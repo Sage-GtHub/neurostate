@@ -1,13 +1,9 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
-import { SearchOverlay } from "./SearchOverlay";
 import { Search, User } from "lucide-react";
 import { Button } from "./ui/button";
 
 export const Header = () => {
-  const [searchOpen, setSearchOpen] = useState(false);
-
   return (
     <>
       <div className="bg-primary text-primary-foreground text-center py-2 px-4 text-sm font-medium">
@@ -32,12 +28,7 @@ export const Header = () => {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="hidden md:flex"
-              onClick={() => setSearchOpen(true)}
-            >
+            <Button variant="ghost" size="icon" className="hidden md:flex">
               <Search className="h-5 w-5" />
             </Button>
             <Button variant="ghost" size="icon" className="hidden md:flex">
@@ -47,8 +38,6 @@ export const Header = () => {
           </div>
         </div>
       </header>
-      
-      <SearchOverlay open={searchOpen} onOpenChange={setSearchOpen} />
     </>
   );
 };
