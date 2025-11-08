@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import heroImage from "@/assets/cryoplunge-ice-bath.jpg";
+import heroImage from "@/assets/marine-collagen.jpg";
 
 export const Hero = () => {
   const scrollToProducts = () => {
@@ -16,13 +16,13 @@ export const Hero = () => {
       <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div className="max-w-xl">
           <p className="text-sm font-medium text-foreground/70 mb-4 tracking-wide">
-            CryoPlunge™ Ice Bath
+            Marine Collagen Premium
           </p>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-background leading-[1.1]">
-            Peak Performance Recovery
+            Cellular Health & Vitality
           </h1>
           <p className="text-lg text-background/80 mb-8">
-            Professional-grade cold therapy for faster recovery, reduced inflammation, and enhanced mental clarity.
+            Pure marine collagen peptides for enhanced skin health, joint support, and optimal cellular function.
           </p>
           <Button 
             size="lg" 
@@ -35,7 +35,7 @@ export const Hero = () => {
         <div className="hidden md:flex justify-center items-center">
           <img 
             src={heroImage} 
-            alt="CryoPlunge™ Ice Bath - Professional Cold Therapy Recovery System"
+            alt="Marine Collagen Premium - Pure Marine Collagen Peptides"
             className="w-full max-w-md"
           />
         </div>
