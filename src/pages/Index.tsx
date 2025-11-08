@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero";
 import { Categories } from "@/components/Categories";
 import { Benefits } from "@/components/Benefits";
 import { ProductGrid } from "@/components/ProductGrid";
+import { Footer } from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -26,11 +27,7 @@ const Index = () => {
         </section>
         <Benefits />
       </main>
-      <footer className="border-t py-8 px-4">
-        <div className="container mx-auto text-center text-muted-foreground">
-          <p>&copy; 2025 NeuroState®. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
