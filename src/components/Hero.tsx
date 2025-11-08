@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import heroImage from "@/assets/redrestore-pro-panel.jpg";
 
 export const Hero = () => {
   const scrollToProducts = () => {
@@ -33,14 +34,11 @@ export const Hero = () => {
           </Button>
         </div>
         <div className="hidden md:flex justify-center items-center">
-          <div className="w-full max-w-md aspect-[3/4] bg-background/30 rounded-lg flex items-center justify-center border border-border/20">
-            <div className="text-center p-8">
-              <div className="w-full h-96 bg-primary/5 rounded-lg mb-4 flex items-center justify-center">
-                <div className="text-6xl font-bold text-foreground/10">RLT</div>
-              </div>
-              <p className="text-sm text-muted-foreground">RedRestore™ Pro Panel</p>
-            </div>
-          </div>
+          <img 
+            src={heroImage} 
+            alt="RedRestore™ Pro Panel - Professional Red Light Therapy Device"
+            className="w-full max-w-md rounded-lg"
+          />
         </div>
       </div>
     </section>
