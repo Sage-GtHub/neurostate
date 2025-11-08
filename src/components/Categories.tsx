@@ -1,17 +1,22 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Zap, Pill } from "lucide-react";
+import { Zap, Moon, Brain } from "lucide-react";
 
 export const Categories = () => {
   const categories = [
     {
       icon: <Zap className="h-8 w-8 text-accent" />,
-      title: "Recovery Technology",
-      description: "Advanced devices for optimal recovery including red light therapy and sleep aid technologies."
+      title: "Recovery",
+      description: "Advanced red light therapy and recovery devices for optimal muscle repair and wellness."
     },
     {
-      icon: <Pill className="h-8 w-8 text-accent" />,
-      title: "Premium Supplements",
-      description: "Science-backed supplements for cognitive performance, energy, and overall wellness."
+      icon: <Moon className="h-8 w-8 text-accent" />,
+      title: "Sleep",
+      description: "Sleep aid technologies and products designed to enhance sleep quality and restoration."
+    },
+    {
+      icon: <Brain className="h-8 w-8 text-accent" />,
+      title: "Cognitive Performance",
+      description: "Science-backed supplements and nootropics for enhanced focus, memory, and mental clarity."
     }
   ];
 
@@ -21,7 +26,7 @@ export const Categories = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           Our Product Categories
         </h2>
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {categories.map((category, index) => (
             <Card key={index} className="hover:shadow-lg transition-shadow">
               <CardContent className="pt-6 text-center">
