@@ -6,19 +6,19 @@ export const Categories = () => {
     {
       icon: <Zap className="h-6 w-6" />,
       title: "Recovery",
-      description: "Advanced devices for optimal recovery and muscle repair.",
+      description: "Cutting-edge tools engineered for peak recovery and muscular restoration.",
       slug: "recovery"
     },
     {
       icon: <Moon className="h-6 w-6" />,
       title: "Sleep",
-      description: "Sleep aid technologies for enhanced sleep quality.",
+      description: "Science-backed solutions to reset your sleep, focus, and longevity.",
       slug: "sleep"
     },
     {
       icon: <Brain className="h-6 w-6" />,
-      title: "Cognitive Performance",
-      description: "Science-backed supplements for focus and mental clarity.",
+      title: "Performance",
+      description: "Advanced supplements and wearables for cognitive and physical optimisation.",
       slug: "cognitive"
     }
   ];

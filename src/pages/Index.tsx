@@ -1,8 +1,10 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Categories } from "@/components/Categories";
+import { Manifesto } from "@/components/Manifesto";
 import { Benefits } from "@/components/Benefits";
 import { ProductGrid } from "@/components/ProductGrid";
+import { EmailSignup } from "@/components/EmailSignup";
 
 const Index = () => {
   return (
@@ -24,7 +26,9 @@ const Index = () => {
             <ProductGrid />
           </div>
         </section>
+        <Manifesto />
         <Benefits />
+        <EmailSignup />
       </main>
       <footer className="border-t py-8 px-4">
         <div className="container mx-auto text-center text-muted-foreground">

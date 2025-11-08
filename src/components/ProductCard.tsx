@@ -41,7 +41,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <Link to={`/product/${node.handle}`}>
-      <div className="group">
+      <div className="group hover:shadow-sm transition-all">
         <div className="aspect-square overflow-hidden bg-secondary rounded-lg mb-4">
           {image ? (
             <img
