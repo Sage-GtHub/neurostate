@@ -3,24 +3,22 @@ import { Shield, Award } from "lucide-react";
 export const Benefits = () => {
   const benefits = [
     {
-      icon: <Shield className="h-5 w-5" />,
-      title: "Money-Back Guarantee"
+      icon: <Shield className="h-5 w-5 text-accent" />,
+      title: "Third-Party Tested"
     },
     {
-      icon: <Award className="h-5 w-5" />,
-      title: "Third-Party Tested"
+      icon: <Award className="h-5 w-5 text-accent" />,
+      title: "Money-Back Guarantee"
     }
   ];
 
   return (
-    <section className="py-12 px-4 border-t">
+    <section className="py-8 px-4 border-t bg-background">
       <div className="container mx-auto">
-        <div className="flex justify-center items-center gap-12">
+        <div className="flex justify-center items-center gap-16 flex-wrap">
           {benefits.map((benefit, index) => (
             <div key={index} className="flex items-center gap-2">
-              <div className="text-accent">
-                {benefit.icon}
-              </div>
+              {benefit.icon}
               <span className="font-medium text-sm">{benefit.title}</span>
             </div>
           ))}

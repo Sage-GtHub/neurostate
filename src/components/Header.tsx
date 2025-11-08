@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
-import { ShoppingBag } from "lucide-react";
+import { Search, User } from "lucide-react";
+import { Button } from "./ui/button";
 
 export const Header = () => {
   return (
     <>
-      <div className="bg-primary text-primary-foreground text-center py-2 px-4 text-sm">
+      <div className="bg-primary text-primary-foreground text-center py-2 px-4 text-sm font-medium">
         Free Shipping on US Orders $75+
       </div>
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="sticky top-0 z-50 w-full bg-background border-b">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <Link to="/" className="font-bold text-xl tracking-tight">
+          <Link to="/" className="font-bold text-2xl tracking-tight">
             NeuroState®
           </Link>
           
@@ -27,6 +28,12 @@ export const Header = () => {
           </nav>
 
           <div className="flex items-center gap-4">
+            <Button variant="ghost" size="icon" className="hidden md:flex">
+              <Search className="h-5 w-5" />
+            </Button>
+            <Button variant="ghost" size="icon" className="hidden md:flex">
+              <User className="h-5 w-5" />
+            </Button>
             <CartDrawer />
           </div>
         </div>

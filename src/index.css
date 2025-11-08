@@ -38,13 +38,14 @@ All colors MUST be HSL.
     --sidebar-border: 0 0% 90%;
     --sidebar-ring: 18 95% 55%;
     
-    /* Minimal earth tones */
+    /* Momentous-inspired earth tones */
+    --beige: 30 15% 75%;
+    --beige-light: 30 12% 85%;
     --taupe: 30 15% 60%;
     --taupe-dark: 30 20% 40%;
-    --stone: 30 8% 85%;
     
-    /* Gradients - minimal */
-    --gradient-hero: linear-gradient(135deg, hsl(30 20% 75%), hsl(30 15% 85%));
+    /* Hero background */
+    --hero-bg: 30 15% 75%;
     
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -80,13 +81,14 @@ All colors MUST be HSL.
     --sidebar-border: 0 0% 14%;
     --sidebar-ring: 18 95% 55%;
     
-    /* Minimal earth tones - dark mode */
+    /* Momentous-inspired earth tones - dark mode */
+    --beige: 30 15% 25%;
+    --beige-light: 30 12% 20%;
     --taupe: 30 15% 40%;
     --taupe-dark: 30 20% 25%;
-    --stone: 30 8% 20%;
     
-    /* Gradients - dark mode */
-    --gradient-hero: linear-gradient(135deg, hsl(30 20% 20%), hsl(30 15% 15%));
+    /* Hero background - dark mode */
+    --hero-bg: 30 15% 20%;
   }
 }
 

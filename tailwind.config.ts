@@ -57,11 +57,14 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        beige: {
+          DEFAULT: "hsl(var(--beige))",
+          light: "hsl(var(--beige-light))",
+        },
         taupe: {
           DEFAULT: "hsl(var(--taupe))",
           dark: "hsl(var(--taupe-dark))",
         },
-        stone: "hsl(var(--stone))",
       },
       borderRadius: {
         lg: "var(--radius)",

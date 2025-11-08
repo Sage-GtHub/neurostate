@@ -41,13 +41,13 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <Link to={`/product/${node.handle}`}>
-      <div className="group">
-        <div className="aspect-square overflow-hidden bg-secondary rounded-lg mb-4">
+      <div className="group bg-background rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+        <div className="aspect-square overflow-hidden bg-secondary/30">
           {image ? (
             <img
               src={image.url}
               alt={image.altText || node.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
@@ -55,7 +55,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             </div>
           )}
         </div>
-        <div>
+        <div className="p-4">
           <h3 className="font-semibold text-base mb-2 line-clamp-2 group-hover:text-accent transition-colors">
             {node.title}
           </h3>
@@ -63,14 +63,14 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             {node.description}
           </p>
           <div className="flex items-center justify-between">
-          <p className="text-lg font-bold">
-            £{price.toFixed(2)}
-          </p>
+            <p className="text-lg font-bold">
+              £{price.toFixed(2)}
+            </p>
             <Button 
               onClick={handleAddToCart}
               size="sm"
               disabled={!firstVariant?.availableForSale}
-              className="bg-primary hover:bg-primary/90"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               {firstVariant?.availableForSale ? "Add" : "Out of Stock"}
             </Button>

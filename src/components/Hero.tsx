@@ -10,24 +10,23 @@ export const Hero = () => {
 
   return (
     <section 
-      className="relative min-h-[700px] flex items-center px-4 py-20"
-      style={{ background: 'var(--gradient-hero)' }}
+      className="relative min-h-[600px] flex items-center px-4 py-16 md:py-24"
+      style={{ backgroundColor: 'hsl(var(--hero-bg))' }}
     >
-      <div className="container mx-auto grid md:grid-cols-2 gap-16 items-center">
+      <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div className="max-w-xl">
-          <p className="text-sm font-medium text-muted-foreground mb-3 tracking-wider uppercase">
+          <p className="text-sm font-medium text-foreground/70 mb-4 tracking-wide">
             RedRestore™ Pro Panel
           </p>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-foreground leading-[1.1]">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-background leading-[1.1]">
             Professional Red Light Therapy
           </h1>
-          <p className="text-lg md:text-xl text-foreground/80 mb-4">
+          <p className="text-lg text-background/80 mb-8">
             Clinical-grade 660nm + 850nm wavelength technology for enhanced recovery, reduced inflammation, and cellular optimization.
           </p>
-          <p className="text-3xl font-bold mb-8">£899</p>
           <Button 
             size="lg" 
-            className="px-8 py-6 bg-primary hover:bg-primary/90"
+            className="bg-background text-foreground hover:bg-background/90 font-medium"
             onClick={scrollToProducts}
           >
             Shop Now <ArrowRight className="ml-2 h-5 w-5" />
@@ -37,7 +36,7 @@ export const Hero = () => {
           <img 
             src={heroImage} 
             alt="RedRestore™ Pro Panel - Professional Red Light Therapy Device"
-            className="w-full max-w-md rounded-lg"
+            className="w-full max-w-md"
           />
         </div>
       </div>
