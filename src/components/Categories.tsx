@@ -1,4 +1,4 @@
-import { Zap, Moon, Brain } from "lucide-react";
+import { Zap, Moon, Brain, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const Categories = () => {
@@ -34,7 +34,7 @@ export const Categories = () => {
             <Link 
               key={index} 
               to={`/category/${category.slug}`}
-              className="bg-background rounded-lg p-6 hover:shadow-md transition-all border border-border hover:border-accent group"
+              className="bg-background rounded-lg p-6 hover:shadow-lg transition-all border border-border hover:border-accent group"
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="text-accent group-hover:scale-110 transition-transform">
@@ -42,7 +42,11 @@ export const Categories = () => {
                 </div>
                 <h3 className="text-lg font-semibold group-hover:text-accent transition-colors">{category.title}</h3>
               </div>
-              <p className="text-sm text-muted-foreground">{category.description}</p>
+              <p className="text-sm text-muted-foreground mb-4">{category.description}</p>
+              <div className="flex items-center text-sm font-medium text-accent group-hover:gap-2 transition-all">
+                View Products 
+                <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+              </div>
             </Link>
           ))}
         </div>
