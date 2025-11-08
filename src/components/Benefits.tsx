@@ -1,18 +1,14 @@
-import { Shield, Award, Check } from "lucide-react";
+import { Shield, Award } from "lucide-react";
 
 export const Benefits = () => {
   const benefits = [
-    {
-      icon: <Award className="h-5 w-5" />,
-      title: "Third-Party Tested"
-    },
     {
       icon: <Shield className="h-5 w-5" />,
       title: "Money-Back Guarantee"
     },
     {
-      icon: <Check className="h-5 w-5" />,
-      title: "Premium UK Quality"
+      icon: <Award className="h-5 w-5" />,
+      title: "Third-Party Tested"
     }
   ];
 
