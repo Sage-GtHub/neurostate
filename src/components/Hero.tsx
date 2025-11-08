@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import heroImage from "@/assets/marine-collagen.jpg";
 
 export const Hero = () => {
   const scrollToProducts = () => {
@@ -13,8 +12,8 @@ export const Hero = () => {
       className="relative min-h-[600px] flex items-center px-4 py-16 md:py-24"
       style={{ backgroundColor: 'hsl(var(--hero-bg))' }}
     >
-      <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
-        <div className="max-w-xl">
+      <div className="container mx-auto flex justify-center items-center">
+        <div className="max-w-2xl text-center">
           <p className="text-sm font-medium text-foreground/70 mb-4 tracking-wide">
             Marine Collagen Premium
           </p>
@@ -31,13 +30,6 @@ export const Hero = () => {
           >
             Shop Now <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
-        </div>
-        <div className="hidden md:flex justify-center items-center">
-          <img 
-            src={heroImage} 
-            alt="Marine Collagen Premium - Pure Marine Collagen Peptides"
-            className="w-full max-w-md"
-          />
         </div>
       </div>
     </section>
