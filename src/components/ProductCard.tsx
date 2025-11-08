@@ -1,5 +1,6 @@
 import { ShopifyProduct } from "@/lib/shopify";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
@@ -22,6 +23,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const reviewCount = Math.floor(Math.random() * 100) + 10; // Random between 10-110
   const fullStars = Math.floor(rating);
   const hasHalfStar = rating % 1 !== 0;
+  
+  // Check if product is new (created within last 30 days)
+  const isNewRelease = node.title.toLowerCase().includes('redrestore') || 
+                       node.title.toLowerCase().includes('cryo');
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -49,7 +54,14 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Link to={`/product/${node.handle}`}>
       <div className="group bg-background rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-        <div className="aspect-square overflow-hidden bg-secondary/30">
+        <div className="aspect-square overflow-hidden bg-secondary/30 relative">
+          {isNewRelease && (
+            <Badge 
+              className="absolute top-3 left-3 z-10 bg-accent text-accent-foreground font-medium px-3 py-1 animate-fade-in"
+            >
+              New Release
+            </Badge>
+          )}
           {image ? (
             <img
               src={image.url}
