@@ -41,39 +41,42 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <Link to={`/product/${node.handle}`}>
-      <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300">
-        <div className="aspect-square overflow-hidden bg-secondary/20">
+      <div className="group">
+        <div className="aspect-square overflow-hidden bg-secondary rounded-lg mb-4">
           {image ? (
             <img
               src={image.url}
               alt={image.altText || node.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
-              <span className="text-muted-foreground">No image</span>
+              <span className="text-muted-foreground text-sm">No image</span>
             </div>
           )}
         </div>
-        <CardContent className="pt-4">
-          <h3 className="font-semibold text-lg mb-2 line-clamp-2">{node.title}</h3>
+        <div>
+          <h3 className="font-semibold text-base mb-2 line-clamp-2 group-hover:text-accent transition-colors">
+            {node.title}
+          </h3>
           <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
             {node.description}
           </p>
-          <p className="text-2xl font-bold text-primary">
-            {node.priceRange.minVariantPrice.currencyCode} ${price.toFixed(2)}
-          </p>
-        </CardContent>
-        <CardFooter>
-          <Button 
-            onClick={handleAddToCart}
-            className="w-full"
-            disabled={!firstVariant?.availableForSale}
-          >
-            {firstVariant?.availableForSale ? "Add to Cart" : "Out of Stock"}
-          </Button>
-        </CardFooter>
-      </Card>
+          <div className="flex items-center justify-between">
+            <p className="text-lg font-bold">
+              ${price.toFixed(2)}
+            </p>
+            <Button 
+              onClick={handleAddToCart}
+              size="sm"
+              disabled={!firstVariant?.availableForSale}
+              className="bg-primary hover:bg-primary/90"
+            >
+              {firstVariant?.availableForSale ? "Add" : "Out of Stock"}
+            </Button>
+          </div>
+        </div>
+      </div>
     </Link>
   );
 };

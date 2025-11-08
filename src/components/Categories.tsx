@@ -1,40 +1,41 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Zap, Moon, Brain } from "lucide-react";
 
 export const Categories = () => {
   const categories = [
     {
-      icon: <Zap className="h-8 w-8 text-accent" />,
+      icon: <Zap className="h-6 w-6" />,
       title: "Recovery",
-      description: "Advanced red light therapy and recovery devices for optimal muscle repair and wellness."
+      description: "Advanced devices for optimal recovery and muscle repair."
     },
     {
-      icon: <Moon className="h-8 w-8 text-accent" />,
+      icon: <Moon className="h-6 w-6" />,
       title: "Sleep",
-      description: "Sleep aid technologies and products designed to enhance sleep quality and restoration."
+      description: "Sleep aid technologies for enhanced sleep quality."
     },
     {
-      icon: <Brain className="h-8 w-8 text-accent" />,
+      icon: <Brain className="h-6 w-6" />,
       title: "Cognitive Performance",
-      description: "Science-backed supplements and nootropics for enhanced focus, memory, and mental clarity."
+      description: "Science-backed supplements for focus and mental clarity."
     }
   ];
 
   return (
-    <section className="py-16 px-4 bg-secondary/30">
+    <section className="py-16 px-4 bg-secondary">
       <div className="container mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-          Our Product Categories
+          Shop By Category
         </h2>
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {categories.map((category, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow">
-              <CardContent className="pt-6 text-center">
-                <div className="flex justify-center mb-4">{category.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{category.title}</h3>
-                <p className="text-muted-foreground">{category.description}</p>
-              </CardContent>
-            </Card>
+            <div key={index} className="bg-background rounded-lg p-6 hover:shadow-md transition-shadow border border-border">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="text-accent">
+                  {category.icon}
+                </div>
+                <h3 className="text-lg font-semibold">{category.title}</h3>
+              </div>
+              <p className="text-sm text-muted-foreground">{category.description}</p>
+            </div>
           ))}
         </div>
       </div>

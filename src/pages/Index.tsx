@@ -13,9 +13,14 @@ const Index = () => {
         <Categories />
         <section id="products" className="py-16 px-4">
           <div className="container mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-              Featured Products
-            </h2>
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold">
+                Best Sellers
+              </h2>
+              <a href="#products" className="text-sm font-medium text-accent hover:underline">
+                View All
+              </a>
+            </div>
             <ProductGrid />
           </div>
         </section>
