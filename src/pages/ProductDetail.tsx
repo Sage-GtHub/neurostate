@@ -112,7 +112,7 @@ const ProductDetail = () => {
             <div>
               <h1 className="text-4xl font-bold mb-4">{product.title}</h1>
               <p className="text-3xl font-bold text-primary">
-                {selectedVariant?.price.currencyCode} ${price.toFixed(2)}
+                £{price.toFixed(2)}
               </p>
             </div>
 

@@ -63,9 +63,9 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             {node.description}
           </p>
           <div className="flex items-center justify-between">
-            <p className="text-lg font-bold">
-              ${price.toFixed(2)}
-            </p>
+          <p className="text-lg font-bold">
+            £{price.toFixed(2)}
+          </p>
             <Button 
               onClick={handleAddToCart}
               size="sm"

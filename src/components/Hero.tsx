@@ -24,7 +24,7 @@ export const Hero = () => {
           <p className="text-lg md:text-xl text-foreground/80 mb-4">
             Clinical-grade 660nm + 850nm wavelength technology for enhanced recovery, reduced inflammation, and cellular optimization.
           </p>
-          <p className="text-3xl font-bold mb-8">$899</p>
+          <p className="text-3xl font-bold mb-8">£899</p>
           <Button 
             size="lg" 
             className="px-8 py-6 bg-primary hover:bg-primary/90"
