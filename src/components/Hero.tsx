@@ -11,7 +11,11 @@ export const Hero = () => {
   return (
     <section 
       className="relative min-h-[600px] flex items-center px-4 py-16 md:py-24"
-      style={{ backgroundColor: 'hsl(var(--hero-bg))' }}
+      style={{ 
+        backgroundColor: 'hsl(var(--hero-bg))',
+        backgroundImage: 'radial-gradient(circle, hsl(var(--background) / 0.1) 1px, transparent 1px)',
+        backgroundSize: '24px 24px'
+      }}
     >
       <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div className="max-w-xl">
