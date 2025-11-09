@@ -131,12 +131,15 @@ const Resources = () => {
             <span>Science-Backed Resources</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-            Health & Wellness Hub
+            Master Your Health Journey
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Expert insights on nutrition, recovery, and optimising your health through evidence-based information
+            Discover personalized resources, expert courses, and science-backed content to optimize your performance and wellbeing
           </p>
         </div>
+
+        {/* Interactive Resource Finder - Top Priority */}
+        <ResourceFinder />
 
         {/* Featured Article */}
         <Card className="mb-16 overflow-hidden hover:shadow-xl transition-all duration-300 border-primary/20">
@@ -178,9 +181,6 @@ const Resources = () => {
             </div>
           </div>
         </Card>
-
-        {/* Interactive Resource Finder */}
-        <ResourceFinder />
 
         {/* Multi-Format Content Hub */}
         <MultiFormatHub />
