@@ -41,16 +41,16 @@ const AboutUs = () => {
 
   const team = [
     {
+      name: "Sage",
+      role: "Founder & CEO",
+      image: "/src/assets/expert-2.jpg",
+      bio: "Serial entrepreneur with sports science background. Founded NeuroState® to make elite performance tools accessible to everyone.",
+    },
+    {
       name: "Dr. Sarah Mitchell",
       role: "Chief Scientific Officer",
       image: "/src/assets/expert-1.jpg",
       bio: "PhD in Nutritional Biochemistry with 15+ years researching human performance optimization.",
-    },
-    {
-      name: "Marcus Chen",
-      role: "Founder & CEO",
-      image: "/src/assets/expert-2.jpg",
-      bio: "Former professional athlete turned wellness entrepreneur, dedicated to making elite performance accessible.",
     },
     {
       name: "Dr. Elena Rodriguez",
@@ -97,14 +97,15 @@ const AboutUs = () => {
                 <h2 className="text-3xl md:text-4xl font-bold">Our Mission</h2>
               </div>
               <p className="text-lg text-muted-foreground leading-relaxed text-center mb-6">
-                At NeuroState®, we believe that peak performance isn't reserved for elite athletes—it's
-                achievable for everyone. Our mission is to bridge the gap between cutting-edge sports science
-                and everyday wellness, making premium-quality supplements and recovery technologies accessible
-                to all who seek to optimize their physical and mental performance.
+                At NeuroState®, we believe that peak performance tools and premium supplements shouldn't be
+                reserved for elite athletes or the wealthy—they should be accessible to everyone, everywhere.
+                Our mission is to democratize access to the world's best recovery technologies and
+                evidence-based supplements, making optimal health and performance achievable for all.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed text-center">
-                We're committed to transparency, quality, and your long-term health. Every product we create
-                is backed by research, tested by experts, and trusted by those who demand excellence.
+                We're committed to transparency, quality, and breaking down barriers. Every product we offer
+                is carefully curated, rigorously tested, and made accessible to those who seek to optimize
+                their physical and mental well-being.
               </p>
             </div>
           </div>
@@ -118,24 +119,26 @@ const AboutUs = () => {
               
               <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
                 <p>
-                  NeuroState® was founded in 2018 by Marcus Chen, a former professional triathlete who
-                  experienced firsthand the transformative power of proper nutrition and recovery. After
-                  struggling to find supplements that met his standards for quality and efficacy, Marcus
-                  assembled a team of world-class scientists, physicians, and industry experts to create
-                  something better.
+                  NeuroState® was founded in 2025 by Sage, a serial entrepreneur with a sports science
+                  background who experienced the debilitating effects of burnout, chronic fatigue, and low
+                  energy firsthand. After years of struggling, Sage discovered the transformative power of
+                  advanced recovery tools and evidence-based supplements—technologies and products that
+                  completely changed everything.
                 </p>
                 
                 <p>
-                  What started in a small lab has grown into a movement. Today, NeuroState® products are
-                  trusted by Olympic athletes, military personnel, healthcare professionals, and everyday
-                  individuals committed to optimizing their health. Our products are found in training
-                  facilities, clinics, and homes across 40+ countries.
+                  But the journey to finding these solutions wasn't easy. Sage realized how inaccessible,
+                  expensive, and complicated these tools were for most people. Premium recovery technologies
+                  and high-quality supplements were locked behind paywalls, confusing jargon, and exclusive
+                  circles. That's when the vision for NeuroState® was born: to make the world's best
+                  performance and recovery tools accessible to everyone, everywhere.
                 </p>
                 
                 <p>
-                  But we've never lost sight of our founding principle: quality over everything. Every
-                  ingredient is carefully sourced, every formula is rigorously tested, and every product
-                  is manufactured to the highest standards. We don't just meet industry standards—we set them.
+                  Today, NeuroState® is breaking down those barriers. We've partnered with leading scientists,
+                  manufacturers, and wellness experts to curate and deliver products that were once only
+                  available to elite athletes and high-net-worth individuals. Our mission is simple but
+                  powerful: democratize access to optimal health and performance for all.
                 </p>
               </div>
             </div>
