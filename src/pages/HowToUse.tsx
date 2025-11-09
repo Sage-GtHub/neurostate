@@ -439,7 +439,7 @@ const HowToUse = () => {
                   View FAQ
                 </a>
                 <a
-                  href="mailto:support@example.com"
+                  href="mailto:support@neurostate.fit"
                   className="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-8 py-3 font-medium hover:bg-primary/90 transition-colors"
                 >
                   Contact Support

@@ -35,7 +35,7 @@ export const LiveChat = () => {
     setTimeout(() => {
       const response = {
         id: messages.length + 2,
-        text: "Thanks for your message! Our team will respond shortly. For immediate assistance, please email support@example.com or call us.",
+        text: "Thanks for your message! Our team will respond shortly. For immediate assistance, please email support@neurostate.fit or call us.",
         sender: "agent",
         timestamp: new Date()
       };

@@ -146,11 +146,11 @@ export const Footer = () => {
               <h3 className="font-bold text-lg mb-4">Get in Touch</h3>
               <div className="space-y-3">
                 <a
-                  href="mailto:contact@neuroestate.fit"
+                  href="mailto:support@neurostate.fit"
                   className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
                 >
                   <Mail className="h-4 w-4" />
-                  contact@neuroestate.fit
+                  support@neurostate.fit
                 </a>
                 <div className="flex items-center gap-2 text-muted-foreground text-sm">
                   <MapPin className="h-4 w-4 flex-shrink-0" />
