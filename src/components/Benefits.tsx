@@ -1,4 +1,4 @@
-import { Shield, Award } from "lucide-react";
+import { Shield, Award, FlaskConical } from "lucide-react";
 
 export const Benefits = () => {
   const benefits = [
@@ -9,6 +9,10 @@ export const Benefits = () => {
     {
       icon: <Award className="h-5 w-5 text-accent" />,
       title: "Money-Back Guarantee"
+    },
+    {
+      icon: <FlaskConical className="h-5 w-5 text-accent" />,
+      title: "Science Backed"
     }
   ];
 
