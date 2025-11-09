@@ -9,6 +9,7 @@ import { ProductQuiz } from "@/components/ProductQuiz";
 import { RecentlyViewed } from "@/components/RecentlyViewed";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 import { LiveChat } from "@/components/LiveChat";
+import { Testimonials } from "@/components/Testimonials";
 import { Footer } from "@/components/Footer";
 import { ShopByGoal } from "@/components/ShopByGoal";
 import { QualityStandards } from "@/components/QualityStandards";
@@ -111,7 +112,7 @@ const Index = () => {
         </section>
         <QualityStandards />
         <ProductBundles />
-        
+        <Testimonials />
         <RecentlyViewed />
         <Benefits />
       </main>
