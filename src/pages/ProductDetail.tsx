@@ -12,6 +12,7 @@ import { TrustBadges } from "@/components/TrustBadges";
 import { BenefitsSection } from "@/components/BenefitsSection";
 import { ProductTabs } from "@/components/ProductTabs";
 import { CustomerReviews } from "@/components/CustomerReviews";
+import { ShippingCalculator } from "@/components/ShippingCalculator";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
@@ -112,6 +113,13 @@ const ProductDetail = () => {
               <div className="pt-6 border-t">
                 <h3 className="text-lg font-semibold mb-4">Key Benefits</h3>
                 <BenefitsSection />
+              </div>
+
+              {/* Shipping Calculator */}
+              <div className="pt-6 border-t">
+                <ShippingCalculator 
+                  productPrice={parseFloat(product.priceRange.minVariantPrice.amount)}
+                />
               </div>
             </div>
           </div>
