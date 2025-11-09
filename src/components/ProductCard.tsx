@@ -128,7 +128,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           
           <Button 
             onClick={handleAddToCart}
-            className={`w-full bg-primary/10 text-foreground border border-border hover:bg-foreground hover:text-background transition-all duration-300 font-medium rounded-full ${
+            className={`w-full bg-accent text-accent-foreground border-0 hover:bg-accent/90 transition-all duration-300 font-medium rounded-full ${
               justAdded ? "bg-green-500 text-white border-green-500" : ""
             } ${isAdding ? "scale-95" : ""}`}
             disabled={!firstVariant?.availableForSale || isAdding}
