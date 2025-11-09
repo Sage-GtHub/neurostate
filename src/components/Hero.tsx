@@ -31,7 +31,7 @@ export const Hero = () => {
             Marine Collagen Premium
           </p>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-background leading-[1.1]">
-            Cellular Health & Vitality
+            Recovery, Sleep & Performance
           </h1>
           <p className="text-lg text-background/80 mb-8">
             Pure marine collagen peptides for healthier skin, supported joints, and proper cellular function.
