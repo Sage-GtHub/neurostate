@@ -5,6 +5,15 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Clock, Droplets, Moon, Sun, Utensils, Brain, Search } from "lucide-react";
 import { useState } from "react";
+import omega3Image from "@/assets/omega3-elite.jpg";
+import neurofocusImage from "@/assets/neurofocus-cognitive.jpg";
+import restoreSleepImage from "@/assets/restoresleep-night.jpg";
+import marineCollagenImage from "@/assets/marine-collagen.jpg";
+import traceMineral from "@/assets/trace-mineral.jpg";
+import adaptBalanceImage from "@/assets/adaptbalance-stress.jpg";
+import redRestoreProImage from "@/assets/redrestore-pro-panel.jpg";
+import redRestoreMiniImage from "@/assets/redrestore-mini.jpg";
+import cryoPlungeImage from "@/assets/cryoplunge-ice-bath.jpg";
 
 const HowToUse = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -16,6 +25,7 @@ const HowToUse = () => {
       products: [
         {
           name: "Omega-3 Elite",
+          image: omega3Image,
           timing: "Best taken with meals",
           dosage: "2 capsules daily",
           tips: [
@@ -32,6 +42,7 @@ const HowToUse = () => {
         },
         {
           name: "NeuroFocus™ Cognitive",
+          image: neurofocusImage,
           timing: "Morning or early afternoon",
           dosage: "2 capsules daily",
           tips: [
@@ -48,6 +59,7 @@ const HowToUse = () => {
         },
         {
           name: "RestoreSleep™ Night",
+          image: restoreSleepImage,
           timing: "30-60 minutes before bed",
           dosage: "2 capsules nightly",
           tips: [
@@ -64,6 +76,7 @@ const HowToUse = () => {
         },
         {
           name: "Marine Collagen",
+          image: marineCollagenImage,
           timing: "Morning on empty stomach",
           dosage: "1 scoop (10g) daily",
           tips: [
@@ -80,6 +93,7 @@ const HowToUse = () => {
         },
         {
           name: "Trace Mineral Complex",
+          image: traceMineral,
           timing: "With breakfast or lunch",
           dosage: "4 capsules daily",
           tips: [
@@ -96,6 +110,7 @@ const HowToUse = () => {
         },
         {
           name: "AdaptBalance™ Stress",
+          image: adaptBalanceImage,
           timing: "Morning and afternoon",
           dosage: "1 capsule twice daily",
           tips: [
@@ -118,6 +133,7 @@ const HowToUse = () => {
       products: [
         {
           name: "RedRestore™ Pro Panel",
+          image: redRestoreProImage,
           timing: "Morning or evening sessions",
           dosage: "10-20 minutes per session",
           tips: [
@@ -135,6 +151,7 @@ const HowToUse = () => {
         },
         {
           name: "RedRestore™ Mini",
+          image: redRestoreMiniImage,
           timing: "Anytime, anywhere",
           dosage: "10-15 minutes per area",
           tips: [
@@ -152,6 +169,7 @@ const HowToUse = () => {
         },
         {
           name: "CryoPlunge™ Ice Bath",
+          image: cryoPlungeImage,
           timing: "Post-workout or morning routine",
           dosage: "2-10 minutes per session",
           tips: [
@@ -270,10 +288,19 @@ const HowToUse = () => {
                       filteredGuides.map((guide) =>
                         guide.products.map((product) => (
                           <Card key={product.name} className="p-8">
-                            <div className="flex items-start gap-4 mb-6">
-                              <guide.icon className="h-8 w-8 text-primary flex-shrink-0" />
+                            <div className="flex flex-col md:flex-row gap-6 mb-6">
+                              <div className="w-full md:w-48 h-48 rounded-lg overflow-hidden bg-secondary/20 flex-shrink-0">
+                                <img
+                                  src={product.image}
+                                  alt={product.name}
+                                  className="w-full h-full object-cover"
+                                />
+                              </div>
                               <div className="flex-1">
-                                <h2 className="text-2xl font-bold mb-2">{product.name}</h2>
+                                <div className="flex items-start gap-3 mb-3">
+                                  <guide.icon className="h-8 w-8 text-primary flex-shrink-0" />
+                                  <h2 className="text-2xl font-bold">{product.name}</h2>
+                                </div>
                                 <div className="flex flex-wrap gap-4 text-sm">
                                   <div className="flex items-center gap-2">
                                     <Clock className="h-4 w-4 text-muted-foreground" />
@@ -287,7 +314,7 @@ const HowToUse = () => {
                               </div>
                             </div>
 
-                            <div className="grid md:grid-cols-2 gap-6">
+                            <div className="grid md:grid-cols-2 gap-6 mt-6">
                               <div>
                                 <h3 className="font-semibold mb-3 flex items-center gap-2">
                                   <Sun className="h-5 w-5 text-primary" />
@@ -335,10 +362,19 @@ const HowToUse = () => {
                   >
                     {guide.products.map((product) => (
                       <Card key={product.name} className="p-8">
-                        <div className="flex items-start gap-4 mb-6">
-                          <guide.icon className="h-8 w-8 text-primary flex-shrink-0" />
+                        <div className="flex flex-col md:flex-row gap-6 mb-6">
+                          <div className="w-full md:w-48 h-48 rounded-lg overflow-hidden bg-secondary/20 flex-shrink-0">
+                            <img
+                              src={product.image}
+                              alt={product.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
                           <div className="flex-1">
-                            <h2 className="text-2xl font-bold mb-2">{product.name}</h2>
+                            <div className="flex items-start gap-3 mb-3">
+                              <guide.icon className="h-8 w-8 text-primary flex-shrink-0" />
+                              <h2 className="text-2xl font-bold">{product.name}</h2>
+                            </div>
                             <div className="flex flex-wrap gap-4 text-sm">
                               <div className="flex items-center gap-2">
                                 <Clock className="h-4 w-4 text-muted-foreground" />
@@ -352,7 +388,7 @@ const HowToUse = () => {
                           </div>
                         </div>
 
-                        <div className="grid md:grid-cols-2 gap-6">
+                        <div className="grid md:grid-cols-2 gap-6 mt-6">
                           <div>
                             <h3 className="font-semibold mb-3 flex items-center gap-2">
                               <Sun className="h-5 w-5 text-primary" />
