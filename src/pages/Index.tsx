@@ -1,6 +1,5 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
-import { VideoBanner } from "@/components/VideoBanner";
 import { Benefits } from "@/components/Benefits";
 import { ProductGrid } from "@/components/ProductGrid";
 import { ProductFilters, FilterState } from "@/components/ProductFilters";
@@ -65,7 +64,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        <VideoBanner />
+        <Hero />
         <ShopByGoal />
         <section id="products" className="py-16 px-4">
           <div className="container mx-auto">
