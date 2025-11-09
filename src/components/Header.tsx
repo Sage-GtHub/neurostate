@@ -3,6 +3,7 @@ import { CartDrawer } from "./CartDrawer";
 import { Search, User, Menu, RefreshCw } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
+import { AnnouncementBar } from "./AnnouncementBar";
 import { useState } from "react";
 
 export const Header = () => {
@@ -18,9 +19,7 @@ export const Header = () => {
 
   return (
     <>
-      <div className="bg-primary text-primary-foreground text-center py-2 px-4 text-sm font-medium">
-        Free Shipping on UK Orders £50+
-      </div>
+      <AnnouncementBar />
       <header className="sticky top-0 z-50 w-full bg-background border-b">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <Link to="/" className="font-bold text-2xl tracking-tight">
