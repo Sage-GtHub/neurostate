@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
-import { Star } from "lucide-react";
+import { Star, Check } from "lucide-react";
+import { useState } from "react";
 
 interface ProductCardProps {
   product: ShopifyProduct;
@@ -15,18 +16,25 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const firstVariant = node.variants.edges[0]?.node;
   const image = node.images.edges[0]?.node;
   const price = parseFloat(node.priceRange.minVariantPrice.amount);
+  const [isAdding, setIsAdding] = useState(false);
+  const [justAdded, setJustAdded] = useState(false);
   
   // Mock review data (4.5-5 star range for premium products)
   const rating = 4.5 + Math.random() * 0.5;
   const reviewCount = Math.floor(Math.random() * 500) + 100;
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     
     if (!firstVariant) {
       toast.error("Product unavailable");
       return;
     }
+
+    setIsAdding(true);
+    
+    // Simulate brief delay for animation
+    await new Promise(resolve => setTimeout(resolve, 300));
 
     const cartItem = {
       product,
@@ -38,9 +46,15 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     };
     
     addItem(cartItem);
+    setIsAdding(false);
+    setJustAdded(true);
+    
     toast.success("Added to cart", {
       description: `${node.title} has been added to your cart.`,
     });
+    
+    // Reset after animation
+    setTimeout(() => setJustAdded(false), 2000);
   };
 
   return (
@@ -99,10 +113,26 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           
           <Button 
             onClick={handleAddToCart}
-            className="w-full bg-primary/10 text-foreground border border-border hover:bg-foreground hover:text-background transition-all duration-300 font-medium rounded-full"
-            disabled={!firstVariant?.availableForSale}
+            className={`w-full bg-primary/10 text-foreground border border-border hover:bg-foreground hover:text-background transition-all duration-300 font-medium rounded-full ${
+              justAdded ? "bg-green-500 text-white border-green-500" : ""
+            } ${isAdding ? "scale-95" : ""}`}
+            disabled={!firstVariant?.availableForSale || isAdding}
           >
-            {firstVariant?.availableForSale ? "Add to Cart" : "Out of Stock"}
+            {isAdding ? (
+              <span className="flex items-center gap-2">
+                <span className="animate-spin">⏳</span>
+                Adding...
+              </span>
+            ) : justAdded ? (
+              <span className="flex items-center gap-2 animate-scale-in">
+                <Check className="h-4 w-4" />
+                Added!
+              </span>
+            ) : firstVariant?.availableForSale ? (
+              "Add to Cart"
+            ) : (
+              "Out of Stock"
+            )}
           </Button>
         </div>
       </div>
