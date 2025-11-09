@@ -133,48 +133,48 @@ export const QualityStandards = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="bg-gradient-to-br from-accent/10 via-secondary to-primary/10 rounded-3xl p-8 md:p-12 backdrop-blur-sm border border-accent/20 shadow-2xl">
+        <div className="bg-muted/30 rounded-lg p-8 md:p-10 border border-border/50">
           <div className="max-w-4xl mx-auto text-center">
-            <h3 className="text-3xl md:text-4xl font-bold mb-8">
+            <h3 className="text-2xl md:text-3xl font-semibold mb-8 text-foreground">
               Trusted by 100,000+ Athletes
             </h3>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-              <div className="text-center group">
-                <div className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-accent to-accent/60 bg-clip-text text-transparent mb-2 transition-transform group-hover:scale-110">
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
                   150+
                 </div>
                 <div className="text-sm font-medium text-muted-foreground">Pro Teams</div>
               </div>
-              <div className="text-center group">
-                <div className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-accent to-accent/60 bg-clip-text text-transparent mb-2 transition-transform group-hover:scale-110">
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
                   100%
                 </div>
                 <div className="text-sm font-medium text-muted-foreground">Third-Party Tested</div>
               </div>
-              <div className="text-center group">
-                <div className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-accent to-accent/60 bg-clip-text text-transparent mb-2 transition-transform group-hover:scale-110">
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
                   NSF
                 </div>
                 <div className="text-sm font-medium text-muted-foreground">Certified Sport</div>
               </div>
-              <div className="text-center group">
-                <div className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-accent to-accent/60 bg-clip-text text-transparent mb-2 transition-transform group-hover:scale-110">
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
                   Zero
                 </div>
                 <div className="text-sm font-medium text-muted-foreground">Banned Substances</div>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link to="/resources">
-                <Button size="lg" className="group/btn shadow-lg">
+                <Button size="default" className="group/btn">
                   Learn More About Our Process
-                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                 </Button>
               </Link>
               <Link to="/faq">
-                <Button size="lg" variant="outline" className="shadow-lg">
+                <Button size="default" variant="outline">
                   View Testing Certificates
                 </Button>
               </Link>
