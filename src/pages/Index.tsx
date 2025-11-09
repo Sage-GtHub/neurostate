@@ -5,7 +5,7 @@ import { ProductGrid } from "@/components/ProductGrid";
 import { ProductFilters, FilterState } from "@/components/ProductFilters";
 import { ProductBundles } from "@/components/ProductBundles";
 import { ProductQuiz } from "@/components/ProductQuiz";
-import { SocialProof } from "@/components/SocialProof";
+
 import { RecentlyViewed } from "@/components/RecentlyViewed";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 import { LiveChat } from "@/components/LiveChat";
@@ -112,7 +112,7 @@ const Index = () => {
         <ExpertPartners />
         <QualityStandards />
         <ProductBundles />
-        <SocialProof />
+        
         <RecentlyViewed />
         <Benefits />
       </main>
