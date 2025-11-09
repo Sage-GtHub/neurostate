@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
-import { Star, Check, Eye } from "lucide-react";
+import { Star, Check, Eye, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { QuickViewModal } from "@/components/QuickViewModal";
 
@@ -136,7 +136,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           >
             {isAdding ? (
               <span className="flex items-center gap-2">
-                <span className="animate-spin">⏳</span>
+                <Loader2 className="h-4 w-4 animate-spin text-accent" />
                 Adding...
               </span>
             ) : justAdded ? (

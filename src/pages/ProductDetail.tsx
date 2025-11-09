@@ -41,7 +41,7 @@ const ProductDetail = () => {
       <>
         <Header />
         <div className="flex justify-center items-center min-h-screen">
-          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          <Loader2 className="h-8 w-8 animate-spin text-accent" />
         </div>
       </>
     );

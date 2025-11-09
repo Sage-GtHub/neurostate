@@ -120,7 +120,7 @@ const ProductDescriptionUpdater = () => {
                   >
                     {isUpdating ? (
                       <>
-                        <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                        <Loader2 className="h-5 w-5 mr-2 animate-spin text-accent" />
                         Updating Products...
                       </>
                     ) : (

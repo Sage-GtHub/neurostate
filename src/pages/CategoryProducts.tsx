@@ -76,7 +76,7 @@ const CategoryProducts = () => {
           <div className="container mx-auto">
             {isLoading ? (
               <div className="flex justify-center items-center min-h-[400px]">
-                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                <Loader2 className="h-8 w-8 animate-spin text-accent" />
               </div>
             ) : error ? (
               <div className="text-center py-12">
