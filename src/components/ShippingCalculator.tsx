@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Truck, Package, Clock, MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 
 interface ShippingRate {
   name: string;
@@ -93,6 +94,13 @@ export const ShippingCalculator = ({ productPrice = 0, className = "" }: Shippin
   const [selectedRegion, setSelectedRegion] = useState<string>("uk");
 
   const region = shippingData[selectedRegion];
+  
+  // Find the free shipping threshold for the selected region
+  const freeShippingRate = region?.rates.find(rate => rate.free && rate.freeThreshold);
+  const freeShippingThreshold = freeShippingRate?.freeThreshold || 0;
+  const isEligibleForFreeShipping = freeShippingThreshold > 0 && productPrice >= freeShippingThreshold;
+  const remainingForFreeShipping = freeShippingThreshold > 0 ? Math.max(0, freeShippingThreshold - productPrice) : 0;
+  const progressPercentage = freeShippingThreshold > 0 ? Math.min(100, (productPrice / freeShippingThreshold) * 100) : 0;
 
   return (
     <Card className={`p-6 ${className}`}>
@@ -102,6 +110,27 @@ export const ShippingCalculator = ({ productPrice = 0, className = "" }: Shippin
       </div>
 
       <div className="space-y-4">
+        {/* Free Shipping Progress */}
+        {freeShippingThreshold > 0 && (
+          <div className="space-y-2 pb-4 border-b">
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-muted-foreground">Free shipping progress</span>
+              <span className="font-medium">
+                {isEligibleForFreeShipping ? (
+                  <span className="text-green-600">Eligible! 🎉</span>
+                ) : (
+                  <span>£{remainingForFreeShipping.toFixed(2)} to go</span>
+                )}
+              </span>
+            </div>
+            <Progress value={progressPercentage} className="h-2" />
+            {!isEligibleForFreeShipping && (
+              <p className="text-xs text-muted-foreground">
+                Spend £{remainingForFreeShipping.toFixed(2)} more to get free {freeShippingRate?.name.toLowerCase()}
+              </p>
+            )}
+          </div>
+        )}
         <div className="space-y-2">
           <Label htmlFor="region" className="text-sm font-medium flex items-center gap-2">
             <MapPin className="h-4 w-4 text-muted-foreground" />
