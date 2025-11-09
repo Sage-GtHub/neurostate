@@ -70,39 +70,45 @@ export const ExpertPartners = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {experts.map((expert) => (
-            <Card 
+            <Link 
               key={expert.id}
-              className="overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-accent-glow group"
+              to={expert.collectionLink}
+              className="block"
             >
-              <div className="p-6">
-                <div className="mb-3">
-                  <span className="inline-block px-3 py-1 text-xs font-medium bg-accent/10 text-accent rounded-full mb-2">
-                    {expert.specialization}
-                  </span>
-                  <h3 className="text-xl font-bold mb-1">{expert.name}</h3>
-                  <p className="text-sm text-muted-foreground font-medium mb-1">
-                    {expert.credentials}
+              <Card 
+                className="overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-accent-glow group cursor-pointer"
+              >
+                <div className="p-6">
+                  <div className="mb-3">
+                    <span className="inline-block px-3 py-1 text-xs font-medium bg-accent/10 text-accent rounded-full mb-2">
+                      {expert.specialization}
+                    </span>
+                    <h3 className="text-xl font-bold mb-1">{expert.name}</h3>
+                    <p className="text-sm text-muted-foreground font-medium mb-1">
+                      {expert.credentials}
+                    </p>
+                    <p className="text-sm text-foreground/80 font-medium">
+                      {expert.title}
+                    </p>
+                  </div>
+                  
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                    {expert.bio}
                   </p>
-                  <p className="text-sm text-foreground/80 font-medium">
-                    {expert.title}
-                  </p>
-                </div>
-                
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                  {expert.bio}
-                </p>
-                
-                <Link to={expert.collectionLink}>
+                  
                   <Button 
                     variant="outline" 
                     className="w-full group/btn"
+                    asChild
                   >
-                    View Collection
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                    <span>
+                      View Collection
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                    </span>
                   </Button>
-                </Link>
-              </div>
-            </Card>
+                </div>
+              </Card>
+            </Link>
           ))}
         </div>
         
