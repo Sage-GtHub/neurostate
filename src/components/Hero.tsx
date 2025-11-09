@@ -10,13 +10,21 @@ export const Hero = () => {
 
   return (
     <section 
-      className="relative min-h-[600px] flex items-center px-4 py-16 md:py-24"
+      className="relative min-h-[600px] flex items-center px-4 py-16 md:py-24 overflow-hidden"
       style={{ 
-        backgroundColor: 'hsl(var(--hero-bg))',
-        backgroundImage: 'radial-gradient(circle, hsl(var(--background) / 0.1) 1px, transparent 1px)',
-        backgroundSize: '24px 24px'
+        background: 'linear-gradient(135deg, hsl(var(--hero-bg)) 0%, hsl(var(--accent) / 0.15) 50%, hsl(var(--hero-bg)) 100%)',
+        backgroundSize: '200% 200%',
+        animation: 'gradient-shift 15s ease infinite'
       }}
     >
+      {/* Dot pattern overlay */}
+      <div 
+        className="absolute inset-0 opacity-30"
+        style={{
+          backgroundImage: 'radial-gradient(circle, hsl(var(--background) / 0.1) 1px, transparent 1px)',
+          backgroundSize: '24px 24px'
+        }}
+      />
       <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div className="max-w-xl">
           <p className="text-sm font-medium text-foreground/70 mb-4 tracking-wide">
