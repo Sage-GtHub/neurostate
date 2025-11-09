@@ -35,8 +35,8 @@ export const SocialProof = () => {
               className="text-center animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-3">
-                <stat.icon className="h-6 w-6 text-primary" />
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-accent/10 mb-3">
+                <stat.icon className="h-6 w-6 text-accent" />
               </div>
               <div className="text-3xl md:text-4xl font-bold mb-1">{stat.value}</div>
               <div className="text-sm text-muted-foreground">{stat.label}</div>

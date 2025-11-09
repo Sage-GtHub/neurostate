@@ -98,15 +98,15 @@ export const CustomerReviews = ({ productHandle }: CustomerReviewsProps) => {
         {/* Review Highlights */}
         <div className="lg:col-span-2 grid md:grid-cols-3 gap-4">
           <div className="text-center p-4 border rounded-lg">
-            <div className="text-3xl font-bold text-primary mb-1">4.8/5</div>
+            <div className="text-3xl font-bold text-accent mb-1">4.8/5</div>
             <div className="text-sm text-muted-foreground">Average Rating</div>
           </div>
           <div className="text-center p-4 border rounded-lg">
-            <div className="text-3xl font-bold text-primary mb-1">96%</div>
+            <div className="text-3xl font-bold text-accent mb-1">96%</div>
             <div className="text-sm text-muted-foreground">Would Recommend</div>
           </div>
           <div className="text-center p-4 border rounded-lg">
-            <div className="text-3xl font-bold text-primary mb-1">100%</div>
+            <div className="text-3xl font-bold text-accent mb-1">100%</div>
             <div className="text-sm text-muted-foreground">Verified Purchases</div>
           </div>
         </div>
@@ -147,7 +147,7 @@ export const CustomerReviews = ({ productHandle }: CustomerReviewsProps) => {
                 <div className="flex items-center gap-2 mb-1">
                   <span className="font-semibold">{review.author}</span>
                   {review.verified && (
-                    <span className="flex items-center gap-1 text-xs text-primary">
+                    <span className="flex items-center gap-1 text-xs text-accent">
                       <CheckCircle className="h-3 w-3" />
                       Verified Purchase
                     </span>

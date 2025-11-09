@@ -122,7 +122,7 @@ export const Header = () => {
                             to={category.href}
                             className="flex items-center gap-3 select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                           >
-                            <category.icon className="h-5 w-5 text-primary" />
+                            <category.icon className="h-5 w-5 text-accent" />
                             <div className="text-sm font-medium leading-none">
                               {category.label}
                             </div>
@@ -148,7 +148,7 @@ export const Header = () => {
                             to={topic.href}
                             className="flex items-center gap-3 select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                           >
-                            <topic.icon className="h-5 w-5 text-primary" />
+                            <topic.icon className="h-5 w-5 text-accent" />
                             <div className="text-sm font-medium leading-none">
                               {topic.label}
                             </div>
