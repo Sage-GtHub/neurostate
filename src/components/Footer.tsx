@@ -44,6 +44,7 @@ export const Footer = () => {
       { name: "About Us", href: "/about" },
       { name: "Resources", href: "/resources" },
       { name: "Subscriptions", href: "/subscriptions" },
+      { name: "Rewards", href: "/rewards" },
       { name: "Contact", href: "/contact" },
     ],
     support: [
