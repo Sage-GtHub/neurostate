@@ -1,10 +1,14 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Clock, Droplets, Moon, Sun, Utensils, Brain } from "lucide-react";
+import { Clock, Droplets, Moon, Sun, Utensils, Brain, Search } from "lucide-react";
+import { useState } from "react";
 
 const HowToUse = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  
   const guides = [
     {
       category: "Supplements",
@@ -167,6 +171,16 @@ const HowToUse = () => {
     },
   ];
 
+  // Filter products based on search query
+  const filteredGuides = guides.map(guide => ({
+    ...guide,
+    products: guide.products.filter(product =>
+      product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+  })).filter(guide => guide.products.length > 0);
+
+  const hasResults = filteredGuides.some(guide => guide.products.length > 0);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -219,13 +233,101 @@ const HowToUse = () => {
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
-              <Tabs defaultValue="supplements" className="w-full">
-                <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-12">
-                  <TabsTrigger value="supplements">Supplements</TabsTrigger>
-                  <TabsTrigger value="devices">Recovery Devices</TabsTrigger>
-                </TabsList>
+              {/* Search Bar */}
+              <div className="mb-12">
+                <div className="relative max-w-2xl mx-auto">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <Input
+                    type="text"
+                    placeholder="Search for a product guide (e.g., Omega-3, Collagen, Red Light...)"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-12 h-14 text-lg"
+                  />
+                </div>
+                {searchQuery && (
+                  <p className="text-center text-sm text-muted-foreground mt-3">
+                    {hasResults 
+                      ? `Found ${filteredGuides.reduce((sum, guide) => sum + guide.products.length, 0)} guide${filteredGuides.reduce((sum, guide) => sum + guide.products.length, 0) !== 1 ? 's' : ''} for "${searchQuery}"`
+                      : `No guides found for "${searchQuery}". Try a different search term.`
+                    }
+                  </p>
+                )}
+              </div>
 
-                {guides.map((guide) => (
+              <Tabs defaultValue="supplements" className="w-full">
+                {!searchQuery && (
+                  <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-12">
+                    <TabsTrigger value="supplements">Supplements</TabsTrigger>
+                    <TabsTrigger value="devices">Recovery Devices</TabsTrigger>
+                  </TabsList>
+                )}
+
+                {searchQuery ? (
+                  // Show search results without tabs
+                  <div className="space-y-8">
+                    {hasResults ? (
+                      filteredGuides.map((guide) =>
+                        guide.products.map((product) => (
+                          <Card key={product.name} className="p-8">
+                            <div className="flex items-start gap-4 mb-6">
+                              <guide.icon className="h-8 w-8 text-primary flex-shrink-0" />
+                              <div className="flex-1">
+                                <h2 className="text-2xl font-bold mb-2">{product.name}</h2>
+                                <div className="flex flex-wrap gap-4 text-sm">
+                                  <div className="flex items-center gap-2">
+                                    <Clock className="h-4 w-4 text-muted-foreground" />
+                                    <span className="text-muted-foreground">{product.timing}</span>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <Droplets className="h-4 w-4 text-muted-foreground" />
+                                    <span className="text-muted-foreground">{product.dosage}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="grid md:grid-cols-2 gap-6">
+                              <div>
+                                <h3 className="font-semibold mb-3 flex items-center gap-2">
+                                  <Sun className="h-5 w-5 text-primary" />
+                                  Usage Tips
+                                </h3>
+                                <ul className="space-y-2 text-sm text-muted-foreground">
+                                  {product.tips.map((tip, idx) => (
+                                    <li key={idx}>• {tip}</li>
+                                  ))}
+                                </ul>
+                              </div>
+
+                              <div>
+                                <h3 className="font-semibold mb-3 flex items-center gap-2">
+                                  <Moon className="h-5 w-5 text-primary" />
+                                  Best Practices
+                                </h3>
+                                <ul className="space-y-2 text-sm text-muted-foreground">
+                                  {product.bestPractices.map((practice, idx) => (
+                                    <li key={idx}>• {practice}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+                          </Card>
+                        ))
+                      )
+                    ) : (
+                      <Card className="p-12 text-center">
+                        <Search className="h-16 w-16 text-muted-foreground mx-auto mb-4 opacity-50" />
+                        <h3 className="text-xl font-bold mb-2">No Guides Found</h3>
+                        <p className="text-muted-foreground">
+                          Try searching for another product or clear your search to view all guides.
+                        </p>
+                      </Card>
+                    )}
+                  </div>
+                ) : (
+                  // Show normal tabbed view
+                  guides.map((guide) => (
                   <TabsContent
                     key={guide.category}
                     value={guide.category.toLowerCase().replace(" ", "-")}
@@ -277,8 +379,9 @@ const HowToUse = () => {
                         </div>
                       </Card>
                     ))}
-                  </TabsContent>
-                ))}
+                    </TabsContent>
+                  ))
+                )}
               </Tabs>
             </div>
           </div>
