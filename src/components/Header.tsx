@@ -12,7 +12,8 @@ export const Header = () => {
     { label: "Shop", href: "/" },
     { label: "Products", href: "#products" },
     { label: "Resources", href: "/resources" },
-    { label: "About", href: "/about" },
+    { label: "Guides", href: "/guides" },
+    { label: "Ambassador", href: "/ambassador" },
   ];
 
   return (

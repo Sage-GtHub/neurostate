@@ -49,8 +49,8 @@ export const Footer = () => {
     support: [
       { name: "FAQ", href: "/faq" },
       { name: "Shipping & Returns", href: "/shipping" },
-      { name: "Privacy Policy", href: "/privacy" },
-      { name: "Terms of Service", href: "/terms" },
+      { name: "How-to-Use Guides", href: "/guides" },
+      { name: "Ambassador Program", href: "/ambassador" },
     ],
   };
 
