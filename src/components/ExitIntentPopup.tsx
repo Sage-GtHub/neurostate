@@ -80,7 +80,7 @@ export const ExitIntentPopup = () => {
             <Button 
               type="submit" 
               variant="outline"
-              className="flex-1 rounded-full bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-accent transition-all duration-300 font-medium" 
+              className="flex-1 rounded-full bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-accent hover:shadow-[0_0_20px_rgba(255,138,0,0.6)] transition-all duration-300 font-medium" 
               disabled={isLoading}
             >
               {isLoading ? "Subscribing..." : "Get My Discount"}

@@ -177,7 +177,7 @@ export const QuickViewModal = ({ product, open, onOpenChange }: QuickViewModalPr
 
             <div className="flex gap-3">
               <Button
-                className="flex-1 bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-accent transition-all duration-300"
+                className="flex-1 bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-accent hover:shadow-[0_0_20px_rgba(255,138,0,0.6)] transition-all duration-300"
                 variant="outline"
                 onClick={handleAddToCart}
                 disabled={!selectedVariant?.availableForSale}
