@@ -82,7 +82,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                 e.preventDefault();
                 setShowQuickView(true);
               }}
-              className="absolute top-4 right-4 bg-background/90 backdrop-blur-sm text-foreground p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-primary hover:text-primary-foreground shadow-lg"
+              className="absolute top-4 right-4 bg-background/90 backdrop-blur-sm text-foreground p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-accent hover:text-accent-foreground shadow-lg hover:shadow-[0_0_20px_rgba(255,138,0,0.6)]"
               aria-label="Quick view"
             >
               <Eye className="h-5 w-5" />
