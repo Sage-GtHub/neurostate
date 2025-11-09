@@ -22,6 +22,7 @@ const Index = () => {
   const isMobile = useIsMobile();
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get('search') || '';
+  const [chatOpen, setChatOpen] = useState(false);
   const [filters, setFilters] = useState<FilterState>({
     categories: [],
     sortBy: 'price-low-high',
@@ -62,7 +63,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header onAskAIClick={() => setChatOpen(true)} />
       <main>
         <Hero />
         <ShopByGoal />
@@ -115,7 +116,7 @@ const Index = () => {
         <Benefits />
       </main>
       <Footer />
-      <LiveChat />
+      <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
       <ExitIntentPopup />
     </div>
   );

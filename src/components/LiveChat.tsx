@@ -11,8 +11,20 @@ type Message = {
   timestamp: Date;
 };
 
-export const LiveChat = () => {
+export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolean; onOpenChange?: (open: boolean) => void } = {}) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  // Sync with external control
+  useEffect(() => {
+    if (externalOpen !== undefined) {
+      setIsOpen(externalOpen);
+    }
+  }, [externalOpen]);
+
+  const handleOpenChange = (open: boolean) => {
+    setIsOpen(open);
+    onOpenChange?.(open);
+  };
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -191,15 +203,17 @@ export const LiveChat = () => {
 
   return (
     <>
-      {/* Floating chat button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 p-4 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground rounded-full shadow-2xl hover:shadow-primary/50 transition-all hover:scale-110 animate-pulse"
-        aria-label="Toggle chat"
-        style={{ boxShadow: '0 0 30px rgba(var(--primary), 0.5)' }}
-      >
-        {isOpen ? <X size={28} /> : <MessageCircle size={28} />}
-      </button>
+      {/* Floating chat button - only show if not controlled externally */}
+      {externalOpen === undefined && (
+        <button
+          onClick={() => handleOpenChange(!isOpen)}
+          className="fixed bottom-6 right-6 z-50 p-4 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground rounded-full shadow-2xl hover:shadow-primary/50 transition-all hover:scale-110 animate-pulse"
+          aria-label="Toggle chat"
+          style={{ boxShadow: '0 0 30px rgba(var(--primary), 0.5)' }}
+        >
+          {isOpen ? <X size={28} /> : <MessageCircle size={28} />}
+        </button>
+      )}
 
       {/* Chat window */}
       {isOpen && (

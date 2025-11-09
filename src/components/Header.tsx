@@ -1,6 +1,6 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
-import { Search, User, Menu, RefreshCw, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target, LogOut, X, Award } from "lucide-react";
+import { Search, User, Menu, RefreshCw, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target, LogOut, X, Award, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { Input } from "./ui/input";
@@ -26,7 +26,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser, Session } from "@supabase/supabase-js";
 import { toast } from "sonner";
 
-export const Header = () => {
+export const Header = ({ onAskAIClick }: { onAskAIClick?: () => void }) => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -175,6 +175,16 @@ export const Header = () => {
           </NavigationMenu>
 
           <div className="flex items-center gap-2">
+            {/* Ask AI Button */}
+            <Button 
+              variant="default"
+              className="hidden md:flex items-center gap-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-md"
+              onClick={onAskAIClick}
+            >
+              <Sparkles className="h-4 w-4" />
+              Ask AI
+            </Button>
+
             {/* Desktop Search */}
             {searchOpen ? (
               <form onSubmit={handleSearch} className="hidden md:flex items-center gap-2 animate-in fade-in slide-in-from-right-2">
