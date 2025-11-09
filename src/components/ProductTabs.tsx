@@ -48,68 +48,6 @@ export const ProductTabs = ({ description }: ProductTabsProps) => {
               <p key={index}>{paragraph}</p>
             ))}
           </div>
-          
-          <div className="mt-8 grid md:grid-cols-2 gap-6">
-            <div className="border rounded-lg p-6 bg-secondary/5">
-              <h3 className="text-lg font-semibold mb-4">Why Choose This?</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div className="w-2 h-2 rounded-full bg-primary"></div>
-                  </div>
-                  <span className="text-sm text-muted-foreground">Premium quality ingredients sourced from trusted suppliers</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div className="w-2 h-2 rounded-full bg-primary"></div>
-                  </div>
-                  <span className="text-sm text-muted-foreground">Third-party tested for purity and potency</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div className="w-2 h-2 rounded-full bg-primary"></div>
-                  </div>
-                  <span className="text-sm text-muted-foreground">Manufactured in GMP-certified facilities</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div className="w-2 h-2 rounded-full bg-primary"></div>
-                  </div>
-                  <span className="text-sm text-muted-foreground">Free from artificial colors, flavors, and preservatives</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="border rounded-lg p-6 bg-secondary/5">
-              <h3 className="text-lg font-semibold mb-4">Perfect For</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div className="w-2 h-2 rounded-full bg-primary"></div>
-                  </div>
-                  <span className="text-sm text-muted-foreground">Athletes seeking peak performance</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div className="w-2 h-2 rounded-full bg-primary"></div>
-                  </div>
-                  <span className="text-sm text-muted-foreground">Professionals needing sustained focus</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div className="w-2 h-2 rounded-full bg-primary"></div>
-                  </div>
-                  <span className="text-sm text-muted-foreground">Anyone optimizing their health journey</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div className="w-2 h-2 rounded-full bg-primary"></div>
-                  </div>
-                  <span className="text-sm text-muted-foreground">Those committed to evidence-based wellness</span>
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
       </TabsContent>
 
