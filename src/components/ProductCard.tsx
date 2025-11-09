@@ -1,10 +1,9 @@
 import { ShopifyProduct } from "@/lib/shopify";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cartStore";
-import { useWishlistStore } from "@/stores/wishlistStore";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
-import { Star, Check, Heart } from "lucide-react";
+import { Star, Check } from "lucide-react";
 import { useState } from "react";
 
 interface ProductCardProps {
@@ -13,30 +12,16 @@ interface ProductCardProps {
 
 export const ProductCard = ({ product }: ProductCardProps) => {
   const addItem = useCartStore(state => state.addItem);
-  const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlistStore();
   const { node } = product;
   const firstVariant = node.variants.edges[0]?.node;
   const image = node.images.edges[0]?.node;
   const price = parseFloat(node.priceRange.minVariantPrice.amount);
   const [isAdding, setIsAdding] = useState(false);
   const [justAdded, setJustAdded] = useState(false);
-  const inWishlist = isInWishlist(node.id);
   
   // Mock review data (4.5-5 star range for premium products)
   const rating = 4.5 + Math.random() * 0.5;
   const reviewCount = Math.floor(Math.random() * 500) + 100;
-
-  const handleToggleWishlist = (e: React.MouseEvent) => {
-    e.preventDefault();
-    
-    if (inWishlist) {
-      removeFromWishlist(node.id);
-      toast.success("Removed from wishlist");
-    } else {
-      addToWishlist(product);
-      toast.success("Added to wishlist");
-    }
-  };
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -76,20 +61,6 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     <Link to={`/product/${node.handle}`} className="group block">
       <div className="bg-card border border-border rounded-lg overflow-hidden transition-all hover:shadow-lg">
         <div className="aspect-square overflow-hidden bg-secondary/10 relative">
-          {/* Wishlist Button */}
-          <Button
-            size="icon"
-            variant="ghost"
-            className="absolute top-3 right-3 z-10 bg-background/80 hover:bg-background rounded-full"
-            onClick={handleToggleWishlist}
-          >
-            <Heart 
-              className={`h-5 w-5 transition-colors ${
-                inWishlist ? "fill-red-500 text-red-500" : "text-foreground"
-              }`} 
-            />
-          </Button>
-          
           {image ? (
             <img
               src={image.url}

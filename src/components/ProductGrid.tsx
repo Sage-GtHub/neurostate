@@ -7,9 +7,10 @@ import { FilterState } from "./ProductFilters";
 
 interface ProductGridProps {
   filters?: FilterState;
+  searchQuery?: string;
 }
 
-export const ProductGrid = ({ filters }: ProductGridProps) => {
+export const ProductGrid = ({ filters, searchQuery }: ProductGridProps) => {
   const { data: products, isLoading, error } = useQuery({
     queryKey: ['products'],
     queryFn: () => fetchProducts(50),
@@ -18,12 +19,29 @@ export const ProductGrid = ({ filters }: ProductGridProps) => {
     refetchOnWindowFocus: 'always',
   });
 
-  // Filter products based on filters
+  // Filter products based on filters and search query
   const filteredProducts = useMemo(() => {
-    if (!products || !filters) return products;
+    if (!products) return products;
 
     return products.filter(product => {
       const price = parseFloat(product.node.priceRange.minVariantPrice.amount);
+      
+      // Search query filter
+      if (searchQuery && searchQuery.trim()) {
+        const query = searchQuery.toLowerCase();
+        const searchableText = (
+          product.node.title + ' ' + 
+          product.node.description + ' ' + 
+          product.node.tags.join(' ')
+        ).toLowerCase();
+        
+        if (!searchableText.includes(query)) {
+          return false;
+        }
+      }
+
+      // Apply other filters only if they exist
+      if (!filters) return true;
       
       // Price filter
       if (price < filters.priceRange[0] || price > filters.priceRange[1]) {
@@ -47,7 +65,7 @@ export const ProductGrid = ({ filters }: ProductGridProps) => {
 
       return true;
     });
-  }, [products, filters]);
+  }, [products, filters, searchQuery]);
 
   if (isLoading) {
     return <ProductGridSkeleton />;
@@ -66,7 +84,9 @@ export const ProductGrid = ({ filters }: ProductGridProps) => {
       <div className="text-center py-12">
         <p className="text-muted-foreground text-lg">No products found.</p>
         <p className="text-sm text-muted-foreground mt-2">
-          {filters && (filters.categories.length > 0 || filters.features.length > 0) 
+          {searchQuery 
+            ? `No results for "${searchQuery}". Try a different search term.`
+            : filters && (filters.categories.length > 0 || filters.features.length > 0)
             ? "Try adjusting your filters to see more products."
             : "Create your first product by telling me what you'd like to add!"}
         </p>

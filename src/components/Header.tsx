@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
-import { Search, User, Menu, RefreshCw, ChevronDown, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target, TrendingUp, Heart, LogOut } from "lucide-react";
+import { Search, User, Menu, RefreshCw, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target, LogOut, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
+import { Input } from "./ui/input";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import {
   NavigationMenu,
@@ -21,16 +22,18 @@ import {
 } from "./ui/dropdown-menu";
 import { AnnouncementBar } from "./AnnouncementBar";
 import { useState, useEffect } from "react";
-import { useWishlistStore } from "@/stores/wishlistStore";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser, Session } from "@supabase/supabase-js";
 import { toast } from "sonner";
 
 export const Header = () => {
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [session, setSession] = useState<Session | null>(null);
-  const wishlistItems = useWishlistStore(state => state.items);
 
   useEffect(() => {
     // Set up auth state listener FIRST
@@ -57,6 +60,20 @@ export const Header = () => {
     } else {
       toast.success("Signed out successfully");
     }
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/?search=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchOpen(false);
+      setMobileMenuOpen(false);
+    }
+  };
+
+  const clearSearch = () => {
+    setSearchQuery('');
+    navigate('/');
   };
 
   const shopCategories = [
@@ -159,21 +176,42 @@ export const Header = () => {
           </NavigationMenu>
 
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" className="hidden md:flex">
-              <Search className="h-5 w-5" />
-            </Button>
-            
-            {/* Wishlist */}
-            <Link to="/wishlist">
-              <Button variant="ghost" size="icon" className="hidden md:flex relative">
-                <Heart className="h-5 w-5" />
-                {wishlistItems.length > 0 && (
-                  <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs">
-                    {wishlistItems.length}
-                  </Badge>
-                )}
+            {/* Desktop Search */}
+            {searchOpen ? (
+              <form onSubmit={handleSearch} className="hidden md:flex items-center gap-2 animate-in fade-in slide-in-from-right-2">
+                <Input
+                  type="search"
+                  placeholder="Search products..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-64"
+                  autoFocus
+                />
+                <Button type="submit" size="icon" variant="ghost">
+                  <Search className="h-5 w-5" />
+                </Button>
+                <Button 
+                  type="button" 
+                  size="icon" 
+                  variant="ghost"
+                  onClick={() => {
+                    setSearchOpen(false);
+                    clearSearch();
+                  }}
+                >
+                  <X className="h-5 w-5" />
+                </Button>
+              </form>
+            ) : (
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="hidden md:flex"
+                onClick={() => setSearchOpen(true)}
+              >
+                <Search className="h-5 w-5" />
               </Button>
-            </Link>
+            )}
             
             <Link to="/subscriptions">
               <Button variant="ghost" size="icon" className="hidden md:flex" title="Manage Subscriptions">
@@ -282,11 +320,19 @@ export const Header = () => {
                     </Link>
                   ))}
 
-                  <div className="border-t pt-6 mt-4">
-                    <Button variant="ghost" className="w-full justify-start" size="lg">
-                      <Search className="h-5 w-5 mr-2" />
-                      Search
-                    </Button>
+                  <div className="border-t pt-6 mt-4 space-y-4">
+                    <form onSubmit={handleSearch} className="flex items-center gap-2">
+                      <Input
+                        type="search"
+                        placeholder="Search products..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="flex-1"
+                      />
+                      <Button type="submit" size="icon">
+                        <Search className="h-5 w-5" />
+                      </Button>
+                    </form>
                     <Link
                       to="/subscriptions"
                       className="w-full"

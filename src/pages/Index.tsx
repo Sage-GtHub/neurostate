@@ -12,9 +12,12 @@ import { LiveChat } from "@/components/LiveChat";
 import { Footer } from "@/components/Footer";
 import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useSearchParams } from "react-router-dom";
 
 const Index = () => {
   const isMobile = useIsMobile();
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get('search') || '';
   const [filters, setFilters] = useState<FilterState>({
     categories: [],
     priceRange: [0, 5000],
@@ -37,9 +40,16 @@ const Index = () => {
         <section id="products" className="py-16 px-4">
           <div className="container mx-auto">
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl md:text-4xl font-bold">
-                Best Sellers
-              </h2>
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold">
+                  {searchQuery ? 'Search Results' : 'Best Sellers'}
+                </h2>
+                {searchQuery && (
+                  <p className="text-muted-foreground mt-1">
+                    Showing results for "{searchQuery}"
+                  </p>
+                )}
+              </div>
               <div className="flex items-center gap-3">
                 <ProductQuiz />
                 {isMobile && (
@@ -62,7 +72,7 @@ const Index = () => {
                 />
               )}
               <div className="flex-1">
-                <ProductGrid filters={filters} />
+                <ProductGrid filters={filters} searchQuery={searchQuery} />
               </div>
             </div>
           </div>
