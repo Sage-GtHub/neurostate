@@ -11,6 +11,9 @@ import {
 } from "@/components/ui/sheet";
 import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, RefreshCw } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
+import { supabase } from "@/integrations/supabase/client";
+import { createOrder } from "@/lib/orders";
+import { toast } from "sonner";
 
 export const CartDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,14 +30,39 @@ export const CartDrawer = () => {
 
   const handleCheckout = async () => {
     try {
+      setIsOpen(false);
+      
+      // Check if user is logged in
+      const { data: { session } } = await supabase.auth.getSession();
+      
       await createCheckout();
       const checkoutUrl = useCartStore.getState().checkoutUrl;
+      
       if (checkoutUrl) {
+        // If user is logged in, save order to database
+        if (session?.user) {
+          const result = await createOrder({
+            userId: session.user.id,
+            items,
+            totalAmount: totalPrice,
+            currency: items[0]?.price.currencyCode || 'GBP',
+            shopifyCheckoutUrl: checkoutUrl
+          });
+
+          if (result.success) {
+            toast.success("Order created", {
+              description: "Redirecting to checkout..."
+            });
+          }
+        }
+        
         window.open(checkoutUrl, '_blank');
-        setIsOpen(false);
       }
     } catch (error) {
       console.error('Checkout failed:', error);
+      toast.error("Checkout failed", {
+        description: "Please try again or contact support."
+      });
     }
   };
 
