@@ -182,7 +182,7 @@ export const Header = () => {
                 className="hidden md:flex items-center gap-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-md"
               >
                 <Sparkles className="h-4 w-4" />
-                Ask AI
+                Ask Hera
               </Button>
             </Link>
 

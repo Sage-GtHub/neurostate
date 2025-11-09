@@ -53,7 +53,7 @@ export default function Chat() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hello! I'm your AI wellness assistant. How can I help you today? Whether you're looking for product recommendations, have questions about our services, or need wellness advice, I'm here to help!",
+      content: "Hello! I'm Hera, your AI wellness assistant. How can I help you today? Whether you're looking for product recommendations, have questions about our services, or need wellness advice, I'm here to help!",
       timestamp: new Date(),
     },
   ]);
@@ -310,7 +310,7 @@ export default function Chat() {
   const clearHistory = () => {
     const firstMessage: Message = {
       role: "assistant",
-      content: "Hello! I'm your AI wellness assistant. How can I help you today?",
+      content: "Hello! I'm Hera, your AI wellness assistant. How can I help you today?",
       timestamp: new Date(),
     };
     setMessages([firstMessage]);
@@ -449,7 +449,7 @@ export default function Chat() {
                 <Sparkles className="h-5 w-5 text-white" />
               </div>
               <div>
-                <h1 className="text-lg font-semibold text-white">Ask AI</h1>
+                <h1 className="text-lg font-semibold text-white">Hera</h1>
                 <p className="text-xs text-white/80">Your wellness assistant</p>
               </div>
             </div>
