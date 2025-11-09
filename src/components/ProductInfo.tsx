@@ -73,8 +73,41 @@ export const ProductInfo = ({
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-4xl font-bold mb-2">{product.title}</h1>
-        <p className="text-lg text-muted-foreground">{product.description}</p>
+        <h1 className="text-4xl font-bold mb-3">{product.title}</h1>
+        
+        {/* Servings and Price Per Serving */}
+        <div className="flex items-center gap-3 mb-4 text-sm text-muted-foreground">
+          <span className="font-medium">30 Servings</span>
+          <span>•</span>
+          <span className="font-medium">£{(price / 30).toFixed(2)}/Serving</span>
+        </div>
+
+        {/* Short Description */}
+        <p className="text-lg text-foreground mb-6 leading-relaxed">
+          {product.description}
+        </p>
+
+        {/* Key Benefits - Bullet Points */}
+        <div className="space-y-3 mb-6">
+          <div className="flex items-start gap-3">
+            <span className="text-primary mt-1">✓</span>
+            <p className="text-sm text-foreground leading-relaxed">
+              Third-party tested and NSF Certified for quality and purity
+            </p>
+          </div>
+          <div className="flex items-start gap-3">
+            <span className="text-primary mt-1">✓</span>
+            <p className="text-sm text-foreground leading-relaxed">
+              Supports optimal cellular function and recovery
+            </p>
+          </div>
+          <div className="flex items-start gap-3">
+            <span className="text-primary mt-1">✓</span>
+            <p className="text-sm text-foreground leading-relaxed">
+              Science-backed formulation with clean, bioavailable ingredients
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Purchase Type */}
