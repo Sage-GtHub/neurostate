@@ -1,6 +1,5 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
-import { Categories } from "@/components/Categories";
 import { Benefits } from "@/components/Benefits";
 import { ProductGrid } from "@/components/ProductGrid";
 import { ProductFilters, FilterState } from "@/components/ProductFilters";
@@ -33,7 +32,6 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
-        <Categories />
         <section id="products" className="py-16 px-4">
           <div className="container mx-auto">
             <div className="flex items-center justify-between mb-8">
