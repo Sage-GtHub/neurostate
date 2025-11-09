@@ -5,7 +5,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
-import { Star, Eye } from "lucide-react";
+import { Star, Eye, RefreshCw } from "lucide-react";
 
 interface ProductCardProps {
   product: ShopifyProduct;
@@ -18,6 +18,7 @@ export const ProductCard = ({ product, onQuickView }: ProductCardProps) => {
   const firstVariant = node.variants.edges[0]?.node;
   const image = node.images.edges[0]?.node;
   const price = parseFloat(node.priceRange.minVariantPrice.amount);
+  const subscriptionPrice = price * 0.85; // 15% discount
   
   // Mock rating data (in a real app, this would come from your backend)
   const rating = 4.5;
@@ -113,10 +114,22 @@ export const ProductCard = ({ product, onQuickView }: ProductCardProps) => {
           <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
             {node.description}
           </p>
+          
+          {/* Subscription Badge */}
+          <div className="mb-3 flex items-center gap-1 text-xs text-primary">
+            <RefreshCw className="h-3 w-3" />
+            <span className="font-medium">Subscribe & Save 15%</span>
+          </div>
+          
           <div className="flex items-center justify-between">
-            <p className="text-lg font-bold">
-              £{price.toFixed(2)}
-            </p>
+            <div>
+              <p className="text-lg font-bold">
+                £{price.toFixed(2)}
+              </p>
+              <p className="text-xs text-muted-foreground">
+                or £{subscriptionPrice.toFixed(2)}/month
+              </p>
+            </div>
             <Button 
               onClick={handleAddToCart}
               size="sm"
