@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Loader2, Sparkles, Mic, MicOff, ArrowLeft } from "lucide-react";
+import { Send, Loader2, Sparkles, Mic, MicOff, ArrowLeft, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
@@ -308,6 +308,68 @@ export default function Chat() {
     });
   };
 
+  // Render message content with product links
+  const renderMessageContent = (content: string) => {
+    // Parse markdown links [text](url)
+    const linkRegex = /\[([^\]]+)\]\(([^\)]+)\)/g;
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = linkRegex.exec(content)) !== null) {
+      // Add text before the link
+      if (match.index > lastIndex) {
+        parts.push(
+          <span key={`text-${lastIndex}`}>
+            {content.substring(lastIndex, match.index)}
+          </span>
+        );
+      }
+
+      // Add the link as a button
+      const linkText = match[1];
+      const linkUrl = match[2];
+      
+      if (linkUrl.startsWith('/product/')) {
+        parts.push(
+          <Link 
+            key={`link-${match.index}`} 
+            to={linkUrl}
+            className="inline-flex items-center gap-1 px-3 py-1.5 my-1 bg-accent/20 hover:bg-accent/30 text-accent rounded-lg transition-colors font-medium text-sm border border-accent/30"
+          >
+            {linkText}
+            <ExternalLink className="h-3 w-3" />
+          </Link>
+        );
+      } else {
+        parts.push(
+          <a
+            key={`link-${match.index}`}
+            href={linkUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent hover:underline"
+          >
+            {linkText}
+          </a>
+        );
+      }
+
+      lastIndex = match.index + match[0].length;
+    }
+
+    // Add remaining text
+    if (lastIndex < content.length) {
+      parts.push(
+        <span key={`text-${lastIndex}`}>
+          {content.substring(lastIndex)}
+        </span>
+      );
+    }
+
+    return parts.length > 0 ? parts : content;
+  };
+
   return (
     <div className="flex flex-col h-screen bg-background">
       {/* Header */}
@@ -387,7 +449,9 @@ export default function Chat() {
                       : "bg-card border border-border rounded-2xl rounded-tl-sm shadow-sm"
                   } p-4`}
                 >
-                  <p className="text-sm whitespace-pre-wrap leading-relaxed">{msg.content}</p>
+                  <div className="text-sm whitespace-pre-wrap leading-relaxed">
+                    {renderMessageContent(msg.content)}
+                  </div>
                   <p className="text-xs opacity-60 mt-2">
                     {msg.timestamp.toLocaleTimeString([], {
                       hour: "2-digit",
