@@ -13,7 +13,8 @@ import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { User, Session } from "@supabase/supabase-js";
 import { z } from "zod";
-import { Package, Settings, User as UserIcon, ExternalLink } from "lucide-react";
+import { Package, Settings, User as UserIcon, ExternalLink, Truck } from "lucide-react";
+import { getTrackingUrl } from "@/lib/orders";
 
 const emailSchema = z.string().email("Invalid email address");
 const passwordSchema = z.string().min(6, "Password must be at least 6 characters");
@@ -26,6 +27,9 @@ interface Order {
   currency: string;
   shopify_checkout_url: string | null;
   created_at: string;
+  tracking_number: string | null;
+  carrier: string | null;
+  shipped_at: string | null;
   order_items: OrderItem[];
 }
 
@@ -104,6 +108,9 @@ export default function Profile() {
           currency,
           shopify_checkout_url,
           created_at,
+          tracking_number,
+          carrier,
+          shipped_at,
           order_items (
             id,
             product_title,
@@ -422,6 +429,47 @@ export default function Profile() {
                         </div>
 
                         <Separator />
+
+                        {/* Tracking Information */}
+                        {order.tracking_number && order.carrier && (
+                          <>
+                            <div className="p-4 bg-secondary/20 rounded-lg border">
+                              <div className="flex items-start gap-3">
+                                <Truck className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                                <div className="flex-1 min-w-0">
+                                  <p className="font-medium mb-2">Shipment Tracking</p>
+                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm mb-3">
+                                    <div>
+                                      <span className="text-muted-foreground">Carrier: </span>
+                                      <span className="font-medium">{order.carrier}</span>
+                                    </div>
+                                    <div>
+                                      <span className="text-muted-foreground">Tracking: </span>
+                                      <span className="font-medium">{order.tracking_number}</span>
+                                    </div>
+                                    {order.shipped_at && (
+                                      <div>
+                                        <span className="text-muted-foreground">Shipped: </span>
+                                        <span className="font-medium">
+                                          {new Date(order.shipped_at).toLocaleDateString()}
+                                        </span>
+                                      </div>
+                                    )}
+                                  </div>
+                                  <Button 
+                                    variant="outline" 
+                                    size="sm" 
+                                    className="w-full sm:w-auto"
+                                    onClick={() => window.open(getTrackingUrl(order.carrier!, order.tracking_number!), '_blank')}
+                                  >
+                                    Track Shipment <ExternalLink className="w-3 h-3 ml-1" />
+                                  </Button>
+                                </div>
+                              </div>
+                            </div>
+                            <Separator />
+                          </>
+                        )}
 
                         {/* Order Total */}
                         <div className="flex items-center justify-between">

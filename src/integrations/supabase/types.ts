@@ -66,35 +66,44 @@ export type Database = {
       }
       orders: {
         Row: {
+          carrier: string | null
           created_at: string
           currency: string
           id: string
           order_number: string
+          shipped_at: string | null
           shopify_checkout_url: string | null
           status: Database["public"]["Enums"]["order_status"]
           total_amount: number
+          tracking_number: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
+          carrier?: string | null
           created_at?: string
           currency?: string
           id?: string
           order_number: string
+          shipped_at?: string | null
           shopify_checkout_url?: string | null
           status?: Database["public"]["Enums"]["order_status"]
           total_amount: number
+          tracking_number?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
+          carrier?: string | null
           created_at?: string
           currency?: string
           id?: string
           order_number?: string
+          shipped_at?: string | null
           shopify_checkout_url?: string | null
           status?: Database["public"]["Enums"]["order_status"]
           total_amount?: number
+          tracking_number?: string | null
           updated_at?: string
           user_id?: string
         }

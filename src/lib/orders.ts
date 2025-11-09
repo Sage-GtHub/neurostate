@@ -79,3 +79,47 @@ export async function updateOrderStatus(orderId: string, status: 'pending' | 'pr
     return { success: false, error: error.message };
   }
 }
+
+export interface UpdateTrackingParams {
+  orderId: string;
+  trackingNumber: string;
+  carrier: string;
+}
+
+export async function updateOrderTracking(params: UpdateTrackingParams) {
+  const { orderId, trackingNumber, carrier } = params;
+
+  try {
+    const { error } = await supabase
+      .from('orders')
+      .update({
+        tracking_number: trackingNumber,
+        carrier: carrier,
+        shipped_at: new Date().toISOString(),
+        status: 'shipped'
+      })
+      .eq('id', orderId);
+
+    if (error) throw error;
+
+    return { success: true };
+  } catch (error: any) {
+    console.error('Error updating tracking info:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+// Generate tracking URL based on carrier
+export function getTrackingUrl(carrier: string, trackingNumber: string): string {
+  const carriers: Record<string, string> = {
+    'ups': `https://www.ups.com/track?tracknum=${trackingNumber}`,
+    'usps': `https://tools.usps.com/go/TrackConfirmAction?tLabels=${trackingNumber}`,
+    'fedex': `https://www.fedex.com/fedextrack/?trknbr=${trackingNumber}`,
+    'dhl': `https://www.dhl.com/en/express/tracking.html?AWB=${trackingNumber}`,
+    'royal-mail': `https://www.royalmail.com/track-your-item#/tracking-results/${trackingNumber}`,
+    'dpduk': `https://www.dpd.co.uk/apps/tracking/?reference=${trackingNumber}`,
+  };
+
+  const carrierKey = carrier.toLowerCase().replace(/\s+/g, '-');
+  return carriers[carrierKey] || `https://www.google.com/search?q=${carrier}+tracking+${trackingNumber}`;
+}
