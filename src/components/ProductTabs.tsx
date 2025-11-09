@@ -193,7 +193,7 @@ export const ProductTabs = ({ description }: ProductTabsProps) => {
             <div className="bg-background/80 rounded-lg p-5 border">
               <div className="flex items-center gap-3 mb-3">
                 <span className="text-3xl">⚡</span>
-                <Badge variant="outline" className="text-xs">Optimized</Badge>
+                <Badge variant="outline" className="text-xs">Optimised</Badge>
               </div>
               <h4 className="font-semibold text-lg mb-2">Actually Absorbed</h4>
               <p className="text-sm text-muted-foreground leading-relaxed">
