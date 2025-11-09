@@ -148,7 +148,7 @@ export const ProductBundles = () => {
 
                 <Button 
                   onClick={() => handleAddBundle(bundle)}
-                  className="w-full"
+                  className="w-full rounded-full bg-primary/10 text-foreground border border-border hover:bg-foreground hover:text-background transition-all duration-300 font-medium"
                 >
                   Add Bundle
                   <ArrowRight className="ml-2 h-4 w-4" />

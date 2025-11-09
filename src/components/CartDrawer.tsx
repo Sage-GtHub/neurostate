@@ -120,7 +120,7 @@ export const CartDrawer = () => {
                           <Button
                             variant="outline"
                             size="icon"
-                            className="h-6 w-6"
+                            className="h-6 w-6 rounded-full"
                             onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
                           >
                             <Minus className="h-3 w-3" />
@@ -129,7 +129,7 @@ export const CartDrawer = () => {
                           <Button
                             variant="outline"
                             size="icon"
-                            className="h-6 w-6"
+                            className="h-6 w-6 rounded-full"
                             onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
                           >
                             <Plus className="h-3 w-3" />
@@ -151,7 +151,7 @@ export const CartDrawer = () => {
                 
                 <Button 
                   onClick={handleCheckout}
-                  className="w-full" 
+                  className="w-full rounded-full bg-primary/10 text-foreground border border-border hover:bg-foreground hover:text-background transition-all duration-300" 
                   size="lg"
                   disabled={items.length === 0 || isLoading}
                 >

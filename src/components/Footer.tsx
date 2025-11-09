@@ -80,7 +80,7 @@ export const Footer = () => {
                 className="flex-1"
                 disabled={isLoading}
               />
-              <Button type="submit" disabled={isLoading}>
+              <Button type="submit" disabled={isLoading} className="rounded-full bg-primary/10 text-foreground border border-border hover:bg-foreground hover:text-background transition-all duration-300 font-medium">
                 {isLoading ? "..." : "Subscribe"}
               </Button>
             </form>

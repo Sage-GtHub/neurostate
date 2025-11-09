@@ -157,7 +157,7 @@ export const FrequentlyBoughtTogether = ({ currentProduct }: FrequentlyBoughtTog
         
         <Button 
           onClick={handleAddBundle}
-          className="w-full"
+          className="w-full rounded-full bg-primary/10 text-foreground border border-border hover:bg-foreground hover:text-background transition-all duration-300 font-medium"
           size="lg"
         >
           <ShoppingCart className="h-5 w-5 mr-2" />

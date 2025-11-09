@@ -215,7 +215,7 @@ export const ProductInfo = ({
                   key={valueIndex}
                   variant={selectedVariantIndex === variantIndex ? "default" : "outline"}
                   onClick={() => setSelectedVariantIndex(variantIndex)}
-                  className="min-w-[80px]"
+                  className="min-w-[80px] rounded-full"
                 >
                   {value}
                 </Button>
@@ -233,6 +233,7 @@ export const ProductInfo = ({
             variant="outline"
             size="icon"
             onClick={() => setQuantity(Math.max(1, quantity - 1))}
+            className="rounded-full"
           >
             <Minus className="h-4 w-4" />
           </Button>
@@ -241,6 +242,7 @@ export const ProductInfo = ({
             variant="outline"
             size="icon"
             onClick={() => setQuantity(quantity + 1)}
+            className="rounded-full"
           >
             <Plus className="h-4 w-4" />
           </Button>
@@ -250,7 +252,7 @@ export const ProductInfo = ({
       {/* Add to Cart */}
       <Button
         size="lg"
-        className="w-full"
+        className="w-full rounded-full bg-primary/10 text-foreground border border-border hover:bg-foreground hover:text-background transition-all duration-300 font-medium"
         onClick={handleAddToCart}
         disabled={!selectedVariant?.availableForSale}
       >

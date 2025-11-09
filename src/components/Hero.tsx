@@ -30,7 +30,7 @@ export const Hero = () => {
           </p>
           <Button 
             size="lg" 
-            className="bg-background text-foreground hover:bg-background/90 font-medium"
+            className="bg-background text-foreground hover:bg-background/90 font-medium rounded-full"
             onClick={scrollToProducts}
           >
             Shop Now <ArrowRight className="ml-2 h-5 w-5" />
