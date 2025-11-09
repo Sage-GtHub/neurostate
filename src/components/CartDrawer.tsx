@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2 } from "lucide-react";
+import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, RefreshCw } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 
 export const CartDrawer = () => {
@@ -88,7 +88,20 @@ export const CartDrawer = () => {
                         <p className="text-sm text-muted-foreground">
                           {item.selectedOptions.map(option => option.value).join(' • ')}
                         </p>
-                        <p className="font-semibold">
+                        {item.isSubscription && (
+                          <div className="flex items-center gap-1 mt-1">
+                            <Badge variant="secondary" className="text-xs flex items-center gap-1">
+                              <RefreshCw className="h-3 w-3" />
+                              Subscribe & Save 15%
+                            </Badge>
+                          </div>
+                        )}
+                        {item.isSubscription && item.subscriptionFrequency && (
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Delivers {item.subscriptionFrequency === 'monthly' ? 'monthly' : item.subscriptionFrequency === 'bi-monthly' ? 'every 2 months' : 'quarterly'}
+                          </p>
+                        )}
+                        <p className="font-semibold mt-1">
                           £{parseFloat(item.price.amount).toFixed(2)}
                         </p>
                       </div>

@@ -20,6 +20,7 @@ const ProductDetail = () => {
   const { addRecentlyViewed } = useRecentlyViewed();
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [purchaseType, setPurchaseType] = useState<"onetime" | "subscription">("onetime");
+  const [subscriptionFrequency, setSubscriptionFrequency] = useState<"monthly" | "bi-monthly" | "quarterly">("monthly");
 
   const { data: product, isLoading, error } = useQuery({
     queryKey: ['product', handle],
@@ -67,19 +68,27 @@ const ProductDetail = () => {
   const handleAddToCart = () => {
     if (!selectedVariant) return;
 
+    const isSubscription = purchaseType === "subscription";
+    const effectivePrice = isSubscription ? subscriptionPrice.toString() : selectedVariant.price.amount;
+
     const cartItem = {
       product: { node: product },
       variantId: selectedVariant.id,
       variantTitle: selectedVariant.title,
-      price: selectedVariant.price,
+      price: {
+        amount: effectivePrice,
+        currencyCode: selectedVariant.price.currencyCode
+      },
       quantity: 1,
-      selectedOptions: selectedVariant.selectedOptions || []
+      selectedOptions: selectedVariant.selectedOptions || [],
+      isSubscription,
+      subscriptionFrequency: isSubscription ? subscriptionFrequency : undefined
     };
     
     addItem(cartItem);
     
-    const message = purchaseType === "subscription" 
-      ? `${product.title} subscription added to cart (15% off!)`
+    const message = isSubscription
+      ? `${product.title} subscription added to cart (15% off, delivered ${subscriptionFrequency}!)`
       : `${product.title} has been added to your cart.`;
     
     toast.success("Added to cart", {
@@ -171,7 +180,7 @@ const ProductDetail = () => {
                           <RefreshCw className="h-4 w-4" />
                           <div>
                             <span className="font-medium">Subscribe & Save 15%</span>
-                            <p className="text-xs text-muted-foreground">Delivered monthly, cancel anytime</p>
+                            <p className="text-xs text-muted-foreground">Choose delivery frequency, cancel anytime</p>
                           </div>
                         </div>
                       </Label>
@@ -183,6 +192,29 @@ const ProductDetail = () => {
                   </div>
                 </div>
               </RadioGroup>
+              
+              {/* Subscription Frequency Options */}
+              {purchaseType === "subscription" && (
+                <div className="mt-4 pt-4 border-t">
+                  <Label className="text-sm font-medium mb-2 block">Delivery Frequency</Label>
+                  <RadioGroup value={subscriptionFrequency} onValueChange={(value) => setSubscriptionFrequency(value as "monthly" | "bi-monthly" | "quarterly")}>
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="monthly" id="monthly" />
+                        <Label htmlFor="monthly" className="cursor-pointer text-sm">Every month</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="bi-monthly" id="bi-monthly" />
+                        <Label htmlFor="bi-monthly" className="cursor-pointer text-sm">Every 2 months</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="quarterly" id="quarterly" />
+                        <Label htmlFor="quarterly" className="cursor-pointer text-sm">Every 3 months (quarterly)</Label>
+                      </div>
+                    </div>
+                  </RadioGroup>
+                </div>
+              )}
             </div>
 
             {product.options.length > 0 && (

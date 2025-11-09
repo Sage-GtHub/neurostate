@@ -11,6 +11,7 @@ import FAQ from "./pages/FAQ";
 import Shipping from "./pages/Shipping";
 import HowToUse from "./pages/HowToUse";
 import Ambassador from "./pages/Ambassador";
+import Subscriptions from "./pages/Subscriptions";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/shipping" element={<Shipping />} />
           <Route path="/guides" element={<HowToUse />} />
           <Route path="/ambassador" element={<Ambassador />} />
+          <Route path="/subscriptions" element={<Subscriptions />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

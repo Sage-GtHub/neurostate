@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
-import { Search, User, Menu, X } from "lucide-react";
+import { Search, User, Menu, RefreshCw } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { useState } from "react";
@@ -44,6 +44,11 @@ export const Header = () => {
             <Button variant="ghost" size="icon" className="hidden md:flex">
               <Search className="h-5 w-5" />
             </Button>
+            <Link to="/subscriptions">
+              <Button variant="ghost" size="icon" className="hidden md:flex" title="Manage Subscriptions">
+                <RefreshCw className="h-5 w-5" />
+              </Button>
+            </Link>
             <Button variant="ghost" size="icon" className="hidden md:flex">
               <User className="h-5 w-5" />
             </Button>
@@ -76,6 +81,16 @@ export const Header = () => {
                       <Search className="h-5 w-5 mr-2" />
                       Search
                     </Button>
+                    <Link
+                      to="/subscriptions"
+                      className="w-full"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Button variant="ghost" className="w-full justify-start" size="lg">
+                        <RefreshCw className="h-5 w-5 mr-2" />
+                        Subscriptions
+                      </Button>
+                    </Link>
                     <Button variant="ghost" className="w-full justify-start" size="lg">
                       <User className="h-5 w-5 mr-2" />
                       Account

@@ -43,8 +43,8 @@ export const Footer = () => {
     company: [
       { name: "About Us", href: "/about" },
       { name: "Resources", href: "/resources" },
+      { name: "Subscriptions", href: "/subscriptions" },
       { name: "Contact", href: "/contact" },
-      { name: "Careers", href: "/careers" },
     ],
     support: [
       { name: "FAQ", href: "/faq" },

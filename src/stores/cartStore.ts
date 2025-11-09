@@ -15,6 +15,8 @@ export interface CartItem {
     name: string;
     value: string;
   }>;
+  isSubscription?: boolean;
+  subscriptionFrequency?: 'monthly' | 'bi-monthly' | 'quarterly';
 }
 
 interface CartStore {
@@ -43,12 +45,19 @@ export const useCartStore = create<CartStore>()(
 
       addItem: (item) => {
         const { items } = get();
-        const existingItem = items.find(i => i.variantId === item.variantId);
+        // Match by variantId AND subscription status
+        const existingItem = items.find(i => 
+          i.variantId === item.variantId && 
+          i.isSubscription === item.isSubscription &&
+          i.subscriptionFrequency === item.subscriptionFrequency
+        );
         
         if (existingItem) {
           set({
             items: items.map(i =>
-              i.variantId === item.variantId
+              i.variantId === item.variantId && 
+              i.isSubscription === item.isSubscription &&
+              i.subscriptionFrequency === item.subscriptionFrequency
                 ? { ...i, quantity: i.quantity + item.quantity }
                 : i
             )
