@@ -84,7 +84,9 @@ export const ProductInfo = ({
 
         {/* Short Description */}
         <p className="text-lg text-foreground mb-6 leading-relaxed">
-          {product.description}
+          {product.description && product.description.length > 180 
+            ? `${product.description.substring(0, 180)}...` 
+            : product.description}
         </p>
 
         {/* Key Benefits - Bullet Points */}
