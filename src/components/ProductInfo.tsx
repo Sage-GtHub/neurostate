@@ -154,7 +154,7 @@ export const ProductInfo = ({
             <div 
               className={`flex items-center justify-between p-4 rounded-lg transition-all ${
                 purchaseType === "onetime" 
-                  ? "bg-accent/50 text-accent-foreground border-2 border-accent/70" 
+                  ? "bg-accent text-accent-foreground border-2 border-accent shadow-md" 
                   : "hover:bg-secondary/20 border border-transparent"
               }`}
             >
@@ -162,7 +162,7 @@ export const ProductInfo = ({
                 <RadioGroupItem 
                   value="onetime" 
                   id="onetime"
-                  className="data-[state=checked]:bg-accent data-[state=checked]:border-accent"
+                  className="border-accent-foreground data-[state=checked]:bg-accent-foreground data-[state=checked]:border-accent-foreground"
                 />
                 <Label htmlFor="onetime" className="cursor-pointer">
                   <div className="flex items-center gap-2">
