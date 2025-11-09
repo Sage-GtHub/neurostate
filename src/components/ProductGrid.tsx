@@ -23,8 +23,7 @@ export const ProductGrid = ({ filters, searchQuery }: ProductGridProps) => {
   const filteredProducts = useMemo(() => {
     if (!products) return products;
 
-    return products.filter(product => {
-      const price = parseFloat(product.node.priceRange.minVariantPrice.amount);
+    let filtered = products.filter(product => {
       const hasInStockVariant = product.node.variants.edges.some(v => v.node.availableForSale);
       
       // Search query filter
@@ -43,11 +42,6 @@ export const ProductGrid = ({ filters, searchQuery }: ProductGridProps) => {
 
       // Apply other filters only if they exist
       if (!filters) return true;
-      
-      // Price filter
-      if (price < filters.priceRange[0] || price > filters.priceRange[1]) {
-        return false;
-      }
 
       // Tags filter
       if (filters.tags.length > 0) {
@@ -83,6 +77,29 @@ export const ProductGrid = ({ filters, searchQuery }: ProductGridProps) => {
 
       return true;
     });
+
+    // Apply sorting
+    if (filters?.sortBy) {
+      filtered = [...filtered].sort((a, b) => {
+        const priceA = parseFloat(a.node.priceRange.minVariantPrice.amount);
+        const priceB = parseFloat(b.node.priceRange.minVariantPrice.amount);
+
+        switch (filters.sortBy) {
+          case 'price-low-high':
+            return priceA - priceB;
+          case 'price-high-low':
+            return priceB - priceA;
+          case 'newest':
+            // Assuming newer products have higher IDs (this is a simple heuristic)
+            return b.node.id.localeCompare(a.node.id);
+          case 'featured':
+          default:
+            return 0;
+        }
+      });
+    }
+
+    return filtered;
   }, [products, filters, searchQuery]);
 
   if (isLoading) {

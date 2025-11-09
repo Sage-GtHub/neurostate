@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { SlidersHorizontal, X, ChevronDown } from "lucide-react";
 import {
@@ -15,7 +14,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export interface FilterState {
   categories: string[];
-  priceRange: [number, number];
+  sortBy: 'featured' | 'price-low-high' | 'price-high-low' | 'newest';
   features: string[];
   tags: string[];
   availability: 'all' | 'in-stock' | 'out-of-stock';
@@ -46,7 +45,7 @@ const features = [
 
 const ProductFiltersContent = ({ filters, onFiltersChange, onClearFilters, availableTags }: ProductFiltersProps) => {
   const [categoryOpen, setCategoryOpen] = useState(true);
-  const [priceOpen, setPriceOpen] = useState(true);
+  const [sortOpen, setSortOpen] = useState(true);
   const [featuresOpen, setFeaturesOpen] = useState(true);
   const [tagsOpen, setTagsOpen] = useState(true);
   const [availabilityOpen, setAvailabilityOpen] = useState(true);
@@ -76,15 +75,16 @@ const ProductFiltersContent = ({ filters, onFiltersChange, onClearFilters, avail
     onFiltersChange({ ...filters, availability: value as FilterState['availability'] });
   };
 
-  const handlePriceChange = (value: number[]) => {
-    onFiltersChange({ ...filters, priceRange: [value[0], value[1]] });
+  const handleSortChange = (value: string) => {
+    onFiltersChange({ ...filters, sortBy: value as FilterState['sortBy'] });
   };
 
   const activeFiltersCount = 
     filters.categories.length + 
     filters.features.length + 
     filters.tags.length + 
-    (filters.availability !== 'all' ? 1 : 0);
+    (filters.availability !== 'all' ? 1 : 0) +
+    (filters.sortBy !== 'featured' ? 1 : 0);
 
   return (
     <div className="space-y-6">
@@ -127,25 +127,40 @@ const ProductFiltersContent = ({ filters, onFiltersChange, onClearFilters, avail
         </CollapsibleContent>
       </Collapsible>
 
+      {/* Sort By */}
       <div className="border-t pt-6">
-        <Collapsible open={priceOpen} onOpenChange={setPriceOpen}>
+        <Collapsible open={sortOpen} onOpenChange={setSortOpen}>
           <CollapsibleTrigger className="flex w-full items-center justify-between py-2">
-            <span className="font-medium">Price Range</span>
-            <ChevronDown className={`h-4 w-4 transition-transform ${priceOpen ? 'rotate-180' : ''}`} />
+            <span className="font-medium">Sort By</span>
+            <ChevronDown className={`h-4 w-4 transition-transform ${sortOpen ? 'rotate-180' : ''}`} />
           </CollapsibleTrigger>
-          <CollapsibleContent className="space-y-4 pt-3">
-            <Slider
-              value={filters.priceRange}
-              onValueChange={handlePriceChange}
-              max={500}
-              min={0}
-              step={10}
-              className="w-full"
-            />
-            <div className="flex items-center justify-between text-sm text-muted-foreground">
-              <span>£{filters.priceRange[0]}</span>
-              <span>£{filters.priceRange[1]}</span>
-            </div>
+          <CollapsibleContent className="space-y-3 pt-3">
+            <RadioGroup value={filters.sortBy} onValueChange={handleSortChange}>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="featured" id="featured" />
+                <Label htmlFor="featured" className="text-sm font-normal cursor-pointer">
+                  Featured
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="price-low-high" id="price-low-high" />
+                <Label htmlFor="price-low-high" className="text-sm font-normal cursor-pointer">
+                  Price: Low to High
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="price-high-low" id="price-high-low" />
+                <Label htmlFor="price-high-low" className="text-sm font-normal cursor-pointer">
+                  Price: High to Low
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="newest" id="newest" />
+                <Label htmlFor="newest" className="text-sm font-normal cursor-pointer">
+                  Newest
+                </Label>
+              </div>
+            </RadioGroup>
           </CollapsibleContent>
         </Collapsible>
       </div>
@@ -245,9 +260,9 @@ export const ProductFilters = (props: ProductFiltersProps) => {
           <Button variant="outline" size="sm" className="gap-2">
             <SlidersHorizontal className="h-4 w-4" />
             Filters
-            {(props.filters.categories.length + props.filters.features.length + props.filters.tags.length + (props.filters.availability !== 'all' ? 1 : 0)) > 0 && (
+            {(props.filters.categories.length + props.filters.features.length + props.filters.tags.length + (props.filters.availability !== 'all' ? 1 : 0) + (props.filters.sortBy !== 'featured' ? 1 : 0)) > 0 && (
               <span className="ml-1 rounded-full bg-primary text-primary-foreground w-5 h-5 text-xs flex items-center justify-center">
-                {props.filters.categories.length + props.filters.features.length + props.filters.tags.length + (props.filters.availability !== 'all' ? 1 : 0)}
+                {props.filters.categories.length + props.filters.features.length + props.filters.tags.length + (props.filters.availability !== 'all' ? 1 : 0) + (props.filters.sortBy !== 'featured' ? 1 : 0)}
               </span>
             )}
           </Button>

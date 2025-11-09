@@ -22,7 +22,7 @@ const Index = () => {
   const searchQuery = searchParams.get('search') || '';
   const [filters, setFilters] = useState<FilterState>({
     categories: [],
-    priceRange: [0, 5000],
+    sortBy: 'featured',
     features: [],
     tags: [],
     availability: 'all',
@@ -51,7 +51,7 @@ const Index = () => {
   const handleClearFilters = () => {
     setFilters({
       categories: [],
-      priceRange: [0, 5000],
+      sortBy: 'featured',
       features: [],
       tags: [],
       availability: 'all',
