@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import heroImage from "@/assets/marine-collagen.jpg";
+import heroImage from "@/assets/red-light-therapy-blanket.jpg";
 
 export const Hero = () => {
   const scrollToProducts = () => {
@@ -47,7 +47,7 @@ export const Hero = () => {
         <div className="hidden md:flex justify-center items-center">
           <img 
             src={heroImage} 
-            alt="Marine Collagen Premium - Pure Marine Collagen Peptides"
+            alt="Red Light Therapy - Recovery, Sleep & Performance"
             className="w-full max-w-md"
           />
         </div>
