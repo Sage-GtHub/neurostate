@@ -73,12 +73,12 @@ export const ExpertPartners = () => {
             <Link 
               key={expert.id}
               to={expert.collectionLink}
-              className="block"
+              className="block h-full"
             >
               <Card 
-                className="overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-accent-glow group cursor-pointer"
+                className="overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-accent-glow group cursor-pointer h-full flex flex-col"
               >
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-1">
                   <div className="mb-3">
                     <span className="inline-block px-3 py-1 text-xs font-medium bg-accent/10 text-accent rounded-full mb-2">
                       {expert.specialization}
@@ -92,13 +92,13 @@ export const ExpertPartners = () => {
                     </p>
                   </div>
                   
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
                     {expert.bio}
                   </p>
                   
                   <Button 
                     variant="outline" 
-                    className="w-full group/btn"
+                    className="w-full group/btn mt-auto"
                     asChild
                   >
                     <span>
