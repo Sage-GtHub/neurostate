@@ -181,7 +181,7 @@ export const Footer = () => {
 
           {/* Copyright */}
           <div className="border-t pt-6 text-center text-sm text-muted-foreground">
-            <p>© {new Date().getFullYear()} Your Store. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} NeuroState®. All rights reserved.</p>
           </div>
         </div>
       </div>
