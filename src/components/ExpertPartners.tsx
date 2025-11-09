@@ -2,10 +2,6 @@ import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import expert1 from "@/assets/expert-1.jpg";
-import expert2 from "@/assets/expert-2.jpg";
-import expert3 from "@/assets/expert-3.jpg";
-import expert4 from "@/assets/expert-4.jpg";
 
 interface Expert {
   id: string;
@@ -13,7 +9,6 @@ interface Expert {
   credentials: string;
   title: string;
   bio: string;
-  image: string;
   collectionLink: string;
   specialization: string;
 }
@@ -25,7 +20,6 @@ const experts: Expert[] = [
     credentials: "MD, PhD",
     title: "Sleep & Recovery Specialist",
     bio: "Leading expert in sleep optimization and circadian biology with 20+ years of research in performance recovery.",
-    image: expert1,
     collectionLink: "/category/supplements?tag=sleep",
     specialization: "Sleep Science",
   },
@@ -35,7 +29,6 @@ const experts: Expert[] = [
     credentials: "PhD, CSCS",
     title: "Sports Nutrition Scientist",
     bio: "Performance nutritionist working with Olympic athletes and professional sports teams worldwide.",
-    image: expert2,
     collectionLink: "/category/supplements",
     specialization: "Nutrition",
   },
@@ -45,7 +38,6 @@ const experts: Expert[] = [
     credentials: "DPT, CSCS",
     title: "Recovery & Performance Coach",
     bio: "Physical therapist and performance coach specializing in recovery technology and athletic optimization.",
-    image: expert3,
     collectionLink: "/category/recovery-devices",
     specialization: "Recovery",
   },
@@ -55,7 +47,6 @@ const experts: Expert[] = [
     credentials: "PhD",
     title: "Cognitive Performance Researcher",
     bio: "Neuroscientist focused on cognitive enhancement, mental clarity, and brain health optimization.",
-    image: expert4,
     collectionLink: "/category/supplements?tag=cognitive",
     specialization: "Cognitive Health",
   },
@@ -83,15 +74,6 @@ export const ExpertPartners = () => {
               key={expert.id}
               className="overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-accent-glow group"
             >
-              <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-secondary to-muted">
-                <img 
-                  src={expert.image} 
-                  alt={expert.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-              
               <div className="p-6">
                 <div className="mb-3">
                   <span className="inline-block px-3 py-1 text-xs font-medium bg-accent/10 text-accent rounded-full mb-2">
