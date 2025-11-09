@@ -161,7 +161,7 @@ export const Footer = () => {
                 </a>
                 <div className="flex items-center gap-2 text-muted-foreground text-sm">
                   <MapPin className="h-4 w-4 flex-shrink-0" />
-                  <span>123 Health Street, Wellness City, WC 12345</span>
+                  <span>123 Buckingham Palace Rd, London SW1W 9SH</span>
                 </div>
               </div>
             </div>
