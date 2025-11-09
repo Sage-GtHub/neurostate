@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { X, Truck, Zap, Gift } from "lucide-react";
 import { Button } from "./ui/button";
 
@@ -7,16 +8,19 @@ const announcements = [
     icon: Truck,
     text: "Free Shipping on UK Orders £50+",
     color: "bg-primary text-primary-foreground",
+    link: "/shipping",
   },
   {
     icon: Zap,
     text: "Subscribe & Save 15% on Every Order",
     color: "bg-accent text-accent-foreground",
+    link: "/subscriptions",
   },
   {
     icon: Gift,
     text: "New Customer? Get 10% Off Your First Order",
     color: "bg-secondary text-secondary-foreground",
+    link: "/#products",
   },
 ];
 
@@ -54,10 +58,13 @@ export const AnnouncementBar = () => {
       className={`${currentAnnouncement.color} transition-colors duration-500 relative overflow-hidden`}
     >
       <div className="container mx-auto flex items-center justify-center py-2.5 px-4 relative">
-        <div className="flex items-center gap-2 animate-fade-in">
+        <Link 
+          to={currentAnnouncement.link} 
+          className="flex items-center gap-2 animate-fade-in hover:opacity-80 transition-opacity"
+        >
           <Icon className="h-4 w-4 animate-pulse" />
           <span className="text-sm font-medium">{currentAnnouncement.text}</span>
-        </div>
+        </Link>
         
         <Button
           variant="ghost"
