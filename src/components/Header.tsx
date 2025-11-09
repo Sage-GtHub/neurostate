@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
-import { Search, User, Menu, RefreshCw, ChevronDown } from "lucide-react";
+import { Search, User, Menu, RefreshCw, ChevronDown, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target, TrendingUp } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import {
@@ -18,19 +18,19 @@ export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const shopCategories = [
-    { label: "All Products", href: "/" },
-    { label: "Supplements", href: "/#products" },
-    { label: "Recovery & Performance", href: "/#products" },
-    { label: "Sleep & Rest", href: "/#products" },
-    { label: "Cognitive Performance", href: "/#products" },
+    { label: "All Products", href: "/", icon: Package },
+    { label: "Supplements", href: "/#products", icon: Droplets },
+    { label: "Recovery & Performance", href: "/#products", icon: Activity },
+    { label: "Sleep & Rest", href: "/#products", icon: Moon },
+    { label: "Cognitive Performance", href: "/#products", icon: Brain },
   ];
 
   const guideTopics = [
-    { label: "All Guides", href: "/guides" },
-    { label: "Supplement Usage", href: "/guides#supplements" },
-    { label: "Recovery Protocols", href: "/guides#recovery" },
-    { label: "Sleep Optimization", href: "/guides#sleep" },
-    { label: "Performance Tips", href: "/guides#performance" },
+    { label: "All Guides", href: "/guides", icon: BookOpen },
+    { label: "Supplement Usage", href: "/guides#supplements", icon: Droplets },
+    { label: "Recovery Protocols", href: "/guides#recovery", icon: Zap },
+    { label: "Sleep Optimization", href: "/guides#sleep", icon: Moon },
+    { label: "Performance Tips", href: "/guides#performance", icon: Target },
   ];
 
   const otherLinks = [
@@ -62,8 +62,9 @@ export const Header = () => {
                         <NavigationMenuLink asChild>
                           <Link
                             to={category.href}
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            className="flex items-center gap-3 select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                           >
+                            <category.icon className="h-5 w-5 text-primary" />
                             <div className="text-sm font-medium leading-none">
                               {category.label}
                             </div>
@@ -87,8 +88,9 @@ export const Header = () => {
                         <NavigationMenuLink asChild>
                           <Link
                             to={topic.href}
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            className="flex items-center gap-3 select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                           >
+                            <topic.icon className="h-5 w-5 text-primary" />
                             <div className="text-sm font-medium leading-none">
                               {topic.label}
                             </div>
@@ -148,9 +150,10 @@ export const Header = () => {
                         <Link
                           key={category.label}
                           to={category.href}
-                          className="text-md text-muted-foreground hover:text-accent transition-colors"
+                          className="flex items-center gap-2 text-md text-muted-foreground hover:text-accent transition-colors"
                           onClick={() => setMobileMenuOpen(false)}
                         >
+                          <category.icon className="h-4 w-4" />
                           {category.label}
                         </Link>
                       ))}
@@ -165,9 +168,10 @@ export const Header = () => {
                         <Link
                           key={topic.label}
                           to={topic.href}
-                          className="text-md text-muted-foreground hover:text-accent transition-colors"
+                          className="flex items-center gap-2 text-md text-muted-foreground hover:text-accent transition-colors"
                           onClick={() => setMobileMenuOpen(false)}
                         >
+                          <topic.icon className="h-4 w-4" />
                           {topic.label}
                         </Link>
                       ))}
