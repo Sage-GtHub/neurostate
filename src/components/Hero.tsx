@@ -34,7 +34,7 @@ export const Hero = () => {
             Recovery, Sleep & Performance
           </h1>
           <p className="text-lg text-background/80 mb-8">
-            Pure marine collagen peptides for healthier skin, supported joints, and proper cellular function.
+            Science backed tools for total recovery, peak sleep, and human performance.
           </p>
           <Button 
             size="lg" 
