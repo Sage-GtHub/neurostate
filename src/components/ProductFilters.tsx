@@ -1,0 +1,195 @@
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { SlidersHorizontal, X } from "lucide-react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { ChevronDown } from "lucide-react";
+
+export interface FilterState {
+  categories: string[];
+  priceRange: [number, number];
+  features: string[];
+}
+
+interface ProductFiltersProps {
+  filters: FilterState;
+  onFiltersChange: (filters: FilterState) => void;
+  onClearFilters: () => void;
+  isMobile?: boolean;
+}
+
+const categories = [
+  { id: "supplements", label: "Supplements" },
+  { id: "recovery", label: "Recovery Devices" },
+  { id: "sleep", label: "Sleep Aids" },
+  { id: "cognitive", label: "Cognitive Support" },
+];
+
+const features = [
+  { id: "third-party-tested", label: "Third-Party Tested" },
+  { id: "nsf-certified", label: "NSF Certified" },
+  { id: "vegan", label: "Vegan Friendly" },
+  { id: "gluten-free", label: "Gluten Free" },
+  { id: "non-gmo", label: "Non-GMO" },
+];
+
+const ProductFiltersContent = ({ filters, onFiltersChange, onClearFilters }: ProductFiltersProps) => {
+  const [categoryOpen, setCategoryOpen] = useState(true);
+  const [priceOpen, setPriceOpen] = useState(true);
+  const [featuresOpen, setFeaturesOpen] = useState(true);
+
+  const handleCategoryChange = (categoryId: string, checked: boolean) => {
+    const newCategories = checked
+      ? [...filters.categories, categoryId]
+      : filters.categories.filter(c => c !== categoryId);
+    onFiltersChange({ ...filters, categories: newCategories });
+  };
+
+  const handleFeatureChange = (featureId: string, checked: boolean) => {
+    const newFeatures = checked
+      ? [...filters.features, featureId]
+      : filters.features.filter(f => f !== featureId);
+    onFiltersChange({ ...filters, features: newFeatures });
+  };
+
+  const handlePriceChange = (value: number[]) => {
+    onFiltersChange({ ...filters, priceRange: [value[0], value[1]] });
+  };
+
+  const activeFiltersCount = filters.categories.length + filters.features.length;
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h3 className="font-semibold text-lg">Filters</h3>
+        {activeFiltersCount > 0 && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onClearFilters}
+            className="text-sm"
+          >
+            Clear All
+          </Button>
+        )}
+      </div>
+
+      {/* Category Filter */}
+      <Collapsible open={categoryOpen} onOpenChange={setCategoryOpen}>
+        <CollapsibleTrigger className="flex w-full items-center justify-between py-2">
+          <span className="font-medium">Category</span>
+          <ChevronDown className={`h-4 w-4 transition-transform ${categoryOpen ? 'rotate-180' : ''}`} />
+        </CollapsibleTrigger>
+        <CollapsibleContent className="space-y-3 pt-3">
+          {categories.map((category) => (
+            <div key={category.id} className="flex items-center space-x-2">
+              <Checkbox
+                id={category.id}
+                checked={filters.categories.includes(category.id)}
+                onCheckedChange={(checked) => handleCategoryChange(category.id, checked as boolean)}
+              />
+              <Label
+                htmlFor={category.id}
+                className="text-sm font-normal cursor-pointer"
+              >
+                {category.label}
+              </Label>
+            </div>
+          ))}
+        </CollapsibleContent>
+      </Collapsible>
+
+      <div className="border-t pt-6">
+        <Collapsible open={priceOpen} onOpenChange={setPriceOpen}>
+          <CollapsibleTrigger className="flex w-full items-center justify-between py-2">
+            <span className="font-medium">Price Range</span>
+            <ChevronDown className={`h-4 w-4 transition-transform ${priceOpen ? 'rotate-180' : ''}`} />
+          </CollapsibleTrigger>
+          <CollapsibleContent className="space-y-4 pt-3">
+            <Slider
+              value={filters.priceRange}
+              onValueChange={handlePriceChange}
+              max={500}
+              min={0}
+              step={10}
+              className="w-full"
+            />
+            <div className="flex items-center justify-between text-sm text-muted-foreground">
+              <span>£{filters.priceRange[0]}</span>
+              <span>£{filters.priceRange[1]}</span>
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
+      </div>
+
+      <div className="border-t pt-6">
+        <Collapsible open={featuresOpen} onOpenChange={setFeaturesOpen}>
+          <CollapsibleTrigger className="flex w-full items-center justify-between py-2">
+            <span className="font-medium">Features</span>
+            <ChevronDown className={`h-4 w-4 transition-transform ${featuresOpen ? 'rotate-180' : ''}`} />
+          </CollapsibleTrigger>
+          <CollapsibleContent className="space-y-3 pt-3">
+            {features.map((feature) => (
+              <div key={feature.id} className="flex items-center space-x-2">
+                <Checkbox
+                  id={feature.id}
+                  checked={filters.features.includes(feature.id)}
+                  onCheckedChange={(checked) => handleFeatureChange(feature.id, checked as boolean)}
+                />
+                <Label
+                  htmlFor={feature.id}
+                  className="text-sm font-normal cursor-pointer"
+                >
+                  {feature.label}
+                </Label>
+              </div>
+            ))}
+          </CollapsibleContent>
+        </Collapsible>
+      </div>
+    </div>
+  );
+};
+
+export const ProductFilters = (props: ProductFiltersProps) => {
+  if (props.isMobile) {
+    return (
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button variant="outline" size="sm" className="gap-2">
+            <SlidersHorizontal className="h-4 w-4" />
+            Filters
+            {(props.filters.categories.length + props.filters.features.length) > 0 && (
+              <span className="ml-1 rounded-full bg-primary text-primary-foreground w-5 h-5 text-xs flex items-center justify-center">
+                {props.filters.categories.length + props.filters.features.length}
+              </span>
+            )}
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="left" className="w-[300px] overflow-y-auto">
+          <SheetHeader>
+            <SheetTitle>Filters</SheetTitle>
+          </SheetHeader>
+          <div className="mt-6">
+            <ProductFiltersContent {...props} />
+          </div>
+        </SheetContent>
+      </Sheet>
+    );
+  }
+
+  return (
+    <div className="w-64 flex-shrink-0">
+      <div className="sticky top-20 bg-background border rounded-lg p-6">
+        <ProductFiltersContent {...props} />
+      </div>
+    </div>
+  );
+};
