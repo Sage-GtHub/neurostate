@@ -11,6 +11,7 @@ import FAQ from "./pages/FAQ";
 import Shipping from "./pages/Shipping";
 import HowToUse from "./pages/HowToUse";
 import Ambassador from "./pages/Ambassador";
+import Partnerships from "./pages/Partnerships";
 import Subscriptions from "./pages/Subscriptions";
 import ProductDescriptionUpdater from "./pages/ProductDescriptionUpdater";
 import Auth from "./pages/Auth";
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/shipping" element={<Shipping />} />
           <Route path="/guides" element={<HowToUse />} />
           <Route path="/ambassador" element={<Ambassador />} />
+          <Route path="/partnerships" element={<Partnerships />} />
           <Route path="/subscriptions" element={<Subscriptions />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/profile" element={<Profile />} />
