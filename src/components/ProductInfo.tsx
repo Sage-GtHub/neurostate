@@ -78,34 +78,49 @@ export const ProductInfo = ({
       </div>
 
       {/* Purchase Type */}
-      <div className="border rounded-lg p-4 bg-secondary/10">
+      <div className="border rounded-lg p-4 bg-card">
         <RadioGroup value={purchaseType} onValueChange={(value) => setPurchaseType(value as "onetime" | "subscription")}>
           <div className="space-y-3">
-            <div className="flex items-center justify-between p-3 rounded-md hover:bg-secondary/20 transition-colors">
+            <div 
+              className={`flex items-center justify-between p-4 rounded-lg transition-all ${
+                purchaseType === "subscription" 
+                  ? "bg-accent text-accent-foreground border-2 border-accent shadow-md" 
+                  : "hover:bg-secondary/20 border border-transparent"
+              }`}
+            >
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="subscription" id="subscription" />
                 <Label htmlFor="subscription" className="cursor-pointer">
                   <div className="flex items-center gap-2">
-                    <RefreshCw className="h-4 w-4 text-primary" />
+                    <RefreshCw className="h-5 w-5" />
                     <div>
-                      <div className="font-semibold">Subscribe & Save 15%</div>
-                      <div className="text-xs text-muted-foreground">Cancel anytime, free shipping</div>
+                      <div className="font-bold text-base flex items-center gap-2">
+                        Subscribe & Save 15%
+                        <Badge variant="secondary" className="bg-background/20 text-accent-foreground text-xs">BEST VALUE</Badge>
+                      </div>
+                      <div className="text-sm opacity-90">Cancel anytime, free delivery</div>
                     </div>
                   </div>
                 </Label>
               </div>
               <div className="text-right">
-                <div className="text-xl font-bold text-primary">£{subscriptionPrice.toFixed(2)}</div>
-                <div className="text-xs text-muted-foreground line-through">£{price.toFixed(2)}</div>
+                <div className="text-2xl font-bold">£{subscriptionPrice.toFixed(2)}</div>
+                <div className="text-sm line-through opacity-70">£{price.toFixed(2)}</div>
               </div>
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-md hover:bg-secondary/20 transition-colors">
+            <div 
+              className={`flex items-center justify-between p-4 rounded-lg transition-all ${
+                purchaseType === "onetime" 
+                  ? "bg-secondary/30 border-2 border-secondary" 
+                  : "hover:bg-secondary/20 border border-transparent"
+              }`}
+            >
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="onetime" id="onetime" />
                 <Label htmlFor="onetime" className="cursor-pointer">
                   <div className="flex items-center gap-2">
-                    <Package className="h-4 w-4" />
+                    <Package className="h-5 w-5" />
                     <span className="font-semibold">One-time purchase</span>
                   </div>
                 </Label>
@@ -116,8 +131,8 @@ export const ProductInfo = ({
         </RadioGroup>
         
         {purchaseType === "subscription" && (
-          <div className="mt-4 pt-4 border-t">
-            <Label className="text-sm font-medium mb-2 block">Delivery Frequency</Label>
+          <div className="mt-4 pt-4 border-t border-accent/30 bg-accent/10 -mx-4 px-4 pb-4 rounded-b-lg">
+            <Label className="text-sm font-medium mb-3 block">Delivery Frequency</Label>
             <RadioGroup value={subscriptionFrequency} onValueChange={(value) => setSubscriptionFrequency(value as any)}>
               <div className="space-y-2">
                 <div className="flex items-center space-x-2">
@@ -197,9 +212,9 @@ export const ProductInfo = ({
         {selectedVariant?.availableForSale ? "Add to Cart" : "Out of Stock"}
       </Button>
 
-      {/* Free Shipping Badge */}
+      {/* Free Delivery Badge */}
       <div className="text-center text-sm text-muted-foreground">
-        Free shipping on orders over £50
+        Free delivery on orders over £50
       </div>
     </div>
   );
