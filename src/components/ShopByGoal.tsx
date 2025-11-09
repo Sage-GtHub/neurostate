@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
-import { Target, Moon, Zap, Brain } from "lucide-react";
 import sleepImage from "@/assets/restoresleep-night.jpg";
 import recoveryImage from "@/assets/red-light-therapy-blanket.jpg";
 import performanceImage from "@/assets/pemf-therapy-mat.jpg";
@@ -10,7 +9,6 @@ interface Goal {
   id: string;
   title: string;
   description: string;
-  icon: React.ElementType;
   image: string;
   link: string;
   color: string;
@@ -21,7 +19,6 @@ const goals: Goal[] = [
     id: "sleep",
     title: "Sleep",
     description: "Optimize sleep quality and recovery with science-backed tools for deeper, more restorative rest.",
-    icon: Moon,
     image: sleepImage,
     link: "/category/supplements?tag=sleep",
     color: "from-blue-500/20 to-indigo-500/20",
@@ -30,7 +27,6 @@ const goals: Goal[] = [
     id: "recovery",
     title: "Recovery",
     description: "Accelerate muscle recovery and reduce inflammation with advanced therapeutic technologies.",
-    icon: Target,
     image: recoveryImage,
     link: "/category/recovery-devices",
     color: "from-green-500/20 to-emerald-500/20",
@@ -39,7 +35,6 @@ const goals: Goal[] = [
     id: "performance",
     title: "Performance",
     description: "Enhance athletic performance and endurance with cutting-edge recovery and training tools.",
-    icon: Zap,
     image: performanceImage,
     link: "/category/recovery-devices?tag=performance",
     color: "from-accent/20 to-yellow-500/20",
@@ -48,7 +43,6 @@ const goals: Goal[] = [
     id: "cognitive",
     title: "Cognitive Function",
     description: "Support mental clarity, focus, and brain health with nootropics and cognitive enhancers.",
-    icon: Brain,
     image: cognitiveImage,
     link: "/category/supplements?tag=cognitive",
     color: "from-purple-500/20 to-pink-500/20",
@@ -68,7 +62,6 @@ export const ShopByGoal = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {goals.map((goal) => {
-            const Icon = goal.icon;
             return (
               <Link 
                 key={goal.id} 
@@ -83,9 +76,6 @@ export const ShopByGoal = () => {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className={`absolute inset-0 bg-gradient-to-t ${goal.color} to-transparent`} />
-                    <div className="absolute top-4 right-4 bg-background/90 backdrop-blur-sm p-3 rounded-full transition-all duration-300 group-hover:bg-accent group-hover:text-accent-foreground group-hover:shadow-[0_0_20px_rgba(255,138,0,0.6)]">
-                      <Icon className="h-6 w-6" />
-                    </div>
                   </div>
                   
                   <div className="p-6 bg-card">
