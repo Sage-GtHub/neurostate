@@ -1,10 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Loader2, Sparkles, Mic, MicOff, ArrowLeft, ExternalLink } from "lucide-react";
+import { Send, Loader2, Sparkles, Mic, MicOff, ArrowLeft, ShoppingCart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import { fetchProducts } from "@/lib/shopify";
+import { useCartStore } from "@/stores/cartStore";
+import { toast } from "sonner";
 
 type Message = {
   role: "user" | "assistant";
@@ -56,11 +59,13 @@ export default function Chat() {
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { toast } = useToast();
+  const { toast: showToast } = useToast();
   const [showSuggestions, setShowSuggestions] = useState(true);
   const [isRecording, setIsRecording] = useState(false);
   const [transcript, setTranscript] = useState("");
   const recognitionRef = useRef<any>(null);
+  const [products, setProducts] = useState<any[]>([]);
+  const addItem = useCartStore((state) => state.addItem);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -69,6 +74,15 @@ export default function Chat() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    // Fetch products on mount
+    fetchProducts(50).then((data) => {
+      setProducts(data);
+    }).catch((error) => {
+      console.error('Error fetching products:', error);
+    });
+  }, []);
 
   useEffect(() => {
     // Initialize speech recognition
@@ -94,13 +108,13 @@ export default function Chat() {
         setIsRecording(false);
         
         if (event.error === 'not-allowed') {
-          toast({
+          showToast({
             title: "Microphone access denied",
             description: "Please allow microphone access to use voice input.",
             variant: "destructive",
           });
         } else if (event.error !== 'aborted') {
-          toast({
+          showToast({
             title: "Voice recognition error",
             description: "Please try again.",
             variant: "destructive",
@@ -114,12 +128,12 @@ export default function Chat() {
       };
     }
 
-    return () => {
+      return () => {
       if (recognitionRef.current) {
         recognitionRef.current.stop();
       }
     };
-  }, [toast]);
+  }, [showToast]);
 
   useEffect(() => {
     // Load conversation history from localStorage
@@ -175,7 +189,7 @@ export default function Chat() {
       });
 
       if (response.status === 429) {
-        toast({
+        showToast({
           title: "Rate limit exceeded",
           description: "Please try again in a moment.",
           variant: "destructive",
@@ -185,7 +199,7 @@ export default function Chat() {
       }
 
       if (response.status === 402) {
-        toast({
+        showToast({
           title: "Service unavailable",
           description: "AI service is temporarily unavailable.",
           variant: "destructive",
@@ -254,7 +268,7 @@ export default function Chat() {
       setIsLoading(false);
     } catch (error) {
       console.error("Chat error:", error);
-      toast({
+      showToast({
         title: "Error",
         description: "Failed to send message. Please try again.",
         variant: "destructive",
@@ -271,7 +285,7 @@ export default function Chat() {
 
   const toggleVoiceInput = () => {
     if (!recognitionRef.current) {
-      toast({
+      showToast({
         title: "Voice input not supported",
         description: "Your browser doesn't support voice input. Please try Chrome, Edge, or Safari.",
         variant: "destructive",
@@ -286,7 +300,7 @@ export default function Chat() {
       setTranscript("");
       recognitionRef.current.start();
       setIsRecording(true);
-      toast({
+      showToast({
         title: "Listening...",
         description: "Speak your question now.",
       });
@@ -302,56 +316,53 @@ export default function Chat() {
     setMessages([firstMessage]);
     setShowSuggestions(true);
     localStorage.removeItem("chatHistory");
-    toast({
+    showToast({
       title: "Chat cleared",
       description: "Conversation history has been cleared.",
     });
   };
 
-  // Render message content with product links
+  const handleAddToCart = (product: any, variantId: string) => {
+    const variant = product.node.variants.edges.find((v: any) => v.node.id === variantId)?.node;
+    
+    if (!variant) return;
+
+    addItem({
+      product: product,
+      variantId: variant.id,
+      variantTitle: variant.title,
+      price: {
+        amount: variant.price.amount,
+        currencyCode: variant.price.currencyCode,
+      },
+      quantity: 1,
+      selectedOptions: variant.selectedOptions,
+    });
+
+    toast.success("Added to cart", {
+      description: `${product.node.title} has been added to your cart.`,
+    });
+  };
+
+  // Render message content with product cards
   const renderMessageContent = (content: string) => {
     // Parse markdown links [text](url)
-    const linkRegex = /\[([^\]]+)\]\(([^\)]+)\)/g;
+    const linkRegex = /\[([^\]]+)\]\(\/product\/([^\)]+)\)/g;
     const parts = [];
     let lastIndex = 0;
     let match;
+    const productHandles = new Set<string>();
 
     while ((match = linkRegex.exec(content)) !== null) {
+      const handle = match[2];
+      productHandles.add(handle);
+      
       // Add text before the link
       if (match.index > lastIndex) {
         parts.push(
           <span key={`text-${lastIndex}`}>
             {content.substring(lastIndex, match.index)}
           </span>
-        );
-      }
-
-      // Add the link as a button
-      const linkText = match[1];
-      const linkUrl = match[2];
-      
-      if (linkUrl.startsWith('/product/')) {
-        parts.push(
-          <Link 
-            key={`link-${match.index}`} 
-            to={linkUrl}
-            className="inline-flex items-center gap-1 px-3 py-1.5 my-1 bg-accent/20 hover:bg-accent/30 text-accent rounded-lg transition-colors font-medium text-sm border border-accent/30"
-          >
-            {linkText}
-            <ExternalLink className="h-3 w-3" />
-          </Link>
-        );
-      } else {
-        parts.push(
-          <a
-            key={`link-${match.index}`}
-            href={linkUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-accent hover:underline"
-          >
-            {linkText}
-          </a>
         );
       }
 
@@ -367,7 +378,59 @@ export default function Chat() {
       );
     }
 
-    return parts.length > 0 ? parts : content;
+    const textContent = parts.length > 0 ? <div>{parts}</div> : content;
+
+    // Find and render product cards
+    const productCards = Array.from(productHandles).map((handle) => {
+      const product = products.find((p) => p.node.handle === handle);
+      if (!product) return null;
+
+      const firstVariant = product.node.variants.edges[0]?.node;
+      const imageUrl = product.node.images.edges[0]?.node.url;
+      const price = parseFloat(product.node.priceRange.minVariantPrice.amount);
+
+      return (
+        <div
+          key={handle}
+          className="mt-3 border border-border rounded-xl overflow-hidden bg-background hover:shadow-accent transition-shadow"
+        >
+          <div className="flex gap-4 p-4">
+            <Link to={`/product/${handle}`} className="flex-shrink-0">
+              <img
+                src={imageUrl}
+                alt={product.node.title}
+                className="w-24 h-24 object-cover rounded-lg"
+              />
+            </Link>
+            <div className="flex-1 min-w-0">
+              <Link to={`/product/${handle}`}>
+                <h4 className="font-semibold text-sm mb-1 hover:text-accent transition-colors">
+                  {product.node.title}
+                </h4>
+              </Link>
+              <p className="text-lg font-bold text-accent mb-2">
+                £{price.toFixed(2)}
+              </p>
+              <Button
+                size="sm"
+                onClick={() => handleAddToCart(product, firstVariant.id)}
+                className="bg-gradient-primary hover:opacity-90 shadow-accent h-8"
+              >
+                <ShoppingCart className="h-3.5 w-3.5 mr-1.5" />
+                Add to Cart
+              </Button>
+            </div>
+          </div>
+        </div>
+      );
+    });
+
+    return (
+      <>
+        {textContent}
+        {productCards.length > 0 && <div className="space-y-2">{productCards}</div>}
+      </>
+    );
   };
 
   return (
