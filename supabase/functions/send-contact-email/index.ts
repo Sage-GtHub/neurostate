@@ -64,7 +64,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send notification to admin
     const adminEmailResponse = await resend.emails.send({
       from: "NeuroState® Contact Form <onboarding@resend.dev>",
-      to: ["hello@neurostate.com"], // Replace with your actual email
+      to: ["contact@neurostate.fit"], // Replace with your actual email
       subject: `New Contact Form Submission: ${subject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

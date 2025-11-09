@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, Clock, MapPin, Send, MessageCircle } from "lucide-react";
+import { Mail, Clock, MapPin, Send, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { z } from "zod";
@@ -59,7 +59,7 @@ const Contact = () => {
     } catch (error: any) {
       console.error('Error sending message:', error);
       toast.error("Failed to send message", {
-        description: "Please try again or email us directly at hello@neurostate.com",
+        description: "Please try again or email us directly at contact@neurostate.fit",
       });
     } finally {
       setIsSubmitting(false);
@@ -70,14 +70,8 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      content: "hello@neurostate.com",
-      link: "mailto:hello@neurostate.com",
-    },
-    {
-      icon: Phone,
-      title: "Phone",
-      content: "+44 20 1234 5678",
-      link: "tel:+442012345678",
+      content: "contact@neurostate.fit",
+      link: "mailto:contact@neurostate.fit",
     },
     {
       icon: Clock,
