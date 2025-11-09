@@ -100,7 +100,7 @@ const Ambassador = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header onAskAIClick={() => setChatOpen(true)} />
+      <Header />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-br from-primary/10 via-background to-background py-20 overflow-hidden">

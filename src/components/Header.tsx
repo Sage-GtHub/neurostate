@@ -26,7 +26,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser, Session } from "@supabase/supabase-js";
 import { toast } from "sonner";
 
-export const Header = ({ onAskAIClick }: { onAskAIClick?: () => void }) => {
+export const Header = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -176,14 +176,15 @@ export const Header = ({ onAskAIClick }: { onAskAIClick?: () => void }) => {
 
           <div className="flex items-center gap-2">
             {/* Ask AI Button */}
-            <Button 
-              variant="default"
-              className="hidden md:flex items-center gap-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-md"
-              onClick={onAskAIClick}
-            >
-              <Sparkles className="h-4 w-4" />
-              Ask AI
-            </Button>
+            <Link to="/chat">
+              <Button 
+                variant="default"
+                className="hidden md:flex items-center gap-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-md"
+              >
+                <Sparkles className="h-4 w-4" />
+                Ask AI
+              </Button>
+            </Link>
 
             {/* Desktop Search */}
             {searchOpen ? (

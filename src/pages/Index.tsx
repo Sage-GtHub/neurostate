@@ -63,7 +63,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header onAskAIClick={() => setChatOpen(true)} />
+      <Header />
       <main>
         <Hero />
         <ShopByGoal />

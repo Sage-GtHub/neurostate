@@ -41,7 +41,7 @@ const ProductDetail = () => {
   if (isLoading) {
     return (
       <>
-        <Header onAskAIClick={() => setChatOpen(true)} />
+        <Header />
         <div className="flex justify-center items-center min-h-screen">
           <Loader2 className="h-8 w-8 animate-spin text-accent" />
         </div>
@@ -53,7 +53,7 @@ const ProductDetail = () => {
   if (error || !product) {
     return (
       <>
-        <Header onAskAIClick={() => setChatOpen(true)} />
+        <Header />
         <div className="container mx-auto px-4 py-12">
           <Link to="/">
             <Button variant="ghost" className="mb-6">
@@ -74,7 +74,7 @@ const ProductDetail = () => {
 
   return (
     <>
-      <Header onAskAIClick={() => setChatOpen(true)} />
+      <Header />
       <div className="min-h-screen bg-background">
         {/* Breadcrumb */}
         <div className="border-b">

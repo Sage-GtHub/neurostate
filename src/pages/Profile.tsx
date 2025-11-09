@@ -226,7 +226,7 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header onAskAIClick={() => setChatOpen(true)} />
+      <Header />
       <main className="flex-1 container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">

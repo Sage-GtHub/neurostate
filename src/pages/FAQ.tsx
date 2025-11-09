@@ -115,7 +115,7 @@ const FAQ = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header onAskAIClick={() => setChatOpen(true)} />
+      <Header />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="bg-muted/30 py-16">

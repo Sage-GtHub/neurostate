@@ -187,7 +187,7 @@ export default function Rewards() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header onAskAIClick={() => setChatOpen(true)} />
+      <Header />
       <main className="container mx-auto px-4 py-12">
         {/* Hero Section */}
         <div className="mb-12">

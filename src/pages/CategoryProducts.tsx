@@ -49,7 +49,7 @@ const CategoryProducts = () => {
   if (!config) {
     return (
       <>
-        <Header onAskAIClick={() => setChatOpen(true)} />
+        <Header />
         <div className="container mx-auto px-4 py-12">
           <p className="text-destructive">Category not found</p>
         </div>
@@ -60,7 +60,7 @@ const CategoryProducts = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header onAskAIClick={() => setChatOpen(true)} />
+      <Header />
       <main>
         <section className="py-16 px-4 bg-secondary">
           <div className="container mx-auto">
