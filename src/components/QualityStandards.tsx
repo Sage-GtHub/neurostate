@@ -74,7 +74,7 @@ const standards: Standard[] = [
 
 export const QualityStandards = () => {
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-background via-secondary/20 to-background relative overflow-hidden">
+    <section className="py-12 md:py-16 lg:py-20 px-4 bg-gradient-to-b from-background via-secondary/20 to-background relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-10 w-72 h-72 bg-accent rounded-full blur-3xl" />
@@ -82,16 +82,16 @@ export const QualityStandards = () => {
       </div>
       
       <div className="container mx-auto relative z-10">
-        <div className="text-center mb-16">
-          <p className="text-sm font-medium text-accent mb-3 tracking-wide uppercase">
+        <div className="text-center mb-10 md:mb-16">
+          <p className="text-xs sm:text-sm font-medium text-accent mb-2 md:mb-3 tracking-wide uppercase">
             Our Commitment
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
             The Standard of Excellence
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10 md:mb-16">
           {standards.map((standard, index) => {
             const Icon = standard.icon;
             return (
@@ -133,13 +133,13 @@ export const QualityStandards = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="bg-muted/30 rounded-lg p-8 md:p-10 border border-border/50">
+        <div className="bg-muted/30 rounded-lg p-6 md:p-8 lg:p-10 border border-border/50">
           <div className="max-w-4xl mx-auto text-center">
-            <h3 className="text-2xl md:text-3xl font-semibold mb-8 text-foreground">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 md:mb-8 text-foreground">
               Trusted by 100,000+ Athletes
             </h3>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
               <div className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
                   150+
