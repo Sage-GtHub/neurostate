@@ -177,16 +177,6 @@ export const Header = () => {
           </NavigationMenu>
 
           <div className="flex items-center gap-2">
-            {/* Ask AI Button */}
-            <Button 
-              variant="default"
-              onClick={() => setChatOpen(true)}
-              className="hidden md:flex items-center gap-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-md"
-            >
-              <Sparkles className="h-4 w-4" />
-              Ask Hera
-            </Button>
-
             {/* Desktop Search */}
             {searchOpen ? (
               <form onSubmit={handleSearch} className="hidden md:flex items-center gap-2 animate-in fade-in slide-in-from-right-2">
@@ -270,6 +260,16 @@ export const Header = () => {
             )}
             
             <CartDrawer />
+
+            {/* Ask AI Button */}
+            <Button 
+              variant="default"
+              onClick={() => setChatOpen(true)}
+              className="hidden md:flex items-center gap-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-md"
+            >
+              <Sparkles className="h-4 w-4" />
+              Ask Hera
+            </Button>
             
             {/* Mobile Menu */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
