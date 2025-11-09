@@ -311,28 +311,29 @@ export default function Chat() {
   return (
     <div className="flex flex-col h-screen bg-background">
       {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-10">
+      <header className="border-b bg-gradient-primary sticky top-0 z-10 shadow-accent">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link to="/">
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="text-white hover:bg-white/20">
                 <ArrowLeft className="h-5 w-5" />
               </Button>
             </Link>
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-full bg-primary/10">
-                <Sparkles className="h-5 w-5 text-primary" />
+              <div className="p-2 rounded-full bg-white/20 backdrop-blur">
+                <Sparkles className="h-5 w-5 text-white" />
               </div>
               <div>
-                <h1 className="text-lg font-semibold">Ask AI</h1>
-                <p className="text-xs text-muted-foreground">Your wellness assistant</p>
+                <h1 className="text-lg font-semibold text-white">Ask AI</h1>
+                <p className="text-xs text-white/80">Your wellness assistant</p>
               </div>
             </div>
           </div>
           <Button
-            variant="outline"
+            variant="ghost"
             size="sm"
             onClick={clearHistory}
+            className="text-white hover:bg-white/20"
           >
             Clear Chat
           </Button>
@@ -340,13 +341,13 @@ export default function Chat() {
       </header>
 
       {/* Chat Area */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto bg-gradient-to-b from-accent/5 via-background to-background">
         <div className="container mx-auto max-w-3xl px-4 py-8">
           {/* Quick Suggestions */}
           {showSuggestions && messages.length === 1 && (
             <div className="mb-8 space-y-4">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Sparkles className="h-4 w-4 text-primary" />
+                <Sparkles className="h-4 w-4 text-accent" />
                 <span className="font-medium">Quick questions to get started:</span>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -354,15 +355,15 @@ export default function Chat() {
                   <Button
                     key={index}
                     variant="outline"
-                    className="justify-start text-left h-auto py-4 px-4 hover:bg-primary/5 hover:border-primary/50 transition-all group"
+                    className="justify-start text-left h-auto py-4 px-4 hover:bg-accent/5 hover:border-accent/50 hover:shadow-accent transition-all group"
                     onClick={() => handleSuggestionClick(suggestion.text)}
                   >
                     <span className="text-xl mr-3 group-hover:scale-110 transition-transform">
                       {suggestion.icon}
                     </span>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm">{suggestion.text}</p>
-                      <Badge variant="secondary" className="text-xs mt-1.5">
+                      <p className="text-sm font-medium">{suggestion.text}</p>
+                      <Badge variant="secondary" className="text-xs mt-1.5 bg-accent/10 text-accent-foreground">
                         {suggestion.category}
                       </Badge>
                     </div>
@@ -382,9 +383,9 @@ export default function Chat() {
                 <div
                   className={`max-w-[85%] md:max-w-[75%] ${
                     msg.role === "user"
-                      ? "bg-primary text-primary-foreground rounded-2xl rounded-tr-sm"
-                      : "bg-muted rounded-2xl rounded-tl-sm"
-                  } p-4 shadow-sm`}
+                      ? "bg-gradient-primary text-white rounded-2xl rounded-tr-sm shadow-accent"
+                      : "bg-card border border-border rounded-2xl rounded-tl-sm shadow-sm"
+                  } p-4`}
                 >
                   <p className="text-sm whitespace-pre-wrap leading-relaxed">{msg.content}</p>
                   <p className="text-xs opacity-60 mt-2">
@@ -398,8 +399,8 @@ export default function Chat() {
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-muted rounded-2xl rounded-tl-sm p-4 shadow-sm">
-                  <Loader2 className="h-5 w-5 animate-spin text-primary" />
+                <div className="bg-card border border-border rounded-2xl rounded-tl-sm p-4 shadow-sm">
+                  <Loader2 className="h-5 w-5 animate-spin text-accent" />
                 </div>
               </div>
             )}
@@ -409,11 +410,11 @@ export default function Chat() {
       </div>
 
       {/* Input Area */}
-      <div className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky bottom-0">
+      <div className="border-t bg-card/80 backdrop-blur supports-[backdrop-filter]:bg-card/60 sticky bottom-0 shadow-lg">
         <div className="container mx-auto max-w-3xl px-4 py-4">
           {isRecording && transcript && (
-            <div className="mb-3 p-3 bg-primary/10 rounded-lg animate-pulse">
-              <p className="text-sm text-primary flex items-center gap-2">
+            <div className="mb-3 p-3 bg-accent/10 border border-accent/20 rounded-lg animate-pulse">
+              <p className="text-sm text-accent flex items-center gap-2 font-medium">
                 <Mic className="h-4 w-4 animate-pulse" />
                 <span>{transcript}</span>
               </p>
@@ -426,7 +427,7 @@ export default function Chat() {
               variant={isRecording ? "destructive" : "outline"}
               onClick={toggleVoiceInput}
               disabled={isLoading}
-              className={isRecording ? "animate-pulse" : ""}
+              className={isRecording ? "animate-pulse" : "hover:border-accent/50"}
             >
               {isRecording ? <MicOff size={18} /> : <Mic size={18} />}
             </Button>
@@ -434,14 +435,14 @@ export default function Chat() {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder={isRecording ? "Listening..." : "Ask me anything..."}
-              className="flex-1 h-11"
+              className="flex-1 h-11 focus-visible:ring-accent"
               disabled={isLoading || isRecording}
             />
             <Button 
               type="submit" 
               size="icon" 
               disabled={isLoading || isRecording}
-              className="h-11 w-11"
+              className="h-11 w-11 bg-gradient-primary hover:opacity-90 shadow-accent"
             >
               {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send size={18} />}
             </Button>
