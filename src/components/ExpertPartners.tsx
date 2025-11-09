@@ -1,7 +1,18 @@
 import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ShoppingCart } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
+import { useCartStore } from "@/stores/cartStore";
+import { toast } from "sonner";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 interface Expert {
   id: string;
@@ -11,6 +22,7 @@ interface Expert {
   bio: string;
   collectionLink: string;
   specialization: string;
+  productQuery: string;
 }
 
 const experts: Expert[] = [
@@ -22,6 +34,7 @@ const experts: Expert[] = [
     bio: "Leading expert in sleep optimization and circadian biology with 20+ years of research in performance recovery.",
     collectionLink: "/category/supplements?tag=sleep",
     specialization: "Sleep Science",
+    productQuery: "tag:sleep",
   },
   {
     id: "dr-sarah-williams",
@@ -31,6 +44,7 @@ const experts: Expert[] = [
     bio: "Performance nutritionist working with Olympic athletes and professional sports teams worldwide.",
     collectionLink: "/category/supplements",
     specialization: "Nutrition",
+    productQuery: "product_type:Supplements",
   },
   {
     id: "dr-marcus-thompson",
@@ -40,6 +54,7 @@ const experts: Expert[] = [
     bio: "Physical therapist and performance coach specializing in recovery technology and athletic optimization.",
     collectionLink: "/category/recovery-devices",
     specialization: "Recovery",
+    productQuery: "tag:recovery",
   },
   {
     id: "dr-emily-chen",
@@ -49,8 +64,104 @@ const experts: Expert[] = [
     bio: "Neuroscientist focused on cognitive enhancement, mental clarity, and brain health optimization.",
     collectionLink: "/category/supplements?tag=cognitive",
     specialization: "Cognitive Health",
+    productQuery: "tag:cognitive",
   },
 ];
+
+const ExpertProductCarousel = ({ expert }: { expert: Expert }) => {
+  const addItem = useCartStore(state => state.addItem);
+  
+  const { data: products = [], isLoading } = useQuery({
+    queryKey: ['expert-products', expert.productQuery],
+    queryFn: () => fetchProducts(6, expert.productQuery),
+  });
+
+  const handleAddToCart = (product: ShopifyProduct) => {
+    const variant = product.node.variants.edges[0]?.node;
+    if (!variant) return;
+
+    const cartItem = {
+      product,
+      variantId: variant.id,
+      variantTitle: variant.title,
+      price: variant.price,
+      quantity: 1,
+      selectedOptions: variant.selectedOptions,
+    };
+    
+    addItem(cartItem);
+    toast.success("Added to cart", {
+      description: `${product.node.title} has been added to your cart.`,
+    });
+  };
+
+  if (isLoading) {
+    return (
+      <div className="mt-6 flex items-center justify-center py-8">
+        <div className="text-sm text-muted-foreground">Loading products...</div>
+      </div>
+    );
+  }
+
+  if (!products.length) {
+    return null;
+  }
+
+  return (
+    <div className="mt-6">
+      <h4 className="text-sm font-semibold mb-3 text-foreground/80">Recommended Products</h4>
+      <Carousel
+        opts={{
+          align: "start",
+          loop: true,
+        }}
+        className="w-full"
+      >
+        <CarouselContent className="-ml-2">
+          {products.map((product) => (
+            <CarouselItem key={product.node.id} className="pl-2 basis-full sm:basis-1/2">
+              <Link to={`/product/${product.node.handle}`}>
+                <Card className="overflow-hidden hover:shadow-lg transition-shadow h-full">
+                  <div className="aspect-square overflow-hidden bg-secondary/20">
+                    {product.node.images.edges[0]?.node && (
+                      <img
+                        src={product.node.images.edges[0].node.url}
+                        alt={product.node.title}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    )}
+                  </div>
+                  <div className="p-3">
+                    <h5 className="font-medium text-sm line-clamp-1 mb-1">{product.node.title}</h5>
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-bold">
+                        {product.node.priceRange.minVariantPrice.currencyCode} £
+                        {parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(2)}
+                      </p>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="h-8 w-8 p-0"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleAddToCart(product);
+                        }}
+                      >
+                        <ShoppingCart className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </Card>
+              </Link>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="left-0" />
+        <CarouselNext className="right-0" />
+      </Carousel>
+    </div>
+  );
+};
 
 export const ExpertPartners = () => {
   return (
@@ -96,13 +207,15 @@ export const ExpertPartners = () => {
                     {expert.bio}
                   </p>
                   
+                  <ExpertProductCarousel expert={expert} />
+                  
                   <Button 
                     variant="outline" 
-                    className="w-full group/btn mt-auto"
+                    className="w-full group/btn mt-4"
                     asChild
                   >
                     <span>
-                      View Collection
+                      View All Products
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                     </span>
                   </Button>
