@@ -146,18 +146,11 @@ export const Footer = () => {
               <h3 className="font-bold text-lg mb-4">Get in Touch</h3>
               <div className="space-y-3">
                 <a
-                  href="mailto:support@example.com"
+                  href="mailto:contact@neuroestate.fit"
                   className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
                 >
                   <Mail className="h-4 w-4" />
-                  support@example.com
-                </a>
-                <a
-                  href="tel:+1234567890"
-                  className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
-                >
-                  <Phone className="h-4 w-4" />
-                  +1 (234) 567-890
+                  contact@neuroestate.fit
                 </a>
                 <div className="flex items-center gap-2 text-muted-foreground text-sm">
                   <MapPin className="h-4 w-4 flex-shrink-0" />
