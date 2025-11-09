@@ -218,6 +218,25 @@ export const Header = () => {
               </Button>
             )}
             
+            {/* Ask AI Button */}
+            <Button 
+              variant="default"
+              onClick={() => {
+                setChatOpen(true);
+                setHasUnreadChat(false);
+                localStorage.setItem('hera-chat-visited', 'true');
+              }}
+              className="hidden md:flex items-center gap-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-md relative"
+            >
+              <Sparkles className="h-4 w-4" />
+              Ask Hera
+              {hasUnreadChat && (
+                <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 bg-red-500 hover:bg-red-500 flex items-center justify-center animate-pulse">
+                  <span className="text-xs text-white">1</span>
+                </Badge>
+              )}
+            </Button>
+            
             {/* User Account Dropdown */}
             {user ? (
               <DropdownMenu>
@@ -264,25 +283,6 @@ export const Header = () => {
             )}
             
             <CartDrawer />
-
-            {/* Ask AI Button */}
-            <Button 
-              variant="default"
-              onClick={() => {
-                setChatOpen(true);
-                setHasUnreadChat(false);
-                localStorage.setItem('hera-chat-visited', 'true');
-              }}
-              className="hidden md:flex items-center gap-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-md relative"
-            >
-              <Sparkles className="h-4 w-4" />
-              Ask Hera
-              {hasUnreadChat && (
-                <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 bg-red-500 hover:bg-red-500 flex items-center justify-center animate-pulse">
-                  <span className="text-xs text-white">1</span>
-                </Badge>
-              )}
-            </Button>
             
             {/* Mobile Menu */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
