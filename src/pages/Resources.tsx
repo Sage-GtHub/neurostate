@@ -15,7 +15,7 @@ const featuredArticle = {
   category: "Featured",
   readTime: "15 min read",
   date: "Jan 15, 2026",
-  image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80",
+  image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=80",
   featured: true
 };
 
@@ -27,7 +27,7 @@ const articles = [
     category: "Nutrition",
     readTime: "8 min read",
     date: "Jan 10, 2026",
-    image: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&q=80"
+    image: "https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?w=800&q=80"
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ const articles = [
     category: "Recovery",
     readTime: "10 min read",
     date: "Jan 8, 2026",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80"
+    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80"
   },
   {
     id: 3,
@@ -45,7 +45,7 @@ const articles = [
     category: "Sleep",
     readTime: "6 min read",
     date: "Jan 5, 2026",
-    image: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&q=80"
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
   },
   {
     id: 4,
@@ -54,7 +54,7 @@ const articles = [
     category: "Beauty",
     readTime: "7 min read",
     date: "Jan 3, 2026",
-    image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&q=80"
+    image: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=800&q=80"
   },
   {
     id: 5,
@@ -63,7 +63,7 @@ const articles = [
     category: "Recovery",
     readTime: "9 min read",
     date: "Dec 30, 2025",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80"
+    image: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80"
   },
   {
     id: 6,
@@ -72,7 +72,7 @@ const articles = [
     category: "Nutrition",
     readTime: "5 min read",
     date: "Dec 28, 2025",
-    image: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&q=80"
+    image: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=800&q=80"
   },
   {
     id: 7,
@@ -81,7 +81,7 @@ const articles = [
     category: "Recovery",
     readTime: "8 min read",
     date: "Dec 25, 2025",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80"
+    image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800&q=80"
   },
   {
     id: 8,
@@ -90,7 +90,7 @@ const articles = [
     category: "Wellness",
     readTime: "6 min read",
     date: "Dec 22, 2025",
-    image: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&q=80"
+    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80"
   },
   {
     id: 9,
@@ -99,7 +99,7 @@ const articles = [
     category: "Brain Health",
     readTime: "10 min read",
     date: "Dec 20, 2025",
-    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=80"
+    image: "https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=800&q=80"
   }
 ];
 
