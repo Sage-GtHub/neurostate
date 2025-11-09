@@ -2,16 +2,50 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { MessageCircle, X, Send, Loader2 } from "lucide-react";
+import { MessageCircle, X, Send, Loader2, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Badge } from "@/components/ui/badge";
 
 type Message = {
   role: "user" | "assistant";
   content: string;
   timestamp: Date;
 };
+
+const quickSuggestions = [
+  {
+    icon: "🎯",
+    text: "What products are best for recovery?",
+    category: "Products"
+  },
+  {
+    icon: "💤",
+    text: "How can I improve my sleep quality?",
+    category: "Wellness"
+  },
+  {
+    icon: "🧠",
+    text: "Which supplements support cognitive function?",
+    category: "Products"
+  },
+  {
+    icon: "⚡",
+    text: "What's the difference between your red light devices?",
+    category: "Products"
+  },
+  {
+    icon: "🏋️",
+    text: "How do I use cold therapy for muscle recovery?",
+    category: "Usage"
+  },
+  {
+    icon: "📦",
+    text: "Tell me about your subscription options",
+    category: "Shopping"
+  }
+];
 
 export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolean; onOpenChange?: (open: boolean) => void } = {}) => {
   const isMobile = useIsMobile();
@@ -39,6 +73,7 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+  const [showSuggestions, setShowSuggestions] = useState(true);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -71,18 +106,20 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
     }
   }, [messages]);
 
-  const handleSendMessage = async (e: React.FormEvent) => {
+  const handleSendMessage = async (e: React.FormEvent, customMessage?: string) => {
     e.preventDefault();
-    if (!message.trim() || isLoading) return;
+    const messageToSend = customMessage || message;
+    if (!messageToSend.trim() || isLoading) return;
 
     const userMessage: Message = {
       role: "user",
-      content: message,
+      content: messageToSend,
       timestamp: new Date(),
     };
 
     setMessages((prev) => [...prev, userMessage]);
     setMessage("");
+    setShowSuggestions(false);
     setIsLoading(true);
 
     try {
@@ -190,6 +227,11 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
     }
   };
 
+  const handleSuggestionClick = (suggestion: string) => {
+    const syntheticEvent = { preventDefault: () => {} } as React.FormEvent;
+    handleSendMessage(syntheticEvent, suggestion);
+  };
+
   const clearHistory = () => {
     const firstMessage: Message = {
       role: "assistant",
@@ -197,6 +239,7 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
       timestamp: new Date(),
     };
     setMessages([firstMessage]);
+    setShowSuggestions(true);
     localStorage.removeItem("chatHistory");
     toast({
       title: "Chat cleared",
@@ -204,9 +247,44 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
     });
   };
 
+  // Render quick suggestions
+  const renderSuggestions = () => {
+    if (!showSuggestions || messages.length > 1) return null;
+
+    return (
+      <div className="p-4 space-y-3">
+        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+          <Sparkles className="h-4 w-4 text-primary" />
+          <span className="font-medium">Quick questions to get started:</span>
+        </div>
+        <div className="grid grid-cols-1 gap-2">
+          {quickSuggestions.map((suggestion, index) => (
+            <Button
+              key={index}
+              variant="outline"
+              className="justify-start text-left h-auto py-3 px-4 hover:bg-primary/5 hover:border-primary/50 transition-all group"
+              onClick={() => handleSuggestionClick(suggestion.text)}
+            >
+              <span className="text-lg mr-2 group-hover:scale-110 transition-transform">
+                {suggestion.icon}
+              </span>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm">{suggestion.text}</p>
+                <Badge variant="secondary" className="text-xs mt-1">
+                  {suggestion.category}
+                </Badge>
+              </div>
+            </Button>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   // Render chat messages (shared between mobile and desktop)
   const renderMessages = () => (
     <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      {renderSuggestions()}
       {messages.map((msg, index) => (
         <div
           key={index}
