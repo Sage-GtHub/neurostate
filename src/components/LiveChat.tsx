@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { MessageCircle, X, Send, Loader2, Sparkles } from "lucide-react";
+import { MessageCircle, X, Send, Loader2, Sparkles, Mic, MicOff } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -74,6 +74,9 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
   const [showSuggestions, setShowSuggestions] = useState(true);
+  const [isRecording, setIsRecording] = useState(false);
+  const [transcript, setTranscript] = useState("");
+  const recognitionRef = useRef<any>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -82,6 +85,58 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    // Initialize speech recognition
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = false;
+      recognitionRef.current.interimResults = true;
+      recognitionRef.current.lang = 'en-US';
+
+      recognitionRef.current.onresult = (event: any) => {
+        const current = event.resultIndex;
+        const transcriptText = event.results[current][0].transcript;
+        setTranscript(transcriptText);
+        
+        // If final result, update the input field
+        if (event.results[current].isFinal) {
+          setMessage(transcriptText);
+        }
+      };
+
+      recognitionRef.current.onerror = (event: any) => {
+        console.error('Speech recognition error:', event.error);
+        setIsRecording(false);
+        
+        if (event.error === 'not-allowed') {
+          toast({
+            title: "Microphone access denied",
+            description: "Please allow microphone access to use voice input.",
+            variant: "destructive",
+          });
+        } else if (event.error !== 'aborted') {
+          toast({
+            title: "Voice recognition error",
+            description: "Please try again.",
+            variant: "destructive",
+          });
+        }
+      };
+
+      recognitionRef.current.onend = () => {
+        setIsRecording(false);
+        setTranscript("");
+      };
+    }
+
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+    };
+  }, [toast]);
 
   useEffect(() => {
     // Load conversation history from localStorage
@@ -232,6 +287,30 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
     handleSendMessage(syntheticEvent, suggestion);
   };
 
+  const toggleVoiceInput = () => {
+    if (!recognitionRef.current) {
+      toast({
+        title: "Voice input not supported",
+        description: "Your browser doesn't support voice input. Please try Chrome, Edge, or Safari.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (isRecording) {
+      recognitionRef.current.stop();
+      setIsRecording(false);
+    } else {
+      setTranscript("");
+      recognitionRef.current.start();
+      setIsRecording(true);
+      toast({
+        title: "Listening...",
+        description: "Speak your question now.",
+      });
+    }
+  };
+
   const clearHistory = () => {
     const firstMessage: Message = {
       role: "assistant",
@@ -323,15 +402,33 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
   // Render input form (shared between mobile and desktop)
   const renderInput = () => (
     <form onSubmit={handleSendMessage} className="p-4 border-t bg-background">
+      {isRecording && transcript && (
+        <div className="mb-2 p-2 bg-primary/10 rounded-lg animate-pulse">
+          <p className="text-sm text-primary flex items-center gap-2">
+            <Mic className="h-4 w-4 animate-pulse" />
+            <span>{transcript}</span>
+          </p>
+        </div>
+      )}
       <div className="flex gap-2">
+        <Button
+          type="button"
+          size="icon"
+          variant={isRecording ? "destructive" : "outline"}
+          onClick={toggleVoiceInput}
+          disabled={isLoading}
+          className={isRecording ? "animate-pulse" : ""}
+        >
+          {isRecording ? <MicOff size={18} /> : <Mic size={18} />}
+        </Button>
         <Input
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Ask me anything..."
+          placeholder={isRecording ? "Listening..." : "Ask me anything..."}
           className="flex-1"
-          disabled={isLoading}
+          disabled={isLoading || isRecording}
         />
-        <Button type="submit" size="icon" disabled={isLoading}>
+        <Button type="submit" size="icon" disabled={isLoading || isRecording}>
           {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send size={18} />}
         </Button>
       </div>
