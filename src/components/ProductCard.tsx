@@ -5,13 +5,14 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
-import { Star } from "lucide-react";
+import { Star, Eye } from "lucide-react";
 
 interface ProductCardProps {
   product: ShopifyProduct;
+  onQuickView?: () => void;
 }
 
-export const ProductCard = ({ product }: ProductCardProps) => {
+export const ProductCard = ({ product, onQuickView }: ProductCardProps) => {
   const addItem = useCartStore(state => state.addItem);
   const { node } = product;
   const firstVariant = node.variants.edges[0]?.node;
@@ -61,6 +62,20 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             >
               New Release
             </Badge>
+          )}
+          {onQuickView && (
+            <Button
+              size="sm"
+              variant="secondary"
+              className="absolute top-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+              onClick={(e) => {
+                e.preventDefault();
+                onQuickView();
+              }}
+            >
+              <Eye className="h-4 w-4 mr-1" />
+              Quick View
+            </Button>
           )}
           {image ? (
             <img

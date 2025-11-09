@@ -5,12 +5,16 @@ import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { RecentlyViewed } from "@/components/RecentlyViewed";
 import { ArrowLeft, Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
   const addItem = useCartStore(state => state.addItem);
+  const { addRecentlyViewed } = useRecentlyViewed();
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
 
   const { data: product, isLoading, error } = useQuery({
@@ -18,6 +22,12 @@ const ProductDetail = () => {
     queryFn: () => fetchProductByHandle(handle!),
     enabled: !!handle,
   });
+
+  useEffect(() => {
+    if (product) {
+      addRecentlyViewed({ node: product });
+    }
+  }, [product, addRecentlyViewed]);
 
   if (isLoading) {
     return (
@@ -163,7 +173,11 @@ const ProductDetail = () => {
             </div>
           </div>
         </div>
+        
+        <RecentlyViewed />
       </div>
+      
+      <Footer />
     </>
   );
 };
