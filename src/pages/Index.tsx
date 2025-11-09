@@ -7,6 +7,7 @@ import { ProductBundles } from "@/components/ProductBundles";
 import { ProductQuiz } from "@/components/ProductQuiz";
 import { SocialProof } from "@/components/SocialProof";
 import { RecentlyViewed } from "@/components/RecentlyViewed";
+import { FeaturedIn } from "@/components/FeaturedIn";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 import { LiveChat } from "@/components/LiveChat";
 import { Footer } from "@/components/Footer";
@@ -34,6 +35,7 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
+        <FeaturedIn />
         <section id="products" className="py-16 px-4">
           <div className="container mx-auto">
             <div className="flex items-center justify-between mb-8">

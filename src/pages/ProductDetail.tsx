@@ -12,6 +12,7 @@ import { TrustBadges } from "@/components/TrustBadges";
 import { BenefitsSection } from "@/components/BenefitsSection";
 import { ProductTabs } from "@/components/ProductTabs";
 import { CustomerReviews } from "@/components/CustomerReviews";
+import { FeaturedIn } from "@/components/FeaturedIn";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
@@ -105,6 +106,9 @@ const ProductDetail = () => {
           <h2 className="text-3xl font-bold mb-8">Key Benefits</h2>
           <BenefitsSection />
         </div>
+
+        {/* Featured In Section */}
+        <FeaturedIn />
 
         {/* Product Details Tabs */}
         <div className="container mx-auto px-4 py-12 border-t">
