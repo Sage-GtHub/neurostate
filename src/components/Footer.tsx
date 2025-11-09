@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Link } from "react-router-dom";
 import { Facebook, Instagram, Twitter, Youtube, Mail, Phone, MapPin } from "lucide-react";
 import { toast } from "sonner";
 
@@ -54,6 +55,10 @@ export const Footer = () => {
       { name: "Ambassador Program", href: "/ambassador" },
       { name: "Partnerships", href: "/partnerships" },
     ],
+    legal: [
+      { name: "Terms & Conditions", href: "/terms" },
+      { name: "Privacy Policy", href: "/privacy" },
+    ],
   };
 
   const socialLinks = [
@@ -66,7 +71,7 @@ export const Footer = () => {
   return (
     <footer className="bg-muted/30 border-t mt-24">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
           {/* Newsletter Signup */}
           <div className="lg:col-span-2">
             <h3 className="font-bold text-lg mb-4">Join Our Community</h3>
@@ -139,6 +144,23 @@ export const Footer = () => {
                   >
                     {link.name}
                   </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Legal Links */}
+          <div>
+            <h3 className="font-bold text-lg mb-4">Legal</h3>
+            <ul className="space-y-2">
+              {footerLinks.legal.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.href}
+                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                  >
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>

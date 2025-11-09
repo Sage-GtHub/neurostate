@@ -18,6 +18,8 @@ import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
 import Rewards from "./pages/Rewards";
 import LearningPathDetail from "./pages/LearningPathDetail";
+import Terms from "./pages/Terms";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -43,6 +45,8 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/rewards" element={<Rewards />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/admin/update-descriptions" element={<ProductDescriptionUpdater />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
