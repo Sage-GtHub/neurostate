@@ -363,7 +363,7 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
 
   // Render chat messages (shared between mobile and desktop)
   const renderMessages = () => (
-    <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-background/60 backdrop-blur-sm">
+    <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-background/40 backdrop-blur-[20px]">
       {renderSuggestions()}
       {messages.map((msg, index) => (
         <div
@@ -376,7 +376,7 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
             className={`max-w-[80%] p-3 rounded-lg ${
               msg.role === "user"
                 ? "bg-primary text-primary-foreground"
-                : "bg-muted/80 backdrop-blur-sm"
+                : "bg-muted/70 backdrop-blur-[12px]"
             }`}
           >
             <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
@@ -391,7 +391,7 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
       ))}
       {isLoading && (
         <div className="flex justify-start">
-          <div className="bg-muted/80 backdrop-blur-sm p-3 rounded-lg">
+          <div className="bg-muted/70 backdrop-blur-[12px] p-3 rounded-lg">
             <Loader2 className="h-4 w-4 animate-spin" />
           </div>
         </div>
@@ -402,7 +402,7 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
 
   // Render input form (shared between mobile and desktop)
   const renderInput = () => (
-    <form onSubmit={handleSendMessage} className="p-4 border-t border-border/50 bg-background/80 backdrop-blur-sm">
+    <form onSubmit={handleSendMessage} className="p-4 border-t border-border/50 bg-background/70 backdrop-blur-[20px]">
       {isRecording && transcript && (
         <div className="mb-2 p-2 bg-primary/10 rounded-lg animate-pulse">
           <p className="text-sm text-primary flex items-center gap-2">
@@ -451,8 +451,8 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
                 <MessageCircle size={28} />
               </button>
             </DrawerTrigger>
-            <DrawerContent className="h-[85vh] flex flex-col bg-transparent backdrop-blur-xl border-t border-border/50">
-              <DrawerHeader className="border-b border-border/50 bg-background/80 backdrop-blur-sm">
+            <DrawerContent className="h-[85vh] flex flex-col bg-transparent backdrop-blur-[30px] border-t border-border/50">
+              <DrawerHeader className="border-b border-border/50 bg-background/70 backdrop-blur-[20px]">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Sparkles className="h-5 w-5 text-primary" />
@@ -480,8 +480,8 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
         {/* Controlled version for external open state */}
         {externalOpen !== undefined && (
           <Drawer open={isOpen} onOpenChange={handleOpenChange}>
-            <DrawerContent className="h-[85vh] flex flex-col bg-transparent backdrop-blur-xl border-t border-border/50">
-              <DrawerHeader className="border-b border-border/50 bg-background/80 backdrop-blur-sm">
+            <DrawerContent className="h-[85vh] flex flex-col bg-transparent backdrop-blur-[30px] border-t border-border/50">
+              <DrawerHeader className="border-b border-border/50 bg-background/70 backdrop-blur-[20px]">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Sparkles className="h-5 w-5 text-primary" />
@@ -512,8 +512,8 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
   // Desktop view with Sheet (side panel like Ask Helix)
   return (
     <Sheet open={isOpen} onOpenChange={handleOpenChange}>
-      <SheetContent side="right" className="w-full sm:w-[440px] flex flex-col p-0 bg-transparent backdrop-blur-xl border-l border-border/50">
-        <SheetHeader className="border-b border-border/50 p-6 pb-4 bg-background/80 backdrop-blur-sm">
+      <SheetContent side="right" className="w-full sm:w-[440px] flex flex-col p-0 bg-transparent backdrop-blur-[30px] border-l border-border/50">
+        <SheetHeader className="border-b border-border/50 p-6 pb-4 bg-background/70 backdrop-blur-[20px]">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-full bg-primary/10">
