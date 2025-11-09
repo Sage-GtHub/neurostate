@@ -3,10 +3,13 @@ import { Hero } from "@/components/Hero";
 import { Benefits } from "@/components/Benefits";
 import { ProductGrid } from "@/components/ProductGrid";
 import { ProductFilters, FilterState } from "@/components/ProductFilters";
+import { ProductBundles } from "@/components/ProductBundles";
+import { ProductQuiz } from "@/components/ProductQuiz";
 import { SocialProof } from "@/components/SocialProof";
 import { ProductComparison } from "@/components/ProductComparison";
 import { RecentlyViewed } from "@/components/RecentlyViewed";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
+import { LiveChat } from "@/components/LiveChat";
 import { Footer } from "@/components/Footer";
 import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -38,14 +41,17 @@ const Index = () => {
               <h2 className="text-3xl md:text-4xl font-bold">
                 Best Sellers
               </h2>
-              {isMobile && (
-                <ProductFilters
-                  filters={filters}
-                  onFiltersChange={setFilters}
-                  onClearFilters={handleClearFilters}
-                  isMobile={true}
-                />
-              )}
+              <div className="flex items-center gap-3">
+                <ProductQuiz />
+                {isMobile && (
+                  <ProductFilters
+                    filters={filters}
+                    onFiltersChange={setFilters}
+                    onClearFilters={handleClearFilters}
+                    isMobile={true}
+                  />
+                )}
+              </div>
             </div>
             <div className="flex gap-8">
               {!isMobile && (
@@ -62,12 +68,14 @@ const Index = () => {
             </div>
           </div>
         </section>
+        <ProductBundles />
         <SocialProof />
         <ProductComparison />
         <RecentlyViewed />
         <Benefits />
       </main>
       <Footer />
+      <LiveChat />
       <ExitIntentPopup />
     </div>
   );

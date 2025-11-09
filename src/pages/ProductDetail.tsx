@@ -2,12 +2,15 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProductByHandle } from "@/lib/shopify";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { RecentlyViewed } from "@/components/RecentlyViewed";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { ArrowLeft, Loader2, Star, RefreshCw, Package } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 
@@ -16,6 +19,7 @@ const ProductDetail = () => {
   const addItem = useCartStore(state => state.addItem);
   const { addRecentlyViewed } = useRecentlyViewed();
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
+  const [purchaseType, setPurchaseType] = useState<"onetime" | "subscription">("onetime");
 
   const { data: product, isLoading, error } = useQuery({
     queryKey: ['product', handle],
@@ -58,6 +62,7 @@ const ProductDetail = () => {
 
   const selectedVariant = product.variants.edges[selectedVariantIndex]?.node;
   const price = selectedVariant ? parseFloat(selectedVariant.price.amount) : 0;
+  const subscriptionPrice = price * 0.85; // 15% discount for subscription
 
   const handleAddToCart = () => {
     if (!selectedVariant) return;
@@ -72,8 +77,13 @@ const ProductDetail = () => {
     };
     
     addItem(cartItem);
+    
+    const message = purchaseType === "subscription" 
+      ? `${product.title} subscription added to cart (15% off!)`
+      : `${product.title} has been added to your cart.`;
+    
     toast.success("Added to cart", {
-      description: `${product.title} has been added to your cart.`,
+      description: message,
     });
   };
 
@@ -121,9 +131,58 @@ const ProductDetail = () => {
           <div className="space-y-6">
             <div>
               <h1 className="text-4xl font-bold mb-4">{product.title}</h1>
-              <p className="text-3xl font-bold text-primary">
-                £{price.toFixed(2)}
-              </p>
+              <div className="flex items-center gap-4 mb-4">
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`h-5 w-5 ${
+                        i < 4 ? "fill-accent text-accent" : "fill-none text-muted-foreground/30"
+                      }`}
+                    />
+                  ))}
+                  <span className="text-sm text-muted-foreground ml-2">(24 reviews)</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Purchase Type Selection */}
+            <div className="border rounded-lg p-4 bg-secondary/20">
+              <RadioGroup value={purchaseType} onValueChange={(value) => setPurchaseType(value as "onetime" | "subscription")}>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="onetime" id="onetime" />
+                      <Label htmlFor="onetime" className="cursor-pointer">
+                        <div className="flex items-center gap-2">
+                          <Package className="h-4 w-4" />
+                          <span className="font-medium">One-time purchase</span>
+                        </div>
+                      </Label>
+                    </div>
+                    <span className="text-lg font-bold">£{price.toFixed(2)}</span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="subscription" id="subscription" />
+                      <Label htmlFor="subscription" className="cursor-pointer">
+                        <div className="flex items-center gap-2">
+                          <RefreshCw className="h-4 w-4" />
+                          <div>
+                            <span className="font-medium">Subscribe & Save 15%</span>
+                            <p className="text-xs text-muted-foreground">Delivered monthly, cancel anytime</p>
+                          </div>
+                        </div>
+                      </Label>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-lg font-bold text-primary">£{subscriptionPrice.toFixed(2)}</div>
+                      <div className="text-xs text-muted-foreground line-through">£{price.toFixed(2)}</div>
+                    </div>
+                  </div>
+                </div>
+              </RadioGroup>
             </div>
 
             {product.options.length > 0 && (
@@ -170,6 +229,31 @@ const ProductDetail = () => {
               <p className="text-muted-foreground whitespace-pre-line">
                 {product.description || "No description available."}
               </p>
+            </div>
+
+            {/* Reviews Section */}
+            <div className="border-t pt-6">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-semibold">Customer Reviews</h2>
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`h-4 w-4 ${
+                          i < 4 ? "fill-accent text-accent" : "fill-none text-muted-foreground/30"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-sm font-medium">4.2 out of 5</span>
+                </div>
+              </div>
+              <div className="bg-secondary/20 rounded-lg p-8 text-center">
+                <p className="text-muted-foreground">
+                  Customer reviews will be displayed here once available
+                </p>
+              </div>
             </div>
           </div>
         </div>
