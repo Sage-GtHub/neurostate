@@ -102,9 +102,9 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                     key={star}
                     className={`h-4 w-4 ${
                       star <= Math.floor(rating)
-                        ? "fill-primary text-primary"
+                        ? "fill-accent text-accent"
                         : star - 0.5 <= rating
-                        ? "fill-primary/50 text-primary"
+                        ? "fill-accent/50 text-accent"
                         : "fill-none text-muted-foreground/30"
                     }`}
                   />
