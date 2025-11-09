@@ -88,9 +88,9 @@ const Ambassador = () => {
   ];
 
   const requirements = [
-    "Passionate about health, wellness, and optimized living",
+    "Passionate about health, wellness, and living your best life",
     "Active social media presence (Instagram, TikTok, YouTube, blog, etc.)",
-    "Authentic engagement with your audience",
+    "Genuine engagement with your audience",
     "Alignment with our brand values and mission",
     "Willingness to share honest reviews and experiences",
     "18 years or older",
@@ -112,7 +112,7 @@ const Ambassador = () => {
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
                 Join our community of wellness advocates. Share what you love, earn rewards, 
-                and help others optimize their health.
+                and help others optimise their health.
               </p>
               <Button 
                 size="lg" 

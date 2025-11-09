@@ -141,12 +141,12 @@ export const LearningPaths = () => {
           <Trophy className="h-3 w-3 mr-1" />
           Structured Learning
         </Badge>
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Learning Paths
-        </h2>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          Follow step-by-step courses designed by experts. Track your progress, earn badges, and master your health goals.
-        </p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Learning Paths
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Follow step-by-step courses designed by experts. Track your progress, earn badges, and master your health goals.
+          </p>
       </div>
 
       <div className="grid md:grid-cols-2 gap-8 mb-8">

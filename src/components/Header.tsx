@@ -88,7 +88,7 @@ export const Header = () => {
     { label: "All Guides", href: "/guides", icon: BookOpen },
     { label: "Supplement Usage", href: "/guides#supplements", icon: Droplets },
     { label: "Recovery Protocols", href: "/guides#recovery", icon: Zap },
-    { label: "Sleep Optimization", href: "/guides#sleep", icon: Moon },
+    { label: "Sleep Optimisation", href: "/guides#sleep", icon: Moon },
     { label: "Performance Tips", href: "/guides#performance", icon: Target },
   ];
 

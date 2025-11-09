@@ -14,7 +14,7 @@ import { MultiFormatHub } from "@/components/MultiFormatHub";
 const featuredArticle = {
   id: 0,
   title: "The Ultimate Guide to Biohacking Your Health in 2026",
-  excerpt: "Discover the latest science-backed strategies for optimizing your health, performance, and longevity through nutrition, recovery techniques, and cutting-edge wellness technology.",
+  excerpt: "Discover the latest science-backed strategies for optimising your health, performance, and longevity through nutrition, recovery techniques, and cutting-edge wellness technology.",
   category: "Featured",
   readTime: "15 min read",
   date: "Jan 15, 2026",
@@ -134,7 +134,7 @@ const Resources = () => {
             Master Your Health Journey
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Discover personalized resources, expert courses, and science-backed content to optimize your performance and wellbeing
+            Discover personalised resources, expert courses, and science-backed content to help you optimise your performance and wellbeing
           </p>
         </div>
 
@@ -195,7 +195,7 @@ const Resources = () => {
           <CardContent className="p-8 md:p-12 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Stay Updated</h2>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto text-lg">
-              Get the latest health insights, exclusive offers, and expert tips delivered to your inbox
+              Get the latest health insights, exclusive offers, and expert tips straight to your inbox
             </p>
             <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
               <Input 
@@ -210,7 +210,7 @@ const Resources = () => {
 
         {/* CTA Section */}
         <div className="mt-16 text-center">
-          <p className="text-muted-foreground mb-6 text-lg">Ready to optimize your health?</p>
+          <p className="text-muted-foreground mb-6 text-lg">Ready to optimise your health?</p>
           <Link to="/">
             <Button size="lg" className="text-lg px-8">
               Explore Our Products

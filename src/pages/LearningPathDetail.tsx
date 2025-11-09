@@ -326,10 +326,10 @@ const LearningPathDetail = () => {
         {!user && (
           <Card className="mt-12 bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
             <CardContent className="p-8 text-center">
-              <h3 className="text-2xl font-bold mb-4">Ready to Start Your Journey?</h3>
-              <p className="text-muted-foreground mb-6">
-                Sign in to track your progress, earn badges, and unlock your full potential.
-              </p>
+            <h3 className="text-2xl font-bold mb-4">Ready to Start Your Journey?</h3>
+            <p className="text-muted-foreground mb-6">
+              Sign in to track your progress, earn badges, and unlock your full potential.
+            </p>
               <Button size="lg" onClick={() => navigate('/auth')}>
                 Get Started
               </Button>

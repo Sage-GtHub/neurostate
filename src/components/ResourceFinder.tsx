@@ -209,7 +209,7 @@ export const ResourceFinder = () => {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4 mx-auto">
             <Target className="h-8 w-8 text-primary" />
           </div>
-          <h3 className="text-2xl md:text-3xl font-bold mb-2">Your Personalized Resources</h3>
+          <h3 className="text-2xl md:text-3xl font-bold mb-2">Your Personalised Resources</h3>
           <p className="text-muted-foreground">
             Based on your goals and experience, here are the best resources for you
           </p>
@@ -283,7 +283,7 @@ export const ResourceFinder = () => {
         </div>
         <h3 className="text-2xl md:text-3xl font-bold mb-2">Find Your Perfect Resources</h3>
         <p className="text-muted-foreground">
-          Answer a few quick questions to get personalized recommendations
+          Answer a few quick questions to get personalised recommendations
         </p>
       </CardHeader>
 

@@ -114,8 +114,8 @@ const videos: VideoContent[] = [
   },
   {
     id: 4,
-    title: "Sleep Optimization: Evening Wind-Down Protocol",
-    description: "Follow along with our science-backed evening routine to prepare your body and mind for restorative sleep.",
+    title: "Sleep Optimisation: Evening Wind-Down Protocol",
+    description: "Follow along with our science-backed evening routine to help your body and mind prepare for restorative sleep.",
     duration: "15:10",
     thumbnail: "https://images.unsplash.com/photo-1511295742362-92c96b1cf484?w=800&q=80",
     category: "Sleep"
@@ -126,7 +126,7 @@ const guides: Guide[] = [
   {
     id: 1,
     title: "30-Day Meal Plan for Athletes",
-    description: "Complete nutrition plan with recipes, shopping lists, and macronutrient breakdowns optimized for performance.",
+    description: "Complete nutrition plan with recipes, shopping lists, and macronutrient breakdowns optimised for performance.",
     pages: 45,
     size: "2.3 MB",
     category: "Nutrition",
@@ -143,7 +143,7 @@ const guides: Guide[] = [
   },
   {
     id: 3,
-    title: "Sleep Optimization Workbook",
+    title: "Sleep Optimisation Workbook",
     description: "Interactive workbook with sleep tracking sheets, environment checklist, and supplement protocols.",
     pages: 28,
     size: "1.5 MB",
@@ -174,7 +174,7 @@ const podcasts: Podcast[] = [
   {
     id: 1,
     title: "The Science of Sleep with Dr. Sarah Mitchell",
-    description: "Deep dive into sleep architecture, circadian rhythms, and how to optimize your sleep quality naturally.",
+    description: "Deep dive into sleep architecture, circadian rhythms, and how to optimise your sleep quality naturally.",
     duration: "52:18",
     date: "Jan 12, 2026",
     guest: "Dr. Sarah Mitchell",
@@ -191,7 +191,7 @@ const podcasts: Podcast[] = [
   },
   {
     id: 3,
-    title: "Optimizing Brain Health Through Nutrition",
+    title: "Optimising Brain Health Through Nutrition",
     description: "Expert nutritionist discusses foods, supplements, and lifestyle habits that enhance cognitive performance.",
     duration: "45:30",
     date: "Dec 28, 2025",
@@ -235,13 +235,13 @@ export const MultiFormatHub = () => {
 
   return (
     <section className="mb-16">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Resource Library
-        </h2>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-6">
-          Access our complete library of articles, video tutorials, downloadable guides, and expert podcasts
-        </p>
+        <div className="text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Resource Library
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-6">
+            Get stuck into our complete library of articles, video tutorials, downloadable guides, and expert podcasts
+          </p>
 
         {/* Search */}
         <div className="relative max-w-md mx-auto">

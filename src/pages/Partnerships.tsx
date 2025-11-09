@@ -52,19 +52,19 @@ const partners: Partner[] = [
   {
     name: "University Research Lab",
     logo: "🔬",
-    description: "Leading research institution studying performance optimization and recovery protocols.",
+    description: "Leading research institution studying performance optimisation and recovery protocols.",
     category: "Research"
   },
   {
     name: "HealthTech Solutions",
     logo: "🏥",
-    description: "Healthcare technology provider integrating recovery tools into patient care programs.",
+    description: "Healthcare technology provider integrating recovery tools into patient care programmes.",
     category: "Healthcare"
   },
   {
     name: "Pro Athletes Union",
     logo: "⚡",
-    description: "Professional sports organization ensuring athletes have access to optimal recovery tools.",
+    description: "Professional sports organisation ensuring athletes have access to the best recovery tools.",
     category: "Sports"
   },
 ];
@@ -73,32 +73,32 @@ const benefits = [
   {
     icon: TrendingUp,
     title: "Exclusive Pricing",
-    description: "Access to wholesale pricing and bulk discounts for your organization's needs."
+    description: "Get wholesale pricing and bulk discounts tailored to your organisation's needs."
   },
   {
     icon: Users,
     title: "Dedicated Support",
-    description: "Personal account manager and priority customer service for all your queries."
+    description: "You'll have a personal account manager and priority support whenever you need help."
   },
   {
     icon: Target,
     title: "Custom Solutions",
-    description: "Tailored product bundles and protocols designed for your specific requirements."
+    description: "We'll create bespoke product bundles and protocols designed specifically for your requirements."
   },
   {
     icon: Award,
     title: "Co-Marketing",
-    description: "Joint marketing opportunities and featured placement on our platforms."
+    description: "Work with us on joint marketing initiatives and get featured placement on our platforms."
   },
   {
     icon: Zap,
     title: "Early Access",
-    description: "First access to new products, research findings, and exclusive content."
+    description: "Be the first to try new products, read our latest research, and access exclusive content."
   },
   {
     icon: Heart,
     title: "Community Impact",
-    description: "Collaborate on wellness initiatives that make a real difference in people's lives."
+    description: "Let's work together on wellness initiatives that genuinely make a difference."
   },
 ];
 
@@ -163,13 +163,13 @@ const Partnerships = () => {
             Partner With NeuroState®
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Join our network of leading organizations committed to advancing human performance, 
+            Join our network of leading organisations working to advance human performance, 
             recovery, and wellbeing through science-backed solutions.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
               <Building2 className="h-5 w-5 text-primary" />
-              <span>50+ Partner Organizations</span>
+              <span>50+ Partner Organisations</span>
             </div>
             <div className="flex items-center gap-2">
               <Globe className="h-5 w-5 text-primary" />
@@ -187,7 +187,7 @@ const Partnerships = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Partnership Benefits</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              We believe in creating mutually beneficial relationships that drive real impact
+              We believe in building partnerships that genuinely benefit both sides and make a real impact
             </p>
           </div>
 
@@ -213,7 +213,7 @@ const Partnerships = () => {
         </div>
 
         {/* Ideal Partners Section */}
-        <Card className="mb-20 border-primary/20 bg-gradient-to-br from-primary/5 to-background">
+        <Card className="mb-16 border-primary/20 bg-gradient-to-br from-primary/5 to-background">
           <CardContent className="p-8 md:p-12">
             <h2 className="text-3xl font-bold mb-6 text-center">Who We Partner With</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -221,7 +221,7 @@ const Partnerships = () => {
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
                   <span className="text-2xl">🏋️</span>
                 </div>
-                <h3 className="font-semibold mb-2">Fitness Centers</h3>
+                <h3 className="font-semibold mb-2">Fitness Centres</h3>
                 <p className="text-sm text-muted-foreground">Gyms, studios, and training facilities</p>
               </div>
               <div className="text-center">
@@ -229,7 +229,7 @@ const Partnerships = () => {
                   <span className="text-2xl">🏢</span>
                 </div>
                 <h3 className="font-semibold mb-2">Corporate Wellness</h3>
-                <p className="text-sm text-muted-foreground">Companies prioritizing employee health</p>
+                <p className="text-sm text-muted-foreground">Companies prioritising employee health</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
@@ -254,7 +254,7 @@ const Partnerships = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Partners</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Trusted by leading organizations across multiple industries
+              Trusted by leading organisations across multiple industries
             </p>
           </div>
 
@@ -291,7 +291,7 @@ const Partnerships = () => {
             <CardHeader className="text-center pb-6">
               <h2 className="text-3xl font-bold mb-2">Apply for Partnership</h2>
               <p className="text-muted-foreground">
-                Tell us about your organization and how we can work together
+                Tell us about your organisation and how we might work together
               </p>
             </CardHeader>
             <CardContent className="p-8">
@@ -299,7 +299,7 @@ const Partnerships = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm font-medium">
-                      Organization Name <span className="text-destructive">*</span>
+                      Organisation Name <span className="text-destructive">*</span>
                     </label>
                     <Input
                       name="organizationName"
@@ -353,11 +353,11 @@ const Partnerships = () => {
 
                 <div className="space-y-2">
                   <label className="text-sm font-medium">
-                    Organization Type
+                    Organisation Type
                   </label>
                   <Input
                     name="organizationType"
-                    placeholder="e.g., Fitness Center, Corporate, Sports Team, Healthcare"
+                    placeholder="e.g., Fitness Centre, Corporate, Sports Team, Healthcare"
                     value={formData.organizationType}
                     onChange={handleChange}
                   />
@@ -365,11 +365,11 @@ const Partnerships = () => {
 
                 <div className="space-y-2">
                   <label className="text-sm font-medium">
-                    Tell Us About Your Organization
+                    Tell Us About Your Organisation
                   </label>
                   <Textarea
                     name="message"
-                    placeholder="Share details about your organization, your goals, and how you envision our partnership..."
+                    placeholder="Share details about your organisation, your goals, and how you envision working with us..."
                     value={formData.message}
                     onChange={handleChange}
                     rows={6}
@@ -407,7 +407,7 @@ const Partnerships = () => {
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold mb-4">Questions About Partnerships?</h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Our partnership team is here to help you explore opportunities
+                Our partnership team is here to help you explore what's possible
               </p>
             </div>
             
