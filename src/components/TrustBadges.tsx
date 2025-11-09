@@ -19,8 +19,8 @@ export const TrustBadges = () => {
     },
     {
       icon: Truck,
-      title: "Free Shipping",
-      description: "Orders over £50"
+      title: "Free Delivery",
+      description: "UK orders over £50"
     }
   ];
 

@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 const announcements = [
   {
     icon: Truck,
-    text: "Free Shipping on UK Orders £50+",
+    text: "Free Delivery on UK Orders £50+",
     color: "bg-primary text-primary-foreground",
     link: "/shipping",
   },

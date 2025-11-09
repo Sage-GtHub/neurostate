@@ -25,8 +25,8 @@ export const Footer = () => {
     
     // Simulate API call - replace with actual implementation
     setTimeout(() => {
-      toast.success("Thanks for subscribing!", {
-        description: "You'll receive 10% off your first order in your inbox.",
+      toast.success("Cheers for signing up!", {
+        description: "Your 10% off code is on its way to your inbox.",
       });
       setEmail("");
       setIsLoading(false);
@@ -48,7 +48,7 @@ export const Footer = () => {
     ],
     support: [
       { name: "FAQ", href: "/faq" },
-      { name: "Shipping & Returns", href: "/shipping" },
+      { name: "Delivery & Returns", href: "/shipping" },
       { name: "How-to-Use Guides", href: "/guides" },
       { name: "Ambassador Program", href: "/ambassador" },
     ],
@@ -69,7 +69,7 @@ export const Footer = () => {
           <div className="lg:col-span-2">
             <h3 className="font-bold text-lg mb-4">Join Our Community</h3>
             <p className="text-muted-foreground mb-4 text-sm">
-              Subscribe to get special offers, free giveaways, and 10% off your first order.
+              Sign up for exclusive offers, the occasional freebie, and 10% off your first order.
             </p>
             <form onSubmit={handleNewsletterSignup} className="flex gap-2">
               <Input
