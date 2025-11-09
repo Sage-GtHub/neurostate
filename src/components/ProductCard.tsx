@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
-import { Star, Check } from "lucide-react";
+import { Star, Check, Eye } from "lucide-react";
 import { useState } from "react";
+import { QuickViewModal } from "@/components/QuickViewModal";
 
 interface ProductCardProps {
   product: ShopifyProduct;
@@ -18,6 +19,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const price = parseFloat(node.priceRange.minVariantPrice.amount);
   const [isAdding, setIsAdding] = useState(false);
   const [justAdded, setJustAdded] = useState(false);
+  const [showQuickView, setShowQuickView] = useState(false);
   
   // Mock review data (4.5-5 star range for premium products)
   const rating = 4.5 + Math.random() * 0.5;
@@ -58,21 +60,34 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   return (
-    <Link to={`/product/${node.handle}`} className="group block h-full">
-      <div className="bg-card border border-border rounded-lg overflow-hidden transition-all hover:shadow-lg h-full flex flex-col">
-        <div className="aspect-square overflow-hidden bg-secondary/10 relative flex-shrink-0">
-          {image ? (
-            <img
-              src={image.url}
-              alt={image.altText || node.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center">
-              <span className="text-muted-foreground text-sm">No image</span>
-            </div>
-          )}
-        </div>
+    <>
+      <Link to={`/product/${node.handle}`} className="group block h-full">
+        <div className="bg-card border border-border rounded-lg overflow-hidden transition-all hover:shadow-lg h-full flex flex-col">
+          <div className="aspect-square overflow-hidden bg-secondary/10 relative flex-shrink-0">
+            {image ? (
+              <img
+                src={image.url}
+                alt={image.altText || node.title}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center">
+                <span className="text-muted-foreground text-sm">No image</span>
+              </div>
+            )}
+            
+            {/* Quick View Button */}
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setShowQuickView(true);
+              }}
+              className="absolute top-4 right-4 bg-background/90 backdrop-blur-sm text-foreground p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-primary hover:text-primary-foreground shadow-lg"
+              aria-label="Quick view"
+            >
+              <Eye className="h-5 w-5" />
+            </button>
+          </div>
         <div className="p-6 space-y-4 flex-1 flex flex-col">
           <div className="space-y-2 flex-1">
             <h3 className="font-medium text-foreground line-clamp-2 leading-snug min-h-[2.5rem]">
@@ -137,5 +152,12 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       </div>
     </Link>
+
+    <QuickViewModal
+      product={product}
+      open={showQuickView}
+      onOpenChange={setShowQuickView}
+    />
+  </>
   );
 };
