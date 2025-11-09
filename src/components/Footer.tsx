@@ -50,6 +50,7 @@ export const Footer = () => {
     ],
     support: [
       { name: "FAQ", href: "/faq" },
+      { name: "Order Tracking", href: "/track-order" },
       { name: "Delivery & Returns", href: "/shipping" },
       { name: "How-to-Use Guides", href: "/guides" },
       { name: "Ambassador Program", href: "/ambassador" },
