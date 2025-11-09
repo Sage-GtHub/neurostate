@@ -345,6 +345,27 @@ export const Header = () => {
                   ))}
 
                   <div className="border-t pt-6 mt-4 space-y-4">
+                    {/* Ask Hera Button */}
+                    <Button 
+                      variant="default"
+                      onClick={() => {
+                        setChatOpen(true);
+                        setHasUnreadChat(false);
+                        localStorage.setItem('hera-chat-visited', 'true');
+                        setMobileMenuOpen(false);
+                      }}
+                      className="w-full justify-start bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-md relative"
+                      size="lg"
+                    >
+                      <Sparkles className="h-5 w-5 mr-2" />
+                      Ask Hera
+                      {hasUnreadChat && (
+                        <Badge className="absolute top-2 right-2 h-5 w-5 rounded-full p-0 bg-red-500 hover:bg-red-500 flex items-center justify-center animate-pulse">
+                          <span className="text-xs text-white">1</span>
+                        </Badge>
+                      )}
+                    </Button>
+
                     <form onSubmit={handleSearch} className="flex items-center gap-2">
                       <Input
                         type="search"
