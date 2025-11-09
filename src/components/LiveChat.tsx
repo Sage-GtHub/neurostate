@@ -4,6 +4,8 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { MessageCircle, X, Send, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type Message = {
   role: "user" | "assistant";
@@ -12,6 +14,7 @@ type Message = {
 };
 
 export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolean; onOpenChange?: (open: boolean) => void } = {}) => {
+  const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
 
   // Sync with external control
@@ -201,6 +204,137 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
     });
   };
 
+  // Render chat messages (shared between mobile and desktop)
+  const renderMessages = () => (
+    <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      {messages.map((msg, index) => (
+        <div
+          key={index}
+          className={`flex ${
+            msg.role === "user" ? "justify-end" : "justify-start"
+          }`}
+        >
+          <div
+            className={`max-w-[80%] p-3 rounded-lg ${
+              msg.role === "user"
+                ? "bg-primary text-primary-foreground"
+                : "bg-muted"
+            }`}
+          >
+            <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
+            <p className="text-xs opacity-70 mt-1">
+              {msg.timestamp.toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </p>
+          </div>
+        </div>
+      ))}
+      {isLoading && (
+        <div className="flex justify-start">
+          <div className="bg-muted p-3 rounded-lg">
+            <Loader2 className="h-4 w-4 animate-spin" />
+          </div>
+        </div>
+      )}
+      <div ref={messagesEndRef} />
+    </div>
+  );
+
+  // Render input form (shared between mobile and desktop)
+  const renderInput = () => (
+    <form onSubmit={handleSendMessage} className="p-4 border-t bg-background">
+      <div className="flex gap-2">
+        <Input
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Ask me anything..."
+          className="flex-1"
+          disabled={isLoading}
+        />
+        <Button type="submit" size="icon" disabled={isLoading}>
+          {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send size={18} />}
+        </Button>
+      </div>
+    </form>
+  );
+
+  // Mobile view with Drawer (bottom sheet)
+  if (isMobile) {
+    return (
+      <>
+        {/* Floating chat button - only show if not controlled externally */}
+        {externalOpen === undefined && (
+          <Drawer open={isOpen} onOpenChange={handleOpenChange}>
+            <DrawerTrigger asChild>
+              <button
+                className="fixed bottom-6 right-6 z-50 p-4 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground rounded-full shadow-2xl hover:shadow-primary/50 transition-all hover:scale-110 active:scale-95"
+                aria-label="Open chat"
+                style={{ boxShadow: '0 0 30px rgba(var(--primary), 0.5)' }}
+              >
+                <MessageCircle size={28} />
+              </button>
+            </DrawerTrigger>
+            <DrawerContent className="h-[85vh] flex flex-col">
+              <DrawerHeader className="border-b bg-primary text-white">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <MessageCircle size={20} />
+                    <div>
+                      <DrawerTitle className="text-white">AI Assistant</DrawerTitle>
+                      <p className="text-xs opacity-90">Powered by AI</p>
+                    </div>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={clearHistory}
+                    className="text-white hover:bg-white/20 text-xs"
+                  >
+                    Clear
+                  </Button>
+                </div>
+              </DrawerHeader>
+              {renderMessages()}
+              {renderInput()}
+            </DrawerContent>
+          </Drawer>
+        )}
+
+        {/* Controlled version for external open state */}
+        {externalOpen !== undefined && (
+          <Drawer open={isOpen} onOpenChange={handleOpenChange}>
+            <DrawerContent className="h-[85vh] flex flex-col">
+              <DrawerHeader className="border-b bg-primary text-white">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <MessageCircle size={20} />
+                    <div>
+                      <DrawerTitle className="text-white">AI Assistant</DrawerTitle>
+                      <p className="text-xs opacity-90">Powered by AI</p>
+                    </div>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={clearHistory}
+                    className="text-white hover:bg-white/20 text-xs"
+                  >
+                    Clear
+                  </Button>
+                </div>
+              </DrawerHeader>
+              {renderMessages()}
+              {renderInput()}
+            </DrawerContent>
+          </Drawer>
+        )}
+      </>
+    );
+  }
+
+  // Desktop view with Card
   return (
     <>
       {/* Floating chat button - only show if not controlled externally */}
@@ -215,7 +349,7 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
         </button>
       )}
 
-      {/* Chat window */}
+      {/* Desktop chat window */}
       {isOpen && (
         <Card className="fixed bottom-20 right-4 z-50 w-96 h-[500px] flex flex-col shadow-xl">
           {/* Chat header */}
@@ -239,57 +373,8 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
             </div>
           </div>
 
-          {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
-            {messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`flex ${
-                  msg.role === "user" ? "justify-end" : "justify-start"
-                }`}
-              >
-                <div
-                  className={`max-w-[80%] p-3 rounded-lg ${
-                    msg.role === "user"
-                      ? "bg-primary text-white"
-                      : "bg-muted"
-                  }`}
-                >
-                  <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
-                  <p className="text-xs opacity-70 mt-1">
-                    {msg.timestamp.toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </p>
-                </div>
-              </div>
-            ))}
-            {isLoading && (
-              <div className="flex justify-start">
-                <div className="bg-muted p-3 rounded-lg">
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                </div>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
-
-          {/* Input form */}
-          <form onSubmit={handleSendMessage} className="p-4 border-t">
-            <div className="flex gap-2">
-              <Input
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Ask me anything..."
-                className="flex-1"
-                disabled={isLoading}
-              />
-              <Button type="submit" size="icon" disabled={isLoading}>
-                {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send size={18} />}
-              </Button>
-            </div>
-          </form>
+          {renderMessages()}
+          {renderInput()}
         </Card>
       )}
     </>
