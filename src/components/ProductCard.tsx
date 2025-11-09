@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+import { Star } from "lucide-react";
 
 interface ProductCardProps {
   product: ShopifyProduct;
@@ -14,6 +15,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const firstVariant = node.variants.edges[0]?.node;
   const image = node.images.edges[0]?.node;
   const price = parseFloat(node.priceRange.minVariantPrice.amount);
+  
+  // Mock review data (4.5-5 star range for premium products)
+  const rating = 4.5 + Math.random() * 0.5;
+  const reviewCount = Math.floor(Math.random() * 500) + 100;
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -59,6 +64,28 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             <h3 className="font-medium text-foreground line-clamp-2 leading-snug">
               {node.title}
             </h3>
+            
+            {/* Star Rating */}
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-0.5">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star
+                    key={star}
+                    className={`h-4 w-4 ${
+                      star <= Math.floor(rating)
+                        ? "fill-primary text-primary"
+                        : star - 0.5 <= rating
+                        ? "fill-primary/50 text-primary"
+                        : "fill-none text-muted-foreground/30"
+                    }`}
+                  />
+                ))}
+              </div>
+              <span className="text-xs text-muted-foreground">
+                ({reviewCount})
+              </span>
+            </div>
+            
             <p className="text-sm text-muted-foreground line-clamp-2">
               {node.description}
             </p>
@@ -72,7 +99,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           
           <Button 
             onClick={handleAddToCart}
-            className="w-full"
+            className="w-full bg-primary text-primary-foreground hover:bg-foreground hover:text-background transition-colors duration-300"
             disabled={!firstVariant?.availableForSale}
           >
             {firstVariant?.availableForSale ? "Add to Cart" : "Out of Stock"}
