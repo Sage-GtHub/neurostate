@@ -1,1 +1,4 @@
 project_id = "ibugjjjhxtclofaegtvc"
+
+[functions.update-product-descriptions]
+verify_jwt = false
