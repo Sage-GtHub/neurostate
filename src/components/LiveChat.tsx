@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { MessageCircle, X, Send, Loader2, Sparkles, Mic, MicOff } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Badge } from "@/components/ui/badge";
 
@@ -446,26 +447,25 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
               <button
                 className="fixed bottom-6 right-6 z-50 p-4 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground rounded-full shadow-2xl hover:shadow-primary/50 transition-all hover:scale-110 active:scale-95"
                 aria-label="Open chat"
-                style={{ boxShadow: '0 0 30px rgba(var(--primary), 0.5)' }}
               >
                 <MessageCircle size={28} />
               </button>
             </DrawerTrigger>
             <DrawerContent className="h-[85vh] flex flex-col">
-              <DrawerHeader className="border-b bg-primary text-white">
+              <DrawerHeader className="border-b">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <MessageCircle size={20} />
+                    <Sparkles className="h-5 w-5 text-primary" />
                     <div>
-                      <DrawerTitle className="text-white">AI Assistant</DrawerTitle>
-                      <p className="text-xs opacity-90">Powered by AI</p>
+                      <DrawerTitle>Ask AI</DrawerTitle>
+                      <p className="text-xs text-muted-foreground">Your wellness assistant</p>
                     </div>
                   </div>
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={clearHistory}
-                    className="text-white hover:bg-white/20 text-xs"
+                    className="text-xs"
                   >
                     Clear
                   </Button>
@@ -481,20 +481,20 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
         {externalOpen !== undefined && (
           <Drawer open={isOpen} onOpenChange={handleOpenChange}>
             <DrawerContent className="h-[85vh] flex flex-col">
-              <DrawerHeader className="border-b bg-primary text-white">
+              <DrawerHeader className="border-b">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <MessageCircle size={20} />
+                    <Sparkles className="h-5 w-5 text-primary" />
                     <div>
-                      <DrawerTitle className="text-white">AI Assistant</DrawerTitle>
-                      <p className="text-xs opacity-90">Powered by AI</p>
+                      <DrawerTitle>Ask AI</DrawerTitle>
+                      <p className="text-xs text-muted-foreground">Your wellness assistant</p>
                     </div>
                   </div>
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={clearHistory}
-                    className="text-white hover:bg-white/20 text-xs"
+                    className="text-xs"
                   >
                     Clear
                   </Button>
@@ -509,49 +509,34 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
     );
   }
 
-  // Desktop view with Card
+  // Desktop view with Sheet (side panel like Ask Helix)
   return (
-    <>
-      {/* Floating chat button - only show if not controlled externally */}
-      {externalOpen === undefined && (
-        <button
-          onClick={() => handleOpenChange(!isOpen)}
-          className="fixed bottom-6 right-6 z-50 p-4 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground rounded-full shadow-2xl hover:shadow-primary/50 transition-all hover:scale-110 animate-pulse"
-          aria-label="Toggle chat"
-          style={{ boxShadow: '0 0 30px rgba(var(--primary), 0.5)' }}
-        >
-          {isOpen ? <X size={28} /> : <MessageCircle size={28} />}
-        </button>
-      )}
-
-      {/* Desktop chat window */}
-      {isOpen && (
-        <Card className="fixed bottom-20 right-4 z-50 w-96 h-[500px] flex flex-col shadow-xl">
-          {/* Chat header */}
-          <div className="p-4 border-b bg-primary text-white rounded-t-lg">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <MessageCircle size={20} />
-                <div>
-                  <p className="font-semibold">AI Assistant</p>
-                  <p className="text-xs opacity-90">Powered by AI</p>
-                </div>
+    <Sheet open={isOpen} onOpenChange={handleOpenChange}>
+      <SheetContent side="right" className="w-full sm:w-[440px] flex flex-col p-0">
+        <SheetHeader className="border-b p-6 pb-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-full bg-primary/10">
+                <Sparkles className="h-5 w-5 text-primary" />
               </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={clearHistory}
-                className="text-white hover:bg-white/20 text-xs"
-              >
-                Clear
-              </Button>
+              <div>
+                <SheetTitle>Ask AI</SheetTitle>
+                <p className="text-xs text-muted-foreground mt-0.5">Your wellness assistant</p>
+              </div>
             </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={clearHistory}
+              className="text-xs h-8"
+            >
+              Clear
+            </Button>
           </div>
-
-          {renderMessages()}
-          {renderInput()}
-        </Card>
-      )}
-    </>
+        </SheetHeader>
+        {renderMessages()}
+        {renderInput()}
+      </SheetContent>
+    </Sheet>
   );
 };
