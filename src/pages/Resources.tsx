@@ -10,11 +10,11 @@ import { useState } from "react";
 
 const featuredArticle = {
   id: 0,
-  title: "The Ultimate Guide to Biohacking Your Health in 2024",
+  title: "The Ultimate Guide to Biohacking Your Health in 2026",
   excerpt: "Discover the latest science-backed strategies for optimizing your health, performance, and longevity through nutrition, recovery techniques, and cutting-edge wellness technology.",
   category: "Featured",
   readTime: "15 min read",
-  date: "Dec 20, 2024",
+  date: "Jan 15, 2026",
   image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80",
   featured: true
 };
@@ -26,7 +26,7 @@ const articles = [
     excerpt: "Learn everything about omega-3s, their benefits for heart health, brain function, and how to choose the right supplement.",
     category: "Nutrition",
     readTime: "8 min read",
-    date: "Dec 15, 2024",
+    date: "Jan 10, 2026",
     image: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&q=80"
   },
   {
@@ -35,7 +35,7 @@ const articles = [
     excerpt: "Discover how red light therapy works, its proven benefits for recovery, skin health, and athletic performance.",
     category: "Recovery",
     readTime: "10 min read",
-    date: "Dec 12, 2024",
+    date: "Jan 8, 2026",
     image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80"
   },
   {
@@ -44,7 +44,7 @@ const articles = [
     excerpt: "Understanding the role of quality sleep in recovery and how supplements can support your natural sleep cycle.",
     category: "Sleep",
     readTime: "6 min read",
-    date: "Dec 10, 2024",
+    date: "Jan 5, 2026",
     image: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&q=80"
   },
   {
@@ -53,7 +53,7 @@ const articles = [
     excerpt: "The science behind marine collagen and why it's superior for skin health, joint support, and overall wellness.",
     category: "Beauty",
     readTime: "7 min read",
-    date: "Dec 8, 2024",
+    date: "Jan 3, 2026",
     image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&q=80"
   },
   {
@@ -62,7 +62,7 @@ const articles = [
     excerpt: "Explore the powerful recovery benefits of cold exposure and how to safely incorporate it into your routine.",
     category: "Recovery",
     readTime: "9 min read",
-    date: "Dec 5, 2024",
+    date: "Dec 30, 2025",
     image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80"
   },
   {
@@ -71,7 +71,7 @@ const articles = [
     excerpt: "Why trace minerals are essential for optimum health and how modern diets often leave us deficient.",
     category: "Nutrition",
     readTime: "5 min read",
-    date: "Dec 3, 2024",
+    date: "Dec 28, 2025",
     image: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&q=80"
   },
   {
@@ -80,7 +80,7 @@ const articles = [
     excerpt: "Understanding pulsed electromagnetic field therapy and its applications for pain relief and cellular health.",
     category: "Recovery",
     readTime: "8 min read",
-    date: "Dec 1, 2024",
+    date: "Dec 25, 2025",
     image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80"
   },
   {
@@ -89,7 +89,7 @@ const articles = [
     excerpt: "Natural compounds that help your body adapt to stress and maintain hormonal balance.",
     category: "Wellness",
     readTime: "6 min read",
-    date: "Nov 28, 2024",
+    date: "Dec 22, 2025",
     image: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&q=80"
   },
   {
@@ -98,7 +98,7 @@ const articles = [
     excerpt: "Evidence-based guide to supplements that support memory, focus, and mental clarity.",
     category: "Brain Health",
     readTime: "10 min read",
-    date: "Nov 25, 2024",
+    date: "Dec 20, 2025",
     image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=80"
   }
 ];
