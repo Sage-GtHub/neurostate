@@ -8,6 +8,7 @@ import { Calendar, Clock, ArrowRight, BookOpen, TrendingUp, Search } from "lucid
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { LearningPaths } from "@/components/LearningPaths";
+import { LiveChat } from "@/components/LiveChat";
 import { ResourceFinder } from "@/components/ResourceFinder";
 import { MultiFormatHub } from "@/components/MultiFormatHub";
 
@@ -111,6 +112,7 @@ const categories = ["All", "Nutrition", "Recovery", "Sleep", "Beauty", "Wellness
 const Resources = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const [chatOpen, setChatOpen] = useState(false);
 
   const filteredArticles = articles.filter(article => {
     const matchesCategory = selectedCategory === "All" || article.category === selectedCategory;
@@ -121,7 +123,7 @@ const Resources = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header onAskAIClick={() => setChatOpen(true)} />
       
       <main className="container mx-auto px-4 py-12">
         {/* Hero Section */}
@@ -221,6 +223,7 @@ const Resources = () => {
       </main>
 
       <Footer />
+      <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
     </div>
   );
 };

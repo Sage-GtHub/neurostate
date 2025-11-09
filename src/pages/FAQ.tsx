@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import {
@@ -7,8 +8,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
+import { LiveChat } from "@/components/LiveChat";
 
 const FAQ = () => {
+  const [chatOpen, setChatOpen] = useState(false);
+  
   const faqCategories = [
     {
       category: "Orders & Delivery",
@@ -111,7 +115,7 @@ const FAQ = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header onAskAIClick={() => setChatOpen(true)} />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="bg-muted/30 py-16">
@@ -179,6 +183,7 @@ const FAQ = () => {
         </section>
       </main>
       <Footer />
+      <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
     </div>
   );
 };

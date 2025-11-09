@@ -17,8 +17,10 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { LiveChat } from "@/components/LiveChat";
 
 const Ambassador = () => {
+  const [chatOpen, setChatOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -98,7 +100,7 @@ const Ambassador = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header onAskAIClick={() => setChatOpen(true)} />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-br from-primary/10 via-background to-background py-20 overflow-hidden">
@@ -305,6 +307,7 @@ const Ambassador = () => {
         </section>
       </main>
       <Footer />
+      <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
     </div>
   );
 };

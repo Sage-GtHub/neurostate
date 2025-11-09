@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Header } from "@/components/Header";
+import { LiveChat } from "@/components/LiveChat";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -50,6 +51,7 @@ export default function Profile() {
   const [loading, setLoading] = useState(false);
   const [orders, setOrders] = useState<Order[]>([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
+  const [chatOpen, setChatOpen] = useState(false);
   
   // Email update
   const [newEmail, setNewEmail] = useState("");
@@ -224,7 +226,7 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header onAskAIClick={() => setChatOpen(true)} />
       <main className="flex-1 container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
@@ -500,6 +502,7 @@ export default function Profile() {
         </div>
       </main>
       <Footer />
+      <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
     </div>
   );
 }

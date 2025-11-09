@@ -10,6 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { LiveChat } from "@/components/LiveChat";
 
 interface Reward {
   id: string;
@@ -45,6 +46,7 @@ export default function Rewards() {
   const [user, setUser] = useState<any>(null);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const [chatOpen, setChatOpen] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -185,7 +187,7 @@ export default function Rewards() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header onAskAIClick={() => setChatOpen(true)} />
       <main className="container mx-auto px-4 py-12">
         {/* Hero Section */}
         <div className="mb-12">
@@ -394,6 +396,7 @@ export default function Rewards() {
         </Card>
       </main>
       <Footer />
+      <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
     </div>
   );
 }

@@ -15,11 +15,13 @@ import { CustomerReviews } from "@/components/CustomerReviews";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
+import { LiveChat } from "@/components/LiveChat";
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
   const { addRecentlyViewed } = useRecentlyViewed();
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
+  const [chatOpen, setChatOpen] = useState(false);
 
   const { data: product, isLoading, error } = useQuery({
     queryKey: ['product', handle],
@@ -39,10 +41,11 @@ const ProductDetail = () => {
   if (isLoading) {
     return (
       <>
-        <Header />
+        <Header onAskAIClick={() => setChatOpen(true)} />
         <div className="flex justify-center items-center min-h-screen">
           <Loader2 className="h-8 w-8 animate-spin text-accent" />
         </div>
+        <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
       </>
     );
   }
@@ -50,7 +53,7 @@ const ProductDetail = () => {
   if (error || !product) {
     return (
       <>
-        <Header />
+        <Header onAskAIClick={() => setChatOpen(true)} />
         <div className="container mx-auto px-4 py-12">
           <Link to="/">
             <Button variant="ghost" className="mb-6">
@@ -59,6 +62,7 @@ const ProductDetail = () => {
           </Link>
           <p className="text-destructive">Product not found</p>
         </div>
+        <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
       </>
     );
   }
@@ -70,7 +74,7 @@ const ProductDetail = () => {
 
   return (
     <>
-      <Header />
+      <Header onAskAIClick={() => setChatOpen(true)} />
       <div className="min-h-screen bg-background">
         {/* Breadcrumb */}
         <div className="border-b">
@@ -136,6 +140,7 @@ const ProductDetail = () => {
       </div>
       
       <Footer />
+      <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
     </>
   );
 };

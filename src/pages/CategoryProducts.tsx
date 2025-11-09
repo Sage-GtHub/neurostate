@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProducts } from "@/lib/shopify";
@@ -5,6 +6,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Loader2, ArrowLeft } from "lucide-react";
+import { LiveChat } from "@/components/LiveChat";
 
 const categoryConfig = {
   recovery: {
@@ -27,6 +29,7 @@ const categoryConfig = {
 const CategoryProducts = () => {
   const { category } = useParams<{ category: string }>();
   const config = categoryConfig[category as keyof typeof categoryConfig];
+  const [chatOpen, setChatOpen] = useState(false);
 
   const { data: products, isLoading, error } = useQuery({
     queryKey: ['products', category],
@@ -46,17 +49,18 @@ const CategoryProducts = () => {
   if (!config) {
     return (
       <>
-        <Header />
+        <Header onAskAIClick={() => setChatOpen(true)} />
         <div className="container mx-auto px-4 py-12">
           <p className="text-destructive">Category not found</p>
         </div>
+        <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
       </>
     );
   }
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header onAskAIClick={() => setChatOpen(true)} />
       <main>
         <section className="py-16 px-4 bg-secondary">
           <div className="container mx-auto">
@@ -101,6 +105,7 @@ const CategoryProducts = () => {
           <p>&copy; 2025 NeuroState®. All rights reserved.</p>
         </div>
       </footer>
+      <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
     </div>
   );
 };

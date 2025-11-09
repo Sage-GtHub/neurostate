@@ -15,8 +15,11 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { LiveChat } from "@/components/LiveChat";
 
 const Subscriptions = () => {
+  const [chatOpen, setChatOpen] = useState(false);
+  
   // Mock data - in production this would come from your backend
   const [subscriptions, setSubscriptions] = useState([
     {
@@ -88,7 +91,7 @@ const Subscriptions = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header onAskAIClick={() => setChatOpen(true)} />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="bg-muted/30 py-12">
@@ -285,6 +288,7 @@ const Subscriptions = () => {
         </section>
       </main>
       <Footer />
+      <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
     </div>
   );
 };

@@ -1,12 +1,16 @@
+import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Package, Truck, RefreshCcw, Shield } from "lucide-react";
+import { LiveChat } from "@/components/LiveChat";
 
 const Shipping = () => {
+  const [chatOpen, setChatOpen] = useState(false);
+  
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header onAskAIClick={() => setChatOpen(true)} />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="bg-muted/30 py-16">
@@ -171,6 +175,7 @@ const Shipping = () => {
         </section>
       </main>
       <Footer />
+      <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
     </div>
   );
 };

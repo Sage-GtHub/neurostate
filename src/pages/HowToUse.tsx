@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Clock, Droplets, Moon, Sun, Utensils, Brain, Search } from "lucide-react";
 import { useState } from "react";
+import { LiveChat } from "@/components/LiveChat";
 import omega3Image from "@/assets/omega3-elite.jpg";
 import neurofocusImage from "@/assets/neurofocus-cognitive.jpg";
 import restoreSleepImage from "@/assets/restoresleep-night.jpg";
@@ -17,6 +18,7 @@ import cryoPlungeImage from "@/assets/cryoplunge-ice-bath.jpg";
 
 const HowToUse = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [chatOpen, setChatOpen] = useState(false);
   
   const guides = [
     {
@@ -201,7 +203,7 @@ const HowToUse = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header onAskAIClick={() => setChatOpen(true)} />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="bg-muted/30 py-16">
@@ -450,6 +452,7 @@ const HowToUse = () => {
         </section>
       </main>
       <Footer />
+      <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
     </div>
   );
 };
