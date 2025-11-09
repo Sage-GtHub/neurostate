@@ -26,7 +26,7 @@ export const Hero = () => {
             Cellular Health & Vitality
           </h1>
           <p className="text-lg text-background/80 mb-8">
-            Pure marine collagen peptides for enhanced skin health, joint support, and optimal cellular function.
+            Pure marine collagen peptides for enhanced skin health, joint support, and optimum cellular function.
           </p>
           <Button 
             size="lg" 

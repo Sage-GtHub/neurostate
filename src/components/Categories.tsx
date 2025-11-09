@@ -6,7 +6,7 @@ export const Categories = () => {
     {
       icon: <Zap className="h-6 w-6" />,
       title: "Recovery",
-      description: "Advanced devices for optimal recovery and muscle repair.",
+      description: "Advanced devices for optimum recovery and muscle repair.",
       slug: "recovery"
     },
     {

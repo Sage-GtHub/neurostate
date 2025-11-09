@@ -27,7 +27,7 @@ const articles = [
   },
   {
     id: 3,
-    title: "Sleep Optimization for Peak Performance",
+    title: "Sleep Optimisation for Peak Performance",
     excerpt: "Understanding the role of quality sleep in recovery and how supplements can support your natural sleep cycle.",
     category: "Sleep",
     readTime: "6 min read",
@@ -55,7 +55,7 @@ const articles = [
   {
     id: 6,
     title: "Trace Minerals: The Missing Link",
-    excerpt: "Why trace minerals are essential for optimal health and how modern diets often leave us deficient.",
+    excerpt: "Why trace minerals are essential for optimum health and how modern diets often leave us deficient.",
     category: "Nutrition",
     readTime: "5 min read",
     date: "Dec 3, 2024",
@@ -72,7 +72,7 @@ const Resources = () => {
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Health & Wellness Resources</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Expert insights on nutrition, recovery, and optimizing your health through science-backed information
+            Expert insights on nutrition, recovery, and optimising your health through science-backed information
           </p>
         </div>
 

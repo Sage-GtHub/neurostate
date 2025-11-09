@@ -14,12 +14,12 @@ const features = [
   {
     icon: Leaf,
     title: "Natural Ingredients",
-    description: "No artificial colors, flavors, or unnecessary additives"
+    description: "No artificial colours, flavours, or unnecessary additives"
   },
   {
     icon: Zap,
     title: "Fast Results",
-    description: "Optimized bioavailability for maximum absorption"
+    description: "Optimised bioavailability for maximum absorption"
   },
   {
     icon: Heart,
