@@ -58,9 +58,9 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   return (
-    <Link to={`/product/${node.handle}`} className="group block">
-      <div className="bg-card border border-border rounded-lg overflow-hidden transition-all hover:shadow-lg">
-        <div className="aspect-square overflow-hidden bg-secondary/10 relative">
+    <Link to={`/product/${node.handle}`} className="group block h-full">
+      <div className="bg-card border border-border rounded-lg overflow-hidden transition-all hover:shadow-lg h-full flex flex-col">
+        <div className="aspect-square overflow-hidden bg-secondary/10 relative flex-shrink-0">
           {image ? (
             <img
               src={image.url}
@@ -73,9 +73,9 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             </div>
           )}
         </div>
-        <div className="p-6 space-y-4">
-          <div className="space-y-2">
-            <h3 className="font-medium text-foreground line-clamp-2 leading-snug">
+        <div className="p-6 space-y-4 flex-1 flex flex-col">
+          <div className="space-y-2 flex-1">
+            <h3 className="font-medium text-foreground line-clamp-2 leading-snug min-h-[2.5rem]">
               {node.title}
             </h3>
             
@@ -100,7 +100,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
               </span>
             </div>
             
-            <p className="text-sm text-muted-foreground line-clamp-2">
+            <p className="text-sm text-muted-foreground line-clamp-2 min-h-[2.5rem]">
               {node.description}
             </p>
           </div>
