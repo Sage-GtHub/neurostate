@@ -10,9 +10,12 @@ import { toast } from "sonner";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { RecentlyViewed } from "@/components/RecentlyViewed";
+import { ReviewForm } from "@/components/ReviewForm";
+import { ReviewsList } from "@/components/ReviewsList";
 import { ArrowLeft, Loader2, Star, RefreshCw, Package } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
+import { supabase } from "@/integrations/supabase/client";
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
@@ -27,6 +30,26 @@ const ProductDetail = () => {
     queryFn: () => fetchProductByHandle(handle!),
     enabled: !!handle,
   });
+
+  const { data: reviews = [], refetch: refetchReviews } = useQuery({
+    queryKey: ['reviews', handle],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('product_reviews')
+        .select('*')
+        .eq('product_handle', handle)
+        .order('created_at', { ascending: false });
+      
+      if (error) throw error;
+      return data || [];
+    },
+    enabled: !!handle,
+  });
+
+  // Calculate average rating
+  const averageRating = reviews.length > 0
+    ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
+    : 0;
 
   useEffect(() => {
     if (product) {
@@ -146,11 +169,13 @@ const ProductDetail = () => {
                     <Star
                       key={i}
                       className={`h-5 w-5 ${
-                        i < 4 ? "fill-accent text-accent" : "fill-none text-muted-foreground/30"
+                        i < Math.round(averageRating) ? "fill-accent text-accent" : "fill-none text-muted-foreground/30"
                       }`}
                     />
                   ))}
-                  <span className="text-sm text-muted-foreground ml-2">(24 reviews)</span>
+                  <span className="text-sm text-muted-foreground ml-2">
+                    {averageRating > 0 ? `${averageRating.toFixed(1)} out of 5` : "No reviews yet"} ({reviews.length} {reviews.length === 1 ? 'review' : 'reviews'})
+                  </span>
                 </div>
               </div>
             </div>
@@ -264,8 +289,8 @@ const ProductDetail = () => {
             </div>
 
             {/* Reviews Section */}
-            <div className="border-t pt-6">
-              <div className="flex items-center justify-between mb-4">
+            <div className="border-t pt-6 space-y-6">
+              <div className="flex items-center justify-between">
                 <h2 className="text-xl font-semibold">Customer Reviews</h2>
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-1">
@@ -273,19 +298,24 @@ const ProductDetail = () => {
                       <Star
                         key={i}
                         className={`h-4 w-4 ${
-                          i < 4 ? "fill-accent text-accent" : "fill-none text-muted-foreground/30"
+                          i < Math.round(averageRating) ? "fill-accent text-accent" : "fill-none text-muted-foreground/30"
                         }`}
                       />
                     ))}
                   </div>
-                  <span className="text-sm font-medium">4.2 out of 5</span>
+                  <span className="text-sm font-medium">
+                    {averageRating > 0 ? `${averageRating.toFixed(1)} out of 5` : "No ratings yet"}
+                  </span>
                 </div>
               </div>
-              <div className="bg-secondary/20 rounded-lg p-8 text-center">
-                <p className="text-muted-foreground">
-                  Customer reviews will be displayed here once available
-                </p>
-              </div>
+              
+              <ReviewsList reviews={reviews} />
+              
+              <ReviewForm 
+                productId={product.id} 
+                productHandle={product.handle}
+                onReviewSubmitted={refetchReviews}
+              />
             </div>
           </div>
         </div>
