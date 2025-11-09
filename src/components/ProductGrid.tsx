@@ -18,6 +18,9 @@ export const ProductGrid = ({ filters }: ProductGridProps) => {
   const { data: products, isLoading, error } = useQuery({
     queryKey: ['products'],
     queryFn: () => fetchProducts(50),
+    staleTime: 0,
+    refetchOnMount: 'always',
+    refetchOnWindowFocus: 'always',
   });
 
   const handleQuickView = (product: ShopifyProduct) => {

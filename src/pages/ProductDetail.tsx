@@ -25,6 +25,9 @@ const ProductDetail = () => {
     queryKey: ['product', handle],
     queryFn: () => fetchProductByHandle(handle!),
     enabled: !!handle,
+    staleTime: 0,
+    refetchOnMount: 'always',
+    refetchOnWindowFocus: 'always',
   });
 
   useEffect(() => {
