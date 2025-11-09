@@ -2,9 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchProducts } from "@/lib/shopify";
 import { ProductCard } from "./ProductCard";
 import { ProductGridSkeleton } from "./ProductSkeleton";
-import { useState, useMemo } from "react";
-import { QuickViewModal } from "./QuickViewModal";
-import { ShopifyProduct } from "@/lib/shopify";
+import { useMemo } from "react";
 import { FilterState } from "./ProductFilters";
 
 interface ProductGridProps {
@@ -12,9 +10,6 @@ interface ProductGridProps {
 }
 
 export const ProductGrid = ({ filters }: ProductGridProps) => {
-  const [quickViewProduct, setQuickViewProduct] = useState<ShopifyProduct | null>(null);
-  const [quickViewOpen, setQuickViewOpen] = useState(false);
-  
   const { data: products, isLoading, error } = useQuery({
     queryKey: ['products'],
     queryFn: () => fetchProducts(50),
@@ -22,11 +17,6 @@ export const ProductGrid = ({ filters }: ProductGridProps) => {
     refetchOnMount: 'always',
     refetchOnWindowFocus: 'always',
   });
-
-  const handleQuickView = (product: ShopifyProduct) => {
-    setQuickViewProduct(product);
-    setQuickViewOpen(true);
-  };
 
   // Filter products based on filters
   const filteredProducts = useMemo(() => {
@@ -85,21 +75,13 @@ export const ProductGrid = ({ filters }: ProductGridProps) => {
   }
 
   return (
-    <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredProducts.map((product) => (
-          <ProductCard 
-            key={product.node.id} 
-            product={product}
-            onQuickView={() => handleQuickView(product)}
-          />
-        ))}
-      </div>
-      <QuickViewModal 
-        product={quickViewProduct}
-        open={quickViewOpen}
-        onOpenChange={setQuickViewOpen}
-      />
-    </>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {filteredProducts.map((product) => (
+        <ProductCard 
+          key={product.node.id} 
+          product={product}
+        />
+      ))}
+    </div>
   );
 };
