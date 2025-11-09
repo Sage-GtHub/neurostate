@@ -13,6 +13,8 @@ import HowToUse from "./pages/HowToUse";
 import Ambassador from "./pages/Ambassador";
 import Subscriptions from "./pages/Subscriptions";
 import ProductDescriptionUpdater from "./pages/ProductDescriptionUpdater";
+import Auth from "./pages/Auth";
+import Wishlist from "./pages/Wishlist";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +35,8 @@ const App = () => (
           <Route path="/guides" element={<HowToUse />} />
           <Route path="/ambassador" element={<Ambassador />} />
           <Route path="/subscriptions" element={<Subscriptions />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/admin/update-descriptions" element={<ProductDescriptionUpdater />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

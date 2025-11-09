@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
-import { Search, User, Menu, RefreshCw, ChevronDown, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target, TrendingUp } from "lucide-react";
+import { Search, User, Menu, RefreshCw, ChevronDown, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target, TrendingUp, Heart, LogOut } from "lucide-react";
 import { Button } from "./ui/button";
+import { Badge } from "./ui/badge";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import {
   NavigationMenu,
@@ -11,11 +12,52 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "./ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 import { AnnouncementBar } from "./AnnouncementBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useWishlistStore } from "@/stores/wishlistStore";
+import { supabase } from "@/integrations/supabase/client";
+import { User as SupabaseUser, Session } from "@supabase/supabase-js";
+import { toast } from "sonner";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const wishlistItems = useWishlistStore(state => state.items);
+
+  useEffect(() => {
+    // Set up auth state listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+      }
+    );
+
+    // THEN check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleSignOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast.error("Error signing out", { description: error.message });
+    } else {
+      toast.success("Signed out successfully");
+    }
+  };
 
   const shopCategories = [
     { label: "All Products", href: "/", icon: Package },
@@ -120,14 +162,59 @@ export const Header = () => {
             <Button variant="ghost" size="icon" className="hidden md:flex">
               <Search className="h-5 w-5" />
             </Button>
+            
+            {/* Wishlist */}
+            <Link to="/wishlist">
+              <Button variant="ghost" size="icon" className="hidden md:flex relative">
+                <Heart className="h-5 w-5" />
+                {wishlistItems.length > 0 && (
+                  <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs">
+                    {wishlistItems.length}
+                  </Badge>
+                )}
+              </Button>
+            </Link>
+            
             <Link to="/subscriptions">
               <Button variant="ghost" size="icon" className="hidden md:flex" title="Manage Subscriptions">
                 <RefreshCw className="h-5 w-5" />
               </Button>
             </Link>
-            <Button variant="ghost" size="icon" className="hidden md:flex">
-              <User className="h-5 w-5" />
-            </Button>
+            
+            {/* User Account Dropdown */}
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="hidden md:flex relative">
+                    <User className="h-5 w-5" />
+                    <Badge className="absolute -top-1 -right-1 h-3 w-3 rounded-full p-0 bg-green-500" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48 bg-background">
+                  <DropdownMenuItem disabled className="text-xs text-muted-foreground">
+                    {user.email}
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link to="/subscriptions" className="cursor-pointer">
+                      My Subscriptions
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive">
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link to="/auth">
+                <Button variant="ghost" size="icon" className="hidden md:flex">
+                  <User className="h-5 w-5" />
+                </Button>
+              </Link>
+            )}
+            
             <CartDrawer />
             
             {/* Mobile Menu */}
