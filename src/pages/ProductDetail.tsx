@@ -71,57 +71,68 @@ const ProductDetail = () => {
   return (
     <>
       <Header />
-      <div className="min-h-screen">
+      <div className="min-h-screen bg-background">
         {/* Breadcrumb */}
-        <div className="container mx-auto px-4 py-6">
-          <Link to="/">
-            <Button variant="ghost" size="sm">
-              <ArrowLeft className="mr-2 h-4 w-4" /> Back to Products
-            </Button>
-          </Link>
+        <div className="border-b">
+          <div className="container mx-auto px-4 py-4">
+            <Link to="/">
+              <Button variant="ghost" size="sm" className="hover:bg-muted">
+                <ArrowLeft className="mr-2 h-4 w-4" /> Back to Products
+              </Button>
+            </Link>
+          </div>
         </div>
 
-        {/* Product Section */}
-        <div className="container mx-auto px-4 pb-8">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Left: Image Gallery */}
-            <ProductImageGallery images={images} productTitle={product.title} />
+        {/* Product Section - Main Hero */}
+        <div className="container mx-auto px-4 py-8 lg:py-12">
+          <div className="grid lg:grid-cols-[1fr,1fr] gap-8 lg:gap-16 items-start">
+            {/* Left: Image Gallery - Sticky on scroll */}
+            <div className="lg:sticky lg:top-24">
+              <ProductImageGallery images={images} productTitle={product.title} />
+            </div>
 
             {/* Right: Product Info */}
-            <div>
+            <div className="space-y-6">
               <ProductInfo
                 product={product}
                 selectedVariantIndex={selectedVariantIndex}
                 setSelectedVariantIndex={setSelectedVariantIndex}
               />
               
-              {/* Trust Badges - Integrated */}
-              <div className="mt-6 pt-6 border-t">
+              {/* Trust Badges */}
+              <div className="pt-6 border-t">
                 <TrustBadges />
+              </div>
+
+              {/* Key Benefits - Moved up for better visibility */}
+              <div className="pt-6 border-t">
+                <h3 className="text-lg font-semibold mb-4">Key Benefits</h3>
+                <BenefitsSection />
               </div>
             </div>
           </div>
         </div>
 
-        {/* Benefits Section */}
-        <div className="container mx-auto px-4 py-12">
-          <h2 className="text-3xl font-bold mb-8">Key Benefits</h2>
-          <BenefitsSection />
-        </div>
-
-        {/* Product Details Tabs */}
-        <div className="container mx-auto px-4 py-12 border-t">
-          <ProductTabs description={product.description || "No description available."} />
+        {/* Product Details Section - Full Width */}
+        <div className="bg-muted/30 border-t">
+          <div className="container mx-auto px-4 py-12 lg:py-16">
+            <ProductTabs description={product.description || "No description available."} />
+          </div>
         </div>
 
         {/* Frequently Bought Together */}
-        <div className="container mx-auto px-4 py-12 border-t">
-          <FrequentlyBoughtTogether currentProduct={product} />
+        <div className="border-t bg-background">
+          <div className="container mx-auto px-4 py-12 lg:py-16">
+            <h2 className="text-2xl lg:text-3xl font-bold mb-8">Frequently Bought Together</h2>
+            <FrequentlyBoughtTogether currentProduct={product} />
+          </div>
         </div>
 
         {/* Customer Reviews */}
-        <div className="container mx-auto px-4 py-12 border-t">
-          <CustomerReviews productHandle={product.handle} />
+        <div className="border-t bg-muted/20">
+          <div className="container mx-auto px-4 py-12 lg:py-16">
+            <CustomerReviews productHandle={product.handle} />
+          </div>
         </div>
       </div>
       
