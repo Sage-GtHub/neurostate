@@ -3,6 +3,8 @@ import { Hero } from "@/components/Hero";
 import { Categories } from "@/components/Categories";
 import { Benefits } from "@/components/Benefits";
 import { ProductGrid } from "@/components/ProductGrid";
+import { SocialProof } from "@/components/SocialProof";
+import { ProductComparison } from "@/components/ProductComparison";
 import { RecentlyViewed } from "@/components/RecentlyViewed";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 import { Footer } from "@/components/Footer";
@@ -27,6 +29,8 @@ const Index = () => {
             <ProductGrid />
           </div>
         </section>
+        <SocialProof />
+        <ProductComparison />
         <RecentlyViewed />
         <Benefits />
       </main>
