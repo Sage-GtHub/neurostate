@@ -8,6 +8,7 @@ import { Calendar, Clock, ArrowRight, BookOpen, TrendingUp, Search } from "lucid
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { LearningPaths } from "@/components/LearningPaths";
+import { ResourceFinder } from "@/components/ResourceFinder";
 
 const featuredArticle = {
   id: 0,
@@ -176,6 +177,9 @@ const Resources = () => {
             </div>
           </div>
         </Card>
+
+        {/* Interactive Resource Finder */}
+        <ResourceFinder />
 
         {/* Search and Filter */}
         <div className="mb-12 space-y-6">
