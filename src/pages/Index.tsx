@@ -10,6 +10,7 @@ import { RecentlyViewed } from "@/components/RecentlyViewed";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 import { LiveChat } from "@/components/LiveChat";
 import { Footer } from "@/components/Footer";
+import { ShopByGoal } from "@/components/ShopByGoal";
 import { useState, useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSearchParams } from "react-router-dom";
@@ -63,6 +64,7 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
+        <ShopByGoal />
         <section id="products" className="py-16 px-4">
           <div className="container mx-auto">
             <div className="flex items-center justify-between mb-8">
