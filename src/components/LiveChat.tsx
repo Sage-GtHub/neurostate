@@ -194,10 +194,11 @@ export const LiveChat = () => {
       {/* Floating chat button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-4 right-4 z-50 p-4 bg-primary text-white rounded-full shadow-lg hover:bg-primary/90 transition-all hover:scale-110"
+        className="fixed bottom-6 right-6 z-50 p-4 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground rounded-full shadow-2xl hover:shadow-primary/50 transition-all hover:scale-110 animate-pulse"
         aria-label="Toggle chat"
+        style={{ boxShadow: '0 0 30px rgba(var(--primary), 0.5)' }}
       >
-        {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
+        {isOpen ? <X size={28} /> : <MessageCircle size={28} />}
       </button>
 
       {/* Chat window */}
