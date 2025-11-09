@@ -13,7 +13,6 @@ import { Footer } from "@/components/Footer";
 import { ShopByGoal } from "@/components/ShopByGoal";
 import { ExpertPartners } from "@/components/ExpertPartners";
 import { QualityStandards } from "@/components/QualityStandards";
-import { ProductTestingTimeline } from "@/components/ProductTestingTimeline";
 import { useState, useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSearchParams } from "react-router-dom";
@@ -112,7 +111,6 @@ const Index = () => {
         </section>
         <ExpertPartners />
         <QualityStandards />
-        <ProductTestingTimeline />
         <ProductBundles />
         
         <RecentlyViewed />
