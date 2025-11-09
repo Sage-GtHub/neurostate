@@ -10,9 +10,11 @@ import { RecentlyViewed } from "@/components/RecentlyViewed";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 import { LiveChat } from "@/components/LiveChat";
 import { Footer } from "@/components/Footer";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSearchParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { fetchProducts } from "@/lib/shopify";
 
 const Index = () => {
   const isMobile = useIsMobile();
@@ -22,13 +24,37 @@ const Index = () => {
     categories: [],
     priceRange: [0, 5000],
     features: [],
+    tags: [],
+    availability: 'all',
   });
+
+  // Fetch products to get available tags
+  const { data: products } = useQuery({
+    queryKey: ['products'],
+    queryFn: () => fetchProducts(50),
+  });
+
+  // Extract unique tags from all products
+  const availableTags = useMemo(() => {
+    if (!products) return [];
+    const tags = new Set<string>();
+    products.forEach(product => {
+      product.node.tags.forEach(tag => {
+        if (tag && tag.trim()) {
+          tags.add(tag.trim());
+        }
+      });
+    });
+    return Array.from(tags).sort();
+  }, [products]);
 
   const handleClearFilters = () => {
     setFilters({
       categories: [],
       priceRange: [0, 5000],
       features: [],
+      tags: [],
+      availability: 'all',
     });
   };
 
@@ -58,6 +84,7 @@ const Index = () => {
                     onFiltersChange={setFilters}
                     onClearFilters={handleClearFilters}
                     isMobile={true}
+                    availableTags={availableTags}
                   />
                 )}
               </div>
@@ -69,6 +96,7 @@ const Index = () => {
                   onFiltersChange={setFilters}
                   onClearFilters={handleClearFilters}
                   isMobile={false}
+                  availableTags={availableTags}
                 />
               )}
               <div className="flex-1">

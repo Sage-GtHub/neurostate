@@ -25,6 +25,7 @@ export const ProductGrid = ({ filters, searchQuery }: ProductGridProps) => {
 
     return products.filter(product => {
       const price = parseFloat(product.node.priceRange.minVariantPrice.amount);
+      const hasInStockVariant = product.node.variants.edges.some(v => v.node.availableForSale);
       
       // Search query filter
       if (searchQuery && searchQuery.trim()) {
@@ -45,6 +46,23 @@ export const ProductGrid = ({ filters, searchQuery }: ProductGridProps) => {
       
       // Price filter
       if (price < filters.priceRange[0] || price > filters.priceRange[1]) {
+        return false;
+      }
+
+      // Tags filter
+      if (filters.tags.length > 0) {
+        const productTags = product.node.tags.map(tag => tag.toLowerCase());
+        const matchesTags = filters.tags.some(filterTag => 
+          productTags.includes(filterTag.toLowerCase())
+        );
+        if (!matchesTags) return false;
+      }
+
+      // Availability filter
+      if (filters.availability === 'in-stock' && !hasInStockVariant) {
+        return false;
+      }
+      if (filters.availability === 'out-of-stock' && hasInStockVariant) {
         return false;
       }
 
@@ -86,7 +104,7 @@ export const ProductGrid = ({ filters, searchQuery }: ProductGridProps) => {
         <p className="text-sm text-muted-foreground mt-2">
           {searchQuery 
             ? `No results for "${searchQuery}". Try a different search term.`
-            : filters && (filters.categories.length > 0 || filters.features.length > 0)
+            : filters && (filters.categories.length > 0 || filters.features.length > 0 || filters.tags.length > 0 || filters.availability !== 'all')
             ? "Try adjusting your filters to see more products."
             : "Create your first product by telling me what you'd like to add!"}
         </p>

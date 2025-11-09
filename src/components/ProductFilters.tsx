@@ -4,18 +4,21 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { SlidersHorizontal, X } from "lucide-react";
+import { SlidersHorizontal, X, ChevronDown } from "lucide-react";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { ChevronDown } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export interface FilterState {
   categories: string[];
   priceRange: [number, number];
   features: string[];
+  tags: string[];
+  availability: 'all' | 'in-stock' | 'out-of-stock';
 }
 
 interface ProductFiltersProps {
@@ -23,6 +26,7 @@ interface ProductFiltersProps {
   onFiltersChange: (filters: FilterState) => void;
   onClearFilters: () => void;
   isMobile?: boolean;
+  availableTags: string[];
 }
 
 const categories = [
@@ -40,10 +44,12 @@ const features = [
   { id: "non-gmo", label: "Non-GMO" },
 ];
 
-const ProductFiltersContent = ({ filters, onFiltersChange, onClearFilters }: ProductFiltersProps) => {
+const ProductFiltersContent = ({ filters, onFiltersChange, onClearFilters, availableTags }: ProductFiltersProps) => {
   const [categoryOpen, setCategoryOpen] = useState(true);
   const [priceOpen, setPriceOpen] = useState(true);
   const [featuresOpen, setFeaturesOpen] = useState(true);
+  const [tagsOpen, setTagsOpen] = useState(true);
+  const [availabilityOpen, setAvailabilityOpen] = useState(true);
 
   const handleCategoryChange = (categoryId: string, checked: boolean) => {
     const newCategories = checked
@@ -59,11 +65,26 @@ const ProductFiltersContent = ({ filters, onFiltersChange, onClearFilters }: Pro
     onFiltersChange({ ...filters, features: newFeatures });
   };
 
+  const handleTagChange = (tagId: string, checked: boolean) => {
+    const newTags = checked
+      ? [...filters.tags, tagId]
+      : filters.tags.filter(t => t !== tagId);
+    onFiltersChange({ ...filters, tags: newTags });
+  };
+
+  const handleAvailabilityChange = (value: string) => {
+    onFiltersChange({ ...filters, availability: value as FilterState['availability'] });
+  };
+
   const handlePriceChange = (value: number[]) => {
     onFiltersChange({ ...filters, priceRange: [value[0], value[1]] });
   };
 
-  const activeFiltersCount = filters.categories.length + filters.features.length;
+  const activeFiltersCount = 
+    filters.categories.length + 
+    filters.features.length + 
+    filters.tags.length + 
+    (filters.availability !== 'all' ? 1 : 0);
 
   return (
     <div className="space-y-6">
@@ -154,6 +175,64 @@ const ProductFiltersContent = ({ filters, onFiltersChange, onClearFilters }: Pro
           </CollapsibleContent>
         </Collapsible>
       </div>
+
+      {/* Tags Filter */}
+      {availableTags.length > 0 && (
+        <div className="border-t pt-6">
+          <Collapsible open={tagsOpen} onOpenChange={setTagsOpen}>
+            <CollapsibleTrigger className="flex w-full items-center justify-between py-2">
+              <span className="font-medium">Tags</span>
+              <ChevronDown className={`h-4 w-4 transition-transform ${tagsOpen ? 'rotate-180' : ''}`} />
+            </CollapsibleTrigger>
+            <CollapsibleContent className="space-y-3 pt-3">
+              <div className="flex flex-wrap gap-2">
+                {availableTags.map((tag) => (
+                  <Badge
+                    key={tag}
+                    variant={filters.tags.includes(tag) ? "default" : "outline"}
+                    className="cursor-pointer hover:bg-primary/80 transition-colors"
+                    onClick={() => handleTagChange(tag, !filters.tags.includes(tag))}
+                  >
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+        </div>
+      )}
+
+      {/* Availability Filter */}
+      <div className="border-t pt-6">
+        <Collapsible open={availabilityOpen} onOpenChange={setAvailabilityOpen}>
+          <CollapsibleTrigger className="flex w-full items-center justify-between py-2">
+            <span className="font-medium">Availability</span>
+            <ChevronDown className={`h-4 w-4 transition-transform ${availabilityOpen ? 'rotate-180' : ''}`} />
+          </CollapsibleTrigger>
+          <CollapsibleContent className="space-y-3 pt-3">
+            <RadioGroup value={filters.availability} onValueChange={handleAvailabilityChange}>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="all" id="all" />
+                <Label htmlFor="all" className="text-sm font-normal cursor-pointer">
+                  All Products
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="in-stock" id="in-stock" />
+                <Label htmlFor="in-stock" className="text-sm font-normal cursor-pointer">
+                  In Stock Only
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="out-of-stock" id="out-of-stock" />
+                <Label htmlFor="out-of-stock" className="text-sm font-normal cursor-pointer">
+                  Out of Stock
+                </Label>
+              </div>
+            </RadioGroup>
+          </CollapsibleContent>
+        </Collapsible>
+      </div>
     </div>
   );
 };
@@ -166,9 +245,9 @@ export const ProductFilters = (props: ProductFiltersProps) => {
           <Button variant="outline" size="sm" className="gap-2">
             <SlidersHorizontal className="h-4 w-4" />
             Filters
-            {(props.filters.categories.length + props.filters.features.length) > 0 && (
+            {(props.filters.categories.length + props.filters.features.length + props.filters.tags.length + (props.filters.availability !== 'all' ? 1 : 0)) > 0 && (
               <span className="ml-1 rounded-full bg-primary text-primary-foreground w-5 h-5 text-xs flex items-center justify-center">
-                {props.filters.categories.length + props.filters.features.length}
+                {props.filters.categories.length + props.filters.features.length + props.filters.tags.length + (props.filters.availability !== 'all' ? 1 : 0)}
               </span>
             )}
           </Button>
