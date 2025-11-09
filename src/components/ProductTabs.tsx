@@ -96,7 +96,7 @@ export const ProductTabs = ({ description }: ProductTabsProps) => {
             <div className="flex items-center gap-2">
               <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
               <p className="text-sm text-foreground">
-                All ingredients are carefully selected and tested for quality and efficacy.
+                We hand-pick every ingredient and rigorously test for quality. Nothing makes it into our formulas without meeting our standards.
               </p>
             </div>
           </Card>
@@ -131,7 +131,7 @@ export const ProductTabs = ({ description }: ProductTabsProps) => {
               </div>
             </div>
             <p className="text-muted-foreground leading-relaxed">
-              Morning with breakfast for optimal absorption
+              Best taken in the morning with breakfast for better absorption
             </p>
           </Card>
           
@@ -155,9 +155,9 @@ export const ProductTabs = ({ description }: ProductTabsProps) => {
           <div className="flex gap-3">
             <span className="text-2xl flex-shrink-0">⚠️</span>
             <div>
-              <p className="text-sm font-medium mb-1">Important Note</p>
+              <p className="text-sm font-medium mb-1">Important</p>
               <p className="text-sm text-muted-foreground">
-                Consult with a healthcare professional before starting any new supplement regimen, especially if pregnant, nursing, or taking medications.
+                If you're pregnant, breastfeeding, or taking any medications, have a chat with your GP or healthcare provider before starting this supplement.
               </p>
             </div>
           </div>
@@ -171,9 +171,9 @@ export const ProductTabs = ({ description }: ProductTabsProps) => {
               <FlaskConical className="h-6 w-6 text-primary" />
             </div>
             <div>
-              <h3 className="text-2xl font-bold mb-2">Science-Backed Formulation</h3>
+              <h3 className="text-2xl font-bold mb-2">Backed by Science</h3>
               <p className="text-muted-foreground leading-relaxed text-lg">
-                Our formulations are developed based on the latest scientific research and clinical studies. Each ingredient is selected for its proven efficacy and optimal dosing.
+                We build our formulas on solid scientific research and clinical trials. Every ingredient is chosen for what it can actually do, not just marketing claims, and dosed properly to get results.
               </p>
             </div>
           </div>
@@ -184,9 +184,9 @@ export const ProductTabs = ({ description }: ProductTabsProps) => {
                 <span className="text-3xl">🔬</span>
                 <Badge variant="outline" className="text-xs">Verified</Badge>
               </div>
-              <h4 className="font-semibold text-lg mb-2">Clinical Studies</h4>
+              <h4 className="font-semibold text-lg mb-2">Clinically Studied</h4>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Backed by peer-reviewed research and clinical trials
+                Supported by peer-reviewed research and proper clinical trials
               </p>
             </div>
             
@@ -195,9 +195,9 @@ export const ProductTabs = ({ description }: ProductTabsProps) => {
                 <span className="text-3xl">⚡</span>
                 <Badge variant="outline" className="text-xs">Optimized</Badge>
               </div>
-              <h4 className="font-semibold text-lg mb-2">Bioavailable</h4>
+              <h4 className="font-semibold text-lg mb-2">Actually Absorbed</h4>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Advanced formulation optimized for maximum absorption
+                Formulated for proper absorption—what matters is what your body can use
               </p>
             </div>
             
@@ -208,7 +208,7 @@ export const ProductTabs = ({ description }: ProductTabsProps) => {
               </div>
               <h4 className="font-semibold text-lg mb-2">Evidence-Based</h4>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Carefully formulated from scientific literature
+                Built on real scientific evidence, not wellness trends
               </p>
             </div>
           </div>
@@ -220,25 +220,25 @@ export const ProductTabs = ({ description }: ProductTabsProps) => {
           <AccordionItem value="item-1">
             <AccordionTrigger>How long until I see results?</AccordionTrigger>
             <AccordionContent>
-              Most users notice benefits within 2-4 weeks of consistent use. For optimal results, we recommend taking the supplement daily for at least 8-12 weeks.
+              Most people start noticing benefits within 2-4 weeks of taking it daily. For best results, we'd suggest giving it at least 8-12 weeks of consistent use.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
             <AccordionTrigger>Can I take this with other supplements?</AccordionTrigger>
             <AccordionContent>
-              Yes, this product is generally safe to combine with other supplements. However, we recommend consulting with a healthcare provider if you're taking multiple supplements or medications.
+              Generally speaking, yes—it's usually fine to combine with other supplements. That said, if you're taking several supplements or any medications, it's worth checking with your GP or healthcare provider first.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-3">
             <AccordionTrigger>Is this product vegan/vegetarian?</AccordionTrigger>
             <AccordionContent>
-              Please check the product label for specific dietary information. We clearly indicate if products are vegan, vegetarian, gluten-free, or dairy-free.
+              Have a look at the product label for the specifics. We always clearly mark if something's vegan, vegetarian, gluten-free, or dairy-free.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-4">
-            <AccordionTrigger>What is your return policy?</AccordionTrigger>
+            <AccordionTrigger>What's your return policy?</AccordionTrigger>
             <AccordionContent>
-              We offer a 30-day money-back guarantee. If you're not satisfied with your purchase, contact our customer service team for a full refund.
+              We've got a 30-day money-back guarantee. If you're not happy with your purchase for any reason, just get in touch with our customer service team and we'll sort out a full refund.
             </AccordionContent>
           </AccordionItem>
         </Accordion>
