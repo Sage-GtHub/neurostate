@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cartStore";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { RecentlyViewed } from "@/components/RecentlyViewed";
 import { FrequentlyBoughtTogether } from "@/components/FrequentlyBoughtTogether";
 import { ProductImageGallery } from "@/components/ProductImageGallery";
 import { ProductInfo } from "@/components/ProductInfo";
 import { TrustBadges } from "@/components/TrustBadges";
 import { BenefitsSection } from "@/components/BenefitsSection";
 import { ProductTabs } from "@/components/ProductTabs";
+import { CustomerReviews } from "@/components/CustomerReviews";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
@@ -116,9 +116,9 @@ const ProductDetail = () => {
           <FrequentlyBoughtTogether currentProduct={product} />
         </div>
 
-        {/* Recently Viewed */}
+        {/* Customer Reviews */}
         <div className="container mx-auto px-4 py-12 border-t">
-          <RecentlyViewed />
+          <CustomerReviews productHandle={product.handle} />
         </div>
       </div>
       
