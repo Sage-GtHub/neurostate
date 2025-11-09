@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { fetchProducts } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 type Message = {
   role: "user" | "assistant";
@@ -66,6 +67,8 @@ export default function Chat() {
   const recognitionRef = useRef<any>(null);
   const [products, setProducts] = useState<any[]>([]);
   const addItem = useCartStore((state) => state.addItem);
+  const [heraAvatar, setHeraAvatar] = useState<string | null>(null);
+  const [isGeneratingAvatar, setIsGeneratingAvatar] = useState(false);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -82,6 +85,37 @@ export default function Chat() {
     }).catch((error) => {
       console.error('Error fetching products:', error);
     });
+
+    // Generate Hera avatar
+    const generateAvatar = async () => {
+      // Check if avatar is cached
+      const cached = localStorage.getItem('hera-avatar');
+      if (cached) {
+        setHeraAvatar(cached);
+        return;
+      }
+
+      setIsGeneratingAvatar(true);
+      try {
+        const { data, error } = await supabase.functions.invoke('generate-hera-avatar');
+        
+        if (error) {
+          console.error('Error generating avatar:', error);
+          return;
+        }
+
+        if (data?.imageUrl) {
+          setHeraAvatar(data.imageUrl);
+          localStorage.setItem('hera-avatar', data.imageUrl);
+        }
+      } catch (error) {
+        console.error('Error generating avatar:', error);
+      } finally {
+        setIsGeneratingAvatar(false);
+      }
+    };
+
+    generateAvatar();
   }, []);
 
   useEffect(() => {
@@ -446,7 +480,15 @@ export default function Chat() {
             </Link>
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-full bg-white/20 backdrop-blur">
-                <Sparkles className="h-5 w-5 text-white" />
+                {heraAvatar ? (
+                  <img 
+                    src={heraAvatar} 
+                    alt="Hera" 
+                    className="w-5 h-5 rounded-full"
+                  />
+                ) : (
+                  <Sparkles className="h-5 w-5 text-white" />
+                )}
               </div>
               <div>
                 <h1 className="text-lg font-semibold text-white">Hera</h1>
@@ -503,8 +545,23 @@ export default function Chat() {
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                className={`flex gap-3 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
               >
+                {msg.role === "assistant" && (
+                  <div className="flex-shrink-0">
+                    {heraAvatar ? (
+                      <img 
+                        src={heraAvatar} 
+                        alt="Hera" 
+                        className="w-10 h-10 rounded-full border-2 border-accent/20 shadow-sm"
+                      />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center shadow-accent">
+                        <Sparkles className="h-5 w-5 text-white" />
+                      </div>
+                    )}
+                  </div>
+                )}
                 <div
                   className={`max-w-[85%] md:max-w-[75%] ${
                     msg.role === "user"
@@ -525,7 +582,18 @@ export default function Chat() {
               </div>
             ))}
             {isLoading && (
-              <div className="flex justify-start">
+              <div className="flex gap-3 justify-start">
+                {heraAvatar ? (
+                  <img 
+                    src={heraAvatar} 
+                    alt="Hera" 
+                    className="w-10 h-10 rounded-full border-2 border-accent/20 shadow-sm flex-shrink-0"
+                  />
+                ) : (
+                  <div className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center shadow-accent flex-shrink-0">
+                    <Sparkles className="h-5 w-5 text-white" />
+                  </div>
+                )}
                 <div className="bg-card border border-border rounded-2xl rounded-tl-sm p-4 shadow-sm">
                   <Loader2 className="h-5 w-5 animate-spin text-accent" />
                 </div>
