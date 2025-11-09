@@ -1,17 +1,39 @@
 import { Link } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
-import { Search, User, Menu, RefreshCw } from "lucide-react";
+import { Search, User, Menu, RefreshCw, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "./ui/navigation-menu";
 import { AnnouncementBar } from "./AnnouncementBar";
 import { useState } from "react";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const navLinks = [
-    { label: "Shop", href: "/" },
-    { label: "Guides", href: "/guides" },
+  const shopCategories = [
+    { label: "All Products", href: "/" },
+    { label: "Supplements", href: "/#products" },
+    { label: "Recovery & Performance", href: "/#products" },
+    { label: "Sleep & Rest", href: "/#products" },
+    { label: "Cognitive Performance", href: "/#products" },
+  ];
+
+  const guideTopics = [
+    { label: "All Guides", href: "/guides" },
+    { label: "Supplement Usage", href: "/guides#supplements" },
+    { label: "Recovery Protocols", href: "/guides#recovery" },
+    { label: "Sleep Optimization", href: "/guides#sleep" },
+    { label: "Performance Tips", href: "/guides#performance" },
+  ];
+
+  const otherLinks = [
     { label: "Resources", href: "/resources" },
     { label: "Ambassador", href: "/ambassador" },
   ];
@@ -26,17 +48,71 @@ export const Header = () => {
           </Link>
           
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.label}
-                to={link.href} 
-                className="text-sm font-medium hover:text-accent transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+          <NavigationMenu className="hidden md:flex">
+            <NavigationMenuList>
+              {/* Shop Dropdown */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-sm font-medium">
+                  Shop
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4 bg-background">
+                    {shopCategories.map((category) => (
+                      <li key={category.label}>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to={category.href}
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          >
+                            <div className="text-sm font-medium leading-none">
+                              {category.label}
+                            </div>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              {/* Guides Dropdown */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-sm font-medium">
+                  Guides
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4 bg-background">
+                    {guideTopics.map((topic) => (
+                      <li key={topic.label}>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to={topic.href}
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          >
+                            <div className="text-sm font-medium leading-none">
+                              {topic.label}
+                            </div>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              {/* Other Links */}
+              {otherLinks.map((link) => (
+                <NavigationMenuItem key={link.label}>
+                  <Link
+                    to={link.href}
+                    className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                  >
+                    {link.label}
+                  </Link>
+                </NavigationMenuItem>
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
 
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="icon" className="hidden md:flex">
@@ -64,7 +140,42 @@ export const Header = () => {
                   <SheetTitle className="text-left">Menu</SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col gap-6 mt-8">
-                  {navLinks.map((link) => (
+                  {/* Shop Section */}
+                  <div>
+                    <h3 className="font-semibold text-lg mb-3">Shop</h3>
+                    <div className="flex flex-col gap-2 pl-4">
+                      {shopCategories.map((category) => (
+                        <Link
+                          key={category.label}
+                          to={category.href}
+                          className="text-md text-muted-foreground hover:text-accent transition-colors"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {category.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Guides Section */}
+                  <div>
+                    <h3 className="font-semibold text-lg mb-3">Guides</h3>
+                    <div className="flex flex-col gap-2 pl-4">
+                      {guideTopics.map((topic) => (
+                        <Link
+                          key={topic.label}
+                          to={topic.href}
+                          className="text-md text-muted-foreground hover:text-accent transition-colors"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {topic.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Other Links */}
+                  {otherLinks.map((link) => (
                     <Link
                       key={link.label}
                       to={link.href}
@@ -74,6 +185,7 @@ export const Header = () => {
                       {link.label}
                     </Link>
                   ))}
+
                   <div className="border-t pt-6 mt-4">
                     <Button variant="ghost" className="w-full justify-start" size="lg">
                       <Search className="h-5 w-5 mr-2" />
