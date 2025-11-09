@@ -22,7 +22,7 @@ const Index = () => {
   const searchQuery = searchParams.get('search') || '';
   const [filters, setFilters] = useState<FilterState>({
     categories: [],
-    sortBy: 'featured',
+    sortBy: 'price-low-high',
     features: [],
     tags: [],
     availability: 'all',
