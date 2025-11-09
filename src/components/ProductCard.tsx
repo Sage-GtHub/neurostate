@@ -99,7 +99,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           
           <Button 
             onClick={handleAddToCart}
-            className="w-full bg-primary text-primary-foreground hover:bg-foreground hover:text-background transition-colors duration-300"
+            className="w-full bg-primary/10 text-foreground border border-border hover:bg-foreground hover:text-background transition-all duration-300 font-medium"
             disabled={!firstVariant?.availableForSale}
           >
             {firstVariant?.availableForSale ? "Add to Cart" : "Out of Stock"}
