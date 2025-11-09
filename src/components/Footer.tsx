@@ -164,16 +164,13 @@ export const Footer = () => {
               <h3 className="font-bold text-lg mb-4">Follow Us</h3>
               <div className="flex gap-4">
                 {socialLinks.map((social) => (
-                  <a
+                  <div
                     key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-accent transition-colors"
+                    className="w-10 h-10 rounded-full bg-muted flex items-center justify-center"
                     aria-label={social.label}
                   >
                     <social.icon className="h-5 w-5" />
-                  </a>
+                  </div>
                 ))}
               </div>
             </div>
