@@ -5,9 +5,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
-import { Star, Eye, RefreshCw } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
+import { Eye, RefreshCw } from "lucide-react";
 
 interface ProductCardProps {
   product: ShopifyProduct;
@@ -21,26 +19,6 @@ export const ProductCard = ({ product, onQuickView }: ProductCardProps) => {
   const image = node.images.edges[0]?.node;
   const price = parseFloat(node.priceRange.minVariantPrice.amount);
   const subscriptionPrice = price * 0.85; // 15% discount
-  
-  // Fetch reviews for this product
-  const { data: reviews = [] } = useQuery({
-    queryKey: ['product-reviews', node.handle],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('product_reviews')
-        .select('rating')
-        .eq('product_handle', node.handle);
-      
-      if (error) throw error;
-      return data || [];
-    },
-  });
-
-  // Calculate average rating
-  const averageRating = reviews.length > 0
-    ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
-    : 0;
-  const reviewCount = reviews.length;
   
   // Check if product is new (created within last 30 days)
   const isNewRelease = node.title.toLowerCase().includes('redrestore') || 
@@ -107,25 +85,6 @@ export const ProductCard = ({ product, onQuickView }: ProductCardProps) => {
           )}
         </div>
         <div className="p-4">
-          {/* Star Rating */}
-          {reviewCount > 0 && (
-            <div className="flex items-center gap-1 mb-2">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className={`h-4 w-4 ${
-                    i < Math.round(averageRating)
-                      ? "fill-accent text-accent"
-                      : "fill-none text-muted-foreground/30"
-                  }`}
-                />
-              ))}
-              <span className="text-xs text-muted-foreground ml-1">
-                ({reviewCount})
-              </span>
-            </div>
-          )}
-          
           <h3 className="font-semibold text-base mb-2 line-clamp-2 group-hover:text-accent transition-colors">
             {node.title}
           </h3>
