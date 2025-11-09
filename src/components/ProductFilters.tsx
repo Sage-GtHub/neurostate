@@ -131,7 +131,7 @@ const ProductFiltersContent = ({ filters, onFiltersChange, onClearFilters, avail
       <div className="border-t pt-6">
         <Collapsible open={sortOpen} onOpenChange={setSortOpen}>
           <CollapsibleTrigger className="flex w-full items-center justify-between py-2">
-            <span className="font-medium">Sort By</span>
+            <span className="font-medium">Sort by Price</span>
             <ChevronDown className={`h-4 w-4 transition-transform ${sortOpen ? 'rotate-180' : ''}`} />
           </CollapsibleTrigger>
           <CollapsibleContent className="space-y-3 pt-3">
