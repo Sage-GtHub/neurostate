@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Loader2, Sparkles, Mic, MicOff, ArrowLeft, ShoppingCart } from "lucide-react";
+import { Send, Loader2, Sparkles, Mic, MicOff, X, ShoppingCart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
@@ -9,6 +9,7 @@ import { fetchProducts } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 type Message = {
   role: "user" | "assistant";
@@ -49,7 +50,7 @@ const quickSuggestions = [
   }
 ];
 
-export default function Chat() {
+export default function Chat({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -468,16 +469,10 @@ export default function Chat() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-gradient-primary sticky top-0 z-10 shadow-accent">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link to="/">
-              <Button variant="ghost" size="icon" className="text-white hover:bg-white/20">
-                <ArrowLeft className="h-5 w-5" />
-              </Button>
-            </Link>
+    <Sheet open={open} onOpenChange={onOpenChange}>
+      <SheetContent side="right" className="w-full sm:w-[500px] p-0 flex flex-col">
+        <SheetHeader className="border-b bg-gradient-primary p-4 flex-shrink-0">
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-full bg-white/20 backdrop-blur">
                 {heraAvatar ? (
@@ -491,33 +486,32 @@ export default function Chat() {
                 )}
               </div>
               <div>
-                <h1 className="text-lg font-semibold text-white">Hera</h1>
+                <SheetTitle className="text-lg font-semibold text-white">Hera</SheetTitle>
                 <p className="text-xs text-white/80">Your wellness assistant</p>
               </div>
             </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={clearHistory}
+              className="text-white hover:bg-white/20"
+            >
+              Clear
+            </Button>
           </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={clearHistory}
-            className="text-white hover:bg-white/20"
-          >
-            Clear Chat
-          </Button>
-        </div>
-      </header>
+        </SheetHeader>
 
-      {/* Chat Area */}
-      <div className="flex-1 overflow-y-auto bg-gradient-to-b from-accent/5 via-background to-background">
-        <div className="container mx-auto max-w-3xl px-4 py-8">
-          {/* Quick Suggestions */}
-          {showSuggestions && messages.length === 1 && (
-            <div className="mb-8 space-y-4">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Sparkles className="h-4 w-4 text-accent" />
-                <span className="font-medium">Quick questions to get started:</span>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {/* Chat Area */}
+        <div className="flex-1 overflow-y-auto bg-gradient-to-b from-accent/5 via-background to-background">
+          <div className="px-4 py-8">
+            {/* Quick Suggestions */}
+            {showSuggestions && messages.length === 1 && (
+              <div className="mb-8 space-y-4">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Sparkles className="h-4 w-4 text-accent" />
+                  <span className="font-medium">Quick questions to get started:</span>
+                </div>
+                <div className="grid grid-cols-1 gap-3">
                 {quickSuggestions.map((suggestion, index) => (
                   <Button
                     key={index}
@@ -535,13 +529,13 @@ export default function Chat() {
                       </Badge>
                     </div>
                   </Button>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* Messages */}
-          <div className="space-y-6">
+            {/* Messages */}
+            <div className="space-y-6">
             {messages.map((msg, index) => (
               <div
                 key={index}
@@ -603,14 +597,13 @@ export default function Chat() {
                 </div>
               </div>
             )}
-            <div ref={messagesEndRef} />
+              <div ref={messagesEndRef} />
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Input Area */}
-      <div className="border-t bg-card/80 backdrop-blur supports-[backdrop-filter]:bg-card/60 sticky bottom-0 shadow-lg">
-        <div className="container mx-auto max-w-3xl px-4 py-4">
+        {/* Input Area */}
+        <div className="border-t bg-card/80 backdrop-blur supports-[backdrop-filter]:bg-card/60 p-4 flex-shrink-0">
           {isRecording && transcript && (
             <div className="mb-3 p-3 bg-accent/10 border border-accent/20 rounded-lg animate-pulse">
               <p className="text-sm text-accent flex items-center gap-2 font-medium">
@@ -647,7 +640,7 @@ export default function Chat() {
             </Button>
           </form>
         </div>
-      </div>
-    </div>
+      </SheetContent>
+    </Sheet>
   );
 }

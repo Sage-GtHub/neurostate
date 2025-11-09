@@ -1,5 +1,6 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
+import Chat from "@/pages/Chat";
 import { Search, User, Menu, RefreshCw, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target, LogOut, X, Award, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
@@ -34,6 +35,7 @@ export const Header = () => {
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [session, setSession] = useState<Session | null>(null);
+  const [chatOpen, setChatOpen] = useState(false);
 
   useEffect(() => {
     // Set up auth state listener FIRST
@@ -176,15 +178,14 @@ export const Header = () => {
 
           <div className="flex items-center gap-2">
             {/* Ask AI Button */}
-            <Link to="/chat">
-              <Button 
-                variant="default"
-                className="hidden md:flex items-center gap-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-md"
-              >
-                <Sparkles className="h-4 w-4" />
-                Ask Hera
-              </Button>
-            </Link>
+            <Button 
+              variant="default"
+              onClick={() => setChatOpen(true)}
+              className="hidden md:flex items-center gap-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-md"
+            >
+              <Sparkles className="h-4 w-4" />
+              Ask Hera
+            </Button>
 
             {/* Desktop Search */}
             {searchOpen ? (
@@ -354,6 +355,7 @@ export const Header = () => {
           </div>
         </div>
       </header>
+      <Chat open={chatOpen} onOpenChange={setChatOpen} />
     </>
   );
 };
