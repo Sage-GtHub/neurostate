@@ -14,6 +14,104 @@ export type Database = {
   }
   public: {
     Tables: {
+      learning_path_lessons: {
+        Row: {
+          content: string
+          created_at: string
+          day_number: number
+          description: string
+          duration_minutes: number
+          id: string
+          order_index: number
+          path_id: string
+          resources: Json | null
+          title: string
+          video_url: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          day_number: number
+          description: string
+          duration_minutes?: number
+          id?: string
+          order_index?: number
+          path_id: string
+          resources?: Json | null
+          title: string
+          video_url?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          day_number?: number
+          description?: string
+          duration_minutes?: number
+          id?: string
+          order_index?: number
+          path_id?: string
+          resources?: Json | null
+          title?: string
+          video_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "learning_path_lessons_path_id_fkey"
+            columns: ["path_id"]
+            isOneToOne: false
+            referencedRelation: "learning_paths"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      learning_paths: {
+        Row: {
+          badge_icon: string
+          badge_name: string
+          category: string
+          created_at: string
+          description: string
+          difficulty: string
+          duration_days: number
+          id: string
+          image_url: string | null
+          is_active: boolean
+          order_index: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          badge_icon: string
+          badge_name: string
+          category: string
+          created_at?: string
+          description: string
+          difficulty: string
+          duration_days: number
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          order_index?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          badge_icon?: string
+          badge_name?: string
+          category?: string
+          created_at?: string
+          description?: string
+          difficulty?: string
+          duration_days?: number
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          order_index?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       loyalty_points: {
         Row: {
           created_at: string
@@ -238,6 +336,77 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      user_badges: {
+        Row: {
+          earned_at: string
+          id: string
+          path_id: string
+          user_id: string
+        }
+        Insert: {
+          earned_at?: string
+          id?: string
+          path_id: string
+          user_id: string
+        }
+        Update: {
+          earned_at?: string
+          id?: string
+          path_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_badges_path_id_fkey"
+            columns: ["path_id"]
+            isOneToOne: false
+            referencedRelation: "learning_paths"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_learning_progress: {
+        Row: {
+          completed_at: string
+          id: string
+          lesson_id: string
+          notes: string | null
+          path_id: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string
+          id?: string
+          lesson_id: string
+          notes?: string | null
+          path_id: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string
+          id?: string
+          lesson_id?: string
+          notes?: string | null
+          path_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_learning_progress_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "learning_path_lessons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_learning_progress_path_id_fkey"
+            columns: ["path_id"]
+            isOneToOne: false
+            referencedRelation: "learning_paths"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

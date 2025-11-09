@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Calendar, Clock, ArrowRight, BookOpen, TrendingUp, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { LearningPaths } from "@/components/LearningPaths";
 
 const featuredArticle = {
   id: 0,
@@ -201,6 +202,12 @@ const Resources = () => {
             ))}
           </div>
         </div>
+
+        {/* Learning Paths */}
+        <LearningPaths />
+
+        {/* Divider */}
+        <div className="border-t my-16"></div>
 
         {/* Articles Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
