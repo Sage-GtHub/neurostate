@@ -1,6 +1,6 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
-import { Search, User, Menu, RefreshCw, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target, LogOut, X } from "lucide-react";
+import { Search, User, Menu, RefreshCw, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target, LogOut, X, Award } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { Input } from "./ui/input";
@@ -94,6 +94,7 @@ export const Header = () => {
 
   const otherLinks = [
     { label: "Resources", href: "/resources" },
+    { label: "Rewards", href: "/rewards", icon: Award },
   ];
 
   return (
@@ -167,6 +168,7 @@ export const Header = () => {
                     to={link.href}
                     className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                   >
+                    {link.icon && <link.icon className="h-4 w-4 mr-2 text-accent" />}
                     {link.label}
                   </Link>
                 </NavigationMenuItem>
@@ -234,6 +236,12 @@ export const Header = () => {
                   <DropdownMenuItem asChild>
                     <Link to="/subscriptions" className="cursor-pointer">
                       My Subscriptions
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/rewards" className="cursor-pointer flex items-center">
+                      <Award className="h-4 w-4 mr-2 text-accent" />
+                      Rewards Program
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
@@ -306,9 +314,10 @@ export const Header = () => {
                     <Link
                       key={link.label}
                       to={link.href}
-                      className="text-lg font-medium hover:text-accent transition-colors"
+                      className="text-lg font-medium hover:text-accent transition-colors flex items-center gap-2"
                       onClick={() => setMobileMenuOpen(false)}
                     >
+                      {link.icon && <link.icon className="h-5 w-5 text-accent" />}
                       {link.label}
                     </Link>
                   ))}
