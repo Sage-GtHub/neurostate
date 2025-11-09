@@ -83,86 +83,85 @@ export const FrequentlyBoughtTogether = ({ currentProduct }: FrequentlyBoughtTog
   const bundleDiscount = calculateTotal() - calculateBundlePrice();
 
   return (
-    <div className="border rounded-lg p-6 bg-secondary/20">
-      <h2 className="text-xl font-semibold mb-4">Frequently Bought Together</h2>
+    <div className="space-y-4">
+      <h2 className="text-2xl font-bold">Frequently Bought Together</h2>
       
-      <div className="space-y-4">
+      <div className="flex gap-4 items-start">
         {displayProducts.map((product, index) => {
           const firstVariant = product.node.variants.edges[0]?.node;
           const image = product.node.images.edges[0]?.node;
           const price = parseFloat(product.node.priceRange.minVariantPrice.amount);
           
           return (
-            <div key={product.node.id}>
-              <div className="flex items-center gap-4">
-                <Checkbox
-                  checked={selectedProducts.has(product.node.id)}
-                  onCheckedChange={() => toggleProduct(product.node.id)}
-                  disabled={product.node.id === currentProduct.id}
-                />
-                
-                <div className="w-16 h-16 bg-secondary/20 rounded-md overflow-hidden flex-shrink-0">
-                  {image && (
-                    <img
-                      src={image.url}
-                      alt={image.altText || product.node.title}
-                      className="w-full h-full object-cover"
-                    />
-                  )}
-                </div>
-                
-                <div className="flex-1 min-w-0">
-                  <h4 className="font-medium text-sm truncate">{product.node.title}</h4>
-                  <p className="text-sm text-muted-foreground line-clamp-1">
-                    {product.node.description}
-                  </p>
-                </div>
-                
-                <div className="text-right flex-shrink-0">
-                  <p className="font-semibold">£{price.toFixed(2)}</p>
-                </div>
-              </div>
-              
-              {index < displayProducts.length - 1 && (
-                <div className="flex items-center justify-center my-3">
-                  <Plus className="h-4 w-4 text-muted-foreground" />
+            <div key={product.node.id} className="flex items-start gap-2">
+              {index > 0 && (
+                <div className="flex items-center justify-center pt-20">
+                  <Plus className="h-5 w-5 text-muted-foreground" />
                 </div>
               )}
+              
+              <div className="flex-1">
+                <div className="relative group">
+                  <Checkbox
+                    checked={selectedProducts.has(product.node.id)}
+                    onCheckedChange={() => toggleProduct(product.node.id)}
+                    disabled={product.node.id === currentProduct.id}
+                    className="absolute top-2 left-2 z-10 bg-background"
+                  />
+                  
+                  <div className="border rounded-lg overflow-hidden bg-background hover:shadow-md transition-shadow">
+                    <div className="aspect-square bg-secondary/20">
+                      {image && (
+                        <img
+                          src={image.url}
+                          alt={image.altText || product.node.title}
+                          className="w-full h-full object-cover"
+                        />
+                      )}
+                    </div>
+                    <div className="p-3">
+                      <h4 className="font-medium text-sm line-clamp-2 mb-2">{product.node.title}</h4>
+                      <p className="font-bold">£{price.toFixed(2)}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           );
         })}
       </div>
 
-      <div className="border-t mt-6 pt-4 space-y-3">
-        <div className="flex justify-between items-center">
-          <span className="text-sm text-muted-foreground">
-            Total for {selectedProducts.size} item{selectedProducts.size > 1 ? 's' : ''}
-          </span>
+      <div className="border rounded-lg p-4 bg-secondary/10">
+        <div className="flex justify-between items-center mb-3">
+          <div>
+            <div className="text-sm text-muted-foreground">
+              Total for {selectedProducts.size} item{selectedProducts.size > 1 ? 's' : ''}
+            </div>
+            {bundleDiscount > 0 && (
+              <div className="text-xs text-primary font-medium">
+                Save £{bundleDiscount.toFixed(2)} with bundle
+              </div>
+            )}
+          </div>
           <div className="text-right">
             {bundleDiscount > 0 && (
-              <div className="text-xs text-muted-foreground line-through">
+              <div className="text-sm text-muted-foreground line-through">
                 £{calculateTotal().toFixed(2)}
               </div>
             )}
-            <div className="text-lg font-bold">
+            <div className="text-2xl font-bold">
               £{calculateBundlePrice().toFixed(2)}
             </div>
           </div>
         </div>
-        
-        {bundleDiscount > 0 && (
-          <div className="text-sm text-primary font-medium">
-            Save £{bundleDiscount.toFixed(2)} (5% bundle discount)
-          </div>
-        )}
         
         <Button 
           onClick={handleAddBundle}
           className="w-full"
           size="lg"
         >
-          <ShoppingCart className="h-4 w-4 mr-2" />
-          Add Selected to Cart
+          <ShoppingCart className="h-5 w-5 mr-2" />
+          Add Bundle to Cart
         </Button>
       </div>
     </div>

@@ -5,32 +5,34 @@ export const TrustBadges = () => {
     {
       icon: Shield,
       title: "Third-Party Tested",
-      description: "NSF Certified for Sport"
+      description: "NSF Certified"
     },
     {
       icon: Award,
       title: "Science-Backed",
-      description: "Research-driven formulas"
+      description: "Research-driven"
     },
     {
       icon: Leaf,
       title: "Clean Ingredients",
-      description: "No artificial additives"
+      description: "No additives"
     },
     {
       icon: Truck,
       title: "Free Shipping",
-      description: "On orders over £50"
+      description: "Orders over £50"
     }
   ];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-8 border-y">
+    <div className="flex items-center justify-between gap-4 py-6 text-xs text-muted-foreground">
       {badges.map((badge, index) => (
-        <div key={index} className="text-center">
-          <badge.icon className="h-8 w-8 mx-auto mb-2 text-primary" />
-          <h3 className="font-semibold text-sm mb-1">{badge.title}</h3>
-          <p className="text-xs text-muted-foreground">{badge.description}</p>
+        <div key={index} className="flex items-center gap-2">
+          <badge.icon className="h-4 w-4" />
+          <div>
+            <div className="font-medium text-foreground">{badge.title}</div>
+            <div>{badge.description}</div>
+          </div>
         </div>
       ))}
     </div>

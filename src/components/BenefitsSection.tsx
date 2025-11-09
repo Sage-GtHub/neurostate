@@ -5,46 +5,40 @@ interface BenefitsSectionProps {
 }
 
 export const BenefitsSection = ({ productType }: BenefitsSectionProps) => {
-  // Default benefits - can be customized based on product type
   const benefits = [
     {
       icon: Heart,
       title: "Heart Health",
-      description: "Supports cardiovascular function and circulation"
+      description: "Supports cardiovascular function"
     },
     {
       icon: Brain,
       title: "Cognitive Function",
-      description: "Enhances mental clarity and focus"
+      description: "Enhances mental clarity"
     },
     {
       icon: Zap,
       title: "Energy & Recovery",
-      description: "Promotes faster recovery and sustained energy"
+      description: "Faster recovery times"
     },
     {
       icon: Shield,
       title: "Immune Support",
-      description: "Strengthens natural defense mechanisms"
+      description: "Strengthens defenses"
     }
   ];
 
   return (
-    <div className="py-12 bg-secondary/10 rounded-lg">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8">Key Benefits</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {benefits.map((benefit, index) => (
-            <div key={index} className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
-                <benefit.icon className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="font-semibold text-lg mb-2">{benefit.title}</h3>
-              <p className="text-sm text-muted-foreground">{benefit.description}</p>
-            </div>
-          ))}
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {benefits.map((benefit, index) => (
+        <div key={index} className="text-center p-6 rounded-lg border bg-secondary/5 hover:bg-secondary/10 transition-colors">
+          <div className="w-12 h-12 mx-auto mb-3 bg-primary/10 rounded-full flex items-center justify-center">
+            <benefit.icon className="h-6 w-6 text-primary" />
+          </div>
+          <h3 className="font-semibold mb-1">{benefit.title}</h3>
+          <p className="text-sm text-muted-foreground">{benefit.description}</p>
         </div>
-      </div>
+      ))}
     </div>
   );
 };

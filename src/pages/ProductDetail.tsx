@@ -79,42 +79,45 @@ const ProductDetail = () => {
         </div>
 
         {/* Product Section */}
-        <div className="container mx-auto px-4 pb-12">
+        <div className="container mx-auto px-4 pb-8">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Left: Image Gallery */}
             <ProductImageGallery images={images} productTitle={product.title} />
 
             {/* Right: Product Info */}
-            <ProductInfo
-              product={product}
-              selectedVariantIndex={selectedVariantIndex}
-              setSelectedVariantIndex={setSelectedVariantIndex}
-            />
+            <div>
+              <ProductInfo
+                product={product}
+                selectedVariantIndex={selectedVariantIndex}
+                setSelectedVariantIndex={setSelectedVariantIndex}
+              />
+              
+              {/* Trust Badges - Integrated */}
+              <div className="mt-6 pt-6 border-t">
+                <TrustBadges />
+              </div>
+            </div>
           </div>
-        </div>
-
-        {/* Trust Badges */}
-        <div className="container mx-auto px-4">
-          <TrustBadges />
         </div>
 
         {/* Benefits Section */}
         <div className="container mx-auto px-4 py-12">
+          <h2 className="text-3xl font-bold mb-8">Key Benefits</h2>
           <BenefitsSection />
         </div>
 
         {/* Product Details Tabs */}
-        <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 py-12 border-t">
           <ProductTabs description={product.description || "No description available."} />
         </div>
 
         {/* Frequently Bought Together */}
-        <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 py-12 border-t">
           <FrequentlyBoughtTogether currentProduct={product} />
         </div>
 
         {/* Recently Viewed */}
-        <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 py-12 border-t">
           <RecentlyViewed />
         </div>
       </div>
