@@ -75,12 +75,15 @@ export const ProductInfo = ({
       <div>
         <h1 className="text-4xl font-bold mb-3">{product.title}</h1>
         
-        {/* Servings and Price Per Serving */}
-        <div className="flex items-center gap-3 mb-4 text-sm text-muted-foreground">
-          <span className="font-medium">30 Servings</span>
-          <span>•</span>
-          <span className="font-medium">£{(price / 30).toFixed(2)}/Serving</span>
-        </div>
+        {/* Servings and Price Per Serving - Only for supplements */}
+        {(product.productType?.toLowerCase().includes('supplement') || 
+          product.tags?.some((tag: string) => tag.toLowerCase().includes('supplement'))) && (
+          <div className="flex items-center gap-3 mb-4 text-sm text-muted-foreground">
+            <span className="font-medium">30 Servings</span>
+            <span>•</span>
+            <span className="font-medium">£{(price / 30).toFixed(2)}/Serving</span>
+          </div>
+        )}
 
         {/* Short Description */}
         <p className="text-lg text-foreground mb-6 leading-relaxed">
@@ -151,7 +154,7 @@ export const ProductInfo = ({
             <div 
               className={`flex items-center justify-between p-4 rounded-lg transition-all ${
                 purchaseType === "onetime" 
-                  ? "bg-secondary/30 border-2 border-secondary" 
+                  ? "bg-accent/50 text-accent-foreground border-2 border-accent/70" 
                   : "hover:bg-secondary/20 border border-transparent"
               }`}
             >
@@ -159,7 +162,7 @@ export const ProductInfo = ({
                 <RadioGroupItem 
                   value="onetime" 
                   id="onetime"
-                  className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                  className="data-[state=checked]:bg-accent data-[state=checked]:border-accent"
                 />
                 <Label htmlFor="onetime" className="cursor-pointer">
                   <div className="flex items-center gap-2">
