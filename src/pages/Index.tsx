@@ -6,7 +6,6 @@ import { ProductFilters, FilterState } from "@/components/ProductFilters";
 import { ProductBundles } from "@/components/ProductBundles";
 import { ProductQuiz } from "@/components/ProductQuiz";
 import { SocialProof } from "@/components/SocialProof";
-import { ProductComparison } from "@/components/ProductComparison";
 import { RecentlyViewed } from "@/components/RecentlyViewed";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 import { LiveChat } from "@/components/LiveChat";
@@ -70,7 +69,6 @@ const Index = () => {
         </section>
         <ProductBundles />
         <SocialProof />
-        <ProductComparison />
         <RecentlyViewed />
         <Benefits />
       </main>
