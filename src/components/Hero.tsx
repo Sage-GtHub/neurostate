@@ -25,7 +25,7 @@ export const Hero = () => {
           backgroundSize: '24px 24px'
         }}
       />
-      <div className="container mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+      <div className="container mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
         <div className="max-w-xl">
           <p className="text-xs md:text-sm font-medium text-foreground/70 mb-3 md:mb-4 tracking-wide">
             Redefining Human Performance
@@ -38,7 +38,7 @@ export const Hero = () => {
           </p>
           <Button 
             size="lg" 
-            className="bg-accent text-accent-foreground border-2 border-accent hover:bg-accent/90 hover:shadow-[0_0_25px_rgba(255,138,0,0.7)] font-medium rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(255,138,0,0.4)] w-full sm:w-auto min-h-[44px]"
+            className="bg-accent text-accent-foreground border-2 border-accent hover:bg-accent/90 hover:shadow-[0_0_25px_rgba(255,138,0,0.7)] font-medium rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(255,138,0,0.4)] w-full sm:w-auto min-h-[44px] cursor-pointer active:scale-95"
             onClick={scrollToProducts}
           >
             Shop Now <ArrowRight className="ml-2 h-5 w-5" />
