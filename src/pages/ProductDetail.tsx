@@ -123,7 +123,6 @@ const ProductDetail = () => {
         {/* Frequently Bought Together */}
         <div className="border-t bg-background">
           <div className="container mx-auto px-4 py-12 lg:py-16">
-            <h2 className="text-2xl lg:text-3xl font-bold mb-8">Frequently Bought Together</h2>
             <FrequentlyBoughtTogether currentProduct={product} />
           </div>
         </div>
