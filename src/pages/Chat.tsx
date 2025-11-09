@@ -545,7 +545,7 @@ export default function Chat() {
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`flex gap-3 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                className={`flex gap-3 ${msg.role === "user" ? "justify-end" : "justify-start"} animate-fade-in`}
               >
                 {msg.role === "assistant" && (
                   <div className="flex-shrink-0">
@@ -582,7 +582,7 @@ export default function Chat() {
               </div>
             ))}
             {isLoading && (
-              <div className="flex gap-3 justify-start">
+              <div className="flex gap-3 justify-start animate-fade-in">
                 {heraAvatar ? (
                   <img 
                     src={heraAvatar} 
@@ -595,7 +595,11 @@ export default function Chat() {
                   </div>
                 )}
                 <div className="bg-card border border-border rounded-2xl rounded-tl-sm p-4 shadow-sm">
-                  <Loader2 className="h-5 w-5 animate-spin text-accent" />
+                  <div className="flex gap-1.5 items-center">
+                    <div className="w-2 h-2 rounded-full bg-accent animate-bounce" style={{ animationDelay: "0ms" }}></div>
+                    <div className="w-2 h-2 rounded-full bg-accent animate-bounce" style={{ animationDelay: "150ms" }}></div>
+                    <div className="w-2 h-2 rounded-full bg-accent animate-bounce" style={{ animationDelay: "300ms" }}></div>
+                  </div>
                 </div>
               </div>
             )}
