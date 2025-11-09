@@ -185,99 +185,10 @@ const Resources = () => {
         {/* Multi-Format Content Hub */}
         <MultiFormatHub />
 
-        {/* Divider */}
-        <div className="border-t my-16"></div>
-
-        {/* Search and Filter - Legacy Articles Section */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">More Articles</h2>
-          <div className="space-y-6">
-          <div className="relative max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Search more articles..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10"
-            />
-          </div>
-          
-          <div className="flex flex-wrap gap-2">
-            {categories.map((category) => (
-              <Button
-                key={category}
-                variant={selectedCategory === category ? "default" : "outline"}
-                onClick={() => setSelectedCategory(category)}
-                className="rounded-full"
-              >
-                {category}
-              </Button>
-            ))}
-          </div>
-        </div>
-        </div>
-
-        {/* Divider */}
-        <div className="border-t my-16"></div>
-
         {/* Learning Paths */}
-        <LearningPaths />
-
-        {/* Divider */}
-        <div className="border-t my-16"></div>
-
-        {/* Articles Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {filteredArticles.map((article) => (
-            <Card key={article.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group border-border/50 hover:border-primary/30">
-              <div className="aspect-video overflow-hidden bg-muted">
-                <img
-                  src={article.image}
-                  alt={article.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-              
-              <CardHeader>
-                <div className="flex items-center gap-2 mb-3">
-                  <Badge variant="secondary">{article.category}</Badge>
-                  <div className="flex items-center text-xs text-muted-foreground gap-3">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="h-3 w-3" />
-                      {article.date}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="h-3 w-3" />
-                      {article.readTime}
-                    </span>
-                  </div>
-                </div>
-                <h3 className="text-xl font-bold line-clamp-2 group-hover:text-primary transition-colors leading-tight">
-                  {article.title}
-                </h3>
-              </CardHeader>
-
-              <CardContent>
-                <p className="text-muted-foreground line-clamp-3 leading-relaxed">
-                  {article.excerpt}
-                </p>
-              </CardContent>
-
-              <CardFooter>
-                <Button variant="ghost" className="w-full group/btn">
-                  Read More
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
+        <div className="my-20">
+          <LearningPaths />
         </div>
-
-        {filteredArticles.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground text-lg">No articles found matching your search.</p>
-          </div>
-        )}
 
         {/* Newsletter Section */}
         <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
