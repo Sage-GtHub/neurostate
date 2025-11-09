@@ -180,7 +180,7 @@ export const CartDrawer = () => {
                 <Button 
                   onClick={handleCheckout}
                   variant="outline"
-                  className="w-full rounded-full bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-accent hover:shadow-[0_0_20px_rgba(255,138,0,0.6)] transition-all duration-300" 
+                  className="w-full rounded-full bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-accent hover:shadow-[0_0_20px_rgba(255,138,0,0.6)] transition-all duration-300 animate-pulse-subtle" 
                   size="lg"
                   disabled={items.length === 0 || isLoading}
                 >

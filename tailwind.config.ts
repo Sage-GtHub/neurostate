@@ -114,11 +114,22 @@ export default {
             backgroundPosition: "100% 50%",
           },
         },
+        "pulse-subtle": {
+          "0%, 100%": {
+            transform: "scale(1)",
+            boxShadow: "0 0 0 0 rgba(255, 138, 0, 0.4)",
+          },
+          "50%": {
+            transform: "scale(1.02)",
+            boxShadow: "0 0 15px 5px rgba(255, 138, 0, 0.2)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.5s ease-out",
+        "pulse-subtle": "pulse-subtle 3s ease-in-out infinite",
       },
     },
   },
