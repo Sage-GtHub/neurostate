@@ -218,7 +218,26 @@ export const Header = () => {
               </Button>
             )}
             
-            {/* Ask AI Button */}
+            {/* Mobile Chat Button */}
+            <Button 
+              variant="ghost"
+              size="icon"
+              onClick={() => {
+                setChatOpen(true);
+                setHasUnreadChat(false);
+                localStorage.setItem('hera-chat-visited', 'true');
+              }}
+              className="md:hidden relative"
+            >
+              <Sparkles className="h-5 w-5" />
+              {hasUnreadChat && (
+                <Badge className="absolute -top-1 -right-1 h-4 w-4 rounded-full p-0 bg-red-500 hover:bg-red-500 flex items-center justify-center animate-pulse">
+                  <span className="text-[10px] text-white">1</span>
+                </Badge>
+              )}
+            </Button>
+            
+            {/* Desktop Chat Button */}
             <Button 
               variant="default"
               onClick={() => {
