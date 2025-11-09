@@ -17,14 +17,14 @@ const Index = () => {
   const isMobile = useIsMobile();
   const [filters, setFilters] = useState<FilterState>({
     categories: [],
-    priceRange: [0, 500],
+    priceRange: [0, 5000],
     features: [],
   });
 
   const handleClearFilters = () => {
     setFilters({
       categories: [],
-      priceRange: [0, 500],
+      priceRange: [0, 5000],
       features: [],
     });
   };
