@@ -77,7 +77,12 @@ export const ExitIntentPopup = () => {
           </div>
 
           <div className="flex gap-2">
-            <Button type="submit" className="flex-1 rounded-full bg-primary/10 text-foreground border border-border hover:bg-foreground hover:text-background transition-all duration-300 font-medium" disabled={isLoading}>
+            <Button 
+              type="submit" 
+              variant="outline"
+              className="flex-1 rounded-full bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-accent transition-all duration-300 font-medium" 
+              disabled={isLoading}
+            >
               {isLoading ? "Subscribing..." : "Get My Discount"}
             </Button>
             <Button type="button" variant="outline" onClick={handleClose} className="rounded-full">

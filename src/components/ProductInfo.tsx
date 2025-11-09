@@ -252,7 +252,8 @@ export const ProductInfo = ({
       {/* Add to Cart */}
       <Button
         size="lg"
-        className="w-full rounded-full bg-primary/10 text-foreground border border-border hover:bg-foreground hover:text-background transition-all duration-300 font-medium"
+        variant="outline"
+        className="w-full rounded-full bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-accent transition-all duration-300 font-medium"
         onClick={handleAddToCart}
         disabled={!selectedVariant?.availableForSale}
       >
