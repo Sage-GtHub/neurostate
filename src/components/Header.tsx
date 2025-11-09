@@ -94,7 +94,6 @@ export const Header = () => {
 
   const otherLinks = [
     { label: "Resources", href: "/resources" },
-    { label: "Ambassador", href: "/ambassador" },
   ];
 
   return (
@@ -213,12 +212,6 @@ export const Header = () => {
               </Button>
             )}
             
-            <Link to="/subscriptions">
-              <Button variant="ghost" size="icon" className="hidden md:flex" title="Manage Subscriptions">
-                <RefreshCw className="h-5 w-5" />
-              </Button>
-            </Link>
-            
             {/* User Account Dropdown */}
             {user ? (
               <DropdownMenu>
@@ -333,16 +326,6 @@ export const Header = () => {
                         <Search className="h-5 w-5" />
                       </Button>
                     </form>
-                    <Link
-                      to="/subscriptions"
-                      className="w-full"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <Button variant="ghost" className="w-full justify-start" size="lg">
-                        <RefreshCw className="h-5 w-5 mr-2" />
-                        Subscriptions
-                      </Button>
-                    </Link>
                     <Button variant="ghost" className="w-full justify-start" size="lg">
                       <User className="h-5 w-5 mr-2" />
                       Account
