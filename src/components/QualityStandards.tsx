@@ -74,101 +74,107 @@ const standards: Standard[] = [
 
 export const QualityStandards = () => {
   return (
-    <section className="py-16 px-4 bg-background">
-      <div className="container mx-auto">
-        <div className="text-center mb-12">
+    <section className="py-20 px-4 bg-gradient-to-b from-background via-secondary/20 to-background relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-accent rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary rounded-full blur-3xl" />
+      </div>
+      
+      <div className="container mx-auto relative z-10">
+        <div className="text-center mb-16">
           <p className="text-sm font-medium text-accent mb-3 tracking-wide uppercase">
             Our Commitment
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
             The Standard of Excellence
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            We hold ourselves to the same rigorous standards used by Olympic athletes and professional sports teams. Every product is tested, verified, and backed by science.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          {standards.map((standard) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {standards.map((standard, index) => {
             const Icon = standard.icon;
             return (
               <Card 
                 key={standard.id}
-                className="overflow-hidden group transition-all duration-300 hover:shadow-accent-glow"
+                className="overflow-hidden group transition-all duration-500 hover:scale-105 hover:shadow-2xl border-0 bg-gradient-to-br from-background to-secondary/30"
+                style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className={`h-2 bg-gradient-to-r ${standard.color}`} />
-                <div className="p-8">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="flex-shrink-0">
-                      <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center transition-all duration-300 group-hover:bg-accent group-hover:shadow-[0_0_20px_rgba(255,138,0,0.6)]">
-                        <Icon className="h-7 w-7 text-accent group-hover:text-accent-foreground transition-colors" />
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="text-3xl font-bold text-accent/30">{standard.number}</span>
-                        <h3 className="text-2xl font-bold">{standard.title}</h3>
-                      </div>
-                      <p className="text-muted-foreground mb-4">
-                        {standard.description}
-                      </p>
+                <div className={`h-1 bg-gradient-to-r ${standard.color} transition-all duration-300 group-hover:h-2`} />
+                <div className="p-6 relative">
+                  {/* Large Background Number */}
+                  <span className="absolute top-4 right-4 text-6xl font-bold text-accent/5 pointer-events-none">
+                    {standard.number}
+                  </span>
+                  
+                  {/* Icon */}
+                  <div className="mb-6 relative z-10">
+                    <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${standard.color} flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-lg`}>
+                      <Icon className="h-10 w-10 text-accent transition-transform duration-500 group-hover:scale-110" />
                     </div>
                   </div>
                   
-                  <ul className="space-y-2">
-                    {standard.details.map((detail, index) => (
-                      <li key={index} className="flex items-start gap-2 text-sm">
-                        <span className="text-accent mt-1 flex-shrink-0">✓</span>
-                        <span className="text-foreground/80">{detail}</span>
-                      </li>
+                  {/* Title */}
+                  <h3 className="text-xl font-bold mb-3 relative z-10">{standard.title}</h3>
+                  
+                  {/* Condensed Key Points */}
+                  <div className="space-y-2 relative z-10">
+                    {standard.details.slice(0, 2).map((detail, idx) => (
+                      <div key={idx} className="flex items-start gap-2">
+                        <span className="text-accent mt-1 text-lg flex-shrink-0">✓</span>
+                        <span className="text-sm text-muted-foreground line-clamp-2">{detail}</span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               </Card>
             );
           })}
         </div>
 
-        <div className="bg-gradient-to-br from-secondary to-muted rounded-2xl p-8 md:p-12">
-          <div className="max-w-3xl mx-auto text-center">
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              Trusted by 100,000+ Athletes & Health Enthusiasts
+        {/* Stats Section */}
+        <div className="bg-gradient-to-br from-accent/10 via-secondary to-primary/10 rounded-3xl p-8 md:p-12 backdrop-blur-sm border border-accent/20 shadow-2xl">
+          <div className="max-w-4xl mx-auto text-center">
+            <h3 className="text-3xl md:text-4xl font-bold mb-8">
+              Trusted by 100,000+ Athletes
             </h3>
-            <p className="text-muted-foreground mb-6">
-              Our products are used by professional sports teams, Olympic athletes, and individuals committed to optimal performance. We're honored to support your journey to peak health and performance.
-            </p>
             
-            <div className="flex flex-wrap justify-center gap-6 mb-8">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-accent mb-1">150+</div>
-                <div className="text-sm text-muted-foreground">Pro Teams</div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+              <div className="text-center group">
+                <div className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-accent to-accent/60 bg-clip-text text-transparent mb-2 transition-transform group-hover:scale-110">
+                  150+
+                </div>
+                <div className="text-sm font-medium text-muted-foreground">Pro Teams</div>
               </div>
-              <div className="h-12 w-px bg-border hidden sm:block" />
-              <div className="text-center">
-                <div className="text-3xl font-bold text-accent mb-1">100%</div>
-                <div className="text-sm text-muted-foreground">Third-Party Tested</div>
+              <div className="text-center group">
+                <div className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-accent to-accent/60 bg-clip-text text-transparent mb-2 transition-transform group-hover:scale-110">
+                  100%
+                </div>
+                <div className="text-sm font-medium text-muted-foreground">Third-Party Tested</div>
               </div>
-              <div className="h-12 w-px bg-border hidden sm:block" />
-              <div className="text-center">
-                <div className="text-3xl font-bold text-accent mb-1">NSF</div>
-                <div className="text-sm text-muted-foreground">Certified Sport</div>
+              <div className="text-center group">
+                <div className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-accent to-accent/60 bg-clip-text text-transparent mb-2 transition-transform group-hover:scale-110">
+                  NSF
+                </div>
+                <div className="text-sm font-medium text-muted-foreground">Certified Sport</div>
               </div>
-              <div className="h-12 w-px bg-border hidden sm:block" />
-              <div className="text-center">
-                <div className="text-3xl font-bold text-accent mb-1">Zero</div>
-                <div className="text-sm text-muted-foreground">Banned Substances</div>
+              <div className="text-center group">
+                <div className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-accent to-accent/60 bg-clip-text text-transparent mb-2 transition-transform group-hover:scale-110">
+                  Zero
+                </div>
+                <div className="text-sm font-medium text-muted-foreground">Banned Substances</div>
               </div>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/resources">
-                <Button size="lg" className="group/btn">
+                <Button size="lg" className="group/btn shadow-lg">
                   Learn More About Our Process
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
                 </Button>
               </Link>
               <Link to="/faq">
-                <Button size="lg" variant="outline">
+                <Button size="lg" variant="outline" className="shadow-lg">
                   View Testing Certificates
                 </Button>
               </Link>
