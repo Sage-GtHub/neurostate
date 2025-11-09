@@ -38,8 +38,7 @@ export const Hero = () => {
           </p>
           <Button 
             size="lg" 
-            variant="outline"
-            className="bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-accent hover:shadow-[0_0_20px_rgba(255,138,0,0.6)] font-medium rounded-full transition-all duration-300"
+            className="bg-accent text-accent-foreground border-2 border-accent hover:bg-accent/90 hover:shadow-[0_0_25px_rgba(255,138,0,0.7)] font-medium rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(255,138,0,0.4)]"
             onClick={scrollToProducts}
           >
             Shop Now <ArrowRight className="ml-2 h-5 w-5" />
