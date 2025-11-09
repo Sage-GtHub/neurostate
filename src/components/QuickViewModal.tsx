@@ -1,10 +1,10 @@
-import { ShopifyProduct } from "@/lib/shopify";
+import { ShopifyProduct, fetchProducts } from "@/lib/shopify";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
-import { useState } from "react";
-import { Star, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Star, X, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface QuickViewModalProps {
@@ -16,6 +16,34 @@ interface QuickViewModalProps {
 export const QuickViewModal = ({ product, open, onOpenChange }: QuickViewModalProps) => {
   const addItem = useCartStore(state => state.addItem);
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
+  const [relatedProducts, setRelatedProducts] = useState<ShopifyProduct[]>([]);
+  const [isLoadingRelated, setIsLoadingRelated] = useState(false);
+
+  useEffect(() => {
+    if (open && product) {
+      loadRelatedProducts();
+    }
+  }, [open, product]);
+
+  const loadRelatedProducts = async () => {
+    if (!product) return;
+    
+    setIsLoadingRelated(true);
+    try {
+      const allProducts = await fetchProducts(20);
+      // Filter out the current product and get random 4 products
+      const filtered = allProducts
+        .filter(p => p.node.id !== product.node.id)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 4);
+      
+      setRelatedProducts(filtered);
+    } catch (error) {
+      console.error('Failed to load related products:', error);
+    } finally {
+      setIsLoadingRelated(false);
+    }
+  };
 
   if (!product) return null;
 
@@ -50,7 +78,7 @@ export const QuickViewModal = ({ product, open, onOpenChange }: QuickViewModalPr
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="sr-only">Quick View: {node.title}</DialogTitle>
         </DialogHeader>
@@ -141,6 +169,64 @@ export const QuickViewModal = ({ product, open, onOpenChange }: QuickViewModalPr
             </div>
           </div>
         </div>
+
+        {/* Related Products Section */}
+        {relatedProducts.length > 0 && (
+          <div className="mt-8 pt-8 border-t">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-semibold">You May Also Like</h3>
+              <ChevronRight className="h-5 w-5 text-muted-foreground" />
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {relatedProducts.map((relatedProduct) => {
+                const relatedImage = relatedProduct.node.images.edges[0]?.node;
+                const relatedPrice = parseFloat(relatedProduct.node.priceRange.minVariantPrice.amount);
+                
+                return (
+                  <Link
+                    key={relatedProduct.node.id}
+                    to={`/product/${relatedProduct.node.handle}`}
+                    onClick={() => onOpenChange(false)}
+                    className="group block"
+                  >
+                    <div className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-md transition-all">
+                      <div className="aspect-square bg-secondary/10 overflow-hidden">
+                        {relatedImage ? (
+                          <img
+                            src={relatedImage.url}
+                            alt={relatedImage.altText || relatedProduct.node.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <span className="text-xs text-muted-foreground">No image</span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-3 space-y-1">
+                        <h4 className="text-sm font-medium line-clamp-2 group-hover:text-primary transition-colors">
+                          {relatedProduct.node.title}
+                        </h4>
+                        <p className="text-sm font-semibold">
+                          £{relatedPrice.toFixed(2)}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {isLoadingRelated && (
+          <div className="mt-8 pt-8 border-t">
+            <div className="flex items-center justify-center py-8">
+              <div className="text-sm text-muted-foreground">Loading related products...</div>
+            </div>
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   );
