@@ -28,7 +28,7 @@ export const Hero = () => {
       <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div className="max-w-xl">
           <p className="text-sm font-medium text-foreground/70 mb-4 tracking-wide">
-            Marine Collagen Premium
+            Redefining Human Performance
           </p>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-background leading-[1.1]">
             Recovery, Sleep & Performance
