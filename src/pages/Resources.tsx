@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { LearningPaths } from "@/components/LearningPaths";
 import { ResourceFinder } from "@/components/ResourceFinder";
+import { MultiFormatHub } from "@/components/MultiFormatHub";
 
 const featuredArticle = {
   id: 0,
@@ -181,12 +182,20 @@ const Resources = () => {
         {/* Interactive Resource Finder */}
         <ResourceFinder />
 
-        {/* Search and Filter */}
-        <div className="mb-12 space-y-6">
+        {/* Multi-Format Content Hub */}
+        <MultiFormatHub />
+
+        {/* Divider */}
+        <div className="border-t my-16"></div>
+
+        {/* Search and Filter - Legacy Articles Section */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-6">More Articles</h2>
+          <div className="space-y-6">
           <div className="relative max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Search articles..."
+              placeholder="Search more articles..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
@@ -206,6 +215,10 @@ const Resources = () => {
             ))}
           </div>
         </div>
+        </div>
+
+        {/* Divider */}
+        <div className="border-t my-16"></div>
 
         {/* Learning Paths */}
         <LearningPaths />
