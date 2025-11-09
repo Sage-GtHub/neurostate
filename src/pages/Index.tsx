@@ -11,6 +11,7 @@ import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 import { LiveChat } from "@/components/LiveChat";
 import { Footer } from "@/components/Footer";
 import { ShopByGoal } from "@/components/ShopByGoal";
+import { ExpertPartners } from "@/components/ExpertPartners";
 import { useState, useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSearchParams } from "react-router-dom";
@@ -107,6 +108,7 @@ const Index = () => {
             </div>
           </div>
         </section>
+        <ExpertPartners />
         <ProductBundles />
         <SocialProof />
         <RecentlyViewed />
