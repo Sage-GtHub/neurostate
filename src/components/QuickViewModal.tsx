@@ -30,14 +30,36 @@ export const QuickViewModal = ({ product, open, onOpenChange }: QuickViewModalPr
     
     setIsLoadingRelated(true);
     try {
-      const allProducts = await fetchProducts(20);
-      // Filter out the current product and get random 4 products
-      const filtered = allProducts
-        .filter(p => p.node.id !== product.node.id)
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 4);
+      const allProducts = await fetchProducts(50);
+      const currentTags = product.node.tags || [];
       
-      setRelatedProducts(filtered);
+      // Score products based on tag similarity
+      const scoredProducts = allProducts
+        .filter(p => p.node.id !== product.node.id)
+        .map(p => {
+          const productTags = p.node.tags || [];
+          const matchingTags = productTags.filter(tag => currentTags.includes(tag));
+          return {
+            product: p,
+            score: matchingTags.length,
+            matchingTags
+          };
+        });
+      
+      // Sort by score (most matching tags first), then randomize within same score
+      scoredProducts.sort((a, b) => {
+        if (b.score !== a.score) {
+          return b.score - a.score;
+        }
+        return Math.random() - 0.5;
+      });
+      
+      // Take top 4 products
+      const related = scoredProducts
+        .slice(0, 4)
+        .map(item => item.product);
+      
+      setRelatedProducts(related);
     } catch (error) {
       console.error('Failed to load related products:', error);
     } finally {
