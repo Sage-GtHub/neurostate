@@ -89,7 +89,11 @@ export const ProductInfo = ({
               }`}
             >
               <div className="flex items-center space-x-3">
-                <RadioGroupItem value="subscription" id="subscription" />
+                <RadioGroupItem 
+                  value="subscription" 
+                  id="subscription"
+                  className="border-accent-foreground data-[state=checked]:bg-accent-foreground data-[state=checked]:border-accent-foreground"
+                />
                 <Label htmlFor="subscription" className="cursor-pointer">
                   <div className="flex items-center gap-2">
                     <RefreshCw className="h-5 w-5" />
@@ -117,7 +121,11 @@ export const ProductInfo = ({
               }`}
             >
               <div className="flex items-center space-x-3">
-                <RadioGroupItem value="onetime" id="onetime" />
+                <RadioGroupItem 
+                  value="onetime" 
+                  id="onetime"
+                  className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                />
                 <Label htmlFor="onetime" className="cursor-pointer">
                   <div className="flex items-center gap-2">
                     <Package className="h-5 w-5" />
