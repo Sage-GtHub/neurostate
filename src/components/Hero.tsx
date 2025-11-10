@@ -44,12 +44,21 @@ export const Hero = () => {
             Shop Now <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>
-        <div className="hidden md:flex justify-center items-center">
-          <img 
-            src={heroImage} 
-            alt="Red Light Face Mask - Recovery, Sleep & Performance"
-            className="w-full max-w-md"
-          />
+        <div className="hidden md:flex justify-center items-center relative">
+          <div className="relative w-full max-w-md">
+            <img 
+              src={heroImage} 
+              alt="Red Light Face Mask - Recovery, Sleep & Performance"
+              className="w-full rounded-2xl shadow-xl"
+            />
+            {/* Subtle gradient overlay for depth */}
+            <div 
+              className="absolute inset-0 rounded-2xl pointer-events-none"
+              style={{
+                background: 'linear-gradient(to bottom, transparent 0%, transparent 60%, hsl(var(--background) / 0.1) 100%)'
+              }}
+            />
+          </div>
         </div>
       </div>
     </section>
