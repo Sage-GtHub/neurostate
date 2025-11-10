@@ -1,12 +1,35 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import heroImage from "@/assets/redlight.webp";
+import { HeroCarousel } from "@/components/HeroCarousel";
+import heroImage1 from "@/assets/redlight.webp";
+import heroImage2 from "@/assets/hero-redlight-panel.jpg";
+import heroImage3 from "@/assets/hero-pemf-recovery.jpg";
+import heroImage4 from "@/assets/hero-sleep-wellness.jpg";
 
 export const Hero = () => {
   const scrollToProducts = () => {
     const productsSection = document.getElementById('products');
     productsSection?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const heroSlides = [
+    {
+      image: heroImage1,
+      alt: "Red Light Therapy Experience - Recovery, Sleep & Performance"
+    },
+    {
+      image: heroImage2,
+      alt: "Red Light Therapy Panel in Wellness Room"
+    },
+    {
+      image: heroImage3,
+      alt: "PEMF Therapy Recovery Session"
+    },
+    {
+      image: heroImage4,
+      alt: "Sleep Wellness and Recovery"
+    }
+  ];
 
   return (
     <section 
@@ -49,16 +72,8 @@ export const Hero = () => {
             Shop Now <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>
-        <div className="hidden md:flex justify-center items-center relative">
-          <div className="absolute inset-0 bg-gradient-to-l from-background/30 to-transparent rounded-lg"></div>
-          <img 
-            src={heroImage} 
-            alt="Red Light Therapy Experience - Recovery, Sleep & Performance"
-            className="w-full max-w-md rounded-lg shadow-2xl relative z-10"
-            style={{
-              filter: 'brightness(0.95) contrast(1.05)'
-            }}
-          />
+        <div className="hidden md:flex justify-center items-center">
+          <HeroCarousel slides={heroSlides} />
         </div>
       </div>
     </section>
