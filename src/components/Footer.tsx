@@ -195,11 +195,11 @@ export const Footer = () => {
               <h3 className="font-bold text-lg mb-4">Get in Touch</h3>
               <div className="space-y-3">
                 <a
-                  href="mailto:contact@neurostate.fit"
+                  href="mailto:contact@neurostate.co.uk"
                   className="flex items-center gap-2 text-muted-foreground hover:text-accent transition-colors text-sm group"
                 >
                   <Mail className="h-4 w-4 group-hover:scale-110 transition-transform" />
-                  contact@neurostate.fit
+                  contact@neurostate.co.uk
                 </a>
                 <p className="text-xs text-muted-foreground mt-4">
                   We typically respond within 24 hours
