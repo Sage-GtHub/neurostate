@@ -17,8 +17,7 @@ import {
   Zap,
   Heart,
   ArrowRight,
-  Mail,
-  Phone
+  Mail
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -417,10 +416,6 @@ const Partnerships = () => {
               <Button size="lg" variant="outline" className="gap-2">
                 <Mail className="h-5 w-5" />
                 contact@neurostate.co.uk
-              </Button>
-              <Button size="lg" variant="outline" className="gap-2">
-                <Phone className="h-5 w-5" />
-                +44 20 1234 5678
               </Button>
             </div>
           </CardContent>

@@ -17,7 +17,6 @@ import { supabase } from "@/integrations/supabase/client";
 const contactSchema = z.object({
   name: z.string().trim().min(1, { message: "Name is required" }).max(100, { message: "Name must be less than 100 characters" }),
   email: z.string().trim().email({ message: "Please enter a valid email address" }).max(255, { message: "Email must be less than 255 characters" }),
-  phone: z.string().trim().max(20, { message: "Phone must be less than 20 characters" }).optional(),
   subject: z.string().trim().min(1, { message: "Subject is required" }).max(200, { message: "Subject must be less than 200 characters" }),
   message: z.string().trim().min(10, { message: "Message must be at least 10 characters" }).max(2000, { message: "Message must be less than 2000 characters" }),
 });
@@ -44,7 +43,6 @@ const Contact = () => {
         body: {
           name: data.name,
           email: data.email,
-          phone: data.phone || '',
           subject: data.subject,
           message: data.message,
         },
@@ -154,31 +152,19 @@ const Contact = () => {
                         </div>
                       </div>
 
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label htmlFor="phone">Phone (optional)</Label>
-                          <Input
-                            id="phone"
-                            type="tel"
-                            placeholder="+44 20 1234 5678"
-                            {...register("phone")}
-                          />
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="subject">
-                            Subject <span className="text-destructive">*</span>
-                          </Label>
-                          <Input
-                            id="subject"
-                            placeholder="How can we help?"
-                            {...register("subject")}
-                            className={errors.subject ? "border-destructive" : ""}
-                          />
-                          {errors.subject && (
-                            <p className="text-sm text-destructive">{errors.subject.message}</p>
-                          )}
-                        </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="subject">
+                          Subject <span className="text-destructive">*</span>
+                        </Label>
+                        <Input
+                          id="subject"
+                          placeholder="How can we help?"
+                          {...register("subject")}
+                          className={errors.subject ? "border-destructive" : ""}
+                        />
+                        {errors.subject && (
+                          <p className="text-sm text-destructive">{errors.subject.message}</p>
+                        )}
                       </div>
 
                       <div className="space-y-2">
