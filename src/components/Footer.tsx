@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Twitter, Youtube, Mail } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube, Mail, Lock, Shield, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 import { TrustBadges } from "./TrustBadges";
 
@@ -224,6 +224,27 @@ export const Footer = () => {
               <p className="text-xs text-muted-foreground mt-4">
                 Join our community for tips, product updates, and exclusive offers
               </p>
+            </div>
+          </div>
+
+          {/* Security & Trust Indicators */}
+          <div className="border-t pt-6 pb-6">
+            <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <Lock className="h-4 w-4 text-accent" />
+                <span>256-bit SSL Secure</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Shield className="h-4 w-4 text-accent" />
+                <span>PCI DSS Compliant</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-accent" />
+                <span>Verified Business</span>
+              </div>
+              <div className="text-muted-foreground/60">
+                We accept: Visa • Mastercard • Amex • PayPal
+              </div>
             </div>
           </div>
 
