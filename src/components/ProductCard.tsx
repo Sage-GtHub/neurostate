@@ -117,14 +117,9 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           </div>
           
           <div className="flex items-center justify-between pt-2">
-            <div>
-              <p className="text-xl font-semibold text-foreground">
-                £{price.toFixed(2)}
-              </p>
-              <p className="text-xs text-muted-foreground mt-1">
-                or £{(price * 0.85).toFixed(2)} with Subscribe & Save
-              </p>
-            </div>
+            <p className="text-xl font-semibold text-foreground">
+              £{price.toFixed(2)}
+            </p>
           </div>
           
           <Button 
