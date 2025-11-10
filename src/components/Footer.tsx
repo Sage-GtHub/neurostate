@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Twitter, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube, Mail, Shield, Truck, RotateCcw, Lock, Award, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 
 export const Footer = () => {
@@ -67,6 +67,15 @@ export const Footer = () => {
     { icon: Instagram, href: "https://instagram.com/neurostate", label: "Instagram" },
     { icon: Twitter, href: "https://twitter.com/neurostate", label: "Twitter" },
     { icon: Youtube, href: "https://youtube.com/@neurostate", label: "YouTube" },
+  ];
+
+  const trustBadges = [
+    { icon: Shield, label: "Secure Checkout", description: "SSL Encrypted" },
+    { icon: Truck, label: "Free Shipping", description: "On orders over £50" },
+    { icon: RotateCcw, label: "30-Day Returns", description: "Money-back guarantee" },
+    { icon: Award, label: "Quality Assured", description: "Lab-tested products" },
+    { icon: Lock, label: "Privacy Protected", description: "Your data is safe" },
+    { icon: CheckCircle, label: "Verified Reviews", description: "Real customer feedback" },
   ];
 
   return (
@@ -177,6 +186,25 @@ export const Footer = () => {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+
+        {/* Trust Badges */}
+        <div className="border-t pt-8 pb-8">
+          <h3 className="font-bold text-lg mb-6 text-center">Why Shop With Us</h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {trustBadges.map((badge) => (
+              <div 
+                key={badge.label} 
+                className="flex flex-col items-center text-center gap-2 p-4 rounded-lg hover:bg-muted/50 transition-colors"
+              >
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+                  <badge.icon className="h-6 w-6 text-primary" />
+                </div>
+                <h4 className="font-semibold text-sm">{badge.label}</h4>
+                <p className="text-xs text-muted-foreground">{badge.description}</p>
+              </div>
+            ))}
           </div>
         </div>
 
