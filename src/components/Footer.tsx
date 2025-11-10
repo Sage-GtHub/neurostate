@@ -36,25 +36,25 @@ export const Footer = () => {
 
   const footerLinks = {
     shop: [
-      { name: "All Products", href: "#products" },
-      { name: "Categories", href: "#categories" },
-      { name: "New Arrivals", href: "#products" },
-      { name: "Best Sellers", href: "#products" },
+      { name: "All Products", href: "/" },
+      { name: "Supplements", href: "/#products" },
+      { name: "Recovery & Performance", href: "/#products" },
+      { name: "Sleep & Rest", href: "/#products" },
     ],
     company: [
       { name: "About Us", href: "/about" },
       { name: "Resources", href: "/resources" },
-      { name: "Subscriptions", href: "/subscriptions" },
-      { name: "Rewards", href: "/rewards" },
+      { name: "Ambassador Program", href: "/ambassador" },
+      { name: "Partnerships", href: "/partnerships" },
       { name: "Contact", href: "/contact" },
     ],
     support: [
       { name: "FAQ", href: "/faq" },
+      { name: "How to Use", href: "/guides" },
       { name: "Order Tracking", href: "/track-order" },
-      { name: "Delivery & Returns", href: "/shipping" },
-      { name: "How-to-Use Guides", href: "/guides" },
-      { name: "Ambassador Program", href: "/ambassador" },
-      { name: "Partnerships", href: "/partnerships" },
+      { name: "Shipping & Returns", href: "/shipping" },
+      { name: "Subscriptions", href: "/subscriptions" },
+      { name: "Rewards Program", href: "/rewards" },
     ],
     legal: [
       { name: "Terms & Conditions", href: "/terms" },
@@ -63,15 +63,27 @@ export const Footer = () => {
   };
 
   const socialLinks = [
-    { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
-    { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-    { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-    { icon: Youtube, href: "https://youtube.com", label: "YouTube" },
+    { icon: Facebook, href: "https://facebook.com/neurostate", label: "Facebook" },
+    { icon: Instagram, href: "https://instagram.com/neurostate", label: "Instagram" },
+    { icon: Twitter, href: "https://twitter.com/neurostate", label: "Twitter" },
+    { icon: Youtube, href: "https://youtube.com/@neurostate", label: "YouTube" },
   ];
 
   return (
     <footer className="bg-muted/30 border-t mt-24">
       <div className="container mx-auto px-4 py-12">
+        {/* Company Mission */}
+        <div className="mb-12 max-w-3xl">
+          <Link to="/" className="font-bold text-2xl tracking-tight mb-4 inline-block">
+            NeuroState®
+          </Link>
+          <p className="text-muted-foreground text-sm leading-relaxed">
+            Making the best recovery tools and supplements accessible to everyone, everywhere. 
+            Founded by Sage, a serial entrepreneur with a sports science background, NeuroState 
+            was born from personal experience with burnout and discovering transformative recovery tools.
+          </p>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
           {/* Newsletter Signup */}
           <div className="lg:col-span-2">
@@ -176,16 +188,15 @@ export const Footer = () => {
               <h3 className="font-bold text-lg mb-4">Get in Touch</h3>
               <div className="space-y-3">
                 <a
-                  href="mailto:support@neurostate.fit"
-                  className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
+                  href="mailto:contact@neurostate.fit"
+                  className="flex items-center gap-2 text-muted-foreground hover:text-accent transition-colors text-sm group"
                 >
-                  <Mail className="h-4 w-4" />
-                  support@neurostate.fit
+                  <Mail className="h-4 w-4 group-hover:scale-110 transition-transform" />
+                  contact@neurostate.fit
                 </a>
-                <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                  <MapPin className="h-4 w-4 flex-shrink-0" />
-                  <span>123 Buckingham Palace Rd, London SW1W 9SH</span>
-                </div>
+                <p className="text-xs text-muted-foreground mt-4">
+                  We typically respond within 24 hours
+                </p>
               </div>
             </div>
 
@@ -194,21 +205,47 @@ export const Footer = () => {
               <h3 className="font-bold text-lg mb-4">Follow Us</h3>
               <div className="flex gap-4">
                 {socialLinks.map((social) => (
-                  <div
+                  <a
                     key={social.label}
-                    className="w-10 h-10 rounded-full bg-muted flex items-center justify-center"
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-muted hover:bg-accent flex items-center justify-center transition-all hover:scale-110"
                     aria-label={social.label}
                   >
                     <social.icon className="h-5 w-5" />
-                  </div>
+                  </a>
                 ))}
               </div>
+              <p className="text-xs text-muted-foreground mt-4">
+                Join our community for tips, product updates, and exclusive offers
+              </p>
             </div>
           </div>
 
-          {/* Copyright */}
-          <div className="border-t pt-6 text-center text-sm text-muted-foreground">
-            <p>© {new Date().getFullYear()} NeuroState®. All rights reserved.</p>
+          {/* Copyright & Links */}
+          <div className="border-t pt-6">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-sm text-muted-foreground">
+                © {new Date().getFullYear()} NeuroState®. All rights reserved.
+              </p>
+              <div className="flex flex-wrap gap-4 justify-center">
+                <Link to="/terms" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                  Terms
+                </Link>
+                <Link to="/privacy" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                  Privacy
+                </Link>
+                <a 
+                  href="https://neurostate.co.uk" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  neurostate.co.uk
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
