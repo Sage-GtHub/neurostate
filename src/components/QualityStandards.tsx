@@ -1,7 +1,4 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { FlaskConical, Leaf, ShieldCheck, Award, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { FlaskConical, Leaf, ShieldCheck, Award } from "lucide-react";
 
 interface Standard {
   id: string;
@@ -74,110 +71,53 @@ const standards: Standard[] = [
 
 export const QualityStandards = () => {
   return (
-    <section className="py-12 md:py-16 lg:py-20 px-4 bg-gradient-to-b from-background via-secondary/20 to-background relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-accent rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary rounded-full blur-3xl" />
-      </div>
-      
-      <div className="container mx-auto relative z-10">
-        <div className="text-center mb-10 md:mb-16">
-          <p className="text-xs sm:text-sm font-medium text-accent mb-2 md:mb-3 tracking-wide uppercase">
-            Our Commitment
-          </p>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-            The Standard of Excellence
+    <section className="py-16 md:py-24 px-4">
+      <div className="container mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">
+            Our Quality Commitment
           </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Every product is backed by science, rigorously tested, and made with premium ingredients
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10 md:mb-16">
-          {standards.map((standard, index) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          {standards.map((standard) => {
             const Icon = standard.icon;
             return (
-              <Card 
-                key={standard.id}
-                className="overflow-hidden group transition-all duration-500 hover:scale-105 hover:shadow-2xl border-0 bg-gradient-to-br from-background to-secondary/30"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className={`h-1 bg-gradient-to-r ${standard.color} transition-all duration-300 group-hover:h-2`} />
-                <div className="p-6 relative">
-                  {/* Large Background Number */}
-                  <span className="absolute top-4 right-4 text-6xl font-bold text-accent/5 pointer-events-none">
-                    {standard.number}
-                  </span>
-                  
-                  {/* Icon */}
-                  <div className="mb-6 relative z-10">
-                    <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${standard.color} flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-lg`}>
-                      <Icon className="h-10 w-10 text-accent transition-transform duration-500 group-hover:scale-110" />
-                    </div>
-                  </div>
-                  
-                  {/* Title */}
-                  <h3 className="text-xl font-bold mb-3 relative z-10">{standard.title}</h3>
-                  
-                  {/* Condensed Key Points */}
-                  <div className="space-y-2 relative z-10">
-                    {standard.details.slice(0, 2).map((detail, idx) => (
-                      <div key={idx} className="flex items-start gap-2">
-                        <span className="text-accent mt-1 text-lg flex-shrink-0">✓</span>
-                        <span className="text-sm text-muted-foreground line-clamp-2">{detail}</span>
-                      </div>
-                    ))}
+              <div key={standard.id} className="text-center">
+                <div className="mb-4 flex justify-center">
+                  <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center">
+                    <Icon className="h-8 w-8 text-foreground" />
                   </div>
                 </div>
-              </Card>
+                <h3 className="text-lg font-semibold mb-2">{standard.title}</h3>
+                <p className="text-sm text-muted-foreground">
+                  {standard.description}
+                </p>
+              </div>
             );
           })}
         </div>
 
-        {/* Stats Section */}
-        <div className="bg-muted/30 rounded-lg p-6 md:p-8 lg:p-10 border border-border/50">
-          <div className="max-w-4xl mx-auto text-center">
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 md:mb-8 text-foreground">
-              Trusted by 100,000+ Athletes
-            </h3>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
-                  150+
-                </div>
-                <div className="text-sm font-medium text-muted-foreground">Pro Teams</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
-                  100%
-                </div>
-                <div className="text-sm font-medium text-muted-foreground">Third-Party Tested</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
-                  NSF
-                </div>
-                <div className="text-sm font-medium text-muted-foreground">Certified Sport</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
-                  Zero
-                </div>
-                <div className="text-sm font-medium text-muted-foreground">Banned Substances</div>
-              </div>
+        <div className="text-center border-t pt-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
+            <div>
+              <div className="text-3xl font-bold mb-1">150+</div>
+              <div className="text-sm text-muted-foreground">Pro Teams</div>
             </div>
-
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link to="/resources">
-                <Button size="default" className="group/btn">
-                  Learn More About Our Process
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                </Button>
-              </Link>
-              <Link to="/faq">
-                <Button size="default" variant="outline">
-                  View Testing Certificates
-                </Button>
-              </Link>
+            <div>
+              <div className="text-3xl font-bold mb-1">100%</div>
+              <div className="text-sm text-muted-foreground">Third-Party Tested</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold mb-1">NSF</div>
+              <div className="text-sm text-muted-foreground">Certified Sport</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold mb-1">Zero</div>
+              <div className="text-sm text-muted-foreground">Banned Substances</div>
             </div>
           </div>
         </div>
