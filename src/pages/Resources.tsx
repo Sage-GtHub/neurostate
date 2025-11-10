@@ -196,25 +196,21 @@ const Resources = () => {
         </div>
 
         {/* Newsletter Section */}
-        <Card className="bg-gradient-to-br from-primary/10 via-accent/5 to-primary/5 border-primary/30 shadow-xl overflow-hidden relative">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(var(--primary),0.1),transparent)]" />
-          <CardContent className="p-10 md:p-16 text-center relative z-10">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/15 mb-6 border border-primary/20">
-              <TrendingUp className="h-8 w-8 text-primary" />
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-5 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent">
+        <Card className="border-border/50">
+          <CardContent className="p-10 md:p-12 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Stay Updated
             </h2>
-            <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
+            <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
               Get the latest health insights, exclusive offers, and expert tips straight to your inbox
             </p>
             <div className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
               <Input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="flex-1 h-12 bg-background/50 backdrop-blur-sm border-border/50"
+                className="flex-1 h-11"
               />
-              <Button size="lg" className="h-12 px-8 shadow-lg hover:shadow-xl transition-shadow">
+              <Button size="lg" className="h-11 px-6">
                 Subscribe
               </Button>
             </div>
