@@ -110,8 +110,8 @@ const Index = () => {
             </div>
           </div>
         </section>
-        <QualityStandards />
         <ProductBundles />
+        <QualityStandards />
         <Testimonials />
         <RecentlyViewed />
         <Benefits />
