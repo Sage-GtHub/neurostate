@@ -234,78 +234,88 @@ export const MultiFormatHub = () => {
   );
 
   return (
-    <section className="mb-16">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+    <section className="mb-20">
+        <div className="text-center mb-12 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-accent/5 via-transparent to-transparent -z-10 blur-2xl" />
+          <div className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-semibold mb-5 border border-accent/20">
+            <BookOpen className="h-4 w-4" />
+            <span>Multi-Format Learning</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-5 bg-gradient-to-br from-foreground via-foreground/90 to-foreground/60 bg-clip-text text-transparent">
             Resource Library
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-6">
+          <p className="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto mb-8 leading-relaxed">
             Get stuck into our complete library of articles, video tutorials, downloadable guides, and expert podcasts
           </p>
 
         {/* Search */}
-        <div className="relative max-w-md mx-auto">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        <div className="relative max-w-xl mx-auto">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input
             placeholder="Search all resources..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10"
+            className="pl-12 h-14 text-base bg-background/50 backdrop-blur-sm border-border/50 shadow-sm focus:shadow-md transition-shadow"
           />
         </div>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-4 mb-8 h-auto p-1">
-          <TabsTrigger value="articles" className="gap-2 py-3">
-            <BookOpen className="h-4 w-4" />
-            <span className="hidden sm:inline">Articles</span>
+        <TabsList className="grid w-full grid-cols-4 mb-10 h-auto p-1.5 bg-muted/50 backdrop-blur-sm">
+          <TabsTrigger value="articles" className="gap-2 py-4 data-[state=active]:bg-background data-[state=active]:shadow-md">
+            <BookOpen className="h-5 w-5" />
+            <span className="hidden sm:inline font-medium">Articles</span>
           </TabsTrigger>
-          <TabsTrigger value="videos" className="gap-2 py-3">
-            <Video className="h-4 w-4" />
-            <span className="hidden sm:inline">Videos</span>
+          <TabsTrigger value="videos" className="gap-2 py-4 data-[state=active]:bg-background data-[state=active]:shadow-md">
+            <Video className="h-5 w-5" />
+            <span className="hidden sm:inline font-medium">Videos</span>
           </TabsTrigger>
-          <TabsTrigger value="guides" className="gap-2 py-3">
-            <FileText className="h-4 w-4" />
-            <span className="hidden sm:inline">Guides</span>
+          <TabsTrigger value="guides" className="gap-2 py-4 data-[state=active]:bg-background data-[state=active]:shadow-md">
+            <FileText className="h-5 w-5" />
+            <span className="hidden sm:inline font-medium">Guides</span>
           </TabsTrigger>
-          <TabsTrigger value="podcasts" className="gap-2 py-3">
-            <Headphones className="h-4 w-4" />
-            <span className="hidden sm:inline">Podcasts</span>
+          <TabsTrigger value="podcasts" className="gap-2 py-4 data-[state=active]:bg-background data-[state=active]:shadow-md">
+            <Headphones className="h-5 w-5" />
+            <span className="hidden sm:inline font-medium">Podcasts</span>
           </TabsTrigger>
         </TabsList>
 
         {/* Articles Tab */}
         <TabsContent value="articles" className="animate-in fade-in slide-in-from-bottom-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredArticles.map((article) => (
-              <Card key={article.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
-                <div className="aspect-video overflow-hidden bg-muted">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredArticles.map((article, index) => (
+              <Card 
+                key={article.id} 
+                className="overflow-hidden hover:shadow-xl transition-all duration-500 group border-border/50 hover:border-primary/30 bg-gradient-to-br from-card to-card/50"
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                <div className="aspect-video overflow-hidden bg-muted relative">
                   <img
                     src={article.image}
                     alt={article.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-                <CardHeader>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Badge variant="secondary">{article.category}</Badge>
-                    <div className="flex items-center text-xs text-muted-foreground gap-2">
-                      <Clock className="h-3 w-3" />
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Badge variant="secondary" className="shadow-sm">{article.category}</Badge>
+                    <div className="flex items-center text-xs text-muted-foreground gap-1.5">
+                      <Clock className="h-3.5 w-3.5" />
                       {article.readTime}
                     </div>
                   </div>
-                  <h3 className="text-lg font-bold line-clamp-2 group-hover:text-primary transition-colors">
+                  <h3 className="text-lg font-bold line-clamp-2 group-hover:text-primary transition-colors leading-snug">
                     {article.title}
                   </h3>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground line-clamp-2">
+                <CardContent className="pb-4">
+                  <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
                     {article.excerpt}
                   </p>
                 </CardContent>
-                <CardFooter>
-                  <Button variant="ghost" className="w-full group/btn">
+                <CardFooter className="pt-0">
+                  <Button variant="ghost" className="w-full group/btn hover:bg-primary/5">
                     Read Article
                     <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                   </Button>
@@ -317,37 +327,41 @@ export const MultiFormatHub = () => {
 
         {/* Videos Tab */}
         <TabsContent value="videos" className="animate-in fade-in slide-in-from-bottom-4">
-          <div className="grid md:grid-cols-2 gap-6">
-            {filteredVideos.map((video) => (
-              <Card key={video.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
-                <div className="relative aspect-video overflow-hidden bg-muted">
+          <div className="grid md:grid-cols-2 gap-8">
+            {filteredVideos.map((video, index) => (
+              <Card 
+                key={video.id} 
+                className="overflow-hidden hover:shadow-xl transition-all duration-500 group border-border/50 hover:border-primary/30"
+                style={{ animationDelay: `${index * 75}ms` }}
+              >
+                <div className="relative aspect-video overflow-hidden bg-gradient-to-br from-muted to-muted/50">
                   <img
                     src={video.thumbnail}
                     alt={video.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center">
-                      <Play className="h-8 w-8 text-primary-foreground ml-1" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
+                      <Play className="h-10 w-10 text-primary-foreground ml-1" />
                     </div>
                   </div>
-                  <Badge className="absolute bottom-3 right-3 bg-black/80">
+                  <Badge className="absolute bottom-4 right-4 bg-black/90 text-white px-3 py-1.5 shadow-lg">
                     {video.duration}
                   </Badge>
                 </div>
-                <CardHeader>
-                  <Badge variant="secondary" className="w-fit mb-2">{video.category}</Badge>
-                  <h3 className="text-xl font-bold line-clamp-2 group-hover:text-primary transition-colors">
+                <CardHeader className="pb-3">
+                  <Badge variant="secondary" className="w-fit mb-3 shadow-sm">{video.category}</Badge>
+                  <h3 className="text-xl font-bold line-clamp-2 group-hover:text-primary transition-colors leading-snug">
                     {video.title}
                   </h3>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground line-clamp-2">
+                <CardContent className="pb-4">
+                  <p className="text-muted-foreground line-clamp-2 leading-relaxed">
                     {video.description}
                   </p>
                 </CardContent>
-                <CardFooter>
-                  <Button className="w-full">
+                <CardFooter className="pt-0">
+                  <Button className="w-full shadow-md hover:shadow-lg transition-shadow">
                     <Play className="mr-2 h-4 w-4" />
                     Watch Video
                   </Button>

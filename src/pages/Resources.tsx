@@ -125,17 +125,18 @@ const Resources = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="container mx-auto px-4 py-12">
+      <main className="container mx-auto px-4 py-16">
         {/* Hero Section */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
+        <div className="text-center mb-20 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent -z-10 blur-3xl" />
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/15 to-accent/15 text-primary px-5 py-2.5 rounded-full text-sm font-semibold mb-6 border border-primary/20 shadow-sm">
             <BookOpen className="h-4 w-4" />
             <span>Science-Backed Resources</span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-br from-foreground via-foreground/90 to-foreground/60 bg-clip-text text-transparent leading-tight">
             Master Your Health Journey
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
             Discover personalised resources, expert courses, and science-backed content to help you optimise your performance and wellbeing
           </p>
         </div>
@@ -144,41 +145,43 @@ const Resources = () => {
         <ResourceFinder />
 
         {/* Featured Article */}
-        <Card className="mb-16 overflow-hidden hover:shadow-xl transition-all duration-300 border-primary/20">
-          <div className="grid md:grid-cols-2 gap-0">
-            <div className="aspect-video md:aspect-auto overflow-hidden">
+        <Card className="mb-20 overflow-hidden hover:shadow-2xl transition-all duration-500 border-primary/20 bg-gradient-to-br from-card via-card to-primary/5 group">
+          <div className="grid md:grid-cols-5 gap-0">
+            <div className="md:col-span-3 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-background/50 z-10" />
               <img
                 src={featuredArticle.image}
                 alt={featuredArticle.title}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
             </div>
-            <div className="p-8 md:p-12 flex flex-col justify-center">
-              <div className="flex items-center gap-2 mb-4">
-                <Badge className="bg-primary text-primary-foreground">
-                  <TrendingUp className="h-3 w-3 mr-1" />
+            <div className="md:col-span-2 p-8 md:p-10 flex flex-col justify-center relative">
+              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary via-primary/50 to-transparent" />
+              <div className="flex flex-wrap items-center gap-2 mb-5">
+                <Badge className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground shadow-md">
+                  <TrendingUp className="h-3.5 w-3.5 mr-1.5" />
                   Featured
                 </Badge>
                 <div className="flex items-center text-sm text-muted-foreground gap-3">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="h-3 w-3" />
+                  <span className="flex items-center gap-1.5">
+                    <Calendar className="h-3.5 w-3.5" />
                     {featuredArticle.date}
                   </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="h-3 w-3" />
+                  <span className="flex items-center gap-1.5">
+                    <Clock className="h-3.5 w-3.5" />
                     {featuredArticle.readTime}
                   </span>
                 </div>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+              <h2 className="text-3xl md:text-4xl font-bold mb-5 leading-tight group-hover:text-primary transition-colors">
                 {featuredArticle.title}
               </h2>
-              <p className="text-muted-foreground mb-6 text-lg">
+              <p className="text-muted-foreground mb-8 text-base leading-relaxed">
                 {featuredArticle.excerpt}
               </p>
-              <Button size="lg" className="w-fit">
+              <Button size="lg" className="w-fit group/btn shadow-lg hover:shadow-xl transition-shadow">
                 Read Full Article
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-5 w-5 group-hover/btn:translate-x-1 transition-transform" />
               </Button>
             </div>
           </div>
@@ -193,19 +196,27 @@ const Resources = () => {
         </div>
 
         {/* Newsletter Section */}
-        <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
-          <CardContent className="p-8 md:p-12 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Stay Updated</h2>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto text-lg">
+        <Card className="bg-gradient-to-br from-primary/10 via-accent/5 to-primary/5 border-primary/30 shadow-xl overflow-hidden relative">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(var(--primary),0.1),transparent)]" />
+          <CardContent className="p-10 md:p-16 text-center relative z-10">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/15 mb-6 border border-primary/20">
+              <TrendingUp className="h-8 w-8 text-primary" />
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-5 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent">
+              Stay Updated
+            </h2>
+            <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
               Get the latest health insights, exclusive offers, and expert tips straight to your inbox
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <div className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
               <Input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="flex-1"
+                className="flex-1 h-12 bg-background/50 backdrop-blur-sm border-border/50"
               />
-              <Button size="lg">Subscribe</Button>
+              <Button size="lg" className="h-12 px-8 shadow-lg hover:shadow-xl transition-shadow">
+                Subscribe
+              </Button>
             </div>
           </CardContent>
         </Card>
