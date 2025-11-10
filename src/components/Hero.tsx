@@ -1,35 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { HeroCarousel } from "@/components/HeroCarousel";
-import heroImage1 from "@/assets/redlight.webp";
-import heroImage2 from "@/assets/hero-redlight-panel.jpg";
-import heroImage3 from "@/assets/hero-pemf-recovery.jpg";
-import heroImage4 from "@/assets/hero-sleep-wellness.jpg";
+import heroImage from "@/assets/redlight.webp";
 
 export const Hero = () => {
   const scrollToProducts = () => {
     const productsSection = document.getElementById('products');
     productsSection?.scrollIntoView({ behavior: 'smooth' });
   };
-
-  const heroSlides = [
-    {
-      image: heroImage1,
-      alt: "Red Light Therapy Experience - Recovery, Sleep & Performance"
-    },
-    {
-      image: heroImage2,
-      alt: "Red Light Therapy Panel in Wellness Room"
-    },
-    {
-      image: heroImage3,
-      alt: "PEMF Therapy Recovery Session"
-    },
-    {
-      image: heroImage4,
-      alt: "Sleep Wellness and Recovery"
-    }
-  ];
 
   return (
     <section 
@@ -41,17 +18,12 @@ export const Hero = () => {
       }}
     >
       {/* Dot pattern overlay */}
-      {/* Dot pattern overlay */}
       <div 
         className="absolute inset-0 opacity-30"
         style={{
           backgroundImage: 'radial-gradient(circle, hsl(var(--background) / 0.1) 1px, transparent 1px)',
           backgroundSize: '24px 24px'
         }}
-      />
-      {/* Subtle gradient overlay for text readability */}
-      <div 
-        className="absolute inset-0 bg-gradient-to-r from-background/40 via-background/20 to-transparent"
       />
       <div className="container mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
         <div className="max-w-xl">
@@ -73,7 +45,11 @@ export const Hero = () => {
           </Button>
         </div>
         <div className="hidden md:flex justify-center items-center">
-          <HeroCarousel slides={heroSlides} />
+          <img 
+            src={heroImage} 
+            alt="Red Light Face Mask - Recovery, Sleep & Performance"
+            className="w-full max-w-md"
+          />
         </div>
       </div>
     </section>
