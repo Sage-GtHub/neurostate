@@ -197,7 +197,7 @@ const PrivacyPolicy = () => {
               </div>
 
               <p className="text-muted-foreground leading-relaxed mt-4">
-                To exercise any of these rights, please contact us at privacy@neurostate.co.uk. We will respond to your request within 30 days.
+                To exercise any of these rights, please contact us at contact@neurostate.co.uk. We will respond to your request within 30 days.
               </p>
             </section>
 
@@ -248,7 +248,7 @@ const PrivacyPolicy = () => {
                 <p className="text-muted-foreground">
                   <strong>Data Protection Officer</strong><br />
                   NeuroState®<br />
-                  Email: privacy@neurostate.co.uk<br />
+                  Email: contact@neurostate.co.uk<br />
                   Address: 123 Buckingham Palace Rd, London SW1W 9SH, United Kingdom
                 </p>
                 <p className="text-sm text-muted-foreground mt-4">

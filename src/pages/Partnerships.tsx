@@ -416,7 +416,7 @@ const Partnerships = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button size="lg" variant="outline" className="gap-2">
                 <Mail className="h-5 w-5" />
-                partnerships@neurostate.co.uk
+                contact@neurostate.co.uk
               </Button>
               <Button size="lg" variant="outline" className="gap-2">
                 <Phone className="h-5 w-5" />

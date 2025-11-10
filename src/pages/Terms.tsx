@@ -168,7 +168,7 @@ const Terms = () => {
               <div className="mt-4 p-4 bg-muted/30 rounded-lg">
                 <p className="text-muted-foreground">
                   <strong>NeuroState®</strong><br />
-                  Email: legal@neurostate.co.uk<br />
+                  Email: contact@neurostate.co.uk<br />
                   Address: 123 Buckingham Palace Rd, London SW1W 9SH, United Kingdom
                 </p>
               </div>
