@@ -204,7 +204,7 @@ const Shipping = () => {
                       </div>
                     </AccordionTrigger>
                     <AccordionContent className="text-muted-foreground">
-                      While rare, delays can occur due to courier issues, extreme weather, or high demand periods. If your order hasn't arrived within the estimated timeframe, first check the tracking information. If there's still an issue, contact our support team at support@neurostate.fit and we'll investigate immediately.
+                      While rare, delays can occur due to courier issues, extreme weather, or high demand periods. If your order hasn't arrived within the estimated timeframe, first check the tracking information. If there's still an issue, contact our support team at support@neurostate.co.uk and we'll investigate immediately.
                     </AccordionContent>
                   </AccordionItem>
 
@@ -269,7 +269,7 @@ const Shipping = () => {
                     <div className="flex-1">
                       <h4 className="font-semibold mb-1">Contact Us</h4>
                       <p className="text-sm text-muted-foreground">
-                        Email support@neurostate.fit with your order number and reason for return. We'll respond within 24 hours with a return authorization (RA) number.
+                        Email support@neurostate.co.uk with your order number and reason for return. We'll respond within 24 hours with a return authorization (RA) number.
                       </p>
                     </div>
                   </div>
@@ -353,7 +353,7 @@ const Shipping = () => {
                   <AccordionItem value="damaged">
                     <AccordionTrigger className="text-left">What if my item arrives damaged or faulty?</AccordionTrigger>
                     <AccordionContent className="text-muted-foreground">
-                      We're sorry to hear that! Please contact us immediately at support@neurostate.fit with photos of the damage. We'll either send a replacement right away or arrange a full refund - whichever you prefer. You won't need to return the damaged item unless requested. We take full responsibility for items damaged in transit.
+                      We're sorry to hear that! Please contact us immediately at support@neurostate.co.uk with photos of the damage. We'll either send a replacement right away or arrange a full refund - whichever you prefer. You won't need to return the damaged item unless requested. We take full responsibility for items damaged in transit.
                     </AccordionContent>
                   </AccordionItem>
 
@@ -408,7 +408,7 @@ const Shipping = () => {
                 Our support team is here to help with any delivery or return enquiries.
               </p>
               <a
-                href="mailto:support@neurostate.fit"
+                href="mailto:support@neurostate.co.uk"
                 className="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-8 py-3 font-medium hover:bg-primary/90 transition-colors"
               >
                 Contact Support

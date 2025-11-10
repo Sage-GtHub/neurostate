@@ -59,7 +59,7 @@ const Contact = () => {
     } catch (error: any) {
       console.error('Error sending message:', error);
       toast.error("Failed to send message", {
-        description: "Please try again or email us directly at contact@neurostate.fit",
+        description: "Please try again or email us directly at contact@neurostate.co.uk",
       });
     } finally {
       setIsSubmitting(false);
@@ -70,8 +70,8 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      content: "contact@neurostate.fit",
-      link: "mailto:contact@neurostate.fit",
+      content: "contact@neurostate.co.uk",
+      link: "mailto:contact@neurostate.co.uk",
     },
     {
       icon: Clock,
