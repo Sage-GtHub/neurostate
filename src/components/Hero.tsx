@@ -18,12 +18,17 @@ export const Hero = () => {
       }}
     >
       {/* Dot pattern overlay */}
+      {/* Dot pattern overlay */}
       <div 
         className="absolute inset-0 opacity-30"
         style={{
           backgroundImage: 'radial-gradient(circle, hsl(var(--background) / 0.1) 1px, transparent 1px)',
           backgroundSize: '24px 24px'
         }}
+      />
+      {/* Subtle gradient overlay for text readability */}
+      <div 
+        className="absolute inset-0 bg-gradient-to-r from-background/40 via-background/20 to-transparent"
       />
       <div className="container mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
         <div className="max-w-xl">
@@ -44,11 +49,15 @@ export const Hero = () => {
             Shop Now <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>
-        <div className="hidden md:flex justify-center items-center">
+        <div className="hidden md:flex justify-center items-center relative">
+          <div className="absolute inset-0 bg-gradient-to-l from-background/30 to-transparent rounded-lg"></div>
           <img 
             src={heroImage} 
-            alt="Red Light Face Mask - Recovery, Sleep & Performance"
-            className="w-full max-w-md"
+            alt="Red Light Therapy Experience - Recovery, Sleep & Performance"
+            className="w-full max-w-md rounded-lg shadow-2xl relative z-10"
+            style={{
+              filter: 'brightness(0.95) contrast(1.05)'
+            }}
           />
         </div>
       </div>
