@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Twitter, Youtube, Mail } from "lucide-react";
 import { toast } from "sonner";
+import { TrustBadges } from "./TrustBadges";
 
 export const Footer = () => {
   const [email, setEmail] = useState("");
@@ -83,6 +84,11 @@ export const Footer = () => {
             Founded by Sage, a serial entrepreneur with a sports science background, NeuroState 
             was born from personal experience with burnout and discovering transformative recovery tools.
           </p>
+        </div>
+
+        {/* Trust Badges */}
+        <div className="border-t pt-6">
+          <TrustBadges />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
