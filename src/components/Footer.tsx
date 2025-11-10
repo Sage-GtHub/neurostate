@@ -227,27 +227,6 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Security & Trust Indicators */}
-          <div className="border-t pt-6 pb-6">
-            <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <Lock className="h-4 w-4 text-accent" />
-                <span>256-bit SSL Secure</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Shield className="h-4 w-4 text-accent" />
-                <span>PCI DSS Compliant</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-accent" />
-                <span>Verified Business</span>
-              </div>
-              <div className="text-muted-foreground/60">
-                We accept: Visa • Mastercard • Amex • PayPal
-              </div>
-            </div>
-          </div>
-
           {/* Copyright & Links */}
           <div className="border-t pt-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
