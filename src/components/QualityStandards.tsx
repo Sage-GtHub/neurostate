@@ -101,23 +101,26 @@ export const QualityStandards = () => {
           })}
         </div>
 
-        <div className="text-center border-t pt-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
+        <div className="mt-12 pt-8 border-t border-border/50">
+          <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-center">
             <div>
-              <div className="text-3xl font-bold mb-1">150+</div>
-              <div className="text-sm text-muted-foreground">Pro Teams</div>
+              <div className="text-xl font-semibold mb-0.5">150+</div>
+              <div className="text-xs text-muted-foreground">Pro Teams</div>
             </div>
+            <div className="hidden sm:block text-muted-foreground/30">•</div>
             <div>
-              <div className="text-3xl font-bold mb-1">100%</div>
-              <div className="text-sm text-muted-foreground">Third-Party Tested</div>
+              <div className="text-xl font-semibold mb-0.5">100%</div>
+              <div className="text-xs text-muted-foreground">Third-Party Tested</div>
             </div>
+            <div className="hidden sm:block text-muted-foreground/30">•</div>
             <div>
-              <div className="text-3xl font-bold mb-1">NSF</div>
-              <div className="text-sm text-muted-foreground">Certified Sport</div>
+              <div className="text-xl font-semibold mb-0.5">NSF</div>
+              <div className="text-xs text-muted-foreground">Certified Sport</div>
             </div>
+            <div className="hidden sm:block text-muted-foreground/30">•</div>
             <div>
-              <div className="text-3xl font-bold mb-1">Zero</div>
-              <div className="text-sm text-muted-foreground">Banned Substances</div>
+              <div className="text-xl font-semibold mb-0.5">Zero</div>
+              <div className="text-xs text-muted-foreground">Banned Substances</div>
             </div>
           </div>
         </div>
