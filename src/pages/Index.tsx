@@ -1,6 +1,5 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
-import { Benefits } from "@/components/Benefits";
 import { ProductGrid } from "@/components/ProductGrid";
 import { ProductFilters, FilterState } from "@/components/ProductFilters";
 import { ProductBundles } from "@/components/ProductBundles";
@@ -114,7 +113,6 @@ const Index = () => {
         <QualityStandards />
         <Testimonials />
         <RecentlyViewed />
-        <Benefits />
       </main>
       <Footer />
       <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
