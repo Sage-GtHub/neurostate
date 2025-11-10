@@ -114,10 +114,6 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                 ({reviewCount})
               </span>
             </div>
-            
-            <p className="text-sm text-muted-foreground line-clamp-2 min-h-[2.5rem]">
-              {node.description}
-            </p>
           </div>
           
           <div className="flex items-center justify-between pt-2">
