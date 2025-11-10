@@ -33,7 +33,12 @@ export const ProductInfo = ({
   setSelectedVariantIndex,
 }: ProductInfoProps) => {
   const addItem = useCartStore(state => state.addItem);
-  const [purchaseType, setPurchaseType] = useState<"onetime" | "subscription">("subscription");
+  
+  // Check if product is a supplement
+  const isSupplement = product.productType?.toLowerCase().includes('supplement') || 
+    product.tags?.some((tag: string) => tag.toLowerCase().includes('supplement'));
+  
+  const [purchaseType, setPurchaseType] = useState<"onetime" | "subscription">(isSupplement ? "subscription" : "onetime");
   const [subscriptionFrequency, setSubscriptionFrequency] = useState<"monthly" | "bi-monthly" | "quarterly">("monthly");
   const [quantity, setQuantity] = useState(1);
 
@@ -76,8 +81,7 @@ export const ProductInfo = ({
         <h1 className="text-4xl font-bold mb-3">{product.title}</h1>
         
         {/* Servings and Price Per Serving - Only for supplements */}
-        {(product.productType?.toLowerCase().includes('supplement') || 
-          product.tags?.some((tag: string) => tag.toLowerCase().includes('supplement'))) && (
+        {isSupplement && (
           <div className="flex items-center gap-3 mb-4 text-sm text-muted-foreground">
             <span className="font-medium">30 Servings</span>
             <span>•</span>
@@ -117,84 +121,96 @@ export const ProductInfo = ({
 
       {/* Purchase Type */}
       <div className="border rounded-lg p-4 bg-card">
-        <RadioGroup value={purchaseType} onValueChange={(value) => setPurchaseType(value as "onetime" | "subscription")}>
-          <div className="space-y-3">
-            <div 
-              className={`flex items-center justify-between p-4 rounded-lg transition-all ${
-                purchaseType === "subscription" 
-                  ? "bg-accent text-accent-foreground border-2 border-accent shadow-md" 
-                  : "hover:bg-secondary/20 border border-transparent"
-              }`}
-            >
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem 
-                  value="subscription" 
-                  id="subscription"
-                  className="border-accent-foreground data-[state=checked]:bg-accent-foreground data-[state=checked]:border-accent-foreground"
-                />
-                <Label htmlFor="subscription" className="cursor-pointer">
-                  <div className="flex items-center gap-2">
-                    <RefreshCw className="h-5 w-5" />
-                    <div>
-                      <div className="font-bold text-base flex items-center gap-2">
-                        Subscribe & Save 15%
-                        <Badge variant="secondary" className="bg-background/20 text-accent-foreground text-xs">BEST VALUE</Badge>
+        {isSupplement ? (
+          <>
+            <RadioGroup value={purchaseType} onValueChange={(value) => setPurchaseType(value as "onetime" | "subscription")}>
+              <div className="space-y-3">
+                <div 
+                  className={`flex items-center justify-between p-4 rounded-lg transition-all ${
+                    purchaseType === "subscription" 
+                      ? "bg-accent text-accent-foreground border-2 border-accent shadow-md" 
+                      : "hover:bg-secondary/20 border border-transparent"
+                  }`}
+                >
+                  <div className="flex items-center space-x-3">
+                    <RadioGroupItem 
+                      value="subscription" 
+                      id="subscription"
+                      className="border-accent-foreground data-[state=checked]:bg-accent-foreground data-[state=checked]:border-accent-foreground"
+                    />
+                    <Label htmlFor="subscription" className="cursor-pointer">
+                      <div className="flex items-center gap-2">
+                        <RefreshCw className="h-5 w-5" />
+                        <div>
+                          <div className="font-bold text-base flex items-center gap-2">
+                            Subscribe & Save 15%
+                            <Badge variant="secondary" className="bg-background/20 text-accent-foreground text-xs">BEST VALUE</Badge>
+                          </div>
+                          <div className="text-sm opacity-90">Cancel anytime, free delivery</div>
+                        </div>
                       </div>
-                      <div className="text-sm opacity-90">Cancel anytime, free delivery</div>
-                    </div>
+                    </Label>
                   </div>
-                </Label>
-              </div>
-              <div className="text-right">
-                <div className="text-2xl font-bold">£{subscriptionPrice.toFixed(2)}</div>
-                <div className="text-sm line-through opacity-70">£{price.toFixed(2)}</div>
-              </div>
-            </div>
+                  <div className="text-right">
+                    <div className="text-2xl font-bold">£{subscriptionPrice.toFixed(2)}</div>
+                    <div className="text-sm line-through opacity-70">£{price.toFixed(2)}</div>
+                  </div>
+                </div>
 
-            <div 
-              className={`flex items-center justify-between p-4 rounded-lg transition-all ${
-                purchaseType === "onetime" 
-                  ? "bg-accent text-accent-foreground border-2 border-accent shadow-md" 
-                  : "hover:bg-secondary/20 border border-transparent"
-              }`}
-            >
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem 
-                  value="onetime" 
-                  id="onetime"
-                  className="border-accent-foreground data-[state=checked]:bg-accent-foreground data-[state=checked]:border-accent-foreground"
-                />
-                <Label htmlFor="onetime" className="cursor-pointer">
-                  <div className="flex items-center gap-2">
-                    <Package className="h-5 w-5" />
-                    <span className="font-semibold">One-time purchase</span>
+                <div 
+                  className={`flex items-center justify-between p-4 rounded-lg transition-all ${
+                    purchaseType === "onetime" 
+                      ? "bg-accent text-accent-foreground border-2 border-accent shadow-md" 
+                      : "hover:bg-secondary/20 border border-transparent"
+                  }`}
+                >
+                  <div className="flex items-center space-x-3">
+                    <RadioGroupItem 
+                      value="onetime" 
+                      id="onetime"
+                      className="border-accent-foreground data-[state=checked]:bg-accent-foreground data-[state=checked]:border-accent-foreground"
+                    />
+                    <Label htmlFor="onetime" className="cursor-pointer">
+                      <div className="flex items-center gap-2">
+                        <Package className="h-5 w-5" />
+                        <span className="font-semibold">One-time purchase</span>
+                      </div>
+                    </Label>
                   </div>
-                </Label>
-              </div>
-              <div className="text-xl font-bold">£{price.toFixed(2)}</div>
-            </div>
-          </div>
-        </RadioGroup>
-        
-        {purchaseType === "subscription" && (
-          <div className="mt-4 pt-4 border-t border-accent/30 bg-accent/10 -mx-4 px-4 pb-4 rounded-b-lg">
-            <Label className="text-sm font-medium mb-3 block">Delivery Frequency</Label>
-            <RadioGroup value={subscriptionFrequency} onValueChange={(value) => setSubscriptionFrequency(value as any)}>
-              <div className="space-y-2">
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="monthly" id="freq-monthly" />
-                  <Label htmlFor="freq-monthly" className="cursor-pointer text-sm">Every 30 days</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="bi-monthly" id="freq-bimonthly" />
-                  <Label htmlFor="freq-bimonthly" className="cursor-pointer text-sm">Every 60 days</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="quarterly" id="freq-quarterly" />
-                  <Label htmlFor="freq-quarterly" className="cursor-pointer text-sm">Every 90 days</Label>
+                  <div className="text-xl font-bold">£{price.toFixed(2)}</div>
                 </div>
               </div>
             </RadioGroup>
+            
+            {purchaseType === "subscription" && (
+              <div className="mt-4 pt-4 border-t border-accent/30 bg-accent/10 -mx-4 px-4 pb-4 rounded-b-lg">
+                <Label className="text-sm font-medium mb-3 block">Delivery Frequency</Label>
+                <RadioGroup value={subscriptionFrequency} onValueChange={(value) => setSubscriptionFrequency(value as any)}>
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="monthly" id="freq-monthly" />
+                      <Label htmlFor="freq-monthly" className="cursor-pointer text-sm">Every 30 days</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="bi-monthly" id="freq-bimonthly" />
+                      <Label htmlFor="freq-bimonthly" className="cursor-pointer text-sm">Every 60 days</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="quarterly" id="freq-quarterly" />
+                      <Label htmlFor="freq-quarterly" className="cursor-pointer text-sm">Every 90 days</Label>
+                    </div>
+                  </div>
+                </RadioGroup>
+              </div>
+            )}
+          </>
+        ) : (
+          <div className="flex items-center justify-between p-4 rounded-lg bg-accent text-accent-foreground border-2 border-accent shadow-md">
+            <div className="flex items-center gap-2">
+              <Package className="h-5 w-5" />
+              <span className="font-semibold">One-time purchase</span>
+            </div>
+            <div className="text-xl font-bold">£{price.toFixed(2)}</div>
           </div>
         )}
       </div>
