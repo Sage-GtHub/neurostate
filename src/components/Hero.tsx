@@ -10,12 +10,7 @@ export const Hero = () => {
 
   return (
     <section 
-      className="relative min-h-[500px] md:min-h-[600px] flex items-center px-4 py-12 md:py-16 lg:py-24 overflow-hidden"
-      style={{ 
-        background: 'linear-gradient(135deg, hsl(var(--hero-bg)) 0%, hsl(var(--accent) / 0.15) 50%, hsl(var(--hero-bg)) 100%)',
-        backgroundSize: '200% 200%',
-        animation: 'gradient-shift 15s ease infinite'
-      }}
+      className="relative min-h-[500px] md:min-h-[600px] flex items-center px-4 py-12 md:py-16 lg:py-24 overflow-hidden bg-[hsl(var(--hero-bg))]"
     >
       {/* Dot pattern overlay */}
       <div 
