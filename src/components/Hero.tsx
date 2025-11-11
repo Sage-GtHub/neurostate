@@ -49,13 +49,10 @@ export const Hero = () => {
             <img 
               src={heroImage} 
               alt="Red Light Face Mask - Recovery, Sleep & Performance"
-              className="w-full rounded-2xl shadow-xl"
-            />
-            {/* Subtle gradient overlay for depth */}
-            <div 
-              className="absolute inset-0 rounded-2xl pointer-events-none"
+              className="w-full"
               style={{
-                background: 'linear-gradient(to bottom, transparent 0%, transparent 60%, hsl(var(--background) / 0.1) 100%)'
+                maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 70%, rgba(0,0,0,0) 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 70%, rgba(0,0,0,0) 100%)'
               }}
             />
           </div>
