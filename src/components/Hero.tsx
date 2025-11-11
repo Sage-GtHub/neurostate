@@ -38,8 +38,8 @@ export const Hero = () => {
               alt="Red Light Face Mask - Recovery, Sleep & Performance"
               className="w-full"
               style={{
-                mixBlendMode: 'normal',
-                filter: 'drop-shadow(0 10px 40px rgba(0,0,0,0.1))'
+                mixBlendMode: 'multiply',
+                filter: 'drop-shadow(0 8px 28px rgba(0,0,0,0.12))'
               }}
             />
           </div>
