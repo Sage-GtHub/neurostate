@@ -14,15 +14,6 @@ const announcements = [
     highlight: true,
   },
   {
-    icon: Gift,
-    text: "Cyber Week Extended: Extra 25% Off Bundles",
-    subtext: "Limited time only",
-    color: "bg-accent",
-    textColor: "text-accent-foreground",
-    link: "/#products",
-    highlight: true,
-  },
-  {
     icon: Truck,
     text: "Free Express Delivery on Orders £50+",
     subtext: "2-3 business days",
@@ -88,17 +79,17 @@ export const AnnouncementBar = () => {
         </div>
       )}
       
-      <div className="container mx-auto flex items-center justify-center py-3 px-4 relative">
+      <div className="container mx-auto flex items-center justify-center py-2 px-4 relative">
         <Link 
           to={currentAnnouncement.link} 
-          className="flex items-center gap-3 animate-fade-in hover:scale-[1.02] transition-transform duration-300 text-center"
+          className="flex items-center gap-2 animate-fade-in hover:scale-[1.01] transition-transform duration-300 text-center"
         >
-          <Icon className={`h-5 w-5 ${currentAnnouncement.highlight ? 'animate-pulse' : ''}`} />
-          <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
-            <span className={`text-sm sm:text-base font-semibold tracking-wide ${currentAnnouncement.highlight ? 'uppercase' : ''}`}>
+          <Icon className={`h-3.5 w-3.5 ${currentAnnouncement.highlight ? 'animate-pulse' : ''}`} />
+          <div className="flex flex-col sm:flex-row sm:items-center sm:gap-1.5">
+            <span className={`text-[11px] sm:text-xs font-medium tracking-wide ${currentAnnouncement.highlight ? 'uppercase' : ''}`}>
               {currentAnnouncement.text}
             </span>
-            <span className="text-xs sm:text-sm font-light opacity-90">
+            <span className="text-[10px] sm:text-[11px] font-light opacity-80">
               {currentAnnouncement.subtext}
             </span>
           </div>
@@ -107,11 +98,11 @@ export const AnnouncementBar = () => {
         <Button
           variant="ghost"
           size="icon"
-          className="absolute right-4 h-7 w-7 hover:bg-background/10 rounded-full transition-all duration-300"
+          className="absolute right-4 h-6 w-6 hover:bg-background/10 rounded-full transition-all duration-300"
           onClick={handleDismiss}
           aria-label="Dismiss announcement"
         >
-          <X className="h-4 w-4" />
+          <X className="h-3.5 w-3.5" />
         </Button>
       </div>
 
