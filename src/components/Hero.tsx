@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import heroImage from "@/assets/red-light-face-mask.jpg";
+import heroImage from "@/assets/hero-mask-transparent.png";
 
 export const Hero = () => {
   const scrollToProducts = () => {
@@ -50,10 +50,6 @@ export const Hero = () => {
               src={heroImage} 
               alt="Red Light Face Mask - Recovery, Sleep & Performance"
               className="w-full"
-              style={{
-                maskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 55%, rgba(0,0,0,0.5) 72%, rgba(0,0,0,0.15) 82%, rgba(0,0,0,0) 90%)',
-                WebkitMaskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 55%, rgba(0,0,0,0.5) 72%, rgba(0,0,0,0.15) 82%, rgba(0,0,0,0) 90%)'
-              }}
             />
           </div>
         </div>
