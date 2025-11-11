@@ -99,6 +99,7 @@ export const Header = () => {
   ];
 
   const otherLinks = [
+    { label: "Bundles", href: "/#bundles" },
     { label: "Resources", href: "/resources" },
   ];
 
