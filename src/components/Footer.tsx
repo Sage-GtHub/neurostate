@@ -72,14 +72,14 @@ export const Footer = () => {
 
 
   return (
-    <footer className="bg-muted/30 border-t mt-24">
-      <div className="container mx-auto px-4 py-12">
+    <footer className="bg-muted/30 border-t mt-16 sm:mt-24">
+      <div className="container mx-auto px-4 py-8 sm:py-12">
         {/* Company Mission */}
-        <div className="mb-12 max-w-3xl">
-          <Link to="/" className="font-bold text-2xl tracking-tight mb-4 inline-block">
+        <div className="mb-8 sm:mb-12 max-w-3xl">
+          <Link to="/" className="font-bold text-xl sm:text-2xl tracking-tight mb-3 sm:mb-4 inline-block">
             NeuroState®
           </Link>
-          <p className="text-muted-foreground text-sm leading-relaxed">
+          <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
             Making the best recovery tools and supplements accessible to everyone, everywhere. 
             Founded by Sage, a serial entrepreneur with a sports science background, NeuroState 
             was born from personal experience with burnout and discovering transformative recovery tools.
@@ -87,31 +87,31 @@ export const Footer = () => {
         </div>
 
         {/* Trust Badges */}
-        <div className="border-t pt-6">
+        <div className="border-t pt-4 sm:pt-6">
           <TrustBadges />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 sm:gap-8 mb-6 sm:mb-8">
           {/* Newsletter Signup */}
-          <div className="lg:col-span-2">
-            <h3 className="font-bold text-lg mb-4">Join Our Community</h3>
-            <p className="text-muted-foreground mb-4 text-sm">
+          <div className="sm:col-span-2 lg:col-span-2">
+            <h3 className="font-bold text-base sm:text-lg mb-3 sm:mb-4">Join Our Community</h3>
+            <p className="text-muted-foreground mb-3 sm:mb-4 text-xs sm:text-sm leading-relaxed">
               Sign up for exclusive offers, the occasional freebie, and 10% off your first order.
             </p>
-            <form onSubmit={handleNewsletterSignup} className="flex gap-2">
+            <form onSubmit={handleNewsletterSignup} className="flex flex-col sm:flex-row gap-2">
               <Input
                 type="email"
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1"
+                className="flex-1 text-sm"
                 disabled={isLoading}
               />
               <Button 
                 type="submit" 
                 variant="outline"
                 disabled={isLoading} 
-                className="rounded-full bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-accent hover:shadow-[0_0_20px_rgba(255,138,0,0.6)] transition-all duration-300 font-medium"
+                className="rounded-full bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-accent hover:shadow-[0_0_20px_rgba(255,138,0,0.6)] transition-all duration-300 font-medium text-sm sm:w-auto w-full min-h-[44px]"
               >
                 {isLoading ? "..." : "Subscribe"}
               </Button>
@@ -120,13 +120,13 @@ export const Footer = () => {
 
           {/* Shop Links */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Shop</h3>
-            <ul className="space-y-2">
+            <h3 className="font-bold text-base sm:text-lg mb-3 sm:mb-4">Shop</h3>
+            <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.shop.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                    className="text-muted-foreground hover:text-foreground transition-colors text-xs sm:text-sm"
                   >
                     {link.name}
                   </a>
@@ -137,13 +137,13 @@ export const Footer = () => {
 
           {/* Company Links */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Company</h3>
-            <ul className="space-y-2">
+            <h3 className="font-bold text-base sm:text-lg mb-3 sm:mb-4">Company</h3>
+            <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                    className="text-muted-foreground hover:text-foreground transition-colors text-xs sm:text-sm"
                   >
                     {link.name}
                   </a>
@@ -154,13 +154,13 @@ export const Footer = () => {
 
           {/* Support Links */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Support</h3>
-            <ul className="space-y-2">
+            <h3 className="font-bold text-base sm:text-lg mb-3 sm:mb-4">Support</h3>
+            <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                    className="text-muted-foreground hover:text-foreground transition-colors text-xs sm:text-sm"
                   >
                     {link.name}
                   </a>
@@ -171,13 +171,13 @@ export const Footer = () => {
 
           {/* Legal Links */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Legal</h3>
-            <ul className="space-y-2">
+            <h3 className="font-bold text-base sm:text-lg mb-3 sm:mb-4">Legal</h3>
+            <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.legal.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                    className="text-muted-foreground hover:text-foreground transition-colors text-xs sm:text-sm"
                   >
                     {link.name}
                   </Link>
@@ -188,20 +188,20 @@ export const Footer = () => {
         </div>
 
         {/* Contact Info & Social */}
-        <div className="border-t pt-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <div className="border-t pt-6 sm:pt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
             {/* Contact Information */}
             <div>
-              <h3 className="font-bold text-lg mb-4">Get in Touch</h3>
-              <div className="space-y-3">
+              <h3 className="font-bold text-base sm:text-lg mb-3 sm:mb-4">Get in Touch</h3>
+              <div className="space-y-2 sm:space-y-3">
                 <a
                   href="mailto:contact@neurostate.co.uk"
-                  className="flex items-center gap-2 text-muted-foreground hover:text-accent transition-colors text-sm group"
+                  className="flex items-center gap-2 text-muted-foreground hover:text-accent transition-colors text-xs sm:text-sm group"
                 >
-                  <Mail className="h-4 w-4 group-hover:scale-110 transition-transform" />
+                  <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4 group-hover:scale-110 transition-transform" />
                   contact@neurostate.co.uk
                 </a>
-                <p className="text-xs text-muted-foreground mt-4">
+                <p className="text-[10px] sm:text-xs text-muted-foreground">
                   We typically respond within 24 hours
                 </p>
               </div>
@@ -209,31 +209,31 @@ export const Footer = () => {
 
             {/* Social Media */}
             <div>
-              <h3 className="font-bold text-lg mb-4">Follow Us</h3>
-              <div className="flex gap-4">
+              <h3 className="font-bold text-base sm:text-lg mb-3 sm:mb-4">Follow Us</h3>
+              <div className="flex gap-3 sm:gap-4">
                 {socialLinks.map((social) => (
                   <div
                     key={social.label}
-                    className="w-10 h-10 rounded-full bg-muted flex items-center justify-center cursor-default"
+                    className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-muted flex items-center justify-center cursor-default"
                     aria-label={social.label}
                   >
-                    <social.icon className="h-5 w-5" />
+                    <social.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                   </div>
                 ))}
               </div>
-              <p className="text-xs text-muted-foreground mt-4">
+              <p className="text-[10px] sm:text-xs text-muted-foreground mt-3 sm:mt-4">
                 Join our community for tips, product updates, and exclusive offers
               </p>
             </div>
           </div>
 
           {/* Copyright & Links */}
-          <div className="border-t pt-6">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-sm text-muted-foreground">
+          <div className="border-t pt-4 sm:pt-6">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
+              <p className="text-xs sm:text-sm text-muted-foreground text-center sm:text-left">
                 © {new Date().getFullYear()} NeuroState®. All rights reserved.
               </p>
-              <div className="flex flex-wrap gap-4 justify-center">
+              <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
                 <Link to="/terms" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
                   Terms
                 </Link>

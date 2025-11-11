@@ -51,16 +51,16 @@ const goals: Goal[] = [
 
 export const ShopByGoal = () => {
   return (
-    <section className="py-12 md:py-16 px-4 bg-gradient-to-b from-background to-secondary/30">
+    <section className="py-12 sm:py-16 px-4 bg-gradient-to-b from-background to-secondary/30">
       <div className="container mx-auto">
-        <div className="text-center mb-8 md:mb-12">
+        <div className="text-center mb-8 sm:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">Shop by Goal</h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
             Choose your path to optimal performance. Each category is curated with science-backed products designed for specific outcomes.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
           {goals.map((goal) => {
             return (
               <Link 
@@ -78,15 +78,15 @@ export const ShopByGoal = () => {
                     <div className={`absolute inset-0 bg-gradient-to-t ${goal.color} to-transparent`} />
                   </div>
                   
-                  <div className="p-6 bg-card">
-                    <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
+                  <div className="p-5 sm:p-6 bg-card">
+                    <h3 className="text-lg sm:text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
                       {goal.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
+                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                       {goal.description}
                     </p>
                     
-                    <div className="mt-4 flex items-center text-accent text-sm font-medium group-hover:gap-2 transition-all">
+                    <div className="mt-3 sm:mt-4 flex items-center text-accent text-xs sm:text-sm font-medium group-hover:gap-2 transition-all">
                       <span>Explore {goal.title}</span>
                       <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
                     </div>

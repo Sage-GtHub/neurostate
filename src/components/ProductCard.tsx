@@ -88,19 +88,19 @@ export const ProductCard = ({ product }: ProductCardProps) => {
               <Eye className="h-4 w-4" />
             </button>
           </div>
-        <div className="p-6 lg:p-8 space-y-4 flex-1 flex flex-col">
-          <div className="space-y-3 flex-1">
-            <h3 className="font-medium text-foreground line-clamp-2 leading-snug min-h-[2.5rem] text-sm lg:text-base">
+        <div className="p-4 sm:p-6 lg:p-8 space-y-3 sm:space-y-4 flex-1 flex flex-col">
+          <div className="space-y-2 sm:space-y-3 flex-1">
+            <h3 className="font-medium text-foreground line-clamp-2 leading-snug min-h-[2.5rem] text-sm sm:text-base">
               {node.title}
             </h3>
             
             {/* Star Rating */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               <div className="flex items-center gap-0.5">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <Star
                     key={star}
-                    className={`h-3.5 w-3.5 ${
+                    className={`h-3 w-3 sm:h-3.5 sm:w-3.5 ${
                       star <= Math.floor(rating)
                         ? "fill-accent text-accent"
                         : star - 0.5 <= rating
@@ -110,7 +110,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                   />
                 ))}
               </div>
-              <span className="text-xs text-muted-foreground font-light">
+              <span className="text-[10px] sm:text-xs text-muted-foreground font-light">
                 ({reviewCount})
               </span>
             </div>
@@ -118,10 +118,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           
           <div className="flex items-center justify-between pt-2 border-t border-border/40">
             <div>
-              <p className="text-lg font-light text-foreground tracking-tight">
+              <p className="text-base sm:text-lg font-light text-foreground tracking-tight">
                 £{price.toFixed(2)}
               </p>
-              <p className="text-[10px] text-muted-foreground mt-1.5 font-light">
+              <p className="text-[9px] sm:text-[10px] text-muted-foreground mt-1 sm:mt-1.5 font-light leading-tight">
                 or £{(price * 0.85).toFixed(2)} with Subscribe & Save
               </p>
             </div>
@@ -129,7 +129,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           
           <Button 
             onClick={handleAddToCart}
-            className={`w-full bg-background text-foreground border border-border/60 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 font-medium rounded-full min-h-[48px] shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-medium)] ${
+            className={`w-full bg-background text-foreground border border-border/60 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 font-medium rounded-full min-h-[44px] sm:min-h-[48px] text-sm sm:text-base shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-medium)] ${
               justAdded ? "bg-green-600 hover:bg-green-600 text-white border-green-600" : ""
             } ${isAdding ? "scale-[0.98]" : ""}`}
             disabled={!firstVariant?.availableForSale || isAdding}

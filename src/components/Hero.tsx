@@ -10,35 +10,35 @@ export const Hero = () => {
 
   return (
     <section 
-      className="relative min-h-[85vh] flex items-center px-6 lg:px-12 overflow-hidden bg-[hsl(var(--hero-bg))]"
+      className="relative min-h-[60vh] md:min-h-[75vh] lg:min-h-[85vh] flex items-center px-4 sm:px-6 lg:px-12 overflow-hidden bg-[hsl(var(--hero-bg))]"
     >
       <div className="container mx-auto max-w-7xl">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
           {/* Content - centered and minimal */}
-          <div className="text-center lg:text-left max-w-2xl mx-auto lg:mx-0 py-20">
+          <div className="text-center lg:text-left max-w-2xl mx-auto lg:mx-0 py-12 md:py-16 lg:py-20">
             <p className="text-sm font-medium text-muted-foreground mb-6 tracking-[0.2em] uppercase">
               Science-Backed Wellness
             </p>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-light mb-6 text-foreground leading-[1.1] tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light mb-4 md:mb-6 text-foreground leading-[1.1] tracking-tight">
               Peak Performance,
               <br />
               <span className="font-semibold">Naturally</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-10 font-light leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 md:mb-10 font-light leading-relaxed">
               Premium tools and supplements for recovery, sleep, and cognitive performance.
             </p>
             <Button 
               size="lg" 
-              className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium rounded-full px-10 py-6 text-base transition-all duration-300 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-medium)]"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium rounded-full px-8 sm:px-10 py-5 sm:py-6 text-sm sm:text-base transition-all duration-300 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-medium)] w-full sm:w-auto"
               onClick={scrollToProducts}
             >
-              Explore Products <ArrowRight className="ml-2 h-5 w-5" />
+              Explore Products <ArrowRight className="ml-2 h-4 sm:h-5 w-4 sm:w-5" />
             </Button>
           </div>
 
           {/* Hero Image - full-bleed, subtle */}
-          <div className="hidden lg:flex justify-end items-center relative">
-            <div className="relative w-full max-w-lg">
+          <div className="flex justify-center lg:justify-end items-center relative mt-8 lg:mt-0">
+            <div className="relative w-full max-w-sm md:max-w-md lg:max-w-lg">
               <img 
                 src={heroImage} 
                 alt="Premium wellness tools for recovery and performance"

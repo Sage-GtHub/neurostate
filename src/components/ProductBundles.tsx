@@ -87,20 +87,20 @@ export const ProductBundles = () => {
   };
 
   return (
-    <section id="bundles" className="py-16 px-4 bg-secondary/20">
+    <section id="bundles" className="py-12 sm:py-16 px-4 bg-secondary/20">
       <div className="container mx-auto">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <Package className="h-6 w-6 text-primary" />
-            <Badge variant="secondary" className="text-sm">Best Value</Badge>
+        <div className="text-center mb-8 sm:mb-12">
+          <div className="inline-flex items-center gap-2 mb-3 sm:mb-4">
+            <Package className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+            <Badge variant="secondary" className="text-xs sm:text-sm">Best Value</Badge>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Curated Bundles</h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Curated Bundles</h2>
+          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto px-4">
             Save more with our expertly designed supplement stacks
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
           {bundles.map((bundle) => {
             const bundleProducts = getBundleProducts(bundle.productKeywords);
             if (bundleProducts.length === 0) return null;
@@ -108,35 +108,35 @@ export const ProductBundles = () => {
             const pricing = calculateBundlePrice(bundleProducts, bundle.discount);
 
             return (
-              <div key={bundle.id} className="p-8 border-t border-border/30 hover:translate-y-[-4px] transition-all duration-300">
-                <div className="mb-6">
-                  <Badge className="mb-3 bg-accent text-accent-foreground">
+              <div key={bundle.id} className="p-6 sm:p-8 border-t border-border/30 hover:translate-y-[-4px] transition-all duration-300">
+                <div className="mb-5 sm:mb-6">
+                  <Badge className="mb-2 sm:mb-3 bg-accent text-accent-foreground text-xs sm:text-sm">
                     Save {bundle.discount}%
                   </Badge>
-                  <h3 className="text-xl font-semibold mb-2">{bundle.name}</h3>
-                  <p className="text-sm text-muted-foreground font-light mb-4">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-2">{bundle.name}</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground font-light mb-3 sm:mb-4">
                     {bundle.description}
                   </p>
                 </div>
 
-                <div className="space-y-2 mb-6">
+                <div className="space-y-2 mb-5 sm:mb-6">
                   {bundle.benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-center gap-2 text-sm">
-                      <Check className="h-4 w-4 text-accent flex-shrink-0" />
+                    <div key={index} className="flex items-center gap-2 text-xs sm:text-sm">
+                      <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-accent flex-shrink-0" />
                       <span className="font-light">{benefit}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="border-t pt-4 mb-4">
-                  <div className="text-sm text-muted-foreground mb-1">
+                <div className="border-t pt-3 sm:pt-4 mb-4">
+                  <div className="text-xs sm:text-sm text-muted-foreground mb-1">
                     Includes {bundleProducts.length} products
                   </div>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-bold">
+                    <span className="text-xl sm:text-2xl font-bold">
                       £{pricing.discounted.toFixed(2)}
                     </span>
-                    <span className="text-sm text-muted-foreground line-through">
+                    <span className="text-xs sm:text-sm text-muted-foreground line-through">
                       £{pricing.original.toFixed(2)}
                     </span>
                   </div>
@@ -148,10 +148,10 @@ export const ProductBundles = () => {
                 <Button 
                   onClick={() => handleAddBundle(bundle)}
                   variant="outline"
-                  className="w-full rounded-full bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-accent hover:shadow-[0_0_20px_rgba(255,138,0,0.6)] transition-all duration-300 font-medium"
+                  className="w-full rounded-full bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-accent hover:shadow-[0_0_20px_rgba(255,138,0,0.6)] transition-all duration-300 font-medium min-h-[44px] sm:min-h-[48px] text-sm sm:text-base"
                 >
                   Add Bundle
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <ArrowRight className="ml-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 </Button>
               </div>
             );
