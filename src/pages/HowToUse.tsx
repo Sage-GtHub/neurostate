@@ -6,15 +6,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Clock, Droplets, Moon, Sun, Utensils, Brain, Search } from "lucide-react";
 import { useState } from "react";
 import { LiveChat } from "@/components/LiveChat";
-import omega3Image from "@/assets/omega3-elite.jpg";
-import neurofocusImage from "@/assets/neurofocus-cognitive.jpg";
-import restoreSleepImage from "@/assets/restoresleep-night.jpg";
-import marineCollagenImage from "@/assets/marine-collagen.jpg";
-import traceMineral from "@/assets/trace-mineral.jpg";
-import adaptBalanceImage from "@/assets/adaptbalance-stress.jpg";
-import redRestoreProImage from "@/assets/redrestore-pro-panel.jpg";
-import redRestoreMiniImage from "@/assets/redrestore-mini.jpg";
-import cryoPlungeImage from "@/assets/cryoplunge-ice-bath.jpg";
+import omega3Image from "@/assets/omega3-elite.png";
+import neurofocusImage from "@/assets/neurofocus-cognitive.png";
+import restoreSleepImage from "@/assets/restoresleep-night.png";
+import marineCollagenImage from "@/assets/marine-collagen.png";
+import traceMineral from "@/assets/trace-mineral.png";
+import adaptBalanceImage from "@/assets/adaptbalance-stress.png";
+import redRestoreProImage from "@/assets/redrestore-pro-panel.png";
+import redRestoreMiniImage from "@/assets/redrestore-mini.png";
+import cryoPlungeImage from "@/assets/cryoplunge-ice-bath.png";
 
 const HowToUse = () => {
   const [searchQuery, setSearchQuery] = useState("");
