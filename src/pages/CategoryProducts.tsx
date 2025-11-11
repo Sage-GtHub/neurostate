@@ -12,17 +12,22 @@ const categoryConfig = {
   recovery: {
     title: "Recovery",
     description: "Advanced red light therapy and recovery devices for optimal muscle repair and wellness.",
-    tags: ["recovery", "red light therapy", "ice bath", "cold plunge"]
+    tags: ["recovery", "red light therapy", "ice bath", "cold plunge", "sauna", "infrared", "PEMF"]
   },
   sleep: {
     title: "Sleep",
     description: "Sleep aid technologies and products designed to enhance sleep quality and restoration.",
-    tags: ["sleep", "rest", "reishi", "magnesium"]
+    tags: ["sleep", "rest", "reishi", "magnesium", "melatonin"]
   },
   cognitive: {
     title: "Cognitive Performance",
     description: "Science-backed supplements and nootropics for enhanced focus, memory, and mental clarity.",
-    tags: ["nootropic", "cognitive", "focus", "brain health"]
+    tags: ["nootropic", "cognitive", "focus", "brain health", "mental clarity", "memory"]
+  },
+  performance: {
+    title: "Performance",
+    description: "Enhance athletic performance and endurance with cutting-edge supplements and recovery tools.",
+    tags: ["performance", "athletic", "endurance", "energy", "pre-workout", "recovery"]
   }
 };
 
