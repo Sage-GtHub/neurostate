@@ -62,17 +62,17 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <>
       <Link to={`/product/${node.handle}`} className="group block h-full">
-        <div className="bg-card border border-border rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 hover:scale-[1.02] hover:-translate-y-1 h-full flex flex-col">
-          <div className="aspect-square overflow-hidden bg-secondary/10 relative flex-shrink-0">
+        <div className="bg-card rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[var(--shadow-medium)] h-full flex flex-col border border-border/40">
+          <div className="aspect-square overflow-hidden bg-muted/30 relative flex-shrink-0">
             {image ? (
               <img
                 src={image.url}
                 alt={image.altText || node.title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center">
-                <span className="text-muted-foreground text-sm">No image</span>
+                <span className="text-muted-foreground text-sm font-light">No image</span>
               </div>
             )}
             
@@ -82,15 +82,15 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                 e.preventDefault();
                 setShowQuickView(true);
               }}
-              className="absolute top-4 right-4 bg-background/90 backdrop-blur-sm text-foreground p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-accent hover:text-accent-foreground shadow-lg hover:shadow-[0_0_20px_rgba(255,138,0,0.6)]"
+              className="absolute top-4 right-4 bg-background/95 backdrop-blur-sm text-foreground p-2.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-primary hover:text-primary-foreground shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-medium)]"
               aria-label="Quick view"
             >
-              <Eye className="h-5 w-5" />
+              <Eye className="h-4 w-4" />
             </button>
           </div>
-        <div className="p-6 space-y-4 flex-1 flex flex-col">
-          <div className="space-y-2 flex-1">
-            <h3 className="font-medium text-foreground line-clamp-2 leading-snug min-h-[2.5rem]">
+        <div className="p-6 lg:p-8 space-y-4 flex-1 flex flex-col">
+          <div className="space-y-3 flex-1">
+            <h3 className="font-medium text-foreground line-clamp-2 leading-snug min-h-[2.5rem] text-base lg:text-lg">
               {node.title}
             </h3>
             
@@ -100,28 +100,28 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                 {[1, 2, 3, 4, 5].map((star) => (
                   <Star
                     key={star}
-                    className={`h-4 w-4 ${
+                    className={`h-3.5 w-3.5 ${
                       star <= Math.floor(rating)
                         ? "fill-accent text-accent"
                         : star - 0.5 <= rating
                         ? "fill-accent/50 text-accent"
-                        : "fill-none text-muted-foreground/30"
+                        : "fill-none text-border"
                     }`}
                   />
                 ))}
               </div>
-              <span className="text-xs text-muted-foreground">
+              <span className="text-xs text-muted-foreground font-light">
                 ({reviewCount})
               </span>
             </div>
           </div>
           
-          <div className="flex items-center justify-between pt-2">
+          <div className="flex items-center justify-between pt-2 border-t border-border/40">
             <div>
-              <p className="text-xl font-semibold text-foreground">
+              <p className="text-2xl font-light text-foreground tracking-tight">
                 £{price.toFixed(2)}
               </p>
-              <p className="text-xs text-muted-foreground mt-1">
+              <p className="text-xs text-muted-foreground mt-1.5 font-light">
                 or £{(price * 0.85).toFixed(2)} with Subscribe & Save
               </p>
             </div>
@@ -129,15 +129,14 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           
           <Button 
             onClick={handleAddToCart}
-            variant="outline"
-            className={`w-full bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-accent hover:shadow-[0_0_20px_rgba(255,138,0,0.6)] transition-all duration-300 font-medium rounded-full min-h-[44px] ${
-              justAdded ? "bg-green-500 text-white hover:bg-green-500" : ""
-            } ${isAdding ? "scale-95" : ""}`}
+            className={`w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 font-medium rounded-full min-h-[48px] shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-medium)] ${
+              justAdded ? "bg-green-600 hover:bg-green-600" : ""
+            } ${isAdding ? "scale-[0.98]" : ""}`}
             disabled={!firstVariant?.availableForSale || isAdding}
           >
             {isAdding ? (
               <span className="flex items-center gap-2">
-                <Loader2 className="h-4 w-4 animate-spin text-accent" />
+                <Loader2 className="h-4 w-4 animate-spin" />
                 Adding...
               </span>
             ) : justAdded ? (
