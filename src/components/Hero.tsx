@@ -12,14 +12,6 @@ export const Hero = () => {
     <section 
       className="relative min-h-[500px] md:min-h-[600px] flex items-center px-4 py-12 md:py-16 lg:py-24 overflow-hidden bg-[hsl(var(--hero-bg))]"
     >
-      {/* Dot pattern overlay */}
-      <div 
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage: 'radial-gradient(circle, hsl(var(--background) / 0.1) 1px, transparent 1px)',
-          backgroundSize: '24px 24px'
-        }}
-      />
       <div className="container mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
         <div className="max-w-xl">
           <p className="text-xs md:text-sm font-medium text-foreground/70 mb-3 md:mb-4 tracking-wide">
