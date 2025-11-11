@@ -8,99 +8,96 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 9%;
+    /* Premium wellness palette - stone, sand, charcoal */
+    --background: 30 8% 97%;
+    --foreground: 20 10% 15%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 9%;
+    --card-foreground: 20 10% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 18 95% 55%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 84.2% 60.2%;
+    --popover-foreground: 20 10% 15%;
+    --primary: 20 10% 15%;
+    --primary-foreground: 30 8% 97%;
+    --secondary: 30 10% 92%;
+    --secondary-foreground: 20 10% 15%;
+    --muted: 30 10% 92%;
+    --muted-foreground: 20 8% 45%;
+    --accent: 25 35% 55%;
+    --accent-foreground: 30 8% 97%;
+    --destructive: 0 65% 55%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 18 95% 55%;
-    --radius: 0.375rem;
+    --border: 30 12% 88%;
+    --input: 30 12% 88%;
+    --ring: 25 35% 55%;
+    --radius: 0.5rem;
     
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 0 0% 9%;
-    --sidebar-primary: 0 0% 9%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 0 0% 96%;
-    --sidebar-accent-foreground: 0 0% 9%;
-    --sidebar-border: 0 0% 90%;
-    --sidebar-ring: 18 95% 55%;
+    --sidebar-background: 30 8% 97%;
+    --sidebar-foreground: 20 10% 15%;
+    --sidebar-primary: 20 10% 15%;
+    --sidebar-primary-foreground: 30 8% 97%;
+    --sidebar-accent: 30 10% 92%;
+    --sidebar-accent-foreground: 20 10% 15%;
+    --sidebar-border: 30 12% 88%;
+    --sidebar-ring: 25 35% 55%;
     
-    /* Momentous-inspired earth tones */
-    --beige: 30 15% 75%;
-    --beige-light: 30 12% 85%;
-    --taupe: 30 15% 60%;
-    --taupe-dark: 30 20% 40%;
+    /* Wellness neutrals */
+    --stone: 30 8% 85%;
+    --sand: 35 15% 88%;
+    --charcoal: 20 10% 20%;
     
     /* Hero background */
-    --hero-bg: 30 15% 75%;
+    --hero-bg: 30 10% 92%;
     
-    /* Orange accent gradients and effects */
-    --gradient-primary: linear-gradient(135deg, hsl(18 95% 55%), hsl(25 100% 60%));
-    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--accent) / 0.1));
-    --shadow-accent: 0 10px 30px -10px hsl(var(--accent) / 0.3);
-    --shadow-accent-glow: 0 0 40px hsl(var(--accent) / 0.4);
+    /* Subtle depth effects */
+    --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.06);
+    --shadow-large: 0 8px 32px rgba(0, 0, 0, 0.08);
     
     /* Animations */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .dark {
-    --background: 0 0% 9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14%;
-    --muted-foreground: 0 0% 63%;
-    --accent: 18 95% 55%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --background: 20 10% 12%;
+    --foreground: 30 8% 95%;
+    --card: 20 10% 15%;
+    --card-foreground: 30 8% 95%;
+    --popover: 20 10% 15%;
+    --popover-foreground: 30 8% 95%;
+    --primary: 30 8% 95%;
+    --primary-foreground: 20 10% 12%;
+    --secondary: 20 8% 18%;
+    --secondary-foreground: 30 8% 95%;
+    --muted: 20 8% 18%;
+    --muted-foreground: 30 6% 60%;
+    --accent: 25 35% 55%;
+    --accent-foreground: 30 8% 95%;
+    --destructive: 0 65% 45%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14%;
-    --input: 0 0% 14%;
-    --ring: 18 95% 55%;
+    --border: 20 8% 22%;
+    --input: 20 8% 22%;
+    --ring: 25 35% 55%;
     
-    --sidebar-background: 0 0% 9%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 0 0% 98%;
-    --sidebar-primary-foreground: 0 0% 9%;
-    --sidebar-accent: 0 0% 14%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 0 0% 14%;
-    --sidebar-ring: 18 95% 55%;
+    --sidebar-background: 20 10% 12%;
+    --sidebar-foreground: 30 8% 95%;
+    --sidebar-primary: 30 8% 95%;
+    --sidebar-primary-foreground: 20 10% 12%;
+    --sidebar-accent: 20 8% 18%;
+    --sidebar-accent-foreground: 30 8% 95%;
+    --sidebar-border: 20 8% 22%;
+    --sidebar-ring: 25 35% 55%;
     
-    /* Momentous-inspired earth tones - dark mode */
-    --beige: 30 15% 25%;
-    --beige-light: 30 12% 20%;
-    --taupe: 30 15% 40%;
-    --taupe-dark: 30 20% 25%;
+    /* Wellness neutrals - dark mode */
+    --stone: 20 8% 25%;
+    --sand: 25 10% 28%;
+    --charcoal: 20 10% 18%;
     
     /* Hero background - dark mode */
-    --hero-bg: 30 15% 20%;
+    --hero-bg: 20 8% 18%;
     
-    /* Orange accent gradients and effects - dark mode */
-    --gradient-primary: linear-gradient(135deg, hsl(18 95% 55%), hsl(25 100% 60%));
-    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--accent) / 0.15));
-    --shadow-accent: 0 10px 30px -10px hsl(var(--accent) / 0.4);
-    --shadow-accent-glow: 0 0 40px hsl(var(--accent) / 0.5);
+    /* Subtle depth effects - dark mode */
+    --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.3);
+    --shadow-large: 0 8px 32px rgba(0, 0, 0, 0.4);
   }
 }
 
