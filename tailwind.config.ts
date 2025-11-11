@@ -71,6 +71,9 @@ export default {
           DEFAULT: "hsl(var(--taupe))",
           dark: "hsl(var(--taupe-dark))",
         },
+        stone: "hsl(var(--stone))",
+        sand: "hsl(var(--sand))",
+        charcoal: "hsl(var(--charcoal))",
       },
       borderRadius: {
         lg: "var(--radius)",
