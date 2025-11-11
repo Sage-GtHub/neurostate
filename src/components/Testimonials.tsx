@@ -1,4 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Star } from "lucide-react";
 
@@ -98,47 +97,47 @@ export const Testimonials = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {testimonials.map((testimonial) => (
-            <Card
+            <div
               key={testimonial.id}
-              className="hover:shadow-lg transition-shadow duration-300"
+              className="p-6 border-t border-border/30 hover:translate-y-[-4px] transition-all duration-300"
             >
-              <CardContent className="pt-6 space-y-4">
+              <div className="space-y-4">
                 {/* Rating */}
                 <StarRating rating={testimonial.rating} />
 
                 {/* Review Text */}
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed font-light text-sm">
                   "{testimonial.review}"
                 </p>
 
                 {/* Product Badge */}
                 {testimonial.product && (
                   <div className="pt-2">
-                    <span className="text-xs font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
+                    <span className="text-xs font-medium text-accent bg-accent/10 px-3 py-1 rounded-full">
                       {testimonial.product}
                     </span>
                   </div>
                 )}
 
                 {/* Customer Info */}
-                <div className="flex items-center gap-3 pt-4 border-t">
+                <div className="flex items-center gap-3 pt-4 border-t border-border/30">
                   <Avatar className="h-10 w-10">
                     <AvatarImage src="" alt={testimonial.name} />
-                    <AvatarFallback className="bg-primary/10 text-primary font-semibold">
+                    <AvatarFallback className="bg-accent/10 text-accent font-semibold">
                       {testimonial.avatar}
                     </AvatarFallback>
                   </Avatar>
                   <div>
                     <p className="font-semibold text-sm">{testimonial.name}</p>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-muted-foreground font-light">
                       {testimonial.role}
                     </p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
 

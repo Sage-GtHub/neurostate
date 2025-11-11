@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Package, ArrowRight, Check } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
@@ -109,22 +108,22 @@ export const ProductBundles = () => {
             const pricing = calculateBundlePrice(bundleProducts, bundle.discount);
 
             return (
-              <Card key={bundle.id} className="p-6 hover:shadow-lg transition-shadow">
-                <div className="mb-4">
-                  <Badge className="mb-3 bg-primary text-primary-foreground">
+              <div key={bundle.id} className="p-8 border-t border-border/30 hover:translate-y-[-4px] transition-all duration-300">
+                <div className="mb-6">
+                  <Badge className="mb-3 bg-accent text-accent-foreground">
                     Save {bundle.discount}%
                   </Badge>
-                  <h3 className="text-xl font-bold mb-2">{bundle.name}</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <h3 className="text-xl font-semibold mb-2">{bundle.name}</h3>
+                  <p className="text-sm text-muted-foreground font-light mb-4">
                     {bundle.description}
                   </p>
                 </div>
 
-                <div className="space-y-2 mb-4">
+                <div className="space-y-2 mb-6">
                   {bundle.benefits.map((benefit, index) => (
                     <div key={index} className="flex items-center gap-2 text-sm">
-                      <Check className="h-4 w-4 text-primary flex-shrink-0" />
-                      <span>{benefit}</span>
+                      <Check className="h-4 w-4 text-accent flex-shrink-0" />
+                      <span className="font-light">{benefit}</span>
                     </div>
                   ))}
                 </div>
@@ -154,7 +153,7 @@ export const ProductBundles = () => {
                   Add Bundle
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
-              </Card>
+              </div>
             );
           })}
         </div>

@@ -139,13 +139,13 @@ const Ambassador = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {benefits.map((benefit) => (
-                <Card key={benefit.title} className="p-6 hover:shadow-lg transition-shadow">
-                  <benefit.icon className="h-10 w-10 text-primary mb-4" />
-                  <h3 className="text-xl font-bold mb-3">{benefit.title}</h3>
-                  <p className="text-muted-foreground">{benefit.description}</p>
-                </Card>
+                <div key={benefit.title} className="p-6 hover:translate-y-[-4px] transition-transform duration-300">
+                  <benefit.icon className="h-10 w-10 text-accent mb-4" />
+                  <h3 className="text-lg font-semibold mb-3">{benefit.title}</h3>
+                  <p className="text-sm text-muted-foreground font-light leading-relaxed">{benefit.description}</p>
+                </div>
               ))}
             </div>
           </div>
@@ -164,36 +164,36 @@ const Ambassador = () => {
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-8">
-                <Card className="p-6 text-center">
-                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xl font-bold mx-auto mb-4">
+              <div className="grid md:grid-cols-3 gap-12">
+                <div className="text-center">
+                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xl font-semibold mx-auto mb-4">
                     1
                   </div>
-                  <h3 className="font-bold text-lg mb-2">Apply</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <h3 className="font-semibold text-lg mb-2">Apply</h3>
+                  <p className="text-sm text-muted-foreground font-light">
                     Fill out the application form and tell us about yourself and your wellness journey.
                   </p>
-                </Card>
+                </div>
 
-                <Card className="p-6 text-center">
-                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xl font-bold mx-auto mb-4">
+                <div className="text-center">
+                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xl font-semibold mx-auto mb-4">
                     2
                   </div>
-                  <h3 className="font-bold text-lg mb-2">Get Approved</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <h3 className="font-semibold text-lg mb-2">Get Approved</h3>
+                  <p className="text-sm text-muted-foreground font-light">
                     We'll review your application and notify you within 5 business days.
                   </p>
-                </Card>
+                </div>
 
-                <Card className="p-6 text-center">
-                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xl font-bold mx-auto mb-4">
+                <div className="text-center">
+                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xl font-semibold mx-auto mb-4">
                     3
                   </div>
-                  <h3 className="font-bold text-lg mb-2">Start Earning</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <h3 className="font-semibold text-lg mb-2">Start Earning</h3>
+                  <p className="text-sm text-muted-foreground font-light">
                     Get your unique code, receive your welcome kit, and start sharing!
                   </p>
-                </Card>
+                </div>
               </div>
             </div>
           </div>
@@ -203,19 +203,19 @@ const Ambassador = () => {
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto">
-              <Card className="p-8">
-                <h2 className="text-2xl font-bold mb-6">Who We're Looking For</h2>
-                <ul className="space-y-3">
+              <div className="py-8 border-t border-b border-border/40">
+                <h2 className="text-2xl font-semibold mb-8 text-center">Who We're Looking For</h2>
+                <ul className="space-y-4">
                   {requirements.map((req, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Gift className="h-4 w-4 text-primary" />
+                      <div className="h-6 w-6 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <Gift className="h-4 w-4 text-accent" />
                       </div>
-                      <span className="text-muted-foreground">{req}</span>
+                      <span className="text-muted-foreground font-light">{req}</span>
                     </li>
                   ))}
                 </ul>
-              </Card>
+              </div>
             </div>
           </div>
         </section>
@@ -233,7 +233,7 @@ const Ambassador = () => {
                 </p>
               </div>
 
-              <Card className="p-8">
+              <div className="bg-card/50 backdrop-blur-sm border border-border/40 rounded-2xl p-8 shadow-[var(--shadow-soft)]">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
                     <Label htmlFor="name">Full Name *</Label>
@@ -301,7 +301,7 @@ const Ambassador = () => {
                     We'll review your application and get back to you within 5 business days.
                   </p>
                 </form>
-              </Card>
+              </div>
             </div>
           </div>
         </section>
