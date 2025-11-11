@@ -1,6 +1,5 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -145,18 +144,16 @@ const Resources = () => {
         <ResourceFinder />
 
         {/* Featured Article */}
-        <Card className="mb-20 overflow-hidden hover:shadow-2xl transition-all duration-500 border-primary/20 bg-gradient-to-br from-card via-card to-primary/5 group">
-          <div className="grid md:grid-cols-5 gap-0">
-            <div className="md:col-span-3 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-background/50 z-10" />
+        <div className="mb-20 overflow-hidden border-b pb-12">
+          <div className="grid md:grid-cols-5 gap-8">
+            <div className="md:col-span-3 relative overflow-hidden rounded-lg">
               <img
                 src={featuredArticle.image}
                 alt={featuredArticle.title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>
-            <div className="md:col-span-2 p-8 md:p-10 flex flex-col justify-center relative">
-              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary via-primary/50 to-transparent" />
+            <div className="md:col-span-2 flex flex-col justify-center">
               <div className="flex flex-wrap items-center gap-2 mb-5">
                 <Badge className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground shadow-md">
                   <TrendingUp className="h-3.5 w-3.5 mr-1.5" />
@@ -173,7 +170,7 @@ const Resources = () => {
                   </span>
                 </div>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-5 leading-tight group-hover:text-primary transition-colors">
+              <h2 className="text-3xl md:text-4xl font-bold mb-5 leading-tight hover:text-primary transition-colors">
                 {featuredArticle.title}
               </h2>
               <p className="text-muted-foreground mb-8 text-base leading-relaxed">
@@ -185,7 +182,7 @@ const Resources = () => {
               </Button>
             </div>
           </div>
-        </Card>
+        </div>
 
         {/* Multi-Format Content Hub */}
         <MultiFormatHub />
@@ -196,26 +193,24 @@ const Resources = () => {
         </div>
 
         {/* Newsletter Section */}
-        <Card className="border-border/50">
-          <CardContent className="p-10 md:p-12 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Stay Updated
-            </h2>
-            <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-              Get the latest health insights, exclusive offers, and expert tips straight to your inbox
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
-              <Input 
-                type="email" 
-                placeholder="Enter your email" 
-                className="flex-1 h-11"
-              />
-              <Button size="lg" className="h-11 px-6">
-                Subscribe
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+        <div className="p-10 md:p-12 text-center border-b pb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Stay Updated
+          </h2>
+          <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
+            Get the latest health insights, exclusive offers, and expert tips straight to your inbox
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+            <Input 
+              type="email" 
+              placeholder="Enter your email" 
+              className="flex-1 h-11"
+            />
+            <Button size="lg" className="h-11 px-6">
+              Subscribe
+            </Button>
+          </div>
+        </div>
 
         {/* CTA Section */}
         <div className="mt-16 text-center">

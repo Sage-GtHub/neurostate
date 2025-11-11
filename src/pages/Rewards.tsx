@@ -1,6 +1,5 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -198,7 +197,7 @@ export default function Rewards() {
         </div>
 
         {/* Points Balance Card */}
-        <Card className="p-8 mb-8 bg-gradient-to-br from-accent/10 to-accent/5 border-accent/20">
+        <div className="p-8 mb-8 bg-gradient-to-br from-accent/10 to-accent/5 border-l-4 border-accent">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-muted-foreground mb-2">Your Points Balance</p>
@@ -212,7 +211,7 @@ export default function Rewards() {
             </div>
             <Award className="h-20 w-20 text-accent/30" />
           </div>
-        </Card>
+        </div>
 
         {/* Tabs */}
         <Tabs defaultValue="catalog" className="space-y-6">
@@ -228,9 +227,9 @@ export default function Rewards() {
               {rewards.map((reward) => {
                 const canRedeem = pointsBalance >= reward.points_required;
                 return (
-                  <Card key={reward.id} className="overflow-hidden transition-all duration-300 hover:shadow-accent-glow">
-                    <div className="h-2 bg-gradient-to-r from-accent/20 to-accent/60" />
-                    <div className="p-6">
+                  <div key={reward.id} className="overflow-hidden border-b pb-6">
+                    <div className="h-2 bg-gradient-to-r from-accent/20 to-accent/60 mb-6" />
+                    <div>
                       <div className="flex items-start justify-between mb-4">
                         <Badge variant="secondary" className="text-accent">
                           {reward.points_required} points
@@ -266,7 +265,7 @@ export default function Rewards() {
                         {redeemMutation.isPending ? "Redeeming..." : canRedeem ? "Redeem Now" : `Need ${reward.points_required - pointsBalance} more points`}
                       </Button>
                     </div>
-                  </Card>
+                  </div>
                 );
               })}
             </div>
@@ -275,13 +274,13 @@ export default function Rewards() {
           {/* Redemptions Tab */}
           <TabsContent value="redemptions" className="space-y-4">
             {redemptions.length === 0 ? (
-              <Card className="p-12 text-center">
+              <div className="p-12 text-center border-b">
                 <Gift className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
                 <p className="text-muted-foreground">No redemptions yet. Start earning points to unlock rewards!</p>
-              </Card>
+              </div>
             ) : (
               redemptions.map((redemption) => (
-                <Card key={redemption.id} className="p-6">
+                <div key={redemption.id} className="p-6 border-b">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
@@ -313,7 +312,7 @@ export default function Rewards() {
                       </p>
                     </div>
                   </div>
-                </Card>
+                </div>
               ))
             )}
           </TabsContent>
@@ -321,48 +320,46 @@ export default function Rewards() {
           {/* History Tab */}
           <TabsContent value="history" className="space-y-4">
             {pointsHistory.length === 0 ? (
-              <Card className="p-12 text-center">
+              <div className="p-12 text-center border-b">
                 <TrendingUp className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
                 <p className="text-muted-foreground">No points history yet. Make a purchase to start earning!</p>
-              </Card>
+              </div>
             ) : (
-              <Card>
-                <div className="divide-y">
-                  {pointsHistory.map((transaction) => (
-                    <div key={transaction.id} className="p-4 flex items-center justify-between hover:bg-secondary/20 transition-colors">
-                      <div className="flex items-center gap-4">
-                        <div className={`p-2 rounded-full ${
-                          transaction.transaction_type === 'earned' ? 'bg-green-500/10' :
-                          transaction.transaction_type === 'bonus' ? 'bg-blue-500/10' :
-                          'bg-red-500/10'
-                        }`}>
-                          {transaction.transaction_type === 'earned' ? <TrendingUp className="h-5 w-5 text-green-600" /> :
-                           transaction.transaction_type === 'bonus' ? <Gift className="h-5 w-5 text-blue-600" /> :
-                           <Check className="h-5 w-5 text-red-600" />}
-                        </div>
-                        <div>
-                          <p className="font-medium">{transaction.description}</p>
-                          <p className="text-xs text-muted-foreground flex items-center gap-1">
-                            <Clock className="h-3 w-3" />
-                            {new Date(transaction.created_at).toLocaleString()}
-                          </p>
-                        </div>
-                      </div>
-                      <div className={`text-xl font-bold ${
-                        transaction.points > 0 ? 'text-green-600' : 'text-red-600'
+              <div className="divide-y border-b">
+                {pointsHistory.map((transaction) => (
+                  <div key={transaction.id} className="p-4 flex items-center justify-between hover:bg-secondary/20 transition-colors">
+                    <div className="flex items-center gap-4">
+                      <div className={`p-2 rounded-full ${
+                        transaction.transaction_type === 'earned' ? 'bg-green-500/10' :
+                        transaction.transaction_type === 'bonus' ? 'bg-blue-500/10' :
+                        'bg-red-500/10'
                       }`}>
-                        {transaction.points > 0 ? '+' : ''}{transaction.points}
+                        {transaction.transaction_type === 'earned' ? <TrendingUp className="h-5 w-5 text-green-600" /> :
+                         transaction.transaction_type === 'bonus' ? <Gift className="h-5 w-5 text-blue-600" /> :
+                         <Check className="h-5 w-5 text-red-600" />}
+                      </div>
+                      <div>
+                        <p className="font-medium">{transaction.description}</p>
+                        <p className="text-xs text-muted-foreground flex items-center gap-1">
+                          <Clock className="h-3 w-3" />
+                          {new Date(transaction.created_at).toLocaleString()}
+                        </p>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </Card>
+                    <div className={`text-xl font-bold ${
+                      transaction.points > 0 ? 'text-green-600' : 'text-red-600'
+                    }`}>
+                      {transaction.points > 0 ? '+' : ''}{transaction.points}
+                    </div>
+                  </div>
+                ))}
+              </div>
             )}
           </TabsContent>
         </Tabs>
 
         {/* How It Works Section */}
-        <Card className="mt-12 p-8 bg-gradient-to-br from-secondary to-muted">
+        <div className="mt-12 p-8 border-t">
           <h2 className="text-2xl font-bold mb-6">How It Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
@@ -393,7 +390,7 @@ export default function Rewards() {
               </p>
             </div>
           </div>
-        </Card>
+        </div>
       </main>
       <Footer />
       <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />

@@ -1,7 +1,6 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
@@ -163,11 +162,11 @@ const OrderTracking = () => {
   };
 
   const OrderCard = ({ order }: { order: Order }) => (
-    <Card className="overflow-hidden">
-      <CardHeader className="bg-muted/50">
+    <div className="overflow-hidden border-b pb-8 mb-8">
+      <div className="mb-6">
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="text-lg">Order #{order.order_number}</CardTitle>
+            <h3 className="text-lg font-bold">Order #{order.order_number}</h3>
             <p className="text-sm text-muted-foreground mt-1">
               Placed on {formatDate(order.created_at)}
             </p>
@@ -179,9 +178,9 @@ const OrderTracking = () => {
             </span>
           </Badge>
         </div>
-      </CardHeader>
+      </div>
 
-      <CardContent className="pt-6 space-y-6">
+      <div className="space-y-6">
         {/* Order Timeline */}
         <div className="space-y-4">
           <h4 className="font-semibold text-sm">Order Status</h4>
@@ -282,8 +281,8 @@ const OrderTracking = () => {
             £{Number(order.total_amount).toFixed(2)}
           </span>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 
   return (
@@ -310,43 +309,41 @@ const OrderTracking = () => {
             <div className="max-w-4xl mx-auto space-y-12">
               {/* Guest Order Tracking */}
               {!user && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
+                <div className="p-8 border-b">
+                  <div className="mb-6">
+                    <h2 className="text-xl font-bold flex items-center gap-2 mb-2">
                       <Search className="h-5 w-5" />
                       Track Your Order
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <form onSubmit={handleTrackOrder} className="space-y-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="orderNumber">Order Number</Label>
-                        <Input
-                          id="orderNumber"
-                          placeholder="e.g., NS-2024-001"
-                          value={orderNumber}
-                          onChange={(e) => setOrderNumber(e.target.value)}
-                        />
-                        <p className="text-xs text-muted-foreground">
-                          You can find your order number in your confirmation email
-                        </p>
-                      </div>
-                      <Button type="submit" disabled={isLoading}>
-                        {isLoading ? "Tracking..." : "Track Order"}
-                      </Button>
-                    </form>
-
-                    <div className="mt-6 p-4 bg-muted/50 rounded-lg">
-                      <p className="text-sm text-muted-foreground">
-                        Have an account?{" "}
-                        <Link to="/auth" className="text-primary hover:underline font-medium">
-                          Sign in
-                        </Link>{" "}
-                        to view all your orders
+                    </h2>
+                  </div>
+                  <form onSubmit={handleTrackOrder} className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="orderNumber">Order Number</Label>
+                      <Input
+                        id="orderNumber"
+                        placeholder="e.g., NS-2024-001"
+                        value={orderNumber}
+                        onChange={(e) => setOrderNumber(e.target.value)}
+                      />
+                      <p className="text-xs text-muted-foreground">
+                        You can find your order number in your confirmation email
                       </p>
                     </div>
-                  </CardContent>
-                </Card>
+                    <Button type="submit" disabled={isLoading}>
+                      {isLoading ? "Tracking..." : "Track Order"}
+                    </Button>
+                  </form>
+
+                  <div className="mt-6 p-4 bg-muted/50 rounded-lg">
+                    <p className="text-sm text-muted-foreground">
+                      Have an account?{" "}
+                      <Link to="/auth" className="text-primary hover:underline font-medium">
+                        Sign in
+                      </Link>{" "}
+                      to view all your orders
+                    </p>
+                  </div>
+                </div>
               )}
 
               {/* Searched Order Results */}
@@ -368,20 +365,18 @@ const OrderTracking = () => {
                   </div>
 
                   {userOrders.length === 0 ? (
-                    <Card>
-                      <CardContent className="py-12 text-center space-y-4">
-                        <Package className="h-12 w-12 mx-auto text-muted-foreground" />
-                        <div>
-                          <h3 className="font-semibold mb-2">No orders yet</h3>
-                          <p className="text-sm text-muted-foreground mb-4">
-                            When you place an order, it will appear here
-                          </p>
-                          <Link to="/">
-                            <Button>Start Shopping</Button>
-                          </Link>
-                        </div>
-                      </CardContent>
-                    </Card>
+                    <div className="py-12 text-center space-y-4 border-b">
+                      <Package className="h-12 w-12 mx-auto text-muted-foreground" />
+                      <div>
+                        <h3 className="font-semibold mb-2">No orders yet</h3>
+                        <p className="text-sm text-muted-foreground mb-4">
+                          When you place an order, it will appear here
+                        </p>
+                        <Link to="/">
+                          <Button>Start Shopping</Button>
+                        </Link>
+                      </div>
+                    </div>
                   ) : (
                     <div className="space-y-6">
                       {userOrders.map((order) => (

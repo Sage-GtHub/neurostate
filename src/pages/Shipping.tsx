@@ -32,34 +32,34 @@ const Shipping = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               {/* Quick Overview Cards */}
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-                <Card className="p-6 text-center">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div className="text-center">
                   <Clock className="h-10 w-10 text-primary mx-auto mb-3" />
                   <h3 className="font-bold mb-1">Fast Processing</h3>
                   <p className="text-sm text-muted-foreground">1-2 working days</p>
-                </Card>
-                <Card className="p-6 text-center">
+                </div>
+                <div className="text-center">
                   <Package className="h-10 w-10 text-primary mx-auto mb-3" />
                   <h3 className="font-bold mb-1">Free UK Delivery</h3>
                   <p className="text-sm text-muted-foreground">Orders over £50</p>
-                </Card>
-                <Card className="p-6 text-center">
+                </div>
+                <div className="text-center">
                   <RefreshCcw className="h-10 w-10 text-primary mx-auto mb-3" />
                   <h3 className="font-bold mb-1">30-Day Returns</h3>
                   <p className="text-sm text-muted-foreground">Money-back guarantee</p>
-                </Card>
-                <Card className="p-6 text-center">
+                </div>
+                <div className="text-center">
                   <Shield className="h-10 w-10 text-primary mx-auto mb-3" />
                   <h3 className="font-bold mb-1">Secure Packaging</h3>
                   <p className="text-sm text-muted-foreground">Safe & discreet</p>
-                </Card>
+                </div>
               </div>
 
               {/* Detailed Shipping Options */}
               <h2 className="text-3xl font-bold mb-6">Shipping Options</h2>
-              <div className="grid md:grid-cols-2 gap-6 mb-12">
-                <Card className="p-6">
-                  <div className="flex items-start gap-4 mb-4">
+              <div className="grid md:grid-cols-2 gap-12 mb-12">
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
                     <MapPin className="h-8 w-8 text-primary flex-shrink-0" />
                     <div>
                       <h3 className="text-xl font-bold mb-2">UK Delivery</h3>
@@ -98,10 +98,10 @@ const Shipping = () => {
                       </div>
                     </div>
                   </div>
-                </Card>
+                </div>
 
-                <Card className="p-6">
-                  <div className="flex items-start gap-4 mb-4">
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
                     <Truck className="h-8 w-8 text-primary flex-shrink-0" />
                     <div>
                       <h3 className="text-xl font-bold mb-2">International Delivery</h3>
@@ -141,11 +141,11 @@ const Shipping = () => {
                       </div>
                     </div>
                   </div>
-                </Card>
+                </div>
               </div>
 
               {/* Shipping FAQ */}
-              <Card className="p-8 mb-12">
+              <div className="mb-12 pb-12 border-b">
                 <h2 className="text-2xl font-bold mb-6">Shipping Information</h2>
                 <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value="processing">
@@ -220,11 +220,11 @@ const Shipping = () => {
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
-              </Card>
+              </div>
 
               {/* Returns & Refunds Section */}
               <h2 className="text-3xl font-bold mb-6">Returns & Refunds</h2>
-              <Card className="p-8 bg-gradient-to-br from-primary/5 to-transparent border-2 border-primary/20 mb-8">
+              <div className="p-8 bg-gradient-to-br from-primary/5 to-transparent border-l-4 border-primary mb-8">
                 <div className="flex items-start gap-4 mb-6">
                   <RefreshCcw className="h-12 w-12 text-primary flex-shrink-0" />
                   <div>
@@ -258,10 +258,10 @@ const Shipping = () => {
                     </div>
                   </div>
                 </div>
-              </Card>
+              </div>
 
               {/* Return Process */}
-              <Card className="p-8 mb-8">
+              <div className="mb-8 pb-8 border-b">
                 <h3 className="text-xl font-bold mb-6">How to Return an Item</h3>
                 <div className="space-y-6">
                   <div className="flex gap-4">
@@ -301,10 +301,10 @@ const Shipping = () => {
                     </div>
                   </div>
                 </div>
-              </Card>
+              </div>
 
               {/* Returns FAQ */}
-              <Card className="p-8 mb-8">
+              <div className="mb-8 pb-8 border-b">
                 <h3 className="text-xl font-bold mb-6">Return Policy Details</h3>
                 <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value="eligible">
@@ -371,10 +371,10 @@ const Shipping = () => {
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
-              </Card>
+              </div>
 
               {/* Satisfaction Guarantee */}
-              <Card className="p-8 text-center bg-muted/30">
+              <div className="p-8 text-center">
                 <Shield className="h-16 w-16 text-primary mx-auto mb-4" />
                 <h2 className="text-2xl font-bold mb-3">Our Satisfaction Guarantee</h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
@@ -394,7 +394,7 @@ const Shipping = () => {
                     <span className="font-medium">Full Refunds</span>
                   </div>
                 </div>
-              </Card>
+              </div>
             </div>
           </div>
         </section>
