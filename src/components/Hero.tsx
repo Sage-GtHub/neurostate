@@ -37,6 +37,10 @@ export const Hero = () => {
               src={heroImage} 
               alt="Red Light Face Mask - Recovery, Sleep & Performance"
               className="w-full"
+              style={{
+                mixBlendMode: 'normal',
+                filter: 'drop-shadow(0 10px 40px rgba(0,0,0,0.1))'
+              }}
             />
           </div>
         </div>
