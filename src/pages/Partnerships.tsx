@@ -1,6 +1,5 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -192,63 +191,61 @@ const Partnerships = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {benefits.map((benefit, index) => {
               const Icon = benefit.icon;
               return (
-                <Card 
+                <div 
                   key={index}
-                  className="hover:shadow-lg transition-all duration-300 group border-border/50 hover:border-primary/30"
+                  className="p-6 hover:translate-y-[-4px] transition-all duration-300"
                 >
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                      <Icon className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-2">{benefit.title}</h3>
-                    <p className="text-muted-foreground">{benefit.description}</p>
-                  </CardContent>
-                </Card>
+                  <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4 transition-colors">
+                    <Icon className="h-6 w-6 text-accent" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">{benefit.title}</h3>
+                  <p className="text-sm text-muted-foreground font-light">{benefit.description}</p>
+                </div>
               );
             })}
           </div>
         </div>
 
         {/* Ideal Partners Section */}
-        <Card className="mb-16 border-primary/20 bg-gradient-to-br from-primary/5 to-background">
-          <CardContent className="p-8 md:p-12">
-            <h2 className="text-3xl font-bold mb-6 text-center">Who We Partner With</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="mb-16 border-t border-b border-border/40 py-12 bg-muted/20">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-3xl font-semibold mb-8 text-center">Who We Partner With</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-3">
                   <span className="text-2xl">🏋️</span>
                 </div>
                 <h3 className="font-semibold mb-2">Fitness Centres</h3>
-                <p className="text-sm text-muted-foreground">Gyms, studios, and training facilities</p>
+                <p className="text-sm text-muted-foreground font-light">Gyms, studios, and training facilities</p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-3">
                   <span className="text-2xl">🏢</span>
                 </div>
                 <h3 className="font-semibold mb-2">Corporate Wellness</h3>
-                <p className="text-sm text-muted-foreground">Companies prioritising employee health</p>
+                <p className="text-sm text-muted-foreground font-light">Companies prioritising employee health</p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-3">
                   <span className="text-2xl">🏆</span>
                 </div>
                 <h3 className="font-semibold mb-2">Sports Teams</h3>
-                <p className="text-sm text-muted-foreground">Professional and collegiate athletics</p>
+                <p className="text-sm text-muted-foreground font-light">Professional and collegiate athletics</p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-3">
                   <span className="text-2xl">🏥</span>
                 </div>
                 <h3 className="font-semibold mb-2">Healthcare</h3>
-                <p className="text-sm text-muted-foreground">Clinics, wellness centers, and practitioners</p>
+                <p className="text-sm text-muted-foreground font-light">Clinics, wellness centers, and practitioners</p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
         {/* Current Partners */}
         <div className="mb-20">
@@ -259,43 +256,38 @@ const Partnerships = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {partners.map((partner, index) => (
-              <Card 
+              <div 
                 key={index}
-                className="hover:shadow-lg transition-all duration-300 group"
+                className="p-6 border-t border-border/30 hover:translate-y-[-4px] transition-all duration-300"
               >
-                <CardHeader>
-                  <div className="flex items-center gap-4 mb-3">
-                    <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-3xl">
-                      {partner.logo}
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold group-hover:text-primary transition-colors">
-                        {partner.name}
-                      </h3>
-                      <Badge variant="secondary" className="mt-1">{partner.category}</Badge>
-                    </div>
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-accent/20 to-accent/10 flex items-center justify-center text-3xl">
+                    {partner.logo}
                   </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{partner.description}</p>
-                </CardContent>
-              </Card>
+                  <div>
+                    <h3 className="text-lg font-semibold">
+                      {partner.name}
+                    </h3>
+                    <Badge variant="secondary" className="mt-1 text-xs">{partner.category}</Badge>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground font-light">{partner.description}</p>
+              </div>
             ))}
           </div>
         </div>
 
         {/* Application Form */}
         <div className="max-w-3xl mx-auto mb-20">
-          <Card className="border-primary/20">
-            <CardHeader className="text-center pb-6">
-              <h2 className="text-3xl font-bold mb-2">Apply for Partnership</h2>
-              <p className="text-muted-foreground">
+          <div className="bg-card/50 backdrop-blur-sm border border-border/40 rounded-2xl p-8 shadow-[var(--shadow-soft)]">
+            <div className="text-center pb-6 mb-6 border-b border-border/30">
+              <h2 className="text-3xl font-semibold mb-2">Apply for Partnership</h2>
+              <p className="text-muted-foreground font-light">
                 Tell us about your organisation and how we might work together
               </p>
-            </CardHeader>
-            <CardContent className="p-8">
+            </div>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
@@ -379,11 +371,11 @@ const Partnerships = () => {
 
                 <div className="space-y-4">
                   <div className="flex items-start gap-3 text-sm text-muted-foreground">
-                    <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                     <p>We review all applications within 2-3 business days</p>
                   </div>
-                  <div className="flex items-start gap-3 text-sm text-muted-foreground">
-                    <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-3 text-sm text-muted-foreground font-light">
+                    <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                     <p>Our team will reach out to discuss partnership opportunities</p>
                   </div>
                 </div>
@@ -398,28 +390,25 @@ const Partnerships = () => {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </form>
-            </CardContent>
-          </Card>
-        </div>
+            </div>
+          </div>
 
-        {/* Contact Section */}
-        <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
-          <CardContent className="p-8 md:p-12">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4">Questions About Partnerships?</h2>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Our partnership team is here to help you explore what's possible
-              </p>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" variant="outline" className="gap-2">
-                <Mail className="h-5 w-5" />
-                contact@neurostate.co.uk
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+          {/* Contact Section */}
+          <div className="bg-muted/30 border-t border-b border-border/40 py-12 mt-20">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-semibold mb-4">Questions About Partnerships?</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-light">
+              Our partnership team is here to help you explore what's possible
+            </p>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button size="lg" variant="outline" className="gap-2">
+              <Mail className="h-5 w-5" />
+              contact@neurostate.co.uk
+            </Button>
+          </div>
+        </div>
       </main>
 
       <Footer />
