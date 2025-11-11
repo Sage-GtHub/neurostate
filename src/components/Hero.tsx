@@ -25,7 +25,7 @@ export const Hero = () => {
               <span className="font-semibold">Naturally</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-10 font-light leading-relaxed">
-              Premium tools and supplements for recovery, sleep, and human optimization.
+              Premium tools and supplements for recovery, sleep, and cognitive performance.
             </p>
             <Button 
               size="lg" 
