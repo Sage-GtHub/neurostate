@@ -1,7 +1,6 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Target, Heart, Shield, Award, Microscope, Leaf, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -145,22 +144,20 @@ const AboutUs = () => {
         {/* Core Values */}
         <section className="py-16 lg:py-20">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Our Core Values</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-semibold text-center mb-12">Our Core Values</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
               {values.map((value, index) => {
                 const Icon = value.icon;
                 return (
-                  <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                    <CardContent className="pt-6 pb-6 space-y-4">
-                      <div className="flex justify-center">
-                        <div className="p-3 rounded-full bg-primary/10">
-                          <Icon className="h-8 w-8 text-primary" />
-                        </div>
+                  <div key={index} className="text-center p-6">
+                    <div className="flex justify-center">
+                      <div className="p-3 rounded-full bg-accent/10">
+                        <Icon className="h-8 w-8 text-accent" />
                       </div>
-                      <h3 className="font-semibold text-lg">{value.title}</h3>
-                      <p className="text-sm text-muted-foreground">{value.description}</p>
-                    </CardContent>
-                  </Card>
+                    </div>
+                    <h3 className="font-semibold text-lg mt-4 mb-2">{value.title}</h3>
+                    <p className="text-sm text-muted-foreground font-light">{value.description}</p>
+                  </div>
                 );
               })}
             </div>
@@ -181,9 +178,9 @@ const AboutUs = () => {
               
               <div className="grid md:grid-cols-2 gap-4">
                 {standards.map((standard, index) => (
-                  <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-background">
+                  <div key={index} className="flex items-start gap-3 p-4 rounded-lg border border-border/30">
                     <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">{standard}</span>
+                    <span className="text-muted-foreground font-light">{standard}</span>
                   </div>
                 ))}
               </div>

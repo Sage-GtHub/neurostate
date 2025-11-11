@@ -7,7 +7,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Card } from "@/components/ui/card";
 import { LiveChat } from "@/components/LiveChat";
 
 const FAQ = () => {
@@ -136,21 +135,21 @@ const FAQ = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto space-y-12">
               {faqCategories.map((category) => (
-                <Card key={category.category} className="p-6">
-                  <h2 className="text-2xl font-bold mb-6">{category.category}</h2>
+                <div key={category.category} className="py-8 border-t border-border/30">
+                  <h2 className="text-2xl font-semibold mb-6">{category.category}</h2>
                   <Accordion type="single" collapsible className="w-full">
                     {category.questions.map((item, idx) => (
                       <AccordionItem key={idx} value={`item-${idx}`}>
-                        <AccordionTrigger className="text-left">
+                        <AccordionTrigger className="text-left font-medium">
                           {item.q}
                         </AccordionTrigger>
-                        <AccordionContent className="text-muted-foreground">
+                        <AccordionContent className="text-muted-foreground font-light">
                           {item.a}
                         </AccordionContent>
                       </AccordionItem>
                     ))}
                   </Accordion>
-                </Card>
+                </div>
               ))}
             </div>
           </div>

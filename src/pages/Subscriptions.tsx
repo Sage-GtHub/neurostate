@@ -241,30 +241,30 @@ const Subscriptions = () => {
               )}
 
               {/* Info Cards */}
-              <div className="grid md:grid-cols-3 gap-6 mt-12">
-                <Card className="p-6 text-center">
-                  <RefreshCw className="h-10 w-10 text-primary mx-auto mb-3" />
-                  <h3 className="font-bold mb-2">Flexible Delivery</h3>
-                  <p className="text-sm text-muted-foreground">
+              <div className="grid md:grid-cols-3 gap-8 mt-12">
+                <div className="p-6 text-center">
+                  <RefreshCw className="h-10 w-10 text-accent mx-auto mb-3" />
+                  <h3 className="font-semibold mb-2">Flexible Delivery</h3>
+                  <p className="text-sm text-muted-foreground font-light">
                     Choose monthly, bi-monthly, or quarterly deliveries
                   </p>
-                </Card>
+                </div>
 
-                <Card className="p-6 text-center">
-                  <Pause className="h-10 w-10 text-primary mx-auto mb-3" />
-                  <h3 className="font-bold mb-2">Pause Anytime</h3>
-                  <p className="text-sm text-muted-foreground">
+                <div className="p-6 text-center">
+                  <Pause className="h-10 w-10 text-accent mx-auto mb-3" />
+                  <h3 className="font-semibold mb-2">Pause Anytime</h3>
+                  <p className="text-sm text-muted-foreground font-light">
                     Skip or pause deliveries whenever you need to
                   </p>
-                </Card>
+                </div>
 
-                <Card className="p-6 text-center">
-                  <Settings className="h-10 w-10 text-primary mx-auto mb-3" />
-                  <h3 className="font-bold mb-2">Easy Management</h3>
-                  <p className="text-sm text-muted-foreground">
+                <div className="p-6 text-center">
+                  <Settings className="h-10 w-10 text-accent mx-auto mb-3" />
+                  <h3 className="font-semibold mb-2">Easy Management</h3>
+                  <p className="text-sm text-muted-foreground font-light">
                     Update frequency, address, or cancel with one click
                   </p>
-                </Card>
+                </div>
               </div>
             </div>
           </div>
