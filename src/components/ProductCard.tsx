@@ -90,7 +90,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           </div>
         <div className="p-6 lg:p-8 space-y-4 flex-1 flex flex-col">
           <div className="space-y-3 flex-1">
-            <h3 className="font-medium text-foreground line-clamp-2 leading-snug min-h-[2.5rem] text-base lg:text-lg">
+            <h3 className="font-medium text-foreground line-clamp-2 leading-snug min-h-[2.5rem] text-sm lg:text-base">
               {node.title}
             </h3>
             
@@ -118,10 +118,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           
           <div className="flex items-center justify-between pt-2 border-t border-border/40">
             <div>
-              <p className="text-2xl font-light text-foreground tracking-tight">
+              <p className="text-lg font-light text-foreground tracking-tight">
                 £{price.toFixed(2)}
               </p>
-              <p className="text-xs text-muted-foreground mt-1.5 font-light">
+              <p className="text-[10px] text-muted-foreground mt-1.5 font-light">
                 or £{(price * 0.85).toFixed(2)} with Subscribe & Save
               </p>
             </div>
@@ -129,8 +129,8 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           
           <Button 
             onClick={handleAddToCart}
-            className={`w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 font-medium rounded-full min-h-[48px] shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-medium)] ${
-              justAdded ? "bg-green-600 hover:bg-green-600" : ""
+            className={`w-full bg-background text-foreground border border-border/60 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 font-medium rounded-full min-h-[48px] shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-medium)] ${
+              justAdded ? "bg-green-600 hover:bg-green-600 text-white border-green-600" : ""
             } ${isAdding ? "scale-[0.98]" : ""}`}
             disabled={!firstVariant?.availableForSale || isAdding}
           >
