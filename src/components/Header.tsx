@@ -142,12 +142,19 @@ export const Header = () => {
 
               {/* Bundles Link */}
               <NavigationMenuItem>
-                <Link
-                  to="/#bundles"
-                  className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                <button
+                  onClick={() => {
+                    const bundlesSection = document.getElementById('bundles');
+                    if (bundlesSection) {
+                      bundlesSection.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                      navigate('/#bundles');
+                    }
+                  }}
+                  className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 cursor-pointer"
                 >
                   Bundles
-                </Link>
+                </button>
               </NavigationMenuItem>
 
               {/* Guides Dropdown */}
@@ -344,13 +351,22 @@ export const Header = () => {
                   </div>
 
                   {/* Bundles Section */}
-                  <Link
-                    to="/#bundles"
-                    className="text-lg font-medium hover:text-accent transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setTimeout(() => {
+                        const bundlesSection = document.getElementById('bundles');
+                        if (bundlesSection) {
+                          bundlesSection.scrollIntoView({ behavior: 'smooth' });
+                        } else {
+                          navigate('/#bundles');
+                        }
+                      }, 100);
+                    }}
+                    className="text-lg font-medium hover:text-accent transition-colors text-left cursor-pointer"
                   >
                     Bundles
-                  </Link>
+                  </button>
 
                   {/* Guides Section */}
                   <div>
