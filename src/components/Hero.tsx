@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import heroImage from "@/assets/red-light-face-mask.png";
+import heroImage from "@/assets/red-light-face-mask.jpg";
 
 export const Hero = () => {
   const scrollToProducts = () => {
