@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import sleepImage from "@/assets/restoresleep-night.png";
-import recoveryImage from "@/assets/red-light-therapy-blanket.png";
-import performanceImage from "@/assets/pemf-therapy-mat.png";
+import recoveryImage from "@/assets/red-light-therapy-blanket-new.png";
+import performanceImage from "@/assets/pemf-therapy-mat-new.png";
 import cognitiveImage from "@/assets/neurofocus-cognitive.png";
 
 interface Goal {
