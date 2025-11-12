@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import heroImage from "@/assets/omega3-elite-new.png";
+import heroImage from "@/assets/lions-mane-mushroom.png";
 
 export const Hero = () => {
   const scrollToProducts = () => {
