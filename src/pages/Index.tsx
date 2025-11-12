@@ -67,7 +67,7 @@ const Index = () => {
       <main>
         <Hero />
         <ShopByGoal />
-        <section id="products" className="py-12 md:py-16 px-4 sm:px-6 lg:px-16 xl:px-24">
+        <section id="products" className="py-12 md:py-16 px-6 sm:px-8 lg:px-20 xl:px-32">
           <div className="container mx-auto">
             <div className="flex items-center justify-between mb-6 md:mb-8">
               <div>

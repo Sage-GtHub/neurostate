@@ -106,7 +106,7 @@ export const Header = () => {
     <>
       <AnnouncementBar />
       <header className="sticky top-0 z-50 w-full bg-background border-b">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-16 xl:px-24">
+        <div className="container mx-auto flex h-16 items-center justify-between px-6 sm:px-8 lg:px-20 xl:px-32">
           <Link to="/" className="font-bold text-2xl tracking-tight">
             NeuroState®
           </Link>
