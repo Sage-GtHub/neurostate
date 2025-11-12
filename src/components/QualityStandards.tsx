@@ -72,7 +72,7 @@ const standards: Standard[] = [
 export const QualityStandards = () => {
   return (
     <section className="py-16 md:py-24 px-6 sm:px-8 lg:px-20 xl:px-32">
-      <div className="container mx-auto">
+      <div className="w-full">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-3">
             Our Quality Commitment

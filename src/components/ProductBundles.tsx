@@ -88,7 +88,7 @@ export const ProductBundles = () => {
 
   return (
     <section id="bundles" className="py-12 sm:py-16 px-6 sm:px-8 lg:px-20 xl:px-32 bg-secondary/20">
-      <div className="container mx-auto">
+      <div className="w-full">
         <div className="text-center mb-8 sm:mb-12">
           <div className="inline-flex items-center gap-2 mb-3 sm:mb-4">
             <Package className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
