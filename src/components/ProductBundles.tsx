@@ -100,7 +100,7 @@ export const ProductBundles = () => {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {bundles.map((bundle) => {
             const bundleProducts = getBundleProducts(bundle.productKeywords);
             if (bundleProducts.length === 0) return null;

@@ -12,7 +12,7 @@ export const Hero = () => {
     <section 
       className="relative min-h-[60vh] md:min-h-[75vh] lg:min-h-[85vh] flex items-center px-4 sm:px-6 lg:px-12 overflow-hidden bg-[hsl(var(--hero-bg))]"
     >
-      <div className="container mx-auto max-w-7xl">
+      <div className="w-full">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
           {/* Content - centered and minimal */}
           <div className="text-center lg:text-left max-w-2xl mx-auto lg:mx-0 py-12 md:py-16 lg:py-20">
