@@ -87,7 +87,7 @@ export const ProductBundles = () => {
   };
 
   return (
-    <section id="bundles" className="py-12 sm:py-16 px-4 bg-secondary/20">
+    <section id="bundles" className="py-12 sm:py-16 px-4 sm:px-6 lg:px-16 xl:px-24 bg-secondary/20">
       <div className="container mx-auto">
         <div className="text-center mb-8 sm:mb-12">
           <div className="inline-flex items-center gap-2 mb-3 sm:mb-4">

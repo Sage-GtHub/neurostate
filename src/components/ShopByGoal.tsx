@@ -51,7 +51,7 @@ const goals: Goal[] = [
 
 export const ShopByGoal = () => {
   return (
-    <section className="py-12 sm:py-16 px-4 bg-gradient-to-b from-background to-secondary/30">
+    <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-16 xl:px-24 bg-gradient-to-b from-background to-secondary/30">
       <div className="container mx-auto">
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">Shop by Goal</h2>

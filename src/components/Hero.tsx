@@ -10,7 +10,7 @@ export const Hero = () => {
 
   return (
     <section 
-      className="relative min-h-[60vh] md:min-h-[75vh] lg:min-h-[85vh] flex items-center px-4 sm:px-6 lg:px-12 overflow-hidden bg-[hsl(var(--hero-bg))]"
+      className="relative min-h-[60vh] md:min-h-[75vh] lg:min-h-[85vh] flex items-center px-4 sm:px-6 lg:px-16 xl:px-24 overflow-hidden bg-[hsl(var(--hero-bg))]"
     >
       <div className="w-full">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">

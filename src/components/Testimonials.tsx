@@ -87,7 +87,7 @@ const StarRating = ({ rating }: { rating: number }) => {
 export const Testimonials = () => {
   return (
     <section className="py-16 lg:py-24 bg-gradient-to-b from-background to-muted/20">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
         <div className="text-center mb-12 space-y-4">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
             What Our Customers Say

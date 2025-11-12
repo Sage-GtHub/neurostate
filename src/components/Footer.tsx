@@ -73,7 +73,7 @@ export const Footer = () => {
 
   return (
     <footer className="bg-muted/30 border-t mt-16 sm:mt-24">
-      <div className="container mx-auto px-4 py-8 sm:py-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-16 xl:px-24 py-8 sm:py-12">
         {/* Company Mission */}
         <div className="mb-8 sm:mb-12 max-w-3xl">
           <Link to="/" className="font-bold text-xl sm:text-2xl tracking-tight mb-3 sm:mb-4 inline-block">
