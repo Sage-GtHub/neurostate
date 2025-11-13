@@ -4,7 +4,8 @@ import { ProductGrid } from "@/components/ProductGrid";
 import { ProductFilters, FilterState } from "@/components/ProductFilters";
 import { ProductBundles } from "@/components/ProductBundles";
 import { ProductQuiz } from "@/components/ProductQuiz";
-
+import { SEO } from "@/components/SEO";
+import { OrganizationStructuredData } from "@/components/StructuredData";
 import { RecentlyViewed } from "@/components/RecentlyViewed";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 import { LiveChat } from "@/components/LiveChat";
@@ -62,12 +63,15 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main>
-        <Hero />
-        <ShopByGoal />
-        <section id="products" className="py-12 md:py-16 px-6 sm:px-8 lg:px-20 xl:px-32">
+    <>
+      <SEO />
+      <OrganizationStructuredData />
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main>
+          <Hero />
+          <ShopByGoal />
+          <section id="products" className="py-12 md:py-16 px-6 sm:px-8 lg:px-20 xl:px-32">
           <div className="w-full">
             <div className="flex items-center justify-between mb-6 md:mb-8">
               <div>
@@ -113,11 +117,12 @@ const Index = () => {
         <QualityStandards />
         <Testimonials />
         <RecentlyViewed />
-      </main>
-      <Footer />
-      <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
-      <ExitIntentPopup />
-    </div>
+        </main>
+        <Footer />
+        <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
+        <ExitIntentPopup />
+      </div>
+    </>
   );
 };
 

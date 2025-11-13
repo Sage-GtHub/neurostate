@@ -11,6 +11,7 @@ export const Hero = () => {
   return (
     <section 
       className="relative min-h-[60vh] md:min-h-[75vh] lg:min-h-[85vh] flex items-center px-6 sm:px-8 lg:px-20 xl:px-32 overflow-hidden bg-[hsl(var(--hero-bg))]"
+      aria-label="Hero section"
     >
       <div className="w-full">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
@@ -31,6 +32,7 @@ export const Hero = () => {
               size="lg" 
               className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium rounded-full px-8 sm:px-10 py-5 sm:py-6 text-sm sm:text-base transition-all duration-300 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-medium)] w-full sm:w-auto"
               onClick={scrollToProducts}
+              aria-label="Scroll to products section"
             >
               Explore Products <ArrowRight className="ml-2 h-4 sm:h-5 w-4 sm:w-5" />
             </Button>
@@ -41,8 +43,11 @@ export const Hero = () => {
             <div className="relative w-full max-w-sm md:max-w-md lg:max-w-lg">
               <img 
                 src={heroImage} 
-                alt="Premium wellness tools for recovery and performance"
+                alt="Lion's Mane Mushroom supplement bottle - Premium cognitive enhancement supplement from NeuroState"
                 className="w-full h-auto object-contain"
+                loading="eager"
+                width="600"
+                height="800"
                 style={{
                   filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.08))',
                   maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 60%, rgba(0,0,0,0) 100%)',
