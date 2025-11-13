@@ -19,6 +19,7 @@ import { ArrowLeft, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import { LiveChat } from "@/components/LiveChat";
+import { trackProductView } from "@/lib/analytics";
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
@@ -38,6 +39,16 @@ const ProductDetail = () => {
   useEffect(() => {
     if (product) {
       addRecentlyViewed({ node: product });
+      
+      // Track product view in Google Analytics
+      const firstVariant = product.variants.edges[0]?.node;
+      trackProductView({
+        id: product.id,
+        name: product.title,
+        price: firstVariant?.price.amount || '0',
+        category: product.tags?.[0],
+        brand: 'NeuroState',
+      });
     }
   }, [product, addRecentlyViewed]);
 
