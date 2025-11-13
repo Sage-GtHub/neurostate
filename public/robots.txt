@@ -1,14 +1,11 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+
+Sitemap: https://neurostate.co.uk/sitemap.xml
+
+# Crawl-delay for all bots
+Crawl-delay: 0
+
+# Block specific paths if needed (currently none)
+# Disallow: /admin/
+# Disallow: /api/
