@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { ShopifyProduct, createStorefrontCheckout } from '@/lib/shopify';
+import { trackAddToCart, trackRemoveFromCart, trackBeginCheckout } from '@/lib/analytics';
 
 export interface CartItem {
   product: ShopifyProduct;
@@ -65,6 +66,16 @@ export const useCartStore = create<CartStore>()(
         } else {
           set({ items: [...items, item] });
         }
+
+        // Track add to cart event
+        trackAddToCart({
+          id: item.product.node.id,
+          name: item.product.node.title,
+          price: item.price.amount,
+          quantity: item.quantity,
+          category: item.product.node.tags?.[0],
+          variant: item.variantTitle,
+        });
       },
 
       updateQuantity: (variantId, quantity) => {
@@ -81,8 +92,21 @@ export const useCartStore = create<CartStore>()(
       },
 
       removeItem: (variantId) => {
+        const { items } = get();
+        const itemToRemove = items.find(item => item.variantId === variantId);
+        
+        if (itemToRemove) {
+          // Track remove from cart event
+          trackRemoveFromCart({
+            id: itemToRemove.product.node.id,
+            name: itemToRemove.product.node.title,
+            price: itemToRemove.price.amount,
+            quantity: itemToRemove.quantity,
+          });
+        }
+
         set({
-          items: get().items.filter(item => item.variantId !== variantId)
+          items: items.filter(item => item.variantId !== variantId)
         });
       },
 
@@ -97,6 +121,23 @@ export const useCartStore = create<CartStore>()(
       createCheckout: async () => {
         const { items, setLoading, setCheckoutUrl } = get();
         if (items.length === 0) return;
+
+        // Calculate total value
+        const totalValue = items.reduce((total, item) => {
+          return total + (parseFloat(item.price.amount) * item.quantity);
+        }, 0);
+
+        // Track begin checkout event
+        trackBeginCheckout(
+          items.map(item => ({
+            id: item.product.node.id,
+            name: item.product.node.title,
+            price: item.price.amount,
+            quantity: item.quantity,
+            category: item.product.node.tags?.[0],
+          })),
+          totalValue
+        );
 
         setLoading(true);
         try {
