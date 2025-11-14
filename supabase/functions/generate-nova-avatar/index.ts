@@ -17,7 +17,7 @@ serve(async (req) => {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
 
-    console.log("Generating Hera avatar...");
+    console.log("Generating Nova avatar...");
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
@@ -30,7 +30,7 @@ serve(async (req) => {
         messages: [
           {
             role: "user",
-            content: "Generate a minimalist, modern logo icon for 'Hera' - an AI wellness assistant. Design should be: circular avatar style, warm orange and earth tone color palette, elegant and professional, featuring abstract geometric shapes or a stylized 'H' symbol. Clean, modern aesthetic suitable for a health and wellness brand. No text, just the icon. Style: flat design, professional, memorable."
+            content: "Generate a minimalist, modern logo icon for 'Nova' - an AI wellness assistant. Design should be: circular avatar style, warm orange and earth tone color palette, elegant and professional, featuring abstract geometric shapes or a stylized 'N' symbol. Clean, modern aesthetic suitable for a health and wellness brand. No text, just the icon. Style: flat design, professional, memorable."
           }
         ],
         modalities: ["image", "text"]

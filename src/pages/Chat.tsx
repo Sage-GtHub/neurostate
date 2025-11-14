@@ -55,7 +55,7 @@ export default function Chat({ open, onOpenChange }: { open: boolean; onOpenChan
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hello! I'm Hera, your AI wellness assistant. How can I help you today? Whether you're looking for product recommendations, have questions about our services, or need wellness advice, I'm here to help!",
+      content: "Hello! I'm Nova, your AI wellness assistant. How can I help you today? Whether you're looking for product recommendations, have questions about our services, or need wellness advice, I'm here to help!",
       timestamp: new Date(),
     },
   ]);
@@ -68,7 +68,7 @@ export default function Chat({ open, onOpenChange }: { open: boolean; onOpenChan
   const recognitionRef = useRef<any>(null);
   const [products, setProducts] = useState<any[]>([]);
   const addItem = useCartStore((state) => state.addItem);
-  const [heraAvatar, setHeraAvatar] = useState<string | null>(null);
+  const [novaAvatar, setNovaAvatar] = useState<string | null>(null);
   const [isGeneratingAvatar, setIsGeneratingAvatar] = useState(false);
 
   const scrollToBottom = () => {
@@ -87,18 +87,18 @@ export default function Chat({ open, onOpenChange }: { open: boolean; onOpenChan
       console.error('Error fetching products:', error);
     });
 
-    // Generate Hera avatar
+    // Generate Nova avatar
     const generateAvatar = async () => {
       // Check if avatar is cached
-      const cached = localStorage.getItem('hera-avatar');
+      const cached = localStorage.getItem('nova-avatar');
       if (cached) {
-        setHeraAvatar(cached);
+        setNovaAvatar(cached);
         return;
       }
 
       setIsGeneratingAvatar(true);
       try {
-        const { data, error } = await supabase.functions.invoke('generate-hera-avatar');
+        const { data, error } = await supabase.functions.invoke('generate-nova-avatar');
         
         if (error) {
           console.error('Error generating avatar:', error);
@@ -106,8 +106,8 @@ export default function Chat({ open, onOpenChange }: { open: boolean; onOpenChan
         }
 
         if (data?.imageUrl) {
-          setHeraAvatar(data.imageUrl);
-          localStorage.setItem('hera-avatar', data.imageUrl);
+          setNovaAvatar(data.imageUrl);
+          localStorage.setItem('nova-avatar', data.imageUrl);
         }
       } catch (error) {
         console.error('Error generating avatar:', error);
@@ -345,7 +345,7 @@ export default function Chat({ open, onOpenChange }: { open: boolean; onOpenChan
   const clearHistory = () => {
     const firstMessage: Message = {
       role: "assistant",
-      content: "Hello! I'm Hera, your AI wellness assistant. How can I help you today?",
+      content: "Hello! I'm Nova, your AI wellness assistant. How can I help you today?",
       timestamp: new Date(),
     };
     setMessages([firstMessage]);
@@ -475,10 +475,10 @@ export default function Chat({ open, onOpenChange }: { open: boolean; onOpenChan
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-full bg-white/20 backdrop-blur">
-                {heraAvatar ? (
+                {novaAvatar ? (
                   <img 
-                    src={heraAvatar} 
-                    alt="Hera" 
+                    src={novaAvatar} 
+                    alt="Nova" 
                     className="w-5 h-5 rounded-full"
                   />
                 ) : (
@@ -486,7 +486,7 @@ export default function Chat({ open, onOpenChange }: { open: boolean; onOpenChan
                 )}
               </div>
               <div>
-                <SheetTitle className="text-lg font-semibold text-white">Hera</SheetTitle>
+                <SheetTitle className="text-lg font-semibold text-white">Nova</SheetTitle>
                 <p className="text-xs text-white/80">Your wellness assistant</p>
               </div>
             </div>
@@ -543,10 +543,10 @@ export default function Chat({ open, onOpenChange }: { open: boolean; onOpenChan
               >
                 {msg.role === "assistant" && (
                   <div className="flex-shrink-0">
-                    {heraAvatar ? (
+                    {novaAvatar ? (
                       <img 
-                        src={heraAvatar} 
-                        alt="Hera" 
+                        src={novaAvatar} 
+                        alt="Nova" 
                         className="w-10 h-10 rounded-full border-2 border-accent/20 shadow-sm"
                       />
                     ) : (
@@ -577,10 +577,10 @@ export default function Chat({ open, onOpenChange }: { open: boolean; onOpenChan
             ))}
             {isLoading && (
               <div className="flex gap-3 justify-start animate-fade-in">
-                {heraAvatar ? (
+                {novaAvatar ? (
                   <img 
-                    src={heraAvatar} 
-                    alt="Hera" 
+                    src={novaAvatar} 
+                    alt="Nova" 
                     className="w-10 h-10 rounded-full border-2 border-accent/20 shadow-sm flex-shrink-0"
                   />
                 ) : (
