@@ -487,7 +487,7 @@ export default function Chat({ open, onOpenChange }: { open: boolean; onOpenChan
               </div>
               <div>
                 <SheetTitle className="text-lg font-semibold text-white">Nova</SheetTitle>
-                <p className="text-xs text-white/80">Your wellness assistant</p>
+                <p className="text-xs text-white/80">Your performance intelligence</p>
               </div>
             </div>
             <Button
