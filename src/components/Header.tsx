@@ -38,7 +38,7 @@ export const Header = () => {
   const [chatOpen, setChatOpen] = useState(false);
   const [hasUnreadChat, setHasUnreadChat] = useState(() => {
     // Check if user has opened chat before
-    return !localStorage.getItem('hera-chat-visited');
+    return !localStorage.getItem('nova-chat-visited');
   });
 
   useEffect(() => {
@@ -242,7 +242,7 @@ export const Header = () => {
               onClick={() => {
                 setChatOpen(true);
                 setHasUnreadChat(false);
-                localStorage.setItem('hera-chat-visited', 'true');
+                localStorage.setItem('nova-chat-visited', 'true');
               }}
               className="md:hidden relative"
             >
@@ -260,12 +260,12 @@ export const Header = () => {
               onClick={() => {
                 setChatOpen(true);
                 setHasUnreadChat(false);
-                localStorage.setItem('hera-chat-visited', 'true');
+                localStorage.setItem('nova-chat-visited', 'true');
               }}
               className="hidden md:flex items-center gap-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-md relative"
             >
               <Sparkles className="h-4 w-4" />
-              Ask Hera
+              Ask Nova
               {hasUnreadChat && (
                 <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 bg-red-500 hover:bg-red-500 flex items-center justify-center animate-pulse">
                   <span className="text-xs text-white">1</span>
@@ -405,14 +405,14 @@ export const Header = () => {
                       onClick={() => {
                         setChatOpen(true);
                         setHasUnreadChat(false);
-                        localStorage.setItem('hera-chat-visited', 'true');
+                        localStorage.setItem('nova-chat-visited', 'true');
                         setMobileMenuOpen(false);
                       }}
                       className="w-full justify-start bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-md relative"
                       size="lg"
                     >
                       <Sparkles className="h-5 w-5 mr-2" />
-                      Ask Hera
+                      Ask Nova
                       {hasUnreadChat && (
                         <Badge className="absolute top-2 right-2 h-5 w-5 rounded-full p-0 bg-red-500 hover:bg-red-500 flex items-center justify-center animate-pulse">
                           <span className="text-xs text-white">1</span>
