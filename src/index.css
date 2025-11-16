@@ -8,113 +8,92 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Premium wellness palette - stone, sand, charcoal */
-    --background: 30 8% 97%;
-    --foreground: 20 10% 15%;
-    --card: 0 0% 100%;
-    --card-foreground: 20 10% 15%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 20 10% 15%;
-    --primary: 20 10% 15%;
-    --primary-foreground: 30 8% 97%;
-    --secondary: 30 10% 92%;
-    --secondary-foreground: 20 10% 15%;
-    --muted: 30 10% 92%;
-    --muted-foreground: 20 8% 45%;
-    --accent: 25 35% 55%;
-    --accent-foreground: 30 8% 97%;
+    /* NEUROSTATE® Premium Performance Palette - Black, White, Red */
+    --background: 0 0% 8%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 8%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 0 85% 55%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 65% 55%;
     --destructive-foreground: 0 0% 98%;
-    --border: 30 12% 88%;
-    --input: 30 12% 88%;
-    --ring: 25 35% 55%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 85% 55%;
     --radius: 0.5rem;
     
-    --sidebar-background: 30 8% 97%;
-    --sidebar-foreground: 20 10% 15%;
-    --sidebar-primary: 20 10% 15%;
-    --sidebar-primary-foreground: 30 8% 97%;
-    --sidebar-accent: 30 10% 92%;
-    --sidebar-accent-foreground: 20 10% 15%;
-    --sidebar-border: 30 12% 88%;
-    --sidebar-ring: 25 35% 55%;
+    --sidebar-background: 0 0% 8%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 0 0% 8%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 0 85% 55%;
     
-    /* Wellness neutrals */
-    --stone: 30 8% 85%;
-    --sand: 35 15% 88%;
-    --charcoal: 20 10% 20%;
+    /* Performance neutrals */
+    --stone: 0 0% 20%;
+    --sand: 0 0% 25%;
+    --charcoal: 0 0% 12%;
     
     /* Hero background */
-    --hero-bg: 30 10% 92%;
+    --hero-bg: 0 0% 10%;
     
-    /* Subtle depth effects */
-    --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.04);
-    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.06);
-    --shadow-large: 0 8px 32px rgba(0, 0, 0, 0.08);
+    /* Depth effects */
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.5);
+    --shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.6);
+    --shadow-large: 0 16px 48px rgba(0, 0, 0, 0.7);
     
-    /* Animations */
-    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    /*
+    Extended Palette
+    */
+    --beige: 48 100% 98%;
+    --beige-light: 48 100% 99%;
+    
+    --taupe: 48 4% 56%;
+    --taupe-dark: 48 4% 26%;
+    
+    /*
+    Gradients
+    */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    --gradient-subtle: linear-gradient(135deg, hsl(var(--stone)) 0%, hsl(var(--sand)) 100%);
+    
+    /*
+    Accent Shadows
+    */
+    --shadow-accent: 0 2px 4px hsl(var(--accent) / 0.5);
+    --shadow-accent-glow: 0 0 8px 2px hsl(var(--accent) / 0.4);
   }
-
-  .dark {
-    --background: 20 10% 12%;
-    --foreground: 30 8% 95%;
-    --card: 20 10% 15%;
-    --card-foreground: 30 8% 95%;
-    --popover: 20 10% 15%;
-    --popover-foreground: 30 8% 95%;
-    --primary: 30 8% 95%;
-    --primary-foreground: 20 10% 12%;
-    --secondary: 20 8% 18%;
-    --secondary-foreground: 30 8% 95%;
-    --muted: 20 8% 18%;
-    --muted-foreground: 30 6% 60%;
-    --accent: 25 35% 55%;
-    --accent-foreground: 30 8% 95%;
-    --destructive: 0 65% 45%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 20 8% 22%;
-    --input: 20 8% 22%;
-    --ring: 25 35% 55%;
-    
-    --sidebar-background: 20 10% 12%;
-    --sidebar-foreground: 30 8% 95%;
-    --sidebar-primary: 30 8% 95%;
-    --sidebar-primary-foreground: 20 10% 12%;
-    --sidebar-accent: 20 8% 18%;
-    --sidebar-accent-foreground: 30 8% 95%;
-    --sidebar-border: 20 8% 22%;
-    --sidebar-ring: 25 35% 55%;
-    
-    /* Wellness neutrals - dark mode */
-    --stone: 20 8% 25%;
-    --sand: 25 10% 28%;
-    --charcoal: 20 10% 18%;
-    
-    /* Hero background - dark mode */
-    --hero-bg: 20 8% 18%;
-    
-    /* Subtle depth effects - dark mode */
-    --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.2);
-    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.3);
-    --shadow-large: 0 8px 32px rgba(0, 0, 0, 0.4);
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-
+  
   body {
     @apply bg-background text-foreground;
   }
-}
 
-@layer components {
-  /* Make all .container wrappers span full width on desktop */
-  .container {
-    max-width: 100% !important;
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: hsl(var(--primary)) hsl(var(--background));
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--primary));
+    border-radius: 3px;
+    border: 0px solid hsl(var(--background));
   }
 }
-
