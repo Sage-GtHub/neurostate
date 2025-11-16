@@ -86,22 +86,28 @@ const StarRating = ({ rating }: { rating: number }) => {
 
 export const Testimonials = () => {
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-b from-background to-muted/20">
+    <section className="py-16 lg:py-24 bg-background">
+      {/* Red accent line */}
+      <div className="w-full h-[1px] bg-accent mb-12" />
+      
       <div className="w-full px-6 sm:px-8 lg:px-20 xl:px-32">
-        <div className="text-center mb-12 space-y-4">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
-            What Our Customers Say
+        <div className="mb-12 space-y-4">
+          <p className="text-[10px] sm:text-xs font-light text-muted-foreground tracking-[0.3em] uppercase">
+            TESTIMONIALS
+          </p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light uppercase tracking-tight">
+            WHAT OUR CUSTOMERS SAY
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Real reviews from real people who've transformed their health and wellness journey with NeuroState
+          <p className="text-sm text-muted-foreground max-w-2xl font-light">
+            Real reviews from real people who've transformed their health and wellness journey
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="p-6 border-t border-border/30 hover:translate-y-[-4px] transition-all duration-300"
+              className="p-6 border border-border/40 bg-card hover:border-accent/40 transition-all duration-300"
             >
               <div className="space-y-4">
                 {/* Rating */}

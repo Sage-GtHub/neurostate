@@ -71,15 +71,21 @@ const Index = () => {
         <main>
           <Hero />
           <ShopByGoal />
-          <section id="products" className="py-12 md:py-16 px-6 sm:px-8 lg:px-20 xl:px-32">
+          <section id="products" className="py-16 md:py-24 px-6 sm:px-8 lg:px-20 xl:px-32">
+          {/* Red accent line */}
+          <div className="w-full h-[1px] bg-accent mb-12" />
+          
           <div className="w-full">
-            <div className="flex items-center justify-between mb-6 md:mb-8">
+            <div className="flex items-center justify-between mb-10 md:mb-14">
               <div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-                  {searchQuery ? 'Search Results' : 'Best Sellers'}
+                <p className="text-[10px] sm:text-xs font-light text-muted-foreground mb-3 tracking-[0.3em] uppercase">
+                  PRODUCT SYSTEMS
+                </p>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light uppercase tracking-tight">
+                  {searchQuery ? 'SEARCH RESULTS' : 'PRODUCTS'}
                 </h2>
                 {searchQuery && (
-                  <p className="text-muted-foreground mt-1">
+                  <p className="text-sm text-muted-foreground mt-3 font-light">
                     Showing results for "{searchQuery}"
                   </p>
                 )}
