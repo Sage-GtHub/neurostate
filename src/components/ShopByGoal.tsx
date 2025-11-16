@@ -51,12 +51,18 @@ const goals: Goal[] = [
 
 export const ShopByGoal = () => {
   return (
-    <section className="py-12 sm:py-16 px-6 sm:px-8 lg:px-20 xl:px-32 bg-gradient-to-b from-background to-secondary/30">
+    <section className="py-16 sm:py-24 px-6 sm:px-8 lg:px-20 xl:px-32 bg-background">
+      {/* Red accent line */}
+      <div className="w-full h-[1px] bg-accent mb-12" />
+      
       <div className="w-full">
-        <div className="text-center mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">Shop by Goal</h2>
-          <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-            Choose your path to optimal performance. Each category is curated with science-backed products designed for specific outcomes.
+        <div className="mb-12 sm:mb-16">
+          <p className="text-[10px] sm:text-xs font-light text-muted-foreground mb-3 tracking-[0.3em] uppercase">
+            PERFORMANCE SYSTEMS
+          </p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light uppercase tracking-tight mb-6">SHOP BY GOAL</h2>
+          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl font-light">
+            Choose your path to optimal performance. Each category is curated with science-backed products.
           </p>
         </div>
         
@@ -68,28 +74,22 @@ export const ShopByGoal = () => {
                 to={goal.link}
                 className="group"
               >
-                <Card className="overflow-hidden h-full transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-accent-glow border-border">
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                <Card className="overflow-hidden h-full transition-all duration-300 hover:scale-[1.01] border-border/40 bg-card">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-secondary/20">
                     <img 
                       src={goal.image} 
                       alt={goal.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80"
                     />
-                    <div className={`absolute inset-0 bg-gradient-to-t ${goal.color} to-transparent`} />
                   </div>
                   
                   <div className="p-5 sm:p-6 bg-card">
-                    <h3 className="text-lg sm:text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
+                    <h3 className="text-base sm:text-lg font-light uppercase tracking-wider mb-2 group-hover:text-foreground transition-colors">
                       {goal.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed font-light">
                       {goal.description}
                     </p>
-                    
-                    <div className="mt-3 sm:mt-4 flex items-center text-accent text-xs sm:text-sm font-medium group-hover:gap-2 transition-all">
-                      <span>Explore {goal.title}</span>
-                      <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
-                    </div>
                   </div>
                 </Card>
               </Link>

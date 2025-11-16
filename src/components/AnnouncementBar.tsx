@@ -6,27 +6,27 @@ import { Button } from "./ui/button";
 const announcements = [
   {
     icon: Sparkles,
-    text: "Black Friday Sale: 40% Off Everything",
-    subtext: "Use code BLACKFRIDAY40",
-    color: "bg-gradient-to-r from-charcoal via-primary to-charcoal",
-    textColor: "text-primary-foreground",
+    text: "BLACK FRIDAY SALE: 40% OFF EVERYTHING",
+    subtext: "USE CODE BLACKFRIDAY40",
+    color: "bg-background",
+    textColor: "text-foreground",
     link: "/#products",
     highlight: true,
   },
   {
     icon: Truck,
-    text: "Free Express Delivery on Orders £50+",
-    subtext: "2-3 business days",
-    color: "bg-primary",
-    textColor: "text-primary-foreground",
+    text: "FREE EXPRESS DELIVERY ON ORDERS £50+",
+    subtext: "2-3 BUSINESS DAYS",
+    color: "bg-background",
+    textColor: "text-foreground",
     link: "/shipping",
     highlight: false,
   },
   {
     icon: Zap,
-    text: "Subscribe & Save 15% Forever",
-    subtext: "Cancel anytime",
-    color: "bg-stone",
+    text: "SUBSCRIBE & SAVE 15% FOREVER",
+    subtext: "CANCEL ANYTIME",
+    color: "bg-background",
     textColor: "text-foreground",
     link: "/subscriptions",
     highlight: false,
@@ -64,32 +64,22 @@ export const AnnouncementBar = () => {
 
   return (
     <div
-      className={`${currentAnnouncement.color} ${currentAnnouncement.textColor} transition-all duration-700 relative overflow-hidden`}
+      className={`${currentAnnouncement.color} ${currentAnnouncement.textColor} transition-all duration-700 relative overflow-hidden border-b border-accent/20`}
     >
-      {/* Animated background shimmer for highlights */}
-      {currentAnnouncement.highlight && (
-        <div className="absolute inset-0 opacity-30">
-          <div 
-            className="absolute inset-0 -translate-x-full animate-[slide-in-right_3s_ease-in-out_infinite]"
-            style={{
-              background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
-              width: '50%',
-            }}
-          />
-        </div>
-      )}
+      {/* Red accent line top */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-accent" />
       
-      <div className="container mx-auto flex items-center justify-center py-2 px-4 relative">
+      <div className="container mx-auto flex items-center justify-center py-2.5 px-4 relative">
         <Link 
           to={currentAnnouncement.link} 
-          className="flex items-center gap-2 animate-fade-in hover:scale-[1.01] transition-transform duration-300 text-center"
+          className="flex items-center gap-2 animate-fade-in hover:opacity-80 transition-opacity duration-300 text-center"
         >
-          <Icon className={`h-3.5 w-3.5 ${currentAnnouncement.highlight ? 'animate-pulse' : ''}`} />
-          <div className="flex flex-col sm:flex-row sm:items-center sm:gap-1.5">
-            <span className={`text-[11px] sm:text-xs font-medium tracking-wide ${currentAnnouncement.highlight ? 'uppercase' : ''}`}>
+          <Icon className="h-3 w-3" />
+          <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
+            <span className="text-[10px] sm:text-[11px] font-light uppercase tracking-widest">
               {currentAnnouncement.text}
             </span>
-            <span className="text-[10px] sm:text-[11px] font-light opacity-80">
+            <span className="text-[9px] sm:text-[10px] font-light opacity-60 uppercase tracking-wider">
               {currentAnnouncement.subtext}
             </span>
           </div>
@@ -98,18 +88,18 @@ export const AnnouncementBar = () => {
         <Button
           variant="ghost"
           size="icon"
-          className="absolute right-4 h-6 w-6 hover:bg-background/10 rounded-full transition-all duration-300"
+          className="absolute right-4 h-6 w-6 hover:bg-foreground/5 transition-all duration-300"
           onClick={handleDismiss}
           aria-label="Dismiss announcement"
         >
-          <X className="h-3.5 w-3.5" />
+          <X className="h-3 w-3" />
         </Button>
       </div>
 
-      {/* Elegant progress indicator */}
-      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-background/10">
+      {/* Progress indicator */}
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-accent/10">
         <div
-          className="h-full bg-background/40 transition-all"
+          className="h-full bg-accent/40 transition-all"
           style={{
             width: "100%",
             animation: "progress 5s linear infinite",

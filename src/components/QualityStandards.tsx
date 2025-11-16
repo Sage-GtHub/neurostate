@@ -72,12 +72,18 @@ const standards: Standard[] = [
 export const QualityStandards = () => {
   return (
     <section className="py-16 md:py-24 px-6 sm:px-8 lg:px-20 xl:px-32">
+      {/* Red accent line */}
+      <div className="w-full h-[1px] bg-accent mb-12" />
+      
       <div className="w-full">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-3">
-            Our Quality Commitment
+        <div className="mb-12">
+          <p className="text-[10px] sm:text-xs font-light text-muted-foreground mb-3 tracking-[0.3em] uppercase">
+            QUALITY COMMITMENT
+          </p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light uppercase tracking-tight mb-6">
+            OUR STANDARDS
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm text-muted-foreground max-w-2xl font-light">
             Every product is backed by science, rigorously tested, and made with premium ingredients
           </p>
         </div>
@@ -86,14 +92,13 @@ export const QualityStandards = () => {
           {standards.map((standard) => {
             const Icon = standard.icon;
             return (
-              <div key={standard.id} className="text-center">
-                <div className="mb-4 flex justify-center">
-                  <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center">
-                    <Icon className="h-8 w-8 text-foreground" />
-                  </div>
+              <div key={standard.id}>
+                <div className="mb-4">
+                  <Icon className="h-6 w-6 text-accent" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{standard.title}</h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs text-muted-foreground mb-2 uppercase tracking-wider font-light">{standard.number}</p>
+                <h3 className="text-base font-light uppercase tracking-wide mb-3">{standard.title}</h3>
+                <p className="text-sm text-muted-foreground font-light leading-relaxed">
                   {standard.description}
                 </p>
               </div>
