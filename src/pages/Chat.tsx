@@ -19,32 +19,26 @@ type Message = {
 
 const quickSuggestions = [
   {
-    icon: "🎯",
     text: "What products are best for recovery?",
     category: "Products"
   },
   {
-    icon: "💤",
     text: "How can I improve my sleep quality?",
     category: "Wellness"
   },
   {
-    icon: "🧠",
     text: "Which supplements support cognitive function?",
     category: "Products"
   },
   {
-    icon: "⚡",
     text: "What's the difference between your red light devices?",
     category: "Products"
   },
   {
-    icon: "🏋️",
     text: "How do I use cold therapy for muscle recovery?",
     category: "Usage"
   },
   {
-    icon: "📦",
     text: "Tell me about your subscription options",
     category: "Shopping"
   }
@@ -519,9 +513,6 @@ export default function Chat({ open, onOpenChange }: { open: boolean; onOpenChan
                     className="justify-start text-left h-auto py-4 px-4 hover:bg-accent/5 hover:border-accent/50 hover:shadow-accent transition-all group"
                     onClick={() => handleSuggestionClick(suggestion.text)}
                   >
-                    <span className="text-xl mr-3 group-hover:scale-110 transition-transform">
-                      {suggestion.icon}
-                    </span>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium">{suggestion.text}</p>
                       <Badge variant="secondary" className="text-xs mt-1.5 bg-accent/10 text-accent-foreground">
