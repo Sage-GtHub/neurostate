@@ -107,8 +107,8 @@ export const Header = () => {
       <AnnouncementBar />
       <header className="sticky top-0 z-50 w-full bg-background border-b">
         <div className="container mx-auto flex h-16 items-center justify-between px-6 sm:px-8 lg:px-20 xl:px-32">
-          <Link to="/" className="font-bold text-2xl tracking-tight">
-            NeuroState®
+          <Link to="/" className="font-light text-2xl tracking-tight uppercase">
+            NEUROSTATE®
           </Link>
           
           {/* Desktop Navigation */}
@@ -116,7 +116,7 @@ export const Header = () => {
             <NavigationMenuList>
               {/* Shop Dropdown */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-sm font-medium">
+                <NavigationMenuTrigger>
                   Shop
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
@@ -126,10 +126,10 @@ export const Header = () => {
                         <NavigationMenuLink asChild>
                           <Link
                             to={category.href}
-                            className="flex items-center gap-3 select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-colors hover:bg-secondary uppercase text-sm tracking-wider font-light"
                           >
                             <category.icon className="h-5 w-5 text-accent" />
-                            <div className="text-sm font-medium leading-none">
+                            <div className="text-sm font-light leading-none uppercase tracking-wider">
                               {category.label}
                             </div>
                           </Link>
@@ -151,7 +151,7 @@ export const Header = () => {
                       navigate('/#bundles');
                     }
                   }}
-                  className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 cursor-pointer"
+                  className="group inline-flex h-10 w-max items-center justify-center bg-background px-4 py-2 text-sm font-light uppercase tracking-wider transition-colors hover:bg-transparent hover:border-b-2 hover:border-accent focus:bg-transparent focus:outline-none cursor-pointer rounded-none"
                 >
                   Bundles
                 </button>
@@ -159,7 +159,7 @@ export const Header = () => {
 
               {/* Guides Dropdown */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-sm font-medium">
+                <NavigationMenuTrigger>
                   Guides
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
@@ -169,10 +169,10 @@ export const Header = () => {
                         <NavigationMenuLink asChild>
                           <Link
                             to={topic.href}
-                            className="flex items-center gap-3 select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-colors hover:bg-secondary uppercase text-sm tracking-wider font-light"
                           >
                             <topic.icon className="h-5 w-5 text-accent" />
-                            <div className="text-sm font-medium leading-none">
+                            <div className="text-sm font-light leading-none uppercase tracking-wider">
                               {topic.label}
                             </div>
                           </Link>
@@ -188,7 +188,7 @@ export const Header = () => {
                 <NavigationMenuItem key={link.label}>
                   <Link
                     to={link.href}
-                    className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                    className="group inline-flex h-10 w-max items-center justify-center bg-background px-4 py-2 text-sm font-light uppercase tracking-wider transition-colors hover:bg-transparent hover:border-b-2 hover:border-accent focus:bg-transparent focus:outline-none rounded-none"
                   >
                     {link.label}
                   </Link>
