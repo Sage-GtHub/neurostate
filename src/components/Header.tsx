@@ -26,7 +26,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser, Session } from "@supabase/supabase-js";
 import { toast } from "sonner";
-import logo from "@/assets/neurostate-logo.jpg";
+import logo from "@/assets/neurostate-logo.png";
 
 export const Header = () => {
   const navigate = useNavigate();
