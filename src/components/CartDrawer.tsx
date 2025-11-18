@@ -169,9 +169,9 @@ export const CartDrawer = () => {
                 </div>
               </div>
               
-              <div className="flex-shrink-0 space-y-4 pt-4 border-t bg-background">
+              <div className="flex-shrink-0 space-y-4 pt-4 bg-background">
                 {items.some(item => item.isSubscription) && (
-                  <div className="bg-accent/10 border border-accent/20 rounded-lg p-3">
+                  <div className="bg-accent/10 p-3">
                     <div className="flex items-center gap-2 text-sm">
                       <RefreshCw className="h-4 w-4 text-accent" />
                       <span className="font-medium text-accent">Subscription Benefits</span>

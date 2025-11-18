@@ -183,7 +183,7 @@ export const ProductInfo = ({
             </RadioGroup>
             
             {purchaseType === "subscription" && (
-              <div className="mt-4 pt-4 border-t border-accent/30 bg-accent/10 -mx-4 px-4 pb-4 rounded-b-lg">
+              <div className="mt-4 pt-4 bg-accent/10 -mx-4 px-4 pb-4">
                 <Label className="text-sm font-medium mb-3 block">Delivery Frequency</Label>
                 <RadioGroup value={subscriptionFrequency} onValueChange={(value) => setSubscriptionFrequency(value as any)}>
                   <div className="space-y-2">
@@ -205,7 +205,7 @@ export const ProductInfo = ({
             )}
           </>
         ) : (
-          <div className="flex items-center justify-between p-4 rounded-lg bg-accent text-accent-foreground border-2 border-accent shadow-md">
+          <div className="flex items-center justify-between p-4 bg-accent text-accent-foreground shadow-md">
             <div className="flex items-center gap-2">
               <Package className="h-5 w-5" />
               <span className="font-semibold">One-time purchase</span>

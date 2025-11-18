@@ -66,9 +66,6 @@ export const AnnouncementBar = () => {
     <div
       className={`${currentAnnouncement.color} ${currentAnnouncement.textColor} transition-all duration-700 relative overflow-hidden`}
     >
-      {/* Red accent line top */}
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-accent" />
-      
       <div className="container mx-auto flex items-center justify-center py-2.5 px-4 relative">
         <Link 
           to={currentAnnouncement.link} 
@@ -97,9 +94,9 @@ export const AnnouncementBar = () => {
       </div>
 
       {/* Progress indicator */}
-      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-accent/10">
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-background/10">
         <div
-          className="h-full bg-accent/40 transition-all"
+          className="h-full bg-background/20 transition-all"
           style={{
             width: "100%",
             animation: "progress 5s linear infinite",

@@ -237,7 +237,7 @@ export const MultiFormatHub = () => {
     <section className="mb-20">
         <div className="text-center mb-12 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-accent/5 via-transparent to-transparent -z-10 blur-2xl" />
-          <div className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-semibold mb-5 border border-accent/20">
+          <div className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-2 text-sm font-semibold mb-5">
             <BookOpen className="h-4 w-4" />
             <span>Multi-Format Learning</span>
           </div>

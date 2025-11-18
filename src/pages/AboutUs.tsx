@@ -70,7 +70,7 @@ const AboutUs = () => {
       <Header />
       <div className="min-h-screen bg-background">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-primary/5 via-background to-accent/5 border-b">
+        <section className="relative bg-gradient-to-br from-primary/5 via-background to-accent/5">
           <div className="container mx-auto px-4 py-16 lg:py-24">
             <div className="max-w-4xl mx-auto text-center space-y-6">
               <Badge variant="secondary" className="mb-4">
@@ -178,7 +178,7 @@ const AboutUs = () => {
               
               <div className="grid md:grid-cols-2 gap-4">
                 {standards.map((standard, index) => (
-                  <div key={index} className="flex items-start gap-3 p-4 rounded-lg border border-border/30">
+                  <div key={index} className="flex items-start gap-3 p-4">
                     <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
                     <span className="text-muted-foreground font-light">{standard}</span>
                   </div>
@@ -189,7 +189,7 @@ const AboutUs = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 lg:py-20 bg-gradient-to-br from-primary/10 to-accent/10 border-t">
+        <section className="py-16 lg:py-20 bg-gradient-to-br from-primary/10 to-accent/10">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center space-y-6">
               <h2 className="text-3xl md:text-4xl font-bold">

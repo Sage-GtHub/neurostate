@@ -105,7 +105,7 @@ const CategoryProducts = () => {
           </div>
         </section>
       </main>
-      <footer className="border-t py-8 px-4">
+      <footer className="py-8 px-4">
         <div className="container mx-auto text-center text-muted-foreground">
           <p>&copy; 2025 NeuroState®. All rights reserved.</p>
         </div>

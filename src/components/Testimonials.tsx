@@ -87,9 +87,6 @@ const StarRating = ({ rating }: { rating: number }) => {
 export const Testimonials = () => {
   return (
     <section className="py-16 lg:py-24 bg-background">
-      {/* Red accent line */}
-      <div className="w-full h-[1px] bg-accent mb-12" />
-      
       <div className="w-full px-6 sm:px-8 lg:px-20 xl:px-32">
         <div className="mb-12 space-y-4">
           <p className="text-[10px] sm:text-xs font-light text-muted-foreground tracking-[0.3em] uppercase">

@@ -72,9 +72,6 @@ const Index = () => {
           <Hero />
           <ShopByGoal />
           <section id="products" className="py-16 md:py-24 px-6 sm:px-8 lg:px-20 xl:px-32">
-          {/* Red accent line */}
-          <div className="w-full h-[1px] bg-accent mb-12" />
-          
           <div className="w-full">
             <div className="flex items-center justify-between mb-10 md:mb-14">
               <div>
