@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ShoppingCart } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
@@ -165,17 +164,17 @@ const ExpertProductCarousel = ({ expert }: { expert: Expert }) => {
 
 export const ExpertPartners = () => {
   return (
-    <section className="py-16 px-4 bg-secondary/30">
-      <div className="container mx-auto">
-        <div className="text-center mb-12">
-          <p className="text-sm font-medium text-accent mb-3 tracking-wide uppercase">
-            Trusted by Experts
+    <section className="py-16 px-6 sm:px-8 lg:px-20 xl:px-32 bg-background">
+      <div className="w-full">
+        <div className="mb-12">
+          <p className="text-[10px] sm:text-xs font-light text-muted-foreground mb-3 tracking-[0.3em] uppercase">
+            EXPERT PARTNERSHIPS
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Your Achievement Is Our Mission
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light uppercase tracking-tight mb-6">
+            Trusted by Experts
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            We've brought together the best minds in science, performance, and wellness. Our expert partners rigorously test and curate every product to help you pursue your potential.
+          <p className="text-sm text-muted-foreground max-w-2xl font-light">
+            Our products are recommended by leading researchers, athletes, and health professionals
           </p>
         </div>
         
@@ -186,11 +185,36 @@ export const ExpertPartners = () => {
               to={expert.collectionLink}
               className="block h-full"
             >
-              <div 
-                className="overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 group cursor-pointer h-full flex flex-col"
-              >
+              <div className="overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 group cursor-pointer h-full flex flex-col">
                 <div className="p-6 flex flex-col flex-1">
-...
+                  <div className="mb-3">
+                    <span className="inline-block px-3 py-1 text-xs font-medium bg-accent/10 text-accent mb-2">
+                      {expert.specialization}
+                    </span>
+                    <h3 className="text-xl font-bold mb-1">{expert.name}</h3>
+                    <p className="text-sm text-muted-foreground font-medium mb-1">
+                      {expert.credentials}
+                    </p>
+                    <p className="text-sm text-foreground/80 font-medium">
+                      {expert.title}
+                    </p>
+                  </div>
+                  
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
+                    {expert.bio}
+                  </p>
+                  
+                  <ExpertProductCarousel expert={expert} />
+                  
+                  <Button 
+                    variant="outline" 
+                    className="w-full group/btn mt-4"
+                    asChild
+                  >
+                    <span>
+                      View All Products
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                    </span>
                   </Button>
                 </div>
               </div>

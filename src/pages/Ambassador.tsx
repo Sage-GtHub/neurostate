@@ -203,7 +203,7 @@ const Ambassador = () => {
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto">
-              <div className="py-8 border-t border-b border-border/40">
+              <div className="py-8">
                 <h2 className="text-2xl font-semibold mb-8 text-center">Who We're Looking For</h2>
                 <ul className="space-y-4">
                   {requirements.map((req, idx) => (
@@ -233,7 +233,7 @@ const Ambassador = () => {
                 </p>
               </div>
 
-              <div className="bg-card/50 backdrop-blur-sm border border-border/40 rounded-2xl p-8 shadow-[var(--shadow-soft)]">
+              <div className="bg-card/50 backdrop-blur-sm p-8">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
                     <Label htmlFor="name">Full Name *</Label>

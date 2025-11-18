@@ -62,7 +62,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <>
       <Link to={`/product/${node.handle}`} className="group block h-full">
-        <div className="bg-card rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[var(--shadow-medium)] h-full flex flex-col border border-border/40">
+        <div className="bg-card overflow-hidden transition-all duration-500 hover:shadow-[var(--shadow-medium)] h-full flex flex-col">
           <div className="aspect-square overflow-hidden bg-muted/30 relative flex-shrink-0">
             {image ? (
               <img

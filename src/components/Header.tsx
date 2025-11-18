@@ -399,7 +399,7 @@ export const Header = () => {
                     </Link>
                   ))}
 
-                  <div className="border-t pt-6 mt-4 space-y-4">
+                  <div className="pt-6 mt-4 space-y-4">
                     {/* Ask Hera Button */}
                     <Button 
                       variant="default"

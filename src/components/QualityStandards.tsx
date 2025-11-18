@@ -72,9 +72,6 @@ const standards: Standard[] = [
 export const QualityStandards = () => {
   return (
     <section className="py-16 md:py-24 px-6 sm:px-8 lg:px-20 xl:px-32">
-      {/* Red accent line */}
-      <div className="w-full h-[1px] bg-accent mb-12" />
-      
       <div className="w-full">
         <div className="mb-12">
           <p className="text-[10px] sm:text-xs font-light text-muted-foreground mb-3 tracking-[0.3em] uppercase">

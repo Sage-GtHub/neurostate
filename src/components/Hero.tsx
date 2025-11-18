@@ -13,9 +13,6 @@ export const Hero = () => {
       className="relative min-h-screen flex items-center px-6 sm:px-8 lg:px-20 xl:px-32 overflow-hidden bg-background"
       aria-label="Hero section"
     >
-      {/* Red accent line */}
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-accent" />
-      
       <div className="w-full py-20 md:py-32">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Content */}

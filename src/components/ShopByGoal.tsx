@@ -52,9 +52,6 @@ const goals: Goal[] = [
 export const ShopByGoal = () => {
   return (
     <section className="py-16 sm:py-24 px-6 sm:px-8 lg:px-20 xl:px-32 bg-background">
-      {/* Red accent line */}
-      <div className="w-full h-[1px] bg-accent mb-12" />
-      
       <div className="w-full">
         <div className="mb-12 sm:mb-16">
           <p className="text-[10px] sm:text-xs font-light text-muted-foreground mb-3 tracking-[0.3em] uppercase">
