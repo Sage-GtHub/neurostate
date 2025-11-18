@@ -26,7 +26,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser, Session } from "@supabase/supabase-js";
 import { toast } from "sonner";
-import logo from "@/assets/neurostate-logo-circle.jpg";
+import logo from "@/assets/neurostate-logo.jpg";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -109,7 +109,7 @@ export const Header = () => {
       <header className="sticky top-0 z-50 w-full bg-background border-b">
         <div className="container mx-auto flex h-16 items-center justify-between px-6 sm:px-8 lg:px-20 xl:px-32">
           <Link to="/" className="flex items-center">
-            <img src={logo} alt="NEUROSTATE" className="h-10 w-10" style={{ mixBlendMode: 'lighten' }} />
+            <img src={logo} alt="NEUROSTATE" className="h-8 w-auto" style={{ mixBlendMode: 'lighten' }} />
           </Link>
           
           {/* Desktop Navigation */}
