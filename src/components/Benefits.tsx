@@ -17,7 +17,7 @@ export const Benefits = () => {
   ];
 
   return (
-    <section className="py-8 md:py-12 px-4 border-t border-accent/20 bg-background">
+    <section className="py-8 md:py-12 px-4 bg-background">
       {/* Red accent line */}
       <div className="w-full h-[1px] bg-accent mb-8" />
       

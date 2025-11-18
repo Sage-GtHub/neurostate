@@ -74,7 +74,7 @@ export const ShopByGoal = () => {
                 to={goal.link}
                 className="group"
               >
-                <Card className="overflow-hidden h-full transition-all duration-300 hover:scale-[1.01] border-border/40 bg-card">
+                <div className="overflow-hidden h-full transition-all duration-300 hover:scale-[1.01] bg-card">
                   <div className="relative aspect-[4/3] overflow-hidden bg-secondary/20">
                     <img 
                       src={goal.image} 
@@ -91,7 +91,7 @@ export const ShopByGoal = () => {
                       {goal.description}
                     </p>
                   </div>
-                </Card>
+                </div>
               </Link>
             );
           })}

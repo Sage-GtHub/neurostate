@@ -109,7 +109,7 @@ export const FrequentlyBoughtTogether = ({ currentProduct }: FrequentlyBoughtTog
                     className="absolute top-2 left-2 z-10 bg-background"
                   />
                   
-                  <div className="border rounded-lg overflow-hidden bg-background hover:shadow-md transition-shadow">
+                  <div className="overflow-hidden bg-background hover:shadow-md transition-shadow">
                     <div className="aspect-square bg-secondary/20">
                       {image && (
                         <img
@@ -131,7 +131,7 @@ export const FrequentlyBoughtTogether = ({ currentProduct }: FrequentlyBoughtTog
         })}
       </div>
 
-      <div className="border rounded-lg p-4 bg-secondary/10">
+      <div className="p-4 bg-secondary/10">
         <div className="flex justify-between items-center mb-3">
           <div>
             <div className="text-sm text-muted-foreground">

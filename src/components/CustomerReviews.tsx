@@ -97,15 +97,15 @@ export const CustomerReviews = ({ productHandle }: CustomerReviewsProps) => {
 
         {/* Review Highlights */}
         <div className="lg:col-span-2 grid md:grid-cols-3 gap-4">
-          <div className="text-center p-4 border rounded-lg">
+          <div className="text-center p-4">
             <div className="text-3xl font-bold text-accent mb-1">4.8/5</div>
             <div className="text-sm text-muted-foreground">Average Rating</div>
           </div>
-          <div className="text-center p-4 border rounded-lg">
+          <div className="text-center p-4">
             <div className="text-3xl font-bold text-accent mb-1">96%</div>
             <div className="text-sm text-muted-foreground">Would Recommend</div>
           </div>
-          <div className="text-center p-4 border rounded-lg">
+          <div className="text-center p-4">
             <div className="text-3xl font-bold text-accent mb-1">100%</div>
             <div className="text-sm text-muted-foreground">Verified Purchases</div>
           </div>
@@ -113,7 +113,7 @@ export const CustomerReviews = ({ productHandle }: CustomerReviewsProps) => {
       </div>
 
       {/* Sort Options */}
-      <div className="flex items-center gap-2 mb-6 pb-4 border-b">
+      <div className="flex items-center gap-2 mb-6 pb-4">
         <span className="text-sm text-muted-foreground">Sort by:</span>
         <Button
           variant={sortBy === "recent" ? "default" : "ghost"}
@@ -141,7 +141,7 @@ export const CustomerReviews = ({ productHandle }: CustomerReviewsProps) => {
       {/* Review List */}
       <div className="space-y-6">
         {reviews.map((review) => (
-          <div key={review.id} className="border-b pb-6 last:border-b-0">
+          <div key={review.id} className="pb-6 last:pb-0">
             <div className="flex items-start justify-between mb-3">
               <div>
                 <div className="flex items-center gap-2 mb-1">

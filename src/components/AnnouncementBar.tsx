@@ -64,7 +64,7 @@ export const AnnouncementBar = () => {
 
   return (
     <div
-      className={`${currentAnnouncement.color} ${currentAnnouncement.textColor} transition-all duration-700 relative overflow-hidden border-b border-accent/20`}
+      className={`${currentAnnouncement.color} ${currentAnnouncement.textColor} transition-all duration-700 relative overflow-hidden`}
     >
       {/* Red accent line top */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-accent" />

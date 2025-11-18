@@ -72,7 +72,7 @@ export const Footer = () => {
 
 
   return (
-    <footer className="bg-muted/30 border-t mt-16 sm:mt-24">
+    <footer className="bg-muted/30 mt-16 sm:mt-24">
       <div className="container mx-auto px-6 sm:px-8 lg:px-20 xl:px-32 py-8 sm:py-12">
         {/* Company Mission */}
         <div className="mb-8 sm:mb-12 max-w-3xl">
@@ -87,7 +87,7 @@ export const Footer = () => {
         </div>
 
         {/* Trust Badges */}
-        <div className="border-t pt-4 sm:pt-6">
+        <div className="pt-4 sm:pt-6">
           <TrustBadges />
         </div>
 
@@ -188,7 +188,7 @@ export const Footer = () => {
         </div>
 
         {/* Contact Info & Social */}
-        <div className="border-t pt-6 sm:pt-8">
+        <div className="pt-6 sm:pt-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
             {/* Contact Information */}
             <div>
@@ -228,7 +228,7 @@ export const Footer = () => {
           </div>
 
           {/* Copyright & Links */}
-          <div className="border-t pt-4 sm:pt-6">
+          <div className="pt-4 sm:pt-6">
             <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
               <p className="text-xs sm:text-sm text-muted-foreground text-center sm:text-left">
                 © {new Date().getFullYear()} NeuroState®. All rights reserved.

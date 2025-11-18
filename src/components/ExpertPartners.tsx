@@ -121,7 +121,7 @@ const ExpertProductCarousel = ({ expert }: { expert: Expert }) => {
           {products.map((product) => (
             <CarouselItem key={product.node.id} className="pl-2 basis-full sm:basis-1/2">
               <Link to={`/product/${product.node.handle}`}>
-                <Card className="overflow-hidden hover:shadow-lg transition-shadow h-full">
+                <div className="overflow-hidden hover:shadow-lg transition-shadow h-full">
                   <div className="aspect-square overflow-hidden bg-secondary/20">
                     {product.node.images.edges[0]?.node && (
                       <img
@@ -151,7 +151,7 @@ const ExpertProductCarousel = ({ expert }: { expert: Expert }) => {
                       </Button>
                     </div>
                   </div>
-                </Card>
+                </div>
               </Link>
             </CarouselItem>
           ))}
@@ -186,41 +186,14 @@ export const ExpertPartners = () => {
               to={expert.collectionLink}
               className="block h-full"
             >
-              <Card 
-                className="overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-accent-glow group cursor-pointer h-full flex flex-col"
+              <div 
+                className="overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 group cursor-pointer h-full flex flex-col"
               >
                 <div className="p-6 flex flex-col flex-1">
-                  <div className="mb-3">
-                    <span className="inline-block px-3 py-1 text-xs font-medium bg-accent/10 text-accent rounded-full mb-2">
-                      {expert.specialization}
-                    </span>
-                    <h3 className="text-xl font-bold mb-1">{expert.name}</h3>
-                    <p className="text-sm text-muted-foreground font-medium mb-1">
-                      {expert.credentials}
-                    </p>
-                    <p className="text-sm text-foreground/80 font-medium">
-                      {expert.title}
-                    </p>
-                  </div>
-                  
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
-                    {expert.bio}
-                  </p>
-                  
-                  <ExpertProductCarousel expert={expert} />
-                  
-                  <Button 
-                    variant="outline" 
-                    className="w-full group/btn mt-4"
-                    asChild
-                  >
-                    <span>
-                      View All Products
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                    </span>
+...
                   </Button>
                 </div>
-              </Card>
+              </div>
             </Link>
           ))}
         </div>

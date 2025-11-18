@@ -108,7 +108,7 @@ export const ProductBundles = () => {
             const pricing = calculateBundlePrice(bundleProducts, bundle.discount);
 
             return (
-              <div key={bundle.id} className="p-6 sm:p-8 border-t border-border/30 hover:translate-y-[-4px] transition-all duration-300">
+              <div key={bundle.id} className="p-6 sm:p-8 hover:translate-y-[-4px] transition-all duration-300">
                 <div className="mb-5 sm:mb-6">
                   <Badge className="mb-2 sm:mb-3 bg-accent text-accent-foreground text-xs sm:text-sm">
                     Save {bundle.discount}%
@@ -128,7 +128,7 @@ export const ProductBundles = () => {
                   ))}
                 </div>
 
-                <div className="border-t pt-3 sm:pt-4 mb-4">
+                <div className="pt-3 sm:pt-4 mb-4">
                   <div className="text-xs sm:text-sm text-muted-foreground mb-1">
                     Includes {bundleProducts.length} products
                   </div>
