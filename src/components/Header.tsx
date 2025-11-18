@@ -106,7 +106,7 @@ export const Header = () => {
   return (
     <>
       <AnnouncementBar />
-      <header className="sticky top-0 z-50 w-full bg-background border-b">
+      <header className="sticky top-0 z-50 w-full bg-background">
         <div className="container mx-auto flex h-16 items-center justify-between px-6 sm:px-8 lg:px-20 xl:px-32">
           <Link to="/" className="flex items-center">
             <img src={logo} alt="NEUROSTATE" className="h-8 w-auto" style={{ mixBlendMode: 'lighten' }} />

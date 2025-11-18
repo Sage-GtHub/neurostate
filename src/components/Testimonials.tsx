@@ -107,7 +107,7 @@ export const Testimonials = () => {
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="p-6 border border-border/40 bg-card hover:border-accent/40 transition-all duration-300"
+              className="p-6 bg-card hover:bg-card/80 transition-all duration-300"
             >
               <div className="space-y-4">
                 {/* Rating */}
