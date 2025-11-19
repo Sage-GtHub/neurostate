@@ -26,7 +26,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser, Session } from "@supabase/supabase-js";
 import { toast } from "sonner";
-import logo from "@/assets/neurostate-logo.jpg";
+import logoIcon from "@/assets/neurostate-icon.png";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -106,10 +106,11 @@ export const Header = () => {
   return (
     <>
       <AnnouncementBar />
-      <header className="sticky top-0 z-50 w-full bg-background">
+      <header className="sticky top-0 z-50 w-full bg-ivory border-b border-mist">
         <div className="container mx-auto flex h-16 items-center justify-between px-6 sm:px-8 lg:px-20 xl:px-32">
-          <Link to="/" className="flex items-center">
-            <img src={logo} alt="NEUROSTATE" className="h-8 w-auto" style={{ mixBlendMode: 'lighten' }} />
+          <Link to="/" className="flex items-center gap-2">
+            <img src={logoIcon} alt="Neural Waveform" className="h-6 w-6" />
+            <span className="text-xl font-bold uppercase tracking-tight text-carbon">NEUROSTATE<sup className="text-[8px]">®</sup></span>
           </Link>
           
           {/* Desktop Navigation */}
@@ -121,16 +122,16 @@ export const Header = () => {
                   Shop
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 bg-background">
+                  <ul className="grid w-[400px] gap-3 p-4 bg-ivory">
                     {shopCategories.map((category) => (
                       <li key={category.label}>
                         <NavigationMenuLink asChild>
                           <Link
                             to={category.href}
-                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-colors hover:bg-secondary uppercase text-sm tracking-wider font-light"
+                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-colors hover:bg-pearl uppercase text-sm tracking-wider font-medium text-carbon"
                           >
-                            <category.icon className="h-5 w-5 text-accent" />
-                            <div className="text-sm font-light leading-none uppercase tracking-wider">
+                            <category.icon className="h-5 w-5 text-carbon" />
+                            <div className="text-sm font-medium leading-none uppercase tracking-wider">
                               {category.label}
                             </div>
                           </Link>
@@ -152,7 +153,7 @@ export const Header = () => {
                       navigate('/#bundles');
                     }
                   }}
-                  className="group inline-flex h-10 w-max items-center justify-center bg-background px-4 py-2 text-sm font-light uppercase tracking-wider transition-colors hover:bg-transparent hover:border-b-2 hover:border-accent focus:bg-transparent focus:outline-none cursor-pointer rounded-none"
+                  className="group inline-flex h-10 w-max items-center justify-center bg-ivory px-4 py-2 text-sm font-medium uppercase tracking-wider transition-colors hover:bg-pearl focus:bg-pearl focus:outline-none cursor-pointer rounded-none text-carbon"
                 >
                   Bundles
                 </button>
@@ -164,16 +165,16 @@ export const Header = () => {
                   Guides
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 bg-background">
+                  <ul className="grid w-[400px] gap-3 p-4 bg-ivory">
                     {guideTopics.map((topic) => (
                       <li key={topic.label}>
                         <NavigationMenuLink asChild>
                           <Link
                             to={topic.href}
-                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-colors hover:bg-secondary uppercase text-sm tracking-wider font-light"
+                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-colors hover:bg-pearl uppercase text-sm tracking-wider font-medium text-carbon"
                           >
-                            <topic.icon className="h-5 w-5 text-accent" />
-                            <div className="text-sm font-light leading-none uppercase tracking-wider">
+                            <topic.icon className="h-5 w-5 text-carbon" />
+                            <div className="text-sm font-medium leading-none uppercase tracking-wider">
                               {topic.label}
                             </div>
                           </Link>
@@ -189,7 +190,7 @@ export const Header = () => {
                 <NavigationMenuItem key={link.label}>
                   <Link
                     to={link.href}
-                    className="group inline-flex h-10 w-max items-center justify-center bg-background px-4 py-2 text-sm font-light uppercase tracking-wider transition-colors hover:bg-transparent hover:border-b-2 hover:border-accent focus:bg-transparent focus:outline-none rounded-none"
+                    className="group inline-flex h-10 w-max items-center justify-center bg-ivory px-4 py-2 text-sm font-medium uppercase tracking-wider transition-colors hover:bg-pearl focus:bg-pearl focus:outline-none rounded-none text-carbon"
                   >
                     {link.label}
                   </Link>
@@ -283,29 +284,29 @@ export const Header = () => {
                     <Badge className="absolute -top-1 -right-1 h-3 w-3 rounded-full p-0 bg-green-500" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48 bg-background">
-                  <DropdownMenuItem disabled className="text-xs text-muted-foreground">
+                <DropdownMenuContent align="end" className="w-48 bg-ivory border-mist">
+                  <DropdownMenuItem disabled className="text-xs text-ash">
                     {user.email}
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link to="/profile" className="cursor-pointer">
+                    <Link to="/profile" className="cursor-pointer text-carbon hover:bg-pearl">
                       My Profile
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/subscriptions" className="cursor-pointer">
+                    <Link to="/subscriptions" className="cursor-pointer text-carbon hover:bg-pearl">
                       My Subscriptions
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/rewards" className="cursor-pointer flex items-center">
-                      <Award className="h-4 w-4 mr-2 text-accent" />
+                    <Link to="/rewards" className="cursor-pointer flex items-center text-carbon hover:bg-pearl">
+                      <Award className="h-4 w-4 mr-2 text-carbon" />
                       Rewards Program
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive">
+                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive hover:bg-pearl">
                     <LogOut className="h-4 w-4 mr-2" />
                     Sign Out
                   </DropdownMenuItem>
@@ -328,20 +329,20 @@ export const Header = () => {
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+              <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-ivory">
                 <SheetHeader>
-                  <SheetTitle className="text-left">Menu</SheetTitle>
+                  <SheetTitle className="text-left text-carbon">Menu</SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col gap-6 mt-8">
                   {/* Shop Section */}
                   <div>
-                    <h3 className="font-semibold text-lg mb-3">Shop</h3>
+                    <h3 className="font-semibold text-lg mb-3 text-carbon">Shop</h3>
                     <div className="flex flex-col gap-2 pl-4">
                       {shopCategories.map((category) => (
                         <Link
                           key={category.label}
                           to={category.href}
-                          className="flex items-center gap-2 text-md text-muted-foreground hover:text-accent transition-colors"
+                          className="flex items-center gap-2 text-md text-ash hover:text-carbon transition-colors"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           <category.icon className="h-4 w-4" />
@@ -364,14 +365,14 @@ export const Header = () => {
                         }
                       }, 100);
                     }}
-                    className="text-lg font-medium hover:text-accent transition-colors text-left cursor-pointer"
+                    className="text-lg font-medium hover:text-slate transition-colors text-left cursor-pointer text-carbon"
                   >
                     Bundles
                   </button>
 
                   {/* Guides Section */}
                   <div>
-                    <h3 className="font-semibold text-lg mb-3">Guides</h3>
+                    <h3 className="font-semibold text-lg mb-3 text-carbon">Guides</h3>
                     <div className="flex flex-col gap-2 pl-4">
                       {guideTopics.map((topic) => (
                         <Link

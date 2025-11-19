@@ -25,12 +25,12 @@ export const TrustBadges = () => {
   ];
 
   return (
-    <div className="flex items-center justify-between gap-4 py-6 text-xs text-muted-foreground">
+    <div className="flex items-center justify-between gap-4 py-6 text-xs text-ash">
       {badges.map((badge, index) => (
         <div key={index} className="flex items-center gap-2">
-          <badge.icon className="h-4 w-4 text-accent" />
+          <badge.icon className="h-4 w-4 text-carbon" />
           <div>
-            <div className="font-medium text-foreground">{badge.title}</div>
+            <div className="font-medium text-carbon">{badge.title}</div>
             <div>{badge.description}</div>
           </div>
         </div>
