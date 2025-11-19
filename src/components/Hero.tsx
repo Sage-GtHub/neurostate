@@ -10,25 +10,25 @@ export const Hero = () => {
 
   return (
     <section 
-      className="relative min-h-screen flex items-center px-6 sm:px-8 lg:px-20 xl:px-32 overflow-hidden bg-background"
+      className="relative min-h-screen flex items-center px-6 sm:px-8 lg:px-20 xl:px-32 overflow-hidden bg-ivory"
       aria-label="Hero section"
     >
       <div className="w-full py-20 md:py-32">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Content */}
           <div className="text-left max-w-3xl">
-            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light mb-8 text-foreground leading-[0.9] tracking-tighter uppercase">
+            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold mb-8 text-carbon leading-[0.9] uppercase">
               NEUROSTATE<sup className="text-2xl">®</sup>
             </h1>
-            <p className="text-xl sm:text-2xl md:text-3xl text-foreground mb-4 font-light leading-tight">
-              Redefining Recovery
+            <p className="text-xl sm:text-2xl md:text-3xl text-carbon mb-4 font-normal leading-tight">
+              Precision tools for your
             </p>
-            <p className="text-xl sm:text-2xl md:text-3xl text-foreground mb-12 font-light leading-tight">
-              And Performance
+            <p className="text-xl sm:text-2xl md:text-3xl text-carbon mb-12 font-normal leading-tight">
+              optimal state
             </p>
             <Button 
               size="lg" 
-              className="bg-foreground text-background hover:bg-foreground/90 font-normal uppercase tracking-wider px-12 py-6 text-sm transition-all duration-300"
+              className="bg-carbon text-ivory hover:bg-slate font-medium uppercase tracking-wider px-12 py-6 text-sm transition-all duration-300"
               onClick={scrollToProducts}
               aria-label="Scroll to products section"
             >
@@ -38,7 +38,7 @@ export const Hero = () => {
 
           {/* Hero Image */}
           <div className="flex justify-center lg:justify-end items-center relative">
-            <div className="relative w-full max-w-md lg:max-w-lg opacity-70">
+            <div className="relative w-full max-w-md lg:max-w-lg opacity-90">
               <img 
                 src={heroImage} 
                 alt="Premium cognitive enhancement supplement from NeuroState"

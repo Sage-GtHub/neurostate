@@ -66,23 +66,23 @@ const Index = () => {
     <>
       <SEO />
       <OrganizationStructuredData />
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-ivory">
         <Header />
         <main>
           <Hero />
           <ShopByGoal />
-          <section id="products" className="py-16 md:py-24 px-6 sm:px-8 lg:px-20 xl:px-32">
+          <section id="products" className="py-16 md:py-24 px-6 sm:px-8 lg:px-20 xl:px-32 bg-ivory">
           <div className="w-full">
             <div className="flex items-center justify-between mb-10 md:mb-14">
               <div>
-                <p className="text-[10px] sm:text-xs font-light text-muted-foreground mb-3 tracking-[0.3em] uppercase">
+                <p className="text-[10px] sm:text-xs font-normal text-ash mb-3 tracking-[0.3em] uppercase">
                   PRODUCT SYSTEMS
                 </p>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light uppercase tracking-tight">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-carbon">
                   {searchQuery ? 'SEARCH RESULTS' : 'PRODUCTS'}
                 </h2>
                 {searchQuery && (
-                  <p className="text-sm text-muted-foreground mt-3 font-light">
+                  <p className="text-sm text-ash mt-3 font-normal">
                     Showing results for "{searchQuery}"
                   </p>
                 )}

@@ -8,66 +8,94 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* NEUROSTATE® Brand Palette - Pure Black, White, Red */
-    --background: 0 0% 5%;
-    --foreground: 0 0% 100%;
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 100%;
-    --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 100%;
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 5%;
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 60%;
-    --accent: 0 100% 50%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 85% 55%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 0 100% 50%;
+    /* NEUROSTATE® Brand Palette - Per Brand Guidelines */
+    /* Primary Brand Colours */
+    --carbon: 0 0% 10%;        /* #1A1A1A - Primary text, logos, authority */
+    --ivory: 60 11% 98%;       /* #FAFAF8 - Primary background, clean space */
+    
+    /* Secondary Colours */
+    --ash: 0 0% 40%;           /* #666666 - Secondary text, subtle elements */
+    --stone: 0 0% 60%;         /* #999999 - Tertiary text, borders */
+    --mist: 0 0% 90%;          /* #E5E5E5 - Light borders, dividers */
+    
+    /* Accent Colours */
+    --slate: 0 0% 16%;         /* #2A2A2A - Hover states, emphasis */
+    --pearl: 0 0% 96%;         /* #F5F5F5 - Subtle backgrounds, cards */
+    
+    /* Semantic Mappings */
+    --background: 60 11% 98%;  /* Ivory */
+    --foreground: 0 0% 10%;    /* Carbon */
+    --card: 0 0% 96%;          /* Pearl */
+    --card-foreground: 0 0% 10%; /* Carbon */
+    --popover: 60 11% 98%;     /* Ivory */
+    --popover-foreground: 0 0% 10%; /* Carbon */
+    --primary: 0 0% 10%;       /* Carbon */
+    --primary-foreground: 60 11% 98%; /* Ivory */
+    --secondary: 0 0% 96%;     /* Pearl */
+    --secondary-foreground: 0 0% 10%; /* Carbon */
+    --muted: 0 0% 96%;         /* Pearl */
+    --muted-foreground: 0 0% 40%; /* Ash */
+    --accent: 0 0% 16%;        /* Slate */
+    --accent-foreground: 60 11% 98%; /* Ivory */
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 60 11% 98%;
+    --border: 0 0% 90%;        /* Mist */
+    --input: 0 0% 90%;         /* Mist */
+    --ring: 0 0% 16%;          /* Slate */
     --radius: 0rem;
     
-    --sidebar-background: 0 0% 5%;
-    --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 0 0% 100%;
-    --sidebar-primary-foreground: 0 0% 5%;
-    --sidebar-accent: 0 0% 12%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 0 100% 50%;
-    
-    /* Brand neutrals */
-    --stone: 0 0% 15%;
-    --sand: 0 0% 20%;
-    --charcoal: 0 0% 8%;
+    --sidebar-background: 60 11% 98%;
+    --sidebar-foreground: 0 0% 10%;
+    --sidebar-primary: 0 0% 10%;
+    --sidebar-primary-foreground: 60 11% 98%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 10%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 0 0% 16%;
     
     /* Hero background */
-    --hero-bg: 0 0% 5%;
+    --hero-bg: 60 11% 98%;
     
-    /* Minimal depth effects */
-    --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.8);
-    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.9);
-    --shadow-large: 0 8px 32px rgba(0, 0, 0, 0.95);
+    /* Minimal shadows per brand guidelines */
+    --shadow-soft: 0 2px 8px rgba(26, 26, 26, 0.08);
+    --shadow-medium: 0 4px 16px rgba(26, 26, 26, 0.12);
+    --shadow-large: 0 8px 32px rgba(26, 26, 26, 0.16);
+  }
+  
+  /* Dark mode using Carbon base per brand guidelines */
+  .dark {
+    --background: 0 0% 10%;    /* Carbon */
+    --foreground: 60 11% 98%;  /* Ivory */
+    --card: 0 0% 16%;          /* Slate */
+    --card-foreground: 60 11% 98%; /* Ivory */
+    --popover: 0 0% 10%;       /* Carbon */
+    --popover-foreground: 60 11% 98%; /* Ivory */
+    --primary: 60 11% 98%;     /* Ivory */
+    --primary-foreground: 0 0% 10%; /* Carbon */
+    --secondary: 0 0% 16%;     /* Slate */
+    --secondary-foreground: 60 11% 98%; /* Ivory */
+    --muted: 0 0% 16%;         /* Slate */
+    --muted-foreground: 0 0% 60%; /* Stone */
+    --accent: 60 11% 98%;      /* Ivory */
+    --accent-foreground: 0 0% 10%; /* Carbon */
+    --border: 0 0% 16%;        /* Slate */
+    --input: 0 0% 16%;         /* Slate */
+    --ring: 60 11% 98%;        /* Ivory */
     
-    /*
-    Brand accent line
-    */
-    --accent-line: 0 100% 50%;
+    --hero-bg: 0 0% 10%;
     
-    /*
-    Gradients - Minimal
-    */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--charcoal)) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--stone)) 100%);
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 60 11% 98%;
+    --sidebar-primary: 60 11% 98%;
+    --sidebar-primary-foreground: 0 0% 10%;
+    --sidebar-accent: 0 0% 16%;
+    --sidebar-accent-foreground: 60 11% 98%;
+    --sidebar-border: 0 0% 16%;
+    --sidebar-ring: 60 11% 98%;
     
-    /*
-    Red accent effects
-    */
-    --shadow-accent: 0 1px 0 hsl(var(--accent));
-    --shadow-accent-glow: 0 0 20px hsl(var(--accent) / 0.3);
+    --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-large: 0 8px 32px rgba(0, 0, 0, 0.5);
   }
   
   body {
@@ -75,15 +103,38 @@ All colors MUST be HSL.
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 
-  /* Typography */
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-light tracking-tight;
+  /* Typography per brand guidelines */
+  h1 {
+    @apply text-4xl font-bold tracking-tight;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  h2 {
+    @apply text-3xl font-semibold;
+    line-height: 1.3;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  h3 {
+    @apply text-2xl font-semibold;
+    line-height: 1.4;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  h4, h5, h6 {
+    @apply font-semibold;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  p {
+    line-height: 1.6;
   }
 
   * {
     scrollbar-width: thin;
-    scrollbar-color: hsl(var(--accent)) hsl(var(--background));
+    scrollbar-color: hsl(var(--slate)) hsl(var(--background));
   }
 
   *::-webkit-scrollbar {
@@ -95,7 +146,7 @@ All colors MUST be HSL.
   }
 
   *::-webkit-scrollbar-thumb {
-    background-color: hsl(var(--accent));
+    background-color: hsl(var(--slate));
     border-radius: 0px;
   }
 }

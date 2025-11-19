@@ -66,17 +66,14 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        beige: {
-          DEFAULT: "hsl(var(--beige))",
-          light: "hsl(var(--beige-light))",
-        },
-        taupe: {
-          DEFAULT: "hsl(var(--taupe))",
-          dark: "hsl(var(--taupe-dark))",
-        },
+        // Brand colors from guidelines
+        carbon: "hsl(var(--carbon))",
+        ivory: "hsl(var(--ivory))",
+        ash: "hsl(var(--ash))",
         stone: "hsl(var(--stone))",
-        sand: "hsl(var(--sand))",
-        charcoal: "hsl(var(--charcoal))",
+        mist: "hsl(var(--mist))",
+        slate: "hsl(var(--slate))",
+        pearl: "hsl(var(--pearl))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -88,8 +85,9 @@ export default {
         "gradient-subtle": "var(--gradient-subtle)",
       },
       boxShadow: {
-        "accent": "var(--shadow-accent)",
-        "accent-glow": "var(--shadow-accent-glow)",
+        soft: "var(--shadow-soft)",
+        medium: "var(--shadow-medium)",
+        large: "var(--shadow-large)",
       },
       keyframes: {
         "accordion-down": {
