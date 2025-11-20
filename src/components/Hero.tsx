@@ -13,6 +13,8 @@ export const Hero = () => {
       className="relative min-h-screen flex items-center px-6 sm:px-8 lg:px-20 xl:px-32 overflow-hidden bg-ivory"
       aria-label="Hero section"
     >
+      {/* Subtle vignette effect */}
+      <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-carbon/5 pointer-events-none" />
       <div className="w-full py-20 md:py-32">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Content */}
