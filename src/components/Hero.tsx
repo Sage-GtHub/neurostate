@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import heroImage from "@/assets/hero-minimal.png";
 
 export const Hero = () => {
   const scrollToProducts = () => {
@@ -8,10 +9,20 @@ export const Hero = () => {
 
   return (
     <section 
-      className="relative min-h-screen flex items-center justify-center px-6 sm:px-8 lg:px-20 xl:px-32 overflow-hidden bg-ivory"
+      className="relative min-h-screen flex items-center px-6 sm:px-8 lg:px-20 xl:px-32 overflow-hidden bg-ivory"
       aria-label="Hero section"
     >
-      <div className="w-full py-20 md:py-32">
+      {/* Background Hero Image */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-40">
+        <img 
+          src={heroImage} 
+          alt="Premium supplement product from NeuroState"
+          className="w-full max-w-2xl h-auto object-contain"
+          loading="eager"
+        />
+      </div>
+
+      <div className="w-full py-20 md:py-32 relative z-10">
         <div className="flex items-center justify-center">
           {/* Content */}
           <div className="text-center max-w-4xl mx-auto">
