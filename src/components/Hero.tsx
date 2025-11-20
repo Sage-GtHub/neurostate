@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-minimal.png";
+import { ArrowRight } from "lucide-react";
+import heroImage from "@/assets/lions-mane-mushroom.png";
 
 export const Hero = () => {
   const scrollToProducts = () => {
@@ -12,20 +13,10 @@ export const Hero = () => {
       className="relative min-h-screen flex items-center px-6 sm:px-8 lg:px-20 xl:px-32 overflow-hidden bg-ivory"
       aria-label="Hero section"
     >
-      {/* Background Hero Image */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-40">
-        <img 
-          src={heroImage} 
-          alt="Premium supplement product from NeuroState"
-          className="w-full max-w-2xl h-auto object-contain"
-          loading="eager"
-        />
-      </div>
-
-      <div className="w-full py-20 md:py-32 relative z-10">
-        <div className="flex items-center justify-center">
+      <div className="w-full py-20 md:py-32">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Content */}
-          <div className="text-center max-w-4xl mx-auto">
+          <div className="text-left max-w-3xl">
             <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold mb-8 text-carbon leading-[0.9] uppercase">
               NEUROSTATE<sup className="text-2xl">®</sup>
             </h1>
@@ -43,6 +34,20 @@ export const Hero = () => {
             >
               Explore Products
             </Button>
+          </div>
+
+          {/* Hero Image */}
+          <div className="flex justify-center lg:justify-end items-center relative">
+            <div className="relative w-full max-w-md lg:max-w-lg opacity-90">
+              <img 
+                src={heroImage} 
+                alt="Premium cognitive enhancement supplement from NeuroState"
+                className="w-full h-auto object-contain"
+                loading="eager"
+                width="600"
+                height="800"
+              />
+            </div>
           </div>
         </div>
       </div>
