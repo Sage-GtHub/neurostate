@@ -17,9 +17,6 @@ export const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Content */}
           <div className="text-left max-w-3xl">
-            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold mb-8 text-carbon leading-[0.9] uppercase">
-              NEUROSTATE<sup className="text-2xl">®</sup>
-            </h1>
             <p className="text-xl sm:text-2xl md:text-3xl text-carbon mb-4 font-normal leading-tight">
               Precision tools for your
             </p>
