@@ -78,8 +78,8 @@ const Index = () => {
                 <p className="text-[10px] sm:text-xs font-normal text-ash mb-3 tracking-[0.3em] uppercase">
                   PRODUCT SYSTEMS
                 </p>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-carbon">
-                  {searchQuery ? 'SEARCH RESULTS' : 'PRODUCTS'}
+                <h2 className="text-[1.875rem] font-semibold uppercase tracking-tight text-carbon" style={{ lineHeight: '1.3' }}>
+                  {searchQuery ? 'Search Results' : 'Products'}
                 </h2>
                 {searchQuery && (
                   <p className="text-sm text-ash mt-3 font-normal">

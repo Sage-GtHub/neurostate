@@ -74,7 +74,7 @@ const CategoryProducts = () => {
                 <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
               </Button>
             </Link>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">{config.title}</h1>
+            <h1 className="text-[2.25rem] font-bold mb-4" style={{ lineHeight: '1.2', letterSpacing: '-0.01em' }}>{config.title}</h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
               {config.description}
             </p>

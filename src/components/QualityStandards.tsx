@@ -77,8 +77,8 @@ export const QualityStandards = () => {
           <p className="text-[10px] sm:text-xs font-light text-muted-foreground mb-3 tracking-[0.3em] uppercase">
             QUALITY COMMITMENT
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light uppercase tracking-tight mb-6">
-            OUR STANDARDS
+          <h2 className="text-[1.875rem] font-semibold uppercase mb-6" style={{ lineHeight: '1.3' }}>
+            Our Standards
           </h2>
           <p className="text-sm text-muted-foreground max-w-2xl font-light">
             Every product is backed by science, rigorously tested, and made with premium ingredients
@@ -94,7 +94,7 @@ export const QualityStandards = () => {
                   <Icon className="h-6 w-6 text-accent" />
                 </div>
                 <p className="text-xs text-muted-foreground mb-2 uppercase tracking-wider font-light">{standard.number}</p>
-                <h3 className="text-base font-light uppercase tracking-wide mb-3">{standard.title}</h3>
+                <h3 className="text-[1.5rem] font-semibold mb-3" style={{ lineHeight: '1.4' }}>{standard.title}</h3>
                 <p className="text-sm text-muted-foreground font-light leading-relaxed">
                   {standard.description}
                 </p>

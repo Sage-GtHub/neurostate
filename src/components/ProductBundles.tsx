@@ -94,7 +94,7 @@ export const ProductBundles = () => {
             <Package className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
             <Badge variant="secondary" className="text-xs sm:text-sm">Best Value</Badge>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Curated Bundles</h2>
+          <h2 className="text-[1.875rem] font-semibold mb-3 sm:mb-4" style={{ lineHeight: '1.3' }}>Curated Bundles</h2>
           <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto px-4">
             Save more with our expertly designed supplement stacks
           </p>
@@ -113,7 +113,7 @@ export const ProductBundles = () => {
                   <Badge className="mb-2 sm:mb-3 bg-accent text-accent-foreground text-xs sm:text-sm">
                     Save {bundle.discount}%
                   </Badge>
-                  <h3 className="text-lg sm:text-xl font-semibold mb-2">{bundle.name}</h3>
+                  <h3 className="text-[1.5rem] font-semibold mb-2" style={{ lineHeight: '1.4' }}>{bundle.name}</h3>
                   <p className="text-xs sm:text-sm text-muted-foreground font-light mb-3 sm:mb-4">
                     {bundle.description}
                   </p>

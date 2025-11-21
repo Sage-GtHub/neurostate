@@ -141,7 +141,7 @@ export const LearningPaths = () => {
           <Trophy className="h-3 w-3 mr-1" />
           Structured Learning
         </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-[1.875rem] font-semibold mb-4" style={{ lineHeight: '1.3' }}>
             Learning Paths
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -175,7 +175,7 @@ export const LearningPaths = () => {
                   )}
                 </div>
 
-                <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
+                <h3 className="text-[1.5rem] font-semibold mb-2 group-hover:text-primary transition-colors" style={{ lineHeight: '1.4' }}>
                   {path.title}
                 </h3>
                 <p className="text-muted-foreground line-clamp-2 leading-relaxed">

@@ -241,7 +241,7 @@ export const MultiFormatHub = () => {
             <BookOpen className="h-4 w-4" />
             <span>Multi-Format Learning</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-5 bg-gradient-to-br from-foreground via-foreground/90 to-foreground/60 bg-clip-text text-transparent">
+          <h2 className="text-[1.875rem] font-semibold mb-5" style={{ lineHeight: '1.3' }}>
             Resource Library
           </h2>
           <p className="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto mb-8 leading-relaxed">

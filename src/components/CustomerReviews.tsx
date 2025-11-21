@@ -58,7 +58,7 @@ export const CustomerReviews = ({ productHandle }: CustomerReviewsProps) => {
   return (
     <div className="py-12">
       <div className="mb-8">
-        <h2 className="text-3xl font-bold mb-2">Customer Reviews</h2>
+        <h2 className="text-[1.875rem] font-semibold mb-2" style={{ lineHeight: '1.3' }}>Customer Reviews</h2>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <div className="flex">
@@ -82,7 +82,7 @@ export const CustomerReviews = ({ productHandle }: CustomerReviewsProps) => {
       <div className="grid lg:grid-cols-3 gap-8 mb-8">
         {/* Rating Distribution */}
         <div className="space-y-3">
-          <h3 className="font-semibold mb-4">Rating Distribution</h3>
+          <h3 className="text-[1.5rem] font-semibold mb-4" style={{ lineHeight: '1.4' }}>Rating Distribution</h3>
           {ratingDistribution.map((item) => (
             <div key={item.stars} className="flex items-center gap-3">
               <div className="flex items-center gap-1 w-16 text-sm">

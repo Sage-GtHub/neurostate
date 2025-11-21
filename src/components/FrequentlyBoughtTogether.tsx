@@ -84,7 +84,7 @@ export const FrequentlyBoughtTogether = ({ currentProduct }: FrequentlyBoughtTog
 
   return (
     <div className="space-y-4">
-      <h2 className="text-2xl font-bold">Frequently Bought Together</h2>
+      <h2 className="text-[1.875rem] font-semibold" style={{ lineHeight: '1.3' }}>Frequently Bought Together</h2>
       
       <div className="flex gap-4 items-start">
         {displayProducts.map((product, index) => {
