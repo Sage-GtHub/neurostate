@@ -76,7 +76,7 @@ const AboutUs = () => {
               <Badge variant="secondary" className="mb-4">
                 About NeuroState®
               </Badge>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+              <h1 className="text-[2.25rem] font-bold tracking-tight" style={{ lineHeight: '1.2', letterSpacing: '-0.01em' }}>
                 Making Elite Performance Accessible to Everyone
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
@@ -93,7 +93,7 @@ const AboutUs = () => {
             <div className="max-w-4xl mx-auto">
               <div className="flex items-center justify-center gap-3 mb-8">
                 <Target className="h-8 w-8 text-primary" />
-                <h2 className="text-3xl md:text-4xl font-bold">Our Mission</h2>
+                <h2 className="text-[1.875rem] font-semibold" style={{ lineHeight: '1.3' }}>Our Mission</h2>
               </div>
               <p className="text-lg text-muted-foreground leading-relaxed text-center mb-6">
                 At NeuroState®, we believe that the best performance tools and supplements shouldn't just
@@ -114,7 +114,7 @@ const AboutUs = () => {
         <section className="py-16 lg:py-20 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto space-y-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Our Story</h2>
+              <h2 className="text-[1.875rem] font-semibold text-center mb-12" style={{ lineHeight: '1.3' }}>Our Story</h2>
               
               <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
                 <p>
@@ -144,7 +144,7 @@ const AboutUs = () => {
         {/* Core Values */}
         <section className="py-16 lg:py-20">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-semibold text-center mb-12">Our Core Values</h2>
+            <h2 className="text-[1.875rem] font-semibold text-center mb-12" style={{ lineHeight: '1.3' }}>Our Core Values</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
               {values.map((value, index) => {
                 const Icon = value.icon;
@@ -155,7 +155,7 @@ const AboutUs = () => {
                         <Icon className="h-8 w-8 text-accent" />
                       </div>
                     </div>
-                    <h3 className="font-semibold text-lg mt-4 mb-2">{value.title}</h3>
+                    <h3 className="text-[1.5rem] font-semibold mt-4 mb-2" style={{ lineHeight: '1.4' }}>{value.title}</h3>
                     <p className="text-sm text-muted-foreground font-light">{value.description}</p>
                   </div>
                 );
@@ -170,7 +170,7 @@ const AboutUs = () => {
             <div className="max-w-4xl mx-auto">
               <div className="flex items-center justify-center gap-3 mb-8">
                 <Award className="h-8 w-8 text-primary" />
-                <h2 className="text-3xl md:text-4xl font-bold">The NeuroState® Standard</h2>
+                <h2 className="text-[1.875rem] font-semibold" style={{ lineHeight: '1.3' }}>The NeuroState® Standard</h2>
               </div>
               <p className="text-lg text-muted-foreground text-center mb-10">
                 We hold ourselves to the highest standards. Here's what that means for every product we offer:
@@ -192,7 +192,7 @@ const AboutUs = () => {
         <section className="py-16 lg:py-20 bg-gradient-to-br from-primary/10 to-accent/10">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center space-y-6">
-              <h2 className="text-3xl md:text-4xl font-bold">
+              <h2 className="text-[1.875rem] font-semibold" style={{ lineHeight: '1.3' }}>
                 Ready to Feel Your Best?
               </h2>
               <p className="text-lg text-muted-foreground">

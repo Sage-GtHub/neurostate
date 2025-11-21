@@ -120,7 +120,7 @@ const FAQ = () => {
         <section className="bg-muted/30 py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <h1 className="text-[2.25rem] font-bold mb-4" style={{ lineHeight: '1.2', letterSpacing: '-0.01em' }}>
                 Frequently Asked Questions
               </h1>
               <p className="text-lg text-muted-foreground">
@@ -136,7 +136,7 @@ const FAQ = () => {
             <div className="max-w-4xl mx-auto space-y-12">
               {faqCategories.map((category) => (
                 <div key={category.category} className="py-8">
-                  <h2 className="text-2xl font-semibold mb-6">{category.category}</h2>
+                  <h2 className="text-[1.875rem] font-semibold mb-6" style={{ lineHeight: '1.3' }}>{category.category}</h2>
                   <Accordion type="single" collapsible className="w-full">
                     {category.questions.map((item, idx) => (
                       <AccordionItem key={idx} value={`item-${idx}`}>

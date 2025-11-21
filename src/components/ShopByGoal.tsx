@@ -57,7 +57,7 @@ export const ShopByGoal = () => {
           <p className="text-[10px] sm:text-xs font-light text-muted-foreground mb-3 tracking-[0.3em] uppercase">
             PERFORMANCE SYSTEMS
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light uppercase tracking-tight mb-6">SHOP BY GOAL</h2>
+          <h2 className="text-[1.875rem] font-semibold uppercase mb-6" style={{ lineHeight: '1.3' }}>Shop by Goal</h2>
           <p className="text-sm sm:text-base text-muted-foreground max-w-2xl font-light">
             Choose your path to optimal performance. Each category is curated with science-backed products.
           </p>
@@ -81,7 +81,7 @@ export const ShopByGoal = () => {
                   </div>
                   
                   <div className="p-5 sm:p-6 bg-card">
-                    <h3 className="text-base sm:text-lg font-light uppercase tracking-wider mb-2 group-hover:text-foreground transition-colors">
+                    <h3 className="text-[1.5rem] font-semibold mb-2 group-hover:text-foreground transition-colors" style={{ lineHeight: '1.4' }}>
                       {goal.title}
                     </h3>
                     <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed font-light">

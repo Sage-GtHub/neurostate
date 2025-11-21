@@ -33,7 +33,7 @@ export const BenefitsSection = ({ productType }: BenefitsSectionProps) => {
       {benefits.map((benefit, index) => (
         <div key={index} className="text-center">
           <benefit.icon className="h-8 w-8 text-accent mx-auto mb-3" />
-          <h3 className="font-semibold mb-1">{benefit.title}</h3>
+          <h3 className="text-[1.5rem] font-semibold mb-1" style={{ lineHeight: '1.4' }}>{benefit.title}</h3>
           <p className="text-sm text-muted-foreground">{benefit.description}</p>
         </div>
       ))}

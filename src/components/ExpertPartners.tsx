@@ -170,7 +170,7 @@ export const ExpertPartners = () => {
           <p className="text-[10px] sm:text-xs font-light text-muted-foreground mb-3 tracking-[0.3em] uppercase">
             EXPERT PARTNERSHIPS
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light uppercase tracking-tight mb-6">
+          <h2 className="text-[1.875rem] font-semibold uppercase mb-6" style={{ lineHeight: '1.3' }}>
             Trusted by Experts
           </h2>
           <p className="text-sm text-muted-foreground max-w-2xl font-light">
@@ -191,7 +191,7 @@ export const ExpertPartners = () => {
                     <span className="inline-block px-3 py-1 text-xs font-medium bg-accent/10 text-accent mb-2">
                       {expert.specialization}
                     </span>
-                    <h3 className="text-xl font-bold mb-1">{expert.name}</h3>
+                    <h3 className="text-[1.5rem] font-semibold mb-1" style={{ lineHeight: '1.4' }}>{expert.name}</h3>
                     <p className="text-sm text-muted-foreground font-medium mb-1">
                       {expert.credentials}
                     </p>

@@ -92,8 +92,8 @@ export const Testimonials = () => {
           <p className="text-[10px] sm:text-xs font-light text-muted-foreground tracking-[0.3em] uppercase">
             TESTIMONIALS
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light uppercase tracking-tight">
-            WHAT OUR CUSTOMERS SAY
+          <h2 className="text-[1.875rem] font-semibold uppercase" style={{ lineHeight: '1.3' }}>
+            What Our Customers Say
           </h2>
           <p className="text-sm text-muted-foreground max-w-2xl font-light">
             Real reviews from real people who've transformed their health and wellness journey

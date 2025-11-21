@@ -100,7 +100,7 @@ const Contact = () => {
         <section className="bg-gradient-to-br from-primary/5 via-background to-accent/5 border-b">
           <div className="container mx-auto px-4 py-16 lg:py-20">
             <div className="max-w-3xl mx-auto text-center space-y-4">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+              <h1 className="text-[2.25rem] font-bold tracking-tight" style={{ lineHeight: '1.2', letterSpacing: '-0.01em' }}>
                 Get in Touch
               </h1>
               <p className="text-xl text-muted-foreground">
