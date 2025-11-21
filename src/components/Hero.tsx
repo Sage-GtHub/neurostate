@@ -18,20 +18,25 @@ export const Hero = () => {
       <div className="w-full py-20 md:py-32">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Content */}
-          <div className="text-left max-w-3xl">
-            <p className="text-xl sm:text-2xl md:text-3xl text-carbon mb-4 font-normal leading-tight">
-              Precision tools for your
-            </p>
-            <p className="text-xl sm:text-2xl md:text-3xl text-carbon mb-12 font-normal leading-tight">
-              optimal state
+          <div className="text-left max-w-3xl space-y-12">
+            <div className="space-y-4">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-carbon leading-none" style={{ letterSpacing: '-0.02em' }}>
+                Your optimal state.
+              </h1>
+              <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-carbon leading-none" style={{ letterSpacing: '-0.02em' }}>
+                On demand.
+              </p>
+            </div>
+            <p className="text-lg text-ash max-w-2xl leading-relaxed">
+              Scientifically-backed supplements engineered for peak mental and physical performance.
             </p>
             <Button 
               size="lg" 
-              className="bg-carbon text-ivory hover:bg-slate font-medium uppercase tracking-wider px-12 py-6 text-sm transition-all duration-300"
+              className="bg-carbon text-ivory hover:bg-slate"
               onClick={scrollToProducts}
-              aria-label="Scroll to products section"
+              aria-label="Shop now"
             >
-              Explore Products
+              Shop Now
             </Button>
           </div>
 
