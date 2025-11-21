@@ -76,9 +76,20 @@ export default {
         pearl: "hsl(var(--pearl))",
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: "12px", /* Per brand guidelines - card radius */
+        md: "8px",
+        sm: "4px",
+        xl: "12px", /* Standard card radius from guidelines */
+      },
+      spacing: {
+        /* Brand guideline spacing scale */
+        'xs': '4px',
+        's': '8px',
+        'm': '16px',
+        'l': '24px',
+        'xl': '32px',
+        '2xl': '48px',
+        '3xl': '64px',
       },
       backgroundImage: {
         "gradient-primary": "var(--gradient-primary)",

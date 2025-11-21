@@ -42,7 +42,7 @@ All colors MUST be HSL.
     --border: 0 0% 90%;        /* Mist */
     --input: 0 0% 90%;         /* Mist */
     --ring: 0 0% 16%;          /* Slate */
-    --radius: 0rem;
+    --radius: 12px; /* Per brand guidelines */
     
     --sidebar-background: 60 11% 98%;
     --sidebar-foreground: 0 0% 10%;
@@ -103,33 +103,63 @@ All colors MUST be HSL.
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 
-  /* Typography per brand guidelines */
+  /* Typography per brand guidelines - exact specifications from NeuroState Brand Guidelines */
   h1 {
-    @apply text-4xl font-bold tracking-tight;
-    letter-spacing: -0.01em;
+    font-size: 2.25rem; /* 36px */
+    font-weight: 700; /* Bold */
     line-height: 1.2;
+    letter-spacing: -0.01em;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
   
   h2 {
-    @apply text-3xl font-semibold;
+    font-size: 1.875rem; /* 30px */
+    font-weight: 600; /* Semibold */
     line-height: 1.3;
+    letter-spacing: normal;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
   
   h3 {
-    @apply text-2xl font-semibold;
+    font-size: 1.5rem; /* 24px */
+    font-weight: 600; /* Semibold */
     line-height: 1.4;
+    letter-spacing: normal;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
   
   h4, h5, h6 {
-    @apply font-semibold;
+    font-weight: 600; /* Semibold */
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
   
+  /* Body text styles per brand guidelines */
   p {
+    font-size: 1rem; /* 16px - Body Regular */
+    font-weight: 400;
     line-height: 1.6;
+    max-width: 640px; /* Optimal reading width per guidelines */
+  }
+  
+  /* Body Large for introductory content */
+  .text-body-large {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.6;
+  }
+  
+  /* Caption style */
+  .text-caption {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.5;
+    color: hsl(var(--ash));
+  }
+  
+  /* UI Labels (buttons, badges, tags) */
+  .text-ui-label {
+    font-size: 0.75rem; /* 12px */
+    font-weight: 500; /* Medium */
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
 
   * {
