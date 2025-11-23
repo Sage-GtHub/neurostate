@@ -84,12 +84,12 @@ export const ProductQuiz = () => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button 
-          variant="outline" 
-          className="gap-2"
+          variant="ghost" 
+          size="sm"
+          className="gap-2 text-[0.75rem] tracking-[0.05em]"
           onClick={resetQuiz}
         >
-          <HelpCircle className="h-4 w-4" />
-          Find Your Perfect Product
+          Product Finder
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-2xl">
