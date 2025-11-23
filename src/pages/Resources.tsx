@@ -125,61 +125,40 @@ const Resources = () => {
       <Header />
       
       <main className="container mx-auto px-4 py-16">
-        {/* Hero Section */}
-        <div className="text-center mb-20 relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent -z-10 blur-3xl" />
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/15 to-accent/15 text-primary px-5 py-2.5 rounded-full text-sm font-semibold mb-6 border border-primary/20 shadow-sm">
-            <BookOpen className="h-4 w-4" />
-            <span>Science-Backed Resources</span>
-          </div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-br from-foreground via-foreground/90 to-foreground/60 bg-clip-text text-transparent leading-tight">
-            Master Your Health Journey
+        <div className="text-center mb-20 py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 border-b border-mist">
+          <h1 className="text-[2.25rem] md:text-[3rem] font-normal text-carbon mb-6" style={{ lineHeight: '1.2' }}>
+            Master your health journey
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            Discover personalised resources, expert courses, and science-backed content to help you optimise your performance and wellbeing
+          <p className="text-[0.9375rem] text-ash max-w-3xl mx-auto">
+            Discover personalised resources, expert courses, and science-backed content
           </p>
         </div>
 
         {/* Interactive Resource Finder - Top Priority */}
         <ResourceFinder />
 
-        {/* Featured Article */}
-        <div className="mb-20 overflow-hidden border-b pb-12">
-          <div className="grid md:grid-cols-5 gap-8">
-            <div className="md:col-span-3 relative overflow-hidden rounded-lg">
-              <img
-                src={featuredArticle.image}
-                alt={featuredArticle.title}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-            <div className="md:col-span-2 flex flex-col justify-center">
-              <div className="flex flex-wrap items-center gap-2 mb-5">
-                <Badge className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground shadow-md">
-                  <TrendingUp className="h-3.5 w-3.5 mr-1.5" />
-                  Featured
-                </Badge>
-                <div className="flex items-center text-sm text-muted-foreground gap-3">
-                  <span className="flex items-center gap-1.5">
-                    <Calendar className="h-3.5 w-3.5" />
-                    {featuredArticle.date}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <Clock className="h-3.5 w-3.5" />
-                    {featuredArticle.readTime}
-                  </span>
-                </div>
+        <div className="mb-20 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 py-16 border-b border-mist">
+          <div className="w-full max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12">
+              <div className="relative overflow-hidden bg-ivory">
+                <img
+                  src={featuredArticle.image}
+                  alt={featuredArticle.title}
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-5 leading-tight hover:text-primary transition-colors">
-                {featuredArticle.title}
-              </h2>
-              <p className="text-muted-foreground mb-8 text-base leading-relaxed">
-                {featuredArticle.excerpt}
-              </p>
-              <Button size="lg" className="w-fit group/btn shadow-lg hover:shadow-xl transition-shadow">
-                Read Full Article
-                <ArrowRight className="ml-2 h-5 w-5 group-hover/btn:translate-x-1 transition-transform" />
-              </Button>
+              <div className="flex flex-col justify-center">
+                <p className="text-[0.6875rem] uppercase tracking-[0.05em] text-stone mb-4">Featured</p>
+                <h2 className="text-[1.5rem] font-normal text-carbon mb-4 leading-tight">
+                  {featuredArticle.title}
+                </h2>
+                <p className="text-[0.9375rem] text-ash mb-6 leading-relaxed">
+                  {featuredArticle.excerpt}
+                </p>
+                <Button variant="ghost" className="w-fit hover:bg-transparent hover:opacity-60">
+                  Read article <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>

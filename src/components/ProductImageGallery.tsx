@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface ProductImageGalleryProps {
@@ -23,36 +23,35 @@ export const ProductImageGallery = ({ images, productTitle }: ProductImageGaller
 
   if (images.length === 0) {
     return (
-      <div className="aspect-square rounded-lg bg-secondary/20 flex items-center justify-center">
-        <span className="text-muted-foreground">No image available</span>
+      <div className="aspect-square bg-ivory flex items-center justify-center">
+        <span className="text-stone text-[0.875rem]">No image</span>
       </div>
     );
   }
 
   return (
-    <div className="space-y-4 sticky top-4">
-      {/* Main Image */}
-      <div className="relative aspect-square rounded-lg overflow-hidden bg-secondary/20 group">
+    <div className="space-y-3 sticky top-4">
+      <div className="relative aspect-square overflow-hidden bg-ivory group">
         <img
           src={images[selectedImage].url}
           alt={images[selectedImage].altText || productTitle}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain p-12"
         />
         
         {images.length > 1 && (
           <>
             <Button
-              variant="secondary"
+              variant="ghost"
               size="icon"
-              className="absolute left-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity"
+              className="absolute left-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-background/80 hover:bg-background"
               onClick={prevImage}
             >
               <ChevronLeft className="h-4 w-4" />
             </Button>
             <Button
-              variant="secondary"
+              variant="ghost"
               size="icon"
-              className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity"
+              className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-background/80 hover:bg-background"
               onClick={nextImage}
             >
               <ChevronRight className="h-4 w-4" />
@@ -61,23 +60,22 @@ export const ProductImageGallery = ({ images, productTitle }: ProductImageGaller
         )}
       </div>
 
-      {/* Thumbnail Gallery */}
       {images.length > 1 && (
         <div className="grid grid-cols-4 gap-2">
           {images.map((image, index) => (
             <button
               key={index}
               onClick={() => setSelectedImage(index)}
-              className={`aspect-square rounded-md overflow-hidden border-2 transition-all ${
+              className={`aspect-square overflow-hidden bg-ivory border transition-all ${
                 selectedImage === index
-                  ? "border-primary"
-                  : "border-transparent hover:border-muted-foreground/30"
+                  ? "border-carbon"
+                  : "border-transparent hover:border-mist"
               }`}
             >
               <img
                 src={image.url}
                 alt={image.altText || `${productTitle} ${index + 1}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain p-3"
               />
             </button>
           ))}

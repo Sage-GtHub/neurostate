@@ -20,7 +20,6 @@ export const FrequentlyBoughtTogether = ({ currentProduct }: FrequentlyBoughtTog
     queryFn: () => fetchProducts(20),
   });
 
-  // Get 2 related products (simple logic - in real app, use product tags or collections)
   const relatedProducts = allProducts
     ?.filter(p => p.node.id !== currentProduct.id)
     .slice(0, 2) || [];
@@ -33,7 +32,7 @@ export const FrequentlyBoughtTogether = ({ currentProduct }: FrequentlyBoughtTog
   const toggleProduct = (productId: string) => {
     const newSelected = new Set(selectedProducts);
     if (newSelected.has(productId)) {
-      if (newSelected.size > 1) { // Keep at least one selected
+      if (newSelected.size > 1) {
         newSelected.delete(productId);
       }
     } else {
@@ -50,7 +49,7 @@ export const FrequentlyBoughtTogether = ({ currentProduct }: FrequentlyBoughtTog
 
   const calculateBundlePrice = () => {
     const total = calculateTotal();
-    return selectedProducts.size > 1 ? total * 0.95 : total; // 5% discount for bundles
+    return selectedProducts.size > 1 ? total * 0.95 : total;
   };
 
   const handleAddBundle = () => {
@@ -72,7 +71,7 @@ export const FrequentlyBoughtTogether = ({ currentProduct }: FrequentlyBoughtTog
     });
 
     toast.success("Bundle added to cart", {
-      description: `${selectedItems.length} item${selectedItems.length > 1 ? 's' : ''} added to your cart.`,
+      description: `${selectedItems.length} item${selectedItems.length > 1 ? 's' : ''} added`,
     });
   };
 
@@ -83,20 +82,20 @@ export const FrequentlyBoughtTogether = ({ currentProduct }: FrequentlyBoughtTog
   const bundleDiscount = calculateTotal() - calculateBundlePrice();
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-[1.875rem] font-semibold" style={{ lineHeight: '1.3' }}>Frequently Bought Together</h2>
+    <div className="space-y-6">
+      <h2 className="text-[1.125rem] font-normal text-carbon">Frequently bought together</h2>
       
-      <div className="flex gap-4 items-start">
+      <div className="flex flex-col md:flex-row gap-6 items-start">
         {displayProducts.map((product, index) => {
           const firstVariant = product.node.variants.edges[0]?.node;
           const image = product.node.images.edges[0]?.node;
           const price = parseFloat(product.node.priceRange.minVariantPrice.amount);
           
           return (
-            <div key={product.node.id} className="flex items-start gap-2">
+            <div key={product.node.id} className="flex items-start gap-3 w-full md:w-auto">
               {index > 0 && (
-                <div className="flex items-center justify-center pt-20">
-                  <Plus className="h-5 w-5 text-muted-foreground" />
+                <div className="hidden md:flex items-center justify-center pt-12">
+                  <Plus className="h-4 w-4 text-stone" />
                 </div>
               )}
               
@@ -106,22 +105,22 @@ export const FrequentlyBoughtTogether = ({ currentProduct }: FrequentlyBoughtTog
                     checked={selectedProducts.has(product.node.id)}
                     onCheckedChange={() => toggleProduct(product.node.id)}
                     disabled={product.node.id === currentProduct.id}
-                    className="absolute top-2 left-2 z-10 bg-background"
+                    className="absolute top-2 left-2 z-10"
                   />
                   
-                  <div className="overflow-hidden bg-background hover:shadow-md transition-shadow">
-                    <div className="aspect-square bg-secondary/20">
+                  <div className="overflow-hidden bg-ivory border border-transparent hover:border-mist transition-all">
+                    <div className="aspect-square bg-ivory p-6">
                       {image && (
                         <img
                           src={image.url}
                           alt={image.altText || product.node.title}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-contain"
                         />
                       )}
                     </div>
-                    <div className="p-3">
-                      <h4 className="font-medium text-sm line-clamp-2 mb-2">{product.node.title}</h4>
-                      <p className="font-bold">£{price.toFixed(2)}</p>
+                    <div className="p-4 border-t border-mist">
+                      <h4 className="text-[0.875rem] font-normal text-carbon line-clamp-2 mb-2">{product.node.title}</h4>
+                      <p className="text-[0.875rem] text-carbon">£{price.toFixed(2)}</p>
                     </div>
                   </div>
                 </div>
@@ -131,25 +130,25 @@ export const FrequentlyBoughtTogether = ({ currentProduct }: FrequentlyBoughtTog
         })}
       </div>
 
-      <div className="p-4 bg-secondary/10">
-        <div className="flex justify-between items-center mb-3">
+      <div className="pt-6 border-t border-mist space-y-4">
+        <div className="flex justify-between items-center">
           <div>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-[0.875rem] text-stone">
               Total for {selectedProducts.size} item{selectedProducts.size > 1 ? 's' : ''}
             </div>
             {bundleDiscount > 0 && (
-              <div className="text-xs text-primary font-medium">
+              <div className="text-[0.75rem] text-carbon">
                 Save £{bundleDiscount.toFixed(2)} with bundle
               </div>
             )}
           </div>
           <div className="text-right">
             {bundleDiscount > 0 && (
-              <div className="text-sm text-muted-foreground line-through">
+              <div className="text-[0.875rem] text-stone line-through">
                 £{calculateTotal().toFixed(2)}
               </div>
             )}
-            <div className="text-2xl font-bold">
+            <div className="text-[1.125rem] font-normal text-carbon">
               £{calculateBundlePrice().toFixed(2)}
             </div>
           </div>
@@ -157,11 +156,11 @@ export const FrequentlyBoughtTogether = ({ currentProduct }: FrequentlyBoughtTog
         
         <Button 
           onClick={handleAddBundle}
-          className="w-full rounded-full bg-primary/10 text-foreground border border-border hover:bg-foreground hover:text-background transition-all duration-300 font-medium"
+          className="w-full"
           size="lg"
         >
           <ShoppingCart className="h-5 w-5 mr-2" />
-          Add Bundle to Cart
+          Add bundle to cart
         </Button>
       </div>
     </div>

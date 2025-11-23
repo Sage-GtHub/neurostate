@@ -96,15 +96,14 @@ const Contact = () => {
     <>
       <Header />
       <div className="min-h-screen bg-background">
-        {/* Hero Section */}
-        <section className="bg-gradient-to-br from-primary/5 via-background to-accent/5 border-b">
-          <div className="container mx-auto px-4 py-16 lg:py-20">
-            <div className="max-w-3xl mx-auto text-center space-y-4">
-              <h1 className="text-[2.25rem] font-bold tracking-tight" style={{ lineHeight: '1.2', letterSpacing: '-0.01em' }}>
+        <section className="py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 border-b border-mist">
+          <div className="w-full max-w-7xl mx-auto">
+            <div className="max-w-2xl mx-auto text-center space-y-4">
+              <h1 className="text-[2.25rem] md:text-[3rem] font-normal text-carbon" style={{ lineHeight: '1.2' }}>
                 Get in touch
               </h1>
-              <p className="text-xl text-muted-foreground">
-                Questions? We're here to help. Send us a message and we'll respond as soon as possible.
+              <p className="text-[0.9375rem] text-ash">
+                Questions? We're here to help
               </p>
             </div>
           </div>

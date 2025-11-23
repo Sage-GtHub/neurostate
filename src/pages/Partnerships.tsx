@@ -153,60 +153,39 @@ const Partnerships = () => {
       <Header />
       
       <main className="container mx-auto px-4 py-12">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
-            <Handshake className="h-4 w-4" />
-            <span>Partnership Program</span>
-          </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-            Partner With NeuroState®
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Join our network of leading organisations working to advance human performance, 
-            recovery, and wellbeing through science-backed solutions.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <Building2 className="h-5 w-5 text-primary" />
-              <span>50+ Partner Organisations</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Globe className="h-5 w-5 text-primary" />
-              <span>Operating in 12 Countries</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Users className="h-5 w-5 text-primary" />
-              <span>100,000+ Users Served</span>
+        <section className="py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 border-b border-mist">
+          <div className="w-full max-w-7xl mx-auto">
+            <div className="max-w-2xl mx-auto text-center">
+              <h1 className="text-[2.25rem] md:text-[3rem] font-normal text-carbon mb-6" style={{ lineHeight: '1.2' }}>
+                Partner with NeuroState
+              </h1>
+              <p className="text-[0.9375rem] text-ash mb-8">
+                Join our network of leading organisations advancing human performance, 
+                recovery, and wellbeing through science-backed solutions
+              </p>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Benefits Section */}
-        <div className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Partnership Benefits</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              We believe in building partnerships that genuinely benefit both sides and make a real impact
-            </p>
-          </div>
+        <div className="py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32">
+          <div className="w-full max-w-7xl mx-auto">
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="text-[1.5rem] font-normal text-carbon mb-4">Partnership benefits</h2>
+              <p className="text-[0.9375rem] text-ash max-w-2xl mx-auto">
+                We believe in building partnerships that genuinely benefit both sides
+              </p>
+            </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {benefits.map((benefit, index) => {
-              const Icon = benefit.icon;
-              return (
-                <div 
-                  key={index}
-                  className="p-6 hover:translate-y-[-4px] transition-all duration-300"
-                >
-                  <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4 transition-colors">
-                    <Icon className="h-6 w-6 text-accent" />
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
+              {benefits.map((benefit, index) => {
+                return (
+                  <div key={index}>
+                    <h3 className="text-[1.125rem] font-normal text-carbon mb-3">{benefit.title}</h3>
+                    <p className="text-[0.875rem] text-ash">{benefit.description}</p>
                   </div>
-                  <h3 className="text-lg font-semibold mb-2">{benefit.title}</h3>
-                  <p className="text-sm text-muted-foreground font-light">{benefit.description}</p>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
 
