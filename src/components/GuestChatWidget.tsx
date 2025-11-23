@@ -372,6 +372,11 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
     return groups;
   };
 
+  const cleanText = (text: string): string => {
+    // Remove asterisks used for markdown formatting
+    return text.replace(/\*/g, "");
+  };
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="w-full sm:w-[440px] p-0 flex flex-col">
@@ -504,7 +509,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                       <div className={`flex-1 ${msg.role === "user" ? "ml-auto max-w-[85%]" : ""}`}>
                         <div className={`${msg.role === "user" ? "bg-pearl p-3 rounded-lg" : ""}`}>
                           <p className="text-sm text-carbon leading-relaxed whitespace-pre-wrap">
-                            {msg.content}
+                            {cleanText(msg.content)}
                           </p>
                         </div>
                         {msg.timestamp && (
