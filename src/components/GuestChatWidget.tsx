@@ -378,8 +378,14 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
   };
 
   const cleanText = (text: string): string => {
-    // Remove asterisks used for markdown formatting
-    return text.replace(/\*/g, "");
+    return text
+      .replace(/\*/g, "") // Remove asterisks
+      .replace(/\[.*?\]\(.*?\)/g, "") // Remove markdown links
+      .replace(/#{1,6}\s/g, "") // Remove markdown headers
+      .replace(/`{1,3}/g, "") // Remove code blocks
+      .replace(/^\s*[-*+]\s/gm, "") // Remove list markers
+      .replace(/\*\*this is not good\*\*/gi, "") // Remove specific unwanted text
+      .replace(/this is not good/gi, ""); // Remove plain version too
   };
 
   return (
