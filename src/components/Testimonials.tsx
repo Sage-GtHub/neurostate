@@ -1,12 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Star } from "lucide-react";
 
 interface Testimonial {
   id: number;
   name: string;
   role: string;
   avatar: string;
-  rating: number;
   review: string;
   product?: string;
 }
@@ -17,7 +15,6 @@ const testimonials: Testimonial[] = [
     name: "Sarah Mitchell",
     role: "Wellness Enthusiast",
     avatar: "SM",
-    rating: 5,
     review: "The Red Light Therapy Blanket has completely transformed my recovery routine. I feel more energised and my muscle soreness has reduced significantly. Absolutely worth the investment!",
     product: "Red Light Therapy Blanket",
   },
@@ -26,7 +23,6 @@ const testimonials: Testimonial[] = [
     name: "James Patterson",
     role: "Professional Athlete",
     avatar: "JP",
-    rating: 5,
     review: "As a professional athlete, recovery is crucial. The CryoPlunge Ice Bath has become an essential part of my daily routine. The quality is outstanding and the results speak for themselves.",
     product: "CryoPlunge Ice Bath",
   },
@@ -35,7 +31,6 @@ const testimonials: Testimonial[] = [
     name: "Emily Chen",
     role: "Yoga Instructor",
     avatar: "EC",
-    rating: 5,
     review: "I've tried many supplements, but the Omega-3 Elite is by far the best. I notice the difference in my joint health and mental clarity. The quality standards are impressive.",
     product: "Omega-3 Elite",
   },
@@ -44,7 +39,6 @@ const testimonials: Testimonial[] = [
     name: "Michael Thompson",
     role: "Business Executive",
     avatar: "MT",
-    rating: 4,
     review: "The PEMF Therapy Mat has helped me manage stress and improve my sleep quality. After long days at the office, it's my go-to for relaxation. Highly recommend!",
     product: "PEMF Therapy Mat",
   },
@@ -53,7 +47,6 @@ const testimonials: Testimonial[] = [
     name: "Lisa Anderson",
     role: "Fitness Coach",
     avatar: "LA",
-    rating: 5,
     review: "NeuroState's products are game-changers. The customer service is excellent, delivery was fast, and the quality exceeds expectations. I recommend them to all my clients.",
   },
   {
@@ -61,104 +54,60 @@ const testimonials: Testimonial[] = [
     name: "David Kumar",
     role: "Health Optimiser",
     avatar: "DK",
-    rating: 5,
     review: "The RestoreSleep Night formula has been a revelation. I fall asleep faster and wake up feeling genuinely refreshed. It's become an essential part of my evening routine.",
     product: "RestoreSleep Night",
   },
 ];
 
-const StarRating = ({ rating }: { rating: number }) => {
-  return (
-    <div className="flex gap-0.5">
-      {[...Array(5)].map((_, index) => (
-        <Star
-          key={index}
-          className={`h-4 w-4 ${
-            index < rating
-              ? "fill-yellow-400 text-yellow-400"
-              : "fill-muted text-muted"
-          }`}
-        />
-      ))}
-    </div>
-  );
-};
 
 export const Testimonials = () => {
   return (
-    <section className="py-24 lg:py-32">
-      <div className="w-full px-6 sm:px-8 lg:px-20 xl:px-32">
-        <div className="mb-20">
-          <p className="ghost-number mb-4">
-            TESTIMONIALS
-          </p>
-          <h2 className="mb-6">
-            What our customers say
-          </h2>
-          <p className="text-body-large text-muted-foreground max-w-2xl">
-            Real reviews from real people who transformed their health and wellness
+    <section className="py-32 lg:py-40">
+      <div className="w-full px-6 sm:px-8 lg:px-20 xl:px-32 max-w-7xl mx-auto">
+        <div className="mb-24">
+          <p className="ghost-number mb-6">TESTIMONIALS</p>
+          <h2 className="mb-6">Customer stories</h2>
+          <p className="text-body-large text-ash max-w-2xl">
+            Real experiences from people optimising their performance
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="p-8 bg-card rounded-xl hover:shadow-large transition-all duration-300"
+              className="space-y-6"
             >
-              <div className="space-y-4">
-                {/* Rating */}
-                <StarRating rating={testimonial.rating} />
+              {/* Review Text - Primary focus */}
+              <p className="text-[1rem] leading-relaxed text-ash">
+                "{testimonial.review}"
+              </p>
 
-                {/* Review Text */}
-                <p className="text-body text-muted-foreground">
-                  "{testimonial.review}"
-                </p>
+              {/* Product Badge - Subtle */}
+              {testimonial.product && (
+                <div>
+                  <span className="text-[0.6875rem] font-medium tracking-wider uppercase text-stone">
+                    {testimonial.product}
+                  </span>
+                </div>
+              )}
 
-                {/* Product Badge */}
-                {testimonial.product && (
-                  <div className="pt-2">
-                    <span className="text-ui-label text-accent bg-accent/10 px-4 py-2 rounded-full">
-                      {testimonial.product}
-                    </span>
-                  </div>
-                )}
-
-                {/* Customer Info */}
-                <div className="flex items-center gap-4 pt-6 border-t border-border/30">
-                  <Avatar className="h-12 w-12">
-                    <AvatarImage src="" alt={testimonial.name} />
-                    <AvatarFallback className="bg-accent/10 text-accent">
-                      {testimonial.avatar}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="font-semibold">{testimonial.name}</p>
-                    <p className="text-caption text-muted-foreground">
-                      {testimonial.role}
-                    </p>
-                  </div>
+              {/* Customer Info - Minimal */}
+              <div className="flex items-center gap-4 pt-4">
+                <div className="h-10 w-10 rounded-full bg-pearl flex items-center justify-center">
+                  <span className="text-[0.75rem] font-medium text-carbon">
+                    {testimonial.avatar}
+                  </span>
+                </div>
+                <div>
+                  <p className="text-[0.9375rem] font-medium">{testimonial.name}</p>
+                  <p className="text-[0.8125rem] text-stone">
+                    {testimonial.role}
+                  </p>
                 </div>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Trust Indicators */}
-        <div className="mt-16 text-center">
-          <div className="flex items-center justify-center gap-3 text-muted-foreground">
-            <div className="flex">
-              {[...Array(5)].map((_, index) => (
-                <Star
-                  key={index}
-                  className="h-6 w-6 fill-yellow-400 text-yellow-400"
-                />
-              ))}
-            </div>
-            <span className="text-body font-medium">
-              4.9/5 average rating from over 2,500+ reviews
-            </span>
-          </div>
         </div>
       </div>
     </section>

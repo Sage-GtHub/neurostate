@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Package, ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
@@ -87,20 +86,17 @@ export const ProductBundles = () => {
   };
 
   return (
-    <section id="bundles" className="py-24 sm:py-32 px-6 sm:px-8 lg:px-20 xl:px-32 bg-secondary/20">
-      <div className="w-full">
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-3 mb-6">
-            <Package className="h-8 w-8 text-primary" />
-            <Badge variant="secondary" className="text-ui-label">Best Value</Badge>
-          </div>
-          <h2 className="mb-6">Curated bundles</h2>
-          <p className="text-body-large text-muted-foreground max-w-2xl mx-auto">
-            Save more with our expertly designed supplement stacks
+    <section id="bundles" className="py-24 sm:py-32 px-6 sm:px-8 lg:px-20 xl:px-32">
+      <div className="w-full max-w-7xl mx-auto">
+        <div className="mb-20">
+          <p className="ghost-number mb-6">BUNDLE & SAVE</p>
+          <h2 className="mb-6">Curated stacks</h2>
+          <p className="text-body-large text-ash max-w-2xl">
+            Complete systems designed for your performance goals
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
           {bundles.map((bundle) => {
             const bundleProducts = getBundleProducts(bundle.productKeywords);
             if (bundleProducts.length === 0) return null;
@@ -108,51 +104,48 @@ export const ProductBundles = () => {
             const pricing = calculateBundlePrice(bundleProducts, bundle.discount);
 
             return (
-              <div key={bundle.id} className="p-8 sm:p-10 rounded-xl bg-card hover:shadow-large hover:translate-y-[-4px] transition-all duration-300">
+              <div key={bundle.id} className="flex flex-col transition-all duration-500 group">
                 <div className="mb-8">
-                  <Badge className="mb-4 bg-accent text-accent-foreground text-ui-label">
+                  <span className="inline-block text-[0.6875rem] font-medium tracking-wider uppercase text-carbon mb-4 px-3 py-1 border border-mist rounded-full">
                     Save {bundle.discount}%
-                  </Badge>
-                  <h3 className="mb-3">{bundle.name}</h3>
-                  <p className="text-body text-muted-foreground">
+                  </span>
+                  <h3 className="text-[1.25rem] font-medium mb-4">{bundle.name}</h3>
+                  <p className="text-[0.9375rem] leading-relaxed text-ash">
                     {bundle.description}
                   </p>
                 </div>
 
                 <div className="space-y-3 mb-8">
                   {bundle.benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <Check className="h-5 w-5 text-accent flex-shrink-0" />
-                      <span className="text-body">{benefit}</span>
+                    <div key={index} className="flex items-start gap-3">
+                      <Check className="h-4 w-4 text-carbon flex-shrink-0 mt-0.5" />
+                      <span className="text-[0.9375rem] text-ash">{benefit}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="pt-6 mb-6">
-                  <div className="text-caption text-muted-foreground mb-2">
+                <div className="mt-auto">
+                  <div className="text-[0.8125rem] text-stone mb-3">
                     Includes {bundleProducts.length} products
                   </div>
-                  <div className="flex items-baseline gap-3">
-                    <span className="text-h2">
+                  <div className="flex items-baseline gap-3 mb-6">
+                    <span className="text-[1.5rem] font-medium">
                       £{pricing.discounted.toFixed(2)}
                     </span>
-                    <span className="text-body text-muted-foreground line-through">
+                    <span className="text-[0.875rem] text-stone line-through">
                       £{pricing.original.toFixed(2)}
                     </span>
                   </div>
-                  <div className="text-caption text-primary font-medium">
-                    Save £{pricing.savings.toFixed(2)}
-                  </div>
-                </div>
 
-                <Button 
-                  onClick={() => handleAddBundle(bundle)}
-                  size="lg"
-                  className="w-full"
-                >
-                  Add Bundle
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
+                  <Button 
+                    onClick={() => handleAddBundle(bundle)}
+                    size="sm"
+                    variant="outline"
+                    className="w-full group-hover:bg-carbon group-hover:text-ivory transition-all duration-300"
+                  >
+                    Add Bundle
+                  </Button>
+                </div>
               </div>
             );
           })}

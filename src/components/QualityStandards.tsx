@@ -71,31 +71,27 @@ const standards: Standard[] = [
 
 export const QualityStandards = () => {
   return (
-    <section className="py-24 md:py-32 px-6 sm:px-8 lg:px-20 xl:px-32">
-      <div className="w-full">
-        <div className="mb-20">
-          <p className="ghost-number mb-4">
-            QUALITY COMMITMENT
-          </p>
-          <h2 className="mb-6">
-            Our standards
-          </h2>
-          <p className="text-body-large text-muted-foreground max-w-2xl">
+    <section className="py-32 md:py-40 px-6 sm:px-8 lg:px-20 xl:px-32">
+      <div className="w-full max-w-7xl mx-auto">
+        <div className="mb-24">
+          <p className="ghost-number mb-6">QUALITY COMMITMENT</p>
+          <h2 className="mb-6">Our standards</h2>
+          <p className="text-body-large text-ash max-w-2xl">
             Every product backed by science, rigorously tested, and made with premium ingredients
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-32">
           {standards.map((standard) => {
             const Icon = standard.icon;
             return (
-              <div key={standard.id}>
-                <div className="mb-6">
-                  <Icon className="h-8 w-8 text-accent" />
-                </div>
-                <p className="ghost-number mb-3">{standard.number}</p>
-                <h3 className="mb-4">{standard.title}</h3>
-                <p className="text-body text-muted-foreground">
+              <div key={standard.id} className="space-y-4">
+                <Icon className="h-6 w-6 text-carbon stroke-[1.5]" />
+                <p className="text-[0.6875rem] font-medium tracking-wider uppercase text-stone">
+                  {standard.number}
+                </p>
+                <h3 className="text-[1.125rem] font-medium leading-tight">{standard.title}</h3>
+                <p className="text-[0.9375rem] leading-relaxed text-ash">
                   {standard.description}
                 </p>
               </div>
@@ -103,26 +99,26 @@ export const QualityStandards = () => {
           })}
         </div>
 
-        <div className="pt-16 border-t border-border/50">
-          <div className="flex flex-wrap justify-center items-center gap-x-16 gap-y-8 text-center">
+        <div className="pt-16 border-t border-mist/50">
+          <div className="flex flex-wrap justify-center items-center gap-x-20 gap-y-12 text-center">
             <div>
-              <div className="text-h2 mb-2">150+</div>
-              <div className="text-ui-label">Pro Teams</div>
+              <div className="text-[2rem] font-medium mb-2">150+</div>
+              <div className="text-[0.6875rem] font-medium tracking-wider uppercase text-stone">Pro Teams</div>
             </div>
-            <div className="hidden sm:block text-muted-foreground/30">•</div>
+            <div className="hidden sm:block text-mist">•</div>
             <div>
-              <div className="text-h2 mb-2">100%</div>
-              <div className="text-ui-label">Third-Party Tested</div>
+              <div className="text-[2rem] font-medium mb-2">100%</div>
+              <div className="text-[0.6875rem] font-medium tracking-wider uppercase text-stone">Third-Party Tested</div>
             </div>
-            <div className="hidden sm:block text-muted-foreground/30">•</div>
+            <div className="hidden sm:block text-mist">•</div>
             <div>
-              <div className="text-h2 mb-2">NSF</div>
-              <div className="text-ui-label">Certified Sport</div>
+              <div className="text-[2rem] font-medium mb-2">NSF</div>
+              <div className="text-[0.6875rem] font-medium tracking-wider uppercase text-stone">Certified Sport</div>
             </div>
-            <div className="hidden sm:block text-muted-foreground/30">•</div>
+            <div className="hidden sm:block text-mist">•</div>
             <div>
-              <div className="text-h2 mb-2">Zero</div>
-              <div className="text-ui-label">Banned Substances</div>
+              <div className="text-[2rem] font-medium mb-2">Zero</div>
+              <div className="text-[0.6875rem] font-medium tracking-wider uppercase text-stone">Banned Substances</div>
             </div>
           </div>
         </div>

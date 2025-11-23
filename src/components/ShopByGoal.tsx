@@ -63,7 +63,7 @@ export const ShopByGoal = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {goals.map((goal) => {
             return (
               <Link 
@@ -71,20 +71,20 @@ export const ShopByGoal = () => {
                 to={goal.link}
                 className="group"
               >
-                <div className="overflow-hidden h-full transition-all duration-300 hover:scale-[1.02] bg-card rounded-xl">
-                  <div className="relative aspect-[4/3] overflow-hidden bg-secondary/20">
+                <div className="overflow-hidden h-full transition-all duration-500">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-pearl mb-6 rounded-2xl">
                     <img 
                       src={goal.image} 
                       alt={goal.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                     />
                   </div>
                   
-                  <div className="p-8 bg-card">
-                    <h3 className="mb-3 group-hover:text-foreground transition-colors">
+                  <div className="space-y-3">
+                    <h3 className="text-[1.25rem] font-medium group-hover:text-slate transition-colors duration-300">
                       {goal.title}
                     </h3>
-                    <p className="text-body text-muted-foreground">
+                    <p className="text-[0.9375rem] leading-relaxed text-ash">
                       {goal.description}
                     </p>
                   </div>
