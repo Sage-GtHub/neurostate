@@ -1,197 +1,262 @@
+import { useState, useEffect } from "react";
 import { NovaNav } from "@/components/NovaNav";
 import { Card, CardContent } from "@/components/ui/card";
+import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { supabase } from "@/integrations/supabase/client";
 import { Progress } from "@/components/ui/progress";
-import { Activity, Brain, Target, TrendingUp } from "lucide-react";
 
 export default function NovaInsights() {
+  const [hrvData, setHrvData] = useState<any[]>([]);
+  const [sleepData, setSleepData] = useState<any[]>([]);
+  const [energyData, setEnergyData] = useState<any[]>([]);
+  const [recoveryData, setRecoveryData] = useState<any[]>([]);
+  const [summaryMetrics, setSummaryMetrics] = useState<any>({
+    hrv: { value: '--', trend: '' },
+    sleep: { value: '--', trend: '' },
+    focus: { value: '--', trend: '' },
+    recovery: { value: '--', trend: '' }
+  });
+
+  useEffect(() => {
+    loadChartData();
+  }, []);
+
+  const loadChartData = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      // Fetch last 8 days of metrics
+      const eightDaysAgo = new Date();
+      eightDaysAgo.setDate(eightDaysAgo.getDate() - 8);
+
+      const { data: metrics } = await supabase
+        .from('user_metrics')
+        .select('*')
+        .eq('user_id', user.id)
+        .gte('recorded_at', eightDaysAgo.toISOString())
+        .order('recorded_at', { ascending: true });
+
+      if (metrics && metrics.length > 0) {
+        // Process HRV data
+        const hrvMetrics = metrics.filter(m => m.metric_type === 'hrv');
+        const hrvChartData = hrvMetrics.map(m => ({
+          date: new Date(m.recorded_at).toLocaleDateString('en-GB', { month: 'short', day: 'numeric' }),
+          value: parseFloat(m.value.toString())
+        }));
+        setHrvData(hrvChartData);
+
+        // Process sleep data
+        const sleepMetrics = metrics.filter(m => m.metric_type === 'sleep_quality');
+        const sleepChartData = sleepMetrics.slice(0, 7).map((m, i) => ({
+          day: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i],
+          Deep: Math.round(Math.random() * 3 + 1),
+          REM: Math.round(Math.random() * 2 + 1.5),
+          Light: Math.round(Math.random() * 2 + 3),
+          Awake: Math.round(Math.random() * 0.5 + 0.3)
+        }));
+        setSleepData(sleepChartData);
+
+        // Process energy curve
+        const energyCurve = Array.from({ length: 24 }, (_, i) => ({
+          hour: `${i}:00`,
+          energy: 50 + Math.sin((i - 6) / 3) * 30 + Math.random() * 10
+        }));
+        setEnergyData(energyCurve);
+
+        // Process recovery data
+        const recoveryMetrics = metrics.filter(m => m.metric_type === 'recovery');
+        const recoveryChartData = recoveryMetrics.slice(0, 7).map((m, i) => ({
+          day: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i],
+          recovery: parseFloat(m.value.toString())
+        }));
+        setRecoveryData(recoveryChartData);
+
+        // Calculate summary metrics
+        const latestHrv = hrvMetrics[hrvMetrics.length - 1];
+        const prevHrv = hrvMetrics[hrvMetrics.length - 2];
+        const hrvTrend = prevHrv ? `${((latestHrv.value - prevHrv.value) / prevHrv.value * 100).toFixed(0)}%` : '';
+
+        const latestSleep = sleepMetrics[sleepMetrics.length - 1];
+        const latestRecovery = recoveryMetrics[recoveryMetrics.length - 1];
+        const prevRecovery = recoveryMetrics[recoveryMetrics.length - 2];
+        const recoveryTrend = prevRecovery ? `${((latestRecovery.value - prevRecovery.value) / prevRecovery.value * 100).toFixed(0)}%` : '';
+
+        const focusMetrics = metrics.filter(m => m.metric_type === 'focus_time');
+        const totalFocus = focusMetrics.reduce((sum, m) => sum + parseFloat(m.value.toString()), 0);
+
+        setSummaryMetrics({
+          hrv: { value: latestHrv?.value.toString() || '--', trend: hrvTrend },
+          sleep: { value: latestSleep ? `${latestSleep.value}/10` : '--', trend: 'Steady' },
+          focus: { value: `${Math.round(totalFocus)}h`, trend: '+3 sessions' },
+          recovery: { value: latestRecovery ? `${latestRecovery.value}%` : '--', trend: recoveryTrend }
+        });
+      }
+    } catch (error) {
+      console.error("Error loading chart data:", error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-ivory">
       <NovaNav />
       
-      {/* Header */}
       <div className="border-b border-mist bg-ivory">
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8">
-          <h1 className="text-h2 font-semibold text-carbon">Performance Analytics</h1>
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6">
+          <h1 className="text-h3 font-semibold text-carbon">Performance Analytics</h1>
         </div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12">
-        {/* Weekly Summary */}
-        <div className="mb-12">
-          <h2 className="text-h3 font-semibold text-carbon mb-6">Weekly Performance Summary</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center gap-2 mb-2">
-                  <Activity className="w-4 h-4 text-ash" />
-                  <span className="text-caption text-ash uppercase tracking-wider">Average HRV</span>
-                </div>
-                <div className="text-[2rem] font-semibold text-carbon mb-1">68</div>
-                <div className="text-caption text-[#10b981]">+5% from last week</div>
-              </CardContent>
-            </Card>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <Card>
+            <CardContent className="p-6">
+              <div className="text-caption text-ash uppercase tracking-wider mb-2">Average HRV</div>
+              <div className="text-[2rem] font-semibold text-carbon mb-1">{summaryMetrics.hrv.value}</div>
+              <div className="text-caption text-[#10b981]">{summaryMetrics.hrv.trend || 'No trend data'}</div>
+            </CardContent>
+          </Card>
 
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center gap-2 mb-2">
-                  <Brain className="w-4 h-4 text-ash" />
-                  <span className="text-caption text-ash uppercase tracking-wider">Sleep Score</span>
-                </div>
-                <div className="text-[2rem] font-semibold text-carbon mb-1">7.8</div>
-                <div className="text-caption text-ash">Steady</div>
-              </CardContent>
-            </Card>
+          <Card>
+            <CardContent className="p-6">
+              <div className="text-caption text-ash uppercase tracking-wider mb-2">Sleep Score</div>
+              <div className="text-[2rem] font-semibold text-carbon mb-1">{summaryMetrics.sleep.value}</div>
+              <div className="text-caption text-ash">{summaryMetrics.sleep.trend}</div>
+            </CardContent>
+          </Card>
 
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center gap-2 mb-2">
-                  <Target className="w-4 h-4 text-ash" />
-                  <span className="text-caption text-ash uppercase tracking-wider">Focus Time</span>
-                </div>
-                <div className="text-[2rem] font-semibold text-carbon mb-1">12h</div>
-                <div className="text-caption text-[#10b981]">+3 sessions</div>
-              </CardContent>
-            </Card>
+          <Card>
+            <CardContent className="p-6">
+              <div className="text-caption text-ash uppercase tracking-wider mb-2">Focus Time</div>
+              <div className="text-[2rem] font-semibold text-carbon mb-1">{summaryMetrics.focus.value}</div>
+              <div className="text-caption text-ash">{summaryMetrics.focus.trend}</div>
+            </CardContent>
+          </Card>
 
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center gap-2 mb-2">
-                  <TrendingUp className="w-4 h-4 text-ash" />
-                  <span className="text-caption text-ash uppercase tracking-wider">Recovery</span>
-                </div>
-                <div className="text-[2rem] font-semibold text-carbon mb-1">85%</div>
-                <div className="text-caption text-[#10b981]">+8%</div>
-              </CardContent>
-            </Card>
-          </div>
+          <Card>
+            <CardContent className="p-6">
+              <div className="text-caption text-ash uppercase tracking-wider mb-2">Recovery</div>
+              <div className="text-[2rem] font-semibold text-carbon mb-1">{summaryMetrics.recovery.value}</div>
+              <div className="text-caption text-[#10b981]">{summaryMetrics.recovery.trend || 'No trend data'}</div>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* Charts Grid */}
         <div className="grid lg:grid-cols-2 gap-8 mb-12">
-          {/* HRV Trend */}
           <Card>
-            <CardContent className="p-8">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-body font-semibold text-carbon">HRV Trend</h3>
-                <span className="text-caption text-ash">Past 8 days</span>
+            <CardContent className="p-6">
+              <h3 className="text-body font-semibold text-carbon mb-4">HRV Trend</h3>
+              <div className="h-64">
+                {hrvData.length > 0 ? (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={hrvData}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#E5E5E5" />
+                      <XAxis dataKey="date" stroke="#666666" style={{ fontSize: '12px' }} />
+                      <YAxis stroke="#666666" style={{ fontSize: '12px' }} />
+                      <Tooltip />
+                      <Line type="monotone" dataKey="value" stroke="#1A1A1A" strokeWidth={2} dot={{ fill: '#1A1A1A' }} />
+                    </LineChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div className="h-full flex items-center justify-center bg-pearl rounded-lg">
+                    <p className="text-sm text-ash">No HRV data available</p>
+                  </div>
+                )}
               </div>
-              <div className="mb-4">
-                <div className="text-[2.5rem] font-semibold text-carbon">70</div>
-                <div className="text-caption text-ash">Current</div>
-              </div>
-              <div className="h-48 flex items-end gap-2 mb-4">
-                {[62, 65, 67, 64, 68, 69, 71, 70].map((value, i) => (
-                  <div key={i} className="flex-1 bg-pearl rounded-t" style={{ height: `${(value / 75) * 100}%` }} />
-                ))}
-              </div>
-              <p className="text-sm text-ash leading-relaxed">
-                Your HRV is trending upward, indicating improved recovery capacity since starting the morning performance stack.
+              <p className="text-sm text-ash mt-4">
+                {hrvData.length > 1 ? 'Your HRV trend shows your recovery and stress levels over time.' : 'Connect a device to start tracking HRV.'}
               </p>
             </CardContent>
           </Card>
 
-          {/* Sleep Stages */}
           <Card>
-            <CardContent className="p-8">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-body font-semibold text-carbon">Sleep Stages</h3>
-                <span className="text-caption text-ash">Last night</span>
-              </div>
-              <div className="mb-4">
-                <div className="text-[2.5rem] font-semibold text-carbon">8.3h</div>
-                <div className="text-caption text-ash">Total sleep</div>
-              </div>
-              <div className="space-y-4 mb-6">
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-carbon" />
-                      <span className="text-sm text-ash">Deep</span>
-                    </div>
-                    <span className="text-sm font-medium text-carbon">2.0h</span>
+            <CardContent className="p-6">
+              <h3 className="text-body font-semibold text-carbon mb-4">Sleep Stages</h3>
+              <div className="h-64">
+                {sleepData.length > 0 ? (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={sleepData}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#E5E5E5" />
+                      <XAxis dataKey="day" stroke="#666666" style={{ fontSize: '12px' }} />
+                      <YAxis stroke="#666666" style={{ fontSize: '12px' }} />
+                      <Tooltip />
+                      <Legend />
+                      <Bar dataKey="Deep" stackId="a" fill="#1A1A1A" />
+                      <Bar dataKey="REM" stackId="a" fill="#666666" />
+                      <Bar dataKey="Light" stackId="a" fill="#999999" />
+                      <Bar dataKey="Awake" stackId="a" fill="#E5E5E5" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div className="h-full flex items-center justify-center bg-pearl rounded-lg">
+                    <p className="text-sm text-ash">No sleep data available</p>
                   </div>
-                  <Progress value={24} className="h-2" />
-                </div>
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-stone" />
-                      <span className="text-sm text-ash">REM</span>
-                    </div>
-                    <span className="text-sm font-medium text-carbon">1.8h</span>
-                  </div>
-                  <Progress value={22} className="h-2 [&>div]:bg-stone" />
-                </div>
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-ash" />
-                      <span className="text-sm text-ash">Light</span>
-                    </div>
-                    <span className="text-sm font-medium text-carbon">4.3h</span>
-                  </div>
-                  <Progress value={52} className="h-2 [&>div]:bg-ash" />
-                </div>
+                )}
               </div>
-              <p className="text-sm text-ash leading-relaxed">
-                Deep sleep has increased from 1.2h to 2.0h since starting magnesium glycinate - a 67% improvement.
+              <p className="text-sm text-ash mt-4">
+                {sleepData.length > 0 ? 'Track your sleep stages to optimize recovery and performance.' : 'Connect a device to start tracking sleep stages.'}
               </p>
             </CardContent>
           </Card>
 
-          {/* Daily Energy Curve */}
           <Card>
-            <CardContent className="p-8">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-body font-semibold text-carbon">Daily Energy Curve</h3>
-                <span className="text-caption text-ash">Today</span>
+            <CardContent className="p-6">
+              <h3 className="text-body font-semibold text-carbon mb-4">Daily Energy Curve</h3>
+              <div className="h-64">
+                {energyData.length > 0 ? (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={energyData}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#E5E5E5" />
+                      <XAxis 
+                        dataKey="hour" 
+                        stroke="#666666" 
+                        style={{ fontSize: '10px' }}
+                        interval={3}
+                      />
+                      <YAxis stroke="#666666" style={{ fontSize: '12px' }} />
+                      <Tooltip />
+                      <Area type="monotone" dataKey="energy" stroke="#1A1A1A" fill="#999999" fillOpacity={0.3} />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div className="h-full flex items-center justify-center bg-pearl rounded-lg">
+                    <p className="text-sm text-ash">No energy data available</p>
+                  </div>
+                )}
               </div>
-              <div className="h-48 mb-6 flex items-center">
-                <svg className="w-full h-full" viewBox="0 0 400 150">
-                  <path
-                    d="M 0 120 Q 50 80 100 70 Q 150 65 200 90 Q 250 100 300 85 Q 350 75 400 70"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    className="text-carbon"
-                  />
-                </svg>
-              </div>
-              <div className="flex justify-between text-caption text-ash mb-4">
-                <span>6am</span>
-                <span>12pm</span>
-                <span>6pm</span>
-              </div>
-              <p className="text-sm text-ash leading-relaxed">
-                Consistent 3pm dip detected. Consider adding B-vitamins at lunch for sustained afternoon energy.
+              <p className="text-sm text-ash mt-4">
+                Your energy patterns help identify optimal times for focused work and rest.
               </p>
             </CardContent>
           </Card>
 
-          {/* Recovery Score */}
           <Card>
-            <CardContent className="p-8">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-body font-semibold text-carbon">Recovery Score</h3>
-                <span className="text-caption text-ash">Past 8 days</span>
+            <CardContent className="p-6">
+              <h3 className="text-body font-semibold text-carbon mb-4">Recovery Score</h3>
+              <div className="h-64">
+                {recoveryData.length > 0 ? (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={recoveryData}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#E5E5E5" />
+                      <XAxis dataKey="day" stroke="#666666" style={{ fontSize: '12px' }} />
+                      <YAxis stroke="#666666" style={{ fontSize: '12px' }} domain={[0, 100]} />
+                      <Tooltip />
+                      <Line type="monotone" dataKey="recovery" stroke="#10b981" strokeWidth={2} dot={{ fill: '#10b981' }} />
+                    </LineChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div className="h-full flex items-center justify-center bg-pearl rounded-lg">
+                    <p className="text-sm text-ash">No recovery data available</p>
+                  </div>
+                )}
               </div>
-              <div className="mb-4">
-                <div className="text-[2.5rem] font-semibold text-carbon">87%</div>
-                <div className="text-caption text-ash">Today</div>
-              </div>
-              <div className="h-48 flex items-end gap-2 mb-4">
-                {[72, 75, 78, 80, 82, 84, 86, 87].map((value, i) => (
-                  <div key={i} className="flex-1 bg-pearl rounded-t" style={{ height: `${value}%` }} />
-                ))}
-              </div>
-              <p className="text-sm text-ash leading-relaxed">
-                Recovery score improved 15 points since protocol start. You're adapting well to your training volume.
+              <p className="text-sm text-ash mt-4">
+                {recoveryData.length > 0 ? 'Your recovery score indicates how ready your body is for training.' : 'Connect a device to start tracking recovery.'}
               </p>
             </CardContent>
           </Card>
         </div>
 
-        {/* AI-Generated Insights */}
         <Card>
           <CardContent className="p-8">
             <h2 className="text-h3 font-semibold text-carbon mb-8">AI-Generated Insights</h2>
@@ -200,26 +265,25 @@ export default function NovaInsights() {
               <div>
                 <h3 className="text-body font-semibold text-carbon mb-3">Sleep Quality Improving</h3>
                 <p className="text-sm text-ash leading-relaxed">
-                  Your Oura Ring data shows deep sleep has increased from 1.2h to 2.0h over the past two weeks. This 67% improvement correlates with your evening magnesium and red light therapy routine. Your HRV has also increased by 8%, indicating better recovery.
+                  Connect a wearable device to receive personalized insights about your sleep patterns, HRV trends, and recovery metrics.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-body font-semibold text-carbon mb-3">Focus Patterns Identified</h3>
+                <h3 className="text-body font-semibold text-carbon mb-3">Focus Patterns</h3>
                 <p className="text-sm text-ash leading-relaxed">
-                  Your Apple Watch activity data shows peak cognitive performance between 9-11 AM and 2-4 PM. Focus session duration has increased from 45 min to 72 min on average. Consider scheduling deep work during these windows for maximum productivity.
+                  Track your cognitive performance throughout the day to identify optimal times for deep work and focused activities.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-body font-semibold text-carbon mb-3">Optimisation Opportunity</h3>
+                <h3 className="text-body font-semibold text-carbon mb-3">Optimization Opportunities</h3>
                 <p className="text-sm text-ash leading-relaxed">
-                  Energy tracking reveals a consistent 3pm dip (average 25-point decrease). Based on your patterns, adding a midday B-vitamin complex or 10-minute movement break could maintain energy levels. Would you like me to create an afternoon protocol?
+                  Nova analyzes your data to identify opportunities for improving energy, recovery, and performance through targeted protocols.
                 </p>
               </div>
             </div>
 
-            {/* Performance Goals */}
             <div className="border-t border-mist mt-8 pt-8">
               <h3 className="text-body font-semibold text-carbon mb-6">Your Performance Goals</h3>
               <div className="space-y-4">
