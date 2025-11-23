@@ -77,11 +77,10 @@ const AboutUs = () => {
                 About NeuroState®
               </Badge>
               <h1 className="text-[2.25rem] font-bold tracking-tight" style={{ lineHeight: '1.2', letterSpacing: '-0.01em' }}>
-                Making Elite Performance Accessible to Everyone
+                Making elite performance accessible to everyone
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                We're here to help you perform at your best with science-backed supplements and recovery
-                tools that actually work—without the ridiculous price tags.
+                Science-backed supplements and recovery tools that actually work—without the ridiculous price tags.
               </p>
             </div>
           </div>
@@ -96,13 +95,13 @@ const AboutUs = () => {
                 <h2 className="text-[1.875rem] font-semibold" style={{ lineHeight: '1.3' }}>Our Mission</h2>
               </div>
               <p className="text-lg text-muted-foreground leading-relaxed text-center mb-6">
-                At NeuroState®, we believe that the best performance tools and supplements shouldn't just
+                At NeuroState, the best performance tools and supplements shouldn't just
                 be for elite athletes or wealthy people—they should be available to everyone, everywhere.
                 Our mission is simple: make the world's best recovery technologies and supplements accessible
                 and affordable for anyone who wants to feel and perform better.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed text-center">
-                We're all about transparency and quality. Every product we offer is carefully chosen,
+                Transparency and quality. Every product we offer is carefully chosen,
                 properly tested, and made available to anyone looking to improve their physical and mental
                 wellbeing.
               </p>
@@ -118,10 +117,9 @@ const AboutUs = () => {
               
               <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
                 <p>
-                  NeuroState® was founded in 2025 by Sage, a serial entrepreneur with a sports science
+                  NeuroState was founded in 2025 by Sage, a serial entrepreneur with a sports science
                   background. For years, Sage struggled with burnout, chronic fatigue, and low energy.
-                  It wasn't easy. Then Sage discovered advanced recovery tools and proper supplements—
-                  and everything changed.
+                  Then Sage discovered advanced recovery tools and proper supplements—and everything changed.
                 </p>
                 
                 <p>
@@ -131,7 +129,7 @@ const AboutUs = () => {
                 </p>
                 
                 <p>
-                  That's why NeuroState® exists. We've partnered with leading scientists and manufacturers
+                  That's why NeuroState exists. We've partnered with leading scientists and manufacturers
                   to make these tools accessible to everyone. No gatekeeping. No exclusive clubs. Just
                   quality products at fair prices, available to anyone who wants to feel better and perform
                   at their best.
@@ -192,21 +190,20 @@ const AboutUs = () => {
         <section className="py-16 lg:py-20 bg-gradient-to-br from-primary/10 to-accent/10">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center space-y-6">
-              <h2 className="text-[1.875rem] font-semibold" style={{ lineHeight: '1.3' }}>
-                Ready to Feel Your Best?
-              </h2>
+              <h2 className="text-[1.875rem] font-semibold" style={{ lineHeight: '1.3' }}>Ready to feel your best?</h2>
+              
               <p className="text-lg text-muted-foreground">
-                Join thousands of people who trust NeuroState® for their supplements and recovery needs.
+                Join thousands of people who trust NeuroState for their supplements and recovery
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                 <Link to="/">
                   <Button size="lg" className="w-full sm:w-auto">
-                    Shop Products
+                    Shop products
                   </Button>
                 </Link>
                 <Link to="/resources">
                   <Button size="lg" variant="outline" className="w-full sm:w-auto">
-                    Learn More
+                    Learn more
                   </Button>
                 </Link>
               </div>

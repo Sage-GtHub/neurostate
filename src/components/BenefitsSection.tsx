@@ -8,23 +8,23 @@ export const BenefitsSection = ({ productType }: BenefitsSectionProps) => {
   const benefits = [
     {
       icon: Heart,
-      title: "Heart Health",
+      title: "Heart health",
       description: "Supports your cardiovascular system"
     },
     {
       icon: Brain,
-      title: "Cognitive Function",
+      title: "Cognitive function",
       description: "Helps keep your mind sharp"
     },
     {
       icon: Zap,
-      title: "Energy & Recovery",
+      title: "Energy and recovery",
       description: "Bounce back quicker"
     },
     {
       icon: Shield,
-      title: "Immune Support",
-      description: "Strengthens your natural defences"
+      title: "Immune support",
+      description: "Strengthens your natural defenses"
     }
   ];
 

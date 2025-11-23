@@ -93,10 +93,10 @@ export const Testimonials = () => {
             TESTIMONIALS
           </p>
           <h2 className="text-[1.875rem] font-semibold uppercase" style={{ lineHeight: '1.3' }}>
-            What Our Customers Say
+            What our customers say
           </h2>
           <p className="text-sm text-muted-foreground max-w-2xl font-light">
-            Real reviews from real people who've transformed their health and wellness journey
+            Real reviews from real people who transformed their health and wellness
           </p>
         </div>
 

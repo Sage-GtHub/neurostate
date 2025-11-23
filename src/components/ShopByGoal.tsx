@@ -18,7 +18,7 @@ const goals: Goal[] = [
   {
     id: "sleep",
     title: "Sleep",
-    description: "Optimise sleep quality and recovery with science-backed tools for deeper, more restorative rest.",
+    description: "Optimize sleep quality and recovery with science-backed tools for deeper, restorative rest.",
     image: sleepImage,
     link: "/category/sleep",
     color: "from-blue-500/20 to-indigo-500/20",
@@ -34,14 +34,14 @@ const goals: Goal[] = [
   {
     id: "performance",
     title: "Performance",
-    description: "Enhance athletic performance and endurance with cutting-edge recovery and training tools.",
+    description: "Enhance athletic performance and endurance with precision recovery and training tools.",
     image: performanceImage,
     link: "/category/performance",
     color: "from-accent/20 to-yellow-500/20",
   },
   {
     id: "cognitive",
-    title: "Cognitive Function",
+    title: "Cognitive function",
     description: "Support mental clarity, focus, and brain health with nootropics and cognitive enhancers.",
     image: cognitiveImage,
     link: "/category/cognitive",
@@ -57,9 +57,9 @@ export const ShopByGoal = () => {
           <p className="text-[10px] sm:text-xs font-light text-muted-foreground mb-3 tracking-[0.3em] uppercase">
             PERFORMANCE SYSTEMS
           </p>
-          <h2 className="text-[1.875rem] font-semibold uppercase mb-6" style={{ lineHeight: '1.3' }}>Shop by Goal</h2>
+          <h2 className="text-[1.875rem] font-semibold uppercase mb-6" style={{ lineHeight: '1.3' }}>Shop by goal</h2>
           <p className="text-sm sm:text-base text-muted-foreground max-w-2xl font-light">
-            Choose your path to optimal performance. Each category is curated with science-backed products.
+            Precision tools designed for how you want to perform
           </p>
         </div>
         

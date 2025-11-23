@@ -101,10 +101,10 @@ const Contact = () => {
           <div className="container mx-auto px-4 py-16 lg:py-20">
             <div className="max-w-3xl mx-auto text-center space-y-4">
               <h1 className="text-[2.25rem] font-bold tracking-tight" style={{ lineHeight: '1.2', letterSpacing: '-0.01em' }}>
-                Get in Touch
+                Get in touch
               </h1>
               <p className="text-xl text-muted-foreground">
-                Have a question? We're here to help. Send us a message and we'll respond as soon as possible.
+                Questions? We're here to help. Send us a message and we'll respond as soon as possible.
               </p>
             </div>
           </div>
@@ -185,7 +185,7 @@ const Contact = () => {
 
                       <Button type="submit" size="lg" className="w-full md:w-auto" disabled={isSubmitting}>
                         <Send className="h-4 w-4 mr-2" />
-                        {isSubmitting ? "Sending..." : "Send Message"}
+                        {isSubmitting ? "Sending..." : "Send message"}
                       </Button>
                     </form>
                   </CardContent>
@@ -231,7 +231,7 @@ const Contact = () => {
                   <CardContent className="pt-6 pb-6">
                     <div className="flex items-center gap-2 mb-4">
                       <MessageCircle className="h-5 w-5 text-primary" />
-                      <h3 className="font-semibold">Quick Help</h3>
+                      <h3 className="font-semibold">Quick help</h3>
                     </div>
                     <p className="text-sm text-muted-foreground mb-4">
                       Find answers to common questions:

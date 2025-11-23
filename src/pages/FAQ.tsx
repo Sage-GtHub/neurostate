@@ -121,10 +121,10 @@ const FAQ = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-[2.25rem] font-bold mb-4" style={{ lineHeight: '1.2', letterSpacing: '-0.01em' }}>
-                Frequently Asked Questions
+                Frequently asked questions
               </h1>
               <p className="text-lg text-muted-foreground">
-                Find answers to common questions about our products, delivery, returns, and more.
+                Common questions about our products, delivery, returns, and policies
               </p>
             </div>
           </div>
@@ -168,7 +168,7 @@ const FAQ = () => {
                   href="mailto:contact@neurostate.co.uk"
                   className="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-8 py-3 font-medium hover:bg-primary/90 transition-colors"
                 >
-                  Email Support
+                  Email support
                 </a>
               </div>
             </div>

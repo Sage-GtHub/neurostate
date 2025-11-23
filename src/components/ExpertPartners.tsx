@@ -171,10 +171,10 @@ export const ExpertPartners = () => {
             EXPERT PARTNERSHIPS
           </p>
           <h2 className="text-[1.875rem] font-semibold uppercase mb-6" style={{ lineHeight: '1.3' }}>
-            Trusted by Experts
+            Trusted by experts
           </h2>
           <p className="text-sm text-muted-foreground max-w-2xl font-light">
-            Our products are recommended by leading researchers, athletes, and health professionals
+            Recommended by leading researchers, athletes, and health professionals
           </p>
         </div>
         
@@ -224,16 +224,16 @@ export const ExpertPartners = () => {
         
         <div className="text-center">
           <p className="text-sm text-muted-foreground mb-4">
-            Our products are backed by leading researchers, athletes, and health professionals
+            Backed by leading researchers, athletes, and health professionals
           </p>
           <div className="flex flex-wrap justify-center gap-8 items-center opacity-60">
-            <div className="text-sm font-medium">150+ Pro Teams</div>
+            <div className="text-sm font-medium">150+ pro teams</div>
             <div className="h-8 w-px bg-border" />
-            <div className="text-sm font-medium">Olympic Athletes</div>
+            <div className="text-sm font-medium">Olympic athletes</div>
             <div className="h-8 w-px bg-border" />
-            <div className="text-sm font-medium">Research Partners</div>
+            <div className="text-sm font-medium">Research partners</div>
             <div className="h-8 w-px bg-border" />
-            <div className="text-sm font-medium">Third-Party Tested</div>
+            <div className="text-sm font-medium">Third-party tested</div>
           </div>
         </div>
       </div>
