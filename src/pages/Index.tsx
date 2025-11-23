@@ -121,7 +121,7 @@ const Index = () => {
         <RecentlyViewed />
         </main>
         <Footer />
-        <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
+        {!isMobile && <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />}
         <ExitIntentPopup />
         <SocialProofNotification />
       </div>
