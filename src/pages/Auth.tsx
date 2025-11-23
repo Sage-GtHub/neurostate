@@ -23,19 +23,19 @@ export default function Auth() {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    // Check if user is already logged in
+    // Check if already logged in
     supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session?.user) {
-        setUser(session.user);
-        navigate("/");
+      if (session) {
+        navigate('/nova');
       }
     });
 
-    // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        navigate("/");
+      if (event === 'SIGNED_IN' && session) {
+        // Seed demo data for new users
+        supabase.functions.invoke('seed-demo-data').then(() => {
+          navigate('/nova');
+        });
       }
     });
 

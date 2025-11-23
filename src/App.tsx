@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { trackPageView } from "@/lib/analytics";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import ProductDetail from "./pages/ProductDetail";
 import CategoryProducts from "./pages/CategoryProducts";
@@ -74,10 +75,10 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/track-order" element={<OrderTracking />} />
           <Route path="/admin/update-descriptions" element={<ProductDescriptionUpdater />} />
-          <Route path="/nova" element={<Nova />} />
-          <Route path="/nova/protocols" element={<NovaProtocols />} />
-          <Route path="/nova/insights" element={<NovaInsights />} />
-          <Route path="/nova/devices" element={<NovaDevices />} />
+          <Route path="/nova" element={<ProtectedRoute><Nova /></ProtectedRoute>} />
+          <Route path="/nova/protocols" element={<ProtectedRoute><NovaProtocols /></ProtectedRoute>} />
+          <Route path="/nova/insights" element={<ProtectedRoute><NovaInsights /></ProtectedRoute>} />
+          <Route path="/nova/devices" element={<ProtectedRoute><NovaDevices /></ProtectedRoute>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

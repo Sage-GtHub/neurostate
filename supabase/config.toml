@@ -8,3 +8,15 @@ verify_jwt = false
 
 [functions.generate-nova-avatar]
 verify_jwt = false
+
+[functions.nova-chat]
+verify_jwt = false
+
+[functions.seed-demo-data]
+verify_jwt = false
+
+[functions.sync-device-data]
+verify_jwt = false
+
+[functions.oura-callback]
+verify_jwt = false
