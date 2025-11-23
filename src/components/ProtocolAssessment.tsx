@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -55,8 +55,22 @@ export function ProtocolAssessment({ open, onOpenChange, onComplete }: ProtocolA
   ];
 
   const generateProtocol = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
+    console.log("Starting protocol generation...", assessment);
+    
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    
+    if (authError) {
+      console.error("Auth error:", authError);
+      toast({
+        title: "Authentication error",
+        description: authError.message,
+        variant: "destructive",
+      });
+      return;
+    }
+    
     if (!user) {
+      console.error("No authenticated user found");
       toast({
         title: "Authentication required",
         description: "Please sign in to create a protocol",
@@ -65,6 +79,7 @@ export function ProtocolAssessment({ open, onOpenChange, onComplete }: ProtocolA
       return;
     }
 
+    console.log("User authenticated:", user.id);
     setIsSubmitting(true);
 
     // Generate protocol based on assessment
@@ -104,8 +119,14 @@ export function ProtocolAssessment({ open, onOpenChange, onComplete }: ProtocolA
 
     const protocolName = goals.find(g => g.value === assessment.goal)?.label + " Protocol" || "Custom Protocol";
 
+    console.log("Creating protocol:", {
+      protocol_name: protocolName,
+      goal: assessment.goal,
+      products: products
+    });
+
     try {
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('user_protocols')
         .insert({
           user_id: user.id,
@@ -114,9 +135,15 @@ export function ProtocolAssessment({ open, onOpenChange, onComplete }: ProtocolA
           status: 'active',
           completion_percentage: 0,
           products: products,
-        });
+        })
+        .select();
 
-      if (error) throw error;
+      if (error) {
+        console.error("Database error:", error);
+        throw error;
+      }
+      
+      console.log("Protocol created successfully:", data);
 
       toast({
         title: "Protocol created",
@@ -169,7 +196,9 @@ export function ProtocolAssessment({ open, onOpenChange, onComplete }: ProtocolA
           <DialogTitle className="text-h3 font-semibold text-carbon">
             Performance Assessment
           </DialogTitle>
-          <p className="text-body text-ash">Step {step} of 5</p>
+          <DialogDescription className="text-body text-ash">
+            Step {step} of 5 - Answer a few questions to create your personalized protocol
+          </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6 py-4">
