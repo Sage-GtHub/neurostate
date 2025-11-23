@@ -71,17 +71,17 @@ const standards: Standard[] = [
 
 export const QualityStandards = () => {
   return (
-    <section className="py-32 md:py-40 px-6 sm:px-8 lg:px-20 xl:px-32">
+    <section className="py-12 sm:py-16 md:py-24 lg:py-32 xl:py-40 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32">
       <div className="w-full max-w-7xl mx-auto">
-        <div className="mb-24">
-          <p className="ghost-number mb-6">QUALITY COMMITMENT</p>
-          <h2 className="mb-6">Our standards</h2>
+        <div className="mb-12 sm:mb-16 md:mb-20 lg:mb-24">
+          <p className="ghost-number mb-3 sm:mb-4 md:mb-6">QUALITY COMMITMENT</p>
+          <h2 className="mb-4 sm:mb-6">Our standards</h2>
           <p className="text-body-large text-ash max-w-2xl">
             Every product backed by science, rigorously tested, and made with premium ingredients
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-32">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 mb-16 sm:mb-20 md:mb-24 lg:mb-32">
           {standards.map((standard) => {
             const Icon = standard.icon;
             return (

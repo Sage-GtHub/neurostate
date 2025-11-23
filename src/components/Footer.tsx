@@ -73,13 +73,13 @@ export const Footer = () => {
 
 
   return (
-    <footer className="bg-carbon text-ivory mt-24 sm:mt-32">
-      <div className="w-full px-6 sm:px-8 lg:px-20 xl:px-32 py-16 sm:py-24">
+    <footer className="bg-carbon text-ivory mt-12 sm:mt-16 md:mt-24 lg:mt-32">
+      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 py-12 sm:py-16 md:py-20 lg:py-24">
         {/* Company Mission */}
-        <div className="mb-16 sm:mb-20 max-w-3xl">
-          <Link to="/" className="flex items-center gap-3 mb-6">
-            <img src={logoIcon} alt="Neural Waveform" className="h-8 w-8 invert" />
-            <span className="text-h2">NEUROSTATE<sup className="text-[10px]">®</sup></span>
+        <div className="mb-12 sm:mb-16 md:mb-20 max-w-3xl">
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <img src={logoIcon} alt="Neural Waveform" className="h-6 w-6 sm:h-8 sm:w-8 invert" />
+            <span className="text-xl sm:text-2xl md:text-h2 font-semibold">NEUROSTATE<sup className="text-[8px] sm:text-[10px]">®</sup></span>
           </Link>
           <p className="text-body-large text-stone">
             Precision tools for your optimal state. Making the best recovery tools and supplements accessible to everyone, everywhere.
@@ -87,15 +87,15 @@ export const Footer = () => {
         </div>
 
         {/* Trust Badges */}
-        <div className="pt-4 sm:pt-6">
+        <div className="pt-3 sm:pt-4 md:pt-6">
           <TrustBadges />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 sm:gap-8 mb-6 sm:mb-8">
           {/* Newsletter Signup */}
           <div className="sm:col-span-2 lg:col-span-2">
-            <h3 className="mb-4">Join our community</h3>
-            <p className="text-stone mb-6">
+            <h3 className="mb-3 sm:mb-4 text-base sm:text-lg">Join our community</h3>
+            <p className="text-stone mb-4 sm:mb-6 text-sm sm:text-base">
               Sign up for exclusive offers and 10% off your first order.
             </p>
             <form onSubmit={handleNewsletterSignup} className="flex flex-col sm:flex-row gap-2">
@@ -104,14 +104,14 @@ export const Footer = () => {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 text-sm bg-ivory border-mist"
+                className="flex-1 text-sm bg-ivory border-mist min-h-[48px]"
                 disabled={isLoading}
               />
               <Button 
                 type="submit" 
                 variant="default"
                 disabled={isLoading} 
-                className="font-medium text-sm sm:w-auto w-full min-h-[44px]"
+                className="font-medium text-sm sm:w-auto w-full min-h-[48px] touch-manipulation"
               >
                 {isLoading ? "..." : "Subscribe"}
               </Button>
@@ -120,7 +120,7 @@ export const Footer = () => {
 
           {/* Shop Links */}
           <div>
-            <h3 className="mb-4">Shop</h3>
+            <h3 className="mb-3 sm:mb-4 text-base sm:text-lg">Shop</h3>
             <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.shop.map((link) => (
                 <li key={link.name}>
@@ -137,7 +137,7 @@ export const Footer = () => {
 
           {/* Company Links */}
           <div>
-            <h3 className="mb-4">Company</h3>
+            <h3 className="mb-3 sm:mb-4 text-base sm:text-lg">Company</h3>
             <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
@@ -154,7 +154,7 @@ export const Footer = () => {
 
           {/* Support Links */}
           <div>
-            <h3 className="mb-4">Support</h3>
+            <h3 className="mb-3 sm:mb-4 text-base sm:text-lg">Support</h3>
             <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
@@ -171,7 +171,7 @@ export const Footer = () => {
 
           {/* Legal Links */}
           <div>
-            <h3 className="mb-4">Legal</h3>
+            <h3 className="mb-3 sm:mb-4 text-base sm:text-lg">Legal</h3>
             <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.legal.map((link) => (
                 <li key={link.name}>
@@ -188,11 +188,11 @@ export const Footer = () => {
         </div>
 
         {/* Contact Info & Social */}
-        <div className="pt-12 border-t border-slate">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 mb-12">
+        <div className="pt-8 sm:pt-10 md:pt-12 border-t border-slate">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
             {/* Contact Information */}
             <div>
-              <h3 className="mb-4">Get in touch</h3>
+              <h3 className="mb-3 sm:mb-4 text-base sm:text-lg">Get in touch</h3>
               <div className="space-y-2 sm:space-y-3">
                 <a
                   href="mailto:contact@neurostate.co.uk"
@@ -209,12 +209,12 @@ export const Footer = () => {
 
             {/* Social Media */}
             <div>
-              <h3 className="mb-4">Follow us</h3>
+              <h3 className="mb-3 sm:mb-4 text-base sm:text-lg">Follow us</h3>
               <div className="flex gap-3 sm:gap-4">
                 {socialLinks.map((social) => (
                   <div
                     key={social.label}
-                    className="w-12 h-12 rounded-xl bg-slate border border-slate flex items-center justify-center cursor-default hover:bg-ivory hover:text-carbon transition-all"
+                    className="w-12 h-12 min-w-[48px] min-h-[48px] rounded-xl bg-slate border border-slate flex items-center justify-center cursor-default hover:bg-ivory hover:text-carbon transition-all touch-manipulation"
                     aria-label={social.label}
                   >
                     <social.icon className="h-5 w-5" />
@@ -228,8 +228,8 @@ export const Footer = () => {
           </div>
 
           {/* Copyright & Links */}
-          <div className="pt-8">
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div className="pt-6 sm:pt-8">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
               <p className="text-caption text-stone">
                 © {new Date().getFullYear()} NeuroState®. All rights reserved.
               </p>

@@ -67,22 +67,22 @@ const CategoryProducts = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        <section className="pt-32 pb-16 px-6 sm:px-8 lg:px-20 xl:px-32">
+        <section className="pt-20 sm:pt-24 md:pt-32 pb-8 sm:pb-12 md:pb-16 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32">
           <div className="w-full max-w-7xl mx-auto">
             <Link to="/">
-              <Button variant="ghost" size="sm" className="mb-8">
+              <Button variant="ghost" size="sm" className="mb-6 sm:mb-8 -ml-3 min-h-[44px] touch-manipulation">
                 <ArrowLeft className="mr-2 h-3 w-3" /> Back
               </Button>
             </Link>
-            <p className="ghost-number mb-6">{category?.toUpperCase()}</p>
-            <h1 className="mb-6">{config.title}</h1>
+            <p className="ghost-number mb-3 sm:mb-4 md:mb-6">{category?.toUpperCase()}</p>
+            <h1 className="mb-4 sm:mb-6">{config.title}</h1>
             <p className="text-body-large text-ash max-w-2xl">
               {config.description}
             </p>
           </div>
         </section>
 
-        <section className="py-24 px-6 sm:px-8 lg:px-20 xl:px-32">
+        <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32">
           <div className="w-full max-w-7xl mx-auto">
             {isLoading ? (
               <div className="flex justify-center items-center min-h-[400px]">
@@ -94,10 +94,10 @@ const CategoryProducts = () => {
               </div>
             ) : filteredProducts.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-ash text-lg">No products found in this category.</p>
+                <p className="text-ash text-base sm:text-lg">No products found in this category.</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 xl:gap-16">
                 {filteredProducts.map((product) => (
                   <ProductCard key={product.node.id} product={product} />
                 ))}
@@ -106,9 +106,9 @@ const CategoryProducts = () => {
           </div>
         </section>
       </main>
-      <footer className="py-8 px-4">
+      <footer className="py-6 sm:py-8 px-4 sm:px-6 md:px-8 border-t border-mist">
         <div className="container mx-auto text-center text-muted-foreground">
-          <p>&copy; 2025 NeuroState®. All rights reserved.</p>
+          <p className="text-caption">© 2025 NeuroState®. All rights reserved.</p>
         </div>
       </footer>
       <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
