@@ -14,9 +14,9 @@ const standards: Standard[] = [
   {
     id: "science",
     number: "01",
-    title: "Science-Backed Formulas",
+    title: "Science-backed formulas",
     icon: FlaskConical,
-    description: "Every product is developed using the latest peer-reviewed research and clinical studies.",
+    description: "Every product developed using peer-reviewed research and clinical studies.",
     details: [
       "Formulated with evidence-based ingredients at clinically effective doses",
       "Partnerships with leading research institutions and universities",
@@ -28,7 +28,7 @@ const standards: Standard[] = [
   {
     id: "sourcing",
     number: "02",
-    title: "Premium Ingredient Sourcing",
+    title: "Premium ingredient sourcing",
     icon: Leaf,
     description: "We source only the highest quality, bioavailable forms of each ingredient from trusted suppliers.",
     details: [
@@ -42,7 +42,7 @@ const standards: Standard[] = [
   {
     id: "testing",
     number: "03",
-    title: "Rigorous Third-Party Testing",
+    title: "Rigorous third-party testing",
     icon: ShieldCheck,
     description: "Every batch undergoes comprehensive testing to ensure purity, potency, and safety.",
     details: [
@@ -56,7 +56,7 @@ const standards: Standard[] = [
   {
     id: "quality",
     number: "04",
-    title: "Manufacturing Excellence",
+    title: "Manufacturing excellence",
     icon: Award,
     description: "Manufactured in certified facilities that meet the highest industry standards.",
     details: [
@@ -78,10 +78,10 @@ export const QualityStandards = () => {
             QUALITY COMMITMENT
           </p>
           <h2 className="text-[1.875rem] font-semibold uppercase mb-6" style={{ lineHeight: '1.3' }}>
-            Our Standards
+            Our standards
           </h2>
           <p className="text-sm text-muted-foreground max-w-2xl font-light">
-            Every product is backed by science, rigorously tested, and made with premium ingredients
+            Every product backed by science, rigorously tested, and made with premium ingredients
           </p>
         </div>
 

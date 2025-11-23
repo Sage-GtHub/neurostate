@@ -242,10 +242,10 @@ export const MultiFormatHub = () => {
             <span>Multi-Format Learning</span>
           </div>
           <h2 className="text-[1.875rem] font-semibold mb-5" style={{ lineHeight: '1.3' }}>
-            Resource Library
+            Resource library
           </h2>
           <p className="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto mb-8 leading-relaxed">
-            Get stuck into our complete library of articles, video tutorials, downloadable guides, and expert podcasts
+            Articles, video tutorials, downloadable guides, and expert podcasts
           </p>
 
         {/* Search */}
@@ -316,7 +316,7 @@ export const MultiFormatHub = () => {
                 </CardContent>
                 <CardFooter className="pt-0">
                   <Button variant="ghost" className="w-full group/btn hover:bg-primary/5">
-                    Read Article
+                    Read article
                     <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                   </Button>
                 </CardFooter>
@@ -363,7 +363,7 @@ export const MultiFormatHub = () => {
                 <CardFooter className="pt-0">
                   <Button className="w-full shadow-md hover:shadow-lg transition-shadow">
                     <Play className="mr-2 h-4 w-4" />
-                    Watch Video
+                    Watch video
                   </Button>
                 </CardFooter>
               </Card>
@@ -402,7 +402,7 @@ export const MultiFormatHub = () => {
                 <CardFooter>
                   <Button variant="outline" className="w-full group/btn">
                     <Download className="mr-2 h-4 w-4 group-hover/btn:-translate-y-1 transition-transform" />
-                    Download Guide
+                    Download guide
                   </Button>
                 </CardFooter>
               </Card>

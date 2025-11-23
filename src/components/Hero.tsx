@@ -21,14 +21,14 @@ export const Hero = () => {
           <div className="text-left max-w-3xl space-y-12">
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-carbon leading-none" style={{ letterSpacing: '-0.02em' }}>
-                Your optimal state.
+                Peak performance isn't luck.
               </h1>
               <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-carbon leading-none" style={{ letterSpacing: '-0.02em' }}>
-                On demand.
+                It's precision.
               </p>
             </div>
             <p className="text-lg text-ash max-w-2xl leading-relaxed">
-              Scientifically-backed supplements engineered for peak mental and physical performance.
+              Scientifically-backed supplements and recovery tools engineered for your optimal state
             </p>
             <Button 
               size="lg" 
@@ -36,7 +36,7 @@ export const Hero = () => {
               onClick={scrollToProducts}
               aria-label="Shop now"
             >
-              Shop Now
+              Shop now
             </Button>
           </div>
 
