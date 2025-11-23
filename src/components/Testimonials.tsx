@@ -62,17 +62,17 @@ const testimonials: Testimonial[] = [
 
 export const Testimonials = () => {
   return (
-    <section className="py-32 lg:py-40">
-      <div className="w-full px-6 sm:px-8 lg:px-20 xl:px-32 max-w-7xl mx-auto">
-        <div className="mb-24">
-          <p className="ghost-number mb-6">TESTIMONIALS</p>
-          <h2 className="mb-6">Customer stories</h2>
+    <section className="py-12 sm:py-16 md:py-24 lg:py-32 xl:py-40">
+      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 max-w-7xl mx-auto">
+        <div className="mb-12 sm:mb-16 md:mb-20 lg:mb-24">
+          <p className="ghost-number mb-3 sm:mb-4 md:mb-6">TESTIMONIALS</p>
+          <h2 className="mb-4 sm:mb-6">Customer stories</h2>
           <p className="text-body-large text-ash max-w-2xl">
             Real experiences from people optimising their performance
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 xl:gap-16">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}

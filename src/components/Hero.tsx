@@ -11,11 +11,11 @@ const Hero = () => {
 
   return (
     <section className="relative bg-ivory overflow-hidden">
-      <div className="container mx-auto px-6 sm:px-12 lg:px-20 xl:px-32 py-24 md:py-32 lg:py-40">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12 sm:py-16 md:py-24 lg:py-40">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-24 items-center">
           {/* Content */}
-          <div className="space-y-8">
-            <div className="space-y-6">
+          <div className="space-y-6 sm:space-y-8">
+            <div className="space-y-4 sm:space-y-6">
               <p className="ghost-number">Precision Performance</p>
               <h1 className="text-hero-display text-carbon">
                 Your optimal state. On demand.
@@ -25,18 +25,18 @@ const Hero = () => {
               </p>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Button 
                 size="lg" 
                 onClick={scrollToProducts}
-                className="bg-carbon text-ivory hover:bg-slate rounded-lg px-8 py-6 text-ui-label"
+                className="bg-carbon text-ivory hover:bg-slate rounded-lg px-6 sm:px-8 py-4 sm:py-6 text-ui-label min-h-[48px] touch-manipulation"
               >
                 Shop Now
               </Button>
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-carbon text-carbon hover:bg-carbon hover:text-ivory rounded-lg px-8 py-6 text-ui-label"
+                className="border-carbon text-carbon hover:bg-carbon hover:text-ivory rounded-lg px-6 sm:px-8 py-4 sm:py-6 text-ui-label min-h-[48px] touch-manipulation"
               >
                 Learn More
               </Button>
@@ -44,8 +44,8 @@ const Hero = () => {
           </div>
 
           {/* Hero Image */}
-          <div className="relative">
-            <div className="relative w-full aspect-square flex items-center justify-center">
+          <div className="relative order-first lg:order-last">
+            <div className="relative w-full aspect-square flex items-center justify-center max-w-md mx-auto lg:max-w-none">
               <img 
                 src={heroImage} 
                 alt="NeuroState premium supplements for optimal performance" 

@@ -86,17 +86,17 @@ export const ProductBundles = () => {
   };
 
   return (
-    <section id="bundles" className="py-24 sm:py-32 px-6 sm:px-8 lg:px-20 xl:px-32">
+    <section id="bundles" className="py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32">
       <div className="w-full max-w-7xl mx-auto">
-        <div className="mb-20">
-          <p className="ghost-number mb-6">BUNDLE & SAVE</p>
-          <h2 className="mb-6">Curated stacks</h2>
+        <div className="mb-12 sm:mb-16 md:mb-20">
+          <p className="ghost-number mb-3 sm:mb-4 md:mb-6">BUNDLE & SAVE</p>
+          <h2 className="mb-4 sm:mb-6">Curated stacks</h2>
           <p className="text-body-large text-ash max-w-2xl">
             Complete systems designed for your performance goals
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 xl:gap-16">
           {bundles.map((bundle) => {
             const bundleProducts = getBundleProducts(bundle.productKeywords);
             if (bundleProducts.length === 0) return null;

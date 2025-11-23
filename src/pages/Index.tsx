@@ -71,12 +71,12 @@ const Index = () => {
         <main>
           <Hero />
           <ShopByGoal />
-        <section id="products" className="py-24 md:py-32 px-6 sm:px-8 lg:px-20 xl:px-32">
+        <section id="products" className="py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32">
           <div className="w-full max-w-7xl mx-auto">
-            <div className="flex items-center justify-between mb-20 md:mb-24">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-12 sm:mb-16 md:mb-20 lg:mb-24 gap-6">
               <div>
-                <p className="ghost-number mb-6">PERFORMANCE ESSENTIALS</p>
-                <h2 className="mb-4">
+                <p className="ghost-number mb-3 sm:mb-4 md:mb-6">PERFORMANCE ESSENTIALS</p>
+                <h2 className="mb-2 sm:mb-4">
                   {searchQuery ? 'Search results' : 'All products'}
                 </h2>
                 {searchQuery && (
@@ -85,7 +85,7 @@ const Index = () => {
                   </p>
                 )}
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 w-full sm:w-auto">
                 <ProductQuiz />
                 {isMobile && (
                   <ProductFilters

@@ -105,10 +105,10 @@ export const Header = () => {
     <>
       <AnnouncementBar />
       <header className="sticky top-0 z-50 w-full bg-background border-b border-mist backdrop-blur-sm bg-background/95">
-        <div className="container mx-auto flex h-20 items-center justify-between px-6 sm:px-12 lg:px-20 xl:px-32">
-          <Link to="/" className="flex items-center gap-3">
-            <img src={logoIcon} alt="NeuroState Neural Waveform" className="h-10 w-10" />
-            <span className="text-ui-label text-carbon tracking-widest">NEUROSTATE<sup className="text-[6px]">®</sup></span>
+        <div className="container mx-auto flex h-16 sm:h-20 items-center justify-between px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32">
+          <Link to="/" className="flex items-center gap-2 sm:gap-3">
+            <img src={logoIcon} alt="NeuroState Neural Waveform" className="h-8 w-8 sm:h-10 sm:w-10" />
+            <span className="text-ui-label text-carbon tracking-widest text-[0.625rem] sm:text-xs">NEUROSTATE<sup className="text-[5px] sm:text-[6px]">®</sup></span>
           </Link>
           
           {/* Desktop Navigation */}

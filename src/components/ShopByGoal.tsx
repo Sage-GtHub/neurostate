@@ -51,19 +51,19 @@ const goals: Goal[] = [
 
 export const ShopByGoal = () => {
   return (
-    <section className="py-24 sm:py-32 px-6 sm:px-8 lg:px-20 xl:px-32">
+    <section className="py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32">
       <div className="w-full">
-        <div className="mb-20">
-          <p className="ghost-number mb-4">
+        <div className="mb-12 sm:mb-16 md:mb-20">
+          <p className="ghost-number mb-3 sm:mb-4 md:mb-6">
             PERFORMANCE SYSTEMS
           </p>
-          <h2 className="mb-6">Shop by goal</h2>
+          <h2 className="mb-4 sm:mb-6">Shop by goal</h2>
           <p className="text-body-large text-muted-foreground max-w-2xl">
             Precision tools designed for how you want to perform
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-10 xl:gap-12">
           {goals.map((goal) => {
             return (
               <Link 
