@@ -555,38 +555,6 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
               </div>
             )}
 
-                {isLoading && (
-                  <div className="flex gap-3">
-                    <div className="flex-shrink-0">
-                      <div className="w-8 h-8 rounded-full bg-carbon flex items-center justify-center">
-                        <Loader2 className="w-4 h-4 text-ivory animate-spin" />
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm text-ash">Nova is typing...</p>
-                    </div>
-                  </div>
-                )}
-
-                {showSuggestions && messages.length === 1 && (
-                  <div className="pt-2">
-                    <p className="text-xs text-ash mb-3 uppercase tracking-wider">Quick Questions</p>
-                    <div className="grid grid-cols-1 gap-2">
-                      {quickSuggestions.map((suggestion, index) => (
-                        <Button
-                          key={index}
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleSuggestionClick(suggestion)}
-                          className="justify-start text-left h-auto py-2 px-3 text-sm"
-                        >
-                          {suggestion}
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
                 <div ref={messagesEndRef} />
               </div>
             </div>
