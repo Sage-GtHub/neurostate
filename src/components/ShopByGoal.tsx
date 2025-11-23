@@ -51,19 +51,19 @@ const goals: Goal[] = [
 
 export const ShopByGoal = () => {
   return (
-    <section className="py-16 sm:py-24 px-6 sm:px-8 lg:px-20 xl:px-32 bg-background">
+    <section className="py-24 sm:py-32 px-6 sm:px-8 lg:px-20 xl:px-32">
       <div className="w-full">
-        <div className="mb-12 sm:mb-16">
-          <p className="text-[10px] sm:text-xs font-light text-muted-foreground mb-3 tracking-[0.3em] uppercase">
+        <div className="mb-20">
+          <p className="ghost-number mb-4">
             PERFORMANCE SYSTEMS
           </p>
-          <h2 className="text-[1.875rem] font-semibold uppercase mb-6" style={{ lineHeight: '1.3' }}>Shop by goal</h2>
-          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl font-light">
+          <h2 className="mb-6">Shop by goal</h2>
+          <p className="text-body-large text-muted-foreground max-w-2xl">
             Precision tools designed for how you want to perform
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {goals.map((goal) => {
             return (
               <Link 
@@ -71,7 +71,7 @@ export const ShopByGoal = () => {
                 to={goal.link}
                 className="group"
               >
-                <div className="overflow-hidden h-full transition-all duration-300 hover:scale-[1.01] bg-card">
+                <div className="overflow-hidden h-full transition-all duration-300 hover:scale-[1.02] bg-card rounded-xl">
                   <div className="relative aspect-[4/3] overflow-hidden bg-secondary/20">
                     <img 
                       src={goal.image} 
@@ -80,11 +80,11 @@ export const ShopByGoal = () => {
                     />
                   </div>
                   
-                  <div className="p-5 sm:p-6 bg-card">
-                    <h3 className="text-[1.5rem] font-semibold mb-2 group-hover:text-foreground transition-colors" style={{ lineHeight: '1.4' }}>
+                  <div className="p-8 bg-card">
+                    <h3 className="mb-3 group-hover:text-foreground transition-colors">
                       {goal.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed font-light">
+                    <p className="text-body text-muted-foreground">
                       {goal.description}
                     </p>
                   </div>

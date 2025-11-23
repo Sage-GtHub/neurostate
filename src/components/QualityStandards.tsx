@@ -71,31 +71,31 @@ const standards: Standard[] = [
 
 export const QualityStandards = () => {
   return (
-    <section className="py-16 md:py-24 px-6 sm:px-8 lg:px-20 xl:px-32">
+    <section className="py-24 md:py-32 px-6 sm:px-8 lg:px-20 xl:px-32">
       <div className="w-full">
-        <div className="mb-12">
-          <p className="text-[10px] sm:text-xs font-light text-muted-foreground mb-3 tracking-[0.3em] uppercase">
+        <div className="mb-20">
+          <p className="ghost-number mb-4">
             QUALITY COMMITMENT
           </p>
-          <h2 className="text-[1.875rem] font-semibold uppercase mb-6" style={{ lineHeight: '1.3' }}>
+          <h2 className="mb-6">
             Our standards
           </h2>
-          <p className="text-sm text-muted-foreground max-w-2xl font-light">
+          <p className="text-body-large text-muted-foreground max-w-2xl">
             Every product backed by science, rigorously tested, and made with premium ingredients
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-24">
           {standards.map((standard) => {
             const Icon = standard.icon;
             return (
               <div key={standard.id}>
-                <div className="mb-4">
-                  <Icon className="h-6 w-6 text-accent" />
+                <div className="mb-6">
+                  <Icon className="h-8 w-8 text-accent" />
                 </div>
-                <p className="text-xs text-muted-foreground mb-2 uppercase tracking-wider font-light">{standard.number}</p>
-                <h3 className="text-[1.5rem] font-semibold mb-3" style={{ lineHeight: '1.4' }}>{standard.title}</h3>
-                <p className="text-sm text-muted-foreground font-light leading-relaxed">
+                <p className="ghost-number mb-3">{standard.number}</p>
+                <h3 className="mb-4">{standard.title}</h3>
+                <p className="text-body text-muted-foreground">
                   {standard.description}
                 </p>
               </div>
@@ -103,26 +103,26 @@ export const QualityStandards = () => {
           })}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-border/50">
-          <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-center">
+        <div className="pt-16 border-t border-border/50">
+          <div className="flex flex-wrap justify-center items-center gap-x-16 gap-y-8 text-center">
             <div>
-              <div className="text-xl font-semibold mb-0.5">150+</div>
-              <div className="text-xs text-muted-foreground">Pro Teams</div>
+              <div className="text-h2 mb-2">150+</div>
+              <div className="text-ui-label">Pro Teams</div>
             </div>
             <div className="hidden sm:block text-muted-foreground/30">•</div>
             <div>
-              <div className="text-xl font-semibold mb-0.5">100%</div>
-              <div className="text-xs text-muted-foreground">Third-Party Tested</div>
+              <div className="text-h2 mb-2">100%</div>
+              <div className="text-ui-label">Third-Party Tested</div>
             </div>
             <div className="hidden sm:block text-muted-foreground/30">•</div>
             <div>
-              <div className="text-xl font-semibold mb-0.5">NSF</div>
-              <div className="text-xs text-muted-foreground">Certified Sport</div>
+              <div className="text-h2 mb-2">NSF</div>
+              <div className="text-ui-label">Certified Sport</div>
             </div>
             <div className="hidden sm:block text-muted-foreground/30">•</div>
             <div>
-              <div className="text-xl font-semibold mb-0.5">Zero</div>
-              <div className="text-xs text-muted-foreground">Banned Substances</div>
+              <div className="text-h2 mb-2">Zero</div>
+              <div className="text-ui-label">Banned Substances</div>
             </div>
           </div>
         </div>

@@ -87,20 +87,20 @@ export const ProductBundles = () => {
   };
 
   return (
-    <section id="bundles" className="py-12 sm:py-16 px-6 sm:px-8 lg:px-20 xl:px-32 bg-secondary/20">
+    <section id="bundles" className="py-24 sm:py-32 px-6 sm:px-8 lg:px-20 xl:px-32 bg-secondary/20">
       <div className="w-full">
-        <div className="text-center mb-8 sm:mb-12">
-          <div className="inline-flex items-center gap-2 mb-3 sm:mb-4">
-            <Package className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-            <Badge variant="secondary" className="text-xs sm:text-sm">Best Value</Badge>
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center gap-3 mb-6">
+            <Package className="h-8 w-8 text-primary" />
+            <Badge variant="secondary" className="text-ui-label">Best Value</Badge>
           </div>
-          <h2 className="text-[1.875rem] font-semibold mb-3 sm:mb-4" style={{ lineHeight: '1.3' }}>Curated Bundles</h2>
-          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto px-4">
+          <h2 className="mb-6">Curated bundles</h2>
+          <p className="text-body-large text-muted-foreground max-w-2xl mx-auto">
             Save more with our expertly designed supplement stacks
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {bundles.map((bundle) => {
             const bundleProducts = getBundleProducts(bundle.productKeywords);
             if (bundleProducts.length === 0) return null;
@@ -108,50 +108,50 @@ export const ProductBundles = () => {
             const pricing = calculateBundlePrice(bundleProducts, bundle.discount);
 
             return (
-              <div key={bundle.id} className="p-6 sm:p-8 hover:translate-y-[-4px] transition-all duration-300">
-                <div className="mb-5 sm:mb-6">
-                  <Badge className="mb-2 sm:mb-3 bg-accent text-accent-foreground text-xs sm:text-sm">
+              <div key={bundle.id} className="p-8 sm:p-10 rounded-xl bg-card hover:shadow-large hover:translate-y-[-4px] transition-all duration-300">
+                <div className="mb-8">
+                  <Badge className="mb-4 bg-accent text-accent-foreground text-ui-label">
                     Save {bundle.discount}%
                   </Badge>
-                  <h3 className="text-[1.5rem] font-semibold mb-2" style={{ lineHeight: '1.4' }}>{bundle.name}</h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground font-light mb-3 sm:mb-4">
+                  <h3 className="mb-3">{bundle.name}</h3>
+                  <p className="text-body text-muted-foreground">
                     {bundle.description}
                   </p>
                 </div>
 
-                <div className="space-y-2 mb-5 sm:mb-6">
+                <div className="space-y-3 mb-8">
                   {bundle.benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-center gap-2 text-xs sm:text-sm">
-                      <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-accent flex-shrink-0" />
-                      <span className="font-light">{benefit}</span>
+                    <div key={index} className="flex items-center gap-3">
+                      <Check className="h-5 w-5 text-accent flex-shrink-0" />
+                      <span className="text-body">{benefit}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="pt-3 sm:pt-4 mb-4">
-                  <div className="text-xs sm:text-sm text-muted-foreground mb-1">
+                <div className="pt-6 mb-6">
+                  <div className="text-caption text-muted-foreground mb-2">
                     Includes {bundleProducts.length} products
                   </div>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-xl sm:text-2xl font-bold">
+                  <div className="flex items-baseline gap-3">
+                    <span className="text-h2">
                       £{pricing.discounted.toFixed(2)}
                     </span>
-                    <span className="text-xs sm:text-sm text-muted-foreground line-through">
+                    <span className="text-body text-muted-foreground line-through">
                       £{pricing.original.toFixed(2)}
                     </span>
                   </div>
-                  <div className="text-xs text-primary font-medium">
+                  <div className="text-caption text-primary font-medium">
                     Save £{pricing.savings.toFixed(2)}
                   </div>
                 </div>
 
                 <Button 
                   onClick={() => handleAddBundle(bundle)}
-                  variant="outline"
-                  className="w-full rounded-full bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-accent hover:shadow-[0_0_20px_rgba(255,138,0,0.6)] transition-all duration-300 font-medium min-h-[44px] sm:min-h-[48px] text-sm sm:text-base"
+                  size="lg"
+                  className="w-full"
                 >
                   Add Bundle
-                  <ArrowRight className="ml-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </div>
             );
