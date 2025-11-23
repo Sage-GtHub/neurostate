@@ -13,6 +13,7 @@ import { Testimonials } from "@/components/Testimonials";
 import { Footer } from "@/components/Footer";
 import { ShopByGoal } from "@/components/ShopByGoal";
 import { QualityStandards } from "@/components/QualityStandards";
+import { SocialProofNotification } from "@/components/SocialProofNotification";
 import { useState, useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSearchParams } from "react-router-dom";
@@ -122,6 +123,7 @@ const Index = () => {
         <Footer />
         <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
         <ExitIntentPopup />
+        <SocialProofNotification />
       </div>
     </>
   );

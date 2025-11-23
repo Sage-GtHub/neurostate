@@ -29,7 +29,7 @@ const Hero = () => {
               <Button 
                 size="lg" 
                 onClick={scrollToProducts}
-                className="bg-carbon text-ivory hover:bg-slate rounded-lg px-6 sm:px-8 py-4 sm:py-6 text-ui-label min-h-[48px] touch-manipulation"
+                className="bg-carbon text-ivory hover:bg-slate hover:text-ivory rounded-lg px-6 sm:px-8 py-4 sm:py-6 text-ui-label min-h-[48px] touch-manipulation"
               >
                 Shop Now
               </Button>

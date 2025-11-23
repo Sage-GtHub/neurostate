@@ -26,6 +26,7 @@ import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import OrderTracking from "./pages/OrderTracking";
 import NotFound from "./pages/NotFound";
+import Dashboard from "./pages/Dashboard";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +61,7 @@ const App = () => (
           <Route path="/partnerships" element={<Partnerships />} />
           <Route path="/subscriptions" element={<Subscriptions />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/rewards" element={<Rewards />} />
           <Route path="/terms" element={<Terms />} />
