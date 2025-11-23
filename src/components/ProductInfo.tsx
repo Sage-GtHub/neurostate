@@ -2,24 +2,9 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { RefreshCw, Package, Minus, Plus, ShoppingCart } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
-
-interface Variant {
-  id: string;
-  title: string;
-  price: {
-    amount: string;
-    currencyCode: string;
-  };
-  availableForSale: boolean;
-  selectedOptions: Array<{
-    name: string;
-    value: string;
-  }>;
-}
 
 interface ProductInfoProps {
   product: any;
@@ -34,7 +19,6 @@ export const ProductInfo = ({
 }: ProductInfoProps) => {
   const addItem = useCartStore(state => state.addItem);
   
-  // Check if product is a supplement
   const isSupplement = product.productType?.toLowerCase().includes('supplement') || 
     product.tags?.some((tag: string) => tag.toLowerCase().includes('supplement'));
   
@@ -80,39 +64,36 @@ export const ProductInfo = ({
       <div>
         <h1 className="mb-4">{product.title}</h1>
         
-        {/* Servings and Price Per Serving - Only for supplements */}
         {isSupplement && (
-          <div className="flex items-center gap-4 mb-6 text-caption text-muted-foreground">
+          <div className="flex items-center gap-4 mb-6 text-[0.8125rem] text-stone">
             <span className="font-medium">30 Servings</span>
             <span>•</span>
             <span className="font-medium">£{(price / 30).toFixed(2)}/Serving</span>
           </div>
         )}
 
-        {/* Short Description */}
-        <p className="text-body-large mb-8">
+        <p className="text-body-large mb-8 text-ash">
           {product.description && product.description.length > 180 
             ? `${product.description.substring(0, 180)}...` 
             : product.description}
         </p>
 
-        {/* Key Benefits - Bullet Points */}
         <div className="space-y-4 mb-8">
           <div className="flex items-start gap-3">
-            <span className="text-primary mt-1">✓</span>
-            <p className="text-body">
+            <span className="text-carbon mt-1">✓</span>
+            <p className="text-[0.9375rem] text-ash">
               Third-party tested and NSF Certified for quality and purity
             </p>
           </div>
           <div className="flex items-start gap-3">
-            <span className="text-primary mt-1">✓</span>
-            <p className="text-body">
+            <span className="text-carbon mt-1">✓</span>
+            <p className="text-[0.9375rem] text-ash">
               Supports optimal cellular function and recovery
             </p>
           </div>
           <div className="flex items-start gap-3">
-            <span className="text-primary mt-1">✓</span>
-            <p className="text-body">
+            <span className="text-carbon mt-1">✓</span>
+            <p className="text-[0.9375rem] text-ash">
               Science-backed formulation with clean, bioavailable ingredients
             </p>
           </div>
@@ -120,84 +101,69 @@ export const ProductInfo = ({
       </div>
 
       {/* Purchase Type */}
-      <div className="border rounded-xl p-6 bg-card">
+      <div className="border-t border-mist pt-10">
         {isSupplement ? (
           <>
             <RadioGroup value={purchaseType} onValueChange={(value) => setPurchaseType(value as "onetime" | "subscription")}>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 <div 
-                  className={`flex items-center justify-between p-4 rounded-lg transition-all ${
+                  className={`flex items-center justify-between py-4 transition-all ${
                     purchaseType === "subscription" 
-                      ? "bg-accent text-accent-foreground border-2 border-accent shadow-md" 
-                      : "hover:bg-secondary/20 border border-transparent"
+                      ? "border-b-2 border-carbon" 
+                      : "border-b border-mist"
                   }`}
                 >
-                  <div className="flex items-center space-x-3">
-                    <RadioGroupItem 
-                      value="subscription" 
-                      id="subscription"
-                      className="border-accent-foreground data-[state=checked]:bg-accent-foreground data-[state=checked]:border-accent-foreground"
-                    />
+                  <div className="flex items-center space-x-4">
+                    <RadioGroupItem value="subscription" id="subscription" />
                     <Label htmlFor="subscription" className="cursor-pointer">
-                      <div className="flex items-center gap-2">
-                        <RefreshCw className="h-5 w-5" />
-                        <div>
-                          <div className="font-bold text-base flex items-center gap-2">
-                            Subscribe & Save 15%
-                            <Badge variant="secondary" className="bg-background/20 text-accent-foreground text-xs">BEST VALUE</Badge>
-                          </div>
-                          <div className="text-sm opacity-90">Cancel anytime, free delivery</div>
+                      <div>
+                        <div className="text-[0.9375rem] font-medium text-carbon mb-1">
+                          Subscribe & Save 15%
                         </div>
+                        <div className="text-[0.8125rem] text-stone">Cancel anytime, free delivery</div>
                       </div>
                     </Label>
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold">£{subscriptionPrice.toFixed(2)}</div>
-                    <div className="text-sm line-through opacity-70">£{price.toFixed(2)}</div>
+                    <div className="text-[1.25rem] font-medium text-carbon">£{subscriptionPrice.toFixed(2)}</div>
+                    <div className="text-[0.8125rem] text-stone line-through">£{price.toFixed(2)}</div>
                   </div>
                 </div>
 
                 <div 
-                  className={`flex items-center justify-between p-4 rounded-lg transition-all ${
+                  className={`flex items-center justify-between py-4 transition-all ${
                     purchaseType === "onetime" 
-                      ? "bg-accent text-accent-foreground border-2 border-accent shadow-md" 
-                      : "hover:bg-secondary/20 border border-transparent"
+                      ? "border-b-2 border-carbon" 
+                      : "border-b border-mist"
                   }`}
                 >
-                  <div className="flex items-center space-x-3">
-                    <RadioGroupItem 
-                      value="onetime" 
-                      id="onetime"
-                      className="border-accent-foreground data-[state=checked]:bg-accent-foreground data-[state=checked]:border-accent-foreground"
-                    />
+                  <div className="flex items-center space-x-4">
+                    <RadioGroupItem value="onetime" id="onetime" />
                     <Label htmlFor="onetime" className="cursor-pointer">
-                      <div className="flex items-center gap-2">
-                        <Package className="h-5 w-5" />
-                        <span className="font-semibold">One-time purchase</span>
-                      </div>
+                      <span className="text-[0.9375rem] font-medium text-carbon">One-time purchase</span>
                     </Label>
                   </div>
-                  <div className="text-xl font-bold">£{price.toFixed(2)}</div>
+                  <div className="text-[1.25rem] font-medium text-carbon">£{price.toFixed(2)}</div>
                 </div>
               </div>
             </RadioGroup>
             
             {purchaseType === "subscription" && (
-              <div className="mt-4 pt-4 bg-accent/10 -mx-4 px-4 pb-4">
-                <Label className="text-sm font-medium mb-3 block">Delivery Frequency</Label>
+              <div className="mt-8 pt-8 border-t border-mist">
+                <Label className="text-[0.875rem] font-medium mb-4 block text-carbon">Delivery Frequency</Label>
                 <RadioGroup value={subscriptionFrequency} onValueChange={(value) => setSubscriptionFrequency(value as any)}>
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-2">
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-3">
                       <RadioGroupItem value="monthly" id="freq-monthly" />
-                      <Label htmlFor="freq-monthly" className="cursor-pointer text-sm">Every 30 days</Label>
+                      <Label htmlFor="freq-monthly" className="cursor-pointer text-[0.875rem] text-ash">Every 30 days</Label>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-3">
                       <RadioGroupItem value="bi-monthly" id="freq-bimonthly" />
-                      <Label htmlFor="freq-bimonthly" className="cursor-pointer text-sm">Every 60 days</Label>
+                      <Label htmlFor="freq-bimonthly" className="cursor-pointer text-[0.875rem] text-ash">Every 60 days</Label>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-3">
                       <RadioGroupItem value="quarterly" id="freq-quarterly" />
-                      <Label htmlFor="freq-quarterly" className="cursor-pointer text-sm">Every 90 days</Label>
+                      <Label htmlFor="freq-quarterly" className="cursor-pointer text-[0.875rem] text-ash">Every 90 days</Label>
                     </div>
                   </div>
                 </RadioGroup>
@@ -205,21 +171,18 @@ export const ProductInfo = ({
             )}
           </>
         ) : (
-          <div className="flex items-center justify-between p-4 bg-accent text-accent-foreground shadow-md">
-            <div className="flex items-center gap-2">
-              <Package className="h-5 w-5" />
-              <span className="font-semibold">One-time purchase</span>
-            </div>
-            <div className="text-xl font-bold">£{price.toFixed(2)}</div>
+          <div className="flex items-center justify-between py-6 border-b-2 border-carbon">
+            <span className="text-[0.9375rem] font-medium text-carbon">One-time purchase</span>
+            <div className="text-[1.25rem] font-medium text-carbon">£{price.toFixed(2)}</div>
           </div>
         )}
       </div>
 
       {/* Variants */}
       {product.options.length > 0 && product.options[0].values.length > 1 && (
-        <div>
-          <label className="block font-medium mb-3">{product.options[0].name}</label>
-          <div className="flex flex-wrap gap-2">
+        <div className="border-t border-mist pt-10">
+          <label className="block text-[0.875rem] font-medium mb-4 text-carbon">{product.options[0].name}</label>
+          <div className="flex flex-wrap gap-3">
             {product.options[0].values.map((value: string, valueIndex: number) => {
               const variantIndex = product.variants.edges.findIndex(
                 (v: any) => v.node.selectedOptions.some(
@@ -231,7 +194,8 @@ export const ProductInfo = ({
                   key={valueIndex}
                   variant={selectedVariantIndex === variantIndex ? "default" : "outline"}
                   onClick={() => setSelectedVariantIndex(variantIndex)}
-                  className="min-w-[80px] rounded-full"
+                  size="sm"
+                  className="min-w-[80px]"
                 >
                   {value}
                 </Button>
@@ -242,23 +206,21 @@ export const ProductInfo = ({
       )}
 
       {/* Quantity */}
-      <div>
-        <label className="block font-medium mb-3">Quantity</label>
-        <div className="flex items-center gap-3">
+      <div className="border-t border-mist pt-10">
+        <label className="block text-[0.875rem] font-medium mb-4 text-carbon">Quantity</label>
+        <div className="flex items-center gap-4">
           <Button
-            variant="outline"
-            size="icon"
+            variant="ghost"
+            size="sm"
             onClick={() => setQuantity(Math.max(1, quantity - 1))}
-            className="rounded-full"
           >
             <Minus className="h-4 w-4" />
           </Button>
-          <span className="font-semibold text-body-large w-16 text-center">{quantity}</span>
+          <span className="font-medium text-[1.125rem] w-12 text-center text-carbon">{quantity}</span>
           <Button
-            variant="outline"
-            size="icon"
+            variant="ghost"
+            size="sm"
             onClick={() => setQuantity(quantity + 1)}
-            className="rounded-full"
           >
             <Plus className="h-4 w-4" />
           </Button>
@@ -269,18 +231,16 @@ export const ProductInfo = ({
       <Button
         size="lg"
         variant="outline"
-        className="w-full rounded-full bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-accent hover:shadow-[0_0_20px_rgba(255,138,0,0.6)] transition-all duration-300 font-medium"
+        className="w-full border-carbon text-carbon hover:bg-carbon hover:text-ivory transition-all duration-300"
         onClick={handleAddToCart}
         disabled={!selectedVariant?.availableForSale}
       >
-        <ShoppingCart className="h-5 w-5 mr-2" />
         {selectedVariant?.availableForSale ? "Add to Cart" : "Out of Stock"}
       </Button>
 
-      {/* Free Delivery Badge */}
-      <div className="text-center text-caption text-muted-foreground">
+      <p className="text-center text-[0.8125rem] text-stone">
         Free delivery on orders over £50
-      </div>
+      </p>
     </div>
   );
 };

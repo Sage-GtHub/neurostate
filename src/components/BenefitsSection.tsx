@@ -29,12 +29,11 @@ export const BenefitsSection = ({ productType }: BenefitsSectionProps) => {
   ];
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-16">
       {benefits.map((benefit, index) => (
-        <div key={index} className="text-center">
-          <benefit.icon className="h-10 w-10 text-accent mx-auto mb-4" />
-          <h3 className="mb-2">{benefit.title}</h3>
-          <p className="text-body text-muted-foreground">{benefit.description}</p>
+        <div key={index}>
+          <h4 className="text-[1.125rem] font-medium mb-3 text-carbon">{benefit.title}</h4>
+          <p className="text-[0.9375rem] text-ash leading-relaxed">{benefit.description}</p>
         </div>
       ))}
     </div>

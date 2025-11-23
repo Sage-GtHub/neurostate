@@ -1,8 +1,7 @@
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Calendar, Clock, ArrowRight, Trophy } from "lucide-react";
+import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -117,104 +116,81 @@ export const LearningPaths = () => {
 
   const hasBadge = (pathId: string) => badges?.includes(pathId);
 
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case 'beginner': return 'bg-green-500/10 text-green-700 dark:text-green-400';
-      case 'intermediate': return 'bg-yellow-500/10 text-yellow-700 dark:text-yellow-400';
-      case 'advanced': return 'bg-red-500/10 text-red-700 dark:text-red-400';
-      default: return 'bg-muted';
-    }
-  };
-
   if (isLoading) {
     return (
-      <section className="py-16">
-        <div className="text-center">Loading learning paths...</div>
+      <section className="py-24 md:py-32">
+        <div className="text-center text-ash">Loading learning paths...</div>
       </section>
     );
   }
 
   return (
-    <section className="py-16">
-      <div className="text-center mb-12">
-        <Badge className="mb-4 bg-primary/10 text-primary">
-          <Trophy className="h-3 w-3 mr-1" />
-          Structured learning
-        </Badge>
-          <h2 className="text-[1.875rem] font-semibold mb-4" style={{ lineHeight: '1.3' }}>
-            Learning paths
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Step-by-step courses designed by experts. Track progress, earn badges, master your goals.
-          </p>
+    <section className="py-24 md:py-32">
+      <div className="mb-16 md:mb-20 text-center">
+        <p className="ghost-number mb-6">STRUCTURED LEARNING</p>
+        <h2 className="mb-4">Learning paths</h2>
+        <p className="text-body-large text-ash max-w-2xl mx-auto">
+          Step-by-step courses designed by experts. Track progress, earn badges, master your goals.
+        </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8 mb-8">
+      <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
         {paths?.map((path) => {
           const progress = getProgress(path.id);
           const earned = hasBadge(path.id);
 
           return (
-            <Card
+            <div
               key={path.id}
-              className="overflow-hidden hover:shadow-lg transition-all duration-300 border-border/50 hover:border-primary/30 group"
+              className="group"
             >
-              <CardHeader>
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex flex-wrap gap-2">
-                    <Badge className={getDifficultyColor(path.difficulty)}>
-                      {path.difficulty}
-                    </Badge>
-                    <Badge variant="secondary">{path.category}</Badge>
-                  </div>
-                  {earned && (
-                    <div className="flex items-center gap-1 text-primary">
-                      <Trophy className="h-4 w-4" />
-                      <span className="text-xl">{path.badge_icon}</span>
-                    </div>
-                  )}
+              <div className="mb-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-[0.75rem] font-medium tracking-[0.05em] uppercase text-stone">
+                    {path.difficulty}
+                  </span>
+                  <span className="text-stone">·</span>
+                  <span className="text-[0.75rem] font-medium tracking-[0.05em] uppercase text-stone">
+                    {path.category}
+                  </span>
                 </div>
 
-                <h3 className="text-[1.5rem] font-semibold mb-2 group-hover:text-primary transition-colors" style={{ lineHeight: '1.4' }}>
+                <h3 className="text-[1.25rem] font-medium mb-3 group-hover:opacity-60 transition-opacity">
                   {path.title}
                 </h3>
-                <p className="text-muted-foreground line-clamp-2 leading-relaxed">
+                <p className="text-[0.9375rem] text-ash leading-relaxed mb-6">
                   {path.description}
                 </p>
-              </CardHeader>
 
-              <CardContent>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-                  <div className="flex items-center gap-1">
+                <div className="flex items-center gap-6 text-[0.8125rem] text-stone mb-6">
+                  <div className="flex items-center gap-2">
                     <Calendar className="h-4 w-4" />
                     {path.duration_days} days
                   </div>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
                     <Clock className="h-4 w-4" />
                     {lessonCounts?.[path.id] || 0} lessons
                   </div>
                 </div>
 
                 {user && progress > 0 && (
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-muted-foreground">Progress</span>
-                      <span className="font-semibold">{progress}%</span>
+                  <div className="space-y-2 mb-6">
+                    <div className="flex items-center justify-between text-[0.8125rem]">
+                      <span className="text-stone">Progress</span>
+                      <span className="font-medium text-carbon">{progress}%</span>
                     </div>
-                    <Progress value={progress} className="h-2" />
+                    <Progress value={progress} className="h-1" />
                   </div>
                 )}
-              </CardContent>
+              </div>
 
-              <CardFooter>
-                <Link to={`/learning-path/${path.id}`} className="w-full">
-                  <Button className="w-full group/btn">
-                    {progress > 0 ? 'Continue Learning' : 'Start Course'}
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-              </CardFooter>
-            </Card>
+              <Link to={`/learning-path/${path.id}`}>
+                <Button variant="ghost" size="sm" className="group/btn">
+                  {progress > 0 ? 'Continue' : 'Start Course'}
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+            </div>
           );
         })}
       </div>

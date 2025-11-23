@@ -63,45 +63,29 @@ export const AnnouncementBar = () => {
   const Icon = currentAnnouncement.icon;
 
   return (
-    <div
-      className={`${currentAnnouncement.color} ${currentAnnouncement.textColor} transition-all duration-700 relative overflow-hidden`}
-    >
-      <div className="container mx-auto flex items-center justify-center py-2.5 px-4 relative">
+    <div className={`${currentAnnouncement.color} ${currentAnnouncement.textColor} border-b border-mist transition-all duration-700`}>
+      <div className="w-full max-w-7xl mx-auto flex items-center justify-center py-3 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 relative">
         <Link 
           to={currentAnnouncement.link} 
-          className="flex items-center gap-2 animate-fade-in hover:opacity-70 transition-opacity duration-300 text-center"
+          className="flex items-center gap-3 hover:opacity-60 transition-opacity duration-300 text-center"
         >
-          <Icon className="h-3 w-3" />
-          <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
-            <span className="text-[10px] sm:text-[11px] font-medium uppercase tracking-widest">
-              {currentAnnouncement.text}
-            </span>
-            <span className="text-[9px] sm:text-[10px] font-normal opacity-70 uppercase tracking-wider">
-              {currentAnnouncement.subtext}
-            </span>
-          </div>
+          <span className="text-[0.6875rem] font-medium tracking-[0.05em] uppercase">
+            {currentAnnouncement.text}
+          </span>
+          <span className="text-[0.6875rem] font-normal text-stone tracking-[0.05em] uppercase hidden sm:inline">
+            {currentAnnouncement.subtext}
+          </span>
         </Link>
         
         <Button
           variant="ghost"
           size="icon"
-          className="absolute right-4 h-6 w-6 hover:bg-carbon/5 transition-all duration-300"
+          className="absolute right-4 sm:right-6 md:right-8 lg:right-20 xl:right-32 h-8 w-8 hover:bg-transparent hover:opacity-60"
           onClick={handleDismiss}
           aria-label="Dismiss announcement"
         >
           <X className="h-3 w-3" />
         </Button>
-      </div>
-
-      {/* Progress indicator */}
-      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-carbon/10">
-        <div
-          className="h-full bg-carbon/20 transition-all"
-          style={{
-            width: "100%",
-            animation: "progress 5s linear infinite",
-          }}
-        />
       </div>
     </div>
   );
