@@ -9,6 +9,10 @@ import Index from "./pages/Index";
 import ProductDetail from "./pages/ProductDetail";
 import CategoryProducts from "./pages/CategoryProducts";
 import Resources from "./pages/Resources";
+import Nova from "./pages/Nova";
+import NovaProtocols from "./pages/NovaProtocols";
+import NovaInsights from "./pages/NovaInsights";
+import NovaDevices from "./pages/NovaDevices";
 import FAQ from "./pages/FAQ";
 import Shipping from "./pages/Shipping";
 import HowToUse from "./pages/HowToUse";
@@ -70,6 +74,10 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/track-order" element={<OrderTracking />} />
           <Route path="/admin/update-descriptions" element={<ProductDescriptionUpdater />} />
+          <Route path="/nova" element={<Nova />} />
+          <Route path="/nova/protocols" element={<NovaProtocols />} />
+          <Route path="/nova/insights" element={<NovaInsights />} />
+          <Route path="/nova/devices" element={<NovaDevices />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
