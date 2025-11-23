@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { NovaNav } from "@/components/NovaNav";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -18,6 +19,7 @@ interface Protocol {
 }
 
 export default function NovaProtocols() {
+  const navigate = useNavigate();
   const [protocols, setProtocols] = useState<Protocol[]>([]);
   const [showAssessment, setShowAssessment] = useState(false);
   const { toast } = useToast();
@@ -76,7 +78,9 @@ export default function NovaProtocols() {
                         Started {new Date(protocol.started_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })} • {protocol.status}
                       </p>
                     </div>
-                    <Button variant="outline" size="sm">View Details</Button>
+                    <Button variant="outline" size="sm" onClick={() => navigate(`/nova/protocols/${protocol.id}`)}>
+                      View Details
+                    </Button>
                   </div>
 
                   <div className="mb-6">

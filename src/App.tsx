@@ -13,6 +13,7 @@ import CategoryProducts from "./pages/CategoryProducts";
 import Resources from "./pages/Resources";
 import Nova from "./pages/Nova";
 import NovaProtocols from "./pages/NovaProtocols";
+import ProtocolDetail from "./pages/ProtocolDetail";
 import NovaInsights from "./pages/NovaInsights";
 import NovaDevices from "./pages/NovaDevices";
 import FAQ from "./pages/FAQ";
@@ -79,6 +80,7 @@ const App = () => (
           <Route path="/admin/update-descriptions" element={<ProductDescriptionUpdater />} />
           <Route path="/nova" element={<ProtectedRoute><Nova /></ProtectedRoute>} />
           <Route path="/nova/protocols" element={<ProtectedRoute><NovaProtocols /></ProtectedRoute>} />
+          <Route path="/nova/protocols/:id" element={<ProtectedRoute><ProtocolDetail /></ProtectedRoute>} />
           <Route path="/nova/insights" element={<ProtectedRoute><NovaInsights /></ProtectedRoute>} />
           <Route path="/nova/devices" element={<ProtectedRoute><NovaDevices /></ProtectedRoute>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
