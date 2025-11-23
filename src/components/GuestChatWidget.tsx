@@ -1,15 +1,33 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Loader2, Sparkles, X } from "lucide-react";
+import { Send, Loader2, Sparkles, X, MessageSquare, Plus, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { format, isToday, isYesterday, formatDistanceToNow } from "date-fns";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 type Message = {
   role: "user" | "assistant";
   content: string;
+  timestamp: string;
+};
+
+type Conversation = {
+  id: string;
+  title: string;
+  messages: Message[];
+  createdAt: string;
+  updatedAt: string;
 };
 
 const quickSuggestions = [
@@ -26,46 +44,82 @@ interface GuestChatWidgetProps {
 
 export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [conversations, setConversations] = useState<Conversation[]>([]);
+  const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast: showToast } = useToast();
   const [showSuggestions, setShowSuggestions] = useState(true);
+  const [showHistory, setShowHistory] = useState(false);
   const location = useLocation();
 
-  // Load conversation history from localStorage on mount
+  // Get current conversation
+  const currentConversation = conversations.find(c => c.id === currentConversationId);
+  const messages = currentConversation?.messages || [];
+
+  // Load conversations from localStorage on mount
   useEffect(() => {
-    const savedMessages = localStorage.getItem("guest-nova-chat-history");
-    if (savedMessages) {
+    const savedConversations = localStorage.getItem("guest-nova-conversations");
+    if (savedConversations) {
       try {
-        const parsed = JSON.parse(savedMessages);
-        setMessages(parsed);
-        setShowSuggestions(parsed.length <= 1);
+        const parsed = JSON.parse(savedConversations);
+        setConversations(parsed);
+        // Set the most recent conversation as current
+        if (parsed.length > 0) {
+          setCurrentConversationId(parsed[0].id);
+          setShowSuggestions(parsed[0].messages.length <= 1);
+        } else {
+          createNewConversation();
+        }
       } catch (error) {
-        console.error("Error loading chat history:", error);
-        // Initialize with welcome message if loading fails
-        const welcomeMessage: Message = {
-          role: "assistant",
-          content: "I'm Nova, your NeuroState performance assistant. Ask me anything about our products, stacks, or how to optimise your performance.",
-        };
-        setMessages([welcomeMessage]);
+        console.error("Error loading conversations:", error);
+        createNewConversation();
       }
     } else {
-      // Initialize with welcome message
-      const welcomeMessage: Message = {
-        role: "assistant",
-        content: "I'm Nova, your NeuroState performance assistant. Ask me anything about our products, stacks, or how to optimise your performance.",
-      };
-      setMessages([welcomeMessage]);
+      createNewConversation();
     }
   }, []);
 
-  // Save conversation history to localStorage whenever messages change
+  // Save conversations to localStorage whenever they change
   useEffect(() => {
-    if (messages.length > 0) {
-      localStorage.setItem("guest-nova-chat-history", JSON.stringify(messages));
+    if (conversations.length > 0) {
+      localStorage.setItem("guest-nova-conversations", JSON.stringify(conversations));
     }
-  }, [messages]);
+  }, [conversations]);
+
+  const createNewConversation = () => {
+    const newConversation: Conversation = {
+      id: Date.now().toString(),
+      title: "New conversation",
+      messages: [
+        {
+          role: "assistant",
+          content: "I'm Nova, your NeuroState performance assistant. Ask me anything about our products, stacks, or how to optimise your performance.",
+          timestamp: new Date().toISOString(),
+        },
+      ],
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+    setConversations(prev => [newConversation, ...prev]);
+    setCurrentConversationId(newConversation.id);
+    setShowSuggestions(true);
+    setShowHistory(false);
+  };
+
+  const generateConversationTitle = (firstUserMessage: string): string => {
+    // Generate a short title from the first user message
+    const words = firstUserMessage.trim().split(" ");
+    return words.slice(0, 5).join(" ") + (words.length > 5 ? "..." : "");
+  };
+
+  const updateCurrentConversation = (updater: (conv: Conversation) => Conversation) => {
+    setConversations(prev =>
+      prev.map(conv =>
+        conv.id === currentConversationId ? updater(conv) : conv
+      )
+    );
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -93,14 +147,30 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
   const handleSendMessage = async (e: React.FormEvent, customMessage?: string) => {
     e.preventDefault();
     const messageToSend = customMessage || message;
-    if (!messageToSend.trim() || isLoading) return;
+    if (!messageToSend.trim() || isLoading || !currentConversationId) return;
 
     const userMessage: Message = {
       role: "user",
       content: messageToSend,
+      timestamp: new Date().toISOString(),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
+    // Update conversation with user message
+    updateCurrentConversation(conv => {
+      const updatedConv = {
+        ...conv,
+        messages: [...conv.messages, userMessage],
+        updatedAt: new Date().toISOString(),
+      };
+      
+      // Update title if this is the first user message
+      if (conv.messages.length === 1 && conv.title === "New conversation") {
+        updatedConv.title = generateConversationTitle(messageToSend);
+      }
+      
+      return updatedConv;
+    });
+
     setMessage("");
     setShowSuggestions(false);
     setIsLoading(true);
@@ -113,6 +183,8 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
         role: "system" as const,
         content: `Context: ${getPageContext()}. The user is not logged in. If they ask for personalized protocols, device tracking, or account features, encourage them to create a free Nova account.`
       };
+
+      const conversationMessages = currentConversation?.messages || [];
       
       const response = await fetch(CHAT_URL, {
         method: "POST",
@@ -123,8 +195,8 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
         body: JSON.stringify({
           messages: [
             contextMessage,
-            ...messages.map(({ role, content }) => ({ role, content })),
-            userMessage
+            ...conversationMessages.map(({ role, content }) => ({ role, content })),
+            { role: userMessage.role, content: userMessage.content }
           ],
         }),
       });
@@ -159,10 +231,14 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
       let streamDone = false;
       let assistantContent = "";
 
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: "" },
-      ]);
+      // Add empty assistant message to conversation
+      updateCurrentConversation(conv => ({
+        ...conv,
+        messages: [
+          ...conv.messages,
+          { role: "assistant", content: "", timestamp: new Date().toISOString() },
+        ],
+      }));
 
       while (!streamDone) {
         const { done, value } = await reader.read();
@@ -189,13 +265,13 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
             const content = parsed.choices?.[0]?.delta?.content as string | undefined;
             if (content) {
               assistantContent += content;
-              setMessages((prev) => {
-                const newMessages = [...prev];
-                const lastMessage = newMessages[newMessages.length - 1];
+              updateCurrentConversation(conv => {
+                const messages = [...conv.messages];
+                const lastMessage = messages[messages.length - 1];
                 if (lastMessage.role === "assistant") {
                   lastMessage.content = assistantContent;
                 }
-                return newMessages;
+                return { ...conv, messages, updatedAt: new Date().toISOString() };
               });
             }
           } catch {
@@ -214,7 +290,11 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
         variant: "destructive",
       });
       setIsLoading(false);
-      setMessages((prev) => prev.slice(0, -1));
+      // Remove the last message (failed assistant message)
+      updateCurrentConversation(conv => ({
+        ...conv,
+        messages: conv.messages.slice(0, -1),
+      }));
     }
   };
 
@@ -223,18 +303,73 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
     handleSendMessage(syntheticEvent, suggestion);
   };
 
-  const clearHistory = () => {
-    const welcomeMessage: Message = {
-      role: "assistant",
-      content: "I'm Nova, your NeuroState performance assistant. Ask me anything about our products, stacks, or how to optimise your performance.",
-    };
-    setMessages([welcomeMessage]);
-    setShowSuggestions(true);
-    localStorage.removeItem("guest-nova-chat-history");
-    showToast({
-      title: "Chat cleared",
-      description: "Conversation history has been cleared.",
+  const deleteConversation = (conversationId: string) => {
+    setConversations(prev => {
+      const filtered = prev.filter(c => c.id !== conversationId);
+      
+      // If deleting current conversation, switch to another or create new
+      if (conversationId === currentConversationId) {
+        if (filtered.length > 0) {
+          setCurrentConversationId(filtered[0].id);
+        } else {
+          createNewConversation();
+          return prev; // Don't update yet, createNewConversation will handle it
+        }
+      }
+      
+      return filtered;
     });
+    
+    showToast({
+      title: "Conversation deleted",
+      description: "The conversation has been removed.",
+    });
+  };
+
+  const clearAllHistory = () => {
+    setConversations([]);
+    localStorage.removeItem("guest-nova-conversations");
+    createNewConversation();
+    showToast({
+      title: "History cleared",
+      description: "All conversation history has been cleared.",
+    });
+  };
+
+  const formatMessageTime = (timestamp: string) => {
+    const date = new Date(timestamp);
+    if (isToday(date)) {
+      return format(date, "HH:mm");
+    } else if (isYesterday(date)) {
+      return `Yesterday ${format(date, "HH:mm")}`;
+    } else {
+      return format(date, "dd MMM HH:mm");
+    }
+  };
+
+  const formatConversationDate = (timestamp: string) => {
+    const date = new Date(timestamp);
+    if (isToday(date)) {
+      return "Today";
+    } else if (isYesterday(date)) {
+      return "Yesterday";
+    } else {
+      return format(date, "dd MMM yyyy");
+    }
+  };
+
+  const groupConversationsByDate = () => {
+    const groups: { [key: string]: Conversation[] } = {};
+    
+    conversations.forEach(conv => {
+      const key = formatConversationDate(conv.updatedAt);
+      if (!groups[key]) {
+        groups[key] = [];
+      }
+      groups[key].push(conv);
+    });
+    
+    return groups;
   };
 
   return (
@@ -248,18 +383,42 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
               </div>
               <div>
                 <SheetTitle className="text-lg font-semibold text-ivory">Nova</SheetTitle>
-                <p className="text-xs text-ivory/80">Your performance assistant</p>
+                <p className="text-xs text-ivory/80">
+                  {currentConversation?.title || "Your performance assistant"}
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <Button
                 variant="ghost"
-                size="sm"
-                onClick={clearHistory}
-                className="text-ivory hover:bg-ivory/10 text-xs"
+                size="icon"
+                onClick={() => setShowHistory(!showHistory)}
+                className="text-ivory hover:bg-ivory/10"
               >
-                Clear
+                <MessageSquare className="h-5 w-5" />
               </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-ivory hover:bg-ivory/10"
+                  >
+                    <Plus className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  <DropdownMenuItem onClick={createNewConversation}>
+                    <Plus className="h-4 w-4 mr-2" />
+                    New conversation
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={clearAllHistory} className="text-destructive">
+                    <X className="h-4 w-4 mr-2" />
+                    Clear all history
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
               <Button
                 variant="ghost"
                 size="icon"
@@ -272,27 +431,92 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
           </div>
         </SheetHeader>
 
-        {/* Chat Area */}
-        <div className="flex-1 overflow-y-auto bg-ivory">
-          <div className="px-4 py-6 space-y-4">
-            {messages.map((msg, index) => (
-              <div key={index} className="flex gap-3">
-                {msg.role === "assistant" && (
-                  <div className="flex-shrink-0">
-                    <div className="w-8 h-8 rounded-full bg-carbon flex items-center justify-center">
-                      <Sparkles className="w-4 h-4 text-ivory" />
+        {/* History Sidebar or Chat Area */}
+        {showHistory ? (
+          <div className="flex-1 overflow-hidden bg-ivory">
+            <ScrollArea className="h-full">
+              <div className="p-4">
+                <h3 className="text-sm font-semibold text-carbon mb-4 uppercase tracking-wider">
+                  Conversation History
+                </h3>
+                {Object.entries(groupConversationsByDate()).map(([date, convs]) => (
+                  <div key={date} className="mb-6">
+                    <p className="text-xs text-ash uppercase tracking-wider mb-2">{date}</p>
+                    <div className="space-y-2">
+                      {convs.map(conv => (
+                        <button
+                          key={conv.id}
+                          onClick={() => {
+                            setCurrentConversationId(conv.id);
+                            setShowHistory(false);
+                            setShowSuggestions(false);
+                          }}
+                          className={`w-full text-left p-3 rounded-lg transition-colors ${
+                            conv.id === currentConversationId
+                              ? "bg-pearl border border-mist"
+                              : "hover:bg-pearl/50"
+                          }`}
+                        >
+                          <div className="flex items-start justify-between gap-2">
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium text-carbon truncate">
+                                {conv.title}
+                              </p>
+                              <p className="text-xs text-ash mt-1">
+                                {conv.messages.length} messages · {formatDistanceToNow(new Date(conv.updatedAt), { addSuffix: true })}
+                              </p>
+                            </div>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-6 w-6 flex-shrink-0"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                deleteConversation(conv.id);
+                              }}
+                            >
+                              <X className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </button>
+                      ))}
                     </div>
                   </div>
-                )}
-                <div className={`flex-1 ${msg.role === "user" ? "ml-auto max-w-[85%]" : ""}`}>
-                  <div className={`${msg.role === "user" ? "bg-pearl p-3 rounded-lg" : ""}`}>
-                    <p className="text-sm text-carbon leading-relaxed whitespace-pre-wrap">
-                      {msg.content}
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
-            ))}
+            </ScrollArea>
+          </div>
+        ) : (
+          <>
+            {/* Chat Area */}
+            <div className="flex-1 overflow-y-auto bg-ivory">
+              <div className="px-4 py-6 space-y-4">
+                {messages.map((msg, index) => (
+                  <div key={index} className="space-y-1">
+                    <div className="flex gap-3">
+                      {msg.role === "assistant" && (
+                        <div className="flex-shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-carbon flex items-center justify-center">
+                            <Sparkles className="w-4 h-4 text-ivory" />
+                          </div>
+                        </div>
+                      )}
+                      <div className={`flex-1 ${msg.role === "user" ? "ml-auto max-w-[85%]" : ""}`}>
+                        <div className={`${msg.role === "user" ? "bg-pearl p-3 rounded-lg" : ""}`}>
+                          <p className="text-sm text-carbon leading-relaxed whitespace-pre-wrap">
+                            {msg.content}
+                          </p>
+                        </div>
+                        {msg.timestamp && (
+                          <p className={`text-xs text-ash mt-1 flex items-center gap-1 ${msg.role === "user" ? "justify-end" : "ml-11"}`}>
+                            <Clock className="h-3 w-3" />
+                            {formatMessageTime(msg.timestamp)}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
 
             {isLoading && (
               <div className="flex gap-3">
@@ -326,45 +550,79 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
               </div>
             )}
 
-            <div ref={messagesEndRef} />
-          </div>
-        </div>
+                {isLoading && (
+                  <div className="flex gap-3">
+                    <div className="flex-shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-carbon flex items-center justify-center">
+                        <Loader2 className="w-4 h-4 text-ivory animate-spin" />
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm text-ash">Nova is typing...</p>
+                    </div>
+                  </div>
+                )}
 
-        {/* Upgrade CTA */}
-        <div className="border-t border-mist bg-pearl p-3">
-          <div className="text-xs text-ash mb-2">
-            Want personalized protocols based on your data?
-          </div>
-          <Link to="/nova" onClick={() => onOpenChange(false)}>
-            <Button variant="default" size="sm" className="w-full">
-              Create Nova Account
-            </Button>
-          </Link>
-        </div>
+                {showSuggestions && messages.length === 1 && (
+                  <div className="pt-2">
+                    <p className="text-xs text-ash mb-3 uppercase tracking-wider">Quick Questions</p>
+                    <div className="grid grid-cols-1 gap-2">
+                      {quickSuggestions.map((suggestion, index) => (
+                        <Button
+                          key={index}
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleSuggestionClick(suggestion)}
+                          className="justify-start text-left h-auto py-2 px-3 text-sm"
+                        >
+                          {suggestion}
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
-        {/* Input Area */}
-        <div className="border-t border-mist bg-ivory p-4">
-          <form onSubmit={handleSendMessage} className="flex gap-2">
-            <Input
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Ask about products, bundles, or advice..."
-              disabled={isLoading}
-              className="flex-1 rounded-lg border-mist"
-            />
-            <Button 
-              type="submit" 
-              size="icon"
-              disabled={isLoading || !message.trim()}
-              className="flex-shrink-0"
-            >
-              <Send className="h-4 w-4" />
-            </Button>
-          </form>
-          <p className="text-xs text-ash mt-2 text-center">
-            Nova helps with product questions, not medical advice
-          </p>
-        </div>
+                <div ref={messagesEndRef} />
+              </div>
+            </div>
+
+            {/* Upgrade CTA */}
+            <div className="border-t border-mist bg-pearl p-3">
+              <div className="text-xs text-ash mb-2">
+                Want personalized protocols based on your data?
+              </div>
+              <Link to="/nova" onClick={() => onOpenChange(false)}>
+                <Button variant="default" size="sm" className="w-full">
+                  Create Nova Account
+                </Button>
+              </Link>
+            </div>
+
+            {/* Input Area */}
+            <div className="border-t border-mist bg-ivory p-4">
+              <form onSubmit={handleSendMessage} className="flex gap-2">
+                <Input
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Ask about products, bundles, or advice..."
+                  disabled={isLoading}
+                  className="flex-1 rounded-lg border-mist"
+                />
+                <Button 
+                  type="submit" 
+                  size="icon"
+                  disabled={isLoading || !message.trim()}
+                  className="flex-shrink-0"
+                >
+                  <Send className="h-4 w-4" />
+                </Button>
+              </form>
+              <p className="text-xs text-ash mt-2 text-center">
+                Nova helps with product questions, not medical advice
+              </p>
+            </div>
+          </>
+        )}
       </SheetContent>
     </Sheet>
   );
