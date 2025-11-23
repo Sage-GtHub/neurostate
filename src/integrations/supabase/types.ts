@@ -14,6 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      connected_devices: {
+        Row: {
+          battery_level: number | null
+          connection_status: string
+          created_at: string
+          device_name: string
+          device_type: string
+          id: string
+          last_sync_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          battery_level?: number | null
+          connection_status?: string
+          created_at?: string
+          device_name: string
+          device_type: string
+          id?: string
+          last_sync_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          battery_level?: number | null
+          connection_status?: string
+          created_at?: string
+          device_name?: string
+          device_type?: string
+          id?: string
+          last_sync_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       learning_path_lessons: {
         Row: {
           content: string
@@ -149,6 +185,30 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      nova_chat_messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          role: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          role: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          role?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       order_items: {
         Row: {
@@ -485,6 +545,78 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      user_metrics: {
+        Row: {
+          created_at: string
+          device_source: string | null
+          id: string
+          metadata: Json | null
+          metric_type: string
+          recorded_at: string
+          user_id: string
+          value: number
+        }
+        Insert: {
+          created_at?: string
+          device_source?: string | null
+          id?: string
+          metadata?: Json | null
+          metric_type: string
+          recorded_at?: string
+          user_id: string
+          value: number
+        }
+        Update: {
+          created_at?: string
+          device_source?: string | null
+          id?: string
+          metadata?: Json | null
+          metric_type?: string
+          recorded_at?: string
+          user_id?: string
+          value?: number
+        }
+        Relationships: []
+      }
+      user_protocols: {
+        Row: {
+          completion_percentage: number
+          created_at: string
+          goal: string
+          id: string
+          products: Json
+          protocol_name: string
+          started_at: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completion_percentage?: number
+          created_at?: string
+          goal: string
+          id?: string
+          products: Json
+          protocol_name: string
+          started_at?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completion_percentage?: number
+          created_at?: string
+          goal?: string
+          id?: string
+          products?: Json
+          protocol_name?: string
+          started_at?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
     }
     Views: {
