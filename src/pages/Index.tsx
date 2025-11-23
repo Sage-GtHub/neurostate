@@ -1,5 +1,5 @@
 import { Header } from "@/components/Header";
-import { Hero } from "@/components/Hero";
+import Hero from "@/components/Hero";
 import { ProductGrid } from "@/components/ProductGrid";
 import { ProductFilters, FilterState } from "@/components/ProductFilters";
 import { ProductBundles } from "@/components/ProductBundles";

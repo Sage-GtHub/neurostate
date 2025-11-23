@@ -1,7 +1,7 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
 import Chat from "@/pages/Chat";
-import { Search, User, Menu, RefreshCw, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target, LogOut, X, Award, Sparkles } from "lucide-react";
+import { Search, User, Menu, X, Award, Sparkles, LogOut, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { Input } from "./ui/input";
@@ -26,11 +26,12 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser, Session } from "@supabase/supabase-js";
 import { toast } from "sonner";
-import logoIcon from "@/assets/neurostate-icon.png";
+import logoIcon from "@/assets/neurostate-icon.svg";
+import logoWordmark from "@/assets/neurostate-wordmark.png";
 
 export const Header = () => {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
@@ -38,12 +39,10 @@ export const Header = () => {
   const [session, setSession] = useState<Session | null>(null);
   const [chatOpen, setChatOpen] = useState(false);
   const [hasUnreadChat, setHasUnreadChat] = useState(() => {
-    // Check if user has opened chat before
     return !localStorage.getItem('nova-chat-visited');
   });
 
   useEffect(() => {
-    // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
         setSession(session);
@@ -51,7 +50,6 @@ export const Header = () => {
       }
     );
 
-    // THEN check for existing session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
@@ -106,34 +104,34 @@ export const Header = () => {
   return (
     <>
       <AnnouncementBar />
-      <header className="sticky top-0 z-50 w-full bg-ivory border-b border-mist">
-        <div className="container mx-auto flex h-16 items-center justify-between px-6 sm:px-8 lg:px-20 xl:px-32">
-          <Link to="/" className="flex items-center gap-2">
-            <img src={logoIcon} alt="Neural Waveform" className="h-6 w-6" />
-            <span className="text-xl font-bold uppercase tracking-tight text-carbon">NEUROSTATE<sup className="text-[8px]">®</sup></span>
+      <header className="sticky top-0 z-50 w-full bg-background border-b border-mist backdrop-blur-sm bg-background/95">
+        <div className="container mx-auto flex h-20 items-center justify-between px-6 sm:px-12 lg:px-20 xl:px-32">
+          <Link to="/" className="flex items-center gap-3">
+            <img src={logoIcon} alt="NeuroState Neural Waveform" className="h-10 w-10" />
+            <span className="text-ui-label text-carbon tracking-widest">NEUROSTATE<sup className="text-[6px]">®</sup></span>
           </Link>
           
           {/* Desktop Navigation */}
-          <NavigationMenu className="hidden md:flex">
-            <NavigationMenuList>
+          <NavigationMenu className="hidden lg:flex">
+            <NavigationMenuList className="gap-2">
               {/* Shop Dropdown */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger>
+                <NavigationMenuTrigger className="bg-transparent text-carbon hover:bg-pearl data-[state=open]:bg-pearl text-ui-label">
                   Shop
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 bg-ivory">
+                  <ul className="grid w-[400px] gap-1 p-4 bg-background border border-mist rounded-lg shadow-soft">
                     {shopCategories.map((category) => (
                       <li key={category.label}>
                         <NavigationMenuLink asChild>
                           <Link
                             to={category.href}
-                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-colors hover:bg-pearl uppercase text-sm tracking-wider font-medium text-carbon"
+                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-colors hover:bg-pearl rounded-lg"
                           >
                             <category.icon className="h-5 w-5 text-carbon" />
-                            <div className="text-sm font-medium leading-none uppercase tracking-wider">
+                            <span className="text-caption font-medium text-carbon">
                               {category.label}
-                            </div>
+                            </span>
                           </Link>
                         </NavigationMenuLink>
                       </li>
@@ -153,7 +151,7 @@ export const Header = () => {
                       navigate('/#bundles');
                     }
                   }}
-                  className="group inline-flex h-10 w-max items-center justify-center bg-ivory px-4 py-2 text-sm font-medium uppercase tracking-wider transition-colors hover:bg-pearl focus:bg-pearl focus:outline-none cursor-pointer rounded-none text-carbon"
+                  className="inline-flex h-10 items-center justify-center px-4 py-2 text-ui-label text-carbon transition-colors hover:bg-pearl rounded-lg cursor-pointer"
                 >
                   Bundles
                 </button>
@@ -161,22 +159,22 @@ export const Header = () => {
 
               {/* Guides Dropdown */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger>
+                <NavigationMenuTrigger className="bg-transparent text-carbon hover:bg-pearl data-[state=open]:bg-pearl text-ui-label">
                   Guides
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 bg-ivory">
+                  <ul className="grid w-[400px] gap-1 p-4 bg-background border border-mist rounded-lg shadow-soft">
                     {guideTopics.map((topic) => (
                       <li key={topic.label}>
                         <NavigationMenuLink asChild>
                           <Link
                             to={topic.href}
-                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-colors hover:bg-pearl uppercase text-sm tracking-wider font-medium text-carbon"
+                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-colors hover:bg-pearl rounded-lg"
                           >
                             <topic.icon className="h-5 w-5 text-carbon" />
-                            <div className="text-sm font-medium leading-none uppercase tracking-wider">
+                            <span className="text-caption font-medium text-carbon">
                               {topic.label}
-                            </div>
+                            </span>
                           </Link>
                         </NavigationMenuLink>
                       </li>
@@ -190,7 +188,7 @@ export const Header = () => {
                 <NavigationMenuItem key={link.label}>
                   <Link
                     to={link.href}
-                    className="group inline-flex h-10 w-max items-center justify-center bg-ivory px-4 py-2 text-sm font-medium uppercase tracking-wider transition-colors hover:bg-pearl focus:bg-pearl focus:outline-none rounded-none text-carbon"
+                    className="inline-flex h-10 items-center justify-center px-4 py-2 text-ui-label text-carbon transition-colors hover:bg-pearl rounded-lg"
                   >
                     {link.label}
                   </Link>
@@ -199,16 +197,16 @@ export const Header = () => {
             </NavigationMenuList>
           </NavigationMenu>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             {/* Desktop Search */}
             {searchOpen ? (
-              <form onSubmit={handleSearch} className="hidden md:flex items-center gap-2 animate-in fade-in slide-in-from-right-2">
+              <form onSubmit={handleSearch} className="hidden lg:flex items-center gap-2">
                 <Input
                   type="search"
                   placeholder="Search products..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-64"
+                  className="w-64 rounded-lg border-mist"
                   autoFocus
                 />
                 <Button type="submit" size="icon" variant="ghost">
@@ -230,31 +228,12 @@ export const Header = () => {
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="hidden md:flex"
+                className="hidden lg:flex"
                 onClick={() => setSearchOpen(true)}
               >
                 <Search className="h-5 w-5" />
               </Button>
             )}
-            
-            {/* Mobile Chat Button */}
-            <Button 
-              variant="ghost"
-              size="icon"
-              onClick={() => {
-                setChatOpen(true);
-                setHasUnreadChat(false);
-                localStorage.setItem('nova-chat-visited', 'true');
-              }}
-              className="md:hidden relative"
-            >
-              <Sparkles className="h-5 w-5" />
-              {hasUnreadChat && (
-                <Badge className="absolute -top-1 -right-1 h-4 w-4 rounded-full p-0 bg-red-500 hover:bg-red-500 flex items-center justify-center animate-pulse">
-                  <span className="text-[10px] text-white">1</span>
-                </Badge>
-              )}
-            </Button>
             
             {/* Desktop Chat Button */}
             <Button 
@@ -264,12 +243,12 @@ export const Header = () => {
                 setHasUnreadChat(false);
                 localStorage.setItem('nova-chat-visited', 'true');
               }}
-              className="hidden md:flex items-center gap-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-md relative"
+              className="hidden lg:flex items-center gap-2 relative"
             >
               <Sparkles className="h-4 w-4" />
               Ask Nova
               {hasUnreadChat && (
-                <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 bg-red-500 hover:bg-red-500 flex items-center justify-center animate-pulse">
+                <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 bg-red-500 hover:bg-red-500 flex items-center justify-center">
                   <span className="text-xs text-white">1</span>
                 </Badge>
               )}
@@ -279,13 +258,13 @@ export const Header = () => {
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="hidden md:flex relative">
+                  <Button variant="ghost" size="icon" className="hidden lg:flex relative">
                     <User className="h-5 w-5" />
                     <Badge className="absolute -top-1 -right-1 h-3 w-3 rounded-full p-0 bg-green-500" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48 bg-ivory border-mist">
-                  <DropdownMenuItem disabled className="text-xs text-ash">
+                <DropdownMenuContent align="end" className="w-48 bg-background border-mist rounded-lg">
+                  <DropdownMenuItem disabled className="text-caption text-ash">
                     {user.email}
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
@@ -301,8 +280,8 @@ export const Header = () => {
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link to="/rewards" className="cursor-pointer flex items-center text-carbon hover:bg-pearl">
-                      <Award className="h-4 w-4 mr-2 text-carbon" />
-                      Rewards Program
+                      <Award className="h-4 w-4 mr-2" />
+                      Rewards Programme
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
@@ -314,7 +293,7 @@ export const Header = () => {
               </DropdownMenu>
             ) : (
               <Link to="/auth">
-                <Button variant="ghost" size="icon" className="hidden md:flex">
+                <Button variant="ghost" size="icon" className="hidden lg:flex">
                   <User className="h-5 w-5" />
                 </Button>
               </Link>
@@ -325,24 +304,24 @@ export const Header = () => {
             {/* Mobile Menu */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="md:hidden">
+                <Button variant="ghost" size="icon" className="lg:hidden">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-ivory">
+              <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-background rounded-l-lg">
                 <SheetHeader>
                   <SheetTitle className="text-left text-carbon">Menu</SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col gap-6 mt-8">
                   {/* Shop Section */}
                   <div>
-                    <h3 className="font-semibold text-lg mb-3 text-carbon">Shop</h3>
+                    <h3 className="text-h3 mb-3 text-carbon">Shop</h3>
                     <div className="flex flex-col gap-2 pl-4">
                       {shopCategories.map((category) => (
                         <Link
                           key={category.label}
                           to={category.href}
-                          className="flex items-center gap-2 text-md text-ash hover:text-carbon transition-colors"
+                          className="flex items-center gap-2 text-caption text-ash hover:text-carbon transition-colors"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           <category.icon className="h-4 w-4" />
@@ -352,7 +331,7 @@ export const Header = () => {
                     </div>
                   </div>
 
-                  {/* Bundles Section */}
+                  {/* Bundles */}
                   <button
                     onClick={() => {
                       setMobileMenuOpen(false);
@@ -365,20 +344,20 @@ export const Header = () => {
                         }
                       }, 100);
                     }}
-                    className="text-lg font-medium hover:text-slate transition-colors text-left cursor-pointer text-carbon"
+                    className="text-h3 hover:text-slate transition-colors text-left cursor-pointer text-carbon"
                   >
                     Bundles
                   </button>
 
                   {/* Guides Section */}
                   <div>
-                    <h3 className="font-semibold text-lg mb-3 text-carbon">Guides</h3>
+                    <h3 className="text-h3 mb-3 text-carbon">Guides</h3>
                     <div className="flex flex-col gap-2 pl-4">
                       {guideTopics.map((topic) => (
                         <Link
                           key={topic.label}
                           to={topic.href}
-                          className="flex items-center gap-2 text-md text-muted-foreground hover:text-accent transition-colors"
+                          className="flex items-center gap-2 text-caption text-ash hover:text-carbon transition-colors"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           <topic.icon className="h-4 w-4" />
@@ -393,7 +372,7 @@ export const Header = () => {
                     <Link
                       key={link.label}
                       to={link.href}
-                      className="text-lg font-medium hover:text-accent transition-colors"
+                      className="text-h3 hover:text-slate transition-colors text-carbon"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {link.label}
@@ -401,7 +380,6 @@ export const Header = () => {
                   ))}
 
                   <div className="pt-6 mt-4 space-y-4">
-                    {/* Ask Hera Button */}
                     <Button 
                       variant="default"
                       onClick={() => {
@@ -410,34 +388,73 @@ export const Header = () => {
                         localStorage.setItem('nova-chat-visited', 'true');
                         setMobileMenuOpen(false);
                       }}
-                      className="w-full justify-start bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-md relative"
+                      className="w-full justify-start relative"
                       size="lg"
                     >
                       <Sparkles className="h-5 w-5 mr-2" />
                       Ask Nova
                       {hasUnreadChat && (
-                        <Badge className="absolute top-2 right-2 h-5 w-5 rounded-full p-0 bg-red-500 hover:bg-red-500 flex items-center justify-center animate-pulse">
+                        <Badge className="absolute top-2 right-2 h-5 w-5 rounded-full p-0 bg-red-500 hover:bg-red-500 flex items-center justify-center">
                           <span className="text-xs text-white">1</span>
                         </Badge>
                       )}
                     </Button>
 
-                    <form onSubmit={handleSearch} className="flex items-center gap-2">
+                    {/* Mobile Search */}
+                    <form onSubmit={handleSearch} className="flex flex-col gap-2">
                       <Input
                         type="search"
                         placeholder="Search products..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="flex-1"
+                        className="w-full rounded-lg"
                       />
-                      <Button type="submit" size="icon">
-                        <Search className="h-5 w-5" />
+                      <Button type="submit" className="w-full">
+                        <Search className="h-4 w-4 mr-2" />
+                        Search
                       </Button>
                     </form>
-                    <Button variant="ghost" className="w-full justify-start" size="lg">
-                      <User className="h-5 w-5 mr-2" />
-                      Account
-                    </Button>
+
+                    {/* Mobile Account Links */}
+                    {user ? (
+                      <div className="flex flex-col gap-2 pt-4 border-t border-mist">
+                        <Link to="/profile" onClick={() => setMobileMenuOpen(false)}>
+                          <Button variant="ghost" className="w-full justify-start">
+                            <User className="h-4 w-4 mr-2" />
+                            My Profile
+                          </Button>
+                        </Link>
+                        <Link to="/subscriptions" onClick={() => setMobileMenuOpen(false)}>
+                          <Button variant="ghost" className="w-full justify-start">
+                            My Subscriptions
+                          </Button>
+                        </Link>
+                        <Link to="/rewards" onClick={() => setMobileMenuOpen(false)}>
+                          <Button variant="ghost" className="w-full justify-start">
+                            <Award className="h-4 w-4 mr-2" />
+                            Rewards Programme
+                          </Button>
+                        </Link>
+                        <Button 
+                          variant="ghost" 
+                          onClick={() => {
+                            handleSignOut();
+                            setMobileMenuOpen(false);
+                          }}
+                          className="w-full justify-start text-destructive"
+                        >
+                          <LogOut className="h-4 w-4 mr-2" />
+                          Sign Out
+                        </Button>
+                      </div>
+                    ) : (
+                      <Link to="/auth" onClick={() => setMobileMenuOpen(false)}>
+                        <Button variant="outline" className="w-full">
+                          <User className="h-4 w-4 mr-2" />
+                          Sign In
+                        </Button>
+                      </Link>
+                    )}
                   </div>
                 </nav>
               </SheetContent>
@@ -445,6 +462,8 @@ export const Header = () => {
           </div>
         </div>
       </header>
+
+      {/* Chat Modal */}
       <Chat open={chatOpen} onOpenChange={setChatOpen} />
     </>
   );

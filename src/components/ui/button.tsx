@@ -5,22 +5,22 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-xs font-medium uppercase tracking-[0.05em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium uppercase tracking-[0.05em] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-carbon focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-carbon text-ivory hover:bg-slate",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-carbon bg-transparent text-carbon hover:bg-carbon hover:text-ivory",
-        secondary: "bg-pearl text-carbon hover:bg-mist",
-        ghost: "hover:bg-pearl",
+        default: "bg-carbon text-ivory hover:bg-slate rounded-lg",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-lg",
+        outline: "border border-mist bg-transparent text-carbon hover:bg-carbon hover:text-ivory rounded-lg",
+        secondary: "bg-pearl text-carbon hover:bg-mist rounded-lg",
+        ghost: "hover:bg-pearl rounded-lg",
         link: "text-carbon underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-10 px-6 py-2",
-        sm: "h-9 px-4",
-        lg: "h-12 px-8",
-        icon: "h-10 w-10",
+        default: "h-12 px-8 py-3 text-[0.75rem]",
+        sm: "h-10 px-6 py-2 text-[0.75rem]",
+        lg: "h-14 px-10 py-4 text-[0.75rem]",
+        icon: "h-12 w-12",
       },
     },
     defaultVariants: {

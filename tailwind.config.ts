@@ -20,7 +20,18 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica', 'Arial', 'sans-serif'],
+      },
+      fontSize: {
+        'hero-display': ['4.5rem', { lineHeight: '1.0', letterSpacing: '-0.02em', fontWeight: '700' }],
+        'large-display': ['3rem', { lineHeight: '1.1', letterSpacing: '-0.01em', fontWeight: '700' }],
+        'h1': ['2.25rem', { lineHeight: '1.2', letterSpacing: '-0.01em', fontWeight: '700' }],
+        'h2': ['1.875rem', { lineHeight: '1.3', fontWeight: '600' }],
+        'h3': ['1.5rem', { lineHeight: '1.4', fontWeight: '600' }],
+        'body-large': ['1.125rem', { lineHeight: '1.6', fontWeight: '400' }],
+        'body': ['1rem', { lineHeight: '1.6', fontWeight: '400' }],
+        'caption': ['0.875rem', { lineHeight: '1.5', fontWeight: '400' }],
+        'ui-label': ['0.75rem', { lineHeight: '1', fontWeight: '500', letterSpacing: '0.05em' }],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -76,10 +87,14 @@ export default {
         pearl: "hsl(var(--pearl))",
       },
       borderRadius: {
-        lg: "12px", /* Per brand guidelines - card radius */
-        md: "8px",
+        none: "0px",
         sm: "4px",
-        xl: "12px", /* Standard card radius from guidelines */
+        DEFAULT: "8px",
+        md: "8px",
+        lg: "12px", /* Primary standard from brand guidelines */
+        xl: "16px",
+        "2xl": "24px",
+        full: "9999px",
       },
       spacing: {
         /* Brand guideline spacing scale */
