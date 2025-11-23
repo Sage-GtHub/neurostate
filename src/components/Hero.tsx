@@ -11,6 +11,21 @@ const Hero = () => {
 
   return (
     <section className="relative bg-ivory overflow-hidden">
+      {/* Subtle Snow Animation */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-mist rounded-full opacity-40 animate-snowfall"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${8 + Math.random() * 4}s`,
+            }}
+          />
+        ))}
+      </div>
+
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12 sm:py-16 md:py-24 lg:py-40">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-24 items-center">
           {/* Content */}
