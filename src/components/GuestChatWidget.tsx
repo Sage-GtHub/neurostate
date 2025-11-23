@@ -26,17 +26,46 @@ interface GuestChatWidgetProps {
 
 export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: "assistant",
-      content: "I'm Nova, your NeuroState performance assistant. Ask me anything about our products, stacks, or how to optimise your performance.",
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast: showToast } = useToast();
   const [showSuggestions, setShowSuggestions] = useState(true);
   const location = useLocation();
+
+  // Load conversation history from localStorage on mount
+  useEffect(() => {
+    const savedMessages = localStorage.getItem("guest-nova-chat-history");
+    if (savedMessages) {
+      try {
+        const parsed = JSON.parse(savedMessages);
+        setMessages(parsed);
+        setShowSuggestions(parsed.length <= 1);
+      } catch (error) {
+        console.error("Error loading chat history:", error);
+        // Initialize with welcome message if loading fails
+        const welcomeMessage: Message = {
+          role: "assistant",
+          content: "I'm Nova, your NeuroState performance assistant. Ask me anything about our products, stacks, or how to optimise your performance.",
+        };
+        setMessages([welcomeMessage]);
+      }
+    } else {
+      // Initialize with welcome message
+      const welcomeMessage: Message = {
+        role: "assistant",
+        content: "I'm Nova, your NeuroState performance assistant. Ask me anything about our products, stacks, or how to optimise your performance.",
+      };
+      setMessages([welcomeMessage]);
+    }
+  }, []);
+
+  // Save conversation history to localStorage whenever messages change
+  useEffect(() => {
+    if (messages.length > 0) {
+      localStorage.setItem("guest-nova-chat-history", JSON.stringify(messages));
+    }
+  }, [messages]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -194,6 +223,20 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
     handleSendMessage(syntheticEvent, suggestion);
   };
 
+  const clearHistory = () => {
+    const welcomeMessage: Message = {
+      role: "assistant",
+      content: "I'm Nova, your NeuroState performance assistant. Ask me anything about our products, stacks, or how to optimise your performance.",
+    };
+    setMessages([welcomeMessage]);
+    setShowSuggestions(true);
+    localStorage.removeItem("guest-nova-chat-history");
+    showToast({
+      title: "Chat cleared",
+      description: "Conversation history has been cleared.",
+    });
+  };
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="w-full sm:w-[440px] p-0 flex flex-col">
@@ -208,14 +251,24 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                 <p className="text-xs text-ivory/80">Your performance assistant</p>
               </div>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => onOpenChange(false)}
-              className="text-ivory hover:bg-ivory/10"
-            >
-              <X className="h-5 w-5" />
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={clearHistory}
+                className="text-ivory hover:bg-ivory/10 text-xs"
+              >
+                Clear
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => onOpenChange(false)}
+                className="text-ivory hover:bg-ivory/10"
+              >
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
           </div>
         </SheetHeader>
 
