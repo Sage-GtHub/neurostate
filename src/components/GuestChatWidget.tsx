@@ -20,6 +20,7 @@ type Message = {
   role: "user" | "assistant";
   content: string;
   timestamp: string;
+  suggestions?: string[];
 };
 
 type Conversation = {
@@ -241,7 +242,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
         ...conv,
         messages: [
           ...conv.messages,
-          { role: "assistant", content: "", timestamp: new Date().toISOString() },
+          { role: "assistant", content: "", timestamp: new Date().toISOString(), suggestions: [] },
         ],
       }));
 
@@ -275,6 +276,10 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                 const lastMessage = messages[messages.length - 1];
                 if (lastMessage.role === "assistant") {
                   lastMessage.content = assistantContent;
+                  // Generate contextual suggestions once we have enough content
+                  if (assistantContent.length > 50 && !lastMessage.suggestions?.length) {
+                    lastMessage.suggestions = generateContextualSuggestions(assistantContent);
+                  }
                 }
                 return { ...conv, messages, updatedAt: new Date().toISOString() };
               });
@@ -375,6 +380,62 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
     });
     
     return groups;
+  };
+
+  const generateContextualSuggestions = (assistantMessage: string): string[] => {
+    const lower = assistantMessage.toLowerCase();
+    
+    // Sleep-related suggestions
+    if (lower.includes('sleep') || lower.includes('melatonin') || lower.includes('rest')) {
+      return [
+        "What's the best time to take sleep supplements?",
+        "Can you recommend a complete sleep stack?",
+        "How does red light therapy help with sleep?"
+      ];
+    }
+    
+    // Recovery-related suggestions
+    if (lower.includes('recovery') || lower.includes('muscle') || lower.includes('inflammation')) {
+      return [
+        "What supplements support faster recovery?",
+        "Tell me about cold therapy for recovery",
+        "How do I optimize my recovery protocol?"
+      ];
+    }
+    
+    // Cognitive/focus suggestions
+    if (lower.includes('focus') || lower.includes('cognitive') || lower.includes('brain') || lower.includes('nootropic')) {
+      return [
+        "What's in the NeuroFocus supplement?",
+        "How can I improve my mental clarity?",
+        "Tell me about cognitive enhancement stacks"
+      ];
+    }
+    
+    // Product-specific suggestions
+    if (lower.includes('bundle') || lower.includes('stack')) {
+      return [
+        "What bundles do you recommend for beginners?",
+        "Can I customize a bundle?",
+        "Do bundles save money compared to individual products?"
+      ];
+    }
+    
+    // Device-related suggestions
+    if (lower.includes('device') || lower.includes('therapy') || lower.includes('red light') || lower.includes('cold')) {
+      return [
+        "How do I use red light therapy effectively?",
+        "What's the difference between your therapy devices?",
+        "Can devices be combined with supplements?"
+      ];
+    }
+    
+    // Default contextual suggestions
+    return [
+      "What products would you recommend for my goals?",
+      "Tell me about your most popular products",
+      "How do I know which supplements I need?"
+    ];
   };
 
   const cleanText = (text: string): string => {
@@ -528,6 +589,25 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                             <Clock className="h-3 w-3" />
                             {formatMessageTime(msg.timestamp)}
                           </p>
+                        )}
+                        {/* Show contextual suggestions after assistant responses */}
+                        {msg.role === "assistant" && msg.suggestions && msg.suggestions.length > 0 && index === messages.length - 1 && !isLoading && (
+                          <div className="mt-3 ml-11 space-y-2">
+                            <p className="text-xs text-ash uppercase tracking-wider">Continue the conversation</p>
+                            <div className="grid grid-cols-1 gap-2">
+                              {msg.suggestions.map((suggestion, i) => (
+                                <Button
+                                  key={i}
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => handleSuggestionClick(suggestion)}
+                                  className="justify-start text-left h-auto py-2 px-3 text-xs hover:bg-pearl/50"
+                                >
+                                  {suggestion}
+                                </Button>
+                              ))}
+                            </div>
+                          </div>
                         )}
                       </div>
                     </div>
