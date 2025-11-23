@@ -57,6 +57,11 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
   const currentConversation = conversations.find(c => c.id === currentConversationId);
   const messages = currentConversation?.messages || [];
 
+  // Auto-scroll to bottom when messages change
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   // Load conversations from localStorage on mount
   useEffect(() => {
     const savedConversations = localStorage.getItem("guest-nova-conversations");
@@ -379,37 +384,37 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="w-full sm:w-[440px] p-0 flex flex-col">
+      <SheetContent side="right" className="w-full sm:w-[440px] p-0 flex flex-col h-full">
         <SheetHeader className="border-b bg-carbon p-4 flex-shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-full bg-ivory/10 backdrop-blur">
                 <Sparkles className="h-5 w-5 text-ivory" />
               </div>
-              <div>
+              <div className="min-w-0 flex-1">
                 <SheetTitle className="text-lg font-semibold text-ivory">Nova</SheetTitle>
-                <p className="text-xs text-ivory/80">
+                <p className="text-xs text-ivory/80 truncate">
                   {currentConversation?.title || "Your performance assistant"}
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setShowHistory(!showHistory)}
-                className="text-ivory hover:bg-ivory/10"
+                className="text-ivory hover:bg-ivory/10 h-8 w-8"
               >
-                <MessageSquare className="h-5 w-5" />
+                <MessageSquare className="h-4 w-4" />
               </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="text-ivory hover:bg-ivory/10"
+                    className="text-ivory hover:bg-ivory/10 h-8 w-8"
                   >
-                    <Plus className="h-5 w-5" />
+                    <Plus className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48">
@@ -428,9 +433,9 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                 variant="ghost"
                 size="icon"
                 onClick={() => onOpenChange(false)}
-                className="text-ivory hover:bg-ivory/10"
+                className="text-ivory hover:bg-ivory/10 h-8 w-8"
               >
-                <X className="h-5 w-5" />
+                <X className="h-4 w-4" />
               </Button>
             </div>
           </div>
