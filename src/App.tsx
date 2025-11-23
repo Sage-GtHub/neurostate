@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { trackPageView } from "@/lib/analytics";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { FloatingNovaButton } from "@/components/FloatingNovaButton";
 import Index from "./pages/Index";
 import ProductDetail from "./pages/ProductDetail";
 import CategoryProducts from "./pages/CategoryProducts";
@@ -53,6 +54,7 @@ const App = () => (
       <Sonner position="top-center" />
       <BrowserRouter>
         <AnalyticsTracker />
+        <FloatingNovaButton />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/product/:handle" element={<ProductDetail />} />

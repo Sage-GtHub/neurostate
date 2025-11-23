@@ -1,6 +1,6 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
-import Chat from "@/pages/Chat";
+import { GuestChatWidget } from "./GuestChatWidget";
 import { Search, User, Menu, X, Award, Sparkles, LogOut, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
@@ -236,24 +236,23 @@ export const Header = () => {
             )}
             
             {/* Desktop Chat Button */}
-            <Link to="/nova">
-              <Button 
-                variant="default"
-                onClick={() => {
-                  setHasUnreadChat(false);
-                  localStorage.setItem('nova-chat-visited', 'true');
-                }}
-                className="hidden lg:flex items-center gap-2 relative"
-              >
-                <Sparkles className="h-4 w-4" />
-                Ask Nova
-                {hasUnreadChat && (
-                  <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 bg-red-500 hover:bg-red-500 flex items-center justify-center">
-                    <span className="text-xs text-white">1</span>
-                  </Badge>
-                )}
-              </Button>
-            </Link>
+            <Button 
+              variant="default"
+              onClick={() => {
+                setChatOpen(true);
+                setHasUnreadChat(false);
+                localStorage.setItem('nova-chat-visited', 'true');
+              }}
+              className="hidden lg:flex items-center gap-2 relative"
+            >
+              <Sparkles className="h-4 w-4" />
+              Ask Nova
+              {hasUnreadChat && (
+                <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 bg-red-500 hover:bg-red-500 flex items-center justify-center">
+                  <span className="text-xs text-white">1</span>
+                </Badge>
+              )}
+            </Button>
             
             {/* User Account Dropdown */}
             {user ? (
@@ -386,25 +385,25 @@ export const Header = () => {
                   ))}
 
                   <div className="pt-6 mt-4 space-y-4">
-                    <Link to="/nova" className="w-full" onClick={() => setMobileMenuOpen(false)}>
-                      <Button 
-                        variant="default"
-                        onClick={() => {
-                          setHasUnreadChat(false);
-                          localStorage.setItem('nova-chat-visited', 'true');
-                        }}
-                        className="w-full justify-start relative"
-                        size="lg"
-                      >
-                        <Sparkles className="h-5 w-5 mr-2" />
-                        Ask Nova
-                        {hasUnreadChat && (
-                          <Badge className="absolute top-2 right-2 h-5 w-5 rounded-full p-0 bg-red-500 hover:bg-red-500 flex items-center justify-center">
-                            <span className="text-xs text-white">1</span>
-                          </Badge>
-                        )}
-                      </Button>
-                    </Link>
+                    <Button 
+                      variant="default"
+                      onClick={() => {
+                        setChatOpen(true);
+                        setMobileMenuOpen(false);
+                        setHasUnreadChat(false);
+                        localStorage.setItem('nova-chat-visited', 'true');
+                      }}
+                      className="w-full justify-start relative"
+                      size="lg"
+                    >
+                      <Sparkles className="h-5 w-5 mr-2" />
+                      Ask Nova
+                      {hasUnreadChat && (
+                        <Badge className="absolute top-2 right-2 h-5 w-5 rounded-full p-0 bg-red-500 hover:bg-red-500 flex items-center justify-center">
+                          <span className="text-xs text-white">1</span>
+                        </Badge>
+                      )}
+                    </Button>
 
                     {/* Mobile Search */}
                     <form onSubmit={handleSearch} className="flex flex-col gap-2">
@@ -475,8 +474,7 @@ export const Header = () => {
         </div>
       </header>
 
-      {/* Chat Modal */}
-      <Chat open={chatOpen} onOpenChange={setChatOpen} />
+      <GuestChatWidget open={chatOpen} onOpenChange={setChatOpen} />
     </>
   );
 };
