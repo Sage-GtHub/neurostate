@@ -71,18 +71,16 @@ const Index = () => {
         <main>
           <Hero />
           <ShopByGoal />
-          <section id="products" className="py-16 md:py-24 px-6 sm:px-8 lg:px-20 xl:px-32 bg-ivory">
+        <section id="products" className="py-24 md:py-32 px-6 sm:px-8 lg:px-20 xl:px-32">
           <div className="w-full">
-            <div className="flex items-center justify-between mb-10 md:mb-14">
+            <div className="flex items-center justify-between mb-16 md:mb-20">
               <div>
-                <p className="text-[10px] sm:text-xs font-normal text-ash mb-3 tracking-[0.3em] uppercase">
-                  PRODUCT SYSTEMS
-                </p>
-                <h2 className="text-[1.875rem] font-semibold uppercase tracking-tight text-carbon" style={{ lineHeight: '1.3' }}>
-                  {searchQuery ? 'Search Results' : 'Products'}
+                <p className="ghost-number mb-4">PRODUCT SYSTEMS</p>
+                <h2 className="mb-4">
+                  {searchQuery ? 'Search results' : 'Products'}
                 </h2>
                 {searchQuery && (
-                  <p className="text-sm text-ash mt-3 font-normal">
+                  <p className="text-caption">
                     Showing results for "{searchQuery}"
                   </p>
                 )}

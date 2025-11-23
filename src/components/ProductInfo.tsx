@@ -76,13 +76,13 @@ export const ProductInfo = ({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-10">
       <div>
-        <h1 className="text-4xl font-bold mb-3">{product.title}</h1>
+        <h1 className="mb-4">{product.title}</h1>
         
         {/* Servings and Price Per Serving - Only for supplements */}
         {isSupplement && (
-          <div className="flex items-center gap-3 mb-4 text-sm text-muted-foreground">
+          <div className="flex items-center gap-4 mb-6 text-caption text-muted-foreground">
             <span className="font-medium">30 Servings</span>
             <span>•</span>
             <span className="font-medium">£{(price / 30).toFixed(2)}/Serving</span>
@@ -90,29 +90,29 @@ export const ProductInfo = ({
         )}
 
         {/* Short Description */}
-        <p className="text-lg text-foreground mb-6 leading-relaxed">
+        <p className="text-body-large mb-8">
           {product.description && product.description.length > 180 
             ? `${product.description.substring(0, 180)}...` 
             : product.description}
         </p>
 
         {/* Key Benefits - Bullet Points */}
-        <div className="space-y-3 mb-6">
+        <div className="space-y-4 mb-8">
           <div className="flex items-start gap-3">
             <span className="text-primary mt-1">✓</span>
-            <p className="text-sm text-foreground leading-relaxed">
+            <p className="text-body">
               Third-party tested and NSF Certified for quality and purity
             </p>
           </div>
           <div className="flex items-start gap-3">
             <span className="text-primary mt-1">✓</span>
-            <p className="text-sm text-foreground leading-relaxed">
+            <p className="text-body">
               Supports optimal cellular function and recovery
             </p>
           </div>
           <div className="flex items-start gap-3">
             <span className="text-primary mt-1">✓</span>
-            <p className="text-sm text-foreground leading-relaxed">
+            <p className="text-body">
               Science-backed formulation with clean, bioavailable ingredients
             </p>
           </div>
@@ -120,7 +120,7 @@ export const ProductInfo = ({
       </div>
 
       {/* Purchase Type */}
-      <div className="border rounded-lg p-4 bg-card">
+      <div className="border rounded-xl p-6 bg-card">
         {isSupplement ? (
           <>
             <RadioGroup value={purchaseType} onValueChange={(value) => setPurchaseType(value as "onetime" | "subscription")}>
@@ -218,7 +218,7 @@ export const ProductInfo = ({
       {/* Variants */}
       {product.options.length > 0 && product.options[0].values.length > 1 && (
         <div>
-          <label className="block text-sm font-medium mb-2">{product.options[0].name}</label>
+          <label className="block font-medium mb-3">{product.options[0].name}</label>
           <div className="flex flex-wrap gap-2">
             {product.options[0].values.map((value: string, valueIndex: number) => {
               const variantIndex = product.variants.edges.findIndex(
@@ -243,7 +243,7 @@ export const ProductInfo = ({
 
       {/* Quantity */}
       <div>
-        <label className="block text-sm font-medium mb-2">Quantity</label>
+        <label className="block font-medium mb-3">Quantity</label>
         <div className="flex items-center gap-3">
           <Button
             variant="outline"
@@ -253,7 +253,7 @@ export const ProductInfo = ({
           >
             <Minus className="h-4 w-4" />
           </Button>
-          <span className="text-lg font-semibold w-12 text-center">{quantity}</span>
+          <span className="font-semibold text-body-large w-16 text-center">{quantity}</span>
           <Button
             variant="outline"
             size="icon"
@@ -278,7 +278,7 @@ export const ProductInfo = ({
       </Button>
 
       {/* Free Delivery Badge */}
-      <div className="text-center text-sm text-muted-foreground">
+      <div className="text-center text-caption text-muted-foreground">
         Free delivery on orders over £50
       </div>
     </div>

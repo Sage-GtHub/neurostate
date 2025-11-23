@@ -131,25 +131,25 @@ const ProductDetail = () => {
       <main className="min-h-screen bg-background">
         {/* Breadcrumb */}
         <nav className="border-b" aria-label="Breadcrumb">
-          <div className="container mx-auto px-4 py-4">
+          <div className="w-full px-6 sm:px-8 lg:px-20 xl:px-32 py-6">
             <Link to="/">
               <Button variant="ghost" size="sm" className="hover:bg-muted">
-                <ArrowLeft className="mr-2 h-4 w-4" /> Back to Products
+                <ArrowLeft className="mr-2 h-4 w-4" /> Back to products
               </Button>
             </Link>
           </div>
         </nav>
 
         {/* Product Section - Main Hero */}
-        <article className="container mx-auto px-4 py-8 lg:py-12">
-          <div className="grid lg:grid-cols-[1fr,1fr] gap-8 lg:gap-16 items-start">
+        <article className="w-full px-6 sm:px-8 lg:px-20 xl:px-32 py-16 lg:py-24">
+          <div className="grid lg:grid-cols-[1fr,1fr] gap-12 lg:gap-20 items-start">
             {/* Left: Image Gallery - Sticky on scroll */}
-            <div className="lg:sticky lg:top-24">
+            <div className="lg:sticky lg:top-32">
               <ProductImageGallery images={images} productTitle={product.title} />
             </div>
 
             {/* Right: Product Info */}
-            <div className="space-y-6">
+            <div className="space-y-10">
               <ProductInfo
                 product={product}
                 selectedVariantIndex={selectedVariantIndex}
@@ -157,18 +157,18 @@ const ProductDetail = () => {
               />
               
               {/* Trust Badges */}
-              <div className="pt-6 border-t">
+              <div className="pt-10 border-t">
                 <TrustBadges />
               </div>
 
               {/* Key Benefits - Moved up for better visibility */}
-              <div className="pt-6 border-t">
-                <h3 className="text-lg font-semibold mb-4">Key Benefits</h3>
+              <div className="pt-10 border-t">
+                <h3 className="mb-6">Key benefits</h3>
                 <BenefitsSection />
               </div>
 
               {/* Shipping Calculator */}
-              <div className="pt-6 border-t">
+              <div className="pt-10 border-t">
                 <ShippingCalculator 
                   productPrice={parseFloat(product.priceRange.minVariantPrice.amount)}
                 />
@@ -179,21 +179,21 @@ const ProductDetail = () => {
 
         {/* Product Details Section - Full Width */}
         <section className="bg-muted/30 border-t">
-          <div className="container mx-auto px-4 py-12 lg:py-16">
+          <div className="w-full px-6 sm:px-8 lg:px-20 xl:px-32 py-20 lg:py-24">
             <ProductTabs description={product.description || "No description available."} />
           </div>
         </section>
 
         {/* Frequently Bought Together */}
         <section className="border-t bg-background">
-          <div className="container mx-auto px-4 py-12 lg:py-16">
+          <div className="w-full px-6 sm:px-8 lg:px-20 xl:px-32 py-20 lg:py-24">
             <FrequentlyBoughtTogether currentProduct={product} />
           </div>
         </section>
 
         {/* Customer Reviews */}
         <section className="border-t bg-muted/20">
-          <div className="container mx-auto px-4 py-12 lg:py-16">
+          <div className="w-full px-6 sm:px-8 lg:px-20 xl:px-32 py-20 lg:py-24">
             <CustomerReviews productHandle={product.handle} />
           </div>
         </section>

@@ -44,9 +44,9 @@ export const ProductTabs = ({ description }: ProductTabsProps) => {
         </TabsTrigger>
       </TabsList>
 
-      <TabsContent value="overview" className="mt-6 space-y-6">
+      <TabsContent value="overview" className="mt-8 space-y-8">
         <div className="prose max-w-none">
-          <div className="text-muted-foreground leading-relaxed space-y-4">
+          <div className="text-body text-muted-foreground space-y-6">
             {description.split('\n\n').map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
             ))}
@@ -55,47 +55,47 @@ export const ProductTabs = ({ description }: ProductTabsProps) => {
       </TabsContent>
 
       <TabsContent value="ingredients" className="mt-8">
-        <div className="space-y-6">
-          <Card className="p-6 bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
-            <div className="flex items-start gap-3 mb-6">
-              <div className="p-2 rounded-lg bg-primary/10">
-                <Pill className="h-5 w-5 text-primary" />
+        <div className="space-y-8">
+          <Card className="p-8 rounded-xl bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+            <div className="flex items-start gap-4 mb-8">
+              <div className="p-3 rounded-xl bg-primary/10">
+                <Pill className="h-6 w-6 text-primary" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-1">Supplement Facts</h3>
-                <p className="text-sm text-muted-foreground">Premium ingredients for optimal results</p>
+                <h3 className="mb-2">Supplement facts</h3>
+                <p className="text-body text-muted-foreground">Premium ingredients for optimal results</p>
               </div>
             </div>
             
-            <div className="space-y-3 bg-background/50 rounded-lg p-4">
-              <div className="flex justify-between items-center py-3 border-b">
-                <div className="flex items-center gap-2">
+            <div className="space-y-4 bg-background/50 rounded-xl p-6">
+              <div className="flex justify-between items-center py-4 border-b">
+                <div className="flex items-center gap-3">
                   <span className="text-2xl">💊</span>
-                  <span className="font-medium">Serving Size</span>
+                  <span className="font-medium">Serving size</span>
                 </div>
-                <Badge variant="secondary" className="font-mono">2 capsules</Badge>
+                <Badge variant="secondary" className="text-ui-label">2 capsules</Badge>
               </div>
-              <div className="flex justify-between items-center py-3 border-b">
-                <div className="flex items-center gap-2">
+              <div className="flex justify-between items-center py-4 border-b">
+                <div className="flex items-center gap-3">
                   <span className="text-2xl">📦</span>
-                  <span className="font-medium">Servings Per Container</span>
+                  <span className="font-medium">Servings per container</span>
                 </div>
-                <Badge variant="secondary" className="font-mono">30 days</Badge>
+                <Badge variant="secondary" className="text-ui-label">30 days</Badge>
               </div>
-              <div className="flex justify-between items-center py-3">
-                <div className="flex items-center gap-2">
+              <div className="flex justify-between items-center py-4">
+                <div className="flex items-center gap-3">
                   <span className="text-2xl">⚡</span>
-                  <span className="font-medium">Amount Per Serving</span>
+                  <span className="font-medium">Amount per serving</span>
                 </div>
-                <Badge variant="outline" className="font-mono">View label</Badge>
+                <Badge variant="outline" className="text-ui-label">View label</Badge>
               </div>
             </div>
           </Card>
           
-          <Card className="p-4 bg-accent/50 border-accent">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
-              <p className="text-sm text-foreground">
+          <Card className="p-6 rounded-xl bg-accent/50 border-accent">
+            <div className="flex items-center gap-3">
+              <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0" />
+              <p className="text-body text-foreground">
                 We hand-pick every ingredient and rigorously test for quality. Nothing makes it into our formulas without meeting our standards.
               </p>
             </div>
@@ -104,59 +104,59 @@ export const ProductTabs = ({ description }: ProductTabsProps) => {
       </TabsContent>
 
       <TabsContent value="usage" className="mt-8">
-        <div className="grid gap-4 md:grid-cols-3">
-          <Card className="p-6 hover:shadow-lg transition-shadow">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-3 rounded-full bg-primary/10">
+        <div className="grid gap-8 md:grid-cols-3">
+          <Card className="p-8 rounded-xl hover:shadow-large transition-shadow">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="p-4 rounded-full bg-primary/10">
                 <span className="text-2xl">💊</span>
               </div>
               <div>
-                <h4 className="font-semibold text-lg">Dosage</h4>
-                <Badge variant="secondary" className="mt-1">Daily</Badge>
+                <h4 className="mb-2">Dosage</h4>
+                <Badge variant="secondary" className="text-ui-label">Daily</Badge>
               </div>
             </div>
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-body text-muted-foreground">
               Take 2 capsules daily with food
             </p>
           </Card>
           
-          <Card className="p-6 hover:shadow-lg transition-shadow">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-3 rounded-full bg-primary/10">
+          <Card className="p-8 rounded-xl hover:shadow-large transition-shadow">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="p-4 rounded-full bg-primary/10">
                 <span className="text-2xl">⏰</span>
               </div>
               <div>
-                <h4 className="font-semibold text-lg">Best Time</h4>
-                <Badge variant="secondary" className="mt-1">Morning</Badge>
+                <h4 className="mb-2">Best time</h4>
+                <Badge variant="secondary" className="text-ui-label">Morning</Badge>
               </div>
             </div>
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-body text-muted-foreground">
               Best taken in the morning with breakfast for better absorption
             </p>
           </Card>
           
-          <Card className="p-6 hover:shadow-lg transition-shadow">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-3 rounded-full bg-primary/10">
+          <Card className="p-8 rounded-xl hover:shadow-large transition-shadow">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="p-4 rounded-full bg-primary/10">
                 <span className="text-2xl">🌡️</span>
               </div>
               <div>
-                <h4 className="font-semibold text-lg">Storage</h4>
-                <Badge variant="secondary" className="mt-1">Cool & Dry</Badge>
+                <h4 className="mb-2">Storage</h4>
+                <Badge variant="secondary" className="text-ui-label">Cool & dry</Badge>
               </div>
             </div>
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-body text-muted-foreground">
               Keep in a cool, dry place away from direct sunlight
             </p>
           </Card>
         </div>
         
-        <Card className="mt-6 p-5 bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800">
-          <div className="flex gap-3">
+        <Card className="mt-8 p-8 rounded-xl bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800">
+          <div className="flex gap-4">
             <span className="text-2xl flex-shrink-0">⚠️</span>
             <div>
-              <p className="text-sm font-medium mb-1">Important</p>
-              <p className="text-sm text-muted-foreground">
+              <p className="font-medium mb-2">Important</p>
+              <p className="text-body text-muted-foreground">
                 If you're pregnant, breastfeeding, or taking any medications, have a chat with your GP or healthcare provider before starting this supplement.
               </p>
             </div>
@@ -165,49 +165,49 @@ export const ProductTabs = ({ description }: ProductTabsProps) => {
       </TabsContent>
 
       <TabsContent value="research" className="mt-8">
-        <Card className="p-8 bg-gradient-to-br from-primary/5 to-secondary/5">
-          <div className="flex items-start gap-4 mb-6">
-            <div className="p-3 rounded-xl bg-primary/10">
-              <FlaskConical className="h-6 w-6 text-primary" />
+        <Card className="p-10 rounded-xl bg-gradient-to-br from-primary/5 to-secondary/5">
+          <div className="flex items-start gap-6 mb-10">
+            <div className="p-4 rounded-xl bg-primary/10">
+              <FlaskConical className="h-8 w-8 text-primary" />
             </div>
             <div>
-              <h3 className="text-2xl font-bold mb-2">Backed by Science</h3>
-              <p className="text-muted-foreground leading-relaxed text-lg">
+              <h3 className="mb-4">Backed by science</h3>
+              <p className="text-body-large text-muted-foreground">
                 We build our formulas on solid scientific research and clinical trials. Every ingredient is chosen for what it can actually do, not just marketing claims, and dosed properly to get results.
               </p>
             </div>
           </div>
           
-          <div className="grid gap-4 md:grid-cols-3 mt-8">
-            <div className="bg-background/80 rounded-lg p-5 border">
-              <div className="flex items-center gap-3 mb-3">
+          <div className="grid gap-6 md:grid-cols-3 mt-10">
+            <div className="bg-background/80 rounded-xl p-8 border">
+              <div className="flex items-center gap-3 mb-4">
                 <span className="text-3xl">🔬</span>
-                <Badge variant="outline" className="text-xs">Verified</Badge>
+                <Badge variant="outline" className="text-ui-label">Verified</Badge>
               </div>
-              <h4 className="font-semibold text-lg mb-2">Clinically Studied</h4>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <h4 className="mb-3">Clinically studied</h4>
+              <p className="text-body text-muted-foreground">
                 Supported by peer-reviewed research and proper clinical trials
               </p>
             </div>
             
-            <div className="bg-background/80 rounded-lg p-5 border">
-              <div className="flex items-center gap-3 mb-3">
+            <div className="bg-background/80 rounded-xl p-8 border">
+              <div className="flex items-center gap-3 mb-4">
                 <span className="text-3xl">⚡</span>
-                <Badge variant="outline" className="text-xs">Optimised</Badge>
+                <Badge variant="outline" className="text-ui-label">Optimised</Badge>
               </div>
-              <h4 className="font-semibold text-lg mb-2">Actually Absorbed</h4>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <h4 className="mb-3">Actually absorbed</h4>
+              <p className="text-body text-muted-foreground">
                 Formulated for proper absorption—what matters is what your body can use
               </p>
             </div>
             
-            <div className="bg-background/80 rounded-lg p-5 border">
-              <div className="flex items-center gap-3 mb-3">
+            <div className="bg-background/80 rounded-xl p-8 border">
+              <div className="flex items-center gap-3 mb-4">
                 <span className="text-3xl">📚</span>
-                <Badge variant="outline" className="text-xs">Proven</Badge>
+                <Badge variant="outline" className="text-ui-label">Proven</Badge>
               </div>
-              <h4 className="font-semibold text-lg mb-2">Evidence-Based</h4>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <h4 className="mb-3">Evidence-based</h4>
+              <p className="text-body text-muted-foreground">
                 Built on real scientific evidence, not wellness trends
               </p>
             </div>

@@ -73,18 +73,16 @@ export const Footer = () => {
 
 
   return (
-    <footer className="bg-pearl mt-16 sm:mt-24 border-t border-mist">
-      <div className="container mx-auto px-6 sm:px-8 lg:px-20 xl:px-32 py-8 sm:py-12">
+    <footer className="bg-carbon text-ivory mt-24 sm:mt-32">
+      <div className="w-full px-6 sm:px-8 lg:px-20 xl:px-32 py-16 sm:py-24">
         {/* Company Mission */}
-        <div className="mb-8 sm:mb-12 max-w-3xl">
-          <Link to="/" className="flex items-center gap-2 mb-3 sm:mb-4">
-            <img src={logoIcon} alt="Neural Waveform" className="h-6 w-6" />
-            <span className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-carbon">NEUROSTATE<sup className="text-[8px]">®</sup></span>
+        <div className="mb-16 sm:mb-20 max-w-3xl">
+          <Link to="/" className="flex items-center gap-3 mb-6">
+            <img src={logoIcon} alt="Neural Waveform" className="h-8 w-8 invert" />
+            <span className="text-h2">NEUROSTATE<sup className="text-[10px]">®</sup></span>
           </Link>
-          <p className="text-ash text-xs sm:text-sm leading-relaxed font-normal">
-            Making the best recovery tools and supplements accessible to everyone, everywhere. 
-            Founded by Sage, a serial entrepreneur with a sports science background, NeuroState 
-            was born from personal experience with burnout and discovering transformative recovery tools.
+          <p className="text-body-large text-stone">
+            Precision tools for your optimal state. Making the best recovery tools and supplements accessible to everyone, everywhere.
           </p>
         </div>
 
@@ -96,9 +94,9 @@ export const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 sm:gap-8 mb-6 sm:mb-8">
           {/* Newsletter Signup */}
           <div className="sm:col-span-2 lg:col-span-2">
-            <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4 text-carbon">Join Our Community</h3>
-            <p className="text-ash mb-3 sm:mb-4 text-xs sm:text-sm leading-relaxed font-normal">
-              Sign up for exclusive offers, the occasional freebie, and 10% off your first order.
+            <h3 className="mb-4">Join our community</h3>
+            <p className="text-stone mb-6">
+              Sign up for exclusive offers and 10% off your first order.
             </p>
             <form onSubmit={handleNewsletterSignup} className="flex flex-col sm:flex-row gap-2">
               <Input
@@ -122,13 +120,13 @@ export const Footer = () => {
 
           {/* Shop Links */}
           <div>
-            <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4 text-carbon">Shop</h3>
+            <h3 className="mb-4">Shop</h3>
             <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.shop.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-ash hover:text-carbon transition-colors text-xs sm:text-sm font-normal"
+                    className="text-stone hover:text-ivory transition-colors text-caption"
                   >
                     {link.name}
                   </a>
@@ -139,13 +137,13 @@ export const Footer = () => {
 
           {/* Company Links */}
           <div>
-            <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4 text-carbon">Company</h3>
+            <h3 className="mb-4">Company</h3>
             <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-ash hover:text-carbon transition-colors text-xs sm:text-sm font-normal"
+                    className="text-stone hover:text-ivory transition-colors text-caption"
                   >
                     {link.name}
                   </a>
@@ -156,13 +154,13 @@ export const Footer = () => {
 
           {/* Support Links */}
           <div>
-            <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4 text-carbon">Support</h3>
+            <h3 className="mb-4">Support</h3>
             <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-ash hover:text-carbon transition-colors text-xs sm:text-sm font-normal"
+                    className="text-stone hover:text-ivory transition-colors text-caption"
                   >
                     {link.name}
                   </a>
@@ -173,13 +171,13 @@ export const Footer = () => {
 
           {/* Legal Links */}
           <div>
-            <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4 text-carbon">Legal</h3>
+            <h3 className="mb-4">Legal</h3>
             <ul className="space-y-1.5 sm:space-y-2">
               {footerLinks.legal.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.href}
-                    className="text-ash hover:text-carbon transition-colors text-xs sm:text-sm font-normal"
+                    className="text-stone hover:text-ivory transition-colors text-caption"
                   >
                     {link.name}
                   </Link>
@@ -190,20 +188,20 @@ export const Footer = () => {
         </div>
 
         {/* Contact Info & Social */}
-        <div className="pt-6 sm:pt-8 border-t border-mist">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
+        <div className="pt-12 border-t border-slate">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 mb-12">
             {/* Contact Information */}
             <div>
-              <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4 text-carbon">Get in Touch</h3>
+              <h3 className="mb-4">Get in touch</h3>
               <div className="space-y-2 sm:space-y-3">
                 <a
                   href="mailto:contact@neurostate.co.uk"
-                  className="flex items-center gap-2 text-ash hover:text-carbon transition-colors text-xs sm:text-sm group font-normal"
+                  className="flex items-center gap-2 text-stone hover:text-ivory transition-colors group"
                 >
-                  <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4 group-hover:scale-110 transition-transform" />
+                  <Mail className="h-5 w-5 group-hover:scale-110 transition-transform" />
                   contact@neurostate.co.uk
                 </a>
-                <p className="text-[10px] sm:text-xs text-ash font-normal">
+                <p className="text-caption text-stone mt-3">
                   We typically respond within 24 hours
                 </p>
               </div>
@@ -211,42 +209,42 @@ export const Footer = () => {
 
             {/* Social Media */}
             <div>
-              <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4 text-carbon">Follow Us</h3>
+              <h3 className="mb-4">Follow us</h3>
               <div className="flex gap-3 sm:gap-4">
                 {socialLinks.map((social) => (
                   <div
                     key={social.label}
-                    className="w-9 h-9 sm:w-10 sm:h-10 bg-ivory border border-mist flex items-center justify-center cursor-default hover:bg-pearl transition-colors"
+                    className="w-12 h-12 rounded-xl bg-slate border border-slate flex items-center justify-center cursor-default hover:bg-ivory hover:text-carbon transition-all"
                     aria-label={social.label}
                   >
-                    <social.icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                    <social.icon className="h-5 w-5" />
                   </div>
                 ))}
               </div>
-              <p className="text-[10px] sm:text-xs text-muted-foreground mt-3 sm:mt-4">
+              <p className="text-caption text-stone mt-4">
                 Join our community for tips, product updates, and exclusive offers
               </p>
             </div>
           </div>
 
           {/* Copyright & Links */}
-          <div className="pt-4 sm:pt-6">
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
-              <p className="text-xs sm:text-sm text-muted-foreground text-center sm:text-left">
+          <div className="pt-8">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+              <p className="text-caption text-stone">
                 © {new Date().getFullYear()} NeuroState®. All rights reserved.
               </p>
-              <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
-                <Link to="/terms" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+              <div className="flex flex-wrap gap-6 justify-center">
+                <Link to="/terms" className="text-caption text-stone hover:text-ivory transition-colors">
                   Terms
                 </Link>
-                <Link to="/privacy" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/privacy" className="text-caption text-stone hover:text-ivory transition-colors">
                   Privacy
                 </Link>
                 <a 
                   href="https://neurostate.co.uk" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-caption text-stone hover:text-ivory transition-colors"
                 >
                   neurostate.co.uk
                 </a>

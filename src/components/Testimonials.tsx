@@ -86,55 +86,55 @@ const StarRating = ({ rating }: { rating: number }) => {
 
 export const Testimonials = () => {
   return (
-    <section className="py-16 lg:py-24 bg-background">
+    <section className="py-24 lg:py-32">
       <div className="w-full px-6 sm:px-8 lg:px-20 xl:px-32">
-        <div className="mb-12 space-y-4">
-          <p className="text-[10px] sm:text-xs font-light text-muted-foreground tracking-[0.3em] uppercase">
+        <div className="mb-20">
+          <p className="ghost-number mb-4">
             TESTIMONIALS
           </p>
-          <h2 className="text-[1.875rem] font-semibold uppercase" style={{ lineHeight: '1.3' }}>
+          <h2 className="mb-6">
             What our customers say
           </h2>
-          <p className="text-sm text-muted-foreground max-w-2xl font-light">
+          <p className="text-body-large text-muted-foreground max-w-2xl">
             Real reviews from real people who transformed their health and wellness
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="p-6 bg-card hover:bg-card/80 transition-all duration-300"
+              className="p-8 bg-card rounded-xl hover:shadow-large transition-all duration-300"
             >
               <div className="space-y-4">
                 {/* Rating */}
                 <StarRating rating={testimonial.rating} />
 
                 {/* Review Text */}
-                <p className="text-muted-foreground leading-relaxed font-light text-sm">
+                <p className="text-body text-muted-foreground">
                   "{testimonial.review}"
                 </p>
 
                 {/* Product Badge */}
                 {testimonial.product && (
                   <div className="pt-2">
-                    <span className="text-xs font-medium text-accent bg-accent/10 px-3 py-1 rounded-full">
+                    <span className="text-ui-label text-accent bg-accent/10 px-4 py-2 rounded-full">
                       {testimonial.product}
                     </span>
                   </div>
                 )}
 
                 {/* Customer Info */}
-                <div className="flex items-center gap-3 pt-4 border-t border-border/30">
-                  <Avatar className="h-10 w-10">
+                <div className="flex items-center gap-4 pt-6 border-t border-border/30">
+                  <Avatar className="h-12 w-12">
                     <AvatarImage src="" alt={testimonial.name} />
-                    <AvatarFallback className="bg-accent/10 text-accent font-semibold">
+                    <AvatarFallback className="bg-accent/10 text-accent">
                       {testimonial.avatar}
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="font-semibold text-sm">{testimonial.name}</p>
-                    <p className="text-xs text-muted-foreground font-light">
+                    <p className="font-semibold">{testimonial.name}</p>
+                    <p className="text-caption text-muted-foreground">
                       {testimonial.role}
                     </p>
                   </div>
@@ -145,17 +145,17 @@ export const Testimonials = () => {
         </div>
 
         {/* Trust Indicators */}
-        <div className="mt-12 text-center space-y-4">
-          <div className="flex items-center justify-center gap-2 text-muted-foreground">
+        <div className="mt-16 text-center">
+          <div className="flex items-center justify-center gap-3 text-muted-foreground">
             <div className="flex">
               {[...Array(5)].map((_, index) => (
                 <Star
                   key={index}
-                  className="h-5 w-5 fill-yellow-400 text-yellow-400"
+                  className="h-6 w-6 fill-yellow-400 text-yellow-400"
                 />
               ))}
             </div>
-            <span className="text-sm font-medium">
+            <span className="text-body font-medium">
               4.9/5 average rating from over 2,500+ reviews
             </span>
           </div>

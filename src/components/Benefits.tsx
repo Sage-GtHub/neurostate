@@ -17,13 +17,13 @@ export const Benefits = () => {
   ];
 
   return (
-    <section className="py-8 md:py-12 px-4 bg-ivory">
-      <div className="container mx-auto">
-        <div className="flex justify-center items-center gap-8 md:gap-16 lg:gap-24 flex-wrap">
+    <section className="py-16 md:py-20">
+      <div className="w-full px-6 sm:px-8 lg:px-20 xl:px-32">
+        <div className="flex justify-center items-center gap-12 md:gap-20 lg:gap-32 flex-wrap">
           {benefits.map((benefit, index) => (
             <div key={index} className="flex items-center gap-3">
               {benefit.icon}
-              <span className="font-normal text-xs sm:text-sm uppercase tracking-wider text-carbon">{benefit.title}</span>
+              <span className="text-ui-label">{benefit.title}</span>
             </div>
           ))}
         </div>
