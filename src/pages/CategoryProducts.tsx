@@ -67,25 +67,26 @@ const CategoryProducts = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        <section className="py-16 px-4 bg-secondary">
-          <div className="container mx-auto">
+        <section className="pt-32 pb-16 px-6 sm:px-8 lg:px-20 xl:px-32">
+          <div className="w-full max-w-7xl mx-auto">
             <Link to="/">
-              <Button variant="ghost" className="mb-6">
-                <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
+              <Button variant="ghost" size="sm" className="mb-8">
+                <ArrowLeft className="mr-2 h-3 w-3" /> Back
               </Button>
             </Link>
-            <h1 className="text-[2.25rem] font-bold mb-4" style={{ lineHeight: '1.2', letterSpacing: '-0.01em' }}>{config.title}</h1>
-            <p className="text-lg text-muted-foreground max-w-2xl">
+            <p className="ghost-number mb-6">{category?.toUpperCase()}</p>
+            <h1 className="mb-6">{config.title}</h1>
+            <p className="text-body-large text-ash max-w-2xl">
               {config.description}
             </p>
           </div>
         </section>
 
-        <section className="py-16 px-4">
-          <div className="container mx-auto">
+        <section className="py-24 px-6 sm:px-8 lg:px-20 xl:px-32">
+          <div className="w-full max-w-7xl mx-auto">
             {isLoading ? (
               <div className="flex justify-center items-center min-h-[400px]">
-                <Loader2 className="h-8 w-8 animate-spin text-accent" />
+                <Loader2 className="h-8 w-8 animate-spin text-carbon" />
               </div>
             ) : error ? (
               <div className="text-center py-12">
@@ -93,10 +94,10 @@ const CategoryProducts = () => {
               </div>
             ) : filteredProducts.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-muted-foreground text-lg">No products found in this category.</p>
+                <p className="text-ash text-lg">No products found in this category.</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
                 {filteredProducts.map((product) => (
                   <ProductCard key={product.node.id} product={product} />
                 ))}

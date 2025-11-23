@@ -9,11 +9,12 @@ export const RecentlyViewed = () => {
   }
 
   return (
-    <section className="py-16 px-6 sm:px-8 lg:px-20 xl:px-32 bg-secondary/20">
-      <div className="w-full">
-        <h2 className="text-[1.875rem] font-semibold mb-8" style={{ lineHeight: '1.3' }}>Recently Viewed</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {recentlyViewed.slice(0, 4).map((product) => (
+    <section className="py-24 md:py-32 px-6 sm:px-8 lg:px-20 xl:px-32">
+      <div className="w-full max-w-7xl mx-auto">
+        <p className="ghost-number mb-6">CONTINUE EXPLORING</p>
+        <h2 className="mb-16">Recently viewed</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
+          {recentlyViewed.slice(0, 3).map((product) => (
             <ProductCard key={product.node.id} product={product} />
           ))}
         </div>
