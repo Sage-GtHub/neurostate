@@ -102,49 +102,42 @@ const Ambassador = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-primary/10 via-background to-background py-20 overflow-hidden">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center justify-center p-2 bg-primary/10 rounded-full mb-6">
-                <Heart className="h-6 w-6 text-primary" />
-              </div>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                Become a NeuroState® Ambassador
+        <section className="py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 border-b border-mist">
+          <div className="w-full max-w-7xl mx-auto">
+            <div className="max-w-2xl mx-auto text-center">
+              <h1 className="text-[2.25rem] md:text-[3rem] font-normal text-carbon mb-6" style={{ lineHeight: '1.2' }}>
+                Become a NeuroState ambassador
               </h1>
-              <p className="text-xl text-muted-foreground mb-8">
+              <p className="text-[0.9375rem] text-ash mb-8">
                 Join our community of wellness advocates. Share what you love, earn rewards, 
-                and help others optimise their health.
+                and help others optimise their health
               </p>
               <Button 
                 size="lg" 
-                className="text-lg px-8"
                 onClick={() => document.getElementById('application')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Apply Now
+                Apply now
               </Button>
             </div>
           </div>
         </section>
 
-        {/* Benefits Section */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Ambassador Benefits
+        <section className="py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32">
+          <div className="w-full max-w-7xl mx-auto">
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="text-[1.5rem] font-normal text-carbon mb-4">
+                Ambassador benefits
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                We value our ambassadors and provide incredible perks to support your wellness journey.
+              <p className="text-[0.9375rem] text-ash max-w-2xl mx-auto">
+                We value our ambassadors and provide incredible perks
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
               {benefits.map((benefit) => (
-                <div key={benefit.title} className="p-6 hover:translate-y-[-4px] transition-transform duration-300">
-                  <benefit.icon className="h-10 w-10 text-accent mb-4" />
-                  <h3 className="text-lg font-semibold mb-3">{benefit.title}</h3>
-                  <p className="text-sm text-muted-foreground font-light leading-relaxed">{benefit.description}</p>
+                <div key={benefit.title}>
+                  <h3 className="text-[1.125rem] font-normal text-carbon mb-3">{benefit.title}</h3>
+                  <p className="text-[0.875rem] text-ash leading-relaxed">{benefit.description}</p>
                 </div>
               ))}
             </div>

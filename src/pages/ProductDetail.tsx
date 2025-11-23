@@ -40,7 +40,6 @@ const ProductDetail = () => {
     if (product) {
       addRecentlyViewed({ node: product });
       
-      // Track product view in Google Analytics
       const firstVariant = product.variants.edges[0]?.node;
       trackProductView({
         id: product.id,
@@ -57,7 +56,7 @@ const ProductDetail = () => {
       <>
         <Header />
         <div className="flex justify-center items-center min-h-screen">
-          <Loader2 className="h-8 w-8 animate-spin text-accent" />
+          <Loader2 className="h-8 w-8 animate-spin text-carbon" />
         </div>
         <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
       </>
@@ -68,13 +67,13 @@ const ProductDetail = () => {
     return (
       <>
         <Header />
-        <div className="container mx-auto px-4 py-12">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 py-12">
           <Link to="/">
             <Button variant="ghost" className="mb-6">
               <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
             </Button>
           </Link>
-          <p className="text-destructive">Product not found</p>
+          <p className="text-ash">Product not found</p>
         </div>
         <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
       </>
@@ -91,11 +90,9 @@ const ProductDetail = () => {
   const productDescription = product.description || `Premium ${product.title} from NeuroState®. Science-backed supplement for optimal performance and wellness.`;
   const productImage = images[0]?.url || '';
   
-  // Mock rating for structured data
   const rating = 4.5 + Math.random() * 0.5;
   const reviewCount = Math.floor(Math.random() * 500) + 100;
   
-  // Check availability based on variant availability
   const isAvailable = firstVariant?.availableForSale ?? true;
 
   return (
@@ -129,46 +126,39 @@ const ProductDetail = () => {
       />
       <Header />
       <main className="min-h-screen bg-background">
-        {/* Breadcrumb */}
-        <nav className="border-b" aria-label="Breadcrumb">
-          <div className="w-full px-6 sm:px-8 lg:px-20 xl:px-32 py-6">
+        <nav className="border-b border-mist" aria-label="Breadcrumb">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 py-4">
             <Link to="/">
-              <Button variant="ghost" size="sm" className="hover:bg-muted">
-                <ArrowLeft className="mr-2 h-4 w-4" /> Back to products
+              <Button variant="ghost" size="sm" className="hover:bg-transparent hover:opacity-60">
+                <ArrowLeft className="mr-2 h-4 w-4" /> Back
               </Button>
             </Link>
           </div>
         </nav>
 
-        {/* Product Section - Main Hero */}
-        <article className="w-full px-6 sm:px-8 lg:px-20 xl:px-32 py-16 lg:py-24">
-          <div className="grid lg:grid-cols-[1fr,1fr] gap-12 lg:gap-20 items-start">
-            {/* Left: Image Gallery - Sticky on scroll */}
-            <div className="lg:sticky lg:top-32">
+        <article className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 py-12 md:py-20 lg:py-32">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+            <div className="lg:sticky lg:top-32 h-fit">
               <ProductImageGallery images={images} productTitle={product.title} />
             </div>
 
-            {/* Right: Product Info */}
-            <div className="space-y-10">
+            <div className="space-y-8">
               <ProductInfo
                 product={product}
                 selectedVariantIndex={selectedVariantIndex}
                 setSelectedVariantIndex={setSelectedVariantIndex}
               />
               
-              {/* Trust Badges */}
-              <div className="pt-10 border-t">
+              <div className="pt-8 border-t border-mist">
                 <TrustBadges />
               </div>
 
-              {/* Key Benefits - Moved up for better visibility */}
-              <div className="pt-10 border-t">
-                <h3 className="mb-6">Key benefits</h3>
+              <div className="pt-8 border-t border-mist">
+                <h3 className="mb-6 text-[1.125rem] font-normal text-carbon">Key benefits</h3>
                 <BenefitsSection />
               </div>
 
-              {/* Shipping Calculator */}
-              <div className="pt-10 border-t">
+              <div className="pt-8 border-t border-mist">
                 <ShippingCalculator 
                   productPrice={parseFloat(product.priceRange.minVariantPrice.amount)}
                 />
@@ -177,23 +167,20 @@ const ProductDetail = () => {
           </div>
         </article>
 
-        {/* Product Details Section - Full Width */}
-        <section className="bg-muted/30 border-t">
-          <div className="w-full px-6 sm:px-8 lg:px-20 xl:px-32 py-20 lg:py-24">
+        <section className="bg-ivory border-t border-mist">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 py-16 md:py-24">
             <ProductTabs description={product.description || "No description available."} />
           </div>
         </section>
 
-        {/* Frequently Bought Together */}
-        <section className="border-t bg-background">
-          <div className="w-full px-6 sm:px-8 lg:px-20 xl:px-32 py-20 lg:py-24">
+        <section className="border-t border-mist bg-background">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 py-16 md:py-24">
             <FrequentlyBoughtTogether currentProduct={product} />
           </div>
         </section>
 
-        {/* Customer Reviews */}
-        <section className="border-t bg-muted/20">
-          <div className="w-full px-6 sm:px-8 lg:px-20 xl:px-32 py-20 lg:py-24">
+        <section className="border-t border-mist bg-ivory">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 py-16 md:py-24">
             <CustomerReviews productHandle={product.handle} />
           </div>
         </section>

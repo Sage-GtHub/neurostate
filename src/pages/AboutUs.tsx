@@ -69,38 +69,30 @@ const AboutUs = () => {
     <>
       <Header />
       <div className="min-h-screen bg-background">
-        {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-primary/5 via-background to-accent/5">
-          <div className="container mx-auto px-4 py-16 lg:py-24">
-            <div className="max-w-4xl mx-auto text-center space-y-6">
-              <Badge variant="secondary" className="mb-4">
-                About NeuroState®
-              </Badge>
-              <h1 className="text-[2.25rem] font-bold tracking-tight" style={{ lineHeight: '1.2', letterSpacing: '-0.01em' }}>
+        <section className="py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 border-b border-mist">
+          <div className="w-full max-w-7xl mx-auto">
+            <div className="max-w-3xl mx-auto text-center space-y-6">
+              <h1 className="text-[2.25rem] md:text-[3rem] font-normal tracking-tight text-carbon" style={{ lineHeight: '1.2' }}>
                 Making elite performance accessible to everyone
               </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed">
-                Science-backed supplements and recovery tools that actually work—without the ridiculous price tags.
+              <p className="text-[1rem] text-ash">
+                Science-backed supplements and recovery tools that actually work
               </p>
             </div>
           </div>
         </section>
 
-        {/* Mission Statement */}
-        <section className="py-16 lg:py-20">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="flex items-center justify-center gap-3 mb-8">
-                <Target className="h-8 w-8 text-primary" />
-                <h2 className="text-[1.875rem] font-semibold" style={{ lineHeight: '1.3' }}>Our Mission</h2>
-              </div>
-              <p className="text-lg text-muted-foreground leading-relaxed text-center mb-6">
+        <section className="py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32">
+          <div className="w-full max-w-7xl mx-auto">
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-[1.5rem] font-normal text-carbon mb-8">Our mission</h2>
+              <p className="text-[0.9375rem] text-ash leading-relaxed mb-6">
                 At NeuroState, the best performance tools and supplements shouldn't just
                 be for elite athletes or wealthy people—they should be available to everyone, everywhere.
                 Our mission is simple: make the world's best recovery technologies and supplements accessible
                 and affordable for anyone who wants to feel and perform better.
               </p>
-              <p className="text-lg text-muted-foreground leading-relaxed text-center">
+              <p className="text-[0.9375rem] text-ash leading-relaxed">
                 Transparency and quality. Every product we offer is carefully chosen,
                 properly tested, and made available to anyone looking to improve their physical and mental
                 wellbeing.
@@ -139,22 +131,15 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* Core Values */}
-        <section className="py-16 lg:py-20">
-          <div className="container mx-auto px-4">
-            <h2 className="text-[1.875rem] font-semibold text-center mb-12" style={{ lineHeight: '1.3' }}>Our Core Values</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+        <section className="py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 bg-ivory border-t border-b border-mist">
+          <div className="w-full max-w-7xl mx-auto">
+            <h2 className="text-[1.5rem] font-normal text-carbon text-center mb-12 md:mb-16">Our core values</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
               {values.map((value, index) => {
-                const Icon = value.icon;
                 return (
-                  <div key={index} className="text-center p-6">
-                    <div className="flex justify-center">
-                      <div className="p-3 rounded-full bg-accent/10">
-                        <Icon className="h-8 w-8 text-accent" />
-                      </div>
-                    </div>
-                    <h3 className="text-[1.5rem] font-semibold mt-4 mb-2" style={{ lineHeight: '1.4' }}>{value.title}</h3>
-                    <p className="text-sm text-muted-foreground font-light">{value.description}</p>
+                  <div key={index} className="text-center">
+                    <h3 className="text-[1.125rem] font-normal text-carbon mb-3">{value.title}</h3>
+                    <p className="text-[0.875rem] text-ash">{value.description}</p>
                   </div>
                 );
               })}

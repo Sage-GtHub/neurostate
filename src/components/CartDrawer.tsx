@@ -32,14 +32,12 @@ export const CartDrawer = () => {
     try {
       setIsOpen(false);
       
-      // Check if user is logged in
       const { data: { session } } = await supabase.auth.getSession();
       
       await createCheckout();
       const checkoutUrl = useCartStore.getState().checkoutUrl;
       
       if (checkoutUrl) {
-        // If user is logged in, save order to database
         if (session?.user) {
           const result = await createOrder({
             userId: session.user.id,
@@ -69,21 +67,21 @@ export const CartDrawer = () => {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline" size="icon" className="relative">
+        <Button variant="outline" size="icon" className="relative border-mist hover:bg-transparent hover:opacity-60">
           <ShoppingCart className="h-5 w-5" />
           {totalItems > 0 && (
-            <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs">
+            <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center text-[0.625rem]">
               {totalItems}
             </Badge>
           )}
         </Button>
       </SheetTrigger>
       
-      <SheetContent className="w-full sm:max-w-lg flex flex-col h-full">
+      <SheetContent className="w-full sm:max-w-lg flex flex-col h-full border-l border-mist">
         <SheetHeader className="flex-shrink-0">
-          <SheetTitle>Shopping Cart</SheetTitle>
-          <SheetDescription>
-            {totalItems === 0 ? "Your cart is empty" : `${totalItems} item${totalItems !== 1 ? 's' : ''} in your cart`}
+          <SheetTitle className="text-[1.125rem] font-normal">Cart</SheetTitle>
+          <SheetDescription className="text-stone">
+            {totalItems === 0 ? "Your cart is empty" : `${totalItems} item${totalItems !== 1 ? 's' : ''}`}
           </SheetDescription>
         </SheetHeader>
         
@@ -91,122 +89,98 @@ export const CartDrawer = () => {
           {items.length === 0 ? (
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center">
-                <ShoppingCart className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <p className="text-muted-foreground">Your cart is empty</p>
+                <ShoppingCart className="h-12 w-12 text-stone mx-auto mb-4" />
+                <p className="text-ash">Your cart is empty</p>
               </div>
             </div>
           ) : (
             <>
-              <div className="flex-1 overflow-y-auto pr-2 min-h-0">
-                <div className="space-y-4">
-                  {items.map((item) => (
-                    <div key={item.variantId} className="flex gap-4 p-2">
-                      <div className="w-16 h-16 bg-secondary/20 rounded-md overflow-hidden flex-shrink-0">
-                        {item.product.node.images?.edges?.[0]?.node && (
-                          <img
-                            src={item.product.node.images.edges[0].node.url}
-                            alt={item.product.node.title}
-                            className="w-full h-full object-cover"
-                          />
-                        )}
-                      </div>
-                      
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-medium truncate">{item.product.node.title}</h4>
-                        <p className="text-sm text-muted-foreground">
-                          {item.selectedOptions.map(option => option.value).join(' • ')}
+              <div className="flex-1 overflow-y-auto pr-2 min-h-0 space-y-6">
+                {items.map((item) => (
+                  <div key={item.variantId} className="flex gap-4 pb-6 border-b border-mist last:border-0">
+                    <div className="w-20 h-20 bg-ivory overflow-hidden flex-shrink-0">
+                      {item.product.node.images?.edges?.[0]?.node && (
+                        <img
+                          src={item.product.node.images.edges[0].node.url}
+                          alt={item.product.node.title}
+                          className="w-full h-full object-contain p-2"
+                        />
+                      )}
+                    </div>
+                    
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-[0.875rem] font-normal text-carbon mb-1">{item.product.node.title}</h4>
+                      <p className="text-[0.75rem] text-stone mb-2">
+                        {item.selectedOptions.map(option => option.value).join(' • ')}
+                      </p>
+                      {item.isSubscription && (
+                        <p className="text-[0.6875rem] text-stone mb-2">
+                          Subscribe & Save 15%
                         </p>
-                        {item.isSubscription && (
-                          <div className="flex items-center gap-1 mt-1">
-                            <Badge variant="secondary" className="text-xs flex items-center gap-1">
-                              <RefreshCw className="h-3 w-3" />
-                              Subscribe & Save 15%
-                            </Badge>
-                          </div>
-                        )}
-                        {item.isSubscription && item.subscriptionFrequency && (
-                          <p className="text-xs text-muted-foreground mt-1">
-                            Delivers {item.subscriptionFrequency === 'monthly' ? 'monthly' : item.subscriptionFrequency === 'bi-monthly' ? 'every 2 months' : 'quarterly'}
-                          </p>
-                        )}
-                        <p className="font-semibold mt-1">
-                          £{parseFloat(item.price.amount).toFixed(2)}
-                        </p>
-                      </div>
+                      )}
+                      <p className="text-[0.875rem] text-carbon">
+                        £{parseFloat(item.price.amount).toFixed(2)}
+                      </p>
+                    </div>
+                    
+                    <div className="flex flex-col items-end gap-3 flex-shrink-0">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-6 w-6 hover:bg-transparent hover:opacity-60"
+                        onClick={() => removeItem(item.variantId)}
+                      >
+                        <Trash2 className="h-3 w-3" />
+                      </Button>
                       
-                      <div className="flex flex-col items-end gap-2 flex-shrink-0">
+                      <div className="flex items-center gap-2">
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="h-6 w-6"
-                          onClick={() => removeItem(item.variantId)}
+                          className="h-6 w-6 border border-mist hover:bg-transparent hover:opacity-60"
+                          onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
                         >
-                          <Trash2 className="h-3 w-3" />
+                          <Minus className="h-3 w-3" />
                         </Button>
-                        
-                        <div className="flex items-center gap-1">
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            className="h-6 w-6 rounded-full"
-                            onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
-                          >
-                            <Minus className="h-3 w-3" />
-                          </Button>
-                          <span className="w-8 text-center text-sm">{item.quantity}</span>
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            className="h-6 w-6 rounded-full"
-                            onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
-                          >
-                            <Plus className="h-3 w-3" />
-                          </Button>
-                        </div>
+                        <span className="w-6 text-center text-[0.75rem]">{item.quantity}</span>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-6 w-6 border border-mist hover:bg-transparent hover:opacity-60"
+                          onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
+                        >
+                          <Plus className="h-3 w-3" />
+                        </Button>
                       </div>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
               
-              <div className="flex-shrink-0 space-y-4 pt-4 bg-background">
-                {items.some(item => item.isSubscription) && (
-                  <div className="bg-accent/10 p-3">
-                    <div className="flex items-center gap-2 text-sm">
-                      <RefreshCw className="h-4 w-4 text-accent" />
-                      <span className="font-medium text-accent">Subscription Benefits</span>
-                    </div>
-                    <ul className="text-xs text-muted-foreground mt-2 space-y-1">
-                      <li>✓ Save 15% on every delivery</li>
-                      <li>✓ Free shipping on all orders</li>
-                      <li>✓ Cancel or pause anytime</li>
-                    </ul>
-                  </div>
-                )}
-                
+              <div className="flex-shrink-0 space-y-6 pt-6 border-t border-mist">
                 <div className="flex justify-between items-center">
-                  <span className="text-lg font-semibold">Total</span>
-                  <span className="text-xl font-bold">
+                  <span className="text-[0.875rem] font-normal text-carbon">Total</span>
+                  <span className="text-[1.125rem] font-normal text-carbon">
                     £{totalPrice.toFixed(2)}
                   </span>
                 </div>
                 
                 <Button 
                   onClick={handleCheckout}
-                  variant="outline"
-                  className="w-full rounded-full bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-accent hover:shadow-[0_0_20px_rgba(255,138,0,0.6)] transition-all duration-300" 
+                  variant="default"
+                  className="w-full" 
                   size="lg"
                   disabled={items.length === 0 || isLoading}
                 >
                   {isLoading ? (
                     <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin text-accent" />
-                      Creating Checkout...
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Creating Checkout
                     </>
                   ) : (
                     <>
                       <ExternalLink className="w-4 h-4 mr-2" />
-                      Checkout with Shopify
+                      Checkout
                     </>
                   )}
                 </Button>

@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { X } from "lucide-react";
 
 const EXIT_INTENT_SHOWN_KEY = "exit-intent-shown";
 const EXIT_INTENT_DISMISSED_KEY = "exit-intent-dismissed";
@@ -35,11 +34,10 @@ export const ExitIntentPopup = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    toast.success("Thanks for subscribing!", {
-      description: "Check your email for an exclusive 15% off code",
+    toast.success("Thanks for subscribing", {
+      description: "Check your email for an exclusive discount code",
     });
 
     setIsOpen(false);
@@ -55,17 +53,17 @@ export const ExitIntentPopup = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md border-mist">
         <DialogHeader>
-          <DialogTitle className="text-2xl">Wait! Don't Miss Out</DialogTitle>
-          <DialogDescription className="text-base">
-            Get <span className="font-bold text-primary">15% off</span> your first order when you subscribe to our newsletter
+          <DialogTitle className="text-[1.5rem] font-normal text-carbon">Wait</DialogTitle>
+          <DialogDescription className="text-[0.9375rem] text-ash">
+            Get <span className="text-carbon">15% off</span> your first order when you subscribe
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+        <form onSubmit={handleSubmit} className="space-y-6 mt-4">
           <div className="space-y-2">
-            <Label htmlFor="exit-email">Email Address</Label>
+            <Label htmlFor="exit-email" className="text-[0.875rem] font-normal text-carbon">Email</Label>
             <Input
               id="exit-email"
               type="email"
@@ -73,25 +71,25 @@ export const ExitIntentPopup = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              className="border-mist"
             />
           </div>
 
           <div className="flex gap-2">
             <Button 
               type="submit" 
-              variant="outline"
-              className="flex-1 rounded-full bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-accent hover:shadow-[0_0_20px_rgba(255,138,0,0.6)] transition-all duration-300 font-medium" 
+              className="flex-1"
               disabled={isLoading}
             >
-              {isLoading ? "Subscribing..." : "Get My Discount"}
+              {isLoading ? "Subscribing..." : "Get discount"}
             </Button>
-            <Button type="button" variant="outline" onClick={handleClose} className="rounded-full">
-              No Thanks
+            <Button type="button" variant="outline" onClick={handleClose} className="border-mist hover:bg-transparent hover:opacity-60">
+              No thanks
             </Button>
           </div>
 
-          <p className="text-xs text-muted-foreground text-center">
-            By subscribing, you agree to receive marketing emails. Unsubscribe anytime.
+          <p className="text-[0.75rem] text-stone text-center">
+            By subscribing, you agree to receive marketing emails
           </p>
         </form>
       </DialogContent>

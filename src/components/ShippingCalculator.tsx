@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Truck, Package, Clock, MapPin } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 
 interface ShippingRate {
@@ -95,7 +93,6 @@ export const ShippingCalculator = ({ productPrice = 0, className = "" }: Shippin
 
   const region = shippingData[selectedRegion];
   
-  // Find the free shipping threshold for the selected region
   const freeShippingRate = region?.rates.find(rate => rate.free && rate.freeThreshold);
   const freeShippingThreshold = freeShippingRate?.freeThreshold || 0;
   const isEligibleForFreeShipping = freeShippingThreshold > 0 && productPrice >= freeShippingThreshold;
@@ -103,46 +100,37 @@ export const ShippingCalculator = ({ productPrice = 0, className = "" }: Shippin
   const progressPercentage = freeShippingThreshold > 0 ? Math.min(100, (productPrice / freeShippingThreshold) * 100) : 0;
 
   return (
-    <Card className={`p-6 ${className}`}>
-      <div className="flex items-center gap-2 mb-4">
-        <Truck className="h-5 w-5 text-primary" />
-        <h3 className="font-semibold">Estimate Shipping Cost</h3>
-      </div>
+    <div className={`${className}`}>
+      <h3 className="text-[1.125rem] font-normal text-carbon mb-6">Shipping</h3>
 
-      <div className="space-y-4">
-        {/* Free Shipping Progress */}
+      <div className="space-y-6">
         {freeShippingThreshold > 0 && (
-          <div className="space-y-2 pb-4 border-b">
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-muted-foreground">Free shipping progress</span>
-              <span className="font-medium">
+          <div className="space-y-3 pb-6 border-b border-mist">
+            <div className="flex items-center justify-between text-[0.875rem]">
+              <span className="text-stone">Free shipping progress</span>
+              <span className="text-carbon">
                 {isEligibleForFreeShipping ? (
-                  <span className="text-green-600">Eligible! 🎉</span>
+                  <span>Eligible</span>
                 ) : (
                   <span>£{remainingForFreeShipping.toFixed(2)} to go</span>
                 )}
               </span>
             </div>
-            <Progress value={progressPercentage} className="h-2" />
-            {!isEligibleForFreeShipping && (
-              <p className="text-xs text-muted-foreground">
-                Spend £{remainingForFreeShipping.toFixed(2)} more to get free {freeShippingRate?.name.toLowerCase()}
-              </p>
-            )}
+            <Progress value={progressPercentage} className="h-1" />
           </div>
         )}
-        <div className="space-y-2">
-          <Label htmlFor="region" className="text-sm font-medium flex items-center gap-2">
-            <MapPin className="h-4 w-4 text-muted-foreground" />
-            Select Your Location
+        <div className="space-y-3">
+          <Label htmlFor="region" className="text-[0.875rem] font-normal text-carbon flex items-center gap-2">
+            <MapPin className="h-4 w-4 text-stone" />
+            Select your location
           </Label>
           <Select value={selectedRegion} onValueChange={setSelectedRegion}>
-            <SelectTrigger id="region" className="w-full">
+            <SelectTrigger id="region" className="w-full border-mist">
               <SelectValue placeholder="Select region" />
             </SelectTrigger>
             <SelectContent>
               {Object.entries(shippingData).map(([key, data]) => (
-                <SelectItem key={key} value={key} className="cursor-pointer">
+                <SelectItem key={key} value={key}>
                   {data.name}
                 </SelectItem>
               ))}
@@ -151,8 +139,8 @@ export const ShippingCalculator = ({ productPrice = 0, className = "" }: Shippin
         </div>
 
         {region && (
-          <div className="space-y-3 pt-2">
-            <p className="text-sm text-muted-foreground">Available shipping options:</p>
+          <div className="space-y-3 pt-3">
+            <p className="text-[0.875rem] text-stone">Available options:</p>
             {region.rates.map((rate, index) => {
               const Icon = rate.icon;
               const isFree = rate.free && productPrice >= (rate.freeThreshold || 0);
@@ -160,15 +148,15 @@ export const ShippingCalculator = ({ productPrice = 0, className = "" }: Shippin
               return (
                 <div
                   key={index}
-                  className="flex items-start justify-between p-3 rounded-lg border bg-card hover:bg-muted/50 transition-colors"
+                  className="flex items-start justify-between p-4 border border-mist bg-background hover:bg-ivory transition-colors"
                 >
                   <div className="flex items-start gap-3">
-                    <Icon className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                    <Icon className="h-4 w-4 text-stone mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium text-sm">{rate.name}</p>
-                      <p className="text-xs text-muted-foreground">{rate.delivery}</p>
+                      <p className="text-[0.875rem] font-normal text-carbon">{rate.name}</p>
+                      <p className="text-[0.75rem] text-stone">{rate.delivery}</p>
                       {rate.free && !isFree && (
-                        <p className="text-xs text-primary mt-1">
+                        <p className="text-[0.75rem] text-stone mt-1">
                           Free on orders over £{rate.freeThreshold}
                         </p>
                       )}
@@ -176,11 +164,9 @@ export const ShippingCalculator = ({ productPrice = 0, className = "" }: Shippin
                   </div>
                   <div className="text-right">
                     {isFree ? (
-                      <Badge variant="default" className="bg-green-500 hover:bg-green-600">
-                        FREE
-                      </Badge>
+                      <span className="text-[0.875rem] text-carbon">FREE</span>
                     ) : (
-                      <p className="font-semibold text-sm">{rate.price}</p>
+                      <p className="text-[0.875rem] text-carbon">{rate.price}</p>
                     )}
                   </div>
                 </div>
@@ -189,12 +175,12 @@ export const ShippingCalculator = ({ productPrice = 0, className = "" }: Shippin
           </div>
         )}
 
-        <div className="pt-2 border-t">
-          <p className="text-xs text-muted-foreground">
-            Final shipping cost calculated at checkout. International orders may be subject to customs duties.
+        <div className="pt-3 border-t border-mist">
+          <p className="text-[0.75rem] text-stone">
+            Final shipping cost calculated at checkout
           </p>
         </div>
       </div>
-    </Card>
+    </div>
   );
 };

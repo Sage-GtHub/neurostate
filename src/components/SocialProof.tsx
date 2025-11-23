@@ -1,63 +1,38 @@
-import { Shield, Users, Package, Award } from "lucide-react";
+import { Users, Package, Shield, Award } from "lucide-react";
 
 const stats = [
   {
-    icon: Users,
     value: "50,000+",
-    label: "Active Customers"
+    label: "Active customers"
   },
   {
-    icon: Package,
     value: "100,000+",
-    label: "Orders Delivered"
+    label: "Orders delivered"
   },
   {
-    icon: Shield,
     value: "100%",
-    label: "Third-Party Tested"
+    label: "Third-party tested"
   },
   {
-    icon: Award,
     value: "4.8/5",
-    label: "Average Rating"
+    label: "Average rating"
   }
 ];
 
 export const SocialProof = () => {
   return (
-    <section className="py-16 px-4 bg-secondary/20">
-      <div className="container mx-auto">
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+    <section className="py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 bg-ivory border-t border-b border-mist">
+      <div className="w-full max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           {stats.map((stat, index) => (
             <div 
               key={index} 
-              className="text-center animate-fade-in"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="text-center"
             >
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-accent/10 mb-3">
-                <stat.icon className="h-6 w-6 text-accent" />
-              </div>
-              <div className="text-3xl md:text-4xl font-bold mb-1">{stat.value}</div>
-              <div className="text-sm text-muted-foreground">{stat.label}</div>
+              <div className="text-[2rem] md:text-[2.5rem] font-normal mb-2 text-carbon">{stat.value}</div>
+              <div className="text-[0.75rem] tracking-[0.05em] uppercase text-stone">{stat.label}</div>
             </div>
           ))}
-        </div>
-
-        {/* Trust Badges */}
-        <div className="mt-12 flex flex-wrap justify-center gap-4">
-          <div className="px-4 py-2 bg-background rounded-lg border border-border text-sm font-medium">
-            NSF Certified
-          </div>
-          <div className="px-4 py-2 bg-background rounded-lg border border-border text-sm font-medium">
-            Informed Sport Approved
-          </div>
-          <div className="px-4 py-2 bg-background rounded-lg border border-border text-sm font-medium">
-            GMP Certified
-          </div>
-          <div className="px-4 py-2 bg-background rounded-lg border border-border text-sm font-medium">
-            Non-GMO Verified
-          </div>
         </div>
       </div>
     </section>

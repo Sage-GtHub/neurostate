@@ -116,42 +116,38 @@ const FAQ = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="bg-muted/30 py-16">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-[2.25rem] font-bold mb-4" style={{ lineHeight: '1.2', letterSpacing: '-0.01em' }}>
+        <section className="py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 border-b border-mist">
+          <div className="w-full max-w-7xl mx-auto">
+            <div className="max-w-2xl mx-auto text-center">
+              <h1 className="text-[2.25rem] md:text-[3rem] font-normal text-carbon mb-4" style={{ lineHeight: '1.2' }}>
                 Frequently asked questions
               </h1>
-              <p className="text-lg text-muted-foreground">
-                Common questions about our products, delivery, returns, and policies
+              <p className="text-[0.9375rem] text-ash">
+                Common questions about our products, delivery, and policies
               </p>
             </div>
           </div>
         </section>
 
-        {/* FAQ Content */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto space-y-12">
-              {faqCategories.map((category) => (
-                <div key={category.category} className="py-8">
-                  <h2 className="text-[1.875rem] font-semibold mb-6" style={{ lineHeight: '1.3' }}>{category.category}</h2>
-                  <Accordion type="single" collapsible className="w-full">
-                    {category.questions.map((item, idx) => (
-                      <AccordionItem key={idx} value={`item-${idx}`}>
-                        <AccordionTrigger className="text-left font-medium">
-                          {item.q}
-                        </AccordionTrigger>
-                        <AccordionContent className="text-muted-foreground font-light">
-                          {item.a}
-                        </AccordionContent>
-                      </AccordionItem>
-                    ))}
-                  </Accordion>
-                </div>
-              ))}
-            </div>
+        <section className="py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32">
+          <div className="w-full max-w-3xl mx-auto space-y-12">
+            {faqCategories.map((category) => (
+              <div key={category.category} className="py-8 border-t border-mist first:border-t-0">
+                <h2 className="text-[1.125rem] font-normal text-carbon mb-6">{category.category}</h2>
+                <Accordion type="single" collapsible className="w-full">
+                  {category.questions.map((item, idx) => (
+                    <AccordionItem key={idx} value={`item-${idx}`} className="border-mist">
+                      <AccordionTrigger className="text-left text-[0.9375rem] font-normal text-carbon hover:no-underline">
+                        {item.q}
+                      </AccordionTrigger>
+                      <AccordionContent className="text-[0.875rem] text-ash">
+                        {item.a}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
+            ))}
           </div>
         </section>
 
