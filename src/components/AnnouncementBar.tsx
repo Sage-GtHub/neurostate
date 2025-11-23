@@ -6,8 +6,8 @@ import { Button } from "./ui/button";
 const announcements = [
   {
     icon: Sparkles,
-    text: "BLACK FRIDAY SALE: 40% OFF EVERYTHING",
-    subtext: "USE CODE BLACKFRIDAY40",
+    text: "CHRISTMAS SALE: 40% OFF EVERYTHING",
+    subtext: "USE CODE CHRISTMAS40",
     color: "bg-carbon",
     textColor: "text-ivory",
     link: "/#products",
