@@ -2,34 +2,34 @@ import { NavLink } from "@/components/NavLink";
 
 export const NovaNav = () => {
   return (
-    <nav className="border-b border-mist bg-ivory">
+    <nav className="border-b border-mist bg-ivory overflow-x-auto">
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32">
-        <div className="flex gap-8 py-4">
+        <div className="flex gap-4 sm:gap-8 py-4 min-w-max sm:min-w-0">
           <NavLink
             to="/nova"
             end
-            className="text-sm uppercase tracking-wider text-ash transition-colors hover:text-carbon"
+            className="text-xs sm:text-sm uppercase tracking-wider text-ash transition-colors hover:text-carbon whitespace-nowrap px-2 sm:px-0"
             activeClassName="text-carbon border-b-2 border-carbon pb-4"
           >
             Chat
           </NavLink>
           <NavLink
             to="/nova/protocols"
-            className="text-sm uppercase tracking-wider text-ash transition-colors hover:text-carbon"
+            className="text-xs sm:text-sm uppercase tracking-wider text-ash transition-colors hover:text-carbon whitespace-nowrap px-2 sm:px-0"
             activeClassName="text-carbon border-b-2 border-carbon pb-4"
           >
-            My Protocols
+            Protocols
           </NavLink>
           <NavLink
             to="/nova/insights"
-            className="text-sm uppercase tracking-wider text-ash transition-colors hover:text-carbon"
+            className="text-xs sm:text-sm uppercase tracking-wider text-ash transition-colors hover:text-carbon whitespace-nowrap px-2 sm:px-0"
             activeClassName="text-carbon border-b-2 border-carbon pb-4"
           >
-            Insights & Metrics
+            Insights
           </NavLink>
           <NavLink
             to="/nova/devices"
-            className="text-sm uppercase tracking-wider text-ash transition-colors hover:text-carbon"
+            className="text-xs sm:text-sm uppercase tracking-wider text-ash transition-colors hover:text-carbon whitespace-nowrap px-2 sm:px-0"
             activeClassName="text-carbon border-b-2 border-carbon pb-4"
           >
             Devices
