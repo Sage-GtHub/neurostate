@@ -245,6 +245,36 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       reward_redemptions: {
         Row: {
           expires_at: string | null
@@ -334,6 +364,54 @@ export type Database = {
           terms?: string | null
           title?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      subscriptions: {
+        Row: {
+          created_at: string
+          currency: string
+          frequency: string
+          id: string
+          next_delivery_date: string
+          price: number
+          product_id: string
+          product_title: string
+          status: string
+          updated_at: string
+          user_id: string
+          variant_id: string
+          variant_title: string | null
+        }
+        Insert: {
+          created_at?: string
+          currency?: string
+          frequency: string
+          id?: string
+          next_delivery_date: string
+          price: number
+          product_id: string
+          product_title: string
+          status?: string
+          updated_at?: string
+          user_id: string
+          variant_id: string
+          variant_title?: string | null
+        }
+        Update: {
+          created_at?: string
+          currency?: string
+          frequency?: string
+          id?: string
+          next_delivery_date?: string
+          price?: number
+          product_id?: string
+          product_title?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+          variant_id?: string
+          variant_title?: string | null
         }
         Relationships: []
       }

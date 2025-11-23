@@ -269,6 +269,11 @@ export const Header = () => {
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
+                    <Link to="/dashboard" className="cursor-pointer text-carbon hover:bg-pearl">
+                      My Dashboard
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
                     <Link to="/profile" className="cursor-pointer text-carbon hover:bg-pearl">
                       My Profile
                     </Link>
@@ -418,6 +423,12 @@ export const Header = () => {
                     {/* Mobile Account Links */}
                     {user ? (
                       <div className="flex flex-col gap-2 pt-4 border-t border-mist">
+                        <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>
+                          <Button variant="ghost" className="w-full justify-start">
+                            <User className="h-4 w-4 mr-2" />
+                            My Dashboard
+                          </Button>
+                        </Link>
                         <Link to="/profile" onClick={() => setMobileMenuOpen(false)}>
                           <Button variant="ghost" className="w-full justify-start">
                             <User className="h-4 w-4 mr-2" />

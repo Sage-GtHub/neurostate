@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import { Check, Loader2 } from "lucide-react";
 import { useState } from "react";
+import { UrgencyIndicator } from "./UrgencyIndicator";
 
 interface ProductCardProps {
   product: ShopifyProduct;
@@ -18,6 +19,11 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const price = parseFloat(node.priceRange.minVariantPrice.amount);
   const [isAdding, setIsAdding] = useState(false);
   const [justAdded, setJustAdded] = useState(false);
+
+  // Determine urgency indicator
+  const isPopular = node.tags.includes("popular") || node.tags.includes("bestseller");
+  const isTrending = node.tags.includes("trending") || node.tags.includes("new");
+  const isLowStock = false; // This would come from inventory data in a real scenario
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -55,6 +61,15 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       <div className="h-full flex flex-col transition-all duration-500">
         {/* Product Image - Dominates the card */}
         <div className="aspect-[4/5] overflow-hidden bg-ivory relative flex-shrink-0 mb-6">
+          {/* Urgency Indicator */}
+          {(isPopular || isTrending || isLowStock) && (
+            <div className="absolute top-3 left-3 z-10">
+              {isLowStock && <UrgencyIndicator type="low-stock" count={3} />}
+              {!isLowStock && isTrending && <UrgencyIndicator type="trending" />}
+              {!isLowStock && !isTrending && isPopular && <UrgencyIndicator type="popular" />}
+            </div>
+          )}
+          
           {image ? (
             <img
               src={image.url}
