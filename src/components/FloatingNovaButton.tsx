@@ -3,14 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
 import { GuestChatWidget } from "./GuestChatWidget";
 import { useLocation } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function FloatingNovaButton() {
   const [chatOpen, setChatOpen] = useState(false);
   const location = useLocation();
+  const isMobile = useIsMobile();
 
-  // Don't show on Nova app pages
+  // Don't show on Nova app pages or on mobile
   const isNovaPage = location.pathname.startsWith('/nova') || location.pathname === '/auth';
-  if (isNovaPage) return null;
+  if (isNovaPage || isMobile) return null;
 
   return (
     <>
