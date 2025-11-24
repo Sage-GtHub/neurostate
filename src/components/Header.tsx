@@ -122,28 +122,9 @@ export const Header = () => {
             <NavigationMenuList className="gap-2">
               {/* Shop Dropdown */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-carbon hover:bg-pearl data-[state=open]:bg-pearl text-ui-label">
+                <Link to="/" className="inline-flex h-10 items-center justify-center px-4 py-2 text-ui-label text-carbon transition-colors hover:bg-pearl rounded-lg">
                   Shop
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-1 p-4 bg-background border border-mist rounded-lg shadow-soft">
-                    {shopCategories.map((category) => (
-                      <li key={category.label}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to={category.href}
-                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-colors hover:bg-pearl rounded-lg"
-                          >
-                            <category.icon className="h-5 w-5 text-carbon" />
-                            <span className="text-caption font-medium text-carbon">
-                              {category.label}
-                            </span>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
+                </Link>
               </NavigationMenuItem>
 
               {/* Bundles Link */}
@@ -163,56 +144,18 @@ export const Header = () => {
                 </button>
               </NavigationMenuItem>
 
-              {/* Guides Dropdown */}
+              {/* Guides Link */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-carbon hover:bg-pearl data-[state=open]:bg-pearl text-ui-label">
+                <Link to="/guides" className="inline-flex h-10 items-center justify-center px-4 py-2 text-ui-label text-carbon transition-colors hover:bg-pearl rounded-lg">
                   Guides
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-1 p-4 bg-background border border-mist rounded-lg shadow-soft">
-                    {guideTopics.map((topic) => (
-                      <li key={topic.label}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to={topic.href}
-                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-colors hover:bg-pearl rounded-lg"
-                          >
-                            <topic.icon className="h-5 w-5 text-carbon" />
-                            <span className="text-caption font-medium text-carbon">
-                              {topic.label}
-                            </span>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
+                </Link>
               </NavigationMenuItem>
 
-              {/* For Teams Dropdown */}
+              {/* For Teams Link */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-carbon hover:bg-pearl data-[state=open]:bg-pearl text-ui-label">
+                <Link to="/enterprise/overview" className="inline-flex h-10 items-center justify-center px-4 py-2 text-ui-label text-carbon transition-colors hover:bg-pearl rounded-lg">
                   For Teams
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-1 p-4 bg-background border border-mist rounded-lg shadow-soft">
-                    {enterpriseLinks.map((link) => (
-                      <li key={link.label}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to={link.href}
-                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-colors hover:bg-pearl rounded-lg"
-                          >
-                            <link.icon className="h-5 w-5 text-carbon" />
-                            <span className="text-caption font-medium text-carbon">
-                              {link.label}
-                            </span>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
+                </Link>
               </NavigationMenuItem>
 
               {/* Other Links */}
@@ -351,22 +294,13 @@ export const Header = () => {
                 </SheetHeader>
                 <nav className="flex flex-col gap-6 mt-8">
                   {/* Shop Section */}
-                  <div>
-                    <h3 className="text-h3 mb-3 text-carbon">Shop</h3>
-                    <div className="flex flex-col gap-2 pl-4">
-                      {shopCategories.map((category) => (
-                        <Link
-                          key={category.label}
-                          to={category.href}
-                          className="flex items-center gap-2 text-caption text-ash hover:text-carbon transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          <category.icon className="h-4 w-4" />
-                          {category.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
+                  <Link
+                    to="/"
+                    className="text-h3 text-carbon hover:text-ash transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Shop
+                  </Link>
 
                   {/* Bundles */}
                   <button
@@ -387,40 +321,22 @@ export const Header = () => {
                   </button>
 
                   {/* Guides Section */}
-                  <div>
-                    <h3 className="text-h3 mb-3 text-carbon">Guides</h3>
-                    <div className="flex flex-col gap-2 pl-4">
-                      {guideTopics.map((topic) => (
-                        <Link
-                          key={topic.label}
-                          to={topic.href}
-                          className="flex items-center gap-2 text-caption text-ash hover:text-carbon transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          <topic.icon className="h-4 w-4" />
-                          {topic.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
+                  <Link
+                    to="/guides"
+                    className="text-h3 text-carbon hover:text-ash transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Guides
+                  </Link>
 
                   {/* For Teams Section */}
-                  <div>
-                    <h3 className="text-h3 mb-3 text-carbon">For Teams</h3>
-                    <div className="flex flex-col gap-2 pl-4">
-                      {enterpriseLinks.map((link) => (
-                        <Link
-                          key={link.label}
-                          to={link.href}
-                          className="flex items-center gap-2 text-caption text-ash hover:text-carbon transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          <link.icon className="h-4 w-4" />
-                          {link.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
+                  <Link
+                    to="/enterprise/overview"
+                    className="text-h3 text-carbon hover:text-ash transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    For Teams
+                  </Link>
 
                   {/* Other Links */}
                   {otherLinks.map((link) => (
