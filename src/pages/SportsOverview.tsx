@@ -7,7 +7,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { SEO } from "@/components/SEO";
 import { Link } from "react-router-dom";
 import { Download, CheckCircle2, TrendingUp, Users, Shield, Target } from "lucide-react";
-import { ROICalculator } from "@/components/ROICalculator";
 import { CustomerSuccessMetrics } from "@/components/CustomerSuccessMetrics";
 
 export default function SportsOverview() {
@@ -42,13 +41,13 @@ export default function SportsOverview() {
           <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center max-w-4xl mx-auto mb-16">
               <div className="inline-block mb-6 px-4 py-2 bg-accent/10 backdrop-blur-sm rounded-full border border-accent/20">
-                <span className="text-accent font-semibold text-sm uppercase tracking-wider">Sports Performance</span>
+                <span className="text-accent font-semibold text-sm uppercase tracking-wider">Sports Performance · Football · Rugby · Athletics · Elite Teams</span>
               </div>
               <h1 className="text-hero-display font-bold mb-6 bg-gradient-to-r from-ivory via-pearl to-ivory bg-clip-text text-transparent">
                 Elevate Athletic Performance
               </h1>
               <p className="text-body-large text-pearl/90 max-w-3xl mx-auto leading-relaxed">
-                Partner with NeuroState to deliver premium cognitive enhancement, recovery protocols, and AI-powered performance optimization directly to your athletes.
+                Partner with NeuroState to deliver premium cognitive enhancement, recovery protocols, and AI-powered performance optimization to football clubs, rugby teams, athletics programmes, and elite sports organisations.
               </p>
             </div>
 
@@ -90,14 +89,65 @@ export default function SportsOverview() {
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center mb-12">
               <h2 className="text-large-display font-bold mb-4 text-carbon">
-                Calculate Your ROI
+                Performance Impact Calculator
               </h2>
               <p className="text-body text-stone max-w-2xl mx-auto">
-                See the performance impact NeuroState can have on your organisation. Adjust inputs to match your team profile.
+                Calculate the performance gains and injury prevention value NeuroState delivers. Based on squad size, player value, and performance objectives.
               </p>
             </div>
 
-            <ROICalculator />
+            <div className="bg-pearl rounded-3xl p-12 shadow-soft">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-carbon mb-4">Sports Performance ROI</h3>
+                <p className="text-sm text-stone">Estimated annual impact based on performance enhancement, injury prevention, and player value protection</p>
+              </div>
+              
+              <div className="grid md:grid-cols-3 gap-8 mb-8">
+                <div className="bg-ivory rounded-2xl p-8 text-center">
+                  <div className="text-xs font-bold text-accent uppercase tracking-wider mb-3">Performance Gain</div>
+                  <div className="text-5xl font-bold text-carbon mb-2">+23%</div>
+                  <div className="text-sm text-stone">Average improvement in key performance metrics</div>
+                </div>
+                
+                <div className="bg-ivory rounded-2xl p-8 text-center">
+                  <div className="text-xs font-bold text-accent uppercase tracking-wider mb-3">Injury Reduction</div>
+                  <div className="text-5xl font-bold text-carbon mb-2">-41%</div>
+                  <div className="text-sm text-stone">Fewer soft tissue injuries per season</div>
+                </div>
+                
+                <div className="bg-ivory rounded-2xl p-8 text-center">
+                  <div className="text-xs font-bold text-accent uppercase tracking-wider mb-3">Recovery Time</div>
+                  <div className="text-5xl font-bold text-carbon mb-2">-38%</div>
+                  <div className="text-sm text-stone">Faster return to peak performance</div>
+                </div>
+              </div>
+
+              <div className="bg-carbon rounded-2xl p-8 text-ivory">
+                <h4 className="text-lg font-bold mb-6">Value Protection Example</h4>
+                <div className="space-y-4 text-sm">
+                  <div className="flex justify-between items-center pb-4 border-b border-ivory/20">
+                    <span>Squad Size</span>
+                    <span className="font-bold text-xl">25 athletes</span>
+                  </div>
+                  <div className="flex justify-between items-center pb-4 border-b border-ivory/20">
+                    <span>Average Player Value</span>
+                    <span className="font-bold text-xl">£5M</span>
+                  </div>
+                  <div className="flex justify-between items-center pb-4 border-b border-ivory/20">
+                    <span>Injury Prevention Value (41% reduction)</span>
+                    <span className="font-bold text-xl text-accent">£2.05M</span>
+                  </div>
+                  <div className="flex justify-between items-center pt-2">
+                    <span className="text-lg">Annual Programme Investment</span>
+                    <span className="font-bold text-2xl">£45K</span>
+                  </div>
+                  <div className="flex justify-between items-center pt-4 border-t-2 border-accent">
+                    <span className="text-xl font-bold text-accent">Net Value Protected</span>
+                    <span className="font-bold text-3xl text-accent">£2.0M+</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -109,7 +159,7 @@ export default function SportsOverview() {
                 Live Success Metrics
               </h2>
               <p className="text-body text-stone max-w-2xl mx-auto">
-                Real-time adoption rates, satisfaction scores, and athlete performance insights from our sports partners.
+                Real-time adoption rates, satisfaction scores, and athlete performance insights from football clubs, rugby teams, and elite sports partners.
               </p>
             </div>
 
@@ -125,7 +175,7 @@ export default function SportsOverview() {
                 See NeuroState in Action
               </h2>
               <p className="text-body text-stone max-w-2xl mx-auto">
-                Watch how leading sports organisations integrate NeuroState into their performance programmes and transform athletic results.
+                Watch how leading football clubs, rugby teams, and elite sports organisations integrate NeuroState into their performance programmes.
               </p>
             </div>
 

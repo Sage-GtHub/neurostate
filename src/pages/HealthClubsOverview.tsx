@@ -7,7 +7,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { SEO } from "@/components/SEO";
 import { Link } from "react-router-dom";
 import { Download, CheckCircle2, TrendingUp, Users, Shield, Target } from "lucide-react";
-import { ROICalculator } from "@/components/ROICalculator";
 import { CustomerSuccessMetrics } from "@/components/CustomerSuccessMetrics";
 
 export default function HealthClubsOverview() {
@@ -42,13 +41,13 @@ export default function HealthClubsOverview() {
           <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center max-w-4xl mx-auto mb-16">
               <div className="inline-block mb-6 px-4 py-2 bg-accent/10 backdrop-blur-sm rounded-full border border-accent/20">
-                <span className="text-accent font-semibold text-sm uppercase tracking-wider">Member Wellness</span>
+                <span className="text-accent font-semibold text-sm uppercase tracking-wider">Member Wellness · Gyms · Yoga Studios · Private Members Clubs</span>
               </div>
               <h1 className="text-hero-display font-bold mb-6 bg-gradient-to-r from-ivory via-pearl to-ivory bg-clip-text text-transparent">
                 Elevate Member Experience
               </h1>
               <p className="text-body-large text-pearl/90 max-w-3xl mx-auto leading-relaxed">
-                Partner with NeuroState to deliver premium cognitive enhancement, recovery protocols, and AI-powered wellness optimization directly to your members.
+                Partner with NeuroState to deliver premium wellness optimization to gyms, yoga studios, private members clubs, and boutique fitness facilities. Increase retention, boost revenue, elevate member satisfaction.
               </p>
             </div>
 
@@ -90,14 +89,69 @@ export default function HealthClubsOverview() {
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center mb-12">
               <h2 className="text-large-display font-bold mb-4 text-carbon">
-                Calculate Your ROI
+                Member Retention & Revenue Calculator
               </h2>
               <p className="text-body text-stone max-w-2xl mx-auto">
-                See the impact NeuroState can have on member retention and revenue. Adjust inputs to match your facility profile.
+                Calculate the retention and revenue impact NeuroState delivers. Based on member count, lifetime value, and churn reduction.
               </p>
             </div>
 
-            <ROICalculator />
+            <div className="bg-pearl rounded-3xl p-12 shadow-soft">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-carbon mb-4">Facility Revenue ROI</h3>
+                <p className="text-sm text-stone">Estimated annual impact based on member retention improvement and premium service revenue</p>
+              </div>
+              
+              <div className="grid md:grid-cols-3 gap-8 mb-8">
+                <div className="bg-ivory rounded-2xl p-8 text-center">
+                  <div className="text-xs font-bold text-accent uppercase tracking-wider mb-3">Retention Increase</div>
+                  <div className="text-5xl font-bold text-carbon mb-2">+34%</div>
+                  <div className="text-sm text-stone">Average improvement in member retention rate</div>
+                </div>
+                
+                <div className="bg-ivory rounded-2xl p-8 text-center">
+                  <div className="text-xs font-bold text-accent uppercase tracking-wider mb-3">Revenue Per Member</div>
+                  <div className="text-5xl font-bold text-carbon mb-2">+28%</div>
+                  <div className="text-sm text-stone">Increase through premium wellness offering</div>
+                </div>
+                
+                <div className="bg-ivory rounded-2xl p-8 text-center">
+                  <div className="text-xs font-bold text-accent uppercase tracking-wider mb-3">Member Satisfaction</div>
+                  <div className="text-5xl font-bold text-carbon mb-2">89%</div>
+                  <div className="text-sm text-stone">NPS score from NeuroState partner facilities</div>
+                </div>
+              </div>
+
+              <div className="bg-carbon rounded-2xl p-8 text-ivory">
+                <h4 className="text-lg font-bold mb-6">Revenue Impact Example</h4>
+                <div className="space-y-4 text-sm">
+                  <div className="flex justify-between items-center pb-4 border-b border-ivory/20">
+                    <span>Active Members</span>
+                    <span className="font-bold text-xl">500 members</span>
+                  </div>
+                  <div className="flex justify-between items-center pb-4 border-b border-ivory/20">
+                    <span>Average Lifetime Value</span>
+                    <span className="font-bold text-xl">£1,200</span>
+                  </div>
+                  <div className="flex justify-between items-center pb-4 border-b border-ivory/20">
+                    <span>Churn Prevention (34% retention increase)</span>
+                    <span className="font-bold text-xl text-accent">£204K</span>
+                  </div>
+                  <div className="flex justify-between items-center pb-4 border-b border-ivory/20">
+                    <span>Premium Service Revenue (28% ARPU increase)</span>
+                    <span className="font-bold text-xl text-accent">£168K</span>
+                  </div>
+                  <div className="flex justify-between items-center pt-2">
+                    <span className="text-lg">Annual Programme Investment</span>
+                    <span className="font-bold text-2xl">£30K</span>
+                  </div>
+                  <div className="flex justify-between items-center pt-4 border-t-2 border-accent">
+                    <span className="text-xl font-bold text-accent">Net Revenue Gain</span>
+                    <span className="font-bold text-3xl text-accent">£342K+</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -109,7 +163,7 @@ export default function HealthClubsOverview() {
                 Live Success Metrics
               </h2>
               <p className="text-body text-stone max-w-2xl mx-auto">
-                Real-time adoption rates, satisfaction scores, and member engagement insights from our health club partners.
+                Real-time adoption rates, satisfaction scores, and member engagement insights from gyms, yoga studios, and private members clubs.
               </p>
             </div>
 
@@ -125,7 +179,7 @@ export default function HealthClubsOverview() {
                 See NeuroState in Action
               </h2>
               <p className="text-body text-stone max-w-2xl mx-auto">
-                Watch how leading health clubs and studios integrate NeuroState into their member programmes and transform retention.
+                Watch how leading gyms, yoga studios, and boutique fitness clubs integrate NeuroState into their member programmes.
               </p>
             </div>
 
