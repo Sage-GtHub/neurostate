@@ -98,9 +98,9 @@ export const Header = () => {
   ];
 
   const enterpriseLinks = [
-    { label: "Corporate Wellness", href: "/enterprise/overview", icon: Target },
-    { label: "Sports Organisations", href: "/enterprise/overview", icon: Activity },
-    { label: "Health Clubs and Studios", href: "/enterprise/overview", icon: Zap },
+    { label: "Corporate Wellness", href: "/enterprise/corporate/overview", icon: Target },
+    { label: "Sports Organisations", href: "/enterprise/sports/overview", icon: Activity },
+    { label: "Health Clubs and Studios", href: "/enterprise/health-clubs/overview", icon: Zap },
   ];
 
   const otherLinks = [

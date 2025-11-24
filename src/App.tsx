@@ -35,6 +35,8 @@ import OrderTracking from "./pages/OrderTracking";
 import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/Dashboard";
 import ProgramOverview from "./pages/ProgramOverview";
+import SportsOverview from "./pages/SportsOverview";
+import HealthClubsOverview from "./pages/HealthClubsOverview";
 import EnterpriseIntegrations from "./pages/EnterpriseIntegrations";
 import EnterprisePricing from "./pages/EnterprisePricing";
 import EnterpriseCaseStudies from "./pages/EnterpriseCaseStudies";
@@ -87,7 +89,26 @@ const App = () => (
           <Route path="/nova/protocols/:id" element={<ProtectedRoute><ProtocolDetail /></ProtectedRoute>} />
           <Route path="/nova/insights" element={<ProtectedRoute><NovaInsights /></ProtectedRoute>} />
           <Route path="/nova/devices" element={<ProtectedRoute><NovaDevices /></ProtectedRoute>} />
+          {/* Corporate Wellness Routes */}
           <Route path="/enterprise/overview" element={<ProgramOverview />} />
+          <Route path="/enterprise/corporate/overview" element={<ProgramOverview />} />
+          <Route path="/enterprise/corporate/integrations" element={<EnterpriseIntegrations />} />
+          <Route path="/enterprise/corporate/pricing" element={<EnterprisePricing />} />
+          <Route path="/enterprise/corporate/cases" element={<EnterpriseCaseStudies />} />
+          
+          {/* Sports Organisations Routes */}
+          <Route path="/enterprise/sports/overview" element={<SportsOverview />} />
+          <Route path="/enterprise/sports/integrations" element={<EnterpriseIntegrations />} />
+          <Route path="/enterprise/sports/pricing" element={<EnterprisePricing />} />
+          <Route path="/enterprise/sports/cases" element={<EnterpriseCaseStudies />} />
+          
+          {/* Health Clubs & Studios Routes */}
+          <Route path="/enterprise/health-clubs/overview" element={<HealthClubsOverview />} />
+          <Route path="/enterprise/health-clubs/integrations" element={<EnterpriseIntegrations />} />
+          <Route path="/enterprise/health-clubs/pricing" element={<EnterprisePricing />} />
+          <Route path="/enterprise/health-clubs/cases" element={<EnterpriseCaseStudies />} />
+          
+          {/* Legacy enterprise routes */}
           <Route path="/enterprise/integrations" element={<EnterpriseIntegrations />} />
           <Route path="/enterprise/pricing" element={<EnterprisePricing />} />
           <Route path="/enterprise/cases" element={<EnterpriseCaseStudies />} />
