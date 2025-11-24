@@ -100,22 +100,22 @@ export default function EnterprisePricing() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="text-center">
                 <div className="text-5xl sm:text-6xl font-bold mb-3 text-accent">47%</div>
-                <div className="text-lg font-semibold mb-1">Increase in Focus</div>
+                <div className="text-lg font-semibold mb-1 text-ivory">Increase in Focus</div>
                 <div className="text-sm text-mist">Measured via cognitive tests</div>
               </div>
               <div className="text-center">
                 <div className="text-5xl sm:text-6xl font-bold mb-3 text-accent">63%</div>
-                <div className="text-lg font-semibold mb-1">Reduction in Burnout</div>
+                <div className="text-lg font-semibold mb-1 text-ivory">Reduction in Burnout</div>
                 <div className="text-sm text-mist">Employee wellness surveys</div>
               </div>
               <div className="text-center">
                 <div className="text-5xl sm:text-6xl font-bold mb-3 text-accent">31%</div>
-                <div className="text-lg font-semibold mb-1">Productivity Gain</div>
+                <div className="text-lg font-semibold mb-1 text-ivory">Productivity Gain</div>
                 <div className="text-sm text-mist">Output per employee</div>
               </div>
               <div className="text-center">
                 <div className="text-5xl sm:text-6xl font-bold mb-3 text-accent">89%</div>
-                <div className="text-lg font-semibold mb-1">Employee Satisfaction</div>
+                <div className="text-lg font-semibold mb-1 text-ivory">Employee Satisfaction</div>
                 <div className="text-sm text-mist">Program NPS score</div>
               </div>
             </div>
