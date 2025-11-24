@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
 import { Link } from "react-router-dom";
-import { ChevronDown, ChevronUp, ExternalLink, MessageSquare, Calendar, Shield, Code, Users } from "lucide-react";
+import { ChevronDown, ChevronUp, ExternalLink, MessageSquare, Calendar, Shield, Code, Users, CheckCircle2 } from "lucide-react";
 
 interface IntegrationCardProps {
   title: string;
@@ -20,17 +20,17 @@ function IntegrationCard({ title, description, features, setupTime, badge, icon,
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="border border-mist rounded-2xl overflow-hidden bg-ivory hover:shadow-soft transition-shadow">
-      <div className="p-8">
+    <div className="group bg-pearl rounded-3xl overflow-hidden hover:shadow-soft transition-all">
+      <div className="p-10">
         <div className="flex items-start justify-between mb-6">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-pearl rounded-xl flex items-center justify-center">
+          <div className="flex items-center gap-5">
+            <div className="w-16 h-16 bg-ivory rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform">
               {icon}
             </div>
             <div>
-              <h3 className="text-2xl font-bold text-carbon">{title}</h3>
+              <h3 className="text-3xl font-bold text-carbon mb-2">{title}</h3>
               {badge && (
-                <span className="inline-block mt-2 px-3 py-1 bg-accent/10 text-accent text-xs font-semibold uppercase tracking-wide rounded-full">
+                <span className="inline-block px-4 py-1.5 bg-accent/10 text-accent text-xs font-bold uppercase tracking-wider rounded-full">
                   {badge}
                 </span>
               )}
@@ -38,37 +38,40 @@ function IntegrationCard({ title, description, features, setupTime, badge, icon,
           </div>
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-stone hover:text-carbon transition-colors"
+            className="text-stone hover:text-carbon transition-colors mt-2"
           >
-            {isExpanded ? <ChevronUp className="w-6 h-6" /> : <ChevronDown className="w-6 h-6" />}
+            {isExpanded ? <ChevronUp className="w-7 h-7" /> : <ChevronDown className="w-7 h-7" />}
           </button>
         </div>
 
-        <p className="text-body text-stone mb-6">{description}</p>
+        <p className="text-body-large text-stone mb-8">{description}</p>
 
         {isExpanded && (
-          <div className="space-y-6 pt-6 border-t border-mist">
-            <ul className="space-y-3">
+          <div className="space-y-8 pt-8 border-t border-mist animate-fade-in">
+            <div className="grid md:grid-cols-2 gap-4">
               {features.map((feature, index) => (
-                <li key={index} className="flex items-start gap-3 text-sm text-stone">
-                  <span className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0" />
-                  {feature}
-                </li>
+                <div key={index} className="flex items-start gap-3 bg-ivory rounded-xl p-4">
+                  <CheckCircle2 className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                  <span className="text-sm text-stone font-medium">{feature}</span>
+                </div>
               ))}
-            </ul>
+            </div>
 
             {codeExample && (
-              <div className="bg-carbon rounded-xl p-6 overflow-x-auto">
-                <pre className="text-sm text-pearl font-mono">
+              <div className="bg-carbon rounded-2xl p-8 overflow-x-auto">
+                <pre className="text-sm text-pearl font-mono leading-relaxed">
                   <code>{codeExample}</code>
                 </pre>
               </div>
             )}
 
-            <div className="flex items-center justify-between pt-4">
-              <span className="text-sm text-stone">Setup time: <span className="font-semibold text-carbon">{setupTime}</span></span>
-              <Button variant="outline" size="sm" className="gap-2">
-                View Docs <ExternalLink className="w-4 h-4" />
+            <div className="flex items-center justify-between pt-6">
+              <div className="flex items-center gap-3">
+                <span className="text-sm text-stone">Setup time:</span>
+                <span className="px-4 py-2 bg-accent/10 text-accent text-sm font-bold rounded-full">{setupTime}</span>
+              </div>
+              <Button variant="default" size="lg" className="gap-2">
+                View Documentation <ExternalLink className="w-4 h-4" />
               </Button>
             </div>
           </div>

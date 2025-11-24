@@ -86,40 +86,48 @@ export default function ProgramOverview() {
             </h2>
 
             <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-pearl rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <Target className="w-8 h-8 text-accent" />
+              <div className="bg-pearl rounded-3xl p-10 hover:shadow-soft transition-all">
+                <div className="w-20 h-20 bg-ivory rounded-2xl flex items-center justify-center mb-6">
+                  <Target className="w-10 h-10 text-accent" />
                 </div>
-                <h3 className="text-2xl font-semibold mb-4 text-carbon">Nova AI Assistant</h3>
-                <p className="text-body text-stone mb-4">
+                <h3 className="text-2xl font-bold mb-4 text-carbon">Nova AI Assistant</h3>
+                <p className="text-body text-stone mb-6">
                   Personalised wellness protocols for every team member via chat, mobile app, or web dashboard.
                 </p>
-                <div className="text-sm text-ash">24/7 AI health coach</div>
+                <div className="inline-block px-4 py-2 bg-accent/10 text-accent text-sm font-medium rounded-full">
+                  24/7 AI health coach
+                </div>
               </div>
 
-              <div className="text-center">
-                <div className="w-16 h-16 bg-pearl rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <TrendingUp className="w-8 h-8 text-accent" />
+              <div className="bg-pearl rounded-3xl p-10 hover:shadow-soft transition-all">
+                <div className="w-20 h-20 bg-ivory rounded-2xl flex items-center justify-center mb-6">
+                  <TrendingUp className="w-10 h-10 text-accent" />
                 </div>
-                <h3 className="text-2xl font-semibold mb-4 text-carbon">Team Dashboard</h3>
-                <p className="text-body text-stone mb-4">
+                <h3 className="text-2xl font-bold mb-4 text-carbon">Team Dashboard</h3>
+                <p className="text-body text-stone mb-6">
                   Aggregated wellness insights and engagement metrics for HR and leadership.
                 </p>
-                <div className="space-y-1 text-sm text-ash">
-                  <div>Anonymized team health trends</div>
-                  <div>Engagement analytics</div>
+                <div className="space-y-2">
+                  <div className="inline-block px-4 py-2 bg-accent/10 text-accent text-sm font-medium rounded-full mr-2">
+                    Health trends
+                  </div>
+                  <div className="inline-block px-4 py-2 bg-accent/10 text-accent text-sm font-medium rounded-full">
+                    Engagement analytics
+                  </div>
                 </div>
               </div>
 
-              <div className="text-center">
-                <div className="w-16 h-16 bg-pearl rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <Shield className="w-8 h-8 text-accent" />
+              <div className="bg-pearl rounded-3xl p-10 hover:shadow-soft transition-all">
+                <div className="w-20 h-20 bg-ivory rounded-2xl flex items-center justify-center mb-6">
+                  <Shield className="w-10 h-10 text-accent" />
                 </div>
-                <h3 className="text-2xl font-semibold mb-4 text-carbon">Premium Product Access</h3>
-                <p className="text-body text-stone mb-4">
+                <h3 className="text-2xl font-bold mb-4 text-carbon">Premium Product Access</h3>
+                <p className="text-body text-stone mb-6">
                   Discounted supplements, red light devices, and recovery products for your team.
                 </p>
-                <div className="text-sm text-ash">20-40% corporate discount</div>
+                <div className="inline-block px-4 py-2 bg-accent/10 text-accent text-sm font-medium rounded-full">
+                  20-40% corporate discount
+                </div>
               </div>
             </div>
           </div>
@@ -213,61 +221,113 @@ export default function ProgramOverview() {
         {/* Implementation Timeline */}
         <section className="py-20 bg-ivory">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-            <h2 className="text-large-display font-bold text-center mb-16 text-carbon">
+            <h2 className="text-large-display font-bold text-center mb-4 text-carbon">
               Implementation Timeline
             </h2>
+            <p className="text-body text-center text-stone mb-16 max-w-2xl mx-auto">
+              Go live in 4 weeks with our streamlined implementation process
+            </p>
 
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr className="border-b-2 border-carbon">
-                    <th className="text-left py-4 px-6 font-bold text-carbon uppercase tracking-wide">Week 1</th>
-                    <th className="text-left py-4 px-6 font-bold text-carbon uppercase tracking-wide">Week 2</th>
-                    <th className="text-left py-4 px-6 font-bold text-carbon uppercase tracking-wide">Week 3-4</th>
-                    <th className="text-left py-4 px-6 font-bold text-carbon uppercase tracking-wide">Month 2+</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b border-mist">
-                    <td className="py-6 px-6">
-                      <div className="font-semibold text-carbon mb-3">Onboarding</div>
-                      <ul className="space-y-2 text-sm text-stone">
-                        <li>Contract signing</li>
-                        <li>Team setup</li>
-                        <li>Dashboard access</li>
-                        <li>Admin training</li>
-                      </ul>
-                    </td>
-                    <td className="py-6 px-6">
-                      <div className="font-semibold text-carbon mb-3">Launch</div>
-                      <ul className="space-y-2 text-sm text-stone">
-                        <li>Employee invitations</li>
-                        <li>Kickoff webinar</li>
-                        <li>Nova onboarding</li>
-                        <li>First orders</li>
-                      </ul>
-                    </td>
-                    <td className="py-6 px-6">
-                      <div className="font-semibold text-carbon mb-3">Adoption</div>
-                      <ul className="space-y-2 text-sm text-stone">
-                        <li>Usage monitoring</li>
-                        <li>Support tickets</li>
-                        <li>Feedback collection</li>
-                        <li>Engagement boost</li>
-                      </ul>
-                    </td>
-                    <td className="py-6 px-6">
-                      <div className="font-semibold text-carbon mb-3">Optimization</div>
-                      <ul className="space-y-2 text-sm text-stone">
-                        <li>Performance review</li>
-                        <li>ROI analysis</li>
-                        <li>Programme refinement</li>
-                        <li>Scale planning</li>
-                      </ul>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="grid md:grid-cols-4 gap-6">
+              <div className="relative">
+                <div className="bg-pearl rounded-2xl p-8 h-full hover:shadow-soft transition-all">
+                  <div className="text-sm font-bold text-accent uppercase tracking-wider mb-3">Week 1</div>
+                  <div className="text-xl font-bold text-carbon mb-6">Onboarding</div>
+                  <ul className="space-y-3 text-sm text-stone">
+                    <li className="flex items-start gap-2">
+                      <span className="w-1 h-1 bg-accent rounded-full mt-2 flex-shrink-0" />
+                      Contract signing
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-1 h-1 bg-accent rounded-full mt-2 flex-shrink-0" />
+                      Team setup
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-1 h-1 bg-accent rounded-full mt-2 flex-shrink-0" />
+                      Dashboard access
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-1 h-1 bg-accent rounded-full mt-2 flex-shrink-0" />
+                      Admin training
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="bg-pearl rounded-2xl p-8 h-full hover:shadow-soft transition-all">
+                  <div className="text-sm font-bold text-accent uppercase tracking-wider mb-3">Week 2</div>
+                  <div className="text-xl font-bold text-carbon mb-6">Launch</div>
+                  <ul className="space-y-3 text-sm text-stone">
+                    <li className="flex items-start gap-2">
+                      <span className="w-1 h-1 bg-accent rounded-full mt-2 flex-shrink-0" />
+                      Employee invitations
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-1 h-1 bg-accent rounded-full mt-2 flex-shrink-0" />
+                      Kickoff webinar
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-1 h-1 bg-accent rounded-full mt-2 flex-shrink-0" />
+                      Nova onboarding
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-1 h-1 bg-accent rounded-full mt-2 flex-shrink-0" />
+                      First orders
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="bg-pearl rounded-2xl p-8 h-full hover:shadow-soft transition-all">
+                  <div className="text-sm font-bold text-accent uppercase tracking-wider mb-3">Week 3-4</div>
+                  <div className="text-xl font-bold text-carbon mb-6">Adoption</div>
+                  <ul className="space-y-3 text-sm text-stone">
+                    <li className="flex items-start gap-2">
+                      <span className="w-1 h-1 bg-accent rounded-full mt-2 flex-shrink-0" />
+                      Usage monitoring
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-1 h-1 bg-accent rounded-full mt-2 flex-shrink-0" />
+                      Support tickets
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-1 h-1 bg-accent rounded-full mt-2 flex-shrink-0" />
+                      Feedback collection
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-1 h-1 bg-accent rounded-full mt-2 flex-shrink-0" />
+                      Engagement boost
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="bg-pearl rounded-2xl p-8 h-full hover:shadow-soft transition-all">
+                  <div className="text-sm font-bold text-accent uppercase tracking-wider mb-3">Month 2+</div>
+                  <div className="text-xl font-bold text-carbon mb-6">Optimization</div>
+                  <ul className="space-y-3 text-sm text-stone">
+                    <li className="flex items-start gap-2">
+                      <span className="w-1 h-1 bg-accent rounded-full mt-2 flex-shrink-0" />
+                      Performance review
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-1 h-1 bg-accent rounded-full mt-2 flex-shrink-0" />
+                      ROI analysis
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-1 h-1 bg-accent rounded-full mt-2 flex-shrink-0" />
+                      Programme refinement
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-1 h-1 bg-accent rounded-full mt-2 flex-shrink-0" />
+                      Scale planning
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </section>
