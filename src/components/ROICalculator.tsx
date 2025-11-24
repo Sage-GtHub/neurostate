@@ -279,9 +279,9 @@ export function ROICalculator() {
           </div>
         </div>
 
-        <div className="text-xs text-stone pt-4 border-t border-mist">
-          * Calculations based on verified metrics from enterprise deployments. Individual results may vary based on industry.
-        </div>
+          <div className="text-xs text-stone pt-4 border-t border-mist">
+            * Calculations based on verified metrics from enterprise deployments. Individual results may vary based on industry.
+          </div>
       </div>
     </div>
     </div>

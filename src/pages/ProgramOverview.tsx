@@ -105,7 +105,7 @@ export default function ProgramOverview() {
                 Calculate Your ROI
               </h2>
               <p className="text-body text-stone max-w-2xl mx-auto">
-                See the financial impact NeuroState can have on your organization. Choose your industry and adjust inputs to match your company profile.
+                See the financial impact NeuroState can have on your organisation. Choose your industry and adjust inputs to match your company profile.
               </p>
             </div>
 
@@ -137,7 +137,7 @@ export default function ProgramOverview() {
                 See NeuroState in Action
               </h2>
               <p className="text-body text-stone max-w-2xl mx-auto">
-                Watch how leading organizations integrate NeuroState into their wellness programs and transform team performance.
+                Watch how leading organisations integrate NeuroState into their wellness programmes and transform team performance.
               </p>
             </div>
 
@@ -196,7 +196,7 @@ export default function ProgramOverview() {
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center mb-12">
               <h2 className="text-large-display font-bold mb-4 text-carbon">
-                NeuroState vs Traditional Wellness Programs
+                NeuroState vs Traditional Wellness Programmes
               </h2>
               <p className="text-body text-stone max-w-2xl mx-auto">
                 See how NeuroState delivers measurable performance gains compared to generic wellness benefits.
@@ -508,7 +508,7 @@ export default function ProgramOverview() {
                 Ready to Partner?
               </h2>
               <p className="text-body text-stone max-w-2xl mx-auto">
-                Schedule a demo with our partnerships team to discuss your organization's needs.
+                Schedule a demo with our partnerships team to discuss your organisation's needs.
               </p>
             </div>
 
@@ -577,7 +577,7 @@ export default function ProgramOverview() {
         <section className="py-12 bg-carbon text-ivory">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="flex flex-wrap justify-center gap-6 text-sm uppercase tracking-wider">
-              <Link to="/enterprise/overview" className="hover:text-accent transition-colors">Program Overview</Link>
+              <Link to="/enterprise/overview" className="hover:text-accent transition-colors">Programme Overview</Link>
               <Link to="/enterprise/integrations" className="hover:text-accent transition-colors">Integrations</Link>
               <Link to="/enterprise/pricing" className="hover:text-accent transition-colors">Pricing Calculator</Link>
               <Link to="/enterprise/cases" className="hover:text-accent transition-colors">Case Studies</Link>
