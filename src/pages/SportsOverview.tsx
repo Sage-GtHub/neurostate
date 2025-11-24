@@ -7,6 +7,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { SEO } from "@/components/SEO";
 import { Link } from "react-router-dom";
 import { Download, CheckCircle2, TrendingUp, Users, Shield, Target } from "lucide-react";
+import { SportsROICalculator } from "@/components/SportsROICalculator";
+import { SportsComparisonTable } from "@/components/SportsComparisonTable";
 import { CustomerSuccessMetrics } from "@/components/CustomerSuccessMetrics";
 
 export default function SportsOverview() {
@@ -148,6 +150,38 @@ export default function SportsOverview() {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* ROI Calculator Section */}
+        <section className="py-20 bg-pearl">
+          <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="text-center mb-12">
+              <h2 className="text-large-display font-bold mb-4 text-carbon">
+                Calculate Your Performance ROI
+              </h2>
+              <p className="text-body text-stone max-w-2xl mx-auto">
+                See the financial impact of injury prevention and performance gains for your squad.
+              </p>
+            </div>
+
+            <SportsROICalculator />
+          </div>
+        </section>
+
+        {/* Comparison Table */}
+        <section className="py-20 bg-ivory">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="text-center mb-12">
+              <h2 className="text-large-display font-bold mb-4 text-carbon">
+                NeuroState vs Traditional Sports Nutrition
+              </h2>
+              <p className="text-body text-stone max-w-2xl mx-auto">
+                See how NeuroState's integrated approach compares to conventional sports programs.
+              </p>
+            </div>
+
+            <SportsComparisonTable />
           </div>
         </section>
 

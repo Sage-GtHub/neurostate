@@ -7,7 +7,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { SEO } from "@/components/SEO";
 import { Link } from "react-router-dom";
 import { Download, CheckCircle2, TrendingUp, Users, Shield, Target } from "lucide-react";
-import { ROICalculator } from "@/components/ROICalculator";
+import { CorporateROICalculator } from "@/components/CorporateROICalculator";
+import { CorporateComparisonTable } from "@/components/CorporateComparisonTable";
 import { CustomerSuccessMetrics } from "@/components/CustomerSuccessMetrics";
 
 export default function ProgramOverview() {
@@ -97,7 +98,7 @@ export default function ProgramOverview() {
               </p>
             </div>
 
-            <ROICalculator />
+            <CorporateROICalculator />
           </div>
         </section>
 
@@ -191,83 +192,7 @@ export default function ProgramOverview() {
               </p>
             </div>
 
-            <div className="bg-pearl rounded-3xl p-8 overflow-x-auto shadow-soft">
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr className="border-b-2 border-carbon">
-                    <th className="text-left py-6 px-6 font-bold text-carbon uppercase tracking-wide">Feature</th>
-                    <th className="text-center py-6 px-6 font-bold text-accent uppercase tracking-wide">NeuroState</th>
-                    <th className="text-center py-6 px-6 font-bold text-stone uppercase tracking-wide">Traditional Programs</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b border-mist">
-                    <td className="py-6 px-6 font-semibold text-carbon">AI-Powered Personalisation</td>
-                    <td className="py-6 px-6 text-center">
-                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-carbon/10">
-                        <CheckCircle2 className="w-6 h-6 text-carbon" />
-                      </div>
-                    </td>
-                    <td className="py-6 px-6 text-center text-stone">—</td>
-                  </tr>
-                  <tr className="border-b border-mist bg-ivory/50">
-                    <td className="py-6 px-6 font-semibold text-carbon">Cognitive Performance Focus</td>
-                    <td className="py-6 px-6 text-center">
-                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-carbon/10">
-                        <CheckCircle2 className="w-6 h-6 text-carbon" />
-                      </div>
-                    </td>
-                    <td className="py-6 px-6 text-center text-stone">—</td>
-                  </tr>
-                  <tr className="border-b border-mist">
-                    <td className="py-6 px-6 font-semibold text-carbon">Real-Time Analytics</td>
-                    <td className="py-6 px-6 text-center">
-                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-carbon/10">
-                        <CheckCircle2 className="w-6 h-6 text-carbon" />
-                      </div>
-                    </td>
-                    <td className="py-6 px-6 text-center text-sm text-stone">Annual surveys only</td>
-                  </tr>
-                  <tr className="border-b border-mist bg-ivory/50">
-                    <td className="py-6 px-6 font-semibold text-carbon">Premium Products Included</td>
-                    <td className="py-6 px-6 text-center">
-                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-carbon/10">
-                        <CheckCircle2 className="w-6 h-6 text-carbon" />
-                      </div>
-                    </td>
-                    <td className="py-6 px-6 text-center text-sm text-stone">Gym membership only</td>
-                  </tr>
-                  <tr className="border-b border-mist">
-                    <td className="py-6 px-6 font-semibold text-carbon">Measurable ROI</td>
-                    <td className="py-6 px-6 text-center font-bold text-carbon"><span className="text-accent">47%</span> focus increase</td>
-                    <td className="py-6 px-6 text-center text-sm text-stone">No clear metrics</td>
-                  </tr>
-                  <tr className="border-b border-mist bg-ivory/50">
-                    <td className="py-6 px-6 font-semibold text-carbon">Slack/Teams Integration</td>
-                    <td className="py-6 px-6 text-center">
-                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-carbon/10">
-                        <CheckCircle2 className="w-6 h-6 text-carbon" />
-                      </div>
-                    </td>
-                    <td className="py-6 px-6 text-center text-stone">—</td>
-                  </tr>
-                  <tr className="border-b border-mist">
-                    <td className="py-6 px-6 font-semibold text-carbon">Implementation Time</td>
-                    <td className="py-6 px-6 text-center font-bold text-carbon"><span className="text-accent">2-4</span> weeks</td>
-                    <td className="py-6 px-6 text-center text-sm text-stone">3-6 months</td>
-                  </tr>
-                  <tr className="bg-ivory/50">
-                    <td className="py-6 px-6 font-semibold text-carbon">24/7 Support Access</td>
-                    <td className="py-6 px-6 text-center">
-                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-carbon/10">
-                        <CheckCircle2 className="w-6 h-6 text-carbon" />
-                      </div>
-                    </td>
-                    <td className="py-6 px-6 text-center text-sm text-stone">Business hours only</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <CorporateComparisonTable />
           </div>
         </section>
 
@@ -549,10 +474,10 @@ export default function ProgramOverview() {
         <section className="py-12 bg-carbon text-ivory">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="flex flex-wrap justify-center gap-6 text-sm uppercase tracking-wider">
-              <Link to="/enterprise/overview" className="hover:text-pearl transition-colors">Programme Overview</Link>
-              <Link to="/enterprise/integrations" className="hover:text-pearl transition-colors">Integrations</Link>
-              <Link to="/enterprise/pricing" className="hover:text-pearl transition-colors">Pricing Calculator</Link>
-              <Link to="/enterprise/cases" className="hover:text-pearl transition-colors">Case Studies</Link>
+              <Link to="/enterprise/corporate/overview" className="hover:text-pearl transition-colors">Programme Overview</Link>
+              <Link to="/enterprise/corporate/integrations" className="hover:text-pearl transition-colors">Integrations</Link>
+              <Link to="/enterprise/corporate/pricing" className="hover:text-pearl transition-colors">Pricing Calculator</Link>
+              <Link to="/enterprise/corporate/cases" className="hover:text-pearl transition-colors">Case Studies</Link>
               <button className="hover:text-pearl transition-colors">Download Overview</button>
             </div>
           </div>

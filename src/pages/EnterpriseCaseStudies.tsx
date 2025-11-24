@@ -232,10 +232,10 @@ export default function EnterpriseCaseStudies() {
         <section className="py-12 bg-carbon text-ivory">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="flex flex-wrap justify-center gap-6 text-sm uppercase tracking-wider">
-              <Link to="/enterprise/overview" className="hover:text-accent transition-colors">Program Overview</Link>
-              <Link to="/enterprise/integrations" className="hover:text-accent transition-colors">Integrations</Link>
-              <Link to="/enterprise/pricing" className="hover:text-accent transition-colors">Pricing Calculator</Link>
-              <Link to="/enterprise/cases" className="hover:text-accent transition-colors">Case Studies</Link>
+              <Link to="/enterprise/corporate/overview" className="hover:text-accent transition-colors">Program Overview</Link>
+              <Link to="/enterprise/corporate/integrations" className="hover:text-accent transition-colors">Integrations</Link>
+              <Link to="/enterprise/corporate/pricing" className="hover:text-accent transition-colors">Pricing Calculator</Link>
+              <Link to="/enterprise/corporate/cases" className="hover:text-accent transition-colors">Case Studies</Link>
               <button className="hover:text-accent transition-colors">Download Overview</button>
             </div>
           </div>
