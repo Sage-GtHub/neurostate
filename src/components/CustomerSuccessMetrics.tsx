@@ -59,64 +59,49 @@ export function CustomerSuccessMetrics() {
       </div>
 
       {/* Primary Metrics - Seamless Grid */}
-      <div className="grid md:grid-cols-3 gap-x-16 gap-y-12">
+      <div className="grid md:grid-cols-3 gap-x-20 gap-y-12">
         {/* Adoption Rate */}
-        <div className="relative group text-center">
-          <div className="absolute -inset-8 bg-gradient-to-br from-accent/5 via-transparent to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
-          <div className="relative space-y-3">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <div className="w-11 h-11 rounded-full bg-accent/10 flex items-center justify-center">
-                <TrendingUp className="w-6 h-6 text-accent" />
-              </div>
-            </div>
-            <div className="text-7xl font-bold text-accent mb-2 tracking-tight">
-              {formatValue(metrics.adoptionRate.value)}%
-            </div>
-            <div className="text-base font-semibold text-carbon">Platform Adoption</div>
-            <div className="text-sm text-stone">Active teams using NeuroState</div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent mt-2">
-              <span>↑ {metrics.adoptionRate.change}% this month</span>
-            </div>
+        <div className="text-center space-y-2">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <TrendingUp className="w-5 h-5 text-accent" />
+          </div>
+          <div className="text-5xl font-bold text-accent mb-1 tracking-tight">
+            {formatValue(metrics.adoptionRate.value)}%
+          </div>
+          <div className="text-sm font-semibold text-carbon">Platform Adoption</div>
+          <div className="text-xs text-stone">Active teams using NeuroState</div>
+          <div className="inline-flex items-center gap-1 text-xs font-semibold text-accent mt-2">
+            <span>↑ {metrics.adoptionRate.change}% this month</span>
           </div>
         </div>
 
         {/* Satisfaction Score */}
-        <div className="relative group text-center">
-          <div className="absolute -inset-8 bg-gradient-to-br from-accent/5 via-transparent to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
-          <div className="relative space-y-3">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <div className="w-11 h-11 rounded-full bg-accent/10 flex items-center justify-center">
-                <Award className="w-6 h-6 text-accent" />
-              </div>
-            </div>
-            <div className="text-7xl font-bold text-accent mb-2 tracking-tight">
-              {formatValue(metrics.satisfaction.value, true)}<span className="text-4xl text-stone">/5.0</span>
-            </div>
-            <div className="text-base font-semibold text-carbon">User Satisfaction</div>
-            <div className="text-sm text-stone">Average employee rating</div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent mt-2">
-              <span>↑ {metrics.satisfaction.change} increase</span>
-            </div>
+        <div className="text-center space-y-2">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <Award className="w-5 h-5 text-accent" />
+          </div>
+          <div className="text-5xl font-bold text-accent mb-1 tracking-tight">
+            {formatValue(metrics.satisfaction.value, true)}<span className="text-3xl text-stone">/5.0</span>
+          </div>
+          <div className="text-sm font-semibold text-carbon">User Satisfaction</div>
+          <div className="text-xs text-stone">Average employee rating</div>
+          <div className="inline-flex items-center gap-1 text-xs font-semibold text-accent mt-2">
+            <span>↑ {metrics.satisfaction.change} increase</span>
           </div>
         </div>
 
         {/* Active Users */}
-        <div className="relative group text-center">
-          <div className="absolute -inset-8 bg-gradient-to-br from-accent/5 via-transparent to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
-          <div className="relative space-y-3">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <div className="w-11 h-11 rounded-full bg-accent/10 flex items-center justify-center">
-                <Users className="w-6 h-6 text-accent" />
-              </div>
-            </div>
-            <div className="text-7xl font-bold text-accent mb-2 tracking-tight">
-              {formatValue(metrics.activeUsers.value)}
-            </div>
-            <div className="text-base font-semibold text-carbon">Active Users</div>
-            <div className="text-sm text-stone">Monthly active employees</div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent mt-2">
-              <span>↑ {formatValue(metrics.activeUsers.change)} new users</span>
-            </div>
+        <div className="text-center space-y-2">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <Users className="w-5 h-5 text-accent" />
+          </div>
+          <div className="text-5xl font-bold text-accent mb-1 tracking-tight">
+            {formatValue(metrics.activeUsers.value)}
+          </div>
+          <div className="text-sm font-semibold text-carbon">Active Users</div>
+          <div className="text-xs text-stone">Monthly active employees</div>
+          <div className="inline-flex items-center gap-1 text-xs font-semibold text-accent mt-2">
+            <span>↑ {formatValue(metrics.activeUsers.change)} new users</span>
           </div>
         </div>
       </div>
@@ -125,15 +110,15 @@ export function CustomerSuccessMetrics() {
       <div className="h-px bg-gradient-to-r from-transparent via-mist to-transparent" />
 
       {/* Secondary Metrics - Inline Style */}
-      <div className="grid md:grid-cols-3 gap-x-12 gap-y-8">
+      <div className="grid md:grid-cols-3 gap-x-16 gap-y-8">
         {/* Engagement Score */}
-        <div className="text-center space-y-3">
+        <div className="text-center space-y-2">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <Activity className="w-5 h-5 text-accent" />
-            <div className="text-sm font-semibold text-stone uppercase tracking-wider">Engagement</div>
+            <Activity className="w-4 h-4 text-accent" />
+            <div className="text-xs font-semibold text-stone uppercase tracking-wider">Engagement</div>
           </div>
-          <div className="text-4xl font-bold text-accent">{formatValue(metrics.engagementScore.value)}%</div>
-          <div className="relative h-1.5 bg-mist/30 rounded-full overflow-hidden max-w-[200px] mx-auto">
+          <div className="text-3xl font-bold text-accent">{formatValue(metrics.engagementScore.value)}%</div>
+          <div className="relative h-1 bg-mist/30 rounded-full overflow-hidden max-w-[180px] mx-auto">
             <div 
               className="absolute inset-y-0 left-0 bg-accent rounded-full transition-all duration-1000"
               style={{ width: `${metrics.engagementScore.value}%` }}
@@ -142,23 +127,23 @@ export function CustomerSuccessMetrics() {
         </div>
 
         {/* Average Session Time */}
-        <div className="text-center space-y-3">
+        <div className="text-center space-y-2">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <Clock className="w-5 h-5 text-accent" />
-            <div className="text-sm font-semibold text-stone uppercase tracking-wider">Session Time</div>
+            <Clock className="w-4 h-4 text-accent" />
+            <div className="text-xs font-semibold text-stone uppercase tracking-wider">Session Time</div>
           </div>
-          <div className="text-4xl font-bold text-accent">{formatValue(metrics.avgSessionTime.value)}<span className="text-2xl text-stone">min</span></div>
-          <div className="text-sm text-ash">Average per interaction</div>
+          <div className="text-3xl font-bold text-accent">{formatValue(metrics.avgSessionTime.value)}<span className="text-xl text-stone">min</span></div>
+          <div className="text-xs text-ash">Average per interaction</div>
         </div>
 
         {/* Protocol Completion */}
-        <div className="text-center space-y-3">
+        <div className="text-center space-y-2">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <Target className="w-5 h-5 text-accent" />
-            <div className="text-sm font-semibold text-stone uppercase tracking-wider">Completion</div>
+            <Target className="w-4 h-4 text-accent" />
+            <div className="text-xs font-semibold text-stone uppercase tracking-wider">Completion</div>
           </div>
-          <div className="text-4xl font-bold text-accent">{formatValue(metrics.protocolCompletion.value)}%</div>
-          <div className="relative h-1.5 bg-mist/30 rounded-full overflow-hidden max-w-[200px] mx-auto">
+          <div className="text-3xl font-bold text-accent">{formatValue(metrics.protocolCompletion.value)}%</div>
+          <div className="relative h-1 bg-mist/30 rounded-full overflow-hidden max-w-[180px] mx-auto">
             <div 
               className="absolute inset-y-0 left-0 bg-accent rounded-full transition-all duration-1000"
               style={{ width: `${metrics.protocolCompletion.value}%` }}

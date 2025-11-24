@@ -212,72 +212,56 @@ export function ROICalculator() {
       </div>
 
         {/* Right Column - Results */}
-        <div className="space-y-6">
-          <div className="bg-gradient-to-br from-carbon to-slate text-ivory rounded-2xl p-8">
-            <div className="text-sm font-semibold uppercase tracking-wide mb-2 opacity-90">
+        <div className="space-y-8">
+          <div className="bg-gradient-to-br from-carbon to-slate text-ivory rounded-2xl p-8 text-center">
+            <div className="text-xs font-semibold uppercase tracking-wide mb-3 opacity-80">
               Annual ROI
             </div>
-            <div className="text-5xl font-bold mb-2 text-accent">
+            <div className="text-4xl font-bold mb-2 text-accent">
               {roi > 0 ? '+' : ''}{roi.toFixed(0)}%
             </div>
-            <div className="text-sm opacity-90">
+            <div className="text-sm opacity-80">
               {formatCurrency(netSavings)} net savings
             </div>
           </div>
 
-          <div className="space-y-4">
-            <div className="bg-pearl rounded-2xl p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-carbon/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <TrendingUp className="w-6 h-6 text-carbon" />
-                </div>
-                <div className="flex-1">
-                  <div className="text-sm text-stone mb-1">Productivity Gains</div>
-                  <div className="text-2xl font-bold text-accent">{formatCurrency(totalProductivityGain)}</div>
-                  <div className="text-xs text-stone mt-1"><span className="text-accent font-semibold">31%</span> improvement per employee</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-pearl rounded-2xl p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-carbon/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Clock className="w-6 h-6 text-carbon" />
-                </div>
-                <div className="flex-1">
-                  <div className="text-sm text-stone mb-1">Sick Day Reduction</div>
-                  <div className="text-2xl font-bold text-accent">{formatCurrency(sickDaySavings)}</div>
-                  <div className="text-xs text-stone mt-1"><span className="text-accent font-semibold">40%</span> fewer sick days annually</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-pearl rounded-2xl p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-carbon/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Users className="w-6 h-6 text-carbon" />
-                </div>
-                <div className="flex-1">
-                  <div className="text-sm text-stone mb-1">Turnover Savings</div>
-                  <div className="text-2xl font-bold text-accent">{formatCurrency(turnoverSavings)}</div>
-                  <div className="text-xs text-stone mt-1"><span className="text-accent font-semibold">18%</span> retention improvement</div>
-                </div>
-              </div>
-            </div>
-
-          <div className="bg-ivory border border-mist rounded-2xl p-6">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-carbon rounded-xl flex items-center justify-center flex-shrink-0">
-                <DollarSign className="w-6 h-6 text-ivory" />
-              </div>
+          <div className="space-y-6">
+            <div className="flex items-start gap-4 pb-4 border-b border-mist">
+              <TrendingUp className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
               <div className="flex-1">
-                <div className="text-sm text-stone mb-1">NeuroState Investment</div>
-                <div className="text-2xl font-bold text-carbon">{formatCurrency(neurostateAnnualCost)}</div>
+                <div className="text-xs text-stone mb-1 uppercase tracking-wide">Productivity Gains</div>
+                <div className="text-xl font-bold text-accent">{formatCurrency(totalProductivityGain)}</div>
+                <div className="text-xs text-stone mt-1"><span className="text-accent font-semibold">31%</span> improvement per employee</div>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 pb-4 border-b border-mist">
+              <Clock className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
+              <div className="flex-1">
+                <div className="text-xs text-stone mb-1 uppercase tracking-wide">Sick Day Reduction</div>
+                <div className="text-xl font-bold text-accent">{formatCurrency(sickDaySavings)}</div>
+                <div className="text-xs text-stone mt-1"><span className="text-accent font-semibold">40%</span> fewer sick days annually</div>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 pb-4 border-b border-mist">
+              <Users className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
+              <div className="flex-1">
+                <div className="text-xs text-stone mb-1 uppercase tracking-wide">Turnover Savings</div>
+                <div className="text-xl font-bold text-accent">{formatCurrency(turnoverSavings)}</div>
+                <div className="text-xs text-stone mt-1"><span className="text-accent font-semibold">18%</span> retention improvement</div>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 pt-2">
+              <DollarSign className="w-5 h-5 text-carbon flex-shrink-0 mt-1" />
+              <div className="flex-1">
+                <div className="text-xs text-stone mb-1 uppercase tracking-wide">NeuroState Investment</div>
+                <div className="text-xl font-bold text-carbon">{formatCurrency(neurostateAnnualCost)}</div>
                 <div className="text-xs text-stone mt-1">£78 per employee per month</div>
               </div>
             </div>
           </div>
-        </div>
 
           <div className="text-xs text-stone pt-4 border-t border-mist">
             * Calculations based on verified metrics from enterprise deployments. Individual results may vary based on industry.
