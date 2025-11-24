@@ -8,6 +8,7 @@ import { SEO } from "@/components/SEO";
 import { Link } from "react-router-dom";
 import { Download, CheckCircle2, TrendingUp, Users, Shield, Target } from "lucide-react";
 import { ROICalculator } from "@/components/ROICalculator";
+import { CustomerSuccessMetrics } from "@/components/CustomerSuccessMetrics";
 
 export default function ProgramOverview() {
   const [formData, setFormData] = useState({
@@ -112,8 +113,24 @@ export default function ProgramOverview() {
           </div>
         </section>
 
-        {/* Demo Video Section */}
+        {/* Customer Success Metrics Dashboard */}
         <section className="py-20 bg-gradient-to-b from-pearl to-ivory">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="text-center mb-12">
+              <h2 className="text-large-display font-bold mb-4 text-carbon">
+                Live Customer Success Metrics
+              </h2>
+              <p className="text-body text-stone max-w-2xl mx-auto">
+                Real-time adoption rates, satisfaction scores, and team performance insights from our enterprise partners.
+              </p>
+            </div>
+
+            <CustomerSuccessMetrics />
+          </div>
+        </section>
+
+        {/* Demo Video Section */}
+        <section className="py-20 bg-ivory">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center mb-12">
               <h2 className="text-large-display font-bold mb-4 text-carbon">
@@ -125,8 +142,12 @@ export default function ProgramOverview() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="group relative bg-ivory rounded-3xl overflow-hidden shadow-soft hover:shadow-lg transition-all">
-                <div className="aspect-video bg-gradient-to-br from-slate to-carbon flex items-center justify-center relative cursor-pointer">
+              <div className="group relative bg-pearl rounded-3xl overflow-hidden shadow-soft hover:shadow-lg transition-all">
+                <div className="relative aspect-video bg-gradient-to-br from-slate to-carbon flex items-center justify-center cursor-pointer">
+                  {/* Coming Soon Badge */}
+                  <div className="absolute top-4 right-4 z-10 px-4 py-2 bg-accent rounded-full">
+                    <span className="text-xs font-bold text-ivory uppercase tracking-wider">Coming Soon</span>
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-br from-carbon/80 to-slate/80 flex items-center justify-center">
                     <div className="relative">
                       <div className="absolute inset-0 bg-accent/20 rounded-full blur-2xl" />
@@ -144,8 +165,12 @@ export default function ProgramOverview() {
                 </div>
               </div>
 
-              <div className="group relative bg-ivory rounded-3xl overflow-hidden shadow-soft hover:shadow-lg transition-all">
-                <div className="aspect-video bg-gradient-to-br from-slate to-carbon flex items-center justify-center relative cursor-pointer">
+              <div className="group relative bg-pearl rounded-3xl overflow-hidden shadow-soft hover:shadow-lg transition-all">
+                <div className="relative aspect-video bg-gradient-to-br from-slate to-carbon flex items-center justify-center cursor-pointer">
+                  {/* Coming Soon Badge */}
+                  <div className="absolute top-4 right-4 z-10 px-4 py-2 bg-accent rounded-full">
+                    <span className="text-xs font-bold text-ivory uppercase tracking-wider">Coming Soon</span>
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-br from-carbon/80 to-slate/80 flex items-center justify-center">
                     <div className="relative">
                       <div className="absolute inset-0 bg-accent/20 rounded-full blur-2xl" />
