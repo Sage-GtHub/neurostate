@@ -97,6 +97,13 @@ export const Header = () => {
     { label: "Performance Tips", href: "/guides#performance", icon: Target },
   ];
 
+  const enterpriseLinks = [
+    { label: "Program Overview", href: "/enterprise/overview", icon: Target },
+    { label: "Integrations", href: "/enterprise/integrations", icon: Zap },
+    { label: "Pricing Calculator", href: "/enterprise/pricing", icon: Package },
+    { label: "Case Studies", href: "/enterprise/cases", icon: Award },
+  ];
+
   const otherLinks = [
     { label: "Resources", href: "/resources" },
   ];
@@ -174,6 +181,32 @@ export const Header = () => {
                             <topic.icon className="h-5 w-5 text-carbon" />
                             <span className="text-caption font-medium text-carbon">
                               {topic.label}
+                            </span>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              {/* For Teams Dropdown */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent text-carbon hover:bg-pearl data-[state=open]:bg-pearl text-ui-label">
+                  For Teams
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-1 p-4 bg-background border border-mist rounded-lg shadow-soft">
+                    {enterpriseLinks.map((link) => (
+                      <li key={link.label}>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to={link.href}
+                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-colors hover:bg-pearl rounded-lg"
+                          >
+                            <link.icon className="h-5 w-5 text-carbon" />
+                            <span className="text-caption font-medium text-carbon">
+                              {link.label}
                             </span>
                           </Link>
                         </NavigationMenuLink>
@@ -367,6 +400,24 @@ export const Header = () => {
                         >
                           <topic.icon className="h-4 w-4" />
                           {topic.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* For Teams Section */}
+                  <div>
+                    <h3 className="text-h3 mb-3 text-carbon">For Teams</h3>
+                    <div className="flex flex-col gap-2 pl-4">
+                      {enterpriseLinks.map((link) => (
+                        <Link
+                          key={link.label}
+                          to={link.href}
+                          className="flex items-center gap-2 text-caption text-ash hover:text-carbon transition-colors"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          <link.icon className="h-4 w-4" />
+                          {link.label}
                         </Link>
                       ))}
                     </div>
