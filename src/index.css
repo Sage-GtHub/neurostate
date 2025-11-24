@@ -40,7 +40,7 @@ All colors MUST be HSL.
     --muted: 0 0% 96%; /* Pearl */
     --muted-foreground: 0 0% 40%; /* Ash */
     
-    --accent: 0 0% 16%; /* Slate */
+    --accent: 142 76% 36%; /* Green - Performance accent */
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 84% 60%;
@@ -90,8 +90,8 @@ All colors MUST be HSL.
     --muted: 0 0% 16%; /* Slate */
     --muted-foreground: 0 0% 60%; /* Stone */
     
-    --accent: 40 33% 98%; /* Ivory */
-    --accent-foreground: 0 0% 10%;
+    --accent: 142 76% 36%; /* Green - Performance accent */
+    --accent-foreground: 0 0% 100%;
     
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
