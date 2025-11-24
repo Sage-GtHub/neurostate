@@ -211,59 +211,59 @@ export function ROICalculator() {
         </div>
       </div>
 
-      {/* Right Column - Results */}
-      <div className="space-y-6">
-        <div className="bg-gradient-to-br from-accent to-carbon text-ivory rounded-2xl p-8">
-          <div className="text-sm font-semibold uppercase tracking-wide mb-2 opacity-90">
-            Annual ROI
-          </div>
-          <div className="text-5xl font-bold mb-2">
-            {roi > 0 ? '+' : ''}{roi.toFixed(0)}%
-          </div>
-          <div className="text-sm opacity-90">
-            {formatCurrency(netSavings)} net savings
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <div className="bg-pearl rounded-2xl p-6">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <TrendingUp className="w-6 h-6 text-accent" />
-              </div>
-              <div className="flex-1">
-                <div className="text-sm text-stone mb-1">Productivity Gains</div>
-                <div className="text-2xl font-bold text-carbon">{formatCurrency(totalProductivityGain)}</div>
-                <div className="text-xs text-stone mt-1">31% improvement per employee</div>
-              </div>
+        {/* Right Column - Results */}
+        <div className="space-y-6">
+          <div className="bg-gradient-to-br from-carbon to-slate text-ivory rounded-2xl p-8">
+            <div className="text-sm font-semibold uppercase tracking-wide mb-2 opacity-90">
+              Annual ROI
+            </div>
+            <div className="text-5xl font-bold mb-2 text-accent">
+              {roi > 0 ? '+' : ''}{roi.toFixed(0)}%
+            </div>
+            <div className="text-sm opacity-90">
+              {formatCurrency(netSavings)} net savings
             </div>
           </div>
 
-          <div className="bg-pearl rounded-2xl p-6">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <Clock className="w-6 h-6 text-accent" />
-              </div>
-              <div className="flex-1">
-                <div className="text-sm text-stone mb-1">Sick Day Reduction</div>
-                <div className="text-2xl font-bold text-carbon">{formatCurrency(sickDaySavings)}</div>
-                <div className="text-xs text-stone mt-1">40% fewer sick days annually</div>
+          <div className="space-y-4">
+            <div className="bg-pearl rounded-2xl p-6">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-carbon/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <TrendingUp className="w-6 h-6 text-carbon" />
+                </div>
+                <div className="flex-1">
+                  <div className="text-sm text-stone mb-1">Productivity Gains</div>
+                  <div className="text-2xl font-bold text-accent">{formatCurrency(totalProductivityGain)}</div>
+                  <div className="text-xs text-stone mt-1"><span className="text-accent font-semibold">31%</span> improvement per employee</div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="bg-pearl rounded-2xl p-6">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <Users className="w-6 h-6 text-accent" />
-              </div>
-              <div className="flex-1">
-                <div className="text-sm text-stone mb-1">Turnover Savings</div>
-                <div className="text-2xl font-bold text-carbon">{formatCurrency(turnoverSavings)}</div>
-                <div className="text-xs text-stone mt-1">18% retention improvement</div>
+            <div className="bg-pearl rounded-2xl p-6">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-carbon/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Clock className="w-6 h-6 text-carbon" />
+                </div>
+                <div className="flex-1">
+                  <div className="text-sm text-stone mb-1">Sick Day Reduction</div>
+                  <div className="text-2xl font-bold text-accent">{formatCurrency(sickDaySavings)}</div>
+                  <div className="text-xs text-stone mt-1"><span className="text-accent font-semibold">40%</span> fewer sick days annually</div>
+                </div>
               </div>
             </div>
-          </div>
+
+            <div className="bg-pearl rounded-2xl p-6">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-carbon/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Users className="w-6 h-6 text-carbon" />
+                </div>
+                <div className="flex-1">
+                  <div className="text-sm text-stone mb-1">Turnover Savings</div>
+                  <div className="text-2xl font-bold text-accent">{formatCurrency(turnoverSavings)}</div>
+                  <div className="text-xs text-stone mt-1"><span className="text-accent font-semibold">18%</span> retention improvement</div>
+                </div>
+              </div>
+            </div>
 
           <div className="bg-ivory border border-mist rounded-2xl p-6">
             <div className="flex items-start gap-4">

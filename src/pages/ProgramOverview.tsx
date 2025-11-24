@@ -55,33 +55,29 @@ export default function ProgramOverview() {
             {/* Metrics Grid with Cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
               <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent rounded-2xl blur-xl group-hover:blur-2xl transition-all" />
                 <div className="relative bg-ivory/5 backdrop-blur-sm border border-ivory/10 rounded-2xl p-6 text-center hover:bg-ivory/10 transition-all">
-                  <div className="text-5xl sm:text-6xl font-bold mb-3 bg-gradient-to-br from-accent to-accent/70 bg-clip-text text-transparent">47%</div>
+                  <div className="text-5xl sm:text-6xl font-bold mb-3 text-accent">47%</div>
                   <div className="text-base font-semibold mb-1 text-ivory">Increase in Focus</div>
                   <div className="text-xs text-mist/80">Measured via cognitive tests</div>
                 </div>
               </div>
               <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent rounded-2xl blur-xl group-hover:blur-2xl transition-all" />
                 <div className="relative bg-ivory/5 backdrop-blur-sm border border-ivory/10 rounded-2xl p-6 text-center hover:bg-ivory/10 transition-all">
-                  <div className="text-5xl sm:text-6xl font-bold mb-3 bg-gradient-to-br from-accent to-accent/70 bg-clip-text text-transparent">63%</div>
+                  <div className="text-5xl sm:text-6xl font-bold mb-3 text-accent">63%</div>
                   <div className="text-base font-semibold mb-1 text-ivory">Reduction in Burnout</div>
                   <div className="text-xs text-mist/80">Employee wellness surveys</div>
                 </div>
               </div>
               <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent rounded-2xl blur-xl group-hover:blur-2xl transition-all" />
                 <div className="relative bg-ivory/5 backdrop-blur-sm border border-ivory/10 rounded-2xl p-6 text-center hover:bg-ivory/10 transition-all">
-                  <div className="text-5xl sm:text-6xl font-bold mb-3 bg-gradient-to-br from-accent to-accent/70 bg-clip-text text-transparent">31%</div>
+                  <div className="text-5xl sm:text-6xl font-bold mb-3 text-accent">31%</div>
                   <div className="text-base font-semibold mb-1 text-ivory">Productivity Gain</div>
                   <div className="text-xs text-mist/80">Output per employee</div>
                 </div>
               </div>
               <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent rounded-2xl blur-xl group-hover:blur-2xl transition-all" />
                 <div className="relative bg-ivory/5 backdrop-blur-sm border border-ivory/10 rounded-2xl p-6 text-center hover:bg-ivory/10 transition-all">
-                  <div className="text-5xl sm:text-6xl font-bold mb-3 bg-gradient-to-br from-accent to-accent/70 bg-clip-text text-transparent">89%</div>
+                  <div className="text-5xl sm:text-6xl font-bold mb-3 text-accent">89%</div>
                   <div className="text-base font-semibold mb-1 text-ivory">Employee Satisfaction</div>
                   <div className="text-xs text-mist/80">Program NPS score</div>
                 </div>
@@ -89,7 +85,7 @@ export default function ProgramOverview() {
             </div>
 
             <div className="text-center">
-              <Button size="lg" className="gap-2 bg-accent hover:bg-accent/90 text-carbon shadow-lg hover:shadow-xl transition-all">
+              <Button size="lg" className="gap-2 bg-carbon hover:bg-slate text-ivory shadow-lg hover:shadow-xl transition-all">
                 <Download className="w-5 h-5" />
                 Download Partnership Overview PDF
               </Button>
@@ -145,14 +141,14 @@ export default function ProgramOverview() {
               <div className="group relative bg-pearl rounded-3xl overflow-hidden shadow-soft hover:shadow-lg transition-all">
                 <div className="relative aspect-video bg-gradient-to-br from-slate to-carbon flex items-center justify-center cursor-pointer">
                   {/* Coming Soon Badge */}
-                  <div className="absolute top-4 right-4 z-10 px-4 py-2 bg-accent rounded-full">
+                  <div className="absolute top-4 right-4 z-10 px-4 py-2 bg-carbon/80 backdrop-blur-sm rounded-full border border-ivory/20">
                     <span className="text-xs font-bold text-ivory uppercase tracking-wider">Coming Soon</span>
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-br from-carbon/80 to-slate/80 flex items-center justify-center">
                     <div className="relative">
-                      <div className="absolute inset-0 bg-accent/20 rounded-full blur-2xl" />
-                      <div className="relative w-20 h-20 rounded-full bg-accent flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <svg className="w-10 h-10 text-ivory ml-1" fill="currentColor" viewBox="0 0 24 24">
+                      <div className="absolute inset-0 bg-ivory/10 rounded-full blur-2xl" />
+                      <div className="relative w-20 h-20 rounded-full bg-ivory flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg className="w-10 h-10 text-carbon ml-1" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M8 5v14l11-7z"/>
                         </svg>
                       </div>
@@ -168,14 +164,14 @@ export default function ProgramOverview() {
               <div className="group relative bg-pearl rounded-3xl overflow-hidden shadow-soft hover:shadow-lg transition-all">
                 <div className="relative aspect-video bg-gradient-to-br from-slate to-carbon flex items-center justify-center cursor-pointer">
                   {/* Coming Soon Badge */}
-                  <div className="absolute top-4 right-4 z-10 px-4 py-2 bg-accent rounded-full">
+                  <div className="absolute top-4 right-4 z-10 px-4 py-2 bg-carbon/80 backdrop-blur-sm rounded-full border border-ivory/20">
                     <span className="text-xs font-bold text-ivory uppercase tracking-wider">Coming Soon</span>
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-br from-carbon/80 to-slate/80 flex items-center justify-center">
                     <div className="relative">
-                      <div className="absolute inset-0 bg-accent/20 rounded-full blur-2xl" />
-                      <div className="relative w-20 h-20 rounded-full bg-accent flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <svg className="w-10 h-10 text-ivory ml-1" fill="currentColor" viewBox="0 0 24 24">
+                      <div className="absolute inset-0 bg-ivory/10 rounded-full blur-2xl" />
+                      <div className="relative w-20 h-20 rounded-full bg-ivory flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg className="w-10 h-10 text-carbon ml-1" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M8 5v14l11-7z"/>
                         </svg>
                       </div>
@@ -214,10 +210,10 @@ export default function ProgramOverview() {
                 </thead>
                 <tbody>
                   <tr className="border-b border-mist">
-                    <td className="py-6 px-6 font-semibold text-carbon">AI-Powered Personalization</td>
+                    <td className="py-6 px-6 font-semibold text-carbon">AI-Powered Personalisation</td>
                     <td className="py-6 px-6 text-center">
-                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-accent/10">
-                        <CheckCircle2 className="w-6 h-6 text-accent" />
+                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-carbon/10">
+                        <CheckCircle2 className="w-6 h-6 text-carbon" />
                       </div>
                     </td>
                     <td className="py-6 px-6 text-center text-stone">—</td>
@@ -225,8 +221,8 @@ export default function ProgramOverview() {
                   <tr className="border-b border-mist bg-ivory/50">
                     <td className="py-6 px-6 font-semibold text-carbon">Cognitive Performance Focus</td>
                     <td className="py-6 px-6 text-center">
-                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-accent/10">
-                        <CheckCircle2 className="w-6 h-6 text-accent" />
+                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-carbon/10">
+                        <CheckCircle2 className="w-6 h-6 text-carbon" />
                       </div>
                     </td>
                     <td className="py-6 px-6 text-center text-stone">—</td>
@@ -234,8 +230,8 @@ export default function ProgramOverview() {
                   <tr className="border-b border-mist">
                     <td className="py-6 px-6 font-semibold text-carbon">Real-Time Analytics</td>
                     <td className="py-6 px-6 text-center">
-                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-accent/10">
-                        <CheckCircle2 className="w-6 h-6 text-accent" />
+                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-carbon/10">
+                        <CheckCircle2 className="w-6 h-6 text-carbon" />
                       </div>
                     </td>
                     <td className="py-6 px-6 text-center text-sm text-stone">Annual surveys only</td>
@@ -243,36 +239,36 @@ export default function ProgramOverview() {
                   <tr className="border-b border-mist bg-ivory/50">
                     <td className="py-6 px-6 font-semibold text-carbon">Premium Products Included</td>
                     <td className="py-6 px-6 text-center">
-                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-accent/10">
-                        <CheckCircle2 className="w-6 h-6 text-accent" />
+                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-carbon/10">
+                        <CheckCircle2 className="w-6 h-6 text-carbon" />
                       </div>
                     </td>
                     <td className="py-6 px-6 text-center text-sm text-stone">Gym membership only</td>
                   </tr>
                   <tr className="border-b border-mist">
                     <td className="py-6 px-6 font-semibold text-carbon">Measurable ROI</td>
-                    <td className="py-6 px-6 text-center text-accent font-bold">47% focus increase</td>
+                    <td className="py-6 px-6 text-center font-bold text-carbon"><span className="text-accent">47%</span> focus increase</td>
                     <td className="py-6 px-6 text-center text-sm text-stone">No clear metrics</td>
                   </tr>
                   <tr className="border-b border-mist bg-ivory/50">
                     <td className="py-6 px-6 font-semibold text-carbon">Slack/Teams Integration</td>
                     <td className="py-6 px-6 text-center">
-                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-accent/10">
-                        <CheckCircle2 className="w-6 h-6 text-accent" />
+                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-carbon/10">
+                        <CheckCircle2 className="w-6 h-6 text-carbon" />
                       </div>
                     </td>
                     <td className="py-6 px-6 text-center text-stone">—</td>
                   </tr>
                   <tr className="border-b border-mist">
                     <td className="py-6 px-6 font-semibold text-carbon">Implementation Time</td>
-                    <td className="py-6 px-6 text-center text-accent font-bold">2-4 weeks</td>
+                    <td className="py-6 px-6 text-center font-bold text-carbon"><span className="text-accent">2-4</span> weeks</td>
                     <td className="py-6 px-6 text-center text-sm text-stone">3-6 months</td>
                   </tr>
                   <tr className="bg-ivory/50">
                     <td className="py-6 px-6 font-semibold text-carbon">24/7 Support Access</td>
                     <td className="py-6 px-6 text-center">
-                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-accent/10">
-                        <CheckCircle2 className="w-6 h-6 text-accent" />
+                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-carbon/10">
+                        <CheckCircle2 className="w-6 h-6 text-carbon" />
                       </div>
                     </td>
                     <td className="py-6 px-6 text-center text-sm text-stone">Business hours only</td>
@@ -370,31 +366,31 @@ export default function ProgramOverview() {
                 </h3>
                 <div className="space-y-6">
                   <div className="flex gap-4">
-                    <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                    <CheckCircle2 className="w-6 h-6 text-carbon flex-shrink-0 mt-1" />
                     <div>
                       <div className="font-semibold text-carbon mb-1">Reduced Brain Fog</div>
-                      <div className="text-sm text-stone">47% improvement in focus metrics</div>
+                      <div className="text-sm text-stone"><span className="text-accent font-semibold">47%</span> improvement in focus metrics</div>
                     </div>
                   </div>
                   <div className="flex gap-4">
-                    <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                    <CheckCircle2 className="w-6 h-6 text-carbon flex-shrink-0 mt-1" />
                     <div>
                       <div className="font-semibold text-carbon mb-1">Enhanced Cognitive Function</div>
-                      <div className="text-sm text-stone">31% increase in output per employee</div>
+                      <div className="text-sm text-stone"><span className="text-accent font-semibold">31%</span> increase in output per employee</div>
                     </div>
                   </div>
                   <div className="flex gap-4">
-                    <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                    <CheckCircle2 className="w-6 h-6 text-carbon flex-shrink-0 mt-1" />
                     <div>
                       <div className="font-semibold text-carbon mb-1">Better Decision Making</div>
-                      <div className="text-sm text-stone">23% faster problem-solving</div>
+                      <div className="text-sm text-stone"><span className="text-accent font-semibold">23%</span> faster problem-solving</div>
                     </div>
                   </div>
                   <div className="flex gap-4">
-                    <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                    <CheckCircle2 className="w-6 h-6 text-carbon flex-shrink-0 mt-1" />
                     <div>
                       <div className="font-semibold text-carbon mb-1">Sustained Energy</div>
-                      <div className="text-sm text-stone">41% reduction in afternoon slumps</div>
+                      <div className="text-sm text-stone"><span className="text-accent font-semibold">41%</span> reduction in afternoon slumps</div>
                     </div>
                   </div>
                 </div>
@@ -407,31 +403,31 @@ export default function ProgramOverview() {
                 </h3>
                 <div className="space-y-6">
                   <div className="flex gap-4">
-                    <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                    <CheckCircle2 className="w-6 h-6 text-carbon flex-shrink-0 mt-1" />
                     <div>
                       <div className="font-semibold text-carbon mb-1">Lower Burnout Rates</div>
-                      <div className="text-sm text-stone">63% reduction in stress-related leave</div>
+                      <div className="text-sm text-stone"><span className="text-accent font-semibold">63%</span> reduction in stress-related leave</div>
                     </div>
                   </div>
                   <div className="flex gap-4">
-                    <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                    <CheckCircle2 className="w-6 h-6 text-carbon flex-shrink-0 mt-1" />
                     <div>
                       <div className="font-semibold text-carbon mb-1">Improved Job Satisfaction</div>
-                      <div className="text-sm text-stone">89% employee programme approval</div>
+                      <div className="text-sm text-stone"><span className="text-accent font-semibold">89%</span> employee programme approval</div>
                     </div>
                   </div>
                   <div className="flex gap-4">
-                    <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                    <CheckCircle2 className="w-6 h-6 text-carbon flex-shrink-0 mt-1" />
                     <div>
                       <div className="font-semibold text-carbon mb-1">Stronger Employer Brand</div>
                       <div className="text-sm text-stone">Top-tier wellness benefit</div>
                     </div>
                   </div>
                   <div className="flex gap-4">
-                    <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                    <CheckCircle2 className="w-6 h-6 text-carbon flex-shrink-0 mt-1" />
                     <div>
                       <div className="font-semibold text-carbon mb-1">Reduced Turnover</div>
-                      <div className="text-sm text-stone">18% improvement in retention</div>
+                      <div className="text-sm text-stone"><span className="text-accent font-semibold">18%</span> improvement in retention</div>
                     </div>
                   </div>
                 </div>
@@ -454,7 +450,7 @@ export default function ProgramOverview() {
 
             <div className="grid md:grid-cols-4 gap-6">
               <div className="bg-ivory rounded-3xl p-8 shadow-soft">
-                <div className="text-accent font-bold text-lg mb-4">Week 1</div>
+                <div className="text-carbon font-bold text-lg mb-4">Week <span className="text-accent">1</span></div>
                 <div className="font-semibold text-carbon mb-4">Onboarding</div>
                 <ul className="space-y-2 text-sm text-stone">
                   <li>• Contract signing</li>
@@ -465,7 +461,7 @@ export default function ProgramOverview() {
               </div>
 
               <div className="bg-ivory rounded-3xl p-8 shadow-soft">
-                <div className="text-accent font-bold text-lg mb-4">Week 2</div>
+                <div className="text-carbon font-bold text-lg mb-4">Week <span className="text-accent">2</span></div>
                 <div className="font-semibold text-carbon mb-4">Launch</div>
                 <ul className="space-y-2 text-sm text-stone">
                   <li>• Employee invitations</li>
@@ -476,7 +472,7 @@ export default function ProgramOverview() {
               </div>
 
               <div className="bg-ivory rounded-3xl p-8 shadow-soft">
-                <div className="text-accent font-bold text-lg mb-4">Week 3-4</div>
+                <div className="text-carbon font-bold text-lg mb-4">Week <span className="text-accent">3-4</span></div>
                 <div className="font-semibold text-carbon mb-4">Adoption</div>
                 <ul className="space-y-2 text-sm text-stone">
                   <li>• Usage monitoring</li>
@@ -487,7 +483,7 @@ export default function ProgramOverview() {
               </div>
 
               <div className="bg-ivory rounded-3xl p-8 shadow-soft">
-                <div className="text-accent font-bold text-lg mb-4">Month 2+</div>
+                <div className="text-carbon font-bold text-lg mb-4">Month <span className="text-accent">2+</span></div>
                 <div className="font-semibold text-carbon mb-4">Optimization</div>
                 <ul className="space-y-2 text-sm text-stone">
                   <li>• Performance review</li>
@@ -577,11 +573,11 @@ export default function ProgramOverview() {
         <section className="py-12 bg-carbon text-ivory">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="flex flex-wrap justify-center gap-6 text-sm uppercase tracking-wider">
-              <Link to="/enterprise/overview" className="hover:text-accent transition-colors">Programme Overview</Link>
-              <Link to="/enterprise/integrations" className="hover:text-accent transition-colors">Integrations</Link>
-              <Link to="/enterprise/pricing" className="hover:text-accent transition-colors">Pricing Calculator</Link>
-              <Link to="/enterprise/cases" className="hover:text-accent transition-colors">Case Studies</Link>
-              <button className="hover:text-accent transition-colors">Download Overview</button>
+              <Link to="/enterprise/overview" className="hover:text-pearl transition-colors">Programme Overview</Link>
+              <Link to="/enterprise/integrations" className="hover:text-pearl transition-colors">Integrations</Link>
+              <Link to="/enterprise/pricing" className="hover:text-pearl transition-colors">Pricing Calculator</Link>
+              <Link to="/enterprise/cases" className="hover:text-pearl transition-colors">Case Studies</Link>
+              <button className="hover:text-pearl transition-colors">Download Overview</button>
             </div>
           </div>
         </section>
