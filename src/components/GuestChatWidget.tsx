@@ -655,11 +655,11 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
               <div className="text-xs text-ash mb-2">
                 Want personalized protocols based on your data?
               </div>
-              <Link to="/nova" target="_blank" rel="noopener noreferrer" onClick={() => onOpenChange(false)}>
+              <a href="https://neurostate.co.uk/nova" target="_blank" rel="noopener noreferrer">
                 <Button variant="default" size="sm" className="w-full">
                   Create Nova Account
                 </Button>
-              </Link>
+              </a>
             </div>
 
             {/* Input Area */}
