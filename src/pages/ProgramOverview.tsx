@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { SEO } from "@/components/SEO";
 import { Link } from "react-router-dom";
 import { Download, ArrowRight, CheckCircle2, TrendingUp, Users, Shield, Target } from "lucide-react";
+import { ROICalculator } from "@/components/ROICalculator";
 
 export default function ProgramOverview() {
   const [formData, setFormData] = useState({
@@ -75,6 +76,20 @@ export default function ProgramOverview() {
                 Download Partnership Overview PDF
               </Button>
             </div>
+          </div>
+        </section>
+
+        {/* ROI Calculator */}
+        <section className="py-20 bg-ivory">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <h2 className="text-large-display font-bold text-center mb-6 text-carbon">
+              Calculate Your ROI
+            </h2>
+            <p className="text-body text-center text-stone mb-12 max-w-2xl mx-auto">
+              See the financial impact NeuroState can have on your organization. Adjust the inputs to match your company profile.
+            </p>
+
+            <ROICalculator />
           </div>
         </section>
 
