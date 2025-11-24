@@ -655,7 +655,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
               <div className="text-xs text-ash mb-2">
                 Want personalized protocols based on your data?
               </div>
-              <Link to="/nova" onClick={() => onOpenChange(false)}>
+              <Link to="/nova" target="_blank" rel="noopener noreferrer" onClick={() => onOpenChange(false)}>
                 <Button variant="default" size="sm" className="w-full">
                   Create Nova Account
                 </Button>
