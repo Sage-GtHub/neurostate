@@ -49,22 +49,22 @@ export default function ProgramOverview() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
               <div className="text-center">
                 <div className="text-5xl sm:text-6xl font-bold mb-3 text-accent">47%</div>
-                <div className="text-lg font-semibold mb-1">Increase in Focus</div>
+                <div className="text-lg font-semibold mb-1 text-ivory">Increase in Focus</div>
                 <div className="text-sm text-mist">Measured via cognitive tests</div>
               </div>
               <div className="text-center">
                 <div className="text-5xl sm:text-6xl font-bold mb-3 text-accent">63%</div>
-                <div className="text-lg font-semibold mb-1">Reduction in Burnout</div>
+                <div className="text-lg font-semibold mb-1 text-ivory">Reduction in Burnout</div>
                 <div className="text-sm text-mist">Employee wellness surveys</div>
               </div>
               <div className="text-center">
                 <div className="text-5xl sm:text-6xl font-bold mb-3 text-accent">31%</div>
-                <div className="text-lg font-semibold mb-1">Productivity Gain</div>
+                <div className="text-lg font-semibold mb-1 text-ivory">Productivity Gain</div>
                 <div className="text-sm text-mist">Output per employee</div>
               </div>
               <div className="text-center">
                 <div className="text-5xl sm:text-6xl font-bold mb-3 text-accent">89%</div>
-                <div className="text-lg font-semibold mb-1">Employee Satisfaction</div>
+                <div className="text-lg font-semibold mb-1 text-ivory">Employee Satisfaction</div>
                 <div className="text-sm text-mist">Program NPS score</div>
               </div>
             </div>
@@ -78,8 +78,174 @@ export default function ProgramOverview() {
           </div>
         </section>
 
-        {/* What's Included */}
+        {/* Demo Video Section */}
+        <section className="py-20 bg-pearl">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <h2 className="text-large-display font-bold text-center mb-6 text-carbon">
+              See NeuroState in Action
+            </h2>
+            <p className="text-body text-center text-stone mb-12 max-w-2xl mx-auto">
+              Watch how leading organizations integrate NeuroState into their wellness programs and transform team performance.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="bg-ivory rounded-2xl overflow-hidden shadow-soft">
+                <div className="aspect-video bg-slate flex items-center justify-center relative group cursor-pointer">
+                  <div className="absolute inset-0 bg-gradient-to-br from-carbon/80 to-slate/80 flex items-center justify-center">
+                    <div className="w-20 h-20 rounded-full bg-accent flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <svg className="w-10 h-10 text-ivory ml-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-carbon mb-2">Platform Overview</h3>
+                  <p className="text-sm text-stone">Complete walkthrough of the NeuroState enterprise dashboard, Nova AI integration, and team analytics.</p>
+                </div>
+              </div>
+
+              <div className="bg-ivory rounded-2xl overflow-hidden shadow-soft">
+                <div className="aspect-video bg-slate flex items-center justify-center relative group cursor-pointer">
+                  <div className="absolute inset-0 bg-gradient-to-br from-carbon/80 to-slate/80 flex items-center justify-center">
+                    <div className="w-20 h-20 rounded-full bg-accent flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <svg className="w-10 h-10 text-ivory ml-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-carbon mb-2">Implementation Guide</h3>
+                  <p className="text-sm text-stone">Step-by-step guide to rolling out NeuroState across your organization in under 4 weeks.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Comparison Table */}
         <section className="py-20 bg-ivory">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <h2 className="text-large-display font-bold text-center mb-6 text-carbon">
+              NeuroState vs Traditional Wellness Programs
+            </h2>
+            <p className="text-body text-center text-stone mb-12 max-w-2xl mx-auto">
+              See how NeuroState delivers measurable performance gains compared to generic wellness benefits.
+            </p>
+
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="border-b-2 border-carbon">
+                    <th className="text-left py-6 px-6 font-bold text-carbon uppercase tracking-wide">Feature</th>
+                    <th className="text-center py-6 px-6 font-bold text-accent uppercase tracking-wide">NeuroState</th>
+                    <th className="text-center py-6 px-6 font-bold text-stone uppercase tracking-wide">Traditional Programs</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-mist bg-pearl">
+                    <td className="py-6 px-6 font-semibold text-carbon">AI-Powered Personalization</td>
+                    <td className="py-6 px-6 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-accent/20">
+                        <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
+                    </td>
+                    <td className="py-6 px-6 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-stone/20">
+                        <svg className="w-5 h-5 text-stone" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="border-b border-mist">
+                    <td className="py-6 px-6 font-semibold text-carbon">Cognitive Performance Focus</td>
+                    <td className="py-6 px-6 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-accent/20">
+                        <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
+                    </td>
+                    <td className="py-6 px-6 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-stone/20">
+                        <svg className="w-5 h-5 text-stone" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="border-b border-mist bg-pearl">
+                    <td className="py-6 px-6 font-semibold text-carbon">Real-Time Analytics</td>
+                    <td className="py-6 px-6 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-accent/20">
+                        <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
+                    </td>
+                    <td className="py-6 px-6 text-center text-sm text-stone">Annual surveys only</td>
+                  </tr>
+                  <tr className="border-b border-mist">
+                    <td className="py-6 px-6 font-semibold text-carbon">Premium Products Included</td>
+                    <td className="py-6 px-6 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-accent/20">
+                        <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
+                    </td>
+                    <td className="py-6 px-6 text-center text-sm text-stone">Gym membership only</td>
+                  </tr>
+                  <tr className="border-b border-mist bg-pearl">
+                    <td className="py-6 px-6 font-semibold text-carbon">Measurable ROI</td>
+                    <td className="py-6 px-6 text-center text-sm text-accent font-semibold">47% focus increase</td>
+                    <td className="py-6 px-6 text-center text-sm text-stone">No clear metrics</td>
+                  </tr>
+                  <tr className="border-b border-mist">
+                    <td className="py-6 px-6 font-semibold text-carbon">Slack/Teams Integration</td>
+                    <td className="py-6 px-6 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-accent/20">
+                        <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
+                    </td>
+                    <td className="py-6 px-6 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-stone/20">
+                        <svg className="w-5 h-5 text-stone" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="border-b border-mist bg-pearl">
+                    <td className="py-6 px-6 font-semibold text-carbon">Implementation Time</td>
+                    <td className="py-6 px-6 text-center text-sm text-accent font-semibold">2-4 weeks</td>
+                    <td className="py-6 px-6 text-center text-sm text-stone">3-6 months</td>
+                  </tr>
+                  <tr className="border-b border-mist">
+                    <td className="py-6 px-6 font-semibold text-carbon">24/7 Support Access</td>
+                    <td className="py-6 px-6 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-accent/20">
+                        <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
+                    </td>
+                    <td className="py-6 px-6 text-center text-sm text-stone">Business hours only</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* What's Included */}
+        <section className="py-20 bg-pearl">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <h2 className="text-large-display font-bold text-center mb-16 text-carbon">
               What's Included
