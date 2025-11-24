@@ -34,6 +34,10 @@ import Contact from "./pages/Contact";
 import OrderTracking from "./pages/OrderTracking";
 import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/Dashboard";
+import ProgramOverview from "./pages/ProgramOverview";
+import EnterpriseIntegrations from "./pages/EnterpriseIntegrations";
+import EnterprisePricing from "./pages/EnterprisePricing";
+import EnterpriseCaseStudies from "./pages/EnterpriseCaseStudies";
 
 const queryClient = new QueryClient();
 
@@ -83,6 +87,10 @@ const App = () => (
           <Route path="/nova/protocols/:id" element={<ProtectedRoute><ProtocolDetail /></ProtectedRoute>} />
           <Route path="/nova/insights" element={<ProtectedRoute><NovaInsights /></ProtectedRoute>} />
           <Route path="/nova/devices" element={<ProtectedRoute><NovaDevices /></ProtectedRoute>} />
+          <Route path="/enterprise/overview" element={<ProgramOverview />} />
+          <Route path="/enterprise/integrations" element={<EnterpriseIntegrations />} />
+          <Route path="/enterprise/pricing" element={<EnterprisePricing />} />
+          <Route path="/enterprise/cases" element={<EnterpriseCaseStudies />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
