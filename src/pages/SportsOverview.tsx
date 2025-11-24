@@ -260,8 +260,10 @@ export default function SportsOverview() {
                   Aggregated performance insights and engagement metrics for coaches and staff.
                 </p>
                 <div className="space-y-1 text-xs text-ash">
-                  <div>Team health trends</div>
-                  <div>Engagement analytics</div>
+                  <div>Athlete performance metrics</div>
+                  <div>Recovery & readiness stats</div>
+                  <div>Injury prevention tracking</div>
+                  <div>Training load analytics</div>
                 </div>
               </div>
 

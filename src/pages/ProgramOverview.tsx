@@ -304,8 +304,10 @@ export default function ProgramOverview() {
                   Aggregated wellness insights and engagement metrics for HR and leadership.
                 </p>
                 <div className="space-y-1 text-xs text-ash">
-                  <div>Anonymised team health trends</div>
-                  <div>Engagement analytics</div>
+                  <div>Employee productivity trends</div>
+                  <div>Burnout reduction metrics</div>
+                  <div>Focus & cognitive performance</div>
+                  <div>Team wellness engagement</div>
                 </div>
               </div>
 

@@ -264,8 +264,10 @@ export default function HealthClubsOverview() {
                   Aggregated wellness insights and engagement metrics for facility management.
                 </p>
                 <div className="space-y-1 text-xs text-ash">
-                  <div>Member health trends</div>
-                  <div>Engagement analytics</div>
+                  <div>Member retention trends</div>
+                  <div>Class attendance rates</div>
+                  <div>Satisfaction & NPS scores</div>
+                  <div>Programme engagement</div>
                 </div>
               </div>
 
