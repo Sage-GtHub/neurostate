@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { SEO } from "@/components/SEO";
 import { Link } from "react-router-dom";
-import { Download, CheckCircle2, TrendingUp, Users, Shield, Target } from "lucide-react";
+import { Download, CheckCircle2, TrendingUp, Users, Shield, Target, FileText, Layers, Calculator, Award } from "lucide-react";
 import { SportsROICalculator } from "@/components/SportsROICalculator";
 import { SportsComparisonTable } from "@/components/SportsComparisonTable";
 import { CustomerSuccessMetrics } from "@/components/CustomerSuccessMetrics";
@@ -402,15 +402,68 @@ export default function SportsOverview() {
           </div>
         </section>
 
-        {/* Navigation Links */}
-        <section className="py-12 bg-carbon text-ivory">
+        {/* Navigation Cards */}
+        <section className="py-20 bg-carbon">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-            <div className="flex flex-wrap justify-center gap-6 text-sm uppercase tracking-wider">
-              <Link to="/enterprise/sports/overview" className="hover:text-accent transition-colors">Program Overview</Link>
-              <Link to="/enterprise/sports/integrations" className="hover:text-accent transition-colors">Integrations</Link>
-              <Link to="/enterprise/sports/pricing" className="hover:text-accent transition-colors">Pricing Calculator</Link>
-              <Link to="/enterprise/sports/cases" className="hover:text-accent transition-colors">Case Studies</Link>
-              <button className="hover:text-accent transition-colors">Download Overview</button>
+            <div className="text-center mb-12">
+              <h3 className="text-2xl font-bold text-ivory mb-3">Explore Partnership Resources</h3>
+              <p className="text-mist text-sm">Everything you need to evaluate NeuroState for your sports organization</p>
+            </div>
+
+            <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
+              <Link 
+                to="/enterprise/sports/overview" 
+                className="group bg-slate rounded-2xl p-6 hover:bg-slate/80 transition-all hover:scale-105"
+              >
+                <div className="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-accent/30 transition-colors">
+                  <FileText className="w-6 h-6 text-accent" />
+                </div>
+                <div className="text-sm font-bold text-ivory mb-1">Program Overview</div>
+                <div className="text-xs text-mist">Core benefits and metrics</div>
+              </Link>
+
+              <Link 
+                to="/enterprise/sports/integrations" 
+                className="group bg-slate rounded-2xl p-6 hover:bg-slate/80 transition-all hover:scale-105"
+              >
+                <div className="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-accent/30 transition-colors">
+                  <Layers className="w-6 h-6 text-accent" />
+                </div>
+                <div className="text-sm font-bold text-ivory mb-1">Integrations</div>
+                <div className="text-xs text-mist">Connect your tools</div>
+              </Link>
+
+              <Link 
+                to="/enterprise/sports/pricing" 
+                className="group bg-slate rounded-2xl p-6 hover:bg-slate/80 transition-all hover:scale-105"
+              >
+                <div className="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-accent/30 transition-colors">
+                  <Calculator className="w-6 h-6 text-accent" />
+                </div>
+                <div className="text-sm font-bold text-ivory mb-1">Pricing Calculator</div>
+                <div className="text-xs text-mist">Calculate your investment</div>
+              </Link>
+
+              <Link 
+                to="/enterprise/sports/cases" 
+                className="group bg-slate rounded-2xl p-6 hover:bg-slate/80 transition-all hover:scale-105"
+              >
+                <div className="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-accent/30 transition-colors">
+                  <Award className="w-6 h-6 text-accent" />
+                </div>
+                <div className="text-sm font-bold text-ivory mb-1">Case Studies</div>
+                <div className="text-xs text-mist">Client success stories</div>
+              </Link>
+
+              <button 
+                className="group bg-slate rounded-2xl p-6 hover:bg-slate/80 transition-all hover:scale-105"
+              >
+                <div className="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-accent/30 transition-colors">
+                  <Download className="w-6 h-6 text-accent" />
+                </div>
+                <div className="text-sm font-bold text-ivory mb-1">Download Overview</div>
+                <div className="text-xs text-mist">Save for later</div>
+              </button>
             </div>
           </div>
         </section>
