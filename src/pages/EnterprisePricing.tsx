@@ -129,12 +129,12 @@ export default function EnterprisePricing() {
               {/* Left Column - Controls */}
               <div className="space-y-8">
                 {/* Employee Count Slider */}
-                <div className="border border-mist rounded-2xl p-8 bg-pearl">
-                  <div className="mb-6">
-                    <label className="text-sm font-semibold text-stone uppercase tracking-wide mb-2 block">
+                <div className="bg-pearl rounded-3xl p-10">
+                  <div className="mb-8">
+                    <label className="text-xs font-bold text-accent uppercase tracking-wider mb-3 block">
                       Number of Employees
                     </label>
-                    <div className="text-4xl font-bold text-carbon">{employeeCount[0]}</div>
+                    <div className="text-6xl font-bold text-carbon mb-2">{employeeCount[0]}</div>
                   </div>
                   
                   <Slider
@@ -143,69 +143,69 @@ export default function EnterprisePricing() {
                     min={10}
                     max={5000}
                     step={10}
-                    className="mb-4"
+                    className="mb-6"
                   />
                   
-                  <div className="flex justify-between text-xs text-stone">
+                  <div className="flex justify-between text-sm text-stone font-medium">
                     <span>10</span>
                     <span>5,000+</span>
                   </div>
                 </div>
 
                 {/* Pricing Summary */}
-                <div className="border border-mist rounded-2xl p-8 bg-ivory">
-                  <h3 className="text-sm font-semibold text-stone uppercase tracking-wide mb-6">
+                <div className="bg-gradient-to-br from-carbon to-slate rounded-3xl p-10 text-ivory">
+                  <h3 className="text-xs font-bold text-accent uppercase tracking-wider mb-8">
                     Pricing Summary
                   </h3>
                   
-                  <div className="space-y-4 mb-6">
-                    <div className="flex justify-between items-center pb-4 border-b border-mist">
-                      <span className="text-stone">Price per employee</span>
-                      <span className="text-2xl font-bold text-carbon">£{discountedPrice.toFixed(2)}/mo</span>
+                  <div className="space-y-6 mb-8">
+                    <div className="flex justify-between items-center pb-6 border-b border-ivory/20">
+                      <span className="text-mist">Price per employee</span>
+                      <span className="text-3xl font-bold">£{discountedPrice.toFixed(2)}/mo</span>
                     </div>
                     
                     {volumeDiscount > 0 && (
-                      <div className="flex justify-between items-center pb-4 border-b border-mist">
-                        <span className="text-stone">Volume discount</span>
-                        <span className="text-lg font-semibold text-accent">-{(volumeDiscount * 100).toFixed(0)}%</span>
+                      <div className="flex justify-between items-center pb-6 border-b border-ivory/20">
+                        <span className="text-mist">Volume discount</span>
+                        <span className="text-2xl font-bold text-accent">-{(volumeDiscount * 100).toFixed(0)}%</span>
                       </div>
                     )}
                     
                     <div className="flex justify-between items-center">
-                      <span className="text-stone">Monthly total</span>
-                      <span className="text-3xl font-bold text-carbon">£{monthlyTotal.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                      <span className="text-mist">Monthly total</span>
+                      <span className="text-4xl font-bold">£{monthlyTotal.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                     </div>
                   </div>
 
                   {/* Annual Toggle */}
-                  <div className="bg-pearl rounded-xl p-4 mb-6">
+                  <div className="bg-ivory/10 backdrop-blur-sm rounded-2xl p-6 mb-6">
                     <label className="flex items-center justify-between cursor-pointer">
                       <div>
-                        <div className="font-semibold text-carbon">Annual Commitment</div>
-                        <div className="text-sm text-stone">Save 15% with annual billing</div>
+                        <div className="font-bold text-ivory mb-1">Annual Commitment</div>
+                        <div className="text-sm text-mist">Save 15% with annual billing</div>
                       </div>
                       <input
                         type="checkbox"
                         checked={isAnnual}
                         onChange={(e) => setIsAnnual(e.target.checked)}
-                        className="w-5 h-5"
+                        className="w-6 h-6"
                       />
                     </label>
                   </div>
 
                   {isAnnual && (
-                    <div className="bg-accent/10 rounded-xl p-4 mb-6">
+                    <div className="bg-accent/20 backdrop-blur-sm rounded-2xl p-6 mb-6 animate-fade-in">
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm text-stone">Annual total</span>
-                        <span className="text-2xl font-bold text-accent">£{annualTotal.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                        <span className="text-sm text-ivory">Annual total</span>
+                        <span className="text-3xl font-bold text-ivory">£{annualTotal.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                       </div>
-                      <div className="text-sm text-accent font-medium">
+                      <div className="text-sm text-accent font-bold">
                         Save £{annualSavings.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} annually
                       </div>
                     </div>
                   )}
 
-                  <Button size="lg" className="w-full">
+                  <Button size="lg" variant="secondary" className="w-full">
                     Request Custom Quote
                   </Button>
                 </div>
@@ -222,27 +222,35 @@ export default function EnterprisePricing() {
                     <button
                       key={tier.name}
                       onClick={() => setSelectedTier(index)}
-                      className={`w-full text-left border-2 rounded-2xl p-6 transition-all ${
+                      className={`w-full text-left rounded-3xl p-8 transition-all ${
                         selectedTier === index
-                          ? 'border-accent bg-accent/5'
-                          : 'border-mist bg-ivory hover:border-stone'
+                          ? 'bg-accent text-ivory shadow-soft scale-[1.02]'
+                          : 'bg-pearl hover:bg-ivory hover:shadow-soft'
                       }`}
                     >
-                      <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-start justify-between mb-6">
                         <div>
-                          <h4 className="text-xl font-bold text-carbon mb-1">{tier.name}</h4>
-                          <div className="text-sm text-stone">{tier.commitment}</div>
+                          <h4 className={`text-2xl font-bold mb-2 ${selectedTier === index ? 'text-ivory' : 'text-carbon'}`}>
+                            {tier.name}
+                          </h4>
+                          <div className={`text-sm ${selectedTier === index ? 'text-ivory/80' : 'text-stone'}`}>
+                            {tier.commitment}
+                          </div>
                         </div>
                         <div className="text-right">
-                          <div className="text-2xl font-bold text-carbon">£{tier.price}</div>
-                          <div className="text-sm text-stone">/employee/mo</div>
+                          <div className={`text-3xl font-bold ${selectedTier === index ? 'text-ivory' : 'text-carbon'}`}>
+                            £{tier.price}
+                          </div>
+                          <div className={`text-sm ${selectedTier === index ? 'text-ivory/80' : 'text-stone'}`}>
+                            /employee/mo
+                          </div>
                         </div>
                       </div>
                       
-                      <ul className="space-y-2">
+                      <ul className="space-y-3">
                         {tier.features.map((feature, i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm text-stone">
-                            <CheckCircle2 className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
+                          <li key={i} className={`flex items-start gap-3 text-sm ${selectedTier === index ? 'text-ivory/90' : 'text-stone'}`}>
+                            <CheckCircle2 className={`w-5 h-5 mt-0.5 flex-shrink-0 ${selectedTier === index ? 'text-ivory' : 'text-accent'}`} />
                             {feature}
                           </li>
                         ))}
@@ -251,28 +259,28 @@ export default function EnterprisePricing() {
                   ))}
                 </div>
 
-                <div className="mt-8 border border-mist rounded-2xl p-6 bg-pearl">
-                  <h4 className="font-semibold text-carbon mb-4">What's Included</h4>
-                  <ul className="space-y-2 text-sm text-stone">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
-                      Nova AI assistant for all employees
+                <div className="mt-8 bg-pearl rounded-3xl p-8">
+                  <h4 className="font-bold text-carbon mb-6 text-lg">What's Included</h4>
+                  <ul className="space-y-4 text-sm text-stone">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                      <span className="font-medium">Nova AI assistant for all employees</span>
                     </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
-                      20-40% discount on all products
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                      <span className="font-medium">20-40% discount on all products</span>
                     </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
-                      Admin dashboard with analytics
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                      <span className="font-medium">Admin dashboard with analytics</span>
                     </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
-                      Flexible billing and contracts
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                      <span className="font-medium">Flexible billing and contracts</span>
                     </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
-                      Dedicated account support
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                      <span className="font-medium">Dedicated account support</span>
                     </li>
                   </ul>
                 </div>

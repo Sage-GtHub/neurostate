@@ -23,61 +23,65 @@ interface CaseStudyProps {
 
 function CaseStudyCard({ company, industry, employees, icon, challenge, solution, metrics, quote, author, role }: CaseStudyProps) {
   return (
-    <div className="border border-mist rounded-2xl overflow-hidden bg-ivory mb-12">
+    <div className="group bg-pearl rounded-3xl overflow-hidden hover:shadow-soft transition-all mb-12">
       {/* Header */}
-      <div className="bg-pearl p-8 border-b border-mist">
-        <div className="flex items-center gap-4 mb-4">
-          <div className="w-16 h-16 bg-ivory rounded-2xl flex items-center justify-center">
+      <div className="bg-gradient-to-br from-carbon to-slate p-12">
+        <div className="flex items-center gap-6">
+          <div className="w-20 h-20 bg-ivory/10 backdrop-blur-sm rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform">
             {icon}
           </div>
           <div>
-            <h3 className="text-3xl font-bold text-carbon">{company}</h3>
-            <div className="text-stone">{industry} • {employees}</div>
+            <h3 className="text-4xl font-bold text-ivory mb-2">{company}</h3>
+            <div className="text-mist text-lg">{industry} • {employees}</div>
           </div>
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-8 space-y-8">
-        {/* Challenge */}
-        <div>
-          <h4 className="text-sm font-semibold text-stone uppercase tracking-wide mb-3">
-            The Challenge
-          </h4>
-          <p className="text-body text-carbon">{challenge}</p>
-        </div>
+      <div className="p-12 space-y-10">
+        {/* Challenge & Solution Grid */}
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="bg-ivory rounded-2xl p-8">
+            <h4 className="text-xs font-bold text-accent uppercase tracking-wider mb-4">
+              The Challenge
+            </h4>
+            <p className="text-body text-carbon leading-relaxed">{challenge}</p>
+          </div>
 
-        {/* Solution */}
-        <div>
-          <h4 className="text-sm font-semibold text-stone uppercase tracking-wide mb-3">
-            The Solution
-          </h4>
-          <p className="text-body text-carbon">{solution}</p>
+          <div className="bg-ivory rounded-2xl p-8">
+            <h4 className="text-xs font-bold text-accent uppercase tracking-wider mb-4">
+              The Solution
+            </h4>
+            <p className="text-body text-carbon leading-relaxed">{solution}</p>
+          </div>
         </div>
 
         {/* Metrics */}
         <div>
-          <h4 className="text-sm font-semibold text-stone uppercase tracking-wide mb-6">
+          <h4 className="text-xs font-bold text-stone uppercase tracking-wider mb-8 text-center">
             Measurable Results
           </h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {metrics.map((metric, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl font-bold text-accent mb-2">{metric.value}</div>
-                <div className="text-sm text-stone">{metric.label}</div>
+              <div key={index} className="bg-ivory rounded-2xl p-6 text-center hover:shadow-soft transition-shadow">
+                <div className="text-5xl font-bold text-accent mb-3">{metric.value}</div>
+                <div className="text-sm text-stone font-medium leading-tight">{metric.label}</div>
               </div>
             ))}
           </div>
         </div>
 
         {/* Quote */}
-        <div className="bg-pearl rounded-2xl p-8">
-          <blockquote className="text-lg text-carbon italic mb-4">
+        <div className="bg-gradient-to-br from-accent/5 to-accent/10 rounded-2xl p-10">
+          <blockquote className="text-xl text-carbon mb-6 leading-relaxed">
             "{quote}"
           </blockquote>
-          <div className="text-sm">
-            <div className="font-semibold text-carbon">— {author}</div>
-            <div className="text-stone">{role}</div>
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 bg-accent/20 rounded-full"></div>
+            <div>
+              <div className="font-bold text-carbon text-lg">{author}</div>
+              <div className="text-stone">{role}</div>
+            </div>
           </div>
         </div>
       </div>
