@@ -52,35 +52,27 @@ export default function ProgramOverview() {
               </p>
             </div>
 
-            {/* Metrics Grid with Cards */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-              <div className="relative group">
-                <div className="relative bg-ivory/5 backdrop-blur-sm border border-ivory/10 rounded-2xl p-6 text-center hover:bg-ivory/10 transition-all">
-                  <div className="text-5xl sm:text-6xl font-bold mb-3 text-accent">47%</div>
-                  <div className="text-base font-semibold mb-1 text-ivory">Increase in Focus</div>
-                  <div className="text-xs text-mist/80">Measured via cognitive tests</div>
-                </div>
+            {/* Metrics Grid - Seamless */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-12">
+              <div className="text-center">
+                <div className="text-4xl font-bold mb-2 text-accent">47%</div>
+                <div className="text-sm font-semibold text-ivory">Increase in Focus</div>
+                <div className="text-xs text-mist/60 mt-1">Measured via cognitive tests</div>
               </div>
-              <div className="relative group">
-                <div className="relative bg-ivory/5 backdrop-blur-sm border border-ivory/10 rounded-2xl p-6 text-center hover:bg-ivory/10 transition-all">
-                  <div className="text-5xl sm:text-6xl font-bold mb-3 text-accent">63%</div>
-                  <div className="text-base font-semibold mb-1 text-ivory">Reduction in Burnout</div>
-                  <div className="text-xs text-mist/80">Employee wellness surveys</div>
-                </div>
+              <div className="text-center">
+                <div className="text-4xl font-bold mb-2 text-accent">63%</div>
+                <div className="text-sm font-semibold text-ivory">Reduction in Burnout</div>
+                <div className="text-xs text-mist/60 mt-1">Employee wellness surveys</div>
               </div>
-              <div className="relative group">
-                <div className="relative bg-ivory/5 backdrop-blur-sm border border-ivory/10 rounded-2xl p-6 text-center hover:bg-ivory/10 transition-all">
-                  <div className="text-5xl sm:text-6xl font-bold mb-3 text-accent">31%</div>
-                  <div className="text-base font-semibold mb-1 text-ivory">Productivity Gain</div>
-                  <div className="text-xs text-mist/80">Output per employee</div>
-                </div>
+              <div className="text-center">
+                <div className="text-4xl font-bold mb-2 text-accent">31%</div>
+                <div className="text-sm font-semibold text-ivory">Productivity Gain</div>
+                <div className="text-xs text-mist/60 mt-1">Output per employee</div>
               </div>
-              <div className="relative group">
-                <div className="relative bg-ivory/5 backdrop-blur-sm border border-ivory/10 rounded-2xl p-6 text-center hover:bg-ivory/10 transition-all">
-                  <div className="text-5xl sm:text-6xl font-bold mb-3 text-accent">89%</div>
-                  <div className="text-base font-semibold mb-1 text-ivory">Employee Satisfaction</div>
-                  <div className="text-xs text-mist/80">Program NPS score</div>
-                </div>
+              <div className="text-center">
+                <div className="text-4xl font-bold mb-2 text-accent">89%</div>
+                <div className="text-sm font-semibold text-ivory">Employee Satisfaction</div>
+                <div className="text-xs text-mist/60 mt-1">Programme NPS score</div>
               </div>
             </div>
 
@@ -291,59 +283,41 @@ export default function ProgramOverview() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent rounded-3xl" />
-                <div className="relative bg-ivory rounded-3xl p-8 text-center hover:shadow-soft transition-all">
-                  <div className="relative w-20 h-20 mx-auto mb-6">
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-accent/5 rounded-2xl animate-pulse" />
-                    <div className="relative w-full h-full bg-pearl rounded-2xl flex items-center justify-center">
-                      <Target className="w-10 h-10 text-accent" />
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-semibold mb-4 text-carbon">Nova AI Assistant</h3>
-                  <p className="text-body text-stone mb-4">
-                    Personalised wellness protocols for every team member via chat, mobile app, or web dashboard.
-                  </p>
-                  <div className="text-sm text-ash">24/7 AI health coach</div>
+            <div className="grid md:grid-cols-3 gap-16">
+              <div className="text-center space-y-4">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-carbon/5 flex items-center justify-center">
+                  <Target className="w-8 h-8 text-carbon" />
+                </div>
+                <h3 className="text-xl font-semibold text-carbon">Nova AI Assistant</h3>
+                <p className="text-sm text-stone leading-relaxed">
+                  Personalised wellness protocols for every team member via chat, mobile app, or web dashboard.
+                </p>
+                <div className="text-xs text-ash">24/7 AI health coach</div>
+              </div>
+
+              <div className="text-center space-y-4">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-carbon/5 flex items-center justify-center">
+                  <TrendingUp className="w-8 h-8 text-carbon" />
+                </div>
+                <h3 className="text-xl font-semibold text-carbon">Team Dashboard</h3>
+                <p className="text-sm text-stone leading-relaxed">
+                  Aggregated wellness insights and engagement metrics for HR and leadership.
+                </p>
+                <div className="space-y-1 text-xs text-ash">
+                  <div>Anonymised team health trends</div>
+                  <div>Engagement analytics</div>
                 </div>
               </div>
 
-              <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent rounded-3xl" />
-                <div className="relative bg-ivory rounded-3xl p-8 text-center hover:shadow-soft transition-all">
-                  <div className="relative w-20 h-20 mx-auto mb-6">
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-accent/5 rounded-2xl animate-pulse" style={{ animationDelay: '0.2s' }} />
-                    <div className="relative w-full h-full bg-pearl rounded-2xl flex items-center justify-center">
-                      <TrendingUp className="w-10 h-10 text-accent" />
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-semibold mb-4 text-carbon">Team Dashboard</h3>
-                  <p className="text-body text-stone mb-4">
-                    Aggregated wellness insights and engagement metrics for HR and leadership.
-                  </p>
-                  <div className="space-y-1 text-sm text-ash">
-                    <div>Anonymized team health trends</div>
-                    <div>Engagement analytics</div>
-                  </div>
+              <div className="text-center space-y-4">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-carbon/5 flex items-center justify-center">
+                  <Shield className="w-8 h-8 text-carbon" />
                 </div>
-              </div>
-
-              <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent rounded-3xl" />
-                <div className="relative bg-ivory rounded-3xl p-8 text-center hover:shadow-soft transition-all">
-                  <div className="relative w-20 h-20 mx-auto mb-6">
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-accent/5 rounded-2xl animate-pulse" style={{ animationDelay: '0.4s' }} />
-                    <div className="relative w-full h-full bg-pearl rounded-2xl flex items-center justify-center">
-                      <Shield className="w-10 h-10 text-accent" />
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-semibold mb-4 text-carbon">Premium Product Access</h3>
-                  <p className="text-body text-stone mb-4">
-                    Discounted supplements, red light devices, and recovery products for your team.
-                  </p>
-                  <div className="text-sm text-ash">20-40% corporate discount</div>
-                </div>
+                <h3 className="text-xl font-semibold text-carbon">Premium Product Access</h3>
+                <p className="text-sm text-stone leading-relaxed">
+                  Discounted supplements, red light devices, and recovery products for your team.
+                </p>
+                <div className="text-xs text-ash">20-40% corporate discount</div>
               </div>
             </div>
           </div>
@@ -358,10 +332,10 @@ export default function ProgramOverview() {
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-12">
+            <div className="grid md:grid-cols-2 gap-16">
               {/* Productivity & Performance */}
-              <div className="bg-pearl rounded-3xl p-10">
-                <h3 className="text-2xl font-bold mb-8 text-carbon uppercase tracking-wide">
+              <div className="space-y-6">
+                <h3 className="text-xl font-bold mb-8 text-carbon uppercase tracking-wide">
                   Productivity & Performance
                 </h3>
                 <div className="space-y-6">
@@ -397,8 +371,8 @@ export default function ProgramOverview() {
               </div>
 
               {/* Retention & Culture */}
-              <div className="bg-pearl rounded-3xl p-10">
-                <h3 className="text-2xl font-bold mb-8 text-carbon uppercase tracking-wide">
+              <div className="space-y-6">
+                <h3 className="text-xl font-bold mb-8 text-carbon uppercase tracking-wide">
                   Retention & Culture
                 </h3>
                 <div className="space-y-6">
@@ -448,10 +422,10 @@ export default function ProgramOverview() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-4 gap-6">
-              <div className="bg-ivory rounded-3xl p-8 shadow-soft">
-                <div className="text-carbon font-bold text-lg mb-4">Week <span className="text-accent">1</span></div>
-                <div className="font-semibold text-carbon mb-4">Onboarding</div>
+            <div className="grid md:grid-cols-4 gap-12">
+              <div className="space-y-4">
+                <div className="text-carbon font-bold mb-3">Week <span className="text-accent">1</span></div>
+                <div className="font-semibold text-carbon mb-3">Onboarding</div>
                 <ul className="space-y-2 text-sm text-stone">
                   <li>• Contract signing</li>
                   <li>• Team setup</li>
@@ -460,9 +434,9 @@ export default function ProgramOverview() {
                 </ul>
               </div>
 
-              <div className="bg-ivory rounded-3xl p-8 shadow-soft">
-                <div className="text-carbon font-bold text-lg mb-4">Week <span className="text-accent">2</span></div>
-                <div className="font-semibold text-carbon mb-4">Launch</div>
+              <div className="space-y-4">
+                <div className="text-carbon font-bold mb-3">Week <span className="text-accent">2</span></div>
+                <div className="font-semibold text-carbon mb-3">Launch</div>
                 <ul className="space-y-2 text-sm text-stone">
                   <li>• Employee invitations</li>
                   <li>• Kickoff webinar</li>
@@ -471,9 +445,9 @@ export default function ProgramOverview() {
                 </ul>
               </div>
 
-              <div className="bg-ivory rounded-3xl p-8 shadow-soft">
-                <div className="text-carbon font-bold text-lg mb-4">Week <span className="text-accent">3-4</span></div>
-                <div className="font-semibold text-carbon mb-4">Adoption</div>
+              <div className="space-y-4">
+                <div className="text-carbon font-bold mb-3">Week <span className="text-accent">3-4</span></div>
+                <div className="font-semibold text-carbon mb-3">Adoption</div>
                 <ul className="space-y-2 text-sm text-stone">
                   <li>• Usage monitoring</li>
                   <li>• Support tickets</li>
@@ -482,9 +456,9 @@ export default function ProgramOverview() {
                 </ul>
               </div>
 
-              <div className="bg-ivory rounded-3xl p-8 shadow-soft">
-                <div className="text-carbon font-bold text-lg mb-4">Month <span className="text-accent">2+</span></div>
-                <div className="font-semibold text-carbon mb-4">Optimization</div>
+              <div className="space-y-4">
+                <div className="text-carbon font-bold mb-3">Month <span className="text-accent">2+</span></div>
+                <div className="font-semibold text-carbon mb-3">Optimisation</div>
                 <ul className="space-y-2 text-sm text-stone">
                   <li>• Performance review</li>
                   <li>• ROI analysis</li>
