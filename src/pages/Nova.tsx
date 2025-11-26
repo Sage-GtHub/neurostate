@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { NovaNav } from "@/components/NovaNav";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Activity, Watch, TrendingUp, Brain, Target, Sparkles, Send, Loader2 } from "lucide-react";
@@ -218,24 +217,26 @@ export default function Nova() {
   };
 
   return (
-    <div className="min-h-screen bg-ivory">
+    <div className="min-h-screen bg-gradient-to-br from-carbon via-slate to-carbon">
       <NovaNav />
       
-      <div className="border-b border-mist/30 bg-gradient-to-b from-ivory to-pearl/20">
+      {/* Header */}
+      <div className="border-b border-ivory/5 backdrop-blur-xl bg-carbon/40">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8">
           <div className="flex items-center justify-between mb-2">
-            <h1 className="text-[2rem] font-semibold text-carbon tracking-tight">Nova</h1>
-            <div className="flex items-center gap-2 text-sm text-ash">
-              <div className={`w-2 h-2 rounded-full transition-colors ${isSpeaking ? 'bg-[#10b981] animate-pulse' : 'bg-[#10b981]'}`} />
-              <span className="text-caption">Online</span>
+            <h1 className="text-[2rem] font-semibold text-ivory tracking-tight">Nova</h1>
+            <div className="flex items-center gap-2 text-sm">
+              <div className={`w-2 h-2 rounded-full transition-all ${isSpeaking ? 'bg-[#10b981] animate-pulse shadow-lg shadow-[#10b981]/50' : 'bg-[#10b981] shadow-md shadow-[#10b981]/30'}`} />
+              <span className="text-ivory/70 text-caption">Online</span>
             </div>
           </div>
-          <p className="text-sm text-ash">Your AI performance assistant</p>
+          <p className="text-sm text-ivory/60">Your AI performance assistant</p>
         </div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12">
         <div className="grid lg:grid-cols-3 gap-12">
+          {/* Main Content */}
           <div className="lg:col-span-2 space-y-12">
             {showMorningCheckIn && currentPhase >= 2 && (
               <div className="animate-fade-in">
@@ -256,86 +257,84 @@ export default function Nova() {
               </div>
             )}
 
-            <Card className="border-mist/30 shadow-sm hover:shadow-md transition-shadow">
-              <CardContent className="p-0">
-                <div className="space-y-6 p-8 max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-mist scrollbar-track-transparent">
-                  {messages.map((message, index) => (
-                    <div key={index} className="flex gap-4 animate-fade-in">
-                      {message.role === "assistant" && (
-                        <div className="flex-shrink-0">
-                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-carbon to-slate flex items-center justify-center shadow-sm">
-                            <Sparkles className="w-5 h-5 text-ivory" />
-                          </div>
-                        </div>
-                      )}
-                      <div className={`flex-1 ${message.role === "user" ? "ml-auto max-w-[85%]" : ""}`}>
-                        <div className={`${message.role === "user" ? "bg-gradient-to-br from-pearl to-mist/30 p-5 rounded-2xl shadow-sm" : ""}`}>
-                          <p className="text-[0.9375rem] text-carbon leading-relaxed whitespace-pre-wrap">
-                            {message.content}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                  {isLoading && (
-                    <div className="flex gap-4 animate-fade-in">
+            {/* Chat Interface - Glassmorphism */}
+            <div className="backdrop-blur-2xl bg-ivory/5 rounded-3xl border border-ivory/10 shadow-2xl overflow-hidden">
+              <div className="space-y-6 p-8 max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-ivory/20 scrollbar-track-transparent">
+                {messages.map((message, index) => (
+                  <div key={index} className="flex gap-4 animate-fade-in">
+                    {message.role === "assistant" && (
                       <div className="flex-shrink-0">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-carbon to-slate flex items-center justify-center">
-                          <Loader2 className="w-5 h-5 text-ivory animate-spin" />
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#10b981]/20 to-[#10b981]/40 backdrop-blur-xl flex items-center justify-center ring-1 ring-[#10b981]/30">
+                          <Sparkles className="w-5 h-5 text-[#10b981]" />
                         </div>
                       </div>
-                      <div className="flex-1">
-                        <p className="text-sm text-ash italic">Analysing...</p>
+                    )}
+                    <div className={`flex-1 ${message.role === "user" ? "ml-auto max-w-[85%]" : ""}`}>
+                      <div className={`${message.role === "user" ? "backdrop-blur-xl bg-ivory/10 p-5 rounded-2xl border border-ivory/10" : ""}`}>
+                        <p className="text-[0.9375rem] text-ivory/90 leading-relaxed whitespace-pre-wrap">
+                          {message.content}
+                        </p>
                       </div>
                     </div>
-                  )}
-                  <div ref={messagesEndRef} />
+                  </div>
+                ))}
+                {isLoading && (
+                  <div className="flex gap-4 animate-fade-in">
+                    <div className="flex-shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#10b981]/20 to-[#10b981]/40 backdrop-blur-xl flex items-center justify-center ring-1 ring-[#10b981]/30">
+                        <Loader2 className="w-5 h-5 text-[#10b981] animate-spin" />
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm text-ivory/60 italic">Analysing...</p>
+                    </div>
+                  </div>
+                )}
+                <div ref={messagesEndRef} />
+              </div>
+              
+              <div className="border-t border-ivory/10 p-6 bg-carbon/20 backdrop-blur-xl">
+                <div className="flex gap-3 mb-4">
+                  <Input
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                    placeholder="Ask about protocols, performance, recovery..."
+                    disabled={isLoading}
+                    className="flex-1 bg-ivory/5 border-ivory/20 text-ivory placeholder:text-ivory/40 focus:border-[#10b981]/50 transition-colors backdrop-blur-xl"
+                  />
+                  <Button 
+                    onClick={handleSendMessage} 
+                    disabled={isLoading || !input.trim()}
+                    className="px-6 bg-gradient-to-r from-[#10b981]/90 to-[#10b981]/70 hover:from-[#10b981] hover:to-[#10b981]/80 border-0"
+                  >
+                    <Send className="w-4 h-4" />
+                  </Button>
                 </div>
                 
-                <div className="border-t border-mist/30 p-6 bg-pearl/20">
-                  <div className="flex gap-3 mb-4">
-                    <Input
-                      value={input}
-                      onChange={(e) => setInput(e.target.value)}
-                      onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                      placeholder="Ask about protocols, performance, recovery..."
-                      disabled={isLoading}
-                      className="flex-1 border-mist/40 focus:border-carbon transition-colors"
-                    />
-                    <Button 
-                      onClick={handleSendMessage} 
-                      disabled={isLoading || !input.trim()}
-                      className="px-6"
-                    >
-                      <Send className="w-4 h-4" />
-                    </Button>
-                  </div>
-                  
-                  <div className="flex justify-center pt-2 border-t border-mist/20">
-                    <VoiceInterface onSpeakingChange={setIsSpeaking} />
-                  </div>
+                <div className="flex justify-center pt-2 border-t border-ivory/10">
+                  <VoiceInterface onSpeakingChange={setIsSpeaking} />
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
 
+            {/* Metrics Grid - Data-First Design */}
             <div>
-              <h2 className="text-[1.5rem] font-semibold text-carbon mb-6 tracking-tight">Live Performance Metrics</h2>
+              <h2 className="text-[1.5rem] font-semibold text-ivory mb-6 tracking-tight">Live Performance Metrics</h2>
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {metrics.length > 0 ? metrics.map((metric, index) => (
-                  <Card key={index} className="border-mist/30 hover:border-mist transition-colors">
-                    <CardContent className="p-6">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="w-8 h-8 rounded-full bg-pearl/50 flex items-center justify-center">
-                          <metric.icon className="w-4 h-4 text-ash" />
-                        </div>
-                        <span className="text-caption text-ash uppercase tracking-wider font-medium">{metric.label}</span>
+                  <div key={index} className="backdrop-blur-xl bg-gradient-to-br from-ivory/5 to-ivory/0 rounded-2xl p-6 border border-ivory/10 hover:border-ivory/20 transition-all group">
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-ivory/10 to-ivory/5 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <metric.icon className="w-4 h-4 text-ivory/70" />
                       </div>
-                      <div className="text-[2rem] font-semibold text-carbon mb-1 tracking-tight">{metric.value}</div>
-                      {metric.trend && (
-                        <div className={`text-caption font-medium ${metric.trendColor || "text-ash"}`}>{metric.trend}</div>
-                      )}
-                    </CardContent>
-                  </Card>
+                      <span className="text-[0.6875rem] text-ivory/60 uppercase tracking-wider font-medium">{metric.label}</span>
+                    </div>
+                    <div className="text-[2.5rem] font-bold text-ivory mb-1 tracking-tight leading-none">{metric.value}</div>
+                    {metric.trend && (
+                      <div className={`text-caption font-semibold ${metric.trendColor || "text-ivory/70"}`}>{metric.trend}</div>
+                    )}
+                  </div>
                 )) : (
                   <>
                     {[
@@ -344,18 +343,16 @@ export default function Nova() {
                       { label: "Focus Sessions", icon: Target },
                       { label: "Recovery", icon: TrendingUp }
                     ].map((metric, index) => (
-                      <Card key={index} className="border-mist/30">
-                        <CardContent className="p-6">
-                          <div className="flex items-center gap-2 mb-3">
-                            <div className="w-8 h-8 rounded-full bg-pearl/50 flex items-center justify-center">
-                              <metric.icon className="w-4 h-4 text-ash" />
-                            </div>
-                            <span className="text-caption text-ash uppercase tracking-wider font-medium">{metric.label}</span>
+                      <div key={index} className="backdrop-blur-xl bg-gradient-to-br from-ivory/5 to-ivory/0 rounded-2xl p-6 border border-ivory/10">
+                        <div className="flex items-center gap-2 mb-4">
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-ivory/10 to-ivory/5 flex items-center justify-center">
+                            <metric.icon className="w-4 h-4 text-ivory/40" />
                           </div>
-                          <div className="text-[2rem] font-semibold text-carbon/20 mb-1">--</div>
-                          <div className="text-caption text-ash">Connect device</div>
-                        </CardContent>
-                      </Card>
+                          <span className="text-[0.6875rem] text-ivory/40 uppercase tracking-wider font-medium">{metric.label}</span>
+                        </div>
+                        <div className="text-[2.5rem] font-bold text-ivory/20 mb-1">--</div>
+                        <div className="text-caption text-ivory/40">Connect device</div>
+                      </div>
                     ))}
                   </>
                 )}
@@ -363,12 +360,13 @@ export default function Nova() {
             </div>
           </div>
 
+          {/* Sidebar */}
           <div className="space-y-8">
             <PhaseIndicator currentPhase={currentPhase} />
 
             {currentPhase >= 2 && (
               <div className="animate-fade-in">
-                <h3 className="text-body font-semibold text-carbon mb-4">Predictive Insights</h3>
+                <h3 className="text-body font-semibold text-ivory mb-4">Predictive Insights</h3>
                 <PredictiveInsights 
                   insights={[
                     {
@@ -390,68 +388,62 @@ export default function Nova() {
               </div>
             )}
 
-            <Card className="border-mist/30">
-              <CardContent className="p-6">
-                <h3 className="text-body font-semibold text-carbon mb-6">Connected Devices</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-3 rounded-lg hover:bg-pearl/30 transition-colors">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pearl to-mist flex items-center justify-center shadow-sm">
-                        <div className="w-6 h-6 rounded-full border-2 border-carbon" />
-                      </div>
-                      <div>
-                        <div className="text-sm font-medium text-carbon">Oura Ring Gen 3</div>
-                        <div className="text-caption text-ash">2 minutes ago</div>
-                      </div>
+            {/* Connected Devices */}
+            <div className="backdrop-blur-xl bg-gradient-to-br from-ivory/5 to-ivory/0 rounded-2xl p-6 border border-ivory/10">
+              <h3 className="text-body font-semibold text-ivory mb-6">Connected Devices</h3>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-3 rounded-xl hover:bg-ivory/5 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-ivory/10 to-ivory/5 backdrop-blur-xl flex items-center justify-center">
+                      <div className="w-6 h-6 rounded-full border-2 border-ivory/70" />
                     </div>
-                    <div className="w-2 h-2 rounded-full bg-[#10b981] shadow-sm shadow-[#10b981]/30" />
-                  </div>
-
-                  <div className="flex items-center justify-between p-3 rounded-lg hover:bg-pearl/30 transition-colors">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pearl to-mist flex items-center justify-center shadow-sm">
-                        <Watch className="w-5 h-5 text-carbon" />
-                      </div>
-                      <div>
-                        <div className="text-sm font-medium text-carbon">Apple Watch Ultra</div>
-                        <div className="text-caption text-ash">Offline</div>
-                      </div>
+                    <div>
+                      <div className="text-sm font-medium text-ivory">Oura Ring Gen 3</div>
+                      <div className="text-caption text-ivory/50">2 minutes ago</div>
                     </div>
-                    <div className="w-2 h-2 rounded-full bg-ash/40" />
                   </div>
+                  <div className="w-2 h-2 rounded-full bg-[#10b981] shadow-lg shadow-[#10b981]/50" />
                 </div>
 
-                <Button variant="outline" className="w-full mt-6" onClick={() => window.location.href = '/nova/devices'}>
-                  Manage Devices
-                </Button>
-              </CardContent>
-            </Card>
+                <div className="flex items-center justify-between p-3 rounded-xl hover:bg-ivory/5 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-ivory/10 to-ivory/5 backdrop-blur-xl flex items-center justify-center">
+                      <Watch className="w-5 h-5 text-ivory/70" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-medium text-ivory">Apple Watch Ultra</div>
+                      <div className="text-caption text-ivory/50">5 minutes ago</div>
+                    </div>
+                  </div>
+                  <div className="w-2 h-2 rounded-full bg-[#10b981] shadow-lg shadow-[#10b981]/50" />
+                </div>
+              </div>
+            </div>
 
-            <Card className="border-carbon/10 bg-gradient-to-br from-carbon to-slate text-ivory shadow-lg">
-              <CardContent className="p-8">
-                <h3 className="text-h3 font-semibold mb-3">Nova Intelligence</h3>
-                <div className="space-y-4 text-sm text-pearl/90 mb-6">
-                  <div className="flex justify-between items-center">
-                    <span>Data Points Analysed</span>
-                    <span className="font-semibold text-ivory">1,247</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Insights Generated</span>
-                    <span className="font-semibold text-ivory">18</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Performance Gain</span>
-                    <span className="font-semibold text-[#10b981]">+23%</span>
-                  </div>
+            {/* Nova Intelligence Block */}
+            <div className="backdrop-blur-xl bg-gradient-to-br from-[#10b981]/10 to-[#10b981]/5 rounded-2xl p-6 border border-[#10b981]/20">
+              <h3 className="text-body font-semibold text-ivory mb-6">Nova Intelligence</h3>
+              <div className="space-y-4">
+                <div>
+                  <div className="text-caption text-ivory/60 mb-1">Data Points Analysed</div>
+                  <div className="text-[2rem] font-bold text-ivory tracking-tight">1,247</div>
+                </div>
+                <div>
+                  <div className="text-caption text-ivory/60 mb-1">Insights Generated</div>
+                  <div className="text-[2rem] font-bold text-ivory tracking-tight">18</div>
+                </div>
+                <div>
+                  <div className="text-caption text-ivory/60 mb-1">Performance Gain</div>
+                  <div className="text-[2rem] font-bold text-[#10b981] tracking-tight">+23%</div>
                 </div>
                 <Button 
                   onClick={() => setShowAssessment(true)}
-                  className="w-full bg-ivory text-carbon hover:bg-pearl"
+                  className="w-full mt-4 bg-gradient-to-r from-[#10b981] to-[#10b981]/80 hover:from-[#10b981]/90 hover:to-[#10b981]/70 border-0"
                 >
-                  Start Protocol Assessment
+                  Start Assessment
                 </Button>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -459,7 +451,6 @@ export default function Nova() {
       <ProtocolAssessment 
         open={showAssessment} 
         onOpenChange={setShowAssessment}
-        onComplete={loadMetrics}
       />
     </div>
   );

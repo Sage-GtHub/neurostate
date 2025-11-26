@@ -51,36 +51,33 @@ export const SocialProofNotification = () => {
   if (!currentNotification || !isVisible) return null;
 
   return (
-    <div className="fixed bottom-6 left-6 z-50 animate-in slide-in-from-bottom duration-300">
-      <Card className="p-4 shadow-elegant bg-background border-mist max-w-sm">
-        <div className="flex items-start gap-3">
-          <div className="flex-shrink-0 mt-1">
-            <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center">
-              <CheckCircle className="h-4 w-4 text-green-600" />
+    <div className="fixed top-24 right-6 z-50 animate-in slide-in-from-right duration-500">
+      <div className="backdrop-blur-xl bg-carbon/80 rounded-2xl p-3 shadow-2xl max-w-xs border border-ivory/10">
+        <div className="flex items-center gap-2.5">
+          <div className="flex-shrink-0">
+            <div className="h-6 w-6 rounded-full bg-gradient-to-br from-[#10b981]/20 to-[#10b981]/40 flex items-center justify-center ring-1 ring-[#10b981]/30">
+              <CheckCircle className="h-3.5 w-3.5 text-[#10b981]" />
             </div>
           </div>
           
           <div className="flex-1 min-w-0">
-            <p className="text-caption text-carbon font-medium">
-              {currentNotification.name} from {currentNotification.location}
+            <p className="text-[0.75rem] text-ivory/90 font-medium leading-tight">
+              {currentNotification.name} · {currentNotification.location}
             </p>
-            <p className="text-caption text-ash">
-              just purchased {currentNotification.product}
-            </p>
-            <p className="text-[0.625rem] text-stone mt-1">
-              {currentNotification.timeAgo}
+            <p className="text-[0.6875rem] text-ivory/60 leading-tight mt-0.5">
+              {currentNotification.product}
             </p>
           </div>
 
           <button
             onClick={() => setDismissed(true)}
-            className="text-stone hover:text-carbon transition-colors text-xs"
+            className="text-ivory/40 hover:text-ivory/80 transition-colors text-sm ml-1"
             aria-label="Dismiss notification"
           >
             ×
           </button>
         </div>
-      </Card>
+      </div>
     </div>
   );
 };
