@@ -104,12 +104,12 @@ export const ProductBundles = () => {
             const pricing = calculateBundlePrice(bundleProducts, bundle.discount);
 
             return (
-              <div key={bundle.id} className="flex flex-col transition-all duration-700 group py-8 border-t border-mist/20 hover:border-carbon/20">
+              <div key={bundle.id} className="flex flex-col transition-all duration-500 group">
                 <div className="mb-8">
-                  <span className="inline-block text-[0.6875rem] font-medium tracking-[0.15em] uppercase text-carbon/60 mb-6">
+                  <span className="inline-block text-[0.6875rem] font-medium tracking-wider uppercase text-carbon mb-4 px-3 py-1 border border-mist rounded-full">
                     Save {bundle.discount}%
                   </span>
-                  <h3 className="text-[1.25rem] font-medium mb-4 transition-colors group-hover:text-carbon/90">{bundle.name}</h3>
+                  <h3 className="text-[1.25rem] font-medium mb-4">{bundle.name}</h3>
                   <p className="text-[0.9375rem] leading-relaxed text-ash">
                     {bundle.description}
                   </p>
@@ -140,8 +140,8 @@ export const ProductBundles = () => {
                   <Button 
                     onClick={() => handleAddBundle(bundle)}
                     size="sm"
-                    variant="ghost"
-                    className="w-full justify-center text-[0.6875rem] font-medium tracking-[0.15em] uppercase transition-all duration-500 ease-out rounded-full border-t border-transparent group-hover:border-carbon/20 group-hover:text-carbon hover:bg-carbon/5"
+                    variant="outline"
+                    className="w-full group-hover:bg-carbon group-hover:text-ivory transition-all duration-300"
                   >
                     Add Bundle
                   </Button>

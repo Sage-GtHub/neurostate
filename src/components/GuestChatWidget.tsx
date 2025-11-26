@@ -54,19 +54,23 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
   const [showHistory, setShowHistory] = useState(false);
   const location = useLocation();
 
+  // Get current conversation
   const currentConversation = conversations.find(c => c.id === currentConversationId);
   const messages = currentConversation?.messages || [];
 
+  // Auto-scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  // Load conversations from localStorage on mount
   useEffect(() => {
     const savedConversations = localStorage.getItem("guest-nova-conversations");
     if (savedConversations) {
       try {
         const parsed = JSON.parse(savedConversations);
         setConversations(parsed);
+        // Set the most recent conversation as current
         if (parsed.length > 0) {
           setCurrentConversationId(parsed[0].id);
           setShowSuggestions(parsed[0].messages.length <= 1);
@@ -82,6 +86,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
     }
   }, []);
 
+  // Save conversations to localStorage whenever they change
   useEffect(() => {
     if (conversations.length > 0) {
       localStorage.setItem("guest-nova-conversations", JSON.stringify(conversations));
@@ -109,6 +114,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
   };
 
   const generateConversationTitle = (firstUserMessage: string): string => {
+    // Generate a short title from the first user message
     const words = firstUserMessage.trim().split(" ");
     return words.slice(0, 5).join(" ") + (words.length > 5 ? "..." : "");
   };
@@ -129,12 +135,13 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
     scrollToBottom();
   }, [messages]);
 
+  // Get context from current page
   const getPageContext = () => {
     const path = location.pathname;
     if (path.startsWith('/product/')) {
       return `The user is currently viewing a product page: ${path}`;
     } else if (path === '/' || path.includes('products')) {
-      return 'The user is browsing the product catalogue';
+      return 'The user is browsing the product catalog';
     } else if (path.includes('bundles')) {
       return 'The user is viewing product bundles';
     } else if (path.includes('guides')) {
@@ -154,6 +161,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
       timestamp: new Date().toISOString(),
     };
 
+    // Update conversation with user message
     updateCurrentConversation(conv => {
       const updatedConv = {
         ...conv,
@@ -161,6 +169,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
         updatedAt: new Date().toISOString(),
       };
       
+      // Update title if this is the first user message
       if (conv.messages.length === 1 && conv.title === "New conversation") {
         updatedConv.title = generateConversationTitle(messageToSend);
       }
@@ -175,9 +184,10 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
     try {
       const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-chat`;
       
+      // Add page context to the first message
       const contextMessage = {
         role: "system" as const,
-        content: `Context: ${getPageContext()}. The user is not logged in. If they ask for personalised protocols, device tracking, or account features, encourage them to create a free Nova account.`
+        content: `Context: ${getPageContext()}. The user is not logged in. If they ask for personalized protocols, device tracking, or account features, encourage them to create a free Nova account.`
       };
 
       const conversationMessages = currentConversation?.messages || [];
@@ -227,6 +237,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
       let streamDone = false;
       let assistantContent = "";
 
+      // Add empty assistant message to conversation
       updateCurrentConversation(conv => ({
         ...conv,
         messages: [
@@ -265,6 +276,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                 const lastMessage = messages[messages.length - 1];
                 if (lastMessage.role === "assistant") {
                   lastMessage.content = assistantContent;
+                  // Generate contextual suggestions once we have enough content
                   if (assistantContent.length > 50 && !lastMessage.suggestions?.length) {
                     lastMessage.suggestions = generateContextualSuggestions(assistantContent);
                   }
@@ -288,6 +300,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
         variant: "destructive",
       });
       setIsLoading(false);
+      // Remove the last message (failed assistant message)
       updateCurrentConversation(conv => ({
         ...conv,
         messages: conv.messages.slice(0, -1),
@@ -304,12 +317,13 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
     setConversations(prev => {
       const filtered = prev.filter(c => c.id !== conversationId);
       
+      // If deleting current conversation, switch to another or create new
       if (conversationId === currentConversationId) {
         if (filtered.length > 0) {
           setCurrentConversationId(filtered[0].id);
         } else {
           createNewConversation();
-          return prev;
+          return prev; // Don't update yet, createNewConversation will handle it
         }
       }
       
@@ -371,6 +385,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
   const generateContextualSuggestions = (assistantMessage: string): string[] => {
     const lower = assistantMessage.toLowerCase();
     
+    // Sleep-related suggestions
     if (lower.includes('sleep') || lower.includes('melatonin') || lower.includes('rest')) {
       return [
         "What's the best time to take sleep supplements?",
@@ -379,14 +394,16 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
       ];
     }
     
+    // Recovery-related suggestions
     if (lower.includes('recovery') || lower.includes('muscle') || lower.includes('inflammation')) {
       return [
         "What supplements support faster recovery?",
         "Tell me about cold therapy for recovery",
-        "How do I optimise my recovery protocol?"
+        "How do I optimize my recovery protocol?"
       ];
     }
     
+    // Cognitive/focus suggestions
     if (lower.includes('focus') || lower.includes('cognitive') || lower.includes('brain') || lower.includes('nootropic')) {
       return [
         "What's in the NeuroFocus supplement?",
@@ -395,14 +412,16 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
       ];
     }
     
+    // Product-specific suggestions
     if (lower.includes('bundle') || lower.includes('stack')) {
       return [
         "What bundles do you recommend for beginners?",
-        "Can I customise a bundle?",
+        "Can I customize a bundle?",
         "Do bundles save money compared to individual products?"
       ];
     }
     
+    // Device-related suggestions
     if (lower.includes('device') || lower.includes('therapy') || lower.includes('red light') || lower.includes('cold')) {
       return [
         "How do I use red light therapy effectively?",
@@ -411,6 +430,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
       ];
     }
     
+    // Default contextual suggestions
     return [
       "What products would you recommend for my goals?",
       "Tell me about your most popular products",
@@ -420,37 +440,37 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
 
   const cleanText = (text: string): string => {
     return text
-      .replace(/\*/g, "")
-      .replace(/\[.*?\]\(.*?\)/g, "")
-      .replace(/#{1,6}\s/g, "")
-      .replace(/`{1,3}/g, "")
-      .replace(/^\s*[-*+]\s/gm, "")
-      .replace(/\*\*this is not good\*\*/gi, "")
-      .replace(/this is not good/gi, "");
+      .replace(/\*/g, "") // Remove asterisks
+      .replace(/\[.*?\]\(.*?\)/g, "") // Remove markdown links
+      .replace(/#{1,6}\s/g, "") // Remove markdown headers
+      .replace(/`{1,3}/g, "") // Remove code blocks
+      .replace(/^\s*[-*+]\s/gm, "") // Remove list markers
+      .replace(/\*\*this is not good\*\*/gi, "") // Remove specific unwanted text
+      .replace(/this is not good/gi, ""); // Remove plain version too
   };
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="w-full sm:w-[440px] p-0 flex flex-col h-full bg-ivory">
-        <SheetHeader className="bg-gradient-to-b from-carbon to-slate p-6 flex-shrink-0">
+      <SheetContent side="right" className="w-full sm:w-[440px] p-0 flex flex-col h-full">
+        <SheetHeader className="border-b bg-carbon p-4 flex-shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-full bg-ivory/10 backdrop-blur">
+              <div className="p-2 rounded-full bg-ivory/10 backdrop-blur">
                 <Sparkles className="h-5 w-5 text-ivory" />
               </div>
               <div className="min-w-0 flex-1">
-                <SheetTitle className="text-[1.125rem] font-semibold text-ivory">Nova</SheetTitle>
-                <p className="text-[0.8125rem] text-ivory/70 truncate">
+                <SheetTitle className="text-lg font-semibold text-ivory">Nova</SheetTitle>
+                <p className="text-xs text-ivory/80 truncate">
                   {currentConversation?.title || "Your performance assistant"}
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-1.5 flex-shrink-0">
+            <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setShowHistory(!showHistory)}
-                className="text-ivory hover:bg-ivory/10 h-9 w-9 rounded-full"
+                className="text-ivory hover:bg-ivory/10 h-8 w-8"
               >
                 <MessageSquare className="h-4 w-4" />
               </Button>
@@ -459,7 +479,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="text-ivory hover:bg-ivory/10 h-9 w-9 rounded-full"
+                    className="text-ivory hover:bg-ivory/10 h-8 w-8"
                   >
                     <Plus className="h-4 w-4" />
                   </Button>
@@ -480,7 +500,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                 variant="ghost"
                 size="icon"
                 onClick={() => onOpenChange(false)}
-                className="text-ivory hover:bg-ivory/10 h-9 w-9 rounded-full"
+                className="text-ivory hover:bg-ivory/10 h-8 w-8"
               >
                 <X className="h-4 w-4" />
               </Button>
@@ -488,17 +508,18 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
           </div>
         </SheetHeader>
 
+        {/* History Sidebar or Chat Area */}
         {showHistory ? (
-          <div className="flex-1 overflow-hidden bg-gradient-to-b from-pearl/30 to-ivory">
+          <div className="flex-1 overflow-hidden bg-ivory">
             <ScrollArea className="h-full">
-              <div className="p-6">
-                <h3 className="text-[0.6875rem] font-semibold text-carbon mb-6 uppercase tracking-[0.15em]">
+              <div className="p-4">
+                <h3 className="text-sm font-semibold text-carbon mb-4 uppercase tracking-wider">
                   Conversation History
                 </h3>
                 {Object.entries(groupConversationsByDate()).map(([date, convs]) => (
-                  <div key={date} className="mb-8">
-                    <p className="text-[0.6875rem] text-ash uppercase tracking-[0.15em] mb-4">{date}</p>
-                    <div className="space-y-3">
+                  <div key={date} className="mb-6">
+                    <p className="text-xs text-ash uppercase tracking-wider mb-2">{date}</p>
+                    <div className="space-y-2">
                       {convs.map(conv => (
                         <button
                           key={conv.id}
@@ -507,31 +528,31 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                             setShowHistory(false);
                             setShowSuggestions(false);
                           }}
-                          className={`w-full text-left p-4 rounded-2xl transition-all ${
+                          className={`w-full text-left p-3 rounded-lg transition-colors ${
                             conv.id === currentConversationId
-                              ? "bg-pearl/60"
-                              : "hover:bg-pearl/30"
+                              ? "bg-pearl border border-mist"
+                              : "hover:bg-pearl/50"
                           }`}
                         >
                           <div className="flex items-start justify-between gap-2">
                             <div className="flex-1 min-w-0">
-                              <p className="text-[0.9375rem] font-medium text-carbon truncate">
+                              <p className="text-sm font-medium text-carbon truncate">
                                 {conv.title}
                               </p>
-                              <p className="text-[0.8125rem] text-ash mt-1">
+                              <p className="text-xs text-ash mt-1">
                                 {conv.messages.length} messages · {formatDistanceToNow(new Date(conv.updatedAt), { addSuffix: true })}
                               </p>
                             </div>
                             <Button
                               variant="ghost"
                               size="icon"
-                              className="h-7 w-7 flex-shrink-0 rounded-full hover:bg-carbon/10"
+                              className="h-6 w-6 flex-shrink-0"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 deleteConversation(conv.id);
                               }}
                             >
-                              <X className="h-3.5 w-3.5" />
+                              <X className="h-3 w-3" />
                             </Button>
                           </div>
                         </button>
@@ -544,41 +565,43 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
           </div>
         ) : (
           <>
-            <div className="flex-1 overflow-y-auto bg-gradient-to-b from-pearl/20 to-ivory">
-              <div className="px-6 py-8 space-y-6">
+            {/* Chat Area */}
+            <div className="flex-1 overflow-y-auto bg-ivory">
+              <div className="px-4 py-6 space-y-4">
                 {messages.map((msg, index) => (
-                  <div key={index} className="space-y-2">
-                    <div className="flex gap-4">
+                  <div key={index} className="space-y-1">
+                    <div className="flex gap-3">
                       {msg.role === "assistant" && (
                         <div className="flex-shrink-0">
-                          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-carbon to-slate flex items-center justify-center">
+                          <div className="w-8 h-8 rounded-full bg-carbon flex items-center justify-center">
                             <Sparkles className="w-4 h-4 text-ivory" />
                           </div>
                         </div>
                       )}
                       <div className={`flex-1 ${msg.role === "user" ? "ml-auto max-w-[85%]" : ""}`}>
-                        <div className={`${msg.role === "user" ? "bg-pearl/60 p-4 rounded-2xl" : ""}`}>
-                          <p className="text-[0.9375rem] text-carbon leading-relaxed whitespace-pre-wrap">
+                        <div className={`${msg.role === "user" ? "bg-pearl p-3 rounded-lg" : ""}`}>
+                          <p className="text-sm text-carbon leading-relaxed whitespace-pre-wrap">
                             {cleanText(msg.content)}
                           </p>
                         </div>
                         {msg.timestamp && (
-                          <p className={`text-[0.75rem] text-ash mt-2 flex items-center gap-1.5 ${msg.role === "user" ? "justify-end" : "ml-13"}`}>
+                          <p className={`text-xs text-ash mt-1 flex items-center gap-1 ${msg.role === "user" ? "justify-end" : "ml-11"}`}>
                             <Clock className="h-3 w-3" />
                             {formatMessageTime(msg.timestamp)}
                           </p>
                         )}
+                        {/* Show contextual suggestions after assistant responses */}
                         {msg.role === "assistant" && msg.suggestions && msg.suggestions.length > 0 && index === messages.length - 1 && !isLoading && (
-                          <div className="mt-4 ml-13 space-y-3">
-                            <p className="text-[0.6875rem] text-ash uppercase tracking-[0.15em]">Continue the conversation</p>
+                          <div className="mt-3 ml-11 space-y-2">
+                            <p className="text-xs text-ash uppercase tracking-wider">Continue the conversation</p>
                             <div className="grid grid-cols-1 gap-2">
                               {msg.suggestions.map((suggestion, i) => (
                                 <Button
                                   key={i}
-                                  variant="ghost"
+                                  variant="outline"
                                   size="sm"
                                   onClick={() => handleSuggestionClick(suggestion)}
-                                  className="justify-start text-left h-auto py-3 px-4 text-[0.8125rem] hover:bg-pearl/40 rounded-xl"
+                                  className="justify-start text-left h-auto py-2 px-3 text-xs hover:bg-pearl/50"
                                 >
                                   {suggestion}
                                 </Button>
@@ -592,29 +615,29 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                 ))}
 
             {isLoading && (
-              <div className="flex gap-4">
+              <div className="flex gap-3">
                 <div className="flex-shrink-0">
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-carbon to-slate flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-carbon flex items-center justify-center">
                     <Loader2 className="w-4 h-4 text-ivory animate-spin" />
                   </div>
                 </div>
                 <div className="flex-1">
-                  <p className="text-[0.9375rem] text-ash">Nova is typing...</p>
+                  <p className="text-sm text-ash">Nova is typing...</p>
                 </div>
               </div>
             )}
 
             {showSuggestions && messages.length === 1 && (
-              <div className="pt-4">
-                <p className="text-[0.6875rem] text-ash mb-4 uppercase tracking-[0.15em]">Quick Questions</p>
+              <div className="pt-2">
+                <p className="text-xs text-ash mb-3 uppercase tracking-wider">Quick Questions</p>
                 <div className="grid grid-cols-1 gap-2">
                   {quickSuggestions.map((suggestion, index) => (
                     <Button
                       key={index}
-                      variant="ghost"
+                      variant="outline"
                       size="sm"
                       onClick={() => handleSuggestionClick(suggestion)}
-                      className="justify-start text-left h-auto py-3 px-4 text-[0.9375rem] hover:bg-pearl/40 rounded-xl"
+                      className="justify-start text-left h-auto py-2 px-3 text-sm"
                     >
                       {suggestion}
                     </Button>
@@ -627,36 +650,38 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
               </div>
             </div>
 
-            <div className="bg-gradient-to-t from-pearl/40 to-transparent p-4">
-              <div className="text-[0.8125rem] text-ash mb-3 text-center">
-                Want personalised protocols based on your data?
+            {/* Upgrade CTA */}
+            <div className="border-t border-mist bg-pearl p-3">
+              <div className="text-xs text-ash mb-2">
+                Want personalized protocols based on your data?
               </div>
               <a href="https://neurostate.co.uk/nova" target="_blank" rel="noopener noreferrer">
-                <Button variant="default" size="sm" className="w-full rounded-full mb-4">
+                <Button variant="default" size="sm" className="w-full">
                   Create Nova Account
                 </Button>
               </a>
             </div>
 
-            <div className="bg-ivory p-6 pt-3">
-              <form onSubmit={handleSendMessage} className="flex gap-3">
+            {/* Input Area */}
+            <div className="border-t border-mist bg-ivory p-4">
+              <form onSubmit={handleSendMessage} className="flex gap-2">
                 <Input
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Ask about products, bundles, or advice..."
                   disabled={isLoading}
-                  className="flex-1 rounded-full bg-pearl/50 border-0 focus-visible:ring-1 focus-visible:ring-carbon/20"
+                  className="flex-1 rounded-lg border-mist"
                 />
                 <Button 
                   type="submit" 
                   size="icon"
                   disabled={isLoading || !message.trim()}
-                  className="flex-shrink-0 rounded-full"
+                  className="flex-shrink-0"
                 >
                   <Send className="h-4 w-4" />
                 </Button>
               </form>
-              <p className="text-[0.75rem] text-ash mt-3 text-center">
+              <p className="text-xs text-ash mt-2 text-center">
                 Nova helps with product questions, not medical advice
               </p>
             </div>

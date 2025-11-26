@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { NovaNav } from "@/components/NovaNav";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { supabase } from "@/integrations/supabase/client";
@@ -55,96 +56,100 @@ export default function NovaProtocols() {
     <div className="min-h-screen bg-ivory">
       <NovaNav />
       
-      <div className="bg-gradient-to-b from-pearl/30 to-ivory">
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12">
-          <div className="flex items-center justify-between mb-3">
+      <div className="border-b border-mist/30 bg-gradient-to-b from-ivory to-pearl/20">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8">
+          <div className="flex items-center justify-between mb-2">
             <h1 className="text-[2rem] font-semibold text-carbon tracking-tight">Active Protocols</h1>
-            <Button onClick={() => setShowAssessment(true)} size="sm" className="gap-2 rounded-full">
+            <Button onClick={() => setShowAssessment(true)} size="sm" className="gap-2">
               <Plus className="w-4 h-4" />
-              <span>New</span>
+              <span>New Protocol</span>
             </Button>
           </div>
-          <p className="text-sm text-ash">Track daily stacks and protocol progress</p>
+          <p className="text-sm text-ash">Track your daily stacks and protocol progress</p>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-16">
-        <div className="space-y-12 animate-fade-in">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12">
+        <div className="space-y-6 animate-fade-in">
           {protocols.length > 0 ? (
             protocols.map((protocol) => (
-              <div key={protocol.id} className="group transition-all duration-700">
-                <div className="flex items-start justify-between mb-8">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-carbon to-slate flex items-center justify-center transition-transform group-hover:scale-110">
-                      <Target className="w-6 h-6 text-ivory" />
-                    </div>
+              <Card key={protocol.id} className="border-mist/30 hover:border-mist transition-all hover:shadow-md">
+                <CardContent className="p-8">
+                  <div className="flex items-start justify-between mb-6">
                     <div>
-                      <h3 className="text-[1.25rem] font-semibold text-carbon mb-1">{protocol.protocol_name}</h3>
-                      <p className="text-sm text-ash">
-                        Started {new Date(protocol.started_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })} · {protocol.status}
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-carbon to-slate flex items-center justify-center">
+                          <Target className="w-5 h-5 text-ivory" />
+                        </div>
+                        <h3 className="text-[1.125rem] font-semibold text-carbon">{protocol.protocol_name}</h3>
+                      </div>
+                      <p className="text-sm text-ash ml-13">
+                        Started {new Date(protocol.started_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })} • {protocol.status}
                       </p>
                     </div>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      onClick={() => navigate(`/nova/protocols/${protocol.id}`)}
+                      className="gap-2 hover:bg-pearl"
+                    >
+                      <span>View Details</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Button>
                   </div>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    onClick={() => navigate(`/nova/protocols/${protocol.id}`)}
-                    className="gap-2 hover:bg-pearl/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                  >
-                    <span>Details</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Button>
-                </div>
 
-                <div className="mb-10">
-                  <div className="flex items-center justify-between text-sm mb-4">
-                    <span className="text-ash font-medium tracking-wide uppercase text-[0.6875rem]">Progress</span>
-                    <span className="font-semibold text-carbon text-[1.125rem]">{protocol.completion_percentage}%</span>
+                  <div className="mb-8">
+                    <div className="flex items-center justify-between text-sm mb-3">
+                      <span className="text-ash font-medium">Progress</span>
+                      <span className="font-semibold text-carbon">{protocol.completion_percentage}%</span>
+                    </div>
+                    <Progress value={protocol.completion_percentage} className="h-3" />
                   </div>
-                  <Progress value={protocol.completion_percentage} className="h-1.5 bg-mist/40" />
-                </div>
 
-                <div className="pt-10 border-t border-mist/20">
-                  <h4 className="text-[0.6875rem] font-semibold text-carbon uppercase tracking-[0.15em] mb-6">Today's Stack</h4>
-                  <div className="space-y-3">
-                    {protocol.products.map((product: any, index: number) => (
-                      <div key={index} className="flex items-center justify-between py-4 transition-all hover:translate-x-2">
-                        <span className="text-[0.9375rem] font-medium text-carbon">{product.product_name}</span>
-                        <span className="text-[0.875rem] text-ash">{product.dose} – {product.time}</span>
-                      </div>
-                    ))}
+                  <div className="border-t border-mist/30 pt-6">
+                    <h4 className="text-caption font-semibold text-carbon uppercase tracking-wider mb-4">TODAY'S STACK</h4>
+                    <div className="space-y-3">
+                      {protocol.products.map((product: any, index: number) => (
+                        <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-pearl/30 hover:bg-pearl/50 transition-colors">
+                          <span className="text-sm font-medium text-carbon">{product.product_name}</span>
+                          <span className="text-sm text-ash">{product.dose} – {product.time}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-
-                <div className="h-px bg-gradient-to-r from-transparent via-mist/30 to-transparent mt-12" />
-              </div>
+                </CardContent>
+              </Card>
             ))
           ) : (
-            <div className="text-center py-24">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-pearl/60 to-mist/40 mx-auto mb-8 flex items-center justify-center">
-                <Target className="w-10 h-10 text-ash/70" />
-              </div>
-              <p className="text-[1.125rem] text-ash mb-8 max-w-md mx-auto leading-relaxed">
-                No active protocols yet. Create your first personalised protocol to start optimising your performance.
-              </p>
-              <Button onClick={() => setShowAssessment(true)} size="lg" className="gap-2 rounded-full">
-                <Plus className="w-4 h-4" />
-                <span>Create Your First Protocol</span>
-              </Button>
-            </div>
+            <Card className="border-mist/30">
+              <CardContent className="p-12 text-center">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-pearl to-mist mx-auto mb-6 flex items-center justify-center">
+                  <Target className="w-8 h-8 text-ash" />
+                </div>
+                <p className="text-body text-ash mb-6 max-w-md mx-auto">
+                  No active protocols yet. Create your first personalised protocol to start optimising your performance.
+                </p>
+                <Button onClick={() => setShowAssessment(true)} size="lg" className="gap-2">
+                  <Plus className="w-4 h-4" />
+                  <span>Create Your First Protocol</span>
+                </Button>
+              </CardContent>
+            </Card>
           )}
 
           {protocols.length > 0 && (
-            <div className="text-center py-16 bg-gradient-to-br from-pearl/20 to-transparent rounded-3xl">
-              <h3 className="text-[1.25rem] font-semibold text-carbon mb-4">Ready to optimise something new?</h3>
-              <p className="text-[0.9375rem] text-ash mb-8 leading-relaxed max-w-xl mx-auto">
-                Take another assessment to create a specialised protocol for different performance goals.
-              </p>
-              <Button variant="outline" onClick={() => setShowAssessment(true)} className="gap-2 rounded-full">
-                <Plus className="w-4 h-4" />
-                <span>Create Protocol</span>
-              </Button>
-            </div>
+            <Card className="border-carbon/10 bg-gradient-to-br from-pearl/50 to-mist/30">
+              <CardContent className="p-8 text-center">
+                <h3 className="text-[1.125rem] font-semibold text-carbon mb-3">Ready to optimise something new?</h3>
+                <p className="text-sm text-ash mb-6 leading-relaxed max-w-xl mx-auto">
+                  Take another assessment to create a specialised protocol for different performance goals.
+                </p>
+                <Button variant="outline" onClick={() => setShowAssessment(true)} className="gap-2">
+                  <Plus className="w-4 h-4" />
+                  <span>Create Protocol</span>
+                </Button>
+              </CardContent>
+            </Card>
           )}
         </div>
       </div>
