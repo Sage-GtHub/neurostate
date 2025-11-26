@@ -37,10 +37,9 @@ export function VoiceInterface({ onSpeakingChange }: VoiceInterfaceProps) {
       setIsLoading(false);
     },
     onMessage: (message) => {
-      if (message.type === "agent_response") {
+      // ElevenLabs messages have source: 'ai' or 'user'
+      if (message.source === "ai") {
         onSpeakingChange?.(true);
-      } else if (message.type === "agent_response_end") {
-        onSpeakingChange?.(false);
       }
     },
   });
@@ -62,7 +61,7 @@ export function VoiceInterface({ onSpeakingChange }: VoiceInterfaceProps) {
       }
 
       await conversation.startSession({ 
-        url: data.signed_url 
+        signedUrl: data.signed_url 
       });
     } catch (error) {
       console.error("Error starting conversation:", error);
