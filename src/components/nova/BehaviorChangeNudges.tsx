@@ -28,7 +28,7 @@ export function BehaviorChangeNudges({ nudges, onAccept, onDismiss }: BehaviorCh
         <CardContent className="p-8 text-center">
           <Target className="w-12 h-12 text-ash mx-auto mb-4" />
           <p className="text-sm text-ash">
-            No behavior change recommendations at this time
+            No behaviour change recommendations at this time
           </p>
         </CardContent>
       </Card>

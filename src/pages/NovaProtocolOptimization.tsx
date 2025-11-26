@@ -13,11 +13,11 @@ import { useToast } from "@/components/ui/use-toast";
 
 export default function NovaProtocolOptimization() {
   const { toast } = useToast();
-  const [activeView, setActiveView] = useState<"optimization" | "balancer" | "nudges" | "patterns" | "autonomous">("optimization");
+  const [activeView, setActiveView] = useState<"optimisation" | "balancer" | "nudges" | "patterns" | "autonomous">("optimisation");
 
-  const handleAcceptOptimization = (protocolId: string) => {
+  const handleAcceptOptimisation = (protocolId: string) => {
     toast({
-      title: "Optimization accepted",
+      title: "Optimisation accepted",
       description: "Your protocol will be updated with the suggested changes",
     });
   };
@@ -26,9 +26,9 @@ export default function NovaProtocolOptimization() {
     // Navigate to protocol detail
   };
 
-  const handleMultiGoalOptimize = (priorities: { [key: string]: number }) => {
+  const handleMultiGoalOptimise = (priorities: { [key: string]: number }) => {
     toast({
-      title: "Generating optimized protocol",
+      title: "Generating optimised protocol",
       description: "Nova is creating a balanced protocol for your goals",
     });
   };
@@ -43,7 +43,7 @@ export default function NovaProtocolOptimization() {
   const handleDismissNudge = (nudgeId: string) => {
     toast({
       title: "Dismissed",
-      description: "You can revisit this recommendation anytime",
+      description: "You can revisit this recommendation at any time",
     });
   };
 
@@ -55,16 +55,16 @@ export default function NovaProtocolOptimization() {
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-h3 font-semibold text-carbon">Protocol Optimization</h1>
-              <p className="text-body text-ash mt-2">Phase 3: AI-driven protocol optimization and behavior insights</p>
+              <h1 className="text-h3 font-semibold text-carbon">Protocol Optimisation</h1>
+              <p className="text-body text-ash mt-2">Phase 3: AI-driven protocol optimisation and behaviour insights</p>
             </div>
             <Badge className="bg-carbon text-ivory">Phase 3</Badge>
           </div>
           
           <div className="flex gap-2 overflow-x-auto">
             <Button 
-              variant={activeView === "optimization" ? "default" : "outline"}
-              onClick={() => setActiveView("optimization")}
+              variant={activeView === "optimisation" ? "default" : "outline"}
+              onClick={() => setActiveView("optimisation")}
               size="sm"
             >
               Adaptive Protocols
@@ -81,7 +81,7 @@ export default function NovaProtocolOptimization() {
               onClick={() => setActiveView("nudges")}
               size="sm"
             >
-              Behavior Nudges
+              Behaviour Nudges
             </Button>
             <Button 
               variant={activeView === "patterns" ? "default" : "outline"}
@@ -102,10 +102,10 @@ export default function NovaProtocolOptimization() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12">
-        {activeView === "optimization" && (
+        {activeView === "optimisation" && (
           <div className="space-y-8">
             <AdaptiveProtocol
-              optimization={{
+              optimisation={{
                 protocolId: "1",
                 protocolName: "Peak Performance Protocol",
                 currentEffectiveness: 73,
@@ -126,7 +126,7 @@ export default function NovaProtocolOptimization() {
                 abTestRunning: true,
                 dataPoints: 847
               }}
-              onAcceptChanges={handleAcceptOptimization}
+              onAcceptChanges={handleAcceptOptimisation}
               onViewDetails={handleViewDetails}
             />
           </div>
@@ -168,7 +168,7 @@ export default function NovaProtocolOptimization() {
                 conflicts: []
               }
             ]}
-            onOptimize={handleMultiGoalOptimize}
+            onOptimise={handleMultiGoalOptimise}
           />
         )}
 
@@ -187,7 +187,7 @@ export default function NovaProtocolOptimization() {
               {
                 id: "2",
                 priority: "medium",
-                title: "Training Window Optimization",
+                title: "Training Window Optimisation",
                 insight: "Your best workouts consistently happen between 4-6pm when your body temperature peaks. Morning sessions show 18% lower performance output.",
                 impact: "12% performance gain by shifting training to optimal window",
                 action: "Schedule high-intensity training between 4-6pm when possible",
@@ -213,7 +213,7 @@ export default function NovaProtocolOptimization() {
               },
               {
                 id: "2",
-                title: "Magnesium Timing Optimization",
+                title: "Magnesium Timing Optimisation",
                 correlation: 92,
                 description: "Taking magnesium at 8pm results in 25% faster sleep onset compared to taking it at 10pm",
                 dataPoints: 63,

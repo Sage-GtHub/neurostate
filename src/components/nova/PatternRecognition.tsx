@@ -23,10 +23,10 @@ export function PatternRecognition({ patterns }: PatternRecognitionProps) {
         <CardContent className="p-8 text-center">
           <Lightbulb className="w-12 h-12 text-ash mx-auto mb-4" />
           <p className="text-sm text-ash mb-2">
-            Nova is analyzing your patterns
+            Nova is analysing your patterns
           </p>
           <p className="text-xs text-stone">
-            Connect devices and maintain protocols for 2+ weeks to discover personalized insights
+            Connect devices and maintain protocols for 2+ weeks to discover personalised insights
           </p>
         </CardContent>
       </Card>

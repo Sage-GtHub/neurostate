@@ -62,7 +62,7 @@ export function MorningCheckIn({ data, onDismiss }: MorningCheckInProps) {
         </div>
 
         <div className="bg-pearl/50 rounded-lg p-4 mb-4">
-          <h4 className="text-sm font-semibold text-carbon mb-2">Today's Recommendation</h4>
+          <h4 className="text-sm font-semibold text-carbon mb-2">Today&apos;s Recommendation</h4>
           <p className="text-sm text-ash leading-relaxed">{data.recommendation}</p>
         </div>
 
