@@ -103,7 +103,7 @@ export default function NovaProtocols() {
                       <span className="text-ash font-medium">Progress</span>
                       <span className="font-semibold text-carbon">{protocol.completion_percentage}%</span>
                     </div>
-                    <Progress value={protocol.completion_percentage} className="h-3" />
+                    <Progress value={protocol.completion_percentage} className="h-2.5" />
                   </div>
 
                   <div className="border-t border-mist/30 pt-6">
