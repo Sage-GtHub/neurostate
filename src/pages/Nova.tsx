@@ -235,9 +235,58 @@ export default function Nova() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12">
-        <div className="grid lg:grid-cols-3 gap-12">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-12">
+        <div className="space-y-16">
+          {/* Performance Metrics - Full Width */}
+          <div>
+            <h2 className="text-[1.5rem] font-semibold text-carbon mb-6 tracking-tight">Live Performance Metrics</h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {metrics.length > 0 ? metrics.map((metric, index) => (
+                <div key={index} className="relative overflow-hidden rounded-3xl p-6 bg-gradient-to-br from-pearl/50 to-ivory transition-all hover:shadow-soft group">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-accent/10 transition-colors" />
+                  <div className="relative">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-2xl bg-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <metric.icon className="w-5 h-5 text-accent" />
+                      </div>
+                      <span className="text-[0.6875rem] text-ash uppercase tracking-wider font-medium">{metric.label}</span>
+                    </div>
+                    <div className="text-[2.5rem] font-bold text-carbon mb-1 tracking-tight leading-none">{metric.value}</div>
+                    {metric.trend && (
+                      <div className={`text-caption font-semibold ${metric.trendColor || "text-ash"}`}>{metric.trend}</div>
+                    )}
+                  </div>
+                </div>
+              )) : (
+                <>
+                  {[
+                    { label: "HRV Score", icon: Activity },
+                    { label: "Sleep Quality", icon: Brain },
+                    { label: "Focus Sessions", icon: Target },
+                    { label: "Recovery", icon: TrendingUp }
+                  ].map((metric, index) => (
+                    <div key={index} className="relative overflow-hidden rounded-3xl p-6 bg-gradient-to-br from-pearl/50 to-ivory">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-mist/20 rounded-full blur-3xl -mr-16 -mt-16" />
+                      <div className="relative">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="w-10 h-10 rounded-2xl bg-mist/30 flex items-center justify-center">
+                            <metric.icon className="w-5 h-5 text-stone" />
+                          </div>
+                          <span className="text-[0.6875rem] text-stone uppercase tracking-wider font-medium">{metric.label}</span>
+                        </div>
+                        <div className="text-[2.5rem] font-bold text-stone/40 mb-1">--</div>
+                        <div className="text-caption text-stone">Connect device</div>
+                      </div>
+                    </div>
+                  ))}
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Two Column Layout */}
+          <div className="grid lg:grid-cols-3 gap-12">
+            {/* Chat Section - Dedicated */}
+            <div className="lg:col-span-2 space-y-8">
             {showMorningCheckIn && currentPhase >= 2 && (
               <div className="animate-fade-in">
                 <MorningCheckIn
@@ -257,198 +306,174 @@ export default function Nova() {
               </div>
             )}
 
-            {/* Chat Interface */}
-            <div className="bg-pearl/30 rounded-2xl border border-mist/30 shadow-soft overflow-hidden">
-              <div className="space-y-6 p-8 max-h-[500px] overflow-y-auto">
-                {messages.map((message, index) => (
-                  <div key={index} className="flex gap-4 animate-fade-in">
-                    {message.role === "assistant" && (
-                      <div className="flex-shrink-0">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent/10 to-accent/20 flex items-center justify-center">
-                          <Sparkles className="w-5 h-5 text-accent" />
-                        </div>
-                      </div>
-                    )}
-                    <div className={`flex-1 ${message.role === "user" ? "ml-auto max-w-[85%]" : ""}`}>
-                      <div className={`${message.role === "user" ? "bg-mist/50 p-5 rounded-2xl border border-mist" : ""}`}>
-                        <p className="text-[0.9375rem] text-carbon leading-relaxed whitespace-pre-wrap">
-                          {message.content}
-                        </p>
-                      </div>
-                    </div>
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-[1.5rem] font-semibold text-carbon tracking-tight">Chat with Nova</h2>
+                  <div className="flex items-center gap-2">
+                    <div className={`w-2 h-2 rounded-full transition-all ${isSpeaking ? 'bg-accent animate-pulse shadow-lg shadow-accent/50' : 'bg-accent shadow-md shadow-accent/30'}`} />
+                    <span className="text-caption text-ash">Online</span>
                   </div>
-                ))}
-                {isLoading && (
-                  <div className="flex gap-4 animate-fade-in">
-                    <div className="flex-shrink-0">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent/10 to-accent/20 flex items-center justify-center">
-                        <Loader2 className="w-5 h-5 text-accent animate-spin" />
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm text-ash italic">Analysing...</p>
-                    </div>
-                  </div>
-                )}
-                <div ref={messagesEndRef} />
-              </div>
-              
-              <div className="border-t border-mist/30 p-6 bg-pearl/20">
-                <div className="flex gap-3 mb-4">
-                  <Input
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                    placeholder="Ask about protocols, performance, recovery..."
-                    disabled={isLoading}
-                    className="flex-1 bg-ivory border-mist text-carbon placeholder:text-stone focus:border-accent/50 transition-colors"
-                  />
-                  <Button 
-                    onClick={handleSendMessage} 
-                    disabled={isLoading || !input.trim()}
-                    className="px-6"
-                  >
-                    <Send className="w-4 h-4" />
-                  </Button>
                 </div>
                 
-                <div className="flex justify-center pt-2 border-t border-mist/30">
-                  <VoiceInterface onSpeakingChange={setIsSpeaking} />
-                </div>
-              </div>
-            </div>
-
-            {/* Metrics Grid */}
-            <div>
-              <h2 className="text-[1.5rem] font-semibold text-carbon mb-6 tracking-tight">Live Performance Metrics</h2>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {metrics.length > 0 ? metrics.map((metric, index) => (
-                  <div key={index} className="bg-pearl/30 rounded-2xl p-6 border border-mist/30 hover:border-mist transition-all group">
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="w-8 h-8 rounded-full bg-mist/50 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <metric.icon className="w-4 h-4 text-ash" />
-                      </div>
-                      <span className="text-[0.6875rem] text-ash uppercase tracking-wider font-medium">{metric.label}</span>
-                    </div>
-                    <div className="text-[2.5rem] font-bold text-carbon mb-1 tracking-tight leading-none">{metric.value}</div>
-                    {metric.trend && (
-                      <div className={`text-caption font-semibold ${metric.trendColor || "text-ash"}`}>{metric.trend}</div>
-                    )}
-                  </div>
-                )) : (
-                  <>
-                    {[
-                      { label: "HRV Score", icon: Activity },
-                      { label: "Sleep Quality", icon: Brain },
-                      { label: "Focus Sessions", icon: Target },
-                      { label: "Recovery", icon: TrendingUp }
-                    ].map((metric, index) => (
-                      <div key={index} className="bg-pearl/30 rounded-2xl p-6 border border-mist/30">
-                        <div className="flex items-center gap-2 mb-4">
-                          <div className="w-8 h-8 rounded-full bg-mist/50 flex items-center justify-center">
-                            <metric.icon className="w-4 h-4 text-stone" />
+                {/* Chat Interface */}
+                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-pearl/50 to-ivory shadow-soft">
+                  <div className="space-y-6 p-8 max-h-[500px] overflow-y-auto">
+                    {messages.map((message, index) => (
+                      <div key={index} className="flex gap-4 animate-fade-in">
+                        {message.role === "assistant" && (
+                          <div className="flex-shrink-0">
+                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent/20 to-accent/30 flex items-center justify-center shadow-sm">
+                              <Sparkles className="w-5 h-5 text-accent" />
+                            </div>
                           </div>
-                          <span className="text-[0.6875rem] text-stone uppercase tracking-wider font-medium">{metric.label}</span>
+                        )}
+                        <div className={`flex-1 ${message.role === "user" ? "ml-auto max-w-[85%]" : ""}`}>
+                          <div className={`${message.role === "user" ? "bg-mist/40 p-5 rounded-3xl" : ""}`}>
+                            <p className="text-[0.9375rem] text-carbon leading-relaxed whitespace-pre-wrap">
+                              {message.content}
+                            </p>
+                          </div>
                         </div>
-                        <div className="text-[2.5rem] font-bold text-stone/40 mb-1">--</div>
-                        <div className="text-caption text-stone">Connect device</div>
                       </div>
                     ))}
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-8">
-            <PhaseIndicator currentPhase={currentPhase} />
-
-            {currentPhase >= 2 && (
-              <div className="animate-fade-in">
-                <h3 className="text-body font-semibold text-carbon mb-4">Predictive Insights</h3>
-                <PredictiveInsights 
-                  insights={[
-                    {
-                      type: "warning",
-                      title: "Performance Decline Predicted",
-                      description: "Your recovery is declining. Expect reduced performance in 2-3 days unless you adjust protocol.",
-                      confidence: 87,
-                      timeframe: "2-3 days"
-                    },
-                    {
-                      type: "pattern",
-                      title: "Sleep Pattern Identified",
-                      description: "Your best sleep happens when you take magnesium before 8pm and avoid screens after 9pm.",
-                      confidence: 92,
-                      timeframe: "Ongoing"
-                    }
-                  ]}
-                />
-              </div>
-            )}
-
-            {/* Connected Devices */}
-            <div className="bg-pearl/30 rounded-2xl p-6 border border-mist/30">
-              <h3 className="text-body font-semibold text-carbon mb-6">Connected Devices</h3>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-3 rounded-xl hover:bg-mist/20 transition-colors">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-mist/50 flex items-center justify-center">
-                      <div className="w-6 h-6 rounded-full border-2 border-carbon" />
+                    {isLoading && (
+                      <div className="flex gap-4 animate-fade-in">
+                        <div className="flex-shrink-0">
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent/20 to-accent/30 flex items-center justify-center shadow-sm">
+                            <Loader2 className="w-5 h-5 text-accent animate-spin" />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-sm text-ash italic">Analysing...</p>
+                        </div>
+                      </div>
+                    )}
+                    <div ref={messagesEndRef} />
+                  </div>
+                  
+                  <div className="border-t border-mist/20 p-6 bg-pearl/30">
+                    <div className="flex gap-3 mb-4">
+                      <Input
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                        placeholder="Ask about protocols, performance, recovery..."
+                        disabled={isLoading}
+                        className="flex-1 bg-ivory border-mist/30 rounded-full text-carbon placeholder:text-stone focus:border-accent/50 transition-colors"
+                      />
+                      <Button 
+                        onClick={handleSendMessage} 
+                        disabled={isLoading || !input.trim()}
+                        className="px-6 rounded-full bg-accent hover:bg-accent/90"
+                      >
+                        <Send className="w-4 h-4" />
+                      </Button>
                     </div>
-                    <div>
-                      <div className="text-sm font-medium text-carbon">Oura Ring Gen 3</div>
-                      <div className="text-caption text-ash">2 minutes ago</div>
+                    
+                    <div className="flex justify-center pt-2 border-t border-mist/20">
+                      <VoiceInterface onSpeakingChange={setIsSpeaking} />
                     </div>
                   </div>
-                  <div className="w-2 h-2 rounded-full bg-accent shadow-lg shadow-accent/50" />
-                </div>
-
-                <div className="flex items-center justify-between p-3 rounded-xl hover:bg-mist/20 transition-colors">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-mist/50 flex items-center justify-center">
-                      <Watch className="w-5 h-5 text-carbon" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-medium text-carbon">Apple Watch Ultra</div>
-                      <div className="text-caption text-ash">5 minutes ago</div>
-                    </div>
-                  </div>
-                  <div className="w-2 h-2 rounded-full bg-accent shadow-lg shadow-accent/50" />
                 </div>
               </div>
             </div>
 
-            {/* Nova Intelligence Block */}
-            <div className="bg-gradient-to-br from-accent/10 to-accent/5 rounded-2xl p-6 border border-accent/20">
-              <h3 className="text-body font-semibold text-carbon mb-6">Nova Intelligence</h3>
-              <div className="space-y-4">
-                <div>
-                  <div className="text-caption text-ash mb-1">Data Points Analysed</div>
-                  <div className="text-[2rem] font-bold text-carbon tracking-tight">1,247</div>
+            {/* Sidebar */}
+            <div className="space-y-8">
+              <PhaseIndicator currentPhase={currentPhase} />
+
+              {currentPhase >= 2 && (
+                <div className="animate-fade-in">
+                  <h3 className="text-body font-semibold text-carbon mb-4">Predictive Insights</h3>
+                  <PredictiveInsights 
+                    insights={[
+                      {
+                        type: "warning",
+                        title: "Performance Decline Predicted",
+                        description: "Your recovery is declining. Expect reduced performance in 2-3 days unless you adjust protocol.",
+                        confidence: 87,
+                        timeframe: "2-3 days"
+                      },
+                      {
+                        type: "pattern",
+                        title: "Sleep Pattern Identified",
+                        description: "Your best sleep happens when you take magnesium before 8pm and avoid screens after 9pm.",
+                        confidence: 92,
+                        timeframe: "Ongoing"
+                      }
+                    ]}
+                  />
                 </div>
-                <div>
-                  <div className="text-caption text-ash mb-1">Insights Generated</div>
-                  <div className="text-[2rem] font-bold text-carbon tracking-tight">18</div>
+              )}
+
+              {/* Connected Devices */}
+              <div className="relative overflow-hidden rounded-3xl p-6 bg-gradient-to-br from-blue-50 to-blue-100/30">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-400/10 rounded-full blur-3xl -mr-16 -mt-16" />
+                <div className="relative">
+                  <h3 className="text-body font-semibold text-carbon mb-6">Connected Devices</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between p-4 rounded-2xl bg-ivory/60 hover:bg-ivory transition-colors">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/30 flex items-center justify-center shadow-sm">
+                          <div className="w-6 h-6 rounded-full border-2 border-accent" />
+                        </div>
+                        <div>
+                          <div className="text-sm font-semibold text-carbon">Oura Ring Gen 3</div>
+                          <div className="text-caption text-ash">2 minutes ago</div>
+                        </div>
+                      </div>
+                      <div className="w-3 h-3 rounded-full bg-accent shadow-lg shadow-accent/50 animate-pulse" />
+                    </div>
+
+                    <div className="flex items-center justify-between p-4 rounded-2xl bg-ivory/60 hover:bg-ivory transition-colors">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/30 flex items-center justify-center shadow-sm">
+                          <Watch className="w-6 h-6 text-accent" />
+                        </div>
+                        <div>
+                          <div className="text-sm font-semibold text-carbon">Apple Watch Ultra</div>
+                          <div className="text-caption text-ash">5 minutes ago</div>
+                        </div>
+                      </div>
+                      <div className="w-3 h-3 rounded-full bg-accent shadow-lg shadow-accent/50 animate-pulse" />
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-caption text-ash mb-1">Performance Gain</div>
-                  <div className="text-[2rem] font-bold text-accent tracking-tight">+23%</div>
+              </div>
+
+              {/* Nova Intelligence Block */}
+              <div className="relative overflow-hidden rounded-3xl p-6 bg-gradient-to-br from-accent/10 to-accent/5">
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-accent/10 rounded-full blur-3xl -ml-16 -mb-16" />
+                <div className="relative">
+                  <h3 className="text-body font-semibold text-carbon mb-6">Nova Intelligence</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <div className="text-caption text-ash mb-1">Data Points Analysed</div>
+                      <div className="text-[2rem] font-bold text-carbon tracking-tight">1,247</div>
+                    </div>
+                    <div>
+                      <div className="text-caption text-ash mb-1">Insights Generated</div>
+                      <div className="text-[2rem] font-bold text-carbon tracking-tight">18</div>
+                    </div>
+                    <div>
+                      <div className="text-caption text-ash mb-1">Performance Gain</div>
+                      <div className="text-[2rem] font-bold text-accent tracking-tight">+23%</div>
+                    </div>
+                    <Button 
+                      onClick={() => setShowAssessment(true)}
+                      className="w-full mt-4 rounded-full bg-accent hover:bg-accent/90"
+                    >
+                      Start Assessment
+                    </Button>
+                  </div>
                 </div>
-                <Button 
-                  onClick={() => setShowAssessment(true)}
-                  className="w-full mt-4"
-                >
-                  Start Assessment
-                </Button>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <ProtocolAssessment 
+      <ProtocolAssessment
         open={showAssessment} 
         onOpenChange={setShowAssessment}
       />

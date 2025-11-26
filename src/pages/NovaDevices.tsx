@@ -106,13 +106,13 @@ export default function NovaDevices() {
   const getDeviceIcon = (deviceType: string) => {
     switch (deviceType) {
       case 'oura_ring':
-        return <div className="w-6 h-6 rounded-full border-2 border-carbon" />;
+        return <div className="w-6 h-6 rounded-full border-2 border-accent" />;
       case 'apple_watch':
-        return <Watch className="w-6 h-6 text-carbon" />;
+        return <Watch className="w-6 h-6 text-accent" />;
       case 'whoop':
-        return <Activity className="w-6 h-6 text-carbon" />;
+        return <Activity className="w-6 h-6 text-accent" />;
       default:
-        return <Activity className="w-6 h-6 text-carbon" />;
+        return <Activity className="w-6 h-6 text-accent" />;
     }
   };
 
@@ -146,15 +146,16 @@ export default function NovaDevices() {
         <div className="space-y-12 animate-fade-in">
           <div className="grid md:grid-cols-3 gap-6">
             {devices.map((device) => (
-              <Card key={device.id} className={`border-mist/30 hover:border-mist transition-all hover:shadow-md ${device.connection_status === 'disconnected' ? "opacity-60" : ""}`}>
-                <CardContent className="p-8">
+              <div key={device.id} className={`relative overflow-hidden rounded-3xl p-8 bg-gradient-to-br from-blue-50/80 to-blue-100/40 transition-all hover:shadow-soft ${device.connection_status === 'disconnected' ? "opacity-60" : ""}`}>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-400/10 rounded-full blur-3xl -mr-16 -mt-16" />
+                <div className="relative">
                   <div className="flex items-start justify-between mb-6">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-pearl to-mist flex items-center justify-center shadow-sm">
+                    <div className="w-16 h-16 rounded-3xl bg-gradient-to-br from-accent/20 to-accent/30 flex items-center justify-center shadow-sm">
                       {getDeviceIcon(device.device_type)}
                     </div>
                     <div className={`px-3 py-1.5 rounded-full text-xs font-medium ${
                       device.connection_status === "connected" 
-                        ? "bg-[#10b981]/10 text-[#10b981]" 
+                        ? "bg-accent/10 text-accent" 
                         : "bg-ash/10 text-ash"
                     }`}>
                       {device.connection_status === "connected" ? "Connected" : "Disconnected"}
@@ -178,7 +179,7 @@ export default function NovaDevices() {
 
                   <Button 
                     variant={device.connection_status === "connected" ? "outline" : "default"} 
-                    className="w-full gap-2"
+                    className="w-full gap-2 rounded-full"
                     onClick={() => device.connection_status === "connected" 
                       ? handleSync(device.id) 
                       : handleConnect(device.device_type)}
@@ -193,8 +194,8 @@ export default function NovaDevices() {
                       <span>Connect</span>
                     )}
                   </Button>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
           </div>
 
@@ -220,11 +221,12 @@ export default function NovaDevices() {
             </CardContent>
           </Card>
 
-          <Card className="border-mist/30 shadow-sm">
-            <CardContent className="p-10">
+          <div className="relative overflow-hidden rounded-3xl p-10 bg-gradient-to-br from-pearl/50 to-ivory">
+            <div className="absolute bottom-0 right-0 w-48 h-48 bg-mist/20 rounded-full blur-3xl -mr-24 -mb-24" />
+            <div className="relative">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-pearl to-mist flex items-center justify-center">
-                  <Shield className="w-6 h-6 text-carbon" />
+                <div className="w-14 h-14 rounded-3xl bg-gradient-to-br from-accent/10 to-accent/20 flex items-center justify-center shadow-sm">
+                  <Shield className="w-7 h-7 text-accent" />
                 </div>
                 <h2 className="text-[1.5rem] font-semibold text-carbon tracking-tight">Privacy & Security</h2>
               </div>
@@ -241,8 +243,8 @@ export default function NovaDevices() {
                   { icon: Database, title: "You control your data", description: "Export or permanently delete your data anytime through your account settings" }
                 ].map((item, index) => (
                   <div key={index} className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-pearl to-mist flex items-center justify-center flex-shrink-0 shadow-sm">
-                      <item.icon className="w-5 h-5 text-carbon" />
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent/10 to-accent/20 flex items-center justify-center flex-shrink-0 shadow-sm">
+                      <item.icon className="w-5 h-5 text-accent" />
                     </div>
                     <div>
                       <h3 className="text-body font-semibold text-carbon mb-2">{item.title}</h3>
@@ -251,8 +253,8 @@ export default function NovaDevices() {
                   </div>
                 ))}
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
     </div>
