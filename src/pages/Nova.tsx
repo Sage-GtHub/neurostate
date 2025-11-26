@@ -7,6 +7,9 @@ import { Activity, Watch, TrendingUp, Brain, Target, Sparkles, Send, Loader2 } f
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { ProtocolAssessment } from "@/components/ProtocolAssessment";
+import { PhaseIndicator } from "@/components/nova/PhaseIndicator";
+import { PredictiveInsights } from "@/components/nova/PredictiveInsights";
+import { MorningCheckIn } from "@/components/nova/MorningCheckIn";
 
 interface Message {
   role: "user" | "assistant";
@@ -27,6 +30,9 @@ export default function Nova() {
   const [isLoading, setIsLoading] = useState(false);
   const [metrics, setMetrics] = useState<Metric[]>([]);
   const [showAssessment, setShowAssessment] = useState(false);
+  const [currentPhase, setCurrentPhase] = useState<1 | 2 | 3 | 4>(1);
+  const [showMorningCheckIn, setShowMorningCheckIn] = useState(true);
+  const [predictiveInsights, setPredictiveInsights] = useState<any[]>([]);
   const { toast } = useToast();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -231,6 +237,23 @@ export default function Nova() {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Left Column - Chat + Metrics */}
           <div className="lg:col-span-2 space-y-8">
+            {/* Morning Check-in (Phase 2) */}
+            {showMorningCheckIn && currentPhase >= 2 && (
+              <MorningCheckIn
+                data={{
+                  sleepHours: 6.2,
+                  hrvChange: -8,
+                  recoveryScore: 72,
+                  recommendation: "Your recovery is declining. Skip high-intensity training today. Focus on recovery protocols and light movement.",
+                  adjustedProtocol: [
+                    "Increased Magnesium Complex to 600mg",
+                    "Added L-Theanine 200mg for stress management",
+                    "Reduced morning stimulants"
+                  ]
+                }}
+                onDismiss={() => setShowMorningCheckIn(false)}
+              />
+            )}
             {/* Chat Interface */}
             <Card>
               <CardContent className="p-8">
@@ -349,8 +372,36 @@ export default function Nova() {
             </div>
           </div>
 
-          {/* Right Column - Devices + CTA */}
+          {/* Right Column - Devices + Phase + Insights */}
           <div className="space-y-8">
+            {/* Phase Indicator */}
+            <PhaseIndicator currentPhase={currentPhase} />
+
+            {/* Predictive Insights (Phase 2+) */}
+            {currentPhase >= 2 && (
+              <div>
+                <h3 className="text-body font-semibold text-carbon mb-4">Predictive Insights</h3>
+                <PredictiveInsights 
+                  insights={[
+                    {
+                      type: "warning",
+                      title: "Performance Decline Predicted",
+                      description: "Your recovery is declining. Expect reduced performance in 2-3 days unless you adjust protocol.",
+                      confidence: 87,
+                      timeframe: "2-3 days"
+                    },
+                    {
+                      type: "pattern",
+                      title: "Sleep Pattern Identified",
+                      description: "Your best sleep happens when you take magnesium before 8pm and avoid screens after 9pm.",
+                      confidence: 92,
+                      timeframe: "Ongoing"
+                    }
+                  ]}
+                />
+              </div>
+            )}
+
             {/* Connected Devices */}
             <Card>
               <CardContent className="p-6">
