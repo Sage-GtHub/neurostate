@@ -1,7 +1,7 @@
 import { NovaNav } from "@/components/NovaNav";
 import { AdaptiveProtocol } from "@/components/nova/AdaptiveProtocol";
 import { MultiGoalBalancer } from "@/components/nova/MultiGoalBalancer";
-import { BehaviorChangeNudges } from "@/components/nova/BehaviorChangeNudges";
+import { BehaviourChangeNudges } from "@/components/nova/BehaviourChangeNudges";
 import { PatternRecognition } from "@/components/nova/PatternRecognition";
 import { AutonomousFeatures } from "@/components/nova/AutonomousFeatures";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -51,7 +51,7 @@ export default function NovaProtocolOptimization() {
           </TabsContent>
 
           <TabsContent value="nudges" className="animate-fade-in">
-            <BehaviorChangeNudges />
+            <BehaviourChangeNudges />
           </TabsContent>
 
           <TabsContent value="autonomous" className="animate-fade-in">
