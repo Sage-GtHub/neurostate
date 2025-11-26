@@ -21,13 +21,6 @@ export const NovaNav = () => {
             Protocols
           </NavLink>
           <NavLink
-            to="/nova/optimization"
-            className="text-xs sm:text-sm uppercase tracking-wider text-ash transition-colors hover:text-carbon whitespace-nowrap px-2 sm:px-0"
-            activeClassName="text-carbon border-b-2 border-carbon pb-4"
-          >
-            Optimisation
-          </NavLink>
-          <NavLink
             to="/nova/insights"
             className="text-xs sm:text-sm uppercase tracking-wider text-ash transition-colors hover:text-carbon whitespace-nowrap px-2 sm:px-0"
             activeClassName="text-carbon border-b-2 border-carbon pb-4"
