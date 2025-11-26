@@ -24,8 +24,8 @@ export function PhaseIndicator({ currentPhase }: PhaseIndicatorProps) {
     },
     {
       number: 3,
-      title: "Prescriptive Optimization",
-      description: "Autonomous protocol optimization and A/B testing",
+      title: "Prescriptive Optimisation",
+      description: "Autonomous protocol optimisation and A/B testing",
       icon: Target,
       color: "text-carbon"
     },

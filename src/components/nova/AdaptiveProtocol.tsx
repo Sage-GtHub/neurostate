@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { RefreshCw, TrendingUp, Target } from "lucide-react";
 
-interface ProtocolOptimization {
+interface ProtocolOptimisation {
   protocolId: string;
   protocolName: string;
   currentEffectiveness: number;
@@ -19,25 +19,25 @@ interface ProtocolOptimization {
 }
 
 interface AdaptiveProtocolProps {
-  optimization: ProtocolOptimization;
+  optimisation: ProtocolOptimisation;
   onAcceptChanges: (protocolId: string) => void;
   onViewDetails: (protocolId: string) => void;
 }
 
-export function AdaptiveProtocol({ optimization, onAcceptChanges, onViewDetails }: AdaptiveProtocolProps) {
+export function AdaptiveProtocol({ optimisation, onAcceptChanges, onViewDetails }: AdaptiveProtocolProps) {
   return (
     <Card>
       <CardContent className="p-6">
         <div className="flex items-start justify-between mb-4">
           <div>
             <h3 className="text-body font-semibold text-carbon mb-1">
-              {optimization.protocolName}
+              {optimisation.protocolName}
             </h3>
             <p className="text-sm text-ash">
-              Nova has identified optimization opportunities
+              Nova has identified optimisation opportunities
             </p>
           </div>
-          {optimization.abTestRunning && (
+          {optimisation.abTestRunning && (
             <Badge className="bg-carbon text-ivory">
               <RefreshCw className="w-3 h-3 mr-1" />
               Testing
@@ -48,17 +48,17 @@ export function AdaptiveProtocol({ optimization, onAcceptChanges, onViewDetails 
         <div className="mb-6">
           <div className="flex items-center justify-between text-sm mb-2">
             <span className="text-ash">Current Effectiveness</span>
-            <span className="font-semibold text-carbon">{optimization.currentEffectiveness}%</span>
+            <span className="font-semibold text-carbon">{optimisation.currentEffectiveness}%</span>
           </div>
-          <Progress value={optimization.currentEffectiveness} className="h-2" />
+          <Progress value={optimisation.currentEffectiveness} className="h-2" />
           <p className="text-xs text-ash mt-1">
-            Based on {optimization.dataPoints.toLocaleString()} data points
+            Based on {optimisation.dataPoints.toLocaleString()} data points
           </p>
         </div>
 
         <div className="space-y-3 mb-6">
-          <h4 className="text-sm font-semibold text-carbon">Suggested Optimizations</h4>
-          {optimization.suggestedChanges.map((change, index) => (
+          <h4 className="text-sm font-semibold text-carbon">Suggested Optimisations</h4>
+          {optimisation.suggestedChanges.map((change, index) => (
             <div key={index} className="bg-pearl/50 rounded-lg p-4">
               <div className="flex items-start gap-3">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
@@ -90,10 +90,10 @@ export function AdaptiveProtocol({ optimization, onAcceptChanges, onViewDetails 
         </div>
 
         <div className="flex gap-2">
-          <Button onClick={() => onAcceptChanges(optimization.protocolId)} className="flex-1">
+          <Button onClick={() => onAcceptChanges(optimisation.protocolId)} className="flex-1">
             Accept Changes
           </Button>
-          <Button variant="outline" onClick={() => onViewDetails(optimization.protocolId)}>
+          <Button variant="outline" onClick={() => onViewDetails(optimisation.protocolId)}>
             View Details
           </Button>
         </div>

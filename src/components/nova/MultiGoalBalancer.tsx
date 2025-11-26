@@ -16,22 +16,22 @@ interface Goal {
 
 interface MultiGoalBalancerProps {
   goals: Goal[];
-  onOptimize: (priorities: { [key: string]: number }) => void;
+  onOptimise: (priorities: { [key: string]: number }) => void;
 }
 
-export function MultiGoalBalancer({ goals: initialGoals, onOptimize }: MultiGoalBalancerProps) {
+export function MultiGoalBalancer({ goals: initialGoals, onOptimise }: MultiGoalBalancerProps) {
   const [goals, setGoals] = useState(initialGoals);
 
   const updatePriority = (goalId: string, value: number) => {
     setGoals(goals.map(g => g.id === goalId ? { ...g, priority: value } : g));
   };
 
-  const handleOptimize = () => {
+  const handleOptimise = () => {
     const priorities = goals.reduce((acc, goal) => {
       acc[goal.id] = goal.priority;
       return acc;
     }, {} as { [key: string]: number });
-    onOptimize(priorities);
+    onOptimise(priorities);
   };
 
   const totalPriority = goals.reduce((sum, g) => sum + g.priority, 0);
@@ -41,9 +41,9 @@ export function MultiGoalBalancer({ goals: initialGoals, onOptimize }: MultiGoal
     <Card>
       <CardContent className="p-6">
         <div className="mb-6">
-          <h3 className="text-body font-semibold text-carbon mb-2">Multi-Goal Optimization</h3>
+          <h3 className="text-body font-semibold text-carbon mb-2">Multi-Goal Optimisation</h3>
           <p className="text-sm text-ash leading-relaxed">
-            Nova will balance these goals to create an optimal protocol that maximizes all objectives
+            Nova will balance these goals to create an optimal protocol that maximises all objectives
           </p>
         </div>
 
@@ -93,12 +93,12 @@ export function MultiGoalBalancer({ goals: initialGoals, onOptimize }: MultiGoal
             {avgPriority > 70 ? "Well Balanced" : avgPriority > 40 ? "Moderate Focus" : "Single Goal Focus"}
           </div>
           <p className="text-xs text-ash leading-relaxed">
-            Nova will create a protocol that prioritizes these goals according to your preferences while minimizing conflicts
+            Nova will create a protocol that prioritises these goals according to your preferences whilst minimising conflicts
           </p>
         </div>
 
-        <Button onClick={handleOptimize} className="w-full">
-          Generate Optimized Protocol
+        <Button onClick={handleOptimise} className="w-full">
+          Generate Optimised Protocol
         </Button>
       </CardContent>
     </Card>
