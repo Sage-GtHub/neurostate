@@ -12,7 +12,7 @@ interface Nudge {
   completed: boolean;
 }
 
-export function BehaviorChangeNudges() {
+export function BehaviourChangeNudges() {
   const [activeNudges, setActiveNudges] = useState<Nudge[]>([
     {
       id: "1",
