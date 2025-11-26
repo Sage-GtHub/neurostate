@@ -10,6 +10,7 @@ import { ProtocolAssessment } from "@/components/ProtocolAssessment";
 import { PhaseIndicator } from "@/components/nova/PhaseIndicator";
 import { PredictiveInsights } from "@/components/nova/PredictiveInsights";
 import { MorningCheckIn } from "@/components/nova/MorningCheckIn";
+import { VoiceInterface } from "@/components/nova/VoiceInterface";
 
 interface Message {
   role: "user" | "assistant";
@@ -30,9 +31,9 @@ export default function Nova() {
   const [isLoading, setIsLoading] = useState(false);
   const [metrics, setMetrics] = useState<Metric[]>([]);
   const [showAssessment, setShowAssessment] = useState(false);
-  const [currentPhase, setCurrentPhase] = useState<1 | 2 | 3 | 4>(1);
+  const [currentPhase, setCurrentPhase] = useState<1 | 2 | 3 | 4>(2);
   const [showMorningCheckIn, setShowMorningCheckIn] = useState(true);
-  const [predictiveInsights, setPredictiveInsights] = useState<any[]>([]);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const { toast } = useToast();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -220,56 +221,56 @@ export default function Nova() {
     <div className="min-h-screen bg-ivory">
       <NovaNav />
       
-      {/* Header */}
-      <div className="border-b border-mist bg-ivory">
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6">
-          <div className="flex items-center justify-between">
-            <h1 className="text-h3 font-semibold text-carbon">Nova – AI Performance Assistant</h1>
+      <div className="border-b border-mist/30 bg-gradient-to-b from-ivory to-pearl/20">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8">
+          <div className="flex items-center justify-between mb-2">
+            <h1 className="text-[2rem] font-semibold text-carbon tracking-tight">Nova</h1>
             <div className="flex items-center gap-2 text-sm text-ash">
-              <div className="w-2 h-2 rounded-full bg-[#10b981]" />
-              <span>Synced 2 min ago</span>
+              <div className={`w-2 h-2 rounded-full transition-colors ${isSpeaking ? 'bg-[#10b981] animate-pulse' : 'bg-[#10b981]'}`} />
+              <span className="text-caption">Online</span>
             </div>
           </div>
+          <p className="text-sm text-ash">Your AI performance assistant</p>
         </div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12">
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Left Column - Chat + Metrics */}
-          <div className="lg:col-span-2 space-y-8">
-            {/* Morning Check-in (Phase 2) */}
+        <div className="grid lg:grid-cols-3 gap-12">
+          <div className="lg:col-span-2 space-y-12">
             {showMorningCheckIn && currentPhase >= 2 && (
-              <MorningCheckIn
-                data={{
-                  sleepHours: 6.2,
-                  hrvChange: -8,
-                  recoveryScore: 72,
-                  recommendation: "Your recovery is declining. Skip high-intensity training today. Focus on recovery protocols and light movement.",
-                  adjustedProtocol: [
-                    "Increased Magnesium Complex to 600mg",
-                    "Added L-Theanine 200mg for stress management",
-                    "Reduced morning stimulants"
-                  ]
-                }}
-                onDismiss={() => setShowMorningCheckIn(false)}
-              />
+              <div className="animate-fade-in">
+                <MorningCheckIn
+                  data={{
+                    sleepHours: 6.2,
+                    hrvChange: -8,
+                    recoveryScore: 72,
+                    recommendation: "Your recovery is declining. Skip high-intensity training today. Focus on recovery protocols and light movement.",
+                    adjustedProtocol: [
+                      "Increased Magnesium Complex to 600mg",
+                      "Added L-Theanine 200mg for stress management",
+                      "Reduced morning stimulants"
+                    ]
+                  }}
+                  onDismiss={() => setShowMorningCheckIn(false)}
+                />
+              </div>
             )}
-            {/* Chat Interface */}
-            <Card>
-              <CardContent className="p-8">
-                <div className="space-y-4 mb-6 max-h-[400px] overflow-y-auto">
+
+            <Card className="border-mist/30 shadow-sm hover:shadow-md transition-shadow">
+              <CardContent className="p-0">
+                <div className="space-y-6 p-8 max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-mist scrollbar-track-transparent">
                   {messages.map((message, index) => (
-                    <div key={index} className="flex gap-4">
+                    <div key={index} className="flex gap-4 animate-fade-in">
                       {message.role === "assistant" && (
                         <div className="flex-shrink-0">
-                          <div className="w-10 h-10 rounded-full bg-carbon flex items-center justify-center">
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-carbon to-slate flex items-center justify-center shadow-sm">
                             <Sparkles className="w-5 h-5 text-ivory" />
                           </div>
                         </div>
                       )}
-                      <div className={`flex-1 ${message.role === "user" ? "ml-auto max-w-[80%]" : ""}`}>
-                        <div className={`${message.role === "user" ? "bg-pearl p-4 rounded-lg" : ""}`}>
-                          <p className="text-body text-carbon leading-relaxed whitespace-pre-wrap">
+                      <div className={`flex-1 ${message.role === "user" ? "ml-auto max-w-[85%]" : ""}`}>
+                        <div className={`${message.role === "user" ? "bg-gradient-to-br from-pearl to-mist/30 p-5 rounded-2xl shadow-sm" : ""}`}>
+                          <p className="text-[0.9375rem] text-carbon leading-relaxed whitespace-pre-wrap">
                             {message.content}
                           </p>
                         </div>
@@ -277,109 +278,96 @@ export default function Nova() {
                     </div>
                   ))}
                   {isLoading && (
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 animate-fade-in">
                       <div className="flex-shrink-0">
-                        <div className="w-10 h-10 rounded-full bg-carbon flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-carbon to-slate flex items-center justify-center">
                           <Loader2 className="w-5 h-5 text-ivory animate-spin" />
                         </div>
                       </div>
                       <div className="flex-1">
-                        <p className="text-body text-ash">Nova is typing...</p>
+                        <p className="text-sm text-ash italic">Analysing...</p>
                       </div>
                     </div>
                   )}
                   <div ref={messagesEndRef} />
                 </div>
                 
-                <div className="flex gap-2">
-                  <Input
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                    placeholder="Ask Nova about supplements, protocols, or performance..."
-                    disabled={isLoading}
-                    className="flex-1"
-                  />
-                  <Button onClick={handleSendMessage} disabled={isLoading || !input.trim()}>
-                    <Send className="w-4 h-4" />
-                  </Button>
+                <div className="border-t border-mist/30 p-6 bg-pearl/20">
+                  <div className="flex gap-3 mb-4">
+                    <Input
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                      placeholder="Ask about protocols, performance, recovery..."
+                      disabled={isLoading}
+                      className="flex-1 border-mist/40 focus:border-carbon transition-colors"
+                    />
+                    <Button 
+                      onClick={handleSendMessage} 
+                      disabled={isLoading || !input.trim()}
+                      className="px-6"
+                    >
+                      <Send className="w-4 h-4" />
+                    </Button>
+                  </div>
+                  
+                  <div className="flex justify-center pt-2 border-t border-mist/20">
+                    <VoiceInterface onSpeakingChange={setIsSpeaking} />
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Live Metrics */}
             <div>
-              <h2 className="text-h3 font-semibold text-carbon mb-6">Live Metrics</h2>
+              <h2 className="text-[1.5rem] font-semibold text-carbon mb-6 tracking-tight">Live Performance Metrics</h2>
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {metrics.length > 0 ? metrics.map((metric, index) => (
-                  <Card key={index}>
+                  <Card key={index} className="border-mist/30 hover:border-mist transition-colors">
                     <CardContent className="p-6">
-                      <div className="flex items-center gap-2 mb-2">
-                        <metric.icon className="w-4 h-4 text-ash" />
-                        <span className="text-caption text-ash uppercase tracking-wider">{metric.label}</span>
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-8 h-8 rounded-full bg-pearl/50 flex items-center justify-center">
+                          <metric.icon className="w-4 h-4 text-ash" />
+                        </div>
+                        <span className="text-caption text-ash uppercase tracking-wider font-medium">{metric.label}</span>
                       </div>
-                      <div className="text-[2rem] font-semibold text-carbon mb-1">{metric.value}</div>
+                      <div className="text-[2rem] font-semibold text-carbon mb-1 tracking-tight">{metric.value}</div>
                       {metric.trend && (
-                        <div className={`text-caption ${metric.trendColor || "text-ash"}`}>{metric.trend}</div>
+                        <div className={`text-caption font-medium ${metric.trendColor || "text-ash"}`}>{metric.trend}</div>
                       )}
                     </CardContent>
                   </Card>
                 )) : (
                   <>
-                    <Card>
-                      <CardContent className="p-6">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Activity className="w-4 h-4 text-ash" />
-                          <span className="text-caption text-ash uppercase tracking-wider">HRV Score</span>
-                        </div>
-                        <div className="text-[2rem] font-semibold text-carbon mb-1">--</div>
-                        <div className="text-caption text-ash">No data</div>
-                      </CardContent>
-                    </Card>
-                    <Card>
-                      <CardContent className="p-6">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Brain className="w-4 h-4 text-ash" />
-                          <span className="text-caption text-ash uppercase tracking-wider">Sleep Quality</span>
-                        </div>
-                        <div className="text-[2rem] font-semibold text-carbon mb-1">--</div>
-                        <div className="text-caption text-ash">No data</div>
-                      </CardContent>
-                    </Card>
-                    <Card>
-                      <CardContent className="p-6">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Target className="w-4 h-4 text-ash" />
-                          <span className="text-caption text-ash uppercase tracking-wider">Focus Sessions</span>
-                        </div>
-                        <div className="text-[2rem] font-semibold text-carbon mb-1">--</div>
-                        <div className="text-caption text-ash">No data</div>
-                      </CardContent>
-                    </Card>
-                    <Card>
-                      <CardContent className="p-6">
-                        <div className="flex items-center gap-2 mb-2">
-                          <TrendingUp className="w-4 h-4 text-ash" />
-                          <span className="text-caption text-ash uppercase tracking-wider">Recovery</span>
-                        </div>
-                        <div className="text-[2rem] font-semibold text-carbon mb-1">--</div>
-                        <div className="text-caption text-ash">No data</div>
-                      </CardContent>
-                    </Card>
+                    {[
+                      { label: "HRV Score", icon: Activity },
+                      { label: "Sleep Quality", icon: Brain },
+                      { label: "Focus Sessions", icon: Target },
+                      { label: "Recovery", icon: TrendingUp }
+                    ].map((metric, index) => (
+                      <Card key={index} className="border-mist/30">
+                        <CardContent className="p-6">
+                          <div className="flex items-center gap-2 mb-3">
+                            <div className="w-8 h-8 rounded-full bg-pearl/50 flex items-center justify-center">
+                              <metric.icon className="w-4 h-4 text-ash" />
+                            </div>
+                            <span className="text-caption text-ash uppercase tracking-wider font-medium">{metric.label}</span>
+                          </div>
+                          <div className="text-[2rem] font-semibold text-carbon/20 mb-1">--</div>
+                          <div className="text-caption text-ash">Connect device</div>
+                        </CardContent>
+                      </Card>
+                    ))}
                   </>
                 )}
               </div>
             </div>
           </div>
 
-          {/* Right Column - Devices + Phase + Insights */}
           <div className="space-y-8">
-            {/* Phase Indicator */}
             <PhaseIndicator currentPhase={currentPhase} />
 
-            {/* Predictive Insights (Phase 2+) */}
             {currentPhase >= 2 && (
-              <div>
+              <div className="animate-fade-in">
                 <h3 className="text-body font-semibold text-carbon mb-4">Predictive Insights</h3>
                 <PredictiveInsights 
                   insights={[
@@ -402,14 +390,13 @@ export default function Nova() {
               </div>
             )}
 
-            {/* Connected Devices */}
-            <Card>
+            <Card className="border-mist/30">
               <CardContent className="p-6">
-                <h3 className="text-body font-semibold text-carbon mb-4">Connected Devices</h3>
+                <h3 className="text-body font-semibold text-carbon mb-6">Connected Devices</h3>
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between p-3 rounded-lg hover:bg-pearl/30 transition-colors">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-pearl flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pearl to-mist flex items-center justify-center shadow-sm">
                         <div className="w-6 h-6 rounded-full border-2 border-carbon" />
                       </div>
                       <div>
@@ -417,64 +404,58 @@ export default function Nova() {
                         <div className="text-caption text-ash">2 minutes ago</div>
                       </div>
                     </div>
-                    <div className="w-2 h-2 rounded-full bg-[#10b981]" />
+                    <div className="w-2 h-2 rounded-full bg-[#10b981] shadow-sm shadow-[#10b981]/30" />
                   </div>
 
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between p-3 rounded-lg hover:bg-pearl/30 transition-colors">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-pearl flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pearl to-mist flex items-center justify-center shadow-sm">
                         <Watch className="w-5 h-5 text-carbon" />
                       </div>
                       <div>
                         <div className="text-sm font-medium text-carbon">Apple Watch Ultra</div>
-                        <div className="text-caption text-ash">5 minutes ago</div>
+                        <div className="text-caption text-ash">Offline</div>
                       </div>
                     </div>
-                    <div className="w-2 h-2 rounded-full bg-[#10b981]" />
+                    <div className="w-2 h-2 rounded-full bg-ash/40" />
                   </div>
                 </div>
-                
-                <Button variant="outline" className="w-full mt-4">
+
+                <Button variant="outline" className="w-full mt-6" onClick={() => window.location.href = '/nova/devices'}>
                   Manage Devices
                 </Button>
               </CardContent>
             </Card>
 
-            {/* Nova Intelligence */}
-            <Card className="bg-carbon text-ivory">
-              <CardContent className="p-6">
-                <h3 className="text-body font-semibold mb-6">Nova Intelligence</h3>
-                <div className="space-y-4">
-                  <div>
-                    <div className="text-caption text-pearl uppercase tracking-wider mb-1">Data Points Analysed</div>
-                    <div className="text-[2rem] font-semibold">12,847</div>
+            <Card className="border-carbon/10 bg-gradient-to-br from-carbon to-slate text-ivory shadow-lg">
+              <CardContent className="p-8">
+                <h3 className="text-h3 font-semibold mb-3">Nova Intelligence</h3>
+                <div className="space-y-4 text-sm text-pearl/90 mb-6">
+                  <div className="flex justify-between items-center">
+                    <span>Data Points Analysed</span>
+                    <span className="font-semibold text-ivory">1,247</span>
                   </div>
-                  <div>
-                    <div className="text-caption text-pearl uppercase tracking-wider mb-1">Insights Generated</div>
-                    <div className="text-[2rem] font-semibold">156</div>
+                  <div className="flex justify-between items-center">
+                    <span>Insights Generated</span>
+                    <span className="font-semibold text-ivory">18</span>
                   </div>
-                  <div>
-                    <div className="text-caption text-pearl uppercase tracking-wider mb-1">Performance Gain</div>
-                    <div className="text-[2rem] font-semibold text-[#10b981]">+23%</div>
+                  <div className="flex justify-between items-center">
+                    <span>Performance Gain</span>
+                    <span className="font-semibold text-[#10b981]">+23%</span>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-
-            {/* Get Started CTA */}
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="text-body font-semibold text-carbon mb-3">Get Started</h3>
-                <p className="text-sm text-ash mb-4 leading-relaxed">
-                  Take our 2-minute assessment for a personalised supplement protocol
-                </p>
-                <Button className="w-full" onClick={() => setShowAssessment(true)}>Start Assessment</Button>
+                <Button 
+                  onClick={() => setShowAssessment(true)}
+                  className="w-full bg-ivory text-carbon hover:bg-pearl"
+                >
+                  Start Protocol Assessment
+                </Button>
               </CardContent>
             </Card>
           </div>
         </div>
       </div>
-      
+
       <ProtocolAssessment 
         open={showAssessment} 
         onOpenChange={setShowAssessment}

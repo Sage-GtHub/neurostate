@@ -16,7 +16,7 @@ import NovaProtocols from "./pages/NovaProtocols";
 import ProtocolDetail from "./pages/ProtocolDetail";
 import NovaInsights from "./pages/NovaInsights";
 import NovaDevices from "./pages/NovaDevices";
-import NovaProtocolOptimization from "./pages/NovaProtocolOptimization";
+
 import FAQ from "./pages/FAQ";
 import Shipping from "./pages/Shipping";
 import HowToUse from "./pages/HowToUse";
@@ -94,7 +94,7 @@ const App = () => (
           <Route path="/nova" element={<ProtectedRoute><Nova /></ProtectedRoute>} />
           <Route path="/nova/protocols" element={<ProtectedRoute><NovaProtocols /></ProtectedRoute>} />
           <Route path="/nova/protocols/:id" element={<ProtectedRoute><ProtocolDetail /></ProtectedRoute>} />
-          <Route path="/nova/optimization" element={<ProtectedRoute><NovaProtocolOptimization /></ProtectedRoute>} />
+          
           <Route path="/nova/insights" element={<ProtectedRoute><NovaInsights /></ProtectedRoute>} />
           <Route path="/nova/devices" element={<ProtectedRoute><NovaDevices /></ProtectedRoute>} />
           {/* Corporate Wellness Routes */}
