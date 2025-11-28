@@ -1,16 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Hero = () => {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
       {/* Subtle Background Effect */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute inset-0 bg-gradient-to-br from-stone/5 via-transparent to-stone/10" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 md:px-12 lg:px-20 xl:px-32 py-32">
+      <div className={`relative z-10 container mx-auto px-6 md:px-12 lg:px-20 xl:px-32 py-32 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="max-w-6xl mx-auto text-center space-y-10">
           <div className="inline-block px-6 py-3 bg-carbon/5 border border-carbon/10 mb-6">
             <p className="text-carbon text-xs tracking-[0.3em] uppercase font-medium">
@@ -32,20 +36,24 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-10">
-            <Button 
-              size="lg"
-              className="bg-carbon text-white hover:bg-slate text-base px-10 py-7 rounded-full group transition-all duration-300"
-            >
-              Explore the System
-              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button 
-              variant="outline"
-              size="lg"
-              className="border-carbon/20 text-carbon hover:bg-carbon/5 text-base px-10 py-7 rounded-full transition-all duration-300"
-            >
-              Watch Demo
-            </Button>
+            <Link to="/nova">
+              <Button 
+                size="lg"
+                className="bg-carbon text-white hover:bg-slate text-base px-10 py-7 rounded-full group transition-all duration-300"
+              >
+                Explore the System
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer">
+              <Button 
+                variant="outline"
+                size="lg"
+                className="border-carbon/20 text-carbon hover:bg-carbon/5 text-base px-10 py-7 rounded-full transition-all duration-300"
+              >
+                Watch Demo
+              </Button>
+            </a>
           </div>
 
           {/* Scroll Indicator */}
