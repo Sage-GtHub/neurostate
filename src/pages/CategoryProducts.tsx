@@ -9,6 +9,16 @@ import { Loader2, ArrowLeft } from "lucide-react";
 import { LiveChat } from "@/components/LiveChat";
 
 const categoryConfig = {
+  supplements: {
+    title: "Supplements",
+    description: "Premium, science-backed supplements for peak performance, recovery, and cognitive enhancement.",
+    tags: ["supplement", "vitamin", "mineral", "nootropic", "adaptogen", "omega", "collagen", "protein", "magnesium", "ashwagandha", "rhodiola", "lions mane", "melatonin", "l-theanine", "valerian", "creatine", "electrolyte"]
+  },
+  devices: {
+    title: "Recovery Devices",
+    description: "Clinical-grade recovery and wellness devices using cutting-edge technology.",
+    tags: ["device", "red light", "therapy", "ice bath", "cold plunge", "sauna", "infrared", "PEMF", "blanket", "mask", "panel"]
+  },
   recovery: {
     title: "Recovery",
     description: "Advanced red light therapy and recovery devices for optimal muscle repair and wellness.",

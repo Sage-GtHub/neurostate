@@ -84,10 +84,10 @@ export const Header = () => {
   const shopCategories = [
     { label: "All Products", href: "/", icon: Package },
     { label: "Supplements", href: "/categories/supplements", icon: Droplets },
-    { label: "Devices", href: "/categories/devices", icon: Activity },
+    { label: "Recovery Devices", href: "/categories/recovery", icon: Activity },
     { label: "Sleep Support", href: "/categories/sleep", icon: Moon },
     { label: "Cognitive Enhancement", href: "/categories/cognitive", icon: Brain },
-    { label: "Recovery Tools", href: "/categories/recovery", icon: Zap },
+    { label: "Performance", href: "/categories/performance", icon: Zap },
   ];
 
   const guideTopics = [
