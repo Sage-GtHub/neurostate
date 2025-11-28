@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Brain, Lightbulb, Zap, Users, Building2, FlaskConical, Award } from "lucide-react";
 import novaIcon from "@/assets/neurostate-icon.svg";
 import redlightDevice from "@/assets/redlight.webp";
+import heroSupplement from "@/assets/hero-supplement.png";
 
 const Index = () => {
   const isMobile = useIsMobile();
@@ -210,9 +211,9 @@ const Index = () => {
                 <div className="space-y-8">
                   <div className="space-y-6">
                     <h2 className="text-5xl md:text-6xl font-light text-ivory leading-tight">
-                      Precision
+                      Performance
                       <br />
-                      <span className="font-normal text-accent">neuromodulation</span>
+                      <span className="font-normal text-accent">supplements</span>
                     </h2>
                     <p className="text-xl text-stone leading-relaxed">
                       Science-backed compounds engineered for cognitive enhancement. 
@@ -242,27 +243,14 @@ const Index = () => {
                   </Button>
                 </div>
 
-                {/* Supplement Products Showcase */}
-                <div className="relative">
-                  <div className="grid grid-cols-2 gap-6">
-                    {[
-                      { name: "NeuroFocus", category: "Cognitive" },
-                      { name: "AdaptBalance", category: "Stress" },
-                      { name: "RestoreSleep", category: "Recovery" },
-                      { name: "Omega3 Elite", category: "Foundation" },
-                    ].map((product, i) => (
-                      <div 
-                        key={i}
-                        className="relative p-6 rounded-3xl bg-gradient-to-br from-ivory/5 to-transparent border border-ivory/10 backdrop-blur-sm hover:border-accent/30 transition-all duration-500"
-                      >
-                        <div className="aspect-square mb-4 rounded-2xl bg-ivory/5 flex items-center justify-center">
-                          <FlaskConical className="w-12 h-12 text-accent" />
-                        </div>
-                        <h3 className="text-lg font-normal text-ivory mb-1">{product.name}</h3>
-                        <p className="text-sm text-stone">{product.category}</p>
-                      </div>
-                    ))}
-                  </div>
+                {/* Supplement Hero Image */}
+                <div className="relative rounded-3xl overflow-hidden">
+                  <img 
+                    src={heroSupplement} 
+                    alt="NeuroState Performance Supplements" 
+                    className="w-full h-auto object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-carbon/80 to-transparent" />
                 </div>
               </div>
             </div>
