@@ -10,8 +10,11 @@ import { Download, CheckCircle2, TrendingUp, Users, Shield, Target, FileText, La
 import { SportsROICalculator } from "@/components/SportsROICalculator";
 import { SportsComparisonTable } from "@/components/SportsComparisonTable";
 import { CustomerSuccessMetrics } from "@/components/CustomerSuccessMetrics";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export default function SportsOverview() {
+  const { ref: roiRef, isVisible: roiVisible } = useScrollAnimation({ threshold: 0.2 });
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -46,10 +49,10 @@ export default function SportsOverview() {
                 <span className="text-accent font-semibold text-sm uppercase tracking-wider">Sports Performance · Football · Rugby · Athletics · Elite Teams</span>
               </div>
               <h1 className="text-hero-display font-bold mb-6 bg-gradient-to-r from-ivory via-pearl to-ivory bg-clip-text text-transparent">
-                Elevate Athletic Performance
+                Make Your Athletes Perform Better
               </h1>
-              <p className="text-body-large text-pearl/90 max-w-3xl mx-auto leading-relaxed">
-                Partner with NeuroState to deliver premium cognitive enhancement, recovery protocols, and AI-powered performance optimization to football clubs, rugby teams, athletics programmes, and elite sports organisations.
+              <p className="text-body-large text-pearl/90 max-w-3xl mx-auto leading-relaxed font-light">
+                Give football clubs, rugby teams, and elite squads premium cognitive tools, recovery protocols, and AI performance optimisation.
               </p>
             </div>
 
@@ -87,14 +90,14 @@ export default function SportsOverview() {
         </section>
 
         {/* ROI Calculator */}
-        <section className="py-20 bg-ivory">
+        <section ref={roiRef} className={`py-20 bg-ivory transition-all duration-1000 ${roiVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center mb-12">
               <h2 className="text-large-display font-bold mb-4 text-carbon">
-                Performance Impact Calculator
+                Performance Impact Numbers
               </h2>
-              <p className="text-body text-stone max-w-2xl mx-auto">
-                Calculate the performance gains and injury prevention value NeuroState delivers. Based on squad size, player value, and performance objectives.
+              <p className="text-body text-stone font-light max-w-2xl mx-auto">
+                Work out the performance gains and injury prevention value. Based on squad size, player value, and performance targets.
               </p>
             </div>
 

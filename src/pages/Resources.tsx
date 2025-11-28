@@ -10,6 +10,7 @@ import { LearningPaths } from "@/components/LearningPaths";
 import { LiveChat } from "@/components/LiveChat";
 import { ResourceFinder } from "@/components/ResourceFinder";
 import { MultiFormatHub } from "@/components/MultiFormatHub";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const featuredArticle = {
   id: 0,
@@ -109,6 +110,9 @@ const articles = [
 const categories = ["All", "Nutrition", "Recovery", "Sleep", "Beauty", "Wellness", "Brain Health"];
 
 const Resources = () => {
+  const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation({ threshold: 0.2 });
+  const { ref: featuredRef, isVisible: featuredVisible } = useScrollAnimation({ threshold: 0.2 });
+  
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [chatOpen, setChatOpen] = useState(false);
@@ -121,26 +125,26 @@ const Resources = () => {
   });
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Header />
       
       <main className="container mx-auto px-4 py-16">
-        <div className="text-center mb-20 py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 border-b border-mist">
-          <h1 className="text-[2.25rem] md:text-[3rem] font-normal text-carbon mb-6" style={{ lineHeight: '1.2' }}>
-            Master your health journey
+        <div ref={heroRef} className={`text-center mb-20 py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 border-b border-mist transition-all duration-1000 ${heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h1 className="text-[2.25rem] md:text-[3rem] font-light text-carbon mb-6" style={{ lineHeight: '1.2' }}>
+            Learn how to perform better
           </h1>
-          <p className="text-[0.9375rem] text-ash max-w-3xl mx-auto">
-            Discover personalised resources, expert courses, and science-backed content
+          <p className="text-[0.9375rem] text-ash font-light max-w-3xl mx-auto">
+            Guides, courses, and research to help you optimise recovery and performance
           </p>
         </div>
 
         {/* Interactive Resource Finder - Top Priority */}
         <ResourceFinder />
 
-        <div className="mb-20 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 py-16 border-b border-mist">
+        <div ref={featuredRef} className={`mb-20 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 py-16 border-b border-mist transition-all duration-1000 ${featuredVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="w-full max-w-7xl mx-auto">
             <div className="grid md:grid-cols-2 gap-12">
-              <div className="relative overflow-hidden bg-ivory">
+              <div className="relative overflow-hidden bg-pearl">
                 <img
                   src={featuredArticle.image}
                   alt={featuredArticle.title}
@@ -148,11 +152,11 @@ const Resources = () => {
                 />
               </div>
               <div className="flex flex-col justify-center">
-                <p className="text-[0.6875rem] uppercase tracking-[0.05em] text-stone mb-4">Featured</p>
-                <h2 className="text-[1.5rem] font-normal text-carbon mb-4 leading-tight">
+                <p className="text-[0.6875rem] uppercase tracking-[0.05em] text-stone mb-4 font-light">Featured</p>
+                <h2 className="text-[1.5rem] font-light text-carbon mb-4 leading-tight">
                   {featuredArticle.title}
                 </h2>
-                <p className="text-[0.9375rem] text-ash mb-6 leading-relaxed">
+                <p className="text-[0.9375rem] text-ash font-light mb-6 leading-relaxed">
                   {featuredArticle.excerpt}
                 </p>
                 <Button variant="ghost" className="w-fit hover:bg-transparent hover:opacity-60">
@@ -172,12 +176,12 @@ const Resources = () => {
         </div>
 
         {/* Newsletter Section */}
-        <div className="p-10 md:p-12 text-center border-b pb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Stay Updated
+        <div className="p-10 md:p-12 text-center border-b pb-12 bg-pearl">
+          <h2 className="text-3xl md:text-4xl font-light mb-4 text-carbon">
+            Stay in the loop
           </h2>
-          <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-            Get the latest health insights, exclusive offers, and expert tips straight to your inbox
+          <p className="text-ash font-light mb-6 max-w-xl mx-auto">
+            Latest insights, offers, and tips sent straight to you
           </p>
           <div className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
             <Input 
@@ -192,11 +196,11 @@ const Resources = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-16 text-center">
-          <p className="text-muted-foreground mb-6 text-lg">Ready to optimise your health?</p>
+        <div className="mt-16 text-center bg-white">
+          <p className="text-ash font-light mb-6 text-lg">Ready to level up?</p>
           <Link to="/">
             <Button size="lg" className="text-lg px-8">
-              Explore Our Products
+              See Products
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </Link>

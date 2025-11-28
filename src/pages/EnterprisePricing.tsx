@@ -89,10 +89,10 @@ export default function EnterprisePricing() {
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center max-w-4xl mx-auto mb-16">
               <h1 className="text-hero-display font-bold mb-6">
-                Enterprise Pricing Calculator
+                Work Out Your Pricing
               </h1>
-              <p className="text-body-large text-pearl max-w-3xl mx-auto">
-                Transparent, scalable pricing based on your team size. No hidden fees, flexible contracts, and volume discounts that grow with you.
+              <p className="text-body-large text-pearl max-w-3xl mx-auto font-light">
+                Transparent, scalable pricing based on team size. No hidden fees, flexible contracts, volume discounts that grow with you.
               </p>
             </div>
 
