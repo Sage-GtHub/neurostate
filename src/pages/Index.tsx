@@ -20,41 +20,40 @@ const Index = () => {
     <>
       <SEO />
       <OrganizationStructuredData />
-      <div className="min-h-screen bg-carbon">
+      <div className="min-h-screen bg-[#0A0A0A]">
         <Header />
         <main>
           <Hero />
 
           {/* The NeuroState System */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-gradient-to-b from-carbon to-slate overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(0,255,0,0.03),transparent_50%)]" />
+          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-gradient-to-b from-[#0A0A0A] via-[#0F0F0F] to-[#0A0A0A] overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(120,119,198,0.08),transparent_70%)]" />
             
             <div className="relative z-10 max-w-7xl mx-auto">
-              <div className="text-center mb-20 space-y-6">
-                <p className="text-accent text-xs tracking-[0.2em] uppercase font-medium">The Complete System</p>
-                <h2 className="text-5xl md:text-6xl font-light text-ivory leading-tight">
+              <div className="text-center mb-24 space-y-8">
+                <p className="text-[#7877C6] text-xs tracking-[0.3em] uppercase font-medium">The Complete System</p>
+                <h2 className="text-5xl md:text-7xl font-light text-white/95 leading-[1.1]">
                   Four pillars of
                   <br />
-                  <span className="font-normal">cognitive performance</span>
+                  <span className="font-normal bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">cognitive performance</span>
                 </h2>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-1">
                 {[
-                  { icon: Brain, title: "Nova AI", desc: "Your autonomous cognitive coach", color: "from-accent/20 to-accent/5" },
-                  { icon: Lightbulb, title: "Red Light", desc: "Photobiomodulation therapy", color: "from-blue-500/20 to-blue-500/5" },
-                  { icon: Zap, title: "Supplements", desc: "Precision neuromodulation", color: "from-accent/20 to-accent/5" },
-                  { icon: FlaskConical, title: "Protocols", desc: "Evidence-based stacks", color: "from-accent/20 to-accent/5" },
+                  { icon: Brain, title: "Nova AI", desc: "Your autonomous cognitive coach" },
+                  { icon: Lightbulb, title: "Red Light", desc: "Photobiomodulation therapy" },
+                  { icon: Zap, title: "Supplements", desc: "Precision neuromodulation" },
+                  { icon: FlaskConical, title: "Protocols", desc: "Evidence-based stacks" },
                 ].map((item, i) => (
                   <div 
                     key={i}
-                    className="group relative p-8 rounded-3xl bg-gradient-to-br from-ivory/5 to-transparent border border-ivory/10 backdrop-blur-sm hover:border-accent/30 transition-all duration-500 hover:scale-105"
+                    className="group relative p-12 bg-gradient-to-b from-white/[0.02] to-transparent hover:from-[#7877C6]/10 hover:to-transparent transition-all duration-700"
                   >
-                    <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                    <div className="relative z-10 space-y-4">
-                      <item.icon className="w-10 h-10 text-accent" />
-                      <h3 className="text-2xl font-normal text-ivory">{item.title}</h3>
-                      <p className="text-stone text-sm leading-relaxed">{item.desc}</p>
+                    <div className="space-y-6">
+                      <item.icon className="w-8 h-8 text-[#7877C6] opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+                      <h3 className="text-xl font-light text-white/90">{item.title}</h3>
+                      <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -63,41 +62,41 @@ const Index = () => {
           </section>
 
           {/* Nova AI Section */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-slate">
+          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-[#0A0A0A]">
             <div className="max-w-7xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-16 items-center">
-                <div className="space-y-8">
+              <div className="grid lg:grid-cols-2 gap-20 items-center">
+                <div className="space-y-10">
                   <div className="inline-block">
-                    <img src={novaIcon} alt="Nova AI" className="w-16 h-16" />
+                    <img src={novaIcon} alt="Nova AI" className="w-16 h-16 opacity-80" />
                   </div>
                   <div className="space-y-6">
-                    <h2 className="text-5xl md:text-6xl font-light text-ivory leading-tight">
+                    <h2 className="text-5xl md:text-7xl font-light text-white/95 leading-[1.1]">
                       Nova AI
                       <br />
-                      <span className="font-normal text-accent">Your cognitive copilot</span>
+                      <span className="font-normal text-[#7877C6]">Your cognitive copilot</span>
                     </h2>
-                    <p className="text-xl text-stone leading-relaxed">
-                      Autonomous performance optimization powered by continuous biometric analysis, 
+                    <p className="text-xl text-white/60 leading-relaxed max-w-xl">
+                      Autonomous performance optimisation powered by continuous biometric analysis, 
                       predictive insights, and adaptive protocol generation.
                     </p>
                   </div>
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2" />
-                      <p className="text-stone">Real-time HRV, sleep, and recovery tracking</p>
+                  <div className="space-y-5">
+                    <div className="flex items-start gap-4">
+                      <div className="w-1 h-1 rounded-full bg-[#7877C6] mt-3" />
+                      <p className="text-white/60 leading-relaxed">Real-time HRV, sleep, and recovery tracking</p>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2" />
-                      <p className="text-stone">Predictive pattern recognition and early intervention</p>
+                    <div className="flex items-start gap-4">
+                      <div className="w-1 h-1 rounded-full bg-[#7877C6] mt-3" />
+                      <p className="text-white/60 leading-relaxed">Predictive pattern recognition and early intervention</p>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2" />
-                      <p className="text-stone">Voice-enabled coaching and protocol optimization</p>
+                    <div className="flex items-start gap-4">
+                      <div className="w-1 h-1 rounded-full bg-[#7877C6] mt-3" />
+                      <p className="text-white/60 leading-relaxed">Voice-enabled coaching and protocol optimisation</p>
                     </div>
                   </div>
                   <Button 
                     size="lg"
-                    className="bg-accent text-carbon hover:bg-accent/90 text-base px-8 py-6 rounded-full group"
+                    className="bg-white text-black hover:bg-white/90 text-base px-10 py-7 rounded-full group transition-all duration-300"
                   >
                     Experience Nova
                     <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -106,36 +105,36 @@ const Index = () => {
 
                 {/* Nova UI Mockup */}
                 <div className="relative">
-                  <div className="relative rounded-3xl overflow-hidden border border-ivory/10 bg-gradient-to-br from-ivory/5 to-transparent backdrop-blur-sm p-8">
-                    <div className="space-y-6">
-                      <div className="flex items-center gap-3 pb-6 border-b border-ivory/10">
-                        <div className="w-12 h-12 rounded-full bg-accent/20 border border-accent/30 flex items-center justify-center">
-                          <Brain className="w-6 h-6 text-accent" />
+                  <div className="relative overflow-hidden bg-gradient-to-br from-white/[0.03] to-transparent p-10 backdrop-blur-xl">
+                    <div className="space-y-8">
+                      <div className="flex items-center gap-4 pb-8 border-b border-white/5">
+                        <div className="w-14 h-14 rounded-full bg-[#7877C6]/20 border border-[#7877C6]/30 flex items-center justify-center">
+                          <Brain className="w-7 h-7 text-[#7877C6]" />
                         </div>
                         <div>
-                          <p className="text-ivory font-medium">Nova</p>
-                          <p className="text-stone text-sm">Online</p>
+                          <p className="text-white/90 font-medium text-lg">Nova</p>
+                          <p className="text-white/40 text-sm">Online</p>
                         </div>
                       </div>
-                      <div className="space-y-4">
-                        <div className="bg-ivory/5 rounded-2xl p-4 border border-ivory/10">
-                          <p className="text-stone text-sm leading-relaxed">
+                      <div className="space-y-6">
+                        <div className="bg-white/[0.03] p-6 border border-white/5">
+                          <p className="text-white/70 leading-relaxed">
                             Your HRV dropped 12% overnight. I've adjusted your protocol to prioritise recovery. 
                             Consider postponing high-intensity training today.
                           </p>
                         </div>
                         <div className="grid grid-cols-3 gap-4">
-                          <div className="bg-accent/10 rounded-xl p-4 border border-accent/20">
-                            <p className="text-accent text-2xl font-light">68</p>
-                            <p className="text-stone text-xs">HRV</p>
+                          <div className="bg-[#7877C6]/10 p-5 border border-[#7877C6]/20">
+                            <p className="text-[#7877C6] text-2xl font-light mb-1">68</p>
+                            <p className="text-white/40 text-xs">HRV</p>
                           </div>
-                          <div className="bg-accent/10 rounded-xl p-4 border border-accent/20">
-                            <p className="text-accent text-2xl font-light">7.8</p>
-                            <p className="text-stone text-xs">Sleep</p>
+                          <div className="bg-[#7877C6]/10 p-5 border border-[#7877C6]/20">
+                            <p className="text-[#7877C6] text-2xl font-light mb-1">7.8</p>
+                            <p className="text-white/40 text-xs">Sleep</p>
                           </div>
-                          <div className="bg-accent/10 rounded-xl p-4 border border-accent/20">
-                            <p className="text-accent text-2xl font-light">85%</p>
-                            <p className="text-stone text-xs">Recovery</p>
+                          <div className="bg-[#7877C6]/10 p-5 border border-[#7877C6]/20">
+                            <p className="text-[#7877C6] text-2xl font-light mb-1">85%</p>
+                            <p className="text-white/40 text-xs">Recovery</p>
                           </div>
                         </div>
                       </div>
@@ -147,52 +146,52 @@ const Index = () => {
           </section>
 
           {/* Red Light Device Section */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-gradient-to-b from-slate to-carbon">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,0,0,0.05),transparent_50%)]" />
+          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-gradient-to-b from-[#0A0A0A] via-[#0F0F0F] to-[#0A0A0A]">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_50%,rgba(239,68,68,0.06),transparent_60%)]" />
             
             <div className="relative z-10 max-w-7xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div className="grid lg:grid-cols-2 gap-20 items-center">
                 {/* Device Image */}
                 <div className="order-last lg:order-first">
-                  <div className="relative rounded-3xl overflow-hidden">
+                  <div className="relative overflow-hidden">
                     <img 
                       src={redlightDevice} 
                       alt="NeuroState Red Light Therapy Device" 
-                      className="w-full h-auto object-cover"
+                      className="w-full h-auto object-cover opacity-90"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-carbon/80 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/90 to-transparent" />
                   </div>
                 </div>
 
-                <div className="space-y-8">
+                <div className="space-y-10">
                   <div className="space-y-6">
-                    <h2 className="text-5xl md:text-6xl font-light text-ivory leading-tight">
+                    <h2 className="text-5xl md:text-7xl font-light text-white/95 leading-[1.1]">
                       Red light
                       <br />
-                      <span className="font-normal text-red-400">therapy devices</span>
+                      <span className="font-normal text-red-400/80">therapy devices</span>
                     </h2>
-                    <p className="text-xl text-stone leading-relaxed">
+                    <p className="text-xl text-white/60 leading-relaxed max-w-xl">
                       Clinical-grade photobiomodulation technology. Enhance mitochondrial function, 
                       accelerate recovery, and optimise cellular energy production.
                     </p>
                   </div>
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-2" />
-                      <p className="text-stone">660nm & 850nm therapeutic wavelengths</p>
+                  <div className="space-y-5">
+                    <div className="flex items-start gap-4">
+                      <div className="w-1 h-1 rounded-full bg-red-400/60 mt-3" />
+                      <p className="text-white/60 leading-relaxed">660nm & 850nm therapeutic wavelengths</p>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-2" />
-                      <p className="text-stone">Clinically proven dosing protocols</p>
+                    <div className="flex items-start gap-4">
+                      <div className="w-1 h-1 rounded-full bg-red-400/60 mt-3" />
+                      <p className="text-white/60 leading-relaxed">Clinically proven dosing protocols</p>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-2" />
-                      <p className="text-stone">Full-body and targeted treatment options</p>
+                    <div className="flex items-start gap-4">
+                      <div className="w-1 h-1 rounded-full bg-red-400/60 mt-3" />
+                      <p className="text-white/60 leading-relaxed">Full-body and targeted treatment options</p>
                     </div>
                   </div>
                   <Button 
                     size="lg"
-                    className="bg-ivory text-carbon hover:bg-pearl text-base px-8 py-6 rounded-full group"
+                    className="bg-white text-black hover:bg-white/90 text-base px-10 py-7 rounded-full group transition-all duration-300"
                   >
                     Explore Devices
                     <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -203,40 +202,40 @@ const Index = () => {
           </section>
 
           {/* Supplements Section */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-gradient-to-b from-carbon to-slate">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(0,255,0,0.03),transparent_50%)]" />
+          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-[#0A0A0A]">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(120,119,198,0.06),transparent_60%)]" />
             
             <div className="relative z-10 max-w-7xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-16 items-center">
-                <div className="space-y-8">
+              <div className="grid lg:grid-cols-2 gap-20 items-center">
+                <div className="space-y-10">
                   <div className="space-y-6">
-                    <h2 className="text-5xl md:text-6xl font-light text-ivory leading-tight">
+                    <h2 className="text-5xl md:text-7xl font-light text-white/95 leading-[1.1]">
                       Performance
                       <br />
-                      <span className="font-normal text-accent">supplements</span>
+                      <span className="font-normal text-[#7877C6]">supplements</span>
                     </h2>
-                    <p className="text-xl text-stone leading-relaxed">
+                    <p className="text-xl text-white/60 leading-relaxed max-w-xl">
                       Science-backed compounds engineered for cognitive enhancement. 
                       Each formulation designed by neuroscientists for measurable performance gains.
                     </p>
                   </div>
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2" />
-                      <p className="text-stone">Third-party tested for purity and potency</p>
+                  <div className="space-y-5">
+                    <div className="flex items-start gap-4">
+                      <div className="w-1 h-1 rounded-full bg-[#7877C6] mt-3" />
+                      <p className="text-white/60 leading-relaxed">Third-party tested for purity and potency</p>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2" />
-                      <p className="text-stone">Evidence-based dosing protocols</p>
+                    <div className="flex items-start gap-4">
+                      <div className="w-1 h-1 rounded-full bg-[#7877C6] mt-3" />
+                      <p className="text-white/60 leading-relaxed">Evidence-based dosing protocols</p>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2" />
-                      <p className="text-stone">Transparent ingredient sourcing</p>
+                    <div className="flex items-start gap-4">
+                      <div className="w-1 h-1 rounded-full bg-[#7877C6] mt-3" />
+                      <p className="text-white/60 leading-relaxed">Transparent ingredient sourcing</p>
                     </div>
                   </div>
                   <Button 
                     size="lg"
-                    className="bg-accent text-carbon hover:bg-accent/90 text-base px-8 py-6 rounded-full group"
+                    className="bg-white text-black hover:bg-white/90 text-base px-10 py-7 rounded-full group transition-all duration-300"
                   >
                     Shop Supplements
                     <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -244,31 +243,31 @@ const Index = () => {
                 </div>
 
                 {/* Supplement Hero Image */}
-                <div className="relative rounded-3xl overflow-hidden">
+                <div className="relative overflow-hidden">
                   <img 
                     src={heroSupplement} 
                     alt="NeuroState Performance Supplements" 
-                    className="w-full h-auto object-cover"
+                    className="w-full h-auto object-cover opacity-90"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-carbon/80 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/80 to-transparent" />
                 </div>
               </div>
             </div>
           </section>
 
           {/* For Businesses */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-carbon">
+          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-gradient-to-b from-[#0A0A0A] via-[#0F0F0F] to-[#0A0A0A]">
             <div className="max-w-7xl mx-auto">
-              <div className="text-center mb-16 space-y-6">
-                <p className="text-accent text-xs tracking-[0.2em] uppercase font-medium">Enterprise Solutions</p>
-                <h2 className="text-5xl md:text-6xl font-light text-ivory leading-tight">
+              <div className="text-center mb-20 space-y-8">
+                <p className="text-[#7877C6] text-xs tracking-[0.3em] uppercase font-medium">Enterprise Solutions</p>
+                <h2 className="text-5xl md:text-7xl font-light text-white/95 leading-[1.1]">
                   Built for
                   <br />
-                  <span className="font-normal">high-performance teams</span>
+                  <span className="font-normal bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">high-performance teams</span>
                 </h2>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-8 mb-12">
+              <div className="grid md:grid-cols-3 gap-1 mb-16">
                 {[
                   { icon: Building2, stat: "47%", label: "Focus increase", desc: "Measured across enterprise clients" },
                   { icon: Users, stat: "63%", label: "Burnout reduction", desc: "Within 90 days of implementation" },
@@ -276,12 +275,12 @@ const Index = () => {
                 ].map((item, i) => (
                   <div 
                     key={i}
-                    className="relative p-8 rounded-3xl bg-gradient-to-br from-ivory/5 to-transparent border border-ivory/10 backdrop-blur-sm"
+                    className="relative p-12 bg-gradient-to-b from-white/[0.02] to-transparent hover:from-[#7877C6]/10 hover:to-transparent transition-all duration-700"
                   >
-                    <item.icon className="w-8 h-8 text-accent mb-6" />
-                    <p className="text-5xl font-light text-ivory mb-2">{item.stat}</p>
-                    <p className="text-lg text-ivory mb-2">{item.label}</p>
-                    <p className="text-sm text-stone">{item.desc}</p>
+                    <item.icon className="w-8 h-8 text-[#7877C6] opacity-60 mb-8" />
+                    <p className="text-6xl font-light text-white/90 mb-3">{item.stat}</p>
+                    <p className="text-lg text-white/80 mb-2">{item.label}</p>
+                    <p className="text-sm text-white/50">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -289,7 +288,7 @@ const Index = () => {
               <div className="text-center">
                 <Button 
                   size="lg"
-                  className="bg-accent text-carbon hover:bg-accent/90 text-base px-8 py-6 rounded-full group"
+                  className="bg-white text-black hover:bg-white/90 text-base px-10 py-7 rounded-full group transition-all duration-300"
                 >
                   Explore Partner Portal
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -299,32 +298,32 @@ const Index = () => {
           </section>
 
           {/* For Individuals */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-gradient-to-b from-slate to-carbon">
+          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-[#0A0A0A]">
             <div className="max-w-7xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-16">
-                <div className="space-y-8">
+              <div className="grid lg:grid-cols-2 gap-20">
+                <div className="space-y-10">
                   <div className="space-y-6">
-                    <p className="text-accent text-xs tracking-[0.2em] uppercase font-medium">Direct to Consumer</p>
-                    <h2 className="text-5xl md:text-6xl font-light text-ivory leading-tight">
+                    <p className="text-[#7877C6] text-xs tracking-[0.3em] uppercase font-medium">Direct to Consumer</p>
+                    <h2 className="text-5xl md:text-7xl font-light text-white/95 leading-[1.1]">
                       Optimise
                       <br />
-                      <span className="font-normal">yourself</span>
+                      <span className="font-normal bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">yourself</span>
                     </h2>
-                    <p className="text-xl text-stone leading-relaxed">
+                    <p className="text-xl text-white/60 leading-relaxed max-w-xl">
                       Premium supplements, evidence-based protocols, and personalised 
                       performance stacks designed by neuroscientists.
                     </p>
                   </div>
                   <Button 
                     size="lg"
-                    className="bg-ivory text-carbon hover:bg-pearl text-base px-8 py-6 rounded-full group"
+                    className="bg-white text-black hover:bg-white/90 text-base px-10 py-7 rounded-full group transition-all duration-300"
                   >
                     Shop Products
                     <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </div>
 
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-2 gap-1">
                   {[
                     { title: "Supplements", count: "40+", desc: "Precision compounds" },
                     { title: "Protocols", count: "12", desc: "Expert-designed stacks" },
@@ -333,11 +332,11 @@ const Index = () => {
                   ].map((item, i) => (
                     <div 
                       key={i}
-                      className="p-6 rounded-3xl bg-gradient-to-br from-ivory/5 to-transparent border border-ivory/10 backdrop-blur-sm"
+                      className="p-10 bg-gradient-to-b from-white/[0.02] to-transparent hover:from-[#7877C6]/10 hover:to-transparent transition-all duration-700"
                     >
-                      <p className="text-4xl font-light text-ivory mb-2">{item.count}</p>
-                      <p className="text-lg text-ivory mb-1">{item.title}</p>
-                      <p className="text-sm text-stone">{item.desc}</p>
+                      <p className="text-5xl font-light text-white/90 mb-3">{item.count}</p>
+                      <p className="text-lg text-white/80 mb-1">{item.title}</p>
+                      <p className="text-sm text-white/50">{item.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -346,33 +345,33 @@ const Index = () => {
           </section>
 
           {/* Science Section */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-carbon">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,255,0,0.03),transparent_50%)]" />
+          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-gradient-to-b from-[#0A0A0A] via-[#0F0F0F] to-[#0A0A0A]">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(120,119,198,0.08),transparent_70%)]" />
             
             <div className="relative z-10 max-w-7xl mx-auto text-center">
-              <div className="mb-16 space-y-6">
-                <p className="text-accent text-xs tracking-[0.2em] uppercase font-medium">Evidence-Based</p>
-                <h2 className="text-5xl md:text-6xl font-light text-ivory leading-tight max-w-3xl mx-auto">
+              <div className="mb-20 space-y-8">
+                <p className="text-[#7877C6] text-xs tracking-[0.3em] uppercase font-medium">Evidence-Based</p>
+                <h2 className="text-5xl md:text-7xl font-light text-white/95 leading-[1.1] max-w-4xl mx-auto">
                   Rooted in
                   <br />
-                  <span className="font-normal">neuroscience</span>
+                  <span className="font-normal bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">neuroscience</span>
                 </h2>
-                <p className="text-xl text-stone max-w-2xl mx-auto leading-relaxed">
+                <p className="text-xl text-white/60 max-w-3xl mx-auto leading-relaxed">
                   Every product, protocol, and recommendation is backed by peer-reviewed research 
                   in neuromodulation, photobiomodulation, and cognitive enhancement.
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-8">
+              <div className="grid md:grid-cols-3 gap-16">
                 {[
                   { number: "200+", label: "Research papers", desc: "Reviewed and validated" },
                   { number: "15", label: "Neuroscientists", desc: "On advisory board" },
                   { number: "50k+", label: "Data points", desc: "Analysed daily" },
                 ].map((item, i) => (
                   <div key={i} className="space-y-4">
-                    <p className="text-6xl font-light text-accent">{item.number}</p>
-                    <p className="text-xl text-ivory">{item.label}</p>
-                    <p className="text-stone">{item.desc}</p>
+                    <p className="text-7xl font-light text-[#7877C6]">{item.number}</p>
+                    <p className="text-xl text-white/90">{item.label}</p>
+                    <p className="text-white/50">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -380,23 +379,23 @@ const Index = () => {
           </section>
 
           {/* Community & Challenges */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-gradient-to-b from-slate to-carbon">
+          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-[#0A0A0A]">
             <div className="max-w-7xl mx-auto text-center">
-              <div className="mb-16 space-y-6">
-                <p className="text-accent text-xs tracking-[0.2em] uppercase font-medium">Join the Movement</p>
-                <h2 className="text-5xl md:text-6xl font-light text-ivory leading-tight">
+              <div className="mb-16 space-y-8">
+                <p className="text-[#7877C6] text-xs tracking-[0.3em] uppercase font-medium">Join the Movement</p>
+                <h2 className="text-5xl md:text-7xl font-light text-white/95 leading-[1.1]">
                   Performance
                   <br />
-                  <span className="font-normal">community</span>
+                  <span className="font-normal bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">community</span>
                 </h2>
-                <p className="text-xl text-stone max-w-2xl mx-auto leading-relaxed">
+                <p className="text-xl text-white/60 max-w-3xl mx-auto leading-relaxed">
                   Connect with high performers, participate in optimisation challenges, 
                   and share your journey to cognitive peak.
                 </p>
               </div>
               <Button 
                 size="lg"
-                className="bg-ivory text-carbon hover:bg-pearl text-base px-8 py-6 rounded-full group"
+                className="bg-white text-black hover:bg-white/90 text-base px-10 py-7 rounded-full group transition-all duration-300"
               >
                 Join Community
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -405,18 +404,18 @@ const Index = () => {
           </section>
 
           {/* Final CTA */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-carbon border-t border-ivory/10">
-            <div className="max-w-4xl mx-auto text-center space-y-8">
-              <h2 className="text-5xl md:text-6xl font-light text-ivory leading-tight">
+          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-gradient-to-b from-[#0A0A0A] via-[#0F0F0F] to-[#0A0A0A] border-t border-white/5">
+            <div className="max-w-4xl mx-auto text-center space-y-10">
+              <h2 className="text-5xl md:text-7xl font-light text-white/95 leading-[1.1]">
                 Ready to optimise?
               </h2>
-              <p className="text-xl text-stone leading-relaxed">
+              <p className="text-xl text-white/60 leading-relaxed">
                 Start your journey to cognitive peak performance today.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
                 <Button 
                   size="lg"
-                  className="bg-accent text-carbon hover:bg-accent/90 text-base px-8 py-6 rounded-full group"
+                  className="bg-white text-black hover:bg-white/90 text-base px-10 py-7 rounded-full group transition-all duration-300"
                 >
                   Get Started
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -424,7 +423,7 @@ const Index = () => {
                 <Button 
                   variant="outline"
                   size="lg"
-                  className="border-ivory/20 text-ivory hover:bg-ivory/10 text-base px-8 py-6 rounded-full backdrop-blur-sm"
+                  className="border-white/10 text-white/90 hover:bg-white/5 text-base px-10 py-7 rounded-full backdrop-blur-sm transition-all duration-300"
                 >
                   Book a Demo
                 </Button>
