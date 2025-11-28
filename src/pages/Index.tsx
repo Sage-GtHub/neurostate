@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { LiveChat } from "@/components/LiveChat";
 import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Brain, Lightbulb, Zap, Users, Building2, FlaskConical, Award } from "lucide-react";
 import novaIcon from "@/assets/neurostate-icon.svg";
@@ -15,6 +16,17 @@ import heroSupplement from "@/assets/hero-supplement.png";
 const Index = () => {
   const isMobile = useIsMobile();
   const [chatOpen, setChatOpen] = useState(false);
+  
+  // Scroll animations for each section
+  const systemSection = useScrollAnimation();
+  const novaSection = useScrollAnimation();
+  const redLightSection = useScrollAnimation();
+  const supplementsSection = useScrollAnimation();
+  const businessSection = useScrollAnimation();
+  const individualsSection = useScrollAnimation();
+  const scienceSection = useScrollAnimation();
+  const communitySection = useScrollAnimation();
+  const ctaSection = useScrollAnimation();
 
   return (
     <>
@@ -26,7 +38,12 @@ const Index = () => {
           <Hero />
 
           {/* The NeuroState System */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl overflow-hidden">
+          <section 
+            ref={systemSection.ref}
+            className={`relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl overflow-hidden transition-all duration-1000 ${
+              systemSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             
             <div className="relative z-10 max-w-7xl mx-auto">
               <div className="text-center mb-24 space-y-8">
@@ -61,7 +78,12 @@ const Index = () => {
           </section>
 
           {/* Nova AI Section */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-white">
+          <section 
+            ref={novaSection.ref}
+            className={`relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-white transition-all duration-1000 ${
+              novaSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             <div className="max-w-7xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-20 items-center">
                 <div className="space-y-10">
@@ -145,7 +167,12 @@ const Index = () => {
           </section>
 
           {/* Red Light Device Section */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl">
+          <section 
+            ref={redLightSection.ref}
+            className={`relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl transition-all duration-1000 ${
+              redLightSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             
             <div className="relative z-10 max-w-7xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-20 items-center">
@@ -199,7 +226,12 @@ const Index = () => {
           </section>
 
           {/* Supplements Section */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-white">
+          <section 
+            ref={supplementsSection.ref}
+            className={`relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-white transition-all duration-1000 ${
+              supplementsSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             
             <div className="relative z-10 max-w-7xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-20 items-center">
@@ -251,7 +283,12 @@ const Index = () => {
           </section>
 
           {/* For Businesses */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl">
+          <section 
+            ref={businessSection.ref}
+            className={`relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl transition-all duration-1000 ${
+              businessSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-20 space-y-8">
                 <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Enterprise Solutions</p>
@@ -293,7 +330,12 @@ const Index = () => {
           </section>
 
           {/* For Individuals */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-white">
+          <section 
+            ref={individualsSection.ref}
+            className={`relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-white transition-all duration-1000 ${
+              individualsSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             <div className="max-w-7xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-20">
                 <div className="space-y-10">
@@ -340,7 +382,12 @@ const Index = () => {
           </section>
 
           {/* Science Section */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl">
+          <section 
+            ref={scienceSection.ref}
+            className={`relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl transition-all duration-1000 ${
+              scienceSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             
             <div className="relative z-10 max-w-7xl mx-auto text-center">
               <div className="mb-20 space-y-8">
@@ -373,7 +420,12 @@ const Index = () => {
           </section>
 
           {/* Community & Challenges */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-white">
+          <section 
+            ref={communitySection.ref}
+            className={`relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-white transition-all duration-1000 ${
+              communitySection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             <div className="max-w-7xl mx-auto text-center">
               <div className="mb-16 space-y-8">
                 <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Join the Movement</p>
@@ -398,7 +450,12 @@ const Index = () => {
           </section>
 
           {/* Final CTA */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl border-t border-mist">
+          <section 
+            ref={ctaSection.ref}
+            className={`relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl border-t border-mist transition-all duration-1000 ${
+              ctaSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             <div className="max-w-4xl mx-auto text-center space-y-10">
               <h2 className="text-5xl md:text-7xl font-light text-carbon leading-[1.1]">
                 Ready to optimise?
