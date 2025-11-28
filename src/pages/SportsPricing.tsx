@@ -89,9 +89,9 @@ export default function SportsPricing() {
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center max-w-4xl mx-auto mb-16">
               <h1 className="text-hero-display font-bold mb-6">
-                Performance Pricing Calculator
+                Performance Pricing
               </h1>
-              <p className="text-body-large text-pearl max-w-3xl mx-auto">
+              <p className="text-body-large text-pearl max-w-3xl mx-auto font-light">
                 Transparent, scalable pricing based on squad size. Built for elite athletes with performance-focused bundles and team discounts.
               </p>
             </div>

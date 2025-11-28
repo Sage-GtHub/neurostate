@@ -10,8 +10,11 @@ import { Download, CheckCircle2, TrendingUp, Users, Shield, Target, FileText, La
 import { HealthClubsROICalculator } from "@/components/HealthClubsROICalculator";
 import { HealthClubsComparisonTable } from "@/components/HealthClubsComparisonTable";
 import { CustomerSuccessMetrics } from "@/components/CustomerSuccessMetrics";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export default function HealthClubsOverview() {
+  const { ref: roiRef, isVisible: roiVisible } = useScrollAnimation({ threshold: 0.2 });
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -46,10 +49,10 @@ export default function HealthClubsOverview() {
                 <span className="text-accent font-semibold text-sm uppercase tracking-wider">Member Wellness · Gyms · Yoga Studios · Private Members Clubs</span>
               </div>
               <h1 className="text-hero-display font-bold mb-6 bg-gradient-to-r from-ivory via-pearl to-ivory bg-clip-text text-transparent">
-                Elevate Member Experience
+                Level Up Your Member Experience
               </h1>
-              <p className="text-body-large text-pearl/90 max-w-3xl mx-auto leading-relaxed">
-                Partner with NeuroState to deliver premium wellness optimization to gyms, yoga studios, private members clubs, and boutique fitness facilities. Increase retention, boost revenue, elevate member satisfaction.
+              <p className="text-body-large text-pearl/90 max-w-3xl mx-auto leading-relaxed font-light">
+                Give gyms, studios, and private clubs premium wellness tools. Increase retention, boost revenue, keep members happy.
               </p>
             </div>
 
@@ -87,14 +90,14 @@ export default function HealthClubsOverview() {
         </section>
 
         {/* ROI Calculator */}
-        <section className="py-20 bg-ivory">
+        <section ref={roiRef} className={`py-20 bg-ivory transition-all duration-1000 ${roiVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center mb-12">
               <h2 className="text-large-display font-bold mb-4 text-carbon">
-                Member Retention & Revenue Calculator
+                Member Retention & Revenue Impact
               </h2>
-              <p className="text-body text-stone max-w-2xl mx-auto">
-                Calculate the retention and revenue impact NeuroState delivers. Based on member count, lifetime value, and churn reduction.
+              <p className="text-body text-stone font-light max-w-2xl mx-auto">
+                Work out the retention and revenue boost NeuroState brings. Based on member count, lifetime value, and churn reduction.
               </p>
             </div>
 

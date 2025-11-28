@@ -89,10 +89,10 @@ export default function HealthClubsPricing() {
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center max-w-4xl mx-auto mb-16">
               <h1 className="text-hero-display font-bold mb-6">
-                Facility Pricing Calculator
+                Facility Pricing
               </h1>
-              <p className="text-body-large text-pearl max-w-3xl mx-auto">
-                Transparent, scalable pricing based on member count. Designed for gyms, studios, and private clubs with retention-focused benefits.
+              <p className="text-body-large text-pearl max-w-3xl mx-auto font-light">
+                Transparent, scalable pricing based on member count. Built for gyms, studios, and private clubs with retention-focused perks.
               </p>
             </div>
 

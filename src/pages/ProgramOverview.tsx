@@ -10,8 +10,12 @@ import { Download, CheckCircle2, TrendingUp, Users, Shield, Target, FileText, La
 import { CorporateROICalculator } from "@/components/CorporateROICalculator";
 import { CorporateComparisonTable } from "@/components/CorporateComparisonTable";
 import { CustomerSuccessMetrics } from "@/components/CustomerSuccessMetrics";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export default function ProgramOverview() {
+  const { ref: roiRef, isVisible: roiVisible } = useScrollAnimation({ threshold: 0.2 });
+  const { ref: benefitsRef, isVisible: benefitsVisible } = useScrollAnimation({ threshold: 0.2 });
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -46,10 +50,10 @@ export default function ProgramOverview() {
                 <span className="text-accent font-semibold text-sm uppercase tracking-wider">Enterprise Wellness</span>
               </div>
               <h1 className="text-hero-display font-bold mb-6 bg-gradient-to-r from-ivory via-pearl to-ivory bg-clip-text text-transparent">
-                Elevate Your Workforce Performance
+                Transform Your Team's Performance
               </h1>
-              <p className="text-body-large text-pearl/90 max-w-3xl mx-auto leading-relaxed">
-                Partner with NeuroState to deliver premium cognitive enhancement, recovery protocols, and AI-powered wellness optimization directly to your team.
+              <p className="text-body-large text-pearl/90 max-w-3xl mx-auto leading-relaxed font-light">
+                Give your team premium cognitive tools, recovery protocols, and AI-powered wellness. Cut burnout, boost productivity.
               </p>
             </div>
 
@@ -87,14 +91,14 @@ export default function ProgramOverview() {
         </section>
 
         {/* ROI Calculator */}
-        <section className="py-20 bg-ivory">
+        <section ref={roiRef} className={`py-20 bg-ivory transition-all duration-1000 ${roiVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center mb-12">
               <h2 className="text-large-display font-bold mb-4 text-carbon">
-                Calculate Your ROI
+                Work Out Your ROI
               </h2>
-              <p className="text-body text-stone max-w-2xl mx-auto">
-                See the financial impact NeuroState can have on your organisation. Choose your industry and adjust inputs to match your company profile.
+              <p className="text-body text-stone font-light max-w-2xl mx-auto">
+                See what NeuroState does for your numbers. Pick your industry and adjust the sliders to match your team.
               </p>
             </div>
 
@@ -251,11 +255,11 @@ export default function ProgramOverview() {
         </section>
 
         {/* Benefits Section */}
-        <section className="py-20 bg-ivory">
+        <section ref={benefitsRef} className={`py-20 bg-ivory transition-all duration-1000 ${benefitsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center mb-16">
               <h2 className="text-large-display font-bold mb-4 text-carbon">
-                Benefits for Your Organisation
+                What You Get
               </h2>
             </div>
 
