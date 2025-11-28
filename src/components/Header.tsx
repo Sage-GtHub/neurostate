@@ -82,12 +82,12 @@ export const Header = () => {
   };
 
   const shopCategories = [
-    { label: "All Products", href: "/", icon: Package },
-    { label: "Supplements", href: "/categories/supplements", icon: Droplets },
-    { label: "Recovery Devices", href: "/categories/recovery", icon: Activity },
-    { label: "Sleep Support", href: "/categories/sleep", icon: Moon },
-    { label: "Cognitive Enhancement", href: "/categories/cognitive", icon: Brain },
-    { label: "Performance", href: "/categories/performance", icon: Zap },
+    { label: "All Products", href: "/shop", icon: Package },
+    { label: "Supplements", href: "/category/supplements", icon: Droplets },
+    { label: "Recovery Devices", href: "/category/devices", icon: Activity },
+    { label: "Sleep Support", href: "/category/sleep", icon: Moon },
+    { label: "Cognitive Enhancement", href: "/category/cognitive", icon: Brain },
+    { label: "Performance", href: "/category/performance", icon: Zap },
   ];
 
   const guideTopics = [
