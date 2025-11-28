@@ -12,32 +12,32 @@ const categoryConfig = {
   supplements: {
     title: "Supplements",
     description: "Premium, science-backed supplements for peak performance, recovery, and cognitive enhancement.",
-    tags: ["supplement", "vitamin", "mineral", "nootropic", "adaptogen", "omega", "collagen", "protein", "magnesium", "ashwagandha", "rhodiola", "lions mane", "melatonin", "l-theanine", "valerian", "creatine", "electrolyte"]
+    tags: ["supplement", "adaptogen", "stress", "recovery", "cognitive", "focus", "sleep", "performance", "protein", "collagen", "mineral", "trace", "electrolyte", "creatine", "magnesium", "omega", "marine", "whey", "ashwagandha", "rhodiola", "lion", "melatonin", "theanine", "valerian"]
   },
   devices: {
     title: "Recovery Devices",
     description: "Clinical-grade recovery and wellness devices using cutting-edge technology.",
-    tags: ["device", "red light", "therapy", "ice bath", "cold plunge", "sauna", "infrared", "PEMF", "blanket", "mask", "panel"]
+    tags: ["device", "technology", "red-light", "LED", "therapy", "light therapy", "recovery technology", "ice bath", "cold", "plunge", "sauna", "infrared", "PEMF", "blanket", "mask", "panel", "face", "cryo", "mini", "pro"]
   },
   recovery: {
     title: "Recovery",
     description: "Advanced red light therapy and recovery devices for optimal muscle repair and wellness.",
-    tags: ["recovery", "red light therapy", "ice bath", "cold plunge", "sauna", "infrared", "PEMF"]
+    tags: ["recovery", "red-light", "LED", "therapy", "light", "ice bath", "cold plunge", "sauna", "infrared", "PEMF", "restore", "cryo"]
   },
   sleep: {
     title: "Sleep",
     description: "Sleep aid technologies and products designed to enhance sleep quality and restoration.",
-    tags: ["sleep", "rest", "reishi", "magnesium", "melatonin"]
+    tags: ["sleep", "rest", "night", "melatonin", "valerian", "magnesium", "restore"]
   },
   cognitive: {
     title: "Cognitive Performance",
     description: "Science-backed supplements and nootropics for enhanced focus, memory, and mental clarity.",
-    tags: ["nootropic", "cognitive", "focus", "brain health", "mental clarity", "memory"]
+    tags: ["cognitive", "focus", "neuro", "brain", "mental", "clarity", "memory", "lion", "theanine", "adaptogen"]
   },
   performance: {
     title: "Performance",
     description: "Enhance athletic performance and endurance with cutting-edge supplements and recovery tools.",
-    tags: ["performance", "athletic", "endurance", "energy", "pre-workout", "recovery"]
+    tags: ["performance", "athletic", "endurance", "energy", "creatine", "protein", "electrolyte", "recovery", "omega"]
   }
 };
 
