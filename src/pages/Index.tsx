@@ -8,6 +8,8 @@ import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Brain, Lightbulb, Zap, Users, Building2, FlaskConical, Award } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import novaIcon from "@/assets/neurostate-icon.svg";
 import redlightDevice from "@/assets/redlight.webp";
 import heroSupplement from "@/assets/hero-supplement.png";
@@ -15,6 +17,16 @@ import heroSupplement from "@/assets/hero-supplement.png";
 const Index = () => {
   const isMobile = useIsMobile();
   const [chatOpen, setChatOpen] = useState(false);
+  
+  const system = useScrollAnimation();
+  const nova = useScrollAnimation();
+  const device = useScrollAnimation();
+  const supplements = useScrollAnimation();
+  const business = useScrollAnimation();
+  const individuals = useScrollAnimation();
+  const science = useScrollAnimation();
+  const community = useScrollAnimation();
+  const cta = useScrollAnimation();
 
   return (
     <>
@@ -26,15 +38,15 @@ const Index = () => {
           <Hero />
 
           {/* The NeuroState System */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl overflow-hidden">
+          <section ref={system.ref} className={`relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl overflow-hidden transition-all duration-1000 ${system.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             
             <div className="relative z-10 max-w-7xl mx-auto">
               <div className="text-center mb-24 space-y-8">
                 <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">The Complete System</p>
                 <h2 className="text-5xl md:text-7xl font-light text-carbon leading-[1.1]">
-                  Four pillars of
+                  Everything you need for
                   <br />
-                  <span className="font-normal">cognitive performance</span>
+                  <span className="font-normal">peak performance</span>
                 </h2>
               </div>
 
@@ -61,7 +73,7 @@ const Index = () => {
           </section>
 
           {/* Nova AI Section */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-white">
+          <section ref={nova.ref} className={`relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-white transition-all duration-1000 ${nova.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="max-w-7xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-20 items-center">
                 <div className="space-y-10">
@@ -72,34 +84,35 @@ const Index = () => {
                     <h2 className="text-5xl md:text-7xl font-light text-carbon leading-[1.1]">
                       Nova AI
                       <br />
-                      <span className="font-normal text-accent">Your cognitive copilot</span>
+                      <span className="font-normal text-accent">Your AI performance coach</span>
                     </h2>
                     <p className="text-xl text-ash leading-relaxed max-w-xl">
-                      Autonomous performance optimisation powered by continuous biometric analysis, 
-                      predictive insights, and adaptive protocol generation.
+                      Tracks your biometrics, spots patterns, and tells you exactly what your body needs right now—whether it's more sleep, a different supplement stack, or a rest day.
                     </p>
                   </div>
                   <div className="space-y-5">
                     <div className="flex items-start gap-4">
                       <div className="w-1 h-1 rounded-full bg-accent mt-3" />
-                      <p className="text-ash leading-relaxed">Real-time HRV, sleep, and recovery tracking</p>
+                      <p className="text-ash leading-relaxed">Live tracking of HRV, sleep quality, and recovery</p>
                     </div>
                     <div className="flex items-start gap-4">
                       <div className="w-1 h-1 rounded-full bg-accent mt-3" />
-                      <p className="text-ash leading-relaxed">Predictive pattern recognition and early intervention</p>
+                      <p className="text-ash leading-relaxed">Knows when you're about to burn out before you do</p>
                     </div>
                     <div className="flex items-start gap-4">
                       <div className="w-1 h-1 rounded-full bg-accent mt-3" />
-                      <p className="text-ash leading-relaxed">Voice-enabled coaching and protocol optimisation</p>
+                      <p className="text-ash leading-relaxed">Talks to you like a real coach—with voice</p>
                     </div>
                   </div>
-                  <Button 
-                    size="lg"
-                    className="bg-carbon text-white hover:bg-slate text-base px-10 py-7 rounded-full group transition-all duration-300"
-                  >
-                    Experience Nova
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                  <Link to="/nova">
+                    <Button 
+                      size="lg"
+                      className="bg-carbon text-white hover:bg-slate text-base px-10 py-7 rounded-full group transition-all duration-300"
+                    >
+                      Try Nova
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
                 </div>
 
                 {/* Nova UI Mockup */}
@@ -145,7 +158,7 @@ const Index = () => {
           </section>
 
           {/* Red Light Device Section */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl">
+          <section ref={device.ref} className={`relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl transition-all duration-1000 ${device.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             
             <div className="relative z-10 max-w-7xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-20 items-center">
@@ -165,77 +178,79 @@ const Index = () => {
                     <h2 className="text-5xl md:text-7xl font-light text-carbon leading-[1.1]">
                       Red light
                       <br />
-                      <span className="font-normal text-red-500">therapy devices</span>
+                      <span className="font-normal text-red-500">therapy that works</span>
                     </h2>
                     <p className="text-xl text-ash leading-relaxed max-w-xl">
-                      Clinical-grade photobiomodulation technology. Enhance mitochondrial function, 
-                      accelerate recovery, and optimise cellular energy production.
+                      Proper red light therapy using the right wavelengths. Speeds up recovery, boosts your cells' energy, and helps your brain work better.
                     </p>
                   </div>
                   <div className="space-y-5">
                     <div className="flex items-start gap-4">
                       <div className="w-1 h-1 rounded-full bg-red-500 mt-3" />
-                      <p className="text-ash leading-relaxed">660nm & 850nm therapeutic wavelengths</p>
+                      <p className="text-ash leading-relaxed">660nm and 850nm wavelengths (the ones backed by research)</p>
                     </div>
                     <div className="flex items-start gap-4">
                       <div className="w-1 h-1 rounded-full bg-red-500 mt-3" />
-                      <p className="text-ash leading-relaxed">Clinically proven dosing protocols</p>
+                      <p className="text-ash leading-relaxed">Clinically proven protocols—not guesswork</p>
                     </div>
                     <div className="flex items-start gap-4">
                       <div className="w-1 h-1 rounded-full bg-red-500 mt-3" />
-                      <p className="text-ash leading-relaxed">Full-body and targeted treatment options</p>
+                      <p className="text-ash leading-relaxed">Full-body panels or targeted devices</p>
                     </div>
                   </div>
-                  <Button 
-                    size="lg"
-                    className="bg-carbon text-white hover:bg-slate text-base px-10 py-7 rounded-full group transition-all duration-300"
-                  >
-                    Explore Devices
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                  <Link to="/categories/devices">
+                    <Button 
+                      size="lg"
+                      className="bg-carbon text-white hover:bg-slate text-base px-10 py-7 rounded-full group transition-all duration-300"
+                    >
+                      See Devices
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
           </section>
 
           {/* Supplements Section */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-white">
+          <section ref={supplements.ref} className={`relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-white transition-all duration-1000 ${supplements.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             
             <div className="relative z-10 max-w-7xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-20 items-center">
                 <div className="space-y-10">
                   <div className="space-y-6">
                     <h2 className="text-5xl md:text-7xl font-light text-carbon leading-[1.1]">
-                      Performance
+                      Supplements
                       <br />
-                      <span className="font-normal text-accent">supplements</span>
+                      <span className="font-normal text-accent">that actually work</span>
                     </h2>
                     <p className="text-xl text-ash leading-relaxed max-w-xl">
-                      Science-backed compounds engineered for cognitive enhancement. 
-                      Each formulation designed by neuroscientists for measurable performance gains.
+                      No marketing hype. No dodgy ingredients. Just properly dosed supplements backed by real research—designed to help you sleep better, focus longer, and recover faster.
                     </p>
                   </div>
                   <div className="space-y-5">
                     <div className="flex items-start gap-4">
                       <div className="w-1 h-1 rounded-full bg-accent mt-3" />
-                      <p className="text-ash leading-relaxed">Third-party tested for purity and potency</p>
+                      <p className="text-ash leading-relaxed">Third-party tested—we show you the results</p>
                     </div>
                     <div className="flex items-start gap-4">
                       <div className="w-1 h-1 rounded-full bg-accent mt-3" />
-                      <p className="text-ash leading-relaxed">Evidence-based dosing protocols</p>
+                      <p className="text-ash leading-relaxed">Doses based on actual studies, not guesswork</p>
                     </div>
                     <div className="flex items-start gap-4">
                       <div className="w-1 h-1 rounded-full bg-accent mt-3" />
-                      <p className="text-ash leading-relaxed">Transparent ingredient sourcing</p>
+                      <p className="text-ash leading-relaxed">Transparent about where everything comes from</p>
                     </div>
                   </div>
-                  <Button 
-                    size="lg"
-                    className="bg-carbon text-white hover:bg-slate text-base px-10 py-7 rounded-full group transition-all duration-300"
-                  >
-                    Shop Supplements
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                  <Link to="/categories/supplements">
+                    <Button 
+                      size="lg"
+                      className="bg-carbon text-white hover:bg-slate text-base px-10 py-7 rounded-full group transition-all duration-300"
+                    >
+                      Browse Supplements
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
                 </div>
 
                 {/* Supplement Hero Image */}
@@ -251,14 +266,14 @@ const Index = () => {
           </section>
 
           {/* For Businesses */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl">
+          <section ref={business.ref} className={`relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl transition-all duration-1000 ${business.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-20 space-y-8">
-                <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Enterprise Solutions</p>
+                <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">For Teams</p>
                 <h2 className="text-5xl md:text-7xl font-light text-carbon leading-[1.1]">
-                  Built for
+                  Keep your team
                   <br />
-                  <span className="font-normal">high-performance teams</span>
+                  <span className="font-normal">sharp and healthy</span>
                 </h2>
               </div>
 
@@ -281,41 +296,44 @@ const Index = () => {
               </div>
 
               <div className="text-center">
-                <Button 
-                  size="lg"
-                  className="bg-carbon text-white hover:bg-slate text-base px-10 py-7 rounded-full group transition-all duration-300"
-                >
-                  Explore Partner Portal
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                <Link to="/enterprise/corporate/overview">
+                  <Button 
+                    size="lg"
+                    className="bg-carbon text-white hover:bg-slate text-base px-10 py-7 rounded-full group transition-all duration-300"
+                  >
+                    See Partner Portal
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </section>
 
           {/* For Individuals */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-white">
+          <section ref={individuals.ref} className={`relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-white transition-all duration-1000 ${individuals.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="max-w-7xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-20">
                 <div className="space-y-10">
                   <div className="space-y-6">
-                    <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Direct to Consumer</p>
+                    <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">For You</p>
                     <h2 className="text-5xl md:text-7xl font-light text-carbon leading-[1.1]">
-                      Optimise
+                      Upgrade
                       <br />
-                      <span className="font-normal">yourself</span>
+                      <span className="font-normal">your performance</span>
                     </h2>
                     <p className="text-xl text-ash leading-relaxed max-w-xl">
-                      Premium supplements, evidence-based protocols, and personalised 
-                      performance stacks designed by neuroscientists.
+                      Top-quality supplements and recovery devices. Everything you need to feel sharper, sleep better, and recover faster.
                     </p>
                   </div>
-                  <Button 
-                    size="lg"
-                    className="bg-carbon text-white hover:bg-slate text-base px-10 py-7 rounded-full group transition-all duration-300"
-                  >
-                    Shop Products
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                  <Link to="/categories/supplements">
+                    <Button 
+                      size="lg"
+                      className="bg-carbon text-white hover:bg-slate text-base px-10 py-7 rounded-full group transition-all duration-300"
+                    >
+                      Shop Now
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
                 </div>
 
                 <div className="grid grid-cols-2 gap-1">
@@ -340,18 +358,18 @@ const Index = () => {
           </section>
 
           {/* Science Section */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl">
+          <section ref={science.ref} className={`relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl transition-all duration-1000 ${science.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             
             <div className="relative z-10 max-w-7xl mx-auto text-center">
               <div className="mb-20 space-y-8">
-                <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Evidence-Based</p>
+                <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Science-Backed</p>
                 <h2 className="text-5xl md:text-7xl font-light text-carbon leading-[1.1] max-w-4xl mx-auto">
-                  Rooted in
+                  Backed by
                   <br />
-                  <span className="font-normal">neuroscience</span>
+                  <span className="font-normal">real research</span>
                 </h2>
                 <p className="text-xl text-ash max-w-3xl mx-auto leading-relaxed">
-                  Every product, protocol, and recommendation is backed by peer-reviewed research 
+                  Everything we make is based on actual peer-reviewed studies—not wellness trends or marketing hype
                   in neuromodulation, photobiomodulation, and cognitive enhancement.
                 </p>
               </div>
@@ -373,54 +391,59 @@ const Index = () => {
           </section>
 
           {/* Community & Challenges */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-white">
+          <section ref={community.ref} className={`relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-white transition-all duration-1000 ${community.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="max-w-7xl mx-auto text-center">
               <div className="mb-16 space-y-8">
-                <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Join the Movement</p>
+                <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Community</p>
                 <h2 className="text-5xl md:text-7xl font-light text-carbon leading-[1.1]">
-                  Performance
+                  Join other
                   <br />
-                  <span className="font-normal">community</span>
+                  <span className="font-normal">high performers</span>
                 </h2>
                 <p className="text-xl text-ash max-w-3xl mx-auto leading-relaxed">
-                  Connect with high performers, participate in optimisation challenges, 
-                  and share your journey to cognitive peak.
+                  Connect with people optimising their performance, share what's working, and learn from others doing the same thing.
                 </p>
               </div>
-              <Button 
-                size="lg"
-                className="bg-carbon text-white hover:bg-slate text-base px-10 py-7 rounded-full group transition-all duration-300"
-              >
-                Join Community
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </div>
-          </section>
-
-          {/* Final CTA */}
-          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl border-t border-mist">
-            <div className="max-w-4xl mx-auto text-center space-y-10">
-              <h2 className="text-5xl md:text-7xl font-light text-carbon leading-[1.1]">
-                Ready to optimise?
-              </h2>
-              <p className="text-xl text-ash leading-relaxed">
-                Start your journey to cognitive peak performance today.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+              <a href="https://discord.gg/neurostate" target="_blank" rel="noopener noreferrer">
                 <Button 
                   size="lg"
                   className="bg-carbon text-white hover:bg-slate text-base px-10 py-7 rounded-full group transition-all duration-300"
                 >
-                  Get Started
+                  Join Community
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                <Button 
-                  variant="outline"
-                  size="lg"
-                  className="border-carbon/20 text-carbon hover:bg-carbon/5 text-base px-10 py-7 rounded-full transition-all duration-300"
-                >
-                  Book a Demo
-                </Button>
+              </a>
+            </div>
+          </section>
+
+          {/* Final CTA */}
+          <section ref={cta.ref} className={`relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl border-t border-mist transition-all duration-1000 ${cta.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="max-w-4xl mx-auto text-center space-y-10">
+              <h2 className="text-5xl md:text-7xl font-light text-carbon leading-[1.1]">
+                Ready to level up?
+              </h2>
+              <p className="text-xl text-ash leading-relaxed">
+                Start feeling sharper, sleeping better, and performing at your best.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+                <Link to="/categories/supplements">
+                  <Button 
+                    size="lg"
+                    className="bg-carbon text-white hover:bg-slate text-base px-10 py-7 rounded-full group transition-all duration-300"
+                  >
+                    Shop Now
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+                <Link to="/nova">
+                  <Button 
+                    variant="outline"
+                    size="lg"
+                    className="border-carbon/20 text-carbon hover:bg-carbon/5 text-base px-10 py-7 rounded-full transition-all duration-300"
+                  >
+                    Try Nova AI
+                  </Button>
+                </Link>
               </div>
             </div>
           </section>
