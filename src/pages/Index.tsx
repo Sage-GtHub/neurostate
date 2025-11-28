@@ -201,6 +201,73 @@ const Index = () => {
             </div>
           </section>
 
+          {/* Supplements Section */}
+          <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-gradient-to-b from-carbon to-slate">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(0,255,0,0.03),transparent_50%)]" />
+            
+            <div className="relative z-10 max-w-7xl mx-auto">
+              <div className="grid lg:grid-cols-2 gap-16 items-center">
+                <div className="space-y-8">
+                  <div className="space-y-6">
+                    <h2 className="text-5xl md:text-6xl font-light text-ivory leading-tight">
+                      Precision
+                      <br />
+                      <span className="font-normal text-accent">neuromodulation</span>
+                    </h2>
+                    <p className="text-xl text-stone leading-relaxed">
+                      Science-backed compounds engineered for cognitive enhancement. 
+                      Each formulation designed by neuroscientists for measurable performance gains.
+                    </p>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2" />
+                      <p className="text-stone">Third-party tested for purity and potency</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2" />
+                      <p className="text-stone">Evidence-based dosing protocols</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2" />
+                      <p className="text-stone">Transparent ingredient sourcing</p>
+                    </div>
+                  </div>
+                  <Button 
+                    size="lg"
+                    className="bg-accent text-carbon hover:bg-accent/90 text-base px-8 py-6 rounded-full group"
+                  >
+                    Shop Supplements
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </div>
+
+                {/* Supplement Products Showcase */}
+                <div className="relative">
+                  <div className="grid grid-cols-2 gap-6">
+                    {[
+                      { name: "NeuroFocus", category: "Cognitive" },
+                      { name: "AdaptBalance", category: "Stress" },
+                      { name: "RestoreSleep", category: "Recovery" },
+                      { name: "Omega3 Elite", category: "Foundation" },
+                    ].map((product, i) => (
+                      <div 
+                        key={i}
+                        className="relative p-6 rounded-3xl bg-gradient-to-br from-ivory/5 to-transparent border border-ivory/10 backdrop-blur-sm hover:border-accent/30 transition-all duration-500"
+                      >
+                        <div className="aspect-square mb-4 rounded-2xl bg-ivory/5 flex items-center justify-center">
+                          <FlaskConical className="w-12 h-12 text-accent" />
+                        </div>
+                        <h3 className="text-lg font-normal text-ivory mb-1">{product.name}</h3>
+                        <p className="text-sm text-stone">{product.category}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* For Businesses */}
           <section className="relative py-32 px-6 md:px-12 lg:px-20 xl:px-32 bg-carbon">
             <div className="max-w-7xl mx-auto">
