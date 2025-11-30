@@ -97,14 +97,14 @@ export default function NovaInsights() {
       <NovaNav />
       
       <div className="border-b border-border/50 bg-gradient-to-b from-background to-muted/20">
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8">
-          <h1 className="text-h1 font-semibold text-foreground mb-2">Performance Analytics</h1>
-          <p className="text-body-sm text-muted-foreground">Visualise your biometric trends and patterns</p>
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-8">
+          <h1 className="text-2xl sm:text-3xl md:text-h1 font-semibold text-foreground mb-2">Performance Analytics</h1>
+          <p className="text-xs sm:text-body-sm text-muted-foreground">Visualise your biometric trends and patterns</p>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12 animate-fade-in">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-12 animate-fade-in">
           {[
             { label: "Average HRV", value: summaryMetrics.hrv.value, trend: summaryMetrics.hrv.trend, icon: Activity, positive: true },
             { label: "Sleep Score", value: summaryMetrics.sleep.value, trend: summaryMetrics.sleep.trend, icon: Brain },
@@ -130,11 +130,11 @@ export default function NovaInsights() {
           ))}
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
           <Card className="border-mist/30 shadow-sm">
-            <CardContent className="p-8">
-              <h3 className="text-[1.125rem] font-semibold text-carbon mb-6">HRV Trend</h3>
-              <div className="h-72">
+            <CardContent className="p-4 sm:p-6 md:p-8">
+              <h3 className="text-base sm:text-lg md:text-[1.125rem] font-semibold text-carbon mb-4 sm:mb-6">HRV Trend</h3>
+              <div className="h-64 sm:h-72">
                 {hrvData.length > 0 ? (
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={hrvData}>
@@ -158,9 +158,9 @@ export default function NovaInsights() {
           </Card>
 
           <Card className="border-mist/30 shadow-sm">
-            <CardContent className="p-8">
-              <h3 className="text-[1.125rem] font-semibold text-carbon mb-6">Sleep Stages</h3>
-              <div className="h-72">
+            <CardContent className="p-4 sm:p-6 md:p-8">
+              <h3 className="text-base sm:text-lg md:text-[1.125rem] font-semibold text-carbon mb-4 sm:mb-6">Sleep Stages</h3>
+              <div className="h-64 sm:h-72">
                 {sleepData.length > 0 ? (
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={sleepData}>
@@ -188,9 +188,9 @@ export default function NovaInsights() {
           </Card>
 
           <Card className="border-mist/30 shadow-sm">
-            <CardContent className="p-8">
-              <h3 className="text-[1.125rem] font-semibold text-carbon mb-6">Daily Energy Curve</h3>
-              <div className="h-72">
+            <CardContent className="p-4 sm:p-6 md:p-8">
+              <h3 className="text-base sm:text-lg md:text-[1.125rem] font-semibold text-carbon mb-4 sm:mb-6">Daily Energy Curve</h3>
+              <div className="h-64 sm:h-72">
                 {energyData.length > 0 ? (
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={energyData}>
@@ -219,9 +219,9 @@ export default function NovaInsights() {
           </Card>
 
           <Card className="border-mist/30 shadow-sm">
-            <CardContent className="p-8">
-              <h3 className="text-[1.125rem] font-semibold text-carbon mb-6">Recovery Score</h3>
-              <div className="h-72">
+            <CardContent className="p-4 sm:p-6 md:p-8">
+              <h3 className="text-base sm:text-lg md:text-[1.125rem] font-semibold text-carbon mb-4 sm:mb-6">Recovery Score</h3>
+              <div className="h-64 sm:h-72">
                 {recoveryData.length > 0 ? (
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={recoveryData}>
@@ -246,8 +246,8 @@ export default function NovaInsights() {
         </div>
 
         <Card className="border-mist/30 shadow-sm">
-          <CardContent className="p-8">
-            <h2 className="text-[1.5rem] font-semibold text-carbon mb-8 tracking-tight">Research Foundation</h2>
+          <CardContent className="p-4 sm:p-6 md:p-8">
+            <h2 className="text-lg sm:text-xl md:text-[1.5rem] font-semibold text-carbon mb-6 sm:mb-8 tracking-tight">Research Foundation</h2>
             <p className="text-sm text-ash leading-relaxed mb-8">
               Every recommendation is backed by peer-reviewed research. Evidence grading system ensures clinical validity.
             </p>

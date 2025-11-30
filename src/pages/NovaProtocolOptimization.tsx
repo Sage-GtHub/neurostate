@@ -21,17 +21,17 @@ export default function NovaProtocolOptimization() {
       <NovaNav />
       
       <div className="border-b border-mist/30 bg-gradient-to-b from-ivory to-pearl/20">
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12">
-          <h1 className="text-[3rem] font-bold text-carbon tracking-tight mb-3">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8 sm:py-10 md:py-12">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[3rem] font-bold text-carbon tracking-tight mb-2 sm:mb-3">
             Nova Intelligence System
           </h1>
-          <p className="text-body text-ash max-w-3xl">
+          <p className="text-sm sm:text-base md:text-body text-ash max-w-3xl">
             15+ specialized AI models working together to optimize your health and performance
           </p>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-16 space-y-24">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8 sm:py-12 md:py-16 space-y-12 sm:space-y-16 md:space-y-24">
         
         {/* The 4-Phase System */}
         <section className="animate-fade-in">
@@ -51,20 +51,20 @@ export default function NovaProtocolOptimization() {
 
         {/* Protocol Optimization Features */}
         <section className="animate-fade-in">
-          <div className="text-center mb-12">
-            <h2 className="text-[2rem] font-bold text-carbon tracking-tight mb-3">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[2rem] font-bold text-carbon tracking-tight mb-2 sm:mb-3">
               Advanced Protocol Management
             </h2>
-            <p className="text-body text-ash">
+            <p className="text-sm sm:text-base md:text-body text-ash">
               AI-driven optimization and behavior change
             </p>
           </div>
 
-          <Tabs defaultValue="adaptive" className="space-y-8">
-            <TabsList className="grid w-full grid-cols-2 lg:grid-cols-5 h-auto gap-2 bg-pearl/30 p-1.5 rounded-3xl">
+          <Tabs defaultValue="adaptive" className="space-y-6 sm:space-y-8">
+            <TabsList className="grid w-full grid-cols-2 lg:grid-cols-5 h-auto gap-1.5 sm:gap-2 bg-pearl/30 p-1 sm:p-1.5 rounded-2xl sm:rounded-3xl overflow-x-auto">
               <TabsTrigger 
                 value="adaptive" 
-                className="px-4 py-3 text-xs sm:text-sm data-[state=active]:bg-accent/10 data-[state=active]:text-carbon data-[state=active]:border data-[state=active]:border-accent/20 rounded-2xl transition-all"
+                className="px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm data-[state=active]:bg-accent/10 data-[state=active]:text-carbon data-[state=active]:border data-[state=active]:border-accent/20 rounded-xl sm:rounded-2xl transition-all whitespace-nowrap"
               >
                 Adaptive Protocol
               </TabsTrigger>

@@ -167,19 +167,19 @@ export default function NovaOverview() {
       
       {/* Hero Section */}
       <div className="border-b border-border/50 bg-gradient-to-b from-background via-muted/20 to-background">
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-20">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12 sm:py-16 md:py-20">
           <div className="text-center max-w-4xl mx-auto">
-            <Badge variant="accent" className="mb-8 animate-fade-in">
-              <Sparkles className="w-4 h-4" />
-              <span>The world's most sophisticated wellness AI</span>
+            <Badge variant="accent" className="mb-6 sm:mb-8 animate-fade-in">
+              <Sparkles className="w-3 sm:w-4 h-3 sm:h-4" />
+              <span className="text-xs sm:text-sm">The world's most sophisticated wellness AI</span>
             </Badge>
-            <h1 className="text-[3rem] md:text-[4rem] font-bold text-foreground mb-6 leading-none animate-fade-in">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[4rem] font-bold text-foreground mb-4 sm:mb-6 leading-tight sm:leading-none animate-fade-in">
               AI That Knows You Better Than You Know Yourself
             </h1>
-            <p className="text-body text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-12 animate-fade-in">
+            <p className="text-sm sm:text-base md:text-body text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-8 sm:mb-12 animate-fade-in">
               Processing 15+ data sources through 100M+ parameters to deliver genomic-level personalisation, 72-hour health predictions, and fully autonomous optimisation. Built on 10,000+ peer-reviewed studies and continuously learning from your unique biology.
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-4 animate-fade-in">
+            <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 animate-fade-in">
               <Button size="lg" className="gap-2 rounded-full px-8" onClick={() => navigate('/nova')}>
                 <span>Start with Nova</span>
                 <ArrowRight className="w-4 h-4" />
@@ -195,13 +195,13 @@ export default function NovaOverview() {
 
       {/* Core Stats */}
       <div className="border-b border-mist/30">
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-20">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 animate-fade-in">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12 sm:py-16 md:py-20">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 animate-fade-in">
             {coreStats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-[3.5rem] font-bold text-carbon mb-2 tracking-tight leading-none">{stat.value}</div>
-                <div className="text-body font-semibold text-carbon mb-1">{stat.label}</div>
-                <div className="text-sm text-ash">{stat.desc}</div>
+                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-carbon mb-2 tracking-tight leading-none">{stat.value}</div>
+                <div className="text-sm sm:text-base md:text-body font-semibold text-carbon mb-1">{stat.label}</div>
+                <div className="text-xs sm:text-sm text-ash">{stat.desc}</div>
               </div>
             ))}
           </div>
@@ -210,13 +210,13 @@ export default function NovaOverview() {
 
       {/* What Makes Nova Different */}
       <div className="border-b border-mist/30 bg-gradient-to-b from-ivory to-pearl/20">
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-20">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-[2.5rem] font-bold text-carbon mb-4 tracking-tight">What Makes Nova Different</h2>
-            <p className="text-body text-ash max-w-2xl mx-auto">The most advanced wellness AI ever built</p>
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12 sm:py-16 md:py-20">
+          <div className="text-center mb-10 sm:mb-12 md:mb-16 animate-fade-in">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-carbon mb-3 sm:mb-4 tracking-tight">What Makes Nova Different</h2>
+            <p className="text-sm sm:text-base md:text-body text-ash max-w-2xl mx-auto">The most advanced wellness AI ever built</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 animate-fade-in">
             {capabilities.map((capability, index) => (
               <Card key={index} className="border-mist/30 hover:border-mist transition-all hover:shadow-md">
                 <CardContent className="p-8">
