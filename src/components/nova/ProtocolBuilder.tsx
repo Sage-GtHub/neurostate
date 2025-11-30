@@ -113,15 +113,15 @@ export function ProtocolBuilder() {
   };
 
   return (
-    <Card className="border-mist/30 shadow-soft">
+    <Card className="hover-lift">
       <CardContent className="p-8">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent/10 to-accent/20 flex items-center justify-center">
-            <Sparkles className="w-6 h-6 text-accent" />
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/20 flex items-center justify-center">
+            <Sparkles className="w-6 h-6 text-primary" />
           </div>
           <div>
-            <h3 className="text-[1.25rem] font-semibold text-carbon">Protocol Builder</h3>
-            <p className="text-caption text-ash">AI-powered supplement stack customisation</p>
+            <h3 className="text-h4 font-semibold text-foreground">Protocol Builder</h3>
+            <p className="text-body-sm text-muted-foreground">AI-powered supplement stack customisation</p>
           </div>
         </div>
 
@@ -172,7 +172,7 @@ export function ProtocolBuilder() {
             onClick={generateRecommendations}
             disabled={selectedGoals.length === 0}
             size="lg"
-            className="w-full gap-2 rounded-full"
+            className="w-full gap-2"
           >
             <Sparkles className="w-4 h-4" />
             Generate AI Recommendations

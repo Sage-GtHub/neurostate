@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Check, Lock, TrendingUp, Activity, Brain, Zap } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -100,16 +101,16 @@ export function PhaseProgressTracker({ currentPhase, daysInPhase }: PhaseProgres
   };
 
   return (
-    <Card className="border-mist/30 shadow-md">
+    <Card className="hover-lift">
       <CardContent className="p-8">
-        <div className="mb-8">
+          <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-[1.5rem] font-semibold text-carbon tracking-tight">Your Nova Journey</h2>
-            <div className="px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium">
+            <h2 className="text-h3 font-semibold text-foreground">Your Nova Journey</h2>
+            <Badge variant="accent" className="px-4 py-2">
               Phase {currentPhase} • Day {daysInPhase}
-            </div>
+            </Badge>
           </div>
-          <p className="text-sm text-ash leading-relaxed">
+          <p className="text-body-sm text-muted-foreground leading-relaxed">
             Track your progress through Nova's 4-phase system as you unlock advanced AI capabilities
           </p>
         </div>
@@ -123,12 +124,12 @@ export function PhaseProgressTracker({ currentPhase, daysInPhase }: PhaseProgres
             return (
               <div
                 key={phase.phase}
-                className={`relative p-6 rounded-2xl border transition-all ${
+                className={`relative p-6 rounded-2xl border transition-all hover-lift ${
                   status === "active"
-                    ? "border-accent bg-accent/5"
+                    ? "border-primary bg-primary/5"
                     : status === "completed"
-                    ? "border-mist/50 bg-pearl/30"
-                    : "border-mist/30 bg-ivory opacity-60"
+                    ? "border-border/50 bg-muted/30"
+                    : "border-border/30 bg-background opacity-60"
                 }`}
               >
                 <div className="flex items-start gap-4 mb-4">
