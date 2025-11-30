@@ -57,19 +57,19 @@ export default function NovaProtocols() {
   };
 
   return (
-    <div className="min-h-screen bg-ivory">
+    <div className="min-h-screen bg-background">
       <NovaNav />
       
-      <div className="border-b border-mist/30 bg-gradient-to-b from-ivory to-pearl/20">
+      <div className="border-b border-border/50 bg-gradient-to-b from-background to-muted/20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8">
           <div className="flex items-center justify-between mb-2">
-            <h1 className="text-[2rem] font-semibold text-carbon tracking-tight">Active Protocols</h1>
+            <h1 className="text-h1 font-semibold text-foreground">Active Protocols</h1>
             <Button onClick={() => setShowAssessment(true)} size="sm" className="gap-2">
               <Plus className="w-4 h-4" />
               <span>New Protocol</span>
             </Button>
           </div>
-          <p className="text-sm text-ash">Track your daily stacks and protocol progress</p>
+          <p className="text-body-sm text-muted-foreground">Track your daily stacks and protocol progress</p>
         </div>
       </div>
 

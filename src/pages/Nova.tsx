@@ -219,20 +219,20 @@ export default function Nova() {
   };
 
   return (
-    <div className="min-h-screen bg-ivory">
+    <div className="min-h-screen bg-background">
       <NovaNav />
       
       {/* Header */}
-      <div className="border-b border-mist/30 bg-gradient-to-b from-ivory to-pearl/20">
+      <div className="border-b border-border/50 bg-gradient-to-b from-background to-muted/20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8">
           <div className="flex items-center justify-between mb-2">
-            <h1 className="text-[2rem] font-semibold text-carbon tracking-tight">Nova</h1>
+            <h1 className="text-h1 font-semibold text-foreground">Nova</h1>
             <div className="flex items-center gap-2 text-sm">
-              <div className={`w-2 h-2 rounded-full transition-all ${isSpeaking ? 'bg-accent animate-pulse shadow-lg shadow-accent/50' : 'bg-accent shadow-md shadow-accent/30'}`} />
-              <span className="text-ash text-caption">Online</span>
+              <div className={`w-2 h-2 rounded-full transition-all ${isSpeaking ? 'bg-primary animate-pulse-subtle shadow-lg shadow-primary/50' : 'bg-primary shadow-md shadow-primary/30'}`} />
+              <span className="text-muted-foreground text-body-sm">Online</span>
             </div>
           </div>
-          <p className="text-sm text-ash">Your AI performance assistant</p>
+          <p className="text-body-sm text-muted-foreground">Your AI performance assistant</p>
         </div>
       </div>
 

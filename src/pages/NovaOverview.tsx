@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NovaNav } from "@/components/NovaNav";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { PhaseProgressTracker } from "@/components/nova/PhaseProgressTracker";
@@ -161,22 +162,22 @@ export default function NovaOverview() {
   ];
 
   return (
-    <div className="min-h-screen bg-ivory">
+    <div className="min-h-screen bg-background">
       <NovaNav />
       
       {/* Hero Section */}
-      <div className="border-b border-mist/30 bg-gradient-to-b from-ivory via-pearl/20 to-ivory">
+      <div className="border-b border-border/50 bg-gradient-to-b from-background via-muted/20 to-background">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-20">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-caption font-medium mb-8 animate-fade-in">
+            <Badge variant="accent" className="mb-8 animate-fade-in">
               <Sparkles className="w-4 h-4" />
               <span>The world's most sophisticated wellness AI</span>
-            </div>
-            <h1 className="text-[3rem] md:text-[4rem] font-bold text-carbon tracking-tight mb-6 leading-none animate-fade-in">
+            </Badge>
+            <h1 className="text-[3rem] md:text-[4rem] font-bold text-foreground mb-6 leading-none animate-fade-in">
               AI That Knows You Better Than You Know Yourself
             </h1>
-            <p className="text-body text-ash leading-relaxed max-w-3xl mx-auto mb-12 animate-fade-in">
-              Processing 15+ data sources through 100M+ parameters to deliver genomic-level personalization, 72-hour health predictions, and fully autonomous optimization. Built on 10,000+ peer-reviewed studies and continuously learning from your unique biology.
+            <p className="text-body text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-12 animate-fade-in">
+              Processing 15+ data sources through 100M+ parameters to deliver genomic-level personalisation, 72-hour health predictions, and fully autonomous optimisation. Built on 10,000+ peer-reviewed studies and continuously learning from your unique biology.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 animate-fade-in">
               <Button size="lg" className="gap-2 rounded-full px-8" onClick={() => navigate('/nova')}>

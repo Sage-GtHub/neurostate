@@ -81,36 +81,37 @@ export function RealTimeSimulation() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "optimal": return "text-accent";
-      case "moderate": return "text-[#f59e0b]";
-      case "low": return "text-[#ef4444]";
-      default: return "text-ash";
+      case "optimal": return "text-primary";
+      case "moderate": return "text-warning";
+      case "low": return "text-destructive";
+      default: return "text-muted-foreground";
     }
   };
 
   const getStatusBg = (status: string) => {
     switch (status) {
-      case "optimal": return "bg-accent/10";
-      case "moderate": return "bg-[#f59e0b]/10";
-      case "low": return "bg-[#ef4444]/10";
-      default: return "bg-mist/20";
+      case "optimal": return "bg-primary/10";
+      case "moderate": return "bg-warning/10";
+      case "low": return "bg-destructive/10";
+      default: return "bg-muted/20";
     }
   };
 
   return (
-    <Card className="border-mist/30 shadow-lg">
+    <Card className="hover-lift">
       <CardContent className="p-8">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-[1.5rem] font-semibold text-carbon tracking-tight mb-2">
+            <h2 className="text-h3 font-semibold text-foreground mb-2">
               Real-Time AI Processing
             </h2>
-            <p className="text-sm text-ash">Watch Nova analyze and adapt in real-time</p>
+            <p className="text-body-sm text-muted-foreground">Watch Nova analyse and adapt in real-time</p>
           </div>
           <Button
             onClick={() => setIsRunning(!isRunning)}
             variant={isRunning ? "outline" : "default"}
-            className="gap-2 rounded-full"
+            size="sm"
+            className="gap-2"
           >
             {isRunning ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
             <span>{isRunning ? "Pause" : "Start"} Simulation</span>

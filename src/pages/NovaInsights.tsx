@@ -93,13 +93,13 @@ export default function NovaInsights() {
   };
 
   return (
-    <div className="min-h-screen bg-ivory">
+    <div className="min-h-screen bg-background">
       <NovaNav />
       
-      <div className="border-b border-mist/30 bg-gradient-to-b from-ivory to-pearl/20">
+      <div className="border-b border-border/50 bg-gradient-to-b from-background to-muted/20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8">
-          <h1 className="text-[2rem] font-semibold text-carbon tracking-tight mb-2">Performance Analytics</h1>
-          <p className="text-sm text-ash">Visualise your biometric trends and patterns</p>
+          <h1 className="text-h1 font-semibold text-foreground mb-2">Performance Analytics</h1>
+          <p className="text-body-sm text-muted-foreground">Visualise your biometric trends and patterns</p>
         </div>
       </div>
 

@@ -109,15 +109,15 @@ export function HealthForecast() {
   };
 
   return (
-    <Card className="border-mist/30 shadow-soft">
+    <Card className="hover-lift">
       <CardContent className="p-8">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent/10 to-accent/20 flex items-center justify-center">
-            <Calendar className="w-6 h-6 text-accent" />
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/20 flex items-center justify-center">
+            <Calendar className="w-6 h-6 text-primary" />
           </div>
           <div>
-            <h3 className="text-[1.25rem] font-semibold text-carbon">7-Day Health Forecast</h3>
-            <p className="text-caption text-ash">AI-predicted performance windows</p>
+            <h3 className="text-h4 font-semibold text-foreground">7-Day Health Forecast</h3>
+            <p className="text-body-sm text-muted-foreground">AI-predicted performance windows</p>
           </div>
         </div>
 
