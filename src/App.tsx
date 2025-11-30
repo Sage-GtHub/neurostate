@@ -18,6 +18,7 @@ import ProtocolDetail from "./pages/ProtocolDetail";
 import NovaInsights from "./pages/NovaInsights";
 import NovaDevices from "./pages/NovaDevices";
 import NovaProtocolOptimization from "./pages/NovaProtocolOptimization";
+import NovaOverview from "./pages/NovaOverview";
 
 import FAQ from "./pages/FAQ";
 import Shipping from "./pages/Shipping";
@@ -94,6 +95,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/track-order" element={<OrderTracking />} />
           <Route path="/admin/update-descriptions" element={<ProductDescriptionUpdater />} />
+          <Route path="/nova/overview" element={<NovaOverview />} />
           <Route path="/nova" element={<ProtectedRoute><Nova /></ProtectedRoute>} />
           <Route path="/nova/protocols" element={<ProtectedRoute><NovaProtocols /></ProtectedRoute>} />
           <Route path="/nova/protocols/:id" element={<ProtectedRoute><ProtocolDetail /></ProtectedRoute>} />
