@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { NovaNav } from "@/components/NovaNav";
+import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Activity, Watch, TrendingUp, Brain, Target, Sparkles, Send, Loader2 } from "lucide-react";
@@ -219,8 +220,9 @@ export default function Nova() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <NovaNav />
+    <NovaSwipeWrapper>
+      <div className="min-h-screen bg-background">
+        <NovaNav />
       
       {/* Header */}
       <div className="border-b border-border/50 bg-gradient-to-b from-background to-muted/20">
@@ -494,5 +496,6 @@ export default function Nova() {
         onOpenChange={setShowAssessment}
       />
     </div>
+    </NovaSwipeWrapper>
   );
 }

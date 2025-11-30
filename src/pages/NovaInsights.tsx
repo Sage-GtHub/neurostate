@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { NovaNav } from "@/components/NovaNav";
+import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { Card, CardContent } from "@/components/ui/card";
 import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import { supabase } from "@/integrations/supabase/client";
@@ -93,8 +94,9 @@ export default function NovaInsights() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <NovaNav />
+    <NovaSwipeWrapper>
+      <div className="min-h-screen bg-background">
+        <NovaNav />
       
       <div className="border-b border-border/50 bg-gradient-to-b from-background to-muted/20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-8">
@@ -451,5 +453,6 @@ export default function NovaInsights() {
         </Card>
       </div>
     </div>
+    </NovaSwipeWrapper>
   );
 }
