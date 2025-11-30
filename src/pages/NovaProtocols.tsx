@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { ProtocolAssessment } from "@/components/ProtocolAssessment";
 import { useToast } from "@/components/ui/use-toast";
 import { Plus, ArrowRight, Target } from "lucide-react";
+import { PhaseProgressTracker } from "@/components/nova/PhaseProgressTracker";
 
 interface Protocol {
   id: string;
@@ -23,6 +24,8 @@ export default function NovaProtocols() {
   const navigate = useNavigate();
   const [protocols, setProtocols] = useState<Protocol[]>([]);
   const [showAssessment, setShowAssessment] = useState(false);
+  const [currentPhase, setCurrentPhase] = useState<1 | 2 | 3 | 4>(2);
+  const [daysInPhase, setDaysInPhase] = useState(14);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -70,8 +73,13 @@ export default function NovaProtocols() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12">
-        <div className="space-y-6 animate-fade-in">
-          {protocols.length > 0 ? (
+        <div className="space-y-12 animate-fade-in">
+          {/* Phase Progress Tracker */}
+          <PhaseProgressTracker currentPhase={currentPhase} daysInPhase={daysInPhase} />
+
+          {/* Protocols List */}
+          <div className="space-y-6">
+            {protocols.length > 0 ? (
             protocols.map((protocol) => (
               <Card key={protocol.id} className="border-mist/30 hover:border-mist transition-all hover:shadow-md">
                 <CardContent className="p-8">
@@ -151,6 +159,7 @@ export default function NovaProtocols() {
               </CardContent>
             </Card>
           )}
+          </div>
         </div>
       </div>
 

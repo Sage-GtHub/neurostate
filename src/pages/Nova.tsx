@@ -10,6 +10,7 @@ import { PhaseIndicator } from "@/components/nova/PhaseIndicator";
 import { PredictiveInsights } from "@/components/nova/PredictiveInsights";
 import { MorningCheckIn } from "@/components/nova/MorningCheckIn";
 import { VoiceInterface } from "@/components/nova/VoiceInterface";
+import { RealTimeSimulation } from "@/components/nova/RealTimeSimulation";
 
 interface Message {
   role: "user" | "assistant";
@@ -236,6 +237,13 @@ export default function Nova() {
 
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12">
         <div className="space-y-16">
+          {/* Real-Time AI Processing Simulation */}
+          {currentPhase >= 2 && (
+            <div className="animate-fade-in">
+              <RealTimeSimulation />
+            </div>
+          )}
+
           {/* Performance Metrics - Full Width */}
           <div>
             <h2 className="text-[1.5rem] font-semibold text-carbon mb-6 tracking-tight">Live Performance Metrics</h2>
