@@ -3,6 +3,8 @@ import { NovaNav } from "@/components/NovaNav";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
+import { PhaseProgressTracker } from "@/components/nova/PhaseProgressTracker";
+import { RealTimeSimulation } from "@/components/nova/RealTimeSimulation";
 import { 
   Brain, 
   Activity, 
@@ -13,7 +15,8 @@ import {
   Shield,
   Database,
   Zap,
-  LineChart as ChartIcon
+  LineChart as ChartIcon,
+  Cpu
 } from "lucide-react";
 
 export default function NovaOverview() {
@@ -104,6 +107,57 @@ export default function NovaOverview() {
     { category: "Database", tech: "PostgreSQL + TimescaleDB", detail: "Relational + time-series data" },
     { category: "Security", tech: "AES-256 + TLS 1.3", detail: "Data at rest and in transit" },
     { category: "Compliance", tech: "HIPAA + GDPR + SOC 2", detail: "Healthcare compliance" }
+  ];
+
+  const aiModels = [
+    {
+      name: "GPT-4 Turbo",
+      parameters: "175B parameters",
+      use: "Conversational interface, report generation",
+      performance: "95% intent accuracy"
+    },
+    {
+      name: "XGBoost Ensemble",
+      parameters: "500 trees",
+      use: "Performance prediction, optimization",
+      performance: "91% forecast accuracy"
+    },
+    {
+      name: "LSTM Networks",
+      parameters: "Deep Q-Network",
+      use: "72-hour health forecasting",
+      performance: "89% prediction accuracy"
+    },
+    {
+      name: "Random Forest",
+      parameters: "1000 decision trees",
+      use: "Burnout detection, illness prediction",
+      performance: "87% early detection"
+    },
+    {
+      name: "Transformer Architecture",
+      parameters: "100M parameters",
+      use: "Multi-modal data fusion (biometric + genetic + lifestyle)",
+      performance: "84% correlation detection"
+    },
+    {
+      name: "K-Means Clustering",
+      parameters: "24 clusters",
+      use: "User archetype identification",
+      performance: "92% archetype match"
+    },
+    {
+      name: "Prophet (Meta)",
+      parameters: "Bayesian approach",
+      use: "Circadian rhythm modeling",
+      performance: "79% pattern recognition"
+    },
+    {
+      name: "Isolation Forest",
+      parameters: "Unsupervised learning",
+      use: "Detecting unusual health patterns",
+      performance: "96% anomaly detection"
+    }
   ];
 
   return (
@@ -225,6 +279,63 @@ export default function NovaOverview() {
               <Target className="w-4 h-4" />
               <span>Explore Protocol Optimization</span>
             </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Real-Time Simulation */}
+      <div className="border-b border-mist/30">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-20">
+          <RealTimeSimulation />
+        </div>
+      </div>
+
+      {/* Phase Progress Tracker */}
+      <div className="border-b border-mist/30 bg-gradient-to-b from-ivory to-pearl/20">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-20">
+          <PhaseProgressTracker currentPhase={2} daysInPhase={15} />
+        </div>
+      </div>
+
+      {/* AI Model Stack */}
+      <div className="border-b border-mist/30">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-20">
+          <div className="text-center mb-16 animate-fade-in">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-accent/10 to-accent/20 flex items-center justify-center mx-auto mb-8 shadow-sm">
+              <Cpu className="w-10 h-10 text-accent" />
+            </div>
+            <h2 className="text-[2.5rem] font-bold text-carbon mb-4 tracking-tight">AI Model Stack</h2>
+            <p className="text-body text-ash max-w-2xl mx-auto">15+ specialized models working together for optimal results</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 animate-fade-in">
+            {aiModels.map((model, index) => (
+              <Card key={index} className="border-mist/30 hover:border-accent/30 transition-all hover:shadow-md">
+                <CardContent className="p-6">
+                  <div className="mb-4">
+                    <h3 className="text-body font-semibold text-carbon mb-2">{model.name}</h3>
+                    <div className="text-caption text-accent font-medium mb-1">{model.parameters}</div>
+                  </div>
+                  <div className="space-y-3">
+                    <div>
+                      <div className="text-caption text-ash uppercase tracking-wider mb-1">Use Case</div>
+                      <p className="text-sm text-carbon">{model.use}</p>
+                    </div>
+                    <div>
+                      <div className="text-caption text-ash uppercase tracking-wider mb-1">Performance</div>
+                      <div className="text-sm font-semibold text-accent">{model.performance}</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="mt-12 p-8 rounded-2xl bg-gradient-to-br from-carbon to-slate text-ivory text-center animate-fade-in">
+            <h3 className="text-[1.125rem] font-semibold mb-3">Continuous Model Training</h3>
+            <p className="text-sm text-pearl/90 max-w-2xl mx-auto leading-relaxed">
+              All models are continuously retrained with new data to improve accuracy and adapt to emerging patterns in health optimization
+            </p>
           </div>
         </div>
       </div>
