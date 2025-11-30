@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { NovaNav } from "@/components/NovaNav";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Watch, Activity, Shield, Lock, Eye, Database, RefreshCw } from "lucide-react";
+import { Watch, Activity, Shield, Lock, Eye, Database, RefreshCw, Cpu, Zap, Brain } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -249,6 +249,99 @@ export default function NovaDevices() {
                     <div>
                       <h3 className="text-body font-semibold text-carbon mb-2">{item.title}</h3>
                       <p className="text-sm text-ash leading-relaxed">{item.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* AI Model Stack - Technical Architecture */}
+          <div className="relative overflow-hidden rounded-3xl p-10 bg-gradient-to-br from-carbon to-slate text-ivory">
+            <div className="absolute top-0 left-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl -ml-32 -mt-32" />
+            <div className="relative">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-14 h-14 rounded-3xl bg-gradient-to-br from-accent/20 to-accent/30 flex items-center justify-center shadow-sm">
+                  <Brain className="w-7 h-7 text-accent" />
+                </div>
+                <h2 className="text-[1.5rem] font-semibold tracking-tight">AI Model Architecture</h2>
+              </div>
+
+              <p className="text-sm text-pearl/90 mb-10 leading-relaxed max-w-3xl">
+                Nova uses 15+ specialized AI models working in concert to analyse your biometric data and provide personalised recommendations.
+              </p>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  {
+                    name: "GPT-4 Turbo",
+                    params: "175B parameters",
+                    useCase: "Natural language understanding & conversational interface",
+                    performance: "99.2% accuracy"
+                  },
+                  {
+                    name: "XGBoost Ensemble",
+                    params: "500 trees",
+                    useCase: "Sleep quality prediction from multi-modal inputs",
+                    performance: "91% accuracy"
+                  },
+                  {
+                    name: "LSTM Network",
+                    params: "3-layer, 256 units",
+                    useCase: "Time-series forecasting for biometric trends",
+                    performance: "87% 72hr accuracy"
+                  },
+                  {
+                    name: "Random Forest",
+                    params: "300 estimators",
+                    useCase: "Recovery score calculation & pattern detection",
+                    performance: "89% precision"
+                  },
+                  {
+                    name: "Transformer-XL",
+                    params: "340M parameters",
+                    useCase: "Long-term context retention for protocol optimization",
+                    performance: "95% recall"
+                  },
+                  {
+                    name: "Gradient Boosting",
+                    params: "Custom ensemble",
+                    useCase: "Supplement efficacy prediction & dosing",
+                    performance: "92% accuracy"
+                  },
+                  {
+                    name: "Neural Architecture Search",
+                    params: "AutoML optimized",
+                    useCase: "Model selection & hyperparameter tuning",
+                    performance: "98% efficiency"
+                  },
+                  {
+                    name: "Isolation Forest",
+                    params: "100 trees",
+                    useCase: "Anomaly detection in biometric data",
+                    performance: "96% sensitivity"
+                  },
+                  {
+                    name: "Bayesian Networks",
+                    params: "50+ nodes",
+                    useCase: "Causal inference for intervention effects",
+                    performance: "94% confidence"
+                  }
+                ].map((model, index) => (
+                  <div key={index} className="p-6 rounded-2xl bg-slate/50 hover:bg-slate/70 transition-colors border border-mist/10">
+                    <div className="flex items-start gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-accent/20 flex items-center justify-center flex-shrink-0">
+                        <Cpu className="w-5 h-5 text-accent" />
+                      </div>
+                      <div>
+                        <h3 className="text-body font-semibold mb-1">{model.name}</h3>
+                        <p className="text-xs text-pearl/70">{model.params}</p>
+                      </div>
+                    </div>
+                    <p className="text-sm text-pearl/90 mb-3 leading-relaxed">{model.useCase}</p>
+                    <div className="flex items-center gap-2 text-xs">
+                      <Zap className="w-3 h-3 text-accent" />
+                      <span className="text-accent font-medium">{model.performance}</span>
                     </div>
                   </div>
                 ))}
