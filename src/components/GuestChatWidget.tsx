@@ -187,7 +187,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
       // Add page context to the first message
       const contextMessage = {
         role: "system" as const,
-        content: `Context: ${getPageContext()}. The user is not logged in. If they ask for personalized protocols, device tracking, or account features, encourage them to create a free Nova account.`
+        content: `Context: ${getPageContext()}. The user is not logged in. If they ask for personalised protocols, device tracking, or account features, encourage them to create a free Nova account.`
       };
 
       const conversationMessages = currentConversation?.messages || [];
@@ -399,7 +399,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
       return [
         "What supplements support faster recovery?",
         "Tell me about cold therapy for recovery",
-        "How do I optimize my recovery protocol?"
+        "How do I optimise my recovery protocol?"
       ];
     }
     
@@ -416,7 +416,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
     if (lower.includes('bundle') || lower.includes('stack')) {
       return [
         "What bundles do you recommend for beginners?",
-        "Can I customize a bundle?",
+        "Can I customise a bundle?",
         "Do bundles save money compared to individual products?"
       ];
     }
@@ -653,7 +653,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
             {/* Upgrade CTA */}
             <div className="border-t border-mist bg-pearl p-3">
               <div className="text-xs text-ash mb-2">
-                Want personalized protocols based on your data?
+                Want personalised protocols based on your data?
               </div>
               <a href="https://neurostate.co.uk/nova" target="_blank" rel="noopener noreferrer">
                 <Button variant="default" size="sm" className="w-full">

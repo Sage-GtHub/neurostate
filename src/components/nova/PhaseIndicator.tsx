@@ -12,7 +12,7 @@ export function PhaseIndicator({ currentPhase, daysInCurrentPhase }: PhaseIndica
     {
       number: 1,
       title: "Conversational AI",
-      description: "Intelligent assistant providing personalized guidance",
+      description: "Intelligent assistant providing personalised guidance",
       icon: Brain,
       color: "text-carbon"
     },

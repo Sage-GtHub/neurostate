@@ -5,7 +5,7 @@ export function CorporateComparisonTable() {
     {
       category: "Approach",
       traditional: "Generic wellness perks (gym memberships, meditation apps)",
-      neurostate: "Personalized cognitive enhancement and recovery protocols"
+      neurostate: "Personalised cognitive enhancement and recovery protocols"
     },
     {
       category: "Measurement",
@@ -35,7 +35,7 @@ export function CorporateComparisonTable() {
     {
       category: "Employee Focus",
       traditional: "Reactive: address burnout after it happens",
-      neurostate: "Proactive: optimize performance and prevent burnout"
+      neurostate: "Proactive: optimise performance and prevent burnout"
     },
     {
       category: "Cost Structure",

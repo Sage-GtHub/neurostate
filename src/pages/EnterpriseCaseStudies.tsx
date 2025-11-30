@@ -97,7 +97,7 @@ export default function EnterpriseCaseStudies() {
       employees: "450 employees",
       icon: <TrendingUp className="w-8 h-8 text-accent" />,
       challenge: "Engineering team experiencing chronic burnout, declining code quality, and 22% annual turnover. Leadership needed a solution beyond traditional wellness perks.",
-      solution: "Rolled out NeuroState Professional tier with Slack integration. Nova AI provided personalized cognitive enhancement protocols, and 73% of engineers adopted within first month.",
+      solution: "Rolled out NeuroState Professional tier with Slack integration. Nova AI provided personalised cognitive enhancement protocols, and 73% of engineers adopted within first month.",
       metrics: [
         { value: "63%", label: "reduction in reported burnout" },
         { value: "31%", label: "increase in sprint velocity" },
@@ -148,7 +148,7 @@ export default function EnterpriseCaseStudies() {
     <>
       <SEO 
         title="Enterprise Case Studies | NeuroState"
-        description="See how leading organizations use NeuroState to elevate workforce performance, reduce burnout, and create competitive advantages."
+        description="See how leading organisations use NeuroState to elevate workforce performance, reduce burnout, and create competitive advantages."
       />
       
       <div className="min-h-screen bg-ivory">
@@ -162,7 +162,7 @@ export default function EnterpriseCaseStudies() {
                 Partnership Success Stories
               </h1>
               <p className="text-body-large text-pearl max-w-3xl mx-auto">
-                See how leading organizations are using NeuroState to elevate workforce performance, reduce burnout, and create competitive advantages.
+                See how leading organisations are using NeuroState to elevate workforce performance, reduce burnout, and create competitive advantages.
               </p>
             </div>
 
@@ -208,7 +208,7 @@ export default function EnterpriseCaseStudies() {
               Ready to Partner?
             </h2>
             <p className="text-body-large text-stone mb-8 max-w-2xl mx-auto">
-              Schedule a demo with our partnerships team to discuss your organization's needs.
+              Schedule a demo with our partnerships team to discuss your organisation's needs.
             </p>
             <Button size="lg" asChild>
               <Link to="/enterprise/overview">Schedule Partnership Demo</Link>

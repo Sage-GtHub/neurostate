@@ -12,7 +12,7 @@ interface SEOProps {
 
 export const SEO = ({
   title = 'NeuroState® - Science-Backed Supplements & Recovery Technology | UK',
-  description = 'Premium science-backed supplements and recovery technology designed to optimize performance, cognitive function, and wellness. Shop NSF certified supplements and red light therapy. Free UK delivery.',
+  description = 'Premium science-backed supplements and recovery technology designed to optimise performance, cognitive function, and wellness. Shop NSF certified supplements and red light therapy. Free UK delivery.',
   image = 'https://neurostate.co.uk/og-image.jpg',
   type = 'website',
   canonical,

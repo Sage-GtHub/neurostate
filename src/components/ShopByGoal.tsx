@@ -18,7 +18,7 @@ const goals: Goal[] = [
   {
     id: "sleep",
     title: "Sleep",
-    description: "Optimize sleep quality and recovery with science-backed tools for deeper, restorative rest.",
+    description: "Optimise sleep quality and recovery with science-backed tools for deeper, restorative rest.",
     image: sleepImage,
     link: "/category/sleep",
     color: "from-blue-500/20 to-indigo-500/20",

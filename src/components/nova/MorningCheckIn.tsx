@@ -24,7 +24,7 @@ export function MorningCheckIn({ data, onDismiss }: MorningCheckInProps) {
           </div>
           <div className="flex-1">
             <h3 className="text-body font-semibold text-carbon">Good Morning</h3>
-            <p className="text-caption text-ash">Your personalized check-in from Nova</p>
+            <p className="text-caption text-ash">Your personalised check-in from Nova</p>
           </div>
           <Button variant="ghost" size="sm" onClick={onDismiss}>
             Dismiss
