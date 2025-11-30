@@ -14,6 +14,86 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_insights: {
+        Row: {
+          confidence_score: number | null
+          created_at: string
+          data_sources: Json | null
+          description: string
+          expires_at: string | null
+          id: string
+          insight_type: string
+          recommendations: Json | null
+          timeframe: string | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          confidence_score?: number | null
+          created_at?: string
+          data_sources?: Json | null
+          description: string
+          expires_at?: string | null
+          id?: string
+          insight_type: string
+          recommendations?: Json | null
+          timeframe?: string | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          confidence_score?: number | null
+          created_at?: string
+          data_sources?: Json | null
+          description?: string
+          expires_at?: string | null
+          id?: string
+          insight_type?: string
+          recommendations?: Json | null
+          timeframe?: string | null
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      biometric_streams: {
+        Row: {
+          created_at: string
+          device_id: string | null
+          id: string
+          recorded_at: string
+          stream_type: string
+          user_id: string
+          value: Json
+        }
+        Insert: {
+          created_at?: string
+          device_id?: string | null
+          id?: string
+          recorded_at: string
+          stream_type: string
+          user_id: string
+          value: Json
+        }
+        Update: {
+          created_at?: string
+          device_id?: string | null
+          id?: string
+          recorded_at?: string
+          stream_type?: string
+          user_id?: string
+          value?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "biometric_streams_device_id_fkey"
+            columns: ["device_id"]
+            isOneToOne: false
+            referencedRelation: "connected_devices"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       connected_devices: {
         Row: {
           battery_level: number | null
@@ -79,6 +159,39 @@ export type Database = {
           refresh_token?: string | null
           token_expires_at?: string | null
           updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      health_forecasts: {
+        Row: {
+          created_at: string
+          energy_prediction: Json | null
+          forecast_date: string
+          id: string
+          intervention_timing: Json | null
+          optimal_training_window: string | null
+          recovery_prediction: number | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          energy_prediction?: Json | null
+          forecast_date: string
+          id?: string
+          intervention_timing?: Json | null
+          optimal_training_window?: string | null
+          recovery_prediction?: number | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          energy_prediction?: Json | null
+          forecast_date?: string
+          id?: string
+          intervention_timing?: Json | null
+          optimal_training_window?: string | null
+          recovery_prediction?: number | null
           user_id?: string
         }
         Relationships: []
@@ -338,6 +451,48 @@ export type Database = {
         }
         Relationships: []
       }
+      performance_goals: {
+        Row: {
+          created_at: string
+          current_value: number | null
+          goal_type: string
+          id: string
+          progress_percentage: number | null
+          started_at: string
+          status: string | null
+          target_date: string | null
+          target_value: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          current_value?: number | null
+          goal_type: string
+          id?: string
+          progress_percentage?: number | null
+          started_at?: string
+          status?: string | null
+          target_date?: string | null
+          target_value: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          current_value?: number | null
+          goal_type?: string
+          id?: string
+          progress_percentage?: number | null
+          started_at?: string
+          status?: string | null
+          target_date?: string | null
+          target_value?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -365,6 +520,80 @@ export type Database = {
           id?: string
           phone?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      protocol_adjustments: {
+        Row: {
+          adjustment_type: string
+          biometric_trigger: Json | null
+          created_at: string
+          id: string
+          new_state: Json | null
+          previous_state: Json | null
+          protocol_id: string | null
+          reason: string | null
+          user_id: string
+        }
+        Insert: {
+          adjustment_type: string
+          biometric_trigger?: Json | null
+          created_at?: string
+          id?: string
+          new_state?: Json | null
+          previous_state?: Json | null
+          protocol_id?: string | null
+          reason?: string | null
+          user_id: string
+        }
+        Update: {
+          adjustment_type?: string
+          biometric_trigger?: Json | null
+          created_at?: string
+          id?: string
+          new_state?: Json | null
+          previous_state?: Json | null
+          protocol_id?: string | null
+          reason?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "protocol_adjustments_protocol_id_fkey"
+            columns: ["protocol_id"]
+            isOneToOne: false
+            referencedRelation: "user_protocols"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      protocol_assessments: {
+        Row: {
+          assessment_data: Json
+          completed_at: string
+          created_at: string
+          goals: string[]
+          id: string
+          lifestyle_factors: Json | null
+          user_id: string
+        }
+        Insert: {
+          assessment_data: Json
+          completed_at?: string
+          created_at?: string
+          goals: string[]
+          id?: string
+          lifestyle_factors?: Json | null
+          user_id: string
+        }
+        Update: {
+          assessment_data?: Json
+          completed_at?: string
+          created_at?: string
+          goals?: string[]
+          id?: string
+          lifestyle_factors?: Json | null
+          user_id?: string
         }
         Relationships: []
       }
