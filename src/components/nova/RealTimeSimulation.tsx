@@ -22,7 +22,7 @@ export function RealTimeSimulation() {
   const [aiConfidence, setAiConfidence] = useState(97);
   const [prediction, setPrediction] = useState("80/100");
   const [recommendation, setRecommendation] = useState("Magnesium +100mg");
-  const [processing, setProcessing] = useState("Analyzing 15 biometric streams");
+  const [processing, setProcessing] = useState("Analysing 15 biometric streams");
 
   useEffect(() => {
     if (!isRunning) return;
@@ -67,7 +67,7 @@ export function RealTimeSimulation() {
       setRecommendation(recommendations[Math.floor(Math.random() * recommendations.length)]);
 
       const processingStates = [
-        "Analyzing 15 biometric streams",
+        "Analysing 15 biometric streams",
         "Processing sleep architecture",
         "Evaluating recovery patterns",
         "Computing HRV correlations",

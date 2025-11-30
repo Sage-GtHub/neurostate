@@ -151,7 +151,7 @@ export default function EnterpriseIntegrations() {
 
               <IntegrationCard
                 title="Microsoft Teams"
-                description="Native Teams bot for enterprise organizations"
+                description="Native Teams bot for enterprise organisations"
                 icon={<Users className="w-6 h-6 text-accent" />}
                 setupTime="10 minutes"
                 badge="Available Now"
@@ -231,7 +231,7 @@ POST /api/v1/employees
               Ready to Partner?
             </h2>
             <p className="text-body-large text-stone mb-8 max-w-2xl mx-auto">
-              Schedule a demo with our partnerships team to discuss your organization's needs.
+              Schedule a demo with our partnerships team to discuss your organisation's needs.
             </p>
             <Button size="lg" asChild>
               <Link to="/enterprise/overview">Schedule Partnership Demo</Link>

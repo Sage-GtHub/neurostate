@@ -76,7 +76,7 @@ export const OrganizationStructuredData = () => {
       "name": "NeuroState®",
       "url": "https://neurostate.co.uk",
       "logo": "https://neurostate.co.uk/favicon.jpg",
-      "description": "Premium science-backed supplements and recovery technology designed to optimize performance, cognitive function, and wellness.",
+      "description": "Premium science-backed supplements and recovery technology designed to optimise performance, cognitive function, and wellness.",
       "contactPoint": {
         "@type": "ContactPoint",
         "email": "contact@neurostate.co.uk",

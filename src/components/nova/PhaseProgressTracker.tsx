@@ -55,7 +55,7 @@ export function PhaseProgressTracker({ currentPhase, daysInPhase }: PhaseProgres
     },
     {
       phase: 2,
-      title: "Optimize",
+      title: "Optimise",
       duration: "Days 8-30",
       icon: TrendingUp,
       description: "Active experimentation and rapid optimization",

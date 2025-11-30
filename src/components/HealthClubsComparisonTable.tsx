@@ -5,7 +5,7 @@ export function HealthClubsComparisonTable() {
     {
       category: "Value Proposition",
       traditional: "Equipment access and group classes",
-      neurostate: "Complete wellness ecosystem with personalized protocols and community"
+      neurostate: "Complete wellness ecosystem with personalised protocols and community"
     },
     {
       category: "Member Engagement",
@@ -20,7 +20,7 @@ export function HealthClubsComparisonTable() {
     {
       category: "Retention Strategy",
       traditional: "Annual contracts with 28% churn rate",
-      neurostate: "34% retention improvement through personalized member experience"
+      neurostate: "34% retention improvement through personalised member experience"
     },
     {
       category: "Differentiation",

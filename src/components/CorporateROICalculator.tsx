@@ -30,7 +30,7 @@ export function CorporateROICalculator() {
     <Card className="bg-pearl rounded-3xl p-10">
       <h3 className="text-2xl font-bold text-carbon mb-2">ROI Calculator</h3>
       <p className="text-sm text-stone mb-8">
-        Calculate potential cost savings and productivity gains for your organization
+        Calculate potential cost savings and productivity gains for your organisation
       </p>
       
       {/* Employee Count Slider */}

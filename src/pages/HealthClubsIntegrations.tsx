@@ -172,7 +172,7 @@ export default function HealthClubsIntegrations() {
                 badge="Premium Feature"
                 features={[
                   "Branded member wellness dashboard",
-                  "Personalized protocol tracking",
+                  "Personalised protocol tracking",
                   "Product ordering through facility",
                   "Progress visualization",
                   "Community challenges and leaderboards"

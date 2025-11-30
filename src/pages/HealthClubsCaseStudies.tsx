@@ -97,7 +97,7 @@ export default function HealthClubsCaseStudies() {
       members: "850 members",
       icon: <Dumbbell className="w-8 h-8 text-accent" />,
       challenge: "Struggling with 28% annual member churn rate typical of UK gyms. Members citing lack of visible results and generic wellness advice. Premium positioning threatened by commoditization.",
-      solution: "Implemented NeuroState Premium tier with Mindbody integration. Branded member wellness portal with personalized supplement protocols. Retail corner established with 35% member discount on products.",
+      solution: "Implemented NeuroState Premium tier with Mindbody integration. Branded member wellness portal with personalised supplement protocols. Retail corner established with 35% member discount on products.",
       metrics: [
         { value: "34%", label: "increase in member retention" },
         { value: "£38K", label: "monthly retail revenue added" },
@@ -130,7 +130,7 @@ export default function HealthClubsCaseStudies() {
       type: "Private Members Club",
       members: "450 members",
       icon: <Sparkles className="w-8 h-8 text-accent" />,
-      challenge: "Ultra-premium positioning (£250/month membership) required constant innovation to justify pricing. Members expecting cutting-edge wellness technology and personalized service.",
+      challenge: "Ultra-premium positioning (£250/month membership) required constant innovation to justify pricing. Members expecting cutting-edge wellness technology and personalised service.",
       solution: "Signature tier with fully white-labeled portal matching club branding. Dedicated wellness concierge using Nova AI for member protocol design. VIP supplement protocols with same-day delivery.",
       metrics: [
         { value: "98%", label: "member retention rate" },

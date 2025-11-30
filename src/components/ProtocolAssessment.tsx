@@ -38,7 +38,7 @@ export function ProtocolAssessment({ open, onOpenChange, onComplete }: ProtocolA
   });
 
   const goals = [
-    { value: "performance", label: "Peak Performance", description: "Optimize energy and focus" },
+    { value: "performance", label: "Peak Performance", description: "Optimise energy and focus" },
     { value: "recovery", label: "Athletic Recovery", description: "Accelerate muscle repair" },
     { value: "sleep", label: "Better Sleep", description: "Improve sleep quality and duration" },
     { value: "focus", label: "Enhanced Focus", description: "Boost cognitive performance" },
