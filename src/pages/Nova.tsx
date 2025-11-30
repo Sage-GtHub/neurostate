@@ -224,20 +224,20 @@ export default function Nova() {
       
       {/* Header */}
       <div className="border-b border-border/50 bg-gradient-to-b from-background to-muted/20">
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-8">
           <div className="flex items-center justify-between mb-2">
-            <h1 className="text-h1 font-semibold text-foreground">Nova</h1>
+            <h1 className="text-2xl sm:text-3xl md:text-h1 font-semibold text-foreground">Nova</h1>
             <div className="flex items-center gap-2 text-sm">
               <div className={`w-2 h-2 rounded-full transition-all ${isSpeaking ? 'bg-primary animate-pulse-subtle shadow-lg shadow-primary/50' : 'bg-primary shadow-md shadow-primary/30'}`} />
-              <span className="text-muted-foreground text-body-sm">Online</span>
+              <span className="text-muted-foreground text-xs sm:text-body-sm">Online</span>
             </div>
           </div>
-          <p className="text-body-sm text-muted-foreground">Your AI performance assistant</p>
+          <p className="text-xs sm:text-body-sm text-muted-foreground">Your AI performance assistant</p>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12">
-        <div className="space-y-16">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8 sm:py-12">
+        <div className="space-y-8 sm:space-y-12 md:space-y-16">
           {/* 7-Day Health Forecast */}
           {currentPhase >= 3 && (
             <div className="animate-fade-in">
@@ -254,8 +254,8 @@ export default function Nova() {
 
           {/* Performance Metrics - Full Width */}
           <div>
-            <h2 className="text-[1.5rem] font-semibold text-carbon mb-6 tracking-tight">Live Performance Metrics</h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <h2 className="text-lg sm:text-xl md:text-[1.5rem] font-semibold text-carbon mb-4 sm:mb-6 tracking-tight">Live Performance Metrics</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               {metrics.length > 0 ? metrics.map((metric, index) => (
                 <div key={index} className="relative overflow-hidden rounded-3xl p-6 bg-gradient-to-br from-pearl/50 to-ivory transition-all hover:shadow-soft group">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-accent/10 transition-colors" />
@@ -300,9 +300,9 @@ export default function Nova() {
           </div>
 
           {/* Two Column Layout */}
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
             {/* Chat Section - Dedicated */}
-            <div className="lg:col-span-2 space-y-8">
+            <div className="lg:col-span-2 space-y-6 sm:space-y-8">
             {showMorningCheckIn && currentPhase >= 2 && (
               <div className="animate-fade-in">
                 <MorningCheckIn
@@ -323,17 +323,17 @@ export default function Nova() {
             )}
 
               <div>
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-[1.5rem] font-semibold text-carbon tracking-tight">Chat with Nova</h2>
+                <div className="flex items-center justify-between mb-4 sm:mb-6">
+                  <h2 className="text-lg sm:text-xl md:text-[1.5rem] font-semibold text-carbon tracking-tight">Chat with Nova</h2>
                   <div className="flex items-center gap-2">
                     <div className={`w-2 h-2 rounded-full transition-all ${isSpeaking ? 'bg-accent animate-pulse shadow-lg shadow-accent/50' : 'bg-accent shadow-md shadow-accent/30'}`} />
-                    <span className="text-caption text-ash">Online</span>
+                    <span className="text-xs sm:text-caption text-ash">Online</span>
                   </div>
                 </div>
                 
                 {/* Chat Interface */}
-                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-pearl/50 to-ivory shadow-soft">
-                  <div className="space-y-6 p-8 max-h-[500px] overflow-y-auto">
+                <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-pearl/50 to-ivory shadow-soft">
+                  <div className="space-y-4 sm:space-y-6 p-4 sm:p-6 md:p-8 max-h-[400px] sm:max-h-[500px] overflow-y-auto">
                     {messages.map((message, index) => (
                       <div key={index} className="flex gap-4 animate-fade-in">
                         {message.role === "assistant" && (
@@ -367,8 +367,8 @@ export default function Nova() {
                     <div ref={messagesEndRef} />
                   </div>
                   
-                  <div className="border-t border-mist/20 p-6 bg-pearl/30">
-                    <div className="flex gap-3 mb-4">
+                  <div className="border-t border-mist/20 p-4 sm:p-6 bg-pearl/30">
+                    <div className="flex gap-2 sm:gap-3 mb-3 sm:mb-4">
                       <Input
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
@@ -395,7 +395,7 @@ export default function Nova() {
             </div>
 
             {/* Sidebar */}
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               <PhaseIndicator currentPhase={currentPhase} />
 
               {currentPhase >= 2 && (

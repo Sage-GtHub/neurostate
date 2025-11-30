@@ -61,20 +61,21 @@ export default function NovaProtocols() {
       <NovaNav />
       
       <div className="border-b border-border/50 bg-gradient-to-b from-background to-muted/20">
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8">
-          <div className="flex items-center justify-between mb-2">
-            <h1 className="text-h1 font-semibold text-foreground">Active Protocols</h1>
-            <Button onClick={() => setShowAssessment(true)} size="sm" className="gap-2">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-8">
+          <div className="flex items-center justify-between gap-3 mb-2">
+            <h1 className="text-2xl sm:text-3xl md:text-h1 font-semibold text-foreground">Active Protocols</h1>
+            <Button onClick={() => setShowAssessment(true)} size="sm" className="gap-2 min-h-[44px]">
               <Plus className="w-4 h-4" />
-              <span>New Protocol</span>
+              <span className="hidden sm:inline">New Protocol</span>
+              <span className="sm:hidden">New</span>
             </Button>
           </div>
-          <p className="text-body-sm text-muted-foreground">Track your daily stacks and protocol progress</p>
+          <p className="text-xs sm:text-body-sm text-muted-foreground">Track your daily stacks and protocol progress</p>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12">
-        <div className="space-y-12 animate-fade-in">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8 sm:py-12">
+        <div className="space-y-8 sm:space-y-12 animate-fade-in">
           {/* Phase Progress Tracker */}
           <PhaseProgressTracker currentPhase={currentPhase} daysInPhase={daysInPhase} />
 
@@ -82,12 +83,12 @@ export default function NovaProtocols() {
           <ProtocolBuilder />
 
           {/* Protocols List */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {protocols.length > 0 ? (
             protocols.map((protocol) => (
               <Card key={protocol.id} className="border-mist/30 hover:border-mist transition-all hover:shadow-md">
-                <CardContent className="p-8">
-                  <div className="flex items-start justify-between mb-6">
+                <CardContent className="p-4 sm:p-6 md:p-8">
+                  <div className="flex flex-col sm:flex-row items-start justify-between gap-4 mb-4 sm:mb-6">
                     <div>
                       <div className="flex items-center gap-3 mb-2">
                         <div className="w-10 h-10 rounded-full bg-gradient-to-br from-carbon to-slate flex items-center justify-center">
