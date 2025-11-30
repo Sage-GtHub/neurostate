@@ -5,22 +5,22 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium uppercase tracking-[0.05em] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-carbon focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 touch-manipulation active:scale-[0.98]",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 touch-manipulation",
   {
     variants: {
       variant: {
-        default: "bg-carbon text-ivory hover:bg-slate rounded-xl",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-xl",
-        outline: "border border-mist bg-transparent text-carbon hover:bg-carbon hover:text-ivory rounded-xl",
-        secondary: "bg-pearl text-carbon hover:bg-mist rounded-xl",
-        ghost: "text-carbon hover:bg-pearl/50 rounded-xl",
+        default: "bg-carbon text-ivory hover:bg-slate shadow-sm hover:shadow-md rounded-full font-semibold uppercase tracking-wider text-xs",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-sm hover:shadow-md rounded-full",
+        outline: "border border-input bg-background hover:bg-accent/5 hover:border-accent/50 text-carbon rounded-full",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-muted shadow-sm rounded-full",
+        ghost: "text-carbon hover:bg-accent/5 rounded-full",
         link: "text-carbon underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-9 px-4 sm:px-5 py-2 text-[0.6875rem] min-h-[36px]",
-        sm: "h-8 px-3 sm:px-4 py-1.5 text-[0.625rem] min-h-[32px]",
-        lg: "h-10 px-5 sm:px-6 py-2.5 text-[0.6875rem] min-h-[40px]",
-        icon: "h-9 w-9 min-h-[36px] min-w-[36px]",
+        default: "h-10 px-6 py-2 text-xs min-h-[40px]",
+        sm: "h-9 px-5 py-1.5 text-xs min-h-[36px]",
+        lg: "h-11 px-8 py-2.5 text-xs min-h-[44px]",
+        icon: "h-10 w-10 min-h-[40px] min-w-[40px] rounded-full",
       },
     },
     defaultVariants: {
