@@ -9,6 +9,7 @@ import { ProtocolAssessment } from "@/components/ProtocolAssessment";
 import { useToast } from "@/components/ui/use-toast";
 import { Plus, ArrowRight, Target } from "lucide-react";
 import { PhaseProgressTracker } from "@/components/nova/PhaseProgressTracker";
+import { ProtocolBuilder } from "@/components/nova/ProtocolBuilder";
 
 interface Protocol {
   id: string;
@@ -76,6 +77,9 @@ export default function NovaProtocols() {
         <div className="space-y-12 animate-fade-in">
           {/* Phase Progress Tracker */}
           <PhaseProgressTracker currentPhase={currentPhase} daysInPhase={daysInPhase} />
+
+          {/* Protocol Builder */}
+          <ProtocolBuilder />
 
           {/* Protocols List */}
           <div className="space-y-6">

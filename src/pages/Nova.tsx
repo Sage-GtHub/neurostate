@@ -11,6 +11,7 @@ import { PredictiveInsights } from "@/components/nova/PredictiveInsights";
 import { MorningCheckIn } from "@/components/nova/MorningCheckIn";
 import { VoiceInterface } from "@/components/nova/VoiceInterface";
 import { RealTimeSimulation } from "@/components/nova/RealTimeSimulation";
+import { HealthForecast } from "@/components/nova/HealthForecast";
 
 interface Message {
   role: "user" | "assistant";
@@ -237,6 +238,13 @@ export default function Nova() {
 
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12">
         <div className="space-y-16">
+          {/* 7-Day Health Forecast */}
+          {currentPhase >= 3 && (
+            <div className="animate-fade-in">
+              <HealthForecast />
+            </div>
+          )}
+
           {/* Real-Time AI Processing Simulation */}
           {currentPhase >= 2 && (
             <div className="animate-fade-in">
