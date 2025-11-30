@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NovaNav } from "@/components/NovaNav";
+import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -162,8 +163,9 @@ export default function NovaOverview() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <NovaNav />
+    <NovaSwipeWrapper>
+      <div className="min-h-screen bg-background">
+        <NovaNav />
       
       {/* Hero Section */}
       <div className="border-b border-border/50 bg-gradient-to-b from-background via-muted/20 to-background">
@@ -414,5 +416,6 @@ export default function NovaOverview() {
         </div>
       </div>
     </div>
+    </NovaSwipeWrapper>
   );
 }

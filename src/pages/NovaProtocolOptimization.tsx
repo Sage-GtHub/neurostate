@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NovaNav } from "@/components/NovaNav";
+import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { PhaseIndicator } from "@/components/nova/PhaseIndicator";
 import { ResearchFoundation } from "@/components/nova/ResearchFoundation";
 import { PredictiveInsightsComponent } from "@/components/nova/PredictiveInsightsComponent";
@@ -17,8 +18,9 @@ export default function NovaProtocolOptimization() {
   const [daysInCurrentPhase] = useState(15);
 
   return (
-    <div className="min-h-screen bg-ivory">
-      <NovaNav />
+    <NovaSwipeWrapper>
+      <div className="min-h-screen bg-ivory">
+        <NovaNav />
       
       <div className="border-b border-mist/30 bg-gradient-to-b from-ivory to-pearl/20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8 sm:py-10 md:py-12">
@@ -124,5 +126,6 @@ export default function NovaProtocolOptimization() {
 
       </div>
     </div>
+    </NovaSwipeWrapper>
   );
 }

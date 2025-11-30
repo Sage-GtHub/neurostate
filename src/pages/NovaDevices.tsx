@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { NovaNav } from "@/components/NovaNav";
+import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Watch, Activity, Shield, Lock, Eye, Database, RefreshCw, Cpu, Zap, Brain } from "lucide-react";
@@ -132,8 +133,9 @@ export default function NovaDevices() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <NovaNav />
+    <NovaSwipeWrapper>
+      <div className="min-h-screen bg-background">
+        <NovaNav />
       
       <div className="border-b border-border/50 bg-gradient-to-b from-background to-muted/20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8">
@@ -351,5 +353,6 @@ export default function NovaDevices() {
         </div>
       </div>
     </div>
+    </NovaSwipeWrapper>
   );
 }

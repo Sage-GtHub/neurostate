@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { NovaNav } from "@/components/NovaNav";
+import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -57,8 +58,9 @@ export default function NovaProtocols() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <NovaNav />
+    <NovaSwipeWrapper>
+      <div className="min-h-screen bg-background">
+        <NovaNav />
       
       <div className="border-b border-border/50 bg-gradient-to-b from-background to-muted/20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-8">
@@ -174,5 +176,6 @@ export default function NovaProtocols() {
         onComplete={loadProtocols}
       />
     </div>
+    </NovaSwipeWrapper>
   );
 }
