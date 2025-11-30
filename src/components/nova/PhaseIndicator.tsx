@@ -4,9 +4,10 @@ import { Brain, TrendingUp, Target, Sparkles } from "lucide-react";
 
 interface PhaseIndicatorProps {
   currentPhase: 1 | 2 | 3 | 4;
+  daysInCurrentPhase?: number;
 }
 
-export function PhaseIndicator({ currentPhase }: PhaseIndicatorProps) {
+export function PhaseIndicator({ currentPhase, daysInCurrentPhase }: PhaseIndicatorProps) {
   const phases = [
     {
       number: 1,
@@ -83,6 +84,11 @@ export function PhaseIndicator({ currentPhase }: PhaseIndicatorProps) {
                       <Badge variant="outline" className="border-[#10b981] text-[#10b981] text-xs">Complete</Badge>
                     )}
                   </div>
+                  {isActive && daysInCurrentPhase && (
+                    <div className="text-xs text-accent font-medium mt-1">
+                      Day {daysInCurrentPhase} of this phase
+                    </div>
+                  )}
                   <p className={`text-xs leading-relaxed ${
                     isActive ? "text-ash" : "text-stone"
                   }`}>
