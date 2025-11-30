@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { NovaNav } from "@/components/NovaNav";
 import { PhaseIndicator } from "@/components/nova/PhaseIndicator";
-import { AIModelCard } from "@/components/nova/AIModelCard";
 import { ResearchFoundation } from "@/components/nova/ResearchFoundation";
-import { TechnicalArchitecture } from "@/components/nova/TechnicalArchitecture";
 import { PredictiveInsightsComponent } from "@/components/nova/PredictiveInsightsComponent";
 import { AdaptiveProtocol } from "@/components/nova/AdaptiveProtocol";
 import { MultiGoalBalancer } from "@/components/nova/MultiGoalBalancer";
@@ -13,89 +11,6 @@ import { AutonomousFeatures } from "@/components/nova/AutonomousFeatures";
 import { RealTimeSimulation } from "@/components/nova/RealTimeSimulation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const aiModels = [
-  {
-    name: "GPT-4 Turbo",
-    category: "Natural Language Understanding",
-    parameters: "175B parameters",
-    useCase: "Conversational interface, report generation",
-    performance: "95%",
-    performanceLabel: "Intent accuracy",
-    icon: "brain" as const
-  },
-  {
-    name: "XGBoost",
-    category: "Ensemble Learning",
-    parameters: "500 trees",
-    useCase: "Protocol efficacy prediction",
-    performance: "91%",
-    performanceLabel: "Forecast accuracy",
-    icon: "trending" as const
-  },
-  {
-    name: "LSTM Networks",
-    category: "Time-Series Forecasting",
-    parameters: "Multi-layer recurrent",
-    useCase: "72-hour health forecasting",
-    performance: "89%",
-    performanceLabel: "Prediction accuracy",
-    icon: "activity" as const
-  },
-  {
-    name: "Random Forest",
-    category: "Risk Assessment",
-    parameters: "1000 decision trees",
-    useCase: "Burnout detection, illness prediction",
-    performance: "87%",
-    performanceLabel: "Early detection rate",
-    icon: "brain" as const
-  },
-  {
-    name: "Transformer Architecture",
-    category: "Multi-Modal Data Fusion",
-    parameters: "100M parameters",
-    useCase: "Biometric + genetic + lifestyle data integration",
-    performance: "84%",
-    performanceLabel: "Correlation detection",
-    icon: "trending" as const
-  },
-  {
-    name: "Reinforcement Learning",
-    category: "Autonomous Decision Making",
-    parameters: "Deep Q-Network",
-    useCase: "Protocol optimization",
-    performance: "92%",
-    performanceLabel: "Optimal decisions",
-    icon: "brain" as const
-  },
-  {
-    name: "K-Means Clustering",
-    category: "User Archetype Discovery",
-    parameters: "24 clusters",
-    useCase: "Personalization engine",
-    performance: "79%",
-    performanceLabel: "Archetype match",
-    icon: "activity" as const
-  },
-  {
-    name: "Prophet (Meta)",
-    category: "Seasonal Trend Decomposition",
-    parameters: "Bayesian approach",
-    useCase: "Circadian rhythm modeling, baseline tracking",
-    performance: "92%",
-    performanceLabel: "Pattern recognition",
-    icon: "trending" as const
-  },
-  {
-    name: "Isolation Forest",
-    category: "Anomaly Detection",
-    parameters: "Unsupervised learning",
-    useCase: "Detecting unusual health patterns",
-    performance: "96%",
-    performanceLabel: "Anomaly detection",
-    icon: "brain" as const
-  }
-];
 
 export default function NovaProtocolOptimization() {
   const [currentPhase] = useState<1 | 2 | 3 | 4>(2);
@@ -128,29 +43,6 @@ export default function NovaProtocolOptimization() {
           <RealTimeSimulation />
         </section>
 
-        {/* AI Model Stack */}
-        <section className="animate-fade-in">
-          <div className="text-center mb-12">
-            <h2 className="text-[2rem] font-bold text-carbon tracking-tight mb-3">
-              AI Model Stack
-            </h2>
-            <p className="text-body text-ash">
-              15+ specialized models working together
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {aiModels.map((model, index) => (
-              <div 
-                key={index}
-                className="animate-fade-in"
-                style={{ animationDelay: `${index * 50}ms` }}
-              >
-                <AIModelCard {...model} />
-              </div>
-            ))}
-          </div>
-        </section>
 
         {/* Predictive Forecasting */}
         <section className="animate-fade-in">
@@ -229,10 +121,6 @@ export default function NovaProtocolOptimization() {
           <ResearchFoundation />
         </section>
 
-        {/* Technical Architecture */}
-        <section className="animate-fade-in">
-          <TechnicalArchitecture />
-        </section>
 
       </div>
     </div>
