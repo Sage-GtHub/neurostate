@@ -23,11 +23,7 @@ const Hero = () => {
           </div>
 
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-light text-carbon leading-[1.05] tracking-tight">
-            Engineer your
-            <br />
-            <span className="font-normal">
-              cognitive peak
-            </span>
+            Peak Performance, Naturally.
           </h1>
 
           <p className="text-xl md:text-2xl text-ash max-w-3xl mx-auto font-light leading-relaxed">
