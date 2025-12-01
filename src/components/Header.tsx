@@ -1,7 +1,7 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
 import { GuestChatWidget } from "./GuestChatWidget";
-import { Search, User, Menu, X, Award, Sparkles, LogOut, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target, Lightbulb } from "lucide-react";
+import { Search, User, Menu, X, Award, Sparkles, LogOut, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target, Lightbulb, Building2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { Input } from "./ui/input";
@@ -100,7 +100,7 @@ export const Header = () => {
   ];
 
   const enterpriseLinks = [
-    { label: "Overview", href: "/enterprise/overview", icon: Target },
+    { label: "Overview", href: "/enterprise/overview", icon: Building2 },
     { label: "Corporate Wellness", href: "/enterprise/corporate/overview", icon: Target },
     { label: "Sports Organisations", href: "/enterprise/sports/overview", icon: Activity },
     { label: "Health Clubs and Studios", href: "/enterprise/health-clubs/overview", icon: Zap },
