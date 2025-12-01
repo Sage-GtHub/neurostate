@@ -38,7 +38,7 @@ export default function EnterpriseOverview() {
                 </p>
                 <p className="text-lg md:text-xl text-stone leading-relaxed">
                   A cognitive performance system that strengthens your workforce from the inside out<br />
-                  <span className="text-carbon font-semibold">Think better perform better recover better</span>
+                  <span className="text-carbon font-semibold">Think better, perform better, recover better</span>
                 </p>
               </div>
               <Button 
@@ -62,7 +62,7 @@ export default function EnterpriseOverview() {
                   Corporate wellness is broken
                 </h2>
                 <p className="text-lg text-stone leading-relaxed">
-                  Meditation apps yoga sessions and wellbeing platforms are not solving burnout brain fog or declining productivity. Companies keep spending employees keep struggling. People do not need more calm they need a sharper mind. They need the ability to think clearly recover quickly and perform at a high level every day. Nobody is addressing this in a meaningful way until now.
+                  Meditation apps, yoga sessions, and wellbeing platforms are not solving burnout, brain fog, or declining productivity. Companies keep spending, employees keep struggling. People do not need more calm, they need a sharper mind. They need the ability to think clearly, recover quickly, and perform at a high level every day. Nobody is addressing this in a meaningful way, until now.
                 </p>
               </div>
               <div className="bg-background rounded-3xl p-8 shadow-lg">
@@ -101,7 +101,7 @@ export default function EnterpriseOverview() {
                 A cognitive performance system<br />for modern teams
               </h2>
               <p className="text-lg text-stone max-w-3xl mx-auto leading-relaxed">
-                NeuroState gives organisations a complete ecosystem designed to enhance focus energy resilience and clarity. Our system includes:
+                NeuroState gives organisations a complete ecosystem designed to enhance focus, energy, resilience, and clarity. Our system includes:
               </p>
             </div>
             
@@ -182,10 +182,10 @@ export default function EnterpriseOverview() {
                 </h2>
                 <div className="text-lg text-mist leading-relaxed space-y-4">
                   <p>
-                    When your people think better everything improves. Better concentration. Faster decisions. Stronger emotional control. Less burnout. More creativity. Higher quality output every day.
+                    When your people think better, everything improves. Better concentration. Faster decisions. Stronger emotional control. Less burnout. More creativity. Higher quality output every day.
                   </p>
                   <p className="font-semibold text-ivory">
-                    NeuroState strengthens the foundation of performance the mind.
+                    NeuroState strengthens the foundation of performance: the mind.
                   </p>
                 </div>
               </div>
@@ -205,11 +205,11 @@ export default function EnterpriseOverview() {
             <div className="max-w-4xl mx-auto">
               <div className="bg-pearl rounded-3xl p-10 space-y-8">
                 <p className="text-lg text-stone leading-relaxed">
-                  For the first time companies can sponsor a monthly cognitive performance subscription for every employee. They receive supplements delivered to their home. Personalised Nova AI coaching. Access to performance programmes. Hardware integrations. Continuous improvement.
+                  For the first time, companies can sponsor a monthly cognitive performance subscription for every employee. They receive supplements delivered to their home, personalised Nova AI coaching, access to performance programmes, hardware integrations, and continuous improvement tracking.
                 </p>
                 <div className="bg-background rounded-2xl p-8">
                   <p className="text-carbon font-semibold text-xl mb-4">
-                    This is a performance infrastructure not a perk
+                    This is a performance infrastructure, not a perk
                   </p>
                   <p className="text-stone">
                     It is designed for real measurable change
@@ -345,7 +345,7 @@ export default function EnterpriseOverview() {
               Bring NeuroState into your organisation
             </h2>
             <p className="text-xl text-mist leading-relaxed mb-8">
-              This is the shift from wellness perks to engineered cognitive performance. If you want your people to think lead and perform at world class levels this is the system.
+              This is the shift from wellness perks to engineered cognitive performance. If you want your people to think, lead, and perform at world class levels, this is the system.
             </p>
             <Button 
               size="lg" 
