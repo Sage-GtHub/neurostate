@@ -1,303 +1,542 @@
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Brain, Zap, LineChart, Package, TrendingUp, Users, CheckCircle2, X } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { SEO } from "@/components/SEO";
+import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { SEO } from "@/components/SEO";
+import { Link } from "react-router-dom";
+import { Download, CheckCircle2, TrendingUp, Target, Shield, FileText, Layers, Calculator, Award } from "lucide-react";
+import { CorporateROICalculator } from "@/components/CorporateROICalculator";
+import { CorporateComparisonTable } from "@/components/CorporateComparisonTable";
+import { CustomerSuccessMetrics } from "@/components/CustomerSuccessMetrics";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export default function CorporatePerformanceOverview() {
-  const navigate = useNavigate();
-  const hero = useScrollAnimation();
-  const problem = useScrollAnimation();
-  const delivery = useScrollAnimation();
-  const impact = useScrollAnimation();
-  const subscription = useScrollAnimation();
-  const metrics = useScrollAnimation();
-  const cta = useScrollAnimation();
+  const { ref: roiRef, isVisible: roiVisible } = useScrollAnimation({ threshold: 0.2 });
+  const { ref: benefitsRef, isVisible: benefitsVisible } = useScrollAnimation({ threshold: 0.2 });
+  
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    employees: "",
+    goals: ""
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Partnership demo request:", formData);
+  };
 
   return (
     <>
       <SEO 
-        title="Corporate Performance Overview | NeuroState"
-        description="The new standard for corporate performance. A cognitive performance system that strengthens your workforce from the inside out."
+        title="Corporate Wellness Overview | NeuroState"
+        description="Partner with NeuroState to deliver premium cognitive enhancement and wellness optimisation to your team. Reduce burnout, boost productivity."
       />
-      <Header />
       
-      <main className="min-h-screen bg-background">
-        {/* Hero Section */}
-        <section ref={hero.ref} className={`pt-32 pb-20 transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto px-6 max-w-6xl">
-            <div className="text-center space-y-6">
-              <h1 className="text-5xl md:text-7xl font-bold text-carbon leading-tight">
-                The new standard for<br />corporate performance
-              </h1>
-              <div className="space-y-4 max-w-3xl mx-auto">
-                <p className="text-xl md:text-2xl text-ash font-medium">
-                  Not another wellbeing perk
-                </p>
-                <p className="text-lg md:text-xl text-stone leading-relaxed">
-                  A cognitive performance system that strengthens your workforce from the inside out<br />
-                  <span className="text-carbon font-semibold">Think better perform better recover better</span>
-                </p>
+      <div className="min-h-screen bg-ivory">
+        <Header />
+        
+        {/* Hero Section with Dynamic Gradient */}
+        <section className="relative overflow-hidden bg-gradient-to-br from-carbon via-slate/95 to-carbon text-ivory pt-32 pb-24">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.05),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.03),transparent_50%)]" />
+          
+          <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="text-center max-w-4xl mx-auto mb-16">
+              <div className="inline-block mb-6 px-4 py-2 bg-accent/10 backdrop-blur-sm rounded-full border border-accent/20">
+                <span className="text-accent font-semibold text-sm uppercase tracking-wider">Enterprise Wellness</span>
               </div>
-              <Button 
-                size="lg" 
-                className="gap-2 mt-8"
-                onClick={() => navigate('/enterprise/pricing')}
-              >
-                Explore the corporate system
-                <ArrowRight className="w-4 h-4" />
+              <h1 className="text-hero-display font-bold mb-6 bg-gradient-to-r from-ivory via-pearl to-ivory bg-clip-text text-transparent">
+                Transform Your Team's Performance
+              </h1>
+              <p className="text-body-large text-pearl/90 max-w-3xl mx-auto leading-relaxed font-light">
+                Give your team premium cognitive tools, recovery protocols, and AI powered wellness. Cut burnout, boost productivity.
+              </p>
+            </div>
+
+            {/* Metrics Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-12">
+              <div className="text-center">
+                <div className="text-4xl font-bold mb-2 text-accent">47%</div>
+                <div className="text-sm font-semibold text-ivory">Increase in Focus</div>
+                <div className="text-xs text-mist/60 mt-1">Measured via cognitive tests</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl font-bold mb-2 text-accent">63%</div>
+                <div className="text-sm font-semibold text-ivory">Reduction in Burnout</div>
+                <div className="text-xs text-mist/60 mt-1">Employee wellness surveys</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl font-bold mb-2 text-accent">31%</div>
+                <div className="text-sm font-semibold text-ivory">Productivity Gain</div>
+                <div className="text-xs text-mist/60 mt-1">Output per employee</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl font-bold mb-2 text-accent">89%</div>
+                <div className="text-sm font-semibold text-ivory">Employee Satisfaction</div>
+                <div className="text-xs text-mist/60 mt-1">Programme NPS score</div>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <Button size="lg" className="gap-2 bg-carbon hover:bg-slate text-ivory shadow-lg hover:shadow-xl transition-all">
+                <Download className="w-5 h-5" />
+                Download Partnership Overview PDF
               </Button>
             </div>
           </div>
         </section>
 
-        {/* The Problem */}
-        <section ref={problem.ref} className={`py-20 bg-pearl transition-all duration-1000 ${problem.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto px-6 max-w-6xl">
-            <div className="grid md:grid-cols-2 gap-16 items-center">
-              <div className="space-y-6">
-                <h2 className="text-4xl md:text-5xl font-bold text-carbon">
-                  Corporate wellness is broken
-                </h2>
-                <p className="text-lg text-stone leading-relaxed">
-                  Meditation apps yoga sessions and wellbeing platforms are not solving burnout brain fog or declining productivity. Companies keep spending employees keep struggling. People do not need more calm they need a sharper mind. They need the ability to think clearly recover quickly and perform at a high level every day. Nobody is addressing this in a meaningful way until now.
-                </p>
-              </div>
-              <div className="bg-background rounded-3xl p-8 shadow-lg">
-                <div className="space-y-6">
-                  <div className="flex items-start gap-4 pb-6 border-b border-mist">
-                    <div className="p-3 rounded-full bg-destructive/10">
-                      <X className="w-6 h-6 text-destructive" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-carbon mb-2">Old Approach</h3>
-                      <p className="text-sm text-stone">Meditation apps, yoga sessions, wellbeing platforms</p>
-                      <p className="text-xs text-ash mt-1">No measurable impact on cognitive performance</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4 pt-2">
-                    <div className="p-3 rounded-full bg-primary/10">
-                      <CheckCircle2 className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-carbon mb-2">NeuroState Approach</h3>
-                      <p className="text-sm text-stone">Cognitive performance system with measurable outcomes</p>
-                      <p className="text-xs text-primary mt-1">Engineered for focus, clarity, and resilience</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* What We Deliver */}
-        <section ref={delivery.ref} className={`py-20 transition-all duration-1000 ${delivery.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto px-6 max-w-6xl">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-carbon mb-6">
-                A cognitive performance system<br />for modern teams
+        {/* ROI Calculator */}
+        <section ref={roiRef} className={`py-20 bg-ivory transition-all duration-1000 ${roiVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="text-center mb-12">
+              <h2 className="text-large-display font-bold mb-4 text-carbon">
+                Work Out Your ROI
               </h2>
-              <p className="text-lg text-stone max-w-3xl mx-auto leading-relaxed">
-                NeuroState gives organisations a complete ecosystem designed to enhance focus energy resilience and clarity. Our system includes:
+              <p className="text-body text-stone font-light max-w-2xl mx-auto">
+                See what NeuroState does for your numbers. Pick your industry and adjust the sliders to match your team.
               </p>
             </div>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                {
-                  icon: Brain,
-                  title: "Nova AI",
-                  description: "Your personal cognitive coach"
-                },
-                {
-                  icon: Zap,
-                  title: "Neuromodulation devices",
-                  description: "Shift mental state instantly for deep focus or rapid recovery"
-                },
-                {
-                  icon: Package,
-                  title: "Clinical supplements",
-                  description: "Shipped every month to every employee"
-                },
-                {
-                  icon: LineChart,
-                  title: "Wearable integrations",
-                  description: "Clear insights from your existing devices"
-                },
-                {
-                  icon: TrendingUp,
-                  title: "Behaviour analytics",
-                  description: "Track team improvements in real time"
-                },
-                {
-                  icon: Users,
-                  title: "Performance programmes",
-                  description: "Education built for busy professionals"
-                }
-              ].map((item, index) => (
-                <div 
-                  key={index}
-                  className="bg-pearl rounded-2xl p-8 hover:shadow-lg transition-all duration-300 group"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <div className="p-3 rounded-full bg-primary/10 w-fit mb-4 group-hover:bg-primary/20 transition-colors">
-                    <item.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-carbon mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-stone text-sm leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
-              ))}
-            </div>
+
+            <CorporateROICalculator />
           </div>
         </section>
 
-        {/* Why It Matters */}
-        <section ref={impact.ref} className={`py-20 bg-slate transition-all duration-1000 ${impact.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto px-6 max-w-6xl">
-            <div className="grid md:grid-cols-2 gap-16 items-center">
-              <div className="order-2 md:order-1">
-                <div className="bg-background rounded-3xl p-8 shadow-xl">
-                  <div className="space-y-4">
-                    {[
-                      { label: "Concentration", value: "+47%" },
-                      { label: "Decision Speed", value: "+31%" },
-                      { label: "Emotional Control", value: "+56%" },
-                      { label: "Burnout Rate", value: "-63%" },
-                      { label: "Creative Output", value: "+42%" },
-                      { label: "Quality Score", value: "+38%" }
-                    ].map((metric, index) => (
-                      <div key={index} className="flex items-center justify-between pb-3 border-b border-mist last:border-0">
-                        <span className="text-sm font-medium text-stone">{metric.label}</span>
-                        <span className="text-2xl font-bold text-primary">{metric.value}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-6 order-1 md:order-2">
-                <h2 className="text-4xl md:text-5xl font-bold text-ivory">
-                  High performing minds build high performing companies
-                </h2>
-                <div className="text-lg text-mist leading-relaxed space-y-4">
-                  <p>
-                    When your people think better everything improves. Better concentration. Faster decisions. Stronger emotional control. Less burnout. More creativity. Higher quality output every day.
-                  </p>
-                  <p className="font-semibold text-ivory">
-                    NeuroState strengthens the foundation of performance the mind.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Subscription Model */}
-        <section ref={subscription.ref} className={`py-20 transition-all duration-1000 ${subscription.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto px-6 max-w-6xl">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-carbon mb-6">
-                Cognitive performance delivered every month
+        {/* Customer Success Metrics Dashboard */}
+        <section className="py-20 bg-gradient-to-b from-pearl to-ivory">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="text-center mb-12">
+              <h2 className="text-large-display font-bold mb-4 text-carbon">
+                Live Customer Success Metrics
               </h2>
+              <p className="text-body text-stone max-w-2xl mx-auto">
+                Real time adoption rates, satisfaction scores, and team performance insights from our enterprise partners.
+              </p>
             </div>
 
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-pearl rounded-3xl p-10 space-y-8">
-                <p className="text-lg text-stone leading-relaxed">
-                  For the first time companies can sponsor a monthly cognitive performance subscription for every employee. They receive supplements delivered to their home. Personalised Nova AI coaching. Access to performance programmes. Hardware integrations. Continuous improvement.
+            <CustomerSuccessMetrics />
+          </div>
+        </section>
+
+        {/* Demo Video Section */}
+        <section className="py-20 bg-ivory">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="text-center mb-12">
+              <h2 className="text-large-display font-bold mb-4 text-carbon">
+                See NeuroState in Action
+              </h2>
+              <p className="text-body text-stone max-w-2xl mx-auto">
+                Watch how leading organisations integrate NeuroState into their wellness programmes and transform team performance.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="group relative bg-pearl rounded-3xl overflow-hidden shadow-soft hover:shadow-lg transition-all">
+                <div className="relative aspect-video bg-gradient-to-br from-slate to-carbon flex items-center justify-center cursor-pointer">
+                  <div className="absolute top-4 right-4 z-10 px-4 py-2 bg-carbon/80 backdrop-blur-sm rounded-full border border-ivory/20">
+                    <span className="text-xs font-bold text-ivory uppercase tracking-wider">Coming Soon</span>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-carbon/80 to-slate/80 flex items-center justify-center">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-ivory/10 rounded-full blur-2xl" />
+                      <div className="relative w-20 h-20 rounded-full bg-ivory flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg className="w-10 h-10 text-carbon ml-1" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold text-carbon mb-3">Platform Overview</h3>
+                  <p className="text-body text-stone">Complete walkthrough of the NeuroState enterprise dashboard, Nova AI integration, and team analytics.</p>
+                </div>
+              </div>
+
+              <div className="group relative bg-pearl rounded-3xl overflow-hidden shadow-soft hover:shadow-lg transition-all">
+                <div className="relative aspect-video bg-gradient-to-br from-slate to-carbon flex items-center justify-center cursor-pointer">
+                  <div className="absolute top-4 right-4 z-10 px-4 py-2 bg-carbon/80 backdrop-blur-sm rounded-full border border-ivory/20">
+                    <span className="text-xs font-bold text-ivory uppercase tracking-wider">Coming Soon</span>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-carbon/80 to-slate/80 flex items-center justify-center">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-ivory/10 rounded-full blur-2xl" />
+                      <div className="relative w-20 h-20 rounded-full bg-ivory flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg className="w-10 h-10 text-carbon ml-1" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold text-carbon mb-3">Implementation Guide</h3>
+                  <p className="text-body text-stone">Step by step guide to rolling out NeuroState across your organisation in under 4 weeks.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Comparison Table */}
+        <section className="py-20 bg-ivory">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="text-center mb-12">
+              <h2 className="text-large-display font-bold mb-4 text-carbon">
+                NeuroState vs Traditional Wellness Programmes
+              </h2>
+              <p className="text-body text-stone max-w-2xl mx-auto">
+                See how NeuroState delivers measurable performance gains compared to generic wellness benefits.
+              </p>
+            </div>
+
+            <CorporateComparisonTable />
+          </div>
+        </section>
+
+        {/* What's Included */}
+        <section className="py-20 bg-gradient-to-b from-ivory to-pearl">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="text-center mb-16">
+              <h2 className="text-large-display font-bold mb-4 text-carbon">
+                What's Included
+              </h2>
+              <p className="text-body text-stone max-w-2xl mx-auto">
+                Comprehensive wellness platform built for enterprise teams
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-16">
+              <div className="text-center space-y-4">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-carbon/5 flex items-center justify-center">
+                  <Target className="w-8 h-8 text-carbon" />
+                </div>
+                <h3 className="text-xl font-semibold text-carbon">Nova AI Assistant</h3>
+                <p className="text-sm text-stone leading-relaxed">
+                  Personalised wellness protocols for every team member via chat, mobile app, or web dashboard.
                 </p>
-                <div className="bg-background rounded-2xl p-8">
-                  <p className="text-carbon font-semibold text-xl mb-4">
-                    This is a performance infrastructure not a perk
-                  </p>
-                  <p className="text-stone">
-                    It is designed for real measurable change
-                  </p>
+                <div className="text-xs text-ash">24/7 AI health coach</div>
+              </div>
+
+              <div className="text-center space-y-4">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-carbon/5 flex items-center justify-center">
+                  <TrendingUp className="w-8 h-8 text-carbon" />
                 </div>
-                <div className="grid md:grid-cols-3 gap-6 pt-4">
-                  {[
-                    { icon: Package, label: "Monthly supplements" },
-                    { icon: Brain, label: "Nova AI coaching" },
-                    { icon: TrendingUp, label: "Continuous tracking" }
-                  ].map((item, index) => (
-                    <div key={index} className="text-center space-y-3">
-                      <div className="p-4 rounded-full bg-primary/10 w-fit mx-auto">
-                        <item.icon className="w-6 h-6 text-primary" />
-                      </div>
-                      <p className="text-sm font-medium text-carbon">{item.label}</p>
-                    </div>
-                  ))}
+                <h3 className="text-xl font-semibold text-carbon">Team Dashboard</h3>
+                <p className="text-sm text-stone leading-relaxed">
+                  Aggregated wellness insights and engagement metrics for HR and leadership.
+                </p>
+                <div className="space-y-1 text-xs text-ash">
+                  <div>Employee productivity trends</div>
+                  <div>Burnout reduction metrics</div>
+                  <div>Focus & cognitive performance</div>
+                  <div>Team wellness engagement</div>
                 </div>
+              </div>
+
+              <div className="text-center space-y-4">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-carbon/5 flex items-center justify-center">
+                  <Shield className="w-8 h-8 text-carbon" />
+                </div>
+                <h3 className="text-xl font-semibold text-carbon">Premium Product Access</h3>
+                <p className="text-sm text-stone leading-relaxed">
+                  Discounted supplements, red light devices, and recovery products for your team.
+                </p>
+                <div className="text-xs text-ash">20 to 40% corporate discount</div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Measurable Impact */}
-        <section ref={metrics.ref} className={`py-20 bg-pearl transition-all duration-1000 ${metrics.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto px-6 max-w-6xl">
+        {/* Benefits Section */}
+        <section ref={benefitsRef} className={`py-20 bg-ivory transition-all duration-1000 ${benefitsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-carbon mb-6">
-                Real impact zero guesswork
+              <h2 className="text-large-display font-bold mb-4 text-carbon">
+                What You Get
               </h2>
             </div>
 
-            <div className="max-w-5xl mx-auto">
-              <div className="bg-background rounded-3xl p-10 shadow-xl">
-                <p className="text-lg text-stone mb-8">We track:</p>
-                <div className="grid md:grid-cols-2 gap-6">
-                  {[
-                    "Cognitive markers",
-                    "Stress and recovery scores",
-                    "Focus quality",
-                    "Protocol engagement",
-                    "Supplement adherence",
-                    "Team wide progress"
-                  ].map((metric, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
-                      <span className="text-carbon font-medium">{metric}</span>
+            <div className="grid md:grid-cols-2 gap-16">
+              {/* Productivity & Performance */}
+              <div className="space-y-6">
+                <h3 className="text-xl font-bold mb-8 text-carbon uppercase tracking-wide">
+                  Productivity & Performance
+                </h3>
+                <div className="space-y-6">
+                  <div className="flex gap-4">
+                    <CheckCircle2 className="w-6 h-6 text-carbon flex-shrink-0 mt-1" />
+                    <div>
+                      <div className="font-semibold text-carbon mb-1">Reduced Brain Fog</div>
+                      <div className="text-sm text-stone"><span className="text-accent font-semibold">47%</span> improvement in focus metrics</div>
                     </div>
-                  ))}
+                  </div>
+                  <div className="flex gap-4">
+                    <CheckCircle2 className="w-6 h-6 text-carbon flex-shrink-0 mt-1" />
+                    <div>
+                      <div className="font-semibold text-carbon mb-1">Enhanced Cognitive Function</div>
+                      <div className="text-sm text-stone"><span className="text-accent font-semibold">31%</span> increase in output per employee</div>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <CheckCircle2 className="w-6 h-6 text-carbon flex-shrink-0 mt-1" />
+                    <div>
+                      <div className="font-semibold text-carbon mb-1">Better Decision Making</div>
+                      <div className="text-sm text-stone"><span className="text-accent font-semibold">23%</span> faster problem solving</div>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <CheckCircle2 className="w-6 h-6 text-carbon flex-shrink-0 mt-1" />
+                    <div>
+                      <div className="font-semibold text-carbon mb-1">Sustained Energy</div>
+                      <div className="text-sm text-stone"><span className="text-accent font-semibold">41%</span> reduction in afternoon slumps</div>
+                    </div>
+                  </div>
                 </div>
-                <div className="mt-8 pt-8 border-t border-mist">
-                  <p className="text-carbon font-semibold text-lg">
-                    You finally get a wellbeing solution that produces actual results supported by real data
-                  </p>
+              </div>
+
+              {/* Retention & Culture */}
+              <div className="space-y-6">
+                <h3 className="text-xl font-bold mb-8 text-carbon uppercase tracking-wide">
+                  Retention & Culture
+                </h3>
+                <div className="space-y-6">
+                  <div className="flex gap-4">
+                    <CheckCircle2 className="w-6 h-6 text-carbon flex-shrink-0 mt-1" />
+                    <div>
+                      <div className="font-semibold text-carbon mb-1">Lower Burnout Rates</div>
+                      <div className="text-sm text-stone"><span className="text-accent font-semibold">63%</span> reduction in stress related leave</div>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <CheckCircle2 className="w-6 h-6 text-carbon flex-shrink-0 mt-1" />
+                    <div>
+                      <div className="font-semibold text-carbon mb-1">Improved Job Satisfaction</div>
+                      <div className="text-sm text-stone"><span className="text-accent font-semibold">89%</span> employee programme approval</div>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <CheckCircle2 className="w-6 h-6 text-carbon flex-shrink-0 mt-1" />
+                    <div>
+                      <div className="font-semibold text-carbon mb-1">Stronger Employer Brand</div>
+                      <div className="text-sm text-stone">Top tier wellness benefit</div>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <CheckCircle2 className="w-6 h-6 text-carbon flex-shrink-0 mt-1" />
+                    <div>
+                      <div className="font-semibold text-carbon mb-1">Reduced Turnover</div>
+                      <div className="text-sm text-stone"><span className="text-accent font-semibold">18%</span> improvement in retention</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Final CTA */}
-        <section ref={cta.ref} className={`py-32 bg-carbon transition-all duration-1000 ${cta.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto px-6 max-w-4xl text-center">
-            <h2 className="text-4xl md:text-6xl font-bold text-ivory mb-6">
-              Bring NeuroState into your organisation
-            </h2>
-            <p className="text-xl text-mist leading-relaxed mb-8">
-              This is the shift from wellness perks to engineered cognitive performance. If you want your people to think lead and perform at world class levels this is the system.
-            </p>
-            <Button 
-              size="lg" 
-              className="gap-2 bg-ivory text-carbon hover:bg-pearl"
-              onClick={() => navigate('/contact')}
-            >
-              Learn more
-              <ArrowRight className="w-4 h-4" />
-            </Button>
+        {/* Implementation Timeline */}
+        <section className="py-20 bg-gradient-to-b from-pearl to-ivory">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="text-center mb-16">
+              <h2 className="text-large-display font-bold mb-4 text-carbon">
+                Implementation Timeline
+              </h2>
+              <p className="text-body text-stone max-w-2xl mx-auto">
+                Go from contract to full deployment in under 4 weeks
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-4 gap-12">
+              <div className="space-y-4">
+                <div className="text-carbon font-bold mb-3">Week <span className="text-accent">1</span></div>
+                <div className="font-semibold text-carbon mb-3">Onboarding</div>
+                <ul className="space-y-2 text-sm text-stone">
+                  <li>• Contract signing</li>
+                  <li>• Team setup</li>
+                  <li>• Dashboard access</li>
+                  <li>• Admin training</li>
+                </ul>
+              </div>
+
+              <div className="space-y-4">
+                <div className="text-carbon font-bold mb-3">Week <span className="text-accent">2</span></div>
+                <div className="font-semibold text-carbon mb-3">Launch</div>
+                <ul className="space-y-2 text-sm text-stone">
+                  <li>• Employee invitations</li>
+                  <li>• Kickoff webinar</li>
+                  <li>• Nova onboarding</li>
+                  <li>• First orders</li>
+                </ul>
+              </div>
+
+              <div className="space-y-4">
+                <div className="text-carbon font-bold mb-3">Week <span className="text-accent">3 to 4</span></div>
+                <div className="font-semibold text-carbon mb-3">Adoption</div>
+                <ul className="space-y-2 text-sm text-stone">
+                  <li>• Usage monitoring</li>
+                  <li>• Support tickets</li>
+                  <li>• Feedback collection</li>
+                  <li>• Engagement boost</li>
+                </ul>
+              </div>
+
+              <div className="space-y-4">
+                <div className="text-carbon font-bold mb-3">Month <span className="text-accent">2+</span></div>
+                <div className="font-semibold text-carbon mb-3">Optimisation</div>
+                <ul className="space-y-2 text-sm text-stone">
+                  <li>• Performance review</li>
+                  <li>• ROI analysis</li>
+                  <li>• Programme refinement</li>
+                  <li>• Scale planning</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
-      </main>
 
-      <Footer />
+        {/* Contact Form */}
+        <section className="py-20 bg-ivory">
+          <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="text-center mb-12">
+              <h2 className="text-large-display font-bold mb-4 text-carbon">
+                Ready to Partner?
+              </h2>
+              <p className="text-body text-stone max-w-2xl mx-auto">
+                Schedule a demo with our partnerships team to discuss your organisation's needs.
+              </p>
+            </div>
+
+            <div className="bg-pearl rounded-3xl p-10 shadow-soft">
+              <form onSubmit={handleSubmit} className="space-y-6 mb-8">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <Input
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    required
+                  />
+                  <Input
+                    type="email"
+                    placeholder="Work Email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    required
+                  />
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-6">
+                  <Input
+                    placeholder="Company Name"
+                    value={formData.company}
+                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    required
+                  />
+                  <Input
+                    placeholder="Number of Employees"
+                    value={formData.employees}
+                    onChange={(e) => setFormData({ ...formData, employees: e.target.value })}
+                    required
+                  />
+                </div>
+
+                <Textarea
+                  placeholder="Tell us about your wellness goals..."
+                  value={formData.goals}
+                  onChange={(e) => setFormData({ ...formData, goals: e.target.value })}
+                  rows={4}
+                  required
+                />
+
+                <Button type="submit" size="lg" className="w-full">
+                  Schedule Partnership Demo
+                </Button>
+              </form>
+
+              <div className="text-center border-t border-mist pt-8">
+                <div className="text-sm text-stone mb-4">Prefer to speak with us directly?</div>
+                <div className="space-y-2">
+                  <div className="text-carbon font-medium">
+                    Email: <a href="mailto:partnerships@neurostate.co.uk" className="text-accent hover:underline">partnerships@neurostate.co.uk</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Navigation Cards */}
+        <section className="py-16">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="text-center mb-10">
+              <h3 className="text-xl font-semibold text-stone mb-2">Explore Partnership Resources</h3>
+              <p className="text-stone/60 text-sm">Everything you need to evaluate NeuroState for your organisation</p>
+            </div>
+
+            <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-4">
+              <Link 
+                to="/corporate/overview" 
+                className="group bg-pearl/50 rounded-2xl p-5 hover:bg-pearl transition-colors"
+              >
+                <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-accent/15 transition-colors">
+                  <FileText className="w-5 h-5 text-accent" />
+                </div>
+                <div className="text-sm font-semibold text-carbon mb-1">Programme Overview</div>
+                <div className="text-xs text-stone">Core benefits and metrics</div>
+              </Link>
+
+              <Link 
+                to="/enterprise/corporate/integrations" 
+                className="group bg-pearl/50 rounded-2xl p-5 hover:bg-pearl transition-colors"
+              >
+                <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-accent/15 transition-colors">
+                  <Layers className="w-5 h-5 text-accent" />
+                </div>
+                <div className="text-sm font-semibold text-carbon mb-1">Integrations</div>
+                <div className="text-xs text-stone">Connect your tools</div>
+              </Link>
+
+              <Link 
+                to="/enterprise/corporate/pricing" 
+                className="group bg-pearl/50 rounded-2xl p-5 hover:bg-pearl transition-colors"
+              >
+                <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-accent/15 transition-colors">
+                  <Calculator className="w-5 h-5 text-accent" />
+                </div>
+                <div className="text-sm font-semibold text-carbon mb-1">Pricing Calculator</div>
+                <div className="text-xs text-stone">Calculate your investment</div>
+              </Link>
+
+              <Link 
+                to="/enterprise/corporate/cases" 
+                className="group bg-pearl/50 rounded-2xl p-5 hover:bg-pearl transition-colors"
+              >
+                <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-accent/15 transition-colors">
+                  <Award className="w-5 h-5 text-accent" />
+                </div>
+                <div className="text-sm font-semibold text-carbon mb-1">Case Studies</div>
+                <div className="text-xs text-stone">Client success stories</div>
+              </Link>
+
+              <button 
+                className="group bg-pearl/50 rounded-2xl p-5 hover:bg-pearl transition-colors"
+              >
+                <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-accent/15 transition-colors">
+                  <Download className="w-5 h-5 text-accent" />
+                </div>
+                <div className="text-sm font-semibold text-carbon mb-1">Download Overview</div>
+                <div className="text-xs text-stone">Save for later</div>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <Footer />
+      </div>
     </>
   );
 }
