@@ -12,7 +12,6 @@ import ProductDetail from "./pages/ProductDetail";
 import CategoryProducts from "./pages/CategoryProducts";
 import Shop from "./pages/Shop";
 import Bundles from "./pages/Bundles";
-import Resources from "./pages/Resources";
 import Nova from "./pages/Nova";
 import NovaProtocols from "./pages/NovaProtocols";
 import ProtocolDetail from "./pages/ProtocolDetail";
@@ -79,7 +78,6 @@ const App = () => (
           <Route path="/category/:category" element={<CategoryProducts />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/bundles" element={<Bundles />} />
-          <Route path="/resources" element={<Resources />} />
           <Route path="/learning-path/:id" element={<LearningPathDetail />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/shipping" element={<Shipping />} />
