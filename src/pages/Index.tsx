@@ -12,7 +12,7 @@ import { ArrowRight, Brain, Lightbulb, Zap, Users, Building2, FlaskConical, Awar
 import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import novaIcon from "@/assets/neurostate-icon.svg";
-import redlightDevice from "@/assets/redlight.webp";
+import redlightDevice from "@/assets/redrestore-pro-panel-new.png";
 import heroSupplement from "@/assets/hero-supplement.png";
 
 const Index = () => {
