@@ -182,7 +182,7 @@ export const Header = () => {
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
-              {/* For Teams Dropdown */}
+               {/* For Teams Dropdown */}
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="bg-transparent text-carbon hover:bg-pearl data-[state=open]:bg-pearl text-ui-label">
                   For Teams
@@ -206,6 +206,16 @@ export const Header = () => {
                     ))}
                   </ul>
                 </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              {/* Nova AI Link */}
+              <NavigationMenuItem>
+                <Link
+                  to="/nova/overview"
+                  className="inline-flex h-10 items-center justify-center px-4 py-2 text-ui-label text-carbon transition-colors hover:bg-pearl rounded-lg"
+                >
+                  Nova AI
+                </Link>
               </NavigationMenuItem>
 
             </NavigationMenuList>
@@ -248,25 +258,6 @@ export const Header = () => {
                 <Search className="h-5 w-5" />
               </Button>
             )}
-            
-            {/* Desktop Chat Button */}
-            <Button 
-              variant="default"
-              onClick={() => {
-                setChatOpen(true);
-                setHasUnreadChat(false);
-                localStorage.setItem('nova-chat-visited', 'true');
-              }}
-              className="hidden lg:flex items-center gap-2 relative"
-            >
-              <Sparkles className="h-4 w-4" />
-              Ask Nova
-              {hasUnreadChat && (
-                <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 bg-red-500 hover:bg-red-500 flex items-center justify-center">
-                  <span className="text-xs text-white">1</span>
-                </Badge>
-              )}
-            </Button>
             
             {/* User Account Dropdown */}
             {user ? (
@@ -404,6 +395,15 @@ export const Header = () => {
                     </div>
                   </div>
 
+                  {/* Nova AI */}
+                  <Link
+                    to="/nova/overview"
+                    className="text-h3 hover:text-slate transition-colors text-carbon"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Nova AI
+                  </Link>
+
                   {/* Other Links */}
                   {otherLinks.map((link) => (
                     <Link
@@ -417,26 +417,6 @@ export const Header = () => {
                   ))}
 
                   <div className="pt-6 mt-4 space-y-4">
-                    <Button 
-                      variant="default"
-                      onClick={() => {
-                        setChatOpen(true);
-                        setMobileMenuOpen(false);
-                        setHasUnreadChat(false);
-                        localStorage.setItem('nova-chat-visited', 'true');
-                      }}
-                      className="w-full justify-start relative"
-                      size="lg"
-                    >
-                      <Sparkles className="h-5 w-5 mr-2" />
-                      Ask Nova
-                      {hasUnreadChat && (
-                        <Badge className="absolute top-2 right-2 h-5 w-5 rounded-full p-0 bg-red-500 hover:bg-red-500 flex items-center justify-center">
-                          <span className="text-xs text-white">1</span>
-                        </Badge>
-                      )}
-                    </Button>
-
                     {/* Mobile Search */}
                     <form onSubmit={handleSearch} className="flex flex-col gap-2">
                       <Input

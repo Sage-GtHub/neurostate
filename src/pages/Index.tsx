@@ -159,9 +159,6 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Nova Landing Section */}
-          <NovaLanding />
-
           {/* Red Light Device Section */}
           <section ref={device.ref} className={`relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl transition-all duration-1000 ${device.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             
