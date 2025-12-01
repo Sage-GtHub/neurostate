@@ -38,6 +38,11 @@ const categoryConfig = {
     title: "Performance",
     description: "Enhance athletic performance and endurance with cutting-edge supplements and recovery tools.",
     tags: ["performance", "athletic", "endurance", "energy", "creatine", "protein", "electrolyte", "recovery", "omega", "complex"]
+  },
+  redlight: {
+    title: "Red Light Therapy",
+    description: "Clinical-grade red light therapy devices for enhanced recovery, skin health, and cellular regeneration.",
+    tags: ["red-light", "red light", "LED", "therapy", "light therapy", "photobiomodulation", "PBM", "restore", "blanket", "panel", "mask", "face", "mini", "pro", "recovery"]
   }
 };
 
