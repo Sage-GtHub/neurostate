@@ -150,19 +150,12 @@ export const Header = () => {
 
               {/* Bundles Link */}
               <NavigationMenuItem>
-                <button
-                  onClick={() => {
-                    const bundlesSection = document.getElementById('bundles');
-                    if (bundlesSection) {
-                      bundlesSection.scrollIntoView({ behavior: 'smooth' });
-                    } else {
-                      navigate('/#bundles');
-                    }
-                  }}
-                  className="inline-flex h-10 items-center justify-center px-4 py-2 text-ui-label text-carbon transition-colors hover:bg-pearl rounded-lg cursor-pointer"
+                <Link
+                  to="/bundles"
+                  className="inline-flex h-10 items-center justify-center px-4 py-2 text-ui-label text-carbon transition-colors hover:bg-pearl rounded-lg"
                 >
                   Bundles
-                </button>
+                </Link>
               </NavigationMenuItem>
 
               {/* Guides Dropdown */}

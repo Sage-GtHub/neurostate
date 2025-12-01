@@ -4,7 +4,7 @@ import { SEO } from "@/components/SEO";
 import { OrganizationStructuredData } from "@/components/StructuredData";
 import { Footer } from "@/components/Footer";
 import { LiveChat } from "@/components/LiveChat";
-import { ProductBundles } from "@/components/ProductBundles";
+
 import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";
@@ -23,7 +23,6 @@ const Index = () => {
   const nova = useScrollAnimation();
   const device = useScrollAnimation();
   const supplements = useScrollAnimation();
-  const bundles = useScrollAnimation();
   const business = useScrollAnimation();
   const individuals = useScrollAnimation();
   const science = useScrollAnimation();
@@ -267,10 +266,6 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Product Bundles */}
-          <div ref={bundles.ref} className={`transition-all duration-1000 ${bundles.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <ProductBundles />
-          </div>
 
           {/* For Businesses */}
           <section ref={business.ref} className={`relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl transition-all duration-1000 ${business.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
