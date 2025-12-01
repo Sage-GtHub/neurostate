@@ -105,9 +105,7 @@ export const Header = () => {
     { label: "Health Clubs and Studios", href: "/enterprise/health-clubs/overview", icon: Zap },
   ];
 
-  const otherLinks = [
-    { label: "Resources", href: "/resources" },
-  ];
+  const otherLinks: { label: string; href: string }[] = [];
 
   return (
     <>
@@ -210,17 +208,6 @@ export const Header = () => {
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
-              {/* Other Links */}
-              {otherLinks.map((link) => (
-                <NavigationMenuItem key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="inline-flex h-10 items-center justify-center px-4 py-2 text-ui-label text-carbon transition-colors hover:bg-pearl rounded-lg"
-                  >
-                    {link.label}
-                  </Link>
-                </NavigationMenuItem>
-              ))}
             </NavigationMenuList>
           </NavigationMenu>
 
