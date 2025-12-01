@@ -126,7 +126,7 @@ const Index = () => {
                         </div>
                         <div>
                           <p className="text-carbon font-medium text-lg">Nova</p>
-                          <p className="text-stone text-sm">Online</p>
+                          <p className="text-accent text-sm">Online</p>
                         </div>
                       </div>
                       <div className="space-y-6">
