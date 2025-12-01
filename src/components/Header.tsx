@@ -1,7 +1,7 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
 import { GuestChatWidget } from "./GuestChatWidget";
-import { Search, User, Menu, X, Award, Sparkles, LogOut, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target } from "lucide-react";
+import { Search, User, Menu, X, Award, Sparkles, LogOut, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target, Lightbulb } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { Input } from "./ui/input";
@@ -84,6 +84,7 @@ export const Header = () => {
   const shopCategories = [
     { label: "All Products", href: "/shop", icon: Package },
     { label: "Supplements", href: "/category/supplements", icon: Droplets },
+    { label: "Red Light Therapy", href: "/category/redlight", icon: Lightbulb },
     { label: "Recovery Devices", href: "/category/devices", icon: Activity },
     { label: "Sleep Support", href: "/category/sleep", icon: Moon },
     { label: "Cognitive Enhancement", href: "/category/cognitive", icon: Brain },
