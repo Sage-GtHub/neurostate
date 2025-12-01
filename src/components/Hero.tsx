@@ -28,7 +28,7 @@ const Hero = () => {
 
           <p className="text-xl md:text-2xl text-ash max-w-3xl mx-auto font-light leading-relaxed">
             AI-powered performance optimisation, photobiomodulation devices, 
-            and precision supplements for the modern human.
+            and cognitive supplements for the modern human.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-10">
