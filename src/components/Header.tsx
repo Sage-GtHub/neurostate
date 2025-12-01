@@ -100,7 +100,8 @@ export const Header = () => {
   ];
 
   const enterpriseLinks = [
-    { label: "Corporate Wellness", href: "/corporate/overview", icon: Target },
+    { label: "Overview", href: "/enterprise/overview", icon: Target },
+    { label: "Corporate Wellness", href: "/enterprise/corporate/overview", icon: Target },
     { label: "Sports Organisations", href: "/enterprise/sports/overview", icon: Activity },
     { label: "Health Clubs and Studios", href: "/enterprise/health-clubs/overview", icon: Zap },
   ];

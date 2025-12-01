@@ -43,7 +43,7 @@ import SportsOverview from "./pages/SportsOverview";
 import HealthClubsOverview from "./pages/HealthClubsOverview";
 import EnterpriseIntegrations from "./pages/EnterpriseIntegrations";
 import EnterprisePricing from "./pages/EnterprisePricing";
-import CorporatePerformanceOverview from "./pages/CorporatePerformanceOverview";
+import EnterpriseOverview from "./pages/EnterpriseOverview";
 import EnterpriseCaseStudies from "./pages/EnterpriseCaseStudies";
 import SportsIntegrations from "./pages/SportsIntegrations";
 import SportsPricing from "./pages/SportsPricing";
@@ -104,9 +104,11 @@ const App = () => (
           <Route path="/nova/insights" element={<ProtectedRoute><NovaInsights /></ProtectedRoute>} />
           <Route path="/nova/devices" element={<ProtectedRoute><NovaDevices /></ProtectedRoute>} />
           <Route path="/nova/optimization" element={<ProtectedRoute><NovaProtocolOptimization /></ProtectedRoute>} />
+          {/* Enterprise Overview */}
+          <Route path="/enterprise/overview" element={<EnterpriseOverview />} />
+          
           {/* Corporate Wellness Routes */}
-          <Route path="/corporate/overview" element={<CorporatePerformanceOverview />} />
-          <Route path="/enterprise/overview" element={<ProgramOverview />} />
+          <Route path="/enterprise/corporate/overview" element={<ProgramOverview />} />
           <Route path="/enterprise/corporate/overview" element={<ProgramOverview />} />
           <Route path="/enterprise/corporate/integrations" element={<EnterpriseIntegrations />} />
           <Route path="/enterprise/corporate/pricing" element={<EnterprisePricing />} />
