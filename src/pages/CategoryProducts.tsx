@@ -8,11 +8,17 @@ import { Button } from "@/components/ui/button";
 import { Loader2, ArrowLeft } from "lucide-react";
 import { LiveChat } from "@/components/LiveChat";
 
-const categoryConfig = {
+const categoryConfig: Record<string, {
+  title: string;
+  description: string;
+  tags: string[];
+  excludeTypes?: string[];
+}> = {
   supplements: {
     title: "Supplements",
     description: "Premium, science-backed supplements for peak performance, recovery, and cognitive enhancement.",
-    tags: ["supplement", "supplements", "adaptogen", "stress", "recovery", "cognitive", "focus", "sleep", "performance", "protein", "collagen", "mineral", "trace", "electrolyte", "creatine", "magnesium", "omega", "marine", "whey", "ashwagandha", "rhodiola", "lion", "melatonin", "theanine", "valerian", "complex", "formula"]
+    tags: ["supplement", "supplements", "adaptogen", "stress", "cognitive", "focus", "performance", "protein", "collagen", "mineral", "trace", "electrolyte", "creatine", "magnesium", "omega", "marine", "whey", "ashwagandha", "rhodiola", "lion", "melatonin", "theanine", "valerian", "complex", "formula"],
+    excludeTypes: ["device", "technology", "recovery device", "red-light", "therapy device"]
   },
   devices: {
     title: "Recovery Devices",
@@ -60,6 +66,15 @@ const CategoryProducts = () => {
   const filteredProducts = products?.filter(product => {
     const productTags = product.node.tags || [];
     const productType = product.node.productType?.toLowerCase() || '';
+    
+    // Check if product type should be excluded (for supplements category)
+    if (config?.excludeTypes) {
+      const isExcluded = config.excludeTypes.some(excludeType => 
+        productType.includes(excludeType.toLowerCase()) ||
+        productTags.some(tag => tag.toLowerCase().includes(excludeType.toLowerCase()))
+      );
+      if (isExcluded) return false;
+    }
     
     return config?.tags.some(tag => 
       productTags.some(productTag => 
