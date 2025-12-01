@@ -23,7 +23,8 @@ const categoryConfig: Record<string, {
   devices: {
     title: "Recovery Devices",
     description: "Clinical-grade recovery devices engineered for optimal muscle repair, reduced inflammation, and accelerated healing.",
-    tags: ["device", "technology", "recovery", "recovery technology", "red-light", "red light", "LED", "therapy", "light therapy", "photobiomodulation", "PBM", "ice bath", "cold", "plunge", "cryotherapy", "sauna", "infrared", "PEMF", "electromagnetic", "blanket", "mask", "panel", "face", "cryo", "mini", "pro", "restore", "redrestore", "cryoplunge"]
+    tags: ["device", "technology", "recovery", "recovery technology", "red-light", "red light", "LED", "therapy", "light therapy", "photobiomodulation", "PBM", "ice bath", "cold", "plunge", "cryotherapy", "sauna", "infrared", "PEMF", "electromagnetic", "blanket", "mask", "panel", "face", "cryo", "mini", "pro", "restore", "redrestore", "cryoplunge"],
+    excludeTypes: ["supplement", "supplements", "adaptogen", "protein", "collagen powder", "vitamin", "mineral supplement", "nootropic"]
   },
   recovery: {
     title: "Recovery",
