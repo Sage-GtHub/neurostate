@@ -26,125 +26,108 @@ export default function EnterpriseOverview() {
       
       <main className="min-h-screen bg-background">
         {/* Hero Section */}
-        <section ref={hero.ref} className={`pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center space-y-4 sm:space-y-6">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-carbon leading-tight">
-                The new standard for<br />corporate performance
+        <section ref={hero.ref} className={`relative pt-32 sm:pt-40 pb-20 sm:pb-32 px-4 sm:px-6 transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="container mx-auto max-w-7xl">
+            <div className="text-center space-y-6 sm:space-y-8">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-carbon leading-[0.95] tracking-tight">
+                The world's first<br />
+                Cognitive Performance OS<br />
+                for Teams
               </h1>
-              <div className="space-y-3 sm:space-y-4 max-w-3xl mx-auto">
-                <p className="text-lg sm:text-xl md:text-2xl text-ash font-medium">
-                  Not another wellbeing perk
-                </p>
-                <p className="text-base sm:text-lg md:text-xl text-stone leading-relaxed px-4">
-                  A cognitive performance system that strengthens your workforce from the inside out<br className="hidden sm:inline" />
-                  <span className="text-carbon font-semibold">Think better, perform better, recover better</span>
-                </p>
-              </div>
-              <Button 
-                size="lg" 
-                className="gap-2 mt-6 sm:mt-8 min-h-[44px]"
-                onClick={() => window.scrollTo({ top: document.getElementById('categories')?.offsetTop || 0, behavior: 'smooth' })}
-              >
-                Explore the corporate system
-                <ArrowRight className="w-4 h-4" />
-              </Button>
+              <p className="text-lg sm:text-xl md:text-2xl text-stone max-w-3xl mx-auto leading-relaxed">
+                Not another wellbeing perk — a system that makes your people sharper, faster, focused
+              </p>
             </div>
           </div>
         </section>
 
         {/* The Problem */}
-        <section ref={problem.ref} className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-pearl transition-all duration-1000 ${problem.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto max-w-6xl">
-            <div className="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
-              <div className="space-y-4 sm:space-y-6">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-carbon">
-                  Corporate wellness is broken
-                </h2>
-                <p className="text-base sm:text-lg text-stone leading-relaxed">
-                  Meditation apps, yoga sessions, and wellbeing platforms are not solving burnout, brain fog, or declining productivity. Companies keep spending, employees keep struggling. People do not need more calm, they need a sharper mind. They need the ability to think clearly, recover quickly, and perform at a high level every day. Nobody is addressing this in a meaningful way, until now.
+        <section ref={problem.ref} className={`py-20 sm:py-32 px-4 sm:px-6 bg-carbon transition-all duration-1000 ${problem.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="container mx-auto max-w-7xl">
+            <div className="max-w-5xl mx-auto text-center space-y-8 sm:space-y-12">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-ivory leading-tight tracking-tight">
+                Corporate wellness is broken
+              </h2>
+              <div className="space-y-6 text-base sm:text-lg md:text-xl text-mist leading-relaxed">
+                <p>
+                  Companies spend billions on meditation apps, yoga classes and "mindfulness benefits" that nobody uses
                 </p>
-              </div>
-              <div className="bg-background rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg">
-                <div className="space-y-4 sm:space-y-6">
-                  <div className="flex items-start gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-mist">
-                    <div className="p-2 sm:p-3 rounded-full bg-destructive/10 flex-shrink-0">
-                      <X className="w-5 h-5 sm:w-6 sm:h-6 text-destructive" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-carbon mb-1 sm:mb-2">Old Approach</h3>
-                      <p className="text-xs sm:text-sm text-stone">Meditation apps, yoga sessions, wellbeing platforms</p>
-                      <p className="text-xs text-ash mt-1">No measurable impact on cognitive performance</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3 sm:gap-4 pt-2">
-                    <div className="p-2 sm:p-3 rounded-full bg-primary/10 flex-shrink-0">
-                      <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-carbon mb-1 sm:mb-2">NeuroState Approach</h3>
-                      <p className="text-xs sm:text-sm text-stone">Cognitive performance system with measurable outcomes</p>
-                      <p className="text-xs text-primary mt-1">Engineered for focus, clarity, and resilience</p>
-                    </div>
-                  </div>
-                </div>
+                <p>
+                  Employees are still tired. Burnt out. Distracted
+                </p>
+                <p className="text-ivory font-semibold text-xl sm:text-2xl">
+                  Because calm is not performance
+                </p>
+                <p>
+                  What teams need is a stronger brain — not another relaxation tool
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* What We Deliver */}
-        <section ref={delivery.ref} className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 transition-all duration-1000 ${delivery.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-10 sm:mb-12 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-carbon mb-4 sm:mb-6">
-                A cognitive performance system<br className="hidden sm:inline" />for modern teams
+        {/* Solution Section */}
+        <section ref={delivery.ref} className={`py-20 sm:py-32 px-4 sm:px-6 transition-all duration-1000 ${delivery.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="container mx-auto max-w-7xl">
+            <div className="text-center mb-16 sm:mb-24">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-carbon mb-6 sm:mb-8 leading-tight tracking-tight">
+                NeuroState is the first system<br />built for cognitive output
               </h2>
-              <p className="text-base sm:text-lg text-stone max-w-3xl mx-auto leading-relaxed px-4">
-                NeuroState gives organisations a complete ecosystem designed to enhance focus, energy, resilience, and clarity. Our system includes:
+              <div className="flex flex-wrap justify-center gap-3 sm:gap-4 max-w-4xl mx-auto">
+                {[
+                  "Red light neuromodulation",
+                  "Clinical-grade supplement protocols",
+                  "AI coaching",
+                  "Behavioural optimisation"
+                ].map((item, index) => (
+                  <div 
+                    key={index}
+                    className="px-6 py-3 bg-pearl border border-mist text-carbon text-sm sm:text-base font-medium"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+              <p className="text-base sm:text-lg text-stone mt-8 max-w-2xl mx-auto">
+                All delivered in one integrated ecosystem
               </p>
             </div>
             
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {[
                 {
-                  title: "Nova AI your personal cognitive coach",
-                  description: "AI powered guidance tailored to each team member"
+                  title: "Monthly supplement delivery",
+                  description: "Clinical-grade protocols shipped directly to employees"
                 },
                 {
-                  title: "Neuromodulation devices",
-                  description: "Shift mental state instantly for deep focus or rapid recovery"
+                  title: "Red-light neuromodulation",
+                  description: "Devices integrated with Nova AI for cognitive enhancement"
                 },
                 {
-                  title: "Clinically supported supplements",
-                  description: "Shipped every month to every employee"
+                  title: "Nova AI assistant",
+                  description: "24/7 performance coaching for sleep, focus, recovery and routines"
                 },
                 {
-                  title: "Wearable integrations",
-                  description: "Clear insights from existing devices"
+                  title: "Employer dashboard",
+                  description: "Real-time insights, ROI analytics and usage tracking"
                 },
                 {
-                  title: "Behaviour analytics",
-                  description: "Track team improvements in real time"
+                  title: "Wearable integration",
+                  description: "Seamless data sync from existing devices"
                 },
                 {
-                  title: "Performance programmes and education",
-                  description: "Built for busy professionals"
-                },
-                {
-                  title: "Plug and play performance rooms",
-                  description: "Brain upgrade zones inside your office"
+                  title: "Performance zones",
+                  description: "Optional on-site setups for brain optimisation"
                 }
               ].map((item, index) => (
                 <div 
                   key={index}
-                  className="bg-pearl rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 hover:shadow-lg transition-all duration-300"
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  className="group p-8 sm:p-10 bg-pearl hover:bg-mist transition-all duration-300"
                 >
-                  <h3 className="text-base sm:text-lg md:text-xl font-semibold text-carbon mb-2">
+                  <h3 className="text-lg sm:text-xl font-bold text-carbon mb-3 group-hover:text-primary transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-stone text-xs sm:text-sm leading-relaxed">
+                  <p className="text-stone text-sm sm:text-base leading-relaxed">
                     {item.description}
                   </p>
                 </div>
@@ -153,123 +136,40 @@ export default function EnterpriseOverview() {
           </div>
         </section>
 
-        {/* Why It Matters */}
-        <section ref={impact.ref} className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-slate transition-all duration-1000 ${impact.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto max-w-6xl">
-            <div className="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
-              <div className="order-2 md:order-1">
-                <div className="bg-background rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-xl">
-                  <div className="space-y-3 sm:space-y-4">
-                    {[
-                      { label: "Better concentration", metric: null },
-                      { label: "Faster decisions", metric: null },
-                      { label: "Stronger emotional control", metric: null },
-                      { label: "Less burnout", metric: null },
-                      { label: "More creativity", metric: null },
-                      { label: "Higher quality output every day", metric: null }
-                    ].map((item, index) => (
-                      <div key={index} className="flex items-center gap-3 pb-3 border-b border-mist last:border-0">
-                        <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
-                        <span className="text-sm font-medium text-carbon">{item.label}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-4 sm:space-y-6 order-1 md:order-2">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-ivory">
-                  High performing minds build high performing companies
-                </h2>
-                <div className="text-base sm:text-lg text-mist leading-relaxed space-y-3 sm:space-y-4">
-                  <p>
-                    When your people think better, everything improves. Better concentration. Faster decisions. Stronger emotional control. Less burnout. More creativity. Higher quality output every day.
-                  </p>
-                  <p className="font-semibold text-ivory">
-                    NeuroState strengthens the foundation of performance: the mind.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Subscription Model */}
-        <section ref={subscription.ref} className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 transition-all duration-1000 ${subscription.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-10 sm:mb-12 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-carbon mb-4 sm:mb-6">
-                Cognitive performance delivered every month
+        {/* Value for Employers */}
+        <section ref={impact.ref} className={`py-20 sm:py-32 px-4 sm:px-6 bg-pearl transition-all duration-1000 ${impact.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="container mx-auto max-w-7xl">
+            <div className="text-center mb-16 sm:mb-20">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-carbon mb-6 leading-tight tracking-tight">
+                Value for employers
               </h2>
             </div>
-
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-pearl rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 space-y-6 sm:space-y-8">
-                <p className="text-base sm:text-lg text-stone leading-relaxed">
-                  For the first time, companies can sponsor a monthly cognitive performance subscription for every employee. They receive supplements delivered to their home, personalised Nova AI coaching, access to performance programmes, hardware integrations, and continuous improvement tracking.
-                </p>
-                <div className="bg-background rounded-xl sm:rounded-2xl p-6 sm:p-8">
-                  <p className="text-carbon font-semibold text-lg sm:text-xl mb-3 sm:mb-4">
-                    This is a performance infrastructure, not a perk
-                  </p>
-                  <p className="text-sm sm:text-base text-stone">
-                    It is designed for real measurable change
+            
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 max-w-6xl mx-auto">
+              {[
+                "Better focus",
+                "Better memory",
+                "Better energy",
+                "Fewer mistakes",
+                "Faster thinking",
+                "Higher output per employee",
+                "Retention improvement",
+                "A benefit people actually use"
+              ].map((item, index) => (
+                <div 
+                  key={index}
+                  className="text-center space-y-3"
+                >
+                  <div className="w-2 h-2 bg-primary mx-auto rounded-full"></div>
+                  <p className="text-base sm:text-lg font-semibold text-carbon">
+                    {item}
                   </p>
                 </div>
-                <div className="grid sm:grid-cols-3 gap-4 sm:gap-6 pt-4">
-                  {[
-                    { icon: Package, label: "Monthly supplements" },
-                    { icon: CheckCircle2, label: "Nova AI coaching" },
-                    { icon: TrendingUp, label: "Continuous tracking" }
-                  ].map((item, index) => (
-                    <div key={index} className="text-center space-y-2 sm:space-y-3">
-                      <div className="p-3 sm:p-4 rounded-full bg-primary/10 w-fit mx-auto">
-                        <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
-                      </div>
-                      <p className="text-xs sm:text-sm font-medium text-carbon">{item.label}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Measurable Impact */}
-        <section ref={metrics.ref} className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-pearl transition-all duration-1000 ${metrics.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-10 sm:mb-12 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-carbon mb-4 sm:mb-6">
-                Real impact zero guesswork
-              </h2>
-            </div>
-
-            <div className="max-w-5xl mx-auto">
-              <div className="bg-background rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl">
-                <p className="text-base sm:text-lg text-stone mb-6 sm:mb-8">We track:</p>
-                <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
-                  {[
-                    "Cognitive markers",
-                    "Stress and recovery scores",
-                    "Focus quality",
-                    "Protocol engagement",
-                    "Supplement adherence",
-                    "Team wide progress"
-                  ].map((metric, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
-                      <span className="text-carbon font-medium">{metric}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-mist">
-                  <p className="text-carbon font-semibold text-base sm:text-lg">
-                    You finally get a wellbeing solution that produces actual results supported by real data
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Three Categories Section */}
         <section id="categories" ref={categories.ref} className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-background transition-all duration-1000 ${categories.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -339,21 +239,21 @@ export default function EnterpriseOverview() {
         </section>
 
         {/* Final CTA */}
-        <section ref={cta.ref} className={`py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-carbon transition-all duration-1000 ${cta.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto max-w-4xl text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-ivory mb-4 sm:mb-6">
-              Bring NeuroState into your organisation
+        <section ref={cta.ref} className={`py-24 sm:py-40 px-4 sm:px-6 bg-carbon transition-all duration-1000 ${cta.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="container mx-auto max-w-5xl text-center space-y-8 sm:space-y-10">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-ivory leading-tight tracking-tight">
+              Show them the future
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-mist leading-relaxed mb-6 sm:mb-8 px-4">
-              This is the shift from wellness perks to engineered cognitive performance. If you want your people to think, lead, and perform at world class levels, this is the system.
+            <p className="text-lg sm:text-xl md:text-2xl text-mist leading-relaxed max-w-3xl mx-auto">
+              Invite NeuroState into your organisation
             </p>
             <Button 
               size="lg" 
-              className="gap-2 bg-ivory text-carbon hover:bg-pearl min-h-[44px]"
+              className="gap-2 bg-ivory text-carbon hover:bg-mist min-h-[44px] px-8 sm:px-10 text-base sm:text-lg font-semibold"
               onClick={() => window.location.href = '/contact'}
             >
-              Learn more
-              <ArrowRight className="w-4 h-4" />
+              Get Started
+              <ArrowRight className="w-5 h-5" />
             </Button>
           </div>
         </section>
