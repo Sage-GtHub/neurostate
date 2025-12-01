@@ -386,10 +386,6 @@ export default function NovaOverview() {
                 </div>
               ))}
             </div>
-            <Button size="lg" className="gap-2 rounded-full px-8" onClick={() => navigate('/resources')}>
-              <span>Explore Research Library</span>
-              <ArrowRight className="w-4 h-4" />
-            </Button>
           </div>
         </div>
       </div>
