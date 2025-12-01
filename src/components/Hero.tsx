@@ -16,7 +16,7 @@ const Hero = () => {
       {/* Content */}
       <div className={`relative z-10 container mx-auto px-6 md:px-12 lg:px-20 xl:px-32 py-32 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="max-w-6xl mx-auto text-center space-y-10">
-          <div className="inline-block px-6 py-3 bg-carbon/5 border border-carbon/10 mb-6">
+          <div className="inline-block mb-6">
             <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">
               Cognitive Performance Ecosystem
             </p>
