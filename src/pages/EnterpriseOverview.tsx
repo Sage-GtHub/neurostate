@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, X, Package, TrendingUp, Building2, Trophy, Dumbbell } from "lucide-react";
+import { ArrowRight, CheckCircle2, X, Package, TrendingUp, Briefcase, Trophy, Dumbbell } from "lucide-react";
 import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { Header } from "@/components/Header";
@@ -288,7 +288,7 @@ export default function EnterpriseOverview() {
               <Link to="/enterprise/corporate/overview" className="group">
                 <div className="bg-pearl rounded-3xl p-8 hover:shadow-xl transition-all h-full">
                   <div className="w-16 h-16 mb-6 rounded-full bg-carbon/5 flex items-center justify-center group-hover:bg-carbon/10 transition-colors">
-                    <Building2 className="w-8 h-8 text-carbon" />
+                    <Briefcase className="w-8 h-8 text-carbon" />
                   </div>
                   <h3 className="text-2xl font-bold text-carbon mb-3">Corporate Wellness</h3>
                   <p className="text-stone mb-6 leading-relaxed">
