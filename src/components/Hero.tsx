@@ -36,7 +36,7 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-10">
-            <Link to="/categories/supplements">
+            <Link to="/shop">
               <Button 
                 size="sm"
                 className="bg-carbon text-white hover:bg-slate rounded-full group transition-all duration-300 min-h-[44px] touch-manipulation"
