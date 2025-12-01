@@ -36,24 +36,24 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-10">
-            <Link to="/nova">
+            <Link to="/categories/supplements">
               <Button 
-                size="lg"
-                className="bg-carbon text-white hover:bg-slate text-base px-10 py-7 rounded-full group transition-all duration-300"
+                size="sm"
+                className="bg-carbon text-white hover:bg-slate rounded-full group transition-all duration-300 min-h-[44px] touch-manipulation"
               >
-                Explore the System
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                Explore Products
+                <ArrowRight className="ml-2 w-3 h-3 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer">
+            <Link to="/enterprise/corporate/overview">
               <Button 
                 variant="outline"
-                size="lg"
-                className="border-carbon/20 text-carbon hover:bg-carbon/5 text-base px-10 py-7 rounded-full transition-all duration-300"
+                size="sm"
+                className="border-carbon/20 text-carbon hover:bg-carbon/5 rounded-full transition-all duration-300 min-h-[44px] touch-manipulation"
               >
-                Watch Demo
+                For Teams
               </Button>
-            </a>
+            </Link>
           </div>
 
           {/* Scroll Indicator */}
