@@ -6,15 +6,16 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { SEO } from "@/components/SEO";
 import { Link } from "react-router-dom";
-import { Download, CheckCircle2, TrendingUp, Target, Shield, FileText, Layers, Calculator, Award } from "lucide-react";
+import { Download, CheckCircle2, TrendingUp, Target, Shield, ArrowRight, Building2, Trophy, Dumbbell } from "lucide-react";
 import { CorporateROICalculator } from "@/components/CorporateROICalculator";
 import { CorporateComparisonTable } from "@/components/CorporateComparisonTable";
 import { CustomerSuccessMetrics } from "@/components/CustomerSuccessMetrics";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-export default function CorporatePerformanceOverview() {
+export default function EnterpriseOverview() {
   const { ref: roiRef, isVisible: roiVisible } = useScrollAnimation({ threshold: 0.2 });
   const { ref: benefitsRef, isVisible: benefitsVisible } = useScrollAnimation({ threshold: 0.2 });
+  const { ref: categoriesRef, isVisible: categoriesVisible } = useScrollAnimation({ threshold: 0.2 });
   
   const [formData, setFormData] = useState({
     name: "",
@@ -32,14 +33,14 @@ export default function CorporatePerformanceOverview() {
   return (
     <>
       <SEO 
-        title="Corporate Wellness Overview | NeuroState"
+        title="Enterprise Overview | NeuroState"
         description="Partner with NeuroState to deliver premium cognitive enhancement and wellness optimisation to your team. Reduce burnout, boost productivity."
       />
       
       <div className="min-h-screen bg-ivory">
         <Header />
         
-        {/* Hero Section with Dynamic Gradient */}
+        {/* Hero Section */}
         <section className="relative overflow-hidden bg-gradient-to-br from-carbon via-slate/95 to-carbon text-ivory pt-32 pb-24">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.05),transparent_50%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.03),transparent_50%)]" />
@@ -90,8 +91,75 @@ export default function CorporatePerformanceOverview() {
           </div>
         </section>
 
+        {/* Three Categories Section */}
+        <section ref={categoriesRef} className={`py-20 bg-ivory transition-all duration-1000 ${categoriesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="text-center mb-16">
+              <h2 className="text-large-display font-bold mb-4 text-carbon">
+                Solutions for Every Organisation
+              </h2>
+              <p className="text-body text-stone max-w-2xl mx-auto">
+                Tailored performance programmes designed for your industry
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* Corporate Wellness */}
+              <Link to="/enterprise/corporate/overview" className="group">
+                <div className="bg-pearl rounded-3xl p-8 hover:shadow-lg transition-all h-full">
+                  <div className="w-16 h-16 mb-6 rounded-full bg-carbon/5 flex items-center justify-center group-hover:bg-carbon/10 transition-colors">
+                    <Building2 className="w-8 h-8 text-carbon" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-carbon mb-3">Corporate Wellness</h3>
+                  <p className="text-stone mb-6 leading-relaxed">
+                    Reduce burnout and boost productivity across your entire workforce with cognitive performance tools designed for busy professionals.
+                  </p>
+                  <div className="flex items-center gap-2 text-accent font-semibold group-hover:gap-3 transition-all">
+                    <span>Explore Corporate Solutions</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </div>
+                </div>
+              </Link>
+
+              {/* Sports Organisations */}
+              <Link to="/enterprise/sports/overview" className="group">
+                <div className="bg-pearl rounded-3xl p-8 hover:shadow-lg transition-all h-full">
+                  <div className="w-16 h-16 mb-6 rounded-full bg-carbon/5 flex items-center justify-center group-hover:bg-carbon/10 transition-colors">
+                    <Trophy className="w-8 h-8 text-carbon" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-carbon mb-3">Sports Organisations</h3>
+                  <p className="text-stone mb-6 leading-relaxed">
+                    Maximise athlete performance and reduce injury risk with cutting edge recovery protocols and cognitive training systems.
+                  </p>
+                  <div className="flex items-center gap-2 text-accent font-semibold group-hover:gap-3 transition-all">
+                    <span>Explore Sports Solutions</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </div>
+                </div>
+              </Link>
+
+              {/* Health Clubs and Studios */}
+              <Link to="/enterprise/health-clubs/overview" className="group">
+                <div className="bg-pearl rounded-3xl p-8 hover:shadow-lg transition-all h-full">
+                  <div className="w-16 h-16 mb-6 rounded-full bg-carbon/5 flex items-center justify-center group-hover:bg-carbon/10 transition-colors">
+                    <Dumbbell className="w-8 h-8 text-carbon" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-carbon mb-3">Health Clubs and Studios</h3>
+                  <p className="text-stone mb-6 leading-relaxed">
+                    Differentiate your facility and increase member retention with exclusive premium wellness and recovery technologies.
+                  </p>
+                  <div className="flex items-center gap-2 text-accent font-semibold group-hover:gap-3 transition-all">
+                    <span>Explore Facility Solutions</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </div>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* ROI Calculator */}
-        <section ref={roiRef} className={`py-20 bg-ivory transition-all duration-1000 ${roiVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <section ref={roiRef} className={`py-20 bg-gradient-to-b from-pearl to-ivory transition-all duration-1000 ${roiVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center mb-12">
               <h2 className="text-large-display font-bold mb-4 text-carbon">
@@ -107,7 +175,7 @@ export default function CorporatePerformanceOverview() {
         </section>
 
         {/* Customer Success Metrics Dashboard */}
-        <section className="py-20 bg-gradient-to-b from-pearl to-ivory">
+        <section className="py-20 bg-ivory">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center mb-12">
               <h2 className="text-large-display font-bold mb-4 text-carbon">
@@ -123,7 +191,7 @@ export default function CorporatePerformanceOverview() {
         </section>
 
         {/* Demo Video Section */}
-        <section className="py-20 bg-ivory">
+        <section className="py-20 bg-gradient-to-b from-pearl to-ivory">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center mb-12">
               <h2 className="text-large-display font-bold mb-4 text-carbon">
@@ -135,7 +203,7 @@ export default function CorporatePerformanceOverview() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="group relative bg-pearl rounded-3xl overflow-hidden shadow-soft hover:shadow-lg transition-all">
+              <div className="group relative bg-background rounded-3xl overflow-hidden shadow-soft hover:shadow-lg transition-all">
                 <div className="relative aspect-video bg-gradient-to-br from-slate to-carbon flex items-center justify-center cursor-pointer">
                   <div className="absolute top-4 right-4 z-10 px-4 py-2 bg-carbon/80 backdrop-blur-sm rounded-full border border-ivory/20">
                     <span className="text-xs font-bold text-ivory uppercase tracking-wider">Coming Soon</span>
@@ -157,7 +225,7 @@ export default function CorporatePerformanceOverview() {
                 </div>
               </div>
 
-              <div className="group relative bg-pearl rounded-3xl overflow-hidden shadow-soft hover:shadow-lg transition-all">
+              <div className="group relative bg-background rounded-3xl overflow-hidden shadow-soft hover:shadow-lg transition-all">
                 <div className="relative aspect-video bg-gradient-to-br from-slate to-carbon flex items-center justify-center cursor-pointer">
                   <div className="absolute top-4 right-4 z-10 px-4 py-2 bg-carbon/80 backdrop-blur-sm rounded-full border border-ivory/20">
                     <span className="text-xs font-bold text-ivory uppercase tracking-wider">Coming Soon</span>
@@ -199,7 +267,7 @@ export default function CorporatePerformanceOverview() {
         </section>
 
         {/* What's Included */}
-        <section className="py-20 bg-gradient-to-b from-ivory to-pearl">
+        <section className="py-20 bg-gradient-to-b from-pearl to-ivory">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center mb-16">
               <h2 className="text-large-display font-bold mb-4 text-carbon">
@@ -465,72 +533,6 @@ export default function CorporatePerformanceOverview() {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Navigation Cards */}
-        <section className="py-16">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-            <div className="text-center mb-10">
-              <h3 className="text-xl font-semibold text-stone mb-2">Explore Partnership Resources</h3>
-              <p className="text-stone/60 text-sm">Everything you need to evaluate NeuroState for your organisation</p>
-            </div>
-
-            <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-4">
-              <Link 
-                to="/corporate/overview" 
-                className="group bg-pearl/50 rounded-2xl p-5 hover:bg-pearl transition-colors"
-              >
-                <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-accent/15 transition-colors">
-                  <FileText className="w-5 h-5 text-accent" />
-                </div>
-                <div className="text-sm font-semibold text-carbon mb-1">Programme Overview</div>
-                <div className="text-xs text-stone">Core benefits and metrics</div>
-              </Link>
-
-              <Link 
-                to="/enterprise/corporate/integrations" 
-                className="group bg-pearl/50 rounded-2xl p-5 hover:bg-pearl transition-colors"
-              >
-                <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-accent/15 transition-colors">
-                  <Layers className="w-5 h-5 text-accent" />
-                </div>
-                <div className="text-sm font-semibold text-carbon mb-1">Integrations</div>
-                <div className="text-xs text-stone">Connect your tools</div>
-              </Link>
-
-              <Link 
-                to="/enterprise/corporate/pricing" 
-                className="group bg-pearl/50 rounded-2xl p-5 hover:bg-pearl transition-colors"
-              >
-                <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-accent/15 transition-colors">
-                  <Calculator className="w-5 h-5 text-accent" />
-                </div>
-                <div className="text-sm font-semibold text-carbon mb-1">Pricing Calculator</div>
-                <div className="text-xs text-stone">Calculate your investment</div>
-              </Link>
-
-              <Link 
-                to="/enterprise/corporate/cases" 
-                className="group bg-pearl/50 rounded-2xl p-5 hover:bg-pearl transition-colors"
-              >
-                <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-accent/15 transition-colors">
-                  <Award className="w-5 h-5 text-accent" />
-                </div>
-                <div className="text-sm font-semibold text-carbon mb-1">Case Studies</div>
-                <div className="text-xs text-stone">Client success stories</div>
-              </Link>
-
-              <button 
-                className="group bg-pearl/50 rounded-2xl p-5 hover:bg-pearl transition-colors"
-              >
-                <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-accent/15 transition-colors">
-                  <Download className="w-5 h-5 text-accent" />
-                </div>
-                <div className="text-sm font-semibold text-carbon mb-1">Download Overview</div>
-                <div className="text-xs text-stone">Save for later</div>
-              </button>
             </div>
           </div>
         </section>
