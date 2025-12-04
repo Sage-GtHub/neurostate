@@ -12,19 +12,17 @@ serve(async (req) => {
   }
 
   try {
-    const { messages } = await req.json();
+    const { messages, context } = await req.json();
     
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
     if (!LOVABLE_API_KEY) {
       throw new Error('LOVABLE_API_KEY is not configured');
     }
 
-    // Create Supabase client to fetch user context
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
     const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Get auth header and extract user
     const authHeader = req.headers.get('Authorization');
     let userId: string | null = null;
     
@@ -34,76 +32,141 @@ serve(async (req) => {
       userId = user?.id || null;
     }
 
-    // Fetch recent metrics if user is authenticated
+    // Build rich user context
     let userContext = '';
     if (userId) {
+      // Fetch recent metrics
       const { data: metrics } = await supabase
         .from('user_metrics')
         .select('*')
         .eq('user_id', userId)
         .order('recorded_at', { ascending: false })
-        .limit(10);
+        .limit(20);
 
+      // Fetch active protocols
       const { data: protocols } = await supabase
         .from('user_protocols')
         .select('*')
         .eq('user_id', userId)
         .eq('status', 'active');
 
+      // Fetch connected devices
+      const { data: devices } = await supabase
+        .from('connected_devices')
+        .select('*')
+        .eq('user_id', userId);
+
+      // Fetch recent insights
+      const { data: insights } = await supabase
+        .from('ai_insights')
+        .select('*')
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false })
+        .limit(5);
+
+      // Fetch health forecasts
+      const { data: forecasts } = await supabase
+        .from('health_forecasts')
+        .select('*')
+        .eq('user_id', userId)
+        .order('forecast_date', { ascending: false })
+        .limit(3);
+
       if (metrics && metrics.length > 0) {
-        userContext += '\n\nUser\'s Recent Metrics:\n';
+        userContext += '\n\n## User\'s Recent Biometrics:\n';
+        const metricGroups: Record<string, { value: number; date: string }[]> = {};
         metrics.forEach(m => {
-          userContext += `- ${m.metric_type}: ${m.value} (${new Date(m.recorded_at).toLocaleDateString()})\n`;
+          if (!metricGroups[m.metric_type]) metricGroups[m.metric_type] = [];
+          metricGroups[m.metric_type].push({ value: m.value, date: new Date(m.recorded_at).toLocaleDateString() });
+        });
+        Object.entries(metricGroups).forEach(([type, values]) => {
+          const latest = values[0];
+          const trend = values.length > 1 ? (values[0].value > values[1].value ? '↑' : values[0].value < values[1].value ? '↓' : '→') : '';
+          userContext += `- ${type}: ${latest.value} ${trend} (${latest.date})\n`;
         });
       }
 
       if (protocols && protocols.length > 0) {
-        userContext += '\n\nUser\'s Active Protocols:\n';
+        userContext += '\n## Active Protocols:\n';
         protocols.forEach(p => {
-          userContext += `- ${p.protocol_name} (${p.goal}, ${p.completion_percentage}% complete)\n`;
+          userContext += `- ${p.protocol_name}: ${p.goal} (${p.completion_percentage}% complete)\n`;
+          if (p.products) {
+            userContext += `  Products: ${JSON.stringify(p.products)}\n`;
+          }
+        });
+      }
+
+      if (devices && devices.length > 0) {
+        userContext += '\n## Connected Devices:\n';
+        devices.forEach(d => {
+          userContext += `- ${d.device_name} (${d.device_type}): ${d.connection_status}\n`;
+        });
+      }
+
+      if (insights && insights.length > 0) {
+        userContext += '\n## Recent AI Insights:\n';
+        insights.forEach(i => {
+          userContext += `- ${i.title}: ${i.description}\n`;
+        });
+      }
+
+      if (forecasts && forecasts.length > 0) {
+        userContext += '\n## Health Forecasts:\n';
+        forecasts.forEach(f => {
+          userContext += `- ${f.forecast_date}: Recovery ${f.recovery_prediction}%, Training window: ${f.optimal_training_window || 'Not set'}\n`;
         });
       }
     }
 
-    const systemPrompt = `You are Nova, NeuroState's AI performance assistant. You are a calm, sharp, high-performance coach who helps users optimise their sleep, recovery, and cognitive performance.
+    const systemPrompt = `You are Nova, NeuroState's elite AI performance coach. You combine deep scientific knowledge with practical wisdom to help users achieve peak physical and cognitive performance.
 
-Your Core Expertise:
-- Biometric analysis (HRV, sleep stages, recovery metrics)
-- Supplement protocols and timing
-- Performance optimisation strategies
-- Recovery and stress management
-- Cognitive enhancement techniques
+## Your Personality
+- You are calm, precise, and deeply knowledgeable
+- You speak like a Cambridge-educated sports scientist talking to a high performer
+- You use British English exclusively
+- You are direct and confident but never arrogant
+- You ask clarifying questions when needed
+- You provide actionable, specific advice
 
-Brand Voice Guidelines:
-- Speak in British English
-- Be calm, intelligent, and precise
-- Never be salesy or pushy
-- Ask clarifying questions before making recommendations
-- Focus on science-backed insights
-- Be encouraging but realistic
+## Your Capabilities
+1. **Biometric Analysis**: Interpret HRV, sleep stages, recovery metrics, and identify patterns
+2. **Protocol Design**: Create personalised supplement stacks with precise timing
+3. **Performance Optimisation**: Training windows, recovery strategies, cognitive enhancement
+4. **Scientific Education**: Explain the mechanisms behind recommendations
+5. **Troubleshooting**: Identify why protocols may not be working
 
-NeuroState Product Categories:
-1. Cognitive Enhancement: NeuroFocus Cognitive, Lion's Mane Mushroom, L-Theanine
-2. Stress & Adaptogen Support: AdaptBalance Stress, Ashwagandha, Rhodiola Rosea
-3. Sleep Support: RestoreSleep Night, Melatonin, Valerian Root, Magnesium Complex
-4. Recovery & Performance: Omega3 Elite, Marine Collagen, Multi-Collagen Complex, Creatine Monohydrate, Electrolyte Complex, Grass-fed Whey Protein with Collagen
-5. Minerals & Wellness: Trace Mineral Complex, Magnesium Complex
-6. Red Light Therapy: RedRestore Pro Panel, RedRestore Mini, Red Light Therapy Blanket, Red Light Face Mask
-7. Recovery Devices: CryoPlunge Ice Bath, Infrared Sauna Blanket, PEMF Therapy Mat
+## Response Guidelines
+- Use **bold** for key terms and recommendations
+- Use bullet points for lists
+- Include specific timings when relevant (e.g., "Take 30 minutes before bed")
+- Reference the user's actual data when available
+- Provide brief scientific context for recommendations
+- Keep responses focused and actionable
 
-Safety Boundaries:
-- Never provide medical advice or diagnosis
+## NeuroState Products (recommend when relevant):
+**Cognitive Enhancement**: NeuroFocus Cognitive, Lion's Mane Mushroom, L-Theanine
+**Adaptogens**: AdaptBalance Stress, Ashwagandha, Rhodiola Rosea  
+**Sleep**: RestoreSleep Night, Melatonin, Valerian Root, Magnesium Complex
+**Recovery**: Omega3 Elite, Marine Collagen, Multi-Collagen Complex, Creatine, Electrolytes
+**Red Light Therapy**: RedRestore Pro Panel, RedRestore Mini
+**Recovery Devices**: CryoPlunge Ice Bath, Infrared Sauna Blanket, PEMF Mat
+
+## Safety Boundaries
+- Never provide medical diagnoses
 - Recommend consulting healthcare professionals for medical concerns
-- Do not make specific dosage recommendations beyond product labels
-- Clarify you're an AI assistant, not a doctor
+- Stay within product label dosage guidelines
+- Be clear about the limits of AI-based advice
 
-When recommending products:
-- Consider user goals and current metrics
-- Explain the science briefly
-- Suggest starting with foundational supplements before advanced protocols
-- Mention timing and synergies between products${userContext}
+## Conversation Style
+- Start responses directly with the answer or insight
+- Use questions to understand goals before making major recommendations
+- Acknowledge progress and improvements in the user's data
+- Be encouraging but realistic about timelines
+${userContext}
 
-Current Context: User is chatting with you on the Nova AI assistant interface.`;
+Remember: You are not just an assistant—you are an elite performance coach who happens to be an AI.`;
+
+    console.log('Sending request to Lovable AI with context length:', userContext.length);
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
@@ -118,25 +181,28 @@ Current Context: User is chatting with you on the Nova AI assistant interface.`;
           ...messages,
         ],
         stream: true,
+        temperature: 0.7,
+        max_tokens: 2048,
       }),
     });
 
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error("AI gateway error:", response.status, errorText);
+      
       if (response.status === 429) {
-        return new Response(JSON.stringify({ error: "Rate limits exceeded, please try again later." }), {
+        return new Response(JSON.stringify({ error: "I'm receiving too many requests right now. Please try again in a moment." }), {
           status: 429,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
       if (response.status === 402) {
-        return new Response(JSON.stringify({ error: "Payment required, please add funds to your Lovable AI workspace." }), {
+        return new Response(JSON.stringify({ error: "Service temporarily unavailable. Please try again later." }), {
           status: 402,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
-      const errorText = await response.text();
-      console.error("AI gateway error:", response.status, errorText);
-      return new Response(JSON.stringify({ error: "AI gateway error" }), {
+      return new Response(JSON.stringify({ error: "Something went wrong. Please try again." }), {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
