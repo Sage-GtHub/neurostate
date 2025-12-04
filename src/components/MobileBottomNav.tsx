@@ -56,7 +56,7 @@ export const MobileBottomNav = ({ onSearchOpen, onNovaOpen }: MobileBottomNavPro
 
   return (
     <>
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-t border-mist safe-area-bottom">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-ivory/95 backdrop-blur-lg border-t border-mist safe-area-bottom">
         <div className="flex items-center justify-around h-16 px-2">
           {navItems.map((item) => {
             const active = isActive(item.href, item.exact);
@@ -70,11 +70,11 @@ export const MobileBottomNav = ({ onSearchOpen, onNovaOpen }: MobileBottomNavPro
                 >
                   <item.icon 
                     className={`w-5 h-5 transition-colors ${
-                      active ? 'text-accent' : 'text-ash'
+                      active ? 'text-carbon' : 'text-stone'
                     }`} 
                   />
                   <span className={`text-[10px] font-medium transition-colors ${
-                    active ? 'text-accent' : 'text-ash'
+                    active ? 'text-carbon' : 'text-stone'
                   }`}>
                     {item.label}
                   </span>
@@ -90,11 +90,11 @@ export const MobileBottomNav = ({ onSearchOpen, onNovaOpen }: MobileBottomNavPro
               >
                 <item.icon 
                   className={`w-5 h-5 transition-colors ${
-                    active ? 'text-accent' : 'text-ash'
+                    active ? 'text-carbon' : 'text-stone'
                   }`} 
                 />
                 <span className={`text-[10px] font-medium transition-colors ${
-                  active ? 'text-accent' : 'text-ash'
+                  active ? 'text-carbon' : 'text-stone'
                 }`}>
                   {item.label}
                 </span>

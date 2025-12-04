@@ -79,10 +79,10 @@ export const Footer = () => {
         <div className="mb-12 sm:mb-16 md:mb-20 max-w-3xl">
           <Link to="/" className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
             <img src={logoIcon} alt="Neural Waveform" className="h-6 w-6 sm:h-8 sm:w-8 invert" />
-            <span className="text-xl sm:text-2xl md:text-h2 font-semibold">NEUROSTATE<sup className="text-[8px] sm:text-[10px]">®</sup></span>
+            <span className="text-xl sm:text-2xl md:text-h2 font-semibold tracking-tight">NEUROSTATE<sup className="text-[8px] sm:text-[10px]">®</sup></span>
           </Link>
-          <p className="text-body-large text-stone">
-            Personalised tools for your optimal state. Making the best recovery tools and supplements accessible to everyone, everywhere.
+          <p className="text-base text-stone max-w-lg">
+            The AI Operating System for Human Performance. Nova AI. Neuromodulation. Precision supplements. One integrated platform.
           </p>
         </div>
 
