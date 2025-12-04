@@ -56,7 +56,7 @@ const Index = () => {
                 {[
                   { icon: Brain, title: "Nova AI", desc: "Your cognitive coach", detail: "Learns. Adapts. Guides." },
                   { icon: Lightbulb, title: "Red Light", desc: "Cellular energy", detail: "660nm + 850nm." },
-                  { icon: Zap, title: "Supplements", desc: "Precision dosing", detail: "Third party tested." },
+                  { icon: Zap, title: "Supplements", desc: "Personalised dosing", detail: "Third party tested." },
                   { icon: FlaskConical, title: "Protocols", desc: "Evidence based", detail: "Personalised stacks." },
                 ].map((item, i) => (
                   <div 
