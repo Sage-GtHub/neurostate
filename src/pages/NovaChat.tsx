@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
-import { VoiceInterface } from "@/components/nova/VoiceInterface";
+
 import { SEO } from "@/components/SEO";
 import ReactMarkdown from "react-markdown";
 import { cn } from "@/lib/utils";
@@ -41,7 +41,7 @@ export default function NovaChat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isSpeaking, setIsSpeaking] = useState(false);
+  
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [isLoadingHistory, setIsLoadingHistory] = useState(true);
   const { toast } = useToast();
@@ -343,7 +343,6 @@ export default function NovaChat() {
                 </div>
               </div>
               <div className="flex items-center gap-1">
-                <VoiceInterface onSpeakingChange={setIsSpeaking} />
                 {messages.length > 0 && (
                   <Button
                     variant="ghost"
