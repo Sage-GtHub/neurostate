@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
@@ -39,23 +39,22 @@ const Hero = () => {
 
           {/* Two Customer Pathways */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-            <Link to="/nova" target="_blank">
+            <Link to="/shop">
               <Button 
                 size="sm"
                 className="bg-carbon text-white hover:bg-slate rounded-full group transition-all duration-300 min-h-[44px] touch-manipulation px-8"
               >
-                <Sparkles className="mr-2 w-3 h-3" />
-                Meet Nova AI
+                Shop Now
+                <ArrowRight className="ml-2 w-3 h-3 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <Link to="/shop">
+            <Link to="/enterprise/overview">
               <Button 
                 variant="outline"
                 size="sm"
                 className="border-carbon/20 text-carbon hover:bg-carbon/5 rounded-full transition-all duration-300 min-h-[44px] touch-manipulation px-8"
               >
-                Explore System
-                <ArrowRight className="ml-2 w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                For Teams
               </Button>
             </Link>
           </div>
