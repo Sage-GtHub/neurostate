@@ -64,7 +64,7 @@ serve(async (req) => {
       });
     });
 
-    const systemPrompt = `You are Nova, NeuroState's AI insights engine. Analyze biometric data and generate actionable insights.
+    const systemPrompt = `You are Nova, NeuroState's AI insights engine. Analyse biometric data and generate actionable insights.
 
 User's Biometric Data (Last 30 Days):
 ${JSON.stringify(metricsByType, null, 2)}
@@ -73,18 +73,18 @@ Generate 3-5 insights based on patterns, trends, and predictions in the data. Fo
 1. Declining performance warnings (HRV drops, poor sleep trends)
 2. Pattern recognition (consistent sleep issues, recovery cycles)
 3. Predictions (upcoming performance dips based on trends)
-4. Optimization opportunities (best training windows, supplement timing)
+4. Optimisation opportunities (best training windows, supplement timing)
 
 Return a JSON array of insights with this structure:
 [
   {
-    "type": "warning" | "pattern" | "prediction" | "optimization",
+    "type": "warning" | "pattern" | "prediction" | "optimisation",
     "title": "string (clear, actionable title)",
     "description": "string (detailed explanation with specific numbers)",
     "confidence": number (70-99, how confident the AI is),
     "timeframe": "string (e.g., '2-3 days', 'next week')",
     "recommendations": ["string", "string"] (2-3 specific actions),
-    "data_sources": ["metric_type", "metric_type"] (which metrics were analyzed)
+    "data_sources": ["metric_type", "metric_type"] (which metrics were analysed)
   }
 ]
 
@@ -104,7 +104,7 @@ Important:
         model: "google/gemini-2.5-flash",
         messages: [
           { role: "system", content: systemPrompt },
-          { role: "user", content: "Analyze my biometric data and generate insights." }
+          { role: "user", content: "Analyse my biometric data and generate insights." }
         ],
         tools: [
           {

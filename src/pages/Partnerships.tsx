@@ -45,7 +45,7 @@ const partners: Partner[] = [
   {
     name: "Premier Fitness Network",
     logo: "💪",
-    description: "Chain of premium fitness centers offering integrated health and recovery services.",
+    description: "Chain of premium fitness centres offering integrated health and recovery services.",
     category: "Fitness"
   },
   {

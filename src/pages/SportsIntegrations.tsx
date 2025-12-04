@@ -100,7 +100,7 @@ export default function SportsIntegrations() {
                 Performance Platform Integration
               </h1>
               <p className="text-body-large text-pearl max-w-3xl mx-auto">
-                NeuroState integrates with leading training apps and wearables, creating a unified performance optimization ecosystem for athletes and coaches.
+                NeuroState integrates with leading training apps and wearables, creating a unified performance optimisation ecosystem for athletes and coaches.
               </p>
             </div>
 
@@ -174,7 +174,7 @@ export default function SportsIntegrations() {
                   "HRV and recovery score sync",
                   "Sleep quality tracking",
                   "Strain and readiness metrics",
-                  "Personalized supplement timing",
+                  "Personalised supplement timing",
                   "Daily protocol adjustments"
                 ]}
               />
@@ -196,7 +196,7 @@ export default function SportsIntegrations() {
 
               <IntegrationCard
                 title="SSO & Security"
-                description="Enterprise-grade security for elite sports organizations"
+                description="Enterprise-grade security for elite sports organisations"
                 icon={<Shield className="w-6 h-6 text-accent" />}
                 setupTime="Dedicated support"
                 badge="Enterprise Only"

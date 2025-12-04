@@ -78,7 +78,7 @@ export default function SportsPricing() {
     <>
       <SEO 
         title="Sports Pricing Calculator | NeuroState"
-        description="Athlete-focused pricing with performance bundles and team discounts. Calculate your custom sports organization pricing."
+        description="Athlete-focused pricing with performance bundles and team discounts. Calculate your custom sports organisation pricing."
       />
       
       <div className="min-h-screen bg-ivory">

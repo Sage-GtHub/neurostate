@@ -174,7 +174,7 @@ export default function EnterpriseIntegrations() {
                   "Automatic supplement reminders based on schedule",
                   "Pre-meeting focus protocol suggestions",
                   "Post-workout recovery timing",
-                  "Sleep schedule optimization",
+                  "Sleep schedule optimisation",
                   "Travel timezone adjustments"
                 ]}
               />

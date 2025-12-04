@@ -148,7 +148,7 @@ export default function SportsCaseStudies() {
     <>
       <SEO 
         title="Sports Case Studies | NeuroState"
-        description="See how elite sports organizations use NeuroState to enhance athlete performance, accelerate recovery, and reduce injury risk."
+        description="See how elite sports organisations use NeuroState to enhance athlete performance, accelerate recovery, and reduce injury risk."
       />
       
       <div className="min-h-screen bg-ivory">
@@ -162,7 +162,7 @@ export default function SportsCaseStudies() {
                 Performance Success Stories
               </h1>
               <p className="text-body-large text-pearl max-w-3xl mx-auto">
-                See how elite teams and athletes are using NeuroState to gain competitive advantages through optimized recovery and performance.
+                See how elite teams and athletes are using NeuroState to gain competitive advantages through optimised recovery and performance.
               </p>
             </div>
 

@@ -13,7 +13,7 @@ interface Expert {
   title: string;
   bio: string;
   collectionLink: string;
-  specialization: string;
+  specialisation: string;
   productQuery: string;
 }
 
@@ -25,7 +25,7 @@ const experts: Expert[] = [
     title: "Sleep & Recovery Specialist",
     bio: "Leading expert in sleep optimisation and circadian biology with 20+ years of research in performance recovery.",
     collectionLink: "/category/supplements?tag=sleep",
-    specialization: "Sleep Science",
+    specialisation: "Sleep Science",
     productQuery: "tag:sleep",
   },
   {
@@ -35,7 +35,7 @@ const experts: Expert[] = [
     title: "Sports Nutrition Scientist",
     bio: "Performance nutritionist working with Olympic athletes and professional sports teams worldwide.",
     collectionLink: "/category/supplements",
-    specialization: "Nutrition",
+    specialisation: "Nutrition",
     productQuery: "product_type:Supplements",
   },
   {
@@ -45,7 +45,7 @@ const experts: Expert[] = [
     title: "Recovery & Performance Coach",
     bio: "Physical therapist and performance coach specialising in recovery technology and athletic optimisation.",
     collectionLink: "/category/recovery-devices",
-    specialization: "Recovery",
+    specialisation: "Recovery",
     productQuery: "tag:recovery",
   },
   {
@@ -55,7 +55,7 @@ const experts: Expert[] = [
     title: "Cognitive Performance Researcher",
     bio: "Neuroscientist focused on cognitive enhancement, mental clarity, and brain health optimisation.",
     collectionLink: "/category/supplements?tag=cognitive",
-    specialization: "Cognitive Health",
+    specialisation: "Cognitive Health",
     productQuery: "tag:cognitive",
   },
 ];
@@ -82,7 +82,7 @@ export const ExpertPartners = () => {
               <div className="space-y-4">
                 <div className="mb-4">
                   <p className="text-[0.75rem] font-medium tracking-[0.05em] uppercase text-stone mb-2">
-                    {expert.specialization}
+                    {expert.specialisation}
                   </p>
                   <h4 className="text-[1.125rem] font-medium mb-1 text-carbon group-hover:opacity-60 transition-opacity">
                     {expert.name}

@@ -8,7 +8,7 @@ export function SportsComparisonTable() {
       neurostate: "Periodized protocols integrated with training load and competition schedule"
     },
     {
-      category: "Recovery Optimization",
+      category: "Recovery Optimisation",
       traditional: "Standard post-training recovery routines",
       neurostate: "AI-adjusted protocols based on HRV, sleep, and strain data from wearables"
     },

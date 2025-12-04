@@ -15,7 +15,7 @@ interface ResearchItem {
 
 const researchData: ResearchItem[] = [
   {
-    category: "Sleep Optimization",
+    category: "Sleep Optimisation",
     items: [
       {
         intervention: "Magnesium glycinate",

@@ -86,7 +86,7 @@ const PrivacyPolicy = () => {
                 <li><strong>Customer Service:</strong> To respond to your inquiries, provide support, and handle returns or exchanges</li>
                 <li><strong>Account Management:</strong> To create and maintain your account, including managing subscriptions and preferences</li>
                 <li><strong>Marketing Communications:</strong> To send you promotional emails, newsletters, and special offers (you can opt out at any time)</li>
-                <li><strong>Personalization:</strong> To provide personalized product recommendations and improve your shopping experience</li>
+                <li><strong>Personalisation:</strong> To provide personalised product recommendations and improve your shopping experience</li>
                 <li><strong>Analytics:</strong> To understand how customers use our site and improve our services</li>
                 <li><strong>Security:</strong> To detect, prevent, and address fraud, security issues, or technical problems</li>
                 <li><strong>Legal Compliance:</strong> To comply with applicable laws, regulations, and legal processes</li>
@@ -103,7 +103,7 @@ const PrivacyPolicy = () => {
               <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                 <li><strong>Essential Cookies:</strong> Required for the website to function properly (e.g., shopping cart, account login)</li>
                 <li><strong>Performance Cookies:</strong> Help us understand how visitors interact with our website</li>
-                <li><strong>Functional Cookies:</strong> Remember your preferences and personalize your experience</li>
+                <li><strong>Functional Cookies:</strong> Remember your preferences and personalise your experience</li>
                 <li><strong>Marketing Cookies:</strong> Track your browsing habits to show relevant advertisements</li>
               </ul>
               
@@ -140,7 +140,7 @@ const PrivacyPolicy = () => {
                 5. Data Security
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-3">
-                We implement appropriate technical and organizational security measures to protect your personal information, including:
+                We implement appropriate technical and organisational security measures to protect your personal information, including:
               </p>
               <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                 <li>SSL/TLS encryption for data transmission</li>
