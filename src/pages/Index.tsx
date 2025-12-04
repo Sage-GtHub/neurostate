@@ -48,7 +48,7 @@ const Index = () => {
                   One System. Three Forces.
                 </h2>
                 <p className="text-base sm:text-lg text-ash max-w-2xl mx-auto">
-                  AI, science-backed supplements, and state-shifting technology — all working together to upgrade the human mind. This isn't a product line. It's a performance architecture.
+                  AI, supplements backed by science, and technology that shifts your state. All working together to upgrade the human mind. This is not a product line. It is a performance architecture.
                 </p>
               </div>
 
@@ -143,7 +143,7 @@ const Index = () => {
                       Nova — Your Cognitive Operating System
                     </h2>
                     <p className="text-base sm:text-lg text-ash leading-relaxed max-w-lg">
-                      Nova learns your physiology, predicts your mental states, and builds personalised protocols that improve how you think, recover, and perform. It doesn't 'motivate' you — it reshapes your habits using science, data, and relentless precision.
+                      Nova learns your physiology, predicts your mental states, and builds personalised protocols that improve how you think, recover, and perform. It does not motivate you. It reshapes your habits using science, data, and relentless precision.
                     </p>
                   </div>
                   <div className="space-y-4">
@@ -229,10 +229,10 @@ const Index = () => {
                   <div className="space-y-4">
                     <p className="text-stone text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Hardware</p>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-ivory leading-[1.05]">
-                      State-Shifting Technology for Peak Performance
+                      Technology That Shifts Your State
                     </h2>
                     <p className="text-base sm:text-lg text-stone leading-relaxed max-w-lg">
-                      Not another wellness gadget. A device engineered to enhance focus, recovery, and cognitive clarity — in minutes. Designed to change your mental state on demand.
+                      Not another wellness gadget. A device engineered to enhance focus, recovery, and cognitive clarity in minutes. Designed to change your mental state on demand.
                     </p>
                   </div>
                   <div className="space-y-3">
