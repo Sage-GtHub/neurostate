@@ -13,12 +13,19 @@ export const NovaNav = () => {
             Overview
           </NavLink>
           <NavLink
+            to="/nova/chat"
+            className="text-xs font-medium uppercase tracking-wider text-muted-foreground transition-all hover:text-foreground whitespace-nowrap px-2 sm:px-0"
+            activeClassName="text-foreground border-b-2 border-primary pb-4"
+          >
+            Chat
+          </NavLink>
+          <NavLink
             to="/nova"
             end
             className="text-xs font-medium uppercase tracking-wider text-muted-foreground transition-all hover:text-foreground whitespace-nowrap px-2 sm:px-0"
             activeClassName="text-foreground border-b-2 border-primary pb-4"
           >
-            Chat
+            Dashboard
           </NavLink>
           <NavLink
             to="/nova/protocols"
@@ -33,13 +40,6 @@ export const NovaNav = () => {
             activeClassName="text-foreground border-b-2 border-primary pb-4"
           >
             Insights
-          </NavLink>
-          <NavLink
-            to="/nova/optimization"
-            className="text-xs font-medium uppercase tracking-wider text-muted-foreground transition-all hover:text-foreground whitespace-nowrap px-2 sm:px-0"
-            activeClassName="text-foreground border-b-2 border-primary pb-4"
-          >
-            Optimisation
           </NavLink>
           <NavLink
             to="/nova/devices"

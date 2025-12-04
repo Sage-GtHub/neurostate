@@ -13,6 +13,7 @@ import CategoryProducts from "./pages/CategoryProducts";
 import Shop from "./pages/Shop";
 import Bundles from "./pages/Bundles";
 import Nova from "./pages/Nova";
+import NovaChat from "./pages/NovaChat";
 import NovaProtocols from "./pages/NovaProtocols";
 import ProtocolDetail from "./pages/ProtocolDetail";
 import NovaInsights from "./pages/NovaInsights";
@@ -101,10 +102,10 @@ const App = () => (
           <Route path="/track-order" element={<OrderTracking />} />
           <Route path="/admin/update-descriptions" element={<ProductDescriptionUpdater />} />
           <Route path="/nova/overview" element={<NovaOverview />} />
+          <Route path="/nova/chat" element={<ProtectedRoute><NovaChat /></ProtectedRoute>} />
           <Route path="/nova" element={<ProtectedRoute><Nova /></ProtectedRoute>} />
           <Route path="/nova/protocols" element={<ProtectedRoute><NovaProtocols /></ProtectedRoute>} />
           <Route path="/nova/protocols/:id" element={<ProtectedRoute><ProtocolDetail /></ProtectedRoute>} />
-          
           <Route path="/nova/insights" element={<ProtectedRoute><NovaInsights /></ProtectedRoute>} />
           <Route path="/nova/devices" element={<ProtectedRoute><NovaDevices /></ProtectedRoute>} />
           <Route path="/nova/optimization" element={<ProtectedRoute><NovaProtocolOptimization /></ProtectedRoute>} />

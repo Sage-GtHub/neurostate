@@ -18,12 +18,10 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export const NovaLanding = () => {
   const navigate = useNavigate();
-  const [activePhase, setActivePhase] = useState<number>(1);
   
   const hero = useScrollAnimation();
   const stats = useScrollAnimation();
   const capabilities = useScrollAnimation();
-  const phases = useScrollAnimation();
   const research = useScrollAnimation();
 
   const coreStats = [
@@ -72,37 +70,6 @@ export const NovaLanding = () => {
     }
   ];
 
-  const phasesData = [
-    {
-      phase: 1,
-      title: "Discover",
-      duration: "Days 1-7",
-      description: "Deep assessment and baseline establishment through multi-dimensional analysis",
-      metrics: ["500+ data points", "15 biometric markers", "50 lifestyle factors", "12 genetic variants"]
-    },
-    {
-      phase: 2,
-      title: "Optimise",
-      duration: "Days 8-30",
-      description: "Active experimentation and rapid optimisation through controlled interventions",
-      metrics: ["2,000+ biometric readings", "90+ subjective reports", "20+ protocol variations tested", "Real-time adjustments"]
-    },
-    {
-      phase: 3,
-      title: "Predict",
-      duration: "Days 31-90",
-      description: "Advanced pattern recognition enabling 72-hour health forecasting",
-      metrics: ["10,000+ patterns", "91% accuracy", "24 forecasted markers", "Weekly model retraining"]
-    },
-    {
-      phase: 4,
-      title: "Autonomy",
-      duration: "Day 91+",
-      description: "Fully autonomous health optimisation with minimal user input required",
-      metrics: ["Continuous monitoring", "Autonomous adjustments", "Long-term tracking", "Minimal input"]
-    }
-  ];
-
   return (
     <div className="bg-white">
       {/* Hero Section */}
@@ -121,12 +88,12 @@ export const NovaLanding = () => {
             Processing 15+ data sources through 100M+ parameters to deliver genomic-level personalisation, 72-hour health predictions, and fully autonomous optimisation. Built on 10,000+ peer-reviewed studies and continuously learning from your unique biology.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-            <Button size="sm" className="bg-carbon text-white hover:bg-slate rounded-full group min-h-[44px]" onClick={() => navigate('/nova')}>
-              <span>Start with Nova</span>
+            <Button size="sm" className="bg-carbon text-white hover:bg-slate rounded-full group min-h-[44px]" onClick={() => navigate('/nova/chat')}>
+              <span>Chat with Nova</span>
               <ArrowRight className="ml-2 w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button size="sm" variant="outline" className="border-carbon/20 text-carbon hover:bg-carbon/5 rounded-full min-h-[44px]" onClick={() => navigate('/nova/insights')}>
-              <span>View Analytics</span>
+            <Button size="sm" variant="outline" className="border-carbon/20 text-carbon hover:bg-carbon/5 rounded-full min-h-[44px]" onClick={() => navigate('/nova/overview')}>
+              <span>Learn More</span>
             </Button>
           </div>
         </div>
@@ -178,56 +145,8 @@ export const NovaLanding = () => {
         </div>
       </section>
 
-      {/* 4-Phase System */}
-      <section ref={phases.ref} className={`relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${phases.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 sm:mb-16">
-            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-carbon mb-3 sm:mb-4 tracking-tight">The 4-Phase Nova System</h3>
-            <p className="text-sm sm:text-base text-ash max-w-2xl mx-auto">From assessment to autonomous optimisation</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
-            {phasesData.map((phase) => (
-              <Card 
-                key={phase.phase} 
-                className={`border-mist/30 cursor-pointer transition-all hover:shadow-sm ${activePhase === phase.phase ? 'border-signal-green shadow-sm' : ''}`}
-                onClick={() => setActivePhase(phase.phase)}
-              >
-                <CardContent className="p-6 sm:p-8">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-base font-medium ${activePhase === phase.phase ? 'bg-signal-green text-white' : 'bg-pearl text-ash'} transition-colors`}>
-                      {phase.phase}
-                    </div>
-                    <div>
-                      <div className="text-base font-medium text-carbon">{phase.title}</div>
-                      <div className="text-xs text-ash">{phase.duration}</div>
-                    </div>
-                  </div>
-                  <p className="text-sm text-ash leading-relaxed mb-6">{phase.description}</p>
-                  <div className="space-y-2">
-                    {phase.metrics.map((metric, i) => (
-                      <div key={i} className="text-xs text-carbon font-medium flex items-center gap-2">
-                        <span className="w-1 h-1 bg-signal-green rounded-full"></span>
-                        {metric}
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <Button size="sm" className="bg-carbon text-white hover:bg-slate rounded-full group min-h-[44px]" onClick={() => navigate('/nova/optimization')}>
-              <Target className="w-4 h-4 mr-2" />
-              <span>Explore Protocol Optimisation</span>
-            </Button>
-          </div>
-        </div>
-      </section>
-
       {/* Research Foundation */}
-      <section ref={research.ref} className={`relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl/30 transition-all duration-1000 ${research.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+      <section ref={research.ref} className={`relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${research.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="max-w-3xl mx-auto text-center">
           <div className="w-16 h-16 rounded-full bg-signal-green/10 flex items-center justify-center mx-auto mb-8">
             <Database className="w-8 h-8 text-signal-green" />

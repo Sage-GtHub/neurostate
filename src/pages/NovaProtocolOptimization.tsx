@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
-import { PhaseIndicator } from "@/components/nova/PhaseIndicator";
 import { ResearchFoundation } from "@/components/nova/ResearchFoundation";
 import { PredictiveInsightsComponent } from "@/components/nova/PredictiveInsightsComponent";
 import { AdaptiveProtocol } from "@/components/nova/AdaptiveProtocol";
@@ -11,47 +9,43 @@ import { PatternRecognition } from "@/components/nova/PatternRecognition";
 import { AutonomousFeatures } from "@/components/nova/AutonomousFeatures";
 import { RealTimeSimulation } from "@/components/nova/RealTimeSimulation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
+import { SEO } from "@/components/SEO";
 
 export default function NovaProtocolOptimization() {
-  const [currentPhase] = useState<1 | 2 | 3 | 4>(2);
-  const [daysInCurrentPhase] = useState(15);
-
   return (
     <NovaSwipeWrapper>
+      <SEO 
+        title="Nova Intelligence System – Protocol Optimisation | NeuroState"
+        description="Advanced protocol management with AI-driven optimisation, pattern recognition, and autonomous health adjustments."
+      />
       <div className="min-h-screen bg-ivory">
         <NovaNav />
       
       <div className="border-b border-mist/30 bg-gradient-to-b from-ivory to-pearl/20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8 sm:py-10 md:py-12">
+          <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium mb-2">Advanced Features</p>
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[3rem] font-bold text-carbon tracking-tight mb-2 sm:mb-3">
-            Nova Intelligence System
+            Protocol Optimisation
           </h1>
           <p className="text-sm sm:text-base md:text-body text-ash max-w-3xl">
-            15+ specialised AI models working together to optimise your health and performance
+            AI-driven tools for adaptive protocols, pattern recognition, and autonomous health management
           </p>
         </div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8 sm:py-12 md:py-16 space-y-12 sm:space-y-16 md:space-y-24">
         
-        {/* The 4-Phase System */}
-        <section className="animate-fade-in">
-          <PhaseIndicator currentPhase={currentPhase} daysInCurrentPhase={daysInCurrentPhase} />
-        </section>
-
         {/* Real-Time AI Processing */}
         <section className="animate-fade-in">
           <RealTimeSimulation />
         </section>
-
 
         {/* Predictive Forecasting */}
         <section className="animate-fade-in">
           <PredictiveInsightsComponent />
         </section>
 
-        {/* Protocol Optimization Features */}
+        {/* Protocol Optimisation Features */}
         <section className="animate-fade-in">
           <div className="text-center mb-8 sm:mb-10 md:mb-12">
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[2rem] font-bold text-carbon tracking-tight mb-2 sm:mb-3">
@@ -122,8 +116,6 @@ export default function NovaProtocolOptimization() {
         <section className="animate-fade-in">
           <ResearchFoundation />
         </section>
-
-
       </div>
     </div>
     </NovaSwipeWrapper>
