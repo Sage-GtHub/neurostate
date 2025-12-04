@@ -272,25 +272,25 @@ export default function NovaChat() {
 
   // Empty state - no messages
   const EmptyState = () => (
-    <div className="flex-1 flex flex-col items-center justify-center px-4 py-12">
-      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-6 shadow-lg">
-        <Sparkles className="w-8 h-8 text-accent" />
+    <div className="flex-1 flex flex-col items-center justify-center px-4 py-8 sm:py-12">
+      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-4 sm:mb-6 shadow-lg">
+        <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-accent" />
       </div>
-      <h2 className="text-2xl font-semibold text-foreground mb-2">Chat with Nova</h2>
-      <p className="text-muted-foreground text-center max-w-md mb-8">
-        Your AI performance coach. Ask about protocols, recovery, supplements, or anything related to optimising your performance.
+      <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 text-center">Chat with Nova</h2>
+      <p className="text-sm sm:text-base text-muted-foreground text-center max-w-md mb-6 sm:mb-8 px-4">
+        Your AI performance coach. Ask about protocols, recovery, or supplements.
       </p>
       
-      <div className="grid grid-cols-2 gap-3 w-full max-w-lg">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 w-full max-w-lg px-2">
         {QUICK_ACTIONS.map((action, i) => (
           <button
             key={i}
             onClick={() => handleSendMessage(action.prompt)}
             disabled={isLoading}
-            className="group flex items-center gap-3 p-4 rounded-xl border border-border/50 bg-card/50 hover:bg-card hover:border-border hover:shadow-sm transition-all text-left"
+            className="group flex items-center gap-3 p-3 sm:p-4 rounded-xl border border-border/50 bg-card/50 hover:bg-card hover:border-border hover:shadow-sm transition-all text-left min-h-[52px]"
           >
-            <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
-              <action.icon className="w-5 h-5 text-accent" />
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
+              <action.icon className="w-4 h-4 sm:w-5 sm:h-5 text-accent" />
             </div>
             <span className="text-sm font-medium text-foreground">{action.label}</span>
           </button>
