@@ -8,15 +8,52 @@ import { Progress } from "@/components/ui/progress";
 import { TrendingUp, Activity, Brain, Target } from "lucide-react";
 
 export default function NovaInsights() {
-  const [hrvData, setHrvData] = useState<any[]>([]);
-  const [sleepData, setSleepData] = useState<any[]>([]);
-  const [energyData, setEnergyData] = useState<any[]>([]);
-  const [recoveryData, setRecoveryData] = useState<any[]>([]);
+  // Placeholder data for demonstration
+  const placeholderHrvData = [
+    { date: '27 Nov', value: 62 },
+    { date: '28 Nov', value: 65 },
+    { date: '29 Nov', value: 58 },
+    { date: '30 Nov', value: 71 },
+    { date: '1 Dec', value: 68 },
+    { date: '2 Dec', value: 74 },
+    { date: '3 Dec', value: 70 },
+    { date: '4 Dec', value: 72 }
+  ];
+
+  const placeholderSleepData = [
+    { day: 'Mon', Deep: 2.1, REM: 1.8, Light: 3.5, Awake: 0.4 },
+    { day: 'Tue', Deep: 1.9, REM: 2.0, Light: 3.8, Awake: 0.3 },
+    { day: 'Wed', Deep: 2.4, REM: 1.6, Light: 3.2, Awake: 0.5 },
+    { day: 'Thu', Deep: 2.0, REM: 2.2, Light: 3.4, Awake: 0.3 },
+    { day: 'Fri', Deep: 1.7, REM: 1.9, Light: 4.0, Awake: 0.6 },
+    { day: 'Sat', Deep: 2.5, REM: 2.1, Light: 3.6, Awake: 0.2 },
+    { day: 'Sun', Deep: 2.3, REM: 2.0, Light: 3.3, Awake: 0.4 }
+  ];
+
+  const placeholderEnergyData = Array.from({ length: 24 }, (_, i) => ({
+    hour: `${i}:00`,
+    energy: Math.round(40 + Math.sin((i - 6) / 3) * 35 + Math.random() * 10)
+  }));
+
+  const placeholderRecoveryData = [
+    { day: 'Mon', recovery: 78 },
+    { day: 'Tue', recovery: 82 },
+    { day: 'Wed', recovery: 75 },
+    { day: 'Thu', recovery: 88 },
+    { day: 'Fri', recovery: 84 },
+    { day: 'Sat', recovery: 91 },
+    { day: 'Sun', recovery: 87 }
+  ];
+
+  const [hrvData, setHrvData] = useState<any[]>(placeholderHrvData);
+  const [sleepData, setSleepData] = useState<any[]>(placeholderSleepData);
+  const [energyData, setEnergyData] = useState<any[]>(placeholderEnergyData);
+  const [recoveryData, setRecoveryData] = useState<any[]>(placeholderRecoveryData);
   const [summaryMetrics, setSummaryMetrics] = useState<any>({
-    hrv: { value: '--', trend: '' },
-    sleep: { value: '--', trend: '' },
-    focus: { value: '--', trend: '' },
-    recovery: { value: '--', trend: '' }
+    hrv: { value: '72', trend: '+5%' },
+    sleep: { value: '8.2/10', trend: 'Steady' },
+    focus: { value: '14h', trend: '+3 sessions' },
+    recovery: { value: '87%', trend: '+8%' }
   });
 
   useEffect(() => {
