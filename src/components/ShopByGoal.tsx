@@ -34,7 +34,7 @@ const goals: Goal[] = [
   {
     id: "performance",
     title: "Performance",
-    description: "Enhance athletic performance and endurance with precision recovery and training tools.",
+    description: "Enhance athletic performance and endurance with personalised recovery and training tools.",
     image: performanceImage,
     link: "/category/performance",
     color: "from-accent/20 to-yellow-500/20",
@@ -59,7 +59,7 @@ export const ShopByGoal = () => {
           </p>
           <h2 className="mb-4 sm:mb-6">Shop by goal</h2>
           <p className="text-body-large text-muted-foreground max-w-2xl">
-            Precision tools designed for how you want to perform
+            Personalised tools designed for how you want to perform
           </p>
         </div>
         
