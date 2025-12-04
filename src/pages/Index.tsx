@@ -136,6 +136,7 @@ const Index = () => {
                   </div>
                   <div className="space-y-3">
                     {[
+                      "Personalised recommendations based on your data",
                       "72 hour performance forecasting",
                       "Real time protocol adjustments",
                       "Voice and text coaching"
