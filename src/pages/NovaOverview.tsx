@@ -7,6 +7,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { PhaseProgressTracker } from "@/components/nova/PhaseProgressTracker";
 import { RealTimeSimulation } from "@/components/nova/RealTimeSimulation";
+import { SEO } from "@/components/SEO";
+import { SoftwareApplicationStructuredData } from "@/components/StructuredData";
 import { 
   Brain, 
   Activity, 
@@ -164,6 +166,11 @@ export default function NovaOverview() {
 
   return (
     <NovaSwipeWrapper>
+      <SEO 
+        title="Nova – AI Cognitive Performance Assistant | NeuroState"
+        description="Personalised protocols, predictive insights and real-time guidance to enhance focus, sleep and mental resilience. 72-hour health forecasting powered by AI."
+      />
+      <SoftwareApplicationStructuredData />
       <div className="min-h-screen bg-background">
         <NovaNav />
       

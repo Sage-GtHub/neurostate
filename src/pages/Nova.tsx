@@ -28,8 +28,6 @@ interface Metric {
   trendColor?: string;
 }
 
-import { SEO } from "@/components/SEO";
-
 export default function Nova() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");

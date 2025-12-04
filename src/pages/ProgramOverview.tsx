@@ -32,8 +32,8 @@ export default function ProgramOverview() {
   return (
     <>
       <SEO 
-        title="Enterprise Partnership Program | NeuroState"
-        description="Partner with NeuroState to deliver premium cognitive enhancement and wellness optimization to your team. Reduce burnout, boost productivity."
+        title="Corporate Cognitive Performance Programme | NeuroState for Teams"
+        description="Deploy AI-driven cognitive performance across your organisation. Employee performance tools that reduce burnout 63%, increase focus 47%, and deliver measurable workplace productivity gains."
       />
       
       <div className="min-h-screen bg-ivory">

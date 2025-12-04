@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { SEO } from "@/components/SEO";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, { message: "Name is required" }).max(100, { message: "Name must be less than 100 characters" }),
@@ -94,6 +95,10 @@ const Contact = () => {
 
   return (
     <>
+      <SEO 
+        title="Contact Us – Get in Touch | NeuroState"
+        description="Questions about our cognitive performance system, supplements, or red light therapy devices? Our team is here to help. Contact NeuroState today."
+      />
       <Header />
       <div className="min-h-screen bg-background mobile-nav-padding">
         <section className="py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 border-b border-mist">

@@ -8,6 +8,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { LiveChat } from "@/components/LiveChat";
+import { SEO } from "@/components/SEO";
+import { FAQStructuredData } from "@/components/StructuredData";
 
 const FAQ = () => {
   const [chatOpen, setChatOpen] = useState(false);
@@ -112,9 +114,19 @@ const FAQ = () => {
     },
   ];
 
+  const allFaqs = faqCategories.flatMap(cat => 
+    cat.questions.map(q => ({ question: q.q, answer: q.a }))
+  );
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
+    <>
+      <SEO 
+        title="FAQ – Frequently Asked Questions | NeuroState"
+        description="Common questions about NeuroState cognitive performance supplements, red light therapy devices, delivery, returns, and the Nova AI performance assistant."
+      />
+      <FAQStructuredData faqs={allFaqs} />
+      <div className="min-h-screen flex flex-col">
+        <Header />
       <main className="flex-1">
         <section className="py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 border-b border-mist">
           <div className="w-full max-w-7xl mx-auto">
@@ -172,8 +184,9 @@ const FAQ = () => {
         </section>
       </main>
       <Footer />
-      <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
-    </div>
+        <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
+      </div>
+    </>
   );
 };
 

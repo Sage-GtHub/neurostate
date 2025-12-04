@@ -9,6 +9,7 @@ import { Loader2, ArrowLeft } from "lucide-react";
 import { LiveChat } from "@/components/LiveChat";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ProductGridSkeleton } from "@/components/ProductSkeleton";
+import { SEO } from "@/components/SEO";
 
 const Shop = () => {
   const [chatOpen, setChatOpen] = useState(false);
@@ -93,8 +94,13 @@ const Shop = () => {
   });
 
   return (
-    <div className="min-h-screen bg-background mobile-nav-padding">
-      <Header />
+    <>
+      <SEO 
+        title="Shop Performance Supplements and Recovery Devices | NeuroState"
+        description="Browse our complete range of adaptogen supplements for focus, red light therapy devices, and cognitive performance products. Evidence-based formulas for mental performance."
+      />
+      <div className="min-h-screen bg-background mobile-nav-padding">
+        <Header />
       <main>
         <section className="pt-20 sm:pt-24 md:pt-32 pb-8 sm:pb-12 md:pb-16 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32">
           <div className="w-full max-w-7xl mx-auto">
@@ -176,8 +182,9 @@ const Shop = () => {
           <p className="text-caption">© 2025 NeuroState®. All rights reserved.</p>
         </div>
       </footer>
-      <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
-    </div>
+        <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
+      </div>
+    </>
   );
 };
 

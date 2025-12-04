@@ -45,6 +45,7 @@ export const Footer = () => {
     ],
     company: [
       { name: "About Us", href: "/about" },
+      { name: "Blog", href: "/blog" },
       { name: "Resources", href: "/resources" },
       { name: "Ambassador Program", href: "/ambassador" },
       { name: "Partnerships", href: "/partnerships" },
