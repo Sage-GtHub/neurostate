@@ -378,7 +378,7 @@ const Index = () => {
                   <Button 
                     variant="outline"
                     size="sm"
-                    className="border-ivory/30 text-ivory hover:bg-ivory/10 rounded-full min-h-[44px] px-8"
+                    className="border-white/30 text-white hover:bg-white/10 rounded-full min-h-[44px] px-8"
                   >
                     <Sparkles className="mr-2 w-4 h-4" />
                     Meet Nova AI
