@@ -1,11 +1,10 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Send, Loader2, Sparkles, X, MessageSquare, Plus, Clock } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { Send, Loader2, Sparkles, X, MessageSquare, Plus, Copy, Check, RotateCcw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { format, isToday, isYesterday, formatDistanceToNow } from "date-fns";
 import {
   DropdownMenu,
@@ -15,12 +14,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import ReactMarkdown from "react-markdown";
 
 type Message = {
   role: "user" | "assistant";
   content: string;
   timestamp: string;
-  suggestions?: string[];
 };
 
 type Conversation = {
@@ -31,8 +30,8 @@ type Conversation = {
   updatedAt: string;
 };
 
-const quickSuggestions = [
-  "What products help with sleep?",
+const QUICK_SUGGESTIONS = [
+  "What helps with better sleep?",
   "Tell me about your bundles",
   "How does red light therapy work?",
   "Which supplements support recovery?",
@@ -48,37 +47,40 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { toast: showToast } = useToast();
-  const [showSuggestions, setShowSuggestions] = useState(true);
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [showHistory, setShowHistory] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const { toast: showToast } = useToast();
   const location = useLocation();
 
-  // Get current conversation
   const currentConversation = conversations.find(c => c.id === currentConversationId);
   const messages = currentConversation?.messages || [];
 
-  // Auto-scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Load conversations from localStorage on mount
+  // Auto-resize textarea
   useEffect(() => {
-    const savedConversations = localStorage.getItem("guest-nova-conversations");
-    if (savedConversations) {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = Math.min(textareaRef.current.scrollHeight, 120) + 'px';
+    }
+  }, [message]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("guest-nova-conversations");
+    if (saved) {
       try {
-        const parsed = JSON.parse(savedConversations);
+        const parsed = JSON.parse(saved);
         setConversations(parsed);
-        // Set the most recent conversation as current
         if (parsed.length > 0) {
           setCurrentConversationId(parsed[0].id);
-          setShowSuggestions(parsed[0].messages.length <= 1);
         } else {
           createNewConversation();
         }
-      } catch (error) {
-        console.error("Error loading conversations:", error);
+      } catch {
         createNewConversation();
       }
     } else {
@@ -86,7 +88,6 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
     }
   }, []);
 
-  // Save conversations to localStorage whenever they change
   useEffect(() => {
     if (conversations.length > 0) {
       localStorage.setItem("guest-nova-conversations", JSON.stringify(conversations));
@@ -94,594 +95,425 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
   }, [conversations]);
 
   const createNewConversation = () => {
-    const newConversation: Conversation = {
+    const newConv: Conversation = {
       id: Date.now().toString(),
       title: "New conversation",
-      messages: [
-        {
-          role: "assistant",
-          content: "I'm Nova, your NeuroState performance assistant. Ask me anything about our products, stacks, or how to optimise your performance.",
-          timestamp: new Date().toISOString(),
-        },
-      ],
+      messages: [{
+        role: "assistant",
+        content: "I am Nova, your NeuroState performance assistant. How can I help you optimise your performance today?",
+        timestamp: new Date().toISOString(),
+      }],
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
-    setConversations(prev => [newConversation, ...prev]);
-    setCurrentConversationId(newConversation.id);
-    setShowSuggestions(true);
+    setConversations(prev => [newConv, ...prev]);
+    setCurrentConversationId(newConv.id);
     setShowHistory(false);
   };
 
-  const generateConversationTitle = (firstUserMessage: string): string => {
-    // Generate a short title from the first user message
-    const words = firstUserMessage.trim().split(" ");
-    return words.slice(0, 5).join(" ") + (words.length > 5 ? "..." : "");
+  const updateConversation = (updater: (conv: Conversation) => Conversation) => {
+    setConversations(prev => prev.map(c => c.id === currentConversationId ? updater(c) : c));
   };
 
-  const updateCurrentConversation = (updater: (conv: Conversation) => Conversation) => {
-    setConversations(prev =>
-      prev.map(conv =>
-        conv.id === currentConversationId ? updater(conv) : conv
-      )
-    );
-  };
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  // Get context from current page
   const getPageContext = () => {
     const path = location.pathname;
-    if (path.startsWith('/product/')) {
-      return `The user is currently viewing a product page: ${path}`;
-    } else if (path === '/' || path.includes('products')) {
-      return 'The user is browsing the product catalog';
-    } else if (path.includes('bundles')) {
-      return 'The user is viewing product bundles';
-    } else if (path.includes('guides')) {
-      return 'The user is browsing wellness guides';
-    }
-    return 'The user is on the NeuroState website';
+    if (path.startsWith('/product/')) return `User is viewing a product page: ${path}`;
+    if (path.includes('bundles')) return 'User is viewing product bundles';
+    if (path.includes('shop')) return 'User is browsing the shop';
+    return 'User is on the NeuroState website';
   };
 
-  const handleSendMessage = async (e: React.FormEvent, customMessage?: string) => {
-    e.preventDefault();
-    const messageToSend = customMessage || message;
-    if (!messageToSend.trim() || isLoading || !currentConversationId) return;
-
-    const userMessage: Message = {
-      role: "user",
-      content: messageToSend,
-      timestamp: new Date().toISOString(),
-    };
-
-    // Update conversation with user message
-    updateCurrentConversation(conv => {
-      const updatedConv = {
-        ...conv,
-        messages: [...conv.messages, userMessage],
-        updatedAt: new Date().toISOString(),
-      };
-      
-      // Update title if this is the first user message
-      if (conv.messages.length === 1 && conv.title === "New conversation") {
-        updatedConv.title = generateConversationTitle(messageToSend);
-      }
-      
-      return updatedConv;
+  const streamResponse = useCallback(async (userMsg: Message) => {
+    const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-chat`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+      },
+      body: JSON.stringify({
+        messages: [
+          { role: "system", content: `Context: ${getPageContext()}. User is not logged in.` },
+          ...messages.map(({ role, content }) => ({ role, content })),
+          { role: userMsg.role, content: userMsg.content }
+        ],
+      }),
     });
 
+    if (!response.ok) {
+      const status = response.status;
+      if (status === 429) throw new Error("Rate limit exceeded. Please try again in a moment.");
+      if (status === 402) throw new Error("Service temporarily unavailable.");
+      throw new Error("Failed to get response");
+    }
+
+    if (!response.body) throw new Error("No response body");
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+    let content = "";
+
+    // Add empty assistant message
+    updateConversation(conv => ({
+      ...conv,
+      messages: [...conv.messages, { role: "assistant", content: "", timestamp: new Date().toISOString() }],
+    }));
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+
+      let idx: number;
+      while ((idx = buffer.indexOf("\n")) !== -1) {
+        let line = buffer.slice(0, idx);
+        buffer = buffer.slice(idx + 1);
+
+        if (line.endsWith("\r")) line = line.slice(0, -1);
+        if (!line.startsWith("data: ")) continue;
+
+        const json = line.slice(6).trim();
+        if (json === "[DONE]") break;
+
+        try {
+          const parsed = JSON.parse(json);
+          const delta = parsed.choices?.[0]?.delta?.content;
+          if (delta) {
+            content += delta;
+            updateConversation(conv => {
+              const msgs = [...conv.messages];
+              msgs[msgs.length - 1] = { role: "assistant", content, timestamp: new Date().toISOString() };
+              return { ...conv, messages: msgs, updatedAt: new Date().toISOString() };
+            });
+          }
+        } catch {
+          buffer = line + "\n" + buffer;
+          break;
+        }
+      }
+    }
+
+    return content;
+  }, [messages, getPageContext]);
+
+  const handleSend = async (customMsg?: string) => {
+    const text = customMsg || message.trim();
+    if (!text || isLoading || !currentConversationId) return;
+
+    const userMsg: Message = { role: "user", content: text, timestamp: new Date().toISOString() };
+    
+    updateConversation(conv => ({
+      ...conv,
+      messages: [...conv.messages, userMsg],
+      title: conv.messages.length === 1 ? text.slice(0, 30) + (text.length > 30 ? "..." : "") : conv.title,
+      updatedAt: new Date().toISOString(),
+    }));
+
     setMessage("");
-    setShowSuggestions(false);
     setIsLoading(true);
 
     try {
-      const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-chat`;
-      
-      // Add page context to the first message
-      const contextMessage = {
-        role: "system" as const,
-        content: `Context: ${getPageContext()}. The user is not logged in. If they ask for personalised protocols, device tracking, or account features, encourage them to create a free Nova account.`
-      };
-
-      const conversationMessages = currentConversation?.messages || [];
-      
-      const response = await fetch(CHAT_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-        },
-        body: JSON.stringify({
-          messages: [
-            contextMessage,
-            ...conversationMessages.map(({ role, content }) => ({ role, content })),
-            { role: userMessage.role, content: userMessage.content }
-          ],
-        }),
-      });
-
-      if (response.status === 429) {
-        showToast({
-          title: "Rate limit exceeded",
-          description: "Please try again in a moment.",
-          variant: "destructive",
-        });
-        setIsLoading(false);
-        return;
-      }
-
-      if (response.status === 402) {
-        showToast({
-          title: "Service unavailable",
-          description: "AI service is temporarily unavailable.",
-          variant: "destructive",
-        });
-        setIsLoading(false);
-        return;
-      }
-
-      if (!response.ok || !response.body) {
-        throw new Error("Failed to start stream");
-      }
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let textBuffer = "";
-      let streamDone = false;
-      let assistantContent = "";
-
-      // Add empty assistant message to conversation
-      updateCurrentConversation(conv => ({
-        ...conv,
-        messages: [
-          ...conv.messages,
-          { role: "assistant", content: "", timestamp: new Date().toISOString(), suggestions: [] },
-        ],
-      }));
-
-      while (!streamDone) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        textBuffer += decoder.decode(value, { stream: true });
-
-        let newlineIndex: number;
-        while ((newlineIndex = textBuffer.indexOf("\n")) !== -1) {
-          let line = textBuffer.slice(0, newlineIndex);
-          textBuffer = textBuffer.slice(newlineIndex + 1);
-
-          if (line.endsWith("\r")) line = line.slice(0, -1);
-          if (line.startsWith(":") || line.trim() === "") continue;
-          if (!line.startsWith("data: ")) continue;
-
-          const jsonStr = line.slice(6).trim();
-          if (jsonStr === "[DONE]") {
-            streamDone = true;
-            break;
-          }
-
-          try {
-            const parsed = JSON.parse(jsonStr);
-            const content = parsed.choices?.[0]?.delta?.content as string | undefined;
-            if (content) {
-              assistantContent += content;
-              updateCurrentConversation(conv => {
-                const messages = [...conv.messages];
-                const lastMessage = messages[messages.length - 1];
-                if (lastMessage.role === "assistant") {
-                  lastMessage.content = assistantContent;
-                  // Generate contextual suggestions once we have enough content
-                  if (assistantContent.length > 50 && !lastMessage.suggestions?.length) {
-                    lastMessage.suggestions = generateContextualSuggestions(assistantContent);
-                  }
-                }
-                return { ...conv, messages, updatedAt: new Date().toISOString() };
-              });
-            }
-          } catch {
-            textBuffer = line + "\n" + textBuffer;
-            break;
-          }
-        }
-      }
-
-      setIsLoading(false);
+      await streamResponse(userMsg);
     } catch (error) {
-      console.error("Chat error:", error);
       showToast({
         title: "Error",
-        description: "Failed to send message. Please try again.",
+        description: error instanceof Error ? error.message : "Failed to send message",
         variant: "destructive",
       });
-      setIsLoading(false);
-      // Remove the last message (failed assistant message)
-      updateCurrentConversation(conv => ({
+      updateConversation(conv => ({
         ...conv,
-        messages: conv.messages.slice(0, -1),
+        messages: conv.messages.filter(m => m.content !== ""),
       }));
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handleSuggestionClick = (suggestion: string) => {
-    const syntheticEvent = { preventDefault: () => {} } as React.FormEvent;
-    handleSendMessage(syntheticEvent, suggestion);
+  const copyMessage = async (content: string, index: number) => {
+    await navigator.clipboard.writeText(content);
+    setCopiedIndex(index);
+    setTimeout(() => setCopiedIndex(null), 2000);
   };
 
-  const deleteConversation = (conversationId: string) => {
+  const regenerate = async () => {
+    if (messages.length < 2) return;
+    const lastUserIdx = [...messages].reverse().findIndex(m => m.role === "user");
+    if (lastUserIdx === -1) return;
+    
+    const idx = messages.length - 1 - lastUserIdx;
+    const lastUserMsg = messages[idx];
+    
+    updateConversation(conv => ({ ...conv, messages: conv.messages.slice(0, idx) }));
+    setTimeout(() => handleSend(lastUserMsg.content), 100);
+  };
+
+  const deleteConversation = (id: string) => {
     setConversations(prev => {
-      const filtered = prev.filter(c => c.id !== conversationId);
-      
-      // If deleting current conversation, switch to another or create new
-      if (conversationId === currentConversationId) {
+      const filtered = prev.filter(c => c.id !== id);
+      if (id === currentConversationId) {
         if (filtered.length > 0) {
           setCurrentConversationId(filtered[0].id);
         } else {
           createNewConversation();
-          return prev; // Don't update yet, createNewConversation will handle it
+          return prev;
         }
       }
-      
       return filtered;
-    });
-    
-    showToast({
-      title: "Conversation deleted",
-      description: "The conversation has been removed.",
     });
   };
 
-  const clearAllHistory = () => {
+  const clearAll = () => {
     setConversations([]);
     localStorage.removeItem("guest-nova-conversations");
     createNewConversation();
-    showToast({
-      title: "History cleared",
-      description: "All conversation history has been cleared.",
-    });
   };
 
-  const formatMessageTime = (timestamp: string) => {
-    const date = new Date(timestamp);
-    if (isToday(date)) {
-      return format(date, "HH:mm");
-    } else if (isYesterday(date)) {
-      return `Yesterday ${format(date, "HH:mm")}`;
-    } else {
-      return format(date, "dd MMM HH:mm");
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
     }
   };
 
-  const formatConversationDate = (timestamp: string) => {
-    const date = new Date(timestamp);
-    if (isToday(date)) {
-      return "Today";
-    } else if (isYesterday(date)) {
-      return "Yesterday";
-    } else {
-      return format(date, "dd MMM yyyy");
-    }
+  const formatTime = (ts: string) => {
+    const d = new Date(ts);
+    if (isToday(d)) return format(d, "HH:mm");
+    if (isYesterday(d)) return `Yesterday ${format(d, "HH:mm")}`;
+    return format(d, "dd MMM HH:mm");
   };
 
-  const groupConversationsByDate = () => {
-    const groups: { [key: string]: Conversation[] } = {};
-    
-    conversations.forEach(conv => {
-      const key = formatConversationDate(conv.updatedAt);
-      if (!groups[key]) {
-        groups[key] = [];
-      }
-      groups[key].push(conv);
+  const groupByDate = () => {
+    const groups: Record<string, Conversation[]> = {};
+    conversations.forEach(c => {
+      const d = new Date(c.updatedAt);
+      const key = isToday(d) ? "Today" : isYesterday(d) ? "Yesterday" : format(d, "dd MMM yyyy");
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(c);
     });
-    
     return groups;
-  };
-
-  const generateContextualSuggestions = (assistantMessage: string): string[] => {
-    const lower = assistantMessage.toLowerCase();
-    
-    // Sleep-related suggestions
-    if (lower.includes('sleep') || lower.includes('melatonin') || lower.includes('rest')) {
-      return [
-        "What's the best time to take sleep supplements?",
-        "Can you recommend a complete sleep stack?",
-        "How does red light therapy help with sleep?"
-      ];
-    }
-    
-    // Recovery-related suggestions
-    if (lower.includes('recovery') || lower.includes('muscle') || lower.includes('inflammation')) {
-      return [
-        "What supplements support faster recovery?",
-        "Tell me about cold therapy for recovery",
-        "How do I optimise my recovery protocol?"
-      ];
-    }
-    
-    // Cognitive/focus suggestions
-    if (lower.includes('focus') || lower.includes('cognitive') || lower.includes('brain') || lower.includes('nootropic')) {
-      return [
-        "What's in the NeuroFocus supplement?",
-        "How can I improve my mental clarity?",
-        "Tell me about cognitive enhancement stacks"
-      ];
-    }
-    
-    // Product-specific suggestions
-    if (lower.includes('bundle') || lower.includes('stack')) {
-      return [
-        "What bundles do you recommend for beginners?",
-        "Can I customise a bundle?",
-        "Do bundles save money compared to individual products?"
-      ];
-    }
-    
-    // Device-related suggestions
-    if (lower.includes('device') || lower.includes('therapy') || lower.includes('red light') || lower.includes('cold')) {
-      return [
-        "How do I use red light therapy effectively?",
-        "What's the difference between your therapy devices?",
-        "Can devices be combined with supplements?"
-      ];
-    }
-    
-    // Default contextual suggestions
-    return [
-      "What products would you recommend for my goals?",
-      "Tell me about your most popular products",
-      "How do I know which supplements I need?"
-    ];
-  };
-
-  const cleanText = (text: string): string => {
-    return text
-      .replace(/\*/g, "") // Remove asterisks
-      .replace(/\[.*?\]\(.*?\)/g, "") // Remove markdown links
-      .replace(/#{1,6}\s/g, "") // Remove markdown headers
-      .replace(/`{1,3}/g, "") // Remove code blocks
-      .replace(/^\s*[-*+]\s/gm, "") // Remove list markers
-      .replace(/\*\*this is not good\*\*/gi, "") // Remove specific unwanted text
-      .replace(/this is not good/gi, ""); // Remove plain version too
   };
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="w-full sm:w-[440px] p-0 flex flex-col h-full bg-ivory border-l border-mist/30">
-        <SheetHeader className="border-b border-mist/30 bg-pearl/30 p-4 flex-shrink-0">
+      <SheetContent side="right" className="w-full sm:w-[420px] p-0 flex flex-col h-full bg-background border-l border-border/50">
+        {/* Header */}
+        <SheetHeader className="border-b border-border/50 p-4 flex-shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-full bg-accent/10">
-                <Sparkles className="h-5 w-5 text-accent" />
+              <div className="w-9 h-9 rounded-full bg-accent/10 flex items-center justify-center">
+                <Sparkles className="h-4 w-4 text-accent" />
               </div>
               <div className="min-w-0 flex-1">
-                <SheetTitle className="text-lg font-semibold text-carbon">Nova</SheetTitle>
-                <p className="text-xs text-ash truncate">
-                  {currentConversation?.title || "Your performance assistant"}
+                <SheetTitle className="text-base font-semibold text-foreground">Nova</SheetTitle>
+                <p className="text-xs text-muted-foreground truncate">
+                  {currentConversation?.title || "Performance assistant"}
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setShowHistory(!showHistory)}
-                className="text-carbon hover:bg-mist/30 h-8 w-8"
-              >
+            <div className="flex items-center gap-1">
+              <Button variant="ghost" size="icon" onClick={() => setShowHistory(!showHistory)} className="h-8 w-8">
                 <MessageSquare className="h-4 w-4" />
               </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-carbon hover:bg-mist/30 h-8 w-8"
-                  >
+                  <Button variant="ghost" size="icon" className="h-8 w-8">
                     <Plus className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuContent align="end">
                   <DropdownMenuItem onClick={createNewConversation}>
-                    <Plus className="h-4 w-4 mr-2" />
-                    New conversation
+                    <Plus className="h-4 w-4 mr-2" /> New conversation
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={clearAllHistory} className="text-destructive">
-                    <X className="h-4 w-4 mr-2" />
-                    Clear all history
+                  <DropdownMenuItem onClick={clearAll} className="text-destructive">
+                    <X className="h-4 w-4 mr-2" /> Clear all
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => onOpenChange(false)}
-                className="text-carbon hover:bg-mist/30 h-8 w-8"
-              >
+              <Button variant="ghost" size="icon" onClick={() => onOpenChange(false)} className="h-8 w-8">
                 <X className="h-4 w-4" />
               </Button>
             </div>
           </div>
         </SheetHeader>
 
-        {/* History Sidebar or Chat Area */}
         {showHistory ? (
-          <div className="flex-1 overflow-hidden bg-ivory">
-            <ScrollArea className="h-full">
-              <div className="p-4">
-                <h3 className="text-sm font-semibold text-carbon mb-4 uppercase tracking-wider">
-                  Conversation History
-                </h3>
-                {Object.entries(groupConversationsByDate()).map(([date, convs]) => (
-                  <div key={date} className="mb-6">
-                    <p className="text-xs text-ash uppercase tracking-wider mb-2">{date}</p>
-                    <div className="space-y-2">
-                      {convs.map(conv => (
-                        <button
-                          key={conv.id}
-                          onClick={() => {
-                            setCurrentConversationId(conv.id);
-                            setShowHistory(false);
-                            setShowSuggestions(false);
-                          }}
-                          className={`w-full text-left p-3 rounded-lg transition-colors ${
-                            conv.id === currentConversationId
-                              ? "bg-pearl border border-mist"
-                              : "hover:bg-pearl/50"
-                          }`}
-                        >
-                          <div className="flex items-start justify-between gap-2">
-                            <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium text-carbon truncate">
-                                {conv.title}
-                              </p>
-                              <p className="text-xs text-ash mt-1">
-                                {conv.messages.length} messages · {formatDistanceToNow(new Date(conv.updatedAt), { addSuffix: true })}
-                              </p>
-                            </div>
+          <ScrollArea className="flex-1">
+            <div className="p-4">
+              <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-4">History</h3>
+              {Object.entries(groupByDate()).map(([date, convs]) => (
+                <div key={date} className="mb-4">
+                  <p className="text-xs text-muted-foreground mb-2">{date}</p>
+                  <div className="space-y-1">
+                    {convs.map(c => (
+                      <button
+                        key={c.id}
+                        onClick={() => { setCurrentConversationId(c.id); setShowHistory(false); }}
+                        className={`w-full text-left p-3 rounded-lg transition-colors ${
+                          c.id === currentConversationId ? "bg-muted" : "hover:bg-muted/50"
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium truncate">{c.title}</p>
+                            <p className="text-xs text-muted-foreground mt-0.5">
+                              {c.messages.length} messages · {formatDistanceToNow(new Date(c.updatedAt), { addSuffix: true })}
+                            </p>
+                          </div>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-6 w-6 flex-shrink-0 opacity-0 group-hover:opacity-100"
+                            onClick={(e) => { e.stopPropagation(); deleteConversation(c.id); }}
+                          >
+                            <X className="h-3 w-3" />
+                          </Button>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </ScrollArea>
+        ) : (
+          <>
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto">
+              <div className="px-4 py-4 space-y-4">
+                {messages.map((msg, i) => (
+                  <div key={i} className={`flex gap-3 ${msg.role === "user" ? "justify-end" : ""}`}>
+                    {msg.role === "assistant" && (
+                      <div className="flex-shrink-0 mt-1">
+                        <div className="w-7 h-7 rounded-full bg-accent/10 flex items-center justify-center">
+                          <Sparkles className="w-3.5 h-3.5 text-accent" />
+                        </div>
+                      </div>
+                    )}
+                    <div className={`group relative max-w-[85%] ${
+                      msg.role === "user"
+                        ? "bg-foreground text-background px-3 py-2 rounded-2xl rounded-br-sm"
+                        : ""
+                    }`}>
+                      {msg.role === "assistant" ? (
+                        <div className="prose prose-sm dark:prose-invert max-w-none text-foreground text-sm">
+                          <ReactMarkdown
+                            components={{
+                              p: ({ children }) => <p className="mb-2 last:mb-0 leading-relaxed">{children}</p>,
+                              ul: ({ children }) => <ul className="mb-2 list-disc pl-4 space-y-1">{children}</ul>,
+                              li: ({ children }) => <li>{children}</li>,
+                              strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+                              a: ({ href, children }) => (
+                                <a href={href} className="text-accent hover:underline" target={href?.startsWith('http') ? '_blank' : undefined}>
+                                  {children}
+                                </a>
+                              ),
+                            }}
+                          >
+                            {msg.content || "..."}
+                          </ReactMarkdown>
+                        </div>
+                      ) : (
+                        <p className="text-sm leading-relaxed">{msg.content}</p>
+                      )}
+                      
+                      {msg.role === "assistant" && msg.content && (
+                        <div className="flex gap-1 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-6 px-2 text-xs text-muted-foreground"
+                            onClick={() => copyMessage(msg.content, i)}
+                          >
+                            {copiedIndex === i ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                          </Button>
+                          {i === messages.length - 1 && (
                             <Button
                               variant="ghost"
-                              size="icon"
-                              className="h-6 w-6 flex-shrink-0"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                deleteConversation(conv.id);
-                              }}
+                              size="sm"
+                              className="h-6 px-2 text-xs text-muted-foreground"
+                              onClick={regenerate}
+                              disabled={isLoading}
                             >
-                              <X className="h-3 w-3" />
+                              <RotateCcw className="w-3 h-3" />
                             </Button>
-                          </div>
-                        </button>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+
+                {isLoading && messages[messages.length - 1]?.content === "" && (
+                  <div className="flex gap-3">
+                    <div className="w-7 h-7 rounded-full bg-accent/10 flex items-center justify-center">
+                      <Loader2 className="w-3.5 h-3.5 text-accent animate-spin" />
+                    </div>
+                    <div className="flex gap-1 items-center">
+                      <span className="w-1.5 h-1.5 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <span className="w-1.5 h-1.5 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <span className="w-1.5 h-1.5 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                    </div>
+                  </div>
+                )}
+
+                {/* Quick suggestions */}
+                {messages.length === 1 && (
+                  <div className="pt-2 space-y-2">
+                    <p className="text-xs text-muted-foreground">Quick questions</p>
+                    <div className="flex flex-wrap gap-2">
+                      {QUICK_SUGGESTIONS.map((s, i) => (
+                        <Button
+                          key={i}
+                          variant="outline"
+                          size="sm"
+                          className="text-xs h-auto py-1.5 px-3"
+                          onClick={() => handleSend(s)}
+                          disabled={isLoading}
+                        >
+                          {s}
+                        </Button>
                       ))}
                     </div>
                   </div>
-                ))}
-              </div>
-            </ScrollArea>
-          </div>
-        ) : (
-          <>
-            {/* Chat Area */}
-            <div className="flex-1 overflow-y-auto bg-ivory">
-              <div className="px-4 py-6 space-y-4">
-                {messages.map((msg, index) => (
-                  <div key={index} className="space-y-1">
-                    <div className="flex gap-3">
-                      {msg.role === "assistant" && (
-                        <div className="flex-shrink-0">
-                          <div className="w-8 h-8 rounded-full bg-carbon flex items-center justify-center">
-                            <Sparkles className="w-4 h-4 text-ivory" />
-                          </div>
-                        </div>
-                      )}
-                      <div className={`flex-1 ${msg.role === "user" ? "ml-auto max-w-[85%]" : ""}`}>
-                        <div className={`${msg.role === "user" ? "bg-pearl p-3 rounded-lg" : ""}`}>
-                          <p className="text-sm text-carbon leading-relaxed whitespace-pre-wrap">
-                            {cleanText(msg.content)}
-                          </p>
-                        </div>
-                        {msg.timestamp && (
-                          <p className={`text-xs text-ash mt-1 flex items-center gap-1 ${msg.role === "user" ? "justify-end" : "ml-11"}`}>
-                            <Clock className="h-3 w-3" />
-                            {formatMessageTime(msg.timestamp)}
-                          </p>
-                        )}
-                        {/* Show contextual suggestions after assistant responses */}
-                        {msg.role === "assistant" && msg.suggestions && msg.suggestions.length > 0 && index === messages.length - 1 && !isLoading && (
-                          <div className="mt-3 ml-11 space-y-2">
-                            <p className="text-xs text-ash uppercase tracking-wider">Continue the conversation</p>
-                            <div className="grid grid-cols-1 gap-2">
-                              {msg.suggestions.map((suggestion, i) => (
-                                <Button
-                                  key={i}
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() => handleSuggestionClick(suggestion)}
-                                  className="justify-start text-left h-auto py-2 px-3 text-xs hover:bg-pearl/50"
-                                >
-                                  {suggestion}
-                                </Button>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-
-            {isLoading && (
-              <div className="flex gap-3">
-                <div className="flex-shrink-0">
-                  <div className="w-8 h-8 rounded-full bg-carbon flex items-center justify-center">
-                    <Loader2 className="w-4 h-4 text-ivory animate-spin" />
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm text-ash">Nova is typing...</p>
-                </div>
-              </div>
-            )}
-
-            {showSuggestions && messages.length === 1 && (
-              <div className="pt-2">
-                <p className="text-xs text-ash mb-3 uppercase tracking-wider">Quick Questions</p>
-                <div className="grid grid-cols-1 gap-2">
-                  {quickSuggestions.map((suggestion, index) => (
-                    <Button
-                      key={index}
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleSuggestionClick(suggestion)}
-                      className="justify-start text-left h-auto py-2 px-3 text-sm"
-                    >
-                      {suggestion}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-            )}
+                )}
 
                 <div ref={messagesEndRef} />
               </div>
             </div>
 
-            {/* Upgrade CTA */}
-            <div className="border-t border-mist bg-pearl p-3">
-              <div className="text-xs text-ash mb-2">
-                Want personalised protocols based on your data?
-              </div>
-              <a href="https://neurostate.co.uk/nova" target="_blank" rel="noopener noreferrer">
-                <Button variant="default" size="sm" className="w-full">
-                  Create Nova Account
-                </Button>
+            {/* CTA */}
+            <div className="border-t border-border/50 bg-muted/30 px-4 py-3">
+              <p className="text-xs text-muted-foreground mb-2">Want personalised protocols?</p>
+              <a href="/nova" target="_blank" rel="noopener noreferrer">
+                <Button size="sm" className="w-full">Create Nova Account</Button>
               </a>
             </div>
 
-            {/* Input Area */}
-            <div className="border-t border-mist bg-ivory p-4">
-              <form onSubmit={handleSendMessage} className="flex gap-2">
-                <Input
+            {/* Input */}
+            <div className="border-t border-border/50 p-3">
+              <div className="flex gap-2 items-end">
+                <Textarea
+                  ref={textareaRef}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Ask about products, bundles, or advice..."
+                  onKeyDown={handleKeyDown}
+                  placeholder="Ask about products, protocols..."
                   disabled={isLoading}
-                  className="flex-1 rounded-lg border-mist"
+                  className="flex-1 resize-none min-h-[40px] max-h-[120px] text-sm"
+                  rows={1}
                 />
-                <Button 
-                  type="submit" 
+                <Button
                   size="icon"
+                  onClick={() => handleSend()}
                   disabled={isLoading || !message.trim()}
-                  className="flex-shrink-0"
+                  className="h-10 w-10"
                 >
-                  <Send className="h-4 w-4" />
+                  {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                 </Button>
-              </form>
-              <p className="text-xs text-ash mt-2 text-center">
+              </div>
+              <p className="text-[10px] text-muted-foreground text-center mt-2">
                 Nova helps with product questions, not medical advice
               </p>
             </div>
