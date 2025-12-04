@@ -147,10 +147,10 @@ const Index = () => {
                   ].map((problem, i) => (
                     <div 
                       key={i} 
-                      className="group relative p-5 bg-carbon/[0.03] hover:bg-carbon transition-all duration-500 border-l-2 border-carbon/10 hover:border-carbon overflow-hidden"
+                      className="group relative p-5 bg-carbon/[0.03] hover:bg-carbon transition-all duration-500 border-l-2 border-signal-green/30 hover:border-signal-green overflow-hidden"
                       style={{ animationDelay: `${i * 50}ms` }}
                     >
-                      <div className="absolute inset-0 bg-gradient-to-r from-carbon/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-signal-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       <p className="relative z-10 text-sm font-medium text-carbon group-hover:text-ivory transition-colors duration-500">{problem}</p>
                     </div>
                   ))}
@@ -253,9 +253,9 @@ const Index = () => {
                       { title: "Wearable integration", desc: "Connects to Oura, Whoop, Apple Watch" },
                       { title: "Protocol optimisation", desc: "Refines your supplement stack automatically" }
                     ].map((item, i) => (
-                      <div key={i} className="group flex items-start gap-4 p-3 -mx-3 hover:bg-carbon/[0.03] transition-colors duration-300">
-                        <div className="w-6 h-6 flex items-center justify-center bg-carbon/10 group-hover:bg-carbon transition-colors duration-300 flex-shrink-0 mt-0.5">
-                          <div className="w-1.5 h-1.5 bg-carbon group-hover:bg-ivory transition-colors duration-300" />
+                      <div key={i} className="group flex items-start gap-4 p-3 -mx-3 hover:bg-signal-green/5 transition-colors duration-300">
+                        <div className="w-6 h-6 flex items-center justify-center bg-signal-green/10 group-hover:bg-signal-green transition-colors duration-300 flex-shrink-0 mt-0.5">
+                          <div className="w-1.5 h-1.5 bg-signal-green group-hover:bg-ivory transition-colors duration-300" />
                         </div>
                         <div>
                           <p className="text-carbon font-medium text-sm">{item.title}</p>
@@ -353,9 +353,9 @@ const Index = () => {
                       "Beta state for focus optimisation and execution",
                       "Clinically validated neuromodulation protocols"
                     ].map((item, i) => (
-                      <div key={i} className="group flex items-center gap-4 p-3 -mx-3 hover:bg-ivory/5 transition-colors duration-300">
-                        <div className="w-6 h-6 flex items-center justify-center bg-ivory/10 group-hover:bg-ivory/20 transition-colors">
-                          <div className="w-1.5 h-1.5 bg-ivory" />
+                      <div key={i} className="group flex items-center gap-4 p-3 -mx-3 hover:bg-signal-green/10 transition-colors duration-300">
+                        <div className="w-6 h-6 flex items-center justify-center bg-signal-green/20 group-hover:bg-signal-green transition-colors">
+                          <div className="w-1.5 h-1.5 bg-signal-green group-hover:bg-ivory" />
                         </div>
                         <p className="text-ivory/80 group-hover:text-ivory text-sm transition-colors">{item}</p>
                       </div>
@@ -399,7 +399,7 @@ const Index = () => {
                       { title: "High performers", desc: "Built for pressure" },
                       { title: "Nova integration", desc: "AI-personalised stacks" }
                     ].map((item, i) => (
-                      <div key={i} className="group p-5 bg-carbon/[0.03] hover:bg-carbon border-l-2 border-carbon/10 hover:border-carbon transition-all duration-500">
+                      <div key={i} className="group p-5 bg-carbon/[0.03] hover:bg-carbon border-l-2 border-signal-green/30 hover:border-signal-green transition-all duration-500">
                         <p className="text-carbon group-hover:text-ivory font-semibold text-sm transition-colors">{item.title}</p>
                         <p className="text-ash group-hover:text-stone text-xs mt-1 transition-colors">{item.desc}</p>
                       </div>
@@ -477,7 +477,7 @@ const Index = () => {
                     { title: "Real-time analytics", desc: "Track cognitive performance across departments" },
                     { title: "Dedicated support", desc: "Enterprise account management and onboarding" }
                   ].map((item, i) => (
-                    <div key={i} className="group p-5 bg-ivory/[0.03] hover:bg-ivory/[0.08] border-l-2 border-ivory/10 hover:border-ivory/30 transition-all duration-500">
+                    <div key={i} className="group p-5 bg-ivory/[0.03] hover:bg-signal-green/10 border-l-2 border-signal-green/30 hover:border-signal-green transition-all duration-500">
                       <p className="text-ivory font-semibold text-sm">{item.title}</p>
                       <p className="text-stone text-xs mt-1">{item.desc}</p>
                     </div>
@@ -502,10 +502,10 @@ const Index = () => {
                   { title: "Red Light", href: "/category/devices", desc: "Neuromodulation devices" },
                   { title: "About Us", href: "/about", desc: "Our mission" }
                 ].map((link, i) => (
-                  <Link key={i} to={link.href} className="group p-5 bg-ivory hover:bg-carbon border border-carbon/5 hover:border-carbon transition-all duration-500">
+                  <Link key={i} to={link.href} className="group p-5 bg-ivory hover:bg-carbon border border-signal-green/10 hover:border-signal-green transition-all duration-500">
                     <p className="text-sm font-semibold text-carbon group-hover:text-ivory transition-colors">{link.title}</p>
                     <p className="text-xs text-ash group-hover:text-stone transition-colors mt-1">{link.desc}</p>
-                    <ArrowRight className="w-4 h-4 text-carbon/30 group-hover:text-ivory mt-3 group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-4 h-4 text-signal-green group-hover:text-ivory mt-3 group-hover:translate-x-1 transition-all" />
                   </Link>
                 ))}
               </div>
