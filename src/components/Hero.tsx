@@ -32,14 +32,14 @@ const Hero = () => {
             </span>
           </div>
 
-          {/* Main Headline */}
+          {/* Main Headline - H1 for SEO */}
           <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-ivory leading-[1.02] tracking-tight">
-            The World's First Cognitive Performance System.
+            The World's First Cognitive Performance System
           </h1>
 
           {/* Subheadline */}
           <p className="text-lg sm:text-2xl md:text-3xl text-stone max-w-3xl mx-auto font-light leading-relaxed">
-            AI, light, and supplementation. Engineered to build elite thinkers.
+            AI, red light therapy, and precision supplements. Engineered to build elite thinkers.
           </p>
 
           {/* Value Proposition */}
@@ -48,7 +48,7 @@ const Hero = () => {
               Not wellness. Not mindfulness.
               <br className="hidden sm:block" />
               <span className="sm:hidden"> </span>
-              Human performance, redesigned.
+              AI-driven cognitive performance, redesigned.
             </p>
           </div>
 

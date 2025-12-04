@@ -37,6 +37,8 @@ import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import OrderTracking from "./pages/OrderTracking";
 import NotFound from "./pages/NotFound";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import Dashboard from "./pages/Dashboard";
 import ProgramOverview from "./pages/ProgramOverview";
 import SportsOverview from "./pages/SportsOverview";
@@ -93,6 +95,8 @@ const App = () => (
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/about" element={<AboutUs />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/track-order" element={<OrderTracking />} />
           <Route path="/admin/update-descriptions" element={<ProductDescriptionUpdater />} />

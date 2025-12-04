@@ -13,6 +13,7 @@ import { MorningCheckIn } from "@/components/nova/MorningCheckIn";
 import { VoiceInterface } from "@/components/nova/VoiceInterface";
 import { RealTimeSimulation } from "@/components/nova/RealTimeSimulation";
 import { HealthForecast } from "@/components/nova/HealthForecast";
+import { SEO } from "@/components/SEO";
 
 interface Message {
   role: "user" | "assistant";
@@ -26,6 +27,8 @@ interface Metric {
   icon: any;
   trendColor?: string;
 }
+
+import { SEO } from "@/components/SEO";
 
 export default function Nova() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -221,6 +224,10 @@ export default function Nova() {
 
   return (
     <NovaSwipeWrapper>
+      <SEO 
+        title="Nova – AI Cognitive Performance Assistant | NeuroState"
+        description="Personalised protocols, predictive insights and real-time guidance to enhance focus, sleep and mental resilience. Your AI performance assistant."
+      />
       <div className="min-h-screen bg-white">
         <NovaNav />
       
