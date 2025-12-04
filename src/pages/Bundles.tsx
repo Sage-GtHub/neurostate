@@ -16,7 +16,7 @@ const Bundles = () => {
         title="Product Bundles | NeuroState"
         description="Curated supplement bundles designed for sleep optimisation, recovery enhancement, and cognitive performance. Save on complete performance stacks."
       />
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background mobile-nav-padding">
         <Header />
         <main>
           {/* Hero Section */}

@@ -95,7 +95,7 @@ const Contact = () => {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background mobile-nav-padding">
         <section className="py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 border-b border-mist">
           <div className="w-full max-w-7xl mx-auto">
             <div className="max-w-2xl mx-auto text-center space-y-4">

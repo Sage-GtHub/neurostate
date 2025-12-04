@@ -33,7 +33,7 @@ const Index = () => {
     <>
       <SEO />
       <OrganizationStructuredData />
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white mobile-nav-padding">
         <Header />
         <main>
           <Hero />
@@ -378,7 +378,7 @@ const Index = () => {
                   <Button 
                     variant="outline"
                     size="sm"
-                    className="border-carbon/30 text-carbon hover:bg-carbon/10 rounded-full min-h-[44px] px-8"
+                    className="border-ivory/30 text-ivory hover:bg-ivory/10 rounded-full min-h-[44px] px-8"
                   >
                     <Sparkles className="mr-2 w-4 h-4" />
                     Meet Nova AI

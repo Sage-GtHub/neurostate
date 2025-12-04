@@ -125,7 +125,7 @@ const ProductDetail = () => {
         ]}
       />
       <Header />
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen bg-background mobile-nav-padding">
         <nav className="border-b border-mist" aria-label="Breadcrumb">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 py-4">
             <Link to="/">

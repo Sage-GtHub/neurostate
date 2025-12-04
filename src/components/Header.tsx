@@ -1,7 +1,7 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
 import { GuestChatWidget } from "./GuestChatWidget";
-import { Search, User, Menu, X, Award, Sparkles, LogOut, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target, Lightbulb, Building2 } from "lucide-react";
+import { Search, User, Menu, X, Award, Sparkles, LogOut, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target, Lightbulb, Building2, ChevronRight } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { Input } from "./ui/input";
@@ -21,13 +21,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "./ui/accordion";
 import { AnnouncementBar } from "./AnnouncementBar";
+import { MobileBottomNav } from "./MobileBottomNav";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser, Session } from "@supabase/supabase-js";
 import { toast } from "sonner";
 import logoIcon from "@/assets/neurostate-icon.svg";
-import logoWordmark from "@/assets/neurostate-wordmark.png";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -106,16 +112,21 @@ export const Header = () => {
     { label: "Health Clubs and Studios", href: "/enterprise/health-clubs/overview", icon: Zap },
   ];
 
-  const otherLinks: { label: string; href: string }[] = [];
+  const handleNovaOpen = () => {
+    setChatOpen(true);
+    setHasUnreadChat(false);
+    localStorage.setItem('nova-chat-visited', 'true');
+  };
 
   return (
     <>
       <AnnouncementBar />
       <header className="sticky top-0 z-50 w-full bg-background border-b border-mist backdrop-blur-sm bg-background/95">
-        <div className="container mx-auto flex h-16 sm:h-20 items-center justify-between px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32">
-          <Link to="/" className="flex items-center gap-2 sm:gap-3">
-            <img src={logoIcon} alt="NeuroState Neural Waveform" className="h-8 w-8 sm:h-10 sm:w-10" />
-            <span className="text-ui-label text-carbon tracking-widest text-[0.625rem] sm:text-xs">NEUROSTATE<sup className="text-[5px] sm:text-[6px]">®</sup></span>
+        <div className="container mx-auto flex h-14 lg:h-20 items-center justify-between px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2">
+            <img src={logoIcon} alt="NeuroState Neural Waveform" className="h-7 w-7 lg:h-10 lg:w-10" />
+            <span className="text-ui-label text-carbon tracking-widest text-[0.6rem] lg:text-xs">NEUROSTATE<sup className="text-[5px] lg:text-[6px]">®</sup></span>
           </Link>
           
           {/* Desktop Navigation */}
@@ -222,7 +233,7 @@ export const Header = () => {
             </NavigationMenuList>
           </NavigationMenu>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 lg:gap-3">
             {/* Desktop Search */}
             {searchOpen ? (
               <form onSubmit={handleSearch} className="hidden lg:flex items-center gap-2">
@@ -260,7 +271,7 @@ export const Header = () => {
               </Button>
             )}
             
-            {/* User Account Dropdown */}
+            {/* User Account Dropdown - Desktop */}
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -312,151 +323,145 @@ export const Header = () => {
             
             <CartDrawer />
             
-            {/* Mobile Menu */}
+            {/* Mobile Menu Button */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="lg:hidden">
+                <Button variant="ghost" size="icon" className="lg:hidden h-9 w-9">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-background rounded-l-lg">
-                <SheetHeader>
-                  <SheetTitle className="text-left text-carbon">Menu</SheetTitle>
+              <SheetContent side="right" className="w-full sm:w-[350px] bg-background p-0 overflow-y-auto">
+                <SheetHeader className="p-4 border-b border-mist">
+                  <SheetTitle className="text-left text-carbon text-base">Menu</SheetTitle>
                 </SheetHeader>
-                <nav className="flex flex-col gap-6 mt-8">
-                  {/* Shop Section */}
-                  <div>
-                    <h3 className="text-h3 mb-3 text-carbon">Shop</h3>
-                    <div className="flex flex-col gap-2 pl-4">
-                      {shopCategories.map((category) => (
-                        <Link
-                          key={category.label}
-                          to={category.href}
-                          className="flex items-center gap-2 text-caption text-ash hover:text-carbon transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          <category.icon className="h-4 w-4" />
-                          {category.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Bundles */}
-                  <button
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      setTimeout(() => {
-                        const bundlesSection = document.getElementById('bundles');
-                        if (bundlesSection) {
-                          bundlesSection.scrollIntoView({ behavior: 'smooth' });
-                        } else {
-                          navigate('/#bundles');
-                        }
-                      }, 100);
-                    }}
-                    className="text-h3 hover:text-slate transition-colors text-left cursor-pointer text-carbon"
-                  >
-                    Bundles
-                  </button>
-
-                  {/* Guides Section */}
-                  <div>
-                    <h3 className="text-h3 mb-3 text-carbon">Guides</h3>
-                    <div className="flex flex-col gap-2 pl-4">
-                      {guideTopics.map((topic) => (
-                        <Link
-                          key={topic.label}
-                          to={topic.href}
-                          className="flex items-center gap-2 text-caption text-ash hover:text-carbon transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          <topic.icon className="h-4 w-4" />
-                          {topic.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* For Teams Section */}
-                  <div>
-                    <h3 className="text-h3 mb-3 text-carbon">For Teams</h3>
-                    <div className="flex flex-col gap-2 pl-4">
-                      {enterpriseLinks.map((link) => (
-                        <Link
-                          key={link.label}
-                          to={link.href}
-                          className="flex items-center gap-2 text-caption text-ash hover:text-carbon transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          <link.icon className="h-4 w-4" />
-                          {link.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Nova AI */}
-                  <Link
-                    to="/nova/overview"
-                    className="text-h3 hover:text-slate transition-colors text-carbon"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Nova AI
-                  </Link>
-
-                  {/* Other Links */}
-                  {otherLinks.map((link) => (
+                
+                <nav className="flex flex-col">
+                  {/* Quick Links */}
+                  <div className="p-4 space-y-1">
                     <Link
-                      key={link.label}
-                      to={link.href}
-                      className="text-h3 hover:text-slate transition-colors text-carbon"
+                      to="/shop"
+                      className="flex items-center justify-between p-3 rounded-lg hover:bg-pearl transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      {link.label}
+                      <div className="flex items-center gap-3">
+                        <Package className="h-5 w-5 text-ash" />
+                        <span className="text-carbon font-medium">Shop All</span>
+                      </div>
+                      <ChevronRight className="h-4 w-4 text-ash" />
                     </Link>
-                  ))}
+                    
+                    <Link
+                      to="/bundles"
+                      className="flex items-center justify-between p-3 rounded-lg hover:bg-pearl transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <div className="flex items-center gap-3">
+                        <Zap className="h-5 w-5 text-ash" />
+                        <span className="text-carbon font-medium">Bundles</span>
+                      </div>
+                      <ChevronRight className="h-4 w-4 text-ash" />
+                    </Link>
+                  </div>
 
-                  <div className="pt-6 mt-4 space-y-4">
-                    {/* Mobile Search */}
-                    <form onSubmit={handleSearch} className="flex flex-col gap-2">
-                      <Input
-                        type="search"
-                        placeholder="Search products..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full rounded-lg"
-                      />
-                      <Button type="submit" className="w-full">
-                        <Search className="h-4 w-4 mr-2" />
-                        Search
-                      </Button>
-                    </form>
+                  {/* Accordion Sections */}
+                  <Accordion type="single" collapsible className="px-4">
+                    {/* Shop Categories */}
+                    <AccordionItem value="shop" className="border-b-0">
+                      <AccordionTrigger className="py-3 hover:no-underline">
+                        <span className="text-carbon font-medium">Categories</span>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="space-y-1 pb-3">
+                          {shopCategories.slice(1).map((category) => (
+                            <Link
+                              key={category.label}
+                              to={category.href}
+                              className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-pearl transition-colors"
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+                              <category.icon className="h-4 w-4 text-ash" />
+                              <span className="text-ash text-sm">{category.label}</span>
+                            </Link>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
 
-                    {/* Mobile Account Links */}
+                    {/* Guides */}
+                    <AccordionItem value="guides" className="border-b-0">
+                      <AccordionTrigger className="py-3 hover:no-underline">
+                        <span className="text-carbon font-medium">Guides</span>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="space-y-1 pb-3">
+                          {guideTopics.map((topic) => (
+                            <Link
+                              key={topic.label}
+                              to={topic.href}
+                              className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-pearl transition-colors"
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+                              <topic.icon className="h-4 w-4 text-ash" />
+                              <span className="text-ash text-sm">{topic.label}</span>
+                            </Link>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    {/* For Teams */}
+                    <AccordionItem value="teams" className="border-b-0">
+                      <AccordionTrigger className="py-3 hover:no-underline">
+                        <span className="text-carbon font-medium">For Teams</span>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="space-y-1 pb-3">
+                          {enterpriseLinks.map((link) => (
+                            <Link
+                              key={link.label}
+                              to={link.href}
+                              className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-pearl transition-colors"
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+                              <link.icon className="h-4 w-4 text-ash" />
+                              <span className="text-ash text-sm">{link.label}</span>
+                            </Link>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+
+                  {/* Nova AI Link */}
+                  <div className="p-4 border-t border-mist">
+                    <Link
+                      to="/nova/overview"
+                      className="flex items-center justify-between p-3 rounded-lg bg-accent/5 hover:bg-accent/10 transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <div className="flex items-center gap-3">
+                        <Sparkles className="h-5 w-5 text-accent" />
+                        <span className="text-carbon font-medium">Nova AI</span>
+                      </div>
+                      <ChevronRight className="h-4 w-4 text-accent" />
+                    </Link>
+                  </div>
+
+                  {/* Account Section */}
+                  <div className="p-4 border-t border-mist mt-auto">
                     {user ? (
-                      <div className="flex flex-col gap-2 pt-4 border-t border-mist">
+                      <div className="space-y-2">
+                        <p className="text-xs text-ash px-3 truncate">{user.email}</p>
                         <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                          <Button variant="ghost" className="w-full justify-start">
-                            <User className="h-4 w-4 mr-2" />
-                            My Dashboard
-                          </Button>
-                        </Link>
-                        <Link to="/profile" onClick={() => setMobileMenuOpen(false)}>
-                          <Button variant="ghost" className="w-full justify-start">
-                            <User className="h-4 w-4 mr-2" />
-                            My Profile
-                          </Button>
-                        </Link>
-                        <Link to="/subscriptions" onClick={() => setMobileMenuOpen(false)}>
-                          <Button variant="ghost" className="w-full justify-start">
-                            My Subscriptions
+                          <Button variant="ghost" className="w-full justify-start h-11">
+                            <User className="h-4 w-4 mr-3" />
+                            Dashboard
                           </Button>
                         </Link>
                         <Link to="/rewards" onClick={() => setMobileMenuOpen(false)}>
-                          <Button variant="ghost" className="w-full justify-start">
-                            <Award className="h-4 w-4 mr-2" />
-                            Rewards Programme
+                          <Button variant="ghost" className="w-full justify-start h-11">
+                            <Award className="h-4 w-4 mr-3" />
+                            Rewards
                           </Button>
                         </Link>
                         <Button 
@@ -465,15 +470,15 @@ export const Header = () => {
                             handleSignOut();
                             setMobileMenuOpen(false);
                           }}
-                          className="w-full justify-start text-destructive"
+                          className="w-full justify-start h-11 text-destructive"
                         >
-                          <LogOut className="h-4 w-4 mr-2" />
+                          <LogOut className="h-4 w-4 mr-3" />
                           Sign Out
                         </Button>
                       </div>
                     ) : (
                       <Link to="/auth" onClick={() => setMobileMenuOpen(false)}>
-                        <Button variant="outline" className="w-full">
+                        <Button className="w-full h-11">
                           <User className="h-4 w-4 mr-2" />
                           Sign In
                         </Button>
@@ -486,6 +491,9 @@ export const Header = () => {
           </div>
         </div>
       </header>
+
+      {/* Mobile Bottom Navigation */}
+      <MobileBottomNav onNovaOpen={handleNovaOpen} />
 
       <GuestChatWidget open={chatOpen} onOpenChange={setChatOpen} />
     </>

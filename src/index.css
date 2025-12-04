@@ -399,4 +399,38 @@ All colors MUST be HSL.
       linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
     background-size: 24px 24px;
   }
+  
+  /* Mobile Bottom Navigation Safe Area */
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  
+  /* Add padding for content above mobile bottom nav */
+  .mobile-nav-padding {
+    padding-bottom: 4.5rem; /* 72px for bottom nav */
+  }
+  
+  @media (min-width: 1024px) {
+    .mobile-nav-padding {
+      padding-bottom: 0;
+    }
+  }
+  
+  /* Touch-friendly tap targets */
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+  
+  /* Prevent text selection on interactive elements */
+  .select-none-touch {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Smooth scrolling for mobile */
+  .scroll-smooth-mobile {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
 }

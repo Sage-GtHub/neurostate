@@ -93,7 +93,7 @@ const Shop = () => {
   });
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background mobile-nav-padding">
       <Header />
       <main>
         <section className="pt-20 sm:pt-24 md:pt-32 pb-8 sm:pb-12 md:pb-16 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32">

@@ -57,13 +57,13 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   return (
-    <Link to={`/product/${node.handle}`} className="group block h-full">
+    <Link to={`/product/${node.handle}`} className="group block h-full touch-manipulation">
       <div className="h-full flex flex-col transition-all duration-500">
         {/* Product Image - Dominates the card */}
-        <div className="aspect-[4/5] overflow-hidden bg-ivory relative flex-shrink-0 mb-6">
+        <div className="aspect-[4/5] overflow-hidden bg-ivory relative flex-shrink-0 mb-4 sm:mb-6">
           {/* Urgency Indicator */}
           {(isPopular || isTrending || isLowStock) && (
-            <div className="absolute top-3 left-3 z-10">
+            <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-10">
               {isLowStock && <UrgencyIndicator type="low-stock" count={3} />}
               {!isLowStock && isTrending && <UrgencyIndicator type="trending" />}
               {!isLowStock && !isTrending && isPopular && <UrgencyIndicator type="popular" />}
@@ -74,7 +74,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             <img
               src={image.url}
               alt={image.altText || node.title}
-              className="w-full h-full object-contain p-12 transition-all duration-700 group-hover:scale-[1.02]"
+              className="w-full h-full object-contain p-6 sm:p-12 transition-all duration-700 group-hover:scale-[1.02]"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
@@ -84,25 +84,25 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         </div>
         
         {/* Product Info - Minimal and calm */}
-        <div className="space-y-3 flex-1 flex flex-col">
-          <h3 className="text-[1.125rem] font-normal text-carbon line-clamp-2 leading-tight tracking-tight">
+        <div className="space-y-2 sm:space-y-3 flex-1 flex flex-col">
+          <h3 className="text-sm sm:text-[1.125rem] font-normal text-carbon line-clamp-2 leading-tight tracking-tight">
             {node.title}
           </h3>
           
           {/* Price - Subtle and refined */}
-          <p className="text-[0.9375rem] font-normal text-stone">
+          <p className="text-sm sm:text-[0.9375rem] font-normal text-stone">
             £{price.toFixed(2)}
           </p>
           
-          {/* Add to Cart Button - Ghost style, appears on hover */}
+          {/* Add to Cart Button - Always visible on mobile, ghost on desktop */}
           <Button 
             onClick={handleAddToCart}
             variant="ghost"
             size="sm"
-            className={`mt-4 w-full justify-center border border-transparent text-[0.6875rem] font-medium tracking-wider transition-all duration-300 ${
+            className={`mt-3 sm:mt-4 w-full justify-center border text-[0.6875rem] font-medium tracking-wider transition-all duration-300 min-h-[44px] touch-manipulation ${
               justAdded 
                 ? "border-carbon bg-carbon text-ivory" 
-                : "opacity-0 group-hover:opacity-100 group-hover:border-mist hover:border-carbon hover:bg-carbon hover:text-ivory"
+                : "border-mist lg:opacity-0 lg:border-transparent lg:group-hover:opacity-100 lg:group-hover:border-mist hover:border-carbon hover:bg-carbon hover:text-ivory"
             }`}
             disabled={!firstVariant?.availableForSale || isAdding}
           >
