@@ -167,9 +167,54 @@ export default function Nova() {
           </div>
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8 sm:py-12">
-          {/* What Nova Does */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-mist mb-8 sm:mb-12">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-12">
+          
+          {/* AI Summary Section - First on mobile */}
+          <div className="mb-6 sm:mb-12">
+            <div className="flex items-center justify-between mb-4 sm:mb-6">
+              <h2 className="text-base sm:text-lg font-bold text-carbon">AI Summary</h2>
+              <Button variant="ghost" size="sm" className="text-accent min-h-[44px]" onClick={() => navigate('/nova/chat')}>
+                <MessageSquare className="w-4 h-4 mr-2" />
+                <span className="hidden sm:inline">Ask Nova</span>
+                <span className="sm:hidden">Ask</span>
+              </Button>
+            </div>
+            <div className="space-y-3 sm:space-y-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-4">
+              {aiSummaries.map((summary, index) => {
+                const Icon = getSummaryIcon(summary.type);
+                const colorClass = getSummaryColor(summary.type);
+                return (
+                  <Card key={index} className="border-mist/50 hover:shadow-md transition-all">
+                    <CardContent className="p-4 sm:p-6">
+                      <div className="flex items-start gap-3 sm:block">
+                        <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full ${colorClass} flex items-center justify-center flex-shrink-0 sm:mb-4`}>
+                          <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-sm font-semibold text-carbon mb-1 sm:mb-2">{summary.title}</h3>
+                          <p className="text-xs text-ash leading-relaxed mb-2 sm:mb-4">{summary.message}</p>
+                          {summary.action && (
+                            <Button variant="ghost" size="sm" className="text-xs text-accent p-0 h-auto min-h-[36px]">
+                              {summary.action}
+                              <ChevronRight className="w-3 h-3 ml-1" />
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* 7-Day Forecast - Second on mobile */}
+          <div className="mb-6 sm:mb-12">
+            <HealthForecast />
+          </div>
+
+          {/* What Nova Does - Hidden on mobile, show on desktop */}
+          <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-px bg-mist mb-8 sm:mb-12">
             {[
               { icon: Brain, title: "Predicts", desc: "72 hour forecasting" },
               { icon: Zap, title: "Adapts", desc: "Real time adjustments" },
@@ -184,43 +229,8 @@ export default function Nova() {
             ))}
           </div>
 
-          {/* AI Summary Section */}
-          <div className="mb-8 sm:mb-12">
-            <div className="flex items-center justify-between mb-4 sm:mb-6">
-              <h2 className="text-base sm:text-lg font-bold text-carbon">AI Summary</h2>
-              <Button variant="ghost" size="sm" className="text-accent min-h-[44px]" onClick={() => navigate('/nova/chat')}>
-                <MessageSquare className="w-4 h-4 mr-2" />
-                <span className="hidden sm:inline">Ask Nova</span>
-                <span className="sm:hidden">Ask</span>
-              </Button>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-              {aiSummaries.map((summary, index) => {
-                const Icon = getSummaryIcon(summary.type);
-                const colorClass = getSummaryColor(summary.type);
-                return (
-                  <Card key={index} className="border-mist/50 hover:shadow-md transition-all">
-                    <CardContent className="p-4 sm:p-6">
-                      <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full ${colorClass} flex items-center justify-center mb-3 sm:mb-4`}>
-                        <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
-                      </div>
-                      <h3 className="text-sm font-semibold text-carbon mb-2">{summary.title}</h3>
-                      <p className="text-xs text-ash leading-relaxed mb-3 sm:mb-4">{summary.message}</p>
-                      {summary.action && (
-                        <Button variant="ghost" size="sm" className="text-xs text-accent p-0 h-auto min-h-[36px]">
-                          {summary.action}
-                          <ChevronRight className="w-3 h-3 ml-1" />
-                        </Button>
-                      )}
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
-
           {/* Live Metrics */}
-          <div className="mb-8 sm:mb-12">
+          <div className="mb-6 sm:mb-12">
             <div className="flex items-center justify-between mb-4 sm:mb-6">
               <div>
                 <h2 className="text-base sm:text-lg font-bold text-carbon">Live Data</h2>
@@ -249,12 +259,12 @@ export default function Nova() {
                 const Icon = getMetricIcon(metric.label);
                 const hasRealData = metrics[metric.label.toLowerCase() as keyof typeof metrics];
                 return (
-                  <div key={index} className={`p-4 sm:p-6 rounded-lg ${hasRealData ? 'bg-pearl' : 'bg-pearl/50'}`}>
-                    <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                  <div key={index} className={`p-3 sm:p-6 rounded-lg ${hasRealData ? 'bg-pearl' : 'bg-pearl/50'}`}>
+                    <div className="flex items-center gap-2 mb-1 sm:mb-3">
                       <Icon className={`w-4 h-4 sm:w-5 sm:h-5 ${hasRealData ? 'text-accent' : 'text-stone'}`} />
                       <span className="text-[10px] sm:text-xs text-stone uppercase tracking-wider">{metric.label}</span>
                     </div>
-                    <p className={`text-xl sm:text-3xl font-bold ${hasRealData ? 'text-carbon' : 'text-carbon/50'}`}>
+                    <p className={`text-lg sm:text-3xl font-bold ${hasRealData ? 'text-carbon' : 'text-carbon/50'}`}>
                       {metric.value}
                     </p>
                     {metric.trend && (
@@ -269,57 +279,90 @@ export default function Nova() {
             </div>
           </div>
 
-          {/* Main Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-            {/* 7-Day Forecast */}
-            <div className="lg:col-span-2 order-2 lg:order-1">
-              <HealthForecast />
+          {/* Mobile Quick Actions */}
+          <div className="lg:hidden mb-6">
+            <h3 className="text-sm font-bold text-carbon mb-3">Quick Actions</h3>
+            <div className="grid grid-cols-2 gap-2">
+              <Button 
+                variant="outline" 
+                className="justify-start text-xs border-mist min-h-[44px]"
+                onClick={() => setShowAssessment(true)}
+              >
+                <Target className="w-4 h-4 mr-2" />
+                Assessment
+              </Button>
+              <Button 
+                variant="outline" 
+                className="justify-start text-xs border-mist min-h-[44px]"
+                onClick={() => navigate('/nova/chat')}
+              >
+                <MessageSquare className="w-4 h-4 mr-2" />
+                Chat
+              </Button>
+              <Button 
+                variant="outline" 
+                className="justify-start text-xs border-mist min-h-[44px]"
+                onClick={() => navigate('/nova/protocols')}
+              >
+                <Sparkles className="w-4 h-4 mr-2" />
+                Protocols
+              </Button>
+              <Button 
+                variant="outline" 
+                className="justify-start text-xs border-mist min-h-[44px]"
+                onClick={() => navigate('/nova/devices')}
+              >
+                <Activity className="w-4 h-4 mr-2" />
+                Devices
+              </Button>
             </div>
+          </div>
 
-            {/* Sidebar */}
-            <div className="space-y-4 sm:space-y-6 order-1 lg:order-2">
+          {/* Desktop Sidebar */}
+          <div className="hidden lg:block">
+            <div className="grid grid-cols-1 gap-6">
               {/* Quick Actions */}
-              <div className="p-4 sm:p-6 bg-pearl rounded-lg">
-                <h3 className="text-sm font-bold text-carbon mb-3 sm:mb-4">Quick Actions</h3>
-                <div className="grid grid-cols-2 lg:grid-cols-1 gap-2">
+              <div className="p-6 bg-pearl rounded-lg">
+                <h3 className="text-sm font-bold text-carbon mb-4">Quick Actions</h3>
+                <div className="space-y-2">
                   <Button 
                     variant="outline" 
-                    className="w-full justify-between text-xs sm:text-sm border-mist min-h-[44px]"
+                    className="w-full justify-between text-sm border-mist min-h-[44px]"
                     onClick={() => setShowAssessment(true)}
                   >
-                    <span className="truncate">Protocol Assessment</span>
-                    <ChevronRight className="w-4 h-4 flex-shrink-0" />
+                    <span>Protocol Assessment</span>
+                    <ChevronRight className="w-4 h-4" />
                   </Button>
                   <Button 
                     variant="outline" 
-                    className="w-full justify-between text-xs sm:text-sm border-mist min-h-[44px]"
+                    className="w-full justify-between text-sm border-mist min-h-[44px]"
                     onClick={() => navigate('/nova/chat')}
                   >
                     <span>Chat with Nova</span>
-                    <ChevronRight className="w-4 h-4 flex-shrink-0" />
+                    <ChevronRight className="w-4 h-4" />
                   </Button>
                   <Button 
                     variant="outline" 
-                    className="w-full justify-between text-xs sm:text-sm border-mist min-h-[44px]"
+                    className="w-full justify-between text-sm border-mist min-h-[44px]"
                     onClick={() => navigate('/nova/protocols')}
                   >
                     <span>View Protocols</span>
-                    <ChevronRight className="w-4 h-4 flex-shrink-0" />
+                    <ChevronRight className="w-4 h-4" />
                   </Button>
                   <Button 
                     variant="outline" 
-                    className="w-full justify-between text-xs sm:text-sm border-mist min-h-[44px]"
+                    className="w-full justify-between text-sm border-mist min-h-[44px]"
                     onClick={() => navigate('/nova/devices')}
                   >
                     <span>Connect Devices</span>
-                    <ChevronRight className="w-4 h-4 flex-shrink-0" />
+                    <ChevronRight className="w-4 h-4" />
                   </Button>
                 </div>
               </div>
 
               {/* Connected Devices Summary */}
-              <div className="p-4 sm:p-6 bg-pearl rounded-lg">
-                <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <div className="p-6 bg-pearl rounded-lg">
+                <div className="flex items-center justify-between mb-4">
                   <h3 className="text-sm font-bold text-carbon">Connected Devices</h3>
                   {connectedDevices.length > 0 && (
                     <span className="text-xs text-accent">{connectedDevices.length} active</span>
@@ -331,7 +374,7 @@ export default function Nova() {
                       <div key={i} className="flex items-center justify-between">
                         <div>
                           <p className="text-sm text-carbon font-medium">{device.device_name}</p>
-                          <p className="text-[10px] sm:text-xs text-stone">
+                          <p className="text-xs text-stone">
                             {device.last_sync_at 
                               ? `Synced ${new Date(device.last_sync_at).toLocaleTimeString()}`
                               : 'Not synced yet'
@@ -347,7 +390,7 @@ export default function Nova() {
                   </div>
                 ) : (
                   <div className="text-center py-4">
-                    <p className="text-xs sm:text-sm text-stone mb-2">No devices connected</p>
+                    <p className="text-sm text-stone mb-2">No devices connected</p>
                     <Button 
                       size="sm" 
                       variant="outline"
