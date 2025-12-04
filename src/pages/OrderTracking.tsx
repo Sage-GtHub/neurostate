@@ -288,7 +288,7 @@ const OrderTracking = () => {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background mobile-nav-padding">
         {/* Hero Section */}
         <section className="bg-gradient-to-br from-primary/5 via-background to-accent/5 border-b">
           <div className="container mx-auto px-4 py-16 lg:py-20">

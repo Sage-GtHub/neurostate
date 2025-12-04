@@ -169,7 +169,7 @@ export default function Dashboard() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen bg-background mobile-nav-padding">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12">
           <div className="mb-8">
             <h1 className="text-h1 text-carbon mb-2">My Account</h1>

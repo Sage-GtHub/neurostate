@@ -179,7 +179,7 @@ const LearningPathDetail = () => {
 
   if (!path || !lessons) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background mobile-nav-padding">
         <Header />
         <div className="container mx-auto px-4 py-12">
           <div className="text-center">Loading...</div>
@@ -190,7 +190,7 @@ const LearningPathDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background mobile-nav-padding">
       <Header />
       
       <main className="container mx-auto px-4 py-12">
