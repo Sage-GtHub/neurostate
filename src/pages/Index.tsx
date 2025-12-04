@@ -45,10 +45,10 @@ const Index = () => {
               <div className="text-center mb-16 sm:mb-24 space-y-4">
                 <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">The Platform</p>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-carbon leading-[1.05]">
-                  One integrated system
+                  One System. Three Forces.
                 </h2>
                 <p className="text-base sm:text-lg text-ash max-w-2xl mx-auto">
-                  Six components engineered to work together. No other platform combines AI, hardware, and nutrition into a single cognitive performance system.
+                  AI, science-backed supplements, and state-shifting technology — all working together to upgrade the human mind. This isn't a product line. It's a performance architecture.
                 </p>
               </div>
 
@@ -140,10 +140,10 @@ const Index = () => {
                   <div className="space-y-4">
                     <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Cognitive Engine</p>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.05]">
-                      Nova: Your AI for cognitive performance
+                      Nova — Your Cognitive Operating System
                     </h2>
                     <p className="text-base sm:text-lg text-ash leading-relaxed max-w-lg">
-                      Simple. Measurable. Personal. Nova tracks your biology, spots patterns you miss, and tells you exactly what to do next.
+                      Nova learns your physiology, predicts your mental states, and builds personalised protocols that improve how you think, recover, and perform. It doesn't 'motivate' you — it reshapes your habits using science, data, and relentless precision.
                     </p>
                   </div>
                   <div className="space-y-4">
@@ -229,13 +229,10 @@ const Index = () => {
                   <div className="space-y-4">
                     <p className="text-stone text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Hardware</p>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-ivory leading-[1.05]">
-                      Red Light Neuromodulation
+                      State-Shifting Technology for Peak Performance
                     </h2>
-                    <p className="text-xl text-ivory/90 font-medium">
-                      Change your brain state in minutes.
-                    </p>
                     <p className="text-base sm:text-lg text-stone leading-relaxed max-w-lg">
-                      Clinical grade photobiomodulation. Switch between Alpha and Beta states on demand. Not a gadget. An instrument for cognitive control.
+                      Not another wellness gadget. A device engineered to enhance focus, recovery, and cognitive clarity — in minutes. Designed to change your mental state on demand.
                     </p>
                   </div>
                   <div className="space-y-3">
@@ -320,13 +317,10 @@ const Index = () => {
               <div className="text-center mb-16 sm:mb-20 space-y-4">
                 <p className="text-stone text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">For Organisations</p>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-ivory leading-[1.05]">
-                  The end of corporate wellness
+                  Corporate Wellness Is Broken.
                 </h2>
-                <p className="text-xl text-ivory/90 font-medium">
-                  The era of cognitive performance begins.
-                </p>
                 <p className="text-base sm:text-lg text-stone max-w-2xl mx-auto">
-                  Skilled workers need a better brain, not another relaxation app. NeuroState drives clarity, focus, and resilience across teams.
+                  Meditation apps, webinars, and yoga sessions don't improve cognitive performance. NeuroState replaces outdated wellbeing perks with a scientific performance system that helps employees think faster, recover better, and perform at elite levels.
                 </p>
               </div>
 
