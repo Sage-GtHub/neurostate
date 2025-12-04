@@ -83,32 +83,7 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Who We Help */}
-          <section ref={whoWeHelp.ref} className={`relative py-24 sm:py-32 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl transition-all duration-1000 ${whoWeHelp.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-16 space-y-4">
-                <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Who We Help</p>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.05]">
-                  Built for those who demand more
-                </h2>
-              </div>
-
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {[
-                  { icon: Briefcase, title: "Professionals", desc: "High performers seeking sustained focus and mental clarity under pressure" },
-                  { icon: Building2, title: "Corporate Teams", desc: "Organisations ready to replace outdated wellness with cognitive performance" },
-                  { icon: Dumbbell, title: "Health Clubs", desc: "Studios and gyms offering premium member performance programmes" },
-                  { icon: Users, title: "Founders and Athletes", desc: "Creatives and competitors who need to think faster and recover better" }
-                ].map((item, i) => (
-                  <div key={i} className="p-6 bg-ivory border-l border-carbon/10">
-                    <item.icon className="w-5 h-5 text-carbon mb-4" />
-                    <h3 className="text-base font-semibold text-carbon mb-2">{item.title}</h3>
-                    <p className="text-sm text-ash">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
+          {/* Who We Help - Hidden for cleaner homepage */}
 
           {/* Problems We Solve */}
           <section ref={problems.ref} className={`relative py-24 sm:py-32 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory transition-all duration-1000 ${problems.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
@@ -144,36 +119,7 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Backed by Science */}
-          <section ref={science.ref} className={`relative py-24 sm:py-32 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-carbon text-ivory transition-all duration-1000 ${science.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-16 space-y-4">
-                <p className="text-stone text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Backed by Science</p>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.05]">
-                  Evidence-based cognitive optimisation
-                </h2>
-                <p className="text-base sm:text-lg text-stone max-w-2xl mx-auto">
-                  Every element of our system is grounded in peer-reviewed research and clinical evidence.
-                </p>
-              </div>
-
-              <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-px bg-slate/30">
-                {[
-                  { icon: Lightbulb, title: "Photobiomodulation", desc: "Red light therapy cognitive benefits at 660nm and 850nm wavelengths" },
-                  { icon: Brain, title: "Neuromodulation", desc: "Non-invasive brain state modulation for focus and recovery" },
-                  { icon: FlaskConical, title: "Adaptogens", desc: "Ashwagandha, Rhodiola, and Lion's Mane for stress adaptation" },
-                  { icon: Shield, title: "Magnesium Glycinate", desc: "Bioavailable magnesium for sleep optimisation and recovery" },
-                  { icon: Sparkles, title: "AI Personalisation", desc: "Predictive wellness AI adapts protocols to your biology" }
-                ].map((item, i) => (
-                  <div key={i} className="p-6 bg-carbon text-center">
-                    <item.icon className="w-5 h-5 text-ivory mx-auto mb-3" />
-                    <h3 className="text-sm font-semibold text-ivory mb-2">{item.title}</h3>
-                    <p className="text-xs text-stone">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
+          {/* Backed by Science - Hidden for cleaner homepage */}
 
           {/* Category Creation - Old vs New */}
           <section ref={category.ref} className={`relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory transition-all duration-1000 ${category.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
