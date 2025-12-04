@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 interface SEOProps {
   title?: string;
   description?: string;
+  keywords?: string;
   image?: string;
   type?: 'website' | 'product' | 'article';
   canonical?: string;
@@ -11,8 +12,9 @@ interface SEOProps {
 }
 
 export const SEO = ({
-  title = 'NeuroState® - Science-Backed Supplements & Recovery Technology | UK',
-  description = 'Premium science-backed supplements and recovery technology designed to optimise performance, cognitive function, and wellness. Shop NSF certified supplements and red light therapy. Free UK delivery.',
+  title = 'NeuroState® - The World\'s First Cognitive Performance System',
+  description = 'AI, red light therapy and performance supplements combined into one system to improve focus, sleep, energy and cognitive performance. Free UK delivery.',
+  keywords = 'cognitive performance system, AI-driven cognitive performance, focus optimisation, mental performance tools, burnout prevention',
   image = 'https://neurostate.co.uk/og-image.jpg',
   type = 'website',
   canonical,
@@ -41,6 +43,7 @@ export const SEO = ({
 
     // Basic meta tags
     updateMetaTag('description', description, false);
+    updateMetaTag('keywords', keywords, false);
     
     // Open Graph
     updateMetaTag('og:title', title);
@@ -70,7 +73,7 @@ export const SEO = ({
       document.head.appendChild(canonicalLink);
     }
     canonicalLink.href = canonical || currentUrl;
-  }, [title, description, image, type, canonical, currentUrl, noindex]);
+  }, [title, description, keywords, image, type, canonical, currentUrl, noindex]);
 
   return null;
 };
