@@ -320,7 +320,7 @@ const Index = () => {
                   Corporate Wellness Is Broken.
                 </h2>
                 <p className="text-base sm:text-lg text-stone max-w-2xl mx-auto">
-                  Meditation apps, webinars, and yoga sessions don't improve cognitive performance. NeuroState replaces outdated wellbeing perks with a scientific performance system that helps employees think faster, recover better, and perform at elite levels.
+                  Meditation apps, webinars, and yoga sessions do not improve cognitive performance. NeuroState replaces outdated wellbeing perks with a scientific performance system that helps employees think faster, recover better, and perform at elite levels.
                 </p>
               </div>
 
