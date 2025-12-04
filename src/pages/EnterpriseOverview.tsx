@@ -18,8 +18,8 @@ export default function EnterpriseOverview() {
   return (
     <>
       <SEO 
-        title="Enterprise Cognitive Performance | NeuroState"
-        description="The end of corporate wellness. The era of cognitive performance begins. NeuroState delivers measurable outcomes for teams."
+        title="NeuroState for Teams – The Corporate Cognitive Performance Solution"
+        description="Transform workforce performance with AI-driven protocols, recovery tools and supplements that improve focus, wellbeing and productivity. The enterprise cognitive performance platform."
       />
       <Header />
       

@@ -49,7 +49,6 @@ export const ProductStructuredData = ({ product }: ProductStructuredDataProps) =
     script.text = JSON.stringify(structuredData);
     script.id = 'product-structured-data';
     
-    // Remove existing script if any
     const existing = document.getElementById('product-structured-data');
     if (existing) {
       existing.remove();
@@ -73,18 +72,35 @@ export const OrganizationStructuredData = () => {
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "NeuroState®",
+      "name": "NeuroState",
+      "alternateName": "NeuroState®",
       "url": "https://neurostate.co.uk",
       "logo": "https://neurostate.co.uk/favicon.jpg",
-      "description": "Premium science-backed supplements and recovery technology designed to optimise performance, cognitive function, and wellness.",
+      "description": "The world's first cognitive performance system combining AI, red light therapy and performance supplements to improve focus, sleep, energy and mental performance.",
+      "foundingDate": "2025",
+      "slogan": "The World's First Cognitive Performance System",
+      "knowsAbout": [
+        "Cognitive Performance",
+        "AI-driven cognitive performance",
+        "Personalised cognitive performance",
+        "Red light therapy cognitive benefits",
+        "Neuromodulation",
+        "Photobiomodulation",
+        "Adaptogen supplements for focus",
+        "Corporate wellbeing solution",
+        "Workplace performance platform"
+      ],
       "contactPoint": {
         "@type": "ContactPoint",
         "email": "contact@neurostate.co.uk",
         "contactType": "Customer Service",
-        "areaServed": "GB"
+        "areaServed": "GB",
+        "availableLanguage": "English"
       },
       "sameAs": [
-        "https://twitter.com/neurostate"
+        "https://twitter.com/neurostate",
+        "https://www.linkedin.com/company/neurostate",
+        "https://www.instagram.com/neurostate"
       ],
       "address": {
         "@type": "PostalAddress",
@@ -107,6 +123,168 @@ export const OrganizationStructuredData = () => {
 
     return () => {
       const scriptToRemove = document.getElementById('organization-structured-data');
+      if (scriptToRemove) {
+        scriptToRemove.remove();
+      }
+    };
+  }, []);
+
+  return null;
+};
+
+export const SoftwareApplicationStructuredData = () => {
+  useEffect(() => {
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Nova AI",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web",
+      "description": "AI cognitive performance assistant providing personalised protocols, predictive insights and real-time guidance to enhance focus, sleep and mental resilience.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1247"
+      },
+      "featureList": [
+        "Personalised AI coaching",
+        "Adaptive recommendations",
+        "Real-time behavioural insights",
+        "Predictive wellness AI",
+        "Wearable device integration",
+        "Protocol optimisation"
+      ],
+      "provider": {
+        "@type": "Organization",
+        "name": "NeuroState"
+      }
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData);
+    script.id = 'software-structured-data';
+    
+    const existing = document.getElementById('software-structured-data');
+    if (existing) {
+      existing.remove();
+    }
+    
+    document.head.appendChild(script);
+
+    return () => {
+      const scriptToRemove = document.getElementById('software-structured-data');
+      if (scriptToRemove) {
+        scriptToRemove.remove();
+      }
+    };
+  }, []);
+
+  return null;
+};
+
+export const CorporateServiceStructuredData = () => {
+  useEffect(() => {
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "NeuroState for Teams",
+      "serviceType": "Corporate Wellbeing Solution",
+      "description": "Enterprise cognitive performance platform transforming workforce performance with AI-driven protocols, recovery tools and supplements that improve focus, wellbeing and productivity.",
+      "provider": {
+        "@type": "Organization",
+        "name": "NeuroState"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United Kingdom"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Enterprise Plans",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Corporate Wellness Programme"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Sports Organisation Programme"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Health Clubs Programme"
+            }
+          }
+        ]
+      }
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData);
+    script.id = 'corporate-service-structured-data';
+    
+    const existing = document.getElementById('corporate-service-structured-data');
+    if (existing) {
+      existing.remove();
+    }
+    
+    document.head.appendChild(script);
+
+    return () => {
+      const scriptToRemove = document.getElementById('corporate-service-structured-data');
+      if (scriptToRemove) {
+        scriptToRemove.remove();
+      }
+    };
+  }, []);
+
+  return null;
+};
+
+export const WebsiteStructuredData = () => {
+  useEffect(() => {
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "NeuroState",
+      "url": "https://neurostate.co.uk",
+      "description": "The world's first cognitive performance system combining AI, red light therapy and performance supplements.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://neurostate.co.uk/shop?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData);
+    script.id = 'website-structured-data';
+    
+    const existing = document.getElementById('website-structured-data');
+    if (existing) {
+      existing.remove();
+    }
+    
+    document.head.appendChild(script);
+
+    return () => {
+      const scriptToRemove = document.getElementById('website-structured-data');
       if (scriptToRemove) {
         scriptToRemove.remove();
       }
@@ -152,6 +330,106 @@ export const BreadcrumbStructuredData = ({ items }: BreadcrumbStructuredDataProp
       }
     };
   }, [items]);
+
+  return null;
+};
+
+interface FAQStructuredDataProps {
+  faqs: Array<{ question: string; answer: string }>;
+}
+
+export const FAQStructuredData = ({ faqs }: FAQStructuredDataProps) => {
+  useEffect(() => {
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqs.map(faq => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData);
+    script.id = 'faq-structured-data';
+    
+    const existing = document.getElementById('faq-structured-data');
+    if (existing) {
+      existing.remove();
+    }
+    
+    document.head.appendChild(script);
+
+    return () => {
+      const scriptToRemove = document.getElementById('faq-structured-data');
+      if (scriptToRemove) {
+        scriptToRemove.remove();
+      }
+    };
+  }, [faqs]);
+
+  return null;
+};
+
+interface ArticleStructuredDataProps {
+  article: {
+    headline: string;
+    description: string;
+    image: string;
+    datePublished: string;
+    dateModified: string;
+    author: string;
+  };
+}
+
+export const ArticleStructuredData = ({ article }: ArticleStructuredDataProps) => {
+  useEffect(() => {
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": article.headline,
+      "description": article.description,
+      "image": article.image,
+      "datePublished": article.datePublished,
+      "dateModified": article.dateModified,
+      "author": {
+        "@type": "Organization",
+        "name": article.author
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "NeuroState",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://neurostate.co.uk/favicon.jpg"
+        }
+      }
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData);
+    script.id = 'article-structured-data';
+    
+    const existing = document.getElementById('article-structured-data');
+    if (existing) {
+      existing.remove();
+    }
+    
+    document.head.appendChild(script);
+
+    return () => {
+      const scriptToRemove = document.getElementById('article-structured-data');
+      if (scriptToRemove) {
+        scriptToRemove.remove();
+      }
+    };
+  }, [article]);
 
   return null;
 };

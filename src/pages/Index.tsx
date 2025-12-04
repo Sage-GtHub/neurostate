@@ -1,14 +1,14 @@
 import { Header } from "@/components/Header";
 import Hero from "@/components/Hero";
 import { SEO } from "@/components/SEO";
-import { OrganizationStructuredData } from "@/components/StructuredData";
+import { OrganizationStructuredData, SoftwareApplicationStructuredData, WebsiteStructuredData } from "@/components/StructuredData";
 import { Footer } from "@/components/Footer";
 import { LiveChat } from "@/components/LiveChat";
 
 import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Brain, Lightbulb, Zap, Users, Building2, X, CheckCircle2, Activity, Target, Sparkles, BarChart3, Shield, Clock } from "lucide-react";
+import { ArrowRight, Brain, Lightbulb, Zap, Users, Building2, X, CheckCircle2, Activity, Target, Sparkles, BarChart3, Shield, Clock, Briefcase, Dumbbell, Heart, FlaskConical } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import novaIcon from "@/assets/neurostate-icon.svg";
@@ -20,6 +20,9 @@ const Index = () => {
   const [chatOpen, setChatOpen] = useState(false);
   
   const system = useScrollAnimation();
+  const whoWeHelp = useScrollAnimation();
+  const problems = useScrollAnimation();
+  const science = useScrollAnimation();
   const category = useScrollAnimation();
   const nova = useScrollAnimation();
   const device = useScrollAnimation();
@@ -30,10 +33,12 @@ const Index = () => {
   return (
     <>
       <SEO 
-        title="NeuroState | The AI Operating System for Human Performance"
-        description="NeuroState replaces outdated corporate wellness with the world's first AI-powered cognitive performance system. Nova AI. Red light neuromodulation. Precision supplements."
+        title="NeuroState – The World's First Cognitive Performance System"
+        description="AI, red light therapy and performance supplements combined into one system to improve focus, sleep, energy and cognitive performance. The future of mental performance starts here."
       />
       <OrganizationStructuredData />
+      <SoftwareApplicationStructuredData />
+      <WebsiteStructuredData />
       <div className="min-h-screen bg-ivory mobile-nav-padding">
         <Header />
         <main>
@@ -45,22 +50,22 @@ const Index = () => {
               <div className="text-center mb-16 sm:mb-24 space-y-4">
                 <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">The Platform</p>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-carbon leading-[1.05]">
-                  One System. Three Forces.
+                  One Cognitive Performance System. Three Forces.
                 </h2>
                 <p className="text-base sm:text-lg text-ash max-w-2xl mx-auto">
-                  AI, supplements backed by science, and technology that shifts your state. All working together to upgrade the human mind. This is not a product line. It is a performance architecture.
+                  AI-driven cognitive performance, precision supplements, and neuromodulation technology. All working together to optimise the human mind. This is not a product line. It is a performance ecosystem.
                 </p>
               </div>
 
               {/* System Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-mist">
                 {[
-                  { icon: Brain, title: "Nova AI", desc: "Cognitive engine", detail: "Daily guidance. Real time adjustments. Deep personalisation." },
-                  { icon: Target, title: "Protocol Engine", desc: "Personal stacks", detail: "Evidence based protocols tuned to your biology." },
-                  { icon: Lightbulb, title: "Neuromodulation", desc: "Brain state control", detail: "Clinical grade red light therapy. Alpha and beta switching." },
-                  { icon: Zap, title: "Supplements", desc: "Precision nutrition", detail: "Research backed doses. Third party verified." },
-                  { icon: Activity, title: "Data Integration", desc: "Wearable sync", detail: "Oura. Whoop. Apple Watch. Unified intelligence." },
-                  { icon: Building2, title: "Team Deployment", desc: "Enterprise scale", detail: "Roll out across organisations. Measure outcomes." },
+                  { icon: Brain, title: "Nova AI", desc: "AI performance assistant", detail: "Personalised AI coaching with adaptive recommendations and real-time behavioural insights." },
+                  { icon: Target, title: "Protocol Engine", desc: "Personal stacks", detail: "Evidence-based protocols tuned to your biology for focus optimisation." },
+                  { icon: Lightbulb, title: "Neuromodulation", desc: "Brain state control", detail: "Red light therapy cognitive benefits. Alpha and beta state switching." },
+                  { icon: Zap, title: "Supplements", desc: "Precision nutrition", detail: "Adaptogen supplements for focus. Magnesium for recovery. Third-party verified." },
+                  { icon: Activity, title: "Data Integration", desc: "Wearable sync", detail: "Oura. Whoop. Apple Watch. Unified predictive wellness AI." },
+                  { icon: Building2, title: "Team Deployment", desc: "Enterprise scale", detail: "Corporate wellbeing solution. Workplace performance platform." },
                 ].map((item, i) => (
                   <div 
                     key={i}
@@ -78,52 +83,144 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Category Creation - Old vs New */}
-          <section ref={category.ref} className={`relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-carbon text-ivory transition-all duration-1000 ${category.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          {/* Who We Help */}
+          <section ref={whoWeHelp.ref} className={`relative py-24 sm:py-32 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl transition-all duration-1000 ${whoWeHelp.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-16 sm:mb-20 space-y-4">
-                <p className="text-stone text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Category Creation</p>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.05]">
-                  The old corporate wellness world is dead
+              <div className="text-center mb-16 space-y-4">
+                <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Who We Help</p>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.05]">
+                  Built for those who demand more
+                </h2>
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {[
+                  { icon: Briefcase, title: "Professionals", desc: "High performers seeking sustained focus and mental clarity under pressure" },
+                  { icon: Building2, title: "Corporate Teams", desc: "Organisations ready to replace outdated wellness with cognitive performance" },
+                  { icon: Dumbbell, title: "Health Clubs", desc: "Studios and gyms offering premium member performance programmes" },
+                  { icon: Users, title: "Founders and Athletes", desc: "Creatives and competitors who need to think faster and recover better" }
+                ].map((item, i) => (
+                  <div key={i} className="p-6 bg-ivory border-l border-carbon/10">
+                    <item.icon className="w-5 h-5 text-carbon mb-4" />
+                    <h3 className="text-base font-semibold text-carbon mb-2">{item.title}</h3>
+                    <p className="text-sm text-ash">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Problems We Solve */}
+          <section ref={problems.ref} className={`relative py-24 sm:py-32 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory transition-all duration-1000 ${problems.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="max-w-6xl mx-auto">
+              <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div className="space-y-6">
+                  <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Problems We Solve</p>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.05]">
+                    Mental performance issues holding you back
+                  </h2>
+                  <p className="text-base sm:text-lg text-ash leading-relaxed">
+                    The modern brain is under siege. We built our cognitive performance system to address the root causes, not just the symptoms.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    "Brain fog",
+                    "Poor focus",
+                    "Burnout",
+                    "Low energy",
+                    "Sleep issues",
+                    "Chronic stress",
+                    "Recovery deficits",
+                    "Decision fatigue"
+                  ].map((problem, i) => (
+                    <div key={i} className="p-4 bg-carbon/5 border-l border-carbon/10">
+                      <p className="text-sm text-carbon font-medium">{problem}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Backed by Science */}
+          <section ref={science.ref} className={`relative py-24 sm:py-32 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-carbon text-ivory transition-all duration-1000 ${science.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-16 space-y-4">
+                <p className="text-stone text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Backed by Science</p>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.05]">
+                  Evidence-based cognitive optimisation
                 </h2>
                 <p className="text-base sm:text-lg text-stone max-w-2xl mx-auto">
-                  This is the future of cognitive performance.
+                  Every element of our system is grounded in peer-reviewed research and clinical evidence.
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-px bg-slate/30">
+                {[
+                  { icon: Lightbulb, title: "Photobiomodulation", desc: "Red light therapy cognitive benefits at 660nm and 850nm wavelengths" },
+                  { icon: Brain, title: "Neuromodulation", desc: "Non-invasive brain state modulation for focus and recovery" },
+                  { icon: FlaskConical, title: "Adaptogens", desc: "Ashwagandha, Rhodiola, and Lion's Mane for stress adaptation" },
+                  { icon: Shield, title: "Magnesium Glycinate", desc: "Bioavailable magnesium for sleep optimisation and recovery" },
+                  { icon: Sparkles, title: "AI Personalisation", desc: "Predictive wellness AI adapts protocols to your biology" }
+                ].map((item, i) => (
+                  <div key={i} className="p-6 bg-carbon text-center">
+                    <item.icon className="w-5 h-5 text-ivory mx-auto mb-3" />
+                    <h3 className="text-sm font-semibold text-ivory mb-2">{item.title}</h3>
+                    <p className="text-xs text-stone">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Category Creation - Old vs New */}
+          <section ref={category.ref} className={`relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory transition-all duration-1000 ${category.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-16 sm:mb-20 space-y-4">
+                <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Category Creation</p>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-carbon leading-[1.05]">
+                  Traditional wellness is dead
+                </h2>
+                <p className="text-base sm:text-lg text-ash max-w-2xl mx-auto">
+                  This is the future of personalised cognitive performance.
                 </p>
               </div>
 
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
                 {/* Dead Solutions */}
                 <div className="space-y-3">
-                  <p className="text-xs text-stone/60 uppercase tracking-wider mb-6">What no longer works</p>
+                  <p className="text-xs text-carbon/60 uppercase tracking-wider mb-6">What no longer works</p>
                   {[
                     { item: "Meditation apps no one opens", status: "Abandoned" },
                     { item: "Breathwork sessions that change nothing", status: "Ineffective" },
                     { item: "Wellbeing talks no one attends", status: "Ignored" },
                     { item: "Mental health days that arrive too late", status: "Reactive" }
                   ].map((entry, i) => (
-                    <div key={i} className="flex items-center gap-4 p-4 bg-slate/40 border-l border-stone/20">
-                      <X className="w-4 h-4 text-stone/50 flex-shrink-0" />
-                      <span className="text-stone/70 line-through text-sm">{entry.item}</span>
-                      <span className="text-[10px] text-stone/40 ml-auto uppercase tracking-wide">{entry.status}</span>
+                    <div key={i} className="flex items-center gap-4 p-4 bg-carbon/5 border-l border-carbon/10">
+                      <X className="w-4 h-4 text-carbon/30 flex-shrink-0" />
+                      <span className="text-ash line-through text-sm">{entry.item}</span>
+                      <span className="text-[10px] text-carbon/40 ml-auto uppercase tracking-wide">{entry.status}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* NeuroState Outcomes */}
                 <div className="space-y-3">
-                  <p className="text-xs text-ivory/60 uppercase tracking-wider mb-6">What NeuroState delivers</p>
+                  <p className="text-xs text-carbon/60 uppercase tracking-wider mb-6">What NeuroState delivers</p>
                   {[
-                    { outcome: "Focus", metric: "Sustained attention and deep work capacity" },
-                    { outcome: "Clarity", metric: "Faster decisions. Clearer thinking." },
-                    { outcome: "Memory", metric: "Retention and recall under pressure" },
-                    { outcome: "Energy", metric: "Stable output throughout the day" },
-                    { outcome: "Resilience", metric: "Stress adaptation. Cognitive recovery." }
+                    { outcome: "Focus Optimisation", metric: "Sustained attention and deep work capacity" },
+                    { outcome: "Mental Clarity", metric: "Faster decisions. Clearer thinking." },
+                    { outcome: "Cognitive Resilience", metric: "Retention and recall under pressure" },
+                    { outcome: "Stable Energy", metric: "Consistent output throughout the day" },
+                    { outcome: "Burnout Prevention", metric: "Stress reduction technology that works" }
                   ].map((entry, i) => (
-                    <div key={i} className="flex items-center gap-4 p-4 bg-ivory/5 border-l border-ivory/20">
-                      <CheckCircle2 className="w-4 h-4 text-ivory flex-shrink-0" />
+                    <div key={i} className="flex items-center gap-4 p-4 bg-carbon/5 border-l border-carbon/20">
+                      <CheckCircle2 className="w-4 h-4 text-carbon flex-shrink-0" />
                       <div>
-                        <span className="text-ivory font-medium text-sm">{entry.outcome}</span>
-                        <p className="text-stone/70 text-xs mt-0.5">{entry.metric}</p>
+                        <span className="text-carbon font-medium text-sm">{entry.outcome}</span>
+                        <p className="text-ash text-xs mt-0.5">{entry.metric}</p>
                       </div>
                     </div>
                   ))}
@@ -133,26 +230,26 @@ const Index = () => {
           </section>
 
           {/* Nova AI Section */}
-          <section ref={nova.ref} className={`relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory transition-all duration-1000 ${nova.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <section ref={nova.ref} className={`relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl transition-all duration-1000 ${nova.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <div className="space-y-8">
                   <div className="space-y-4">
-                    <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Cognitive Engine</p>
+                    <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">AI Performance Assistant</p>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.05]">
                       Nova, Your Cognitive Operating System
                     </h2>
                     <p className="text-base sm:text-lg text-ash leading-relaxed max-w-lg">
-                      Nova learns your physiology, predicts your mental states, and builds personalised protocols that improve how you think, recover, and perform. It does not motivate you. It reshapes your habits using science, data, and relentless precision.
+                      Nova is our AI-driven cognitive performance engine. It learns your physiology, predicts your mental states, and builds personalised protocols that improve how you think, recover, and perform. Predictive wellness AI that reshapes your habits using science, data, and relentless precision.
                     </p>
                   </div>
                   <div className="space-y-4">
                     {[
-                      { title: "Daily guidance", desc: "Personalised protocols every morning" },
-                      { title: "Real time adjustments", desc: "Adapts as your data changes" },
-                      { title: "Deep personalisation", desc: "Learns your biology over time" },
-                      { title: "Data integrations", desc: "Connects to your wearables" },
-                      { title: "Protocol optimisation", desc: "Refines your stack continuously" }
+                      { title: "Personalised AI coaching", desc: "Daily protocols tailored to your biology" },
+                      { title: "Adaptive recommendations", desc: "Adjusts in real-time as your data changes" },
+                      { title: "Real-time behavioural insights", desc: "Learns patterns and optimises continuously" },
+                      { title: "Wearable integration", desc: "Connects to Oura, Whoop, Apple Watch" },
+                      { title: "Protocol optimisation", desc: "Refines your supplement stack automatically" }
                     ].map((item, i) => (
                       <div key={i} className="flex items-start gap-3">
                         <div className="w-1 h-1 rounded-full bg-carbon mt-2 flex-shrink-0" />
@@ -184,12 +281,12 @@ const Index = () => {
                         </div>
                         <div>
                           <p className="text-ivory font-medium text-sm">Nova</p>
-                          <p className="text-stone text-xs">Processing your data</p>
+                          <p className="text-stone text-xs">Analysing your biometrics</p>
                         </div>
                       </div>
                       <div className="bg-slate/50 p-4">
                         <p className="text-stone text-sm leading-relaxed">
-                          Your HRV dropped 12% overnight. Adjusting protocol. Skip high intensity today. Take magnesium at 8pm.
+                          Your HRV dropped 12% overnight. Adjusting protocol. Skip high intensity today. Take magnesium at 8pm for sleep optimisation.
                         </p>
                       </div>
                       <div className="grid grid-cols-3 gap-2">
@@ -219,7 +316,7 @@ const Index = () => {
                   <div className="relative overflow-hidden">
                     <img 
                       src={redlightDevice} 
-                      alt="NeuroState Red Light Therapy Device" 
+                      alt="NeuroState Red Light Therapy Device for cognitive performance and mental clarity" 
                       className="w-full h-auto object-cover"
                     />
                   </div>
@@ -227,20 +324,20 @@ const Index = () => {
 
                 <div className="space-y-8">
                   <div className="space-y-4">
-                    <p className="text-stone text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Hardware</p>
+                    <p className="text-stone text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Neuromodulation Hardware</p>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-ivory leading-[1.05]">
-                      Technology That Shifts Your State
+                      Red Light Therapy for Cognitive Performance
                     </h2>
                     <p className="text-base sm:text-lg text-stone leading-relaxed max-w-lg">
-                      Not another wellness gadget. A device engineered to enhance focus, recovery, and cognitive clarity in minutes. Designed to change your mental state on demand.
+                      Not another wellness gadget. A device engineered to deliver red light therapy cognitive benefits. Enhance focus, accelerate recovery, and improve mental clarity in minutes. Mental performance tools that change your brain state on demand.
                     </p>
                   </div>
                   <div className="space-y-3">
                     {[
-                      "660nm and 850nm wavelengths",
+                      "660nm and 850nm wavelengths for photobiomodulation",
                       "Alpha state for recovery and creativity",
-                      "Beta state for focus and execution",
-                      "Clinically validated protocols"
+                      "Beta state for focus optimisation and execution",
+                      "Clinically validated neuromodulation protocols"
                     ].map((item, i) => (
                       <div key={i} className="flex items-center gap-3">
                         <div className="w-1 h-1 bg-ivory flex-shrink-0" />
@@ -268,20 +365,20 @@ const Index = () => {
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <div className="space-y-8">
                   <div className="space-y-4">
-                    <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Supplements</p>
+                    <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Performance Supplements</p>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.05]">
-                      Performance nutrition engineered for the brain
+                      Adaptogen Supplements for Focus and Recovery
                     </h2>
                     <p className="text-base sm:text-lg text-ash leading-relaxed max-w-lg">
-                      Every ingredient at the dose that works. No proprietary blends. No marketing nonsense. Just research backed formulas designed for cognitive output.
+                      Every ingredient at the dose that works. No proprietary blends. No marketing nonsense. Performance supplements with research-backed formulas designed for cognitive optimisation. Magnesium for recovery. Adaptogens for stress. Nootropics for focus.
                     </p>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     {[
-                      { title: "What it does", desc: "Targeted cognitive enhancement" },
-                      { title: "Why it works", desc: "Clinical dosing protocols" },
-                      { title: "Who it helps", desc: "High performers under pressure" },
-                      { title: "How it fits", desc: "Integrates with Nova AI" }
+                      { title: "Focus optimisation", desc: "Targeted cognitive enhancement" },
+                      { title: "Clinical dosing", desc: "Evidence-based protocols" },
+                      { title: "High performers", desc: "Built for pressure" },
+                      { title: "Nova integration", desc: "AI-personalised stacks" }
                     ].map((item, i) => (
                       <div key={i} className="p-4 bg-carbon/5 border-l border-carbon/10">
                         <p className="text-carbon font-medium text-sm">{item.title}</p>
@@ -303,7 +400,7 @@ const Index = () => {
                 <div className="relative overflow-hidden">
                   <img 
                     src={heroSupplement} 
-                    alt="NeuroState Performance Supplements" 
+                    alt="NeuroState Performance Supplements with adaptogens for focus and cognitive enhancement" 
                     className="w-full h-auto object-cover"
                   />
                 </div>
@@ -314,47 +411,79 @@ const Index = () => {
           {/* For Teams */}
           <section ref={business.ref} className={`relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-carbon transition-all duration-1000 ${business.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-16 sm:mb-20 space-y-4">
-                <p className="text-stone text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">For Organisations</p>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-ivory leading-[1.05]">
-                  Corporate Wellness Is Broken.
-                </h2>
-                <p className="text-base sm:text-lg text-stone max-w-2xl mx-auto">
-                  Meditation apps, webinars, and yoga sessions do not improve cognitive performance. NeuroState replaces outdated wellbeing perks with a scientific performance system that helps employees think faster, recover better, and perform at elite levels.
-                </p>
-              </div>
-
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-slate/30 mb-12">
-                {[
-                  { stat: "47%", label: "Focus increase", desc: "Measured improvement" },
-                  { stat: "63%", label: "Less burnout", desc: "Within 90 days" },
-                  { stat: "31%", label: "Productivity", desc: "Output per employee" },
-                  { stat: "89%", label: "Satisfaction", desc: "Programme rating" },
-                ].map((item, i) => (
-                  <div 
-                    key={i}
-                    className="relative p-8 sm:p-10 bg-carbon text-center"
-                  >
-                    <p className="text-4xl sm:text-5xl font-bold text-ivory mb-2">{item.stat}</p>
-                    <p className="text-sm text-ivory mb-1">{item.label}</p>
-                    <p className="text-xs text-stone">{item.desc}</p>
+              <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div className="space-y-8">
+                  <div className="space-y-4">
+                    <p className="text-stone text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Enterprise Wellbeing Solution</p>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-ivory leading-[1.05]">
+                      Corporate Wellbeing Solution That Delivers Results
+                    </h2>
+                    <p className="text-base sm:text-lg text-stone leading-relaxed max-w-lg">
+                      The workplace performance platform that replaces outdated corporate wellness. Deploy our cognitive performance system across your organisation and measure real outcomes. Employee performance tools that actually work.
+                    </p>
                   </div>
-                ))}
-              </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    {[
+                      { stat: "47%", label: "Focus increase" },
+                      { stat: "63%", label: "Burnout reduction" },
+                      { stat: "31%", label: "Productivity gain" },
+                      { stat: "89%", label: "Satisfaction rate" }
+                    ].map((item, i) => (
+                      <div key={i} className="p-4 bg-ivory/5">
+                        <p className="text-3xl font-bold text-ivory">{item.stat}</p>
+                        <p className="text-stone text-xs mt-1">{item.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <Link to="/enterprise/overview">
+                    <Button 
+                      size="lg"
+                      className="bg-ivory text-carbon hover:bg-mist transition-all duration-300 min-h-[48px] touch-manipulation px-8"
+                    >
+                      For high-performance teams
+                      <ArrowRight className="ml-2 w-4 h-4" />
+                    </Button>
+                  </Link>
+                </div>
 
-              <div className="text-center space-y-4">
-                <p className="text-stone max-w-xl mx-auto text-sm">
-                  The first integrated platform combining AI, hardware, and nutrition. Employers finally get outcomes, not participation rates.
-                </p>
-                <Link to="/enterprise/overview">
-                  <Button 
-                    size="lg"
-                    className="bg-ivory text-carbon hover:bg-mist transition-all duration-300 min-h-[48px] touch-manipulation px-8"
-                  >
-                    Partner Portal
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Button>
-                </Link>
+                <div className="space-y-4">
+                  <p className="text-xs text-stone uppercase tracking-wider mb-6">What enterprise clients receive</p>
+                  {[
+                    { title: "Nova AI for teams", desc: "Personalised AI coaching for every employee" },
+                    { title: "Monthly supplement delivery", desc: "Research-backed formulas delivered to your office" },
+                    { title: "Real-time analytics", desc: "Track cognitive performance across departments" },
+                    { title: "Dedicated support", desc: "Enterprise account management and onboarding" }
+                  ].map((item, i) => (
+                    <div key={i} className="p-4 bg-ivory/5 border-l border-ivory/20">
+                      <p className="text-ivory font-medium text-sm">{item.title}</p>
+                      <p className="text-stone text-xs mt-1">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Internal Links Section */}
+          <section className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl border-y border-mist">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium mb-4">Explore More</p>
+                <h3 className="text-xl sm:text-2xl font-bold text-carbon">Discover the full cognitive performance system</h3>
+              </div>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                {[
+                  { title: "Nova AI", href: "/nova/overview", desc: "AI performance assistant" },
+                  { title: "For Teams", href: "/enterprise/overview", desc: "Corporate solutions" },
+                  { title: "Supplements", href: "/category/supplements", desc: "Performance nutrition" },
+                  { title: "Red Light", href: "/category/devices", desc: "Neuromodulation devices" },
+                  { title: "About Us", href: "/about", desc: "Our mission" }
+                ].map((link, i) => (
+                  <Link key={i} to={link.href} className="group p-4 bg-ivory hover:bg-carbon transition-all duration-300">
+                    <p className="text-sm font-semibold text-carbon group-hover:text-ivory transition-colors">{link.title}</p>
+                    <p className="text-xs text-ash group-hover:text-stone transition-colors mt-1">{link.desc}</p>
+                  </Link>
+                ))}
               </div>
             </div>
           </section>
@@ -363,16 +492,16 @@ const Index = () => {
           <section ref={cta.ref} className={`relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory transition-all duration-1000 ${cta.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="max-w-4xl mx-auto text-center space-y-8">
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-carbon leading-[1.05]">
-                Your brain is your most valuable asset
+                Ready to optimise your cognitive performance?
               </h2>
-              <p className="text-base sm:text-lg text-ash max-w-xl mx-auto">
-                Upgrade it.
+              <p className="text-base sm:text-lg text-ash max-w-2xl mx-auto">
+                Join thousands using the world's first cognitive performance system to think clearer, work harder, and recover faster.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                 <Link to="/shop">
                   <Button 
                     size="lg"
-                    className="bg-carbon text-ivory hover:bg-slate transition-all duration-300 min-h-[52px] px-10"
+                    className="bg-carbon text-ivory hover:bg-slate transition-all duration-300 min-h-[52px] touch-manipulation px-10"
                   >
                     Shop now
                     <ArrowRight className="ml-2 w-4 h-4" />
@@ -382,10 +511,9 @@ const Index = () => {
                   <Button 
                     variant="outline"
                     size="lg"
-                    className="border-carbon/20 text-carbon hover:bg-carbon/5 transition-all duration-300 min-h-[52px] px-10"
+                    className="border-carbon/30 text-carbon hover:bg-carbon/5 transition-all duration-300 min-h-[52px] touch-manipulation px-10"
                   >
-                    <Sparkles className="mr-2 w-4 h-4" />
-                    Meet Nova AI
+                    Explore Nova AI
                   </Button>
                 </Link>
               </div>
@@ -393,7 +521,7 @@ const Index = () => {
           </section>
         </main>
         <Footer />
-        <LiveChat />
+        <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
       </div>
     </>
   );
