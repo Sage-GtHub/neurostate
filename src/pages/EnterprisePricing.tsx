@@ -77,8 +77,9 @@ export default function EnterprisePricing() {
   return (
     <>
       <SEO 
-        title="Enterprise Pricing Calculator | NeuroState"
-        description="Transparent, scalable pricing based on your team size. Calculate your custom enterprise pricing with volume discounts."
+        title="Enterprise Cognitive Performance Pricing | NeuroState for Teams"
+        description="Transparent pricing for workplace cognitive performance solutions. Calculate custom enterprise pricing with volume discounts for AI-driven employee wellness and productivity tools."
+        keywords="enterprise wellness pricing, corporate cognitive performance cost, workplace productivity ROI, employee performance platform pricing, team wellness investment"
       />
       
       <div className="min-h-screen bg-ivory">
@@ -89,10 +90,10 @@ export default function EnterprisePricing() {
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center max-w-4xl mx-auto mb-16">
               <h1 className="text-hero-display font-bold mb-6">
-                Work Out Your Pricing
+                Cognitive Performance Pricing
               </h1>
               <p className="text-body-large text-pearl max-w-3xl mx-auto font-light">
-                Transparent, scalable pricing based on team size. No hidden fees, flexible contracts, volume discounts that grow with you.
+                Transparent, scalable pricing for enterprise cognitive performance. Volume discounts that grow with your team.
               </p>
             </div>
 

@@ -32,8 +32,9 @@ export default function HealthClubsOverview() {
   return (
     <>
       <SEO 
-        title="Health Clubs & Studios | NeuroState"
-        description="Differentiate your facility with premium cognitive wellness. Increase retention. Boost revenue. Elevate the member experience."
+        title="Cognitive Performance for Health Clubs & Studios | NeuroState"
+        description="Differentiate your facility with AI-driven cognitive performance tools. Increase member retention, boost revenue and deliver personalised wellness that drives results."
+        keywords="health club cognitive performance, gym wellness platform, member retention technology, fitness facility AI, studio performance tools, personalised fitness wellness"
       />
       
       <div className="min-h-screen bg-white">
@@ -44,13 +45,13 @@ export default function HealthClubsOverview() {
           <div className="max-w-5xl mx-auto text-center space-y-6">
             <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Gyms · Yoga Studios · Private Clubs</p>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-carbon leading-[1.02]">
-              Members stay
+              Cognitive Performance
               <br />
-              <span className="text-accent">when they perform.</span>
+              <span className="text-accent">for Your Members.</span>
             </h1>
             <p className="text-xl text-ash max-w-2xl mx-auto">
-              Give your members the edge. Premium cognitive wellness tools that increase retention, 
-              boost revenue, and make your facility impossible to leave.
+              Give your members the cognitive edge. AI-driven performance tools that increase retention, 
+              boost revenue, and deliver results they cannot get elsewhere.
             </p>
           </div>
         </section>

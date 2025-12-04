@@ -31,8 +31,9 @@ export default function SportsOverview() {
   return (
     <>
       <SEO 
-        title="Sports Organisations | NeuroState"
-        description="Give your athletes the cognitive edge. Faster recovery. Fewer injuries. Peak performance when it matters."
+        title="Sports Cognitive Performance System | NeuroState for Teams"
+        description="AI-driven cognitive performance for elite athletes. Faster recovery, injury prevention and peak mental performance through personalised protocols, red light therapy and adaptogen supplements."
+        keywords="sports cognitive performance, athlete mental performance, AI sports coaching, injury prevention technology, athletic recovery optimisation, sports wellness platform"
       />
       
       <div className="min-h-screen bg-white">
@@ -43,13 +44,13 @@ export default function SportsOverview() {
           <div className="max-w-5xl mx-auto text-center space-y-6">
             <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Football · Rugby · Athletics · Elite Teams</p>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-carbon leading-[1.02]">
-              Winning starts
+              Cognitive Performance
               <br />
-              <span className="text-accent">in the mind.</span>
+              <span className="text-accent">for Elite Athletes.</span>
             </h1>
             <p className="text-xl text-ash max-w-2xl mx-auto">
-              Give your athletes the cognitive edge. Faster recovery. 
-              Fewer injuries. Peak performance when it matters.
+              AI-driven cognitive optimisation for sports organisations. 
+              Faster recovery. Fewer injuries. Peak mental performance when it matters.
             </p>
           </div>
         </section>
