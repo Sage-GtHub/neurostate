@@ -2,10 +2,8 @@ import { useState } from "react";
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { PhaseProgressTracker } from "@/components/nova/PhaseProgressTracker";
 import { RealTimeSimulation } from "@/components/nova/RealTimeSimulation";
 import { SEO } from "@/components/SEO";
 import { SoftwareApplicationStructuredData } from "@/components/StructuredData";
@@ -19,8 +17,7 @@ import {
   Shield,
   Database,
   Zap,
-  LineChart as ChartIcon,
-  Cpu
+  LineChart as ChartIcon
 } from "lucide-react";
 
 export default function NovaOverview() {
@@ -104,66 +101,6 @@ export default function NovaOverview() {
     }
   ];
 
-  const techStack = [
-    { category: "Frontend", tech: "React Native", detail: "Cross-platform native experience" },
-    { category: "AI Models", tech: "GPT-4 + XGBoost + LSTM", detail: "15+ specialised models" },
-    { category: "ML Training", tech: "PyTorch + Ray", detail: "Distributed model training" },
-    { category: "Database", tech: "PostgreSQL + TimescaleDB", detail: "Relational + time-series data" },
-    { category: "Security", tech: "AES-256 + TLS 1.3", detail: "Data at rest and in transit" },
-    { category: "Compliance", tech: "HIPAA + GDPR + SOC 2", detail: "Healthcare compliance" }
-  ];
-
-  const aiModels = [
-    {
-      name: "GPT-4 Turbo",
-      parameters: "175B parameters",
-      use: "Conversational interface, report generation",
-      performance: "95% intent accuracy"
-    },
-    {
-      name: "XGBoost Ensemble",
-      parameters: "500 trees",
-      use: "Performance prediction, optimisation",
-      performance: "91% forecast accuracy"
-    },
-    {
-      name: "LSTM Networks",
-      parameters: "Deep Q-Network",
-      use: "72-hour health forecasting",
-      performance: "89% prediction accuracy"
-    },
-    {
-      name: "Random Forest",
-      parameters: "1000 decision trees",
-      use: "Burnout detection, illness prediction",
-      performance: "87% early detection"
-    },
-    {
-      name: "Transformer Architecture",
-      parameters: "100M parameters",
-      use: "Multi-modal data fusion (biometric + genetic + lifestyle)",
-      performance: "84% correlation detection"
-    },
-    {
-      name: "K-Means Clustering",
-      parameters: "24 clusters",
-      use: "User archetype identification",
-      performance: "92% archetype match"
-    },
-    {
-      name: "Prophet (Meta)",
-      parameters: "Bayesian approach",
-      use: "Circadian rhythm modeling",
-      performance: "79% pattern recognition"
-    },
-    {
-      name: "Isolation Forest",
-      parameters: "Unsupervised learning",
-      use: "Detecting unusual health patterns",
-      performance: "96% anomaly detection"
-    }
-  ];
-
   return (
     <NovaSwipeWrapper>
       <SEO 
@@ -192,8 +129,8 @@ export default function NovaOverview() {
               Real time adjustments. Learns your biology over time.
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 animate-fade-in">
-              <Button size="lg" className="gap-2 rounded-full px-8" onClick={() => navigate('/nova')}>
-                <span>Start with Nova</span>
+              <Button size="lg" className="gap-2 rounded-full px-8" onClick={() => navigate('/nova/chat')}>
+                <span>Chat with Nova</span>
                 <ArrowRight className="w-4 h-4" />
               </Button>
               <Button size="lg" variant="outline" className="gap-2 rounded-full px-8" onClick={() => navigate('/nova/insights')}>
@@ -290,7 +227,7 @@ export default function NovaOverview() {
           <div className="text-center animate-fade-in">
             <Button size="lg" className="gap-2 rounded-full px-8" onClick={() => navigate('/nova/optimization')}>
               <Target className="w-4 h-4" />
-              <span>Explore Protocol Optimization</span>
+              <span>Explore Protocol Optimisation</span>
             </Button>
           </div>
         </div>
@@ -303,78 +240,8 @@ export default function NovaOverview() {
         </div>
       </div>
 
-      {/* Phase Progress Tracker */}
-      <div className="border-b border-mist/30 bg-gradient-to-b from-ivory to-pearl/20">
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-20">
-          <PhaseProgressTracker currentPhase={2} daysInPhase={15} />
-        </div>
-      </div>
-
-      {/* AI Model Stack */}
-      <div className="border-b border-mist/30">
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-20">
-          <div className="text-center mb-16 animate-fade-in">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-accent/10 to-accent/20 flex items-center justify-center mx-auto mb-8 shadow-sm">
-              <Cpu className="w-10 h-10 text-accent" />
-            </div>
-            <h2 className="text-[2.5rem] font-bold text-carbon mb-4 tracking-tight">AI Model Stack</h2>
-            <p className="text-body text-ash max-w-2xl mx-auto">15+ specialised models working together for optimal results</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 animate-fade-in">
-            {aiModels.map((model, index) => (
-              <Card key={index} className="border-mist/30 hover:border-accent/30 transition-all hover:shadow-md">
-                <CardContent className="p-6">
-                  <div className="mb-4">
-                    <h3 className="text-body font-semibold text-carbon mb-2">{model.name}</h3>
-                    <div className="text-caption text-accent font-medium mb-1">{model.parameters}</div>
-                  </div>
-                  <div className="space-y-3">
-                    <div>
-                      <div className="text-caption text-ash uppercase tracking-wider mb-1">Use Case</div>
-                      <p className="text-sm text-carbon">{model.use}</p>
-                    </div>
-                    <div>
-                      <div className="text-caption text-ash uppercase tracking-wider mb-1">Performance</div>
-                      <div className="text-sm font-semibold text-accent">{model.performance}</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="mt-12 p-8 rounded-2xl bg-gradient-to-br from-carbon to-slate text-ivory text-center animate-fade-in">
-            <h3 className="text-[1.125rem] font-semibold mb-3">Continuous Model Training</h3>
-            <p className="text-sm text-pearl/90 max-w-2xl mx-auto leading-relaxed">
-              All models are continuously retrained with new data to improve accuracy and adapt to emerging patterns in health optimisation
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Technical Architecture */}
-      <div className="border-b border-mist/30 bg-gradient-to-b from-ivory to-pearl/20">
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-20">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-[2.5rem] font-bold text-carbon mb-4 tracking-tight">Enterprise-Grade Infrastructure</h2>
-            <p className="text-body text-ash max-w-2xl mx-auto">Built on cutting-edge technology stack</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
-            {techStack.map((item, index) => (
-              <div key={index} className="p-6 rounded-2xl bg-gradient-to-br from-pearl/50 to-ivory border border-mist/30">
-                <div className="text-caption text-ash uppercase tracking-wider font-medium mb-2">{item.category}</div>
-                <div className="text-body font-semibold text-carbon mb-1">{item.tech}</div>
-                <div className="text-sm text-ash">{item.detail}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
       {/* Research Foundation */}
-      <div className="border-b border-mist/30">
+      <div className="border-b border-mist/30 bg-gradient-to-b from-ivory to-pearl/20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-20">
           <div className="text-center max-w-3xl mx-auto animate-fade-in">
             <div className="w-20 h-20 rounded-full bg-gradient-to-br from-accent/10 to-accent/20 flex items-center justify-center mx-auto mb-8 shadow-sm">
@@ -382,17 +249,18 @@ export default function NovaOverview() {
             </div>
             <h2 className="text-[2.5rem] font-bold text-carbon mb-6 tracking-tight">Built on 10,000+ Peer-Reviewed Studies</h2>
             <p className="text-body text-ash leading-relaxed mb-12">
-              Every recommendation is traceable to clinical evidence with strength ratings. Our knowledge base is updated weekly with the latest longevity research.
+              Every recommendation is traceable to clinical evidence with strength ratings. 
+              Our knowledge base is updated weekly with the latest longevity research.
             </p>
-            <div className="grid sm:grid-cols-3 gap-8 mb-12">
+            <div className="grid grid-cols-3 gap-8 mb-12">
               {[
-                { value: "10K+", label: "Studies" },
-                { value: "Weekly", label: "Updates" },
-                { value: "500+", label: "Clinical researchers" }
-              ].map((stat, index) => (
-                <div key={index}>
-                  <div className="text-[2.5rem] font-bold text-carbon mb-2 tracking-tight">{stat.value}</div>
-                  <div className="text-sm text-ash">{stat.label}</div>
+                { value: "10K+", label: "Studies", icon: Database },
+                { value: "A-F", label: "Evidence Grades", icon: Shield },
+                { value: "Weekly", label: "Updates", icon: Zap }
+              ].map((item, index) => (
+                <div key={index} className="text-center">
+                  <div className="text-4xl font-bold text-signal-green mb-2">{item.value}</div>
+                  <div className="text-sm text-ash">{item.label}</div>
                 </div>
               ))}
             </div>
@@ -401,23 +269,19 @@ export default function NovaOverview() {
       </div>
 
       {/* CTA Section */}
-      <div className="bg-gradient-to-br from-carbon to-slate text-ivory">
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-20">
-          <div className="text-center max-w-3xl mx-auto animate-fade-in">
-            <h2 className="text-[2.5rem] font-bold mb-6 tracking-tight">Ready to experience Nova?</h2>
-            <p className="text-body text-pearl/90 leading-relaxed mb-12">
-              Start your journey to genomic-level personalisation and autonomous health optimisation
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <Button size="lg" variant="outline" className="gap-2 rounded-full px-8 bg-ivory text-carbon hover:bg-pearl" onClick={() => navigate('/auth')}>
-                <span>Create Account</span>
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-              <Button size="lg" variant="ghost" className="gap-2 rounded-full px-8 text-ivory hover:bg-slate" onClick={() => navigate('/nova')}>
-                <Zap className="w-4 h-4" />
-                <span>Try Demo</span>
-              </Button>
-            </div>
+      <div className="bg-gradient-to-br from-carbon to-slate">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-20 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-ivory mb-6">Ready to Optimise Your Performance?</h2>
+          <p className="text-pearl/80 mb-8 max-w-2xl mx-auto">
+            Start your personalised journey with Nova today. Connect your devices and let the AI learn your unique biology.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button size="lg" className="bg-accent hover:bg-accent/90 text-carbon rounded-full px-8" onClick={() => navigate('/nova/chat')}>
+              Start with Nova
+            </Button>
+            <Button size="lg" variant="outline" className="border-pearl/30 text-pearl hover:bg-pearl/10 rounded-full px-8" onClick={() => navigate('/nova/devices')}>
+              Connect Devices
+            </Button>
           </div>
         </div>
       </div>

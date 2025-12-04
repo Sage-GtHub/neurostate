@@ -1,24 +1,15 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Activity, Watch, TrendingUp, Brain, Target, Sparkles, Send, Loader2, Zap, Shield, Clock, ChevronRight } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Activity, TrendingUp, Brain, Target, Sparkles, Zap, Shield, Clock, ChevronRight, Calendar, MessageSquare, Lightbulb, AlertTriangle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
 import { ProtocolAssessment } from "@/components/ProtocolAssessment";
 import { PhaseIndicator } from "@/components/nova/PhaseIndicator";
-import { PredictiveInsights } from "@/components/nova/PredictiveInsights";
-import { MorningCheckIn } from "@/components/nova/MorningCheckIn";
-import { VoiceInterface } from "@/components/nova/VoiceInterface";
-import { RealTimeSimulation } from "@/components/nova/RealTimeSimulation";
 import { HealthForecast } from "@/components/nova/HealthForecast";
 import { SEO } from "@/components/SEO";
-
-interface Message {
-  role: "user" | "assistant";
-  content: string;
-}
 
 interface Metric {
   label: string;
@@ -28,30 +19,42 @@ interface Metric {
   trendColor?: string;
 }
 
+interface AISummary {
+  title: string;
+  message: string;
+  type: "insight" | "warning" | "tip";
+  action?: string;
+}
+
 export default function Nova() {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const [metrics, setMetrics] = useState<Metric[]>([]);
   const [showAssessment, setShowAssessment] = useState(false);
   const [currentPhase, setCurrentPhase] = useState<1 | 2 | 3 | 4>(2);
-  const [showMorningCheckIn, setShowMorningCheckIn] = useState(true);
-  const [isSpeaking, setIsSpeaking] = useState(false);
-  const { toast } = useToast();
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [aiSummaries, setAiSummaries] = useState<AISummary[]>([
+    {
+      title: "Recovery Alert",
+      message: "Your HRV has dropped 12% over the past 3 days. Consider reducing training intensity and prioritising sleep tonight.",
+      type: "warning",
+      action: "View Recovery Protocol"
+    },
+    {
+      title: "Peak Performance Window",
+      message: "Based on your patterns, tomorrow between 9am and 11am is your optimal focus window. Schedule your most demanding work then.",
+      type: "insight",
+      action: "Set Reminder"
+    },
+    {
+      title: "Protocol Adjustment",
+      message: "Your magnesium levels suggest increasing evening dose from 400mg to 600mg for better sleep quality.",
+      type: "tip",
+      action: "Update Protocol"
+    }
+  ]);
 
   useEffect(() => {
     loadMetrics();
-    const initialMessage: Message = {
-      role: "assistant",
-      content: "I am Nova. I track your biology, spot patterns, and tell you exactly what you need. What do you want to optimise?"
-    };
-    setMessages([initialMessage]);
   }, []);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
 
   const loadMetrics = async () => {
     try {
@@ -122,109 +125,29 @@ export default function Nova() {
     }
   };
 
-  const handleSendMessage = async () => {
-    if (!input.trim() || isLoading) return;
-
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) {
-      toast({
-        title: "Sign in required",
-        description: "Please sign in to chat with Nova",
-        variant: "destructive",
-      });
-      return;
+  const getSummaryIcon = (type: string) => {
+    switch (type) {
+      case "warning": return AlertTriangle;
+      case "insight": return Lightbulb;
+      case "tip": return Sparkles;
+      default: return Lightbulb;
     }
+  };
 
-    const userMessage: Message = { role: "user", content: input };
-    setMessages(prev => [...prev, userMessage]);
-    setInput("");
-    setIsLoading(true);
-
-    try {
-      await supabase.from('nova_chat_messages').insert({
-        user_id: user.id,
-        role: 'user',
-        content: input
-      });
-
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/nova-chat`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-        },
-        body: JSON.stringify({
-          messages: [...messages, userMessage].map(m => ({ role: m.role, content: m.content }))
-        }),
-      });
-
-      if (!response.ok || !response.body) {
-        throw new Error('Failed to get response');
-      }
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let assistantMessage = "";
-
-      setMessages(prev => [...prev, { role: "assistant", content: "" }]);
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-
-        const chunk = decoder.decode(value, { stream: true });
-        const lines = chunk.split('\n');
-
-        for (const line of lines) {
-          if (line.startsWith('data: ')) {
-            const data = line.slice(6);
-            if (data === '[DONE]') continue;
-
-            try {
-              const parsed = JSON.parse(data);
-              const content = parsed.choices?.[0]?.delta?.content;
-              if (content) {
-                assistantMessage += content;
-                setMessages(prev => {
-                  const newMessages = [...prev];
-                  newMessages[newMessages.length - 1] = {
-                    role: "assistant",
-                    content: assistantMessage
-                  };
-                  return newMessages;
-                });
-              }
-            } catch (e) {
-              // Skip invalid JSON
-            }
-          }
-        }
-      }
-
-      await supabase.from('nova_chat_messages').insert({
-        user_id: user.id,
-        role: 'assistant',
-        content: assistantMessage
-      });
-
-    } catch (error) {
-      console.error("Error:", error);
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
-      setMessages(prev => prev.slice(0, -1));
-    } finally {
-      setIsLoading(false);
+  const getSummaryColor = (type: string) => {
+    switch (type) {
+      case "warning": return "text-orange-500 bg-orange-500/10";
+      case "insight": return "text-accent bg-accent/10";
+      case "tip": return "text-blue-500 bg-blue-500/10";
+      default: return "text-accent bg-accent/10";
     }
   };
 
   return (
     <NovaSwipeWrapper>
       <SEO 
-        title="Nova – AI Cognitive Performance Assistant | NeuroState"
-        description="Personalised protocols, predictive insights and real-time guidance to enhance focus, sleep and mental resilience. Your AI performance assistant."
+        title="Nova Dashboard – AI Cognitive Performance | NeuroState"
+        description="Your personalised AI performance dashboard. View metrics, forecasts, and AI-generated insights."
       />
       <div className="min-h-screen bg-white">
         <NovaNav />
@@ -234,14 +157,11 @@ export default function Nova() {
           <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-8">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium mb-2">Cognitive Engine</p>
+                <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium mb-2">Dashboard</p>
                 <h1 className="text-2xl sm:text-3xl font-bold text-carbon">Nova</h1>
-                <p className="text-sm text-ash mt-1">Predicts. Adapts. Guides.</p>
+                <p className="text-sm text-ash mt-1">Your AI performance copilot</p>
               </div>
-              <div className="flex items-center gap-2">
-                <div className={`w-2 h-2 rounded-full ${isSpeaking ? 'bg-accent animate-pulse' : 'bg-accent'}`} />
-                <span className="text-xs text-stone">Online</span>
-              </div>
+              <PhaseIndicator currentPhase={currentPhase} />
             </div>
           </div>
         </div>
@@ -263,6 +183,40 @@ export default function Nova() {
             ))}
           </div>
 
+          {/* AI Summary Section */}
+          <div className="mb-12">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-lg font-bold text-carbon">AI Summary</h2>
+              <Button variant="ghost" size="sm" className="text-accent" onClick={() => navigate('/nova/chat')}>
+                <MessageSquare className="w-4 h-4 mr-2" />
+                Ask Nova
+              </Button>
+            </div>
+            <div className="grid md:grid-cols-3 gap-4">
+              {aiSummaries.map((summary, index) => {
+                const Icon = getSummaryIcon(summary.type);
+                const colorClass = getSummaryColor(summary.type);
+                return (
+                  <Card key={index} className="border-mist/50 hover:shadow-md transition-all">
+                    <CardContent className="p-6">
+                      <div className={`w-10 h-10 rounded-full ${colorClass} flex items-center justify-center mb-4`}>
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-sm font-semibold text-carbon mb-2">{summary.title}</h3>
+                      <p className="text-xs text-ash leading-relaxed mb-4">{summary.message}</p>
+                      {summary.action && (
+                        <Button variant="ghost" size="sm" className="text-xs text-accent p-0 h-auto">
+                          {summary.action}
+                          <ChevronRight className="w-3 h-3 ml-1" />
+                        </Button>
+                      )}
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+
           {/* Live Metrics */}
           <div className="mb-12">
             <h2 className="text-lg font-bold text-carbon mb-6">Live Data</h2>
@@ -281,18 +235,20 @@ export default function Nova() {
               )) : (
                 <>
                   {[
-                    { label: "HRV", icon: Activity },
-                    { label: "Sleep", icon: Brain },
-                    { label: "Focus", icon: Target },
-                    { label: "Recovery", icon: TrendingUp }
+                    { label: "HRV", icon: Activity, value: "68", trend: "+5%" },
+                    { label: "Sleep", icon: Brain, value: "7.8/10" },
+                    { label: "Focus", icon: Target, value: "12h" },
+                    { label: "Recovery", icon: TrendingUp, value: "85%", trend: "+8%" }
                   ].map((metric, index) => (
                     <div key={index} className="p-6 bg-pearl">
                       <div className="flex items-center gap-2 mb-3">
-                        <metric.icon className="w-5 h-5 text-stone" />
+                        <metric.icon className="w-5 h-5 text-accent" />
                         <span className="text-xs text-stone uppercase tracking-wider">{metric.label}</span>
                       </div>
-                      <p className="text-3xl font-bold text-stone/30">--</p>
-                      <p className="text-xs text-stone mt-1">Connect device</p>
+                      <p className="text-3xl font-bold text-carbon">{metric.value}</p>
+                      {metric.trend && (
+                        <p className="text-sm mt-1 text-accent">{metric.trend}</p>
+                      )}
                     </div>
                   ))}
                 </>
@@ -302,95 +258,16 @@ export default function Nova() {
 
           {/* Main Content Grid */}
           <div className="grid lg:grid-cols-3 gap-8">
-            {/* Chat Interface */}
+            {/* 7-Day Forecast */}
             <div className="lg:col-span-2">
-              <div className="border border-mist bg-pearl/30">
-                {/* Messages */}
-                <div className="p-6 max-h-[500px] overflow-y-auto space-y-6">
-                  {messages.map((message, index) => (
-                    <div key={index} className={`flex gap-4 ${message.role === "user" ? "justify-end" : ""}`}>
-                      {message.role === "assistant" && (
-                        <div className="flex-shrink-0">
-                          <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
-                            <Sparkles className="w-4 h-4 text-accent" />
-                          </div>
-                        </div>
-                      )}
-                      <div className={`max-w-[80%] ${message.role === "user" ? "bg-carbon text-ivory p-4" : ""}`}>
-                        <p className={`text-sm leading-relaxed ${message.role === "assistant" ? "text-carbon" : ""}`}>
-                          {message.content}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                  {isLoading && (
-                    <div className="flex gap-4">
-                      <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
-                        <Loader2 className="w-4 h-4 text-accent animate-spin" />
-                      </div>
-                      <p className="text-sm text-stone">Processing...</p>
-                    </div>
-                  )}
-                  <div ref={messagesEndRef} />
-                </div>
-                
-                {/* Input */}
-                <div className="border-t border-mist p-4 bg-white">
-                  <div className="flex gap-3">
-                    <Input
-                      value={input}
-                      onChange={(e) => setInput(e.target.value)}
-                      onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                      placeholder="Ask about protocols, recovery, performance..."
-                      disabled={isLoading}
-                      className="flex-1 border-mist bg-pearl min-h-[44px]"
-                    />
-                    <Button 
-                      onClick={handleSendMessage} 
-                      disabled={isLoading || !input.trim()}
-                      className="bg-carbon hover:bg-slate px-6 min-h-[44px]"
-                    >
-                      <Send className="w-4 h-4" />
-                    </Button>
-                  </div>
-                  <div className="flex justify-center mt-3">
-                    <VoiceInterface onSpeakingChange={setIsSpeaking} />
-                  </div>
-                </div>
-              </div>
+              <HealthForecast />
             </div>
 
             {/* Sidebar */}
             <div className="space-y-6">
-              <PhaseIndicator currentPhase={currentPhase} />
-
-              {currentPhase >= 2 && (
-                <div>
-                  <h3 className="text-sm font-bold text-carbon mb-4">Predictions</h3>
-                  <PredictiveInsights 
-                    insights={[
-                      {
-                        type: "warning",
-                        title: "Recovery declining",
-                        description: "HRV trend suggests you need more rest. Skip high intensity today.",
-                        confidence: 87,
-                        timeframe: "Next 24 hours"
-                      },
-                      {
-                        type: "opportunity",
-                        title: "Peak focus window",
-                        description: "Based on your patterns, 9 to 11am is optimal for deep work.",
-                        confidence: 92,
-                        timeframe: "Tomorrow"
-                      }
-                    ]}
-                  />
-                </div>
-              )}
-
               {/* Quick Actions */}
-              <div className="p-6 bg-pearl">
-                <h3 className="text-sm font-bold text-carbon mb-4">Actions</h3>
+              <div className="p-6 bg-pearl rounded-lg">
+                <h3 className="text-sm font-bold text-carbon mb-4">Quick Actions</h3>
                 <div className="space-y-2">
                   <Button 
                     variant="outline" 
@@ -403,18 +280,58 @@ export default function Nova() {
                   <Button 
                     variant="outline" 
                     className="w-full justify-between text-sm border-mist"
+                    onClick={() => navigate('/nova/chat')}
                   >
-                    View 7 Day Forecast
+                    Chat with Nova
                     <ChevronRight className="w-4 h-4" />
                   </Button>
                   <Button 
                     variant="outline" 
                     className="w-full justify-between text-sm border-mist"
+                    onClick={() => navigate('/nova/protocols')}
                   >
-                    Adjust Protocol
+                    View Protocols
+                    <ChevronRight className="w-4 h-4" />
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="w-full justify-between text-sm border-mist"
+                    onClick={() => navigate('/nova/devices')}
+                  >
+                    Connect Devices
                     <ChevronRight className="w-4 h-4" />
                   </Button>
                 </div>
+              </div>
+
+              {/* Connected Devices Summary */}
+              <div className="p-6 bg-pearl rounded-lg">
+                <h3 className="text-sm font-bold text-carbon mb-4">Connected Devices</h3>
+                <div className="space-y-3">
+                  {[
+                    { name: "Oura Ring Gen 3", status: "Connected", lastSync: "2 mins ago" },
+                    { name: "Apple Watch Ultra", status: "Connected", lastSync: "5 mins ago" }
+                  ].map((device, i) => (
+                    <div key={i} className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-carbon font-medium">{device.name}</p>
+                        <p className="text-xs text-stone">{device.lastSync}</p>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <div className="w-2 h-2 rounded-full bg-accent" />
+                        <span className="text-xs text-accent">{device.status}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="w-full mt-4 text-accent"
+                  onClick={() => navigate('/nova/devices')}
+                >
+                  Manage Devices
+                </Button>
               </div>
             </div>
           </div>
