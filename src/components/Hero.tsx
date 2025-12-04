@@ -39,7 +39,7 @@ const Hero = () => {
 
           {/* Subheadline */}
           <p className="text-lg sm:text-2xl md:text-3xl text-stone max-w-3xl mx-auto font-light leading-relaxed">
-            AI, light, and supplementation — engineered to build elite thinkers.
+            AI, light, and supplementation. Engineered to build elite thinkers.
           </p>
 
           {/* Value Proposition */}
