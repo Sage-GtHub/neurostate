@@ -19,10 +19,10 @@ export const useSwipeNavigation = (options: SwipeNavigationOptions = {}) => {
   const touchEndY = useRef<number>(0);
   const isSwiping = useRef<boolean>(false);
 
-  // Define Nova routes in order for swipe navigation
+  // Define Nova routes in order for swipe navigation (mobile)
   const novaRoutes = [
-    '/nova/overview',
     '/nova',
+    '/nova/chat',
     '/nova/protocols',
     '/nova/insights',
     '/nova/optimization',
