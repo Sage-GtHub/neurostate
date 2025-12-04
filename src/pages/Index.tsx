@@ -20,9 +20,7 @@ const Index = () => {
   const [chatOpen, setChatOpen] = useState(false);
   
   const system = useScrollAnimation();
-  const whoWeHelp = useScrollAnimation();
   const problems = useScrollAnimation();
-  const science = useScrollAnimation();
   const category = useScrollAnimation();
   const nova = useScrollAnimation();
   const device = useScrollAnimation();
@@ -45,37 +43,47 @@ const Index = () => {
           <Hero />
 
           {/* The Platform */}
-          <section ref={system.ref} className={`relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory overflow-hidden transition-all duration-1000 ${system.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <section ref={system.ref} className={`relative py-28 sm:py-36 md:py-44 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory overflow-hidden transition-all duration-1000 ${system.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {/* Subtle gradient orb */}
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-carbon/[0.02] to-transparent rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-carbon/[0.03] to-transparent rounded-full blur-3xl pointer-events-none" />
+            
             <div className="relative z-10 max-w-6xl mx-auto">
-              <div className="text-center mb-16 sm:mb-24 space-y-4">
-                <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">The Platform</p>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-carbon leading-[1.05]">
-                  One Cognitive Performance System. Three Forces.
+              <div className="text-center mb-20 sm:mb-28 space-y-6">
+                <p className="text-carbon/40 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium animate-fade-in">The Platform</p>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-carbon leading-[1.02] tracking-tight">
+                  One System.<br className="hidden sm:block" /> Three Forces.
                 </h2>
-                <p className="text-base sm:text-lg text-ash max-w-2xl mx-auto">
-                  AI-driven cognitive performance, precision supplements, and neuromodulation technology. All working together to optimise the human mind. This is not a product line. It is a performance ecosystem.
+                <p className="text-base sm:text-lg md:text-xl text-ash max-w-2xl mx-auto leading-relaxed">
+                  AI-driven cognitive performance, precision supplements, and neuromodulation technology. All working together to optimise the human mind.
                 </p>
               </div>
 
-              {/* System Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-mist">
+              {/* System Grid - Enhanced */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-carbon/10 border border-carbon/10">
                 {[
-                  { icon: Brain, title: "Nova AI", desc: "AI performance assistant", detail: "Personalised AI coaching with adaptive recommendations and real-time behavioural insights." },
-                  { icon: Target, title: "Protocol Engine", desc: "Personal stacks", detail: "Evidence-based protocols tuned to your biology for focus optimisation." },
-                  { icon: Lightbulb, title: "Neuromodulation", desc: "Brain state control", detail: "Red light therapy cognitive benefits. Alpha and beta state switching." },
-                  { icon: Zap, title: "Supplements", desc: "Precision nutrition", detail: "Adaptogen supplements for focus. Magnesium for recovery. Third-party verified." },
-                  { icon: Activity, title: "Data Integration", desc: "Wearable sync", detail: "Oura. Whoop. Apple Watch. Unified predictive wellness AI." },
-                  { icon: Building2, title: "Team Deployment", desc: "Enterprise scale", detail: "Corporate wellbeing solution. Workplace performance platform." },
+                  { icon: Brain, title: "Nova AI", desc: "AI performance assistant", detail: "Personalised AI coaching with adaptive recommendations and real-time behavioural insights.", delay: "0ms" },
+                  { icon: Target, title: "Protocol Engine", desc: "Personal stacks", detail: "Evidence-based protocols tuned to your biology for focus optimisation.", delay: "100ms" },
+                  { icon: Lightbulb, title: "Neuromodulation", desc: "Brain state control", detail: "Red light therapy cognitive benefits. Alpha and beta state switching.", delay: "200ms" },
+                  { icon: Zap, title: "Supplements", desc: "Precision nutrition", detail: "Adaptogen supplements for focus. Magnesium for recovery. Third-party verified.", delay: "300ms" },
+                  { icon: Activity, title: "Data Integration", desc: "Wearable sync", detail: "Oura. Whoop. Apple Watch. Unified predictive wellness AI.", delay: "400ms" },
+                  { icon: Building2, title: "Team Deployment", desc: "Enterprise scale", detail: "Corporate wellbeing solution. Workplace performance platform.", delay: "500ms" },
                 ].map((item, i) => (
                   <div 
                     key={i}
-                    className="group relative p-8 sm:p-10 md:p-12 bg-ivory hover:bg-carbon transition-all duration-500 cursor-pointer"
+                    className="group relative p-10 sm:p-12 md:p-14 bg-ivory hover:bg-carbon transition-all duration-700 cursor-pointer overflow-hidden"
+                    style={{ animationDelay: item.delay }}
                   >
-                    <div className="space-y-4 sm:space-y-5">
-                      <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-carbon group-hover:text-ivory transition-colors" />
-                      <h3 className="text-base sm:text-lg font-semibold text-carbon group-hover:text-ivory transition-colors">{item.title}</h3>
-                      <p className="text-ash group-hover:text-stone text-xs sm:text-sm transition-colors">{item.desc}</p>
-                      <p className="text-stone group-hover:text-stone/70 text-xs transition-colors">{item.detail}</p>
+                    {/* Hover glow effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-carbon/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                    
+                    <div className="relative z-10 space-y-5">
+                      <div className="w-12 h-12 flex items-center justify-center bg-carbon/5 group-hover:bg-ivory/10 transition-colors duration-500">
+                        <item.icon className="w-5 h-5 text-carbon group-hover:text-ivory transition-colors duration-500" />
+                      </div>
+                      <h3 className="text-lg sm:text-xl font-semibold text-carbon group-hover:text-ivory transition-colors duration-500">{item.title}</h3>
+                      <p className="text-ash group-hover:text-stone text-sm transition-colors duration-500">{item.desc}</p>
+                      <p className="text-stone/80 group-hover:text-stone/60 text-xs leading-relaxed transition-colors duration-500">{item.detail}</p>
                     </div>
                   </div>
                 ))}
@@ -83,23 +91,21 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Who We Help - Hidden for cleaner homepage */}
-
-          {/* Problems We Solve */}
-          <section ref={problems.ref} className={`relative py-24 sm:py-32 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory transition-all duration-1000 ${problems.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          {/* Problems We Solve - Enhanced */}
+          <section ref={problems.ref} className={`relative py-28 sm:py-36 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-gradient-to-b from-pearl to-ivory transition-all duration-1000 ${problems.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                <div className="space-y-6">
-                  <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Problems We Solve</p>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.05]">
+              <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+                <div className="space-y-8">
+                  <p className="text-carbon/40 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Problems We Solve</p>
+                  <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-carbon leading-[1.02] tracking-tight">
                     Mental performance issues holding you back
                   </h2>
-                  <p className="text-base sm:text-lg text-ash leading-relaxed">
+                  <p className="text-lg sm:text-xl text-ash leading-relaxed">
                     The modern brain is under siege. We built our cognitive performance system to address the root causes, not just the symptoms.
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2">
                   {[
                     "Brain fog",
                     "Poor focus",
@@ -110,8 +116,13 @@ const Index = () => {
                     "Recovery deficits",
                     "Decision fatigue"
                   ].map((problem, i) => (
-                    <div key={i} className="p-4 bg-carbon/5 border-l border-carbon/10">
-                      <p className="text-sm text-carbon font-medium">{problem}</p>
+                    <div 
+                      key={i} 
+                      className="group relative p-5 bg-carbon/[0.03] hover:bg-carbon transition-all duration-500 border-l-2 border-carbon/10 hover:border-carbon overflow-hidden"
+                      style={{ animationDelay: `${i * 50}ms` }}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-carbon/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <p className="relative z-10 text-sm font-medium text-carbon group-hover:text-ivory transition-colors duration-500">{problem}</p>
                     </div>
                   ))}
                 </div>
@@ -119,42 +130,49 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Backed by Science - Hidden for cleaner homepage */}
-
-          {/* Category Creation - Old vs New */}
-          <section ref={category.ref} className={`relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory transition-all duration-1000 ${category.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-16 sm:mb-20 space-y-4">
-                <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Category Creation</p>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-carbon leading-[1.05]">
-                  Traditional wellness is dead
+          {/* Category Creation - Old vs New - Enhanced */}
+          <section ref={category.ref} className={`relative py-28 sm:py-36 md:py-44 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory overflow-hidden transition-all duration-1000 ${category.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {/* Diagonal lines pattern */}
+            <div className="absolute inset-0 opacity-[0.015]" style={{ backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 40px, #1A1A1A 40px, #1A1A1A 41px)' }} />
+            
+            <div className="relative z-10 max-w-6xl mx-auto">
+              <div className="text-center mb-20 sm:mb-24 space-y-6">
+                <p className="text-carbon/40 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Category Creation</p>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-carbon leading-[1.02] tracking-tight">
+                  Traditional wellness<br className="hidden sm:block" /> is dead
                 </h2>
-                <p className="text-base sm:text-lg text-ash max-w-2xl mx-auto">
+                <p className="text-lg sm:text-xl text-ash max-w-2xl mx-auto">
                   This is the future of personalised cognitive performance.
                 </p>
               </div>
 
-              <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
+              <div className="grid lg:grid-cols-2 gap-10 lg:gap-20">
                 {/* Dead Solutions */}
-                <div className="space-y-3">
-                  <p className="text-xs text-carbon/60 uppercase tracking-wider mb-6">What no longer works</p>
+                <div className="space-y-4">
+                  <p className="text-[10px] text-carbon/50 uppercase tracking-[0.3em] mb-8 font-medium">What no longer works</p>
                   {[
                     { item: "Meditation apps no one opens", status: "Abandoned" },
                     { item: "Breathwork sessions that change nothing", status: "Ineffective" },
                     { item: "Wellbeing talks no one attends", status: "Ignored" },
                     { item: "Mental health days that arrive too late", status: "Reactive" }
                   ].map((entry, i) => (
-                    <div key={i} className="flex items-center gap-4 p-4 bg-carbon/5 border-l border-carbon/10">
-                      <X className="w-4 h-4 text-carbon/30 flex-shrink-0" />
-                      <span className="text-ash line-through text-sm">{entry.item}</span>
-                      <span className="text-[10px] text-carbon/40 ml-auto uppercase tracking-wide">{entry.status}</span>
+                    <div 
+                      key={i} 
+                      className="group flex items-center gap-5 p-5 bg-carbon/[0.02] hover:bg-carbon/[0.05] transition-all duration-500 border-l border-carbon/5"
+                      style={{ animationDelay: `${i * 100}ms` }}
+                    >
+                      <div className="w-8 h-8 flex items-center justify-center bg-carbon/5 group-hover:bg-carbon/10 transition-colors">
+                        <X className="w-4 h-4 text-carbon/30" />
+                      </div>
+                      <span className="text-ash line-through text-sm flex-1">{entry.item}</span>
+                      <span className="text-[9px] text-carbon/30 uppercase tracking-[0.2em] font-medium">{entry.status}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* NeuroState Outcomes */}
-                <div className="space-y-3">
-                  <p className="text-xs text-carbon/60 uppercase tracking-wider mb-6">What NeuroState delivers</p>
+                <div className="space-y-4">
+                  <p className="text-[10px] text-carbon/50 uppercase tracking-[0.3em] mb-8 font-medium">What NeuroState delivers</p>
                   {[
                     { outcome: "Focus Optimisation", metric: "Sustained attention and deep work capacity" },
                     { outcome: "Mental Clarity", metric: "Faster decisions. Clearer thinking." },
@@ -162,11 +180,17 @@ const Index = () => {
                     { outcome: "Stable Energy", metric: "Consistent output throughout the day" },
                     { outcome: "Burnout Prevention", metric: "Stress reduction technology that works" }
                   ].map((entry, i) => (
-                    <div key={i} className="flex items-center gap-4 p-4 bg-carbon/5 border-l border-carbon/20">
-                      <CheckCircle2 className="w-4 h-4 text-carbon flex-shrink-0" />
-                      <div>
-                        <span className="text-carbon font-medium text-sm">{entry.outcome}</span>
-                        <p className="text-ash text-xs mt-0.5">{entry.metric}</p>
+                    <div 
+                      key={i} 
+                      className="group flex items-start gap-5 p-5 bg-carbon/[0.03] hover:bg-carbon transition-all duration-500 border-l-2 border-carbon/20 hover:border-carbon"
+                      style={{ animationDelay: `${i * 100}ms` }}
+                    >
+                      <div className="w-8 h-8 flex items-center justify-center bg-carbon/10 group-hover:bg-ivory/10 transition-colors flex-shrink-0 mt-0.5">
+                        <CheckCircle2 className="w-4 h-4 text-carbon group-hover:text-ivory transition-colors" />
+                      </div>
+                      <div className="flex-1">
+                        <span className="text-carbon group-hover:text-ivory font-semibold text-sm block transition-colors">{entry.outcome}</span>
+                        <p className="text-ash group-hover:text-stone text-xs mt-1 transition-colors">{entry.metric}</p>
                       </div>
                     </div>
                   ))}
@@ -175,18 +199,21 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Nova AI Section */}
-          <section ref={nova.ref} className={`relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl transition-all duration-1000 ${nova.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          {/* Nova AI Section - Enhanced */}
+          <section ref={nova.ref} className={`relative py-28 sm:py-36 md:py-44 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl overflow-hidden transition-all duration-1000 ${nova.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {/* Gradient orbs */}
+            <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-gradient-to-l from-carbon/[0.03] to-transparent rounded-full blur-3xl pointer-events-none" />
+            
             <div className="max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                <div className="space-y-8">
-                  <div className="space-y-4">
-                    <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">AI Performance Assistant</p>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.05]">
+              <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+                <div className="space-y-10">
+                  <div className="space-y-6">
+                    <p className="text-carbon/40 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">AI Performance Assistant</p>
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-carbon leading-[1.02] tracking-tight">
                       Nova, Your Cognitive Operating System
                     </h2>
-                    <p className="text-base sm:text-lg text-ash leading-relaxed max-w-lg">
-                      Nova is our AI-driven cognitive performance engine. It learns your physiology, predicts your mental states, and builds personalised protocols that improve how you think, recover, and perform. Predictive wellness AI that reshapes your habits using science, data, and relentless precision.
+                    <p className="text-lg sm:text-xl text-ash leading-relaxed max-w-lg">
+                      Nova is our AI-driven cognitive performance engine. It learns your physiology, predicts your mental states, and builds personalised protocols that improve how you think, recover, and perform.
                     </p>
                   </div>
                   <div className="space-y-4">
@@ -197,11 +224,13 @@ const Index = () => {
                       { title: "Wearable integration", desc: "Connects to Oura, Whoop, Apple Watch" },
                       { title: "Protocol optimisation", desc: "Refines your supplement stack automatically" }
                     ].map((item, i) => (
-                      <div key={i} className="flex items-start gap-3">
-                        <div className="w-1 h-1 rounded-full bg-carbon mt-2 flex-shrink-0" />
+                      <div key={i} className="group flex items-start gap-4 p-3 -mx-3 hover:bg-carbon/[0.03] transition-colors duration-300">
+                        <div className="w-6 h-6 flex items-center justify-center bg-carbon/10 group-hover:bg-carbon transition-colors duration-300 flex-shrink-0 mt-0.5">
+                          <div className="w-1.5 h-1.5 bg-carbon group-hover:bg-ivory transition-colors duration-300" />
+                        </div>
                         <div>
                           <p className="text-carbon font-medium text-sm">{item.title}</p>
-                          <p className="text-ash text-xs">{item.desc}</p>
+                          <p className="text-ash text-xs mt-0.5">{item.desc}</p>
                         </div>
                       </div>
                     ))}
@@ -209,41 +238,47 @@ const Index = () => {
                   <Link to="/nova/overview" target="_blank">
                     <Button 
                       size="lg"
-                      className="bg-carbon text-ivory hover:bg-slate transition-all duration-300 min-h-[48px] touch-manipulation px-8"
+                      className="bg-carbon text-ivory hover:bg-slate transition-all duration-300 min-h-[52px] touch-manipulation px-10 group"
                     >
                       Explore Nova
-                      <ArrowRight className="ml-2 w-4 h-4" />
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
                 </div>
 
-                {/* Nova UI Preview */}
+                {/* Nova UI Preview - Enhanced */}
                 <div className="relative">
-                  <div className="relative overflow-hidden bg-carbon p-6 sm:p-8">
-                    <div className="space-y-5">
-                      <div className="flex items-center gap-3 pb-4 border-b border-slate">
-                        <div className="w-10 h-10 bg-ivory/10 flex items-center justify-center">
+                  <div className="absolute -inset-4 bg-gradient-to-br from-carbon/5 to-transparent blur-2xl opacity-50" />
+                  <div className="relative overflow-hidden bg-carbon p-8 sm:p-10 shadow-2xl">
+                    <div className="space-y-6">
+                      <div className="flex items-center gap-4 pb-5 border-b border-slate/50">
+                        <div className="w-12 h-12 bg-gradient-to-br from-ivory/20 to-ivory/5 flex items-center justify-center">
                           <Sparkles className="w-5 h-5 text-ivory" />
                         </div>
                         <div>
-                          <p className="text-ivory font-medium text-sm">Nova</p>
+                          <p className="text-ivory font-semibold">Nova</p>
                           <p className="text-stone text-xs">Analysing your biometrics</p>
                         </div>
+                        <div className="ml-auto flex items-center gap-1.5">
+                          <div className="w-2 h-2 bg-signal-green rounded-full animate-pulse" />
+                          <span className="text-[10px] text-stone uppercase tracking-wide">Live</span>
+                        </div>
                       </div>
-                      <div className="bg-slate/50 p-4">
-                        <p className="text-stone text-sm leading-relaxed">
+                      <div className="bg-gradient-to-br from-slate/60 to-slate/40 p-5">
+                        <p className="text-ivory/90 text-sm leading-relaxed">
                           Your HRV dropped 12% overnight. Adjusting protocol. Skip high intensity today. Take magnesium at 8pm for sleep optimisation.
                         </p>
                       </div>
-                      <div className="grid grid-cols-3 gap-2">
+                      <div className="grid grid-cols-3 gap-3">
                         {[
-                          { value: "68", label: "HRV" },
-                          { value: "7.8", label: "Sleep" },
-                          { value: "85%", label: "Recovery" }
+                          { value: "68", label: "HRV", trend: "+5%" },
+                          { value: "7.8", label: "Sleep", trend: "Steady" },
+                          { value: "85%", label: "Recovery", trend: "+8%" }
                         ].map((metric, i) => (
-                          <div key={i} className="bg-slate/30 p-3 text-center">
-                            <p className="text-ivory text-lg font-semibold">{metric.value}</p>
-                            <p className="text-stone text-[10px] mt-0.5 uppercase tracking-wide">{metric.label}</p>
+                          <div key={i} className="group bg-slate/30 hover:bg-slate/50 p-4 text-center transition-colors duration-300">
+                            <p className="text-ivory text-2xl font-bold tracking-tight">{metric.value}</p>
+                            <p className="text-stone text-[10px] mt-1 uppercase tracking-wider">{metric.label}</p>
+                            <p className="text-signal-green text-[9px] mt-1 font-medium">{metric.trend}</p>
                           </div>
                         ))}
                       </div>
@@ -254,28 +289,32 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Hardware Section */}
-          <section ref={device.ref} className={`relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-carbon transition-all duration-1000 ${device.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          {/* Hardware Section - Enhanced */}
+          <section ref={device.ref} className={`relative py-28 sm:py-36 md:py-44 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-carbon overflow-hidden transition-all duration-1000 ${device.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {/* Subtle grid pattern */}
+            <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(to right, #FFFFFF 1px, transparent 1px), linear-gradient(to bottom, #FFFFFF 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+            
             <div className="relative z-10 max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
                 <div className="order-last lg:order-first">
-                  <div className="relative overflow-hidden">
+                  <div className="relative group">
+                    <div className="absolute -inset-8 bg-gradient-to-br from-ivory/10 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                     <img 
                       src={redlightDevice} 
                       alt="NeuroState Red Light Therapy Device for cognitive performance and mental clarity" 
-                      className="w-full h-auto object-cover"
+                      className="relative w-full h-auto object-cover"
                     />
                   </div>
                 </div>
 
-                <div className="space-y-8">
-                  <div className="space-y-4">
-                    <p className="text-stone text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Neuromodulation Hardware</p>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-ivory leading-[1.05]">
+                <div className="space-y-10">
+                  <div className="space-y-6">
+                    <p className="text-stone/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Neuromodulation Hardware</p>
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-ivory leading-[1.02] tracking-tight">
                       Red Light Therapy for Cognitive Performance
                     </h2>
-                    <p className="text-base sm:text-lg text-stone leading-relaxed max-w-lg">
-                      Not another wellness gadget. A device engineered to deliver red light therapy cognitive benefits. Enhance focus, accelerate recovery, and improve mental clarity in minutes. Mental performance tools that change your brain state on demand.
+                    <p className="text-lg sm:text-xl text-stone leading-relaxed max-w-lg">
+                      Not another wellness gadget. A device engineered to deliver red light therapy cognitive benefits. Enhance focus, accelerate recovery, and improve mental clarity in minutes.
                     </p>
                   </div>
                   <div className="space-y-3">
@@ -285,19 +324,21 @@ const Index = () => {
                       "Beta state for focus optimisation and execution",
                       "Clinically validated neuromodulation protocols"
                     ].map((item, i) => (
-                      <div key={i} className="flex items-center gap-3">
-                        <div className="w-1 h-1 bg-ivory flex-shrink-0" />
-                        <p className="text-ivory/80 text-sm">{item}</p>
+                      <div key={i} className="group flex items-center gap-4 p-3 -mx-3 hover:bg-ivory/5 transition-colors duration-300">
+                        <div className="w-6 h-6 flex items-center justify-center bg-ivory/10 group-hover:bg-ivory/20 transition-colors">
+                          <div className="w-1.5 h-1.5 bg-ivory" />
+                        </div>
+                        <p className="text-ivory/80 group-hover:text-ivory text-sm transition-colors">{item}</p>
                       </div>
                     ))}
                   </div>
                   <Link to="/category/devices">
                     <Button 
                       size="lg"
-                      className="bg-ivory text-carbon hover:bg-mist transition-all duration-300 min-h-[48px] touch-manipulation px-8"
+                      className="bg-ivory text-carbon hover:bg-mist transition-all duration-300 min-h-[52px] touch-manipulation px-10 group"
                     >
                       View devices
-                      <ArrowRight className="ml-2 w-4 h-4" />
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
                 </div>
@@ -305,67 +346,74 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Supplements Section */}
-          <section ref={supplements.ref} className={`relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory transition-all duration-1000 ${supplements.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          {/* Supplements Section - Enhanced */}
+          <section ref={supplements.ref} className={`relative py-28 sm:py-36 md:py-44 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory overflow-hidden transition-all duration-1000 ${supplements.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {/* Gradient accent */}
+            <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gradient-to-tl from-carbon/[0.02] to-transparent rounded-full blur-3xl pointer-events-none" />
+            
             <div className="relative z-10 max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                <div className="space-y-8">
-                  <div className="space-y-4">
-                    <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Performance Supplements</p>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.05]">
+              <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+                <div className="space-y-10">
+                  <div className="space-y-6">
+                    <p className="text-carbon/40 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Performance Supplements</p>
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-carbon leading-[1.02] tracking-tight">
                       Adaptogen Supplements for Focus and Recovery
                     </h2>
-                    <p className="text-base sm:text-lg text-ash leading-relaxed max-w-lg">
-                      Every ingredient at the dose that works. No proprietary blends. No marketing nonsense. Performance supplements with research-backed formulas designed for cognitive optimisation. Magnesium for recovery. Adaptogens for stress. Nootropics for focus.
+                    <p className="text-lg sm:text-xl text-ash leading-relaxed max-w-lg">
+                      Every ingredient at the dose that works. No proprietary blends. No marketing nonsense. Performance supplements with research-backed formulas designed for cognitive optimisation.
                     </p>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-3">
                     {[
                       { title: "Focus optimisation", desc: "Targeted cognitive enhancement" },
                       { title: "Clinical dosing", desc: "Evidence-based protocols" },
                       { title: "High performers", desc: "Built for pressure" },
                       { title: "Nova integration", desc: "AI-personalised stacks" }
                     ].map((item, i) => (
-                      <div key={i} className="p-4 bg-carbon/5 border-l border-carbon/10">
-                        <p className="text-carbon font-medium text-sm">{item.title}</p>
-                        <p className="text-ash text-xs mt-1">{item.desc}</p>
+                      <div key={i} className="group p-5 bg-carbon/[0.03] hover:bg-carbon border-l-2 border-carbon/10 hover:border-carbon transition-all duration-500">
+                        <p className="text-carbon group-hover:text-ivory font-semibold text-sm transition-colors">{item.title}</p>
+                        <p className="text-ash group-hover:text-stone text-xs mt-1 transition-colors">{item.desc}</p>
                       </div>
                     ))}
                   </div>
                   <Link to="/category/supplements">
                     <Button 
                       size="lg"
-                      className="bg-carbon text-ivory hover:bg-slate transition-all duration-300 min-h-[48px] touch-manipulation px-8"
+                      className="bg-carbon text-ivory hover:bg-slate transition-all duration-300 min-h-[52px] touch-manipulation px-10 group"
                     >
                       Browse supplements
-                      <ArrowRight className="ml-2 w-4 h-4" />
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
                 </div>
 
-                <div className="relative overflow-hidden">
+                <div className="relative group">
+                  <div className="absolute -inset-8 bg-gradient-to-br from-carbon/5 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                   <img 
                     src={heroSupplement} 
                     alt="NeuroState Performance Supplements with adaptogens for focus and cognitive enhancement" 
-                    className="w-full h-auto object-cover"
+                    className="relative w-full h-auto object-cover"
                   />
                 </div>
               </div>
             </div>
           </section>
 
-          {/* For Teams */}
-          <section ref={business.ref} className={`relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-carbon transition-all duration-1000 ${business.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                <div className="space-y-8">
-                  <div className="space-y-4">
-                    <p className="text-stone text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Enterprise Wellbeing Solution</p>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-ivory leading-[1.05]">
+          {/* For Teams - Enhanced */}
+          <section ref={business.ref} className={`relative py-28 sm:py-36 md:py-44 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-carbon overflow-hidden transition-all duration-1000 ${business.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {/* Grid pattern */}
+            <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #FFFFFF 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+            
+            <div className="max-w-6xl mx-auto relative z-10">
+              <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+                <div className="space-y-10">
+                  <div className="space-y-6">
+                    <p className="text-stone/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Enterprise Wellbeing Solution</p>
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-ivory leading-[1.02] tracking-tight">
                       Corporate Wellbeing Solution That Delivers Results
                     </h2>
-                    <p className="text-base sm:text-lg text-stone leading-relaxed max-w-lg">
-                      The workplace performance platform that replaces outdated corporate wellness. Deploy our cognitive performance system across your organisation and measure real outcomes. Employee performance tools that actually work.
+                    <p className="text-lg sm:text-xl text-stone leading-relaxed max-w-lg">
+                      The workplace performance platform that replaces outdated corporate wellness. Deploy our cognitive performance system across your organisation and measure real outcomes.
                     </p>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
@@ -375,33 +423,33 @@ const Index = () => {
                       { stat: "31%", label: "Productivity gain" },
                       { stat: "89%", label: "Satisfaction rate" }
                     ].map((item, i) => (
-                      <div key={i} className="p-4 bg-ivory/5">
-                        <p className="text-3xl font-bold text-ivory">{item.stat}</p>
-                        <p className="text-stone text-xs mt-1">{item.label}</p>
+                      <div key={i} className="group p-6 bg-ivory/[0.03] hover:bg-ivory/[0.08] border border-ivory/10 hover:border-ivory/20 transition-all duration-500">
+                        <p className="text-4xl sm:text-5xl font-bold text-ivory tracking-tight">{item.stat}</p>
+                        <p className="text-stone text-xs mt-2 uppercase tracking-wider">{item.label}</p>
                       </div>
                     ))}
                   </div>
                   <Link to="/enterprise/overview">
                     <Button 
                       size="lg"
-                      className="bg-ivory text-carbon hover:bg-mist transition-all duration-300 min-h-[48px] touch-manipulation px-8"
+                      className="bg-ivory text-carbon hover:bg-mist transition-all duration-300 min-h-[52px] touch-manipulation px-10 group"
                     >
                       For high-performance teams
-                      <ArrowRight className="ml-2 w-4 h-4" />
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
                 </div>
 
                 <div className="space-y-4">
-                  <p className="text-xs text-stone uppercase tracking-wider mb-6">What enterprise clients receive</p>
+                  <p className="text-[10px] text-stone/50 uppercase tracking-[0.3em] mb-8 font-medium">What enterprise clients receive</p>
                   {[
                     { title: "Nova AI for teams", desc: "Personalised AI coaching for every employee" },
                     { title: "Monthly supplement delivery", desc: "Research-backed formulas delivered to your office" },
                     { title: "Real-time analytics", desc: "Track cognitive performance across departments" },
                     { title: "Dedicated support", desc: "Enterprise account management and onboarding" }
                   ].map((item, i) => (
-                    <div key={i} className="p-4 bg-ivory/5 border-l border-ivory/20">
-                      <p className="text-ivory font-medium text-sm">{item.title}</p>
+                    <div key={i} className="group p-5 bg-ivory/[0.03] hover:bg-ivory/[0.08] border-l-2 border-ivory/10 hover:border-ivory/30 transition-all duration-500">
+                      <p className="text-ivory font-semibold text-sm">{item.title}</p>
                       <p className="text-stone text-xs mt-1">{item.desc}</p>
                     </div>
                   ))}
@@ -410,14 +458,14 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Internal Links Section */}
-          <section className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl border-y border-mist">
+          {/* Internal Links Section - Enhanced */}
+          <section className="py-20 sm:py-24 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-gradient-to-b from-pearl to-ivory border-y border-mist">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium mb-4">Explore More</p>
-                <h3 className="text-xl sm:text-2xl font-bold text-carbon">Discover the full cognitive performance system</h3>
+              <div className="text-center mb-14">
+                <p className="text-carbon/40 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium mb-4">Explore More</p>
+                <h3 className="text-2xl sm:text-3xl font-bold text-carbon tracking-tight">Discover the full cognitive performance system</h3>
               </div>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
                 {[
                   { title: "Nova AI", href: "/nova/overview", desc: "AI performance assistant" },
                   { title: "For Teams", href: "/enterprise/overview", desc: "Corporate solutions" },
@@ -425,39 +473,43 @@ const Index = () => {
                   { title: "Red Light", href: "/category/devices", desc: "Neuromodulation devices" },
                   { title: "About Us", href: "/about", desc: "Our mission" }
                 ].map((link, i) => (
-                  <Link key={i} to={link.href} className="group p-4 bg-ivory hover:bg-carbon transition-all duration-300">
+                  <Link key={i} to={link.href} className="group p-5 bg-ivory hover:bg-carbon border border-carbon/5 hover:border-carbon transition-all duration-500">
                     <p className="text-sm font-semibold text-carbon group-hover:text-ivory transition-colors">{link.title}</p>
                     <p className="text-xs text-ash group-hover:text-stone transition-colors mt-1">{link.desc}</p>
+                    <ArrowRight className="w-4 h-4 text-carbon/30 group-hover:text-ivory mt-3 group-hover:translate-x-1 transition-all" />
                   </Link>
                 ))}
               </div>
             </div>
           </section>
 
-          {/* Final CTA */}
-          <section ref={cta.ref} className={`relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory transition-all duration-1000 ${cta.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="max-w-4xl mx-auto text-center space-y-8">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-carbon leading-[1.05]">
-                Ready to optimise your cognitive performance?
+          {/* Final CTA - Enhanced */}
+          <section ref={cta.ref} className={`relative py-32 sm:py-40 md:py-48 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory overflow-hidden transition-all duration-1000 ${cta.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {/* Radial gradient */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-carbon/[0.02] via-transparent to-transparent" />
+            
+            <div className="relative z-10 max-w-4xl mx-auto text-center space-y-10">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-carbon leading-[1.02] tracking-tight">
+                Ready to optimise your<br className="hidden sm:block" /> cognitive performance?
               </h2>
-              <p className="text-base sm:text-lg text-ash max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-ash max-w-2xl mx-auto leading-relaxed">
                 Join thousands using the world's first cognitive performance system to think clearer, work harder, and recover faster.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
                 <Link to="/shop">
                   <Button 
                     size="lg"
-                    className="bg-carbon text-ivory hover:bg-slate transition-all duration-300 min-h-[52px] touch-manipulation px-10"
+                    className="bg-carbon text-ivory hover:bg-slate transition-all duration-300 min-h-[56px] touch-manipulation px-12 text-base group"
                   >
                     Shop now
-                    <ArrowRight className="ml-2 w-4 h-4" />
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
                 <Link to="/nova/overview" target="_blank">
                   <Button 
                     variant="outline"
                     size="lg"
-                    className="border-carbon/30 text-carbon hover:bg-carbon/5 transition-all duration-300 min-h-[52px] touch-manipulation px-10"
+                    className="border-carbon/20 text-carbon hover:bg-carbon hover:text-ivory transition-all duration-300 min-h-[56px] touch-manipulation px-12 text-base"
                   >
                     Explore Nova AI
                   </Button>
