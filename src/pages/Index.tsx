@@ -89,22 +89,22 @@ const Index = () => {
                     className="group relative text-center cursor-pointer"
                   >
                     {/* Circular container */}
-                    <div className="relative mx-auto w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 mb-8">
+                    <div className="relative mx-auto w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 mb-6">
                       {/* Outer ring */}
                       <div className="absolute inset-0 rounded-full border border-carbon/10 group-hover:border-carbon/30 transition-colors duration-700" />
                       {/* Inner gradient circle */}
-                      <div className="absolute inset-4 rounded-full bg-gradient-to-br from-pearl to-ivory group-hover:from-carbon group-hover:to-slate transition-all duration-700" />
+                      <div className="absolute inset-2 rounded-full bg-gradient-to-br from-pearl to-ivory group-hover:from-carbon group-hover:to-slate transition-all duration-700" />
                       {/* Glow effect on hover */}
-                      <div className="absolute inset-4 rounded-full bg-signal-green/0 group-hover:bg-signal-green/5 blur-xl transition-all duration-700" />
+                      <div className="absolute inset-2 rounded-full bg-signal-green/0 group-hover:bg-signal-green/5 blur-xl transition-all duration-700" />
                       {/* Icon container */}
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-carbon/5 group-hover:bg-ivory/10 flex items-center justify-center transition-all duration-500">
-                          <item.icon className="w-7 h-7 sm:w-8 sm:h-8 text-carbon group-hover:text-ivory transition-colors duration-500" />
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-carbon/5 group-hover:bg-ivory/10 flex items-center justify-center transition-all duration-500">
+                          <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-carbon group-hover:text-ivory transition-colors duration-500" />
                         </div>
                       </div>
                       {/* Number badge */}
-                      <div className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-carbon group-hover:bg-signal-green flex items-center justify-center transition-colors duration-500">
-                        <span className="text-ivory text-xs font-semibold">{item.number}</span>
+                      <div className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-carbon group-hover:bg-signal-green flex items-center justify-center transition-colors duration-500">
+                        <span className="text-ivory text-[10px] font-semibold">{item.number}</span>
                       </div>
                     </div>
                     
