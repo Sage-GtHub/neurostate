@@ -182,11 +182,11 @@ const Index = () => {
                   ].map((entry, i) => (
                     <div 
                       key={i} 
-                      className="group flex items-start gap-5 p-5 bg-carbon/[0.03] hover:bg-carbon transition-all duration-500 border-l-2 border-carbon/20 hover:border-carbon"
+                      className="group flex items-start gap-5 p-5 bg-carbon/[0.03] hover:bg-carbon transition-all duration-500 border-l-2 border-signal-green/40 hover:border-signal-green"
                       style={{ animationDelay: `${i * 100}ms` }}
                     >
-                      <div className="w-8 h-8 flex items-center justify-center bg-carbon/10 group-hover:bg-ivory/10 transition-colors flex-shrink-0 mt-0.5">
-                        <CheckCircle2 className="w-4 h-4 text-carbon group-hover:text-ivory transition-colors" />
+                      <div className="w-8 h-8 flex items-center justify-center bg-signal-green/10 group-hover:bg-signal-green/20 transition-colors flex-shrink-0 mt-0.5">
+                        <CheckCircle2 className="w-4 h-4 text-signal-green transition-colors" />
                       </div>
                       <div className="flex-1">
                         <span className="text-carbon group-hover:text-ivory font-semibold text-sm block transition-colors">{entry.outcome}</span>
@@ -271,14 +271,14 @@ const Index = () => {
                       </div>
                       <div className="grid grid-cols-3 gap-3">
                         {[
-                          { value: "68", label: "HRV", trend: "+5%" },
-                          { value: "7.8", label: "Sleep", trend: "Steady" },
-                          { value: "85%", label: "Recovery", trend: "+8%" }
+                          { value: "68", label: "HRV", trend: "+5%", positive: true },
+                          { value: "7.8", label: "Sleep", trend: "Steady", positive: true },
+                          { value: "85%", label: "Recovery", trend: "+8%", positive: true }
                         ].map((metric, i) => (
                           <div key={i} className="group bg-slate/30 hover:bg-slate/50 p-4 text-center transition-colors duration-300">
                             <p className="text-ivory text-2xl font-bold tracking-tight">{metric.value}</p>
                             <p className="text-stone text-[10px] mt-1 uppercase tracking-wider">{metric.label}</p>
-                            <p className="text-signal-green text-[9px] mt-1 font-medium">{metric.trend}</p>
+                            <p className={`text-[9px] mt-1.5 font-semibold ${metric.positive ? 'text-signal-green' : 'text-stone'}`}>{metric.trend}</p>
                           </div>
                         ))}
                       </div>
@@ -424,7 +424,7 @@ const Index = () => {
                       { stat: "89%", label: "Satisfaction rate" }
                     ].map((item, i) => (
                       <div key={i} className="group p-6 bg-ivory/[0.03] hover:bg-ivory/[0.08] border border-ivory/10 hover:border-ivory/20 transition-all duration-500">
-                        <p className="text-4xl sm:text-5xl font-bold text-ivory tracking-tight">{item.stat}</p>
+                        <p className="text-4xl sm:text-5xl font-bold text-signal-green tracking-tight">{item.stat}</p>
                         <p className="text-stone text-xs mt-2 uppercase tracking-wider">{item.label}</p>
                       </div>
                     ))}

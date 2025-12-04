@@ -86,6 +86,10 @@ export default {
         mist: "hsl(var(--mist))",
         slate: "hsl(var(--slate))",
         pearl: "hsl(var(--pearl))",
+        // Signal colors
+        "signal-green": "hsl(var(--signal-green))",
+        "signal-blue": "hsl(var(--signal-blue))",
+        "signal-amber": "hsl(var(--signal-amber))",
       },
       borderRadius: {
         none: "0px",
