@@ -2,13 +2,26 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Sparkles, Send, Loader2, Copy, Check, RotateCcw, Trash2 } from "lucide-react";
+import { 
+  Sparkles, 
+  Send, 
+  Loader2, 
+  Copy, 
+  Check, 
+  RotateCcw, 
+  Trash2,
+  MessageSquare,
+  Zap,
+  Brain,
+  Moon,
+  Activity
+} from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { VoiceInterface } from "@/components/nova/VoiceInterface";
 import { SEO } from "@/components/SEO";
 import ReactMarkdown from "react-markdown";
+import { cn } from "@/lib/utils";
 
 interface Message {
   id?: string;
@@ -17,11 +30,11 @@ interface Message {
   timestamp?: Date;
 }
 
-const SUGGESTED_PROMPTS = [
-  "How can I improve my HRV?",
-  "Create a morning supplement stack",
-  "Why am I tired in the afternoon?",
-  "Optimise my sleep protocol",
+const QUICK_ACTIONS = [
+  { icon: Activity, label: "Analyse my HRV", prompt: "Analyse my recent HRV data and give me actionable insights" },
+  { icon: Moon, label: "Sleep protocol", prompt: "Create a personalised sleep optimisation protocol for me" },
+  { icon: Zap, label: "Energy boost", prompt: "I need more energy in the afternoon. What do you recommend?" },
+  { icon: Brain, label: "Focus stack", prompt: "Design a supplement stack for deep focus and cognitive performance" },
 ];
 
 export default function NovaChat() {
@@ -34,6 +47,7 @@ export default function NovaChat() {
   const { toast } = useToast();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   // Load chat history
   useEffect(() => {
@@ -58,12 +72,6 @@ export default function NovaChat() {
           content: h.content,
           timestamp: new Date(h.created_at)
         })));
-      } else {
-        setMessages([{
-          role: "assistant",
-          content: "I am Nova, your AI performance coach. I analyse your biometrics, identify patterns, and provide precise recommendations to optimise your performance.\n\nWhat would you like to work on today?",
-          timestamp: new Date()
-        }]);
       }
       setIsLoadingHistory(false);
     };
@@ -79,7 +87,7 @@ export default function NovaChat() {
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = Math.min(textareaRef.current.scrollHeight, 200) + 'px';
+      textareaRef.current.style.height = Math.min(textareaRef.current.scrollHeight, 160) + 'px';
     }
   }, [input]);
 
@@ -109,7 +117,6 @@ export default function NovaChat() {
     let assistantContent = "";
     let textBuffer = "";
 
-    // Add empty assistant message
     setMessages(prev => [...prev, { role: "assistant", content: "", timestamp: new Date() }]);
 
     while (true) {
@@ -118,7 +125,6 @@ export default function NovaChat() {
 
       textBuffer += decoder.decode(value, { stream: true });
 
-      // Process line by line
       let newlineIndex: number;
       while ((newlineIndex = textBuffer.indexOf("\n")) !== -1) {
         let line = textBuffer.slice(0, newlineIndex);
@@ -147,14 +153,12 @@ export default function NovaChat() {
             });
           }
         } catch {
-          // Re-buffer incomplete JSON
           textBuffer = line + "\n" + textBuffer;
           break;
         }
       }
     }
 
-    // Final flush
     if (textBuffer.trim()) {
       for (let raw of textBuffer.split("\n")) {
         if (!raw) continue;
@@ -195,17 +199,14 @@ export default function NovaChat() {
     setIsLoading(true);
 
     try {
-      // Save user message
       await supabase.from('nova_chat_messages').insert({
         user_id: user.id,
         role: 'user',
         content
       });
 
-      // Stream response
       const assistantContent = await streamChat(userMessage);
 
-      // Save assistant response
       if (assistantContent) {
         await supabase.from('nova_chat_messages').insert({
           user_id: user.id,
@@ -221,7 +222,6 @@ export default function NovaChat() {
         description: error instanceof Error ? error.message : "Failed to send message",
         variant: "destructive",
       });
-      // Remove the empty assistant message on error
       setMessages(prev => prev.filter(m => m.content !== ""));
     } finally {
       setIsLoading(false);
@@ -231,6 +231,7 @@ export default function NovaChat() {
   const copyToClipboard = async (content: string, id: string) => {
     await navigator.clipboard.writeText(content);
     setCopiedId(id);
+    toast({ description: "Copied to clipboard" });
     setTimeout(() => setCopiedId(null), 2000);
   };
 
@@ -239,28 +240,21 @@ export default function NovaChat() {
     if (!user) return;
 
     await supabase.from('nova_chat_messages').delete().eq('user_id', user.id);
-    setMessages([{
-      role: "assistant",
-      content: "I am Nova, your AI performance coach. I analyse your biometrics, identify patterns, and provide precise recommendations to optimise your performance.\n\nWhat would you like to work on today?",
-      timestamp: new Date()
-    }]);
-    toast({ title: "Chat history cleared" });
+    setMessages([]);
+    toast({ description: "Conversation cleared" });
   };
 
   const regenerateLastResponse = async () => {
     if (messages.length < 2) return;
     
-    // Find the last user message
     const lastUserMessageIndex = [...messages].reverse().findIndex(m => m.role === "user");
     if (lastUserMessageIndex === -1) return;
 
     const actualIndex = messages.length - 1 - lastUserMessageIndex;
     const lastUserMessage = messages[actualIndex];
     
-    // Remove messages from that point
     setMessages(prev => prev.slice(0, actualIndex));
     
-    // Resend
     setTimeout(() => handleSendMessage(lastUserMessage.content), 100);
   };
 
@@ -271,13 +265,52 @@ export default function NovaChat() {
     }
   };
 
+  const formatTime = (date?: Date) => {
+    if (!date) return "";
+    return date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  };
+
+  // Empty state - no messages
+  const EmptyState = () => (
+    <div className="flex-1 flex flex-col items-center justify-center px-4 py-12">
+      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-6 shadow-lg">
+        <Sparkles className="w-8 h-8 text-accent" />
+      </div>
+      <h2 className="text-2xl font-semibold text-foreground mb-2">Chat with Nova</h2>
+      <p className="text-muted-foreground text-center max-w-md mb-8">
+        Your AI performance coach. Ask about protocols, recovery, supplements, or anything related to optimising your performance.
+      </p>
+      
+      <div className="grid grid-cols-2 gap-3 w-full max-w-lg">
+        {QUICK_ACTIONS.map((action, i) => (
+          <button
+            key={i}
+            onClick={() => handleSendMessage(action.prompt)}
+            disabled={isLoading}
+            className="group flex items-center gap-3 p-4 rounded-xl border border-border/50 bg-card/50 hover:bg-card hover:border-border hover:shadow-sm transition-all text-left"
+          >
+            <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
+              <action.icon className="w-5 h-5 text-accent" />
+            </div>
+            <span className="text-sm font-medium text-foreground">{action.label}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+
   if (isLoadingHistory) {
     return (
       <NovaSwipeWrapper>
         <div className="min-h-screen bg-background">
           <NovaNav />
           <div className="flex items-center justify-center h-[60vh]">
-            <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
+                <Loader2 className="w-6 h-6 animate-spin text-accent" />
+              </div>
+              <p className="text-sm text-muted-foreground">Loading conversation...</p>
+            </div>
           </div>
         </div>
       </NovaSwipeWrapper>
@@ -294,183 +327,207 @@ export default function NovaChat() {
         <NovaNav />
       
         {/* Header */}
-        <div className="border-b border-border/50 bg-background">
-          <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-4 sm:py-6">
-            <div className="flex items-center justify-between">
+        <div className="border-b border-border/30 bg-background/80 backdrop-blur-sm sticky top-0 z-10">
+          <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-3">
+            <div className="flex items-center justify-between max-w-3xl mx-auto">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-accent" />
+                <div className="relative">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center shadow-sm">
+                    <Sparkles className="w-5 h-5 text-accent" />
+                  </div>
+                  <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-accent border-2 border-background" />
                 </div>
                 <div>
-                  <h1 className="text-lg sm:text-xl font-semibold text-foreground">Nova</h1>
-                  <div className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full ${isSpeaking ? 'bg-accent animate-pulse' : 'bg-accent'}`} />
-                    <span className="text-xs text-muted-foreground">Online</span>
-                  </div>
+                  <h1 className="text-base font-semibold text-foreground">Nova</h1>
+                  <p className="text-xs text-muted-foreground">AI Performance Coach</p>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={clearHistory}
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </Button>
+              <div className="flex items-center gap-1">
+                <VoiceInterface onSpeakingChange={setIsSpeaking} />
+                {messages.length > 0 && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={clearHistory}
+                    className="h-8 w-8 text-muted-foreground hover:text-foreground"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                )}
               </div>
             </div>
           </div>
         </div>
 
         {/* Chat Container */}
-        <div className="flex-1 overflow-hidden">
-          <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 h-full">
-            <div className="max-w-3xl mx-auto h-full flex flex-col py-4">
+        <div className="flex-1 overflow-hidden flex flex-col">
+          <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 flex-1 flex flex-col">
+            <div className="max-w-3xl mx-auto w-full flex-1 flex flex-col">
               
-              {/* Messages */}
-              <div className="flex-1 overflow-y-auto space-y-6 pb-4">
-                {messages.map((message, index) => (
+              {messages.length === 0 ? (
+                <EmptyState />
+              ) : (
+                <>
+                  {/* Messages */}
                   <div 
-                    key={index} 
-                    className={`flex gap-3 ${message.role === "user" ? "justify-end" : ""}`}
+                    ref={chatContainerRef}
+                    className="flex-1 overflow-y-auto py-6 space-y-1"
                   >
-                    {message.role === "assistant" && (
-                      <div className="flex-shrink-0 mt-1">
-                        <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
-                          <Sparkles className="w-4 h-4 text-accent" />
-                        </div>
-                      </div>
-                    )}
-                    <div className={`group relative max-w-[85%] ${
-                      message.role === "user" 
-                        ? "bg-foreground text-background px-4 py-3 rounded-2xl rounded-br-md" 
-                        : "bg-muted/30 px-4 py-3 rounded-2xl rounded-bl-md"
-                    }`}>
-                      {message.role === "assistant" ? (
-                        <div className="prose prose-sm dark:prose-invert max-w-none text-foreground">
-                          <ReactMarkdown
-                            components={{
-                              p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
-                              ul: ({ children }) => <ul className="mb-2 list-disc pl-4">{children}</ul>,
-                              ol: ({ children }) => <ol className="mb-2 list-decimal pl-4">{children}</ol>,
-                              li: ({ children }) => <li className="mb-1">{children}</li>,
-                              strong: ({ children }) => <strong className="font-semibold text-foreground">{children}</strong>,
-                              h1: ({ children }) => <h1 className="text-lg font-bold mb-2">{children}</h1>,
-                              h2: ({ children }) => <h2 className="text-base font-semibold mb-2">{children}</h2>,
-                              h3: ({ children }) => <h3 className="text-sm font-semibold mb-1">{children}</h3>,
-                              code: ({ children }) => <code className="bg-muted px-1 py-0.5 rounded text-sm">{children}</code>,
-                            }}
-                          >
-                            {message.content || "..."}
-                          </ReactMarkdown>
-                        </div>
-                      ) : (
-                        <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
-                      )}
-                      
-                      {/* Action buttons */}
-                      {message.role === "assistant" && message.content && (
-                        <div className="absolute -bottom-8 left-0 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="h-7 px-2 text-xs text-muted-foreground hover:text-foreground"
-                            onClick={() => copyToClipboard(message.content, `msg-${index}`)}
-                          >
-                            {copiedId === `msg-${index}` ? (
-                              <Check className="w-3 h-3 mr-1" />
-                            ) : (
-                              <Copy className="w-3 h-3 mr-1" />
-                            )}
-                            Copy
-                          </Button>
-                          {index === messages.length - 1 && (
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="h-7 px-2 text-xs text-muted-foreground hover:text-foreground"
-                              onClick={regenerateLastResponse}
-                              disabled={isLoading}
-                            >
-                              <RotateCcw className="w-3 h-3 mr-1" />
-                              Regenerate
-                            </Button>
+                    {messages.map((message, index) => (
+                      <div 
+                        key={index} 
+                        className={cn(
+                          "group py-4 px-1 transition-colors",
+                          message.role === "user" ? "" : "hover:bg-muted/20 rounded-xl"
+                        )}
+                      >
+                        <div className={cn(
+                          "flex gap-3",
+                          message.role === "user" ? "flex-row-reverse" : ""
+                        )}>
+                          {/* Avatar */}
+                          {message.role === "assistant" && (
+                            <div className="flex-shrink-0">
+                              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center">
+                                <Sparkles className="w-4 h-4 text-accent" />
+                              </div>
+                            </div>
                           )}
+                          
+                          {/* Message Content */}
+                          <div className={cn(
+                            "flex-1 min-w-0",
+                            message.role === "user" ? "flex flex-col items-end" : ""
+                          )}>
+                            {message.role === "user" ? (
+                              <div className="max-w-[85%]">
+                                <div className="bg-foreground text-background px-4 py-3 rounded-2xl rounded-tr-md shadow-sm">
+                                  <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
+                                </div>
+                                <p className="text-[10px] text-muted-foreground mt-1 mr-1">
+                                  {formatTime(message.timestamp)}
+                                </p>
+                              </div>
+                            ) : (
+                              <div className="space-y-2">
+                                {message.content ? (
+                                  <div className="prose prose-sm dark:prose-invert max-w-none text-foreground/90">
+                                    <ReactMarkdown
+                                      components={{
+                                        p: ({ children }) => <p className="mb-3 last:mb-0 leading-relaxed">{children}</p>,
+                                        ul: ({ children }) => <ul className="mb-3 list-disc pl-5 space-y-1">{children}</ul>,
+                                        ol: ({ children }) => <ol className="mb-3 list-decimal pl-5 space-y-1">{children}</ol>,
+                                        li: ({ children }) => <li className="leading-relaxed">{children}</li>,
+                                        strong: ({ children }) => <strong className="font-semibold text-foreground">{children}</strong>,
+                                        h1: ({ children }) => <h1 className="text-lg font-bold mb-3 mt-4 first:mt-0">{children}</h1>,
+                                        h2: ({ children }) => <h2 className="text-base font-semibold mb-2 mt-4 first:mt-0">{children}</h2>,
+                                        h3: ({ children }) => <h3 className="text-sm font-semibold mb-2 mt-3 first:mt-0">{children}</h3>,
+                                        code: ({ children }) => (
+                                          <code className="bg-muted/50 px-1.5 py-0.5 rounded text-sm font-mono">{children}</code>
+                                        ),
+                                        pre: ({ children }) => (
+                                          <pre className="bg-muted/50 p-3 rounded-lg overflow-x-auto my-3">{children}</pre>
+                                        ),
+                                        blockquote: ({ children }) => (
+                                          <blockquote className="border-l-2 border-accent/50 pl-4 italic text-muted-foreground my-3">{children}</blockquote>
+                                        ),
+                                      }}
+                                    >
+                                      {message.content}
+                                    </ReactMarkdown>
+                                  </div>
+                                ) : (
+                                  <div className="flex items-center gap-2 py-2">
+                                    <div className="flex gap-1">
+                                      <span className="w-2 h-2 bg-accent/60 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                                      <span className="w-2 h-2 bg-accent/60 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                                      <span className="w-2 h-2 bg-accent/60 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                                    </div>
+                                    <span className="text-xs text-muted-foreground">Nova is thinking...</span>
+                                  </div>
+                                )}
+                                
+                                {/* Action buttons for assistant messages */}
+                                {message.content && (
+                                  <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <Button
+                                      variant="ghost"
+                                      size="sm"
+                                      className="h-7 px-2 text-xs text-muted-foreground hover:text-foreground"
+                                      onClick={() => copyToClipboard(message.content, `msg-${index}`)}
+                                    >
+                                      {copiedId === `msg-${index}` ? (
+                                        <Check className="w-3 h-3" />
+                                      ) : (
+                                        <Copy className="w-3 h-3" />
+                                      )}
+                                    </Button>
+                                    {index === messages.length - 1 && !isLoading && (
+                                      <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        className="h-7 px-2 text-xs text-muted-foreground hover:text-foreground"
+                                        onClick={regenerateLastResponse}
+                                      >
+                                        <RotateCcw className="w-3 h-3" />
+                                      </Button>
+                                    )}
+                                    <span className="text-[10px] text-muted-foreground ml-2">
+                                      {formatTime(message.timestamp)}
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </div>
                         </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-                
-                {isLoading && messages[messages.length - 1]?.content === "" && (
-                  <div className="flex gap-3">
-                    <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
-                      <Loader2 className="w-4 h-4 text-accent animate-spin" />
-                    </div>
-                    <div className="bg-muted/30 px-4 py-3 rounded-2xl rounded-bl-md">
-                      <div className="flex gap-1">
-                        <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                        <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                        <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                       </div>
-                    </div>
+                    ))}
+                    <div ref={messagesEndRef} />
                   </div>
-                )}
-                <div ref={messagesEndRef} />
-              </div>
-
-              {/* Suggested prompts */}
-              {messages.length <= 1 && (
-                <div className="flex flex-wrap gap-2 pb-4">
-                  {SUGGESTED_PROMPTS.map((prompt, i) => (
-                    <Button
-                      key={i}
-                      variant="outline"
-                      size="sm"
-                      className="text-xs border-border/50 hover:bg-muted/50"
-                      onClick={() => handleSendMessage(prompt)}
-                      disabled={isLoading}
-                    >
-                      {prompt}
-                    </Button>
-                  ))}
-                </div>
+                </>
               )}
               
-              {/* Input */}
-              <div className="border-t border-border/50 pt-4 bg-background">
-                <div className="flex gap-2 items-end">
-                  <Textarea
+              {/* Input Area */}
+              <div className="py-4 border-t border-border/30 bg-background sticky bottom-0">
+                <div className="relative">
+                  <textarea
                     ref={textareaRef}
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    placeholder="Ask Nova anything about performance, recovery, protocols..."
+                    placeholder="Message Nova..."
                     disabled={isLoading}
-                    className="flex-1 resize-none min-h-[48px] max-h-[200px] border-border/50 bg-muted/30 focus:bg-background"
                     rows={1}
+                    className={cn(
+                      "w-full resize-none rounded-xl border border-border/50 bg-muted/30",
+                      "px-4 py-3 pr-12 text-sm placeholder:text-muted-foreground",
+                      "focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50",
+                      "disabled:opacity-50 disabled:cursor-not-allowed",
+                      "transition-all duration-200"
+                    )}
+                    style={{ minHeight: '48px', maxHeight: '160px' }}
                   />
-                  <div className="flex flex-col gap-2">
-                    <Button 
-                      onClick={() => handleSendMessage()} 
-                      disabled={isLoading || !input.trim()}
-                      size="icon"
-                      className="h-[48px] w-[48px] bg-foreground hover:bg-foreground/90"
-                    >
-                      {isLoading ? (
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                      ) : (
-                        <Send className="w-4 h-4" />
-                      )}
-                    </Button>
-                  </div>
-                </div>
-                <div className="flex justify-center mt-3">
-                  <VoiceInterface onSpeakingChange={setIsSpeaking} />
+                  <Button
+                    size="icon"
+                    onClick={() => handleSendMessage()}
+                    disabled={!input.trim() || isLoading}
+                    className={cn(
+                      "absolute right-2 bottom-2 h-8 w-8 rounded-lg",
+                      "bg-accent hover:bg-accent/90 text-accent-foreground",
+                      "disabled:opacity-30 disabled:cursor-not-allowed",
+                      "transition-all duration-200"
+                    )}
+                  >
+                    {isLoading ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Send className="w-4 h-4" />
+                    )}
+                  </Button>
                 </div>
                 <p className="text-[10px] text-muted-foreground text-center mt-2">
-                  Nova may make mistakes. Consider verifying important information.
+                  Press Enter to send, Shift+Enter for new line
                 </p>
               </div>
             </div>
