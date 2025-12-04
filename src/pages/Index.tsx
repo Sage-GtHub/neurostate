@@ -8,7 +8,7 @@ import { LiveChat } from "@/components/LiveChat";
 import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Brain, Lightbulb, Zap, Users, Building2, FlaskConical, Award, X, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Brain, Lightbulb, Zap, Users, Building2, FlaskConical, Award, X, CheckCircle2, Activity, Target, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import novaIcon from "@/assets/neurostate-icon.svg";
@@ -38,26 +38,28 @@ const Index = () => {
         <main>
           <Hero />
 
-          {/* The NeuroState System - Clean Diagram */}
+          {/* The NeuroState System */}
           <section ref={system.ref} className={`relative py-20 sm:py-28 md:py-36 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-white overflow-hidden transition-all duration-1000 ${system.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="relative z-10 max-w-6xl mx-auto">
               <div className="text-center mb-16 sm:mb-20 space-y-4">
-                <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">One Closed Loop System</p>
+                <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">The Platform</p>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-carbon leading-[1.1]">
-                  Everything works together.
+                  One system. Total control.
                 </h2>
                 <p className="text-lg text-ash max-w-xl mx-auto">
-                  Hardware. Supplements. AI. Protocols. One performance engine.
+                  Six components working together. Nothing else on earth does this.
                 </p>
               </div>
 
-              {/* System Diagram - Four Pillars */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-mist">
+              {/* System Diagram - Six Pillars */}
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-px bg-mist">
                 {[
-                  { icon: Brain, title: "Nova AI", desc: "Your cognitive coach", detail: "Learns. Adapts. Guides." },
-                  { icon: Lightbulb, title: "Red Light", desc: "Cellular energy", detail: "660nm + 850nm." },
-                  { icon: Zap, title: "Supplements", desc: "Personalised dosing", detail: "Third party tested." },
-                  { icon: FlaskConical, title: "Protocols", desc: "Evidence based", detail: "Personalised stacks." },
+                  { icon: Brain, title: "Nova AI", desc: "Cognitive engine", detail: "Predicts. Adapts. Guides." },
+                  { icon: Target, title: "Protocol Engine", desc: "Personalised stacks", detail: "Evidence based protocols." },
+                  { icon: Lightbulb, title: "Red Light Therapy", desc: "Cellular energy", detail: "Clinical grade photobiomodulation." },
+                  { icon: Zap, title: "Supplements", desc: "Research backed doses", detail: "Third party tested." },
+                  { icon: Activity, title: "Data Integrations", desc: "Wearable sync", detail: "Oura. Whoop. Apple." },
+                  { icon: Building2, title: "Corporate Programmes", desc: "Team performance", detail: "Enterprise deployment." },
                 ].map((item, i) => (
                   <div 
                     key={i}
@@ -82,33 +84,35 @@ const Index = () => {
                 <div className="space-y-8">
                   <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">The Problem</p>
                   <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.1]">
-                    Old wellness is dead.
+                    Wellness is dead.
                   </h2>
                   <p className="text-lg text-mist leading-relaxed">
                     Meditation apps. Breathwork coaches. Step challenges. Mental health webinars. 
-                    None of it is designed to make you think sharper, recover faster, or perform better.
+                    None of it makes you sharper, faster, or more resilient.
                   </p>
                   <p className="text-xl text-ivory font-medium">
-                    NeuroState is the operating system replacing it.
+                    NeuroState is the operating system replacing all of it.
                   </p>
                 </div>
                 
                 <div className="space-y-4">
                   {[
-                    "Meditation apps",
-                    "Breathwork coaches", 
-                    "Wellness workshops",
-                    "Step challenges",
-                    "Mental health webinars"
-                  ].map((item, i) => (
+                    { item: "Meditation apps", status: "Passive" },
+                    { item: "Breathwork coaches", status: "Temporary" }, 
+                    { item: "Wellness workshops", status: "Forgotten" },
+                    { item: "Step challenges", status: "Irrelevant" },
+                    { item: "Mental health webinars", status: "Reactive" }
+                  ].map((entry, i) => (
                     <div key={i} className="flex items-center gap-4 p-4 bg-slate/30 border-l-2 border-stone/30">
                       <X className="w-5 h-5 text-stone/60 flex-shrink-0" />
-                      <span className="text-stone line-through">{item}</span>
+                      <span className="text-stone line-through">{entry.item}</span>
+                      <span className="text-xs text-stone/60 ml-auto">{entry.status}</span>
                     </div>
                   ))}
                   <div className="flex items-center gap-4 p-4 bg-accent/10 border-l-2 border-accent mt-6">
                     <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0" />
-                    <span className="text-ivory font-medium">NeuroState cognitive enhancement</span>
+                    <span className="text-ivory font-medium">NeuroState cognitive system</span>
+                    <span className="text-xs text-accent ml-auto">Active</span>
                   </div>
                 </div>
               </div>
@@ -124,22 +128,23 @@ const Index = () => {
                     <img src={novaIcon} alt="Nova AI" className="w-12 h-12 sm:w-14 sm:h-14" />
                   </div>
                   <div className="space-y-4">
+                    <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Cognitive Engine</p>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.1]">
-                      Nova knows you
+                      Nova predicts
                       <br />
-                      <span className="text-accent">better than you do.</span>
+                      <span className="text-accent">before you feel it.</span>
                     </h2>
                     <p className="text-lg text-ash leading-relaxed max-w-lg">
-                      Tracks your biometrics. Spots patterns. Predicts burnout before it happens. 
-                      Tells you exactly what to take and when.
+                      Not a chatbot. Not an assistant. A cognitive engine that tracks your biology, 
+                      spots patterns you miss, and tells you exactly what to do next.
                     </p>
                   </div>
                   <div className="space-y-3">
                     {[
-                      "Personalised recommendations based on your data",
-                      "72 hour performance forecasting",
-                      "Real time protocol adjustments",
-                      "Voice and text coaching"
+                      "Predicts your cognitive state 72 hours ahead",
+                      "Generates personal performance protocols",
+                      "Adjusts daily recommendations based on real data",
+                      "Learns your biology over time"
                     ].map((item, i) => (
                       <div key={i} className="flex items-center gap-3">
                         <div className="w-1.5 h-1.5 rounded-full bg-accent" />
@@ -164,17 +169,17 @@ const Index = () => {
                     <div className="space-y-6">
                       <div className="flex items-center gap-4 pb-6 border-b border-mist">
                         <div className="w-12 h-12 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center">
-                          <Brain className="w-6 h-6 text-accent" />
+                          <Sparkles className="w-6 h-6 text-accent" />
                         </div>
                         <div>
                           <p className="text-carbon font-semibold">Nova</p>
-                          <p className="text-accent text-sm">Analysing</p>
+                          <p className="text-accent text-sm">Processing</p>
                         </div>
                       </div>
                       <div className="bg-white border border-mist p-5">
                         <p className="text-ash leading-relaxed text-sm">
-                          Your HRV dropped 12% overnight. Adjusting your protocol to prioritise recovery. 
-                          Skip high intensity training today.
+                          Your HRV dropped 12% overnight. I am adjusting your protocol. 
+                          Skip high intensity today. Take magnesium at 8pm.
                         </p>
                       </div>
                       <div className="grid grid-cols-3 gap-3">
@@ -212,14 +217,15 @@ const Index = () => {
 
                 <div className="space-y-8">
                   <div className="space-y-4">
+                    <p className="text-red-500 text-xs tracking-[0.3em] uppercase font-medium">Hardware</p>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.1]">
                       Light that heals.
                       <br />
-                      <span className="text-red-500">Not hype.</span>
+                      <span className="text-red-500">Clinically proven.</span>
                     </h2>
                     <p className="text-lg text-ash leading-relaxed max-w-lg">
-                      Clinical grade photobiomodulation. The right wavelengths at the right power density. 
-                      Speeds recovery. Boosts mitochondrial function. Sharpens cognition.
+                      Clinical grade photobiomodulation. The right wavelengths at the right power. 
+                      Speeds recovery. Boosts mitochondria. Sharpens cognition.
                     </p>
                   </div>
                   <div className="space-y-3">
@@ -254,6 +260,7 @@ const Index = () => {
               <div className="grid lg:grid-cols-2 gap-16 items-center">
                 <div className="space-y-8">
                   <div className="space-y-4">
+                    <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Supplements</p>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.1]">
                       No fluff.
                       <br />
@@ -304,10 +311,11 @@ const Index = () => {
               <div className="text-center mb-16 space-y-4">
                 <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">For Organisations</p>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.1]">
-                  Sharper teams win.
+                  Every wellness programme is failing.
                 </h2>
-                <p className="text-lg text-ash max-w-xl mx-auto">
-                  Deploy cognitive performance infrastructure across your entire workforce.
+                <p className="text-lg text-ash max-w-2xl mx-auto">
+                  Meditation apps and breathwork coaches are not fixing burnout. 
+                  NeuroState replaces wellness with cognitive performance.
                 </p>
               </div>
 
@@ -328,7 +336,10 @@ const Index = () => {
                 ))}
               </div>
 
-              <div className="text-center">
+              <div className="text-center space-y-4">
+                <p className="text-ash max-w-xl mx-auto">
+                  Every pound invested returns sharper thinking, higher productivity, and measurable performance lift.
+                </p>
                 <Link to="/enterprise/overview">
                   <Button 
                     size="sm"
@@ -348,28 +359,29 @@ const Index = () => {
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1]">
                 Start performing
                 <br />
-                at your potential.
+                <span className="text-accent">at your potential.</span>
               </h2>
               <p className="text-lg text-mist max-w-xl mx-auto">
-                Your mind is your greatest asset. Time to treat it that way.
+                Your brain is your most valuable asset. Upgrade it.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                 <Link to="/shop">
                   <Button 
                     size="sm"
-                    className="bg-accent text-white hover:bg-accent-light rounded-full group transition-all duration-300 min-h-[44px] touch-manipulation px-8"
+                    className="bg-accent text-white hover:bg-accent-light rounded-full min-h-[44px] px-8"
                   >
-                    Shop Now
-                    <ArrowRight className="ml-2 w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                    Explore System
+                    <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                 </Link>
                 <Link to="/nova" target="_blank">
                   <Button 
                     variant="outline"
                     size="sm"
-                    className="border-ivory/30 text-ivory hover:bg-ivory/10 rounded-full transition-all duration-300 min-h-[44px] touch-manipulation px-8"
+                    className="border-ivory/30 text-ivory hover:bg-ivory/10 rounded-full min-h-[44px] px-8"
                   >
-                    Try Nova Free
+                    <Sparkles className="mr-2 w-4 h-4" />
+                    Meet Nova AI
                   </Button>
                 </Link>
               </div>
@@ -377,7 +389,7 @@ const Index = () => {
           </section>
         </main>
         <Footer />
-        {!isMobile && <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />}
+        <LiveChat />
       </div>
     </>
   );

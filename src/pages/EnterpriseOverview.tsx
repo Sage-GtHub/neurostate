@@ -9,6 +9,7 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 export default function EnterpriseOverview() {
   const hero = useScrollAnimation();
   const problem = useScrollAnimation();
+  const comparison = useScrollAnimation();
   const solution = useScrollAnimation();
   const impact = useScrollAnimation();
   const categories = useScrollAnimation();
@@ -18,23 +19,22 @@ export default function EnterpriseOverview() {
     <>
       <SEO 
         title="Enterprise Performance | NeuroState"
-        description="Replace outdated wellness programmes with cognitive performance infrastructure. Sharper minds. Measurable results."
+        description="Corporate wellness is broken. NeuroState replaces it with cognitive performance. Measurable results. Real ROI."
       />
       <Header />
       
       <main className="min-h-screen bg-white">
-        {/* Hero - Revolutionary Statement */}
+        {/* Hero - Category Killer Statement */}
         <section ref={hero.ref} className={`pt-28 sm:pt-36 pb-20 sm:pb-28 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="max-w-5xl mx-auto text-center space-y-6">
             <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">For Organisations</p>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-carbon leading-[1.02]">
               Corporate wellness
               <br />
-              <span className="text-accent">doesn't work.</span>
+              <span className="text-accent">is broken.</span>
             </h1>
             <p className="text-xl text-ash max-w-2xl mx-auto">
-              Meditation apps and yoga sessions are not solving burnout. 
-              Your people need sharper minds, not more calm.
+              NeuroState replaces it with something far more powerful: cognitive performance.
             </p>
             <Button 
               size="sm" 
@@ -47,7 +47,7 @@ export default function EnterpriseOverview() {
           </div>
         </section>
 
-        {/* The Problem - Old vs New */}
+        {/* The Problem - Direct Comparison */}
         <section ref={problem.ref} className={`py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-carbon text-ivory transition-all duration-1000 ${problem.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -69,29 +69,77 @@ export default function EnterpriseOverview() {
               
               <div className="space-y-3">
                 {[
-                  "Meditation apps",
-                  "Breathwork workshops", 
-                  "Wellbeing platforms",
-                  "Step challenges",
-                  "Mental health webinars"
-                ].map((item, i) => (
+                  { item: "Meditation apps", impact: "Passive" },
+                  { item: "Breathwork workshops", impact: "Forgotten" }, 
+                  { item: "Wellbeing platforms", impact: "Ignored" },
+                  { item: "Step challenges", impact: "Irrelevant" },
+                  { item: "Mental health webinars", impact: "Reactive" }
+                ].map((entry, i) => (
                   <div key={i} className="flex items-center gap-4 p-4 bg-slate/40 border-l-2 border-stone/40">
                     <X className="w-5 h-5 text-stone/70 flex-shrink-0" />
-                    <span className="text-stone line-through">{item}</span>
-                    <span className="text-xs text-stone/60 ml-auto">No measurable impact</span>
+                    <span className="text-stone line-through">{entry.item}</span>
+                    <span className="text-xs text-stone/60 ml-auto">{entry.impact}</span>
                   </div>
                 ))}
                 <div className="flex items-center gap-4 p-4 bg-accent/15 border-l-2 border-accent mt-6">
                   <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0" />
                   <span className="text-ivory font-medium">NeuroState cognitive system</span>
-                  <span className="text-xs text-accent ml-auto">Measurable results</span>
+                  <span className="text-xs text-accent ml-auto">Active performance</span>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* What We Deliver - Clean Three Step */}
+        {/* Comparison Grid */}
+        <section ref={comparison.ref} className={`py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl transition-all duration-1000 ${comparison.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16 space-y-4">
+              <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">The Difference</p>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.1]">
+                Wellness vs Performance
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Old Wellness Column */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-bold text-stone mb-6">Traditional Wellness</h3>
+                {[
+                  { item: "Meditation apps", issue: "Users stop after 2 weeks" },
+                  { item: "Wellness workshops", issue: "Information forgotten in days" },
+                  { item: "Mental health days", issue: "Reactive, not preventive" },
+                  { item: "Step challenges", issue: "Does not improve cognition" },
+                  { item: "EAP programmes", issue: "3% utilisation rate" }
+                ].map((entry, i) => (
+                  <div key={i} className="p-5 bg-white border-l-2 border-stone/30">
+                    <p className="text-carbon font-medium">{entry.item}</p>
+                    <p className="text-sm text-stone mt-1">{entry.issue}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* NeuroState Column */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-bold text-accent mb-6">NeuroState System</h3>
+                {[
+                  { item: "Nova AI coaching", benefit: "Personalised daily protocols" },
+                  { item: "Monthly supplement delivery", benefit: "Research backed formulas" },
+                  { item: "Real time analytics", benefit: "Measure cognitive markers" },
+                  { item: "Predictive insights", benefit: "Prevent burnout before it happens" },
+                  { item: "Performance tracking", benefit: "Prove ROI to leadership" }
+                ].map((entry, i) => (
+                  <div key={i} className="p-5 bg-white border-l-2 border-accent">
+                    <p className="text-carbon font-medium">{entry.item}</p>
+                    <p className="text-sm text-accent mt-1">{entry.benefit}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* What We Deliver */}
         <section ref={solution.ref} className={`py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-white transition-all duration-1000 ${solution.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16 space-y-4">
@@ -112,17 +160,17 @@ export default function EnterpriseOverview() {
                 {
                   step: "01",
                   title: "Nova AI coaching",
-                  description: "Personalised guidance for every team member. Learns patterns. Adjusts protocols."
+                  description: "Personalised guidance for every team member. Learns patterns. Adjusts protocols. Works at home and in the office."
                 },
                 {
                   step: "02",
                   title: "Monthly supplements",
-                  description: "Shipped to every employee. Research backed doses. Third party tested."
+                  description: "Shipped to every employee. Research backed doses. Third party tested. No proprietary blends."
                 },
                 {
                   step: "03",
                   title: "Real time analytics",
-                  description: "Track cognitive markers, engagement, and progress across your organisation."
+                  description: "Track cognitive markers, engagement, and progress. Prove ROI to leadership with hard data."
                 }
               ].map((item, index) => (
                 <div 
@@ -139,10 +187,10 @@ export default function EnterpriseOverview() {
             {/* Additional Features */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
               {[
-                "Neuromodulation devices",
+                "Red light therapy devices",
                 "Wearable integrations",
                 "Performance programmes",
-                "Performance rooms"
+                "Dedicated support"
               ].map((item, index) => (
                 <div key={index} className="flex items-center gap-3 p-4 bg-pearl">
                   <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0" />
@@ -161,6 +209,9 @@ export default function EnterpriseOverview() {
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.1]">
                 Results, not promises.
               </h2>
+              <p className="text-lg text-ash max-w-xl mx-auto">
+                Every pound invested returns sharper thinking, higher productivity, and measurable performance lift.
+              </p>
             </div>
 
             <div className="grid md:grid-cols-4 gap-px bg-mist">
@@ -197,7 +248,7 @@ export default function EnterpriseOverview() {
                   <Briefcase className="w-8 h-8 mb-6 text-accent group-hover:text-accent" />
                   <h3 className="text-2xl font-bold mb-3 group-hover:text-ivory">Corporate</h3>
                   <p className="text-ash group-hover:text-mist mb-6 text-sm leading-relaxed">
-                    Reduce burnout and boost productivity across your entire workforce.
+                    Reduce burnout. Boost productivity. Sharper teams win.
                   </p>
                   <div className="flex items-center gap-2 text-accent font-medium text-sm">
                     <span>Learn more</span>
@@ -212,7 +263,7 @@ export default function EnterpriseOverview() {
                   <Trophy className="w-8 h-8 mb-6 text-accent group-hover:text-accent" />
                   <h3 className="text-2xl font-bold mb-3 group-hover:text-ivory">Sports</h3>
                   <p className="text-ash group-hover:text-mist mb-6 text-sm leading-relaxed">
-                    Maximise athlete performance and reduce injury risk with recovery protocols.
+                    Maximise athlete performance. Accelerate recovery. Reduce injury risk.
                   </p>
                   <div className="flex items-center gap-2 text-accent font-medium text-sm">
                     <span>Learn more</span>
@@ -227,7 +278,7 @@ export default function EnterpriseOverview() {
                   <Dumbbell className="w-8 h-8 mb-6 text-accent group-hover:text-accent" />
                   <h3 className="text-2xl font-bold mb-3 group-hover:text-ivory">Health Clubs</h3>
                   <p className="text-ash group-hover:text-mist mb-6 text-sm leading-relaxed">
-                    Differentiate your facility with premium cognitive wellness services.
+                    Differentiate your facility. Premium cognitive wellness services.
                   </p>
                   <div className="flex items-center gap-2 text-accent font-medium text-sm">
                     <span>Learn more</span>
@@ -248,7 +299,7 @@ export default function EnterpriseOverview() {
               your workforce?
             </h2>
             <p className="text-lg text-mist max-w-xl mx-auto">
-              High performing minds build high performing companies.
+              Sharper minds build stronger companies.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link to="/contact">

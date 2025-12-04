@@ -18,7 +18,7 @@ const goals: Goal[] = [
   {
     id: "sleep",
     title: "Sleep",
-    description: "Optimise sleep quality and recovery with science-backed tools for deeper, restorative rest.",
+    description: "Deeper rest. Faster recovery. Wake up sharper.",
     image: sleepImage,
     link: "/category/sleep",
     color: "from-blue-500/20 to-indigo-500/20",
@@ -26,7 +26,7 @@ const goals: Goal[] = [
   {
     id: "recovery",
     title: "Recovery",
-    description: "Accelerate muscle recovery and reduce inflammation with advanced therapeutic technologies.",
+    description: "Accelerate muscle repair. Reduce inflammation. Get back faster.",
     image: recoveryImage,
     link: "/category/recovery",
     color: "from-green-500/20 to-emerald-500/20",
@@ -34,15 +34,15 @@ const goals: Goal[] = [
   {
     id: "performance",
     title: "Performance",
-    description: "Enhance athletic performance and endurance with personalised recovery and training tools.",
+    description: "More power. More endurance. Train harder, recover faster.",
     image: performanceImage,
     link: "/category/performance",
     color: "from-accent/20 to-yellow-500/20",
   },
   {
     id: "cognitive",
-    title: "Cognitive function",
-    description: "Support mental clarity, focus, and brain health with nootropics and cognitive enhancers.",
+    title: "Cognitive",
+    description: "Sharper focus. Clearer thinking. Better decisions.",
     image: cognitiveImage,
     link: "/category/cognitive",
     color: "from-purple-500/20 to-pink-500/20",
