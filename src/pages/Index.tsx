@@ -140,7 +140,7 @@ const Index = () => {
                   <div className="space-y-4">
                     <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Cognitive Engine</p>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.05]">
-                      Nova — Your Cognitive Operating System
+                      Nova, Your Cognitive Operating System
                     </h2>
                     <p className="text-base sm:text-lg text-ash leading-relaxed max-w-lg">
                       Nova learns your physiology, predicts your mental states, and builds personalised protocols that improve how you think, recover, and perform. It does not motivate you. It reshapes your habits using science, data, and relentless precision.
