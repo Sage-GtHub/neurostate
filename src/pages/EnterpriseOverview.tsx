@@ -140,7 +140,7 @@ export default function EnterpriseOverview() {
                   { item: "Predictive insights", benefit: "Prevent burnout before it happens" },
                   { item: "Performance tracking", benefit: "Prove ROI to leadership" }
                 ].map((entry, i) => (
-                  <div key={i} className="p-4 bg-ivory/5 border-l border-ivory/30">
+                  <div key={i} className="p-4 bg-signal-green/10 border-l-2 border-signal-green">
                     <p className="text-ivory text-sm">{entry.item}</p>
                     <p className="text-xs text-stone mt-1">{entry.benefit}</p>
                   </div>
@@ -169,8 +169,8 @@ export default function EnterpriseOverview() {
                 { icon: CheckCircle2, title: "Outcome Tracking", desc: "Measure focus, energy, and resilience" },
                 { icon: Building2, title: "Enterprise Support", desc: "Dedicated account management" }
               ].map((item, i) => (
-                <div key={i} className="p-8 sm:p-10 bg-ivory hover:bg-carbon group transition-all duration-300">
-                  <item.icon className="w-5 h-5 text-carbon group-hover:text-ivory mb-4 transition-colors" />
+                <div key={i} className="p-8 sm:p-10 bg-ivory hover:bg-carbon group transition-all duration-300 border-l-2 border-signal-green/30 hover:border-signal-green">
+                  <item.icon className="w-5 h-5 text-signal-green group-hover:text-signal-green mb-4 transition-colors" />
                   <h3 className="text-base font-semibold text-carbon group-hover:text-ivory mb-2 transition-colors">{item.title}</h3>
                   <p className="text-sm text-ash group-hover:text-stone transition-colors">{item.desc}</p>
                 </div>
@@ -195,13 +195,13 @@ export default function EnterpriseOverview() {
                 { stat: "63%", label: "Burnout reduction", period: "Within 90 days" },
                 { stat: "31%", label: "Productivity gain", period: "Output per employee" },
                 { stat: "89%", label: "Satisfaction", period: "Programme rating" },
-              ].map((item, i) => (
-                <div key={i} className="p-10 sm:p-12 bg-carbon text-center">
-                  <p className="text-5xl sm:text-6xl font-bold text-ivory mb-3">{item.stat}</p>
-                  <p className="text-sm text-ivory mb-1">{item.label}</p>
-                  <p className="text-xs text-stone">{item.period}</p>
-                </div>
-              ))}
+                ].map((item, i) => (
+                  <div key={i} className="p-10 sm:p-12 bg-carbon text-center">
+                    <p className="text-5xl sm:text-6xl font-bold text-signal-green mb-3">{item.stat}</p>
+                    <p className="text-sm text-ivory mb-1">{item.label}</p>
+                    <p className="text-xs text-stone">{item.period}</p>
+                  </div>
+                ))}
             </div>
           </div>
         </section>
@@ -248,7 +248,7 @@ export default function EnterpriseOverview() {
                     <ul className="space-y-2">
                       {category.metrics.map((metric, j) => (
                         <li key={j} className="flex items-center gap-2 text-xs text-ash group-hover:text-stone transition-colors">
-                          <div className="w-1 h-1 bg-carbon group-hover:bg-ivory transition-colors" />
+                          <div className="w-1.5 h-1.5 bg-signal-green group-hover:bg-signal-green transition-colors" />
                           {metric}
                         </li>
                       ))}

@@ -211,7 +211,7 @@ export default function NovaOverview() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 animate-fade-in">
             {coreStats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-carbon mb-2 tracking-tight leading-none">{stat.value}</div>
+                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-signal-green mb-2 tracking-tight leading-none">{stat.value}</div>
                 <div className="text-sm sm:text-base md:text-body font-semibold text-carbon mb-1">{stat.label}</div>
                 <div className="text-xs sm:text-sm text-ash">{stat.desc}</div>
               </div>

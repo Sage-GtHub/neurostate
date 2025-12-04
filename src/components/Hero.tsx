@@ -77,7 +77,7 @@ const Hero = () => {
           {/* Trust Signal */}
           <div className="pt-8 sm:pt-12 text-center">
             <p className="text-stone/60 text-[10px] sm:text-xs tracking-[0.2em] uppercase">
-              Designed for focus. Energy. Resilience.
+              Designed for <span className="text-signal-green">focus</span>. <span className="text-signal-green">Energy</span>. <span className="text-signal-green">Resilience</span>.
             </p>
           </div>
         </div>

@@ -101,7 +101,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             size="sm"
             className={`mt-3 sm:mt-4 w-full justify-center border text-[0.6875rem] font-medium tracking-wider transition-all duration-300 min-h-[44px] touch-manipulation ${
               justAdded 
-                ? "border-carbon bg-carbon text-ivory" 
+                ? "border-signal-green bg-signal-green text-ivory" 
                 : "border-mist lg:opacity-0 lg:border-transparent lg:group-hover:opacity-100 lg:group-hover:border-mist hover:border-carbon hover:bg-carbon hover:text-ivory"
             }`}
             disabled={!firstVariant?.availableForSale || isAdding}

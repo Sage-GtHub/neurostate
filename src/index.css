@@ -25,9 +25,9 @@ All colors MUST be HSL.
     --pearl: 0 0% 96%; /* #F5F5F5 - Elevated surfaces */
     
     /* Electric Accent - Performance Signal */
-    --accent: 0 0% 100%; /* White accent on dark */
-    --accent-light: 0 0% 90%;
-    --accent-foreground: 0 0% 4%;
+    --accent: 142 76% 45%; /* Green accent matching signal-green */
+    --accent-light: 142 76% 55%;
+    --accent-foreground: 0 0% 100%;
     
     /* Signal Colors */
     --signal-green: 142 76% 45%; /* #22C55E - Success/Active */

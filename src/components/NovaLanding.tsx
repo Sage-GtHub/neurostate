@@ -138,7 +138,7 @@ export const NovaLanding = () => {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
             {coreStats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-carbon mb-2 tracking-tight leading-none">{stat.value}</div>
+                <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-signal-green mb-2 tracking-tight leading-none">{stat.value}</div>
                 <div className="text-sm sm:text-base font-medium text-carbon mb-1">{stat.label}</div>
                 <div className="text-xs sm:text-sm text-ash">{stat.desc}</div>
               </div>
@@ -157,16 +157,16 @@ export const NovaLanding = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {capabilitiesData.map((capability, index) => (
-              <Card key={index} className="border-mist/30 hover:border-mist hover:shadow-sm transition-all bg-white">
+              <Card key={index} className="border-mist/30 hover:border-signal-green/30 hover:shadow-sm transition-all bg-white">
                 <CardContent className="p-8">
-                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6">
-                    <capability.icon className="w-6 h-6 text-accent" />
+                  <div className="w-12 h-12 rounded-xl bg-signal-green/10 flex items-center justify-center mb-6">
+                    <capability.icon className="w-6 h-6 text-signal-green" />
                   </div>
                   <h4 className="text-base font-medium text-carbon mb-3">{capability.title}</h4>
                   <p className="text-sm text-ash leading-relaxed mb-6">{capability.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {capability.stats.map((stat, i) => (
-                      <div key={i} className="px-3 py-1.5 rounded-full bg-pearl/50 text-xs text-carbon font-medium">
+                      <div key={i} className="px-3 py-1.5 rounded-full bg-signal-green/10 text-xs text-carbon font-medium">
                         {stat}
                       </div>
                     ))}
@@ -190,12 +190,12 @@ export const NovaLanding = () => {
             {phasesData.map((phase) => (
               <Card 
                 key={phase.phase} 
-                className={`border-mist/30 cursor-pointer transition-all hover:shadow-sm ${activePhase === phase.phase ? 'border-accent shadow-sm' : ''}`}
+                className={`border-mist/30 cursor-pointer transition-all hover:shadow-sm ${activePhase === phase.phase ? 'border-signal-green shadow-sm' : ''}`}
                 onClick={() => setActivePhase(phase.phase)}
               >
                 <CardContent className="p-6 sm:p-8">
                   <div className="flex items-center gap-3 mb-6">
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-base font-medium ${activePhase === phase.phase ? 'bg-accent text-white' : 'bg-pearl text-ash'} transition-colors`}>
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-base font-medium ${activePhase === phase.phase ? 'bg-signal-green text-white' : 'bg-pearl text-ash'} transition-colors`}>
                       {phase.phase}
                     </div>
                     <div>
@@ -206,7 +206,10 @@ export const NovaLanding = () => {
                   <p className="text-sm text-ash leading-relaxed mb-6">{phase.description}</p>
                   <div className="space-y-2">
                     {phase.metrics.map((metric, i) => (
-                      <div key={i} className="text-xs text-carbon font-medium">• {metric}</div>
+                      <div key={i} className="text-xs text-carbon font-medium flex items-center gap-2">
+                        <span className="w-1 h-1 bg-signal-green rounded-full"></span>
+                        {metric}
+                      </div>
                     ))}
                   </div>
                 </CardContent>
@@ -226,8 +229,8 @@ export const NovaLanding = () => {
       {/* Research Foundation */}
       <section ref={research.ref} className={`relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl/30 transition-all duration-1000 ${research.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="max-w-3xl mx-auto text-center">
-          <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-8">
-            <Database className="w-8 h-8 text-accent" />
+          <div className="w-16 h-16 rounded-full bg-signal-green/10 flex items-center justify-center mx-auto mb-8">
+            <Database className="w-8 h-8 text-signal-green" />
           </div>
           <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-carbon mb-6 tracking-tight">Built on 10,000+ Peer-Reviewed Studies</h3>
           <p className="text-base sm:text-lg text-ash leading-relaxed mb-12">
@@ -240,7 +243,7 @@ export const NovaLanding = () => {
               { value: "Weekly", label: "Updates" }
             ].map((item, i) => (
               <div key={i}>
-                <div className="text-4xl sm:text-5xl font-light text-carbon mb-2">{item.value}</div>
+                <div className="text-4xl sm:text-5xl font-light text-signal-green mb-2">{item.value}</div>
                 <div className="text-sm text-ash">{item.label}</div>
               </div>
             ))}

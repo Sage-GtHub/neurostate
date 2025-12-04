@@ -89,8 +89,8 @@ const AboutUs = () => {
                   { stat: "63%", label: "Burnout reduction" },
                   { stat: "89%", label: "Customer satisfaction" },
                 ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-6 p-5 bg-carbon/5 border-l border-carbon/10">
-                    <span className="text-2xl sm:text-3xl font-bold text-carbon">{item.stat}</span>
+                  <div key={i} className="flex items-center gap-6 p-5 bg-carbon/5 border-l-2 border-signal-green/40">
+                    <span className="text-2xl sm:text-3xl font-bold text-signal-green">{item.stat}</span>
                     <span className="text-sm text-ash">{item.label}</span>
                   </div>
                 ))}
@@ -111,8 +111,8 @@ const AboutUs = () => {
 
             <div className="grid sm:grid-cols-2 gap-px bg-slate/30">
               {values.map((value, i) => (
-                <div key={i} className="p-8 sm:p-10 bg-carbon group">
-                  <value.icon className="w-5 h-5 text-ivory mb-6" />
+                <div key={i} className="p-8 sm:p-10 bg-carbon group border-l-2 border-signal-green/30">
+                  <value.icon className="w-5 h-5 text-signal-green mb-6" />
                   <h3 className="text-lg font-semibold text-ivory mb-3">{value.title}</h3>
                   <p className="text-sm text-stone">{value.description}</p>
                 </div>
@@ -137,8 +137,8 @@ const AboutUs = () => {
               
               <div className="space-y-3">
                 {standards.map((standard, i) => (
-                  <div key={i} className="flex items-center gap-4 p-4 bg-carbon/5 border-l border-carbon/10">
-                    <CheckCircle2 className="w-4 h-4 text-carbon flex-shrink-0" />
+                  <div key={i} className="flex items-center gap-4 p-4 bg-carbon/5 border-l-2 border-signal-green/40">
+                    <CheckCircle2 className="w-4 h-4 text-signal-green flex-shrink-0" />
                     <span className="text-sm text-carbon">{standard}</span>
                   </div>
                 ))}

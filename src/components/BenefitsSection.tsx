@@ -31,7 +31,7 @@ export const BenefitsSection = ({ productType }: BenefitsSectionProps) => {
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-16">
       {benefits.map((benefit, index) => (
-        <div key={index}>
+        <div key={index} className="border-l-2 border-signal-green/30 pl-4">
           <h4 className="text-[1.125rem] font-medium mb-3 text-carbon">{benefit.title}</h4>
           <p className="text-[0.9375rem] text-ash leading-relaxed">{benefit.description}</p>
         </div>
