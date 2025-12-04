@@ -108,7 +108,7 @@ const App = () => (
           <Route path="/nova/protocols/:id" element={<ProtectedRoute><ProtocolDetail /></ProtectedRoute>} />
           <Route path="/nova/insights" element={<ProtectedRoute><NovaInsights /></ProtectedRoute>} />
           <Route path="/nova/devices" element={<ProtectedRoute><NovaDevices /></ProtectedRoute>} />
-          <Route path="/nova/optimization" element={<ProtectedRoute><NovaProtocolOptimization /></ProtectedRoute>} />
+          <Route path="/nova/optimisation" element={<ProtectedRoute><NovaProtocolOptimization /></ProtectedRoute>} />
           {/* Enterprise Overview */}
           <Route path="/enterprise/overview" element={<EnterpriseOverview />} />
           
