@@ -37,14 +37,14 @@ const Hero = () => {
             <span className="text-carbon font-normal">AI. Devices. Supplements. Protocols.</span>
           </p>
 
-          {/* Three Customer Pathways */}
+          {/* Two Customer Pathways */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
             <Link to="/shop">
               <Button 
                 size="sm"
                 className="bg-carbon text-white hover:bg-slate rounded-full group transition-all duration-300 min-h-[44px] touch-manipulation px-8"
               >
-                For Individuals
+                Shop Now
                 <ArrowRight className="ml-2 w-3 h-3 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
@@ -55,15 +55,6 @@ const Hero = () => {
                 className="border-carbon/20 text-carbon hover:bg-carbon/5 rounded-full transition-all duration-300 min-h-[44px] touch-manipulation px-8"
               >
                 For Teams
-              </Button>
-            </Link>
-            <Link to="/enterprise/corporate/overview">
-              <Button 
-                variant="outline"
-                size="sm"
-                className="border-carbon/20 text-carbon hover:bg-carbon/5 rounded-full transition-all duration-300 min-h-[44px] touch-manipulation px-8"
-              >
-                For Enterprise
               </Button>
             </Link>
           </div>
