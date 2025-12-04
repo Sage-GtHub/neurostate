@@ -1,7 +1,7 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
 import { GuestChatWidget } from "./GuestChatWidget";
-import { Search, User, Menu, X, Award, Sparkles, LogOut, Package, Droplets, Activity, Moon, Brain, BookOpen, Zap, Target, Lightbulb, Building2, ChevronRight } from "lucide-react";
+import { Search, User, Menu, X, Award, Sparkles, LogOut, Package, Droplets, Activity, Moon, Brain, Zap, Target, Lightbulb, Building2, ChevronRight } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { Input } from "./ui/input";
@@ -97,13 +97,6 @@ export const Header = () => {
     { label: "Performance", href: "/category/performance", icon: Zap },
   ];
 
-  const guideTopics = [
-    { label: "All Guides", href: "/guides", icon: BookOpen },
-    { label: "Supplement Usage", href: "/guides#supplements", icon: Droplets },
-    { label: "Recovery Protocols", href: "/guides#recovery", icon: Zap },
-    { label: "Sleep Optimisation", href: "/guides#sleep", icon: Moon },
-    { label: "Performance Tips", href: "/guides#performance", icon: Target },
-  ];
 
   const enterpriseLinks = [
     { label: "Overview", href: "/enterprise/overview", icon: Building2 },
@@ -158,41 +151,6 @@ export const Header = () => {
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
-              {/* Bundles Link */}
-              <NavigationMenuItem>
-                <Link
-                  to="/bundles"
-                  className="inline-flex h-10 items-center justify-center px-4 py-2 text-ui-label text-carbon transition-colors hover:bg-pearl rounded-lg"
-                >
-                  Bundles
-                </Link>
-              </NavigationMenuItem>
-
-              {/* Guides Dropdown */}
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-carbon hover:bg-pearl data-[state=open]:bg-pearl text-ui-label">
-                  Guides
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-1 p-4 bg-background border border-mist rounded-lg shadow-soft">
-                    {guideTopics.map((topic) => (
-                      <li key={topic.label}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to={topic.href}
-                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-colors hover:bg-pearl rounded-lg"
-                          >
-                            <topic.icon className="h-5 w-5 text-carbon" />
-                            <span className="text-caption font-medium text-carbon">
-                              {topic.label}
-                            </span>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
 
                {/* For Teams Dropdown */}
               <NavigationMenuItem>
@@ -350,17 +308,6 @@ export const Header = () => {
                       <ChevronRight className="h-4 w-4 text-ash" />
                     </Link>
                     
-                    <Link
-                      to="/bundles"
-                      className="flex items-center justify-between p-3 rounded-lg hover:bg-pearl transition-colors"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <div className="flex items-center gap-3">
-                        <Zap className="h-5 w-5 text-ash" />
-                        <span className="text-carbon font-medium">Bundles</span>
-                      </div>
-                      <ChevronRight className="h-4 w-4 text-ash" />
-                    </Link>
                   </div>
 
                   {/* Accordion Sections */}
@@ -387,27 +334,6 @@ export const Header = () => {
                       </AccordionContent>
                     </AccordionItem>
 
-                    {/* Guides */}
-                    <AccordionItem value="guides" className="border-b-0">
-                      <AccordionTrigger className="py-3 hover:no-underline">
-                        <span className="text-carbon font-medium">Guides</span>
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        <div className="space-y-1 pb-3">
-                          {guideTopics.map((topic) => (
-                            <Link
-                              key={topic.label}
-                              to={topic.href}
-                              className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-pearl transition-colors"
-                              onClick={() => setMobileMenuOpen(false)}
-                            >
-                              <topic.icon className="h-4 w-4 text-ash" />
-                              <span className="text-ash text-sm">{topic.label}</span>
-                            </Link>
-                          ))}
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
 
                     {/* For Teams */}
                     <AccordionItem value="teams" className="border-b-0">
