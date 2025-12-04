@@ -3,21 +3,16 @@ import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Activity, TrendingUp, Brain, Target, Sparkles, Zap, Shield, Clock, ChevronRight, Calendar, MessageSquare, Lightbulb, AlertTriangle } from "lucide-react";
+import { Activity, TrendingUp, Brain, Target, Sparkles, Zap, Shield, Clock, ChevronRight, MessageSquare, Lightbulb, AlertTriangle, RefreshCw, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { ProtocolAssessment } from "@/components/ProtocolAssessment";
 import { PhaseIndicator } from "@/components/nova/PhaseIndicator";
 import { HealthForecast } from "@/components/nova/HealthForecast";
+import { NovaOnboarding } from "@/components/nova/NovaOnboarding";
 import { SEO } from "@/components/SEO";
-
-interface Metric {
-  label: string;
-  value: string;
-  trend?: string;
-  icon: any;
-  trendColor?: string;
-}
+import { useRealtimeMetrics } from "@/hooks/useRealtimeMetrics";
+import { useNovaOnboarding } from "@/hooks/useNovaOnboarding";
 
 interface AISummary {
   title: string;
@@ -28,10 +23,15 @@ interface AISummary {
 
 export default function Nova() {
   const navigate = useNavigate();
-  const [metrics, setMetrics] = useState<Metric[]>([]);
   const [showAssessment, setShowAssessment] = useState(false);
   const [currentPhase, setCurrentPhase] = useState<1 | 2 | 3 | 4>(2);
-  const [aiSummaries, setAiSummaries] = useState<AISummary[]>([
+  const [connectedDevices, setConnectedDevices] = useState<any[]>([]);
+  const [isSyncing, setIsSyncing] = useState(false);
+  
+  const { metrics, isLoading: metricsLoading, lastSync, syncDevices, refreshMetrics } = useRealtimeMetrics();
+  const { showOnboarding, isChecking, completeOnboarding } = useNovaOnboarding();
+
+  const [aiSummaries] = useState<AISummary[]>([
     {
       title: "Recovery Alert",
       message: "Your HRV has dropped 12% over the past 3 days. Consider reducing training intensity and prioritising sleep tonight.",
@@ -53,76 +53,31 @@ export default function Nova() {
   ]);
 
   useEffect(() => {
-    loadMetrics();
+    loadConnectedDevices();
   }, []);
 
-  const loadMetrics = async () => {
+  const loadConnectedDevices = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
       const { data } = await supabase
-        .from('user_metrics')
+        .from('connected_devices')
         .select('*')
         .eq('user_id', user.id)
-        .order('recorded_at', { ascending: false })
-        .limit(20);
+        .eq('connection_status', 'connected');
 
-      if (data && data.length > 0) {
-        const latestMetrics: Metric[] = [];
-        
-        const hrvMetrics = data.filter(m => m.metric_type === 'hrv');
-        if (hrvMetrics.length > 0) {
-          const latest = hrvMetrics[0];
-          const previous = hrvMetrics[1];
-          const change = previous ? ((parseFloat(latest.value.toString()) - parseFloat(previous.value.toString())) / parseFloat(previous.value.toString()) * 100).toFixed(0) : null;
-          latestMetrics.push({
-            label: "HRV",
-            value: latest.value.toString(),
-            trend: change ? `${parseFloat(change) > 0 ? '+' : ''}${change}%` : undefined,
-            icon: Activity,
-            trendColor: change && parseFloat(change) > 0 ? "text-accent" : "text-stone"
-          });
-        }
-
-        const sleepMetrics = data.filter(m => m.metric_type === 'sleep_quality');
-        if (sleepMetrics.length > 0) {
-          latestMetrics.push({
-            label: "Sleep",
-            value: `${sleepMetrics[0].value}/10`,
-            icon: Brain
-          });
-        }
-
-        const focusMetrics = data.filter(m => m.metric_type === 'focus_time');
-        if (focusMetrics.length > 0) {
-          const total = focusMetrics.reduce((sum, m) => sum + parseFloat(m.value.toString()), 0);
-          latestMetrics.push({
-            label: "Focus",
-            value: Math.round(total).toString(),
-            icon: Target
-          });
-        }
-
-        const recoveryMetrics = data.filter(m => m.metric_type === 'recovery');
-        if (recoveryMetrics.length > 0) {
-          const latest = recoveryMetrics[0];
-          const previous = recoveryMetrics[1];
-          const change = previous ? ((parseFloat(latest.value.toString()) - parseFloat(previous.value.toString())) / parseFloat(previous.value.toString()) * 100).toFixed(0) : null;
-          latestMetrics.push({
-            label: "Recovery",
-            value: `${latest.value}%`,
-            trend: change ? `${parseFloat(change) > 0 ? '+' : ''}${change}%` : undefined,
-            icon: TrendingUp,
-            trendColor: change && parseFloat(change) > 0 ? "text-accent" : "text-stone"
-          });
-        }
-
-        setMetrics(latestMetrics);
-      }
+      setConnectedDevices(data || []);
     } catch (error) {
-      console.error("Error loading metrics:", error);
+      console.error("Error loading devices:", error);
     }
+  };
+
+  const handleSync = async () => {
+    setIsSyncing(true);
+    await syncDevices();
+    await loadConnectedDevices();
+    setIsSyncing(false);
   };
 
   const getSummaryIcon = (type: string) => {
@@ -143,12 +98,56 @@ export default function Nova() {
     }
   };
 
+  const getMetricIcon = (label: string) => {
+    switch (label) {
+      case "HRV": return Activity;
+      case "Sleep": return Brain;
+      case "Focus": return Target;
+      case "Recovery": return TrendingUp;
+      default: return Activity;
+    }
+  };
+
+  // Placeholder metrics for when no real data exists
+  const placeholderMetrics = [
+    { label: "HRV", value: "68", trend: "+5%", trendColor: "text-accent" },
+    { label: "Sleep", value: "7.8/10", trend: undefined, trendColor: undefined },
+    { label: "Focus", value: "12h", trend: undefined, trendColor: undefined },
+    { label: "Recovery", value: "85%", trend: "+8%", trendColor: "text-accent" },
+  ];
+
+  const displayMetrics = [
+    metrics.hrv || placeholderMetrics[0],
+    metrics.sleep || placeholderMetrics[1],
+    metrics.focus || placeholderMetrics[2],
+    metrics.recovery || placeholderMetrics[3],
+  ];
+
+  if (isChecking) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-accent animate-spin" />
+      </div>
+    );
+  }
+
   return (
     <NovaSwipeWrapper>
       <SEO 
         title="Nova Dashboard – AI Cognitive Performance | NeuroState"
         description="Your personalised AI performance dashboard. View metrics, forecasts, and AI-generated insights."
       />
+      
+      {/* Onboarding Dialog */}
+      <NovaOnboarding 
+        open={showOnboarding} 
+        onComplete={() => {
+          completeOnboarding();
+          refreshMetrics();
+          loadConnectedDevices();
+        }} 
+      />
+
       <div className="min-h-screen bg-white">
         <NovaNav />
       
@@ -161,7 +160,9 @@ export default function Nova() {
                 <h1 className="text-2xl sm:text-3xl font-bold text-carbon">Nova</h1>
                 <p className="text-sm text-ash mt-1">Your AI performance copilot</p>
               </div>
-              <PhaseIndicator currentPhase={currentPhase} />
+              <div className="flex items-center gap-4">
+                <PhaseIndicator currentPhase={currentPhase} />
+              </div>
             </div>
           </div>
         </div>
@@ -219,40 +220,50 @@ export default function Nova() {
 
           {/* Live Metrics */}
           <div className="mb-12">
-            <h2 className="text-lg font-bold text-carbon mb-6">Live Data</h2>
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-lg font-bold text-carbon">Live Data</h2>
+                {lastSync && (
+                  <p className="text-xs text-stone">Last synced: {lastSync.toLocaleTimeString()}</p>
+                )}
+              </div>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={handleSync}
+                disabled={isSyncing || metricsLoading}
+                className="gap-2"
+              >
+                {isSyncing ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <RefreshCw className="w-4 h-4" />
+                )}
+                Sync Now
+              </Button>
+            </div>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {metrics.length > 0 ? metrics.map((metric, index) => (
-                <div key={index} className="p-6 bg-pearl">
-                  <div className="flex items-center gap-2 mb-3">
-                    <metric.icon className="w-5 h-5 text-accent" />
-                    <span className="text-xs text-stone uppercase tracking-wider">{metric.label}</span>
-                  </div>
-                  <p className="text-3xl font-bold text-carbon">{metric.value}</p>
-                  {metric.trend && (
-                    <p className={`text-sm mt-1 ${metric.trendColor}`}>{metric.trend}</p>
-                  )}
-                </div>
-              )) : (
-                <>
-                  {[
-                    { label: "HRV", icon: Activity, value: "68", trend: "+5%" },
-                    { label: "Sleep", icon: Brain, value: "7.8/10" },
-                    { label: "Focus", icon: Target, value: "12h" },
-                    { label: "Recovery", icon: TrendingUp, value: "85%", trend: "+8%" }
-                  ].map((metric, index) => (
-                    <div key={index} className="p-6 bg-pearl">
-                      <div className="flex items-center gap-2 mb-3">
-                        <metric.icon className="w-5 h-5 text-accent" />
-                        <span className="text-xs text-stone uppercase tracking-wider">{metric.label}</span>
-                      </div>
-                      <p className="text-3xl font-bold text-carbon">{metric.value}</p>
-                      {metric.trend && (
-                        <p className="text-sm mt-1 text-accent">{metric.trend}</p>
-                      )}
+              {displayMetrics.map((metric, index) => {
+                const Icon = getMetricIcon(metric.label);
+                const hasRealData = metrics[metric.label.toLowerCase() as keyof typeof metrics];
+                return (
+                  <div key={index} className={`p-6 ${hasRealData ? 'bg-pearl' : 'bg-pearl/50'}`}>
+                    <div className="flex items-center gap-2 mb-3">
+                      <Icon className={`w-5 h-5 ${hasRealData ? 'text-accent' : 'text-stone'}`} />
+                      <span className="text-xs text-stone uppercase tracking-wider">{metric.label}</span>
                     </div>
-                  ))}
-                </>
-              )}
+                    <p className={`text-3xl font-bold ${hasRealData ? 'text-carbon' : 'text-carbon/50'}`}>
+                      {metric.value}
+                    </p>
+                    {metric.trend && (
+                      <p className={`text-sm mt-1 ${metric.trendColor || 'text-stone'}`}>{metric.trend}</p>
+                    )}
+                    {!hasRealData && (
+                      <p className="text-xs text-stone mt-1">Demo data</p>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -306,32 +317,54 @@ export default function Nova() {
 
               {/* Connected Devices Summary */}
               <div className="p-6 bg-pearl rounded-lg">
-                <h3 className="text-sm font-bold text-carbon mb-4">Connected Devices</h3>
-                <div className="space-y-3">
-                  {[
-                    { name: "Oura Ring Gen 3", status: "Connected", lastSync: "2 mins ago" },
-                    { name: "Apple Watch Ultra", status: "Connected", lastSync: "5 mins ago" }
-                  ].map((device, i) => (
-                    <div key={i} className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm text-carbon font-medium">{device.name}</p>
-                        <p className="text-xs text-stone">{device.lastSync}</p>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <div className="w-2 h-2 rounded-full bg-accent" />
-                        <span className="text-xs text-accent">{device.status}</span>
-                      </div>
-                    </div>
-                  ))}
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-sm font-bold text-carbon">Connected Devices</h3>
+                  {connectedDevices.length > 0 && (
+                    <span className="text-xs text-accent">{connectedDevices.length} active</span>
+                  )}
                 </div>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="w-full mt-4 text-accent"
-                  onClick={() => navigate('/nova/devices')}
-                >
-                  Manage Devices
-                </Button>
+                {connectedDevices.length > 0 ? (
+                  <div className="space-y-3">
+                    {connectedDevices.slice(0, 3).map((device, i) => (
+                      <div key={i} className="flex items-center justify-between">
+                        <div>
+                          <p className="text-sm text-carbon font-medium">{device.device_name}</p>
+                          <p className="text-xs text-stone">
+                            {device.last_sync_at 
+                              ? `Synced ${new Date(device.last_sync_at).toLocaleTimeString()}`
+                              : 'Not synced yet'
+                            }
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <div className="w-2 h-2 rounded-full bg-accent" />
+                          <span className="text-xs text-accent">Active</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-4">
+                    <p className="text-sm text-stone mb-2">No devices connected</p>
+                    <Button 
+                      size="sm" 
+                      variant="outline"
+                      onClick={() => navigate('/nova/devices')}
+                    >
+                      Connect a Device
+                    </Button>
+                  </div>
+                )}
+                {connectedDevices.length > 0 && (
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="w-full mt-4 text-accent"
+                    onClick={() => navigate('/nova/devices')}
+                  >
+                    Manage Devices
+                  </Button>
+                )}
               </div>
             </div>
           </div>
