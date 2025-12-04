@@ -7,75 +7,94 @@ const Hero = () => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
 
   return (
-    <section ref={ref} className="relative min-h-[85vh] lg:min-h-screen flex items-center justify-center overflow-hidden bg-white">
-      {/* Subtle Grid Background */}
+    <section ref={ref} className="relative min-h-[90vh] lg:min-h-screen flex items-center justify-center overflow-hidden bg-carbon">
+      {/* Grid Pattern Overlay */}
       <div className="absolute inset-0 opacity-[0.03]">
-        <div className="absolute inset-0 grid-background" />
+        <div 
+          className="absolute inset-0" 
+          style={{
+            backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)',
+            backgroundSize: '48px 48px'
+          }}
+        />
       </div>
+
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-carbon via-carbon to-slate/50" />
 
       {/* Content */}
       <div className={`relative z-10 container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-16 sm:py-24 lg:py-32 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <div className="max-w-5xl mx-auto text-center space-y-5 sm:space-y-8">
-          {/* Category Line */}
+        <div className="max-w-5xl mx-auto text-center space-y-6 sm:space-y-10">
+          {/* Label */}
           <div className="inline-block">
-            <p className="text-accent text-[10px] sm:text-xs tracking-[0.2em] sm:tracking-[0.3em] uppercase font-medium">
-              The Operating System for Human Performance
+            <span className="text-stone text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">
+              Introducing
+            </span>
+          </div>
+
+          {/* Main Headline */}
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-ivory leading-[1.02] tracking-tight">
+            The NeuroState OS
+          </h1>
+
+          {/* Subheadline */}
+          <p className="text-lg sm:text-2xl md:text-3xl text-stone max-w-3xl mx-auto font-light leading-relaxed">
+            The AI system for peak cognitive performance.
+          </p>
+
+          {/* Value Proposition */}
+          <div className="pt-4 sm:pt-6">
+            <p className="text-sm sm:text-base text-ash max-w-2xl mx-auto leading-relaxed px-4">
+              AI coaching. Red light neuromodulation. Precision supplements.
+              <br className="hidden sm:block" />
+              <span className="sm:hidden"> </span>
+              One platform. One mission.
+            </p>
+            <p className="text-ivory font-medium mt-3 text-sm sm:text-base">
+              Unlock the highest level of your mind.
             </p>
           </div>
 
-          {/* Revolutionary Headline */}
-          <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-carbon leading-[1.05] sm:leading-[1.02] tracking-tight">
-            Upgrade your brain.
-            <br />
-            <span className="text-accent">Upgrade everything.</span>
-          </h1>
-
-          {/* Category Definition */}
-          <p className="text-base sm:text-xl md:text-2xl text-ash max-w-2xl mx-auto font-light leading-relaxed px-2">
-            The world's first cognitive performance system.
-            <br className="hidden sm:block" />
-            <span className="sm:hidden"> </span>
-            <span className="text-carbon font-normal">AI. Protocols. Hardware. Supplements.</span>
-          </p>
-
-          {/* Two Customer Pathways */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4 sm:pt-8 px-4 sm:px-0">
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-6 sm:pt-8 px-4 sm:px-0">
             <Link to="/shop" className="w-full sm:w-auto">
               <Button 
-                size="sm"
-                className="w-full sm:w-auto bg-carbon text-white hover:bg-slate rounded-full group transition-all duration-300 min-h-[48px] touch-manipulation px-8"
+                size="lg"
+                className="w-full sm:w-auto bg-ivory text-carbon hover:bg-mist font-medium transition-all duration-300 min-h-[52px] touch-manipulation px-10 text-sm tracking-wide"
               >
-                Shop Now
-                <ArrowRight className="ml-2 w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                Shop now
+                <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
             <Link to="/enterprise/overview" className="w-full sm:w-auto">
               <Button 
                 variant="outline"
-                size="sm"
-                className="w-full sm:w-auto border-carbon/20 text-carbon hover:bg-carbon/5 rounded-full transition-all duration-300 min-h-[48px] touch-manipulation px-8"
+                size="lg"
+                className="w-full sm:w-auto border-stone/30 text-ivory hover:bg-ivory/5 font-medium transition-all duration-300 min-h-[52px] touch-manipulation px-10 text-sm tracking-wide"
               >
-                For Teams
+                For teams
               </Button>
             </Link>
           </div>
 
           {/* Trust Signal */}
-          <p className="text-stone text-xs sm:text-sm pt-2 sm:pt-4">
-            Designed for focus, energy and recovery.
-          </p>
+          <div className="pt-8 sm:pt-12">
+            <p className="text-stone/60 text-[10px] sm:text-xs tracking-[0.2em] uppercase">
+              Designed for focus. Energy. Resilience.
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Scroll Indicator - Hidden on mobile */}
-      <div className="absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 animate-bounce hidden sm:block">
-        <div className="w-6 h-10 rounded-full border-2 border-carbon/20 flex items-start justify-center p-2">
-          <div className="w-1.5 h-3 bg-carbon/40 rounded-full" />
+      {/* Scroll Indicator - Desktop only */}
+      <div className="absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 hidden sm:block">
+        <div className="w-5 h-8 border border-stone/30 flex items-start justify-center pt-2">
+          <div className="w-0.5 h-2 bg-stone/50 animate-bounce" />
         </div>
       </div>
 
-      {/* Bottom Gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-32 bg-gradient-to-t from-white to-transparent" />
+      {/* Bottom Edge Line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-stone/20 to-transparent" />
     </section>
   );
 };
