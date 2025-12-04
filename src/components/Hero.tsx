@@ -67,7 +67,7 @@ const Hero = () => {
               <Button 
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto border-stone/30 text-ivory hover:bg-ivory/5 font-medium transition-all duration-300 min-h-[52px] touch-manipulation px-10 text-sm tracking-wide"
+                className="w-full sm:w-auto border-stone/30 text-carbon bg-ivory hover:bg-mist font-medium transition-all duration-300 min-h-[52px] touch-manipulation px-10 text-sm tracking-wide"
               >
                 For teams
               </Button>
