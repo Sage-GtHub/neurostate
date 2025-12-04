@@ -65,7 +65,7 @@ const goalToCategories: Record<string, { categories: string[]; articleIds: numbe
   sleep: { 
     categories: ['Sleep'], 
     articleIds: [3],
-    pathIds: ['sleep-optimization']
+    pathIds: ['sleep-optimisation']
   },
   recovery: { 
     categories: ['Recovery'], 

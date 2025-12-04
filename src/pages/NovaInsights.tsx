@@ -257,7 +257,7 @@ export default function NovaInsights() {
             <div className="space-y-8">
               {/* Sleep Research */}
               <div>
-                <h3 className="text-body font-semibold text-carbon mb-4">Sleep Optimization</h3>
+                <h3 className="text-body font-semibold text-carbon mb-4">Sleep Optimisation</h3>
                 <div className="space-y-4">
                   <div className="p-4 rounded-xl bg-gradient-to-br from-pearl/30 to-ivory border border-mist/30">
                     <div className="flex items-start justify-between mb-2">

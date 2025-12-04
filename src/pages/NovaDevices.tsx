@@ -270,7 +270,7 @@ export default function NovaDevices() {
               </div>
 
               <p className="text-sm text-pearl/90 mb-10 leading-relaxed max-w-3xl">
-                Nova uses 15+ specialized AI models working in concert to analyse your biometric data and provide personalised recommendations.
+                Nova uses 15+ specialised AI models working in concert to analyse your biometric data and provide personalised recommendations.
               </p>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -302,7 +302,7 @@ export default function NovaDevices() {
                   {
                     name: "Transformer-XL",
                     params: "340M parameters",
-                    useCase: "Long-term context retention for protocol optimization",
+                    useCase: "Long-term context retention for protocol optimisation",
                     performance: "95% recall"
                   },
                   {
@@ -313,7 +313,7 @@ export default function NovaDevices() {
                   },
                   {
                     name: "Neural Architecture Search",
-                    params: "AutoML optimized",
+                    params: "AutoML optimised",
                     useCase: "Model selection & hyperparameter tuning",
                     performance: "98% efficiency"
                   },

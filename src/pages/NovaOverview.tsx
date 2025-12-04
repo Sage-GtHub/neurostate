@@ -31,7 +31,7 @@ export default function NovaOverview() {
     { value: "100M+", label: "AI Parameters", desc: "Multi-model ensemble" },
     { value: "91%", label: "Prediction Accuracy", desc: "Continuously learning" },
     { value: "72hr", label: "Health Forecasts", desc: "Advance predictions" },
-    { value: "500K", label: "SNPs Analyzed", desc: "Genomic integration" }
+    { value: "500K", label: "SNPs Analysed", desc: "Genomic integration" }
   ];
 
   const capabilities = [
@@ -83,9 +83,9 @@ export default function NovaOverview() {
     },
     {
       phase: 2,
-      title: "Optimize",
+      title: "Optimise",
       duration: "Days 8-30",
-      description: "Active experimentation and rapid optimization through controlled interventions",
+      description: "Active experimentation and rapid optimisation through controlled interventions",
       metrics: ["2,000+ biometric readings", "90+ subjective reports", "20+ protocol variations tested", "Real-time adjustments"]
     },
     {
@@ -99,14 +99,14 @@ export default function NovaOverview() {
       phase: 4,
       title: "Autonomy",
       duration: "Day 91+",
-      description: "Fully autonomous health optimization with minimal user input required",
+      description: "Fully autonomous health optimisation with minimal user input required",
       metrics: ["Continuous monitoring", "Autonomous adjustments", "Long-term tracking", "Minimal input"]
     }
   ];
 
   const techStack = [
     { category: "Frontend", tech: "React Native", detail: "Cross-platform native experience" },
-    { category: "AI Models", tech: "GPT-4 + XGBoost + LSTM", detail: "15+ specialized models" },
+    { category: "AI Models", tech: "GPT-4 + XGBoost + LSTM", detail: "15+ specialised models" },
     { category: "ML Training", tech: "PyTorch + Ray", detail: "Distributed model training" },
     { category: "Database", tech: "PostgreSQL + TimescaleDB", detail: "Relational + time-series data" },
     { category: "Security", tech: "AES-256 + TLS 1.3", detail: "Data at rest and in transit" },
@@ -123,7 +123,7 @@ export default function NovaOverview() {
     {
       name: "XGBoost Ensemble",
       parameters: "500 trees",
-      use: "Performance prediction, optimization",
+      use: "Performance prediction, optimisation",
       performance: "91% forecast accuracy"
     },
     {
@@ -256,7 +256,7 @@ export default function NovaOverview() {
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-20">
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-[2.5rem] font-bold text-carbon mb-4 tracking-tight">The 4-Phase Nova System</h2>
-            <p className="text-body text-ash max-w-2xl mx-auto">From assessment to autonomous optimization</p>
+            <p className="text-body text-ash max-w-2xl mx-auto">From assessment to autonomous optimisation</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 animate-fade-in">
@@ -318,7 +318,7 @@ export default function NovaOverview() {
               <Cpu className="w-10 h-10 text-accent" />
             </div>
             <h2 className="text-[2.5rem] font-bold text-carbon mb-4 tracking-tight">AI Model Stack</h2>
-            <p className="text-body text-ash max-w-2xl mx-auto">15+ specialized models working together for optimal results</p>
+            <p className="text-body text-ash max-w-2xl mx-auto">15+ specialised models working together for optimal results</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 animate-fade-in">
@@ -347,7 +347,7 @@ export default function NovaOverview() {
           <div className="mt-12 p-8 rounded-2xl bg-gradient-to-br from-carbon to-slate text-ivory text-center animate-fade-in">
             <h3 className="text-[1.125rem] font-semibold mb-3">Continuous Model Training</h3>
             <p className="text-sm text-pearl/90 max-w-2xl mx-auto leading-relaxed">
-              All models are continuously retrained with new data to improve accuracy and adapt to emerging patterns in health optimization
+              All models are continuously retrained with new data to improve accuracy and adapt to emerging patterns in health optimisation
             </p>
           </div>
         </div>
@@ -406,7 +406,7 @@ export default function NovaOverview() {
           <div className="text-center max-w-3xl mx-auto animate-fade-in">
             <h2 className="text-[2.5rem] font-bold mb-6 tracking-tight">Ready to experience Nova?</h2>
             <p className="text-body text-pearl/90 leading-relaxed mb-12">
-              Start your journey to genomic-level personalization and autonomous health optimization
+              Start your journey to genomic-level personalisation and autonomous health optimisation
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Button size="lg" variant="outline" className="gap-2 rounded-full px-8 bg-ivory text-carbon hover:bg-pearl" onClick={() => navigate('/auth')}>

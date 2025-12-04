@@ -4,7 +4,7 @@ import { useToast } from '@/components/ui/use-toast';
 
 export interface NovaInsight {
   id: string;
-  type: 'warning' | 'pattern' | 'prediction' | 'optimization';
+  type: 'warning' | 'pattern' | 'prediction' | 'optimisation';
   title: string;
   description: string;
   confidence: number;

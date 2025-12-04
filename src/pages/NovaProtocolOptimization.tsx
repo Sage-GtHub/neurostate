@@ -28,7 +28,7 @@ export default function NovaProtocolOptimization() {
             Nova Intelligence System
           </h1>
           <p className="text-sm sm:text-base md:text-body text-ash max-w-3xl">
-            15+ specialized AI models working together to optimize your health and performance
+            15+ specialised AI models working together to optimise your health and performance
           </p>
         </div>
       </div>
@@ -58,7 +58,7 @@ export default function NovaProtocolOptimization() {
               Advanced Protocol Management
             </h2>
             <p className="text-sm sm:text-base md:text-body text-ash">
-              AI-driven optimization and behavior change
+              AI-driven optimisation and behaviour change
             </p>
           </div>
 

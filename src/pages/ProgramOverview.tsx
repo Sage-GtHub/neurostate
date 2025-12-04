@@ -177,7 +177,7 @@ export default function ProgramOverview() {
                 </div>
                 <div className="p-8">
                   <h3 className="text-2xl font-bold text-carbon mb-3">Implementation Guide</h3>
-                  <p className="text-body text-stone">Step-by-step guide to rolling out NeuroState across your organization in under 4 weeks.</p>
+                  <p className="text-body text-stone">Step-by-step guide to rolling out NeuroState across your organisation in under 4 weeks.</p>
                 </div>
               </div>
             </div>

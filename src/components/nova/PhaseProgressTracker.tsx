@@ -58,7 +58,7 @@ export function PhaseProgressTracker({ currentPhase, daysInPhase }: PhaseProgres
       title: "Optimise",
       duration: "Days 8-30",
       icon: TrendingUp,
-      description: "Active experimentation and rapid optimization",
+      description: "Active experimentation and rapid optimisation",
       requiredMetrics: 2000,
       unlockCriteria: "Complete Phase 1 + 30 days of data",
       color: "from-green-500 to-green-600"
@@ -78,7 +78,7 @@ export function PhaseProgressTracker({ currentPhase, daysInPhase }: PhaseProgres
       title: "Autonomy",
       duration: "Day 91+",
       icon: Zap,
-      description: "Fully autonomous health optimization",
+      description: "Fully autonomous health optimisation",
       requiredMetrics: 25000,
       unlockCriteria: "Complete 90 days + high prediction accuracy",
       color: "from-orange-500 to-orange-600"
@@ -222,7 +222,7 @@ export function PhaseProgressTracker({ currentPhase, daysInPhase }: PhaseProgres
               ? `Continue tracking daily to unlock Phase ${currentPhase + 1}. ${
                   phases[currentPhase].requiredMetrics - metricsCollected
                 } more data points needed.`
-              : "You've reached full autonomy! Nova is now optimizing your protocols automatically."}
+              : "You've reached full autonomy! Nova is now optimising your protocols automatically."}
           </p>
         </div>
       </CardContent>
