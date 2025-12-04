@@ -34,24 +34,21 @@ const Hero = () => {
 
           {/* Main Headline */}
           <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-ivory leading-[1.02] tracking-tight">
-            The NeuroState OS
+            The World's First Cognitive Performance System.
           </h1>
 
           {/* Subheadline */}
           <p className="text-lg sm:text-2xl md:text-3xl text-stone max-w-3xl mx-auto font-light leading-relaxed">
-            The AI system for peak cognitive performance.
+            AI, light, and supplementation — engineered to build elite thinkers.
           </p>
 
           {/* Value Proposition */}
           <div className="pt-4 sm:pt-6">
             <p className="text-sm sm:text-base text-ash max-w-2xl mx-auto leading-relaxed px-4">
-              AI coaching. Red light neuromodulation. Precision supplements.
+              Not wellness. Not mindfulness.
               <br className="hidden sm:block" />
               <span className="sm:hidden"> </span>
-              One platform. One mission.
-            </p>
-            <p className="text-ivory font-medium mt-3 text-sm sm:text-base">
-              Unlock the highest level of your mind.
+              Human performance, redesigned.
             </p>
           </div>
 
