@@ -82,7 +82,7 @@ export const Footer = () => {
             <span className="text-xl sm:text-2xl md:text-h2 font-semibold">NEUROSTATE<sup className="text-[8px] sm:text-[10px]">®</sup></span>
           </Link>
           <p className="text-body-large text-stone">
-            Precision tools for your optimal state. Making the best recovery tools and supplements accessible to everyone, everywhere.
+            Personalised tools for your optimal state. Making the best recovery tools and supplements accessible to everyone, everywhere.
           </p>
         </div>
 
