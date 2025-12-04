@@ -35,38 +35,38 @@ export default function NovaOverview() {
   const capabilities = [
     {
       icon: Brain,
-      title: "Multi-Modal Intelligence",
-      description: "Processes biometric data, genetic information, lifestyle inputs, and environmental factors simultaneously",
-      stats: ["15+ data sources", "100M+ parameters", "<50ms latency"]
+      title: "Predicts Your State",
+      description: "72 hour advance predictions for burnout, illness, performance dips, and optimal training windows",
+      stats: ["91% accuracy", "24 health markers", "Real time updates"]
     },
     {
       icon: TrendingUp,
-      title: "Predictive Analytics",
-      description: "72-hour advance predictions for burnout, illness, performance dips, and optimal training windows",
-      stats: ["91% accuracy", "24 health markers", "Real-time updates"]
+      title: "Adapts Your Protocol",
+      description: "Continuously adjusts your supplement stack and recommendations based on real biometric data",
+      stats: ["1000+ daily updates", "Zero user input", "15% efficacy improvement"]
     },
     {
       icon: Activity,
-      title: "Adaptive Learning",
-      description: "Continuously learns from individual responses to refine recommendations in real-time",
-      stats: ["1000+ daily updates", "Zero user input", "15% efficacy improvement/90 days"]
+      title: "Learns Your Biology",
+      description: "Processes data from wearables, sleep, and lifestyle to build a model unique to you",
+      stats: ["15+ data sources", "100M+ parameters", "<50ms latency"]
     },
     {
       icon: Database,
-      title: "Genomic Integration",
-      description: "Analyzes genetic variants to personalize supplement protocols, sleep timing, and recovery strategies",
-      stats: ["500K+ SNPs analyzed", "12 adjustments/month", "98% precision"]
+      title: "Integrates Your Devices",
+      description: "Connects with Oura, Whoop, Apple Watch and other wearables for continuous data sync",
+      stats: ["Oura Ring", "Apple Watch", "Whoop"]
     },
     {
       icon: Sparkles,
-      title: "Natural Language Interface",
-      description: "Conversational AI that understands context, learns preferences, and provides empathetic responses",
-      stats: ["95% intent accuracy", "0.3s latency", "40+ languages"]
+      title: "Speaks Your Language",
+      description: "Conversational interface that understands context, learns preferences, and gives direct answers",
+      stats: ["95% intent accuracy", "0.3s latency", "Voice and text"]
     },
     {
       icon: Shield,
-      title: "Privacy-First Architecture",
-      description: "Zero-knowledge encryption, on-device processing, and full user data sovereignty",
+      title: "Protects Your Data",
+      description: "End to end encryption, on device processing, and full user data sovereignty",
       stats: ["AES-256 encryption", "GDPR compliant", "Local processing"]
     }
   ];
@@ -171,15 +171,18 @@ export default function NovaOverview() {
       <div className="border-b border-border/50 bg-gradient-to-b from-background via-muted/20 to-background">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12 sm:py-16 md:py-20">
           <div className="text-center max-w-4xl mx-auto">
-            <Badge variant="accent" className="mb-6 sm:mb-8 animate-fade-in">
-              <Sparkles className="w-3 sm:w-4 h-3 sm:h-4" />
-              <span className="text-xs sm:text-sm">The world's most sophisticated wellness AI</span>
-            </Badge>
+            <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium mb-6 sm:mb-8 animate-fade-in">
+              Cognitive Engine
+            </p>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[4rem] font-bold text-foreground mb-4 sm:mb-6 leading-tight sm:leading-none animate-fade-in">
-              AI That Knows You Better Than You Know Yourself
+              Nova predicts before
+              <br />
+              <span className="text-accent">you feel it.</span>
             </h1>
             <p className="text-sm sm:text-base md:text-body text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-8 sm:mb-12 animate-fade-in">
-              Processing 15+ data sources through 100M+ parameters to deliver genomic-level personalisation, 72-hour health predictions, and fully autonomous optimisation. Built on 10,000+ peer-reviewed studies and continuously learning from your unique biology.
+              Not a chatbot. Not an assistant. A cognitive engine that tracks your biology, 
+              spots patterns you miss, and tells you exactly what to do next. 72 hour predictions. 
+              Real time adjustments. Learns your biology over time.
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 animate-fade-in">
               <Button size="lg" className="gap-2 rounded-full px-8" onClick={() => navigate('/nova')}>
@@ -214,8 +217,8 @@ export default function NovaOverview() {
       <div className="border-b border-mist/30 bg-gradient-to-b from-ivory to-pearl/20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12 sm:py-16 md:py-20">
           <div className="text-center mb-10 sm:mb-12 md:mb-16 animate-fade-in">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-carbon mb-3 sm:mb-4 tracking-tight">What Makes Nova Different</h2>
-            <p className="text-sm sm:text-base md:text-body text-ash max-w-2xl mx-auto">The most advanced wellness AI ever built</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-carbon mb-3 sm:mb-4 tracking-tight">What Nova Does</h2>
+            <p className="text-sm sm:text-base md:text-body text-ash max-w-2xl mx-auto">A cognitive engine, not a wellness app.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 animate-fade-in">

@@ -3,7 +3,7 @@ import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Activity, Watch, TrendingUp, Brain, Target, Sparkles, Send, Loader2, Zap, Shield, Clock } from "lucide-react";
+import { Activity, Watch, TrendingUp, Brain, Target, Sparkles, Send, Loader2, Zap, Shield, Clock, ChevronRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { ProtocolAssessment } from "@/components/ProtocolAssessment";
@@ -43,7 +43,7 @@ export default function Nova() {
     loadMetrics();
     const initialMessage: Message = {
       role: "assistant",
-      content: "Hello. I'm Nova. I track your biometrics, spot patterns, and tell you exactly what you need. What would you like to optimise today?"
+      content: "I am Nova. I track your biology, spot patterns, and tell you exactly what you need. What do you want to optimise?"
     };
     setMessages([initialMessage]);
   }, []);
@@ -229,8 +229,9 @@ export default function Nova() {
           <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-8">
             <div className="flex items-center justify-between">
               <div>
+                <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium mb-2">Cognitive Engine</p>
                 <h1 className="text-2xl sm:text-3xl font-bold text-carbon">Nova</h1>
-                <p className="text-sm text-ash mt-1">Your cognitive performance coach</p>
+                <p className="text-sm text-ash mt-1">Predicts. Adapts. Guides.</p>
               </div>
               <div className="flex items-center gap-2">
                 <div className={`w-2 h-2 rounded-full ${isSpeaking ? 'bg-accent animate-pulse' : 'bg-accent'}`} />
@@ -241,13 +242,13 @@ export default function Nova() {
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8 sm:py-12">
-          {/* Capabilities Overview */}
+          {/* What Nova Does */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-mist mb-12">
             {[
-              { icon: Brain, title: "Predictive", desc: "72 hour forecasting" },
-              { icon: Zap, title: "Adaptive", desc: "Real time adjustments" },
-              { icon: Shield, title: "Preventive", desc: "Burnout detection" },
-              { icon: Clock, title: "Continuous", desc: "Always learning" }
+              { icon: Brain, title: "Predicts", desc: "72 hour forecasting" },
+              { icon: Zap, title: "Adapts", desc: "Real time adjustments" },
+              { icon: Shield, title: "Prevents", desc: "Burnout detection" },
+              { icon: Clock, title: "Learns", desc: "Your biology over time" }
             ].map((item, i) => (
               <div key={i} className="bg-white p-6 text-center">
                 <item.icon className="w-6 h-6 text-accent mx-auto mb-3" />
@@ -257,9 +258,9 @@ export default function Nova() {
             ))}
           </div>
 
-          {/* Performance Metrics */}
+          {/* Live Metrics */}
           <div className="mb-12">
-            <h2 className="text-lg font-bold text-carbon mb-6">Live Metrics</h2>
+            <h2 className="text-lg font-bold text-carbon mb-6">Live Data</h2>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {metrics.length > 0 ? metrics.map((metric, index) => (
                 <div key={index} className="p-6 bg-pearl">
@@ -296,7 +297,7 @@ export default function Nova() {
 
           {/* Main Content Grid */}
           <div className="grid lg:grid-cols-3 gap-8">
-            {/* Chat Interface - Primary */}
+            {/* Chat Interface */}
             <div className="lg:col-span-2">
               <div className="border border-mist bg-pearl/30">
                 {/* Messages */}
@@ -322,7 +323,7 @@ export default function Nova() {
                       <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
                         <Loader2 className="w-4 h-4 text-accent animate-spin" />
                       </div>
-                      <p className="text-sm text-stone">Analysing...</p>
+                      <p className="text-sm text-stone">Processing...</p>
                     </div>
                   )}
                   <div ref={messagesEndRef} />
@@ -354,26 +355,26 @@ export default function Nova() {
               </div>
             </div>
 
-            {/* Sidebar - Insights */}
+            {/* Sidebar */}
             <div className="space-y-6">
               <PhaseIndicator currentPhase={currentPhase} />
 
               {currentPhase >= 2 && (
                 <div>
-                  <h3 className="text-sm font-bold text-carbon mb-4">Predictive Insights</h3>
+                  <h3 className="text-sm font-bold text-carbon mb-4">Predictions</h3>
                   <PredictiveInsights 
                     insights={[
                       {
                         type: "warning",
                         title: "Recovery declining",
-                        description: "HRV trend suggests you need more rest. Consider lighter training today.",
+                        description: "HRV trend suggests you need more rest. Skip high intensity today.",
                         confidence: 87,
                         timeframe: "Next 24 hours"
                       },
                       {
                         type: "opportunity",
                         title: "Peak focus window",
-                        description: "Based on your patterns, 9-11am is optimal for deep work.",
+                        description: "Based on your patterns, 9 to 11am is optimal for deep work.",
                         confidence: 92,
                         timeframe: "Tomorrow"
                       }
@@ -384,26 +385,29 @@ export default function Nova() {
 
               {/* Quick Actions */}
               <div className="p-6 bg-pearl">
-                <h3 className="text-sm font-bold text-carbon mb-4">Quick Actions</h3>
+                <h3 className="text-sm font-bold text-carbon mb-4">Actions</h3>
                 <div className="space-y-2">
                   <Button 
                     variant="outline" 
-                    className="w-full justify-start text-sm border-mist"
+                    className="w-full justify-between text-sm border-mist"
                     onClick={() => setShowAssessment(true)}
                   >
                     Start Protocol Assessment
+                    <ChevronRight className="w-4 h-4" />
                   </Button>
                   <Button 
                     variant="outline" 
-                    className="w-full justify-start text-sm border-mist"
+                    className="w-full justify-between text-sm border-mist"
                   >
                     View 7 Day Forecast
+                    <ChevronRight className="w-4 h-4" />
                   </Button>
                   <Button 
                     variant="outline" 
-                    className="w-full justify-start text-sm border-mist"
+                    className="w-full justify-between text-sm border-mist"
                   >
-                    Adjust Today's Protocol
+                    Adjust Protocol
+                    <ChevronRight className="w-4 h-4" />
                   </Button>
                 </div>
               </div>

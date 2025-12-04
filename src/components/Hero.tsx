@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
@@ -19,49 +19,50 @@ const Hero = () => {
           {/* Category Line */}
           <div className="inline-block">
             <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">
-              The Cognitive Performance Company
+              The Operating System for Human Performance
             </p>
           </div>
 
           {/* Revolutionary Headline */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-carbon leading-[1.02] tracking-tight">
-            Your mind is your
+            Upgrade your brain.
             <br />
-            <span className="text-accent">greatest asset.</span>
+            <span className="text-accent">Upgrade everything.</span>
           </h1>
 
-          {/* Category Definition - One Sentence */}
+          {/* Category Definition */}
           <p className="text-xl md:text-2xl text-ash max-w-2xl mx-auto font-light leading-relaxed">
-            The complete system for cognitive enhancement.
+            The world's first cognitive performance system.
             <br />
-            <span className="text-carbon font-normal">AI. Devices. Supplements. Protocols.</span>
+            <span className="text-carbon font-normal">AI. Protocols. Hardware. Supplements.</span>
           </p>
 
           {/* Two Customer Pathways */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-            <Link to="/shop">
+            <Link to="/nova" target="_blank">
               <Button 
                 size="sm"
                 className="bg-carbon text-white hover:bg-slate rounded-full group transition-all duration-300 min-h-[44px] touch-manipulation px-8"
               >
-                Shop Now
-                <ArrowRight className="ml-2 w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                <Sparkles className="mr-2 w-3 h-3" />
+                Meet Nova AI
               </Button>
             </Link>
-            <Link to="/enterprise/overview">
+            <Link to="/shop">
               <Button 
                 variant="outline"
                 size="sm"
                 className="border-carbon/20 text-carbon hover:bg-carbon/5 rounded-full transition-all duration-300 min-h-[44px] touch-manipulation px-8"
               >
-                For Teams
+                Explore System
+                <ArrowRight className="ml-2 w-3 h-3 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
           </div>
 
           {/* Trust Signal */}
           <p className="text-stone text-sm pt-4">
-            Trusted by 10,000+ high performers worldwide
+            Designed for focus, energy and recovery.
           </p>
         </div>
       </div>
