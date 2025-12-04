@@ -59,31 +59,60 @@ const Index = () => {
                 </p>
               </div>
 
-              {/* System Grid - Enhanced */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-carbon/10 border border-carbon/10">
+              {/* Three Forces - Circular Design */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
                 {[
-                  { icon: Brain, title: "Nova AI", desc: "AI performance assistant", detail: "Personalised AI coaching with adaptive recommendations and real-time behavioural insights.", delay: "0ms" },
-                  { icon: Target, title: "Protocol Engine", desc: "Personal stacks", detail: "Evidence-based protocols tuned to your biology for focus optimisation.", delay: "100ms" },
-                  { icon: Lightbulb, title: "Neuromodulation", desc: "Brain state control", detail: "Red light therapy cognitive benefits. Alpha and beta state switching.", delay: "200ms" },
-                  { icon: Zap, title: "Supplements", desc: "Precision nutrition", detail: "Adaptogen supplements for focus. Magnesium for recovery. Third-party verified.", delay: "300ms" },
-                  { icon: Activity, title: "Data Integration", desc: "Wearable sync", detail: "Oura. Whoop. Apple Watch. Unified predictive wellness AI.", delay: "400ms" },
-                  { icon: Building2, title: "Team Deployment", desc: "Enterprise scale", detail: "Corporate wellbeing solution. Workplace performance platform.", delay: "500ms" },
+                  { 
+                    icon: Brain, 
+                    title: "Nova AI", 
+                    desc: "AI performance assistant", 
+                    detail: "Personalised AI coaching with adaptive recommendations and real-time behavioural insights.",
+                    number: "01"
+                  },
+                  { 
+                    icon: Zap, 
+                    title: "Supplements", 
+                    desc: "Personalised stacks", 
+                    detail: "Adaptogen supplements for focus. Magnesium for recovery. Third-party verified.",
+                    number: "02"
+                  },
+                  { 
+                    icon: Lightbulb, 
+                    title: "Neuromodulation", 
+                    desc: "Brain state control", 
+                    detail: "Red light therapy cognitive benefits. Alpha and beta state switching.",
+                    number: "03"
+                  },
                 ].map((item, i) => (
                   <div 
                     key={i}
-                    className="group relative p-10 sm:p-12 md:p-14 bg-ivory hover:bg-carbon transition-all duration-700 cursor-pointer overflow-hidden"
-                    style={{ animationDelay: item.delay }}
+                    className="group relative text-center cursor-pointer"
                   >
-                    {/* Hover glow effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-carbon/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    
-                    <div className="relative z-10 space-y-5">
-                      <div className="w-12 h-12 flex items-center justify-center bg-carbon/5 group-hover:bg-ivory/10 transition-colors duration-500">
-                        <item.icon className="w-5 h-5 text-carbon group-hover:text-ivory transition-colors duration-500" />
+                    {/* Circular container */}
+                    <div className="relative mx-auto w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 mb-8">
+                      {/* Outer ring */}
+                      <div className="absolute inset-0 rounded-full border border-carbon/10 group-hover:border-carbon/30 transition-colors duration-700" />
+                      {/* Inner gradient circle */}
+                      <div className="absolute inset-4 rounded-full bg-gradient-to-br from-pearl to-ivory group-hover:from-carbon group-hover:to-slate transition-all duration-700" />
+                      {/* Glow effect on hover */}
+                      <div className="absolute inset-4 rounded-full bg-signal-green/0 group-hover:bg-signal-green/5 blur-xl transition-all duration-700" />
+                      {/* Icon container */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-carbon/5 group-hover:bg-ivory/10 flex items-center justify-center transition-all duration-500">
+                          <item.icon className="w-7 h-7 sm:w-8 sm:h-8 text-carbon group-hover:text-ivory transition-colors duration-500" />
+                        </div>
                       </div>
-                      <h3 className="text-lg sm:text-xl font-semibold text-carbon group-hover:text-ivory transition-colors duration-500">{item.title}</h3>
-                      <p className="text-ash group-hover:text-stone text-sm transition-colors duration-500">{item.desc}</p>
-                      <p className="text-stone/80 group-hover:text-stone/60 text-xs leading-relaxed transition-colors duration-500">{item.detail}</p>
+                      {/* Number badge */}
+                      <div className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-carbon group-hover:bg-signal-green flex items-center justify-center transition-colors duration-500">
+                        <span className="text-ivory text-xs font-semibold">{item.number}</span>
+                      </div>
+                    </div>
+                    
+                    {/* Text content */}
+                    <div className="space-y-3">
+                      <h3 className="text-xl sm:text-2xl font-bold text-carbon transition-colors duration-500">{item.title}</h3>
+                      <p className="text-signal-green text-sm font-medium uppercase tracking-wider">{item.desc}</p>
+                      <p className="text-ash text-sm leading-relaxed max-w-xs mx-auto">{item.detail}</p>
                     </div>
                   </div>
                 ))}
