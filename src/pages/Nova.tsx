@@ -3,7 +3,7 @@ import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Activity, Watch, TrendingUp, Brain, Target, Sparkles, Send, Loader2 } from "lucide-react";
+import { Activity, Watch, TrendingUp, Brain, Target, Sparkles, Send, Loader2, Zap, Shield, Clock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { ProtocolAssessment } from "@/components/ProtocolAssessment";
@@ -43,7 +43,7 @@ export default function Nova() {
     loadMetrics();
     const initialMessage: Message = {
       role: "assistant",
-      content: "Hello! I'm Nova, your AI performance assistant. I'm here to help you improve your cognitive performance, recovery, and overall wellbeing. How can I help you today?"
+      content: "Hello. I'm Nova. I track your biometrics, spot patterns, and tell you exactly what you need. What would you like to optimise today?"
     };
     setMessages([initialMessage]);
   }, []);
@@ -69,22 +69,22 @@ export default function Nova() {
         
         const hrvMetrics = data.filter(m => m.metric_type === 'hrv');
         if (hrvMetrics.length > 0) {
-        const latest = hrvMetrics[0];
+          const latest = hrvMetrics[0];
           const previous = hrvMetrics[1];
           const change = previous ? ((parseFloat(latest.value.toString()) - parseFloat(previous.value.toString())) / parseFloat(previous.value.toString()) * 100).toFixed(0) : null;
           latestMetrics.push({
-            label: "HRV Score",
+            label: "HRV",
             value: latest.value.toString(),
             trend: change ? `${parseFloat(change) > 0 ? '+' : ''}${change}%` : undefined,
             icon: Activity,
-            trendColor: change && parseFloat(change) > 0 ? "text-[#10b981]" : "text-ash"
+            trendColor: change && parseFloat(change) > 0 ? "text-accent" : "text-stone"
           });
         }
 
         const sleepMetrics = data.filter(m => m.metric_type === 'sleep_quality');
         if (sleepMetrics.length > 0) {
           latestMetrics.push({
-            label: "Sleep Quality",
+            label: "Sleep",
             value: `${sleepMetrics[0].value}/10`,
             icon: Brain
           });
@@ -94,7 +94,7 @@ export default function Nova() {
         if (focusMetrics.length > 0) {
           const total = focusMetrics.reduce((sum, m) => sum + parseFloat(m.value.toString()), 0);
           latestMetrics.push({
-            label: "Focus Sessions",
+            label: "Focus",
             value: Math.round(total).toString(),
             icon: Target
           });
@@ -110,7 +110,7 @@ export default function Nova() {
             value: `${latest.value}%`,
             trend: change ? `${parseFloat(change) > 0 ? '+' : ''}${change}%` : undefined,
             icon: TrendingUp,
-            trendColor: change && parseFloat(change) > 0 ? "text-[#10b981]" : "text-ash"
+            trendColor: change && parseFloat(change) > 0 ? "text-accent" : "text-stone"
           });
         }
 
@@ -127,7 +127,7 @@ export default function Nova() {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) {
       toast({
-        title: "Authentication required",
+        title: "Sign in required",
         description: "Please sign in to chat with Nova",
         variant: "destructive",
       });
@@ -221,79 +221,72 @@ export default function Nova() {
 
   return (
     <NovaSwipeWrapper>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-white">
         <NovaNav />
       
-      {/* Header */}
-      <div className="border-b border-border/50 bg-gradient-to-b from-background to-muted/20">
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-8">
-          <div className="flex items-center justify-between mb-2">
-            <h1 className="text-2xl sm:text-3xl md:text-h1 font-semibold text-foreground">Nova</h1>
-            <div className="flex items-center gap-2 text-sm">
-              <div className={`w-2 h-2 rounded-full transition-all ${isSpeaking ? 'bg-primary animate-pulse-subtle shadow-lg shadow-primary/50' : 'bg-primary shadow-md shadow-primary/30'}`} />
-              <span className="text-muted-foreground text-xs sm:text-body-sm">Online</span>
+        {/* Header */}
+        <div className="border-b border-mist bg-white">
+          <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-8">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-2xl sm:text-3xl font-bold text-carbon">Nova</h1>
+                <p className="text-sm text-ash mt-1">Your cognitive performance coach</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className={`w-2 h-2 rounded-full ${isSpeaking ? 'bg-accent animate-pulse' : 'bg-accent'}`} />
+                <span className="text-xs text-stone">Online</span>
+              </div>
             </div>
           </div>
-          <p className="text-xs sm:text-body-sm text-muted-foreground">Your AI performance assistant</p>
         </div>
-      </div>
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8 sm:py-12">
-        <div className="space-y-8 sm:space-y-12 md:space-y-16">
-          {/* 7-Day Health Forecast */}
-          {currentPhase >= 3 && (
-            <div className="animate-fade-in">
-              <HealthForecast />
-            </div>
-          )}
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8 sm:py-12">
+          {/* Capabilities Overview */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-mist mb-12">
+            {[
+              { icon: Brain, title: "Predictive", desc: "72 hour forecasting" },
+              { icon: Zap, title: "Adaptive", desc: "Real time adjustments" },
+              { icon: Shield, title: "Preventive", desc: "Burnout detection" },
+              { icon: Clock, title: "Continuous", desc: "Always learning" }
+            ].map((item, i) => (
+              <div key={i} className="bg-white p-6 text-center">
+                <item.icon className="w-6 h-6 text-accent mx-auto mb-3" />
+                <p className="text-carbon font-semibold text-sm">{item.title}</p>
+                <p className="text-xs text-stone mt-1">{item.desc}</p>
+              </div>
+            ))}
+          </div>
 
-          {/* Real-Time AI Processing Simulation */}
-          {currentPhase >= 2 && (
-            <div className="animate-fade-in">
-              <RealTimeSimulation />
-            </div>
-          )}
-
-          {/* Performance Metrics - Full Width */}
-          <div>
-            <h2 className="text-lg sm:text-xl md:text-[1.5rem] font-semibold text-carbon mb-4 sm:mb-6 tracking-tight">Live Performance Metrics</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          {/* Performance Metrics */}
+          <div className="mb-12">
+            <h2 className="text-lg font-bold text-carbon mb-6">Live Metrics</h2>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {metrics.length > 0 ? metrics.map((metric, index) => (
-                <div key={index} className="relative overflow-hidden rounded-3xl p-6 bg-gradient-to-br from-pearl/50 to-ivory transition-all hover:shadow-soft group">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-accent/10 transition-colors" />
-                  <div className="relative">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-2xl bg-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <metric.icon className="w-5 h-5 text-accent" />
-                      </div>
-                      <span className="text-[0.6875rem] text-ash uppercase tracking-wider font-medium">{metric.label}</span>
-                    </div>
-                    <div className="text-[2.5rem] font-bold text-carbon mb-1 tracking-tight leading-none">{metric.value}</div>
-                    {metric.trend && (
-                      <div className={`text-caption font-semibold ${metric.trendColor || "text-ash"}`}>{metric.trend}</div>
-                    )}
+                <div key={index} className="p-6 bg-pearl">
+                  <div className="flex items-center gap-2 mb-3">
+                    <metric.icon className="w-5 h-5 text-accent" />
+                    <span className="text-xs text-stone uppercase tracking-wider">{metric.label}</span>
                   </div>
+                  <p className="text-3xl font-bold text-carbon">{metric.value}</p>
+                  {metric.trend && (
+                    <p className={`text-sm mt-1 ${metric.trendColor}`}>{metric.trend}</p>
+                  )}
                 </div>
               )) : (
                 <>
                   {[
-                    { label: "HRV Score", icon: Activity },
-                    { label: "Sleep Quality", icon: Brain },
-                    { label: "Focus Sessions", icon: Target },
+                    { label: "HRV", icon: Activity },
+                    { label: "Sleep", icon: Brain },
+                    { label: "Focus", icon: Target },
                     { label: "Recovery", icon: TrendingUp }
                   ].map((metric, index) => (
-                    <div key={index} className="relative overflow-hidden rounded-3xl p-6 bg-gradient-to-br from-pearl/50 to-ivory">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-mist/20 rounded-full blur-3xl -mr-16 -mt-16" />
-                      <div className="relative">
-                        <div className="flex items-center gap-3 mb-4">
-                          <div className="w-10 h-10 rounded-2xl bg-mist/30 flex items-center justify-center">
-                            <metric.icon className="w-5 h-5 text-stone" />
-                          </div>
-                          <span className="text-[0.6875rem] text-stone uppercase tracking-wider font-medium">{metric.label}</span>
-                        </div>
-                        <div className="text-[2.5rem] font-bold text-stone/40 mb-1">--</div>
-                        <div className="text-caption text-stone">Connect device</div>
+                    <div key={index} className="p-6 bg-pearl">
+                      <div className="flex items-center gap-2 mb-3">
+                        <metric.icon className="w-5 h-5 text-stone" />
+                        <span className="text-xs text-stone uppercase tracking-wider">{metric.label}</span>
                       </div>
+                      <p className="text-3xl font-bold text-stone/30">--</p>
+                      <p className="text-xs text-stone mt-1">Connect device</p>
                     </div>
                   ))}
                 </>
@@ -301,189 +294,117 @@ export default function Nova() {
             </div>
           </div>
 
-          {/* Two Column Layout */}
-          <div className="grid lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
-            {/* Chat Section - Dedicated */}
-            <div className="lg:col-span-2 space-y-6 sm:space-y-8">
-            {showMorningCheckIn && currentPhase >= 2 && (
-              <div className="animate-fade-in">
-                <MorningCheckIn
-                  data={{
-                    sleepHours: 6.2,
-                    hrvChange: -8,
-                    recoveryScore: 72,
-                    recommendation: "Your recovery is declining. Skip high-intensity training today. Focus on recovery protocols and light movement.",
-                    adjustedProtocol: [
-                      "Increased Magnesium Complex to 600mg",
-                      "Added L-Theanine 200mg for stress management",
-                      "Reduced morning stimulants"
-                    ]
-                  }}
-                  onDismiss={() => setShowMorningCheckIn(false)}
-                />
-              </div>
-            )}
-
-              <div>
-                <div className="flex items-center justify-between mb-4 sm:mb-6">
-                  <h2 className="text-lg sm:text-xl md:text-[1.5rem] font-semibold text-carbon tracking-tight">Chat with Nova</h2>
-                  <div className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full transition-all ${isSpeaking ? 'bg-accent animate-pulse shadow-lg shadow-accent/50' : 'bg-accent shadow-md shadow-accent/30'}`} />
-                    <span className="text-xs sm:text-caption text-ash">Online</span>
-                  </div>
+          {/* Main Content Grid */}
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Chat Interface - Primary */}
+            <div className="lg:col-span-2">
+              <div className="border border-mist bg-pearl/30">
+                {/* Messages */}
+                <div className="p-6 max-h-[500px] overflow-y-auto space-y-6">
+                  {messages.map((message, index) => (
+                    <div key={index} className={`flex gap-4 ${message.role === "user" ? "justify-end" : ""}`}>
+                      {message.role === "assistant" && (
+                        <div className="flex-shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
+                            <Sparkles className="w-4 h-4 text-accent" />
+                          </div>
+                        </div>
+                      )}
+                      <div className={`max-w-[80%] ${message.role === "user" ? "bg-carbon text-ivory p-4" : ""}`}>
+                        <p className={`text-sm leading-relaxed ${message.role === "assistant" ? "text-carbon" : ""}`}>
+                          {message.content}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                  {isLoading && (
+                    <div className="flex gap-4">
+                      <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
+                        <Loader2 className="w-4 h-4 text-accent animate-spin" />
+                      </div>
+                      <p className="text-sm text-stone">Analysing...</p>
+                    </div>
+                  )}
+                  <div ref={messagesEndRef} />
                 </div>
                 
-                {/* Chat Interface */}
-                <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-pearl/50 to-ivory shadow-soft">
-                  <div className="space-y-4 sm:space-y-6 p-4 sm:p-6 md:p-8 max-h-[400px] sm:max-h-[500px] overflow-y-auto">
-                    {messages.map((message, index) => (
-                      <div key={index} className="flex gap-4 animate-fade-in">
-                        {message.role === "assistant" && (
-                          <div className="flex-shrink-0">
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent/20 to-accent/30 flex items-center justify-center shadow-sm">
-                              <Sparkles className="w-5 h-5 text-accent" />
-                            </div>
-                          </div>
-                        )}
-                        <div className={`flex-1 ${message.role === "user" ? "ml-auto max-w-[85%]" : ""}`}>
-                          <div className={`${message.role === "user" ? "bg-mist/40 p-5 rounded-3xl" : ""}`}>
-                            <p className="text-[0.9375rem] text-carbon leading-relaxed whitespace-pre-wrap">
-                              {message.content}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                    {isLoading && (
-                      <div className="flex gap-4 animate-fade-in">
-                        <div className="flex-shrink-0">
-                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent/20 to-accent/30 flex items-center justify-center shadow-sm">
-                            <Loader2 className="w-5 h-5 text-accent animate-spin" />
-                          </div>
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-sm text-ash italic">Analysing...</p>
-                        </div>
-                      </div>
-                    )}
-                    <div ref={messagesEndRef} />
+                {/* Input */}
+                <div className="border-t border-mist p-4 bg-white">
+                  <div className="flex gap-3">
+                    <Input
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                      placeholder="Ask about protocols, recovery, performance..."
+                      disabled={isLoading}
+                      className="flex-1 border-mist bg-pearl min-h-[44px]"
+                    />
+                    <Button 
+                      onClick={handleSendMessage} 
+                      disabled={isLoading || !input.trim()}
+                      className="bg-carbon hover:bg-slate px-6 min-h-[44px]"
+                    >
+                      <Send className="w-4 h-4" />
+                    </Button>
                   </div>
-                  
-                  <div className="border-t border-mist/20 p-4 sm:p-6 bg-pearl/30">
-                    <div className="flex gap-2 sm:gap-3 mb-3 sm:mb-4">
-                      <Input
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                        placeholder="Ask about protocols, performance, recovery..."
-                        disabled={isLoading}
-                        className="flex-1 bg-ivory border-mist/30 rounded-full text-carbon placeholder:text-stone focus:border-accent/50 transition-colors"
-                      />
-                      <Button 
-                        onClick={handleSendMessage} 
-                        disabled={isLoading || !input.trim()}
-                        className="px-6 rounded-full bg-accent hover:bg-accent/90"
-                      >
-                        <Send className="w-4 h-4" />
-                      </Button>
-                    </div>
-                    
-                    <div className="flex justify-center pt-2 border-t border-mist/20">
-                      <VoiceInterface onSpeakingChange={setIsSpeaking} />
-                    </div>
+                  <div className="flex justify-center mt-3">
+                    <VoiceInterface onSpeakingChange={setIsSpeaking} />
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Sidebar */}
-            <div className="space-y-6 sm:space-y-8">
+            {/* Sidebar - Insights */}
+            <div className="space-y-6">
               <PhaseIndicator currentPhase={currentPhase} />
 
               {currentPhase >= 2 && (
-                <div className="animate-fade-in">
-                  <h3 className="text-body font-semibold text-carbon mb-4">Predictive Insights</h3>
+                <div>
+                  <h3 className="text-sm font-bold text-carbon mb-4">Predictive Insights</h3>
                   <PredictiveInsights 
                     insights={[
                       {
                         type: "warning",
-                        title: "Performance Decline Predicted",
-                        description: "Your recovery is declining. Expect reduced performance in 2-3 days unless you adjust protocol.",
+                        title: "Recovery declining",
+                        description: "HRV trend suggests you need more rest. Consider lighter training today.",
                         confidence: 87,
-                        timeframe: "2-3 days"
+                        timeframe: "Next 24 hours"
                       },
                       {
-                        type: "pattern",
-                        title: "Sleep Pattern Identified",
-                        description: "Your best sleep happens when you take magnesium before 8pm and avoid screens after 9pm.",
+                        type: "opportunity",
+                        title: "Peak focus window",
+                        description: "Based on your patterns, 9-11am is optimal for deep work.",
                         confidence: 92,
-                        timeframe: "Ongoing"
+                        timeframe: "Tomorrow"
                       }
                     ]}
                   />
                 </div>
               )}
 
-              {/* Connected Devices */}
-              <div className="relative overflow-hidden rounded-3xl p-6 bg-gradient-to-br from-blue-50 to-blue-100/30">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-400/10 rounded-full blur-3xl -mr-16 -mt-16" />
-                <div className="relative">
-                  <h3 className="text-body font-semibold text-carbon mb-6">Connected Devices</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between p-4 rounded-2xl bg-ivory/60 hover:bg-ivory transition-colors">
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/30 flex items-center justify-center shadow-sm">
-                          <div className="w-6 h-6 rounded-full border-2 border-accent" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-semibold text-carbon">Oura Ring Gen 3</div>
-                          <div className="text-caption text-ash">2 minutes ago</div>
-                        </div>
-                      </div>
-                      <div className="w-3 h-3 rounded-full bg-accent shadow-lg shadow-accent/50 animate-pulse" />
-                    </div>
-
-                    <div className="flex items-center justify-between p-4 rounded-2xl bg-ivory/60 hover:bg-ivory transition-colors">
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/30 flex items-center justify-center shadow-sm">
-                          <Watch className="w-6 h-6 text-accent" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-semibold text-carbon">Apple Watch Ultra</div>
-                          <div className="text-caption text-ash">5 minutes ago</div>
-                        </div>
-                      </div>
-                      <div className="w-3 h-3 rounded-full bg-accent shadow-lg shadow-accent/50 animate-pulse" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Nova Intelligence Block */}
-              <div className="relative overflow-hidden rounded-3xl p-6 bg-gradient-to-br from-accent/10 to-accent/5">
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-accent/10 rounded-full blur-3xl -ml-16 -mb-16" />
-                <div className="relative">
-                  <h3 className="text-body font-semibold text-carbon mb-6">Nova Intelligence</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <div className="text-caption text-ash mb-1">Data Points Analysed</div>
-                      <div className="text-[2rem] font-bold text-carbon tracking-tight">1,247</div>
-                    </div>
-                    <div>
-                      <div className="text-caption text-ash mb-1">Insights Generated</div>
-                      <div className="text-[2rem] font-bold text-carbon tracking-tight">18</div>
-                    </div>
-                    <div>
-                      <div className="text-caption text-ash mb-1">Performance Gain</div>
-                      <div className="text-[2rem] font-bold text-accent tracking-tight">+23%</div>
-                    </div>
-                    <Button 
-                      onClick={() => setShowAssessment(true)}
-                      className="w-full mt-4 rounded-full bg-accent hover:bg-accent/90"
-                    >
-                      Start Assessment
-                    </Button>
-                  </div>
+              {/* Quick Actions */}
+              <div className="p-6 bg-pearl">
+                <h3 className="text-sm font-bold text-carbon mb-4">Quick Actions</h3>
+                <div className="space-y-2">
+                  <Button 
+                    variant="outline" 
+                    className="w-full justify-start text-sm border-mist"
+                    onClick={() => setShowAssessment(true)}
+                  >
+                    Start Protocol Assessment
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="w-full justify-start text-sm border-mist"
+                  >
+                    View 7 Day Forecast
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="w-full justify-start text-sm border-mist"
+                  >
+                    Adjust Today's Protocol
+                  </Button>
                 </div>
               </div>
             </div>
@@ -491,11 +412,7 @@ export default function Nova() {
         </div>
       </div>
 
-      <ProtocolAssessment
-        open={showAssessment} 
-        onOpenChange={setShowAssessment}
-      />
-    </div>
+      <ProtocolAssessment open={showAssessment} onOpenChange={setShowAssessment} />
     </NovaSwipeWrapper>
   );
 }

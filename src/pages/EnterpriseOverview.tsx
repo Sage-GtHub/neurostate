@@ -9,328 +9,229 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 export default function EnterpriseOverview() {
   const hero = useScrollAnimation();
   const problem = useScrollAnimation();
-  const delivery = useScrollAnimation();
+  const solution = useScrollAnimation();
   const impact = useScrollAnimation();
-  const subscription = useScrollAnimation();
-  const metrics = useScrollAnimation();
   const categories = useScrollAnimation();
   const cta = useScrollAnimation();
 
   return (
     <>
       <SEO 
-        title="Enterprise Overview | NeuroState"
-        description="The new standard for corporate performance. A cognitive performance system that strengthens your workforce from the inside out."
+        title="Enterprise Performance | NeuroState"
+        description="Replace outdated wellness programmes with cognitive performance infrastructure. Sharper minds. Measurable results."
       />
       <Header />
       
-      <main className="min-h-screen bg-background">
-        {/* Hero Section */}
-        <section ref={hero.ref} className={`pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center space-y-4 sm:space-y-6">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-carbon leading-tight">
-                The new standard for<br />corporate performance
-              </h1>
-              <div className="space-y-3 sm:space-y-4 max-w-3xl mx-auto">
-                <p className="text-lg sm:text-xl md:text-2xl text-ash font-medium">
-                  Not another wellbeing perk
-                </p>
-                <p className="text-base sm:text-lg md:text-xl text-stone leading-relaxed px-4">
-                  A cognitive performance system that strengthens your workforce from the inside out<br className="hidden sm:inline" />
-                  <span className="text-carbon font-semibold">Think better, perform better, recover better</span>
-                </p>
-              </div>
-              <Button 
-                size="lg" 
-                className="gap-2 mt-6 sm:mt-8 min-h-[44px]"
-                onClick={() => window.scrollTo({ top: document.getElementById('categories')?.offsetTop || 0, behavior: 'smooth' })}
-              >
-                Explore the corporate system
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-            </div>
+      <main className="min-h-screen bg-white">
+        {/* Hero - Revolutionary Statement */}
+        <section ref={hero.ref} className={`pt-28 sm:pt-36 pb-20 sm:pb-28 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="max-w-5xl mx-auto text-center space-y-6">
+            <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">For Organisations</p>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-carbon leading-[1.02]">
+              Corporate wellness
+              <br />
+              <span className="text-accent">doesn't work.</span>
+            </h1>
+            <p className="text-xl text-ash max-w-2xl mx-auto">
+              Meditation apps and yoga sessions are not solving burnout. 
+              Your people need sharper minds, not more calm.
+            </p>
+            <Button 
+              size="sm" 
+              className="gap-2 mt-6 min-h-[44px] bg-carbon hover:bg-slate rounded-full px-8"
+              onClick={() => document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              See the solution
+              <ArrowRight className="w-4 h-4" />
+            </Button>
           </div>
         </section>
 
-        {/* The Problem */}
-        <section ref={problem.ref} className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-pearl transition-all duration-1000 ${problem.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto max-w-6xl">
-            <div className="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
-              <div className="space-y-4 sm:space-y-6">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-carbon">
-                  Corporate wellness is broken
+        {/* The Problem - Old vs New */}
+        <section ref={problem.ref} className={`py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-carbon text-ivory transition-all duration-1000 ${problem.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div className="space-y-6">
+                <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">The Problem</p>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.1]">
+                  Old wellness is dead.
                 </h2>
-                <p className="text-base sm:text-lg text-stone leading-relaxed">
-                  Meditation apps, yoga sessions, and wellbeing platforms are not solving burnout, brain fog, or declining productivity. Companies keep spending, employees keep struggling. People do not need more calm, they need a sharper mind. They need the ability to think clearly, recover quickly, and perform at a high level every day. Nobody is addressing this in a meaningful way, until now.
+                <p className="text-lg text-mist leading-relaxed">
+                  Companies keep spending on wellness. Employees keep struggling. 
+                  The problem is not stress management. The problem is cognitive performance.
+                </p>
+                <p className="text-xl text-ivory font-semibold">
+                  Your people do not need more calm.
+                  <br />
+                  They need sharper minds.
                 </p>
               </div>
-              <div className="bg-background rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg">
-                <div className="space-y-4 sm:space-y-6">
-                  <div className="flex items-start gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-mist">
-                    <div className="p-2 sm:p-3 rounded-full bg-destructive/10 flex-shrink-0">
-                      <X className="w-5 h-5 sm:w-6 sm:h-6 text-destructive" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-carbon mb-1 sm:mb-2">Old Approach</h3>
-                      <p className="text-xs sm:text-sm text-stone">Meditation apps, yoga sessions, wellbeing platforms</p>
-                      <p className="text-xs text-ash mt-1">No measurable impact on cognitive performance</p>
-                    </div>
+              
+              <div className="space-y-3">
+                {[
+                  "Meditation apps",
+                  "Breathwork workshops", 
+                  "Wellbeing platforms",
+                  "Step challenges",
+                  "Mental health webinars"
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-4 p-4 bg-slate/40 border-l-2 border-stone/40">
+                    <X className="w-5 h-5 text-stone/70 flex-shrink-0" />
+                    <span className="text-stone line-through">{item}</span>
+                    <span className="text-xs text-stone/60 ml-auto">No measurable impact</span>
                   </div>
-                  <div className="flex items-start gap-3 sm:gap-4 pt-2">
-                    <div className="p-2 sm:p-3 rounded-full bg-primary/10 flex-shrink-0">
-                      <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-carbon mb-1 sm:mb-2">NeuroState Approach</h3>
-                      <p className="text-xs sm:text-sm text-stone">Cognitive performance system with measurable outcomes</p>
-                      <p className="text-xs text-primary mt-1">Engineered for focus, clarity, and resilience</p>
-                    </div>
-                  </div>
+                ))}
+                <div className="flex items-center gap-4 p-4 bg-accent/15 border-l-2 border-accent mt-6">
+                  <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0" />
+                  <span className="text-ivory font-medium">NeuroState cognitive system</span>
+                  <span className="text-xs text-accent ml-auto">Measurable results</span>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* What We Deliver */}
-        <section ref={delivery.ref} className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 transition-all duration-1000 ${delivery.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-10 sm:mb-12 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-carbon mb-4 sm:mb-6">
-                A cognitive performance system<br className="hidden sm:inline" />for modern teams
+        {/* What We Deliver - Clean Three Step */}
+        <section ref={solution.ref} className={`py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-white transition-all duration-1000 ${solution.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16 space-y-4">
+              <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">The Solution</p>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.1]">
+                Cognitive performance
+                <br />
+                delivered monthly.
               </h2>
-              <p className="text-base sm:text-lg text-stone max-w-3xl mx-auto leading-relaxed px-4">
-                NeuroState gives organisations a complete ecosystem designed to enhance focus, energy, resilience, and clarity. Our system includes:
+              <p className="text-lg text-ash max-w-2xl mx-auto">
+                A complete system for enhancing focus, energy, and resilience across your entire workforce.
               </p>
             </div>
             
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {/* Three Step Flow */}
+            <div className="grid md:grid-cols-3 gap-px bg-mist">
               {[
                 {
-                  title: "Nova AI your personal cognitive coach",
-                  description: "AI powered guidance tailored to each team member"
+                  step: "01",
+                  title: "Nova AI coaching",
+                  description: "Personalised guidance for every team member. Learns patterns. Adjusts protocols."
                 },
                 {
-                  title: "Neuromodulation devices",
-                  description: "Shift mental state instantly for deep focus or rapid recovery"
+                  step: "02",
+                  title: "Monthly supplements",
+                  description: "Shipped to every employee. Research backed doses. Third party tested."
                 },
                 {
-                  title: "Clinically supported supplements",
-                  description: "Shipped every month to every employee"
-                },
-                {
-                  title: "Wearable integrations",
-                  description: "Clear insights from existing devices"
-                },
-                {
-                  title: "Behaviour analytics",
-                  description: "Track team improvements in real time"
-                },
-                {
-                  title: "Performance programmes and education",
-                  description: "Built for busy professionals"
-                },
-                {
-                  title: "Plug and play performance rooms",
-                  description: "Brain upgrade zones inside your office"
+                  step: "03",
+                  title: "Real time analytics",
+                  description: "Track cognitive markers, engagement, and progress across your organisation."
                 }
               ].map((item, index) => (
                 <div 
                   key={index}
-                  className="bg-pearl rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 hover:shadow-lg transition-all duration-300"
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  className="bg-white p-10 sm:p-12"
                 >
-                  <h3 className="text-base sm:text-lg md:text-xl font-semibold text-carbon mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-stone text-xs sm:text-sm leading-relaxed">
-                    {item.description}
-                  </p>
+                  <p className="text-accent text-xs font-semibold mb-4">{item.step}</p>
+                  <h3 className="text-xl font-bold text-carbon mb-3">{item.title}</h3>
+                  <p className="text-ash text-sm leading-relaxed">{item.description}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Additional Features */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+              {[
+                "Neuromodulation devices",
+                "Wearable integrations",
+                "Performance programmes",
+                "Performance rooms"
+              ].map((item, index) => (
+                <div key={index} className="flex items-center gap-3 p-4 bg-pearl">
+                  <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0" />
+                  <span className="text-carbon text-sm font-medium">{item}</span>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Why It Matters */}
-        <section ref={impact.ref} className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-slate transition-all duration-1000 ${impact.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto max-w-6xl">
-            <div className="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
-              <div className="order-2 md:order-1">
-                <div className="bg-background rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-xl">
-                  <div className="space-y-3 sm:space-y-4">
-                    {[
-                      { label: "Better concentration", metric: null },
-                      { label: "Faster decisions", metric: null },
-                      { label: "Stronger emotional control", metric: null },
-                      { label: "Less burnout", metric: null },
-                      { label: "More creativity", metric: null },
-                      { label: "Higher quality output every day", metric: null }
-                    ].map((item, index) => (
-                      <div key={index} className="flex items-center gap-3 pb-3 border-b border-mist last:border-0">
-                        <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
-                        <span className="text-sm font-medium text-carbon">{item.label}</span>
-                      </div>
-                    ))}
-                  </div>
+        {/* Impact Metrics */}
+        <section ref={impact.ref} className={`py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl transition-all duration-1000 ${impact.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16 space-y-4">
+              <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Measurable Impact</p>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.1]">
+                Results, not promises.
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-4 gap-px bg-mist">
+              {[
+                { stat: "47%", label: "Focus increase", desc: "Cognitive testing" },
+                { stat: "63%", label: "Burnout reduction", desc: "Within 90 days" },
+                { stat: "31%", label: "Productivity gain", desc: "Output metrics" },
+                { stat: "89%", label: "Satisfaction", desc: "Programme rating" },
+              ].map((item, i) => (
+                <div key={i} className="bg-white p-8 sm:p-10 text-center">
+                  <p className="text-4xl sm:text-5xl font-bold text-accent mb-2">{item.stat}</p>
+                  <p className="text-carbon font-semibold mb-1">{item.label}</p>
+                  <p className="text-xs text-stone">{item.desc}</p>
                 </div>
-              </div>
-              <div className="space-y-4 sm:space-y-6 order-1 md:order-2">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-ivory">
-                  High performing minds build high performing companies
-                </h2>
-                <div className="text-base sm:text-lg text-mist leading-relaxed space-y-3 sm:space-y-4">
-                  <p>
-                    When your people think better, everything improves. Better concentration. Faster decisions. Stronger emotional control. Less burnout. More creativity. Higher quality output every day.
-                  </p>
-                  <p className="font-semibold text-ivory">
-                    NeuroState strengthens the foundation of performance: the mind.
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Subscription Model */}
-        <section ref={subscription.ref} className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 transition-all duration-1000 ${subscription.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-10 sm:mb-12 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-carbon mb-4 sm:mb-6">
-                Cognitive performance delivered every month
+        {/* Three Pathways */}
+        <section id="categories" ref={categories.ref} className={`py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-white transition-all duration-1000 ${categories.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16 space-y-4">
+              <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Choose Your Path</p>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.1]">
+                Tailored for your sector.
               </h2>
             </div>
 
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-pearl rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 space-y-6 sm:space-y-8">
-                <p className="text-base sm:text-lg text-stone leading-relaxed">
-                  For the first time, companies can sponsor a monthly cognitive performance subscription for every employee. They receive supplements delivered to their home, personalised Nova AI coaching, access to performance programmes, hardware integrations, and continuous improvement tracking.
-                </p>
-                <div className="bg-background rounded-xl sm:rounded-2xl p-6 sm:p-8">
-                  <p className="text-carbon font-semibold text-lg sm:text-xl mb-3 sm:mb-4">
-                    This is a performance infrastructure, not a perk
-                  </p>
-                  <p className="text-sm sm:text-base text-stone">
-                    It is designed for real measurable change
-                  </p>
-                </div>
-                <div className="grid sm:grid-cols-3 gap-4 sm:gap-6 pt-4">
-                  {[
-                    { icon: Package, label: "Monthly supplements" },
-                    { icon: CheckCircle2, label: "Nova AI coaching" },
-                    { icon: TrendingUp, label: "Continuous tracking" }
-                  ].map((item, index) => (
-                    <div key={index} className="text-center space-y-2 sm:space-y-3">
-                      <div className="p-3 sm:p-4 rounded-full bg-primary/10 w-fit mx-auto">
-                        <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
-                      </div>
-                      <p className="text-xs sm:text-sm font-medium text-carbon">{item.label}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Measurable Impact */}
-        <section ref={metrics.ref} className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-pearl transition-all duration-1000 ${metrics.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-10 sm:mb-12 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-carbon mb-4 sm:mb-6">
-                Real impact zero guesswork
-              </h2>
-            </div>
-
-            <div className="max-w-5xl mx-auto">
-              <div className="bg-background rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl">
-                <p className="text-base sm:text-lg text-stone mb-6 sm:mb-8">We track:</p>
-                <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
-                  {[
-                    "Cognitive markers",
-                    "Stress and recovery scores",
-                    "Focus quality",
-                    "Protocol engagement",
-                    "Supplement adherence",
-                    "Team wide progress"
-                  ].map((metric, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
-                      <span className="text-carbon font-medium">{metric}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-mist">
-                  <p className="text-carbon font-semibold text-base sm:text-lg">
-                    You finally get a wellbeing solution that produces actual results supported by real data
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Three Categories Section */}
-        <section id="categories" ref={categories.ref} className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-background transition-all duration-1000 ${categories.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-10 sm:mb-12 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-carbon mb-4 sm:mb-6">
-                Choose your pathway
-              </h2>
-              <p className="text-base sm:text-lg text-stone max-w-3xl mx-auto px-4">
-                Tailored performance programmes designed for your industry
-              </p>
-            </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div className="grid lg:grid-cols-3 gap-6">
               {/* Corporate Wellness */}
-              <Link to="/enterprise/corporate/overview" className="group sm:col-span-2 lg:col-span-1">
-                <div className="bg-pearl rounded-2xl sm:rounded-3xl p-6 sm:p-8 hover:shadow-xl transition-all h-full">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 mb-4 sm:mb-6 rounded-full bg-carbon/5 flex items-center justify-center group-hover:bg-carbon/10 transition-colors">
-                    <Briefcase className="w-6 h-6 sm:w-8 sm:h-8 text-carbon" />
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-carbon mb-2 sm:mb-3">Corporate Wellness</h3>
-                  <p className="text-sm sm:text-base text-stone mb-4 sm:mb-6 leading-relaxed">
-                    Reduce burnout and boost productivity across your entire workforce with cognitive performance tools designed for busy professionals.
+              <Link to="/enterprise/corporate/overview" className="group">
+                <div className="h-full p-8 sm:p-10 bg-pearl hover:bg-carbon hover:text-ivory transition-all duration-300">
+                  <Briefcase className="w-8 h-8 mb-6 text-accent group-hover:text-accent" />
+                  <h3 className="text-2xl font-bold mb-3 group-hover:text-ivory">Corporate</h3>
+                  <p className="text-ash group-hover:text-mist mb-6 text-sm leading-relaxed">
+                    Reduce burnout and boost productivity across your entire workforce.
                   </p>
-                  <div className="flex items-center gap-2 text-accent font-semibold group-hover:gap-3 transition-all text-sm sm:text-base">
-                    <span>Explore corporate solutions</span>
-                    <ArrowRight className="w-4 h-4" />
+                  <div className="flex items-center gap-2 text-accent font-medium text-sm">
+                    <span>Learn more</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </Link>
 
-              {/* Sports Organisations */}
-              <Link to="/enterprise/sports/overview" className="group sm:col-span-2 lg:col-span-1">
-                <div className="bg-pearl rounded-2xl sm:rounded-3xl p-6 sm:p-8 hover:shadow-xl transition-all h-full">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 mb-4 sm:mb-6 rounded-full bg-carbon/5 flex items-center justify-center group-hover:bg-carbon/10 transition-colors">
-                    <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-carbon" />
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-carbon mb-2 sm:mb-3">Sports Organisations</h3>
-                  <p className="text-sm sm:text-base text-stone mb-4 sm:mb-6 leading-relaxed">
-                    Maximise athlete performance and reduce injury risk with cutting edge recovery protocols and cognitive training systems.
+              {/* Sports */}
+              <Link to="/enterprise/sports/overview" className="group">
+                <div className="h-full p-8 sm:p-10 bg-pearl hover:bg-carbon hover:text-ivory transition-all duration-300">
+                  <Trophy className="w-8 h-8 mb-6 text-accent group-hover:text-accent" />
+                  <h3 className="text-2xl font-bold mb-3 group-hover:text-ivory">Sports</h3>
+                  <p className="text-ash group-hover:text-mist mb-6 text-sm leading-relaxed">
+                    Maximise athlete performance and reduce injury risk with recovery protocols.
                   </p>
-                  <div className="flex items-center gap-2 text-accent font-semibold group-hover:gap-3 transition-all text-sm sm:text-base">
-                    <span>Explore sports solutions</span>
-                    <ArrowRight className="w-4 h-4" />
+                  <div className="flex items-center gap-2 text-accent font-medium text-sm">
+                    <span>Learn more</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </Link>
 
-              {/* Health Clubs and Studios */}
-              <Link to="/enterprise/health-clubs/overview" className="group sm:col-span-2 lg:col-span-1">
-                <div className="bg-pearl rounded-2xl sm:rounded-3xl p-6 sm:p-8 hover:shadow-xl transition-all h-full">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 mb-4 sm:mb-6 rounded-full bg-carbon/5 flex items-center justify-center group-hover:bg-carbon/10 transition-colors">
-                    <Dumbbell className="w-6 h-6 sm:w-8 sm:h-8 text-carbon" />
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-carbon mb-2 sm:mb-3">Health Clubs and Studios</h3>
-                  <p className="text-sm sm:text-base text-stone mb-4 sm:mb-6 leading-relaxed">
-                    Differentiate your facility and increase member retention with exclusive premium wellness and recovery technologies.
+              {/* Health Clubs */}
+              <Link to="/enterprise/health-clubs/overview" className="group">
+                <div className="h-full p-8 sm:p-10 bg-pearl hover:bg-carbon hover:text-ivory transition-all duration-300">
+                  <Dumbbell className="w-8 h-8 mb-6 text-accent group-hover:text-accent" />
+                  <h3 className="text-2xl font-bold mb-3 group-hover:text-ivory">Health Clubs</h3>
+                  <p className="text-ash group-hover:text-mist mb-6 text-sm leading-relaxed">
+                    Differentiate your facility with premium cognitive wellness services.
                   </p>
-                  <div className="flex items-center gap-2 text-accent font-semibold group-hover:gap-3 transition-all text-sm sm:text-base">
-                    <span>Explore facility solutions</span>
-                    <ArrowRight className="w-4 h-4" />
+                  <div className="flex items-center gap-2 text-accent font-medium text-sm">
+                    <span>Learn more</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </Link>
@@ -339,26 +240,39 @@ export default function EnterpriseOverview() {
         </section>
 
         {/* Final CTA */}
-        <section ref={cta.ref} className={`py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-carbon transition-all duration-1000 ${cta.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="container mx-auto max-w-4xl text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-ivory mb-4 sm:mb-6">
-              Bring NeuroState into your organisation
+        <section ref={cta.ref} className={`py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-carbon text-ivory transition-all duration-1000 ${cta.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.1]">
+              Ready to upgrade
+              <br />
+              your workforce?
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-mist leading-relaxed mb-6 sm:mb-8 px-4">
-              This is the shift from wellness perks to engineered cognitive performance. If you want your people to think, lead, and perform at world class levels, this is the system.
+            <p className="text-lg text-mist max-w-xl mx-auto">
+              High performing minds build high performing companies.
             </p>
-            <Button 
-              size="lg" 
-              className="gap-2 bg-ivory text-carbon hover:bg-pearl min-h-[44px]"
-              onClick={() => window.location.href = '/contact'}
-            >
-              Learn more
-              <ArrowRight className="w-4 h-4" />
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              <Link to="/contact">
+                <Button 
+                  size="sm"
+                  className="bg-accent text-white hover:bg-accent-light rounded-full min-h-[44px] px-8"
+                >
+                  Book a Demo
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
+              <a href="mailto:partnerships@neurostate.co.uk">
+                <Button 
+                  variant="outline"
+                  size="sm"
+                  className="border-ivory/30 text-ivory hover:bg-ivory/10 rounded-full min-h-[44px] px-8"
+                >
+                  partnerships@neurostate.co.uk
+                </Button>
+              </a>
+            </div>
           </div>
         </section>
       </main>
-
       <Footer />
     </>
   );

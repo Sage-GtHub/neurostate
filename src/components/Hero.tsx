@@ -8,36 +8,43 @@ const Hero = () => {
 
   return (
     <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
-      {/* Subtle Background Effect */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0 bg-gradient-to-br from-stone/5 via-transparent to-stone/10" />
+      {/* Subtle Grid Background */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div className="absolute inset-0 grid-background" />
       </div>
 
       {/* Content */}
       <div className={`relative z-10 container mx-auto px-6 md:px-12 lg:px-20 xl:px-32 py-32 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <div className="max-w-6xl mx-auto text-center space-y-10">
-          <div className="inline-block mb-6">
+        <div className="max-w-5xl mx-auto text-center space-y-8">
+          {/* Category Line */}
+          <div className="inline-block">
             <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">
-              Cognitive Performance Ecosystem
+              The Cognitive Performance Company
             </p>
           </div>
 
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-light text-carbon leading-[1.05] tracking-tight">
-            Peak Performance, Naturally.
+          {/* Revolutionary Headline */}
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-carbon leading-[1.02] tracking-tight">
+            Your mind is your
+            <br />
+            <span className="text-accent">greatest asset.</span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-ash max-w-3xl mx-auto font-light leading-relaxed">
-            AI-powered performance optimisation, photobiomodulation devices, 
-            and cognitive supplements for the modern human.
+          {/* Category Definition - One Sentence */}
+          <p className="text-xl md:text-2xl text-ash max-w-2xl mx-auto font-light leading-relaxed">
+            The complete system for cognitive enhancement.
+            <br />
+            <span className="text-carbon font-normal">AI. Devices. Supplements. Protocols.</span>
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-10">
+          {/* Three Customer Pathways */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
             <Link to="/shop">
               <Button 
                 size="sm"
-                className="bg-carbon text-white hover:bg-slate rounded-full group transition-all duration-300 min-h-[44px] touch-manipulation"
+                className="bg-carbon text-white hover:bg-slate rounded-full group transition-all duration-300 min-h-[44px] touch-manipulation px-8"
               >
-                Explore Products
+                For Individuals
                 <ArrowRight className="ml-2 w-3 h-3 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
@@ -45,23 +52,37 @@ const Hero = () => {
               <Button 
                 variant="outline"
                 size="sm"
-                className="border-carbon/20 text-carbon hover:bg-carbon/5 rounded-full transition-all duration-300 min-h-[44px] touch-manipulation"
+                className="border-carbon/20 text-carbon hover:bg-carbon/5 rounded-full transition-all duration-300 min-h-[44px] touch-manipulation px-8"
               >
                 For Teams
               </Button>
             </Link>
+            <Link to="/enterprise/corporate/overview">
+              <Button 
+                variant="outline"
+                size="sm"
+                className="border-carbon/20 text-carbon hover:bg-carbon/5 rounded-full transition-all duration-300 min-h-[44px] touch-manipulation px-8"
+              >
+                For Enterprise
+              </Button>
+            </Link>
           </div>
 
-          {/* Scroll Indicator */}
-          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
-            <div className="w-6 h-10 rounded-full border-2 border-carbon/20 flex items-start justify-center p-2">
-              <div className="w-1.5 h-3 bg-carbon/40 rounded-full" />
-            </div>
-          </div>
+          {/* Trust Signal */}
+          <p className="text-stone text-sm pt-4">
+            Trusted by 10,000+ high performers worldwide
+          </p>
         </div>
       </div>
 
-      {/* Gradient Overlay */}
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="w-6 h-10 rounded-full border-2 border-carbon/20 flex items-start justify-center p-2">
+          <div className="w-1.5 h-3 bg-carbon/40 rounded-full" />
+        </div>
+      </div>
+
+      {/* Bottom Gradient */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
     </section>
   );
