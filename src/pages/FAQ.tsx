@@ -145,11 +145,14 @@ const FAQ = () => {
           <div className="w-full max-w-3xl mx-auto space-y-12">
             {faqCategories.map((category) => (
               <div key={category.category} className="py-8 border-t border-mist first:border-t-0">
-                <h2 className="text-[1.125rem] font-normal text-carbon mb-6">{category.category}</h2>
+                <h2 className="text-[1.125rem] font-normal text-carbon mb-6 flex items-center gap-3">
+                  <span className="w-2 h-2 bg-signal-green"></span>
+                  {category.category}
+                </h2>
                 <Accordion type="single" collapsible className="w-full">
                   {category.questions.map((item, idx) => (
                     <AccordionItem key={idx} value={`item-${idx}`} className="border-mist">
-                      <AccordionTrigger className="text-left text-[0.9375rem] font-normal text-carbon hover:no-underline">
+                      <AccordionTrigger className="text-left text-[0.9375rem] font-normal text-carbon hover:no-underline hover:text-signal-green transition-colors">
                         {item.q}
                       </AccordionTrigger>
                       <AccordionContent className="text-[0.875rem] text-ash">

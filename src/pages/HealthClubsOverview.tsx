@@ -67,7 +67,7 @@ export default function HealthClubsOverview() {
                 { stat: "4 weeks", label: "Full Rollout", desc: "Simple onboarding" }
               ].map((item, i) => (
                 <div key={i} className="bg-carbon p-6 sm:p-8 text-center">
-                  <p className="text-3xl sm:text-4xl font-bold text-accent mb-1">{item.stat}</p>
+                  <p className="text-3xl sm:text-4xl font-bold text-signal-green mb-1">{item.stat}</p>
                   <p className="text-ivory font-medium text-sm mb-1">{item.label}</p>
                   <p className="text-xs text-mist">{item.desc}</p>
                 </div>
@@ -104,8 +104,8 @@ export default function HealthClubsOverview() {
                   description: "Visual metrics showing cognitive improvement, recovery scores, and focus gains."
                 }
               ].map((item, index) => (
-                <div key={index} className="bg-white p-10 sm:p-12">
-                  <item.icon className="w-8 h-8 text-accent mb-6" />
+                <div key={index} className="bg-white p-10 sm:p-12 border-l-2 border-signal-green/30">
+                  <item.icon className="w-8 h-8 text-signal-green mb-6" />
                   <h3 className="text-xl font-bold text-carbon mb-3">{item.title}</h3>
                   <p className="text-ash text-sm leading-relaxed">{item.description}</p>
                 </div>
@@ -179,8 +179,8 @@ export default function HealthClubsOverview() {
                 "Dedicated support",
                 "Product discounts"
               ].map((item, index) => (
-                <div key={index} className="flex items-center gap-4 p-6 bg-pearl">
-                  <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0" />
+                <div key={index} className="flex items-center gap-4 p-6 bg-pearl border-l-2 border-signal-green/40">
+                  <CheckCircle2 className="w-5 h-5 text-signal-green flex-shrink-0" />
                   <span className="text-carbon font-medium">{item}</span>
                 </div>
               ))}
