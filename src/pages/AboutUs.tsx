@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Target, Shield, Microscope, Zap, Brain, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { SEO } from "@/components/SEO";
 
 const AboutUs = () => {
   const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation({ threshold: 0.2 });
@@ -45,6 +46,10 @@ const AboutUs = () => {
 
   return (
     <>
+      <SEO 
+        title="About NeuroState – The Cognitive Performance Company | UK"
+        description="We built the world's first cognitive performance system combining AI, neuromodulation, and precision supplements. Research-driven products for focus, energy, and mental resilience."
+      />
       <Header />
       <div className="min-h-screen bg-ivory mobile-nav-padding">
         {/* Hero */}
