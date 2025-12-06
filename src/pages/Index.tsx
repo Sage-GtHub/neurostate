@@ -308,31 +308,32 @@ const Index = () => {
                         ].map((forecast, i) => (
                           <div 
                             key={i} 
-                            className={`p-2 text-center transition-all duration-300 ${
+                            className={`group p-2 text-center transition-all duration-300 cursor-pointer hover:scale-105 hover:-translate-y-0.5 ${
                               i === 0 ? 'bg-signal-green/20 border border-signal-green/40' : 'bg-slate/30 hover:bg-slate/50'
                             }`}
+                            style={{ animationDelay: `${i * 80}ms` }}
                           >
-                            <p className={`text-[9px] font-medium uppercase tracking-wide mb-1 ${
-                              i === 0 ? 'text-signal-green' : 'text-stone'
+                            <p className={`text-[9px] font-medium uppercase tracking-wide mb-1 transition-colors duration-200 ${
+                              i === 0 ? 'text-signal-green' : 'text-stone group-hover:text-ivory'
                             }`}>{forecast.day}</p>
-                            <div className={`w-3 h-3 mx-auto rounded-full mb-1 ${
-                              forecast.readiness === 'optimal' ? 'bg-signal-green' :
-                              forecast.readiness === 'moderate' ? 'bg-orange-500' : 'bg-red-500'
+                            <div className={`w-3 h-3 mx-auto rounded-full mb-1 transition-all duration-300 group-hover:scale-125 group-hover:shadow-lg ${
+                              forecast.readiness === 'optimal' ? 'bg-signal-green group-hover:shadow-signal-green/50' :
+                              forecast.readiness === 'moderate' ? 'bg-orange-500 group-hover:shadow-orange-500/50' : 'bg-red-500 group-hover:shadow-red-500/50'
                             }`} />
-                            <p className="text-ivory text-xs font-semibold">{forecast.energy}%</p>
+                            <p className="text-ivory text-xs font-semibold transition-transform duration-200 group-hover:scale-110">{forecast.energy}%</p>
                           </div>
                         ))}
                       </div>
 
                       {/* Today's Insight */}
-                      <div className="bg-gradient-to-br from-slate/60 to-slate/40 p-4">
+                      <div className="group bg-gradient-to-br from-slate/60 to-slate/40 p-4 transition-all duration-300 hover:from-slate/70 hover:to-slate/50 cursor-pointer">
                         <div className="flex items-start gap-3">
-                          <div className="w-8 h-8 bg-signal-green/20 flex items-center justify-center flex-shrink-0">
-                            <Activity className="w-4 h-4 text-signal-green" />
+                          <div className="w-8 h-8 bg-signal-green/20 flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-signal-green/30 group-hover:scale-110">
+                            <Activity className="w-4 h-4 text-signal-green transition-transform duration-300 group-hover:animate-pulse" />
                           </div>
-                          <div>
+                          <div className="transition-transform duration-200 group-hover:translate-x-0.5">
                             <p className="text-ivory text-xs font-semibold mb-1">Today: Optimal Training Window</p>
-                            <p className="text-stone text-[11px] leading-relaxed">
+                            <p className="text-stone text-[11px] leading-relaxed group-hover:text-mist transition-colors duration-200">
                               Best performance window 9:00-11:00. Expect energy dip at 3pm. Take magnesium at 8pm.
                             </p>
                           </div>
@@ -346,10 +347,14 @@ const Index = () => {
                           { value: "7.8", label: "Sleep", trend: "Steady" },
                           { value: "85%", label: "Recovery", trend: "+8%" }
                         ].map((metric, i) => (
-                          <div key={i} className="bg-slate/30 p-3 text-center">
-                            <p className="text-ivory text-lg font-bold tracking-tight">{metric.value}</p>
-                            <p className="text-stone text-[9px] uppercase tracking-wider">{metric.label}</p>
-                            <p className="text-signal-green text-[8px] font-semibold mt-0.5">{metric.trend}</p>
+                          <div 
+                            key={i} 
+                            className="group bg-slate/30 p-3 text-center transition-all duration-300 hover:bg-slate/50 cursor-pointer hover:scale-[1.02] hover:-translate-y-0.5"
+                            style={{ animationDelay: `${i * 100}ms` }}
+                          >
+                            <p className="text-ivory text-lg font-bold tracking-tight transition-all duration-200 group-hover:scale-110 group-hover:text-signal-green">{metric.value}</p>
+                            <p className="text-stone text-[9px] uppercase tracking-wider transition-colors duration-200 group-hover:text-mist">{metric.label}</p>
+                            <p className="text-signal-green text-[8px] font-semibold mt-0.5 transition-transform duration-200 group-hover:scale-105">{metric.trend}</p>
                           </div>
                         ))}
                       </div>
