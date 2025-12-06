@@ -116,7 +116,7 @@ export function CorporateROICalculator() {
         
         <div className="bg-gradient-to-br from-accent/10 to-accent/5 rounded-2xl p-6 sm:p-7 border border-accent/20">
           <div className="text-xs text-accent uppercase tracking-[0.2em] mb-3 font-medium">
-            Annual Savings with NeuroState
+            Annual Value Creation
           </div>
           <div className="text-4xl sm:text-5xl font-light text-carbon mb-2 tabular-nums">
             £{totalAnnualSavings.toLocaleString('en-GB', { maximumFractionDigits: 0 })}
