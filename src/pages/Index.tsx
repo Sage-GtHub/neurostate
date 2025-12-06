@@ -275,39 +275,81 @@ const Index = () => {
                   </Link>
                 </div>
 
-                {/* Nova UI Preview - Enhanced */}
+                {/* Nova UI Preview - Enhanced with 7-Day Forecast */}
                 <div className="relative">
                   <div className="absolute -inset-4 bg-gradient-to-br from-carbon/5 to-transparent blur-2xl opacity-50" />
-                  <div className="relative overflow-hidden bg-carbon p-8 sm:p-10 shadow-2xl">
-                    <div className="space-y-6">
-                      <div className="flex items-center gap-4 pb-5 border-b border-slate/50">
-                        <div className="w-12 h-12 bg-gradient-to-br from-ivory/20 to-ivory/5 flex items-center justify-center">
-                          <Sparkles className="w-5 h-5 text-ivory" />
+                  <div className="relative overflow-hidden bg-carbon p-6 sm:p-8 shadow-2xl">
+                    <div className="space-y-5">
+                      {/* Header */}
+                      <div className="flex items-center gap-3 pb-4 border-b border-slate/50">
+                        <div className="w-10 h-10 bg-gradient-to-br from-ivory/20 to-ivory/5 flex items-center justify-center">
+                          <Sparkles className="w-4 h-4 text-ivory" />
                         </div>
                         <div>
-                          <p className="text-ivory font-semibold">Nova</p>
-                          <p className="text-stone text-xs">Analysing your biometrics</p>
+                          <p className="text-ivory font-semibold text-sm">Nova</p>
+                          <p className="text-stone text-xs">7-Day Performance Forecast</p>
                         </div>
                         <div className="ml-auto flex items-center gap-1.5">
                           <div className="w-2 h-2 bg-signal-green rounded-full animate-pulse" />
                           <span className="text-[10px] text-stone uppercase tracking-wide">Live</span>
                         </div>
                       </div>
-                      <div className="bg-gradient-to-br from-slate/60 to-slate/40 p-5">
-                        <p className="text-ivory/90 text-sm leading-relaxed">
-                          Your HRV dropped 12% overnight. Adjusting protocol. Skip high intensity today. Take magnesium at 8pm for sleep optimisation.
-                        </p>
-                      </div>
-                      <div className="grid grid-cols-3 gap-3">
+
+                      {/* 7-Day Forecast Calendar */}
+                      <div className="grid grid-cols-7 gap-1.5">
                         {[
-                          { value: "68", label: "HRV", trend: "+5%", positive: true },
-                          { value: "7.8", label: "Sleep", trend: "Steady", positive: true },
-                          { value: "85%", label: "Recovery", trend: "+8%", positive: true }
+                          { day: "Today", readiness: "optimal", energy: 85 },
+                          { day: "Tue", readiness: "optimal", energy: 82 },
+                          { day: "Wed", readiness: "moderate", energy: 68 },
+                          { day: "Thu", readiness: "low", energy: 55 },
+                          { day: "Fri", readiness: "moderate", energy: 72 },
+                          { day: "Sat", readiness: "optimal", energy: 88 },
+                          { day: "Sun", readiness: "optimal", energy: 90 }
+                        ].map((forecast, i) => (
+                          <div 
+                            key={i} 
+                            className={`p-2 text-center transition-all duration-300 ${
+                              i === 0 ? 'bg-signal-green/20 border border-signal-green/40' : 'bg-slate/30 hover:bg-slate/50'
+                            }`}
+                          >
+                            <p className={`text-[9px] font-medium uppercase tracking-wide mb-1 ${
+                              i === 0 ? 'text-signal-green' : 'text-stone'
+                            }`}>{forecast.day}</p>
+                            <div className={`w-3 h-3 mx-auto rounded-full mb-1 ${
+                              forecast.readiness === 'optimal' ? 'bg-signal-green' :
+                              forecast.readiness === 'moderate' ? 'bg-orange-500' : 'bg-red-500'
+                            }`} />
+                            <p className="text-ivory text-xs font-semibold">{forecast.energy}%</p>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Today's Insight */}
+                      <div className="bg-gradient-to-br from-slate/60 to-slate/40 p-4">
+                        <div className="flex items-start gap-3">
+                          <div className="w-8 h-8 bg-signal-green/20 flex items-center justify-center flex-shrink-0">
+                            <Activity className="w-4 h-4 text-signal-green" />
+                          </div>
+                          <div>
+                            <p className="text-ivory text-xs font-semibold mb-1">Today: Optimal Training Window</p>
+                            <p className="text-stone text-[11px] leading-relaxed">
+                              Best performance window 9:00-11:00. Expect energy dip at 3pm. Take magnesium at 8pm.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Quick Metrics */}
+                      <div className="grid grid-cols-3 gap-2">
+                        {[
+                          { value: "68", label: "HRV", trend: "+5%" },
+                          { value: "7.8", label: "Sleep", trend: "Steady" },
+                          { value: "85%", label: "Recovery", trend: "+8%" }
                         ].map((metric, i) => (
-                          <div key={i} className="group bg-slate/30 hover:bg-slate/50 p-4 text-center transition-colors duration-300">
-                            <p className="text-ivory text-2xl font-bold tracking-tight">{metric.value}</p>
-                            <p className="text-stone text-[10px] mt-1 uppercase tracking-wider">{metric.label}</p>
-                            <p className={`text-[9px] mt-1.5 font-semibold ${metric.positive ? 'text-signal-green' : 'text-stone'}`}>{metric.trend}</p>
+                          <div key={i} className="bg-slate/30 p-3 text-center">
+                            <p className="text-ivory text-lg font-bold tracking-tight">{metric.value}</p>
+                            <p className="text-stone text-[9px] uppercase tracking-wider">{metric.label}</p>
+                            <p className="text-signal-green text-[8px] font-semibold mt-0.5">{metric.trend}</p>
                           </div>
                         ))}
                       </div>
