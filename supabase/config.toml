@@ -32,3 +32,9 @@ verify_jwt = true
 
 [functions.generate-health-forecast]
 verify_jwt = true
+
+[functions.vital-connect]
+verify_jwt = false
+
+[functions.vital-webhook]
+verify_jwt = false
