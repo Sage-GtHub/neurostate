@@ -1,29 +1,34 @@
 import { useState } from "react";
 import { Slider } from "@/components/ui/slider";
-import { Card } from "@/components/ui/card";
 
 export function CorporateROICalculator() {
   const [employeeCount, setEmployeeCount] = useState([100]);
+  const [avgSalary, setAvgSalary] = useState([45000]);
+  const [avgSickDays, setAvgSickDays] = useState([8]);
   
-  const avgSalary = 45000; // Average UK salary
-  const burnoutCostPerEmployee = avgSalary * 0.34; // 34% productivity loss from burnout
-  const turnoverCostPerEmployee = avgSalary * 1.5; // 150% of salary to replace
+  const dailyRate = avgSalary[0] / 260; // ~260 working days per year
+  const sickDayCost = employeeCount[0] * avgSickDays[0] * dailyRate;
+  const burnoutCostPerEmployee = avgSalary[0] * 0.34; // 34% productivity loss from burnout
+  const turnoverCostPerEmployee = avgSalary[0] * 1.5; // 150% of salary to replace
   
   // Annual costs without NeuroState
   const annualBurnoutCost = employeeCount[0] * burnoutCostPerEmployee * 0.25; // 25% affected
   const annualTurnoverCost = employeeCount[0] * turnoverCostPerEmployee * 0.18; // 18% turnover
-  const totalAnnualCost = annualBurnoutCost + annualTurnoverCost;
+  const annualSickDayCost = sickDayCost;
+  const totalAnnualCost = annualBurnoutCost + annualTurnoverCost + annualSickDayCost;
   
   // With NeuroState improvements
   const burnoutReduction = 0.63; // 63% reduction
   const turnoverReduction = 0.40; // 40% retention improvement
   const productivityGain = 0.31; // 31% productivity gain
+  const sickDayReduction = 0.35; // 35% reduction in sick days
   
   const savedBurnoutCost = annualBurnoutCost * burnoutReduction;
   const savedTurnoverCost = annualTurnoverCost * turnoverReduction;
-  const productivityValue = employeeCount[0] * avgSalary * productivityGain;
+  const savedSickDayCost = annualSickDayCost * sickDayReduction;
+  const productivityValue = employeeCount[0] * avgSalary[0] * productivityGain;
   
-  const totalAnnualSavings = savedBurnoutCost + savedTurnoverCost + productivityValue;
+  const totalAnnualSavings = savedBurnoutCost + savedTurnoverCost + savedSickDayCost + productivityValue;
   const roi = ((totalAnnualSavings / (employeeCount[0] * 78 * 12)) - 1) * 100; // Assuming Professional tier at £78/employee/month
   
   return (
@@ -36,11 +41,11 @@ export function CorporateROICalculator() {
       </div>
       
       {/* Employee Count Slider */}
-      <div className="mb-10">
+      <div className="mb-8">
         <label className="text-xs text-accent uppercase tracking-[0.2em] mb-4 block font-medium">
           Number of Employees
         </label>
-        <div className="text-6xl font-light text-carbon mb-6 tabular-nums">{employeeCount[0]}</div>
+        <div className="text-5xl font-light text-carbon mb-6 tabular-nums">{employeeCount[0].toLocaleString('en-GB')}</div>
         <Slider
           value={employeeCount}
           onValueChange={setEmployeeCount}
@@ -54,6 +59,46 @@ export function CorporateROICalculator() {
           <span>2,000+</span>
         </div>
       </div>
+
+      {/* Average Salary Slider */}
+      <div className="mb-8">
+        <label className="text-xs text-accent uppercase tracking-[0.2em] mb-4 block font-medium">
+          Average Salary
+        </label>
+        <div className="text-5xl font-light text-carbon mb-6 tabular-nums">£{avgSalary[0].toLocaleString('en-GB')}</div>
+        <Slider
+          value={avgSalary}
+          onValueChange={setAvgSalary}
+          min={20000}
+          max={150000}
+          step={5000}
+          className="mb-3"
+        />
+        <div className="flex justify-between text-xs text-stone font-medium">
+          <span>£20,000</span>
+          <span>£150,000</span>
+        </div>
+      </div>
+
+      {/* Average Sick Days Slider */}
+      <div className="mb-10">
+        <label className="text-xs text-accent uppercase tracking-[0.2em] mb-4 block font-medium">
+          Average Sick Days per Year
+        </label>
+        <div className="text-5xl font-light text-carbon mb-6 tabular-nums">{avgSickDays[0]} days</div>
+        <Slider
+          value={avgSickDays}
+          onValueChange={setAvgSickDays}
+          min={1}
+          max={20}
+          step={1}
+          className="mb-3"
+        />
+        <div className="flex justify-between text-xs text-stone font-medium">
+          <span>1 day</span>
+          <span>20 days</span>
+        </div>
+      </div>
       
       {/* Results Grid */}
       <div className="space-y-3">
@@ -65,7 +110,7 @@ export function CorporateROICalculator() {
             £{totalAnnualCost.toLocaleString('en-GB', { maximumFractionDigits: 0 })}
           </div>
           <div className="text-caption text-ash mt-2">
-            Burnout & turnover costs
+            Burnout, turnover and sick day costs
           </div>
         </div>
         
@@ -81,7 +126,7 @@ export function CorporateROICalculator() {
           </div>
         </div>
         
-        <div className="grid grid-cols-3 gap-3 pt-6">
+        <div className="grid grid-cols-4 gap-3 pt-6">
           <div className="text-center">
             <div className="text-2xl sm:text-3xl font-light text-accent mb-1 tabular-nums">63%</div>
             <div className="text-xs text-stone">Burnout Reduction</div>
@@ -93,6 +138,10 @@ export function CorporateROICalculator() {
           <div className="text-center">
             <div className="text-2xl sm:text-3xl font-light text-accent mb-1 tabular-nums">31%</div>
             <div className="text-xs text-stone">Productivity Gain</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl sm:text-3xl font-light text-accent mb-1 tabular-nums">35%</div>
+            <div className="text-xs text-stone">Sick Day Reduction</div>
           </div>
         </div>
       </div>
