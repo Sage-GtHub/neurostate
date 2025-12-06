@@ -80,13 +80,6 @@ export default function ProgramOverview() {
                 <div className="text-xs text-mist/60 mt-1">Programme NPS score</div>
               </div>
             </div>
-
-            <div className="text-center">
-              <Button size="lg" className="gap-2 bg-carbon hover:bg-slate text-ivory shadow-lg hover:shadow-xl transition-all">
-                <Download className="w-5 h-5" />
-                Download Partnership Overview PDF
-              </Button>
-            </div>
           </div>
         </section>
 
