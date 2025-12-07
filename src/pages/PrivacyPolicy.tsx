@@ -2,6 +2,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Link } from "react-router-dom";
 import { Shield, Lock, Eye, UserCheck, Database, Mail } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 const PrivacyPolicy = () => {
   const highlights = [
@@ -12,9 +13,14 @@ const PrivacyPolicy = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background mobile-nav-padding">
-      <Header />
-      <main className="container mx-auto px-4 py-16">
+    <>
+      <SEO 
+        title="Privacy Policy | NeuroState"
+        description="How NeuroState collects, uses, and protects your personal information. We never sell your data and use bank-level encryption for security."
+      />
+      <div className="min-h-screen bg-background mobile-nav-padding">
+        <Header />
+        <main className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Privacy Policy</h1>
           <p className="text-muted-foreground mb-8">Last updated: {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
@@ -272,7 +278,8 @@ const PrivacyPolicy = () => {
         </div>
       </main>
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

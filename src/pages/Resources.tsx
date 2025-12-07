@@ -11,6 +11,7 @@ import { LiveChat } from "@/components/LiveChat";
 import { ResourceFinder } from "@/components/ResourceFinder";
 import { MultiFormatHub } from "@/components/MultiFormatHub";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { SEO } from "@/components/SEO";
 
 const featuredArticle = {
   id: 0,
@@ -125,8 +126,13 @@ const Resources = () => {
   });
 
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
+    <>
+      <SEO 
+        title="Resources – Guides, Courses & Research | NeuroState"
+        description="Learn how to optimise recovery and performance with science-backed guides, learning paths, and research on red light therapy, adaptogens, and cognitive health."
+      />
+      <div className="min-h-screen bg-white">
+        <Header />
       
       <main className="container mx-auto px-4 py-16">
         <div ref={heroRef} className={`text-center mb-20 py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 border-b border-mist transition-all duration-1000 ${heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
@@ -147,7 +153,7 @@ const Resources = () => {
               <div className="relative overflow-hidden bg-pearl">
                 <img
                   src={featuredArticle.image}
-                  alt={featuredArticle.title}
+                  alt="Person using biohacking tools for health optimisation"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -209,7 +215,8 @@ const Resources = () => {
 
       <Footer />
       <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
-    </div>
+      </div>
+    </>
   );
 };
 
