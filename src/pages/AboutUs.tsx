@@ -78,7 +78,7 @@ const AboutUs = () => {
                   For too long, optimal brain function has been left to chance. Meditation apps. Wellness programmes. Vague advice about sleep and stress.
                 </p>
                 <p className="text-base sm:text-lg text-ash leading-relaxed">
-                  We built NeuroState to change that. One integrated system combining AI coaching, clinical grade hardware, and precision nutrition. Measurable outcomes. Real results.
+                  We built <Link to="/" className="text-signal-green hover:underline">NeuroState</Link> to change that. One integrated system combining AI coaching, clinical grade hardware, and precision nutrition. Measurable outcomes. Real results.
                 </p>
               </div>
               
@@ -154,7 +154,7 @@ const AboutUs = () => {
               Ready to upgrade?
             </h2>
             <p className="text-base sm:text-lg text-stone max-w-xl mx-auto">
-              Experience the NeuroState system. AI coaching. Neuromodulation. Precision nutrition.
+              Experience the <Link to="/" className="text-signal-green hover:underline">NeuroState</Link> system. AI coaching. Neuromodulation. Precision nutrition.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link to="/shop">

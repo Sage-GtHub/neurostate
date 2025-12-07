@@ -75,8 +75,8 @@ export const OrganizationStructuredData = () => {
       "name": "NeuroState",
       "alternateName": "NeuroState®",
       "url": "https://neurostate.co.uk",
-      "logo": "https://neurostate.co.uk/favicon.jpg",
-      "description": "The world's first cognitive performance system combining AI, red light therapy and performance supplements to improve focus, sleep, energy and mental performance.",
+      "logo": "https://neurostate.co.uk/favicon.png",
+      "description": "NeuroState is a science-backed cognitive performance and recovery brand offering AI coaching, supplements and red light therapy technology to improve focus, sleep, energy and cognitive performance.",
       "foundingDate": "2025",
       "slogan": "The World's First Cognitive Performance System",
       "knowsAbout": [
@@ -98,7 +98,6 @@ export const OrganizationStructuredData = () => {
         "availableLanguage": "English"
       },
       "sameAs": [
-        "https://twitter.com/neurostate",
         "https://www.linkedin.com/company/neurostate",
         "https://www.instagram.com/neurostate"
       ],

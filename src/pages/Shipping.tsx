@@ -5,16 +5,22 @@ import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Package, Truck, RefreshCcw, Shield, Clock, MapPin, CreditCard, CheckCircle, AlertCircle } from "lucide-react";
 import { LiveChat } from "@/components/LiveChat";
+import { SEO } from "@/components/SEO";
 
 const Shipping = () => {
   const [chatOpen, setChatOpen] = useState(false);
   
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-1">
-        {/* Hero Section */}
-        <section className="bg-muted/30 py-16">
+    <>
+      <SEO 
+        title="Delivery & Returns – Shipping Information | NeuroState"
+        description="Fast UK delivery, international shipping, and 30-day money-back guarantee. Free standard delivery on orders over £50. Learn about our returns policy."
+      />
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-1">
+          {/* Hero Section */}
+          <section className="bg-muted/30 py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -419,7 +425,8 @@ const Shipping = () => {
       </main>
       <Footer />
       <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
-    </div>
+      </div>
+    </>
   );
 };
 

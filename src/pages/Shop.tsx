@@ -112,7 +112,7 @@ const Shop = () => {
             <p className="ghost-number mb-3 sm:mb-4 md:mb-6">SHOP</p>
             <h1 className="mb-4 sm:mb-6">All Products</h1>
             <p className="text-body-large text-ash max-w-2xl">
-              Discover our complete range of science-backed supplements and clinical-grade recovery devices.
+              Discover our complete range of science-backed <Link to="/category/supplements" className="text-signal-green hover:underline">supplements</Link> and clinical-grade <Link to="/category/devices" className="text-signal-green hover:underline">recovery devices</Link>.
             </p>
           </div>
         </section>

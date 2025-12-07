@@ -1,12 +1,18 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Link } from "react-router-dom";
+import { SEO } from "@/components/SEO";
 
 const Terms = () => {
   return (
-    <div className="min-h-screen bg-background mobile-nav-padding">
-      <Header />
-      <main className="container mx-auto px-4 py-16">
+    <>
+      <SEO 
+        title="Terms & Conditions | NeuroState"
+        description="Read the terms and conditions for using the NeuroState website and purchasing our cognitive performance supplements and recovery devices."
+      />
+      <div className="min-h-screen bg-background mobile-nav-padding">
+        <Header />
+        <main className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Terms & Conditions</h1>
           <p className="text-muted-foreground mb-8">Last updated: {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
@@ -183,7 +189,8 @@ const Terms = () => {
         </div>
       </main>
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

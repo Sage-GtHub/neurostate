@@ -7,6 +7,7 @@ import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Loader2, ArrowLeft } from "lucide-react";
 import { LiveChat } from "@/components/LiveChat";
+import { SEO } from "@/components/SEO";
 
 const categoryConfig: Record<string, {
   title: string;
@@ -100,9 +101,14 @@ const CategoryProducts = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background mobile-nav-padding">
-      <Header />
-      <main>
+    <>
+      <SEO 
+        title={`${config.title} | NeuroState`}
+        description={config.description}
+      />
+      <div className="min-h-screen bg-background mobile-nav-padding">
+        <Header />
+        <main>
         <section className="pt-20 sm:pt-24 md:pt-32 pb-8 sm:pb-12 md:pb-16 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32">
           <div className="w-full max-w-7xl mx-auto">
             <Link to="/">
@@ -148,7 +154,8 @@ const CategoryProducts = () => {
         </div>
       </footer>
       <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
-    </div>
+      </div>
+    </>
   );
 };
 
