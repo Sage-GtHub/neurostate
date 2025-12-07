@@ -257,35 +257,99 @@ export const CorporateServiceStructuredData = () => {
 
 export const WebsiteStructuredData = () => {
   useEffect(() => {
-    const structuredData = {
+    // WebSite schema with SearchAction
+    const websiteData = {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "NeuroState",
+      "alternateName": "NeuroState®",
       "url": "https://neurostate.co.uk",
       "description": "The world's first cognitive performance system combining AI, red light therapy and performance supplements.",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://neurostate.co.uk/shop?search={search_term_string}",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://neurostate.co.uk/shop?search={search_term_string}"
+        },
         "query-input": "required name=search_term_string"
       }
     };
 
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify(structuredData);
-    script.id = 'website-structured-data';
+    // SiteNavigationElement schema for sitelinks
+    const sitelinksData = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Shop",
+          "description": "Shop performance supplements and recovery devices.",
+          "url": "https://neurostate.co.uk/shop"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Nova AI",
+          "description": "AI-powered cognitive performance assistant.",
+          "url": "https://neurostate.co.uk/nova"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "About Us",
+          "description": "Peak performance for everyone. Learn about our mission.",
+          "url": "https://neurostate.co.uk/about"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Resources",
+          "description": "Master your health journey with expert guides and articles.",
+          "url": "https://neurostate.co.uk/resources"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "For Teams",
+          "description": "Enterprise cognitive performance solutions for organisations.",
+          "url": "https://neurostate.co.uk/enterprise/overview"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Contact",
+          "description": "Get in touch with the NeuroState team.",
+          "url": "https://neurostate.co.uk/contact"
+        }
+      ]
+    };
+
+    // Add WebSite schema
+    const websiteScript = document.createElement('script');
+    websiteScript.type = 'application/ld+json';
+    websiteScript.text = JSON.stringify(websiteData);
+    websiteScript.id = 'website-structured-data';
     
-    const existing = document.getElementById('website-structured-data');
-    if (existing) {
-      existing.remove();
+    const existingWebsite = document.getElementById('website-structured-data');
+    if (existingWebsite) {
+      existingWebsite.remove();
     }
+    document.head.appendChild(websiteScript);
+
+    // Add SiteNavigationElement schema
+    const sitelinksScript = document.createElement('script');
+    sitelinksScript.type = 'application/ld+json';
+    sitelinksScript.text = JSON.stringify(sitelinksData);
+    sitelinksScript.id = 'sitelinks-structured-data';
     
-    document.head.appendChild(script);
+    const existingSitelinks = document.getElementById('sitelinks-structured-data');
+    if (existingSitelinks) {
+      existingSitelinks.remove();
+    }
+    document.head.appendChild(sitelinksScript);
 
     return () => {
-      const scriptToRemove = document.getElementById('website-structured-data');
-      if (scriptToRemove) {
-        scriptToRemove.remove();
+      const websiteToRemove = document.getElementById('website-structured-data');
+      if (websiteToRemove) {
+        websiteToRemove.remove();
+      }
+      const sitelinksToRemove = document.getElementById('sitelinks-structured-data');
+      if (sitelinksToRemove) {
+        sitelinksToRemove.remove();
       }
     };
   }, []);
