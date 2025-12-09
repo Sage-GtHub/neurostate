@@ -3,10 +3,12 @@ import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Watch, Activity, Shield, Lock, Eye, Database, RefreshCw, Plus, Loader2, ExternalLink, Unplug, AlertCircle } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Watch, Activity, Shield, Lock, Eye, Database, RefreshCw, Plus, Loader2, ExternalLink, Unplug, AlertCircle, Search } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { SEO } from "@/components/SEO";
+import { NotificationSettings } from "@/components/nova/NotificationSettings";
 
 interface Device {
   id: string;
@@ -24,12 +26,92 @@ interface VitalProvider {
   connected_at?: string;
 }
 
-const AVAILABLE_DEVICES = [
-  { type: 'oura', name: 'Oura Ring', icon: '💍', description: 'Sleep, HRV, activity and recovery tracking' },
-  { type: 'whoop', name: 'Whoop', icon: '📿', description: 'Strain, recovery and sleep performance' },
-  { type: 'fitbit', name: 'Fitbit', icon: '⌚', description: 'Activity, sleep and heart rate data' },
-  { type: 'garmin', name: 'Garmin', icon: '🏃', description: 'Training, sleep and body battery metrics' },
+// Device catalog with official logos and info
+const DEVICE_CATALOG = [
+  { 
+    type: 'oura', 
+    name: 'Oura Ring', 
+    logo: 'https://cdn.brandfetch.io/idfZlKLBKA/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    description: 'Sleep, HRV, activity and recovery tracking',
+    website: 'https://ouraring.com',
+    metrics: ['Sleep Score', 'HRV', 'Recovery', 'Activity'],
+  },
+  { 
+    type: 'whoop', 
+    name: 'WHOOP', 
+    logo: 'https://cdn.brandfetch.io/idANQlf22l/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    description: 'Strain, recovery and sleep performance',
+    website: 'https://whoop.com',
+    metrics: ['Strain', 'Recovery', 'Sleep', 'HRV'],
+  },
+  { 
+    type: 'fitbit', 
+    name: 'Fitbit', 
+    logo: 'https://cdn.brandfetch.io/idpdXJWPE7/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    description: 'Activity, sleep and heart rate data',
+    website: 'https://fitbit.com',
+    metrics: ['Steps', 'Sleep', 'Heart Rate', 'SpO2'],
+  },
+  { 
+    type: 'garmin', 
+    name: 'Garmin', 
+    logo: 'https://cdn.brandfetch.io/idj2fEodKL/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    description: 'Training, sleep and body battery metrics',
+    website: 'https://garmin.com',
+    metrics: ['Body Battery', 'Training Load', 'Sleep', 'Stress'],
+  },
+  { 
+    type: 'apple_health', 
+    name: 'Apple Health', 
+    logo: 'https://cdn.brandfetch.io/idnrCPuv87/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    description: 'iOS health and activity data',
+    website: 'https://apple.com/health',
+    metrics: ['Steps', 'Heart Rate', 'Sleep', 'Workouts'],
+  },
+  { 
+    type: 'withings', 
+    name: 'Withings', 
+    logo: 'https://cdn.brandfetch.io/id-Gni1Kox/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    description: 'Smart scales, watches and health monitors',
+    website: 'https://withings.com',
+    metrics: ['Weight', 'Body Composition', 'Sleep', 'ECG'],
+  },
+  { 
+    type: 'polar', 
+    name: 'Polar', 
+    logo: 'https://cdn.brandfetch.io/idWEKIE1tq/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    description: 'Heart rate and training analytics',
+    website: 'https://polar.com',
+    metrics: ['Heart Rate', 'Training Load', 'Sleep', 'Recovery'],
+  },
+  { 
+    type: 'samsung', 
+    name: 'Samsung Health', 
+    logo: 'https://cdn.brandfetch.io/idxAg10C0L/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    description: 'Galaxy Watch and Samsung Health data',
+    website: 'https://samsung.com/health',
+    metrics: ['Steps', 'Sleep', 'Heart Rate', 'Stress'],
+  },
+  { 
+    type: 'coros', 
+    name: 'COROS', 
+    logo: 'https://cdn.brandfetch.io/idZz8_RBY_/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    description: 'GPS sport watches for athletes',
+    website: 'https://coros.com',
+    metrics: ['Training Load', 'Recovery', 'Sleep', 'HRV'],
+  },
+  { 
+    type: 'amazfit', 
+    name: 'Amazfit', 
+    logo: 'https://cdn.brandfetch.io/idaM8pwIhQ/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    description: 'Smart fitness wearables',
+    website: 'https://amazfit.com',
+    metrics: ['Steps', 'Sleep', 'Heart Rate', 'SpO2'],
+  },
 ];
+
+// Main connected via Vital API
+const VITAL_SUPPORTED = ['oura', 'whoop', 'fitbit', 'garmin'];
 
 export default function NovaDevices() {
   const [devices, setDevices] = useState<Device[]>([]);
@@ -40,6 +122,7 @@ export default function NovaDevices() {
   const [connectingDevice, setConnectingDevice] = useState<string | null>(null);
   const [disconnectingDevice, setDisconnectingDevice] = useState<string | null>(null);
   const [dataStats, setDataStats] = useState({ dataPoints: 0, insights: 0, recommendations: 0 });
+  const [searchQuery, setSearchQuery] = useState("");
   const { toast } = useToast();
 
   useEffect(() => {
@@ -133,6 +216,14 @@ export default function NovaDevices() {
   };
 
   const handleConnect = async (deviceType: string, deviceName: string) => {
+    if (!VITAL_SUPPORTED.includes(deviceType)) {
+      toast({
+        title: "Coming Soon",
+        description: `${deviceName} integration is not yet available. Stay tuned!`,
+      });
+      return;
+    }
+
     setConnectingDevice(deviceType);
     
     try {
@@ -147,7 +238,6 @@ export default function NovaDevices() {
         return;
       }
 
-      // Call Vital API to get connection link
       const response = await fetch(
         `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/vital-connect`,
         {
@@ -171,7 +261,6 @@ export default function NovaDevices() {
       const data = await response.json();
       
       if (data.link_url) {
-        // Open Vital Link in a new window for OAuth
         window.open(data.link_url, '_blank', 'width=600,height=700');
         
         toast({
@@ -179,7 +268,6 @@ export default function NovaDevices() {
           description: `Complete the ${deviceName} authorisation in the new window. Return here when done.`,
         });
         
-        // Poll for connection status
         setTimeout(() => {
           loadVitalProviders();
           loadDevices();
@@ -293,20 +381,6 @@ export default function NovaDevices() {
     }
   };
 
-  const getDeviceIcon = (deviceType: string) => {
-    switch (deviceType) {
-      case 'oura':
-        return <div className="w-6 h-6 rounded-full border-2 border-accent" />;
-      case 'fitbit':
-      case 'garmin':
-        return <Watch className="w-6 h-6 text-accent" />;
-      case 'whoop':
-        return <Activity className="w-6 h-6 text-accent" />;
-      default:
-        return <Activity className="w-6 h-6 text-accent" />;
-    }
-  };
-
   const getTimeSince = (dateString: string | null) => {
     if (!dateString) return "Never";
     const date = new Date(dateString);
@@ -325,7 +399,15 @@ export default function NovaDevices() {
   // Merge Vital providers with local devices
   const connectedProviders = vitalProviders.filter(p => p.status === 'connected').map(p => p.slug);
   const connectedDeviceTypes = [...new Set([...devices.map(d => d.device_type), ...connectedProviders])];
-  const availableToConnect = AVAILABLE_DEVICES.filter(d => !connectedDeviceTypes.includes(d.type));
+  
+  // Filter devices by search
+  const filteredDevices = DEVICE_CATALOG.filter(device => 
+    device.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    device.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const connectedDevicesFiltered = filteredDevices.filter(d => connectedDeviceTypes.includes(d.type));
+  const availableDevicesFiltered = filteredDevices.filter(d => !connectedDeviceTypes.includes(d.type));
 
   return (
     <NovaSwipeWrapper>
@@ -347,6 +429,18 @@ export default function NovaDevices() {
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12">
           <div className="space-y-12 animate-fade-in">
             
+            {/* Search Bar */}
+            <div className="relative max-w-md">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-ash" />
+              <Input
+                type="text"
+                placeholder="Search devices..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10"
+              />
+            </div>
+
             {/* Loading State */}
             {isLoading && (
               <div className="flex items-center justify-center py-12">
@@ -375,22 +469,29 @@ export default function NovaDevices() {
             )}
 
             {/* Connected Devices */}
-            {!isLoading && !loadError && connectedDeviceTypes.length > 0 && (
+            {!isLoading && !loadError && connectedDevicesFiltered.length > 0 && (
               <div>
                 <h2 className="text-lg font-bold text-carbon mb-6">Your Devices</h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {AVAILABLE_DEVICES.filter(d => connectedDeviceTypes.includes(d.type)).map((device) => {
+                  {connectedDevicesFiltered.map((device) => {
                     const localDevice = devices.find(d => d.device_type === device.type);
                     const vitalProvider = vitalProviders.find(p => p.slug === device.type);
                     
                     return (
                       <div 
                         key={device.type} 
-                        className="relative overflow-hidden rounded-2xl p-6 bg-pearl/50 border border-mist/30 transition-all hover:shadow-md"
+                        className="relative overflow-hidden rounded-2xl p-6 bg-pearl/50 border border-accent/20 transition-all hover:shadow-md"
                       >
                         <div className="flex items-start justify-between mb-4">
-                          <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-2xl">
-                            {device.icon}
+                          <div className="w-14 h-14 rounded-xl bg-white border border-mist/50 flex items-center justify-center p-2 shadow-sm">
+                            <img 
+                              src={device.logo} 
+                              alt={device.name}
+                              className="w-full h-full object-contain"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = '/placeholder.svg';
+                              }}
+                            />
                           </div>
                           <div className="flex items-center gap-1">
                             <div className="w-2 h-2 rounded-full bg-accent" />
@@ -400,6 +501,15 @@ export default function NovaDevices() {
 
                         <h3 className="text-base font-semibold text-carbon mb-1">{device.name}</h3>
                         <p className="text-xs text-ash mb-3">{device.description}</p>
+
+                        {/* Metrics Tags */}
+                        <div className="flex flex-wrap gap-1 mb-4">
+                          {device.metrics.slice(0, 3).map((metric, i) => (
+                            <span key={i} className="px-2 py-0.5 text-[10px] bg-accent/10 text-accent rounded-full">
+                              {metric}
+                            </span>
+                          ))}
+                        </div>
                         
                         <div className="space-y-1 text-sm text-ash mb-4">
                           <div className="flex justify-between">
@@ -447,107 +557,137 @@ export default function NovaDevices() {
             )}
 
             {/* Available Devices to Connect */}
-            {!isLoading && !loadError && availableToConnect.length > 0 && (
+            {!isLoading && !loadError && availableDevicesFiltered.length > 0 && (
               <div>
                 <h2 className="text-lg font-bold text-carbon mb-6">
-                  {connectedDeviceTypes.length > 0 ? "Add More Devices" : "Connect Your Devices"}
+                  {connectedDevicesFiltered.length > 0 ? "Add More Devices" : "Connect Your Devices"}
                 </h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {availableToConnect.map((device) => (
-                    <div 
-                      key={device.type} 
-                      className="relative overflow-hidden rounded-2xl p-6 bg-white border border-mist/50 border-dashed transition-all hover:border-accent/50 hover:shadow-sm"
-                    >
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="w-12 h-12 rounded-xl bg-mist/30 flex items-center justify-center text-2xl">
-                          {device.icon}
-                        </div>
-                      </div>
-
-                      <h3 className="text-base font-semibold text-carbon mb-1">{device.name}</h3>
-                      <p className="text-xs text-ash mb-4">{device.description}</p>
-
-                      <Button 
-                        size="sm"
-                        className="w-full gap-2"
-                        onClick={() => handleConnect(device.type, device.name)}
-                        disabled={connectingDevice === device.type}
+                  {availableDevicesFiltered.map((device) => {
+                    const isVitalSupported = VITAL_SUPPORTED.includes(device.type);
+                    
+                    return (
+                      <div 
+                        key={device.type} 
+                        className={`relative overflow-hidden rounded-2xl p-6 bg-white border transition-all hover:shadow-sm ${
+                          isVitalSupported ? 'border-mist/50 hover:border-accent/50' : 'border-mist/30 opacity-75'
+                        }`}
                       >
-                        {connectingDevice === device.type ? (
-                          <>
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="w-14 h-14 rounded-xl bg-mist/20 border border-mist/30 flex items-center justify-center p-2">
+                            <img 
+                              src={device.logo} 
+                              alt={device.name}
+                              className="w-full h-full object-contain"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = '/placeholder.svg';
+                              }}
+                            />
+                          </div>
+                          {!isVitalSupported && (
+                            <span className="text-[10px] text-stone bg-mist/50 px-2 py-0.5 rounded-full">Coming Soon</span>
+                          )}
+                        </div>
+
+                        <h3 className="text-base font-semibold text-carbon mb-1">{device.name}</h3>
+                        <p className="text-xs text-ash mb-3">{device.description}</p>
+
+                        {/* Metrics Tags */}
+                        <div className="flex flex-wrap gap-1 mb-4">
+                          {device.metrics.slice(0, 2).map((metric, i) => (
+                            <span key={i} className="px-2 py-0.5 text-[10px] bg-mist/50 text-stone rounded-full">
+                              {metric}
+                            </span>
+                          ))}
+                        </div>
+
+                        <Button 
+                          size="sm"
+                          variant={isVitalSupported ? "default" : "outline"}
+                          className="w-full gap-2"
+                          onClick={() => handleConnect(device.type, device.name)}
+                          disabled={connectingDevice === device.type || !isVitalSupported}
+                        >
+                          {connectingDevice === device.type ? (
                             <Loader2 className="w-4 h-4 animate-spin" />
-                            Connecting...
-                          </>
-                        ) : (
-                          <>
-                            <ExternalLink className="w-4 h-4" />
-                            Connect
-                          </>
-                        )}
-                      </Button>
-                    </div>
-                  ))}
+                          ) : (
+                            <Plus className="w-4 h-4" />
+                          )}
+                          {isVitalSupported ? 'Connect' : 'Not Available'}
+                        </Button>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}
 
-            {/* Data Sync Stats */}
-            <Card className="border-carbon/10 bg-gradient-to-br from-carbon to-slate text-ivory shadow-lg">
-              <CardContent className="p-8 sm:p-10">
-                <h2 className="text-xl font-semibold mb-4 tracking-tight">Data Synchronisation</h2>
-                <p className="text-sm text-pearl/90 mb-8 leading-relaxed max-w-2xl">
-                  Nova continuously analyses your biometric data to provide personalised insights and adaptive recommendations
-                </p>
-                
-                <div className="grid sm:grid-cols-3 gap-8">
-                  {[
-                    { label: "Data Points Today", value: dataStats.dataPoints > 0 ? dataStats.dataPoints.toLocaleString() : "—" },
-                    { label: "Insights Generated", value: dataStats.insights > 0 ? dataStats.insights.toString() : "—" },
-                    { label: "Recommendations", value: dataStats.recommendations > 0 ? dataStats.recommendations.toString() : "—" }
-                  ].map((stat, index) => (
-                    <div key={index}>
-                      <div className="text-xs text-pearl/70 uppercase tracking-wider mb-2 font-medium">{stat.label}</div>
-                      <div className="text-4xl font-bold tracking-tight">{stat.value}</div>
+            {/* No Results */}
+            {!isLoading && !loadError && filteredDevices.length === 0 && searchQuery && (
+              <div className="text-center py-12">
+                <p className="text-ash">No devices found matching "{searchQuery}"</p>
+                <Button variant="ghost" onClick={() => setSearchQuery("")} className="mt-2">
+                  Clear search
+                </Button>
+              </div>
+            )}
+
+            {/* Notification Settings */}
+            <div>
+              <h2 className="text-lg font-bold text-carbon mb-6">Notification Settings</h2>
+              <NotificationSettings />
+            </div>
+
+            {/* Data Syncing Stats */}
+            <div>
+              <h2 className="text-lg font-bold text-carbon mb-6">Data Syncing</h2>
+              <Card className="border-mist/30">
+                <CardContent className="p-6">
+                  <div className="grid grid-cols-3 gap-6 text-center">
+                    <div>
+                      <p className="text-3xl font-bold text-carbon">{dataStats.dataPoints.toLocaleString()}</p>
+                      <p className="text-xs text-ash">Data Points Today</p>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                    <div>
+                      <p className="text-3xl font-bold text-carbon">{dataStats.insights}</p>
+                      <p className="text-xs text-ash">Insights Generated</p>
+                    </div>
+                    <div>
+                      <p className="text-3xl font-bold text-carbon">{dataStats.recommendations}</p>
+                      <p className="text-xs text-ash">Recommendations</p>
+                    </div>
+                  </div>
+                  <p className="text-xs text-ash text-center mt-6">
+                    Nova continuously analyses your biometric data to provide personalised insights and recommendations.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
 
             {/* Privacy & Security */}
-            <div className="relative overflow-hidden rounded-2xl p-8 sm:p-10 bg-pearl/30">
-              <div className="relative">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
-                    <Shield className="w-6 h-6 text-accent" />
+            <div>
+              <h2 className="text-lg font-bold text-carbon mb-6">Privacy & Security</h2>
+              <Card className="border-mist/30">
+                <CardContent className="p-6">
+                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {[
+                      { icon: Lock, label: "End-to-end encryption" },
+                      { icon: Eye, label: "Data anonymisation" },
+                      { icon: Shield, label: "GDPR compliant" },
+                      { icon: Database, label: "You control your data" },
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                          <item.icon className="w-5 h-5 text-accent" />
+                        </div>
+                        <span className="text-sm text-carbon">{item.label}</span>
+                      </div>
+                    ))}
                   </div>
-                  <h2 className="text-xl font-semibold text-carbon">Privacy & Security</h2>
-                </div>
-                
-                <p className="text-sm text-ash mb-8 leading-relaxed max-w-2xl">
-                  Your data is encrypted end-to-end and never shared with third parties. You maintain complete control over your biometric information.
-                </p>
-
-                <div className="grid sm:grid-cols-2 gap-6">
-                  {[
-                    { icon: Lock, title: "End-to-end encryption", description: "All data is encrypted in transit and at rest" },
-                    { icon: Eye, title: "Data anonymisation", description: "Personal identifiers are removed from analytics" },
-                    { icon: Shield, title: "GDPR compliant", description: "Full compliance with data protection regulations" },
-                    { icon: Database, title: "You control your data", description: "Export or delete your data anytime" }
-                  ].map((item, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
-                        <item.icon className="w-5 h-5 text-accent" />
-                      </div>
-                      <div>
-                        <h3 className="text-sm font-semibold text-carbon mb-1">{item.title}</h3>
-                        <p className="text-xs text-ash">{item.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             </div>
+
           </div>
         </div>
       </div>
