@@ -6,14 +6,22 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-// Vital API supports sandbox and production environments
-// Set VITAL_ENVIRONMENT to "sandbox" or "production" (defaults to sandbox for safety)
+// Vital API supports sandbox/production and US/EU regions
+// VITAL_ENVIRONMENT: "sandbox" or "production" (defaults to sandbox)
+// VITAL_REGION: "us" or "eu" (defaults to us)
 const getVitalApiBase = () => {
   const env = Deno.env.get("VITAL_ENVIRONMENT") || "sandbox";
+  const region = Deno.env.get("VITAL_REGION") || "us";
+  
   if (env === "production") {
-    return "https://api.tryvital.io/v2";
+    return region === "eu" 
+      ? "https://api.eu.tryvital.io/v2"
+      : "https://api.us.tryvital.io/v2";
   }
-  return "https://api.sandbox.tryvital.io/v2";
+  // Sandbox
+  return region === "eu"
+    ? "https://api.sandbox.eu.tryvital.io/v2"
+    : "https://api.sandbox.tryvital.io/v2";
 };
 
 serve(async (req) => {
