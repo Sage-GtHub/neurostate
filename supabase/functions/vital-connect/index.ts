@@ -6,7 +6,15 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-const VITAL_API_BASE = "https://api.tryvital.io/v2";
+// Vital API supports sandbox and production environments
+// Set VITAL_ENVIRONMENT to "sandbox" or "production" (defaults to sandbox for safety)
+const getVitalApiBase = () => {
+  const env = Deno.env.get("VITAL_ENVIRONMENT") || "sandbox";
+  if (env === "production") {
+    return "https://api.tryvital.io/v2";
+  }
+  return "https://api.sandbox.tryvital.io/v2";
+};
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -17,6 +25,9 @@ serve(async (req) => {
     const VITAL_API_KEY = Deno.env.get("VITAL_API_KEY");
     const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+    const VITAL_API_BASE = getVitalApiBase();
+
+    console.log("Using Vital API base:", VITAL_API_BASE);
 
     if (!VITAL_API_KEY) {
       console.error("VITAL_API_KEY is not configured");
