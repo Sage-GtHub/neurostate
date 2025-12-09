@@ -3,11 +3,11 @@ import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Activity, TrendingUp, Brain, Target, Sparkles, Zap, Shield, Clock, ChevronRight, MessageSquare, Lightbulb, AlertTriangle, RefreshCw, Loader2, LogIn } from "lucide-react";
+import { Activity, TrendingUp, Brain, Target, Sparkles, ChevronRight, MessageSquare, Lightbulb, AlertTriangle, RefreshCw, Loader2, LogIn } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { ProtocolAssessment } from "@/components/ProtocolAssessment";
-import { PhaseIndicator } from "@/components/nova/PhaseIndicator";
+
 import { HealthForecast } from "@/components/nova/HealthForecast";
 import { NovaOnboarding } from "@/components/nova/NovaOnboarding";
 import { InteractiveMorningCheckIn } from "@/components/nova/InteractiveMorningCheckIn";
@@ -31,7 +31,7 @@ export default function Nova() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [showAssessment, setShowAssessment] = useState(false);
-  const [currentPhase, setCurrentPhase] = useState<1 | 2 | 3 | 4>(2);
+  
   const [connectedDevices, setConnectedDevices] = useState<any[]>([]);
   const [isSyncing, setIsSyncing] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
@@ -247,14 +247,6 @@ export default function Nova() {
       <div className="min-h-screen bg-white">
         <NovaNav />
       
-        {/* Header - Minimal */}
-        <div className="border-b border-mist bg-white">
-          <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-4 sm:py-6">
-            <div className="flex items-center justify-end">
-              <PhaseIndicator currentPhase={currentPhase} />
-            </div>
-          </div>
-        </div>
 
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-12">
           
@@ -387,35 +379,6 @@ export default function Nova() {
                   </div>
                 );
               })}
-            </div>
-          </div>
-
-          {/* Nova Phases Section */}
-          <div className="mb-6 sm:mb-12">
-            <h2 className="text-base sm:text-lg font-bold text-carbon mb-4 sm:mb-6">The Nova System</h2>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
-              {[
-                { phase: 1, title: "Discover", duration: "Days 1-7", desc: "Deep assessment and baseline" },
-                { phase: 2, title: "Optimise", duration: "Days 8-30", desc: "Active experimentation" },
-                { phase: 3, title: "Predict", duration: "Days 31-90", desc: "72-hour forecasting" },
-                { phase: 4, title: "Autonomy", duration: "Day 91+", desc: "Fully autonomous" }
-              ].map((phase) => (
-                <div 
-                  key={phase.phase} 
-                  className={`p-3 sm:p-4 rounded-lg border ${currentPhase === phase.phase ? 'border-accent bg-accent/5' : 'border-mist bg-pearl/50'}`}
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold ${currentPhase === phase.phase ? 'bg-accent text-ivory' : 'bg-mist text-stone'}`}>
-                      {phase.phase}
-                    </div>
-                    <div>
-                      <p className="text-xs sm:text-sm font-semibold text-carbon">{phase.title}</p>
-                      <p className="text-[10px] sm:text-xs text-stone">{phase.duration}</p>
-                    </div>
-                  </div>
-                  <p className="text-[10px] sm:text-xs text-ash">{phase.desc}</p>
-                </div>
-              ))}
             </div>
           </div>
 
