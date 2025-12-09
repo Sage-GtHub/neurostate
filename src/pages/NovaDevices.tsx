@@ -3,7 +3,7 @@ import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Watch, Activity, Shield, Lock, Eye, Database, RefreshCw, Plus, Loader2, ExternalLink, Unplug } from "lucide-react";
+import { Watch, Activity, Shield, Lock, Eye, Database, RefreshCw, Plus, Loader2, ExternalLink, Unplug, AlertCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { SEO } from "@/components/SEO";
@@ -35,6 +35,7 @@ export default function NovaDevices() {
   const [devices, setDevices] = useState<Device[]>([]);
   const [vitalProviders, setVitalProviders] = useState<VitalProvider[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [syncingDevice, setSyncingDevice] = useState<string | null>(null);
   const [connectingDevice, setConnectingDevice] = useState<string | null>(null);
   const [disconnectingDevice, setDisconnectingDevice] = useState<string | null>(null);
@@ -50,7 +51,10 @@ export default function NovaDevices() {
   const loadDevices = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+      if (!user) {
+        setIsLoading(false);
+        return;
+      }
 
       const { data, error } = await supabase
         .from('connected_devices')
@@ -59,8 +63,10 @@ export default function NovaDevices() {
 
       if (error) throw error;
       setDevices(data || []);
+      setLoadError(null);
     } catch (error) {
       console.error("Error loading devices:", error);
+      setLoadError("Failed to load your devices. Please try again.");
     }
   };
 
@@ -344,12 +350,32 @@ export default function NovaDevices() {
             {/* Loading State */}
             {isLoading && (
               <div className="flex items-center justify-center py-12">
-                <Loader2 className="w-8 h-8 animate-spin text-accent" />
+                <div className="flex flex-col items-center gap-4">
+                  <Loader2 className="w-8 h-8 animate-spin text-accent" />
+                  <p className="text-sm text-muted-foreground">Loading your devices...</p>
+                </div>
+              </div>
+            )}
+
+            {/* Error State */}
+            {!isLoading && loadError && (
+              <div className="flex items-center justify-center py-12">
+                <div className="flex flex-col items-center gap-4 text-center">
+                  <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center">
+                    <AlertCircle className="w-8 h-8 text-red-500" />
+                  </div>
+                  <h2 className="text-lg font-semibold text-foreground">Unable to load devices</h2>
+                  <p className="text-sm text-muted-foreground max-w-md">{loadError}</p>
+                  <Button onClick={() => { loadDevices(); loadVitalProviders(); }} variant="outline" className="gap-2">
+                    <RefreshCw className="w-4 h-4" />
+                    Try Again
+                  </Button>
+                </div>
               </div>
             )}
 
             {/* Connected Devices */}
-            {!isLoading && connectedDeviceTypes.length > 0 && (
+            {!isLoading && !loadError && connectedDeviceTypes.length > 0 && (
               <div>
                 <h2 className="text-lg font-bold text-carbon mb-6">Your Devices</h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -421,7 +447,7 @@ export default function NovaDevices() {
             )}
 
             {/* Available Devices to Connect */}
-            {!isLoading && availableToConnect.length > 0 && (
+            {!isLoading && !loadError && availableToConnect.length > 0 && (
               <div>
                 <h2 className="text-lg font-bold text-carbon mb-6">
                   {connectedDeviceTypes.length > 0 ? "Add More Devices" : "Connect Your Devices"}
