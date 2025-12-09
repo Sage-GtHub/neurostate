@@ -339,7 +339,7 @@ export default function NovaChat() {
                 </div>
                 <div>
                   <h1 className="text-base font-semibold text-foreground">Nova</h1>
-                  <p className="text-xs text-muted-foreground">AI Performance Coach</p>
+                  <p className="text-xs text-muted-foreground">Your Performance Co-pilot</p>
                 </div>
               </div>
               <div className="flex items-center gap-1">

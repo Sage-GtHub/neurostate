@@ -11,6 +11,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { Plus, ArrowRight, Target } from "lucide-react";
 import { PhaseProgressTracker } from "@/components/nova/PhaseProgressTracker";
 import { ProtocolBuilder } from "@/components/nova/ProtocolBuilder";
+import { ProtocolCheckIn } from "@/components/nova/ProtocolCheckIn";
 
 interface Protocol {
   id: string;
@@ -121,16 +122,13 @@ export default function NovaProtocols() {
                     <Progress value={protocol.completion_percentage} className="h-2.5" />
                   </div>
 
+                  {/* Protocol Check-In */}
                   <div className="border-t border-mist/30 pt-6">
-                    <h4 className="text-caption font-semibold text-carbon uppercase tracking-wider mb-4">TODAY'S STACK</h4>
-                    <div className="space-y-3">
-                      {protocol.products.map((product: any, index: number) => (
-                        <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-pearl/30 hover:bg-pearl/50 transition-colors">
-                          <span className="text-sm font-medium text-carbon">{product.product_name}</span>
-                          <span className="text-sm text-ash">{product.dose} – {product.time}</span>
-                        </div>
-                      ))}
-                    </div>
+                    <ProtocolCheckIn 
+                      protocolId={protocol.id} 
+                      products={protocol.products}
+                      onComplete={loadProtocols}
+                    />
                   </div>
                 </CardContent>
               </Card>
