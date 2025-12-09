@@ -13,7 +13,8 @@ import {
   Brain,
   Activity,
   Shield,
-  Loader2
+  Loader2,
+  ExternalLink
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
@@ -31,16 +32,17 @@ interface Device {
   type: string;
   icon: string;
   connected: boolean;
+  connecting: boolean;
 }
 
 export function NovaOnboarding({ open, onComplete }: NovaOnboardingProps) {
   const [step, setStep] = useState<OnboardingStep>("welcome");
   const [devices, setDevices] = useState<Device[]>([
-    { id: "oura", name: "Oura Ring", type: "oura", icon: "💍", connected: false },
-    { id: "apple", name: "Apple Watch", type: "apple_watch", icon: "⌚", connected: false },
-    { id: "whoop", name: "Whoop Band", type: "whoop", icon: "📿", connected: false },
+    { id: "oura", name: "Oura Ring", type: "oura", icon: "💍", connected: false, connecting: false },
+    { id: "whoop", name: "Whoop", type: "whoop", icon: "📿", connected: false, connecting: false },
+    { id: "fitbit", name: "Fitbit", type: "fitbit", icon: "⌚", connected: false, connecting: false },
+    { id: "garmin", name: "Garmin", type: "garmin", icon: "🏃", connected: false, connecting: false },
   ]);
-  const [isConnecting, setIsConnecting] = useState<string | null>(null);
   const [assessmentAnswers, setAssessmentAnswers] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -50,44 +52,119 @@ export function NovaOnboarding({ open, onComplete }: NovaOnboardingProps) {
   const progress = ((currentStepIndex + 1) / steps.length) * 100;
 
   const handleConnectDevice = async (deviceId: string) => {
-    setIsConnecting(deviceId);
+    // Mark device as connecting
+    setDevices(prev => prev.map(d => 
+      d.id === deviceId ? { ...d, connecting: true } : d
+    ));
     
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error("Not authenticated");
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast({
+          title: "Sign in required",
+          description: "Please sign in to connect devices",
+          variant: "destructive",
+        });
+        setDevices(prev => prev.map(d => 
+          d.id === deviceId ? { ...d, connecting: false } : d
+        ));
+        return;
+      }
 
       const device = devices.find(d => d.id === deviceId);
       if (!device) return;
 
-      // Insert device into connected_devices
-      const { error } = await supabase.from('connected_devices').insert({
-        user_id: user.id,
-        device_type: device.type,
-        device_name: device.name,
-        connection_status: 'connected',
-        last_sync_at: new Date().toISOString(),
-        battery_level: 85 + Math.floor(Math.random() * 15)
-      });
+      // Call Vital API to get OAuth link
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/vital-connect`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({ 
+            action: 'create-link',
+            provider: device.type 
+          }),
+        }
+      );
 
-      if (error) throw error;
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to create connection');
+      }
 
-      setDevices(prev => prev.map(d => 
-        d.id === deviceId ? { ...d, connected: true } : d
-      ));
-
-      toast({
-        title: "Device connected",
-        description: `${device.name} has been successfully connected.`,
-      });
+      const data = await response.json();
+      
+      if (data.link_url) {
+        // Open Vital Link in a new window for OAuth
+        window.open(data.link_url, '_blank', 'width=600,height=700');
+        
+        toast({
+          title: "Connection started",
+          description: `Complete the ${device.name} authorisation in the new window. Return here when done.`,
+        });
+        
+        // Poll for connection status
+        const pollInterval = setInterval(async () => {
+          const providersRes = await fetch(
+            `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/vital-connect`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${session.access_token}`,
+              },
+              body: JSON.stringify({ action: 'get-providers' }),
+            }
+          );
+          
+          if (providersRes.ok) {
+            const providersData = await providersRes.json();
+            const connectedProviders = providersData.providers?.filter((p: any) => p.status === 'connected').map((p: any) => p.slug) || [];
+            
+            if (connectedProviders.includes(device.type)) {
+              clearInterval(pollInterval);
+              setDevices(prev => prev.map(d => 
+                d.id === deviceId ? { ...d, connected: true, connecting: false } : d
+              ));
+              
+              // Also save to connected_devices table
+              await supabase.from('connected_devices').upsert({
+                user_id: session.user.id,
+                device_type: device.type,
+                device_name: device.name,
+                connection_status: 'connected',
+                last_sync_at: new Date().toISOString(),
+              }, { onConflict: 'user_id,device_type' });
+              
+              toast({
+                title: "Device connected",
+                description: `${device.name} has been successfully connected.`,
+              });
+            }
+          }
+        }, 3000);
+        
+        // Clear polling after 2 minutes
+        setTimeout(() => {
+          clearInterval(pollInterval);
+          setDevices(prev => prev.map(d => 
+            d.id === deviceId && d.connecting ? { ...d, connecting: false } : d
+          ));
+        }, 120000);
+      }
     } catch (error) {
       console.error("Error connecting device:", error);
       toast({
         title: "Connection failed",
-        description: "Failed to connect device. Please try again.",
+        description: error instanceof Error ? error.message : "Please try again.",
         variant: "destructive",
       });
-    } finally {
-      setIsConnecting(null);
+      setDevices(prev => prev.map(d => 
+        d.id === deviceId ? { ...d, connecting: false } : d
+      ));
     }
   };
 
@@ -129,6 +206,10 @@ export function NovaOnboarding({ open, onComplete }: NovaOnboardingProps) {
   };
 
   const generateInitialMetrics = async (userId: string) => {
+    // Only generate initial metrics if no devices are connected
+    const connectedCount = devices.filter(d => d.connected).length;
+    if (connectedCount > 0) return;
+    
     const metrics = [
       { metric_type: 'hrv', value: 55 + Math.floor(Math.random() * 25) },
       { metric_type: 'sleep_quality', value: 6 + Math.floor(Math.random() * 3) },
@@ -141,7 +222,7 @@ export function NovaOnboarding({ open, onComplete }: NovaOnboardingProps) {
         user_id: userId,
         metric_type: metric.metric_type,
         value: metric.value,
-        device_source: 'onboarding'
+        device_source: 'onboarding_baseline'
       });
     }
   };
@@ -218,7 +299,7 @@ export function NovaOnboarding({ open, onComplete }: NovaOnboardingProps) {
               </div>
               <div className="grid grid-cols-3 gap-4 py-6">
                 {[
-                  { icon: Brain, label: "Predicts", desc: "72hr forecasting" },
+                  { icon: Brain, label: "Predicts", desc: "72-hour forecasting" },
                   { icon: Activity, label: "Adapts", desc: "Real-time adjustments" },
                   { icon: Shield, label: "Protects", desc: "Your data is yours" },
                 ].map((item, i) => (
@@ -243,9 +324,9 @@ export function NovaOnboarding({ open, onComplete }: NovaOnboardingProps) {
                 <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                   <Watch className="w-8 h-8 text-accent" />
                 </div>
-                <h2 className="text-2xl font-bold text-carbon mb-2">Connect Your Devices</h2>
+                <h2 className="text-2xl font-bold text-carbon mb-2">Connect Your Wearables</h2>
                 <p className="text-ash">
-                  Connect your wearables to enable real-time biometric tracking and personalised insights.
+                  Link your devices for real biometric tracking. You can also skip and connect later.
                 </p>
               </div>
 
@@ -261,7 +342,7 @@ export function NovaOnboarding({ open, onComplete }: NovaOnboardingProps) {
                         <div>
                           <p className="font-medium text-carbon">{device.name}</p>
                           <p className="text-xs text-ash">
-                            {device.connected ? "Connected" : "Not connected"}
+                            {device.connected ? "Connected" : device.connecting ? "Waiting for authorisation..." : "Not connected"}
                           </p>
                         </div>
                       </div>
@@ -275,15 +356,19 @@ export function NovaOnboarding({ open, onComplete }: NovaOnboardingProps) {
                           size="sm" 
                           variant="outline"
                           onClick={() => handleConnectDevice(device.id)}
-                          disabled={isConnecting !== null}
+                          disabled={device.connecting}
+                          className="gap-2"
                         >
-                          {isConnecting === device.id ? (
+                          {device.connecting ? (
                             <>
-                              <Loader2 className="w-3 h-3 mr-2 animate-spin" />
+                              <Loader2 className="w-3 h-3 animate-spin" />
                               Connecting...
                             </>
                           ) : (
-                            "Connect"
+                            <>
+                              <ExternalLink className="w-3 h-3" />
+                              Connect
+                            </>
                           )}
                         </Button>
                       )}
@@ -313,7 +398,7 @@ export function NovaOnboarding({ open, onComplete }: NovaOnboardingProps) {
                 </div>
                 <h2 className="text-2xl font-bold text-carbon mb-2">Quick Assessment</h2>
                 <p className="text-ash">
-                  Help Nova understand your goals and current state for personalised recommendations.
+                  Help Nova understand your goals for personalised recommendations.
                 </p>
               </div>
 
@@ -326,7 +411,7 @@ export function NovaOnboarding({ open, onComplete }: NovaOnboardingProps) {
                         <button
                           key={option.value}
                           onClick={() => setAssessmentAnswers(prev => ({ ...prev, [q.id]: option.value }))}
-                          className={`p-3 rounded-xl border text-left transition-all ${
+                          className={`p-3 rounded-xl border text-left transition-all min-h-[52px] ${
                             assessmentAnswers[q.id] === option.value
                               ? 'border-accent bg-accent/5'
                               : 'border-mist hover:border-accent/50'
@@ -373,9 +458,9 @@ export function NovaOnboarding({ open, onComplete }: NovaOnboardingProps) {
                 <Check className="w-10 h-10 text-accent" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-carbon mb-2">You're All Set!</h2>
+                <h2 className="text-2xl font-bold text-carbon mb-2">You are All Set</h2>
                 <p className="text-ash max-w-md mx-auto">
-                  Nova is now configured and ready to help you optimise your performance. Your personalised dashboard is waiting.
+                  Nova is now configured and ready to help you optimise your performance.
                 </p>
               </div>
               <div className="bg-pearl/50 rounded-xl p-6 text-left space-y-3">
@@ -383,15 +468,18 @@ export function NovaOnboarding({ open, onComplete }: NovaOnboardingProps) {
                 <ul className="space-y-2 text-sm text-ash">
                   <li className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-accent" />
-                    Nova will analyse your connected device data
+                    {connectedCount > 0 
+                      ? "Nova will analyse your wearable data in real-time"
+                      : "Connect a device to unlock real-time analysis"
+                    }
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-accent" />
-                    You'll receive personalised insights within 24 hours
+                    Personalised insights will generate as data comes in
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-accent" />
-                    Your 7-day health forecast will populate as data comes in
+                    Your 7-day health forecast will populate automatically
                   </li>
                 </ul>
               </div>

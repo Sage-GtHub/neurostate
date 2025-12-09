@@ -71,7 +71,7 @@ export function useRealtimeMetrics() {
           const trendData = calculateTrend(latest.value, previous?.value);
           newMetrics.hrv = {
             label: 'HRV',
-            value: latest.value.toString(),
+            value: Math.round(latest.value).toString(),
             trend: trendData?.trend,
             trendColor: trendData?.color,
             rawValue: latest.value
@@ -79,14 +79,17 @@ export function useRealtimeMetrics() {
         }
 
         // Process Sleep
-        const sleepData = data.filter(m => m.metric_type === 'sleep_quality');
+        const sleepData = data.filter(m => m.metric_type === 'sleep_quality' || m.metric_type === 'sleep_duration');
         if (sleepData.length > 0) {
           const latest = sleepData[0];
           const previous = sleepData[1];
           const trendData = calculateTrend(latest.value, previous?.value);
+          const displayValue = latest.metric_type === 'sleep_duration' 
+            ? `${latest.value.toFixed(1)}h` 
+            : `${latest.value}/10`;
           newMetrics.sleep = {
             label: 'Sleep',
-            value: `${latest.value}/10`,
+            value: displayValue,
             trend: trendData?.trend,
             trendColor: trendData?.color,
             rawValue: latest.value
@@ -112,7 +115,7 @@ export function useRealtimeMetrics() {
           const trendData = calculateTrend(latest.value, previous?.value);
           newMetrics.recovery = {
             label: 'Recovery',
-            value: `${latest.value}%`,
+            value: `${Math.round(latest.value)}%`,
             trend: trendData?.trend,
             trendColor: trendData?.color,
             rawValue: latest.value
@@ -120,7 +123,11 @@ export function useRealtimeMetrics() {
         }
 
         setMetrics(newMetrics);
-        setLastSync(new Date());
+        
+        // Get last sync time from metrics
+        if (data[0]?.recorded_at) {
+          setLastSync(new Date(data[0].recorded_at));
+        }
       }
     } catch (error) {
       console.error('Error loading metrics:', error);
@@ -152,13 +159,8 @@ export function useRealtimeMetrics() {
           },
           (payload) => {
             console.log('New metric received:', payload);
-            // Refresh metrics when new data arrives
             loadMetrics();
-            
-            toast({
-              title: 'Data synced',
-              description: 'New biometric data received from your device.',
-            });
+            setLastSync(new Date());
           }
         )
         .subscribe();
@@ -173,85 +175,69 @@ export function useRealtimeMetrics() {
     return () => {
       cleanup.then(fn => fn?.());
     };
-  }, [loadMetrics, toast]);
+  }, [loadMetrics]);
 
-  // Sync function to manually trigger device sync
+  // Sync function to trigger Vital API sync
   const syncDevices = useCallback(async () => {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-
-      // Get connected devices
-      const { data: devices } = await supabase
-        .from('connected_devices')
-        .select('*')
-        .eq('user_id', user.id)
-        .eq('connection_status', 'connected');
-
-      if (!devices || devices.length === 0) {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
         toast({
-          title: 'No devices connected',
-          description: 'Connect a device to sync biometric data.',
+          title: 'Sign in required',
+          description: 'Please sign in to sync devices.',
           variant: 'destructive',
         });
         return;
       }
 
-      // Simulate device sync by generating new metrics
-      const newMetrics = [
-        { 
-          metric_type: 'hrv', 
-          value: (metrics.hrv?.rawValue || 65) + (Math.random() * 10 - 5),
-          device_source: devices[0].device_type
-        },
-        { 
-          metric_type: 'sleep_quality', 
-          value: Math.min(10, Math.max(1, (metrics.sleep?.rawValue || 7) + (Math.random() * 2 - 1))),
-          device_source: devices[0].device_type
-        },
-        { 
-          metric_type: 'recovery', 
-          value: Math.min(100, Math.max(0, (metrics.recovery?.rawValue || 75) + (Math.random() * 10 - 5))),
-          device_source: devices[0].device_type
-        },
-        { 
-          metric_type: 'focus_time', 
-          value: Math.random() * 3 + 1,
-          device_source: devices[0].device_type
-        },
-      ];
+      // Call Vital API to sync data
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/vital-connect`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({ action: 'sync-data' }),
+        }
+      );
 
-      for (const metric of newMetrics) {
-        await supabase.from('user_metrics').insert({
-          user_id: user.id,
-          metric_type: metric.metric_type,
-          value: Math.round(metric.value * 10) / 10,
-          device_source: metric.device_source
-        });
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        
+        // If user not found in Vital, show helpful message
+        if (response.status === 404) {
+          toast({
+            title: 'No devices connected',
+            description: 'Connect a wearable device first to sync data.',
+            variant: 'destructive',
+          });
+          return;
+        }
+        
+        throw new Error(errorData.error || 'Failed to sync data');
       }
 
-      // Update device last_sync_at
-      await supabase
-        .from('connected_devices')
-        .update({ last_sync_at: new Date().toISOString() })
-        .eq('user_id', user.id);
-
+      const data = await response.json();
+      
       toast({
         title: 'Sync complete',
-        description: 'Your biometric data has been updated.',
+        description: `Synced ${data.synced?.sleep || 0} sleep and ${data.synced?.activity || 0} activity records.`,
       });
 
-      // Refresh metrics
+      // Refresh metrics after sync
       await loadMetrics();
+      setLastSync(new Date());
     } catch (error) {
       console.error('Error syncing devices:', error);
       toast({
         title: 'Sync failed',
-        description: 'Failed to sync device data. Please try again.',
+        description: error instanceof Error ? error.message : 'Please try again later.',
         variant: 'destructive',
       });
     }
-  }, [metrics, loadMetrics, toast]);
+  }, [loadMetrics, toast]);
 
   return {
     metrics,
