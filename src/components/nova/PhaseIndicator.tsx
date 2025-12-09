@@ -41,13 +41,7 @@ export function PhaseIndicator({ currentPhase, daysInCurrentPhase }: PhaseIndica
 
   return (
     <Card className="bg-pearl/50 border-mist">
-      <CardContent className="p-6">
-        <div className="flex items-center gap-2 mb-4">
-          <div className="w-2 h-2 rounded-full bg-[#10b981]" />
-          <span className="text-caption text-carbon font-semibold uppercase tracking-wider">
-            Nova Evolution
-          </span>
-        </div>
+      <CardContent className="p-4 sm:p-6">
         
         <div className="space-y-3">
           {phases.map((phase) => {
