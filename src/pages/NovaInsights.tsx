@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import { supabase } from "@/integrations/supabase/client";
 import { Progress } from "@/components/ui/progress";
-import { TrendingUp, Activity, Brain, Target } from "lucide-react";
+import { TrendingUp, Activity, Brain, Target, Loader2, AlertCircle, Watch, RefreshCw } from "lucide-react";
 
 export default function NovaInsights() {
   // Placeholder data for demonstration
@@ -45,15 +47,18 @@ export default function NovaInsights() {
     { day: 'Sun', recovery: 87 }
   ];
 
-  const [hrvData, setHrvData] = useState<any[]>(placeholderHrvData);
-  const [sleepData, setSleepData] = useState<any[]>(placeholderSleepData);
-  const [energyData, setEnergyData] = useState<any[]>(placeholderEnergyData);
-  const [recoveryData, setRecoveryData] = useState<any[]>(placeholderRecoveryData);
+  const [hrvData, setHrvData] = useState<any[]>([]);
+  const [sleepData, setSleepData] = useState<any[]>([]);
+  const [energyData, setEnergyData] = useState<any[]>([]);
+  const [recoveryData, setRecoveryData] = useState<any[]>([]);
+  const [hasRealData, setHasRealData] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [summaryMetrics, setSummaryMetrics] = useState<any>({
-    hrv: { value: '72', trend: '+5%' },
-    sleep: { value: '8.2/10', trend: 'Steady' },
-    focus: { value: '14h', trend: '+3 sessions' },
-    recovery: { value: '87%', trend: '+8%' }
+    hrv: { value: '--', trend: '' },
+    sleep: { value: '--', trend: '' },
+    focus: { value: '--', trend: '' },
+    recovery: { value: '--', trend: '' }
   });
 
   useEffect(() => {
@@ -61,9 +66,14 @@ export default function NovaInsights() {
   }, []);
 
   const loadChartData = async () => {
+    setIsLoading(true);
+    setError(null);
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+      if (!user) {
+        setIsLoading(false);
+        return;
+      }
 
       const eightDaysAgo = new Date();
       eightDaysAgo.setDate(eightDaysAgo.getDate() - 8);
@@ -76,12 +86,16 @@ export default function NovaInsights() {
         .order('recorded_at', { ascending: true });
 
       if (metrics && metrics.length > 0) {
+        setHasRealData(true);
+        
         const hrvMetrics = metrics.filter(m => m.metric_type === 'hrv');
-        const hrvChartData = hrvMetrics.map(m => ({
-          date: new Date(m.recorded_at).toLocaleDateString('en-GB', { month: 'short', day: 'numeric' }),
-          value: parseFloat(m.value.toString())
-        }));
-        setHrvData(hrvChartData);
+        if (hrvMetrics.length > 0) {
+          const hrvChartData = hrvMetrics.map(m => ({
+            date: new Date(m.recorded_at).toLocaleDateString('en-GB', { month: 'short', day: 'numeric' }),
+            value: parseFloat(m.value.toString())
+          }));
+          setHrvData(hrvChartData);
+        }
 
         const sleepMetrics = metrics.filter(m => m.metric_type === 'sleep_quality');
         const sleepChartData = sleepMetrics.slice(0, 7).map((m, i) => ({
@@ -125,10 +139,94 @@ export default function NovaInsights() {
           recovery: { value: latestRecovery ? `${latestRecovery.value}%` : '--', trend: recoveryTrend }
         });
       }
-    } catch (error) {
-      console.error("Error loading chart data:", error);
+    } catch (err) {
+      console.error("Error loading chart data:", err);
+      setError(err instanceof Error ? err.message : 'Failed to load analytics data');
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  const navigate = useNavigate();
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <NovaSwipeWrapper>
+        <div className="min-h-screen bg-background">
+          <NovaNav />
+          <div className="flex items-center justify-center h-[60vh]">
+            <div className="flex flex-col items-center gap-4">
+              <Loader2 className="w-8 h-8 animate-spin text-accent" />
+              <p className="text-sm text-muted-foreground">Loading analytics...</p>
+            </div>
+          </div>
+        </div>
+      </NovaSwipeWrapper>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <NovaSwipeWrapper>
+        <div className="min-h-screen bg-background">
+          <NovaNav />
+          <div className="flex items-center justify-center h-[60vh]">
+            <div className="flex flex-col items-center gap-4 text-center px-4">
+              <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center">
+                <AlertCircle className="w-8 h-8 text-red-500" />
+              </div>
+              <h2 className="text-lg font-semibold text-foreground">Unable to load analytics</h2>
+              <p className="text-sm text-muted-foreground max-w-md">{error}</p>
+              <Button onClick={loadChartData} variant="outline" className="gap-2">
+                <RefreshCw className="w-4 h-4" />
+                Try Again
+              </Button>
+            </div>
+          </div>
+        </div>
+      </NovaSwipeWrapper>
+    );
+  }
+
+  // Empty state - no data
+  if (!hasRealData) {
+    return (
+      <NovaSwipeWrapper>
+        <div className="min-h-screen bg-background">
+          <NovaNav />
+          <div className="border-b border-border/50 bg-gradient-to-b from-background to-muted/20">
+            <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-8">
+              <h1 className="text-2xl sm:text-3xl md:text-h1 font-semibold text-foreground mb-2">Performance Analytics</h1>
+              <p className="text-xs sm:text-body-sm text-muted-foreground">Visualise your biometric trends and patterns</p>
+            </div>
+          </div>
+          <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12">
+            <div className="max-w-lg mx-auto text-center">
+              <div className="w-20 h-20 rounded-full bg-muted/50 flex items-center justify-center mx-auto mb-6">
+                <Watch className="w-10 h-10 text-muted-foreground" />
+              </div>
+              <h2 className="text-xl font-semibold text-foreground mb-3">No biometric data yet</h2>
+              <p className="text-muted-foreground mb-8">
+                Connect a wearable device and sync your data to see performance analytics, trends, and AI-powered insights.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Button onClick={() => navigate('/nova/devices')} className="gap-2">
+                  <Watch className="w-4 h-4" />
+                  Connect Device
+                </Button>
+                <Button variant="outline" onClick={loadChartData} className="gap-2">
+                  <RefreshCw className="w-4 h-4" />
+                  Refresh
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </NovaSwipeWrapper>
+    );
+  }
 
   return (
     <NovaSwipeWrapper>

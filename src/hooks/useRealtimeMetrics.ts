@@ -96,7 +96,7 @@ export function useRealtimeMetrics() {
           };
         }
 
-        // Process Focus
+        // Process Focus - derive from activity data if no direct focus_time
         const focusData = data.filter(m => m.metric_type === 'focus_time');
         if (focusData.length > 0) {
           const total = focusData.slice(0, 7).reduce((sum, m) => sum + m.value, 0);
@@ -105,9 +105,26 @@ export function useRealtimeMetrics() {
             value: `${Math.round(total)}h`,
             rawValue: total
           };
+        } else {
+          // Derive focus score from HRV and sleep quality (higher HRV + better sleep = better focus potential)
+          const hrvValue = newMetrics.hrv?.rawValue;
+          const sleepValue = newMetrics.sleep?.rawValue;
+          if (hrvValue && sleepValue) {
+            // Normalise HRV (typical range 20-100) and combine with sleep
+            const hrvNorm = Math.min(Math.max((hrvValue - 20) / 80, 0), 1);
+            const sleepNorm = sleepValue > 10 ? sleepValue / 10 : sleepValue / 10; // Handle both duration and quality
+            const focusScore = Math.round((hrvNorm * 0.4 + sleepNorm * 0.6) * 10);
+            newMetrics.focus = {
+              label: 'Focus',
+              value: `${focusScore}/10`,
+              trend: focusScore >= 7 ? 'Good' : focusScore >= 5 ? 'Moderate' : 'Low',
+              trendColor: focusScore >= 7 ? 'text-accent' : focusScore >= 5 ? 'text-orange-500' : 'text-red-500',
+              rawValue: focusScore
+            };
+          }
         }
 
-        // Process Recovery
+        // Process Recovery - derive from HRV and sleep if no direct recovery metric
         const recoveryData = data.filter(m => m.metric_type === 'recovery');
         if (recoveryData.length > 0) {
           const latest = recoveryData[0];
@@ -120,6 +137,32 @@ export function useRealtimeMetrics() {
             trendColor: trendData?.color,
             rawValue: latest.value
           };
+        } else {
+          // Derive recovery from HRV (primary indicator) and sleep duration
+          const hrvValue = newMetrics.hrv?.rawValue;
+          const sleepValue = newMetrics.sleep?.rawValue;
+          if (hrvValue) {
+            // HRV-based recovery: higher HRV = better recovery
+            // Typical HRV ranges: 20-40 (low), 40-60 (moderate), 60-100+ (good)
+            let recoveryScore = Math.min(Math.round((hrvValue / 80) * 100), 100);
+            
+            // Boost if sleep is good (7+ hours or 7+ score)
+            if (sleepValue && sleepValue >= 7) {
+              recoveryScore = Math.min(recoveryScore + 10, 100);
+            }
+            
+            const previous = data.filter(m => m.metric_type === 'hrv')[1];
+            const prevRecovery = previous ? Math.min(Math.round((previous.value / 80) * 100), 100) : null;
+            const trendData = calculateTrend(recoveryScore, prevRecovery);
+            
+            newMetrics.recovery = {
+              label: 'Recovery',
+              value: `${recoveryScore}%`,
+              trend: trendData?.trend,
+              trendColor: trendData?.color,
+              rawValue: recoveryScore
+            };
+          }
         }
 
         setMetrics(newMetrics);
