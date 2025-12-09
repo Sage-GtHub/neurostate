@@ -326,9 +326,9 @@ export default function NovaChat() {
       <div className="min-h-screen bg-background flex flex-col">
         <NovaNav />
       
-        {/* Header */}
+        {/* Header - Mobile optimised */}
         <div className="border-b border-border/30 bg-background/80 backdrop-blur-sm sticky top-0 z-10">
-          <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-3">
+          <div className="container mx-auto px-3 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-2 sm:py-3">
             <div className="flex items-center justify-between max-w-3xl mx-auto">
               <div className="flex items-center gap-3">
                 <div className="relative">
@@ -339,7 +339,7 @@ export default function NovaChat() {
                 </div>
                 <div>
                   <h1 className="text-base font-semibold text-foreground">Nova</h1>
-                  <p className="text-xs text-muted-foreground">Your Performance Co-pilot</p>
+                  <p className="text-xs text-muted-foreground">AI Cognitive Coach</p>
                 </div>
               </div>
               <div className="flex items-center gap-1">
@@ -358,9 +358,9 @@ export default function NovaChat() {
           </div>
         </div>
 
-        {/* Chat Container */}
+        {/* Chat Container - Mobile optimised */}
         <div className="flex-1 overflow-hidden flex flex-col">
-          <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 flex-1 flex flex-col">
+          <div className="container mx-auto px-2 sm:px-6 md:px-12 lg:px-20 xl:px-32 flex-1 flex flex-col">
             <div className="max-w-3xl mx-auto w-full flex-1 flex flex-col">
               
               {messages.length === 0 ? (
@@ -487,8 +487,8 @@ export default function NovaChat() {
                 </>
               )}
               
-              {/* Input Area */}
-              <div className="py-4 border-t border-border/30 bg-background sticky bottom-0">
+              {/* Input Area - Mobile optimised */}
+              <div className="py-3 sm:py-4 border-t border-border/30 bg-background sticky bottom-0">
                 <div className="relative">
                   <textarea
                     ref={textareaRef}
@@ -500,19 +500,19 @@ export default function NovaChat() {
                     rows={1}
                     className={cn(
                       "w-full resize-none rounded-xl border border-border/50 bg-muted/30",
-                      "px-4 py-3 pr-12 text-sm placeholder:text-muted-foreground",
+                      "px-3 sm:px-4 py-3 pr-12 text-sm placeholder:text-muted-foreground",
                       "focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50",
                       "disabled:opacity-50 disabled:cursor-not-allowed",
                       "transition-all duration-200"
                     )}
-                    style={{ minHeight: '48px', maxHeight: '160px' }}
+                    style={{ minHeight: '44px', maxHeight: '120px' }}
                   />
                   <Button
                     size="icon"
                     onClick={() => handleSendMessage()}
                     disabled={!input.trim() || isLoading}
                     className={cn(
-                      "absolute right-2 bottom-2 h-8 w-8 rounded-lg",
+                      "absolute right-2 bottom-2 h-9 w-9 sm:h-8 sm:w-8 rounded-lg",
                       "bg-accent hover:bg-accent/90 text-accent-foreground",
                       "disabled:opacity-30 disabled:cursor-not-allowed",
                       "transition-all duration-200"
@@ -525,7 +525,7 @@ export default function NovaChat() {
                     )}
                   </Button>
                 </div>
-                <p className="text-[10px] text-muted-foreground text-center mt-2">
+                <p className="text-[10px] text-muted-foreground text-center mt-1.5 sm:mt-2 hidden sm:block">
                   Press Enter to send, Shift+Enter for new line
                 </p>
               </div>

@@ -247,18 +247,11 @@ export default function Nova() {
       <div className="min-h-screen bg-white">
         <NovaNav />
       
-        {/* Header */}
+        {/* Header - Minimal */}
         <div className="border-b border-mist bg-white">
-          <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-8">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium mb-2">Dashboard</p>
-                <h1 className="text-2xl sm:text-3xl font-bold text-carbon">Nova</h1>
-                <p className="text-sm text-ash mt-1">Your AI performance copilot</p>
-              </div>
-              <div className="flex items-center gap-4">
-                <PhaseIndicator currentPhase={currentPhase} />
-              </div>
+          <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-4 sm:py-6">
+            <div className="flex items-center justify-end">
+              <PhaseIndicator currentPhase={currentPhase} />
             </div>
           </div>
         </div>
@@ -339,25 +332,9 @@ export default function Nova() {
             </div>
           </div>
 
-          {/* 7-Day Forecast */}
+          {/* 7-Day Forecast - Moved to top priority */}
           <div className="mb-6 sm:mb-12">
             <HealthForecast />
-          </div>
-
-          {/* What Nova Does - Hidden on mobile */}
-          <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-px bg-mist mb-8 sm:mb-12">
-            {[
-              { icon: Brain, title: "Predicts", desc: "72-hour forecasting" },
-              { icon: Zap, title: "Adapts", desc: "Real-time adjustments" },
-              { icon: Shield, title: "Prevents", desc: "Burnout detection" },
-              { icon: Clock, title: "Learns", desc: "Your biology over time" }
-            ].map((item, i) => (
-              <div key={i} className="bg-white p-4 sm:p-6 text-center">
-                <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-accent mx-auto mb-2 sm:mb-3" />
-                <p className="text-carbon font-semibold text-xs sm:text-sm">{item.title}</p>
-                <p className="text-[10px] sm:text-xs text-stone mt-1">{item.desc}</p>
-              </div>
-            ))}
           </div>
 
           {/* Live Metrics */}
@@ -413,7 +390,35 @@ export default function Nova() {
             </div>
           </div>
 
-          {/* Mobile Quick Actions */}
+          {/* Nova Phases Section */}
+          <div className="mb-6 sm:mb-12">
+            <h2 className="text-base sm:text-lg font-bold text-carbon mb-4 sm:mb-6">The Nova System</h2>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
+              {[
+                { phase: 1, title: "Discover", duration: "Days 1-7", desc: "Deep assessment and baseline" },
+                { phase: 2, title: "Optimise", duration: "Days 8-30", desc: "Active experimentation" },
+                { phase: 3, title: "Predict", duration: "Days 31-90", desc: "72-hour forecasting" },
+                { phase: 4, title: "Autonomy", duration: "Day 91+", desc: "Fully autonomous" }
+              ].map((phase) => (
+                <div 
+                  key={phase.phase} 
+                  className={`p-3 sm:p-4 rounded-lg border ${currentPhase === phase.phase ? 'border-accent bg-accent/5' : 'border-mist bg-pearl/50'}`}
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold ${currentPhase === phase.phase ? 'bg-accent text-ivory' : 'bg-mist text-stone'}`}>
+                      {phase.phase}
+                    </div>
+                    <div>
+                      <p className="text-xs sm:text-sm font-semibold text-carbon">{phase.title}</p>
+                      <p className="text-[10px] sm:text-xs text-stone">{phase.duration}</p>
+                    </div>
+                  </div>
+                  <p className="text-[10px] sm:text-xs text-ash">{phase.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="lg:hidden mb-6">
             <h3 className="text-sm font-bold text-carbon mb-3">Quick Actions</h3>
             <div className="grid grid-cols-2 gap-2">
