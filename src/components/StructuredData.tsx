@@ -255,6 +255,71 @@ export const CorporateServiceStructuredData = () => {
   return null;
 };
 
+export const LocalBusinessStructuredData = () => {
+  useEffect(() => {
+    const localBusinessData = {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": "https://neurostate.co.uk/#organization",
+      "name": "NeuroState",
+      "alternateName": "NeuroState®",
+      "url": "https://neurostate.co.uk",
+      "logo": "https://neurostate.co.uk/favicon.png",
+      "image": "https://neurostate.co.uk/favicon.png",
+      "description": "The world's first cognitive performance system combining AI, red light therapy and performance supplements.",
+      "email": "contact@neurostate.co.uk",
+      "telephone": "",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "GB"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United Kingdom"
+      },
+      "priceRange": "££",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": "contact@neurostate.co.uk",
+        "availableLanguage": "English"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/neurostate",
+        "https://instagram.com/neurostate"
+      ]
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(localBusinessData);
+    script.id = 'local-business-structured-data';
+    
+    const existing = document.getElementById('local-business-structured-data');
+    if (existing) {
+      existing.remove();
+    }
+    document.head.appendChild(script);
+
+    return () => {
+      const scriptToRemove = document.getElementById('local-business-structured-data');
+      if (scriptToRemove) {
+        scriptToRemove.remove();
+      }
+    };
+  }, []);
+
+  return null;
+};
+
 export const WebsiteStructuredData = () => {
   useEffect(() => {
     // WebSite schema with SearchAction

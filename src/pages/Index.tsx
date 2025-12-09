@@ -1,7 +1,7 @@
 import { Header } from "@/components/Header";
 import Hero from "@/components/Hero";
 import { SEO } from "@/components/SEO";
-import { OrganizationStructuredData, SoftwareApplicationStructuredData, WebsiteStructuredData } from "@/components/StructuredData";
+import { OrganizationStructuredData, SoftwareApplicationStructuredData, WebsiteStructuredData, LocalBusinessStructuredData } from "@/components/StructuredData";
 import { Footer } from "@/components/Footer";
 import { LiveChat } from "@/components/LiveChat";
 
@@ -37,6 +37,7 @@ const Index = () => {
       <OrganizationStructuredData />
       <SoftwareApplicationStructuredData />
       <WebsiteStructuredData />
+      <LocalBusinessStructuredData />
       <div className="min-h-screen bg-ivory mobile-nav-padding">
         <Header />
         <main>
