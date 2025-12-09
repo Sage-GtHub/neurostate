@@ -597,6 +597,77 @@ export type Database = {
         }
         Relationships: []
       }
+      protocol_check_ins: {
+        Row: {
+          check_in_date: string
+          created_at: string
+          energy_score: number | null
+          id: string
+          mood_score: number | null
+          notes: string | null
+          products_completed: Json
+          protocol_id: string | null
+          user_id: string
+        }
+        Insert: {
+          check_in_date?: string
+          created_at?: string
+          energy_score?: number | null
+          id?: string
+          mood_score?: number | null
+          notes?: string | null
+          products_completed?: Json
+          protocol_id?: string | null
+          user_id: string
+        }
+        Update: {
+          check_in_date?: string
+          created_at?: string
+          energy_score?: number | null
+          id?: string
+          mood_score?: number | null
+          notes?: string | null
+          products_completed?: Json
+          protocol_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "protocol_check_ins_protocol_id_fkey"
+            columns: ["protocol_id"]
+            isOneToOne: false
+            referencedRelation: "user_protocols"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      push_subscriptions: {
+        Row: {
+          auth_key: string
+          created_at: string
+          endpoint: string
+          id: string
+          p256dh_key: string
+          user_id: string
+        }
+        Insert: {
+          auth_key: string
+          created_at?: string
+          endpoint: string
+          id?: string
+          p256dh_key: string
+          user_id: string
+        }
+        Update: {
+          auth_key?: string
+          created_at?: string
+          endpoint?: string
+          id?: string
+          p256dh_key?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       reward_redemptions: {
         Row: {
           expires_at: string | null
