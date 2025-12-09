@@ -35,11 +35,18 @@ export const NovaNav = () => {
             Insights
           </NavLink>
           <NavLink
-            to="/nova/optimization"
+            to="/nova/optimisation"
             className="text-[10px] sm:text-xs font-medium uppercase tracking-wider text-muted-foreground transition-all hover:text-foreground whitespace-nowrap px-3 py-2 sm:px-2 sm:py-0 rounded-full sm:rounded-none bg-muted/30 sm:bg-transparent min-h-[36px] sm:min-h-0 flex items-center"
             activeClassName="text-foreground bg-foreground/10 sm:bg-transparent sm:border-b-2 sm:border-primary sm:pb-4"
           >
             Optimise
+          </NavLink>
+          <NavLink
+            to="/nova/trends"
+            className="text-[10px] sm:text-xs font-medium uppercase tracking-wider text-muted-foreground transition-all hover:text-foreground whitespace-nowrap px-3 py-2 sm:px-2 sm:py-0 rounded-full sm:rounded-none bg-muted/30 sm:bg-transparent min-h-[36px] sm:min-h-0 flex items-center"
+            activeClassName="text-foreground bg-foreground/10 sm:bg-transparent sm:border-b-2 sm:border-primary sm:pb-4"
+          >
+            Trends
           </NavLink>
           <NavLink
             to="/nova/devices"
