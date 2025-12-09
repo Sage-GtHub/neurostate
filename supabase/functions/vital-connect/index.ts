@@ -73,6 +73,9 @@ serve(async (req) => {
         vitalUserId = userData.user_id;
         console.log("Created Vital user:", vitalUserId);
       } else {
+        const createError = await createUserRes.text();
+        console.log("Create user response:", createUserRes.status, createError);
+        
         // User might already exist, try to get them
         const getUserRes = await fetch(`${VITAL_API_BASE}/user/resolve/${user.id}`, {
           headers: {
@@ -85,8 +88,19 @@ serve(async (req) => {
           vitalUserId = existingUser.user_id;
           console.log("Found existing Vital user:", vitalUserId);
         } else {
-          console.error("Failed to create/get Vital user");
-          return new Response(JSON.stringify({ error: "Failed to create Vital user" }), {
+          const resolveError = await getUserRes.text();
+          console.error("Failed to create/get Vital user. Create status:", createUserRes.status, "Resolve status:", getUserRes.status);
+          console.error("Resolve error:", resolveError);
+          
+          // Check if API key is valid
+          if (createUserRes.status === 401 || getUserRes.status === 401) {
+            return new Response(JSON.stringify({ error: "Vital API key is invalid or expired. Please check your configuration." }), {
+              status: 500,
+              headers: { ...corsHeaders, "Content-Type": "application/json" },
+            });
+          }
+          
+          return new Response(JSON.stringify({ error: "Unable to connect to Vital. Please verify your API key is configured correctly." }), {
             status: 500,
             headers: { ...corsHeaders, "Content-Type": "application/json" },
           });
