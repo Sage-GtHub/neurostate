@@ -10,6 +10,18 @@ import { useToast } from "@/components/ui/use-toast";
 import { SEO } from "@/components/SEO";
 import { NotificationSettings } from "@/components/nova/NotificationSettings";
 
+// Import wearable logos
+import ouraLogo from "@/assets/wearables/oura-logo.png";
+import whoopLogo from "@/assets/wearables/whoop-logo.png";
+import fitbitLogo from "@/assets/wearables/fitbit-logo.png";
+import garminLogo from "@/assets/wearables/garmin-logo.png";
+import appleHealthLogo from "@/assets/wearables/apple-health-logo.png";
+import withingsLogo from "@/assets/wearables/withings-logo.png";
+import polarLogo from "@/assets/wearables/polar-logo.png";
+import samsungLogo from "@/assets/wearables/samsung-logo.png";
+import corosLogo from "@/assets/wearables/coros-logo.png";
+import amazfitLogo from "@/assets/wearables/amazfit-logo.png";
+
 interface Device {
   id: string;
   device_type: string;
@@ -31,7 +43,7 @@ const DEVICE_CATALOG = [
   { 
     type: 'oura', 
     name: 'Oura Ring', 
-    logo: 'https://cdn.brandfetch.io/idfZlKLBKA/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    logo: ouraLogo,
     description: 'Sleep, HRV, activity and recovery tracking',
     website: 'https://ouraring.com',
     metrics: ['Sleep Score', 'HRV', 'Recovery', 'Activity'],
@@ -39,7 +51,7 @@ const DEVICE_CATALOG = [
   { 
     type: 'whoop', 
     name: 'WHOOP', 
-    logo: 'https://cdn.brandfetch.io/idANQlf22l/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    logo: whoopLogo,
     description: 'Strain, recovery and sleep performance',
     website: 'https://whoop.com',
     metrics: ['Strain', 'Recovery', 'Sleep', 'HRV'],
@@ -47,7 +59,7 @@ const DEVICE_CATALOG = [
   { 
     type: 'fitbit', 
     name: 'Fitbit', 
-    logo: 'https://cdn.brandfetch.io/idpdXJWPE7/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    logo: fitbitLogo,
     description: 'Activity, sleep and heart rate data',
     website: 'https://fitbit.com',
     metrics: ['Steps', 'Sleep', 'Heart Rate', 'SpO2'],
@@ -55,7 +67,7 @@ const DEVICE_CATALOG = [
   { 
     type: 'garmin', 
     name: 'Garmin', 
-    logo: 'https://cdn.brandfetch.io/idj2fEodKL/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    logo: garminLogo,
     description: 'Training, sleep and body battery metrics',
     website: 'https://garmin.com',
     metrics: ['Body Battery', 'Training Load', 'Sleep', 'Stress'],
@@ -63,7 +75,7 @@ const DEVICE_CATALOG = [
   { 
     type: 'apple_health', 
     name: 'Apple Health', 
-    logo: 'https://cdn.brandfetch.io/idnrCPuv87/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    logo: appleHealthLogo,
     description: 'iOS health and activity data',
     website: 'https://apple.com/health',
     metrics: ['Steps', 'Heart Rate', 'Sleep', 'Workouts'],
@@ -71,7 +83,7 @@ const DEVICE_CATALOG = [
   { 
     type: 'withings', 
     name: 'Withings', 
-    logo: 'https://cdn.brandfetch.io/id-Gni1Kox/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    logo: withingsLogo,
     description: 'Smart scales, watches and health monitors',
     website: 'https://withings.com',
     metrics: ['Weight', 'Body Composition', 'Sleep', 'ECG'],
@@ -79,7 +91,7 @@ const DEVICE_CATALOG = [
   { 
     type: 'polar', 
     name: 'Polar', 
-    logo: 'https://cdn.brandfetch.io/idWEKIE1tq/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    logo: polarLogo,
     description: 'Heart rate and training analytics',
     website: 'https://polar.com',
     metrics: ['Heart Rate', 'Training Load', 'Sleep', 'Recovery'],
@@ -87,7 +99,7 @@ const DEVICE_CATALOG = [
   { 
     type: 'samsung', 
     name: 'Samsung Health', 
-    logo: 'https://cdn.brandfetch.io/idxAg10C0L/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    logo: samsungLogo,
     description: 'Galaxy Watch and Samsung Health data',
     website: 'https://samsung.com/health',
     metrics: ['Steps', 'Sleep', 'Heart Rate', 'Stress'],
@@ -95,7 +107,7 @@ const DEVICE_CATALOG = [
   { 
     type: 'coros', 
     name: 'COROS', 
-    logo: 'https://cdn.brandfetch.io/idZz8_RBY_/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    logo: corosLogo,
     description: 'GPS sport watches for athletes',
     website: 'https://coros.com',
     metrics: ['Training Load', 'Recovery', 'Sleep', 'HRV'],
@@ -103,7 +115,7 @@ const DEVICE_CATALOG = [
   { 
     type: 'amazfit', 
     name: 'Amazfit', 
-    logo: 'https://cdn.brandfetch.io/idaM8pwIhQ/w/512/h/512/theme/dark/icon.png?k=bfHSJFAPEG',
+    logo: amazfitLogo,
     description: 'Smart fitness wearables',
     website: 'https://amazfit.com',
     metrics: ['Steps', 'Sleep', 'Heart Rate', 'SpO2'],
