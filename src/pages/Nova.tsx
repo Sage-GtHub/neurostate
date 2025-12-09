@@ -10,6 +10,8 @@ import { ProtocolAssessment } from "@/components/ProtocolAssessment";
 import { PhaseIndicator } from "@/components/nova/PhaseIndicator";
 import { HealthForecast } from "@/components/nova/HealthForecast";
 import { NovaOnboarding } from "@/components/nova/NovaOnboarding";
+import { InteractiveMorningCheckIn } from "@/components/nova/InteractiveMorningCheckIn";
+import { ReadinessScore } from "@/components/nova/ReadinessScore";
 import { SEO } from "@/components/SEO";
 import { useRealtimeMetrics } from "@/hooks/useRealtimeMetrics";
 import { useNovaOnboarding } from "@/hooks/useNovaOnboarding";
@@ -263,6 +265,12 @@ export default function Nova() {
 
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-12">
           
+          {/* Morning Check-In & Readiness */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 sm:mb-12">
+            <InteractiveMorningCheckIn onComplete={refreshMetrics} />
+            <ReadinessScore />
+          </div>
+
           {/* AI Summary Section */}
           <div className="mb-6 sm:mb-12">
             <div className="flex items-center justify-between mb-4 sm:mb-6">
