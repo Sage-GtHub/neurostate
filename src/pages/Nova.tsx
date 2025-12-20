@@ -12,6 +12,8 @@ import { HealthForecast } from "@/components/nova/HealthForecast";
 import { NovaOnboarding } from "@/components/nova/NovaOnboarding";
 import { InteractiveMorningCheckIn } from "@/components/nova/InteractiveMorningCheckIn";
 import { ReadinessScore } from "@/components/nova/ReadinessScore";
+import { WeeklySummary } from "@/components/nova/WeeklySummary";
+import { StreaksAchievements } from "@/components/nova/StreaksAchievements";
 import { SEO } from "@/components/SEO";
 import { useRealtimeMetrics } from "@/hooks/useRealtimeMetrics";
 import { useNovaOnboarding } from "@/hooks/useNovaOnboarding";
@@ -324,7 +326,13 @@ export default function Nova() {
             </div>
           </div>
 
-          {/* 7-Day Forecast - Moved to top priority */}
+          {/* Weekly Summary & Streaks */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 sm:mb-12">
+            <WeeklySummary />
+            <StreaksAchievements />
+          </div>
+
+          {/* 7-Day Forecast */}
           <div className="mb-6 sm:mb-12">
             <HealthForecast />
           </div>

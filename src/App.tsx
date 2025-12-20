@@ -22,6 +22,7 @@ import NovaProtocolOptimization from "./pages/NovaProtocolOptimization";
 import NovaOverview from "./pages/NovaOverview";
 import NovaHistoricalTrends from "./pages/NovaHistoricalTrends";
 import NovaSettings from "./pages/NovaSettings";
+import NovaGoals from "./pages/NovaGoals";
 
 import FAQ from "./pages/FAQ";
 import Shipping from "./pages/Shipping";
@@ -112,6 +113,7 @@ const App = () => (
           <Route path="/nova/devices" element={<ProtectedRoute><NovaDevices /></ProtectedRoute>} />
           <Route path="/nova/optimisation" element={<ProtectedRoute><NovaProtocolOptimization /></ProtectedRoute>} />
           <Route path="/nova/trends" element={<ProtectedRoute><NovaHistoricalTrends /></ProtectedRoute>} />
+          <Route path="/nova/goals" element={<ProtectedRoute><NovaGoals /></ProtectedRoute>} />
           <Route path="/nova/settings" element={<ProtectedRoute><NovaSettings /></ProtectedRoute>} />
           {/* Enterprise Overview */}
           <Route path="/enterprise/overview" element={<EnterpriseOverview />} />
