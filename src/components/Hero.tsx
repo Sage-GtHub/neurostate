@@ -197,11 +197,10 @@ const Hero = () => {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-4">
               <Link to="/nova">
                 <Button 
-                  size="lg"
-                  className="w-full sm:w-auto bg-signal-green text-carbon hover:bg-signal-green/90 font-semibold transition-all duration-300 min-h-[56px] px-8 text-sm tracking-wide group shadow-lg shadow-signal-green/20"
+                  className="w-full sm:w-auto bg-signal-green text-carbon hover:bg-signal-green/90 font-semibold transition-all duration-300 h-10 px-6 text-sm tracking-wide group shadow-lg shadow-signal-green/20"
                 >
                   Start with Nova
                   <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -210,8 +209,7 @@ const Hero = () => {
               <Link to="/shop">
                 <Button 
                   variant="outline"
-                  size="lg"
-                  className="w-full sm:w-auto bg-ivory border-ivory text-carbon hover:bg-ivory/90 font-medium transition-all duration-300 min-h-[56px] px-8 text-sm tracking-wide"
+                  className="w-full sm:w-auto bg-ivory border-ivory text-carbon hover:bg-ivory/90 font-medium transition-all duration-300 h-10 px-6 text-sm tracking-wide"
                 >
                   Show Products
                 </Button>
