@@ -546,8 +546,13 @@ export default function NovaChat() {
               )}
               
               {/* Input Area - Mobile optimised */}
-              <div className="py-3 sm:py-4 border-t border-border/30 bg-background sticky bottom-0">
-                <div className="relative">
+              <div className="py-3 sm:py-4 px-1 border-t border-border/30 bg-background sticky bottom-0 pb-safe">
+                <div 
+                  className="relative flex items-end gap-2"
+                  onTouchStart={(e) => e.stopPropagation()}
+                  onTouchMove={(e) => e.stopPropagation()}
+                  onTouchEnd={(e) => e.stopPropagation()}
+                >
                   <textarea
                     ref={textareaRef}
                     value={input}
@@ -557,29 +562,38 @@ export default function NovaChat() {
                     disabled={isLoading}
                     rows={1}
                     className={cn(
-                      "w-full resize-none rounded-xl border border-border/50 bg-muted/30",
-                      "px-3 sm:px-4 py-3 pr-12 text-sm placeholder:text-muted-foreground",
+                      "flex-1 resize-none rounded-xl border border-border/50 bg-muted/30",
+                      "px-3 sm:px-4 py-3 text-base sm:text-sm placeholder:text-muted-foreground",
                       "focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50",
                       "disabled:opacity-50 disabled:cursor-not-allowed",
                       "transition-all duration-200"
                     )}
-                    style={{ minHeight: '44px', maxHeight: '120px' }}
+                    style={{ minHeight: '48px', maxHeight: '120px' }}
                   />
                   <Button
                     size="icon"
-                    onClick={() => handleSendMessage()}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleSendMessage();
+                    }}
+                    onTouchEnd={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleSendMessage();
+                    }}
                     disabled={!input.trim() || isLoading}
                     className={cn(
-                      "absolute right-2 bottom-2 h-9 w-9 sm:h-8 sm:w-8 rounded-lg",
+                      "flex-shrink-0 h-12 w-12 sm:h-10 sm:w-10 rounded-xl",
                       "bg-accent hover:bg-accent/90 text-accent-foreground",
                       "disabled:opacity-30 disabled:cursor-not-allowed",
-                      "transition-all duration-200"
+                      "transition-all duration-200 touch-manipulation"
                     )}
                   >
                     {isLoading ? (
-                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <Loader2 className="w-5 h-5 animate-spin" />
                     ) : (
-                      <Send className="w-4 h-4" />
+                      <Send className="w-5 h-5" />
                     )}
                   </Button>
                 </div>

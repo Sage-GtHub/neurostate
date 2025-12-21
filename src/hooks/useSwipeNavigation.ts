@@ -68,6 +68,15 @@ export const useSwipeNavigation = (options: SwipeNavigationOptions = {}) => {
     if (!enableSwipe || !isMobile) return;
 
     const handleTouchStart = (e: TouchEvent) => {
+      // Ignore touches on interactive elements (buttons, inputs, textareas)
+      const target = e.target as HTMLElement;
+      const isInteractiveElement = target.closest('button, input, textarea, a, [role="button"]');
+      
+      if (isInteractiveElement) {
+        isSwiping.current = false;
+        return;
+      }
+      
       touchStartX.current = e.touches[0].clientX;
       touchStartY.current = e.touches[0].clientY;
       isSwiping.current = true;
