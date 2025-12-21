@@ -468,10 +468,29 @@ export default function NovaChat() {
                                         ),
                                       }}
                                     >
-                                      {message.content}
+                                    {message.content}
                                     </ReactMarkdown>
                                     {isTypingWelcome && index === 0 && (
                                       <span className="inline-block w-1.5 h-4 bg-accent animate-pulse ml-0.5 align-middle" />
+                                    )}
+                                    
+                                    {/* Quick action buttons after welcome message */}
+                                    {!isTypingWelcome && index === 0 && messages.length === 1 && (
+                                      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                        {QUICK_ACTIONS.map((action, i) => (
+                                          <button
+                                            key={i}
+                                            onClick={() => handleSendMessage(action.prompt)}
+                                            disabled={isLoading}
+                                            className="group flex items-center gap-3 p-3 rounded-xl border border-border/50 bg-card/50 hover:bg-card hover:border-accent/30 hover:shadow-sm transition-all text-left"
+                                          >
+                                            <div className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
+                                              <action.icon className="w-4 h-4 text-accent" />
+                                            </div>
+                                            <span className="text-sm font-medium text-foreground">{action.label}</span>
+                                          </button>
+                                        ))}
+                                      </div>
                                     )}
                                   </div>
                                 ) : (
