@@ -11,24 +11,38 @@ interface DemoMessage {
 
 const DEMO_CONVERSATIONS = [
   {
-    trigger: "Analyse my HRV",
+    trigger: "HRV Analysis",
     messages: [
       { role: "user" as const, content: "Analyse my recent HRV data and give me actionable insights" },
       { role: "assistant" as const, content: "Based on your last 7 days of HRV data, I've identified a clear pattern:\n\n**Current State:** Your HRV dropped 18% since Monday, indicating accumulated stress.\n\n**Root Cause:** Late evening screen time (avg 11:23pm) is disrupting parasympathetic recovery.\n\n**Action Plan:**\n• Tonight: Blue light blocking at 9pm\n• Take 400mg magnesium glycinate 1hr before bed\n• Tomorrow: Light zone 2 cardio only" }
     ]
   },
   {
-    trigger: "Sleep protocol",
+    trigger: "Supplement Stack",
     messages: [
-      { role: "user" as const, content: "Create a personalised sleep optimisation protocol for me" },
-      { role: "assistant" as const, content: "I've analysed your sleep architecture from the last 30 nights. Here's your personalised protocol:\n\n**Phase 1 (Days 1-7): Foundation**\n• Temperature: Set bedroom to 18°C\n• Timing: Bed at 10:30pm (aligned with your natural cortisol dip)\n• Supplements: 300mg L-theanine + 1mg melatonin\n\n**Expected Results:**\n+22% deep sleep, +15% REM based on similar profiles.\n\nShall I sync this to your evening routine reminders?" }
+      { role: "user" as const, content: "Design a supplement stack for deep focus and cognitive performance" },
+      { role: "assistant" as const, content: "Based on your goals and biomarkers, here's your optimised cognitive stack:\n\n**Morning Stack (6-8am):**\n• Lion's Mane 500mg – neurogenesis support\n• Alpha-GPC 300mg – acetylcholine precursor\n• Omega-3 2g – brain membrane health\n\n**Focus Stack (as needed):**\n• L-Theanine 200mg + Caffeine 100mg\n• Rhodiola 200mg – stress resilience\n\n**Expected timeline:** Noticeable focus improvement in 3-5 days. Full cognitive benefits at 4-6 weeks." }
     ]
   },
   {
-    trigger: "Energy boost",
+    trigger: "Recovery",
+    messages: [
+      { role: "user" as const, content: "I just finished a heavy leg workout. What should I do for optimal recovery?" },
+      { role: "assistant" as const, content: "Post-workout recovery protocol for your session:\n\n**Immediate (0-30 min):**\n• 30g whey protein + 5g creatine\n• 500ml water with electrolytes\n\n**Next 4 hours:**\n• High-glycemic carbs (rice, potato) within 2hrs\n• Cold exposure: 2-min cold shower\n\n**Tonight:**\n• Magnesium glycinate 400mg before bed\n• Target 8+ hours sleep\n\n**Tomorrow:**\n• Light movement only – your HRV suggests 48hr recovery needed for this intensity." }
+    ]
+  },
+  {
+    trigger: "Sleep",
+    messages: [
+      { role: "user" as const, content: "Create a personalised sleep optimisation protocol for me" },
+      { role: "assistant" as const, content: "I've analysed your sleep architecture from the last 30 nights. Here's your personalised protocol:\n\n**Phase 1 (Days 1-7): Foundation**\n• Temperature: Set bedroom to 18°C\n• Timing: Bed at 10:30pm (aligned with your cortisol dip)\n• Supplements: 300mg L-theanine + 1mg melatonin\n\n**Expected Results:**\n+22% deep sleep, +15% REM based on similar profiles." }
+    ]
+  },
+  {
+    trigger: "Energy",
     messages: [
       { role: "user" as const, content: "I need more energy in the afternoon. What do you recommend?" },
-      { role: "assistant" as const, content: "Looking at your biometrics, your afternoon energy dip correlates with:\n\n1. **Blood glucose crash** at ~2pm (post-lunch spike pattern)\n2. **Circadian trough** between 2-4pm\n\n**Immediate fix for today:**\n• Take 200mg L-theanine now\n• 10-minute walk outside\n\n**Long-term protocol:**\n• Shift lunch to higher protein/fat, lower carbs\n• Add 15-min post-lunch walk\n• Consider 100mg caffeine + 200mg L-theanine at 1pm\n\nThis should boost afternoon alertness by ~35% within a week." }
+      { role: "assistant" as const, content: "Your afternoon energy dip correlates with:\n\n1. **Blood glucose crash** at ~2pm (post-lunch spike)\n2. **Circadian trough** between 2-4pm\n\n**Immediate fix:**\n• Take 200mg L-theanine now\n• 10-minute walk outside\n\n**Long-term protocol:**\n• Shift lunch to higher protein/fat, lower carbs\n• 100mg caffeine + 200mg L-theanine at 1pm\n\nThis should boost afternoon alertness by ~35% within a week." }
     ]
   }
 ];
