@@ -60,7 +60,7 @@ const Index = () => {
                 </p>
               </div>
 
-              {/* Three Forces - Circular Design */}
+              {/* Three Forces - Animated Circular Design */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
                 {[
                   { 
@@ -68,51 +68,85 @@ const Index = () => {
                     title: "Nova AI", 
                     desc: "AI performance assistant", 
                     detail: "Personalised AI coaching with adaptive recommendations and real-time behavioural insights.",
-                    number: "01"
+                    number: "01",
+                    gradient: "from-violet-500 to-purple-600",
+                    pulseColor: "violet"
                   },
                   { 
-                    icon: Zap, 
+                    icon: FlaskConical, 
                     title: "Supplements", 
                     desc: "Personalised stacks", 
                     detail: "Adaptogen supplements for focus. Magnesium for recovery. Third-party verified.",
-                    number: "02"
+                    number: "02",
+                    gradient: "from-emerald-500 to-teal-600",
+                    pulseColor: "emerald"
                   },
                   { 
-                    icon: Lightbulb, 
+                    icon: Activity, 
                     title: "Neuromodulation", 
                     desc: "Brain state control", 
                     detail: "Red light therapy cognitive benefits. Alpha and beta state switching.",
-                    number: "03"
+                    number: "03",
+                    gradient: "from-amber-500 to-orange-600",
+                    pulseColor: "amber"
                   },
                 ].map((item, i) => (
                   <div 
                     key={i}
                     className="group relative text-center cursor-pointer"
+                    style={{ animationDelay: `${i * 150}ms` }}
                   >
-                    {/* Circular container */}
+                    {/* Circular container with animations */}
                     <div className="relative mx-auto w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 mb-6">
-                      {/* Outer ring */}
-                      <div className="absolute inset-0 rounded-full border border-carbon/10 group-hover:border-carbon/30 transition-colors duration-700" />
+                      {/* Animated pulse rings */}
+                      <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-700 animate-pulse`} />
+                      
+                      {/* Outer rotating ring */}
+                      <div 
+                        className="absolute inset-0 rounded-full border-2 border-dashed border-carbon/10 group-hover:border-carbon/30 transition-colors duration-700"
+                        style={{ animation: 'spin 20s linear infinite' }}
+                      />
+                      
+                      {/* Middle ring */}
+                      <div className="absolute inset-2 rounded-full border border-carbon/5 group-hover:border-carbon/20 transition-colors duration-500" />
+                      
                       {/* Inner gradient circle */}
-                      <div className="absolute inset-2 rounded-full bg-gradient-to-br from-pearl to-ivory group-hover:from-carbon group-hover:to-slate transition-all duration-700" />
-                      {/* Glow effect on hover */}
-                      <div className="absolute inset-2 rounded-full bg-signal-green/0 group-hover:bg-signal-green/5 blur-xl transition-all duration-700" />
+                      <div className={`absolute inset-4 rounded-full bg-gradient-to-br from-pearl to-ivory group-hover:from-carbon group-hover:to-slate transition-all duration-700 shadow-lg group-hover:shadow-xl`} />
+                      
+                      {/* Orbiting dots */}
+                      <div 
+                        className="absolute inset-0"
+                        style={{ animation: 'spin 8s linear infinite' }}
+                      >
+                        <div className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-gradient-to-br ${item.gradient} opacity-60 group-hover:opacity-100 transition-opacity`} />
+                      </div>
+                      <div 
+                        className="absolute inset-0"
+                        style={{ animation: 'spin 8s linear infinite reverse' }}
+                      >
+                        <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-1.5 h-1.5 rounded-full bg-gradient-to-br ${item.gradient} opacity-40 group-hover:opacity-80 transition-opacity`} />
+                      </div>
+                      
                       {/* Icon container */}
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-carbon/5 group-hover:bg-ivory/10 flex items-center justify-center transition-all duration-500">
-                          <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-carbon group-hover:text-ivory transition-colors duration-500" />
+                        <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-carbon/5 group-hover:bg-gradient-to-br group-hover:${item.gradient} flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg`}>
+                          <item.icon className={`w-6 h-6 sm:w-7 sm:h-7 text-carbon group-hover:text-ivory transition-all duration-500 group-hover:scale-110`} strokeWidth={1.5} />
                         </div>
                       </div>
-                      {/* Number badge */}
-                      <div className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-carbon group-hover:bg-signal-green flex items-center justify-center transition-colors duration-500">
-                        <span className="text-ivory text-[10px] font-semibold">{item.number}</span>
+                      
+                      {/* Number badge with pulse */}
+                      <div className="absolute -top-1 -right-1">
+                        <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${item.gradient} animate-ping opacity-30`} />
+                        <div className={`relative w-7 h-7 rounded-full bg-carbon group-hover:bg-gradient-to-br group-hover:${item.gradient} flex items-center justify-center transition-all duration-500 shadow-md`}>
+                          <span className="text-ivory text-[10px] font-semibold">{item.number}</span>
+                        </div>
                       </div>
                     </div>
                     
                     {/* Text content */}
                     <div className="space-y-3">
                       <h3 className="text-xl sm:text-2xl font-bold text-carbon transition-colors duration-500">{item.title}</h3>
-                      <p className="text-signal-green text-sm font-medium uppercase tracking-wider">{item.desc}</p>
+                      <p className={`bg-gradient-to-r ${item.gradient} bg-clip-text text-transparent text-sm font-medium uppercase tracking-wider`}>{item.desc}</p>
                       <p className="text-ash text-sm leading-relaxed max-w-xs mx-auto">{item.detail}</p>
                     </div>
                   </div>

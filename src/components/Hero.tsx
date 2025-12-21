@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import NovaInterfaceDemo from "./NovaInterfaceDemo";
 import GuidedTour from "./GuidedTour";
+import { useCountUp } from "@/hooks/useCountUp";
 
 // Animated typing phrases
 const typingPhrases = [
@@ -14,6 +15,38 @@ const typingPhrases = [
   "Generating personalised insights...",
   "Predicting energy levels...",
 ];
+
+// Animated metrics component
+const AnimatedMetrics = () => {
+  const usersCounter = useCountUp({ end: 50, duration: 2000 });
+  const ratingCounter = useCountUp({ end: 49, duration: 1800 });
+  const successCounter = useCountUp({ end: 98, duration: 2200 });
+
+  return (
+    <div ref={usersCounter.ref} className="flex items-center justify-center lg:justify-start gap-6 py-3 px-4 bg-ivory/5 rounded-xl border border-ivory/10">
+      <div className="text-center">
+        <div className="text-lg sm:text-xl font-bold text-signal-green">
+          {usersCounter.count}K+
+        </div>
+        <div className="text-[10px] text-stone uppercase tracking-wider">Users</div>
+      </div>
+      <div className="w-px h-8 bg-ivory/10" />
+      <div className="text-center">
+        <div className="text-lg sm:text-xl font-bold text-signal-green">
+          {(ratingCounter.count / 10).toFixed(1)}★
+        </div>
+        <div className="text-[10px] text-stone uppercase tracking-wider">Rating</div>
+      </div>
+      <div className="w-px h-8 bg-ivory/10" />
+      <div className="text-center">
+        <div className="text-lg sm:text-xl font-bold text-signal-green">
+          {successCounter.count}%
+        </div>
+        <div className="text-[10px] text-stone uppercase tracking-wider">Success</div>
+      </div>
+    </div>
+  );
+};
 
 const Hero = () => {
   const [typingText, setTypingText] = useState("");
@@ -238,26 +271,8 @@ const Hero = () => {
                 </div>
               </div>
 
-              {/* Metrics row */}
-              <div className="flex items-center justify-center lg:justify-start gap-6 py-3 px-4 bg-ivory/5 rounded-xl border border-ivory/10">
-                {[
-                  { value: "50K+", label: "Users" },
-                  { value: "4.9★", label: "Rating" },
-                  { value: "98%", label: "Success" },
-                ].map((metric, idx) => (
-                  <div key={metric.label} className="flex items-center gap-3">
-                    {idx > 0 && <div className="w-px h-8 bg-ivory/10" />}
-                    <div className="text-center">
-                      <div className="text-lg sm:text-xl font-bold text-signal-green">
-                        {metric.value}
-                      </div>
-                      <div className="text-[10px] text-stone uppercase tracking-wider">
-                        {metric.label}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              {/* Metrics row with animated counters */}
+              <AnimatedMetrics />
             </div>
           </div>
 
