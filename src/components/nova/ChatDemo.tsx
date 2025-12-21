@@ -13,36 +13,36 @@ const DEMO_CONVERSATIONS = [
   {
     trigger: "HRV Analysis",
     messages: [
-      { role: "user" as const, content: "Analyse my recent HRV data and give me actionable insights" },
-      { role: "assistant" as const, content: "Based on your last 7 days of HRV data, I've identified a clear pattern:\n\n**Current State:** Your HRV dropped 18% since Monday, indicating accumulated stress.\n\n**Root Cause:** Late evening screen time (avg 11:23pm) is disrupting parasympathetic recovery.\n\n**Action Plan:**\n• Tonight: Blue light blocking at 9pm\n• Take 400mg magnesium glycinate 1hr before bed\n• Tomorrow: Light zone 2 cardio only" }
+      { role: "user" as const, content: "Analyse my HRV data from the past week" },
+      { role: "assistant" as const, content: "Your HRV dropped 18% since Monday. Here's what matters:\n\n**The pattern:** Parasympathetic recovery is degrading. Late screen time (avg 11:23pm) is the primary driver.\n\n**The downstream effect:** If this continues, expect focus degradation in 48–72 hours. Cognitive load is trending up while recovery trends down.\n\n**The lever:**\n• Blue light blocking at 9pm tonight\n• 400mg magnesium glycinate, 1hr before bed\n• Tomorrow: Zone 2 only. No intensity.\n\nThis is the intervention point. Ignore the rest." }
     ]
   },
   {
-    trigger: "Supplement Stack",
+    trigger: "Cognitive Stack",
     messages: [
-      { role: "user" as const, content: "Design a supplement stack for deep focus and cognitive performance" },
-      { role: "assistant" as const, content: "Based on your goals and biomarkers, here's your optimised cognitive stack:\n\n**Morning Stack (6-8am):**\n• Lion's Mane 500mg – neurogenesis support\n• Alpha-GPC 300mg – acetylcholine precursor\n• Omega-3 2g – brain membrane health\n\n**Focus Stack (as needed):**\n• L-Theanine 200mg + Caffeine 100mg\n• Rhodiola 200mg – stress resilience\n\n**Expected timeline:** Noticeable focus improvement in 3-5 days. Full cognitive benefits at 4-6 weeks." }
+      { role: "user" as const, content: "I need a supplement stack for deep focus" },
+      { role: "assistant" as const, content: "What outcome are we optimising for—sustained attention across long work blocks, or peak intensity for shorter cognitive sprints?\n\nAssuming sustained focus, here's the stack:\n\n**Morning (6-8am):**\n• Lion's Mane 500mg – neurogenesis\n• Alpha-GPC 300mg – acetylcholine precursor\n• Omega-3 2g – membrane fluidity\n\n**On-demand:**\n• L-Theanine 200mg + Caffeine 100mg\n\n**Timeline:** Noticeable at day 5. Full effect at week 4-6.\n\nThe trade-off: Alpha-GPC may cause vivid dreams. If sleep quality degrades, drop it." }
     ]
   },
   {
     trigger: "Recovery",
     messages: [
-      { role: "user" as const, content: "I just finished a heavy leg workout. What should I do for optimal recovery?" },
-      { role: "assistant" as const, content: "Post-workout recovery protocol for your session:\n\n**Immediate (0-30 min):**\n• 30g whey protein + 5g creatine\n• 500ml water with electrolytes\n\n**Next 4 hours:**\n• High-glycemic carbs (rice, potato) within 2hrs\n• Cold exposure: 2-min cold shower\n\n**Tonight:**\n• Magnesium glycinate 400mg before bed\n• Target 8+ hours sleep\n\n**Tomorrow:**\n• Light movement only – your HRV suggests 48hr recovery needed for this intensity." }
+      { role: "user" as const, content: "Just finished a heavy leg session. What now?" },
+      { role: "assistant" as const, content: "Your HRV suggests 48hr recovery for this intensity. Here's the protocol:\n\n**0-30 minutes:**\n• 30g protein + 5g creatine\n• 500ml water with electrolytes\n\n**Next 4 hours:**\n• High-glycemic carbs within 2 hours\n• 2-minute cold exposure\n\n**Tonight:**\n• Magnesium glycinate 400mg\n• Target 8+ hours sleep\n\n**Tomorrow:** Light movement only.\n\nTraining again before 48 hours will compound fatigue. The cost outweighs the gain." }
     ]
   },
   {
     trigger: "Sleep",
     messages: [
-      { role: "user" as const, content: "Create a personalised sleep optimisation protocol for me" },
-      { role: "assistant" as const, content: "I've analysed your sleep architecture from the last 30 nights. Here's your personalised protocol:\n\n**Phase 1 (Days 1-7): Foundation**\n• Temperature: Set bedroom to 18°C\n• Timing: Bed at 10:30pm (aligned with your cortisol dip)\n• Supplements: 300mg L-theanine + 1mg melatonin\n\n**Expected Results:**\n+22% deep sleep, +15% REM based on similar profiles." }
+      { role: "user" as const, content: "My sleep quality has been declining. What should I do?" },
+      { role: "assistant" as const, content: "Based on your sleep architecture, two variables matter:\n\n**1. Temperature.** Your deep sleep correlates with ambient temp below 18°C. You're averaging 21°C.\n\n**2. Cortisol timing.** Your natural dip is at 10:30pm. You're going to bed at 11:45pm—past the window.\n\n**The fix:**\n• Room temp: 18°C\n• Bed at 10:30pm\n• 300mg L-theanine + 1mg melatonin, 30 min prior\n\n**Expected result:** +22% deep sleep, +15% REM within 7 days.\n\nThis is a solvable problem. Execute the protocol." }
     ]
   },
   {
-    trigger: "Energy",
+    trigger: "Energy Crash",
     messages: [
-      { role: "user" as const, content: "I need more energy in the afternoon. What do you recommend?" },
-      { role: "assistant" as const, content: "Your afternoon energy dip correlates with:\n\n1. **Blood glucose crash** at ~2pm (post-lunch spike)\n2. **Circadian trough** between 2-4pm\n\n**Immediate fix:**\n• Take 200mg L-theanine now\n• 10-minute walk outside\n\n**Long-term protocol:**\n• Shift lunch to higher protein/fat, lower carbs\n• 100mg caffeine + 200mg L-theanine at 1pm\n\nThis should boost afternoon alertness by ~35% within a week." }
+      { role: "user" as const, content: "I crash every afternoon around 2pm. How do I fix this?" },
+      { role: "assistant" as const, content: "Two mechanisms:\n\n**1. Post-lunch glucose spike.** Your current lunch is carb-heavy. The crash at 2pm is reactive hypoglycaemia.\n\n**2. Circadian trough.** 2-4pm is your natural dip. You're fighting biology.\n\n**Immediate fix (today):**\n• 200mg L-theanine now\n• 10-minute walk outside\n\n**Structural fix:**\n• Shift lunch to higher protein/fat, lower carbs\n• 100mg caffeine + 200mg L-theanine at 1pm\n\nExpect 35% improvement in afternoon alertness within a week.\n\nThis is a systems problem. Fix the input, the output follows." }
     ]
   }
 ];
