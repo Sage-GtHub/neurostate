@@ -106,6 +106,9 @@ export default function NovaOverview() {
           </div>
         </section>
 
+        {/* Interactive Chat Demo - Right after hero */}
+        <ChatDemo />
+
         {/* Stats Bar */}
         <section className="border-y border-border">
           <div className="container mx-auto px-6 sm:px-8 lg:px-16 py-16">
@@ -160,9 +163,6 @@ export default function NovaOverview() {
             </div>
           </div>
         </section>
-
-        {/* Interactive Chat Demo */}
-        <ChatDemo />
 
         {/* 4-Phase System */}
         <section className="py-20 sm:py-28 border-t border-border">
