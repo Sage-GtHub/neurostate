@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Play, X } from "lucide-react";
+import { ArrowRight, Sparkles, Play, X, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import NovaInterfaceDemo from "./NovaInterfaceDemo";
+import GuidedTour from "./GuidedTour";
 
 // Animated typing phrases
 const typingPhrases = [
@@ -20,6 +21,7 @@ const Hero = () => {
   const [isTyping, setIsTyping] = useState(true);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [showDemo, setShowDemo] = useState(false);
+  const [showTour, setShowTour] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
 
   // Typing animation
@@ -284,7 +286,7 @@ const Hero = () => {
             {/* Close button */}
             <button 
               onClick={() => setShowDemo(false)}
-              className="absolute -top-12 right-0 text-ivory/60 hover:text-ivory transition-colors flex items-center gap-2 text-sm"
+              className="absolute -top-12 right-0 text-ivory/60 hover:text-ivory transition-colors flex items-center gap-2 text-sm z-[60]"
             >
               Close <X className="w-4 h-4" />
             </button>
@@ -292,8 +294,27 @@ const Hero = () => {
             {/* Demo interface full size */}
             <NovaInterfaceDemo />
             
-            {/* CTA below modal */}
+            {/* Guided Tour Overlay */}
+            {showTour && (
+              <GuidedTour 
+                onComplete={() => setShowTour(false)}
+                onSkip={() => setShowTour(false)}
+              />
+            )}
+            
+            {/* Tour toggle and CTA below modal */}
             <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-4">
+              {!showTour && (
+                <Button 
+                  variant="outline"
+                  size="lg"
+                  onClick={() => setShowTour(true)}
+                  className="border-ivory/20 text-ivory hover:bg-ivory/10"
+                >
+                  <BookOpen className="mr-2 w-4 h-4" />
+                  Take a Tour
+                </Button>
+              )}
               <Link to="/nova">
                 <Button 
                   size="lg"
