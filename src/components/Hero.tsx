@@ -207,15 +207,15 @@ const Hero = () => {
                   <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
-              <Button 
-                variant="outline"
-                size="lg"
-                onClick={() => setShowDemo(true)}
-                className="w-full sm:w-auto border-ivory/20 text-ivory hover:bg-ivory/10 font-medium transition-all duration-300 min-h-[56px] px-8 text-sm tracking-wide group"
-              >
-                <Play className="mr-2 w-4 h-4 transition-transform group-hover:scale-110" />
-                Watch Demo
-              </Button>
+              <Link to="/shop">
+                <Button 
+                  variant="outline"
+                  size="lg"
+                  className="w-full sm:w-auto bg-ivory border-ivory text-carbon hover:bg-ivory/90 font-medium transition-all duration-300 min-h-[56px] px-8 text-sm tracking-wide"
+                >
+                  Show Products
+                </Button>
+              </Link>
             </div>
 
             {/* Trust Metrics */}
