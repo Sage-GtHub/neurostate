@@ -99,13 +99,13 @@ export function ChatDemo() {
   }, [activeDemo]);
 
   return (
-    <section className="py-20 sm:py-28 bg-foreground text-background">
+    <section className="py-20 sm:py-28 border-t border-border bg-muted/20">
       <div className="container mx-auto px-6 sm:px-8 lg:px-16 max-w-5xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-background mb-4 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 tracking-tight">
             See Nova in Action
           </h2>
-          <p className="text-background/60">Real conversations. Real insights. Real results.</p>
+          <p className="text-muted-foreground">Real conversations. Real insights. Real results.</p>
         </div>
 
         {/* Demo Selector */}
@@ -117,8 +117,8 @@ export function ChatDemo() {
               className={cn(
                 "px-4 py-2 text-sm font-medium transition-all",
                 activeDemo === index
-                  ? "bg-accent text-accent-foreground"
-                  : "bg-transparent border border-background/30 text-background/70 hover:text-background hover:border-background/50"
+                  ? "bg-foreground text-background"
+                  : "bg-background border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50"
               )}
             >
               {conv.trigger}
