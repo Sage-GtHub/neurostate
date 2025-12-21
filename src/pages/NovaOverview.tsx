@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { SoftwareApplicationStructuredData } from "@/components/StructuredData";
+import { ChatDemo } from "@/components/nova/ChatDemo";
 import { ArrowRight, BarChart3 } from "lucide-react";
 
 export default function NovaOverview() {
@@ -159,6 +160,9 @@ export default function NovaOverview() {
             </div>
           </div>
         </section>
+
+        {/* Interactive Chat Demo */}
+        <ChatDemo />
 
         {/* 4-Phase System */}
         <section className="py-20 sm:py-28 border-t border-border">
