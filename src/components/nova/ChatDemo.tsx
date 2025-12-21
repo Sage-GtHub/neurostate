@@ -130,18 +130,12 @@ export function ChatDemo() {
         <div className="max-w-2xl mx-auto">
           <div className="border border-border bg-background overflow-hidden">
             {/* Header */}
-            <div className="border-b border-border px-4 py-3 flex items-center gap-3">
-              <div className="w-8 h-8 bg-accent/10 flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-accent" />
+            <div className="border-b border-border px-5 py-4 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-accent" />
+                <span className="text-sm font-medium tracking-tight text-foreground">Nova</span>
               </div>
-              <div>
-                <div className="text-sm font-medium text-foreground">Nova</div>
-                <div className="text-xs text-muted-foreground">AI Cognitive Coach</div>
-              </div>
-              <div className="ml-auto flex items-center gap-1.5">
-                <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                <span className="text-xs text-muted-foreground">Online</span>
-              </div>
+              <span className="text-xs text-muted-foreground/60 tracking-wide uppercase">Active</span>
             </div>
 
             {/* Messages */}
