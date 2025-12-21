@@ -37,6 +37,17 @@ const QUICK_ACTIONS = [
   { icon: Brain, label: "Focus stack", prompt: "Design a supplement stack for deep focus and cognitive performance" },
 ];
 
+const WELCOME_MESSAGE = `Here's what matters: I'm Nova, your cognitive operating system.
+
+I analyse your biometrics, forecast outcomes, and recommend actions that improve cognition, focus, energy, and recovery.
+
+**What I do:**
+• Interpret HRV, sleep, and recovery patterns
+• Design personalised supplement protocols
+• Identify the levers that matter most
+
+What outcome are we optimising for?`;
+
 export default function NovaChat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -72,6 +83,13 @@ export default function NovaChat() {
           content: h.content,
           timestamp: new Date(h.created_at)
         })));
+      } else {
+        // Show welcome message for new users
+        setMessages([{
+          role: "assistant",
+          content: WELCOME_MESSAGE,
+          timestamp: new Date()
+        }]);
       }
       setIsLoadingHistory(false);
     };
