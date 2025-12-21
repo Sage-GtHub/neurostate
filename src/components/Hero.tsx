@@ -197,41 +197,67 @@ const Hero = () => {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-4">
+            <div className="flex flex-row gap-2 sm:gap-3 justify-center lg:justify-start pt-4">
               <Link to="/nova">
                 <Button 
-                  className="w-full sm:w-auto bg-signal-green text-carbon hover:bg-signal-green/90 font-semibold transition-all duration-300 h-10 px-6 text-sm tracking-wide group shadow-lg shadow-signal-green/20"
+                  className="bg-signal-green text-carbon hover:bg-signal-green/90 font-semibold transition-all duration-300 h-9 sm:h-10 px-4 sm:px-6 text-xs sm:text-sm tracking-wide group shadow-lg shadow-signal-green/20"
                 >
                   Start with Nova
-                  <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="ml-1.5 sm:ml-2 w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
               <Link to="/shop">
                 <Button 
                   variant="outline"
-                  className="w-full sm:w-auto bg-ivory border-ivory text-carbon hover:bg-ivory/90 font-medium transition-all duration-300 h-10 px-6 text-sm tracking-wide"
+                  className="bg-ivory border-ivory text-carbon hover:bg-ivory/90 font-medium transition-all duration-300 h-9 sm:h-10 px-4 sm:px-6 text-xs sm:text-sm tracking-wide"
                 >
-                  Show Products
+                  Shop Products
                 </Button>
               </Link>
             </div>
 
-            {/* Trust Metrics */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-8 pt-6 text-center">
-              {[
-                { value: "50K+", label: "Users Coached" },
-                { value: "2M+", label: "Insights Generated" },
-                { value: "98%", label: "Goal Achievement" },
-              ].map((metric) => (
-                <div key={metric.label} className="space-y-1">
-                  <div className="text-2xl sm:text-3xl font-bold text-ivory">
-                    {metric.value}
-                  </div>
-                  <div className="text-xs text-stone/70 uppercase tracking-wider">
-                    {metric.label}
-                  </div>
+            {/* Social Proof Strip */}
+            <div className="pt-8 max-w-lg mx-auto lg:mx-0">
+              {/* Brand logos / integrations */}
+              <div className="flex items-center justify-center lg:justify-start gap-2 mb-4">
+                <div className="flex -space-x-2">
+                  {[...Array(4)].map((_, i) => (
+                    <div 
+                      key={i}
+                      className="w-8 h-8 rounded-full bg-gradient-to-br from-signal-green/20 to-emerald-600/20 border-2 border-carbon flex items-center justify-center"
+                    >
+                      <span className="text-[10px] text-ivory/80 font-medium">
+                        {['JD', 'MK', 'AS', 'TR'][i]}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+                <div className="ml-2 text-sm">
+                  <span className="text-ivory font-medium">2,847 people</span>
+                  <span className="text-stone"> started this week</span>
+                </div>
+              </div>
+
+              {/* Metrics row */}
+              <div className="flex items-center justify-center lg:justify-start gap-6 py-3 px-4 bg-ivory/5 rounded-xl border border-ivory/10">
+                {[
+                  { value: "50K+", label: "Users" },
+                  { value: "4.9★", label: "Rating" },
+                  { value: "98%", label: "Success" },
+                ].map((metric, idx) => (
+                  <div key={metric.label} className="flex items-center gap-3">
+                    {idx > 0 && <div className="w-px h-8 bg-ivory/10" />}
+                    <div className="text-center">
+                      <div className="text-lg sm:text-xl font-bold text-signal-green">
+                        {metric.value}
+                      </div>
+                      <div className="text-[10px] text-stone uppercase tracking-wider">
+                        {metric.label}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
