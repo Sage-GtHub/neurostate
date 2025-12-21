@@ -52,6 +52,7 @@ export default function NovaChat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isTypingWelcome, setIsTypingWelcome] = useState(false);
   
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [isLoadingHistory, setIsLoadingHistory] = useState(true);
@@ -84,12 +85,29 @@ export default function NovaChat() {
           timestamp: new Date(h.created_at)
         })));
       } else {
-        // Show welcome message for new users
+        // Show welcome message with typing animation for new users
+        setIsTypingWelcome(true);
         setMessages([{
           role: "assistant",
-          content: WELCOME_MESSAGE,
+          content: "",
           timestamp: new Date()
         }]);
+        
+        // Animate the welcome message
+        let charIndex = 0;
+        const typeInterval = setInterval(() => {
+          if (charIndex <= WELCOME_MESSAGE.length) {
+            setMessages([{
+              role: "assistant",
+              content: WELCOME_MESSAGE.slice(0, charIndex),
+              timestamp: new Date()
+            }]);
+            charIndex += 2; // Type 2 chars at a time for speed
+          } else {
+            clearInterval(typeInterval);
+            setIsTypingWelcome(false);
+          }
+        }, 12);
       }
       setIsLoadingHistory(false);
     };
@@ -452,6 +470,9 @@ export default function NovaChat() {
                                     >
                                       {message.content}
                                     </ReactMarkdown>
+                                    {isTypingWelcome && index === 0 && (
+                                      <span className="inline-block w-1.5 h-4 bg-accent animate-pulse ml-0.5 align-middle" />
+                                    )}
                                   </div>
                                 ) : (
                                   <div className="flex items-center gap-2 py-2">
