@@ -18,29 +18,72 @@ const typingPhrases = [
 
 // Animated metrics component
 const AnimatedMetrics = () => {
-  const usersCounter = useCountUp({ end: 50, duration: 2000 });
-  const ratingCounter = useCountUp({ end: 49, duration: 1800 });
-  const successCounter = useCountUp({ end: 98, duration: 2200 });
+  const [isVisible, setIsVisible] = useState(false);
+  const [counts, setCounts] = useState({ users: 0, rating: 0, success: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isVisible]);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const duration = 2000;
+    const startTime = Date.now();
+    const targets = { users: 50, rating: 49, success: 98 };
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeOut = 1 - Math.pow(1 - progress, 4);
+
+      setCounts({
+        users: Math.floor(easeOut * targets.users),
+        rating: Math.floor(easeOut * targets.rating),
+        success: Math.floor(easeOut * targets.success),
+      });
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [isVisible]);
 
   return (
-    <div ref={usersCounter.ref} className="flex items-center justify-center lg:justify-start gap-6 py-3 px-4 bg-ivory/5 rounded-xl border border-ivory/10">
+    <div ref={containerRef} className="flex items-center justify-center lg:justify-start gap-6 py-3 px-4 bg-ivory/5 rounded-xl border border-ivory/10">
       <div className="text-center">
         <div className="text-lg sm:text-xl font-bold text-signal-green">
-          {usersCounter.count}K+
+          {counts.users}K+
         </div>
         <div className="text-[10px] text-stone uppercase tracking-wider">Users</div>
       </div>
       <div className="w-px h-8 bg-ivory/10" />
       <div className="text-center">
         <div className="text-lg sm:text-xl font-bold text-signal-green">
-          {(ratingCounter.count / 10).toFixed(1)}★
+          {(counts.rating / 10).toFixed(1)}★
         </div>
         <div className="text-[10px] text-stone uppercase tracking-wider">Rating</div>
       </div>
       <div className="w-px h-8 bg-ivory/10" />
       <div className="text-center">
         <div className="text-lg sm:text-xl font-bold text-signal-green">
-          {successCounter.count}%
+          {counts.success}%
         </div>
         <div className="text-[10px] text-stone uppercase tracking-wider">Success</div>
       </div>

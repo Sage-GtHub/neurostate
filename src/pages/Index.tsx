@@ -61,7 +61,52 @@ const Index = () => {
               </div>
 
               {/* Three Forces - Animated Circular Design */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+              <div className="relative">
+                {/* Connecting lines - visible on md+ screens */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none hidden md:block" style={{ zIndex: 0 }}>
+                  <defs>
+                    <linearGradient id="lineGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="rgb(139, 92, 246)" stopOpacity="0.3" />
+                      <stop offset="50%" stopColor="rgb(16, 185, 129)" stopOpacity="0.5" />
+                      <stop offset="100%" stopColor="rgb(16, 185, 129)" stopOpacity="0.3" />
+                    </linearGradient>
+                    <linearGradient id="lineGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="rgb(16, 185, 129)" stopOpacity="0.3" />
+                      <stop offset="50%" stopColor="rgb(245, 158, 11)" stopOpacity="0.5" />
+                      <stop offset="100%" stopColor="rgb(245, 158, 11)" stopOpacity="0.3" />
+                    </linearGradient>
+                  </defs>
+                  {/* Line from first to second icon */}
+                  <line 
+                    x1="22%" y1="72px" x2="44%" y2="72px" 
+                    stroke="url(#lineGradient1)" 
+                    strokeWidth="2" 
+                    strokeDasharray="8 4"
+                    className="animate-pulse"
+                  />
+                  {/* Line from second to third icon */}
+                  <line 
+                    x1="56%" y1="72px" x2="78%" y2="72px" 
+                    stroke="url(#lineGradient2)" 
+                    strokeWidth="2" 
+                    strokeDasharray="8 4"
+                    className="animate-pulse"
+                  />
+                  {/* Animated particles on first line */}
+                  <circle r="4" fill="rgb(139, 92, 246)">
+                    <animate attributeName="cx" values="22%;44%;22%" dur="3s" repeatCount="indefinite" />
+                    <animate attributeName="cy" values="72px" dur="3s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" />
+                  </circle>
+                  {/* Animated particles on second line */}
+                  <circle r="4" fill="rgb(245, 158, 11)">
+                    <animate attributeName="cx" values="56%;78%;56%" dur="3s" repeatCount="indefinite" begin="1.5s" />
+                    <animate attributeName="cy" values="72px" dur="3s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" begin="1.5s" />
+                  </circle>
+                </svg>
+
+                <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
                 {[
                   { 
                     icon: Brain, 
@@ -151,6 +196,7 @@ const Index = () => {
                     </div>
                   </div>
                 ))}
+                </div>
               </div>
             </div>
           </section>
