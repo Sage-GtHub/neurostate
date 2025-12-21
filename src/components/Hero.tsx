@@ -1,47 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Brain, Activity, Zap, Target, TrendingUp, Shield, Sparkles, MessageCircle } from "lucide-react";
+import { ArrowRight, Sparkles, Play, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-
-// Nova AI features to showcase
-const novaFeatures = [
-  { 
-    icon: Brain,
-    name: "Cognitive Analysis", 
-    description: "Real-time brain state monitoring",
-    color: "from-violet-500 to-purple-600"
-  },
-  { 
-    icon: Activity,
-    name: "Biometric Sync", 
-    description: "Connect 10+ wearable devices",
-    color: "from-cyan-500 to-blue-600"
-  },
-  { 
-    icon: Target,
-    name: "Goal Tracking", 
-    description: "AI-optimised performance goals",
-    color: "from-emerald-500 to-teal-600"
-  },
-  { 
-    icon: Zap,
-    name: "Smart Protocols", 
-    description: "Personalised daily routines",
-    color: "from-amber-500 to-orange-600"
-  },
-  { 
-    icon: TrendingUp,
-    name: "Predictive Insights", 
-    description: "Forecast your readiness",
-    color: "from-rose-500 to-pink-600"
-  },
-  { 
-    icon: Shield,
-    name: "Recovery Optimisation", 
-    description: "Science-backed interventions",
-    color: "from-indigo-500 to-blue-600"
-  },
-];
+import NovaInterfaceDemo from "./NovaInterfaceDemo";
 
 // Animated typing phrases
 const typingPhrases = [
@@ -54,23 +15,12 @@ const typingPhrases = [
 ];
 
 const Hero = () => {
-  const [activeFeatureIndex, setActiveFeatureIndex] = useState(0);
   const [typingText, setTypingText] = useState("");
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(true);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [pulseActive, setPulseActive] = useState(false);
+  const [showDemo, setShowDemo] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
-
-  // Auto-rotate features
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveFeatureIndex((prev) => (prev + 1) % novaFeatures.length);
-      setPulseActive(true);
-      setTimeout(() => setPulseActive(false), 500);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
 
   // Typing animation
   useEffect(() => {
@@ -114,8 +64,6 @@ const Hero = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const activeFeature = novaFeatures[activeFeatureIndex];
-
   return (
     <section 
       ref={heroRef}
@@ -124,7 +72,6 @@ const Hero = () => {
       {/* Neural Network Background */}
       <div className="absolute inset-0 opacity-[0.05]">
         <svg className="w-full h-full" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
-          {/* Animated network nodes */}
           {[...Array(20)].map((_, i) => (
             <g key={i}>
               <circle 
@@ -142,7 +89,6 @@ const Hero = () => {
                   repeatCount="indefinite"
                 />
               </circle>
-              {/* Connecting lines */}
               {i < 15 && (
                 <line
                   x1={100 + (i % 5) * 200 + Math.sin(i) * 50}
@@ -169,17 +115,18 @@ const Hero = () => {
 
       {/* Dynamic Gradient Orbs */}
       <div 
-        className={`absolute w-[600px] h-[600px] rounded-full blur-3xl opacity-30 transition-all duration-1000 bg-gradient-to-br ${activeFeature.color}`}
+        className="absolute w-[600px] h-[600px] rounded-full blur-3xl opacity-20 bg-gradient-to-br from-signal-green/40 to-emerald-600/20"
         style={{
           left: '60%',
           top: '40%',
           transform: `translate(-50%, -50%) translate(${mousePosition.x * 40}px, ${mousePosition.y * 40}px)`,
+          transition: 'transform 0.5s ease-out'
         }}
       />
       <div 
-        className="absolute w-[400px] h-[400px] rounded-full blur-3xl opacity-20 bg-gradient-to-br from-signal-green/40 to-transparent"
+        className="absolute w-[400px] h-[400px] rounded-full blur-3xl opacity-15 bg-gradient-to-br from-violet-500/40 to-purple-600/20"
         style={{
-          left: '20%',
+          left: '25%',
           top: '60%',
           transform: `translate(${mousePosition.x * -20}px, ${mousePosition.y * -20}px)`,
           transition: 'transform 0.5s ease-out'
@@ -224,7 +171,7 @@ const Hero = () => {
             <div className="bg-carbon/50 border border-ivory/10 rounded-xl p-4 backdrop-blur-sm max-w-lg mx-auto lg:mx-0">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-signal-green to-emerald-600 flex items-center justify-center shrink-0">
-                  <MessageCircle className="w-5 h-5 text-carbon" />
+                  <div className="w-3 h-3 bg-carbon rounded-full animate-pulse" />
                 </div>
                 <div className="flex-1 min-h-[48px] flex items-center">
                   <span className="text-ivory/90 font-mono text-sm">
@@ -258,15 +205,15 @@ const Hero = () => {
                   <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
-              <Link to="/shop">
-                <Button 
-                  variant="outline"
-                  size="lg"
-                  className="w-full sm:w-auto border-ivory/20 text-ivory hover:bg-ivory/10 font-medium transition-all duration-300 min-h-[56px] px-8 text-sm tracking-wide"
-                >
-                  Explore Products
-                </Button>
-              </Link>
+              <Button 
+                variant="outline"
+                size="lg"
+                onClick={() => setShowDemo(true)}
+                className="w-full sm:w-auto border-ivory/20 text-ivory hover:bg-ivory/10 font-medium transition-all duration-300 min-h-[56px] px-8 text-sm tracking-wide group"
+              >
+                <Play className="mr-2 w-4 h-4 transition-transform group-hover:scale-110" />
+                Watch Demo
+              </Button>
             </div>
 
             {/* Trust Metrics */}
@@ -288,138 +235,78 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right: AI Feature Showcase */}
-          <div className="relative order-1 lg:order-2 flex items-center justify-center min-h-[500px]">
-            {/* Central AI Core */}
-            <div className="relative">
-              {/* Pulse rings */}
-              <div className={`absolute inset-0 flex items-center justify-center transition-transform duration-500 ${pulseActive ? 'scale-110' : 'scale-100'}`}>
-                <div className="absolute w-[200px] h-[200px] sm:w-[280px] sm:h-[280px] rounded-full border border-signal-green/20 animate-ping opacity-20" style={{ animationDuration: '3s' }} />
-                <div className="absolute w-[240px] h-[240px] sm:w-[340px] sm:h-[340px] rounded-full border border-signal-green/10 animate-ping opacity-10" style={{ animationDuration: '4s' }} />
-              </div>
-
-              {/* Rotating orbit ring */}
-              <div 
-                className="absolute w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[480px] lg:h-[480px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                style={{ animation: 'spin 30s linear infinite' }}
-              >
-                <div className="absolute inset-0 rounded-full border border-dashed border-ivory/10" />
-                {/* Orbit dots */}
-                {[0, 60, 120, 180, 240, 300].map((deg, i) => (
-                  <div
-                    key={deg}
-                    className="absolute w-2 h-2 rounded-full bg-signal-green/60"
-                    style={{
-                      left: '50%',
-                      top: '0',
-                      transform: `translateX(-50%) rotate(${deg}deg) translateY(-50%)`,
-                      transformOrigin: '50% 200px',
-                    }}
-                  />
-                ))}
-              </div>
-
-              {/* Feature cards orbiting */}
-              <div className="absolute w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[500px] lg:h-[500px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                {novaFeatures.map((feature, index) => {
-                  const angle = (360 / novaFeatures.length) * index - 90;
-                  const isActive = index === activeFeatureIndex;
-                  const radius = typeof window !== 'undefined' && window.innerWidth < 640 ? 130 : 180;
-                  const FeatureIcon = feature.icon;
-                  
-                  return (
-                    <div
-                      key={feature.name}
-                      className={`absolute transition-all duration-500 cursor-pointer ${
-                        isActive ? 'scale-110 z-20' : 'scale-100 z-10 opacity-50'
-                      }`}
-                      style={{
-                        left: '50%',
-                        top: '50%',
-                        transform: `translate(-50%, -50%) rotate(${angle}deg) translateY(-${radius}px) rotate(-${angle}deg)`,
-                      }}
-                      onClick={() => setActiveFeatureIndex(index)}
-                    >
-                      <div className={`
-                        w-14 h-14 sm:w-16 sm:h-16 rounded-xl 
-                        bg-gradient-to-br ${feature.color} 
-                        flex items-center justify-center
-                        shadow-lg transition-all duration-300
-                        ${isActive ? 'shadow-2xl ring-2 ring-white/20' : 'hover:scale-110'}
-                      `}>
-                        <FeatureIcon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Central Nova AI Brain */}
-              <div 
-                className="relative w-40 h-40 sm:w-52 sm:h-52 lg:w-60 lg:h-60"
-                style={{
-                  transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)`,
-                  transition: 'transform 0.3s ease-out'
-                }}
-              >
-                {/* Glow effect */}
-                <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${activeFeature.color} blur-2xl opacity-40 transition-all duration-500`} />
-                
-                {/* Main circle */}
-                <div className="absolute inset-0 rounded-full bg-carbon border-2 border-ivory/10 flex items-center justify-center overflow-hidden">
-                  {/* Animated gradient background */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-carbon via-carbon to-signal-green/10 animate-pulse" />
-                  
-                  {/* Inner content */}
-                  <div className="relative z-10 text-center">
-                    <div className="relative">
-                      <Brain className="w-12 h-12 sm:w-16 sm:h-16 text-signal-green mx-auto" />
-                      <div className="absolute inset-0 animate-pulse">
-                        <Brain className="w-12 h-12 sm:w-16 sm:h-16 text-signal-green mx-auto opacity-50 blur-sm" />
-                      </div>
-                    </div>
-                    <div className="mt-2 text-ivory font-bold text-lg sm:text-xl">NOVA</div>
-                    <div className="text-signal-green text-[10px] sm:text-xs uppercase tracking-widest">AI Active</div>
-                  </div>
-
-                  {/* Scanning line effect */}
-                  <div 
-                    className="absolute inset-0 bg-gradient-to-b from-transparent via-signal-green/10 to-transparent"
-                    style={{
-                      animation: 'scan 2s linear infinite',
-                    }}
-                  />
+          {/* Right: Nova Interface Demo */}
+          <div className="relative order-1 lg:order-2 flex items-center justify-center">
+            <div 
+              className="relative w-full max-w-md lg:max-w-lg aspect-[4/3] cursor-pointer group"
+              onClick={() => setShowDemo(true)}
+              style={{
+                transform: `perspective(1000px) rotateX(${mousePosition.y * 5}deg) rotateY(${mousePosition.x * -5}deg)`,
+                transition: 'transform 0.3s ease-out'
+              }}
+            >
+              {/* Glow effect behind */}
+              <div className="absolute -inset-4 bg-gradient-to-br from-signal-green/20 via-transparent to-violet-500/20 rounded-3xl blur-2xl opacity-60 group-hover:opacity-80 transition-opacity" />
+              
+              {/* The demo interface */}
+              <NovaInterfaceDemo />
+              
+              {/* Play overlay on hover */}
+              <div className="absolute inset-0 bg-carbon/40 backdrop-blur-sm rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-signal-green flex items-center justify-center shadow-lg shadow-signal-green/30 transform group-hover:scale-110 transition-transform">
+                  <Play className="w-6 h-6 text-carbon ml-1" />
                 </div>
               </div>
-
-              {/* Active Feature Info */}
-              <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-64 sm:w-80 text-center">
-                <div className={`bg-gradient-to-r ${activeFeature.color} bg-clip-text text-transparent font-bold text-lg sm:text-xl mb-1`}>
-                  {activeFeature.name}
-                </div>
-                <div className="text-stone text-sm">
-                  {activeFeature.description}
-                </div>
+              
+              {/* Floating badges */}
+              <div className="absolute -top-3 -right-3 px-3 py-1.5 bg-signal-green text-carbon text-xs font-semibold rounded-full shadow-lg animate-bounce" style={{ animationDuration: '2s' }}>
+                Live Demo
               </div>
-            </div>
-
-            {/* Progress Dots */}
-            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-              {novaFeatures.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveFeatureIndex(index)}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    index === activeFeatureIndex 
-                      ? 'w-8 bg-signal-green' 
-                      : 'w-1.5 bg-ivory/20 hover:bg-ivory/40'
-                  }`}
-                />
-              ))}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Full Demo Modal */}
+      {showDemo && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8"
+          onClick={() => setShowDemo(false)}
+        >
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-carbon/95 backdrop-blur-xl animate-fade-in" />
+          
+          {/* Modal content */}
+          <div 
+            className="relative w-full max-w-4xl aspect-[4/3] animate-scale-in"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button 
+              onClick={() => setShowDemo(false)}
+              className="absolute -top-12 right-0 text-ivory/60 hover:text-ivory transition-colors flex items-center gap-2 text-sm"
+            >
+              Close <X className="w-4 h-4" />
+            </button>
+            
+            {/* Demo interface full size */}
+            <NovaInterfaceDemo />
+            
+            {/* CTA below modal */}
+            <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-4">
+              <Link to="/nova">
+                <Button 
+                  size="lg"
+                  className="bg-signal-green text-carbon hover:bg-signal-green/90 font-semibold shadow-lg shadow-signal-green/20"
+                >
+                  Try Nova Now
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Bottom Gradient */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-carbon to-transparent pointer-events-none" />
@@ -431,14 +318,6 @@ const Hero = () => {
           <div className="absolute w-full h-3 bg-signal-green animate-bounce" />
         </div>
       </div>
-
-      {/* Add scan animation keyframes */}
-      <style>{`
-        @keyframes scan {
-          0% { transform: translateY(-100%); }
-          100% { transform: translateY(100%); }
-        }
-      `}</style>
     </section>
   );
 };
