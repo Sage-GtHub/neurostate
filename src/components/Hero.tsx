@@ -81,20 +81,20 @@ const AnimatedMetrics = () => {
       {/* Glassmorphism glow */}
       <div className="absolute -inset-0.5 bg-gradient-to-r from-signal-green/15 via-emerald-500/10 to-cyan-500/15 rounded-xl blur-lg opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
       
-      <div className="relative flex items-center justify-center lg:justify-start gap-3 sm:gap-5 py-3 px-4 bg-white/[0.04] backdrop-blur-2xl rounded-xl border border-white/[0.08] shadow-xl shadow-black/20">
+      <div className="relative flex items-center justify-center lg:justify-start gap-2 sm:gap-4 py-2 sm:py-3 px-3 sm:px-4 bg-white/[0.04] backdrop-blur-2xl rounded-xl border border-white/[0.08] shadow-xl shadow-black/20">
         {metrics.map((metric, i) => (
-          <div key={metric.label} className="flex items-center gap-4">
+          <div key={metric.label} className="flex items-center gap-2 sm:gap-4">
             <div className="text-center group/metric cursor-default">
-              <div className="flex items-center justify-center gap-1.5 mb-0.5">
-                <metric.icon className="w-3 h-3 text-signal-green opacity-80 group-hover/metric:opacity-100 group-hover/metric:scale-110 transition-all duration-300" />
-                <div className="text-sm sm:text-base font-bold bg-gradient-to-r from-signal-green via-emerald-400 to-signal-green bg-clip-text text-transparent group-hover/metric:scale-105 transition-transform">
+              <div className="flex items-center justify-center gap-1 sm:gap-1.5 mb-0.5">
+                <metric.icon className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-signal-green opacity-80 group-hover/metric:opacity-100 group-hover/metric:scale-110 transition-all duration-300" />
+                <div className="text-xs sm:text-base font-bold bg-gradient-to-r from-signal-green via-emerald-400 to-signal-green bg-clip-text text-transparent group-hover/metric:scale-105 transition-transform">
                   {metric.value}
                 </div>
               </div>
-              <div className="text-[9px] text-stone/70 uppercase tracking-wider font-medium">{metric.label}</div>
+              <div className="text-[7px] sm:text-[9px] text-stone/70 uppercase tracking-wider font-medium">{metric.label}</div>
             </div>
             {i < metrics.length - 1 && (
-              <div className="w-px h-8 bg-gradient-to-b from-transparent via-white/15 to-transparent" />
+              <div className="w-px h-6 sm:h-8 bg-gradient-to-b from-transparent via-white/15 to-transparent" />
             )}
           </div>
         ))}
@@ -351,39 +351,39 @@ const Hero = () => {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[75vh]">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-20">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-10 lg:gap-20 items-center min-h-[85vh] sm:min-h-[80vh] lg:min-h-[75vh]">
           
           {/* Left: Text Content */}
-          <div className="space-y-6 text-center lg:text-left order-2 lg:order-1">
+          <div className="space-y-4 sm:space-y-5 lg:space-y-6 text-center lg:text-left order-2 lg:order-1">
             {/* Label with enhanced glow and micro-interaction */}
-            <div className="inline-flex items-center gap-2.5 px-5 py-2.5 bg-signal-green/10 border border-signal-green/30 backdrop-blur-xl rounded-full shadow-lg shadow-signal-green/10 hover:shadow-signal-green/30 hover:scale-105 transition-all duration-500 group cursor-default">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2.5 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-signal-green/10 border border-signal-green/30 backdrop-blur-xl rounded-full shadow-lg shadow-signal-green/10 hover:shadow-signal-green/30 active:scale-95 sm:hover:scale-105 transition-all duration-500 group cursor-default">
               <div className="relative">
-                <Brain className="w-4 h-4 text-signal-green group-hover:rotate-12 transition-transform duration-300" />
+                <Brain className="w-3 h-3 sm:w-4 sm:h-4 text-signal-green group-hover:rotate-12 transition-transform duration-300" />
                 <div className="absolute inset-0 animate-ping opacity-40">
-                  <Brain className="w-4 h-4 text-signal-green" />
+                  <Brain className="w-3 h-3 sm:w-4 sm:h-4 text-signal-green" />
                 </div>
               </div>
-              <span className="text-signal-green text-xs tracking-[0.2em] uppercase font-semibold">
-                Next-Gen AI Health Intelligence
+              <span className="text-signal-green text-[10px] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase font-semibold">
+                AI Health Intelligence
               </span>
             </div>
 
             {/* Main Headline with clearer value proposition */}
-            <div className="space-y-3">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-ivory leading-[1.05] tracking-tight">
+            <div className="space-y-2 sm:space-y-3">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-ivory leading-[1.1] sm:leading-[1.05] tracking-tight">
                 Meet
-                <span className="relative inline-block ml-3 sm:ml-4">
+                <span className="relative inline-block ml-2 sm:ml-3 lg:ml-4">
                   <span className="relative z-10 bg-gradient-to-r from-signal-green via-emerald-300 to-signal-green bg-clip-text text-transparent bg-[length:200%_auto] animate-shimmer">
                     Nova
                   </span>
-                  <div className="absolute -inset-4 bg-gradient-to-r from-signal-green/40 via-emerald-400/30 to-signal-green/40 blur-3xl rounded-full animate-pulse" />
-                  <div className="absolute -inset-2 bg-signal-green/20 blur-xl rounded-full" />
+                  <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-signal-green/40 via-emerald-400/30 to-signal-green/40 blur-2xl sm:blur-3xl rounded-full animate-pulse" />
+                  <div className="absolute -inset-1 sm:-inset-2 bg-signal-green/20 blur-lg sm:blur-xl rounded-full" />
                 </span>
               </h1>
               
               {/* Clear benefit statement */}
-              <p className="text-xl sm:text-2xl md:text-3xl text-stone/90 font-light leading-relaxed">
+              <p className="text-base sm:text-xl md:text-2xl lg:text-3xl text-stone/90 font-light leading-relaxed px-2 sm:px-0">
                 Unlock <span className="text-ivory font-medium">peak performance</span> with AI that{" "}
                 <span className="text-signal-green font-medium">predicts</span> and{" "}
                 <span className="text-signal-green font-medium">adapts</span> to your body.
@@ -391,23 +391,23 @@ const Hero = () => {
             </div>
 
             {/* Glassmorphism AI Typing Animation */}
-            <div className="relative max-w-xl mx-auto lg:mx-0 group">
+            <div className="relative max-w-xl mx-auto lg:mx-0 group hidden sm:block">
               {/* Multi-layer glow */}
               <div className="absolute -inset-2 bg-gradient-to-r from-signal-green/30 via-emerald-500/20 to-cyan-500/30 rounded-2xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               <div className="absolute -inset-1 bg-gradient-to-r from-signal-green/20 via-transparent to-violet-500/20 rounded-2xl blur-xl opacity-50 group-hover:opacity-80 transition-opacity duration-500" />
               
-              <div className="relative bg-white/[0.04] backdrop-blur-2xl border border-white/[0.08] rounded-2xl p-5 shadow-2xl shadow-black/30">
-                <div className="flex items-center gap-4">
-                  <div className="relative w-14 h-14 rounded-xl bg-gradient-to-br from-signal-green via-emerald-500 to-teal-500 flex items-center justify-center shrink-0 shadow-lg shadow-signal-green/40 group-hover:shadow-signal-green/60 transition-shadow">
-                    <div className="w-4 h-4 bg-carbon rounded-full animate-pulse" />
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/30 to-transparent" />
+              <div className="relative bg-white/[0.04] backdrop-blur-2xl border border-white/[0.08] rounded-xl sm:rounded-2xl p-3 sm:p-5 shadow-2xl shadow-black/30">
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="relative w-10 h-10 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-gradient-to-br from-signal-green via-emerald-500 to-teal-500 flex items-center justify-center shrink-0 shadow-lg shadow-signal-green/40 group-hover:shadow-signal-green/60 transition-shadow">
+                    <div className="w-3 h-3 sm:w-4 sm:h-4 bg-carbon rounded-full animate-pulse" />
+                    <div className="absolute inset-0 rounded-lg sm:rounded-xl bg-gradient-to-br from-white/30 to-transparent" />
                     {/* Rotating ring */}
-                    <div className="absolute -inset-1 rounded-xl border border-signal-green/30 animate-spin" style={{ animationDuration: '8s' }} />
+                    <div className="absolute -inset-1 rounded-lg sm:rounded-xl border border-signal-green/30 animate-spin" style={{ animationDuration: '8s' }} />
                   </div>
-                  <div className="flex-1 min-h-[56px] flex items-center">
-                    <span className="text-ivory/90 font-mono text-sm tracking-wide">
+                  <div className="flex-1 min-h-[40px] sm:min-h-[56px] flex items-center">
+                    <span className="text-ivory/90 font-mono text-xs sm:text-sm tracking-wide">
                       {typingText}
-                      <span className="inline-block w-0.5 h-5 bg-signal-green ml-1 animate-pulse" />
+                      <span className="inline-block w-0.5 h-4 sm:h-5 bg-signal-green ml-1 animate-pulse" />
                     </span>
                   </div>
                 </div>
@@ -415,7 +415,7 @@ const Hero = () => {
             </div>
 
             {/* Feature Pills with enhanced micro-interactions */}
-            <div className="flex flex-wrap gap-2.5 justify-center lg:justify-start">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2.5 justify-center lg:justify-start px-2 sm:px-0">
               {[
                 { label: "Wearable Sync", icon: Activity, color: "signal-green" },
                 { label: "Smart Protocols", icon: Brain, color: "violet-400" },
@@ -425,80 +425,80 @@ const Hero = () => {
                 <span 
                   key={pill.label}
                   className={cn(
-                    "group flex items-center gap-2 px-4 py-2.5 text-xs font-medium",
+                    "group flex items-center gap-1 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2.5 text-[10px] sm:text-xs font-medium",
                     "bg-white/[0.04] backdrop-blur-xl border border-white/[0.08]",
                     "text-ivory/80 rounded-full",
                     "hover:border-signal-green/40 hover:bg-signal-green/10 hover:text-signal-green",
-                    "hover:scale-105 hover:shadow-lg hover:shadow-signal-green/20",
+                    "active:scale-95 sm:hover:scale-105 hover:shadow-lg hover:shadow-signal-green/20",
                     "transition-all duration-300 cursor-default"
                   )}
                 >
-                  <pill.icon className="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 group-hover:rotate-12 transition-all duration-300" />
+                  <pill.icon className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 opacity-70 group-hover:opacity-100 group-hover:rotate-12 transition-all duration-300" />
                   {pill.label}
                 </span>
               ))}
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center lg:justify-start pt-2">
-              <Link to="/nova">
+            <div className="flex flex-row gap-2 sm:gap-3 justify-center lg:justify-start pt-2 px-2 sm:px-0">
+              <Link to="/nova" className="flex-1 sm:flex-none">
                 <Button 
                   className={cn(
-                    "relative bg-signal-green text-carbon hover:bg-signal-green font-semibold",
-                    "h-10 sm:h-11 px-6 sm:px-7 text-xs sm:text-sm tracking-wide",
-                    "shadow-lg shadow-signal-green/25 hover:shadow-signal-green/40",
-                    "transition-all duration-300 group overflow-hidden"
+                    "relative bg-signal-green text-carbon hover:bg-signal-green font-semibold w-full sm:w-auto",
+                    "h-10 sm:h-11 px-4 sm:px-7 text-xs sm:text-sm tracking-wide",
+                    "shadow-lg shadow-signal-green/25 active:shadow-signal-green/40",
+                    "transition-all duration-300 group overflow-hidden active:scale-95"
                   )}
                 >
-                  <span className="relative z-10 flex items-center gap-1.5">
+                  <span className="relative z-10 flex items-center justify-center gap-1.5">
                     Start Free
-                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                    <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform group-hover:translate-x-0.5" />
                   </span>
                   {/* Shimmer effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
                 </Button>
               </Link>
-              <Link to="/shop">
+              <Link to="/shop" className="flex-1 sm:flex-none">
                 <Button 
                   variant="outline"
                   className={cn(
-                    "relative bg-transparent border border-ivory/40 text-ivory",
+                    "relative bg-transparent border border-ivory/40 text-ivory w-full sm:w-auto",
                     "hover:bg-ivory hover:text-carbon hover:border-ivory font-medium",
-                    "h-10 sm:h-11 px-6 sm:px-7 text-xs sm:text-sm tracking-wide",
-                    "transition-all duration-300 group hover:scale-[1.02]"
+                    "h-10 sm:h-11 px-4 sm:px-7 text-xs sm:text-sm tracking-wide",
+                    "transition-all duration-300 group active:scale-95"
                   )}
                 >
-                  <span className="flex items-center gap-1.5">
-                    Explore Products
-                    <ChevronRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+                  <span className="flex items-center justify-center gap-1.5">
+                    Products
+                    <ChevronRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
                   </span>
                 </Button>
               </Link>
             </div>
 
             {/* Social Proof + Metrics */}
-            <div className="pt-3 max-w-xl mx-auto lg:mx-0 space-y-3">
+            <div className="pt-2 sm:pt-3 max-w-xl mx-auto lg:mx-0 space-y-2 sm:space-y-3">
               {/* Active users indicator */}
               <div className="flex items-center justify-center lg:justify-start gap-2">
-                <div className="flex -space-x-2">
+                <div className="flex -space-x-1.5 sm:-space-x-2">
                   {[...Array(4)].map((_, i) => (
                     <div 
                       key={i}
-                      className="w-7 h-7 rounded-full bg-gradient-to-br from-signal-green/40 to-emerald-600/40 border-2 border-carbon flex items-center justify-center shadow-md hover:scale-110 hover:z-10 transition-all duration-300 cursor-default"
+                      className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-gradient-to-br from-signal-green/40 to-emerald-600/40 border-[1.5px] sm:border-2 border-carbon flex items-center justify-center shadow-md active:scale-110 sm:hover:scale-110 hover:z-10 transition-all duration-300 cursor-default"
                     >
-                      <span className="text-[8px] text-ivory font-bold">
+                      <span className="text-[6px] sm:text-[8px] text-ivory font-bold">
                         {['JD', 'MK', 'AS', 'TR'][i]}
                       </span>
                     </div>
                   ))}
                 </div>
-                <div className="text-xs">
+                <div className="text-[10px] sm:text-xs">
                   <span className="text-ivory font-semibold">2,847</span>
                   <span className="text-stone/70 ml-1">active now</span>
                 </div>
                 <div className="relative">
-                  <div className="w-2 h-2 bg-signal-green rounded-full animate-pulse" />
-                  <div className="absolute inset-0 w-2 h-2 bg-signal-green rounded-full animate-ping opacity-50" />
+                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-signal-green rounded-full animate-pulse" />
+                  <div className="absolute inset-0 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-signal-green rounded-full animate-ping opacity-50" />
                 </div>
               </div>
 
@@ -511,46 +511,46 @@ const Hero = () => {
           <div className="relative order-1 lg:order-2 flex flex-col items-center justify-center">
             {/* Demo Interface */}
             <div 
-              className="relative w-full max-w-md lg:max-w-lg aspect-[4/3] cursor-pointer group"
+              className="relative w-full max-w-[280px] sm:max-w-md lg:max-w-lg aspect-[4/3] cursor-pointer group"
               onClick={() => setShowDemo(true)}
               style={{
-                transform: `perspective(1200px) rotateX(${mousePosition.y * 6}deg) rotateY(${mousePosition.x * -6}deg) translateY(${scrollY * -0.05}px)`,
+                transform: `perspective(1200px) rotateX(${mousePosition.y * 3}deg) rotateY(${mousePosition.x * -3}deg) translateY(${scrollY * -0.03}px)`,
                 transition: 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
               }}
             >
               {/* Multi-layer glow effects */}
-              <div className="absolute -inset-10 bg-gradient-to-br from-signal-green/25 via-transparent to-violet-500/25 rounded-3xl blur-3xl opacity-60 group-hover:opacity-90 transition-opacity duration-700" />
-              <div className="absolute -inset-6 bg-gradient-to-tr from-cyan-500/15 via-transparent to-signal-green/15 rounded-3xl blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-500" />
+              <div className="absolute -inset-4 sm:-inset-10 bg-gradient-to-br from-signal-green/25 via-transparent to-violet-500/25 rounded-2xl sm:rounded-3xl blur-2xl sm:blur-3xl opacity-60 group-hover:opacity-90 transition-opacity duration-700" />
+              <div className="absolute -inset-3 sm:-inset-6 bg-gradient-to-tr from-cyan-500/15 via-transparent to-signal-green/15 rounded-2xl sm:rounded-3xl blur-xl sm:blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-500" />
               
               {/* Glassmorphism frame */}
-              <div className="absolute inset-0 rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/40" />
+              <div className="absolute inset-0 rounded-xl sm:rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/40" />
               
               {/* The demo interface */}
               <div className="relative z-10">
                 <NovaInterfaceDemo />
               </div>
               
-              {/* Play overlay on hover */}
-              <div className="absolute inset-0 bg-carbon/60 backdrop-blur-md rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-400 flex items-center justify-center z-20">
-                <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-signal-green via-emerald-500 to-teal-500 flex items-center justify-center shadow-2xl shadow-signal-green/50 transform group-hover:scale-110 transition-transform duration-300">
-                  <Play className="w-8 h-8 sm:w-10 sm:h-10 text-carbon ml-1" />
+              {/* Play overlay - always visible on mobile as tap hint */}
+              <div className="absolute inset-0 bg-carbon/40 sm:bg-carbon/60 backdrop-blur-sm sm:backdrop-blur-md rounded-xl sm:rounded-2xl opacity-100 sm:opacity-0 group-hover:opacity-100 transition-all duration-400 flex items-center justify-center z-20">
+                <div className="relative w-14 h-14 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full bg-gradient-to-br from-signal-green via-emerald-500 to-teal-500 flex items-center justify-center shadow-2xl shadow-signal-green/50 transform group-hover:scale-110 active:scale-95 transition-transform duration-300">
+                  <Play className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-carbon ml-0.5 sm:ml-1" />
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/30 to-transparent" />
                   {/* Pulsing ring */}
-                  <div className="absolute -inset-3 rounded-full border-2 border-signal-green/50 animate-ping opacity-30" />
+                  <div className="absolute -inset-2 sm:-inset-3 rounded-full border-2 border-signal-green/50 animate-ping opacity-30" />
                 </div>
               </div>
               
               {/* Floating badge */}
-              <div className="absolute -top-4 -right-4 px-4 py-2 bg-gradient-to-r from-signal-green to-emerald-500 text-carbon text-xs font-bold rounded-full shadow-xl shadow-signal-green/40 z-30 hover:scale-110 transition-transform">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 bg-carbon rounded-full animate-pulse" />
+              <div className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 px-2.5 sm:px-4 py-1 sm:py-2 bg-gradient-to-r from-signal-green to-emerald-500 text-carbon text-[10px] sm:text-xs font-bold rounded-full shadow-xl shadow-signal-green/40 z-30 active:scale-95 sm:hover:scale-110 transition-transform">
+                <span className="flex items-center gap-1 sm:gap-1.5">
+                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-carbon rounded-full animate-pulse" />
                   Live Demo
                 </span>
               </div>
               
-              {/* Corner decorations */}
-              <div className="absolute -bottom-3 -left-3 w-20 h-20 border-l-2 border-b-2 border-signal-green/40 rounded-bl-2xl opacity-70 group-hover:opacity-100 transition-opacity" />
-              <div className="absolute -top-3 -right-3 w-20 h-20 border-r-2 border-t-2 border-violet-500/40 rounded-tr-2xl opacity-70 group-hover:opacity-100 transition-opacity" />
+              {/* Corner decorations - hidden on mobile */}
+              <div className="hidden sm:block absolute -bottom-3 -left-3 w-20 h-20 border-l-2 border-b-2 border-signal-green/40 rounded-bl-2xl opacity-70 group-hover:opacity-100 transition-opacity" />
+              <div className="hidden sm:block absolute -top-3 -right-3 w-20 h-20 border-r-2 border-t-2 border-violet-500/40 rounded-tr-2xl opacity-70 group-hover:opacity-100 transition-opacity" />
             </div>
           </div>
         </div>
@@ -559,7 +559,7 @@ const Hero = () => {
       {/* Full Demo Modal */}
       {showDemo && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8"
+          className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 lg:p-8"
           onClick={() => setShowDemo(false)}
         >
           {/* Backdrop */}
@@ -573,9 +573,9 @@ const Hero = () => {
             {/* Close button */}
             <button 
               onClick={() => setShowDemo(false)}
-              className="absolute -top-12 right-0 text-ivory/60 hover:text-ivory transition-colors flex items-center gap-2 text-sm z-[60] hover:scale-105"
+              className="absolute -top-10 sm:-top-12 right-0 text-ivory/60 hover:text-ivory active:text-ivory transition-colors flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm z-[60] active:scale-95 sm:hover:scale-105"
             >
-              Close <X className="w-4 h-4" />
+              Close <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
             
             {/* Demo interface full size */}
@@ -590,25 +590,25 @@ const Hero = () => {
             )}
             
             {/* Tour toggle and CTA below modal */}
-            <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-4">
+            <div className="absolute -bottom-14 sm:-bottom-16 left-1/2 -translate-x-1/2 flex flex-col sm:flex-row items-center gap-2 sm:gap-4 w-full px-4 sm:w-auto sm:px-0">
               {!showTour && (
                 <Button 
                   variant="outline"
-                  size="lg"
+                  size="default"
                   onClick={() => setShowTour(true)}
-                  className="bg-ivory border-ivory/20 text-carbon hover:bg-ivory/90"
+                  className="bg-ivory border-ivory/20 text-carbon hover:bg-ivory/90 w-full sm:w-auto h-9 sm:h-11 text-xs sm:text-sm"
                 >
-                  <BookOpen className="mr-2 w-4 h-4 text-carbon" />
+                  <BookOpen className="mr-1.5 sm:mr-2 w-3.5 h-3.5 sm:w-4 sm:h-4 text-carbon" />
                   Take a Tour
                 </Button>
               )}
-              <Link to="/nova">
+              <Link to="/nova" className="w-full sm:w-auto">
                 <Button 
-                  size="lg"
-                  className="bg-signal-green text-carbon hover:bg-signal-green/90 font-bold shadow-lg shadow-signal-green/30"
+                  size="default"
+                  className="bg-signal-green text-carbon hover:bg-signal-green/90 font-bold shadow-lg shadow-signal-green/30 w-full sm:w-auto h-9 sm:h-11 text-xs sm:text-sm"
                 >
                   Try Nova Now
-                  <ArrowRight className="ml-2 w-4 h-4" />
+                  <ArrowRight className="ml-1.5 sm:ml-2 w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </Button>
               </Link>
             </div>
