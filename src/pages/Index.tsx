@@ -64,6 +64,23 @@ const Index = () => {
 
               {/* Three Forces - Animated Circular Design */}
               <div className="relative">
+                {/* 3D Orb Background Video */}
+                <div className="absolute inset-0 -top-20 -bottom-20 flex items-center justify-center pointer-events-none overflow-hidden">
+                  <div className="relative w-[600px] h-[600px] sm:w-[800px] sm:h-[800px] lg:w-[1000px] lg:h-[1000px] opacity-20">
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover"
+                      poster=""
+                    >
+                      <source src="https://cdn.pixabay.com/video/2024/02/14/200659-912961933_large.mp4" type="video/mp4" />
+                    </video>
+                    {/* Gradient overlay to blend with background */}
+                    <div className="absolute inset-0 bg-gradient-radial from-transparent via-ivory/50 to-ivory" />
+                  </div>
+                </div>
                 {/* Connecting lines - visible on md+ screens */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none hidden md:block" style={{ zIndex: 0 }}>
                   <defs>
@@ -114,7 +131,6 @@ const Index = () => {
                     title: "Nova AI", 
                     desc: "AI performance assistant", 
                     detail: "Personalised AI coaching with adaptive recommendations and real-time behavioural insights.",
-                    number: "01",
                     gradient: "from-violet-500 to-purple-600",
                     pulseColor: "violet",
                     neuronColor: "#8b5cf6"
@@ -123,7 +139,6 @@ const Index = () => {
                     title: "Supplements", 
                     desc: "Personalised stacks", 
                     detail: "Adaptogen supplements for focus. Magnesium for recovery. Third-party verified.",
-                    number: "02",
                     gradient: "from-emerald-500 to-teal-600",
                     pulseColor: "emerald",
                     neuronColor: "#10b981"
@@ -132,7 +147,6 @@ const Index = () => {
                     title: "Neuromodulation", 
                     desc: "Brain state control", 
                     detail: "Red light therapy cognitive benefits. Alpha and beta state switching.",
-                    number: "03",
                     gradient: "from-amber-500 to-orange-600",
                     pulseColor: "amber",
                     neuronColor: "#f59e0b"
@@ -182,14 +196,6 @@ const Index = () => {
                             color={item.neuronColor}
                             pulseDelay={i * 300}
                           />
-                        </div>
-                      </div>
-                      
-                      {/* Number badge with pulse */}
-                      <div className="absolute -top-1 -right-1">
-                        <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${item.gradient} animate-ping opacity-30`} />
-                        <div className={`relative w-7 h-7 rounded-full bg-carbon group-hover:bg-gradient-to-br group-hover:${item.gradient} flex items-center justify-center transition-all duration-500 shadow-md`}>
-                          <span className="text-ivory text-[10px] font-semibold">{item.number}</span>
                         </div>
                       </div>
                     </div>
