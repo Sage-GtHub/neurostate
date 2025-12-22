@@ -596,9 +596,9 @@ const Hero = () => {
                   variant="outline"
                   size="lg"
                   onClick={() => setShowTour(true)}
-                  className="border-ivory/20 text-ivory hover:bg-ivory/10"
+                  className="bg-ivory border-ivory/20 text-carbon hover:bg-ivory/90"
                 >
-                  <BookOpen className="mr-2 w-4 h-4" />
+                  <BookOpen className="mr-2 w-4 h-4 text-carbon" />
                   Take a Tour
                 </Button>
               )}
