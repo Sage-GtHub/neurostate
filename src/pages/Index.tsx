@@ -64,21 +64,20 @@ const Index = () => {
 
               {/* Three Forces - Animated Circular Design */}
               <div className="relative">
-                {/* 3D Orb Background Video */}
-                <div className="absolute inset-0 -top-20 -bottom-20 flex items-center justify-center pointer-events-none overflow-hidden">
-                  <div className="relative w-[600px] h-[600px] sm:w-[800px] sm:h-[800px] lg:w-[1000px] lg:h-[1000px] opacity-20">
+{/* 3D Orb Background Video */}
+                <div className="absolute inset-0 -top-32 -bottom-32 flex items-center justify-center pointer-events-none overflow-hidden z-0">
+                  <div className="relative w-[500px] h-[500px] sm:w-[700px] sm:h-[700px] lg:w-[900px] lg:h-[900px]">
                     <video
                       autoPlay
                       loop
                       muted
                       playsInline
-                      className="w-full h-full object-cover"
-                      poster=""
+                      className="w-full h-full object-contain opacity-30"
                     >
-                      <source src="https://cdn.pixabay.com/video/2024/02/14/200659-912961933_large.mp4" type="video/mp4" />
+                      <source src="https://assets.mixkit.co/videos/preview/mixkit-glowing-neon-sphere-in-motion-1318-large.mp4" type="video/mp4" />
                     </video>
                     {/* Gradient overlay to blend with background */}
-                    <div className="absolute inset-0 bg-gradient-radial from-transparent via-ivory/50 to-ivory" />
+                    <div className="absolute inset-0 bg-gradient-radial from-transparent via-ivory/30 to-ivory pointer-events-none" />
                   </div>
                 </div>
                 {/* Connecting lines - visible on md+ screens */}
