@@ -1,17 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Play, X, BookOpen, Zap, Brain, Activity, Quote, ChevronRight } from "lucide-react";
+import { ArrowRight, Sparkles, Play, X, BookOpen, Zap, Brain, Activity, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState, useRef, useMemo } from "react";
 import NovaInterfaceDemo from "./NovaInterfaceDemo";
 import GuidedTour from "./GuidedTour";
 import { cn } from "@/lib/utils";
 
-// Device integration logos
-import ouraLogo from "@/assets/wearables/oura-logo.png";
-import whoopLogo from "@/assets/wearables/whoop-logo.png";
-import garminLogo from "@/assets/wearables/garmin-logo.png";
-import appleHealthLogo from "@/assets/wearables/apple-health-logo.png";
-import fitbitLogo from "@/assets/wearables/fitbit-logo.png";
 
 // Animated typing phrases with benefit focus
 const typingPhrases = [
@@ -23,13 +17,6 @@ const typingPhrases = [
   "Adapting recommendations in real-time...",
 ];
 
-// Rotating testimonials
-const testimonials = [
-  { quote: "Nova helped me improve my sleep score by 23% in just 2 weeks.", author: "Dr. Sarah Chen", role: "Performance Coach" },
-  { quote: "The predictive insights are genuinely game-changing for my training.", author: "Marcus Thompson", role: "Elite Athlete" },
-  { quote: "Finally, an AI that actually understands my body's patterns.", author: "Emma Rodriguez", role: "Biohacker" },
-  { quote: "My HRV has improved consistently since following Nova's protocols.", author: "James Wilson", role: "CEO & Founder" },
-];
 
 // Animated metrics component with enhanced glassmorphism
 const AnimatedMetrics = () => {
@@ -116,99 +103,6 @@ const AnimatedMetrics = () => {
   );
 };
 
-// Rotating Testimonial Component
-const RotatingTestimonial = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsAnimating(true);
-      setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-        setIsAnimating(false);
-      }, 300);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const current = testimonials[currentIndex];
-
-  return (
-    <div className="relative group">
-      {/* Glassmorphism card */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-violet-500/20 via-transparent to-signal-green/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      
-      <div className="relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-xl p-4 shadow-xl">
-        <Quote className="w-5 h-5 text-signal-green/60 mb-2" />
-        <p className={cn(
-          "text-ivory/80 text-sm italic leading-relaxed transition-all duration-300",
-          isAnimating ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0"
-        )}>
-          "{current.quote}"
-        </p>
-        <div className={cn(
-          "mt-3 flex items-center gap-2 transition-all duration-300",
-          isAnimating ? "opacity-0" : "opacity-100"
-        )}>
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-signal-green/30 to-emerald-600/30 flex items-center justify-center">
-            <span className="text-[10px] text-ivory font-semibold">{current.author.split(' ').map(n => n[0]).join('')}</span>
-          </div>
-          <div>
-            <div className="text-ivory text-xs font-medium">{current.author}</div>
-            <div className="text-stone text-[10px]">{current.role}</div>
-          </div>
-        </div>
-        
-        {/* Progress dots */}
-        <div className="absolute bottom-4 right-4 flex gap-1">
-          {testimonials.map((_, i) => (
-            <div 
-              key={i}
-              className={cn(
-                "w-1.5 h-1.5 rounded-full transition-all duration-300",
-                i === currentIndex ? "bg-signal-green w-4" : "bg-white/20"
-              )}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Device Integration Logos
-const DeviceLogos = () => {
-  const devices = [
-    { src: ouraLogo, alt: "Oura Ring" },
-    { src: whoopLogo, alt: "WHOOP" },
-    { src: garminLogo, alt: "Garmin" },
-    { src: appleHealthLogo, alt: "Apple Health" },
-    { src: fitbitLogo, alt: "Fitbit" },
-  ];
-
-  return (
-    <div className="flex items-center gap-6">
-      <span className="text-stone text-xs uppercase tracking-wider">Syncs with</span>
-      <div className="flex items-center gap-4">
-        {devices.map((device, i) => (
-          <div 
-            key={device.alt}
-            className="w-8 h-8 rounded-lg bg-white/[0.05] p-1.5 hover:bg-white/10 hover:scale-110 transition-all duration-300 cursor-default"
-            style={{ animationDelay: `${i * 0.1}s` }}
-          >
-            <img 
-              src={device.src} 
-              alt={device.alt} 
-              className="w-full h-full object-contain opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
 
 const Hero = () => {
   const [typingText, setTypingText] = useState("");
@@ -285,23 +179,25 @@ const Hero = () => {
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-carbon"
     >
-      {/* Video Background with fallback */}
+      {/* Premium AI Video Background */}
       <div className="absolute inset-0 z-0">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-20"
+          className="absolute inset-0 w-full h-full object-cover opacity-40"
           poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
         >
           <source 
-            src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-futuristic-devices-99786-large.mp4" 
+            src="https://cdn.pixabay.com/video/2024/02/03/199361-909474814_large.mp4" 
             type="video/mp4" 
           />
         </video>
-        {/* Overlay gradient to blend video */}
-        <div className="absolute inset-0 bg-gradient-to-b from-carbon/80 via-carbon/60 to-carbon" />
+        {/* Multi-layer cinematic overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-carbon via-carbon/70 to-carbon/90" />
+        <div className="absolute inset-0 bg-gradient-to-t from-carbon via-transparent to-carbon/50" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.6)_100%)]" />
       </div>
 
       {/* Multi-layer Animated Gradient Mesh */}
@@ -581,11 +477,6 @@ const Hero = () => {
               </Link>
             </div>
 
-            {/* Device Integration Logos */}
-            <div className="pt-4">
-              <DeviceLogos />
-            </div>
-
             {/* Social Proof + Metrics */}
             <div className="pt-4 max-w-xl mx-auto lg:mx-0 space-y-4">
               {/* Active users indicator */}
@@ -617,8 +508,8 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right: Nova Interface Demo + Testimonial */}
-          <div className="relative order-1 lg:order-2 flex flex-col items-center justify-center gap-6">
+          {/* Right: Nova Interface Demo */}
+          <div className="relative order-1 lg:order-2 flex flex-col items-center justify-center">
             {/* Demo Interface */}
             <div 
               className="relative w-full max-w-md lg:max-w-lg aspect-[4/3] cursor-pointer group"
@@ -661,11 +552,6 @@ const Hero = () => {
               {/* Corner decorations */}
               <div className="absolute -bottom-3 -left-3 w-20 h-20 border-l-2 border-b-2 border-signal-green/40 rounded-bl-2xl opacity-70 group-hover:opacity-100 transition-opacity" />
               <div className="absolute -top-3 -right-3 w-20 h-20 border-r-2 border-t-2 border-violet-500/40 rounded-tr-2xl opacity-70 group-hover:opacity-100 transition-opacity" />
-            </div>
-
-            {/* Rotating Testimonial */}
-            <div className="w-full max-w-md">
-              <RotatingTestimonial />
             </div>
           </div>
         </div>
