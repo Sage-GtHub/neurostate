@@ -9,7 +9,7 @@ import InteractiveOrb from "@/components/InteractiveOrb";
 import { useState, Suspense } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Brain, Lightbulb, Zap, Users, Building2, X, CheckCircle2, Activity, Target, Sparkles, BarChart3, Shield, Clock, Briefcase, Dumbbell, Heart, FlaskConical } from "lucide-react";
+import { ArrowRight, Brain, Lightbulb, Zap, Users, Building2, X, CheckCircle2, Activity, Target, Sparkles, BarChart3, Shield, Clock, Briefcase, Dumbbell, Heart, FlaskConical, BrainCircuit } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import novaIcon from "@/assets/neurostate-icon.svg";
@@ -126,7 +126,7 @@ const Index = () => {
                 <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
                 {[
                   { 
-                    icon: Brain, 
+                    icon: BrainCircuit, 
                     title: "Nova AI", 
                     desc: "AI performance assistant", 
                     detail: "Personalised AI coaching with adaptive recommendations and real-time behavioural insights.",
@@ -135,7 +135,7 @@ const Index = () => {
                     pulseColor: "violet"
                   },
                   { 
-                    icon: FlaskConical, 
+                    icon: BrainCircuit, 
                     title: "Supplements", 
                     desc: "Personalised stacks", 
                     detail: "Adaptogen supplements for focus. Magnesium for recovery. Third-party verified.",
@@ -144,7 +144,7 @@ const Index = () => {
                     pulseColor: "emerald"
                   },
                   { 
-                    icon: Activity, 
+                    icon: BrainCircuit, 
                     title: "Neuromodulation", 
                     desc: "Brain state control", 
                     detail: "Red light therapy cognitive benefits. Alpha and beta state switching.",
