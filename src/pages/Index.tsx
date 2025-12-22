@@ -4,10 +4,9 @@ import { SEO } from "@/components/SEO";
 import { OrganizationStructuredData, SoftwareApplicationStructuredData, WebsiteStructuredData, LocalBusinessStructuredData } from "@/components/StructuredData";
 import { Footer } from "@/components/Footer";
 import { LiveChat } from "@/components/LiveChat";
-import InteractiveOrb from "@/components/InteractiveOrb";
 import AnimatedNeuron from "@/components/AnimatedNeuron";
 
-import { useState, Suspense } from "react";
+import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Brain, Lightbulb, Zap, Users, Building2, X, CheckCircle2, Activity, Target, Sparkles, BarChart3, Shield, Clock, Briefcase, Dumbbell, Heart, FlaskConical, BrainCircuit } from "lucide-react";
@@ -62,21 +61,6 @@ const Index = () => {
                 </p>
               </div>
 
-              {/* 3D Interactive Orb - Central Element */}
-              <div className="relative flex flex-col items-center mb-16 sm:mb-20">
-                <div className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 relative">
-                  {/* Glow effect behind orb */}
-                  <div className="absolute inset-0 bg-gradient-radial from-violet-500/20 via-emerald-500/10 to-transparent blur-3xl" />
-                  <Suspense fallback={
-                    <div className="w-full h-full flex items-center justify-center">
-                      <div className="w-32 h-32 rounded-full bg-gradient-to-br from-violet-500/20 via-emerald-500/20 to-amber-500/20 animate-pulse" />
-                    </div>
-                  }>
-                    <InteractiveOrb />
-                  </Suspense>
-                </div>
-                <p className="text-xs text-carbon/40 mt-4 tracking-wider uppercase">Drag to interact</p>
-              </div>
 
               {/* Three Forces - Animated Circular Design */}
               <div className="relative">
