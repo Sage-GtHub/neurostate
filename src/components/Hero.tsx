@@ -186,18 +186,18 @@ const Hero = () => {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-40"
+          className="absolute inset-0 w-full h-full object-cover opacity-30"
           poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
         >
           <source 
-            src="https://cdn.pixabay.com/video/2024/02/03/199361-909474814_large.mp4" 
+            src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4" 
             type="video/mp4" 
           />
         </video>
         {/* Multi-layer cinematic overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-carbon via-carbon/70 to-carbon/90" />
-        <div className="absolute inset-0 bg-gradient-to-t from-carbon via-transparent to-carbon/50" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.6)_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-carbon via-carbon/80 to-carbon/95" />
+        <div className="absolute inset-0 bg-gradient-to-t from-carbon via-transparent to-carbon/60" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.5)_100%)]" />
       </div>
 
       {/* Multi-layer Animated Gradient Mesh */}
