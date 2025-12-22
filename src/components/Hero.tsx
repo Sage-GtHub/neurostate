@@ -79,22 +79,22 @@ const AnimatedMetrics = () => {
       className="relative group"
     >
       {/* Glassmorphism glow */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-signal-green/20 via-emerald-500/10 to-cyan-500/20 rounded-2xl blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-signal-green/15 via-emerald-500/10 to-cyan-500/15 rounded-xl blur-lg opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
       
-      <div className="relative flex items-center justify-center lg:justify-start gap-4 sm:gap-8 py-5 px-6 bg-white/[0.04] backdrop-blur-2xl rounded-2xl border border-white/[0.08] shadow-2xl shadow-black/30">
+      <div className="relative flex items-center justify-center lg:justify-start gap-3 sm:gap-5 py-3 px-4 bg-white/[0.04] backdrop-blur-2xl rounded-xl border border-white/[0.08] shadow-xl shadow-black/20">
         {metrics.map((metric, i) => (
-          <div key={metric.label} className="flex items-center gap-6">
+          <div key={metric.label} className="flex items-center gap-4">
             <div className="text-center group/metric cursor-default">
-              <div className="flex items-center justify-center gap-2 mb-1.5">
-                <metric.icon className="w-4 h-4 text-signal-green opacity-80 group-hover/metric:opacity-100 group-hover/metric:scale-110 transition-all duration-300" />
-                <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-signal-green via-emerald-400 to-signal-green bg-clip-text text-transparent group-hover/metric:scale-105 transition-transform">
+              <div className="flex items-center justify-center gap-1.5 mb-0.5">
+                <metric.icon className="w-3 h-3 text-signal-green opacity-80 group-hover/metric:opacity-100 group-hover/metric:scale-110 transition-all duration-300" />
+                <div className="text-sm sm:text-base font-bold bg-gradient-to-r from-signal-green via-emerald-400 to-signal-green bg-clip-text text-transparent group-hover/metric:scale-105 transition-transform">
                   {metric.value}
                 </div>
               </div>
-              <div className="text-[10px] text-stone/80 uppercase tracking-wider font-medium">{metric.label}</div>
+              <div className="text-[9px] text-stone/70 uppercase tracking-wider font-medium">{metric.label}</div>
             </div>
             {i < metrics.length - 1 && (
-              <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+              <div className="w-px h-8 bg-gradient-to-b from-transparent via-white/15 to-transparent" />
             )}
           </div>
         ))}
@@ -439,67 +439,66 @@ const Hero = () => {
               ))}
             </div>
 
-            {/* Enhanced CTAs with pulse effect */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start pt-2">
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center lg:justify-start pt-2">
               <Link to="/nova">
                 <Button 
                   className={cn(
-                    "relative bg-signal-green text-carbon hover:bg-signal-green font-bold",
-                    "h-12 sm:h-14 px-8 sm:px-10 text-sm sm:text-base tracking-wide",
-                    "shadow-xl shadow-signal-green/30 hover:shadow-signal-green/50",
-                    "transition-all duration-300 group overflow-hidden",
-                    "animate-pulse-subtle"
+                    "relative bg-signal-green text-carbon hover:bg-signal-green font-semibold",
+                    "h-10 sm:h-11 px-6 sm:px-7 text-xs sm:text-sm tracking-wide",
+                    "shadow-lg shadow-signal-green/25 hover:shadow-signal-green/40",
+                    "transition-all duration-300 group overflow-hidden"
                   )}
                 >
-                  <span className="relative z-10 flex items-center gap-2">
-                    Start Optimising Free
-                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" />
+                  <span className="relative z-10 flex items-center gap-1.5">
+                    Start Free
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
                   </span>
                   {/* Shimmer effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
                 </Button>
               </Link>
               <Link to="/shop">
                 <Button 
                   variant="outline"
                   className={cn(
-                    "relative bg-transparent border-2 border-ivory/60 text-ivory",
-                    "hover:bg-ivory hover:text-carbon hover:border-ivory font-semibold",
-                    "h-12 sm:h-14 px-8 sm:px-10 text-sm sm:text-base tracking-wide",
-                    "transition-all duration-300 group hover:scale-105"
+                    "relative bg-transparent border border-ivory/40 text-ivory",
+                    "hover:bg-ivory hover:text-carbon hover:border-ivory font-medium",
+                    "h-10 sm:h-11 px-6 sm:px-7 text-xs sm:text-sm tracking-wide",
+                    "transition-all duration-300 group hover:scale-[1.02]"
                   )}
                 >
-                  <span className="flex items-center gap-2">
+                  <span className="flex items-center gap-1.5">
                     Explore Products
-                    <ChevronRight className="w-4 h-4 opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                    <ChevronRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
                   </span>
                 </Button>
               </Link>
             </div>
 
             {/* Social Proof + Metrics */}
-            <div className="pt-4 max-w-xl mx-auto lg:mx-0 space-y-4">
+            <div className="pt-3 max-w-xl mx-auto lg:mx-0 space-y-3">
               {/* Active users indicator */}
-              <div className="flex items-center justify-center lg:justify-start gap-3">
-                <div className="flex -space-x-3">
-                  {[...Array(5)].map((_, i) => (
+              <div className="flex items-center justify-center lg:justify-start gap-2">
+                <div className="flex -space-x-2">
+                  {[...Array(4)].map((_, i) => (
                     <div 
                       key={i}
-                      className="w-10 h-10 rounded-full bg-gradient-to-br from-signal-green/40 to-emerald-600/40 border-2 border-carbon flex items-center justify-center shadow-lg hover:scale-110 hover:z-10 transition-all duration-300 cursor-default"
+                      className="w-7 h-7 rounded-full bg-gradient-to-br from-signal-green/40 to-emerald-600/40 border-2 border-carbon flex items-center justify-center shadow-md hover:scale-110 hover:z-10 transition-all duration-300 cursor-default"
                     >
-                      <span className="text-[11px] text-ivory font-bold">
-                        {['JD', 'MK', 'AS', 'TR', 'RL'][i]}
+                      <span className="text-[8px] text-ivory font-bold">
+                        {['JD', 'MK', 'AS', 'TR'][i]}
                       </span>
                     </div>
                   ))}
                 </div>
-                <div className="text-sm">
-                  <span className="text-ivory font-bold">2,847 people</span>
-                  <span className="text-stone/80 ml-1">optimising this week</span>
+                <div className="text-xs">
+                  <span className="text-ivory font-semibold">2,847</span>
+                  <span className="text-stone/70 ml-1">active now</span>
                 </div>
                 <div className="relative">
-                  <div className="w-2.5 h-2.5 bg-signal-green rounded-full animate-pulse" />
-                  <div className="absolute inset-0 w-2.5 h-2.5 bg-signal-green rounded-full animate-ping opacity-50" />
+                  <div className="w-2 h-2 bg-signal-green rounded-full animate-pulse" />
+                  <div className="absolute inset-0 w-2 h-2 bg-signal-green rounded-full animate-ping opacity-50" />
                 </div>
               </div>
 
