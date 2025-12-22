@@ -126,7 +126,6 @@ const Index = () => {
                 <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
                 {[
                   { 
-                    icon: BrainCircuit, 
                     title: "Nova AI", 
                     desc: "AI performance assistant", 
                     detail: "Personalised AI coaching with adaptive recommendations and real-time behavioural insights.",
@@ -135,7 +134,6 @@ const Index = () => {
                     pulseColor: "violet"
                   },
                   { 
-                    icon: BrainCircuit, 
                     title: "Supplements", 
                     desc: "Personalised stacks", 
                     detail: "Adaptogen supplements for focus. Magnesium for recovery. Third-party verified.",
@@ -144,7 +142,6 @@ const Index = () => {
                     pulseColor: "emerald"
                   },
                   { 
-                    icon: BrainCircuit, 
                     title: "Neuromodulation", 
                     desc: "Brain state control", 
                     detail: "Red light therapy cognitive benefits. Alpha and beta state switching.",
@@ -189,10 +186,32 @@ const Index = () => {
                         <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-1.5 h-1.5 rounded-full bg-gradient-to-br ${item.gradient} opacity-40 group-hover:opacity-80 transition-opacity`} />
                       </div>
                       
-                      {/* Icon container */}
+                      {/* Logo container with neuron animation */}
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-carbon/5 group-hover:bg-gradient-to-br group-hover:${item.gradient} flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg`}>
-                          <item.icon className={`w-6 h-6 sm:w-7 sm:h-7 text-carbon group-hover:text-ivory transition-all duration-500 group-hover:scale-110`} strokeWidth={1.5} />
+                        <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-carbon/5 group-hover:bg-gradient-to-br group-hover:${item.gradient} flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg relative overflow-hidden`}>
+                          {/* Animated neuron pulse effect */}
+                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} animate-pulse`} />
+                          </div>
+                          {/* NeuroState logo */}
+                          <img 
+                            src={novaIcon} 
+                            alt="NeuroState" 
+                            className="w-8 h-8 sm:w-10 sm:h-10 relative z-10 transition-all duration-500 group-hover:scale-110 group-hover:brightness-0 group-hover:invert"
+                            style={{ 
+                              animation: 'pulse 2s ease-in-out infinite',
+                              animationDelay: `${i * 200}ms`
+                            }}
+                          />
+                          {/* Neural connection lines */}
+                          <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-60 transition-opacity duration-700">
+                            <svg className="w-full h-full" viewBox="0 0 64 64">
+                              <circle cx="32" cy="16" r="2" fill="currentColor" className="text-ivory animate-ping" style={{ animationDuration: '1.5s' }} />
+                              <circle cx="48" cy="32" r="2" fill="currentColor" className="text-ivory animate-ping" style={{ animationDuration: '2s', animationDelay: '0.3s' }} />
+                              <circle cx="32" cy="48" r="2" fill="currentColor" className="text-ivory animate-ping" style={{ animationDuration: '1.8s', animationDelay: '0.6s' }} />
+                              <circle cx="16" cy="32" r="2" fill="currentColor" className="text-ivory animate-ping" style={{ animationDuration: '2.2s', animationDelay: '0.9s' }} />
+                            </svg>
+                          </div>
                         </div>
                       </div>
                       
