@@ -288,34 +288,38 @@ export const Header = () => {
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-full sm:w-[350px] bg-background p-0 overflow-y-auto">
-                <SheetHeader className="p-4 border-b border-mist">
-                  <SheetTitle className="text-left text-carbon text-base">Menu</SheetTitle>
+              <SheetContent 
+                side="right" 
+                className="w-[300px] sm:w-[350px] bg-background border-l border-mist p-0 overflow-hidden flex flex-col"
+              >
+                <SheetHeader className="p-4 border-b border-mist shrink-0">
+                  <SheetTitle className="text-left text-carbon text-base font-semibold">Menu</SheetTitle>
                 </SheetHeader>
                 
-                <nav className="flex flex-col">
+                <nav className="flex-1 overflow-y-auto">
                   {/* Quick Links */}
-                  <div className="p-4 space-y-1">
+                  <div className="p-3 space-y-1">
                     <Link
                       to="/shop"
-                      className="flex items-center justify-between p-3 rounded-lg hover:bg-pearl transition-colors"
+                      className="flex items-center justify-between p-3 rounded-xl bg-pearl/50 hover:bg-pearl active:scale-[0.98] transition-all"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <div className="flex items-center gap-3">
-                        <Package className="h-5 w-5 text-ash" />
+                        <div className="w-9 h-9 rounded-lg bg-signal-green/10 flex items-center justify-center">
+                          <Package className="h-4 w-4 text-signal-green" />
+                        </div>
                         <span className="text-carbon font-medium">Shop All</span>
                       </div>
                       <ChevronRight className="h-4 w-4 text-ash" />
                     </Link>
-                    
                   </div>
 
                   {/* Accordion Sections */}
-                  <Accordion type="single" collapsible className="px-4">
+                  <Accordion type="single" collapsible className="px-3">
                     {/* Shop Categories */}
-                    <AccordionItem value="shop" className="border-b-0">
+                    <AccordionItem value="shop" className="border-b-0 border-t border-mist/50">
                       <AccordionTrigger className="py-3 hover:no-underline">
-                        <span className="text-carbon font-medium">Categories</span>
+                        <span className="text-carbon font-medium text-sm">Categories</span>
                       </AccordionTrigger>
                       <AccordionContent>
                         <div className="space-y-1 pb-3">
@@ -323,7 +327,7 @@ export const Header = () => {
                             <Link
                               key={category.label}
                               to={category.href}
-                              className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-pearl transition-colors"
+                              className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-pearl active:scale-[0.98] transition-all"
                               onClick={() => setMobileMenuOpen(false)}
                             >
                               <category.icon className="h-4 w-4 text-ash" />
@@ -334,11 +338,10 @@ export const Header = () => {
                       </AccordionContent>
                     </AccordionItem>
 
-
                     {/* For Teams */}
-                    <AccordionItem value="teams" className="border-b-0">
+                    <AccordionItem value="teams" className="border-b-0 border-t border-mist/50">
                       <AccordionTrigger className="py-3 hover:no-underline">
-                        <span className="text-carbon font-medium">For Teams</span>
+                        <span className="text-carbon font-medium text-sm">For Teams</span>
                       </AccordionTrigger>
                       <AccordionContent>
                         <div className="space-y-1 pb-3">
@@ -346,7 +349,7 @@ export const Header = () => {
                             <Link
                               key={link.label}
                               to={link.href}
-                              className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-pearl transition-colors"
+                              className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-pearl active:scale-[0.98] transition-all"
                               onClick={() => setMobileMenuOpen(false)}
                             >
                               <link.icon className="h-4 w-4 text-ash" />
@@ -358,60 +361,68 @@ export const Header = () => {
                     </AccordionItem>
                   </Accordion>
 
-                  {/* Nova AI Link */}
-                  <div className="p-4 border-t border-mist">
+                  {/* Nova AI Link - Featured */}
+                  <div className="p-3 border-t border-mist/50">
                     <Link
                       to="/nova/overview"
-                      className="flex items-center justify-between p-3 rounded-lg bg-accent/5 hover:bg-accent/10 transition-colors"
+                      className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-signal-green/10 to-emerald-500/5 border border-signal-green/20 hover:border-signal-green/40 active:scale-[0.98] transition-all"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <div className="flex items-center gap-3">
-                        <Sparkles className="h-5 w-5 text-accent" />
-                        <span className="text-carbon font-medium">Nova AI</span>
+                        <div className="w-9 h-9 rounded-lg bg-signal-green flex items-center justify-center">
+                          <Sparkles className="h-4 w-4 text-carbon" />
+                        </div>
+                        <div>
+                          <span className="text-carbon font-medium block">Nova AI</span>
+                          <span className="text-ash text-xs">Your AI health coach</span>
+                        </div>
                       </div>
-                      <ChevronRight className="h-4 w-4 text-accent" />
+                      <ChevronRight className="h-4 w-4 text-signal-green" />
                     </Link>
                   </div>
+                </nav>
 
-                  {/* Account Section */}
-                  <div className="p-4 border-t border-mist mt-auto">
-                    {user ? (
-                      <div className="space-y-2">
-                        <p className="text-xs text-ash px-3 truncate">{user.email}</p>
+                {/* Account Section - Fixed at bottom */}
+                <div className="p-3 border-t border-mist bg-pearl/30 shrink-0">
+                  {user ? (
+                    <div className="space-y-2">
+                      <p className="text-xs text-ash px-1 truncate">{user.email}</p>
+                      <div className="grid grid-cols-2 gap-2">
                         <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                          <Button variant="ghost" className="w-full justify-start h-11">
-                            <User className="h-4 w-4 mr-3" />
+                          <Button variant="outline" size="sm" className="w-full h-10 text-xs">
+                            <User className="h-3.5 w-3.5 mr-1.5" />
                             Dashboard
                           </Button>
                         </Link>
                         <Link to="/rewards" onClick={() => setMobileMenuOpen(false)}>
-                          <Button variant="ghost" className="w-full justify-start h-11">
-                            <Award className="h-4 w-4 mr-3" />
+                          <Button variant="outline" size="sm" className="w-full h-10 text-xs">
+                            <Award className="h-3.5 w-3.5 mr-1.5" />
                             Rewards
                           </Button>
                         </Link>
-                        <Button 
-                          variant="ghost" 
-                          onClick={() => {
-                            handleSignOut();
-                            setMobileMenuOpen(false);
-                          }}
-                          className="w-full justify-start h-11 text-destructive"
-                        >
-                          <LogOut className="h-4 w-4 mr-3" />
-                          Sign Out
-                        </Button>
                       </div>
-                    ) : (
-                      <Link to="/auth" onClick={() => setMobileMenuOpen(false)}>
-                        <Button className="w-full h-11">
-                          <User className="h-4 w-4 mr-2" />
-                          Sign In
-                        </Button>
-                      </Link>
-                    )}
-                  </div>
-                </nav>
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
+                        onClick={() => {
+                          handleSignOut();
+                          setMobileMenuOpen(false);
+                        }}
+                        className="w-full h-10 text-xs text-destructive hover:text-destructive hover:bg-destructive/10"
+                      >
+                        <LogOut className="h-3.5 w-3.5 mr-1.5" />
+                        Sign Out
+                      </Button>
+                    </div>
+                  ) : (
+                    <Link to="/auth" onClick={() => setMobileMenuOpen(false)} className="block">
+                      <Button className="w-full h-11 bg-signal-green text-carbon hover:bg-signal-green/90 font-medium">
+                        <User className="h-4 w-4 mr-2" />
+                        Sign In
+                      </Button>
+                    </Link>
+                  )}
+                </div>
               </SheetContent>
             </Sheet>
           </div>
