@@ -112,7 +112,14 @@ const Hero = () => {
   const [showDemo, setShowDemo] = useState(false);
   const [showTour, setShowTour] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
+
+  // Entrance animation trigger
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Typing animation
   useEffect(() => {
@@ -351,11 +358,15 @@ const Hero = () => {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-0 sm:py-8 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-2 sm:gap-8 lg:gap-20 items-center">
+      <div className="relative z-10 container mx-auto px-3 sm:px-6 lg:px-8 py-0 sm:py-8 lg:py-20">
+        <div className="grid lg:grid-cols-2 gap-3 sm:gap-8 lg:gap-20 items-center">
           
-          {/* Left: Text Content */}
-          <div className="space-y-2 sm:space-y-4 lg:space-y-6 text-center lg:text-left order-2 lg:order-1">
+          {/* Left: Text Content - with entrance animations */}
+          <div className={cn(
+            "space-y-2 sm:space-y-4 lg:space-y-6 text-center lg:text-left order-2 lg:order-1",
+            "transition-all duration-700 ease-out",
+            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          )}>
             {/* Label - hidden on mobile */}
             <div className="hidden sm:inline-flex items-center gap-2.5 px-5 py-2.5 bg-signal-green/10 border border-signal-green/30 backdrop-blur-xl rounded-full shadow-lg shadow-signal-green/10 hover:shadow-signal-green/30 hover:scale-105 transition-all duration-500 group cursor-default">
               <div className="relative">
@@ -504,13 +515,17 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right: Nova Demo - fixed static size on mobile */}
-          <div className="relative order-1 lg:order-2 flex items-center justify-center">
+          {/* Right: Nova Demo - fixed static size on mobile with entrance animation */}
+          <div className={cn(
+            "relative order-1 lg:order-2 flex items-center justify-center",
+            "transition-all duration-700 ease-out delay-200",
+            isLoaded ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-4 scale-95"
+          )}>
             <div 
-              className="relative w-[180px] h-[135px] sm:w-full sm:h-auto sm:max-w-md lg:max-w-lg sm:aspect-[4/3] cursor-pointer group overflow-hidden sm:overflow-visible flex-shrink-0"
+              className="relative w-[160px] h-[120px] sm:w-full sm:h-auto sm:max-w-md lg:max-w-lg sm:aspect-[4/3] cursor-pointer group overflow-hidden sm:overflow-visible flex-shrink-0"
               onClick={() => setShowDemo(true)}
               style={{
-                transform: window.innerWidth >= 640 ? `perspective(1200px) rotateX(${mousePosition.y * 3}deg) rotateY(${mousePosition.x * -3}deg)` : 'none',
+                transform: typeof window !== 'undefined' && window.innerWidth >= 640 ? `perspective(1200px) rotateX(${mousePosition.y * 3}deg) rotateY(${mousePosition.x * -3}deg)` : 'none',
                 transition: 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
               }}
             >
@@ -518,22 +533,22 @@ const Hero = () => {
               <div className="absolute -inset-10 bg-gradient-to-br from-signal-green/20 via-transparent to-violet-500/20 rounded-3xl blur-3xl opacity-60 hidden sm:block" />
               
               {/* Frame */}
-              <div className="absolute inset-0 rounded-xl sm:rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/40" />
+              <div className="absolute inset-0 rounded-lg sm:rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] shadow-xl shadow-black/40" />
               
               {/* Demo interface - scaled down on mobile */}
-              <div className="relative z-10 scale-[0.45] sm:scale-100 origin-top-left sm:origin-center w-[400px] sm:w-auto h-auto">
+              <div className="relative z-10 scale-[0.4] sm:scale-100 origin-top-left sm:origin-center w-[400px] sm:w-auto h-auto">
                 <NovaInterfaceDemo />
               </div>
               
               {/* Play overlay - always visible on mobile */}
-              <div className="absolute inset-0 bg-carbon/50 backdrop-blur-sm rounded-xl sm:rounded-2xl sm:opacity-0 group-hover:opacity-100 transition-all duration-400 flex items-center justify-center z-20">
-                <div className="relative w-10 h-10 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-signal-green to-emerald-500 flex items-center justify-center shadow-xl shadow-signal-green/40">
-                  <Play className="w-4 h-4 sm:w-8 sm:h-8 text-carbon ml-0.5" />
+              <div className="absolute inset-0 bg-carbon/60 backdrop-blur-sm rounded-lg sm:rounded-2xl sm:opacity-0 group-hover:opacity-100 transition-all duration-400 flex items-center justify-center z-20">
+                <div className="relative w-8 h-8 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-signal-green to-emerald-500 flex items-center justify-center shadow-xl shadow-signal-green/40">
+                  <Play className="w-3.5 h-3.5 sm:w-8 sm:h-8 text-carbon ml-0.5" />
                 </div>
               </div>
               
               {/* Badge */}
-              <div className="absolute -top-1 -right-1 sm:-top-4 sm:-right-4 px-1.5 sm:px-4 py-0.5 sm:py-2 bg-gradient-to-r from-signal-green to-emerald-500 text-carbon text-[7px] sm:text-xs font-bold rounded-full shadow-lg z-30">
+              <div className="absolute -top-0.5 -right-0.5 sm:-top-4 sm:-right-4 px-1.5 sm:px-4 py-0.5 sm:py-2 bg-gradient-to-r from-signal-green to-emerald-500 text-carbon text-[6px] sm:text-xs font-bold rounded-full shadow-lg z-30">
                 <span className="flex items-center gap-0.5 sm:gap-1">
                   <span className="w-1 h-1 sm:w-2 sm:h-2 bg-carbon rounded-full animate-pulse" />
                   Demo
