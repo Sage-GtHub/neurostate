@@ -177,7 +177,7 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-carbon"
+      className="relative min-h-[100dvh] lg:min-h-screen flex items-center justify-center overflow-hidden bg-carbon pt-16 sm:pt-20 lg:pt-0"
     >
       {/* Premium AI Video Background */}
       <div className="absolute inset-0 z-0">
@@ -351,13 +351,13 @@ const Hero = () => {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-6 sm:gap-10 lg:gap-20 items-center min-h-[85vh] sm:min-h-[80vh] lg:min-h-[75vh]">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8 lg:py-20">
+        <div className="grid lg:grid-cols-2 gap-4 sm:gap-8 lg:gap-20 items-center min-h-[calc(100dvh-8rem)] sm:min-h-[75vh] lg:min-h-[75vh]">
           
           {/* Left: Text Content */}
-          <div className="space-y-4 sm:space-y-5 lg:space-y-6 text-center lg:text-left order-2 lg:order-1">
-            {/* Label with enhanced glow and micro-interaction */}
-            <div className="inline-flex items-center gap-1.5 sm:gap-2.5 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-signal-green/10 border border-signal-green/30 backdrop-blur-xl rounded-full shadow-lg shadow-signal-green/10 hover:shadow-signal-green/30 active:scale-95 sm:hover:scale-105 transition-all duration-500 group cursor-default">
+          <div className="space-y-3 sm:space-y-4 lg:space-y-6 text-center lg:text-left order-2 lg:order-1">
+            {/* Label with enhanced glow and micro-interaction - hidden on mobile for space */}
+            <div className="hidden sm:inline-flex items-center gap-1.5 sm:gap-2.5 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-signal-green/10 border border-signal-green/30 backdrop-blur-xl rounded-full shadow-lg shadow-signal-green/10 hover:shadow-signal-green/30 active:scale-95 sm:hover:scale-105 transition-all duration-500 group cursor-default">
               <div className="relative">
                 <Brain className="w-3 h-3 sm:w-4 sm:h-4 text-signal-green group-hover:rotate-12 transition-transform duration-300" />
                 <div className="absolute inset-0 animate-ping opacity-40">
@@ -370,20 +370,20 @@ const Hero = () => {
             </div>
 
             {/* Main Headline with clearer value proposition */}
-            <div className="space-y-2 sm:space-y-3">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-ivory leading-[1.1] sm:leading-[1.05] tracking-tight">
+            <div className="space-y-1.5 sm:space-y-3">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-ivory leading-[1.15] sm:leading-[1.05] tracking-tight">
                 Meet
-                <span className="relative inline-block ml-2 sm:ml-3 lg:ml-4">
+                <span className="relative inline-block ml-1.5 sm:ml-3 lg:ml-4">
                   <span className="relative z-10 bg-gradient-to-r from-signal-green via-emerald-300 to-signal-green bg-clip-text text-transparent bg-[length:200%_auto] animate-shimmer">
                     Nova
                   </span>
-                  <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-signal-green/40 via-emerald-400/30 to-signal-green/40 blur-2xl sm:blur-3xl rounded-full animate-pulse" />
-                  <div className="absolute -inset-1 sm:-inset-2 bg-signal-green/20 blur-lg sm:blur-xl rounded-full" />
+                  <div className="absolute -inset-1 sm:-inset-4 bg-gradient-to-r from-signal-green/40 via-emerald-400/30 to-signal-green/40 blur-xl sm:blur-3xl rounded-full animate-pulse" />
+                  <div className="absolute -inset-0.5 sm:-inset-2 bg-signal-green/20 blur-md sm:blur-xl rounded-full" />
                 </span>
               </h1>
               
               {/* Clear benefit statement */}
-              <p className="text-base sm:text-xl md:text-2xl lg:text-3xl text-stone/90 font-light leading-relaxed px-2 sm:px-0">
+              <p className="text-sm sm:text-xl md:text-2xl lg:text-3xl text-stone/90 font-light leading-relaxed px-1 sm:px-0">
                 Unlock <span className="text-ivory font-medium">peak performance</span> with AI that{" "}
                 <span className="text-signal-green font-medium">predicts</span> and{" "}
                 <span className="text-signal-green font-medium">adapts</span> to your body.
@@ -511,7 +511,7 @@ const Hero = () => {
           <div className="relative order-1 lg:order-2 flex flex-col items-center justify-center">
             {/* Demo Interface */}
             <div 
-              className="relative w-full max-w-[280px] sm:max-w-md lg:max-w-lg aspect-[4/3] cursor-pointer group"
+              className="relative w-full max-w-[240px] sm:max-w-md lg:max-w-lg aspect-[4/3] cursor-pointer group"
               onClick={() => setShowDemo(true)}
               style={{
                 transform: `perspective(1200px) rotateX(${mousePosition.y * 3}deg) rotateY(${mousePosition.x * -3}deg) translateY(${scrollY * -0.03}px)`,
