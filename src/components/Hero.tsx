@@ -504,37 +504,37 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right: Nova Demo - smaller on mobile */}
+          {/* Right: Nova Demo - fixed static size on mobile */}
           <div className="relative order-1 lg:order-2 flex items-center justify-center">
             <div 
-              className="relative w-full max-w-[180px] sm:max-w-md lg:max-w-lg aspect-[4/3] cursor-pointer group"
+              className="relative w-[180px] h-[135px] sm:w-full sm:h-auto sm:max-w-md lg:max-w-lg sm:aspect-[4/3] cursor-pointer group overflow-hidden sm:overflow-visible flex-shrink-0"
               onClick={() => setShowDemo(true)}
               style={{
-                transform: `perspective(1200px) rotateX(${mousePosition.y * 3}deg) rotateY(${mousePosition.x * -3}deg)`,
+                transform: window.innerWidth >= 640 ? `perspective(1200px) rotateX(${mousePosition.y * 3}deg) rotateY(${mousePosition.x * -3}deg)` : 'none',
                 transition: 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
               }}
             >
-              {/* Glow effects - reduced on mobile */}
-              <div className="absolute -inset-2 sm:-inset-10 bg-gradient-to-br from-signal-green/20 via-transparent to-violet-500/20 rounded-xl sm:rounded-3xl blur-xl sm:blur-3xl opacity-60" />
+              {/* Glow effects - hidden on mobile */}
+              <div className="absolute -inset-10 bg-gradient-to-br from-signal-green/20 via-transparent to-violet-500/20 rounded-3xl blur-3xl opacity-60 hidden sm:block" />
               
               {/* Frame */}
               <div className="absolute inset-0 rounded-xl sm:rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/40" />
               
-              {/* Demo interface */}
-              <div className="relative z-10">
+              {/* Demo interface - scaled down on mobile */}
+              <div className="relative z-10 scale-[0.45] sm:scale-100 origin-top-left sm:origin-center w-[400px] sm:w-auto h-auto">
                 <NovaInterfaceDemo />
               </div>
               
-              {/* Play overlay */}
+              {/* Play overlay - always visible on mobile */}
               <div className="absolute inset-0 bg-carbon/50 backdrop-blur-sm rounded-xl sm:rounded-2xl sm:opacity-0 group-hover:opacity-100 transition-all duration-400 flex items-center justify-center z-20">
-                <div className="relative w-12 h-12 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-signal-green to-emerald-500 flex items-center justify-center shadow-xl shadow-signal-green/40">
-                  <Play className="w-5 h-5 sm:w-8 sm:h-8 text-carbon ml-0.5" />
+                <div className="relative w-10 h-10 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-signal-green to-emerald-500 flex items-center justify-center shadow-xl shadow-signal-green/40">
+                  <Play className="w-4 h-4 sm:w-8 sm:h-8 text-carbon ml-0.5" />
                 </div>
               </div>
               
               {/* Badge */}
-              <div className="absolute -top-1.5 -right-1.5 sm:-top-4 sm:-right-4 px-2 sm:px-4 py-0.5 sm:py-2 bg-gradient-to-r from-signal-green to-emerald-500 text-carbon text-[8px] sm:text-xs font-bold rounded-full shadow-lg z-30">
-                <span className="flex items-center gap-1">
+              <div className="absolute -top-1 -right-1 sm:-top-4 sm:-right-4 px-1.5 sm:px-4 py-0.5 sm:py-2 bg-gradient-to-r from-signal-green to-emerald-500 text-carbon text-[7px] sm:text-xs font-bold rounded-full shadow-lg z-30">
+                <span className="flex items-center gap-0.5 sm:gap-1">
                   <span className="w-1 h-1 sm:w-2 sm:h-2 bg-carbon rounded-full animate-pulse" />
                   Demo
                 </span>
