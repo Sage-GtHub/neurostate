@@ -184,7 +184,7 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden bg-carbon pt-16 pb-2 sm:pt-20 sm:pb-8 lg:pt-0 lg:pb-0"
+      className="relative h-[100dvh] flex items-stretch overflow-hidden bg-carbon"
     >
       {/* Premium AI Video Background */}
       <div className="absolute inset-0 z-0">
@@ -358,12 +358,12 @@ const Hero = () => {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 container mx-auto px-3 sm:px-6 lg:px-8 py-0 sm:py-8 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-3 sm:gap-8 lg:gap-20 items-center">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-4 sm:py-8 lg:py-20 flex flex-col justify-center h-full">
+        <div className="grid lg:grid-cols-2 gap-3 sm:gap-8 lg:gap-20 items-center w-full flex-1 lg:flex-none">
           
           {/* Left: Text Content - with entrance animations */}
           <div className={cn(
-            "space-y-2 sm:space-y-4 lg:space-y-6 text-center lg:text-left order-2 lg:order-1",
+            "space-y-1.5 sm:space-y-4 lg:space-y-6 text-center lg:text-left order-2 lg:order-1",
             "transition-all duration-700 ease-out",
             isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           )}>
@@ -487,7 +487,7 @@ const Hero = () => {
             </div>
 
             {/* Social Proof - minimal on mobile */}
-            <div className="pt-1 sm:pt-3 max-w-xl mx-auto lg:mx-0">
+            <div className="pt-0 sm:pt-3 max-w-xl mx-auto lg:mx-0">
               <div className="flex items-center justify-center lg:justify-start gap-2">
                 <div className="flex -space-x-1.5">
                   {[...Array(3)].map((_, i) => (
@@ -515,14 +515,14 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right: Nova Demo - full width on mobile, autoplays */}
+          {/* Right: Nova Demo - fills remaining space on mobile, autoplays */}
           <div className={cn(
-            "relative order-1 lg:order-2 flex items-center justify-center w-full",
+            "relative order-1 lg:order-2 flex items-center justify-center w-full flex-1 lg:flex-none min-h-0",
             "transition-all duration-700 ease-out delay-200",
             isLoaded ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-4 scale-95"
           )}>
             <div 
-              className="relative w-full max-w-[340px] h-[240px] sm:max-w-md sm:h-auto lg:max-w-lg sm:aspect-[4/3] sm:cursor-pointer group overflow-hidden sm:overflow-visible flex-shrink-0"
+              className="relative w-full h-full max-h-[320px] sm:max-w-md sm:max-h-none sm:h-auto lg:max-w-lg sm:aspect-[4/3] sm:cursor-pointer group overflow-hidden sm:overflow-visible"
               onClick={() => window.innerWidth >= 640 && setShowDemo(true)}
               style={{
                 transform: typeof window !== 'undefined' && window.innerWidth >= 640 ? `perspective(1200px) rotateX(${mousePosition.y * 3}deg) rotateY(${mousePosition.x * -3}deg)` : 'none',
