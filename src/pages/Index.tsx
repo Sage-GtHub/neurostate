@@ -64,20 +64,20 @@ const Index = () => {
 
               {/* Three Forces - Animated Circular Design */}
               <div className="relative">
-{/* 3D Orb Background Video */}
-                <div className="absolute inset-0 -top-32 -bottom-32 flex items-center justify-center pointer-events-none overflow-hidden z-0">
-                  <div className="relative w-[500px] h-[500px] sm:w-[700px] sm:h-[700px] lg:w-[900px] lg:h-[900px]">
+{/* 3D Orb Background Video - Hidden on mobile to prevent content overlap */}
+                <div className="absolute inset-0 -top-16 -bottom-16 sm:-top-32 sm:-bottom-32 hidden sm:flex items-center justify-center pointer-events-none overflow-hidden z-0">
+                  <div className="relative w-[500px] h-[500px] sm:w-[600px] sm:h-[600px] lg:w-[800px] lg:h-[800px]">
                     <video
                       autoPlay
                       loop
                       muted
                       playsInline
-                      className="w-full h-full object-contain opacity-30"
+                      className="w-full h-full object-contain opacity-20 sm:opacity-25"
                     >
                       <source src="https://assets.mixkit.co/videos/preview/mixkit-glowing-neon-sphere-in-motion-1318-large.mp4" type="video/mp4" />
                     </video>
                     {/* Gradient overlay to blend with background */}
-                    <div className="absolute inset-0 bg-gradient-radial from-transparent via-ivory/30 to-ivory pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-radial from-transparent via-ivory/50 to-ivory pointer-events-none" />
                   </div>
                 </div>
                 {/* Connecting lines - visible on md+ screens */}
@@ -652,32 +652,32 @@ const Index = () => {
           </section>
 
           {/* Final CTA - Enhanced */}
-          <section ref={cta.ref} className={`relative py-32 sm:py-40 md:py-48 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory overflow-hidden transition-all duration-1000 ${cta.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <section ref={cta.ref} className={`relative py-20 sm:py-32 md:py-40 lg:py-48 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory overflow-hidden transition-all duration-1000 ${cta.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             {/* Radial gradient */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-carbon/[0.02] via-transparent to-transparent" />
             
-            <div className="relative z-10 max-w-4xl mx-auto text-center space-y-10">
-              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-carbon leading-[1.02] tracking-tight">
+            <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6 sm:space-y-10">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-carbon leading-[1.05] tracking-tight">
                 Ready to optimise your<br className="hidden sm:block" /> cognitive performance?
               </h2>
-              <p className="text-lg sm:text-xl text-ash max-w-2xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-ash max-w-2xl mx-auto leading-relaxed px-2 sm:px-0">
                 Join thousands using the world's first cognitive performance system to think clearer, work harder, and recover faster.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-                <Link to="/shop">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4 sm:pt-6 px-2 sm:px-0">
+                <Link to="/shop" className="w-full sm:w-auto">
                   <Button 
-                    size="lg"
-                    className="bg-carbon text-ivory hover:bg-slate transition-all duration-300 min-h-[56px] touch-manipulation px-12 text-base group"
+                    size="default"
+                    className="bg-carbon text-ivory hover:bg-slate transition-all duration-300 h-11 sm:h-14 touch-manipulation px-6 sm:px-12 text-sm sm:text-base group w-full sm:w-auto"
                   >
                     Shop now
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="ml-2 w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
-                <Link to="/nova/overview" target="_blank">
+                <Link to="/nova/overview" target="_blank" className="w-full sm:w-auto">
                   <Button 
                     variant="outline"
-                    size="lg"
-                    className="border-carbon/20 text-carbon hover:bg-carbon hover:text-ivory transition-all duration-300 min-h-[56px] touch-manipulation px-12 text-base"
+                    size="default"
+                    className="border-carbon/20 text-carbon hover:bg-carbon hover:text-ivory transition-all duration-300 h-11 sm:h-14 touch-manipulation px-6 sm:px-12 text-sm sm:text-base w-full sm:w-auto"
                   >
                     Explore Nova AI
                   </Button>
