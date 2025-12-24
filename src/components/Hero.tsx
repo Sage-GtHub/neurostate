@@ -177,7 +177,7 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-carbon pt-12 pb-4 sm:pt-20 sm:pb-8 lg:pt-0 lg:pb-0"
+      className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden bg-carbon pt-16 pb-2 sm:pt-20 sm:pb-8 lg:pt-0 lg:pb-0"
     >
       {/* Premium AI Video Background */}
       <div className="absolute inset-0 z-0">
@@ -351,27 +351,27 @@ const Hero = () => {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-8 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-3 sm:gap-8 lg:gap-20 items-center">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-0 sm:py-8 lg:py-20">
+        <div className="grid lg:grid-cols-2 gap-2 sm:gap-8 lg:gap-20 items-center">
           
           {/* Left: Text Content */}
           <div className="space-y-2 sm:space-y-4 lg:space-y-6 text-center lg:text-left order-2 lg:order-1">
-            {/* Label with enhanced glow and micro-interaction - hidden on mobile for space */}
-            <div className="hidden sm:inline-flex items-center gap-1.5 sm:gap-2.5 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-signal-green/10 border border-signal-green/30 backdrop-blur-xl rounded-full shadow-lg shadow-signal-green/10 hover:shadow-signal-green/30 active:scale-95 sm:hover:scale-105 transition-all duration-500 group cursor-default">
+            {/* Label - hidden on mobile */}
+            <div className="hidden sm:inline-flex items-center gap-2.5 px-5 py-2.5 bg-signal-green/10 border border-signal-green/30 backdrop-blur-xl rounded-full shadow-lg shadow-signal-green/10 hover:shadow-signal-green/30 hover:scale-105 transition-all duration-500 group cursor-default">
               <div className="relative">
-                <Brain className="w-3 h-3 sm:w-4 sm:h-4 text-signal-green group-hover:rotate-12 transition-transform duration-300" />
+                <Brain className="w-4 h-4 text-signal-green group-hover:rotate-12 transition-transform duration-300" />
                 <div className="absolute inset-0 animate-ping opacity-40">
-                  <Brain className="w-3 h-3 sm:w-4 sm:h-4 text-signal-green" />
+                  <Brain className="w-4 h-4 text-signal-green" />
                 </div>
               </div>
-              <span className="text-signal-green text-[10px] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase font-semibold">
+              <span className="text-signal-green text-xs tracking-[0.2em] uppercase font-semibold">
                 AI Health Intelligence
               </span>
             </div>
 
-            {/* Main Headline with clearer value proposition */}
+            {/* Main Headline */}
             <div className="space-y-1 sm:space-y-3">
-              <h1 className="text-[1.75rem] sm:text-4xl md:text-5xl lg:text-7xl font-bold text-ivory leading-[1.1] tracking-tight">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-ivory leading-[1.1] tracking-tight">
                 Meet
                 <span className="relative inline-block ml-1.5 sm:ml-3 lg:ml-4">
                   <span className="relative z-10 bg-gradient-to-r from-signal-green via-emerald-300 to-signal-green bg-clip-text text-transparent bg-[length:200%_auto] animate-shimmer">
@@ -382,11 +382,12 @@ const Hero = () => {
                 </span>
               </h1>
               
-              {/* Clear benefit statement */}
-              <p className="text-[0.8rem] sm:text-xl md:text-2xl lg:text-3xl text-stone/90 font-light leading-snug">
-                Unlock <span className="text-ivory font-medium">peak performance</span> with AI that{" "}
+              {/* Shorter benefit statement on mobile */}
+              <p className="text-xs sm:text-xl md:text-2xl lg:text-3xl text-stone/90 font-light leading-snug px-2 sm:px-0">
+                <span className="sm:hidden">AI that <span className="text-signal-green font-medium">predicts</span> & <span className="text-signal-green font-medium">adapts</span> to your body.</span>
+                <span className="hidden sm:inline">Unlock <span className="text-ivory font-medium">peak performance</span> with AI that{" "}
                 <span className="text-signal-green font-medium">predicts</span> and{" "}
-                <span className="text-signal-green font-medium">adapts</span> to your body.
+                <span className="text-signal-green font-medium">adapts</span> to your body.</span>
               </p>
             </div>
 
@@ -414,39 +415,38 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* Feature Pills with enhanced micro-interactions */}
-            <div className="flex flex-wrap gap-1.5 sm:gap-2.5 justify-center lg:justify-start px-2 sm:px-0">
+            {/* Feature Pills - horizontal scroll on mobile */}
+            <div className="flex gap-1.5 sm:gap-2.5 justify-center lg:justify-start overflow-x-auto scrollbar-hide pb-1 sm:pb-0 sm:flex-wrap">
               {[
-                { label: "Wearable Sync", icon: Activity, color: "signal-green" },
-                { label: "Smart Protocols", icon: Brain, color: "violet-400" },
-                { label: "Predictive AI", icon: Sparkles, color: "cyan-400" },
-                { label: "24/7 Coaching", icon: Zap, color: "amber-400" },
+                { label: "Wearable Sync", icon: Activity },
+                { label: "Predictive AI", icon: Sparkles },
+                { label: "24/7 Coach", icon: Zap },
               ].map((pill) => (
                 <span 
                   key={pill.label}
                   className={cn(
-                    "group flex items-center gap-1 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2.5 text-[10px] sm:text-xs font-medium",
+                    "group flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1 sm:py-2.5 text-[9px] sm:text-xs font-medium whitespace-nowrap shrink-0",
                     "bg-white/[0.04] backdrop-blur-xl border border-white/[0.08]",
                     "text-ivory/80 rounded-full",
-                    "hover:border-signal-green/40 hover:bg-signal-green/10 hover:text-signal-green",
-                    "active:scale-95 sm:hover:scale-105 hover:shadow-lg hover:shadow-signal-green/20",
+                    "sm:hover:border-signal-green/40 sm:hover:bg-signal-green/10 sm:hover:text-signal-green",
+                    "sm:hover:scale-105 sm:hover:shadow-lg sm:hover:shadow-signal-green/20",
                     "transition-all duration-300 cursor-default"
                   )}
                 >
-                  <pill.icon className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 opacity-70 group-hover:opacity-100 group-hover:rotate-12 transition-all duration-300" />
+                  <pill.icon className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 opacity-70" />
                   {pill.label}
                 </span>
               ))}
             </div>
 
-            {/* CTAs */}
-            <div className="flex flex-row gap-2 sm:gap-3 justify-center lg:justify-start pt-2 px-2 sm:px-0">
-              <Link to="/nova" className="flex-1 sm:flex-none">
+            {/* CTAs - compact on mobile */}
+            <div className="flex flex-row gap-2 sm:gap-3 justify-center lg:justify-start pt-1 sm:pt-2">
+              <Link to="/nova">
                 <Button 
                   className={cn(
-                    "relative bg-signal-green text-carbon hover:bg-signal-green font-semibold w-full sm:w-auto",
-                    "h-10 sm:h-11 px-4 sm:px-7 text-xs sm:text-sm tracking-wide",
-                    "shadow-lg shadow-signal-green/25 active:shadow-signal-green/40",
+                    "relative bg-signal-green text-carbon hover:bg-signal-green font-semibold",
+                    "h-9 sm:h-11 px-4 sm:px-7 text-xs sm:text-sm tracking-wide",
+                    "shadow-lg shadow-signal-green/25",
                     "transition-all duration-300 group overflow-hidden active:scale-95"
                   )}
                 >
@@ -454,17 +454,16 @@ const Hero = () => {
                     Start Free
                     <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform group-hover:translate-x-0.5" />
                   </span>
-                  {/* Shimmer effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
                 </Button>
               </Link>
-              <Link to="/shop" className="flex-1 sm:flex-none">
+              <Link to="/shop">
                 <Button 
                   variant="outline"
                   className={cn(
-                    "relative bg-transparent border border-ivory/40 text-ivory w-full sm:w-auto",
+                    "relative bg-transparent border border-ivory/40 text-ivory",
                     "hover:bg-ivory hover:text-carbon hover:border-ivory font-medium",
-                    "h-10 sm:h-11 px-4 sm:px-7 text-xs sm:text-sm tracking-wide",
+                    "h-9 sm:h-11 px-4 sm:px-7 text-xs sm:text-sm tracking-wide",
                     "transition-all duration-300 group active:scale-95"
                   )}
                 >
@@ -476,83 +475,70 @@ const Hero = () => {
               </Link>
             </div>
 
-            {/* Social Proof + Metrics */}
-            <div className="pt-1 sm:pt-3 max-w-xl mx-auto lg:mx-0 space-y-1.5 sm:space-y-3">
-              {/* Active users indicator */}
+            {/* Social Proof - minimal on mobile */}
+            <div className="pt-1 sm:pt-3 max-w-xl mx-auto lg:mx-0">
               <div className="flex items-center justify-center lg:justify-start gap-2">
-                <div className="flex -space-x-1.5 sm:-space-x-2">
-                  {[...Array(4)].map((_, i) => (
+                <div className="flex -space-x-1.5">
+                  {[...Array(3)].map((_, i) => (
                     <div 
                       key={i}
-                      className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-gradient-to-br from-signal-green/40 to-emerald-600/40 border-[1.5px] sm:border-2 border-carbon flex items-center justify-center shadow-md active:scale-110 sm:hover:scale-110 hover:z-10 transition-all duration-300 cursor-default"
+                      className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-gradient-to-br from-signal-green/40 to-emerald-600/40 border-[1.5px] border-carbon flex items-center justify-center"
                     >
                       <span className="text-[6px] sm:text-[8px] text-ivory font-bold">
-                        {['JD', 'MK', 'AS', 'TR'][i]}
+                        {['JD', 'MK', 'AS'][i]}
                       </span>
                     </div>
                   ))}
                 </div>
                 <div className="text-[10px] sm:text-xs">
-                  <span className="text-ivory font-semibold">2,847</span>
-                  <span className="text-stone/70 ml-1">active now</span>
+                  <span className="text-ivory font-semibold">2.8K</span>
+                  <span className="text-stone/70 ml-1">active</span>
                 </div>
-                <div className="relative">
-                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-signal-green rounded-full animate-pulse" />
-                  <div className="absolute inset-0 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-signal-green rounded-full animate-ping opacity-50" />
-                </div>
+                <div className="w-1.5 h-1.5 bg-signal-green rounded-full animate-pulse" />
               </div>
-
-              {/* Metrics row - hidden on mobile to save space */}
-              <div className="hidden sm:block">
+              
+              {/* Metrics - desktop only */}
+              <div className="hidden sm:block mt-3">
                 <AnimatedMetrics />
               </div>
             </div>
           </div>
 
-          {/* Right: Nova Interface Demo */}
-          <div className="relative order-1 lg:order-2 flex flex-col items-center justify-center">
-            {/* Demo Interface */}
+          {/* Right: Nova Demo - smaller on mobile */}
+          <div className="relative order-1 lg:order-2 flex items-center justify-center">
             <div 
-              className="relative w-full max-w-[200px] sm:max-w-md lg:max-w-lg aspect-[4/3] cursor-pointer group"
+              className="relative w-full max-w-[180px] sm:max-w-md lg:max-w-lg aspect-[4/3] cursor-pointer group"
               onClick={() => setShowDemo(true)}
               style={{
-                transform: `perspective(1200px) rotateX(${mousePosition.y * 3}deg) rotateY(${mousePosition.x * -3}deg) translateY(${scrollY * -0.03}px)`,
+                transform: `perspective(1200px) rotateX(${mousePosition.y * 3}deg) rotateY(${mousePosition.x * -3}deg)`,
                 transition: 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
               }}
             >
-              {/* Multi-layer glow effects */}
-              <div className="absolute -inset-4 sm:-inset-10 bg-gradient-to-br from-signal-green/25 via-transparent to-violet-500/25 rounded-2xl sm:rounded-3xl blur-2xl sm:blur-3xl opacity-60 group-hover:opacity-90 transition-opacity duration-700" />
-              <div className="absolute -inset-3 sm:-inset-6 bg-gradient-to-tr from-cyan-500/15 via-transparent to-signal-green/15 rounded-2xl sm:rounded-3xl blur-xl sm:blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-500" />
+              {/* Glow effects - reduced on mobile */}
+              <div className="absolute -inset-2 sm:-inset-10 bg-gradient-to-br from-signal-green/20 via-transparent to-violet-500/20 rounded-xl sm:rounded-3xl blur-xl sm:blur-3xl opacity-60" />
               
-              {/* Glassmorphism frame */}
+              {/* Frame */}
               <div className="absolute inset-0 rounded-xl sm:rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/40" />
               
-              {/* The demo interface */}
+              {/* Demo interface */}
               <div className="relative z-10">
                 <NovaInterfaceDemo />
               </div>
               
-              {/* Play overlay - always visible on mobile as tap hint */}
-              <div className="absolute inset-0 bg-carbon/40 sm:bg-carbon/60 backdrop-blur-sm sm:backdrop-blur-md rounded-xl sm:rounded-2xl opacity-100 sm:opacity-0 group-hover:opacity-100 transition-all duration-400 flex items-center justify-center z-20">
-                <div className="relative w-14 h-14 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full bg-gradient-to-br from-signal-green via-emerald-500 to-teal-500 flex items-center justify-center shadow-2xl shadow-signal-green/50 transform group-hover:scale-110 active:scale-95 transition-transform duration-300">
-                  <Play className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-carbon ml-0.5 sm:ml-1" />
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/30 to-transparent" />
-                  {/* Pulsing ring */}
-                  <div className="absolute -inset-2 sm:-inset-3 rounded-full border-2 border-signal-green/50 animate-ping opacity-30" />
+              {/* Play overlay */}
+              <div className="absolute inset-0 bg-carbon/50 backdrop-blur-sm rounded-xl sm:rounded-2xl sm:opacity-0 group-hover:opacity-100 transition-all duration-400 flex items-center justify-center z-20">
+                <div className="relative w-12 h-12 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-signal-green to-emerald-500 flex items-center justify-center shadow-xl shadow-signal-green/40">
+                  <Play className="w-5 h-5 sm:w-8 sm:h-8 text-carbon ml-0.5" />
                 </div>
               </div>
               
-              {/* Floating badge */}
-              <div className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 px-2.5 sm:px-4 py-1 sm:py-2 bg-gradient-to-r from-signal-green to-emerald-500 text-carbon text-[10px] sm:text-xs font-bold rounded-full shadow-xl shadow-signal-green/40 z-30 active:scale-95 sm:hover:scale-110 transition-transform">
-                <span className="flex items-center gap-1 sm:gap-1.5">
-                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-carbon rounded-full animate-pulse" />
-                  Live Demo
+              {/* Badge */}
+              <div className="absolute -top-1.5 -right-1.5 sm:-top-4 sm:-right-4 px-2 sm:px-4 py-0.5 sm:py-2 bg-gradient-to-r from-signal-green to-emerald-500 text-carbon text-[8px] sm:text-xs font-bold rounded-full shadow-lg z-30">
+                <span className="flex items-center gap-1">
+                  <span className="w-1 h-1 sm:w-2 sm:h-2 bg-carbon rounded-full animate-pulse" />
+                  Demo
                 </span>
               </div>
-              
-              {/* Corner decorations - hidden on mobile */}
-              <div className="hidden sm:block absolute -bottom-3 -left-3 w-20 h-20 border-l-2 border-b-2 border-signal-green/40 rounded-bl-2xl opacity-70 group-hover:opacity-100 transition-opacity" />
-              <div className="hidden sm:block absolute -top-3 -right-3 w-20 h-20 border-r-2 border-t-2 border-violet-500/40 rounded-tr-2xl opacity-70 group-hover:opacity-100 transition-opacity" />
             </div>
           </div>
         </div>
