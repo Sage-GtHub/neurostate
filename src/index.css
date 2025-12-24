@@ -8,59 +8,58 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* NeuroState OS - High Performance Tech Palette */
-    /* Black/White/Silver - Precision Engineering Aesthetic */
+    /* NeuroState Brand Guidelines - Visual Identity */
     
-    /* Primary Brand Colors - Monochrome Authority */
-    --carbon: 0 0% 4%; /* #0A0A0A - Deep black, primary */
-    --ivory: 0 0% 100%; /* #FFFFFF - Pure white */
+    /* Primary Brand Colours */
+    --carbon: 0 0% 10%; /* #1A1A1A - Primary text, logos, UI elements */
+    --ivory: 60 11% 98%; /* #FAFAF8 - Primary background */
     
-    /* Silver Scale - Technical Precision */
-    --ash: 0 0% 45%; /* #737373 - Body text */
+    /* Secondary Colours - Supporting tones */
+    --ash: 0 0% 40%; /* #666666 - Body text */
     --stone: 0 0% 60%; /* #999999 - Secondary text */
     --mist: 0 0% 90%; /* #E5E5E5 - Borders */
     
-    /* Dark Accents */
-    --slate: 0 0% 8%; /* #141414 - Hover states */
-    --pearl: 0 0% 96%; /* #F5F5F5 - Elevated surfaces */
+    /* Accent Colours - Sparingly used */
+    --slate: 0 0% 16%; /* #2A2A2A - Hover states */
+    --pearl: 0 0% 96%; /* #F5F5F5 - Subtle backgrounds */
     
-    /* Electric Accent - Performance Signal */
-    --accent: 142 76% 45%; /* Green accent matching signal-green */
-    --accent-light: 142 76% 55%;
+    /* Accent - Used sparingly for emphasis */
+    --accent: 0 0% 10%; /* Carbon for buttons */
+    --accent-light: 0 0% 20%;
     --accent-foreground: 0 0% 100%;
     
-    /* Signal Colors */
+    /* Signal Colours - Performance indicators only */
     --signal-green: 142 76% 45%; /* #22C55E - Success/Active */
     --signal-blue: 217 91% 60%; /* #3B82F6 - Info/Link */
     --signal-amber: 38 92% 50%; /* #F59E0B - Warning */
 
-    /* Semantic Mappings */
-    --background: 0 0% 100%; /* Pure white */
-    --foreground: 0 0% 4%; /* Deep black */
+    /* Semantic Mappings - NeuroState Brand */
+    --background: 60 11% 98%; /* Ivory #FAFAF8 */
+    --foreground: 0 0% 10%; /* Carbon #1A1A1A */
     
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 4%;
+    --card: 0 0% 100%; /* White for cards */
+    --card-foreground: 0 0% 10%;
     
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 4%;
+    --popover-foreground: 0 0% 10%;
     
-    --primary: 0 0% 4%; /* Black */
+    --primary: 0 0% 10%; /* Carbon */
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 4%;
+    --secondary: 0 0% 96%; /* Pearl */
+    --secondary-foreground: 0 0% 10%;
     
     --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted-foreground: 0 0% 40%;
     
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 0 0% 90%;
+    --border: 0 0% 90%; /* Mist */
     --input: 0 0% 90%;
-    --ring: 0 0% 4%;
+    --ring: 0 0% 10%;
     
-    --radius: 0px; /* Sharp edges - precision engineering */
+    --radius: 12px; /* Brand standard border radius */
     
     /* Sidebar */
     --sidebar-background: 0 0% 4%;
