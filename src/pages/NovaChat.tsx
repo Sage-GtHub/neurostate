@@ -21,6 +21,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { SEO } from "@/components/SEO";
 import { cn } from "@/lib/utils";
 import { NovaResponseCard } from "@/components/nova/NovaResponseCard";
+import { NovaVoiceInterface } from "@/components/nova/NovaVoiceInterface";
 
 interface Message {
   id?: string;
@@ -405,7 +406,17 @@ export default function NovaChat() {
                   </div>
                 </div>
               </div>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-2">
+                {/* Voice Interface */}
+                <NovaVoiceInterface 
+                  onTranscript={(text, role) => {
+                    if (role === "user") {
+                      setMessages(prev => [...prev, { role: "user", content: text, timestamp: new Date() }]);
+                    } else {
+                      setMessages(prev => [...prev, { role: "assistant", content: text, timestamp: new Date() }]);
+                    }
+                  }}
+                />
                 {messages.length > 0 && (
                   <Button
                     variant="ghost"
