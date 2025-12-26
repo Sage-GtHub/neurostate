@@ -1,4 +1,28 @@
 @tailwind base;
+
+/* Nova Response Card Styles */
+.nova-response-card {
+  @apply relative p-4 rounded-2xl bg-muted/10 border border-border/30;
+  @apply transition-all duration-200;
+}
+
+.nova-response-card:hover {
+  @apply bg-muted/20 border-border/50;
+}
+
+.nova-chip {
+  @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-medium;
+  @apply bg-muted/40 border border-border/40 text-muted-foreground;
+  @apply hover:bg-muted/60 hover:text-foreground hover:border-border/60;
+  @apply transition-all duration-200 cursor-pointer;
+}
+
+.nova-chip-interactive {
+  @apply inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium;
+  @apply bg-background border border-border/50 text-foreground;
+  @apply hover:bg-accent/10 hover:border-accent/40 hover:text-accent;
+  @apply transition-all duration-200 cursor-pointer;
+}
 @tailwind components;
 @tailwind utilities;
 
