@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Send, Loader2, Sparkles, X, MessageSquare, Plus, Copy, Check, RotateCcw } from "lucide-react";
+import { Send, Loader2, Sparkles, X, MessageSquare, Plus } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useLocation } from "react-router-dom";
@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import ReactMarkdown from "react-markdown";
+import { NovaResponseCard } from "@/components/nova/NovaResponseCard";
 
 type Message = {
   role: "user" | "assistant";
@@ -36,6 +36,8 @@ const QUICK_SUGGESTIONS = [
   "How does red light therapy work?",
   "Which supplements support recovery?",
 ];
+
+const WELCOME_MESSAGE = "I am Nova, your NeuroState performance assistant. How can I help you optimise your performance today?";
 
 interface GuestChatWidgetProps {
   open: boolean;
@@ -99,7 +101,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
       id: Date.now().toString(),
       title: "New conversation",
       messages: [{
-        role: "assistant",
+        role: "assistant" as const,
         content: "I am Nova, your NeuroState performance assistant. How can I help you optimise your performance today?",
         timestamp: new Date().toISOString(),
       }],
@@ -230,10 +232,13 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
     }
   };
 
-  const copyMessage = async (content: string, index: number) => {
-    await navigator.clipboard.writeText(content);
-    setCopiedIndex(index);
-    setTimeout(() => setCopiedIndex(null), 2000);
+  const copyMessage = async (index: number) => {
+    const msg = messages[index];
+    if (msg) {
+      await navigator.clipboard.writeText(msg.content);
+      setCopiedIndex(index);
+      setTimeout(() => setCopiedIndex(null), 2000);
+    }
   };
 
   const regenerate = async () => {
@@ -383,63 +388,33 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
             <div className="flex-1 overflow-y-auto">
               <div className="px-4 py-4 space-y-4">
                 {messages.map((msg, i) => (
-                  <div key={i} className={`flex gap-3 ${msg.role === "user" ? "justify-end" : ""}`}>
+                  <div key={i} className={`group flex gap-3 ${msg.role === "user" ? "justify-end" : ""}`}>
                     {msg.role === "assistant" && (
                       <div className="flex-shrink-0 mt-1">
-                        <div className="w-7 h-7 rounded-full bg-accent/10 flex items-center justify-center">
-                          <Sparkles className="w-3.5 h-3.5 text-accent" />
+                        <div className="w-7 h-7 rounded-xl nova-gradient flex items-center justify-center">
+                          <Sparkles className="w-3.5 h-3.5 text-white" />
                         </div>
                       </div>
                     )}
-                    <div className={`group relative max-w-[85%] ${
+                    <div className={`relative max-w-[85%] ${
                       msg.role === "user"
                         ? "bg-foreground text-background px-3 py-2 rounded-2xl rounded-br-sm"
                         : ""
                     }`}>
                       {msg.role === "assistant" ? (
-                        <div className="prose prose-sm dark:prose-invert max-w-none text-foreground text-sm">
-                          <ReactMarkdown
-                            components={{
-                              p: ({ children }) => <p className="mb-2 last:mb-0 leading-relaxed">{children}</p>,
-                              ul: ({ children }) => <ul className="mb-2 list-disc pl-4 space-y-1">{children}</ul>,
-                              li: ({ children }) => <li>{children}</li>,
-                              strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
-                              a: ({ href, children }) => (
-                                <a href={href} className="text-accent hover:underline" target={href?.startsWith('http') ? '_blank' : undefined}>
-                                  {children}
-                                </a>
-                              ),
-                            }}
-                          >
-                            {msg.content || "..."}
-                          </ReactMarkdown>
-                        </div>
+                        <NovaResponseCard
+                          content={msg.content || "..."}
+                          timestamp={new Date(msg.timestamp)}
+                          confidence="high"
+                          baselineDays={14}
+                          isStreaming={isLoading && i === messages.length - 1 && !msg.content}
+                          onCopy={() => copyMessage(i)}
+                          onRegenerate={i === messages.length - 1 && !isLoading ? regenerate : undefined}
+                          isCopied={copiedIndex === i}
+                          showActions={true}
+                        />
                       ) : (
                         <p className="text-sm leading-relaxed">{msg.content}</p>
-                      )}
-                      
-                      {msg.role === "assistant" && msg.content && (
-                        <div className="flex gap-1 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="h-6 px-2 text-xs text-muted-foreground"
-                            onClick={() => copyMessage(msg.content, i)}
-                          >
-                            {copiedIndex === i ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                          </Button>
-                          {i === messages.length - 1 && (
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="h-6 px-2 text-xs text-muted-foreground"
-                              onClick={regenerate}
-                              disabled={isLoading}
-                            >
-                              <RotateCcw className="w-3 h-3" />
-                            </Button>
-                          )}
-                        </div>
                       )}
                     </div>
                   </div>
