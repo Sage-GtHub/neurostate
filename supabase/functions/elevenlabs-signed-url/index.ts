@@ -16,12 +16,29 @@ serve(async (req) => {
       throw new Error('ELEVENLABS_API_KEY is not configured');
     }
 
-    // You'll need to create an agent in ElevenLabs UI first
-    // Then replace this with your actual agent ID
-    const AGENT_ID = "YOUR_AGENT_ID"; // TODO: Replace with actual agent ID from ElevenLabs
+    // Get agent ID from request body or use default
+    let agentId: string | undefined;
+    
+    try {
+      const body = await req.json();
+      agentId = body.agent_id;
+    } catch {
+      // No body provided, will need agent_id from env or error
+    }
+
+    // Use environment variable if not provided in request
+    if (!agentId) {
+      agentId = Deno.env.get('ELEVENLABS_AGENT_ID');
+    }
+
+    if (!agentId) {
+      throw new Error('ElevenLabs Agent ID not configured. Create an agent at elevenlabs.io and set ELEVENLABS_AGENT_ID secret.');
+    }
+
+    console.log("Requesting signed URL for agent:", agentId);
 
     const response = await fetch(
-      `https://api.elevenlabs.io/v1/convai/conversation/get_signed_url?agent_id=${AGENT_ID}`,
+      `https://api.elevenlabs.io/v1/convai/conversation/get_signed_url?agent_id=${agentId}`,
       {
         method: "GET",
         headers: {
@@ -33,10 +50,19 @@ serve(async (req) => {
     if (!response.ok) {
       const errorText = await response.text();
       console.error("ElevenLabs API error:", response.status, errorText);
+      
+      if (response.status === 404) {
+        throw new Error('Agent not found. Please check your ElevenLabs Agent ID.');
+      }
+      if (response.status === 401) {
+        throw new Error('Invalid ElevenLabs API key.');
+      }
+      
       throw new Error(`ElevenLabs API error: ${response.status}`);
     }
 
     const data = await response.json();
+    console.log("Successfully obtained signed URL");
 
     return new Response(
       JSON.stringify({ signed_url: data.signed_url }),
