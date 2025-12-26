@@ -296,7 +296,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="w-full sm:w-[420px] p-0 flex flex-col h-full bg-background border-l border-border/50">
+      <SheetContent side="right" hideCloseButton className="w-full sm:w-[420px] p-0 flex flex-col h-full bg-background border-l border-border/50">
         {/* Header */}
         <SheetHeader className="border-b border-border/50 p-4 flex-shrink-0">
           <div className="flex items-center justify-between">
@@ -483,13 +483,6 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
               </div>
             </div>
 
-            {/* CTA */}
-            <div className="border-t border-border/50 bg-muted/30 px-4 py-3">
-              <p className="text-xs text-muted-foreground mb-2">Want personalised protocols?</p>
-              <a href="/nova" target="_blank" rel="noopener noreferrer">
-                <Button size="sm" className="w-full">Create Nova Account</Button>
-              </a>
-            </div>
 
             {/* Input */}
             <div className="border-t border-border/50 p-3">
