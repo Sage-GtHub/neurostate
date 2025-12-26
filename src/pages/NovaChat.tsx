@@ -10,15 +10,14 @@ import {
   Check, 
   RotateCcw, 
   Trash2,
-  MessageSquare,
   Zap,
   Brain,
   Moon,
-  Activity
+  Activity,
+  ArrowUp
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
-
 import { SEO } from "@/components/SEO";
 import ReactMarkdown from "react-markdown";
 import { cn } from "@/lib/utils";
@@ -31,10 +30,10 @@ interface Message {
 }
 
 const QUICK_ACTIONS = [
-  { icon: Activity, label: "Analyse my HRV", prompt: "Analyse my recent HRV data and give me actionable insights" },
-  { icon: Moon, label: "Sleep protocol", prompt: "Create a personalised sleep optimisation protocol for me" },
-  { icon: Zap, label: "Energy boost", prompt: "I need more energy in the afternoon. What do you recommend?" },
-  { icon: Brain, label: "Focus stack", prompt: "Design a supplement stack for deep focus and cognitive performance" },
+  { icon: Activity, label: "Analyse my HRV", prompt: "Analyse my recent HRV data and give me actionable insights", color: "from-emerald-500/20 to-emerald-500/5" },
+  { icon: Moon, label: "Sleep protocol", prompt: "Create a personalised sleep optimisation protocol for me", color: "from-indigo-500/20 to-indigo-500/5" },
+  { icon: Zap, label: "Energy boost", prompt: "I need more energy in the afternoon. What do you recommend?", color: "from-amber-500/20 to-amber-500/5" },
+  { icon: Brain, label: "Focus stack", prompt: "Design a supplement stack for deep focus and cognitive performance", color: "from-violet-500/20 to-violet-500/5" },
 ];
 
 const WELCOME_MESSAGE = `Here's what matters: I'm Nova, your cognitive operating system.
@@ -53,7 +52,6 @@ export default function NovaChat() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isTypingWelcome, setIsTypingWelcome] = useState(false);
-  
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [isLoadingHistory, setIsLoadingHistory] = useState(true);
   const { toast } = useToast();
@@ -85,7 +83,7 @@ export default function NovaChat() {
           timestamp: new Date(h.created_at)
         })));
       } else {
-        // Show welcome message with typing animation for new users
+        // Show welcome message with typing animation
         setIsTypingWelcome(true);
         setMessages([{
           role: "assistant",
@@ -93,7 +91,6 @@ export default function NovaChat() {
           timestamp: new Date()
         }]);
         
-        // Animate the welcome message
         let charIndex = 0;
         const typeInterval = setInterval(() => {
           if (charIndex <= WELCOME_MESSAGE.length) {
@@ -102,7 +99,7 @@ export default function NovaChat() {
               content: WELCOME_MESSAGE.slice(0, charIndex),
               timestamp: new Date()
             }]);
-            charIndex += 2; // Type 2 chars at a time for speed
+            charIndex += 2;
           } else {
             clearInterval(typeInterval);
             setIsTypingWelcome(false);
@@ -306,27 +303,48 @@ export default function NovaChat() {
     return date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
   };
 
-  // Empty state - no messages
+  // Premium Empty State
   const EmptyState = () => (
-    <div className="flex-1 flex flex-col items-center justify-center px-4 py-8 sm:py-12">
-      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-4 sm:mb-6 shadow-lg">
-        <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-accent" />
+    <div className="flex-1 flex flex-col items-center justify-center px-4 py-8 sm:py-16">
+      {/* Nova Avatar */}
+      <div className="relative mb-8">
+        <div className="absolute inset-0 rounded-full nova-gradient blur-2xl opacity-30 scale-150" />
+        <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl nova-gradient flex items-center justify-center nova-glow">
+          <Sparkles className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
+        </div>
+        <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-green-500 border-3 border-background flex items-center justify-center">
+          <div className="w-2 h-2 rounded-full bg-white animate-pulse" />
+        </div>
       </div>
-      <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 text-center">Chat with Nova</h2>
-      <p className="text-sm sm:text-base text-muted-foreground text-center max-w-md mb-6 sm:mb-8 px-4">
-        Your AI performance coach. Ask about protocols, recovery, or supplements.
+      
+      <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3 text-center">
+        Chat with Nova
+      </h2>
+      <p className="text-sm sm:text-base text-muted-foreground text-center max-w-md mb-10 px-4 leading-relaxed">
+        Your AI cognitive coach. Ask about protocols, recovery, supplements, or performance optimisation.
       </p>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 w-full max-w-lg px-2">
+      {/* Quick Actions Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-lg px-2">
         {QUICK_ACTIONS.map((action, i) => (
           <button
             key={i}
             onClick={() => handleSendMessage(action.prompt)}
             disabled={isLoading}
-            className="group flex items-center gap-3 p-3 sm:p-4 rounded-xl border border-border/50 bg-card/50 hover:bg-card hover:border-border hover:shadow-sm transition-all text-left min-h-[52px]"
+            className={cn(
+              "group relative flex items-center gap-4 p-4 rounded-2xl",
+              "bg-gradient-to-br", action.color,
+              "border border-border/30 hover:border-accent/30",
+              "transition-all duration-300 text-left",
+              "hover:shadow-lg hover:-translate-y-0.5",
+              "nova-card-hover"
+            )}
           >
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
-              <action.icon className="w-4 h-4 sm:w-5 sm:h-5 text-accent" />
+            <div className={cn(
+              "w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0",
+              "bg-background/80 group-hover:bg-background transition-colors"
+            )}>
+              <action.icon className="w-5 h-5 text-foreground" />
             </div>
             <span className="text-sm font-medium text-foreground">{action.label}</span>
           </button>
@@ -335,15 +353,19 @@ export default function NovaChat() {
     </div>
   );
 
+  // Loading state
   if (isLoadingHistory) {
     return (
       <NovaSwipeWrapper>
         <div className="min-h-screen bg-background">
           <NovaNav />
           <div className="flex items-center justify-center h-[60vh]">
-            <div className="flex flex-col items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
-                <Loader2 className="w-6 h-6 animate-spin text-accent" />
+            <div className="flex flex-col items-center gap-6">
+              <div className="relative">
+                <div className="absolute inset-0 rounded-2xl nova-gradient blur-xl opacity-40" />
+                <div className="relative w-16 h-16 rounded-2xl nova-gradient flex items-center justify-center">
+                  <Loader2 className="w-8 h-8 animate-spin text-white" />
+                </div>
               </div>
               <p className="text-sm text-muted-foreground">Loading conversation...</p>
             </div>
@@ -362,20 +384,25 @@ export default function NovaChat() {
       <div className="min-h-screen bg-background flex flex-col">
         <NovaNav />
       
-        {/* Header - Mobile optimised */}
-        <div className="border-b border-border/30 bg-background/80 backdrop-blur-sm sticky top-0 z-10">
-          <div className="container mx-auto px-3 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-2 sm:py-3">
+        {/* Premium Header */}
+        <div className="nova-glass border-b border-border/30 sticky top-[57px] z-30">
+          <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-3">
             <div className="flex items-center justify-between max-w-3xl mx-auto">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
+                {/* Nova Avatar with Ring */}
                 <div className="relative">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center shadow-sm">
-                    <Sparkles className="w-5 h-5 text-accent" />
+                  <div className="absolute -inset-0.5 rounded-xl nova-avatar-ring" />
+                  <div className="relative w-11 h-11 rounded-xl nova-gradient flex items-center justify-center">
+                    <Sparkles className="w-5 h-5 text-white" />
                   </div>
-                  <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-accent border-2 border-background" />
+                  <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-background" />
                 </div>
                 <div>
                   <h1 className="text-base font-semibold text-foreground">Nova</h1>
-                  <p className="text-xs text-muted-foreground">AI Cognitive Coach</p>
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                    <p className="text-xs text-muted-foreground">Online • AI Cognitive Coach</p>
+                  </div>
                 </div>
               </div>
               <div className="flex items-center gap-1">
@@ -384,7 +411,7 @@ export default function NovaChat() {
                     variant="ghost"
                     size="icon"
                     onClick={clearHistory}
-                    className="h-8 w-8 text-muted-foreground hover:text-foreground"
+                    className="h-9 w-9 text-muted-foreground hover:text-foreground rounded-xl"
                   >
                     <Trash2 className="w-4 h-4" />
                   </Button>
@@ -394,9 +421,9 @@ export default function NovaChat() {
           </div>
         </div>
 
-        {/* Chat Container - Mobile optimised */}
+        {/* Chat Container */}
         <div className="flex-1 overflow-hidden flex flex-col">
-          <div className="container mx-auto px-2 sm:px-6 md:px-12 lg:px-20 xl:px-32 flex-1 flex flex-col">
+          <div className="container mx-auto px-3 sm:px-6 md:px-12 lg:px-20 xl:px-32 flex-1 flex flex-col">
             <div className="max-w-3xl mx-auto w-full flex-1 flex flex-col">
               
               {messages.length === 0 ? (
@@ -412,19 +439,20 @@ export default function NovaChat() {
                       <div 
                         key={index} 
                         className={cn(
-                          "group py-4 px-1 transition-colors",
-                          message.role === "user" ? "" : "hover:bg-muted/20 rounded-xl"
+                          "group py-3 px-1 nova-message-animate",
+                          message.role === "assistant" && "hover:bg-muted/20 rounded-2xl"
                         )}
+                        style={{ animationDelay: `${index * 50}ms` }}
                       >
                         <div className={cn(
                           "flex gap-3",
-                          message.role === "user" ? "flex-row-reverse" : ""
+                          message.role === "user" && "flex-row-reverse"
                         )}>
-                          {/* Avatar */}
+                          {/* Nova Avatar */}
                           {message.role === "assistant" && (
                             <div className="flex-shrink-0">
-                              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center">
-                                <Sparkles className="w-4 h-4 text-accent" />
+                              <div className="w-9 h-9 rounded-xl nova-gradient flex items-center justify-center nova-glow-sm">
+                                <Sparkles className="w-4 h-4 text-white" />
                               </div>
                             </div>
                           )}
@@ -432,14 +460,14 @@ export default function NovaChat() {
                           {/* Message Content */}
                           <div className={cn(
                             "flex-1 min-w-0",
-                            message.role === "user" ? "flex flex-col items-end" : ""
+                            message.role === "user" && "flex flex-col items-end"
                           )}>
                             {message.role === "user" ? (
                               <div className="max-w-[85%]">
-                                <div className="bg-foreground text-background px-4 py-3 rounded-2xl rounded-tr-md shadow-sm">
+                                <div className="nova-bubble-user px-4 py-3 shadow-sm">
                                   <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
                                 </div>
-                                <p className="text-[10px] text-muted-foreground mt-1 mr-1">
+                                <p className="text-[10px] text-muted-foreground mt-1.5 mr-1">
                                   {formatTime(message.timestamp)}
                                 </p>
                               </div>
@@ -449,19 +477,19 @@ export default function NovaChat() {
                                   <div className="prose prose-sm dark:prose-invert max-w-none text-foreground/90">
                                     <ReactMarkdown
                                       components={{
-                                        p: ({ children }) => <p className="mb-3 last:mb-0 leading-relaxed">{children}</p>,
-                                        ul: ({ children }) => <ul className="mb-3 list-disc pl-5 space-y-1">{children}</ul>,
-                                        ol: ({ children }) => <ol className="mb-3 list-decimal pl-5 space-y-1">{children}</ol>,
-                                        li: ({ children }) => <li className="leading-relaxed">{children}</li>,
+                                        p: ({ children }) => <p className="mb-3 last:mb-0 leading-relaxed text-[15px]">{children}</p>,
+                                        ul: ({ children }) => <ul className="mb-3 list-disc pl-5 space-y-1.5">{children}</ul>,
+                                        ol: ({ children }) => <ol className="mb-3 list-decimal pl-5 space-y-1.5">{children}</ol>,
+                                        li: ({ children }) => <li className="leading-relaxed text-[15px]">{children}</li>,
                                         strong: ({ children }) => <strong className="font-semibold text-foreground">{children}</strong>,
                                         h1: ({ children }) => <h1 className="text-lg font-bold mb-3 mt-4 first:mt-0">{children}</h1>,
                                         h2: ({ children }) => <h2 className="text-base font-semibold mb-2 mt-4 first:mt-0">{children}</h2>,
                                         h3: ({ children }) => <h3 className="text-sm font-semibold mb-2 mt-3 first:mt-0">{children}</h3>,
                                         code: ({ children }) => (
-                                          <code className="bg-muted/50 px-1.5 py-0.5 rounded text-sm font-mono">{children}</code>
+                                          <code className="bg-muted/60 px-1.5 py-0.5 rounded-md text-sm font-mono text-accent">{children}</code>
                                         ),
                                         pre: ({ children }) => (
-                                          <pre className="bg-muted/50 p-3 rounded-lg overflow-x-auto my-3">{children}</pre>
+                                          <pre className="bg-muted/40 p-4 rounded-xl overflow-x-auto my-3 border border-border/30">{children}</pre>
                                         ),
                                         blockquote: ({ children }) => (
                                           <blockquote className="border-l-2 border-accent/50 pl-4 italic text-muted-foreground my-3">{children}</blockquote>
@@ -471,10 +499,10 @@ export default function NovaChat() {
                                     {message.content}
                                     </ReactMarkdown>
                                     {isTypingWelcome && index === 0 && (
-                                      <span className="inline-block w-1.5 h-4 bg-accent animate-pulse ml-0.5 align-middle" />
+                                      <span className="inline-block w-0.5 h-5 bg-accent animate-pulse ml-0.5 align-middle rounded-full" />
                                     )}
                                     
-                                    {/* Quick action buttons after welcome message */}
+                                    {/* Quick actions after welcome */}
                                     {!isTypingWelcome && index === 0 && messages.length === 1 && (
                                       <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-2">
                                         {QUICK_ACTIONS.map((action, i) => (
@@ -482,10 +510,15 @@ export default function NovaChat() {
                                             key={i}
                                             onClick={() => handleSendMessage(action.prompt)}
                                             disabled={isLoading}
-                                            className="group flex items-center gap-3 p-3 rounded-xl border border-border/50 bg-card/50 hover:bg-card hover:border-accent/30 hover:shadow-sm transition-all text-left"
+                                            className={cn(
+                                              "group flex items-center gap-3 p-3 rounded-xl",
+                                              "bg-gradient-to-br", action.color,
+                                              "border border-border/30 hover:border-accent/30",
+                                              "hover:shadow-md transition-all text-left"
+                                            )}
                                           >
-                                            <div className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
-                                              <action.icon className="w-4 h-4 text-accent" />
+                                            <div className="w-9 h-9 rounded-lg bg-background/80 flex items-center justify-center flex-shrink-0 group-hover:bg-background transition-colors">
+                                              <action.icon className="w-4 h-4 text-foreground" />
                                             </div>
                                             <span className="text-sm font-medium text-foreground">{action.label}</span>
                                           </button>
@@ -494,39 +527,39 @@ export default function NovaChat() {
                                     )}
                                   </div>
                                 ) : (
-                                  <div className="flex items-center gap-2 py-2">
-                                    <div className="flex gap-1">
-                                      <span className="w-2 h-2 bg-accent/60 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                                      <span className="w-2 h-2 bg-accent/60 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                                      <span className="w-2 h-2 bg-accent/60 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                                  <div className="flex items-center gap-3 py-2">
+                                    <div className="flex gap-1.5">
+                                      <span className="w-2 h-2 bg-accent rounded-full nova-typing-dot" />
+                                      <span className="w-2 h-2 bg-accent rounded-full nova-typing-dot" />
+                                      <span className="w-2 h-2 bg-accent rounded-full nova-typing-dot" />
                                     </div>
                                     <span className="text-xs text-muted-foreground">Nova is thinking...</span>
                                   </div>
                                 )}
                                 
-                                {/* Action buttons for assistant messages */}
+                                {/* Action buttons */}
                                 {message.content && (
-                                  <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                  <div className="flex items-center gap-1 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                                     <Button
                                       variant="ghost"
                                       size="sm"
-                                      className="h-7 px-2 text-xs text-muted-foreground hover:text-foreground"
+                                      className="h-7 px-2 text-xs text-muted-foreground hover:text-foreground rounded-lg"
                                       onClick={() => copyToClipboard(message.content, `msg-${index}`)}
                                     >
                                       {copiedId === `msg-${index}` ? (
-                                        <Check className="w-3 h-3" />
+                                        <Check className="w-3.5 h-3.5" />
                                       ) : (
-                                        <Copy className="w-3 h-3" />
+                                        <Copy className="w-3.5 h-3.5" />
                                       )}
                                     </Button>
                                     {index === messages.length - 1 && !isLoading && (
                                       <Button
                                         variant="ghost"
                                         size="sm"
-                                        className="h-7 px-2 text-xs text-muted-foreground hover:text-foreground"
+                                        className="h-7 px-2 text-xs text-muted-foreground hover:text-foreground rounded-lg"
                                         onClick={regenerateLastResponse}
                                       >
-                                        <RotateCcw className="w-3 h-3" />
+                                        <RotateCcw className="w-3.5 h-3.5" />
                                       </Button>
                                     )}
                                     <span className="text-[10px] text-muted-foreground ml-2">
@@ -545,10 +578,10 @@ export default function NovaChat() {
                 </>
               )}
               
-              {/* Input Area - Mobile optimised */}
-              <div className="py-3 sm:py-4 px-1 border-t border-border/30 bg-background sticky bottom-0 pb-safe">
+              {/* Premium Input Area */}
+              <div className="py-4 px-1 border-t border-border/20 bg-gradient-to-t from-background via-background to-transparent sticky bottom-0 pb-safe">
                 <div 
-                  className="relative flex items-end gap-2"
+                  className="relative flex items-end gap-3 nova-input-focus rounded-2xl border border-border/50 bg-muted/20 p-2 transition-all duration-200"
                   onTouchStart={(e) => e.stopPropagation()}
                   onTouchMove={(e) => e.stopPropagation()}
                   onTouchEnd={(e) => e.stopPropagation()}
@@ -562,13 +595,12 @@ export default function NovaChat() {
                     disabled={isLoading}
                     rows={1}
                     className={cn(
-                      "flex-1 resize-none rounded-xl border border-border/50 bg-muted/30",
-                      "px-3 sm:px-4 py-3 text-base sm:text-sm placeholder:text-muted-foreground",
-                      "focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50",
-                      "disabled:opacity-50 disabled:cursor-not-allowed",
-                      "transition-all duration-200"
+                      "flex-1 resize-none bg-transparent border-0",
+                      "px-3 py-2.5 text-[15px] sm:text-sm placeholder:text-muted-foreground/60",
+                      "focus:outline-none focus:ring-0",
+                      "disabled:opacity-50 disabled:cursor-not-allowed"
                     )}
-                    style={{ minHeight: '48px', maxHeight: '120px' }}
+                    style={{ minHeight: '44px', maxHeight: '120px' }}
                   />
                   <Button
                     size="icon"
@@ -584,21 +616,21 @@ export default function NovaChat() {
                     }}
                     disabled={!input.trim() || isLoading}
                     className={cn(
-                      "flex-shrink-0 h-12 w-12 sm:h-10 sm:w-10 rounded-xl",
-                      "bg-accent hover:bg-accent/90 text-accent-foreground",
-                      "disabled:opacity-30 disabled:cursor-not-allowed",
-                      "transition-all duration-200 touch-manipulation"
+                      "flex-shrink-0 h-11 w-11 rounded-xl",
+                      "nova-fab text-white",
+                      "disabled:opacity-30 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none",
+                      "touch-manipulation"
                     )}
                   >
                     {isLoading ? (
                       <Loader2 className="w-5 h-5 animate-spin" />
                     ) : (
-                      <Send className="w-5 h-5" />
+                      <ArrowUp className="w-5 h-5" />
                     )}
                   </Button>
                 </div>
-                <p className="text-[10px] text-muted-foreground text-center mt-1.5 sm:mt-2 hidden sm:block">
-                  Press Enter to send, Shift+Enter for new line
+                <p className="text-[10px] text-muted-foreground/60 text-center mt-2 hidden sm:block">
+                  Press Enter to send • Shift+Enter for new line
                 </p>
               </div>
             </div>
