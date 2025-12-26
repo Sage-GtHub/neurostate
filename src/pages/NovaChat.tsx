@@ -484,48 +484,6 @@ export default function NovaChat() {
                                 showActions={true}
                               />
                             )}
-                                  <div className="flex items-center gap-3 py-2">
-                                    <div className="flex gap-1.5">
-                                      <span className="w-2 h-2 bg-accent rounded-full nova-typing-dot" />
-                                      <span className="w-2 h-2 bg-accent rounded-full nova-typing-dot" />
-                                      <span className="w-2 h-2 bg-accent rounded-full nova-typing-dot" />
-                                    </div>
-                                    <span className="text-xs text-muted-foreground">Nova is thinking...</span>
-                                  </div>
-                                )}
-                                
-                                {/* Action buttons */}
-                                {message.content && (
-                                  <div className="flex items-center gap-1 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                    <Button
-                                      variant="ghost"
-                                      size="sm"
-                                      className="h-7 px-2 text-xs text-muted-foreground hover:text-foreground rounded-lg"
-                                      onClick={() => copyToClipboard(message.content, `msg-${index}`)}
-                                    >
-                                      {copiedId === `msg-${index}` ? (
-                                        <Check className="w-3.5 h-3.5" />
-                                      ) : (
-                                        <Copy className="w-3.5 h-3.5" />
-                                      )}
-                                    </Button>
-                                    {index === messages.length - 1 && !isLoading && (
-                                      <Button
-                                        variant="ghost"
-                                        size="sm"
-                                        className="h-7 px-2 text-xs text-muted-foreground hover:text-foreground rounded-lg"
-                                        onClick={regenerateLastResponse}
-                                      >
-                                        <RotateCcw className="w-3.5 h-3.5" />
-                                      </Button>
-                                    )}
-                                    <span className="text-[10px] text-muted-foreground ml-2">
-                                      {formatTime(message.timestamp)}
-                                    </span>
-                                  </div>
-                                )}
-                              </div>
-                            )}
                           </div>
                         </div>
                       </div>
