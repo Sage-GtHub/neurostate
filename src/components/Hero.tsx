@@ -88,18 +88,6 @@ const Hero = () => {
                   className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-8"
                   style={getParallaxStyle(0.5)}
                 >
-                  {/* Pre-title tag */}
-                  <div 
-                    className={cn(
-                      "mb-4 px-3 py-1 bg-white/5 border border-white/10 rounded-full",
-                      "text-[10px] sm:text-xs text-white/50 uppercase tracking-[0.2em]",
-                      "transition-all duration-1000 delay-200",
-                      isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                    )}
-                  >
-                    The Future of Human Performance
-                  </div>
-
                   <h1 
                     className={cn(
                       "text-center font-bold tracking-[-0.02em] leading-[1.05] text-white",
@@ -115,7 +103,7 @@ const Hero = () => {
                       </span>
                     </span>
                     <span className="block mt-1 sm:mt-2 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-emerald-300 to-teal-400">
-                      Intelligence
+                      Operating System
                     </span>
                   </h1>
                 </div>
