@@ -184,27 +184,30 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative h-[100dvh] flex items-stretch overflow-hidden bg-carbon"
+      className="relative h-[100dvh] flex items-stretch overflow-hidden bg-background"
     >
-      {/* Premium AI Video Background */}
+      {/* Palantir-Level Data Grid Background */}
       <div className="absolute inset-0 z-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-30"
-          poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
-        >
-          <source 
-            src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4" 
-            type="video/mp4" 
-          />
-        </video>
-        {/* Multi-layer cinematic overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-carbon via-carbon/80 to-carbon/95" />
-        <div className="absolute inset-0 bg-gradient-to-t from-carbon via-transparent to-carbon/60" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.5)_100%)]" />
+        {/* Base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-void via-obsidian to-graphite" />
+        
+        {/* Data grid pattern */}
+        <div className="absolute inset-0 data-grid opacity-60" />
+        
+        {/* Hex grid overlay */}
+        <div className="absolute inset-0 hex-grid opacity-30" />
+        
+        {/* Radial glow from center */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_40%,rgba(33,150,243,0.15)_0%,transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_80%,rgba(139,92,246,0.1)_0%,transparent_40%)]" />
+        
+        {/* Scanning line effect */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyber-blue to-transparent animate-scan opacity-40" />
+        </div>
+        
+        {/* Noise texture for depth */}
+        <div className="absolute inset-0 noise-overlay" />
       </div>
 
       {/* Multi-layer Animated Gradient Mesh */}
