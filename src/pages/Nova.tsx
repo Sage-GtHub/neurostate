@@ -280,6 +280,11 @@ export default function Nova() {
       
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-12">
           
+          {/* 7-Day Forecast - Top of Page */}
+          <div className="mb-8">
+            <HealthForecast />
+          </div>
+
           {/* Morning Check-In & Readiness - Premium Cards */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             <InteractiveMorningCheckIn onComplete={refreshMetrics} />
@@ -369,11 +374,6 @@ export default function Nova() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             <WeeklySummary />
             <StreaksAchievements />
-          </div>
-
-          {/* 7-Day Forecast */}
-          <div className="mb-8">
-            <HealthForecast />
           </div>
 
           {/* Live Metrics - Premium Cards */}
