@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Play, X, BookOpen, Zap, Brain, Activity, ChevronRight } from "lucide-react";
+import { ArrowRight, Sparkles, Play, X, BookOpen, Zap, Brain, Activity, ChevronRight, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState, useRef, useMemo } from "react";
 import NovaInterfaceDemo from "./NovaInterfaceDemo";
@@ -557,6 +557,16 @@ const Hero = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Scroll Indicator */}
+      <div className={cn(
+        "absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1",
+        "transition-all duration-700 delay-700",
+        isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+      )}>
+        <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-widest font-light">Scroll</span>
+        <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-white/30 animate-bounce" />
       </div>
 
       {/* Full Demo Modal */}
