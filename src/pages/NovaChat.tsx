@@ -19,8 +19,8 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { SEO } from "@/components/SEO";
-import ReactMarkdown from "react-markdown";
 import { cn } from "@/lib/utils";
+import { NovaResponseCard } from "@/components/nova/NovaResponseCard";
 
 interface Message {
   id?: string;
@@ -472,61 +472,18 @@ export default function NovaChat() {
                                 </p>
                               </div>
                             ) : (
-                              <div className="space-y-2">
-                                {message.content ? (
-                                  <div className="prose prose-sm dark:prose-invert max-w-none text-foreground/90">
-                                    <ReactMarkdown
-                                      components={{
-                                        p: ({ children }) => <p className="mb-3 last:mb-0 leading-relaxed text-[15px]">{children}</p>,
-                                        ul: ({ children }) => <ul className="mb-3 list-disc pl-5 space-y-1.5">{children}</ul>,
-                                        ol: ({ children }) => <ol className="mb-3 list-decimal pl-5 space-y-1.5">{children}</ol>,
-                                        li: ({ children }) => <li className="leading-relaxed text-[15px]">{children}</li>,
-                                        strong: ({ children }) => <strong className="font-semibold text-foreground">{children}</strong>,
-                                        h1: ({ children }) => <h1 className="text-lg font-bold mb-3 mt-4 first:mt-0">{children}</h1>,
-                                        h2: ({ children }) => <h2 className="text-base font-semibold mb-2 mt-4 first:mt-0">{children}</h2>,
-                                        h3: ({ children }) => <h3 className="text-sm font-semibold mb-2 mt-3 first:mt-0">{children}</h3>,
-                                        code: ({ children }) => (
-                                          <code className="bg-muted/60 px-1.5 py-0.5 rounded-md text-sm font-mono text-accent">{children}</code>
-                                        ),
-                                        pre: ({ children }) => (
-                                          <pre className="bg-muted/40 p-4 rounded-xl overflow-x-auto my-3 border border-border/30">{children}</pre>
-                                        ),
-                                        blockquote: ({ children }) => (
-                                          <blockquote className="border-l-2 border-accent/50 pl-4 italic text-muted-foreground my-3">{children}</blockquote>
-                                        ),
-                                      }}
-                                    >
-                                    {message.content}
-                                    </ReactMarkdown>
-                                    {isTypingWelcome && index === 0 && (
-                                      <span className="inline-block w-0.5 h-5 bg-accent animate-pulse ml-0.5 align-middle rounded-full" />
-                                    )}
-                                    
-                                    {/* Quick actions after welcome */}
-                                    {!isTypingWelcome && index === 0 && messages.length === 1 && (
-                                      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                        {QUICK_ACTIONS.map((action, i) => (
-                                          <button
-                                            key={i}
-                                            onClick={() => handleSendMessage(action.prompt)}
-                                            disabled={isLoading}
-                                            className={cn(
-                                              "group flex items-center gap-3 p-3 rounded-xl",
-                                              "bg-gradient-to-br", action.color,
-                                              "border border-border/30 hover:border-accent/30",
-                                              "hover:shadow-md transition-all text-left"
-                                            )}
-                                          >
-                                            <div className="w-9 h-9 rounded-lg bg-background/80 flex items-center justify-center flex-shrink-0 group-hover:bg-background transition-colors">
-                                              <action.icon className="w-4 h-4 text-foreground" />
-                                            </div>
-                                            <span className="text-sm font-medium text-foreground">{action.label}</span>
-                                          </button>
-                                        ))}
-                                      </div>
-                                    )}
-                                  </div>
-                                ) : (
+                              <NovaResponseCard
+                                content={message.content}
+                                timestamp={message.timestamp}
+                                confidence="high"
+                                baselineDays={14}
+                                isStreaming={isLoading && index === messages.length - 1 && !message.content}
+                                onCopy={() => copyToClipboard(message.content, `msg-${index}`)}
+                                onRegenerate={index === messages.length - 1 && !isLoading ? regenerateLastResponse : undefined}
+                                isCopied={copiedId === `msg-${index}`}
+                                showActions={true}
+                              />
+                            )}
                                   <div className="flex items-center gap-3 py-2">
                                     <div className="flex gap-1.5">
                                       <span className="w-2 h-2 bg-accent rounded-full nova-typing-dot" />
