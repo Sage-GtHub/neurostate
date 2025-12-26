@@ -4,15 +4,13 @@ import { SEO } from "@/components/SEO";
 import { OrganizationStructuredData, SoftwareApplicationStructuredData, WebsiteStructuredData, LocalBusinessStructuredData } from "@/components/StructuredData";
 import { Footer } from "@/components/Footer";
 import { LiveChat } from "@/components/LiveChat";
-import AnimatedNeuron from "@/components/AnimatedNeuron";
 
 import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Brain, Lightbulb, Zap, Users, Building2, X, CheckCircle2, Activity, Target, Sparkles, BarChart3, Shield, Clock, Briefcase, Dumbbell, Heart, FlaskConical, BrainCircuit } from "lucide-react";
+import { ArrowRight, X, CheckCircle2, Activity, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import novaIcon from "@/assets/neurostate-icon.svg";
 import redlightDevice from "@/assets/redlight.webp";
 import heroSupplement from "@/assets/hero-supplement.png";
 
@@ -39,189 +37,107 @@ const Index = () => {
       <SoftwareApplicationStructuredData />
       <WebsiteStructuredData />
       <LocalBusinessStructuredData />
-      <div className="min-h-screen bg-ivory mobile-nav-padding">
+      <div className="min-h-screen bg-[#0a0a0a] mobile-nav-padding">
         <Header />
         <main>
           <Hero />
 
-          {/* The Platform */}
-          <section ref={system.ref} className={`relative py-28 sm:py-36 md:py-44 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory overflow-hidden transition-all duration-1000 ${system.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            {/* Subtle gradient orb */}
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-carbon/[0.02] to-transparent rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-carbon/[0.03] to-transparent rounded-full blur-3xl pointer-events-none" />
+          {/* The Platform - Dark Palantir Style */}
+          <section ref={system.ref} className={`relative py-28 sm:py-36 md:py-44 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-[#0a0a0a] overflow-hidden transition-all duration-1000 ${system.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {/* Grid background */}
+            <div 
+              className="absolute inset-0 opacity-[0.03]"
+              style={{
+                backgroundImage: `linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)`,
+                backgroundSize: '60px 60px'
+              }}
+            />
+            
+            {/* Gradient orb */}
+            <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-bl from-emerald-500/[0.05] to-transparent rounded-full blur-3xl pointer-events-none" />
             
             <div className="relative z-10 max-w-6xl mx-auto">
               <div className="text-center mb-20 sm:mb-28 space-y-6">
-                <p className="text-carbon/40 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium animate-fade-in">The Platform</p>
-                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-carbon leading-[1.02] tracking-tight">
+                <p className="text-emerald-400/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">The Platform</p>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.02] tracking-tight">
                   One System.<br className="hidden sm:block" /> Three Forces.
                 </h2>
-                <p className="text-base sm:text-lg md:text-xl text-ash max-w-2xl mx-auto leading-relaxed">
+                <p className="text-base sm:text-lg md:text-xl text-white/50 max-w-2xl mx-auto leading-relaxed">
                   AI-driven cognitive performance, precision supplements, and neuromodulation technology. All working together to optimise the human mind.
                 </p>
               </div>
 
-
-              {/* Three Forces - Animated Circular Design */}
-              <div className="relative">
-{/* 3D Orb Background Video - Hidden on mobile to prevent content overlap */}
-                <div className="absolute inset-0 -top-16 -bottom-16 sm:-top-32 sm:-bottom-32 hidden sm:flex items-center justify-center pointer-events-none overflow-hidden z-0">
-                  <div className="relative w-[500px] h-[500px] sm:w-[600px] sm:h-[600px] lg:w-[800px] lg:h-[800px]">
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-full object-contain opacity-20 sm:opacity-25"
-                    >
-                      <source src="https://assets.mixkit.co/videos/preview/mixkit-glowing-neon-sphere-in-motion-1318-large.mp4" type="video/mp4" />
-                    </video>
-                    {/* Gradient overlay to blend with background */}
-                    <div className="absolute inset-0 bg-gradient-radial from-transparent via-ivory/50 to-ivory pointer-events-none" />
-                  </div>
-                </div>
-                {/* Connecting lines - visible on md+ screens */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none hidden md:block" style={{ zIndex: 0 }}>
-                  <defs>
-                    <linearGradient id="lineGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="rgb(139, 92, 246)" stopOpacity="0.3" />
-                      <stop offset="50%" stopColor="rgb(16, 185, 129)" stopOpacity="0.5" />
-                      <stop offset="100%" stopColor="rgb(16, 185, 129)" stopOpacity="0.3" />
-                    </linearGradient>
-                    <linearGradient id="lineGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="rgb(16, 185, 129)" stopOpacity="0.3" />
-                      <stop offset="50%" stopColor="rgb(245, 158, 11)" stopOpacity="0.5" />
-                      <stop offset="100%" stopColor="rgb(245, 158, 11)" stopOpacity="0.3" />
-                    </linearGradient>
-                  </defs>
-                  {/* Line from first to second icon */}
-                  <line 
-                    x1="22%" y1="72px" x2="44%" y2="72px" 
-                    stroke="url(#lineGradient1)" 
-                    strokeWidth="2" 
-                    strokeDasharray="8 4"
-                    className="animate-pulse"
-                  />
-                  {/* Line from second to third icon */}
-                  <line 
-                    x1="56%" y1="72px" x2="78%" y2="72px" 
-                    stroke="url(#lineGradient2)" 
-                    strokeWidth="2" 
-                    strokeDasharray="8 4"
-                    className="animate-pulse"
-                  />
-                  {/* Animated particles on first line */}
-                  <circle r="4" fill="rgb(139, 92, 246)">
-                    <animate attributeName="cx" values="22%;44%;22%" dur="3s" repeatCount="indefinite" />
-                    <animate attributeName="cy" values="72px" dur="3s" repeatCount="indefinite" />
-                    <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" />
-                  </circle>
-                  {/* Animated particles on second line */}
-                  <circle r="4" fill="rgb(245, 158, 11)">
-                    <animate attributeName="cx" values="56%;78%;56%" dur="3s" repeatCount="indefinite" begin="1.5s" />
-                    <animate attributeName="cy" values="72px" dur="3s" repeatCount="indefinite" />
-                    <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" begin="1.5s" />
-                  </circle>
-                </svg>
-
-                <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+              {/* Three Forces Grid */}
+              <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
                 {[
                   { 
                     title: "Nova AI", 
                     desc: "AI performance assistant", 
                     detail: "Personalised AI coaching with adaptive recommendations and real-time behavioural insights.",
-                    gradient: "from-violet-500 to-purple-600",
-                    pulseColor: "violet",
-                    neuronColor: "#8b5cf6"
+                    color: "violet",
+                    borderColor: "border-violet-500/30",
+                    glowColor: "from-violet-500/20"
                   },
                   { 
                     title: "Supplements", 
                     desc: "Personalised stacks", 
                     detail: "Adaptogen supplements for focus. Magnesium for recovery. Third-party verified.",
-                    gradient: "from-emerald-500 to-teal-600",
-                    pulseColor: "emerald",
-                    neuronColor: "#10b981"
+                    color: "emerald",
+                    borderColor: "border-emerald-500/30",
+                    glowColor: "from-emerald-500/20"
                   },
                   { 
                     title: "Neuromodulation", 
                     desc: "Brain state control", 
                     detail: "Red light therapy cognitive benefits. Alpha and beta state switching.",
-                    gradient: "from-amber-500 to-orange-600",
-                    pulseColor: "amber",
-                    neuronColor: "#f59e0b"
+                    color: "amber",
+                    borderColor: "border-amber-500/30",
+                    glowColor: "from-amber-500/20"
                   },
                 ].map((item, i) => (
                   <div 
                     key={i}
-                    className="group relative text-center cursor-pointer"
+                    className={`group relative p-8 bg-white/[0.02] border ${item.borderColor} hover:bg-white/[0.05] transition-all duration-500 cursor-pointer`}
                     style={{ animationDelay: `${i * 150}ms` }}
                   >
-                    {/* Circular container with animations */}
-                    <div className="relative mx-auto w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 mb-6">
-                      {/* Animated pulse rings */}
-                      <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-700 animate-pulse`} />
-                      
-                      {/* Outer rotating ring */}
-                      <div 
-                        className="absolute inset-0 rounded-full border-2 border-dashed border-carbon/10 group-hover:border-carbon/30 transition-colors duration-700"
-                        style={{ animation: 'spin 20s linear infinite' }}
-                      />
-                      
-                      {/* Middle ring */}
-                      <div className="absolute inset-2 rounded-full border border-carbon/5 group-hover:border-carbon/20 transition-colors duration-500" />
-                      
-                      {/* Inner gradient circle */}
-                      <div className={`absolute inset-4 rounded-full bg-gradient-to-br from-pearl to-ivory group-hover:from-carbon group-hover:to-slate transition-all duration-700 shadow-lg group-hover:shadow-xl`} />
-                      
-                      {/* Orbiting dots */}
-                      <div 
-                        className="absolute inset-0"
-                        style={{ animation: 'spin 8s linear infinite' }}
-                      >
-                        <div className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-gradient-to-br ${item.gradient} opacity-60 group-hover:opacity-100 transition-opacity`} />
-                      </div>
-                      <div 
-                        className="absolute inset-0"
-                        style={{ animation: 'spin 8s linear infinite reverse' }}
-                      >
-                        <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-1.5 h-1.5 rounded-full bg-gradient-to-br ${item.gradient} opacity-40 group-hover:opacity-80 transition-opacity`} />
-                      </div>
-                      
-                      {/* Animated Neuron Icon */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-carbon/5 group-hover:bg-carbon/10 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg relative overflow-visible`}>
-                          <AnimatedNeuron 
-                            className="w-14 h-14 sm:w-16 sm:h-16" 
-                            color={item.neuronColor}
-                            pulseDelay={i * 300}
-                          />
-                        </div>
-                      </div>
+                    {/* Hover glow */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${item.glowColor} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                    
+                    {/* Number indicator */}
+                    <div className="absolute top-4 right-4 text-white/10 text-6xl font-bold">
+                      0{i + 1}
                     </div>
                     
-                    {/* Text content */}
-                    <div className="space-y-3">
-                      <h3 className="text-xl sm:text-2xl font-bold text-carbon transition-colors duration-500">{item.title}</h3>
-                      <p className={`bg-gradient-to-r ${item.gradient} bg-clip-text text-transparent text-sm font-medium uppercase tracking-wider`}>{item.desc}</p>
-                      <p className="text-ash text-sm leading-relaxed max-w-xs mx-auto">{item.detail}</p>
+                    <div className="relative z-10 space-y-4">
+                      <div className={`w-12 h-12 flex items-center justify-center border ${item.borderColor} bg-white/5`}>
+                        <div className={`w-3 h-3 bg-${item.color}-500`} />
+                      </div>
+                      <h3 className="text-2xl font-bold text-white">{item.title}</h3>
+                      <p className={`text-${item.color}-400 text-sm font-medium uppercase tracking-wider`}>{item.desc}</p>
+                      <p className="text-white/50 text-sm leading-relaxed">{item.detail}</p>
                     </div>
+                    
+                    {/* Bottom accent line */}
+                    <div className={`absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-${item.color}-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                   </div>
                 ))}
-                </div>
               </div>
             </div>
           </section>
 
-          {/* Problems We Solve - Enhanced */}
-          <section ref={problems.ref} className={`relative py-28 sm:py-36 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-gradient-to-b from-pearl to-ivory transition-all duration-1000 ${problems.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          {/* Problems We Solve - Dark Style */}
+          <section ref={problems.ref} className={`relative py-28 sm:py-36 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-[#050505] transition-all duration-1000 ${problems.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {/* Diagonal lines */}
+            <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 40px, #FFFFFF 40px, #FFFFFF 41px)' }} />
+            
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
                 <div className="space-y-8">
-                  <p className="text-carbon/40 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Problems We Solve</p>
-                  <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-carbon leading-[1.02] tracking-tight">
+                  <p className="text-emerald-400/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Problems We Solve</p>
+                  <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-[1.02] tracking-tight">
                     Mental performance issues holding you back
                   </h2>
-                  <p className="text-lg sm:text-xl text-ash leading-relaxed">
+                  <p className="text-lg sm:text-xl text-white/50 leading-relaxed">
                     The modern brain is under siege. We built our cognitive performance system to address the root causes, not just the symptoms.
                   </p>
                 </div>
@@ -239,11 +155,11 @@ const Index = () => {
                   ].map((problem, i) => (
                     <div 
                       key={i} 
-                      className="group relative p-5 bg-carbon/[0.03] hover:bg-carbon transition-all duration-500 border-l-2 border-signal-green/30 hover:border-signal-green overflow-hidden"
+                      className="group relative p-5 bg-white/[0.02] hover:bg-emerald-500/10 transition-all duration-500 border-l-2 border-emerald-500/20 hover:border-emerald-500"
                       style={{ animationDelay: `${i * 50}ms` }}
                     >
-                      <div className="absolute inset-0 bg-gradient-to-r from-signal-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      <p className="relative z-10 text-sm font-medium text-carbon group-hover:text-ivory transition-colors duration-500">{problem}</p>
+                      <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <p className="relative z-10 text-sm font-medium text-white/70 group-hover:text-white transition-colors duration-500">{problem}</p>
                     </div>
                   ))}
                 </div>
@@ -251,18 +167,24 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Category Creation - Old vs New - Enhanced */}
-          <section ref={category.ref} className={`relative py-28 sm:py-36 md:py-44 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory overflow-hidden transition-all duration-1000 ${category.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            {/* Diagonal lines pattern */}
-            <div className="absolute inset-0 opacity-[0.015]" style={{ backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 40px, #1A1A1A 40px, #1A1A1A 41px)' }} />
+          {/* Category Creation - Dark Style */}
+          <section ref={category.ref} className={`relative py-28 sm:py-36 md:py-44 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-[#0a0a0a] overflow-hidden transition-all duration-1000 ${category.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {/* Grid pattern */}
+            <div 
+              className="absolute inset-0 opacity-[0.02]"
+              style={{
+                backgroundImage: 'radial-gradient(circle at 1px 1px, #FFFFFF 1px, transparent 0)',
+                backgroundSize: '40px 40px'
+              }}
+            />
             
             <div className="relative z-10 max-w-6xl mx-auto">
               <div className="text-center mb-20 sm:mb-24 space-y-6">
-                <p className="text-carbon/40 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Category Creation</p>
-                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-carbon leading-[1.02] tracking-tight">
+                <p className="text-emerald-400/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Category Creation</p>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.02] tracking-tight">
                   Traditional wellness<br className="hidden sm:block" /> is dead
                 </h2>
-                <p className="text-lg sm:text-xl text-ash max-w-2xl mx-auto">
+                <p className="text-lg sm:text-xl text-white/50 max-w-2xl mx-auto">
                   This is the future of personalised cognitive performance.
                 </p>
               </div>
@@ -270,7 +192,7 @@ const Index = () => {
               <div className="grid lg:grid-cols-2 gap-10 lg:gap-20">
                 {/* Dead Solutions */}
                 <div className="space-y-4">
-                  <p className="text-[10px] text-carbon/50 uppercase tracking-[0.3em] mb-8 font-medium">What no longer works</p>
+                  <p className="text-[10px] text-white/30 uppercase tracking-[0.3em] mb-8 font-medium">What no longer works</p>
                   {[
                     { item: "Meditation apps no one opens", status: "Abandoned" },
                     { item: "Breathwork sessions that change nothing", status: "Ineffective" },
@@ -279,21 +201,21 @@ const Index = () => {
                   ].map((entry, i) => (
                     <div 
                       key={i} 
-                      className="group flex items-center gap-5 p-5 bg-carbon/[0.02] hover:bg-carbon/[0.05] transition-all duration-500 border-l border-carbon/5"
+                      className="group flex items-center gap-5 p-5 bg-white/[0.02] hover:bg-red-500/5 transition-all duration-500 border-l border-red-500/20"
                       style={{ animationDelay: `${i * 100}ms` }}
                     >
-                      <div className="w-8 h-8 flex items-center justify-center bg-carbon/5 group-hover:bg-carbon/10 transition-colors">
-                        <X className="w-4 h-4 text-carbon/30" />
+                      <div className="w-8 h-8 flex items-center justify-center bg-red-500/10 group-hover:bg-red-500/20 transition-colors">
+                        <X className="w-4 h-4 text-red-500/50" />
                       </div>
-                      <span className="text-ash line-through text-sm flex-1">{entry.item}</span>
-                      <span className="text-[9px] text-carbon/30 uppercase tracking-[0.2em] font-medium">{entry.status}</span>
+                      <span className="text-white/40 line-through text-sm flex-1">{entry.item}</span>
+                      <span className="text-[9px] text-red-500/40 uppercase tracking-[0.2em] font-medium">{entry.status}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* NeuroState Outcomes */}
                 <div className="space-y-4">
-                  <p className="text-[10px] text-carbon/50 uppercase tracking-[0.3em] mb-8 font-medium">What NeuroState delivers</p>
+                  <p className="text-[10px] text-white/30 uppercase tracking-[0.3em] mb-8 font-medium">What NeuroState delivers</p>
                   {[
                     { outcome: "Focus Optimisation", metric: "Sustained attention and deep work capacity" },
                     { outcome: "Mental Clarity", metric: "Faster decisions. Clearer thinking." },
@@ -303,15 +225,15 @@ const Index = () => {
                   ].map((entry, i) => (
                     <div 
                       key={i} 
-                      className="group flex items-start gap-5 p-5 bg-carbon/[0.03] hover:bg-carbon transition-all duration-500 border-l-2 border-signal-green/40 hover:border-signal-green"
+                      className="group flex items-start gap-5 p-5 bg-white/[0.02] hover:bg-emerald-500/10 transition-all duration-500 border-l-2 border-emerald-500/30 hover:border-emerald-500"
                       style={{ animationDelay: `${i * 100}ms` }}
                     >
-                      <div className="w-8 h-8 flex items-center justify-center bg-signal-green/10 group-hover:bg-signal-green/20 transition-colors flex-shrink-0 mt-0.5">
-                        <CheckCircle2 className="w-4 h-4 text-signal-green transition-colors" />
+                      <div className="w-8 h-8 flex items-center justify-center bg-emerald-500/10 group-hover:bg-emerald-500/20 transition-colors flex-shrink-0 mt-0.5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-500 transition-colors" />
                       </div>
                       <div className="flex-1">
-                        <span className="text-carbon group-hover:text-ivory font-semibold text-sm block transition-colors">{entry.outcome}</span>
-                        <p className="text-ash group-hover:text-stone text-xs mt-1 transition-colors">{entry.metric}</p>
+                        <span className="text-white font-semibold text-sm block transition-colors">{entry.outcome}</span>
+                        <p className="text-white/40 text-xs mt-1 transition-colors group-hover:text-white/60">{entry.metric}</p>
                       </div>
                     </div>
                   ))}
@@ -320,20 +242,20 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Nova AI Section - Enhanced */}
-          <section ref={nova.ref} className={`relative py-28 sm:py-36 md:py-44 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl overflow-hidden transition-all duration-1000 ${nova.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            {/* Gradient orbs */}
-            <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-gradient-to-l from-carbon/[0.03] to-transparent rounded-full blur-3xl pointer-events-none" />
+          {/* Nova AI Section - Dark Style */}
+          <section ref={nova.ref} className={`relative py-28 sm:py-36 md:py-44 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-[#050505] overflow-hidden transition-all duration-1000 ${nova.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {/* Gradient orb */}
+            <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-gradient-to-l from-emerald-500/[0.05] to-transparent rounded-full blur-3xl pointer-events-none" />
             
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
                 <div className="space-y-10">
                   <div className="space-y-6">
-                    <p className="text-carbon/40 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">AI Performance Assistant</p>
-                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-carbon leading-[1.02] tracking-tight">
+                    <p className="text-emerald-400/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">AI Performance Assistant</p>
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-[1.02] tracking-tight">
                       Nova, Your Cognitive Operating System
                     </h2>
-                    <p className="text-lg sm:text-xl text-ash leading-relaxed max-w-lg">
+                    <p className="text-lg sm:text-xl text-white/50 leading-relaxed max-w-lg">
                       Nova is our AI-driven cognitive performance engine. It learns your physiology, predicts your mental states, and builds personalised protocols that improve how you think, recover, and perform.
                     </p>
                   </div>
@@ -345,13 +267,13 @@ const Index = () => {
                       { title: "Wearable integration", desc: "Connects to Oura, Whoop, Apple Watch" },
                       { title: "Protocol optimisation", desc: "Refines your supplement stack automatically" }
                     ].map((item, i) => (
-                      <div key={i} className="group flex items-start gap-4 p-3 -mx-3 hover:bg-signal-green/5 transition-colors duration-300">
-                        <div className="w-6 h-6 flex items-center justify-center bg-signal-green/10 group-hover:bg-signal-green transition-colors duration-300 flex-shrink-0 mt-0.5">
-                          <div className="w-1.5 h-1.5 bg-signal-green group-hover:bg-ivory transition-colors duration-300" />
+                      <div key={i} className="group flex items-start gap-4 p-3 -mx-3 hover:bg-emerald-500/5 transition-colors duration-300">
+                        <div className="w-6 h-6 flex items-center justify-center bg-emerald-500/10 group-hover:bg-emerald-500 transition-colors duration-300 flex-shrink-0 mt-0.5">
+                          <div className="w-1.5 h-1.5 bg-emerald-500 group-hover:bg-[#050505] transition-colors duration-300" />
                         </div>
                         <div>
-                          <p className="text-carbon font-medium text-sm">{item.title}</p>
-                          <p className="text-ash text-xs mt-0.5">{item.desc}</p>
+                          <p className="text-white font-medium text-sm">{item.title}</p>
+                          <p className="text-white/40 text-xs mt-0.5">{item.desc}</p>
                         </div>
                       </div>
                     ))}
@@ -359,7 +281,7 @@ const Index = () => {
                   <Link to="/nova/overview" target="_blank">
                     <Button 
                       size="lg"
-                      className="bg-carbon text-ivory hover:bg-slate transition-all duration-300 min-h-[52px] touch-manipulation px-10 group"
+                      className="bg-white text-[#0a0a0a] hover:bg-white/90 transition-all duration-300 min-h-[52px] touch-manipulation px-10 group"
                     >
                       Explore Nova
                       <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -367,23 +289,23 @@ const Index = () => {
                   </Link>
                 </div>
 
-                {/* Nova UI Preview - Enhanced with 7-Day Forecast */}
+                {/* Nova UI Preview */}
                 <div className="relative">
-                  <div className="absolute -inset-4 bg-gradient-to-br from-carbon/5 to-transparent blur-2xl opacity-50" />
-                  <div className="relative overflow-hidden bg-carbon p-6 sm:p-8 shadow-2xl">
+                  <div className="absolute -inset-4 bg-gradient-to-br from-emerald-500/10 to-transparent blur-2xl opacity-50" />
+                  <div className="relative overflow-hidden bg-[#0a0a0a] border border-white/10 p-6 sm:p-8 shadow-2xl">
                     <div className="space-y-5">
                       {/* Header */}
-                      <div className="flex items-center gap-3 pb-4 border-b border-slate/50">
-                        <div className="w-10 h-10 bg-gradient-to-br from-ivory/20 to-ivory/5 flex items-center justify-center">
-                          <Sparkles className="w-4 h-4 text-ivory" />
+                      <div className="flex items-center gap-3 pb-4 border-b border-white/10">
+                        <div className="w-10 h-10 bg-gradient-to-br from-emerald-500/20 to-emerald-500/5 flex items-center justify-center">
+                          <Sparkles className="w-4 h-4 text-emerald-400" />
                         </div>
                         <div>
-                          <p className="text-ivory font-semibold text-sm">Nova</p>
-                          <p className="text-stone text-xs">7-Day Performance Forecast</p>
+                          <p className="text-white font-semibold text-sm">Nova</p>
+                          <p className="text-white/40 text-xs">7-Day Performance Forecast</p>
                         </div>
                         <div className="ml-auto flex items-center gap-1.5">
-                          <div className="w-2 h-2 bg-signal-green rounded-full animate-pulse" />
-                          <span className="text-[10px] text-stone uppercase tracking-wide">Live</span>
+                          <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+                          <span className="text-[10px] text-white/40 uppercase tracking-wide">Live</span>
                         </div>
                       </div>
 
@@ -401,31 +323,30 @@ const Index = () => {
                           <div 
                             key={i} 
                             className={`group p-2 text-center transition-all duration-300 cursor-pointer hover:scale-105 hover:-translate-y-0.5 ${
-                              i === 0 ? 'bg-signal-green/20 border border-signal-green/40' : 'bg-slate/30 hover:bg-slate/50'
+                              i === 0 ? 'bg-emerald-500/20 border border-emerald-500/40' : 'bg-white/5 hover:bg-white/10'
                             }`}
-                            style={{ animationDelay: `${i * 80}ms` }}
                           >
-                            <p className={`text-[9px] font-medium uppercase tracking-wide mb-1 transition-colors duration-200 ${
-                              i === 0 ? 'text-signal-green' : 'text-stone group-hover:text-ivory'
+                            <p className={`text-[9px] font-medium uppercase tracking-wide mb-1 ${
+                              i === 0 ? 'text-emerald-400' : 'text-white/40 group-hover:text-white/60'
                             }`}>{forecast.day}</p>
-                            <div className={`w-3 h-3 mx-auto rounded-full mb-1 transition-all duration-300 group-hover:scale-125 group-hover:shadow-lg ${
-                              forecast.readiness === 'optimal' ? 'bg-signal-green group-hover:shadow-signal-green/50' :
-                              forecast.readiness === 'moderate' ? 'bg-orange-500 group-hover:shadow-orange-500/50' : 'bg-red-500 group-hover:shadow-red-500/50'
+                            <div className={`w-3 h-3 mx-auto rounded-full mb-1 transition-all duration-300 group-hover:scale-125 ${
+                              forecast.readiness === 'optimal' ? 'bg-emerald-500' :
+                              forecast.readiness === 'moderate' ? 'bg-orange-500' : 'bg-red-500'
                             }`} />
-                            <p className="text-ivory text-xs font-semibold transition-transform duration-200 group-hover:scale-110">{forecast.energy}%</p>
+                            <p className="text-white text-xs font-semibold">{forecast.energy}%</p>
                           </div>
                         ))}
                       </div>
 
                       {/* Today's Insight */}
-                      <div className="group bg-gradient-to-br from-slate/60 to-slate/40 p-4 transition-all duration-300 hover:from-slate/70 hover:to-slate/50 cursor-pointer">
+                      <div className="group bg-white/5 p-4 transition-all duration-300 hover:bg-white/10 cursor-pointer border border-white/5">
                         <div className="flex items-start gap-3">
-                          <div className="w-8 h-8 bg-signal-green/20 flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-signal-green/30 group-hover:scale-110">
-                            <Activity className="w-4 h-4 text-signal-green transition-transform duration-300 group-hover:animate-pulse" />
+                          <div className="w-8 h-8 bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
+                            <Activity className="w-4 h-4 text-emerald-400" />
                           </div>
-                          <div className="transition-transform duration-200 group-hover:translate-x-0.5">
-                            <p className="text-ivory text-xs font-semibold mb-1">Today: Optimal Training Window</p>
-                            <p className="text-stone text-[11px] leading-relaxed group-hover:text-mist transition-colors duration-200">
+                          <div>
+                            <p className="text-white text-xs font-semibold mb-1">Today: Optimal Training Window</p>
+                            <p className="text-white/40 text-[11px] leading-relaxed">
                               Best performance window 9:00-11:00. Expect energy dip at 3pm. Take magnesium at 8pm.
                             </p>
                           </div>
@@ -441,12 +362,11 @@ const Index = () => {
                         ].map((metric, i) => (
                           <div 
                             key={i} 
-                            className="group bg-slate/30 p-3 text-center transition-all duration-300 hover:bg-slate/50 cursor-pointer hover:scale-[1.02] hover:-translate-y-0.5"
-                            style={{ animationDelay: `${i * 100}ms` }}
+                            className="group bg-white/5 p-3 text-center transition-all duration-300 hover:bg-white/10 cursor-pointer"
                           >
-                            <p className="text-ivory text-lg font-bold tracking-tight transition-all duration-200 group-hover:scale-110 group-hover:text-signal-green">{metric.value}</p>
-                            <p className="text-stone text-[9px] uppercase tracking-wider transition-colors duration-200 group-hover:text-mist">{metric.label}</p>
-                            <p className="text-signal-green text-[8px] font-semibold mt-0.5 transition-transform duration-200 group-hover:scale-105">{metric.trend}</p>
+                            <p className="text-white text-lg font-bold tracking-tight group-hover:text-emerald-400 transition-colors">{metric.value}</p>
+                            <p className="text-white/40 text-[9px] uppercase tracking-wider">{metric.label}</p>
+                            <p className="text-emerald-400 text-[8px] font-semibold mt-0.5">{metric.trend}</p>
                           </div>
                         ))}
                       </div>
@@ -457,16 +377,16 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Hardware Section - Enhanced */}
-          <section ref={device.ref} className={`relative py-28 sm:py-36 md:py-44 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-carbon overflow-hidden transition-all duration-1000 ${device.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            {/* Subtle grid pattern */}
-            <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(to right, #FFFFFF 1px, transparent 1px), linear-gradient(to bottom, #FFFFFF 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+          {/* Hardware Section - Dark Style */}
+          <section ref={device.ref} className={`relative py-28 sm:py-36 md:py-44 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-[#0a0a0a] overflow-hidden transition-all duration-1000 ${device.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {/* Grid pattern */}
+            <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'linear-gradient(to right, #FFFFFF 1px, transparent 1px), linear-gradient(to bottom, #FFFFFF 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
             
             <div className="relative z-10 max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
                 <div className="order-last lg:order-first">
                   <div className="relative group">
-                    <div className="absolute -inset-8 bg-gradient-to-br from-ivory/10 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                    <div className="absolute -inset-8 bg-gradient-to-br from-emerald-500/10 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                     <img 
                       src={redlightDevice} 
                       alt="NeuroState Red Light Therapy Device for cognitive performance and mental clarity" 
@@ -477,11 +397,11 @@ const Index = () => {
 
                 <div className="space-y-10">
                   <div className="space-y-6">
-                    <p className="text-stone/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Neuromodulation Hardware</p>
-                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-ivory leading-[1.02] tracking-tight">
+                    <p className="text-emerald-400/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Neuromodulation Hardware</p>
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-[1.02] tracking-tight">
                       Red Light Therapy for Cognitive Performance
                     </h2>
-                    <p className="text-lg sm:text-xl text-stone leading-relaxed max-w-lg">
+                    <p className="text-lg sm:text-xl text-white/50 leading-relaxed max-w-lg">
                       Not another wellness gadget. A device engineered to deliver red light therapy cognitive benefits. Enhance focus, accelerate recovery, and improve mental clarity in minutes.
                     </p>
                   </div>
@@ -492,18 +412,18 @@ const Index = () => {
                       "Beta state for focus optimisation and execution",
                       "Clinically validated neuromodulation protocols"
                     ].map((item, i) => (
-                      <div key={i} className="group flex items-center gap-4 p-3 -mx-3 hover:bg-signal-green/10 transition-colors duration-300">
-                        <div className="w-6 h-6 flex items-center justify-center bg-signal-green/20 group-hover:bg-signal-green transition-colors">
-                          <div className="w-1.5 h-1.5 bg-signal-green group-hover:bg-ivory" />
+                      <div key={i} className="group flex items-center gap-4 p-3 -mx-3 hover:bg-emerald-500/5 transition-colors duration-300">
+                        <div className="w-6 h-6 flex items-center justify-center bg-emerald-500/20 group-hover:bg-emerald-500 transition-colors">
+                          <div className="w-1.5 h-1.5 bg-emerald-500 group-hover:bg-[#0a0a0a]" />
                         </div>
-                        <p className="text-ivory/80 group-hover:text-ivory text-sm transition-colors">{item}</p>
+                        <p className="text-white/70 group-hover:text-white text-sm transition-colors">{item}</p>
                       </div>
                     ))}
                   </div>
                   <Link to="/category/devices">
                     <Button 
                       size="lg"
-                      className="bg-ivory text-carbon hover:bg-mist transition-all duration-300 min-h-[52px] touch-manipulation px-10 group"
+                      className="bg-white text-[#0a0a0a] hover:bg-white/90 transition-all duration-300 min-h-[52px] touch-manipulation px-10 group"
                     >
                       View devices
                       <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -514,20 +434,20 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Supplements Section - Enhanced */}
-          <section ref={supplements.ref} className={`relative py-28 sm:py-36 md:py-44 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory overflow-hidden transition-all duration-1000 ${supplements.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          {/* Supplements Section - Dark Style */}
+          <section ref={supplements.ref} className={`relative py-28 sm:py-36 md:py-44 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-[#050505] overflow-hidden transition-all duration-1000 ${supplements.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             {/* Gradient accent */}
-            <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gradient-to-tl from-carbon/[0.02] to-transparent rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gradient-to-tl from-emerald-500/[0.03] to-transparent rounded-full blur-3xl pointer-events-none" />
             
             <div className="relative z-10 max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
                 <div className="space-y-10">
                   <div className="space-y-6">
-                    <p className="text-carbon/40 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Performance Supplements</p>
-                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-carbon leading-[1.02] tracking-tight">
+                    <p className="text-emerald-400/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Performance Supplements</p>
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-[1.02] tracking-tight">
                       Adaptogen Supplements for Focus and Recovery
                     </h2>
-                    <p className="text-lg sm:text-xl text-ash leading-relaxed max-w-lg">
+                    <p className="text-lg sm:text-xl text-white/50 leading-relaxed max-w-lg">
                       Every ingredient at the dose that works. No proprietary blends. No marketing nonsense. Performance supplements with research-backed formulas designed for cognitive optimisation.
                     </p>
                   </div>
@@ -538,16 +458,16 @@ const Index = () => {
                       { title: "High performers", desc: "Built for pressure" },
                       { title: "Nova integration", desc: "AI-personalised stacks" }
                     ].map((item, i) => (
-                      <div key={i} className="group p-5 bg-carbon/[0.03] hover:bg-carbon border-l-2 border-signal-green/30 hover:border-signal-green transition-all duration-500">
-                        <p className="text-carbon group-hover:text-ivory font-semibold text-sm transition-colors">{item.title}</p>
-                        <p className="text-ash group-hover:text-stone text-xs mt-1 transition-colors">{item.desc}</p>
+                      <div key={i} className="group p-5 bg-white/[0.02] hover:bg-emerald-500/10 border-l-2 border-emerald-500/20 hover:border-emerald-500 transition-all duration-500">
+                        <p className="text-white font-semibold text-sm transition-colors">{item.title}</p>
+                        <p className="text-white/40 text-xs mt-1 transition-colors group-hover:text-white/60">{item.desc}</p>
                       </div>
                     ))}
                   </div>
                   <Link to="/category/supplements">
                     <Button 
                       size="lg"
-                      className="bg-carbon text-ivory hover:bg-slate transition-all duration-300 min-h-[52px] touch-manipulation px-10 group"
+                      className="bg-white text-[#0a0a0a] hover:bg-white/90 transition-all duration-300 min-h-[52px] touch-manipulation px-10 group"
                     >
                       Browse supplements
                       <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -556,7 +476,7 @@ const Index = () => {
                 </div>
 
                 <div className="relative group">
-                  <div className="absolute -inset-8 bg-gradient-to-br from-carbon/5 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="absolute -inset-8 bg-gradient-to-br from-emerald-500/10 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                   <img 
                     src={heroSupplement} 
                     alt="NeuroState Performance Supplements with adaptogens for focus and cognitive enhancement" 
@@ -567,8 +487,8 @@ const Index = () => {
             </div>
           </section>
 
-          {/* For Teams - Enhanced */}
-          <section ref={business.ref} className={`relative py-28 sm:py-36 md:py-44 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-carbon overflow-hidden transition-all duration-1000 ${business.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          {/* For Teams - Dark Style */}
+          <section ref={business.ref} className={`relative py-28 sm:py-36 md:py-44 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-[#0a0a0a] overflow-hidden transition-all duration-1000 ${business.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             {/* Grid pattern */}
             <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #FFFFFF 1px, transparent 0)', backgroundSize: '40px 40px' }} />
             
@@ -576,11 +496,11 @@ const Index = () => {
               <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
                 <div className="space-y-10">
                   <div className="space-y-6">
-                    <p className="text-stone/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Enterprise Wellbeing Solution</p>
-                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-ivory leading-[1.02] tracking-tight">
+                    <p className="text-emerald-400/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Enterprise Wellbeing Solution</p>
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-[1.02] tracking-tight">
                       Corporate Wellbeing Solution That Delivers Results
                     </h2>
-                    <p className="text-lg sm:text-xl text-stone leading-relaxed max-w-lg">
+                    <p className="text-lg sm:text-xl text-white/50 leading-relaxed max-w-lg">
                       The workplace performance platform that replaces outdated corporate wellness. Deploy our cognitive performance system across your organisation and measure real outcomes.
                     </p>
                   </div>
@@ -591,16 +511,16 @@ const Index = () => {
                       { stat: "31%", label: "Productivity gain" },
                       { stat: "89%", label: "Satisfaction rate" }
                     ].map((item, i) => (
-                      <div key={i} className="group p-6 bg-ivory/[0.03] hover:bg-ivory/[0.08] border border-ivory/10 hover:border-ivory/20 transition-all duration-500">
-                        <p className="text-4xl sm:text-5xl font-bold text-signal-green tracking-tight">{item.stat}</p>
-                        <p className="text-stone text-xs mt-2 uppercase tracking-wider">{item.label}</p>
+                      <div key={i} className="group p-6 bg-white/[0.02] hover:bg-white/[0.05] border border-white/10 hover:border-emerald-500/30 transition-all duration-500">
+                        <p className="text-4xl sm:text-5xl font-bold text-emerald-400 tracking-tight">{item.stat}</p>
+                        <p className="text-white/40 text-xs mt-2 uppercase tracking-wider">{item.label}</p>
                       </div>
                     ))}
                   </div>
                   <Link to="/enterprise/overview">
                     <Button 
                       size="lg"
-                      className="bg-ivory text-carbon hover:bg-mist transition-all duration-300 min-h-[52px] touch-manipulation px-10 group"
+                      className="bg-white text-[#0a0a0a] hover:bg-white/90 transition-all duration-300 min-h-[52px] touch-manipulation px-10 group"
                     >
                       For high-performance teams
                       <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -609,16 +529,16 @@ const Index = () => {
                 </div>
 
                 <div className="space-y-4">
-                  <p className="text-[10px] text-stone/50 uppercase tracking-[0.3em] mb-8 font-medium">What enterprise clients receive</p>
+                  <p className="text-[10px] text-white/30 uppercase tracking-[0.3em] mb-8 font-medium">What enterprise clients receive</p>
                   {[
                     { title: "Nova AI for teams", desc: "Personalised AI coaching for every employee" },
                     { title: "Monthly supplement delivery", desc: "Research-backed formulas delivered to your office" },
                     { title: "Real-time analytics", desc: "Track cognitive performance across departments" },
                     { title: "Dedicated support", desc: "Enterprise account management and onboarding" }
                   ].map((item, i) => (
-                    <div key={i} className="group p-5 bg-ivory/[0.03] hover:bg-signal-green/10 border-l-2 border-signal-green/30 hover:border-signal-green transition-all duration-500">
-                      <p className="text-ivory font-semibold text-sm">{item.title}</p>
-                      <p className="text-stone text-xs mt-1">{item.desc}</p>
+                    <div key={i} className="group p-5 bg-white/[0.02] hover:bg-emerald-500/10 border-l-2 border-emerald-500/20 hover:border-emerald-500 transition-all duration-500">
+                      <p className="text-white font-semibold text-sm">{item.title}</p>
+                      <p className="text-white/40 text-xs mt-1 group-hover:text-white/60">{item.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -626,12 +546,12 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Internal Links Section - Enhanced */}
-          <section className="py-20 sm:py-24 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-gradient-to-b from-pearl to-ivory border-y border-mist">
+          {/* Internal Links Section - Dark Style */}
+          <section className="py-20 sm:py-24 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-[#050505] border-y border-white/5">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-14">
-                <p className="text-carbon/40 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium mb-4">Explore More</p>
-                <h3 className="text-2xl sm:text-3xl font-bold text-carbon tracking-tight">Discover the full cognitive performance system</h3>
+                <p className="text-emerald-400/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium mb-4">Explore More</p>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Discover the full cognitive performance system</h3>
               </div>
               <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
                 {[
@@ -641,33 +561,33 @@ const Index = () => {
                   { title: "Red Light", href: "/category/devices", desc: "Neuromodulation devices" },
                   { title: "About Us", href: "/about", desc: "Our mission" }
                 ].map((link, i) => (
-                  <Link key={i} to={link.href} className="group p-5 bg-ivory hover:bg-carbon border border-signal-green/10 hover:border-signal-green transition-all duration-500">
-                    <p className="text-sm font-semibold text-carbon group-hover:text-ivory transition-colors">{link.title}</p>
-                    <p className="text-xs text-ash group-hover:text-stone transition-colors mt-1">{link.desc}</p>
-                    <ArrowRight className="w-4 h-4 text-signal-green group-hover:text-ivory mt-3 group-hover:translate-x-1 transition-all" />
+                  <Link key={i} to={link.href} className="group p-5 bg-white/[0.02] hover:bg-emerald-500/10 border border-white/5 hover:border-emerald-500/30 transition-all duration-500">
+                    <p className="text-sm font-semibold text-white transition-colors">{link.title}</p>
+                    <p className="text-xs text-white/40 transition-colors mt-1 group-hover:text-white/60">{link.desc}</p>
+                    <ArrowRight className="w-4 h-4 text-emerald-500 mt-3 group-hover:translate-x-1 transition-all" />
                   </Link>
                 ))}
               </div>
             </div>
           </section>
 
-          {/* Final CTA - Enhanced */}
-          <section ref={cta.ref} className={`relative py-20 sm:py-32 md:py-40 lg:py-48 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory overflow-hidden transition-all duration-1000 ${cta.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          {/* Final CTA - Dark Style */}
+          <section ref={cta.ref} className={`relative py-20 sm:py-32 md:py-40 lg:py-48 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-[#0a0a0a] overflow-hidden transition-all duration-1000 ${cta.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             {/* Radial gradient */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-carbon/[0.02] via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-500/[0.05] via-transparent to-transparent" />
             
             <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6 sm:space-y-10">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-carbon leading-[1.05] tracking-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.05] tracking-tight">
                 Ready to optimise your<br className="hidden sm:block" /> cognitive performance?
               </h2>
-              <p className="text-base sm:text-lg md:text-xl text-ash max-w-2xl mx-auto leading-relaxed px-2 sm:px-0">
+              <p className="text-base sm:text-lg md:text-xl text-white/50 max-w-2xl mx-auto leading-relaxed px-2 sm:px-0">
                 Join thousands using the world's first cognitive performance system to think clearer, work harder, and recover faster.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4 sm:pt-6 px-2 sm:px-0">
                 <Link to="/shop" className="w-full sm:w-auto">
                   <Button 
                     size="default"
-                    className="bg-carbon text-ivory hover:bg-slate transition-all duration-300 h-11 sm:h-14 touch-manipulation px-6 sm:px-12 text-sm sm:text-base group w-full sm:w-auto"
+                    className="bg-white text-[#0a0a0a] hover:bg-white/90 transition-all duration-300 h-11 sm:h-14 touch-manipulation px-6 sm:px-12 text-sm sm:text-base group w-full sm:w-auto"
                   >
                     Shop now
                     <ArrowRight className="ml-2 w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
@@ -677,7 +597,7 @@ const Index = () => {
                   <Button 
                     variant="outline"
                     size="default"
-                    className="border-carbon/20 text-carbon hover:bg-carbon hover:text-ivory transition-all duration-300 h-11 sm:h-14 touch-manipulation px-6 sm:px-12 text-sm sm:text-base w-full sm:w-auto"
+                    className="border-white/20 text-white hover:bg-white hover:text-[#0a0a0a] transition-all duration-300 h-11 sm:h-14 touch-manipulation px-6 sm:px-12 text-sm sm:text-base w-full sm:w-auto"
                   >
                     Explore Nova AI
                   </Button>
