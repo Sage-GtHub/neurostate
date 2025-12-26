@@ -76,7 +76,8 @@ const Index = () => {
                     detail: "Personalised AI coaching with adaptive recommendations and real-time behavioural insights.",
                     color: "violet",
                     borderColor: "border-violet-500/30",
-                    glowColor: "from-violet-500/20"
+                    glowColor: "from-violet-500/20",
+                    iconColor: "#8b5cf6"
                   },
                   { 
                     title: "Supplements", 
@@ -84,7 +85,8 @@ const Index = () => {
                     detail: "Adaptogen supplements for focus. Magnesium for recovery. Third-party verified.",
                     color: "emerald",
                     borderColor: "border-emerald-500/30",
-                    glowColor: "from-emerald-500/20"
+                    glowColor: "from-emerald-500/20",
+                    iconColor: "#10b981"
                   },
                   { 
                     title: "Neuromodulation", 
@@ -92,7 +94,8 @@ const Index = () => {
                     detail: "Red light therapy cognitive benefits. Alpha and beta state switching.",
                     color: "amber",
                     borderColor: "border-amber-500/30",
-                    glowColor: "from-amber-500/20"
+                    glowColor: "from-amber-500/20",
+                    iconColor: "#f59e0b"
                   },
                 ].map((item, i) => (
                   <div 
@@ -109,8 +112,18 @@ const Index = () => {
                     </div>
                     
                     <div className="relative z-10 space-y-4">
+                      {/* Brainwave Icon */}
                       <div className={`w-12 h-12 flex items-center justify-center border ${item.borderColor} bg-white/5`}>
-                        <div className={`w-3 h-3 bg-${item.color}-500`} />
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path 
+                            d="M2 12C2 12 4 8 6 12C8 16 10 8 12 12C14 16 16 8 18 12C20 16 22 12 22 12" 
+                            stroke={item.iconColor} 
+                            strokeWidth="2" 
+                            strokeLinecap="round" 
+                            strokeLinejoin="round"
+                            className="group-hover:animate-pulse"
+                          />
+                        </svg>
                       </div>
                       <h3 className="text-2xl font-bold text-white">{item.title}</h3>
                       <p className={`text-${item.color}-400 text-sm font-medium uppercase tracking-wider`}>{item.desc}</p>
