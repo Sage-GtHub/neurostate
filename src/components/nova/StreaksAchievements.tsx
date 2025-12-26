@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
-import { Flame, Award, Trophy, Target, Zap, Calendar, Star, Crown } from "lucide-react";
+import { Flame, Award, Trophy, Target, Zap, Calendar, Star, Crown, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Streak {
@@ -9,7 +9,7 @@ interface Streak {
   count: number;
   label: string;
   icon: React.ElementType;
-  color: string;
+  gradient: string;
 }
 
 interface Achievement {
@@ -19,7 +19,7 @@ interface Achievement {
   icon: React.ElementType;
   earned: boolean;
   earnedAt?: string;
-  color: string;
+  gradient: string;
 }
 
 export function StreaksAchievements() {
@@ -39,14 +39,12 @@ export function StreaksAchievements() {
         return;
       }
 
-      // Load check-ins to calculate streaks
       const { data: checkIns } = await supabase
         .from('protocol_check_ins')
         .select('check_in_date')
         .eq('user_id', user.id)
         .order('check_in_date', { ascending: false });
 
-      // Calculate check-in streak
       let checkInStreak = 0;
       if (checkIns && checkIns.length > 0) {
         const today = new Date();
@@ -66,7 +64,6 @@ export function StreaksAchievements() {
           if (checkDate.getTime() === expectedDate.getTime()) {
             checkInStreak++;
           } else if (i === 0 && checkDate.getTime() === expectedDate.getTime() - 86400000) {
-            // Allow for yesterday if today hasn't been checked in yet
             continue;
           } else {
             break;
@@ -74,7 +71,6 @@ export function StreaksAchievements() {
         }
       }
 
-      // Load chat messages for chat streak
       const { data: chatMessages } = await supabase
         .from('nova_chat_messages')
         .select('created_at')
@@ -104,7 +100,6 @@ export function StreaksAchievements() {
         }
       }
 
-      // Load protocols for protocol streak
       const { data: protocols } = await supabase
         .from('user_protocols')
         .select('*')
@@ -119,25 +114,24 @@ export function StreaksAchievements() {
           count: checkInStreak,
           label: 'Day Check-in',
           icon: Flame,
-          color: 'from-orange-500 to-red-500',
+          gradient: 'from-orange-500 via-red-500 to-rose-500',
         },
         {
           type: 'chat',
           count: chatStreak,
           label: 'Day Chat',
           icon: Zap,
-          color: 'from-accent to-accent/70',
+          gradient: 'from-nova-accent via-cyan-400 to-nova-glow',
         },
         {
           type: 'protocol',
           count: activeProtocols,
           label: 'Active Protocol' + (activeProtocols !== 1 ? 's' : ''),
           icon: Target,
-          color: 'from-blue-500 to-purple-500',
+          gradient: 'from-violet-500 via-purple-500 to-fuchsia-500',
         },
       ]);
 
-      // Define achievements
       const totalCheckIns = checkIns?.length || 0;
       const totalChats = chatMessages?.length || 0;
 
@@ -148,7 +142,7 @@ export function StreaksAchievements() {
           description: 'Complete your first check-in',
           icon: Star,
           earned: totalCheckIns >= 1,
-          color: 'text-yellow-500',
+          gradient: 'from-amber-400 to-yellow-500',
         },
         {
           id: 'week_streak',
@@ -156,7 +150,7 @@ export function StreaksAchievements() {
           description: '7-day check-in streak',
           icon: Flame,
           earned: checkInStreak >= 7,
-          color: 'text-orange-500',
+          gradient: 'from-orange-500 to-red-500',
         },
         {
           id: 'month_streak',
@@ -164,7 +158,7 @@ export function StreaksAchievements() {
           description: '30-day check-in streak',
           icon: Crown,
           earned: checkInStreak >= 30,
-          color: 'text-purple-500',
+          gradient: 'from-violet-500 to-purple-500',
         },
         {
           id: 'chat_explorer',
@@ -172,7 +166,7 @@ export function StreaksAchievements() {
           description: 'Ask Nova 10 questions',
           icon: Zap,
           earned: totalChats >= 10,
-          color: 'text-blue-500',
+          gradient: 'from-blue-500 to-cyan-500',
         },
         {
           id: 'chat_master',
@@ -180,7 +174,7 @@ export function StreaksAchievements() {
           description: 'Have 50 conversations with Nova',
           icon: Trophy,
           earned: totalChats >= 50,
-          color: 'text-accent',
+          gradient: 'from-nova-accent to-nova-glow',
         },
         {
           id: 'protocol_starter',
@@ -188,7 +182,7 @@ export function StreaksAchievements() {
           description: 'Start your first protocol',
           icon: Target,
           earned: activeProtocols >= 1,
-          color: 'text-green-500',
+          gradient: 'from-emerald-500 to-teal-500',
         },
       ]);
 
@@ -203,75 +197,94 @@ export function StreaksAchievements() {
 
   if (isLoading) {
     return (
-      <Card className="border-border/50 animate-pulse">
+      <Card className="nova-card animate-pulse">
         <CardContent className="p-6">
-          <div className="h-40 bg-muted rounded-lg" />
+          <div className="h-48 bg-muted/20 rounded-xl" />
         </CardContent>
       </Card>
     );
   }
 
   return (
-    <Card className="border-border/50">
+    <Card className="nova-card overflow-hidden">
       <CardContent className="p-6">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-sm font-semibold text-foreground">Streaks & Achievements</h3>
-          <div className="flex items-center gap-1 text-xs text-muted-foreground">
-            <Award className="w-4 h-4" />
-            <span>{earnedCount}/{achievements.length}</span>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center">
+              <Award className="w-5 h-5 text-amber-400" />
+            </div>
+            <h3 className="text-sm font-semibold text-foreground">Streaks & Achievements</h3>
+          </div>
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20">
+            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            <span className="text-xs font-medium text-amber-400">{earnedCount}/{achievements.length}</span>
           </div>
         </div>
 
         {/* Streaks */}
-        <div className="flex gap-3 mb-6 overflow-x-auto pb-2">
+        <div className="flex gap-3 mb-6 overflow-x-auto pb-2 -mx-1 px-1">
           {streaks.map((streak) => (
             <div 
               key={streak.type}
               className={cn(
-                "flex-shrink-0 px-4 py-3 rounded-xl bg-gradient-to-br text-white min-w-[100px]",
-                streak.color
+                "flex-shrink-0 px-5 py-4 rounded-2xl bg-gradient-to-br text-white min-w-[110px] relative overflow-hidden group",
+                streak.gradient
               )}
             >
-              <div className="flex items-center gap-2 mb-1">
-                <streak.icon className="w-4 h-4" />
-                <span className="text-2xl font-bold">{streak.count}</span>
+              {/* Glow effect */}
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+              
+              <div className="relative z-10">
+                <div className="flex items-center gap-2 mb-2">
+                  <streak.icon className="w-5 h-5 drop-shadow-lg" />
+                  <span className="text-3xl font-bold drop-shadow-lg">{streak.count}</span>
+                </div>
+                <span className="text-xs font-medium opacity-90">{streak.label}</span>
               </div>
-              <span className="text-xs opacity-90">{streak.label}</span>
             </div>
           ))}
         </div>
 
         {/* Achievements */}
-        <div className="space-y-2">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-3">Achievements</p>
+        <div className="space-y-3">
+          <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Achievements</p>
           <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
             {achievements.map((achievement) => (
               <div 
                 key={achievement.id}
                 className={cn(
-                  "relative group p-3 rounded-lg border text-center transition-all",
+                  "relative group p-3 rounded-xl border text-center transition-all duration-300 cursor-default",
                   achievement.earned 
-                    ? "border-border/50 bg-muted/30" 
-                    : "border-border/20 bg-muted/10 opacity-40"
+                    ? "nova-glass border-nova-border/50 hover:border-nova-accent/30 hover:nova-glow" 
+                    : "bg-muted/10 border-border/20 opacity-40 grayscale"
                 )}
                 title={`${achievement.name}: ${achievement.description}`}
               >
-                <achievement.icon 
-                  className={cn(
-                    "w-6 h-6 mx-auto mb-1",
-                    achievement.earned ? achievement.color : "text-muted-foreground/50"
-                  )} 
-                />
+                <div className={cn(
+                  "w-10 h-10 rounded-xl mx-auto mb-2 flex items-center justify-center",
+                  achievement.earned 
+                    ? `bg-gradient-to-br ${achievement.gradient}` 
+                    : "bg-muted/30"
+                )}>
+                  <achievement.icon 
+                    className={cn(
+                      "w-5 h-5",
+                      achievement.earned ? "text-white drop-shadow-lg" : "text-muted-foreground/50"
+                    )} 
+                  />
+                </div>
                 <p className={cn(
-                  "text-[10px] leading-tight",
+                  "text-[10px] leading-tight font-medium",
                   achievement.earned ? "text-foreground" : "text-muted-foreground/50"
                 )}>
                   {achievement.name}
                 </p>
 
                 {/* Tooltip on hover */}
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-foreground text-background text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
-                  {achievement.description}
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-foreground text-background text-xs rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-20 shadow-xl">
+                  <div className="font-semibold mb-0.5">{achievement.name}</div>
+                  <div className="opacity-80">{achievement.description}</div>
+                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-foreground rotate-45" />
                 </div>
               </div>
             ))}
