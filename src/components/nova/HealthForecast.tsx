@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, TrendingUp, TrendingDown, AlertCircle, Check, RefreshCw, Loader2 } from "lucide-react";
+import { Calendar, TrendingUp, TrendingDown, AlertCircle, Check, RefreshCw, Loader2, Sparkles } from "lucide-react";
 import { useHealthForecast } from "@/hooks/useHealthForecast";
 
 interface ForecastDay {
@@ -26,7 +26,6 @@ const getPlaceholderData = (): ForecastDay[] => {
     const dayIndex = date.getDay();
     const dayName = days[dayIndex === 0 ? 6 : dayIndex - 1];
     
-    // Generate realistic-looking data
     const readinessOptions: ("optimal" | "moderate" | "low")[] = ["optimal", "moderate", "low"];
     const readiness = readinessOptions[Math.floor(Math.random() * 3)];
     const energy = Math.floor(55 + Math.random() * 40);
@@ -76,7 +75,6 @@ export function HealthForecast() {
   const [selectedDay, setSelectedDay] = useState<ForecastDay>(forecastData[0]);
   const { forecasts, isLoading, generateForecast, refreshForecasts } = useHealthForecast();
 
-  // Update forecast data when real data is available
   useEffect(() => {
     if (forecasts && forecasts.length > 0) {
       const mappedData: ForecastDay[] = forecasts.map((f, i) => {
@@ -84,17 +82,14 @@ export function HealthForecast() {
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const dayName = days[date.getDay()];
         
-        // Determine readiness based on recovery prediction
         let readiness: "optimal" | "moderate" | "low" = "moderate";
         if (f.recovery_prediction >= 80) readiness = "optimal";
         else if (f.recovery_prediction < 60) readiness = "low";
         
-        // Calculate average energy from predictions
         const avgEnergy = f.energy_prediction?.length > 0 
           ? Math.round(f.energy_prediction.reduce((sum, e) => sum + e.level, 0) / f.energy_prediction.length)
           : 70;
         
-        // Find energy dip
         let expectedDip = null;
         if (f.energy_prediction?.length > 0) {
           const minEnergy = f.energy_prediction.reduce((min, e) => e.level < min.level ? e : min, f.energy_prediction[0]);
@@ -106,7 +101,6 @@ export function HealthForecast() {
           }
         }
         
-        // Build interventions from timing data
         const interventions: string[] = [];
         if (f.intervention_timing?.morning?.length) {
           interventions.push(...f.intervention_timing.morning.slice(0, 2));
@@ -137,16 +131,31 @@ export function HealthForecast() {
     }
   }, [forecasts]);
 
-  const getReadinessColor = (readiness: string) => {
+  const getReadinessStyles = (readiness: string) => {
     switch (readiness) {
       case "optimal":
-        return { bg: "bg-green-500/10", text: "text-green-600", border: "border-green-500/30" };
+        return { 
+          bg: "bg-emerald-500/10", 
+          text: "text-emerald-400", 
+          border: "border-emerald-500/30",
+          glow: "shadow-[0_0_20px_rgba(16,185,129,0.15)]"
+        };
       case "moderate":
-        return { bg: "bg-orange-500/10", text: "text-orange-600", border: "border-orange-500/30" };
+        return { 
+          bg: "bg-amber-500/10", 
+          text: "text-amber-400", 
+          border: "border-amber-500/30",
+          glow: "shadow-[0_0_20px_rgba(245,158,11,0.15)]"
+        };
       case "low":
-        return { bg: "bg-red-500/10", text: "text-red-600", border: "border-red-500/30" };
+        return { 
+          bg: "bg-rose-500/10", 
+          text: "text-rose-400", 
+          border: "border-rose-500/30",
+          glow: "shadow-[0_0_20px_rgba(244,63,94,0.15)]"
+        };
       default:
-        return { bg: "bg-mist/30", text: "text-stone", border: "border-mist" };
+        return { bg: "bg-muted/30", text: "text-muted-foreground", border: "border-border", glow: "" };
     }
   };
 
@@ -164,16 +173,20 @@ export function HealthForecast() {
   };
 
   return (
-    <Card className="hover:shadow-md transition-all">
+    <Card className="nova-card overflow-hidden">
       <CardContent className="p-6 sm:p-8">
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent/10 to-accent/20 flex items-center justify-center">
-              <Calendar className="w-6 h-6 text-accent" />
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-nova-accent/20 to-nova-glow/20 flex items-center justify-center nova-glow">
+              <Calendar className="w-7 h-7 text-nova-accent" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-carbon">7-Day Health Forecast</h3>
-              <p className="text-sm text-ash">AI-predicted performance windows</p>
+              <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                7-Day Health Forecast
+                <Sparkles className="w-4 h-4 text-nova-accent" />
+              </h3>
+              <p className="text-sm text-muted-foreground">AI-predicted performance windows</p>
             </div>
           </div>
           <Button 
@@ -181,7 +194,7 @@ export function HealthForecast() {
             size="sm" 
             onClick={generateForecast}
             disabled={isLoading}
-            className="gap-2"
+            className="gap-2 nova-glass border-nova-border hover:border-nova-accent/50 hover:bg-nova-accent/10 transition-all"
           >
             {isLoading ? (
               <Loader2 className="w-4 h-4 animate-spin" />
@@ -194,32 +207,34 @@ export function HealthForecast() {
 
         <div className="space-y-6">
           {/* Calendar Timeline */}
-          <div className="grid grid-cols-7 gap-1 sm:gap-2">
+          <div className="grid grid-cols-7 gap-2">
             {forecastData.map((day, index) => {
-              const colors = getReadinessColor(day.trainingReadiness);
+              const styles = getReadinessStyles(day.trainingReadiness);
               const isSelected = selectedDay.date === day.date;
               
               return (
                 <button
                   key={index}
                   onClick={() => setSelectedDay(day)}
-                  className={`relative overflow-hidden rounded-lg sm:rounded-xl p-2 sm:p-3 transition-all ${
+                  className={`relative overflow-hidden rounded-xl p-3 transition-all duration-300 ${
                     isSelected
-                      ? `${colors.bg} border-2 ${colors.border} shadow-md`
-                      : "bg-pearl/30 border border-mist/30 hover:bg-pearl/50"
+                      ? `${styles.bg} border-2 ${styles.border} ${styles.glow} scale-105`
+                      : "nova-glass border border-nova-border/50 hover:border-nova-accent/30 hover:bg-nova-accent/5"
                   }`}
                 >
                   <div className="text-center">
-                    <div className={`text-[0.6rem] sm:text-[0.6875rem] font-medium uppercase tracking-wider mb-1 ${
-                      isSelected ? colors.text : "text-stone"
+                    <div className={`text-[0.65rem] font-semibold uppercase tracking-wider mb-1 ${
+                      isSelected ? styles.text : "text-muted-foreground"
                     }`}>
                       {day.date}
                     </div>
-                    <div className="text-[0.6rem] sm:text-caption text-ash mb-2 hidden sm:block">{day.dayName}</div>
-                    <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-lg mx-auto flex items-center justify-center ${
-                      isSelected ? colors.bg : "bg-mist/20"
+                    <div className="text-[0.6rem] text-muted-foreground/70 mb-2 hidden sm:block">
+                      {day.dayName}
+                    </div>
+                    <div className={`w-8 h-8 rounded-lg mx-auto flex items-center justify-center transition-all ${
+                      isSelected ? `${styles.bg} ${styles.border} border` : "bg-muted/20"
                     }`}>
-                      <div className={isSelected ? colors.text : "text-stone"}>
+                      <div className={isSelected ? styles.text : "text-muted-foreground"}>
                         {getReadinessIcon(day.trainingReadiness)}
                       </div>
                     </div>
@@ -230,43 +245,46 @@ export function HealthForecast() {
           </div>
 
           {/* Selected Day Details */}
-          <div className="space-y-4 animate-fade-in">
-            <div className="rounded-2xl p-6 bg-gradient-to-br from-pearl/50 to-ivory border border-mist/20">
-              <div className="flex items-start justify-between mb-4">
+          <div className="animate-fade-in">
+            <div className="rounded-2xl p-6 nova-glass border border-nova-border/50">
+              <div className="flex items-start justify-between mb-6">
                 <div>
-                  <h4 className="text-body font-semibold text-carbon mb-1">
+                  <h4 className="text-lg font-semibold text-foreground mb-2">
                     {selectedDay.date} • {selectedDay.dayName}
                   </h4>
-                  <div className="flex items-center gap-2">
-                    <Badge
-                      variant="outline"
-                      className={`${getReadinessColor(selectedDay.trainingReadiness).bg} ${
-                        getReadinessColor(selectedDay.trainingReadiness).text
-                      } ${getReadinessColor(selectedDay.trainingReadiness).border} border`}
-                    >
-                      {selectedDay.trainingReadiness.charAt(0).toUpperCase() + selectedDay.trainingReadiness.slice(1)} Readiness
-                    </Badge>
-                  </div>
+                  <Badge
+                    variant="outline"
+                    className={`${getReadinessStyles(selectedDay.trainingReadiness).bg} ${
+                      getReadinessStyles(selectedDay.trainingReadiness).text
+                    } ${getReadinessStyles(selectedDay.trainingReadiness).border} border font-medium`}
+                  >
+                    {selectedDay.trainingReadiness.charAt(0).toUpperCase() + selectedDay.trainingReadiness.slice(1)} Readiness
+                  </Badge>
                 </div>
                 <div className="text-right">
-                  <div className="text-[2rem] font-bold text-carbon leading-none mb-1">
-                    {selectedDay.energyLevel}%
+                  <div className="relative">
+                    <div className="text-4xl font-bold text-foreground leading-none mb-1">
+                      {selectedDay.energyLevel}
+                      <span className="text-lg text-muted-foreground">%</span>
+                    </div>
+                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Energy Level</div>
                   </div>
-                  <div className="text-caption text-ash">Energy Level</div>
                 </div>
               </div>
 
               {/* Energy Dip Warning */}
               {selectedDay.expectedDip && (
-                <div className="mb-4 p-3 rounded-xl bg-orange-500/5 border border-orange-500/20">
-                  <div className="flex items-start gap-2">
-                    <AlertCircle className="w-4 h-4 text-orange-600 mt-0.5 flex-shrink-0" />
+                <div className="mb-6 p-4 rounded-xl bg-amber-500/10 border border-amber-500/30">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                      <AlertCircle className="w-4 h-4 text-amber-400" />
+                    </div>
                     <div>
-                      <div className="text-sm font-medium text-carbon mb-0.5">
+                      <div className="text-sm font-semibold text-foreground mb-1">
                         Expected Energy Dip
                       </div>
-                      <div className="text-caption text-ash">
-                        {selectedDay.expectedDip.time} - {selectedDay.expectedDip.reason}
+                      <div className="text-sm text-muted-foreground">
+                        {selectedDay.expectedDip.time} — {selectedDay.expectedDip.reason}
                       </div>
                     </div>
                   </div>
@@ -275,31 +293,40 @@ export function HealthForecast() {
 
               {/* Interventions */}
               <div>
-                <div className="text-caption font-semibold text-carbon uppercase tracking-wider mb-3">
+                <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">
                   Recommended Interventions
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {selectedDay.interventions.map((intervention, index) => (
-                    <div key={index} className="flex items-start gap-2">
-                      <div className="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Check className="w-3 h-3 text-accent" />
+                    <div key={index} className="flex items-start gap-3 group">
+                      <div className="w-6 h-6 rounded-lg bg-nova-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-nova-accent/20 transition-colors">
+                        <Check className="w-3.5 h-3.5 text-nova-accent" />
                       </div>
-                      <span className="text-sm text-carbon">{intervention}</span>
+                      <span className="text-sm text-foreground/90">{intervention}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Confidence Score */}
-              <div className="mt-4 pt-4 border-t border-mist/20 flex items-center justify-between">
-                <span className="text-caption text-ash">Prediction Confidence</span>
-                <span className="text-sm font-semibold text-accent">{selectedDay.confidence}%</span>
+              <div className="mt-6 pt-4 border-t border-nova-border/30 flex items-center justify-between">
+                <span className="text-xs text-muted-foreground uppercase tracking-wider">Prediction Confidence</span>
+                <div className="flex items-center gap-2">
+                  <div className="w-24 h-1.5 rounded-full bg-muted/30 overflow-hidden">
+                    <div 
+                      className="h-full rounded-full bg-gradient-to-r from-nova-accent to-nova-glow transition-all duration-500"
+                      style={{ width: `${selectedDay.confidence}%` }}
+                    />
+                  </div>
+                  <span className="text-sm font-semibold text-nova-accent">{selectedDay.confidence}%</span>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Footer Note */}
-          <div className="text-caption text-ash text-center">
+          <div className="text-xs text-muted-foreground text-center flex items-center justify-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-nova-accent animate-pulse" />
             Predictions update every 6 hours based on latest biometric data
           </div>
         </div>
