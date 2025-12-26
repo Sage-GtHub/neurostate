@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Twitter, Youtube, Mail, Lock, Shield, CheckCircle } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube, Mail, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { TrustBadges } from "./TrustBadges";
 import logoIcon from "@/assets/neurostate-icon.png";
@@ -74,60 +74,71 @@ export const Footer = () => {
 
 
   return (
-    <footer className="bg-carbon text-ivory mt-12 sm:mt-16 md:mt-24 lg:mt-32">
-      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 py-12 sm:py-16 md:py-20 lg:py-24">
+    <footer className="relative bg-void text-white mt-0 overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.05)_0%,transparent_50%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
+      
+      {/* Top border glow */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
+      
+      <div className="relative w-full px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 py-16 sm:py-20 md:py-24 lg:py-32">
         {/* Company Mission */}
-        <div className="mb-12 sm:mb-16 md:mb-20 max-w-3xl">
-          <Link to="/" className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-            <img src={logoIcon} alt="Neural Waveform" className="h-6 w-6 sm:h-8 sm:w-8 invert" />
-            <span className="text-xl sm:text-2xl md:text-h2 font-semibold tracking-tight">NEUROSTATE<sup className="text-[8px] sm:text-[10px]">®</sup></span>
+        <div className="mb-16 sm:mb-20 md:mb-24 max-w-3xl">
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 mb-6 group">
+            <img src={logoIcon} alt="Neural Waveform" className="h-8 w-8 sm:h-10 sm:w-10 invert opacity-90 group-hover:opacity-100 transition-opacity" />
+            <span className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors">NEUROSTATE<sup className="text-[8px] sm:text-[10px]">®</sup></span>
           </Link>
-          <p className="text-base text-stone max-w-lg">
+          <p className="text-lg text-white/60 max-w-lg leading-relaxed">
             The AI Operating System for Human Performance. Nova AI. Neuromodulation. Precision supplements. One integrated platform.
           </p>
         </div>
 
         {/* Trust Badges */}
-        <div className="pt-3 sm:pt-4 md:pt-6">
+        <div className="pt-3 sm:pt-4 md:pt-6 mb-16">
           <TrustBadges />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 sm:gap-8 mb-6 sm:mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 sm:gap-10 mb-8 sm:mb-10">
           {/* Newsletter Signup */}
           <div className="sm:col-span-2 lg:col-span-2">
-            <h3 className="mb-3 sm:mb-4 text-base sm:text-lg">Join our community</h3>
-            <p className="text-stone mb-4 sm:mb-6 text-sm sm:text-base">
+            <h3 className="mb-4 sm:mb-5 text-base sm:text-lg text-white font-medium">Join our community</h3>
+            <p className="text-white/50 mb-6 text-sm sm:text-base leading-relaxed">
               Sign up for exclusive offers and 10% off your first order.
             </p>
-            <form onSubmit={handleNewsletterSignup} className="flex flex-col sm:flex-row gap-2">
+            <form onSubmit={handleNewsletterSignup} className="flex flex-col sm:flex-row gap-3">
               <Input
                 type="email"
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 text-sm bg-ivory border-mist min-h-[48px]"
+                className="flex-1 text-sm bg-white/5 border-white/10 text-white placeholder:text-white/40 min-h-[48px] focus:border-emerald-500/50 focus:ring-emerald-500/20"
                 disabled={isLoading}
               />
               <Button 
                 type="submit" 
-                variant="default"
                 disabled={isLoading} 
-                className="font-medium text-sm sm:w-auto w-full min-h-[48px] touch-manipulation"
+                className="font-medium text-sm sm:w-auto w-full min-h-[48px] touch-manipulation bg-emerald-500 hover:bg-emerald-600 text-white group"
               >
-                {isLoading ? "..." : "Subscribe"}
+                {isLoading ? "..." : (
+                  <>
+                    Subscribe
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
               </Button>
             </form>
           </div>
 
           {/* Shop Links */}
           <div>
-            <h3 className="mb-3 sm:mb-4 text-base sm:text-lg">Shop</h3>
-            <ul className="space-y-1.5 sm:space-y-2">
+            <h3 className="mb-4 sm:mb-5 text-base sm:text-lg text-white font-medium">Shop</h3>
+            <ul className="space-y-2.5 sm:space-y-3">
               {footerLinks.shop.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-stone hover:text-ivory transition-colors text-caption"
+                    className="text-white/50 hover:text-emerald-400 transition-colors text-sm"
                   >
                     {link.name}
                   </a>
@@ -138,13 +149,13 @@ export const Footer = () => {
 
           {/* Company Links */}
           <div>
-            <h3 className="mb-3 sm:mb-4 text-base sm:text-lg">Company</h3>
-            <ul className="space-y-1.5 sm:space-y-2">
+            <h3 className="mb-4 sm:mb-5 text-base sm:text-lg text-white font-medium">Company</h3>
+            <ul className="space-y-2.5 sm:space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-stone hover:text-ivory transition-colors text-caption"
+                    className="text-white/50 hover:text-emerald-400 transition-colors text-sm"
                   >
                     {link.name}
                   </a>
@@ -155,13 +166,13 @@ export const Footer = () => {
 
           {/* Support Links */}
           <div>
-            <h3 className="mb-3 sm:mb-4 text-base sm:text-lg">Support</h3>
-            <ul className="space-y-1.5 sm:space-y-2">
+            <h3 className="mb-4 sm:mb-5 text-base sm:text-lg text-white font-medium">Support</h3>
+            <ul className="space-y-2.5 sm:space-y-3">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-stone hover:text-ivory transition-colors text-caption"
+                    className="text-white/50 hover:text-emerald-400 transition-colors text-sm"
                   >
                     {link.name}
                   </a>
@@ -172,13 +183,13 @@ export const Footer = () => {
 
           {/* Legal Links */}
           <div>
-            <h3 className="mb-3 sm:mb-4 text-base sm:text-lg">Legal</h3>
-            <ul className="space-y-1.5 sm:space-y-2">
+            <h3 className="mb-4 sm:mb-5 text-base sm:text-lg text-white font-medium">Legal</h3>
+            <ul className="space-y-2.5 sm:space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.href}
-                    className="text-stone hover:text-ivory transition-colors text-caption"
+                    className="text-white/50 hover:text-emerald-400 transition-colors text-sm"
                   >
                     {link.name}
                   </Link>
@@ -189,20 +200,22 @@ export const Footer = () => {
         </div>
 
         {/* Contact Info & Social */}
-        <div className="pt-8 sm:pt-10 md:pt-12 border-t border-slate">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
+        <div className="pt-10 sm:pt-12 md:pt-16 border-t border-white/10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-12 md:gap-16 mb-10 sm:mb-12 md:mb-16">
             {/* Contact Information */}
             <div>
-              <h3 className="mb-3 sm:mb-4 text-base sm:text-lg">Get in touch</h3>
-              <div className="space-y-2 sm:space-y-3">
+              <h3 className="mb-4 sm:mb-5 text-base sm:text-lg text-white font-medium">Get in touch</h3>
+              <div className="space-y-3 sm:space-y-4">
                 <a
                   href="mailto:contact@neurostate.co.uk"
-                  className="flex items-center gap-2 text-stone hover:text-ivory transition-colors group"
+                  className="flex items-center gap-3 text-white/50 hover:text-emerald-400 transition-colors group"
                 >
-                  <Mail className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                  <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-emerald-500/30 transition-colors">
+                    <Mail className="h-5 w-5" />
+                  </div>
                   contact@neurostate.co.uk
                 </a>
-                <p className="text-caption text-stone mt-3">
+                <p className="text-sm text-white/40 mt-4">
                   We typically respond within 24 hours
                 </p>
               </div>
@@ -210,42 +223,42 @@ export const Footer = () => {
 
             {/* Social Media */}
             <div>
-              <h3 className="mb-3 sm:mb-4 text-base sm:text-lg">Follow us</h3>
+              <h3 className="mb-4 sm:mb-5 text-base sm:text-lg text-white font-medium">Follow us</h3>
               <div className="flex gap-3 sm:gap-4">
                 {socialLinks.map((social) => (
                   <div
                     key={social.label}
-                    className="w-12 h-12 min-w-[48px] min-h-[48px] rounded-xl bg-slate border border-slate flex items-center justify-center cursor-default hover:bg-ivory hover:text-carbon transition-all touch-manipulation"
+                    className="w-12 h-12 min-w-[48px] min-h-[48px] rounded-xl bg-white/5 border border-white/10 flex items-center justify-center cursor-pointer hover:bg-emerald-500/10 hover:border-emerald-500/30 hover:text-emerald-400 transition-all touch-manipulation text-white/60"
                     aria-label={social.label}
                   >
                     <social.icon className="h-5 w-5" />
                   </div>
                 ))}
               </div>
-              <p className="text-caption text-stone mt-4">
+              <p className="text-sm text-white/40 mt-5">
                 Join our community for tips, product updates, and exclusive offers
               </p>
             </div>
           </div>
 
           {/* Copyright & Links */}
-          <div className="pt-6 sm:pt-8">
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
-              <p className="text-caption text-stone">
+          <div className="pt-8 sm:pt-10 border-t border-white/5">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6">
+              <p className="text-sm text-white/40">
                 © {new Date().getFullYear()} NeuroState®. All rights reserved.
               </p>
-              <div className="flex flex-wrap gap-6 justify-center">
-                <Link to="/terms" className="text-caption text-stone hover:text-ivory transition-colors">
+              <div className="flex flex-wrap gap-8 justify-center">
+                <Link to="/terms" className="text-sm text-white/40 hover:text-emerald-400 transition-colors">
                   Terms
                 </Link>
-                <Link to="/privacy" className="text-caption text-stone hover:text-ivory transition-colors">
+                <Link to="/privacy" className="text-sm text-white/40 hover:text-emerald-400 transition-colors">
                   Privacy
                 </Link>
                 <a 
                   href="https://neurostate.co.uk" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-caption text-stone hover:text-ivory transition-colors"
+                  className="text-sm text-white/40 hover:text-emerald-400 transition-colors"
                 >
                   neurostate.co.uk
                 </a>
