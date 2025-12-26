@@ -114,33 +114,33 @@ export const Header = () => {
   return (
     <>
       <AnnouncementBar />
-      <header className="sticky top-0 z-50 w-full bg-background border-b border-mist backdrop-blur-sm bg-background/95">
+      <header className="sticky top-0 z-50 w-full bg-void/80 border-b border-white/5 backdrop-blur-xl">
         <div className="container mx-auto flex h-14 lg:h-20 items-center justify-between px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <img src={logoIcon} alt="NeuroState Neural Waveform" className="h-7 w-7 lg:h-10 lg:w-10" />
-            <span className="text-ui-label text-carbon tracking-widest text-[0.6rem] lg:text-xs">NEUROSTATE<sup className="text-[5px] lg:text-[6px]">®</sup></span>
+          <Link to="/" className="flex items-center gap-2 group">
+            <img src={logoIcon} alt="NeuroState Neural Waveform" className="h-7 w-7 lg:h-10 lg:w-10 transition-transform duration-300 group-hover:scale-105" />
+            <span className="text-ui-label text-white/90 tracking-widest text-[0.6rem] lg:text-xs font-medium">NEUROSTATE<sup className="text-[5px] lg:text-[6px]">®</sup></span>
           </Link>
           
           {/* Desktop Navigation */}
           <NavigationMenu className="hidden lg:flex">
-            <NavigationMenuList className="gap-2">
+            <NavigationMenuList className="gap-1">
               {/* Shop Dropdown */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-carbon hover:bg-pearl data-[state=open]:bg-pearl text-ui-label">
+                <NavigationMenuTrigger className="bg-transparent text-white/70 hover:text-white hover:bg-white/5 data-[state=open]:bg-white/5 data-[state=open]:text-white text-ui-label transition-all duration-200">
                   Shop
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-1 p-4 bg-background border border-mist rounded-lg shadow-soft">
+                  <ul className="grid w-[400px] gap-1 p-4 bg-obsidian/95 backdrop-blur-xl border border-white/10 rounded-lg shadow-2xl">
                     {shopCategories.map((category) => (
                       <li key={category.label}>
                         <NavigationMenuLink asChild>
                           <Link
                             to={category.href}
-                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-colors hover:bg-pearl rounded-lg"
+                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-white/5 rounded-lg group"
                           >
-                            <category.icon className="h-5 w-5 text-carbon" />
-                            <span className="text-caption font-medium text-carbon">
+                            <category.icon className="h-5 w-5 text-emerald-400/70 group-hover:text-emerald-400 transition-colors" />
+                            <span className="text-caption font-medium text-white/80 group-hover:text-white transition-colors">
                               {category.label}
                             </span>
                           </Link>
@@ -154,20 +154,20 @@ export const Header = () => {
 
                {/* For Teams Dropdown */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-carbon hover:bg-pearl data-[state=open]:bg-pearl text-ui-label">
+                <NavigationMenuTrigger className="bg-transparent text-white/70 hover:text-white hover:bg-white/5 data-[state=open]:bg-white/5 data-[state=open]:text-white text-ui-label transition-all duration-200">
                   For Teams
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-1 p-4 bg-background border border-mist rounded-lg shadow-soft">
+                  <ul className="grid w-[400px] gap-1 p-4 bg-obsidian/95 backdrop-blur-xl border border-white/10 rounded-lg shadow-2xl">
                     {enterpriseLinks.map((link) => (
                       <li key={link.label}>
                         <NavigationMenuLink asChild>
                           <Link
                             to={link.href}
-                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-colors hover:bg-pearl rounded-lg"
+                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-white/5 rounded-lg group"
                           >
-                            <link.icon className="h-5 w-5 text-carbon" />
-                            <span className="text-caption font-medium text-carbon">
+                            <link.icon className="h-5 w-5 text-emerald-400/70 group-hover:text-emerald-400 transition-colors" />
+                            <span className="text-caption font-medium text-white/80 group-hover:text-white transition-colors">
                               {link.label}
                             </span>
                           </Link>
@@ -182,7 +182,7 @@ export const Header = () => {
               <NavigationMenuItem>
                 <Link
                   to="/nova/overview"
-                  className="inline-flex h-10 items-center justify-center px-4 py-2 text-ui-label text-carbon transition-colors hover:bg-pearl rounded-lg"
+                  className="inline-flex h-10 items-center justify-center px-4 py-2 text-ui-label text-white/70 transition-all duration-200 hover:text-emerald-400 hover:bg-white/5 rounded-lg"
                 >
                   Nova AI
                 </Link>
@@ -200,16 +200,17 @@ export const Header = () => {
                   placeholder="Search products..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-64 rounded-lg border-mist"
+                  className="w-64 rounded-lg bg-white/5 border-white/10 text-white placeholder:text-white/40 focus:border-emerald-500/50"
                   autoFocus
                 />
-                <Button type="submit" size="icon" variant="ghost">
+                <Button type="submit" size="icon" variant="ghost" className="text-white/70 hover:text-white hover:bg-white/5">
                   <Search className="h-5 w-5" />
                 </Button>
                 <Button 
                   type="button" 
                   size="icon" 
                   variant="ghost"
+                  className="text-white/70 hover:text-white hover:bg-white/5"
                   onClick={() => {
                     setSearchOpen(false);
                     clearSearch();
@@ -222,7 +223,7 @@ export const Header = () => {
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="hidden lg:flex"
+                className="hidden lg:flex text-white/70 hover:text-white hover:bg-white/5"
                 onClick={() => setSearchOpen(true)}
               >
                 <Search className="h-5 w-5" />
@@ -233,39 +234,39 @@ export const Header = () => {
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="hidden lg:flex relative">
+                  <Button variant="ghost" size="icon" className="hidden lg:flex relative text-white/70 hover:text-white hover:bg-white/5">
                     <User className="h-5 w-5" />
-                    <Badge className="absolute -top-1 -right-1 h-3 w-3 rounded-full p-0 bg-green-500" />
+                    <Badge className="absolute -top-1 -right-1 h-3 w-3 rounded-full p-0 bg-emerald-500" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48 bg-background border-mist rounded-lg">
-                  <DropdownMenuItem disabled className="text-caption text-ash">
+                <DropdownMenuContent align="end" className="w-48 bg-obsidian/95 backdrop-blur-xl border-white/10 rounded-lg">
+                  <DropdownMenuItem disabled className="text-caption text-white/50">
                     {user.email}
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator />
+                  <DropdownMenuSeparator className="bg-white/10" />
                   <DropdownMenuItem asChild>
-                    <Link to="/dashboard" className="cursor-pointer text-carbon hover:bg-pearl">
+                    <Link to="/dashboard" className="cursor-pointer text-white/80 hover:text-white hover:bg-white/5">
                       My Dashboard
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/profile" className="cursor-pointer text-carbon hover:bg-pearl">
+                    <Link to="/profile" className="cursor-pointer text-white/80 hover:text-white hover:bg-white/5">
                       My Profile
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/subscriptions" className="cursor-pointer text-carbon hover:bg-pearl">
+                    <Link to="/subscriptions" className="cursor-pointer text-white/80 hover:text-white hover:bg-white/5">
                       My Subscriptions
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/rewards" className="cursor-pointer flex items-center text-carbon hover:bg-pearl">
-                      <Award className="h-4 w-4 mr-2" />
+                    <Link to="/rewards" className="cursor-pointer flex items-center text-white/80 hover:text-white hover:bg-white/5">
+                      <Award className="h-4 w-4 mr-2 text-emerald-400" />
                       Rewards Programme
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive hover:bg-pearl">
+                  <DropdownMenuSeparator className="bg-white/10" />
+                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-red-400 hover:text-red-300 hover:bg-white/5">
                     <LogOut className="h-4 w-4 mr-2" />
                     Sign Out
                   </DropdownMenuItem>
@@ -273,7 +274,7 @@ export const Header = () => {
               </DropdownMenu>
             ) : (
               <Link to="/auth">
-                <Button variant="ghost" size="icon" className="hidden lg:flex">
+                <Button variant="ghost" size="icon" className="hidden lg:flex text-white/70 hover:text-white hover:bg-white/5">
                   <User className="h-5 w-5" />
                 </Button>
               </Link>
@@ -284,13 +285,13 @@ export const Header = () => {
             {/* Mobile Menu Button */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="lg:hidden h-9 w-9">
+                <Button variant="ghost" size="icon" className="lg:hidden h-9 w-9 text-white/70 hover:text-white hover:bg-white/5">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-full sm:w-[350px] bg-background p-0 overflow-y-auto">
-                <SheetHeader className="p-4 border-b border-mist">
-                  <SheetTitle className="text-left text-carbon text-base">Menu</SheetTitle>
+              <SheetContent side="right" className="w-full sm:w-[350px] bg-void/95 backdrop-blur-xl border-l border-white/10 p-0 overflow-y-auto">
+                <SheetHeader className="p-4 border-b border-white/10">
+                  <SheetTitle className="text-left text-white text-base">Menu</SheetTitle>
                 </SheetHeader>
                 
                 <nav className="flex flex-col">
@@ -298,14 +299,14 @@ export const Header = () => {
                   <div className="p-4 space-y-1">
                     <Link
                       to="/shop"
-                      className="flex items-center justify-between p-3 rounded-lg hover:bg-pearl transition-colors"
+                      className="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <div className="flex items-center gap-3">
-                        <Package className="h-5 w-5 text-ash" />
-                        <span className="text-carbon font-medium">Shop All</span>
+                        <Package className="h-5 w-5 text-emerald-400/70" />
+                        <span className="text-white font-medium">Shop All</span>
                       </div>
-                      <ChevronRight className="h-4 w-4 text-ash" />
+                      <ChevronRight className="h-4 w-4 text-white/40" />
                     </Link>
                     
                   </div>
@@ -313,9 +314,9 @@ export const Header = () => {
                   {/* Accordion Sections */}
                   <Accordion type="single" collapsible className="px-4">
                     {/* Shop Categories */}
-                    <AccordionItem value="shop" className="border-b-0">
-                      <AccordionTrigger className="py-3 hover:no-underline">
-                        <span className="text-carbon font-medium">Categories</span>
+                    <AccordionItem value="shop" className="border-b-0 border-white/10">
+                      <AccordionTrigger className="py-3 hover:no-underline text-white/80 hover:text-white">
+                        <span className="font-medium">Categories</span>
                       </AccordionTrigger>
                       <AccordionContent>
                         <div className="space-y-1 pb-3">
@@ -323,11 +324,11 @@ export const Header = () => {
                             <Link
                               key={category.label}
                               to={category.href}
-                              className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-pearl transition-colors"
+                              className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-white/5 transition-colors"
                               onClick={() => setMobileMenuOpen(false)}
                             >
-                              <category.icon className="h-4 w-4 text-ash" />
-                              <span className="text-ash text-sm">{category.label}</span>
+                              <category.icon className="h-4 w-4 text-emerald-400/60" />
+                              <span className="text-white/70 text-sm">{category.label}</span>
                             </Link>
                           ))}
                         </div>
@@ -336,9 +337,9 @@ export const Header = () => {
 
 
                     {/* For Teams */}
-                    <AccordionItem value="teams" className="border-b-0">
-                      <AccordionTrigger className="py-3 hover:no-underline">
-                        <span className="text-carbon font-medium">For Teams</span>
+                    <AccordionItem value="teams" className="border-b-0 border-white/10">
+                      <AccordionTrigger className="py-3 hover:no-underline text-white/80 hover:text-white">
+                        <span className="font-medium">For Teams</span>
                       </AccordionTrigger>
                       <AccordionContent>
                         <div className="space-y-1 pb-3">
@@ -346,11 +347,11 @@ export const Header = () => {
                             <Link
                               key={link.label}
                               to={link.href}
-                              className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-pearl transition-colors"
+                              className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-white/5 transition-colors"
                               onClick={() => setMobileMenuOpen(false)}
                             >
-                              <link.icon className="h-4 w-4 text-ash" />
-                              <span className="text-ash text-sm">{link.label}</span>
+                              <link.icon className="h-4 w-4 text-emerald-400/60" />
+                              <span className="text-white/70 text-sm">{link.label}</span>
                             </Link>
                           ))}
                         </div>
@@ -359,34 +360,34 @@ export const Header = () => {
                   </Accordion>
 
                   {/* Nova AI Link */}
-                  <div className="p-4 border-t border-mist">
+                  <div className="p-4 border-t border-white/10">
                     <Link
                       to="/nova/overview"
-                      className="flex items-center justify-between p-3 rounded-lg bg-accent/5 hover:bg-accent/10 transition-colors"
+                      className="flex items-center justify-between p-3 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/20 transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <div className="flex items-center gap-3">
-                        <Sparkles className="h-5 w-5 text-accent" />
-                        <span className="text-carbon font-medium">Nova AI</span>
+                        <Sparkles className="h-5 w-5 text-emerald-400" />
+                        <span className="text-white font-medium">Nova AI</span>
                       </div>
-                      <ChevronRight className="h-4 w-4 text-accent" />
+                      <ChevronRight className="h-4 w-4 text-emerald-400" />
                     </Link>
                   </div>
 
                   {/* Account Section */}
-                  <div className="p-4 border-t border-mist mt-auto">
+                  <div className="p-4 border-t border-white/10 mt-auto">
                     {user ? (
                       <div className="space-y-2">
-                        <p className="text-xs text-ash px-3 truncate">{user.email}</p>
+                        <p className="text-xs text-white/50 px-3 truncate">{user.email}</p>
                         <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                          <Button variant="ghost" className="w-full justify-start h-11">
+                          <Button variant="ghost" className="w-full justify-start h-11 text-white/80 hover:text-white hover:bg-white/5">
                             <User className="h-4 w-4 mr-3" />
                             Dashboard
                           </Button>
                         </Link>
                         <Link to="/rewards" onClick={() => setMobileMenuOpen(false)}>
-                          <Button variant="ghost" className="w-full justify-start h-11">
-                            <Award className="h-4 w-4 mr-3" />
+                          <Button variant="ghost" className="w-full justify-start h-11 text-white/80 hover:text-white hover:bg-white/5">
+                            <Award className="h-4 w-4 mr-3 text-emerald-400" />
                             Rewards
                           </Button>
                         </Link>
@@ -396,7 +397,7 @@ export const Header = () => {
                             handleSignOut();
                             setMobileMenuOpen(false);
                           }}
-                          className="w-full justify-start h-11 text-destructive"
+                          className="w-full justify-start h-11 text-red-400 hover:text-red-300 hover:bg-white/5"
                         >
                           <LogOut className="h-4 w-4 mr-3" />
                           Sign Out
@@ -404,7 +405,7 @@ export const Header = () => {
                       </div>
                     ) : (
                       <Link to="/auth" onClick={() => setMobileMenuOpen(false)}>
-                        <Button className="w-full h-11">
+                        <Button className="w-full h-11 bg-emerald-500 hover:bg-emerald-600 text-white">
                           <User className="h-4 w-4 mr-2" />
                           Sign In
                         </Button>
