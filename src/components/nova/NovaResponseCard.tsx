@@ -93,6 +93,11 @@ function extractExpandableSections(content: string): {
   };
 }
 
+// Strip asterisks from content for clean display
+function stripAsterisks(text: string): string {
+  return text.replace(/\*+/g, '');
+}
+
 export function NovaResponseCard({
   content,
   timestamp,
@@ -136,7 +141,7 @@ export function NovaResponseCard({
     return (
       <div className="space-y-2">
         <div className="prose prose-sm dark:prose-invert max-w-none text-foreground/90">
-          <p className="text-[15px] leading-relaxed whitespace-pre-wrap">{content}</p>
+          <p className="text-[15px] leading-relaxed whitespace-pre-wrap">{stripAsterisks(content)}</p>
         </div>
         {showActions && content && (
           <div className="flex items-center gap-1 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -218,7 +223,7 @@ export function NovaResponseCard({
             {parsed.actions.slice(0, 4).map((action, i) => (
               <li key={i} className="flex items-start gap-2.5 text-[15px] text-foreground font-medium">
                 <span className="text-accent mt-0.5 font-bold">→</span>
-                <span className="leading-relaxed">{action}</span>
+                <span className="leading-relaxed">{stripAsterisks(action)}</span>
               </li>
             ))}
           </ul>
@@ -232,7 +237,7 @@ export function NovaResponseCard({
             <AlertTriangle className="w-3 h-3 text-muted-foreground/70" />
             <span className="text-[9px] font-medium uppercase tracking-wider text-muted-foreground/70">Signal</span>
           </div>
-          <p className="text-xs leading-relaxed text-muted-foreground">{parsed.signal}</p>
+          <p className="text-xs leading-relaxed text-muted-foreground">{stripAsterisks(parsed.signal)}</p>
         </div>
       )}
 
@@ -243,7 +248,7 @@ export function NovaResponseCard({
             <TrendingUp className="w-3 h-3 text-muted-foreground/70" />
             <span className="text-[9px] font-medium uppercase tracking-wider text-muted-foreground/70">Forecast</span>
           </div>
-          <p className="text-xs leading-relaxed text-muted-foreground italic">{parsed.forecast}</p>
+          <p className="text-xs leading-relaxed text-muted-foreground italic">{stripAsterisks(parsed.forecast)}</p>
         </div>
       )}
 
@@ -301,9 +306,9 @@ export function NovaResponseCard({
       {/* Expanded Content */}
       {expandedSection && (
         <div className="mt-3 p-3 rounded-lg bg-muted/30 border border-border/30 text-sm text-foreground/80 leading-relaxed animate-fade-in">
-          {expandedSection === 'explain' && expandable.explain}
-          {expandedSection === 'evidence' && expandable.evidence}
-          {expandedSection === 'protocol' && expandable.protocolOptions}
+          {expandedSection === 'explain' && stripAsterisks(expandable.explain || '')}
+          {expandedSection === 'evidence' && stripAsterisks(expandable.evidence || '')}
+          {expandedSection === 'protocol' && stripAsterisks(expandable.protocolOptions || '')}
         </div>
       )}
 
