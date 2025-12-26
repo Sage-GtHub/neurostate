@@ -205,43 +205,45 @@ export function NovaResponseCard({
         )}
       </div>
 
-      {/* SIGNAL Section */}
-      {parsed.signal && (
-        <div className="mb-4">
-          <div className="flex items-center gap-2 mb-2">
-            <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Signal</span>
-          </div>
-          <p className="text-sm leading-relaxed text-foreground">{parsed.signal}</p>
-        </div>
-      )}
-
-      {/* FORECAST Section */}
-      {parsed.forecast && (
-        <div className="mb-4">
-          <div className="flex items-center gap-2 mb-2">
-            <TrendingUp className="w-3.5 h-3.5 text-blue-500" />
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Forecast</span>
-          </div>
-          <p className="text-sm leading-relaxed text-foreground">{parsed.forecast}</p>
-        </div>
-      )}
-
-      {/* ACTION Section */}
+      {/* ACTION Section - Visually Dominant */}
       {parsed.actions.length > 0 && (
-        <div className="mb-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Target className="w-3.5 h-3.5 text-green-500" />
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Action</span>
+        <div className="mb-5 p-4 rounded-xl bg-accent/5 border border-accent/20">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-5 h-5 rounded-md bg-accent/20 flex items-center justify-center">
+              <Target className="w-3 h-3 text-accent" />
+            </div>
+            <span className="text-xs font-bold uppercase tracking-wider text-accent">Action</span>
           </div>
-          <ul className="space-y-1.5">
+          <ul className="space-y-2.5">
             {parsed.actions.slice(0, 4).map((action, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-foreground">
-                <span className="text-accent mt-0.5">•</span>
+              <li key={i} className="flex items-start gap-2.5 text-[15px] text-foreground font-medium">
+                <span className="text-accent mt-0.5 font-bold">→</span>
                 <span className="leading-relaxed">{action}</span>
               </li>
             ))}
           </ul>
+        </div>
+      )}
+
+      {/* SIGNAL Section - Muted */}
+      {parsed.signal && (
+        <div className="mb-3">
+          <div className="flex items-center gap-1.5 mb-1.5">
+            <AlertTriangle className="w-3 h-3 text-muted-foreground/70" />
+            <span className="text-[9px] font-medium uppercase tracking-wider text-muted-foreground/70">Signal</span>
+          </div>
+          <p className="text-xs leading-relaxed text-muted-foreground">{parsed.signal}</p>
+        </div>
+      )}
+
+      {/* FORECAST Section - Muted */}
+      {parsed.forecast && (
+        <div className="mb-3">
+          <div className="flex items-center gap-1.5 mb-1.5">
+            <TrendingUp className="w-3 h-3 text-muted-foreground/70" />
+            <span className="text-[9px] font-medium uppercase tracking-wider text-muted-foreground/70">Forecast</span>
+          </div>
+          <p className="text-xs leading-relaxed text-muted-foreground italic">{parsed.forecast}</p>
         </div>
       )}
 
