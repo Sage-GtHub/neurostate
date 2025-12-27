@@ -101,16 +101,11 @@ const Index = () => {
                 ].map((item, i) => (
                   <div 
                     key={i}
-                    className={`group relative p-8 bg-white/[0.02] border ${item.borderColor} hover:bg-white/[0.05] transition-all duration-500 cursor-pointer`}
+                    className="group relative p-8 hover:bg-white/[0.03] transition-all duration-500 cursor-pointer"
                     style={{ animationDelay: `${i * 150}ms` }}
                   >
                     {/* Hover glow */}
                     <div className={`absolute inset-0 bg-gradient-to-br ${item.glowColor} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                    
-                    {/* Number indicator */}
-                    <div className="absolute top-4 right-4 text-white/10 text-6xl font-bold">
-                      0{i + 1}
-                    </div>
                     
                     <div className="relative z-10 space-y-4">
                       {/* Animated Neuron Icon */}
