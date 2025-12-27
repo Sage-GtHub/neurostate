@@ -94,6 +94,11 @@ export default {
         "whoop-red": "hsl(var(--whoop-red))",
         "whoop-yellow": "hsl(var(--whoop-yellow))",
         "whoop-blue": "hsl(var(--whoop-blue))",
+        // Whoop Metric Colors
+        "whoop-recovery": "hsl(var(--whoop-recovery, 156 100% 47%))",
+        "whoop-strain": "hsl(var(--whoop-strain, 35 90% 55%))",
+        "whoop-sleep": "hsl(var(--whoop-sleep, 210 100% 50%))",
+        "whoop-hrv": "hsl(var(--whoop-hrv, 280 70% 60%))",
         // Cyber compatibility
         "cyber-blue": "hsl(var(--cyber-blue))",
         "electric-cyan": "hsl(var(--electric-cyan))",
