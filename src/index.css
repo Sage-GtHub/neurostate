@@ -34,116 +34,113 @@
 
 @layer base {
   :root {
-    /* OURA RING-INSPIRED PALETTE */
+    /* CLEAN LIGHT THEME - White Background, Black Text, Green Accent */
     
-    /* Core Backgrounds - Warm Dark */
-    --void: 240 10% 10%; /* Deep dark */
-    --obsidian: 240 8% 13%; /* Primary background */
-    --graphite: 240 6% 16%; /* Elevated surfaces */
-    --steel: 240 5% 20%; /* Cards & containers */
+    /* Core Backgrounds - Light */
+    --void: 0 0% 100%; /* Pure white */
+    --obsidian: 0 0% 98%; /* Off-white */
+    --graphite: 0 0% 96%; /* Light gray surfaces */
+    --steel: 0 0% 94%; /* Cards & containers */
     
-    /* Grays - Warm Scale */
-    --platinum: 0 0% 98%; /* Primary text */
-    --silver: 240 5% 78%; /* Secondary text */
-    --mercury: 240 5% 55%; /* Muted text */
-    --titanium: 240 5% 32%; /* Borders */
+    /* Grays - Neutral Scale */
+    --platinum: 0 0% 8%; /* Primary text - near black */
+    --silver: 0 0% 25%; /* Secondary text */
+    --mercury: 0 0% 45%; /* Muted text */
+    --titanium: 0 0% 85%; /* Borders */
     
-    /* Oura Purple - Signature Accent */
-    --oura-purple: 262 83% 65%; /* #A78BFA - Primary accent */
-    --oura-purple-glow: 262 90% 72%; /* Lighter glow */
-    --oura-purple-dim: 262 60% 50%; /* Dimmed state */
+    /* Green - Signature Accent */
+    --accent-green: 152 69% 40%; /* #22A06B - Primary accent */
+    --accent-green-light: 152 69% 50%; /* Lighter variant */
+    --accent-green-dim: 152 55% 35%; /* Dimmed state */
     
-    /* Secondary Accents - Oura Palette */
-    --oura-blue: 217 91% 60%; /* Sleep/readiness */
-    --oura-teal: 173 80% 45%; /* Activity */
-    --oura-orange: 25 95% 53%; /* Warmth/alerts */
-    --oura-red: 0 72% 55%; /* Low scores */
+    /* Secondary Accents */
+    --signal-blue: 217 91% 55%; /* Info */
+    --signal-amber: 38 92% 50%; /* Warning */
+    --signal-red: 0 72% 50%; /* Error/destructive */
     
-    /* Semantic Mappings - Oura Style */
-    --background: 240 8% 12%; /* Warm dark background */
-    --foreground: 0 0% 98%; /* Near white */
+    /* Semantic Mappings - Light Theme */
+    --background: 0 0% 100%; /* Pure white */
+    --foreground: 0 0% 8%; /* Near black text */
     
-    --card: 240 6% 16%; /* Warm dark card */
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 100%; /* White card */
+    --card-foreground: 0 0% 8%;
     
-    --popover: 240 6% 16%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 8%;
     
-    --primary: 262 83% 65%; /* Oura purple */
+    --primary: 152 69% 40%; /* Green */
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 240 5% 22%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 8%;
     
-    --muted: 240 5% 24%;
-    --muted-foreground: 240 5% 60%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
     
-    --accent: 262 83% 65%; /* Oura purple */
-    --accent-light: 262 90% 72%;
+    --accent: 152 69% 40%; /* Green */
+    --accent-light: 152 69% 50%;
     --accent-foreground: 0 0% 100%;
     
-    --destructive: 0 72% 55%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
     
-    --border: 240 5% 28%;
-    --input: 240 5% 24%;
-    --ring: 262 83% 65%;
+    --border: 0 0% 90%;
+    --input: 0 0% 96%;
+    --ring: 152 69% 40%;
     
-    --radius: 16px;
+    --radius: 12px;
     
     /* Card Gradients for Depth */
-    --card-gradient: linear-gradient(145deg, hsl(240 6% 18%) 0%, hsl(240 6% 14%) 100%);
-    --card-gradient-hover: linear-gradient(145deg, hsl(240 6% 20%) 0%, hsl(240 6% 16%) 100%);
-    --card-gradient-accent: linear-gradient(145deg, hsl(262 15% 18%) 0%, hsl(240 6% 14%) 100%);
+    --card-gradient: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(0 0% 98%) 100%);
+    --card-gradient-hover: linear-gradient(145deg, hsl(0 0% 99%) 0%, hsl(0 0% 96%) 100%);
+    --card-gradient-accent: linear-gradient(145deg, hsl(152 20% 98%) 0%, hsl(0 0% 100%) 100%);
     
     /* Signal Colors */
-    --signal-green: 173 80% 45%;
-    --signal-blue: 217 91% 60%;
-    --signal-amber: 25 95% 53%;
+    --signal-green: 152 69% 40%;
     
     /* Legacy Compatibility */
-    --carbon: 240 8% 10%;
-    --ivory: 0 0% 98%;
-    --ash: 240 5% 55%;
-    --stone: 240 5% 78%;
-    --mist: 240 5% 28%;
-    --slate: 240 6% 16%;
-    --pearl: 240 5% 22%;
+    --carbon: 0 0% 8%;
+    --ivory: 0 0% 100%;
+    --ash: 0 0% 45%;
+    --stone: 0 0% 25%;
+    --mist: 0 0% 90%;
+    --slate: 0 0% 96%;
+    --pearl: 0 0% 94%;
     
-    /* Cyber compatibility - Mapped to Oura */
-    --cyber-blue: 262 83% 65%;
-    --electric-cyan: 217 91% 60%;
-    --neon-green: 173 80% 45%;
-    --plasma-purple: 262 83% 65%;
-    --warning-amber: 25 95% 53%;
-    --alert-red: 0 72% 55%;
+    /* Cyber compatibility - Mapped to Green */
+    --cyber-blue: 152 69% 40%;
+    --electric-cyan: 152 69% 50%;
+    --neon-green: 152 69% 40%;
+    --plasma-purple: 262 83% 58%;
+    --warning-amber: 38 92% 50%;
+    --alert-red: 0 72% 50%;
     
-    /* Sidebar - Oura Theme */
-    --sidebar-background: 240 8% 10%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 262 83% 65%;
+    /* Sidebar - Light Theme */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 8%;
+    --sidebar-primary: 152 69% 40%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 6% 18%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 240 5% 22%;
-    --sidebar-ring: 262 83% 65%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 8%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 152 69% 40%;
     
-    /* Shadow System */
-    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
-    --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-    --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.6);
-    --shadow-lg: 0 8px 16px -4px rgba(0, 0, 0, 0.6);
-    --shadow-xl: 0 16px 32px -8px rgba(0, 0, 0, 0.7);
-    --shadow-2xl: 0 24px 48px -12px rgba(0, 0, 0, 0.7);
-    --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-    --shadow-glow: 0 0 40px rgba(167, 139, 250, 0.15), 0 0 80px rgba(167, 139, 250, 0.05);
+    /* Shadow System - Soft for Light Theme */
+    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+    --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 16px -4px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 16px 32px -8px rgba(0, 0, 0, 0.12);
+    --shadow-2xl: 0 24px 48px -12px rgba(0, 0, 0, 0.15);
+    --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+    --shadow-glow: 0 0 20px rgba(34, 160, 107, 0.1), 0 0 40px rgba(34, 160, 107, 0.05);
     
     /* Focus Ring */
-    --focus-ring: 0 0 0 2px rgba(167, 139, 250, 0.4);
+    --focus-ring: 0 0 0 2px rgba(34, 160, 107, 0.3);
     
     /* Glass Effect */
-    --glass-bg: rgba(28, 28, 35, 0.9);
-    --glass-border: rgba(167, 139, 250, 0.15);
+    --glass-bg: rgba(255, 255, 255, 0.9);
+    --glass-border: rgba(34, 160, 107, 0.15);
   }
   
   /* Light mode fallback - inverted but maintaining sophistication */
