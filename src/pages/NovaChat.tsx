@@ -4,24 +4,24 @@ import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { Button } from "@/components/ui/button";
 import { 
   Sparkles, 
-  Send, 
   Loader2, 
-  Copy, 
-  Check, 
-  RotateCcw, 
   Trash2,
   Zap,
   Brain,
   Moon,
   Activity,
-  ArrowUp
+  ArrowUp,
+  Target,
+  Dumbbell
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { SEO } from "@/components/SEO";
 import { cn } from "@/lib/utils";
-import { NovaResponseCard } from "@/components/nova/NovaResponseCard";
-import { NovaVoiceInterface } from "@/components/nova/NovaVoiceInterface";
+import { NovaChatMessage } from "@/components/nova/NovaChatMessage";
+import { NovaTypingIndicator } from "@/components/nova/NovaTypingIndicator";
+import { NovaVoiceInterfaceEnhanced } from "@/components/nova/NovaVoiceInterfaceEnhanced";
+import { NovaOrb } from "@/components/nova/NovaOrb";
 
 interface Message {
   id?: string;
@@ -30,11 +30,14 @@ interface Message {
   timestamp?: Date;
 }
 
+// Linear/Raycast inspired quick actions - minimal and focused
 const QUICK_ACTIONS = [
-  { icon: Activity, label: "Analyse my HRV", prompt: "Analyse my recent HRV data and give me actionable insights", color: "from-emerald-500/20 to-emerald-500/5" },
-  { icon: Moon, label: "Sleep protocol", prompt: "Create a personalised sleep optimisation protocol for me", color: "from-indigo-500/20 to-indigo-500/5" },
-  { icon: Zap, label: "Energy boost", prompt: "I need more energy in the afternoon. What do you recommend?", color: "from-amber-500/20 to-amber-500/5" },
-  { icon: Brain, label: "Focus stack", prompt: "Design a supplement stack for deep focus and cognitive performance", color: "from-violet-500/20 to-violet-500/5" },
+  { icon: Activity, label: "Analyse HRV", prompt: "Analyse my recent HRV data and give me actionable insights", gradient: "from-emerald-500/20 to-emerald-500/5" },
+  { icon: Moon, label: "Sleep protocol", prompt: "Create a personalised sleep optimisation protocol for me", gradient: "from-indigo-500/20 to-indigo-500/5" },
+  { icon: Zap, label: "Energy boost", prompt: "I need more energy in the afternoon. What do you recommend?", gradient: "from-amber-500/20 to-amber-500/5" },
+  { icon: Brain, label: "Focus stack", prompt: "Design a supplement stack for deep focus and cognitive performance", gradient: "from-violet-500/20 to-violet-500/5" },
+  { icon: Target, label: "Recovery plan", prompt: "Create an optimal recovery protocol for today based on my data", gradient: "from-rose-500/20 to-rose-500/5" },
+  { icon: Dumbbell, label: "Training window", prompt: "When is my optimal training window today?", gradient: "from-cyan-500/20 to-cyan-500/5" },
 ];
 
 const WELCOME_MESSAGE = `Here's what matters: I'm Nova, your cognitive operating system.
@@ -334,11 +337,11 @@ export default function NovaChat() {
             disabled={isLoading}
             className={cn(
               "group relative flex items-center gap-4 p-4 rounded-2xl",
-              "bg-gradient-to-br", action.color,
+              "bg-gradient-to-br", action.gradient,
               "border border-border/30 hover:border-accent/30",
               "transition-all duration-300 text-left",
               "hover:shadow-lg hover:-translate-y-0.5",
-              "nova-card-hover"
+              "nova-quick-action"
             )}
           >
             <div className={cn(
@@ -408,7 +411,7 @@ export default function NovaChat() {
               </div>
               <div className="flex items-center gap-2">
                 {/* Voice Interface */}
-                <NovaVoiceInterface 
+                <NovaVoiceInterfaceEnhanced 
                   onTranscript={(text, role) => {
                     if (role === "user") {
                       setMessages(prev => [...prev, { role: "user", content: text, timestamp: new Date() }]);
@@ -483,16 +486,14 @@ export default function NovaChat() {
                                 </p>
                               </div>
                             ) : (
-                              <NovaResponseCard
+                              <NovaChatMessage
+                                role="assistant"
                                 content={message.content}
                                 timestamp={message.timestamp}
-                                confidence="high"
-                                baselineDays={14}
                                 isStreaming={isLoading && index === messages.length - 1 && !message.content}
                                 onCopy={() => copyToClipboard(message.content, `msg-${index}`)}
                                 onRegenerate={index === messages.length - 1 && !isLoading ? regenerateLastResponse : undefined}
-                                isCopied={copiedId === `msg-${index}`}
-                                showActions={true}
+                                animationDelay={index * 50}
                               />
                             )}
                           </div>
