@@ -110,12 +110,12 @@ const Hero = () => {
 
                 {/* Floating UI elements that respond to mouse */}
                 <div 
-                  className="absolute top-4 left-4 hidden lg:block"
+                  className="absolute top-2 right-4 hidden lg:block"
                   style={getParallaxStyle(-0.3)}
                 >
-                  <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded backdrop-blur-sm">
-                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[10px] text-white/50 font-mono">NEURAL_SYNC</span>
+                  <div className="flex items-center gap-2 px-2 py-1 bg-white/5 border border-white/10 rounded backdrop-blur-sm">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="text-[9px] text-white/50 font-mono">NEURAL_SYNC</span>
                   </div>
                 </div>
 
