@@ -4,6 +4,7 @@ import { SEO } from "@/components/SEO";
 import { OrganizationStructuredData, SoftwareApplicationStructuredData, WebsiteStructuredData, LocalBusinessStructuredData } from "@/components/StructuredData";
 import { Footer } from "@/components/Footer";
 import { LiveChat } from "@/components/LiveChat";
+import AnimatedNeuron from "@/components/AnimatedNeuron";
 
 import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -112,19 +113,8 @@ const Index = () => {
                     </div>
                     
                     <div className="relative z-10 space-y-4">
-                      {/* Brainwave Icon */}
-                      <div className={`w-12 h-12 flex items-center justify-center border ${item.borderColor} bg-white/5`}>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path 
-                            d="M2 12C2 12 4 8 6 12C8 16 10 8 12 12C14 16 16 8 18 12C20 16 22 12 22 12" 
-                            stroke={item.iconColor} 
-                            strokeWidth="2" 
-                            strokeLinecap="round" 
-                            strokeLinejoin="round"
-                            className="group-hover:animate-pulse"
-                          />
-                        </svg>
-                      </div>
+                      {/* Animated Neuron Icon */}
+                      <AnimatedNeuron color={item.iconColor} className="w-16 h-16" pulseDelay={i * 200} />
                       <h3 className="text-2xl font-bold text-white">{item.title}</h3>
                       <p className={`text-${item.color}-400 text-sm font-medium uppercase tracking-wider`}>{item.desc}</p>
                       <p className="text-white/50 text-sm leading-relaxed">{item.detail}</p>
