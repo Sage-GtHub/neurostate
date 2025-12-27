@@ -2,16 +2,11 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { supabase } from "@/integrations/supabase/client";
 import { ProtocolAssessment } from "@/components/ProtocolAssessment";
 import { useToast } from "@/components/ui/use-toast";
-import { Plus, ArrowRight, Target } from "lucide-react";
-import { PhaseProgressTracker } from "@/components/nova/PhaseProgressTracker";
-import { ProtocolBuilder } from "@/components/nova/ProtocolBuilder";
-import { ProtocolCheckIn } from "@/components/nova/ProtocolCheckIn";
+import { Plus, ChevronRight, Target, Activity, TrendingUp, Zap } from "lucide-react";
+import { WhoopScoreRing } from "@/components/nova/WhoopScoreRing";
 
 interface Protocol {
   id: string;
@@ -27,8 +22,6 @@ export default function NovaProtocols() {
   const navigate = useNavigate();
   const [protocols, setProtocols] = useState<Protocol[]>([]);
   const [showAssessment, setShowAssessment] = useState(false);
-  const [currentPhase, setCurrentPhase] = useState<1 | 2 | 3 | 4>(2);
-  const [daysInPhase, setDaysInPhase] = useState(14);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -58,122 +51,160 @@ export default function NovaProtocols() {
     }
   };
 
+  const getDaysSince = (dateString: string) => {
+    const start = new Date(dateString);
+    const now = new Date();
+    return Math.floor((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+  };
+
   return (
     <NovaSwipeWrapper>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-black">
         <NovaNav />
-      
-      <div className="border-b border-border/50 bg-gradient-to-b from-background to-muted/20">
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-8">
-          <div className="flex items-center justify-between gap-3 mb-2">
-            <h1 className="text-2xl sm:text-3xl md:text-h1 font-semibold text-foreground">Active Protocols</h1>
-            <Button onClick={() => setShowAssessment(true)} size="sm" className="gap-2 min-h-[44px]">
-              <Plus className="w-4 h-4" />
-              <span className="hidden sm:inline">New Protocol</span>
-              <span className="sm:hidden">New</span>
-            </Button>
+        
+        {/* Hero Section with Recovery Ring */}
+        <div className="px-6 pt-8 pb-12">
+          <div className="flex flex-col items-center text-center mb-12">
+            {/* Main Score Ring */}
+            <div className="relative mb-8">
+              <WhoopScoreRing 
+                score={protocols.length > 0 ? Math.round(protocols.reduce((acc, p) => acc + p.completion_percentage, 0) / protocols.length) : 0} 
+                size={200} 
+                strokeWidth={10}
+                label="PROTOCOL"
+                sublabel="ADHERENCE"
+              />
+            </div>
+            
+            {/* Stats Row */}
+            <div className="flex items-center gap-8 text-center">
+              <div>
+                <div className="text-3xl font-bold text-foreground">{protocols.length}</div>
+                <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Active</div>
+              </div>
+              <div className="w-px h-8 bg-border" />
+              <div>
+                <div className="text-3xl font-bold text-foreground">
+                  {protocols.length > 0 ? getDaysSince(protocols[0]?.started_at) : 0}
+                </div>
+                <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Days</div>
+              </div>
+              <div className="w-px h-8 bg-border" />
+              <div>
+                <div className="text-3xl font-bold text-primary">
+                  {protocols.reduce((acc, p) => acc + (p.products?.length || 0), 0)}
+                </div>
+                <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Items</div>
+              </div>
+            </div>
           </div>
-          <p className="text-xs sm:text-body-sm text-muted-foreground">Track your daily stacks and protocol progress</p>
-        </div>
-      </div>
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8 sm:py-12">
-        <div className="space-y-8 sm:space-y-12 animate-fade-in">
-          {/* Phase Progress Tracker */}
-          <PhaseProgressTracker currentPhase={currentPhase} daysInPhase={daysInPhase} />
-
-          {/* Protocol Builder */}
-          <ProtocolBuilder />
+          {/* Quick Actions */}
+          <div className="flex gap-3 mb-8">
+            <button
+              onClick={() => setShowAssessment(true)}
+              className="flex-1 flex items-center justify-center gap-2 py-4 rounded-2xl bg-primary text-primary-foreground font-semibold text-sm transition-all active:scale-[0.98]"
+            >
+              <Plus className="w-5 h-5" />
+              New Protocol
+            </button>
+          </div>
 
           {/* Protocols List */}
-          <div className="space-y-4 sm:space-y-6">
+          <div className="space-y-3">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Your Protocols</h2>
+            </div>
+
             {protocols.length > 0 ? (
-            protocols.map((protocol) => (
-              <Card key={protocol.id} className="border-mist/30 hover:border-mist transition-all hover:shadow-md">
-                <CardContent className="p-4 sm:p-6 md:p-8">
-                  <div className="flex flex-col sm:flex-row items-start justify-between gap-4 mb-4 sm:mb-6">
-                    <div>
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-carbon to-slate flex items-center justify-center">
-                          <Target className="w-5 h-5 text-ivory" />
-                        </div>
-                        <h3 className="text-[1.125rem] font-semibold text-carbon">{protocol.protocol_name}</h3>
-                      </div>
-                      <p className="text-sm text-ash ml-13">
-                        Started {new Date(protocol.started_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })} • {protocol.status}
-                      </p>
-                    </div>
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      onClick={() => navigate(`/nova/protocols/${protocol.id}`)}
-                      className="gap-2 hover:bg-pearl"
-                    >
-                      <span>View Details</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </Button>
-                  </div>
-
-                  <div className="mb-8">
-                    <div className="flex items-center justify-between text-sm mb-3">
-                      <span className="text-ash font-medium">Progress</span>
-                      <span className="font-semibold text-carbon">{protocol.completion_percentage}%</span>
-                    </div>
-                    <Progress value={protocol.completion_percentage} className="h-2.5" />
-                  </div>
-
-                  {/* Protocol Check-In */}
-                  <div className="border-t border-mist/30 pt-6">
-                    <ProtocolCheckIn 
-                      protocolId={protocol.id} 
-                      products={protocol.products}
-                      onComplete={loadProtocols}
+              protocols.map((protocol) => (
+                <button
+                  key={protocol.id}
+                  onClick={() => navigate(`/nova/protocols/${protocol.id}`)}
+                  className="w-full flex items-center gap-4 p-4 rounded-2xl bg-card border border-border/50 hover:border-primary/30 transition-all active:scale-[0.99]"
+                >
+                  {/* Mini Ring */}
+                  <div className="flex-shrink-0">
+                    <WhoopScoreRing 
+                      score={protocol.completion_percentage} 
+                      size={56} 
+                      strokeWidth={4}
+                      showLabel={false}
                     />
                   </div>
-                </CardContent>
-              </Card>
-            ))
-          ) : (
-            <Card className="border-mist/30">
-              <CardContent className="p-12 text-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-pearl to-mist mx-auto mb-6 flex items-center justify-center">
-                  <Target className="w-8 h-8 text-ash" />
+                  
+                  {/* Content */}
+                  <div className="flex-1 text-left">
+                    <h3 className="font-semibold text-foreground text-base mb-1">{protocol.protocol_name}</h3>
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <span>{getDaysSince(protocol.started_at)} days</span>
+                      <span className="w-1 h-1 rounded-full bg-muted-foreground" />
+                      <span>{protocol.products?.length || 0} items</span>
+                      <span className="w-1 h-1 rounded-full bg-muted-foreground" />
+                      <span className="capitalize">{protocol.status}</span>
+                    </div>
+                  </div>
+
+                  {/* Arrow */}
+                  <ChevronRight className="w-5 h-5 text-muted-foreground" />
+                </button>
+              ))
+            ) : (
+              <div className="flex flex-col items-center py-16 text-center">
+                <div className="w-20 h-20 rounded-full bg-card border border-border flex items-center justify-center mb-6">
+                  <Target className="w-10 h-10 text-muted-foreground" />
                 </div>
-                <p className="text-body text-ash mb-6 max-w-md mx-auto">
-                  No active protocols yet. Create your first personalised protocol to start optimising your performance.
+                <p className="text-muted-foreground text-sm mb-6 max-w-xs">
+                  No active protocols yet. Create your first protocol to start optimising.
                 </p>
-                <Button onClick={() => setShowAssessment(true)} size="lg" className="gap-2">
+                <button
+                  onClick={() => setShowAssessment(true)}
+                  className="flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-semibold text-sm"
+                >
                   <Plus className="w-4 h-4" />
-                  <span>Create Your First Protocol</span>
-                </Button>
-              </CardContent>
-            </Card>
-          )}
-
-          {protocols.length > 0 && (
-            <Card className="border-carbon/10 bg-gradient-to-br from-pearl/50 to-mist/30">
-              <CardContent className="p-8 text-center">
-                <h3 className="text-[1.125rem] font-semibold text-carbon mb-3">Ready to optimise something new?</h3>
-                <p className="text-sm text-ash mb-6 leading-relaxed max-w-xl mx-auto">
-                  Take another assessment to create a specialised protocol for different performance goals.
-                </p>
-                <Button variant="outline" onClick={() => setShowAssessment(true)} className="gap-2">
-                  <Plus className="w-4 h-4" />
-                  <span>Create Protocol</span>
-                </Button>
-              </CardContent>
-            </Card>
-          )}
+                  Create Protocol
+                </button>
+              </div>
+            )}
           </div>
-        </div>
-      </div>
 
-      <ProtocolAssessment 
-        open={showAssessment} 
-        onOpenChange={setShowAssessment}
-        onComplete={loadProtocols}
-      />
-    </div>
+          {/* Journey Progress */}
+          {protocols.length > 0 && (
+            <div className="mt-8 pt-8 border-t border-border">
+              <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">Your Journey</h2>
+              
+              <div className="grid grid-cols-4 gap-2">
+                {[
+                  { phase: 1, label: "Discover", icon: Activity, active: true },
+                  { phase: 2, label: "Optimise", icon: TrendingUp, active: getDaysSince(protocols[0]?.started_at) > 7 },
+                  { phase: 3, label: "Predict", icon: Target, active: getDaysSince(protocols[0]?.started_at) > 30 },
+                  { phase: 4, label: "Autonomy", icon: Zap, active: getDaysSince(protocols[0]?.started_at) > 90 },
+                ].map((item) => (
+                  <div
+                    key={item.phase}
+                    className={`flex flex-col items-center p-4 rounded-xl transition-all ${
+                      item.active 
+                        ? "bg-card border border-primary/30" 
+                        : "bg-card/50 border border-border/30 opacity-50"
+                    }`}
+                  >
+                    <item.icon className={`w-5 h-5 mb-2 ${item.active ? "text-primary" : "text-muted-foreground"}`} />
+                    <span className={`text-xs font-medium ${item.active ? "text-foreground" : "text-muted-foreground"}`}>
+                      {item.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <ProtocolAssessment 
+          open={showAssessment} 
+          onOpenChange={setShowAssessment}
+          onComplete={loadProtocols}
+        />
+      </div>
     </NovaSwipeWrapper>
   );
 }

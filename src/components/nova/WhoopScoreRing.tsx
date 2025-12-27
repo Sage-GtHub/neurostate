@@ -3,65 +3,41 @@ import { useEffect, useState } from "react";
 
 interface WhoopScoreRingProps {
   score: number; // 0-100
-  label: string;
+  label?: string;
   sublabel?: string;
-  size?: "sm" | "md" | "lg";
-  color?: "green" | "yellow" | "red" | "cyan" | "purple";
+  size?: "sm" | "md" | "lg" | number;
+  strokeWidth?: number;
+  showLabel?: boolean;
+  color?: "green" | "yellow" | "red" | "auto";
   className?: string;
   animated?: boolean;
 }
-
-const colorVariants = {
-  green: {
-    stroke: "stroke-green-500",
-    fill: "fill-green-500",
-    glow: "drop-shadow-[0_0_8px_rgba(34,197,94,0.5)]",
-    bg: "text-green-500/20",
-  },
-  yellow: {
-    stroke: "stroke-yellow-500",
-    fill: "fill-yellow-500",
-    glow: "drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]",
-    bg: "text-yellow-500/20",
-  },
-  red: {
-    stroke: "stroke-red-500",
-    fill: "fill-red-500",
-    glow: "drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]",
-    bg: "text-red-500/20",
-  },
-  cyan: {
-    stroke: "stroke-accent",
-    fill: "fill-accent",
-    glow: "drop-shadow-[0_0_8px_hsl(var(--accent)/0.5)]",
-    bg: "text-accent/20",
-  },
-  purple: {
-    stroke: "stroke-purple-500",
-    fill: "fill-purple-500",
-    glow: "drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]",
-    bg: "text-purple-500/20",
-  },
-};
-
-const sizeVariants = {
-  sm: { size: 80, strokeWidth: 6, fontSize: "text-xl", labelSize: "text-[10px]" },
-  md: { size: 120, strokeWidth: 8, fontSize: "text-3xl", labelSize: "text-xs" },
-  lg: { size: 160, strokeWidth: 10, fontSize: "text-4xl", labelSize: "text-sm" },
-};
 
 export function WhoopScoreRing({
   score,
   label,
   sublabel,
   size = "md",
-  color = "green",
+  strokeWidth: customStrokeWidth,
+  showLabel = true,
+  color = "auto",
   className,
   animated = true,
 }: WhoopScoreRingProps) {
   const [animatedScore, setAnimatedScore] = useState(0);
-  const { size: ringSize, strokeWidth, fontSize, labelSize } = sizeVariants[size];
-  const colors = colorVariants[color];
+  
+  // Handle numeric or preset sizes
+  const getSize = () => {
+    if (typeof size === "number") return size;
+    switch (size) {
+      case "sm": return 80;
+      case "lg": return 160;
+      default: return 120;
+    }
+  };
+  
+  const ringSize = getSize();
+  const strokeWidth = customStrokeWidth ?? (typeof size === "number" ? 8 : size === "sm" ? 6 : size === "lg" ? 10 : 8);
   
   const radius = (ringSize - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
@@ -78,9 +54,25 @@ export function WhoopScoreRing({
     }
   }, [score, animated]);
 
-  // Determine color based on score if not explicitly set
-  const autoColor = score >= 67 ? "green" : score >= 34 ? "yellow" : "red";
-  const activeColors = color === "green" ? colorVariants[autoColor] : colors;
+  // Determine color based on score (Whoop style)
+  const getColor = () => {
+    if (color !== "auto") {
+      switch (color) {
+        case "green": return "hsl(156, 100%, 47%)";
+        case "yellow": return "hsl(45, 100%, 50%)";
+        case "red": return "hsl(0, 85%, 55%)";
+      }
+    }
+    if (animatedScore >= 67) return "hsl(156, 100%, 47%)"; // Green
+    if (animatedScore >= 34) return "hsl(45, 100%, 50%)"; // Yellow
+    return "hsl(0, 85%, 55%)"; // Red
+  };
+
+  const ringColor = getColor();
+  
+  // Font sizes based on ring size
+  const scoreFontSize = Math.max(16, ringSize * 0.28);
+  const labelFontSize = Math.max(8, ringSize * 0.06);
 
   return (
     <div className={cn("relative flex flex-col items-center", className)}>
@@ -89,7 +81,7 @@ export function WhoopScoreRing({
         <svg
           width={ringSize}
           height={ringSize}
-          className={cn("transform -rotate-90", animated && colors.glow)}
+          className="transform -rotate-90"
         >
           {/* Background ring */}
           <circle
@@ -97,7 +89,8 @@ export function WhoopScoreRing({
             cy={ringSize / 2}
             r={radius}
             strokeWidth={strokeWidth}
-            className="stroke-muted/30 fill-none"
+            fill="none"
+            stroke="hsl(0, 0%, 15%)"
           />
           
           {/* Progress ring */}
@@ -107,34 +100,48 @@ export function WhoopScoreRing({
             r={radius}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
-            className={cn("fill-none transition-all duration-1000 ease-out", activeColors.stroke)}
+            fill="none"
+            stroke={ringColor}
+            className="transition-all duration-1000 ease-out"
             style={{
               strokeDasharray: circumference,
               strokeDashoffset: offset,
+              filter: `drop-shadow(0 0 8px ${ringColor})`,
             }}
           />
         </svg>
         
         {/* Center content */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className={cn("font-bold tracking-tight", fontSize)}>
-            {Math.round(animatedScore)}
-          </span>
-          {sublabel && (
-            <span className={cn("text-muted-foreground uppercase tracking-widest", labelSize)}>
-              {sublabel}
+        {showLabel && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <span 
+              className="font-bold tracking-tight leading-none"
+              style={{ 
+                fontSize: scoreFontSize,
+                color: ringColor,
+              }}
+            >
+              {Math.round(animatedScore)}
             </span>
-          )}
-        </div>
+            {label && (
+              <span 
+                className="text-muted-foreground uppercase tracking-widest font-medium mt-1"
+                style={{ fontSize: labelFontSize }}
+              >
+                {label}
+              </span>
+            )}
+            {sublabel && (
+              <span 
+                className="text-muted-foreground uppercase tracking-widest"
+                style={{ fontSize: Math.max(7, labelFontSize - 1) }}
+              >
+                {sublabel}
+              </span>
+            )}
+          </div>
+        )}
       </div>
-      
-      {/* Label */}
-      <span className={cn(
-        "mt-2 font-medium uppercase tracking-wider text-muted-foreground",
-        labelSize
-      )}>
-        {label}
-      </span>
     </div>
   );
 }
