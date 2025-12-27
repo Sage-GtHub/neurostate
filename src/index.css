@@ -34,100 +34,101 @@
 
 @layer base {
   :root {
-    /* WHOOP-INSPIRED PALETTE - Charcoal Gray Aesthetic */
+    /* OURA RING-INSPIRED PALETTE */
     
-    /* Core Backgrounds - Charcoal (15-20% lightness) */
-    --void: 0 0% 12%; /* Deep charcoal */
-    --obsidian: 0 0% 15%; /* Primary background */
-    --graphite: 0 0% 18%; /* Elevated surfaces */
-    --steel: 0 0% 22%; /* Cards & containers */
+    /* Core Backgrounds - Warm Dark */
+    --void: 240 10% 10%; /* Deep dark */
+    --obsidian: 240 8% 13%; /* Primary background */
+    --graphite: 240 6% 16%; /* Elevated surfaces */
+    --steel: 240 5% 20%; /* Cards & containers */
     
-    /* Grays - Whoop Scale */
+    /* Grays - Warm Scale */
     --platinum: 0 0% 98%; /* Primary text */
-    --silver: 0 0% 78%; /* Secondary text */
-    --mercury: 0 0% 58%; /* Muted text */
-    --titanium: 0 0% 30%; /* Borders */
+    --silver: 240 5% 78%; /* Secondary text */
+    --mercury: 240 5% 55%; /* Muted text */
+    --titanium: 240 5% 32%; /* Borders */
     
-    /* Whoop Green - Signature Accent */
-    --whoop-green: 156 100% 47%; /* #00F19E - Primary accent */
-    --whoop-green-glow: 156 100% 55%; /* Lighter glow */
-    --whoop-green-dim: 156 80% 35%; /* Dimmed state */
+    /* Oura Purple - Signature Accent */
+    --oura-purple: 262 83% 65%; /* #A78BFA - Primary accent */
+    --oura-purple-glow: 262 90% 72%; /* Lighter glow */
+    --oura-purple-dim: 262 60% 50%; /* Dimmed state */
     
-    /* Secondary Accents */
-    --whoop-red: 0 85% 55%; /* Recovery low */
-    --whoop-yellow: 45 100% 50%; /* Recovery medium */
-    --whoop-blue: 210 100% 50%; /* Strain indicator */
+    /* Secondary Accents - Oura Palette */
+    --oura-blue: 217 91% 60%; /* Sleep/readiness */
+    --oura-teal: 173 80% 45%; /* Activity */
+    --oura-orange: 25 95% 53%; /* Warmth/alerts */
+    --oura-red: 0 72% 55%; /* Low scores */
     
-    /* Semantic Mappings - Charcoal */
-    --background: 0 0% 14%; /* Charcoal background */
+    /* Semantic Mappings - Oura Style */
+    --background: 240 8% 12%; /* Warm dark background */
     --foreground: 0 0% 98%; /* Near white */
     
-    --card: 0 0% 18%; /* Charcoal card */
+    --card: 240 6% 16%; /* Warm dark card */
     --card-foreground: 0 0% 98%;
     
-    --popover: 0 0% 18%;
+    --popover: 240 6% 16%;
     --popover-foreground: 0 0% 98%;
     
-    --primary: 156 100% 47%; /* Whoop green */
-    --primary-foreground: 0 0% 0%;
+    --primary: 262 83% 65%; /* Oura purple */
+    --primary-foreground: 0 0% 100%;
     
-    --secondary: 0 0% 22%;
+    --secondary: 240 5% 22%;
     --secondary-foreground: 0 0% 98%;
     
-    --muted: 0 0% 24%;
-    --muted-foreground: 0 0% 62%;
+    --muted: 240 5% 24%;
+    --muted-foreground: 240 5% 60%;
     
-    --accent: 156 100% 47%; /* Whoop green */
-    --accent-light: 156 100% 55%;
-    --accent-foreground: 0 0% 0%;
+    --accent: 262 83% 65%; /* Oura purple */
+    --accent-light: 262 90% 72%;
+    --accent-foreground: 0 0% 100%;
     
-    --destructive: 0 85% 55%;
+    --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 98%;
     
-    --border: 0 0% 28%;
-    --input: 0 0% 24%;
-    --ring: 156 100% 47%;
+    --border: 240 5% 28%;
+    --input: 240 5% 24%;
+    --ring: 262 83% 65%;
     
     --radius: 16px;
     
     /* Card Gradients for Depth */
-    --card-gradient: linear-gradient(145deg, hsl(0 0% 20%) 0%, hsl(0 0% 16%) 100%);
-    --card-gradient-hover: linear-gradient(145deg, hsl(0 0% 22%) 0%, hsl(0 0% 18%) 100%);
-    --card-gradient-accent: linear-gradient(145deg, hsl(156 20% 18%) 0%, hsl(0 0% 16%) 100%);
+    --card-gradient: linear-gradient(145deg, hsl(240 6% 18%) 0%, hsl(240 6% 14%) 100%);
+    --card-gradient-hover: linear-gradient(145deg, hsl(240 6% 20%) 0%, hsl(240 6% 16%) 100%);
+    --card-gradient-accent: linear-gradient(145deg, hsl(262 15% 18%) 0%, hsl(240 6% 14%) 100%);
     
     /* Signal Colors */
-    --signal-green: 156 100% 47%;
-    --signal-blue: 210 100% 50%;
-    --signal-amber: 45 100% 50%;
+    --signal-green: 173 80% 45%;
+    --signal-blue: 217 91% 60%;
+    --signal-amber: 25 95% 53%;
     
-    /* Legacy Compatibility - Mapped to Whoop */
-    --carbon: 0 0% 12%;
+    /* Legacy Compatibility */
+    --carbon: 240 8% 10%;
     --ivory: 0 0% 98%;
-    --ash: 0 0% 58%;
-    --stone: 0 0% 78%;
-    --mist: 0 0% 28%;
-    --slate: 0 0% 18%;
-    --pearl: 0 0% 22%;
+    --ash: 240 5% 55%;
+    --stone: 240 5% 78%;
+    --mist: 240 5% 28%;
+    --slate: 240 6% 16%;
+    --pearl: 240 5% 22%;
     
-    /* Cyber compatibility */
-    --cyber-blue: 156 100% 47%;
-    --electric-cyan: 156 100% 47%;
-    --neon-green: 156 100% 47%;
-    --plasma-purple: 265 90% 65%;
-    --warning-amber: 45 100% 50%;
-    --alert-red: 0 85% 55%;
+    /* Cyber compatibility - Mapped to Oura */
+    --cyber-blue: 262 83% 65%;
+    --electric-cyan: 217 91% 60%;
+    --neon-green: 173 80% 45%;
+    --plasma-purple: 262 83% 65%;
+    --warning-amber: 25 95% 53%;
+    --alert-red: 0 72% 55%;
     
-    /* Sidebar - Charcoal Theme */
-    --sidebar-background: 0 0% 12%;
+    /* Sidebar - Oura Theme */
+    --sidebar-background: 240 8% 10%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 156 100% 47%;
-    --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 0 0% 18%;
+    --sidebar-primary: 262 83% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 6% 18%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 0 0% 22%;
-    --sidebar-ring: 156 100% 47%;
+    --sidebar-border: 240 5% 22%;
+    --sidebar-ring: 262 83% 65%;
     
-    /* Shadow System - Softer for Charcoal */
+    /* Shadow System */
     --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
     --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
     --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.6);
@@ -135,14 +136,14 @@
     --shadow-xl: 0 16px 32px -8px rgba(0, 0, 0, 0.7);
     --shadow-2xl: 0 24px 48px -12px rgba(0, 0, 0, 0.7);
     --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-    --shadow-glow: 0 0 40px rgba(0, 241, 158, 0.15), 0 0 80px rgba(0, 241, 158, 0.05);
+    --shadow-glow: 0 0 40px rgba(167, 139, 250, 0.15), 0 0 80px rgba(167, 139, 250, 0.05);
     
     /* Focus Ring */
-    --focus-ring: 0 0 0 2px rgba(0, 241, 158, 0.4);
+    --focus-ring: 0 0 0 2px rgba(167, 139, 250, 0.4);
     
     /* Glass Effect */
-    --glass-bg: rgba(30, 30, 30, 0.9);
-    --glass-border: rgba(0, 241, 158, 0.15);
+    --glass-bg: rgba(28, 28, 35, 0.9);
+    --glass-border: rgba(167, 139, 250, 0.15);
   }
   
   /* Light mode fallback - inverted but maintaining sophistication */
