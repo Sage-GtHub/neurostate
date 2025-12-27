@@ -32,9 +32,9 @@ export default function HealthClubsOverview() {
   return (
     <>
       <SEO 
-        title="Cognitive Performance for Health Clubs & Studios | NeuroState"
-        description="Differentiate your facility with AI-driven cognitive performance tools. Increase member retention, boost revenue and deliver personalised wellness that drives results."
-        keywords="health club cognitive performance, gym wellness platform, member retention technology, fitness facility AI, studio performance tools, personalised fitness wellness"
+        title="Cognitive Performance Infrastructure for Fitness Facilities | Neurostate"
+        description="Enterprise-grade cognitive analytics for health clubs. Measure member cognitive readiness, predict performance outcomes, and deliver data-driven results."
+        keywords="fitness cognitive infrastructure, gym performance analytics, member performance forecasting, facility cognitive tools, premium fitness technology"
       />
       
       <div className="min-h-screen bg-white">
@@ -45,13 +45,13 @@ export default function HealthClubsOverview() {
           <div className="max-w-5xl mx-auto text-center space-y-6">
             <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Gyms · Yoga Studios · Private Clubs</p>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-carbon leading-[1.02]">
-              Cognitive Performance
+              Cognitive Analytics
               <br />
-              <span className="text-accent">for Your Members.</span>
+              <span className="text-accent">for Your Facility.</span>
             </h1>
             <p className="text-xl text-ash max-w-2xl mx-auto">
-              Give your members the cognitive edge. AI-driven performance tools that increase retention, 
-              boost revenue, and deliver results they cannot get elsewhere.
+              Enterprise-grade cognitive infrastructure for fitness facilities.
+              Measure performance outcomes. Predict member success. Deliver data-driven results.
             </p>
           </div>
         </section>

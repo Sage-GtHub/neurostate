@@ -31,8 +31,8 @@ const Index = () => {
   return (
     <>
       <SEO 
-        title="NeuroState – The World's First Cognitive Performance System"
-        description="AI, red light therapy and performance supplements combined into one system to improve focus, sleep, energy and cognitive performance. The future of mental performance starts here."
+        title="AI Cognitive Performance Platform | Neurostate"
+        description="Neurostate is an AI-driven cognitive performance platform that predicts focus, fatigue, and performance volatility for teams and individuals. Enterprise-grade cognitive infrastructure."
       />
       <OrganizationStructuredData />
       <SoftwareApplicationStructuredData />
@@ -61,10 +61,10 @@ const Index = () => {
               <div className="text-center mb-20 sm:mb-28 space-y-6">
                 <p className="text-emerald-400/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">The Platform</p>
                 <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.02] tracking-tight">
-                  One System.<br className="hidden sm:block" /> Three Forces.
+                  Cognitive Infrastructure.<br className="hidden sm:block" /> Three Systems.
                 </h2>
                 <p className="text-base sm:text-lg md:text-xl text-white/50 max-w-2xl mx-auto leading-relaxed">
-                  AI-driven cognitive performance, precision supplements, and neuromodulation technology. All working together to optimise the human mind.
+                  AI-driven cognitive forecasting, precision biological optimisation, and neuromodulation technology. Enterprise-grade performance infrastructure.
                 </p>
               </div>
 
@@ -72,18 +72,18 @@ const Index = () => {
               <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
                 {[
                   { 
-                    title: "Nova AI", 
-                    desc: "AI Cognitive OS",
-                    detail: "Personalised AI coaching with adaptive recommendations and real-time behavioural insights.",
+                    title: "Nova AI Engine", 
+                    desc: "Cognitive Forecasting",
+                    detail: "Predictive cognitive modelling with multi-model AI. Real-time performance forecasting and risk prediction.",
                     color: "violet",
                     borderColor: "border-violet-500/30",
                     glowColor: "from-violet-500/20",
                     iconColor: "#8b5cf6"
                   },
                   { 
-                    title: "Supplements", 
-                    desc: "Personalised stacks", 
-                    detail: "Adaptogen supplements for focus. Magnesium for recovery. Third-party verified.",
+                    title: "Execution Layer", 
+                    desc: "Precision cognitive stacks", 
+                    detail: "Biological optimisation components. Research-backed formulas for peak cognitive output.",
                     color: "emerald",
                     borderColor: "border-emerald-500/30",
                     glowColor: "from-emerald-500/20",
@@ -92,7 +92,7 @@ const Index = () => {
                   { 
                     title: "Neuromodulation", 
                     desc: "Brain state control", 
-                    detail: "Red light therapy cognitive benefits. Alpha and beta state switching.",
+                    detail: "Red light therapy and photobiomodulation. Alpha and beta state switching for cognitive readiness.",
                     color: "amber",
                     borderColor: "border-amber-500/30",
                     glowColor: "from-amber-500/20",
@@ -131,25 +131,25 @@ const Index = () => {
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
                 <div className="space-y-8">
-                  <p className="text-emerald-400/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Problems We Solve</p>
+                  <p className="text-emerald-400/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Performance Volatility</p>
                   <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-[1.02] tracking-tight">
-                    Mental performance issues holding you back
+                    Cognitive risk without prediction
                   </h2>
                   <p className="text-lg sm:text-xl text-white/50 leading-relaxed">
-                    The modern brain is under siege. We built our cognitive performance system to address the root causes, not just the symptoms.
+                    Traditional approaches react to problems. Our cognitive infrastructure predicts and prevents performance volatility before it impacts output.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
                   {[
-                    "Brain fog",
-                    "Poor focus",
-                    "Burnout",
-                    "Low energy",
-                    "Sleep issues",
-                    "Chronic stress",
-                    "Recovery deficits",
-                    "Decision fatigue"
+                    "Focus volatility",
+                    "Performance unpredictability",
+                    "Cognitive fatigue",
+                    "Decision degradation",
+                    "Recovery blindness",
+                    "Stress accumulation",
+                    "Output instability",
+                    "Readiness gaps"
                   ].map((problem, i) => (
                     <div 
                       key={i} 
@@ -178,24 +178,24 @@ const Index = () => {
             
             <div className="relative z-10 max-w-6xl mx-auto">
               <div className="text-center mb-20 sm:mb-24 space-y-6">
-                <p className="text-emerald-400/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Category Creation</p>
+                <p className="text-emerald-400/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">Infrastructure vs Apps</p>
                 <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.02] tracking-tight">
-                  Traditional wellness<br className="hidden sm:block" /> is dead
+                  Reactive wellness<br className="hidden sm:block" /> cannot predict
                 </h2>
                 <p className="text-lg sm:text-xl text-white/50 max-w-2xl mx-auto">
-                  This is the future of personalised cognitive performance.
+                  The future is predictive cognitive infrastructure, not relaxation apps.
                 </p>
               </div>
 
               <div className="grid lg:grid-cols-2 gap-10 lg:gap-20">
                 {/* Dead Solutions */}
                 <div className="space-y-4">
-                  <p className="text-[10px] text-white/30 uppercase tracking-[0.3em] mb-8 font-medium">What no longer works</p>
+                  <p className="text-[10px] text-white/30 uppercase tracking-[0.3em] mb-8 font-medium">Reactive approaches</p>
                   {[
-                    { item: "Meditation apps no one opens", status: "Abandoned" },
-                    { item: "Breathwork sessions that change nothing", status: "Ineffective" },
-                    { item: "Wellbeing talks no one attends", status: "Ignored" },
-                    { item: "Mental health days that arrive too late", status: "Reactive" }
+                    { item: "Apps that respond after burnout", status: "Reactive" },
+                    { item: "Generic wellness with no data", status: "Unmeasured" },
+                    { item: "No performance prediction", status: "Blind" },
+                    { item: "Interventions after breakdown", status: "Too late" }
                   ].map((entry, i) => (
                     <div 
                       key={i} 
@@ -211,15 +211,15 @@ const Index = () => {
                   ))}
                 </div>
 
-                {/* NeuroState Outcomes */}
+                {/* Neurostate Infrastructure */}
                 <div className="space-y-4">
-                  <p className="text-[10px] text-white/30 uppercase tracking-[0.3em] mb-8 font-medium">What NeuroState delivers</p>
+                  <p className="text-[10px] text-white/30 uppercase tracking-[0.3em] mb-8 font-medium">Predictive infrastructure</p>
                   {[
-                    { outcome: "Focus Optimisation", metric: "Sustained attention and deep work capacity" },
-                    { outcome: "Mental Clarity", metric: "Faster decisions. Clearer thinking." },
-                    { outcome: "Cognitive Resilience", metric: "Retention and recall under pressure" },
-                    { outcome: "Stable Energy", metric: "Consistent output throughout the day" },
-                    { outcome: "Burnout Prevention", metric: "Stress reduction technology that works" }
+                    { outcome: "Cognitive Forecasting", metric: "72-hour performance prediction" },
+                    { outcome: "Risk Detection", metric: "Identify volatility before it impacts output" },
+                    { outcome: "Readiness Measurement", metric: "Quantified cognitive capacity scores" },
+                    { outcome: "Performance Stabilisation", metric: "Reduce output variability by 40%" },
+                    { outcome: "Autonomous Optimisation", metric: "AI-driven protocol adjustments" }
                   ].map((entry, i) => (
                     <div 
                       key={i} 
@@ -249,12 +249,12 @@ const Index = () => {
               <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
                 <div className="space-y-10">
                   <div className="space-y-6">
-                    <p className="text-emerald-400/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">AI Performance Assistant</p>
+                    <p className="text-emerald-400/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-medium">AI Cognitive Engine</p>
                     <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-[1.02] tracking-tight">
-                      Nova, Your Cognitive Operating System
+                      Nova — Cognitive Performance Forecasting Engine
                     </h2>
                     <p className="text-lg sm:text-xl text-white/50 leading-relaxed max-w-lg">
-                      Nova is our AI-driven cognitive performance engine. It learns your physiology, predicts your mental states, and builds personalised protocols that improve how you think, recover, and perform.
+                      Nova is our multi-model AI engine for predictive cognitive modelling. It forecasts performance states, detects risk patterns, and delivers real-time cognitive analytics.
                     </p>
                   </div>
                   <div className="space-y-4">

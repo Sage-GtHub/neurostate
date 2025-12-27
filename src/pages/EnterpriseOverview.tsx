@@ -18,8 +18,8 @@ export default function EnterpriseOverview() {
   return (
     <>
       <SEO 
-        title="NeuroState for Teams – The Corporate Cognitive Performance Solution"
-        description="Transform workforce performance with AI-driven protocols, recovery tools and supplements that improve focus, wellbeing and productivity. The enterprise cognitive performance platform."
+        title="Cognitive Performance Infrastructure for High-Performing Teams | Neurostate"
+        description="Predict and reduce performance volatility at scale. AI-driven cognitive analytics, performance forecasting, and risk prediction for enterprise teams."
       />
       <Header />
       
@@ -29,13 +29,13 @@ export default function EnterpriseOverview() {
           <div className="max-w-5xl mx-auto text-center space-y-6">
             <p className="text-stone text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">For Organisations</p>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-ivory leading-[1.02]">
-              The end of corporate wellness
+              Cognitive Performance Infrastructure
             </h1>
             <p className="text-xl sm:text-2xl text-ivory/90 font-medium">
-              The era of cognitive performance begins.
+              Predict and reduce performance volatility at scale.
             </p>
             <p className="text-base sm:text-lg text-stone max-w-2xl mx-auto">
-              Skilled workers need a better brain, not another relaxation app. NeuroState drives clarity, focus, and resilience across teams.
+              Enterprise-grade AI that measures cognitive readiness, predicts performance risk, and stabilises output across high-performing teams.
             </p>
             <div className="pt-8">
               <Button 
@@ -54,9 +54,9 @@ export default function EnterpriseOverview() {
         <section className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory border-b border-mist">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-lg sm:text-xl md:text-2xl text-carbon leading-relaxed">
-              The first integrated platform combining AI, hardware, and nutrition.
+              The first AI platform combining predictive cognitive analytics, biometric data, and performance forecasting.
               <br className="hidden sm:block" />
-              <span className="font-semibold"> Employers finally get outcomes, not participation rates.</span>
+              <span className="font-semibold"> Employers measure outcomes, not participation.</span>
             </p>
           </div>
         </section>
@@ -68,17 +68,17 @@ export default function EnterpriseOverview() {
               <div className="space-y-6">
                 <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">The Problem</p>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.05]">
-                  Corporate wellness is dead
+                  Performance volatility costs billions
                 </h2>
                 <p className="text-base sm:text-lg text-ash leading-relaxed">
-                  Companies keep spending on wellness. Employees keep struggling. The problem is not stress management. The problem is cognitive performance.
+                  Companies cannot predict cognitive risk. Teams operate in the dark until performance breaks down. The problem is not stress—it's unmeasured cognitive capacity.
                 </p>
                 <div className="pt-4 p-6 bg-carbon">
                   <p className="text-lg text-ivory font-medium">
-                    Your people do not need more calm.
+                    Your teams don't need relaxation apps.
                   </p>
                   <p className="text-lg text-ivory/90">
-                    They need sharper minds.
+                    They need predictive cognitive infrastructure.
                   </p>
                 </div>
               </div>
@@ -134,11 +134,11 @@ export default function EnterpriseOverview() {
               <div className="space-y-3">
                 <h3 className="text-sm font-medium text-ivory mb-6 uppercase tracking-wider">NeuroState System</h3>
                 {[
-                  { item: "Nova AI coaching", benefit: "Personalised daily protocols" },
-                  { item: "Monthly supplement delivery", benefit: "Research backed formulas" },
-                  { item: "Real time analytics", benefit: "Measure cognitive markers" },
-                  { item: "Predictive insights", benefit: "Prevent burnout before it happens" },
-                  { item: "Performance tracking", benefit: "Prove ROI to leadership" }
+                  { item: "Nova AI cognitive engine", benefit: "Predictive performance forecasting" },
+                  { item: "Performance execution layer", benefit: "Precision cognitive stacks" },
+                  { item: "Real-time cognitive analytics", benefit: "Measure readiness before it breaks" },
+                  { item: "Risk prediction models", benefit: "Prevent volatility before it happens" },
+                  { item: "Enterprise dashboards", benefit: "Prove ROI to leadership" }
                 ].map((entry, i) => (
                   <div key={i} className="p-4 bg-signal-green/10 border-l-2 border-signal-green">
                     <p className="text-ivory text-sm">{entry.item}</p>

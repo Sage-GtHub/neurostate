@@ -133,7 +133,7 @@ export default function NovaHistoricalTrends() {
   if (isLoading) {
     return (
       <NovaSwipeWrapper>
-        <SEO title="Historical Trends – Nova | NeuroState" description="View your 30-day and 90-day biometric trends." />
+        <SEO title="Historical Trends – Cognitive Performance Analytics | Nova" description="30-day and 90-day biometric trend analysis with predictive performance modelling." />
         <div className="min-h-screen bg-white">
           <NovaNav />
           <div className="flex items-center justify-center py-24">
@@ -146,7 +146,7 @@ export default function NovaHistoricalTrends() {
 
   return (
     <NovaSwipeWrapper>
-      <SEO title="Historical Trends – Nova | NeuroState" description="View your 30-day and 90-day biometric trends." />
+      <SEO title="Historical Trends – Cognitive Performance Analytics | Nova" description="30-day and 90-day biometric trend analysis with predictive performance modelling." />
       <div className="min-h-screen bg-white">
         <NovaNav />
 

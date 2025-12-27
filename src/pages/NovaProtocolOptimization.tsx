@@ -15,8 +15,8 @@ export default function NovaProtocolOptimization() {
   return (
     <NovaSwipeWrapper>
       <SEO 
-        title="Nova Intelligence System – Protocol Optimisation | NeuroState"
-        description="Advanced protocol management with AI-driven optimisation, pattern recognition, and autonomous health adjustments."
+        title="Protocol Optimisation – Autonomous Performance Tuning | Nova"
+        description="AI-driven protocol management with pattern recognition, predictive modelling, and autonomous cognitive performance adjustments."
       />
       <div className="min-h-screen bg-ivory">
         <NovaNav />

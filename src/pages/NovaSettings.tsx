@@ -229,8 +229,8 @@ export default function NovaSettings() {
   return (
     <NovaSwipeWrapper>
       <SEO 
-        title="Settings – Nova | NeuroState"
-        description="Manage your Nova account settings, preferences, and data."
+        title="Settings – Nova Cognitive Infrastructure"
+        description="Configure your Nova AI cognitive performance system preferences and data integrations."
       />
       <div className="min-h-screen bg-background">
         <NovaNav />

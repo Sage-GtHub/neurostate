@@ -343,8 +343,8 @@ export default function NovaChat() {
   return (
     <NovaSwipeWrapper>
       <SEO 
-        title="Chat with Nova – AI Performance Coach | NeuroState"
-        description="Have a conversation with Nova, your elite AI performance coach."
+        title="Nova AI | Predictive Cognitive Modelling Interface"
+        description="Interact with Nova's multi-model AI engine for real-time cognitive forecasting, performance analytics, and predictive insights."
       />
       <div className="min-h-screen bg-background flex flex-col">
         <NovaNav />
