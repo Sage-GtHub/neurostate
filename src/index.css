@@ -34,19 +34,19 @@
 
 @layer base {
   :root {
-    /* WHOOP-INSPIRED DARK PALETTE */
+    /* WHOOP-INSPIRED PALETTE - Lightened for Visibility */
     
-    /* Core Blacks - Pure Black Foundation */
-    --void: 0 0% 0%; /* #000000 - Pure black */
-    --obsidian: 0 0% 4%; /* #0A0A0A - Primary background */
-    --graphite: 0 0% 8%; /* #141414 - Elevated surfaces */
-    --steel: 0 0% 12%; /* #1F1F1F - Cards & containers */
+    /* Core Backgrounds - Softened Dark */
+    --void: 0 0% 6%; /* Softer black */
+    --obsidian: 0 0% 10%; /* Primary background */
+    --graphite: 0 0% 14%; /* Elevated surfaces */
+    --steel: 0 0% 18%; /* Cards & containers */
     
     /* Grays - Whoop Scale */
-    --platinum: 0 0% 98%; /* #FAFAFA - Primary text */
-    --silver: 0 0% 70%; /* #B3B3B3 - Secondary text */
-    --mercury: 0 0% 45%; /* #737373 - Muted text */
-    --titanium: 0 0% 20%; /* #333333 - Borders */
+    --platinum: 0 0% 98%; /* Primary text */
+    --silver: 0 0% 75%; /* Secondary text */
+    --mercury: 0 0% 55%; /* Muted text */
+    --titanium: 0 0% 25%; /* Borders */
     
     /* Whoop Green - Signature Accent */
     --whoop-green: 156 100% 47%; /* #00F19E - Primary accent */
@@ -58,24 +58,24 @@
     --whoop-yellow: 45 100% 50%; /* Recovery medium */
     --whoop-blue: 210 100% 50%; /* Strain indicator */
     
-    /* Semantic Mappings - Dark First */
-    --background: 0 0% 0%; /* Pure black */
+    /* Semantic Mappings - Lightened */
+    --background: 0 0% 8%; /* Softer dark background */
     --foreground: 0 0% 98%; /* Near white */
     
-    --card: 0 0% 6%; /* Very dark gray */
+    --card: 0 0% 12%; /* Lighter card */
     --card-foreground: 0 0% 98%;
     
-    --popover: 0 0% 6%;
+    --popover: 0 0% 12%;
     --popover-foreground: 0 0% 98%;
     
     --primary: 156 100% 47%; /* Whoop green */
     --primary-foreground: 0 0% 0%;
     
-    --secondary: 0 0% 12%;
+    --secondary: 0 0% 18%;
     --secondary-foreground: 0 0% 98%;
     
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 50%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 60%;
     
     --accent: 156 100% 47%; /* Whoop green */
     --accent-light: 156 100% 55%;
@@ -84,8 +84,8 @@
     --destructive: 0 85% 55%;
     --destructive-foreground: 0 0% 98%;
     
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
+    --border: 0 0% 22%;
+    --input: 0 0% 20%;
     --ring: 156 100% 47%;
     
     --radius: 16px;
@@ -96,13 +96,13 @@
     --signal-amber: 45 100% 50%;
     
     /* Legacy Compatibility - Mapped to Whoop */
-    --carbon: 0 0% 0%;
+    --carbon: 0 0% 6%;
     --ivory: 0 0% 98%;
-    --ash: 0 0% 50%;
-    --stone: 0 0% 70%;
-    --mist: 0 0% 15%;
-    --slate: 0 0% 8%;
-    --pearl: 0 0% 12%;
+    --ash: 0 0% 55%;
+    --stone: 0 0% 75%;
+    --mist: 0 0% 22%;
+    --slate: 0 0% 14%;
+    --pearl: 0 0% 18%;
     
     /* Cyber compatibility */
     --cyber-blue: 156 100% 47%;
