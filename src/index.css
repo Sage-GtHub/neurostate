@@ -697,6 +697,108 @@
     0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
     30% { transform: translateY(-8px); opacity: 1; }
   }
+
+  @keyframes nova-wave {
+    0%, 60%, 100% { 
+      transform: translateY(0) scale(1); 
+      opacity: 0.4; 
+    }
+    30% { 
+      transform: translateY(-6px) scale(1.2); 
+      opacity: 1; 
+    }
+  }
+
+  /* ChatGPT-inspired smooth message entrance */
+  @keyframes nova-fade-up {
+    0% { 
+      opacity: 0; 
+      transform: translateY(16px); 
+      filter: blur(4px);
+    }
+    100% { 
+      opacity: 1; 
+      transform: translateY(0); 
+      filter: blur(0);
+    }
+  }
+
+  .nova-fade-up {
+    animation: nova-fade-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  /* Whoop-inspired metric pulse */
+  @keyframes nova-metric-pulse {
+    0%, 100% { 
+      box-shadow: 0 0 0 0 hsl(var(--accent) / 0.4);
+    }
+    50% { 
+      box-shadow: 0 0 0 8px hsl(var(--accent) / 0);
+    }
+  }
+
+  .nova-metric-pulse {
+    animation: nova-metric-pulse 2s ease-out infinite;
+  }
+
+  /* Hume AI inspired orb breathing */
+  @keyframes nova-breathe {
+    0%, 100% { 
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    50% { 
+      transform: scale(1.1);
+      opacity: 0.9;
+    }
+  }
+
+  .nova-breathe {
+    animation: nova-breathe 3s ease-in-out infinite;
+  }
+
+  /* Linear-inspired quick actions hover */
+  .nova-quick-action {
+    @apply relative overflow-hidden;
+    transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .nova-quick-action::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, hsl(var(--accent) / 0.1) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .nova-quick-action:hover::before {
+    opacity: 1;
+  }
+
+  .nova-quick-action:hover {
+    transform: translateY(-2px);
+    border-color: hsl(var(--accent) / 0.4);
+    box-shadow: 0 8px 24px -8px hsl(var(--accent) / 0.2);
+  }
+
+  .nova-quick-action:active {
+    transform: translateY(0);
+  }
+
+  /* Oura-inspired score ring animation */
+  @keyframes nova-score-fill {
+    0% { 
+      stroke-dashoffset: 100;
+    }
+    100% { 
+      stroke-dashoffset: var(--score-offset, 0);
+    }
+  }
+
+  .nova-score-ring {
+    animation: nova-score-fill 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
   
   .nova-card-hover {
     transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
