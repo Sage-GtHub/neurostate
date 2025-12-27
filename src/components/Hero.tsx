@@ -30,7 +30,7 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden bg-[#0a0a0a]"
+      className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden bg-background"
     >
       {/* Video Background */}
       <VideoBackground />
@@ -39,7 +39,7 @@ const Hero = () => {
       <DataVisualization />
 
       {/* Radial gradient for depth */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(16,185,129,0.08),transparent)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,hsl(var(--primary)/0.08),transparent)] pointer-events-none" />
 
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">

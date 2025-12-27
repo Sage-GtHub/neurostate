@@ -114,12 +114,12 @@ export const Header = () => {
   return (
     <>
       <AnnouncementBar />
-      <header className="sticky top-0 z-50 w-full bg-void/80 border-b border-white/5 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 w-full bg-background/80 border-b border-border backdrop-blur-xl">
         <div className="container mx-auto flex h-14 lg:h-20 items-center justify-between px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <img src={logoIcon} alt="NeuroState Neural Waveform" className="h-7 w-7 lg:h-10 lg:w-10 transition-transform duration-300 group-hover:scale-105" />
-            <span className="text-ui-label text-white/90 tracking-widest text-[0.6rem] lg:text-xs font-medium">NEUROSTATE<sup className="text-[5px] lg:text-[6px]">®</sup></span>
+            <span className="text-ui-label text-foreground/90 tracking-widest text-[0.6rem] lg:text-xs font-medium">NEUROSTATE<sup className="text-[5px] lg:text-[6px]">®</sup></span>
           </Link>
           
           {/* Desktop Navigation */}
