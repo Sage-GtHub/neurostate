@@ -20,7 +20,7 @@ import NovaInsights from "./pages/NovaInsights";
 import NovaDevices from "./pages/NovaDevices";
 import NovaProtocolOptimization from "./pages/NovaProtocolOptimization";
 import NovaOverview from "./pages/NovaOverview";
-import { Navigate } from "react-router-dom";
+import NovaHistoricalTrends from "./pages/NovaHistoricalTrends";
 import NovaSettings from "./pages/NovaSettings";
 import NovaGoals from "./pages/NovaGoals";
 
@@ -112,7 +112,7 @@ const App = () => (
           <Route path="/nova/insights" element={<ProtectedRoute><NovaInsights /></ProtectedRoute>} />
           <Route path="/nova/devices" element={<ProtectedRoute><NovaDevices /></ProtectedRoute>} />
           <Route path="/nova/optimisation" element={<ProtectedRoute><NovaProtocolOptimization /></ProtectedRoute>} />
-          <Route path="/nova/trends" element={<Navigate to="/nova/goals" replace />} />
+          <Route path="/nova/trends" element={<ProtectedRoute><NovaHistoricalTrends /></ProtectedRoute>} />
           <Route path="/nova/goals" element={<ProtectedRoute><NovaGoals /></ProtectedRoute>} />
           <Route path="/nova/settings" element={<ProtectedRoute><NovaSettings /></ProtectedRoute>} />
           {/* Enterprise Overview */}
