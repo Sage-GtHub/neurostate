@@ -80,7 +80,7 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // Palantir Palette
+        // Whoop Palette
         void: "hsl(var(--void))",
         obsidian: "hsl(var(--obsidian))",
         graphite: "hsl(var(--graphite))",
@@ -89,7 +89,12 @@ export default {
         silver: "hsl(var(--silver))",
         mercury: "hsl(var(--mercury))",
         titanium: "hsl(var(--titanium))",
-        // Cyber Accents
+        // Whoop Accents
+        "whoop-green": "hsl(var(--whoop-green))",
+        "whoop-red": "hsl(var(--whoop-red))",
+        "whoop-yellow": "hsl(var(--whoop-yellow))",
+        "whoop-blue": "hsl(var(--whoop-blue))",
+        // Cyber compatibility
         "cyber-blue": "hsl(var(--cyber-blue))",
         "electric-cyan": "hsl(var(--electric-cyan))",
         "neon-green": "hsl(var(--neon-green))",

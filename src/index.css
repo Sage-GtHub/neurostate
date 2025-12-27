@@ -34,101 +34,110 @@
 
 @layer base {
   :root {
-    /* PALANTIR DARK PALETTE - Intelligence Grade */
+    /* WHOOP-INSPIRED DARK PALETTE */
     
-    /* Core Blacks - Deep Space */
-    --void: 220 25% 3%; /* #050709 - Deepest black */
-    --obsidian: 220 20% 6%; /* #0D0F14 - Primary background */
-    --graphite: 220 18% 10%; /* #14171E - Elevated surfaces */
-    --steel: 220 15% 15%; /* #1F2430 - Cards & containers */
+    /* Core Blacks - Pure Black Foundation */
+    --void: 0 0% 0%; /* #000000 - Pure black */
+    --obsidian: 0 0% 4%; /* #0A0A0A - Primary background */
+    --graphite: 0 0% 8%; /* #141414 - Elevated surfaces */
+    --steel: 0 0% 12%; /* #1F1F1F - Cards & containers */
     
-    /* Whites & Grays - Precision Scale */
-    --platinum: 220 10% 98%; /* #FAFBFC - Primary text */
-    --silver: 220 10% 70%; /* #A8B0BE - Secondary text */
-    --mercury: 220 10% 50%; /* #767F8E - Muted text */
-    --titanium: 220 12% 25%; /* #373E4D - Borders */
+    /* Grays - Whoop Scale */
+    --platinum: 0 0% 98%; /* #FAFAFA - Primary text */
+    --silver: 0 0% 70%; /* #B3B3B3 - Secondary text */
+    --mercury: 0 0% 45%; /* #737373 - Muted text */
+    --titanium: 0 0% 20%; /* #333333 - Borders */
     
-    /* Cyber Accent Colors - Intelligence Signals */
-    --cyber-blue: 210 100% 56%; /* #2196F3 - Primary accent */
-    --cyber-blue-glow: 210 100% 65%; /* Hover state */
-    --electric-cyan: 185 100% 50%; /* #00E5CC - Data points */
-    --neon-green: 155 100% 50%; /* #00FF88 - Success/Active */
-    --plasma-purple: 265 90% 65%; /* #8B5CF6 - AI/Intelligence */
-    --warning-amber: 38 100% 55%; /* #FFAA00 - Warnings */
-    --alert-red: 0 85% 60%; /* #EF4444 - Critical */
+    /* Whoop Green - Signature Accent */
+    --whoop-green: 156 100% 47%; /* #00F19E - Primary accent */
+    --whoop-green-glow: 156 100% 55%; /* Lighter glow */
+    --whoop-green-dim: 156 80% 35%; /* Dimmed state */
+    
+    /* Secondary Accents */
+    --whoop-red: 0 85% 55%; /* Recovery low */
+    --whoop-yellow: 45 100% 50%; /* Recovery medium */
+    --whoop-blue: 210 100% 50%; /* Strain indicator */
     
     /* Semantic Mappings - Dark First */
-    --background: 220 25% 3%; /* Void black */
-    --foreground: 220 10% 98%; /* Platinum white */
+    --background: 0 0% 0%; /* Pure black */
+    --foreground: 0 0% 98%; /* Near white */
     
-    --card: 220 18% 10%; /* Graphite */
-    --card-foreground: 220 10% 98%;
+    --card: 0 0% 6%; /* Very dark gray */
+    --card-foreground: 0 0% 98%;
     
-    --popover: 220 18% 10%;
-    --popover-foreground: 220 10% 98%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 98%;
     
-    --primary: 210 100% 56%; /* Cyber blue */
-    --primary-foreground: 220 10% 98%;
+    --primary: 156 100% 47%; /* Whoop green */
+    --primary-foreground: 0 0% 0%;
     
-    --secondary: 220 15% 15%; /* Steel */
-    --secondary-foreground: 220 10% 98%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 98%;
     
-    --muted: 220 15% 15%;
-    --muted-foreground: 220 10% 50%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 50%;
     
-    --accent: 185 100% 50%; /* Electric cyan */
-    --accent-light: 185 100% 60%;
-    --accent-foreground: 220 25% 3%;
+    --accent: 156 100% 47%; /* Whoop green */
+    --accent-light: 156 100% 55%;
+    --accent-foreground: 0 0% 0%;
     
-    --destructive: 0 85% 60%;
-    --destructive-foreground: 220 10% 98%;
+    --destructive: 0 85% 55%;
+    --destructive-foreground: 0 0% 98%;
     
-    --border: 220 12% 20%;
-    --input: 220 12% 20%;
-    --ring: 210 100% 56%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 156 100% 47%;
     
-    --radius: 8px;
+    --radius: 16px;
     
     /* Signal Colors */
-    --signal-green: 155 100% 50%;
-    --signal-blue: 210 100% 56%;
-    --signal-amber: 38 100% 55%;
+    --signal-green: 156 100% 47%;
+    --signal-blue: 210 100% 50%;
+    --signal-amber: 45 100% 50%;
     
-    /* Legacy Compatibility */
-    --carbon: 220 25% 3%;
-    --ivory: 220 10% 98%;
-    --ash: 220 10% 50%;
-    --stone: 220 10% 70%;
-    --mist: 220 12% 20%;
-    --slate: 220 18% 10%;
-    --pearl: 220 15% 15%;
+    /* Legacy Compatibility - Mapped to Whoop */
+    --carbon: 0 0% 0%;
+    --ivory: 0 0% 98%;
+    --ash: 0 0% 50%;
+    --stone: 0 0% 70%;
+    --mist: 0 0% 15%;
+    --slate: 0 0% 8%;
+    --pearl: 0 0% 12%;
+    
+    /* Cyber compatibility */
+    --cyber-blue: 156 100% 47%;
+    --electric-cyan: 156 100% 47%;
+    --neon-green: 156 100% 47%;
+    --plasma-purple: 265 90% 65%;
+    --warning-amber: 45 100% 50%;
+    --alert-red: 0 85% 55%;
     
     /* Sidebar - Dark Theme */
-    --sidebar-background: 220 20% 6%;
-    --sidebar-foreground: 220 10% 98%;
-    --sidebar-primary: 210 100% 56%;
-    --sidebar-primary-foreground: 220 10% 98%;
-    --sidebar-accent: 220 15% 15%;
-    --sidebar-accent-foreground: 220 10% 98%;
-    --sidebar-border: 220 12% 15%;
-    --sidebar-ring: 210 100% 56%;
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 156 100% 47%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 12%;
+    --sidebar-ring: 156 100% 47%;
     
-    /* Palantir Shadow System - Depth & Dimension */
-    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-    --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.5), 0 0 1px rgba(33, 150, 243, 0.1);
-    --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.6), 0 0 1px rgba(33, 150, 243, 0.15);
-    --shadow-lg: 0 8px 16px -4px rgba(0, 0, 0, 0.7), 0 0 2px rgba(33, 150, 243, 0.2);
-    --shadow-xl: 0 16px 32px -8px rgba(0, 0, 0, 0.8), 0 0 4px rgba(33, 150, 243, 0.25);
-    --shadow-2xl: 0 24px 48px -12px rgba(0, 0, 0, 0.9), 0 0 8px rgba(33, 150, 243, 0.3);
-    --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-    --shadow-glow: 0 0 40px rgba(33, 150, 243, 0.3), 0 0 80px rgba(33, 150, 243, 0.1);
+    /* Whoop Shadow System */
+    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.8);
+    --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.8);
+    --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.9);
+    --shadow-lg: 0 8px 16px -4px rgba(0, 0, 0, 0.9);
+    --shadow-xl: 0 16px 32px -8px rgba(0, 0, 0, 0.95);
+    --shadow-2xl: 0 24px 48px -12px rgba(0, 0, 0, 0.95);
+    --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 40px rgba(0, 241, 158, 0.2), 0 0 80px rgba(0, 241, 158, 0.05);
     
     /* Focus Ring */
-    --focus-ring: 0 0 0 2px rgba(33, 150, 243, 0.4);
+    --focus-ring: 0 0 0 2px rgba(0, 241, 158, 0.4);
     
     /* Glass Effect */
-    --glass-bg: rgba(10, 15, 25, 0.85);
-    --glass-border: rgba(33, 150, 243, 0.15);
+    --glass-bg: rgba(10, 10, 10, 0.9);
+    --glass-border: rgba(0, 241, 158, 0.1);
   }
   
   /* Light mode fallback - inverted but maintaining sophistication */
