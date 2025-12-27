@@ -119,13 +119,59 @@ const Hero = () => {
                   </div>
                 </div>
 
+                {/* Top left - Cognitive Load */}
+                <div 
+                  className="absolute top-2 left-4 hidden lg:block"
+                  style={getParallaxStyle(-0.25)}
+                >
+                  <div className="flex items-center gap-2 px-2 py-1 bg-white/5 border border-white/10 rounded backdrop-blur-sm">
+                    <span className="text-[9px] text-amber-400 font-mono">42%</span>
+                    <span className="text-[9px] text-white/50 font-mono">COGNITIVE_LOAD</span>
+                  </div>
+                </div>
+
+                {/* Left middle - Focus Mode */}
+                <div 
+                  className="absolute top-1/2 -translate-y-1/2 left-3 hidden xl:block"
+                  style={getParallaxStyle(-0.35)}
+                >
+                  <div className="flex flex-col gap-1 px-2 py-1.5 bg-white/5 border border-white/10 rounded backdrop-blur-sm">
+                    <span className="text-[8px] text-white/40 font-mono">FOCUS_MODE</span>
+                    <span className="text-[10px] text-emerald-400 font-mono font-semibold">ACTIVE</span>
+                  </div>
+                </div>
+
+                {/* Right middle - HRV Status */}
+                <div 
+                  className="absolute top-1/2 -translate-y-1/2 right-3 hidden xl:block"
+                  style={getParallaxStyle(-0.4)}
+                >
+                  <div className="flex flex-col gap-1 px-2 py-1.5 bg-white/5 border border-white/10 rounded backdrop-blur-sm">
+                    <span className="text-[8px] text-white/40 font-mono">HRV_INDEX</span>
+                    <span className="text-[10px] text-violet-400 font-mono font-semibold">68ms</span>
+                  </div>
+                </div>
+
+                {/* Bottom left - Recovery Score */}
+                <div 
+                  className="absolute bottom-4 left-4 hidden md:block"
+                  style={getParallaxStyle(-0.3)}
+                >
+                  <div className="flex items-center gap-2 px-2 py-1 bg-white/5 border border-white/10 rounded backdrop-blur-sm">
+                    <div className="w-1.5 h-1.5 rounded-full bg-teal-500" />
+                    <span className="text-[9px] text-teal-400 font-mono">87</span>
+                    <span className="text-[9px] text-white/50 font-mono">RECOVERY</span>
+                  </div>
+                </div>
+
+                {/* Bottom right - Accuracy */}
                 <div 
                   className="absolute bottom-4 right-4 hidden md:block"
                   style={getParallaxStyle(-0.4)}
                 >
-                  <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded backdrop-blur-sm">
-                    <span className="text-[10px] text-emerald-400 font-mono">98.7%</span>
-                    <span className="text-[10px] text-white/50 font-mono">ACCURACY</span>
+                  <div className="flex items-center gap-2 px-2 py-1 bg-white/5 border border-white/10 rounded backdrop-blur-sm">
+                    <span className="text-[9px] text-emerald-400 font-mono">98.7%</span>
+                    <span className="text-[9px] text-white/50 font-mono">ACCURACY</span>
                   </div>
                 </div>
               </div>
