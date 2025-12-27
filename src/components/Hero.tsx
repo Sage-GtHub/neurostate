@@ -119,9 +119,9 @@ const Hero = () => {
                   </div>
                 </div>
 
-                {/* Top left - Cognitive Load */}
+                {/* Top left outside frame - Cognitive Load */}
                 <div 
-                  className="absolute top-2 left-4 hidden lg:block"
+                  className="absolute -top-8 left-0 hidden lg:block"
                   style={getParallaxStyle(-0.25)}
                 >
                   <div className="flex items-center gap-2 px-2 py-1 bg-white/5 border border-white/10 rounded backdrop-blur-sm">
