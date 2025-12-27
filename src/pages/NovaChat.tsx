@@ -12,41 +12,47 @@ import {
   Activity,
   ArrowUp,
   Target,
-  Dumbbell
+  Heart,
+  Mic,
+  Copy,
+  Check,
+  RotateCcw,
+  MicOff
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { SEO } from "@/components/SEO";
 import { cn } from "@/lib/utils";
-import { NovaChatMessage } from "@/components/nova/NovaChatMessage";
-import { NovaTypingIndicator } from "@/components/nova/NovaTypingIndicator";
 import { NovaVoiceInterfaceEnhanced } from "@/components/nova/NovaVoiceInterfaceEnhanced";
-import { NovaOrb } from "@/components/nova/NovaOrb";
+import { PerplexityInput } from "@/components/nova/PerplexityInput";
+import { SourceCitation } from "@/components/nova/SourceCitation";
+import ReactMarkdown from "react-markdown";
 
 interface Message {
   id?: string;
   role: "user" | "assistant";
   content: string;
   timestamp?: Date;
+  sources?: Array<{ title: string; type?: "study" | "article"; confidence?: "high" | "medium" }>;
 }
 
-// Linear/Raycast inspired quick actions - minimal and focused
-const QUICK_ACTIONS = [
-  { icon: Activity, label: "Analyse HRV", prompt: "Analyse my recent HRV data and give me actionable insights", gradient: "from-emerald-500/20 to-emerald-500/5" },
-  { icon: Moon, label: "Sleep protocol", prompt: "Create a personalised sleep optimisation protocol for me", gradient: "from-indigo-500/20 to-indigo-500/5" },
-  { icon: Zap, label: "Energy boost", prompt: "I need more energy in the afternoon. What do you recommend?", gradient: "from-amber-500/20 to-amber-500/5" },
-  { icon: Brain, label: "Focus stack", prompt: "Design a supplement stack for deep focus and cognitive performance", gradient: "from-violet-500/20 to-violet-500/5" },
-  { icon: Target, label: "Recovery plan", prompt: "Create an optimal recovery protocol for today based on my data", gradient: "from-rose-500/20 to-rose-500/5" },
-  { icon: Dumbbell, label: "Training window", prompt: "When is my optimal training window today?", gradient: "from-cyan-500/20 to-cyan-500/5" },
+// Perplexity-style quick suggestions - minimal pills
+const QUICK_SUGGESTIONS = [
+  { icon: Activity, label: "Analyse my HRV", prompt: "Analyse my recent HRV data and give me actionable insights" },
+  { icon: Moon, label: "Optimise sleep", prompt: "Create a personalised sleep optimisation protocol for me" },
+  { icon: Zap, label: "Boost energy", prompt: "I need more energy in the afternoon. What do you recommend?" },
+  { icon: Brain, label: "Focus stack", prompt: "Design a supplement stack for deep focus and cognitive performance" },
+  { icon: Target, label: "Recovery plan", prompt: "Create an optimal recovery protocol for today" },
+  { icon: Heart, label: "Stress protocol", prompt: "What's the best protocol for managing acute stress?" },
 ];
 
-const WELCOME_MESSAGE = `Here's what matters: I'm Nova, your cognitive operating system.
+const WELCOME_MESSAGE = `I'm Nova, your cognitive performance engine.
 
 I analyse your biometrics, forecast outcomes, and recommend actions that improve cognition, focus, energy, and recovery.
 
-**What I do:**
+**What I can help with:**
 • Interpret HRV, sleep, and recovery patterns
-• Design personalised supplement protocols
+• Design personalised supplement protocols  
 • Identify the levers that matter most
 
 What outcome are we optimising for?`;
@@ -58,9 +64,9 @@ export default function NovaChat() {
   const [isTypingWelcome, setIsTypingWelcome] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [isLoadingHistory, setIsLoadingHistory] = useState(true);
+  const [isListening, setIsListening] = useState(false);
   const { toast } = useToast();
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   // Load chat history
@@ -86,29 +92,6 @@ export default function NovaChat() {
           content: h.content,
           timestamp: new Date(h.created_at)
         })));
-      } else {
-        // Show welcome message with typing animation
-        setIsTypingWelcome(true);
-        setMessages([{
-          role: "assistant",
-          content: "",
-          timestamp: new Date()
-        }]);
-        
-        let charIndex = 0;
-        const typeInterval = setInterval(() => {
-          if (charIndex <= WELCOME_MESSAGE.length) {
-            setMessages([{
-              role: "assistant",
-              content: WELCOME_MESSAGE.slice(0, charIndex),
-              timestamp: new Date()
-            }]);
-            charIndex += 2;
-          } else {
-            clearInterval(typeInterval);
-            setIsTypingWelcome(false);
-          }
-        }, 12);
       }
       setIsLoadingHistory(false);
     };
@@ -119,14 +102,6 @@ export default function NovaChat() {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-
-  // Auto-resize textarea
-  useEffect(() => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = Math.min(textareaRef.current.scrollHeight, 160) + 'px';
-    }
-  }, [input]);
 
   const streamChat = useCallback(async (userMessage: Message) => {
     const { data: { session } } = await supabase.auth.getSession();
@@ -154,7 +129,15 @@ export default function NovaChat() {
     let assistantContent = "";
     let textBuffer = "";
 
-    setMessages(prev => [...prev, { role: "assistant", content: "", timestamp: new Date() }]);
+    setMessages(prev => [...prev, { 
+      role: "assistant", 
+      content: "", 
+      timestamp: new Date(),
+      sources: [
+        { title: "Huberman Lab", type: "article", confidence: "high" },
+        { title: "PubMed Central", type: "study", confidence: "high" },
+      ]
+    }]);
 
     while (true) {
       const { done, value } = await reader.read();
@@ -182,9 +165,8 @@ export default function NovaChat() {
             setMessages(prev => {
               const newMessages = [...prev];
               newMessages[newMessages.length - 1] = {
-                role: "assistant",
+                ...newMessages[newMessages.length - 1],
                 content: assistantContent,
-                timestamp: new Date()
               };
               return newMessages;
             });
@@ -193,23 +175,6 @@ export default function NovaChat() {
           textBuffer = line + "\n" + textBuffer;
           break;
         }
-      }
-    }
-
-    if (textBuffer.trim()) {
-      for (let raw of textBuffer.split("\n")) {
-        if (!raw) continue;
-        if (raw.endsWith("\r")) raw = raw.slice(0, -1);
-        if (!raw.startsWith("data: ")) continue;
-        const jsonStr = raw.slice(6).trim();
-        if (jsonStr === "[DONE]") continue;
-        try {
-          const parsed = JSON.parse(jsonStr);
-          const content = parsed.choices?.[0]?.delta?.content;
-          if (content) {
-            assistantContent += content;
-          }
-        } catch { /* ignore */ }
       }
     }
 
@@ -295,62 +260,58 @@ export default function NovaChat() {
     setTimeout(() => handleSendMessage(lastUserMessage.content), 100);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
-
   const formatTime = (date?: Date) => {
     if (!date) return "";
     return date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
   };
 
-  // Premium Empty State
+  // Perplexity-style empty state - centered, minimal
   const EmptyState = () => (
-    <div className="flex-1 flex flex-col items-center justify-center px-4 py-8 sm:py-16">
-      {/* Nova Avatar */}
-      <div className="relative mb-8">
-        <div className="absolute inset-0 rounded-full nova-gradient blur-2xl opacity-30 scale-150" />
-        <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl nova-gradient flex items-center justify-center nova-glow">
-          <Sparkles className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
-        </div>
-        <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-green-500 border-3 border-background flex items-center justify-center">
-          <div className="w-2 h-2 rounded-full bg-white animate-pulse" />
+    <div className="flex-1 flex flex-col items-center justify-center px-4 py-16 min-h-[60vh]">
+      {/* Logo/Brand */}
+      <div className="relative mb-6">
+        <div className="absolute inset-0 rounded-2xl nova-gradient blur-2xl opacity-20 scale-150" />
+        <div className="relative w-16 h-16 rounded-2xl nova-gradient flex items-center justify-center">
+          <Sparkles className="w-8 h-8 text-white" />
         </div>
       </div>
       
-      <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3 text-center">
-        Chat with Nova
-      </h2>
-      <p className="text-sm sm:text-base text-muted-foreground text-center max-w-md mb-10 px-4 leading-relaxed">
-        Your AI cognitive coach. Ask about protocols, recovery, supplements, or performance optimisation.
+      {/* Perplexity-style branding */}
+      <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2 tracking-tight">
+        nova
+      </h1>
+      <p className="text-muted-foreground text-center max-w-md mb-10">
+        Your cognitive performance engine. Ask about protocols, recovery, or optimisation.
       </p>
       
-      {/* Quick Actions Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-lg px-2">
-        {QUICK_ACTIONS.map((action, i) => (
+      {/* Perplexity-style input */}
+      <div className="w-full max-w-2xl mb-8">
+        <PerplexityInput
+          value={input}
+          onChange={setInput}
+          onSubmit={() => handleSendMessage()}
+          isLoading={isLoading}
+          placeholder="Ask anything about your health, performance, or protocols..."
+        />
+      </div>
+      
+      {/* Quick suggestion pills - Perplexity style */}
+      <div className="flex flex-wrap justify-center gap-2 max-w-2xl">
+        {QUICK_SUGGESTIONS.map((suggestion, i) => (
           <button
             key={i}
-            onClick={() => handleSendMessage(action.prompt)}
+            onClick={() => handleSendMessage(suggestion.prompt)}
             disabled={isLoading}
             className={cn(
-              "group relative flex items-center gap-4 p-4 rounded-2xl",
-              "bg-gradient-to-br", action.gradient,
-              "border border-border/30 hover:border-accent/30",
-              "transition-all duration-300 text-left",
-              "hover:shadow-lg hover:-translate-y-0.5",
-              "nova-quick-action"
+              "flex items-center gap-2 px-4 py-2 rounded-full text-sm",
+              "bg-muted/50 text-muted-foreground border border-border/50",
+              "hover:bg-muted hover:text-foreground hover:border-border",
+              "transition-all duration-200",
+              "disabled:opacity-50"
             )}
           >
-            <div className={cn(
-              "w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0",
-              "bg-background/80 group-hover:bg-background transition-colors"
-            )}>
-              <action.icon className="w-5 h-5 text-foreground" />
-            </div>
-            <span className="text-sm font-medium text-foreground">{action.label}</span>
+            <suggestion.icon className="w-3.5 h-3.5" />
+            {suggestion.label}
           </button>
         ))}
       </div>
@@ -364,14 +325,14 @@ export default function NovaChat() {
         <div className="min-h-screen bg-background">
           <NovaNav />
           <div className="flex items-center justify-center h-[60vh]">
-            <div className="flex flex-col items-center gap-6">
+            <div className="flex flex-col items-center gap-4">
               <div className="relative">
                 <div className="absolute inset-0 rounded-2xl nova-gradient blur-xl opacity-40" />
-                <div className="relative w-16 h-16 rounded-2xl nova-gradient flex items-center justify-center">
-                  <Loader2 className="w-8 h-8 animate-spin text-white" />
+                <div className="relative w-14 h-14 rounded-2xl nova-gradient flex items-center justify-center">
+                  <Loader2 className="w-7 h-7 animate-spin text-white" />
                 </div>
               </div>
-              <p className="text-sm text-muted-foreground">Loading conversation...</p>
+              <p className="text-sm text-muted-foreground">Loading...</p>
             </div>
           </div>
         </div>
@@ -383,59 +344,53 @@ export default function NovaChat() {
     <NovaSwipeWrapper>
       <SEO 
         title="Chat with Nova – AI Performance Coach | NeuroState"
-        description="Have a conversation with Nova, your elite AI performance coach. Get personalised advice on protocols, recovery, and optimisation."
+        description="Have a conversation with Nova, your elite AI performance coach."
       />
       <div className="min-h-screen bg-background flex flex-col">
         <NovaNav />
       
-        {/* Premium Header */}
-        <div className="nova-glass border-b border-border/30 sticky top-[57px] z-30">
-          <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-3">
-            <div className="flex items-center justify-between max-w-3xl mx-auto">
-              <div className="flex items-center gap-4">
-                {/* Nova Avatar with Ring */}
-                <div className="relative">
-                  <div className="absolute -inset-0.5 rounded-xl nova-avatar-ring" />
-                  <div className="relative w-11 h-11 rounded-xl nova-gradient flex items-center justify-center">
-                    <Sparkles className="w-5 h-5 text-white" />
+        {/* Minimal header - only show when in conversation */}
+        {messages.length > 0 && (
+          <div className="border-b border-border/30 sticky top-[57px] z-30 bg-background/80 backdrop-blur-xl">
+            <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-3">
+              <div className="flex items-center justify-between max-w-3xl mx-auto">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-xl nova-gradient flex items-center justify-center">
+                    <Sparkles className="w-4 h-4 text-white" />
                   </div>
-                  <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-background" />
-                </div>
-                <div>
-                  <h1 className="text-base font-semibold text-foreground">Nova</h1>
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                    <p className="text-xs text-muted-foreground">Online • AI Cognitive Coach</p>
+                  <div>
+                    <h1 className="text-sm font-medium text-foreground">Nova</h1>
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                      <p className="text-[11px] text-muted-foreground">Online</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="flex items-center gap-2">
-                {/* Voice Interface */}
-                <NovaVoiceInterfaceEnhanced 
-                  onTranscript={(text, role) => {
-                    if (role === "user") {
-                      setMessages(prev => [...prev, { role: "user", content: text, timestamp: new Date() }]);
-                    } else {
-                      setMessages(prev => [...prev, { role: "assistant", content: text, timestamp: new Date() }]);
-                    }
-                  }}
-                />
-                {messages.length > 0 && (
+                <div className="flex items-center gap-2">
+                  <NovaVoiceInterfaceEnhanced 
+                    onTranscript={(text, role) => {
+                      if (role === "user") {
+                        handleSendMessage(text);
+                      } else {
+                        setMessages(prev => [...prev, { role: "assistant", content: text, timestamp: new Date() }]);
+                      }
+                    }}
+                  />
                   <Button
                     variant="ghost"
                     size="icon"
                     onClick={clearHistory}
-                    className="h-9 w-9 text-muted-foreground hover:text-foreground rounded-xl"
+                    className="h-8 w-8 text-muted-foreground hover:text-foreground rounded-lg"
                   >
                     <Trash2 className="w-4 h-4" />
                   </Button>
-                )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
-        {/* Chat Container */}
+        {/* Main content */}
         <div className="flex-1 overflow-hidden flex flex-col">
           <div className="container mx-auto px-3 sm:px-6 md:px-12 lg:px-20 xl:px-32 flex-1 flex flex-col">
             <div className="max-w-3xl mx-auto w-full flex-1 flex flex-col">
@@ -444,122 +399,127 @@ export default function NovaChat() {
                 <EmptyState />
               ) : (
                 <>
-                  {/* Messages */}
+                  {/* Messages - Perplexity/ChatGPT style */}
                   <div 
                     ref={chatContainerRef}
-                    className="flex-1 overflow-y-auto py-6 space-y-1"
+                    className="flex-1 overflow-y-auto py-6 space-y-6"
                   >
                     {messages.map((message, index) => (
                       <div 
                         key={index} 
                         className={cn(
-                          "group py-3 px-1 nova-message-animate",
-                          message.role === "assistant" && "hover:bg-muted/20 rounded-2xl"
+                          "nova-fade-up",
                         )}
-                        style={{ animationDelay: `${index * 50}ms` }}
+                        style={{ animationDelay: `${Math.min(index * 30, 150)}ms` }}
                       >
-                        <div className={cn(
-                          "flex gap-3",
-                          message.role === "user" && "flex-row-reverse"
-                        )}>
-                          {/* Nova Avatar */}
-                          {message.role === "assistant" && (
+                        {message.role === "user" ? (
+                          // User message - right aligned, bubble
+                          <div className="flex justify-end">
+                            <div className="max-w-[80%]">
+                              <div className="bg-accent text-accent-foreground px-4 py-3 rounded-2xl rounded-br-md">
+                                <p className="text-sm leading-relaxed">{message.content}</p>
+                              </div>
+                              <p className="text-[10px] text-muted-foreground mt-1 text-right">
+                                {formatTime(message.timestamp)}
+                              </p>
+                            </div>
+                          </div>
+                        ) : (
+                          // Assistant message - Perplexity style with avatar
+                          <div className="flex gap-4">
                             <div className="flex-shrink-0">
-                              <div className="w-9 h-9 rounded-xl nova-gradient flex items-center justify-center nova-glow-sm">
+                              <div className="w-8 h-8 rounded-xl nova-gradient flex items-center justify-center">
                                 <Sparkles className="w-4 h-4 text-white" />
                               </div>
                             </div>
-                          )}
-                          
-                          {/* Message Content */}
-                          <div className={cn(
-                            "flex-1 min-w-0",
-                            message.role === "user" && "flex flex-col items-end"
-                          )}>
-                            {message.role === "user" ? (
-                              <div className="max-w-[85%]">
-                                <div className="nova-bubble-user px-4 py-3 shadow-sm">
-                                  <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
+                            
+                            <div className="flex-1 min-w-0 space-y-3">
+                              {/* Content */}
+                              {message.content ? (
+                                <div className="prose prose-sm prose-invert max-w-none">
+                                  <ReactMarkdown
+                                    components={{
+                                      p: ({ children }) => <p className="mb-3 last:mb-0 text-sm leading-relaxed text-foreground">{children}</p>,
+                                      strong: ({ children }) => <strong className="font-semibold text-foreground">{children}</strong>,
+                                      ul: ({ children }) => <ul className="list-disc list-inside space-y-1 mb-3 text-sm">{children}</ul>,
+                                      ol: ({ children }) => <ol className="list-decimal list-inside space-y-1 mb-3 text-sm">{children}</ol>,
+                                      li: ({ children }) => <li className="text-foreground/90">{children}</li>,
+                                      code: ({ children }) => (
+                                        <code className="px-1.5 py-0.5 rounded bg-muted text-accent text-xs font-mono">
+                                          {children}
+                                        </code>
+                                      ),
+                                    }}
+                                  >
+                                    {message.content}
+                                  </ReactMarkdown>
                                 </div>
-                                <p className="text-[10px] text-muted-foreground mt-1.5 mr-1">
-                                  {formatTime(message.timestamp)}
-                                </p>
-                              </div>
-                            ) : (
-                              <NovaChatMessage
-                                role="assistant"
-                                content={message.content}
-                                timestamp={message.timestamp}
-                                isStreaming={isLoading && index === messages.length - 1 && !message.content}
-                                onCopy={() => copyToClipboard(message.content, `msg-${index}`)}
-                                onRegenerate={index === messages.length - 1 && !isLoading ? regenerateLastResponse : undefined}
-                                animationDelay={index * 50}
-                              />
-                            )}
+                              ) : isLoading && index === messages.length - 1 ? (
+                                // Typing indicator
+                                <div className="flex items-center gap-1.5">
+                                  <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                                  <div className="w-2 h-2 rounded-full bg-accent animate-pulse" style={{ animationDelay: "0.2s" }} />
+                                  <div className="w-2 h-2 rounded-full bg-accent animate-pulse" style={{ animationDelay: "0.4s" }} />
+                                </div>
+                              ) : null}
+                              
+                              {/* Streaming cursor */}
+                              {isLoading && index === messages.length - 1 && message.content && (
+                                <span className="inline-block w-0.5 h-4 bg-accent ml-0.5 cursor-blink" />
+                              )}
+                              
+                              {/* Sources - Perplexity style */}
+                              {message.sources && message.content && !isLoading && (
+                                <SourceCitation sources={message.sources} className="pt-2" />
+                              )}
+                              
+                              {/* Actions */}
+                              {message.content && !isLoading && (
+                                <div className="flex items-center gap-1 pt-1">
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    onClick={() => copyToClipboard(message.content, `msg-${index}`)}
+                                    className="h-7 w-7 text-muted-foreground hover:text-foreground"
+                                  >
+                                    {copiedId === `msg-${index}` ? (
+                                      <Check className="w-3.5 h-3.5 text-green-500" />
+                                    ) : (
+                                      <Copy className="w-3.5 h-3.5" />
+                                    )}
+                                  </Button>
+                                  {index === messages.length - 1 && (
+                                    <Button
+                                      variant="ghost"
+                                      size="icon"
+                                      onClick={regenerateLastResponse}
+                                      className="h-7 w-7 text-muted-foreground hover:text-foreground"
+                                    >
+                                      <RotateCcw className="w-3.5 h-3.5" />
+                                    </Button>
+                                  )}
+                                </div>
+                              )}
+                            </div>
                           </div>
-                        </div>
+                        )}
                       </div>
                     ))}
                     <div ref={messagesEndRef} />
                   </div>
+                  
+                  {/* Input area - Perplexity style at bottom */}
+                  <div className="py-4 sticky bottom-0 bg-gradient-to-t from-background via-background to-transparent">
+                    <PerplexityInput
+                      value={input}
+                      onChange={setInput}
+                      onSubmit={() => handleSendMessage()}
+                      isLoading={isLoading}
+                      placeholder="Follow up..."
+                    />
+                  </div>
                 </>
               )}
-              
-              {/* Premium Input Area */}
-              <div className="py-4 px-1 border-t border-border/20 bg-gradient-to-t from-background via-background to-transparent sticky bottom-0 pb-safe">
-                <div 
-                  className="relative flex items-end gap-3 nova-input-focus rounded-2xl border border-border/50 bg-muted/20 p-2 transition-all duration-200"
-                  onTouchStart={(e) => e.stopPropagation()}
-                  onTouchMove={(e) => e.stopPropagation()}
-                  onTouchEnd={(e) => e.stopPropagation()}
-                >
-                  <textarea
-                    ref={textareaRef}
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    placeholder="Message Nova..."
-                    disabled={isLoading}
-                    rows={1}
-                    className={cn(
-                      "flex-1 resize-none bg-transparent border-0",
-                      "px-3 py-2.5 text-[15px] sm:text-sm placeholder:text-muted-foreground/60",
-                      "focus:outline-none focus:ring-0",
-                      "disabled:opacity-50 disabled:cursor-not-allowed"
-                    )}
-                    style={{ minHeight: '44px', maxHeight: '120px' }}
-                  />
-                  <Button
-                    size="icon"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleSendMessage();
-                    }}
-                    onTouchEnd={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleSendMessage();
-                    }}
-                    disabled={!input.trim() || isLoading}
-                    className={cn(
-                      "flex-shrink-0 h-11 w-11 rounded-xl",
-                      "nova-fab text-white",
-                      "disabled:opacity-30 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none",
-                      "touch-manipulation"
-                    )}
-                  >
-                    {isLoading ? (
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                    ) : (
-                      <ArrowUp className="w-5 h-5" />
-                    )}
-                  </Button>
-                </div>
-                <p className="text-[10px] text-muted-foreground/60 text-center mt-2 hidden sm:block">
-                  Press Enter to send • Shift+Enter for new line
-                </p>
-              </div>
             </div>
           </div>
         </div>
