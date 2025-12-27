@@ -200,7 +200,7 @@ export default function NovaDevices() {
   return (
     <NovaSwipeWrapper>
       <SEO title="Devices – Nova" description="Connect your wearables to sync biometric data with Nova." />
-      <div className="min-h-screen bg-black">
+      <div className="min-h-screen bg-background pb-24 md:pb-0">
         <NovaNav />
         
         <div className="px-6 pt-8 pb-12">
@@ -256,7 +256,7 @@ export default function NovaDevices() {
                       className="flex items-center gap-4 p-4 rounded-2xl bg-card border border-border/30 hover:border-primary/20 transition-all"
                     >
                       {/* Logo */}
-                      <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center p-2 flex-shrink-0">
+                      <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center p-2 flex-shrink-0">
                         <img src={device.logo} alt={device.name} className="w-full h-full object-contain" />
                       </div>
                       
@@ -310,7 +310,7 @@ export default function NovaDevices() {
                       }`}
                     >
                       {/* Logo */}
-                      <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center p-2 flex-shrink-0">
+                      <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center p-2 flex-shrink-0">
                         <img src={device.logo} alt={device.name} className="w-full h-full object-contain opacity-70" />
                       </div>
                       

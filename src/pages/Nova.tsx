@@ -117,28 +117,28 @@ export default function Nova() {
       case "warning": return { 
         bg: "from-orange-500/20 to-orange-500/5",
         border: "border-orange-500/30",
-        icon: "text-orange-400",
-        glow: "shadow-orange-500/20"
+        icon: "text-orange-500",
+        glow: "shadow-orange-500/10"
       };
       case "pattern": return { 
         bg: "from-blue-500/20 to-blue-500/5",
         border: "border-blue-500/30",
-        icon: "text-blue-400",
-        glow: "shadow-blue-500/20"
+        icon: "text-blue-500",
+        glow: "shadow-blue-500/10"
       };
       case "prediction": return { 
         bg: "from-purple-500/20 to-purple-500/5",
         border: "border-purple-500/30",
-        icon: "text-purple-400",
-        glow: "shadow-purple-500/20"
+        icon: "text-purple-500",
+        glow: "shadow-purple-500/10"
       };
       case "optimisation": 
       default: 
         return { 
-          bg: "from-nova-accent/20 to-nova-accent/5",
-          border: "border-nova-accent/30",
-          icon: "text-nova-accent",
-          glow: "shadow-nova-accent/20"
+          bg: "from-primary/20 to-primary/5",
+          border: "border-primary/30",
+          icon: "text-primary",
+          glow: "shadow-primary/10"
         };
     }
   };
@@ -149,7 +149,7 @@ export default function Nova() {
       case "Sleep": return { icon: Moon, color: "from-indigo-500 to-purple-500" };
       case "Focus": return { icon: Brain, color: "from-cyan-500 to-blue-500" };
       case "Recovery": return { icon: Battery, color: "from-emerald-500 to-green-500" };
-      default: return { icon: Activity, color: "from-nova-accent to-nova-accent-secondary" };
+      default: return { icon: Activity, color: "from-primary to-primary" };
     }
   };
 
@@ -198,16 +198,16 @@ export default function Nova() {
   // Loading state
   if (isAuthenticated === null || isChecking) {
     return (
-      <div className="min-h-screen bg-nova-bg flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="relative">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-r from-nova-accent to-nova-accent-secondary animate-spin" style={{ animationDuration: '2s' }} />
-            <div className="absolute inset-1 rounded-full bg-nova-bg" />
+            <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-accent animate-spin" style={{ animationDuration: '2s' }} />
+            <div className="absolute inset-1 rounded-full bg-background" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <Sparkles className="w-6 h-6 text-nova-accent" />
+              <Sparkles className="w-6 h-6 text-primary" />
             </div>
           </div>
-          <p className="text-sm text-nova-text-muted">Loading Nova...</p>
+          <p className="text-sm text-muted-foreground">Loading Nova...</p>
         </div>
       </div>
     );
@@ -221,33 +221,33 @@ export default function Nova() {
           title="Nova Dashboard – AI Cognitive Performance | NeuroState"
           description="Your personalised AI performance dashboard. Sign in to view metrics, forecasts, and AI-generated insights."
         />
-        <div className="min-h-screen bg-nova-bg">
+        <div className="min-h-screen bg-background">
           <NovaNav />
           <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12 sm:py-24">
             <div className="max-w-md mx-auto text-center">
               <div className="relative w-24 h-24 mx-auto mb-8">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-nova-accent to-nova-accent-secondary blur-xl opacity-50" />
-                <div className="relative w-full h-full rounded-full bg-nova-surface border border-nova-border flex items-center justify-center">
-                  <Sparkles className="w-10 h-10 text-nova-accent" />
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent blur-xl opacity-50" />
+                <div className="relative w-full h-full rounded-full bg-card border border-border flex items-center justify-center">
+                  <Sparkles className="w-10 h-10 text-primary" />
                 </div>
               </div>
-              <h1 className="text-3xl sm:text-4xl font-bold text-nova-text mb-4">Welcome to Nova</h1>
-              <p className="text-nova-text-muted mb-8 leading-relaxed">
+              <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Welcome to Nova</h1>
+              <p className="text-muted-foreground mb-8 leading-relaxed">
                 Sign in to access your personalised AI performance dashboard with biometric tracking, predictive insights, and adaptive protocols.
               </p>
               <Button 
                 onClick={() => navigate('/auth')} 
                 size="lg" 
-                className="h-14 px-8 gap-3 bg-gradient-to-r from-nova-accent to-nova-accent-secondary hover:opacity-90 text-white rounded-xl shadow-lg shadow-nova-accent/25 transition-all duration-300"
+                className="h-14 px-8 gap-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl shadow-lg transition-all duration-300"
               >
                 <LogIn className="w-5 h-5" />
                 Sign In to Continue
               </Button>
-              <p className="text-sm text-nova-text-muted mt-8">
+              <p className="text-sm text-muted-foreground mt-8">
                 New to NeuroState?{" "}
                 <button 
                   onClick={() => navigate('/auth')} 
-                  className="text-nova-accent hover:underline"
+                  className="text-primary hover:underline"
                 >
                   Create an account
                 </button>
@@ -275,7 +275,7 @@ export default function Nova() {
         }} 
       />
 
-      <div className="min-h-screen bg-nova-bg">
+      <div className="min-h-screen bg-background pb-24 md:pb-0">
         <NovaNav />
       
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-12">
@@ -295,14 +295,14 @@ export default function Nova() {
           <div className="mb-8">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-xl font-bold text-nova-text">AI Insights</h2>
-                <p className="text-sm text-nova-text-muted">Personalised recommendations from Nova</p>
+                <h2 className="text-xl font-bold text-foreground">AI Insights</h2>
+                <p className="text-sm text-muted-foreground">Personalised recommendations from Nova</p>
               </div>
               <div className="flex items-center gap-2">
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="text-nova-accent hover:bg-nova-surface min-h-[44px] rounded-xl" 
+                  className="text-primary hover:bg-muted min-h-[44px] rounded-xl" 
                   onClick={handleGenerateInsights}
                   disabled={insightsLoading}
                 >
@@ -316,7 +316,7 @@ export default function Nova() {
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="text-nova-accent hover:bg-nova-surface min-h-[44px] rounded-xl" 
+                  className="text-primary hover:bg-muted min-h-[44px] rounded-xl" 
                   onClick={() => navigate('/nova/chat')}
                 >
                   <MessageSquare className="w-4 h-4 mr-2" />
@@ -332,7 +332,7 @@ export default function Nova() {
                 return (
                   <div 
                     key={summary.id || index} 
-                    className={`group relative bg-nova-surface rounded-2xl p-6 border ${styles.border} hover:shadow-xl ${styles.glow} transition-all duration-500`}
+                    className={`group relative bg-card rounded-2xl p-6 border ${styles.border} hover:shadow-xl ${styles.glow} transition-all duration-500`}
                   >
                     <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${styles.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                     
@@ -341,14 +341,14 @@ export default function Nova() {
                         <Icon className={`w-6 h-6 ${styles.icon}`} />
                       </div>
                       
-                      <h3 className="text-base font-semibold text-nova-text mb-2">{summary.title}</h3>
-                      <p className="text-sm text-nova-text-muted leading-relaxed mb-4">{summary.message}</p>
+                      <h3 className="text-base font-semibold text-foreground mb-2">{summary.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-4">{summary.message}</p>
                       
                       {summary.action && (
                         <Button 
                           variant="ghost" 
                           size="sm" 
-                          className="text-nova-accent p-0 h-auto hover:bg-transparent group/btn"
+                          className="text-primary p-0 h-auto hover:bg-transparent group/btn"
                           onClick={() => {
                             if (summary.action === "Connect Device") {
                               navigate('/nova/devices');
@@ -380,11 +380,11 @@ export default function Nova() {
           <div className="mb-8">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-xl font-bold text-nova-text">Live Data</h2>
+                <h2 className="text-xl font-bold text-foreground">Live Data</h2>
                 {lastSync ? (
-                  <p className="text-xs text-nova-text-muted">Last synced: {lastSync.toLocaleTimeString()}</p>
+                  <p className="text-xs text-muted-foreground">Last synced: {lastSync.toLocaleTimeString()}</p>
                 ) : !hasRealData && connectedDevices.length === 0 ? (
-                  <p className="text-xs text-nova-text-muted">Connect a device to see real data</p>
+                  <p className="text-xs text-muted-foreground">Connect a device to see real data</p>
                 ) : null}
               </div>
               <Button 
@@ -392,7 +392,7 @@ export default function Nova() {
                 size="sm" 
                 onClick={handleSync}
                 disabled={isSyncing || metricsLoading || connectedDevices.length === 0}
-                className="gap-2 min-h-[44px] bg-nova-surface border-nova-border text-nova-text hover:bg-nova-surface-hover rounded-xl"
+                className="gap-2 min-h-[44px] bg-card border-border text-foreground hover:bg-muted rounded-xl"
               >
                 {isSyncing ? (
                   <Loader2 className="w-4 h-4 animate-spin" />
@@ -412,27 +412,27 @@ export default function Nova() {
                 return (
                   <div 
                     key={index} 
-                    className={`group relative bg-nova-surface rounded-2xl p-6 border border-nova-border hover:border-nova-accent/30 transition-all duration-500 ${hasData ? '' : 'opacity-60'}`}
+                    className={`group relative bg-card rounded-2xl p-6 border border-border hover:border-primary/30 transition-all duration-500 ${hasData ? '' : 'opacity-60'}`}
                   >
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-nova-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     
                     <div className="relative">
                       <div className="flex items-center justify-between mb-4">
                         <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${config.color} bg-opacity-20 flex items-center justify-center`}>
                           <Icon className="w-5 h-5 text-white" />
                         </div>
-                        <span className="text-xs text-nova-text-muted uppercase tracking-wider">{metric.label}</span>
+                        <span className="text-xs text-muted-foreground uppercase tracking-wider">{metric.label}</span>
                       </div>
                       
-                      <p className={`text-3xl sm:text-4xl font-bold ${hasData ? 'text-nova-text' : 'text-nova-text/30'}`}>
+                      <p className={`text-3xl sm:text-4xl font-bold ${hasData ? 'text-foreground' : 'text-foreground/30'}`}>
                         {metric.value}
                       </p>
                       
                       {metric.trend && (
-                        <p className={`text-sm mt-2 ${metric.trendColor || 'text-nova-text-muted'}`}>{metric.trend}</p>
+                        <p className={`text-sm mt-2 ${metric.trendColor || 'text-muted-foreground'}`}>{metric.trend}</p>
                       )}
                       {!hasData && (
-                        <p className="text-xs text-nova-text-muted mt-2">No data yet</p>
+                        <p className="text-xs text-muted-foreground mt-2">No data yet</p>
                       )}
                     </div>
                   </div>

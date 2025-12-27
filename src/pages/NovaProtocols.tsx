@@ -59,7 +59,7 @@ export default function NovaProtocols() {
 
   return (
     <NovaSwipeWrapper>
-      <div className="min-h-screen bg-black">
+      <div className="min-h-screen bg-background pb-24 md:pb-0">
         <NovaNav />
         
         {/* Hero Section with Recovery Ring */}
