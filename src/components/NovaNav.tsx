@@ -1,15 +1,14 @@
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
-import { MessageCircle, LayoutDashboard, Target, Activity, TrendingUp, Smartphone, Settings, Zap } from "lucide-react";
+import { MessageCircle, LayoutDashboard, Target, Activity, Smartphone, Settings, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { to: "/nova/chat", label: "Chat", icon: MessageCircle },
   { to: "/nova", label: "Home", icon: LayoutDashboard, end: true },
-  { to: "/nova/goals", label: "Goals", icon: Target },
+  { to: "/nova/goals", label: "Goals & Trends", icon: Target },
   { to: "/nova/protocols", label: "Protocols", icon: Activity },
   { to: "/nova/insights", label: "Insights", icon: Zap },
-  { to: "/nova/trends", label: "Trends", icon: TrendingUp },
   { to: "/nova/devices", label: "Devices", icon: Smartphone },
   { to: "/nova/settings", label: "Settings", icon: Settings },
 ];
