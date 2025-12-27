@@ -31,9 +31,9 @@ export default function SportsOverview() {
   return (
     <>
       <SEO 
-        title="Sports Cognitive Performance System | NeuroState for Teams"
-        description="AI-driven cognitive performance for elite athletes. Faster recovery, injury prevention and peak mental performance through personalised protocols, red light therapy and adaptogen supplements."
-        keywords="sports cognitive performance, athlete mental performance, AI sports coaching, injury prevention technology, athletic recovery optimisation, sports wellness platform"
+        title="Athletic Cognitive Infrastructure | AI Performance Forecasting for Sports"
+        description="Predictive cognitive analytics for elite athletes. Real-time performance forecasting, risk prediction, and cognitive readiness measurement for sports organisations."
+        keywords="sports cognitive infrastructure, athlete performance forecasting, AI sports analytics, predictive athletic performance, cognitive readiness measurement"
       />
       
       <div className="min-h-screen bg-white">
@@ -44,13 +44,13 @@ export default function SportsOverview() {
           <div className="max-w-5xl mx-auto text-center space-y-6">
             <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Football · Rugby · Athletics · Elite Teams</p>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-carbon leading-[1.02]">
-              Cognitive Performance
+              Predictive Performance
               <br />
-              <span className="text-accent">for Elite Athletes.</span>
+              <span className="text-accent">Infrastructure for Sport.</span>
             </h1>
             <p className="text-xl text-ash max-w-2xl mx-auto">
-              AI-driven cognitive optimisation for sports organisations. 
-              Faster recovery. Fewer injuries. Peak mental performance when it matters.
+              AI-driven cognitive forecasting for sports organisations. 
+              Predict performance volatility. Measure cognitive readiness. Reduce injury risk.
             </p>
           </div>
         </section>

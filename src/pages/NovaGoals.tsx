@@ -273,8 +273,8 @@ export default function NovaGoals() {
   return (
     <NovaSwipeWrapper>
       <SEO 
-        title="Goals – Nova | NeuroState"
-        description="Track your performance goals and visualise your progress with Nova."
+        title="Performance Goals – Cognitive Analytics | Nova"
+        description="Set and track measurable cognitive performance targets. AI-driven goal tracking with predictive progress modelling."
       />
       <div className="min-h-screen bg-background">
         <NovaNav />

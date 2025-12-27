@@ -96,14 +96,14 @@ const Hero = () => {
                       isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                     )}
                   >
-                    <span className="block">AI-Powered</span>
+                    <span className="block">AI Cognitive Performance</span>
                     <span className="block mt-1 sm:mt-2">
                       <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/70">
-                        Cognitive
+                        Platform for Teams
                       </span>
                     </span>
                     <span className="block mt-1 sm:mt-2 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-emerald-300 to-teal-400">
-                      Operating System
+                      & Individuals
                     </span>
                   </h1>
                 </div>

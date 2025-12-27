@@ -199,7 +199,7 @@ export default function NovaDevices() {
 
   return (
     <NovaSwipeWrapper>
-      <SEO title="Devices – Nova" description="Connect your wearables to sync biometric data with Nova." />
+      <SEO title="Device Integration – Wearable Performance Analytics | Nova" description="Connect wearables for continuous biometric data sync and predictive cognitive analytics." />
       <div className="min-h-screen bg-black">
         <NovaNav />
         

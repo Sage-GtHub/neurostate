@@ -218,8 +218,8 @@ export default function Nova() {
     return (
       <NovaSwipeWrapper>
         <SEO 
-          title="Nova Dashboard – AI Cognitive Performance | NeuroState"
-          description="Your personalised AI performance dashboard. Sign in to view metrics, forecasts, and AI-generated insights."
+          title="Nova AI | Cognitive Performance Forecasting Engine"
+          description="Nova is a multi-model AI engine that forecasts cognitive performance using wearable data, behavioural signals, and predictive analytics. Enterprise-grade cognitive infrastructure."
         />
         <div className="min-h-screen bg-nova-bg">
           <NovaNav />
@@ -262,8 +262,8 @@ export default function Nova() {
   return (
     <NovaSwipeWrapper>
       <SEO 
-        title="Nova Dashboard – AI Cognitive Performance | NeuroState"
-        description="Your personalised AI performance dashboard. View metrics, forecasts, and AI-generated insights."
+        title="Nova AI | Cognitive Performance Forecasting Engine"
+        description="Nova is a multi-model AI engine that forecasts cognitive performance using wearable data, behavioural signals, and predictive analytics. Real-time cognitive forecasting for peak performance."
       />
       
       <NovaOnboarding 
