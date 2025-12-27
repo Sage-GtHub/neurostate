@@ -16,8 +16,7 @@ const AnimatedNeuron = ({ className = '', color = '#8b5cf6', pulseDelay = 0 }: A
   return (
     <svg
       viewBox="0 0 100 100"
-      className={`${className}`}
-      style={{ filter: 'drop-shadow(0 0 8px rgba(139, 92, 246, 0.3))' }}
+      className={className}
     >
       <defs>
         {/* Gradient for soma */}

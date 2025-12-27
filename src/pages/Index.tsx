@@ -73,7 +73,7 @@ const Index = () => {
                 {[
                   { 
                     title: "Nova AI", 
-                    desc: "AI performance assistant", 
+                    desc: "AI Cognitive OS",
                     detail: "Personalised AI coaching with adaptive recommendations and real-time behavioural insights.",
                     color: "violet",
                     borderColor: "border-violet-500/30",
