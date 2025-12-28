@@ -4,8 +4,6 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { SoftwareApplicationStructuredData } from "@/components/StructuredData";
-import { WhoopScoreRing } from "@/components/nova/WhoopScoreRing";
-import { WhoopMetricCard } from "@/components/nova/WhoopMetricCard";
 import { 
   ArrowRight, 
   Brain, 
@@ -20,7 +18,6 @@ import {
 export default function NovaOverview() {
   const navigate = useNavigate();
 
-  // Simulated daily scores
   const todayScores = {
     recovery: 78,
     strain: 12.4,
@@ -57,67 +54,63 @@ export default function NovaOverview() {
     <NovaSwipeWrapper>
       <SEO 
         title="Nova AI | Cognitive Performance Forecasting Engine"
-        description="Nova is a multi-model AI engine that forecasts cognitive performance using wearable data, behavioural signals, and predictive analytics. Real-time cognitive forecasting powered by enterprise-grade AI."
+        description="Nova is a multi-model AI engine that forecasts cognitive performance using wearable data, behavioural signals, and predictive analytics."
       />
       <SoftwareApplicationStructuredData />
-      <div className="min-h-screen bg-void">
+      <div className="min-h-screen bg-background">
         <NovaNav />
         
-        <div className="pt-16 pb-24 px-4 sm:px-6 max-w-lg mx-auto">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12 sm:py-16">
           
           {/* Greeting */}
-          <div className="mb-8">
-            <p className="text-muted text-sm uppercase tracking-widest mb-1">Good morning</p>
-            <h1 className="text-2xl font-semibold text-foreground">Your daily overview</h1>
+          <div className="mb-12">
+            <p className="text-muted-foreground text-xs uppercase tracking-widest mb-2">Good morning</p>
+            <h1 className="text-2xl sm:text-3xl font-semibold text-foreground">Your daily overview</h1>
           </div>
 
-          {/* Main Score Ring */}
-          <div className="flex justify-center mb-8">
-            <WhoopScoreRing 
-              score={todayScores.recovery} 
-              label="Recovery"
-              sublabel="Ready to perform"
-              size={200}
-              animated
-            />
+          {/* Main Score */}
+          <div className="flex justify-center mb-12">
+            <div className="text-center">
+              <div className="w-40 h-40 rounded-full border-4 border-accent flex items-center justify-center mx-auto mb-4">
+                <div>
+                  <p className="text-4xl font-bold text-foreground">{todayScores.recovery}%</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Recovery</p>
+                </div>
+              </div>
+              <p className="text-sm text-muted-foreground">Ready to perform</p>
+            </div>
           </div>
 
-          {/* Key Metrics Row */}
-          <div className="grid grid-cols-3 gap-3 mb-8">
-            <div className="bg-card rounded-xl p-4 border border-border text-center">
-              <div className="flex items-center justify-center gap-1 mb-1">
-                <Activity className="w-4 h-4 text-whoop-strain" />
-              </div>
-              <p className="text-xl font-bold text-foreground">{todayScores.strain}</p>
-              <p className="text-xs text-muted">Strain</p>
+          {/* Key Metrics */}
+          <div className="grid grid-cols-3 gap-4 mb-12">
+            <div className="bg-card rounded-lg p-6 border border-border text-center">
+              <Activity className="w-4 h-4 text-accent mx-auto mb-2" />
+              <p className="text-2xl font-bold text-foreground">{todayScores.strain}</p>
+              <p className="text-xs text-muted-foreground">Strain</p>
             </div>
-            <div className="bg-card rounded-xl p-4 border border-border text-center">
-              <div className="flex items-center justify-center gap-1 mb-1">
-                <Moon className="w-4 h-4 text-whoop-sleep" />
-              </div>
-              <p className="text-xl font-bold text-foreground">{todayScores.sleep}%</p>
-              <p className="text-xs text-muted">Sleep</p>
+            <div className="bg-card rounded-lg p-6 border border-border text-center">
+              <Moon className="w-4 h-4 text-accent mx-auto mb-2" />
+              <p className="text-2xl font-bold text-foreground">{todayScores.sleep}%</p>
+              <p className="text-xs text-muted-foreground">Sleep</p>
             </div>
-            <div className="bg-card rounded-xl p-4 border border-border text-center">
-              <div className="flex items-center justify-center gap-1 mb-1">
-                <Heart className="w-4 h-4 text-whoop-hrv" />
-              </div>
-              <p className="text-xl font-bold text-foreground">{todayScores.hrv}</p>
-              <p className="text-xs text-muted">HRV</p>
+            <div className="bg-card rounded-lg p-6 border border-border text-center">
+              <Heart className="w-4 h-4 text-accent mx-auto mb-2" />
+              <p className="text-2xl font-bold text-foreground">{todayScores.hrv}</p>
+              <p className="text-xs text-muted-foreground">HRV</p>
             </div>
           </div>
 
           {/* Quick Actions */}
-          <div className="grid grid-cols-2 gap-3 mb-8">
+          <div className="grid grid-cols-2 gap-4 mb-12">
             {quickActions.map((action) => {
               const Icon = action.icon;
               return (
                 <button
                   key={action.label}
                   onClick={() => navigate(action.route)}
-                  className="bg-card rounded-xl p-4 border border-border text-left hover:border-primary/50 transition-colors group"
+                  className="bg-card rounded-lg p-6 border border-border text-left hover:border-accent/30 transition-all group"
                 >
-                  <Icon className="w-5 h-5 text-primary mb-2 group-hover:scale-110 transition-transform" />
+                  <Icon className="w-5 h-5 text-accent mb-3 group-hover:scale-110 transition-transform" />
                   <p className="text-sm font-medium text-foreground">{action.label}</p>
                 </button>
               );
@@ -125,12 +118,12 @@ export default function NovaOverview() {
           </div>
 
           {/* Insights */}
-          <div className="mb-8">
-            <div className="flex items-center justify-between mb-4">
+          <div className="mb-12">
+            <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-semibold text-foreground">Today's Insights</h2>
               <button 
                 onClick={() => navigate('/nova/insights')}
-                className="text-xs text-primary flex items-center gap-1"
+                className="text-xs text-accent flex items-center gap-1 hover:underline"
               >
                 View all <ChevronRight className="w-3 h-3" />
               </button>
@@ -139,17 +132,17 @@ export default function NovaOverview() {
               {insights.map((insight, index) => (
                 <div 
                   key={index}
-                  className="bg-card rounded-xl p-4 border border-border"
+                  className="bg-card rounded-lg p-5 border border-border"
                 >
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-start gap-4">
                     <div className={`w-2 h-2 rounded-full mt-2 ${
-                      insight.type === 'positive' ? 'bg-primary' :
-                      insight.type === 'warning' ? 'bg-whoop-strain' :
-                      'bg-whoop-sleep'
+                      insight.type === 'positive' ? 'bg-accent' :
+                      insight.type === 'warning' ? 'bg-orange-500' :
+                      'bg-blue-500'
                     }`} />
                     <div>
                       <p className="text-sm font-medium text-foreground mb-1">{insight.title}</p>
-                      <p className="text-xs text-muted leading-relaxed">{insight.description}</p>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{insight.description}</p>
                     </div>
                   </div>
                 </div>
@@ -159,7 +152,7 @@ export default function NovaOverview() {
 
           {/* CTA */}
           <Button 
-            className="w-full h-12 bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl font-medium"
+            className="w-full h-12"
             onClick={() => navigate('/nova/chat')}
           >
             <Brain className="w-4 h-4 mr-2" />

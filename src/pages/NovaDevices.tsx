@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
-import { RefreshCw, Plus, Loader2, ChevronRight, Check, Wifi, WifiOff } from "lucide-react";
+import { RefreshCw, Plus, Loader2, Check, WifiOff } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { SEO } from "@/components/SEO";
-import { WhoopScoreRing } from "@/components/nova/WhoopScoreRing";
 
-// Import wearable logos
 import ouraLogo from "@/assets/wearables/oura-logo.png";
 import whoopLogo from "@/assets/wearables/whoop-logo.png";
 import fitbitLogo from "@/assets/wearables/fitbit-logo.png";
@@ -199,37 +197,31 @@ export default function NovaDevices() {
 
   return (
     <NovaSwipeWrapper>
-      <SEO title="Device Integration – Wearable Performance Analytics | Nova" description="Connect wearables for continuous biometric data sync and predictive cognitive analytics." />
-      <div className="min-h-screen bg-black">
+      <SEO title="Devices | Nova AI" description="Connect wearables for continuous biometric data sync and cognitive analytics." />
+      <div className="min-h-screen bg-background">
         <NovaNav />
         
-        <div className="px-6 pt-8 pb-12">
-          {/* Hero Section */}
-          <div className="flex flex-col items-center text-center mb-10">
-            <WhoopScoreRing 
-              score={connectedDevices.length > 0 ? 100 : 0} 
-              size={160} 
-              strokeWidth={8}
-              label="DEVICES"
-              sublabel="CONNECTED"
-              color={connectedDevices.length > 0 ? "green" : "red"}
-            />
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12 sm:py-16">
+          
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-foreground mb-4">Devices</h1>
             
             {/* Stats */}
-            <div className="flex items-center gap-8 mt-8">
+            <div className="flex items-center justify-center gap-8">
               <div className="text-center">
                 <div className="text-2xl font-bold text-foreground">{connectedDevices.length}</div>
-                <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Sources</div>
+                <div className="text-xs text-muted-foreground uppercase tracking-wider">Sources</div>
               </div>
               <div className="w-px h-8 bg-border" />
               <div className="text-center">
                 <div className="text-2xl font-bold text-foreground">{dataStats.dataPoints.toLocaleString()}</div>
-                <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Data Points</div>
+                <div className="text-xs text-muted-foreground uppercase tracking-wider">Data Points</div>
               </div>
               <div className="w-px h-8 bg-border" />
               <div className="text-center">
-                <div className="text-2xl font-bold text-primary">{dataStats.syncs}</div>
-                <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Syncs</div>
+                <div className="text-2xl font-bold text-accent">{dataStats.syncs}</div>
+                <div className="text-xs text-muted-foreground uppercase tracking-wider">Syncs</div>
               </div>
             </div>
           </div>
@@ -237,15 +229,15 @@ export default function NovaDevices() {
           {/* Loading */}
           {isLoading && (
             <div className="flex items-center justify-center py-16">
-              <Loader2 className="w-6 h-6 animate-spin text-primary" />
+              <Loader2 className="w-6 h-6 animate-spin text-accent" />
             </div>
           )}
 
           {/* Connected Devices */}
           {!isLoading && connectedDevices.length > 0 && (
             <div className="mb-8">
-              <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">Connected</h2>
-              <div className="space-y-2">
+              <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">Connected</h2>
+              <div className="space-y-3">
                 {connectedDevices.map((device) => {
                   const localDevice = devices.find(d => d.device_type === device.type);
                   const vitalProvider = vitalProviders.find(p => p.slug === device.type);
@@ -253,18 +245,16 @@ export default function NovaDevices() {
                   return (
                     <div 
                       key={device.type}
-                      className="flex items-center gap-4 p-4 rounded-2xl bg-card border border-border/30 hover:border-primary/20 transition-all"
+                      className="flex items-center gap-4 p-5 rounded-lg bg-card border border-border hover:border-accent/30 transition-all"
                     >
-                      {/* Logo */}
-                      <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center p-2 flex-shrink-0">
+                      <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center p-2 flex-shrink-0">
                         <img src={device.logo} alt={device.name} className="w-full h-full object-contain" />
                       </div>
                       
-                      {/* Info */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-semibold text-foreground text-sm">{device.name}</h3>
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                          <h3 className="font-medium text-foreground text-sm">{device.name}</h3>
+                          <div className="w-1.5 h-1.5 rounded-full bg-accent" />
                         </div>
                         <div className="flex items-center gap-2 text-xs text-muted-foreground">
                           <span>Synced {getTimeSince(localDevice?.last_sync_at || vitalProvider?.connected_at || null)}</span>
@@ -273,11 +263,10 @@ export default function NovaDevices() {
                         </div>
                       </div>
 
-                      {/* Sync Button */}
                       <button
                         onClick={() => handleSync(device.type)}
                         disabled={syncingDevice === device.type}
-                        className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center hover:border-primary/50 transition-all disabled:opacity-50"
+                        className="w-10 h-10 rounded-lg bg-card border border-border flex items-center justify-center hover:border-accent/50 transition-all disabled:opacity-50"
                       >
                         <RefreshCw className={`w-4 h-4 text-muted-foreground ${syncingDevice === device.type ? 'animate-spin' : ''}`} />
                       </button>
@@ -291,10 +280,10 @@ export default function NovaDevices() {
           {/* Available Devices */}
           {!isLoading && (
             <div>
-              <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">
+              <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">
                 {connectedDevices.length > 0 ? "Add Device" : "Connect Device"}
               </h2>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {availableDevices.map((device) => {
                   const isSupported = VITAL_SUPPORTED.includes(device.type);
                   
@@ -303,30 +292,27 @@ export default function NovaDevices() {
                       key={device.type}
                       onClick={() => handleConnect(device.type, device.name)}
                       disabled={connectingDevice === device.type || !isSupported}
-                      className={`w-full flex items-center gap-4 p-4 rounded-2xl border transition-all active:scale-[0.99] ${
+                      className={`w-full flex items-center gap-4 p-5 rounded-lg border transition-all ${
                         isSupported 
-                          ? 'bg-card border-border/30 hover:border-primary/30' 
-                          : 'bg-card/50 border-border/20 opacity-50'
+                          ? 'bg-card border-border hover:border-accent/30' 
+                          : 'bg-card/50 border-border/50 opacity-50'
                       }`}
                     >
-                      {/* Logo */}
-                      <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center p-2 flex-shrink-0">
+                      <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center p-2 flex-shrink-0">
                         <img src={device.logo} alt={device.name} className="w-full h-full object-contain opacity-70" />
                       </div>
                       
-                      {/* Info */}
                       <div className="flex-1 text-left">
-                        <h3 className="font-semibold text-foreground text-sm mb-0.5">{device.name}</h3>
+                        <h3 className="font-medium text-foreground text-sm mb-0.5">{device.name}</h3>
                         <div className="text-xs text-muted-foreground">
                           {isSupported ? device.metrics.join(' · ') : 'Coming soon'}
                         </div>
                       </div>
 
-                      {/* Action */}
                       {connectingDevice === device.type ? (
-                        <Loader2 className="w-5 h-5 animate-spin text-primary" />
+                        <Loader2 className="w-5 h-5 animate-spin text-accent" />
                       ) : isSupported ? (
-                        <Plus className="w-5 h-5 text-primary" />
+                        <Plus className="w-5 h-5 text-accent" />
                       ) : (
                         <WifiOff className="w-4 h-4 text-muted-foreground" />
                       )}
@@ -341,15 +327,15 @@ export default function NovaDevices() {
           <div className="mt-12 pt-8 border-t border-border">
             <div className="flex items-center justify-center gap-6 text-xs text-muted-foreground">
               <div className="flex items-center gap-2">
-                <Check className="w-3.5 h-3.5 text-primary" />
+                <Check className="w-3.5 h-3.5 text-accent" />
                 <span>Encrypted</span>
               </div>
               <div className="flex items-center gap-2">
-                <Check className="w-3.5 h-3.5 text-primary" />
+                <Check className="w-3.5 h-3.5 text-accent" />
                 <span>GDPR Compliant</span>
               </div>
               <div className="flex items-center gap-2">
-                <Check className="w-3.5 h-3.5 text-primary" />
+                <Check className="w-3.5 h-3.5 text-accent" />
                 <span>Your Data</span>
               </div>
             </div>
