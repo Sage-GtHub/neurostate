@@ -44,8 +44,8 @@ const Index = () => {
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6">
                 {[
                   { value: "80%", label: "AI models trained" },
-                  { value: "72hr", label: "Prediction window" },
-                  { value: "500+", label: "Enterprise clients" },
+                  { value: "7 days", label: "Prediction window" },
+                  { value: "12+", label: "Research partners" },
                   { value: "98%", label: "Accuracy rate" }
                 ].map((stat, i) => (
                   <div 
@@ -197,7 +197,7 @@ const Index = () => {
                 <div className="space-y-6">
                   <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">AI Engine</span>
                   <h2 className="text-large-display text-foreground">
-                    Nova — Cognitive Performance Forecasting
+                    Nova: Cognitive Performance Forecasting
                   </h2>
                   <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
                     Nova is our multi-model AI engine for predictive cognitive modelling. It forecasts performance states, detects risk patterns, and delivers real-time analytics.

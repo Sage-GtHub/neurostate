@@ -284,7 +284,7 @@ export function HealthForecast() {
                         Expected Energy Dip
                       </div>
                       <div className="text-sm text-muted-foreground">
-                        {selectedDay.expectedDip.time} — {selectedDay.expectedDip.reason}
+                        {selectedDay.expectedDip.time}: {selectedDay.expectedDip.reason}
                       </div>
                     </div>
                   </div>

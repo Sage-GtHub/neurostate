@@ -23,7 +23,7 @@ const FAQ = () => {
     {
       category: "Products & Usage",
       questions: [
-        { q: "How do I know which products are right for me?", a: "Take our Product Quiz on the homepage—it'll give you personalised recommendations based on your wellness goals." },
+        { q: "How do I know which products are right for me?", a: "Take our Product Quiz on the homepage. It will give you personalised recommendations based on your wellness goals." },
         { q: "Are your products third-party tested?", a: "Yes, everything goes through rigorous third-party testing for purity, potency, and safety." },
         { q: "How long until I see results?", a: "It varies depending on the product and the person. Most customers notice improvements within 2-4 weeks of consistent use." },
       ],
@@ -39,7 +39,7 @@ const FAQ = () => {
       category: "Account & Subscription",
       questions: [
         { q: "How do subscriptions work?", a: "Subscribe to your favourite products and save 15%. Pick your delivery frequency and change or cancel anytime." },
-        { q: "Can I pause my subscription?", a: "Yes, you can pause, change, or cancel your subscription anytime from your account dashboard—no penalties." },
+        { q: "Can I pause my subscription?", a: "Yes, you can pause, change, or cancel your subscription anytime from your account dashboard. No penalties." },
       ],
     },
   ];

@@ -121,7 +121,7 @@ export default function HealthClubsCaseStudies() {
         { value: "67%", label: "improvement in member engagement scores" },
         { value: "52%", label: "increase in member referrals" }
       ],
-      quote: "Our members don't just come to class anymore—they're part of a complete wellness ecosystem. NeuroState helped us evolve from a studio to a lifestyle brand, and the business results speak for themselves.",
+      quote: "Our members don't just come to class anymore. They're part of a complete wellness ecosystem. NeuroState helped us evolve from a studio to a lifestyle brand, and the business results speak for themselves.",
       author: "Sophie Chen",
       role: "Studio Owner"
     },
@@ -138,7 +138,7 @@ export default function HealthClubsCaseStudies() {
         { value: "3.2x", label: "increase in member waiting list" },
         { value: "95", label: "member NPS score" }
       ],
-      quote: "NeuroState elevated our offering to match our premium positioning. It's become a signature part of the Kinetic experience—members view it as a key differentiator and value driver for their membership.",
+      quote: "NeuroState elevated our offering to match our premium positioning. It's become a signature part of the Kinetic experience. Members view it as a key differentiator and value driver for their membership.",
       author: "Alexander Hunt",
       role: "General Manager"
     }

@@ -22,7 +22,7 @@ export const NovaLanding = () => {
   const coreStats = [
     { value: "100M+", label: "AI Parameters" },
     { value: "91%", label: "Prediction Accuracy" },
-    { value: "72hr", label: "Health Forecasts" },
+    { value: "7 days", label: "Health Forecasts" },
     { value: "500K", label: "SNPs Analysed" }
   ];
 

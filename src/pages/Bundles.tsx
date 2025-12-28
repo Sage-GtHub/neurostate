@@ -60,7 +60,7 @@ const Bundles = () => {
                   },
                   {
                     title: "Simplified approach",
-                    description: "No guesswork—everything you need for your goal in one package."
+                    description: "No guesswork. Everything you need for your goal in one package."
                   }
                 ].map((benefit, i) => (
                   <div 
