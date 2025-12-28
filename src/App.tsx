@@ -48,6 +48,9 @@ import Dashboard from "./pages/Dashboard";
 import ProgramOverview from "./pages/ProgramOverview";
 import SportsOverview from "./pages/SportsOverview";
 import HealthClubsOverview from "./pages/HealthClubsOverview";
+import HealthcareOverview from "./pages/HealthcareOverview";
+import HospitalityOverview from "./pages/HospitalityOverview";
+import FinancialServicesOverview from "./pages/FinancialServicesOverview";
 import EnterpriseIntegrations from "./pages/EnterpriseIntegrations";
 import EnterprisePricing from "./pages/EnterprisePricing";
 import EnterpriseOverview from "./pages/EnterpriseOverview";
@@ -155,6 +158,15 @@ const AnimatedRoutes = () => {
             <Route path="/enterprise/health-clubs/integrations" element={<HealthClubsIntegrations />} />
             <Route path="/enterprise/health-clubs/pricing" element={<HealthClubsPricing />} />
             <Route path="/enterprise/health-clubs/cases" element={<HealthClubsCaseStudies />} />
+            
+            {/* Healthcare & Clinical Routes */}
+            <Route path="/enterprise/healthcare/overview" element={<HealthcareOverview />} />
+            
+            {/* Hospitality & Spas Routes */}
+            <Route path="/enterprise/hospitality/overview" element={<HospitalityOverview />} />
+            
+            {/* Financial Services Routes */}
+            <Route path="/enterprise/financial-services/overview" element={<FinancialServicesOverview />} />
             
             {/* Legacy enterprise routes */}
             <Route path="/enterprise/integrations" element={<EnterpriseIntegrations />} />

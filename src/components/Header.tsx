@@ -89,11 +89,11 @@ export const Header = () => {
   };
 
   const industries = [
-    { label: "Corporate Wellness", href: "/enterprise/corporate/overview", desc: "Employee wellbeing programmes" },
+    { label: "Financial Services", href: "/enterprise/financial-services/overview", desc: "Trading floors & investment teams" },
     { label: "Sports & Athletics", href: "/enterprise/sports/overview", desc: "Athletic performance systems" },
+    { label: "Healthcare & Clinical", href: "/enterprise/healthcare/overview", desc: "Patient recovery protocols" },
+    { label: "Hospitality & Spas", href: "/enterprise/hospitality/overview", desc: "Guest wellness experiences" },
     { label: "Health Clubs & Gyms", href: "/enterprise/health-clubs/overview", desc: "Facility member solutions" },
-    { label: "Healthcare & Clinical", href: "/enterprise/overview", desc: "Patient recovery protocols" },
-    { label: "Hospitality & Spas", href: "/enterprise/overview", desc: "Guest wellness experiences" },
   ];
 
   const mobileLinks = [
