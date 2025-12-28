@@ -2,8 +2,9 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Link } from "react-router-dom";
-import { ArrowRight, Clock, Calendar } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Clock, Calendar } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { Button } from "@/components/ui/button";
 
 interface BlogPost {
   slug: string;
@@ -21,40 +22,40 @@ const blogPosts: BlogPost[] = [
     title: "What Is a Cognitive Performance System?",
     excerpt: "The cognitive performance system represents a new category in human optimisation. Unlike traditional wellness approaches that focus on relaxation, a cognitive performance system integrates AI, supplements, and technology to measurably improve how you think, focus, and recover.",
     category: "Cognitive Performance",
-    readTime: "5 min read",
+    readTime: "5 min",
     date: "2025-01-15",
     featured: true
   },
   {
     slug: "why-traditional-corporate-wellness-fails",
     title: "Why Traditional Corporate Wellness Fails",
-    excerpt: "Corporate wellness programmes have become a £50 billion industry, yet employee burnout continues to rise. The fundamental problem is that traditional approaches focus on stress management rather than cognitive optimisation. Here is why they fail and what works instead.",
+    excerpt: "Corporate wellness programmes have become a £50 billion industry, yet employee burnout continues to rise. The fundamental problem is that traditional approaches focus on stress management rather than cognitive optimisation.",
     category: "Corporate Wellbeing",
-    readTime: "6 min read",
+    readTime: "6 min",
     date: "2025-01-12"
   },
   {
     slug: "science-behind-red-light-therapy-mental-performance",
     title: "The Science Behind Red Light Therapy for Mental Performance",
-    excerpt: "Red light therapy cognitive benefits are supported by over 5,000 peer-reviewed studies. Photobiomodulation at 660nm and 850nm wavelengths enhances mitochondrial function in brain cells, improving focus, memory, and cognitive clarity. Here is what the research shows.",
+    excerpt: "Red light therapy cognitive benefits are supported by over 5,000 peer-reviewed studies. Photobiomodulation at 660nm and 850nm wavelengths enhances mitochondrial function in brain cells.",
     category: "Neuromodulation",
-    readTime: "7 min read",
+    readTime: "7 min",
     date: "2025-01-10"
   },
   {
     slug: "ai-personalisation-future-of-work",
     title: "How AI Personalisation Will Shape the Future of Work",
-    excerpt: "AI-driven cognitive performance is transforming how we approach workplace productivity. Predictive wellness AI can now anticipate burnout, optimise work schedules, and provide personalised interventions. This is not science fiction. It is happening now.",
+    excerpt: "AI-driven cognitive performance is transforming how we approach workplace productivity. Predictive wellness AI can now anticipate burnout, optimise work schedules, and provide personalised interventions.",
     category: "AI Performance",
-    readTime: "5 min read",
+    readTime: "5 min",
     date: "2025-01-08"
   },
   {
     slug: "supplements-that-improve-focus-what-actually-works",
     title: "Supplements That Improve Focus: What Actually Works?",
-    excerpt: "The supplement industry is flooded with focus claims. Most are marketing noise. Here we examine the evidence for adaptogens like Ashwagandha, Lion's Mane, and Rhodiola, plus essential minerals like magnesium glycinate. What does the research actually support?",
+    excerpt: "The supplement industry is flooded with focus claims. Most are marketing noise. Here we examine the evidence for adaptogens like Ashwagandha, Lion's Mane, and Rhodiola.",
     category: "Performance Supplements",
-    readTime: "8 min read",
+    readTime: "8 min",
     date: "2025-01-05"
   }
 ];
@@ -74,42 +75,50 @@ export default function Blog() {
       />
       <Header />
       
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen bg-background relative overflow-hidden">
+        {/* Organic background */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-1/3 right-0 w-[600px] h-[600px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
+        </div>
+
         {/* Hero */}
-        <section ref={hero.ref} className={`pt-32 sm:pt-40 pb-16 sm:pb-20 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-background transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <section 
+          ref={hero.ref} 
+          className={`relative pt-32 sm:pt-44 pb-16 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
           <div className="max-w-4xl mx-auto text-center space-y-6">
-            <p className="text-muted-foreground text-xs tracking-[0.3em] uppercase font-medium">Insights</p>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold text-foreground leading-[1.02]">
+            <p className="text-[10px] uppercase tracking-[0.25em] text-foreground/40">Insights</p>
+            <h1 className="text-4xl sm:text-5xl font-light text-foreground">
               Cognitive Performance Blog
             </h1>
-            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-              Evidence-based insights on AI-driven cognitive performance, neuromodulation, and the future of mental optimisation.
+            <p className="text-sm text-foreground/50 max-w-lg mx-auto">
+              Evidence-based insights on AI-driven cognitive performance and mental optimisation.
             </p>
           </div>
         </section>
 
         {/* Featured Post */}
         {featuredPost && (
-          <section className="px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 pb-16 sm:pb-20">
-            <div className="max-w-6xl mx-auto">
+          <section className="px-6 md:px-12 lg:px-20 xl:px-32 pb-16">
+            <div className="max-w-5xl mx-auto">
               <Link to={`/blog/${featuredPost.slug}`} className="group block">
-                <div className="bg-foreground p-8 sm:p-12 lg:p-16 transition-all duration-300 hover:bg-foreground/90">
-                  <p className="text-background/60 text-xs tracking-[0.3em] uppercase font-medium mb-4">Featured</p>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-background leading-tight mb-4 group-hover:text-muted transition-colors">
+                <div className="rounded-3xl bg-foreground p-8 sm:p-12 transition-all duration-500 hover:scale-[1.01]">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-background/40 mb-4">Featured</p>
+                  <h2 className="text-2xl sm:text-3xl font-light text-background leading-tight mb-4 group-hover:text-background/80 transition-colors">
                     {featuredPost.title}
                   </h2>
-                  <p className="text-background/70 text-base sm:text-lg leading-relaxed mb-6 max-w-3xl">
+                  <p className="text-background/60 text-sm leading-relaxed mb-6 max-w-2xl">
                     {featuredPost.excerpt}
                   </p>
-                  <div className="flex items-center gap-6 text-background/60 text-sm">
-                    <span className="text-background/80">{featuredPost.category}</span>
+                  <div className="flex items-center gap-6 text-background/40 text-xs">
+                    <span className="text-accent">{featuredPost.category}</span>
                     <div className="flex items-center gap-1.5">
-                      <Clock className="w-4 h-4" />
+                      <Clock className="w-3 h-3" />
                       {featuredPost.readTime}
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <Calendar className="w-4 h-4" />
-                      {new Date(featuredPost.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                      <Calendar className="w-3 h-3" />
+                      {new Date(featuredPost.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}
                     </div>
                   </div>
                 </div>
@@ -119,37 +128,36 @@ export default function Blog() {
         )}
 
         {/* All Posts */}
-        <section ref={posts.ref} className={`px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 pb-24 sm:pb-32 transition-all duration-1000 ${posts.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="max-w-6xl mx-auto">
-            <h3 className="text-lg font-semibold text-foreground mb-8">Latest Articles</h3>
-            <div className="grid md:grid-cols-2 gap-px bg-border">
+        <section 
+          ref={posts.ref} 
+          className={`px-6 md:px-12 lg:px-20 xl:px-32 pb-24 transition-all duration-1000 ${posts.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
+          <div className="max-w-5xl mx-auto">
+            <p className="text-[10px] uppercase tracking-[0.15em] text-foreground/40 mb-6">Latest</p>
+            <div className="grid md:grid-cols-2 gap-4">
               {regularPosts.map((post, i) => (
-                <Link key={i} to={`/blog/${post.slug}`} className="group">
-                  <article className="bg-background p-8 sm:p-10 h-full transition-all duration-300 hover:bg-foreground">
-                    <p className="text-muted-foreground group-hover:text-background/60 text-xs tracking-[0.2em] uppercase font-medium mb-3 transition-colors">
+                <Link 
+                  key={i} 
+                  to={`/blog/${post.slug}`} 
+                  className="group"
+                  style={{ animationDelay: `${i * 100}ms` }}
+                >
+                  <article className="p-6 sm:p-8 rounded-3xl bg-foreground/[0.02] hover:bg-foreground transition-all duration-500 h-full flex flex-col">
+                    <p className="text-[10px] uppercase tracking-[0.15em] text-accent mb-3">
                       {post.category}
                     </p>
-                    <h4 className="text-xl font-medium text-foreground group-hover:text-background mb-3 transition-colors leading-tight">
+                    <h4 className="text-base font-medium text-foreground group-hover:text-background mb-3 transition-colors leading-snug">
                       {post.title}
                     </h4>
-                    <p className="text-muted-foreground group-hover:text-background/70 text-sm leading-relaxed mb-6 transition-colors">
-                      {post.excerpt.slice(0, 150)}...
+                    <p className="text-xs text-foreground/50 group-hover:text-background/60 leading-relaxed mb-6 transition-colors flex-1">
+                      {post.excerpt.slice(0, 120)}...
                     </p>
-                    <div className="flex items-center justify-between text-xs text-muted-foreground group-hover:text-background/60 transition-colors">
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-1.5">
-                          <Clock className="w-3.5 h-3.5" />
-                          {post.readTime}
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <Calendar className="w-3.5 h-3.5" />
-                          {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}
-                        </div>
+                    <div className="flex items-center justify-between text-[10px] text-foreground/40 group-hover:text-background/50 transition-colors">
+                      <div className="flex items-center gap-3">
+                        <span>{post.readTime}</span>
+                        <span>{new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</span>
                       </div>
-                      <div className="flex items-center gap-1 text-foreground group-hover:text-background transition-colors">
-                        Read more
-                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                      </div>
+                      <ArrowUpRight className="w-3.5 h-3.5 text-foreground/40 group-hover:text-background/60 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                     </div>
                   </article>
                 </Link>
@@ -159,25 +167,27 @@ export default function Blog() {
         </section>
 
         {/* CTA */}
-        <section className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-muted border-t border-border">
-          <div className="max-w-4xl mx-auto text-center space-y-6">
-            <h3 className="text-2xl sm:text-3xl font-semibold text-foreground">
-              Experience the cognitive performance system
-            </h3>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              Move beyond reading about performance. Start optimising it.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Link to="/shop">
-                <button className="bg-foreground text-background hover:bg-foreground/90 px-8 py-3 text-sm font-medium transition-all duration-300">
-                  Shop products
-                </button>
-              </Link>
-              <Link to="/nova/overview">
-                <button className="border border-border text-foreground hover:bg-muted px-8 py-3 text-sm font-medium transition-all duration-300">
-                  Explore Nova AI
-                </button>
-              </Link>
+        <section className="py-16 px-6 md:px-12 lg:px-20 xl:px-32">
+          <div className="max-w-xl mx-auto text-center">
+            <div className="glass-subtle rounded-3xl p-10 space-y-6">
+              <h3 className="text-xl font-light text-foreground">
+                Experience the cognitive performance system
+              </h3>
+              <p className="text-xs text-foreground/50">
+                Move beyond reading about performance. Start optimising it.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                <Link to="/shop">
+                  <Button size="sm" className="rounded-full h-10 px-6 text-xs bg-foreground text-background hover:bg-foreground/90">
+                    Shop products
+                  </Button>
+                </Link>
+                <Link to="/nova/overview">
+                  <Button variant="outline" size="sm" className="rounded-full h-10 px-6 text-xs border-foreground/20 text-foreground/70 hover:bg-foreground/5">
+                    Explore Nova AI
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </section>
