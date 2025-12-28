@@ -8,8 +8,10 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import redlightDevice from "@/assets/redlight.webp";
-import heroSupplement from "@/assets/hero-supplement.png";
+import { lazy, Suspense } from "react";
+
+const RecoveryTechVisual = lazy(() => import("@/components/visuals/RecoveryTechVisual"));
+const SupplementStackVisual = lazy(() => import("@/components/visuals/SupplementStackVisual"));
 
 const Index = () => {
   const stats = useScrollAnimation();
@@ -277,22 +279,22 @@ const Index = () => {
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 <div className="order-last lg:order-first">
-                  <div className="img-premium">
-                    <img 
-                      src={redlightDevice} 
-                      alt="NeuroState Red Light Therapy Device" 
-                      className="w-full h-auto"
-                    />
-                  </div>
+                  <Suspense fallback={
+                    <div className="w-full aspect-square max-w-sm mx-auto flex items-center justify-center">
+                      <div className="w-12 h-12 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
+                    </div>
+                  }>
+                    <RecoveryTechVisual />
+                  </Suspense>
                 </div>
 
                 <div className="space-y-6">
                   <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Neuromodulation</span>
                   <h2 className="text-large-display text-foreground">
-                    Red Light Therapy for Cognitive Performance
+                    Recovery Technology
                   </h2>
                   <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-                    Clinical-grade photobiomodulation for neural pathway stimulation. Engineered for cognitive enhancement, not just recovery.
+                    Clinical-grade photobiomodulation for neural pathway stimulation. Engineered for cognitive enhancement and deep recovery.
                   </p>
                   
                   <div className="space-y-2 py-2">
@@ -305,7 +307,7 @@ const Index = () => {
                   </div>
                   
                   <Link to="/category/devices">
-                    <Button size="sm" className="h-10 px-5 text-xs font-medium bg-gray-800 text-white hover:bg-gray-700 rounded-full group">
+                    <Button size="sm" className="h-10 px-5 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
                       View Devices
                       <ArrowRight className="ml-2 w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                     </Button>
@@ -325,7 +327,7 @@ const Index = () => {
                 <div className="space-y-6">
                   <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Execution Layer</span>
                   <h2 className="text-large-display text-foreground">
-                    Precision Supplements for Peak Performance
+                    Personalised Supplement Stacks
                   </h2>
                   <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
                     Research-backed formulations designed for measurable cognitive enhancement. Every compound is selected for efficacy.
@@ -340,7 +342,7 @@ const Index = () => {
                   </div>
                   
                   <Link to="/category/supplements">
-                    <Button size="sm" className="h-10 px-5 text-xs font-medium bg-gray-800 text-white hover:bg-gray-700 rounded-full group">
+                    <Button size="sm" className="h-10 px-5 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
                       Shop Supplements
                       <ArrowRight className="ml-2 w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                     </Button>
@@ -348,13 +350,13 @@ const Index = () => {
                 </div>
 
                 <div className="order-first lg:order-last">
-                  <div className="img-premium">
-                    <img 
-                      src={heroSupplement} 
-                      alt="NeuroState Supplements" 
-                      className="w-full h-auto"
-                    />
-                  </div>
+                  <Suspense fallback={
+                    <div className="w-full aspect-square max-w-sm mx-auto flex items-center justify-center">
+                      <div className="w-12 h-12 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
+                    </div>
+                  }>
+                    <SupplementStackVisual />
+                  </Suspense>
                 </div>
               </div>
             </div>
