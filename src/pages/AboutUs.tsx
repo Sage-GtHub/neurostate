@@ -68,34 +68,6 @@ const AboutUs = () => {
             </div>
           </section>
 
-          {/* Stats - Large flowing numbers */}
-          <section className="py-20 md:py-28 px-6 md:px-8">
-            <div className="max-w-6xl mx-auto">
-              <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
-                {[
-                  { value: "2021", label: "Founded", desc: "London, UK" },
-                  { value: "50+", label: "Team members", desc: "Neuroscience & AI" },
-                  { value: "12", label: "Research partners", desc: "Universities & labs" },
-                  { value: "1M+", label: "Data points", desc: "Processed daily" }
-                ].map((stat, i) => (
-                  <StaggerItem key={i}>
-                    <motion.div 
-                      className="text-center lg:text-left group cursor-default relative"
-                      whileHover={{ scale: 1.03, y: -4 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                    >
-                      <motion.div
-                        className="absolute inset-0 bg-primary/5 rounded-3xl -m-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      />
-                      <p className="stat-display text-foreground group-hover:text-primary transition-colors duration-300 relative">{stat.value}</p>
-                      <p className="text-sm text-foreground font-medium mt-2 relative">{stat.label}</p>
-                      <p className="text-xs text-muted-foreground mt-1 relative">{stat.desc}</p>
-                    </motion.div>
-                  </StaggerItem>
-                ))}
-              </StaggerContainer>
-            </div>
-          </section>
 
           {/* Values - Clean list */}
           <section className="py-20 md:py-28 px-6 md:px-8">
