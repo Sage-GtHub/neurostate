@@ -300,6 +300,12 @@
     }
   }
   
+  @media (min-width: 1024px) {
+    .text-body-large {
+      font-size: 1.0625rem;
+    }
+  }
+  
   p, .text-body {
     font-size: 0.8125rem;
     font-weight: 400;
@@ -309,6 +315,12 @@
   @media (min-width: 640px) {
     p, .text-body {
       font-size: 0.875rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    p, .text-body {
+      font-size: 0.9375rem;
     }
   }
   
