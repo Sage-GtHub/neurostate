@@ -174,25 +174,21 @@ const Hero = () => {
                 </span>
               </motion.div>
 
-              {/* Headline with character animation */}
+              {/* Headline */}
               <motion.h1 
                 ref={headlineRef}
-                className="text-large-display text-foreground"
+                className="text-lg md:text-xl lg:text-2xl font-normal text-foreground tracking-tight"
                 variants={itemVariants}
               >
-                <span className="block overflow-hidden">
-                  Advancing AI models from{" "}
-                </span>
-                <span className="block overflow-hidden">
-                  <motion.span 
-                    className="text-primary inline-block"
-                    whileHover={{ scale: 1.02, x: 4 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    prediction
-                  </motion.span>{" "}
-                  to execution
-                </span>
+                Advancing AI models from{" "}
+                <motion.span 
+                  className="text-primary inline"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  prediction
+                </motion.span>{" "}
+                to execution
               </motion.h1>
               
               {/* Subheadline */}
