@@ -120,11 +120,11 @@ const Contact = () => {
 
             {/* Calendly Embed */}
             {activeTab === 'schedule' && (
-              <div className="max-w-4xl mx-auto">
+              <div className="max-w-5xl mx-auto">
                 <div 
                   className="calendly-inline-widget rounded-2xl overflow-hidden" 
-                  data-url="https://calendly.com/sage-neurostate/30min?hide_gdpr_banner=1&background_color=0a0a0a&text_color=fafafa&primary_color=a1a1aa"
-                  style={{ minWidth: '320px', height: '700px' }}
+                  data-url="https://calendly.com/sage-neurostate/30min?hide_gdpr_banner=1&background_color=ffffff&text_color=1a1a1a&primary_color=1a1a1a"
+                  style={{ minWidth: '320px', height: '800px' }}
                 />
               </div>
             )}
