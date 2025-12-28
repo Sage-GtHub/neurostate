@@ -58,6 +58,9 @@ import SportsCaseStudies from "./pages/SportsCaseStudies";
 import HealthClubsIntegrations from "./pages/HealthClubsIntegrations";
 import HealthClubsPricing from "./pages/HealthClubsPricing";
 import HealthClubsCaseStudies from "./pages/HealthClubsCaseStudies";
+import TeamDashboard from "./pages/TeamDashboard";
+import JoinOrganisation from "./pages/JoinOrganisation";
+import TeamSettings from "./pages/TeamSettings";
 
 const queryClient = new QueryClient();
 

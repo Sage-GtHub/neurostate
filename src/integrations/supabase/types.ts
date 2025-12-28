@@ -451,6 +451,221 @@ export type Database = {
         }
         Relationships: []
       }
+      organisation_invites: {
+        Row: {
+          accepted_at: string | null
+          created_at: string
+          email: string
+          expires_at: string
+          id: string
+          invited_by: string
+          organisation_id: string
+          role: Database["public"]["Enums"]["org_role"]
+          status: Database["public"]["Enums"]["invite_status"]
+          token: string
+        }
+        Insert: {
+          accepted_at?: string | null
+          created_at?: string
+          email: string
+          expires_at?: string
+          id?: string
+          invited_by: string
+          organisation_id: string
+          role?: Database["public"]["Enums"]["org_role"]
+          status?: Database["public"]["Enums"]["invite_status"]
+          token?: string
+        }
+        Update: {
+          accepted_at?: string | null
+          created_at?: string
+          email?: string
+          expires_at?: string
+          id?: string
+          invited_by?: string
+          organisation_id?: string
+          role?: Database["public"]["Enums"]["org_role"]
+          status?: Database["public"]["Enums"]["invite_status"]
+          token?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organisation_invites_organisation_id_fkey"
+            columns: ["organisation_id"]
+            isOneToOne: false
+            referencedRelation: "organisations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organisation_join_requests: {
+        Row: {
+          created_at: string
+          id: string
+          message: string | null
+          organisation_id: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: Database["public"]["Enums"]["join_request_status"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message?: string | null
+          organisation_id: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["join_request_status"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string | null
+          organisation_id?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["join_request_status"]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organisation_join_requests_organisation_id_fkey"
+            columns: ["organisation_id"]
+            isOneToOne: false
+            referencedRelation: "organisations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organisation_member_analytics: {
+        Row: {
+          check_ins_count: number | null
+          id: string
+          last_active_at: string | null
+          organisation_id: string
+          protocols_completed: number | null
+          total_session_minutes: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          check_ins_count?: number | null
+          id?: string
+          last_active_at?: string | null
+          organisation_id: string
+          protocols_completed?: number | null
+          total_session_minutes?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          check_ins_count?: number | null
+          id?: string
+          last_active_at?: string | null
+          organisation_id?: string
+          protocols_completed?: number | null
+          total_session_minutes?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organisation_member_analytics_organisation_id_fkey"
+            columns: ["organisation_id"]
+            isOneToOne: false
+            referencedRelation: "organisations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organisation_members: {
+        Row: {
+          id: string
+          invited_by: string | null
+          joined_at: string
+          organisation_id: string
+          role: Database["public"]["Enums"]["org_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          invited_by?: string | null
+          joined_at?: string
+          organisation_id: string
+          role?: Database["public"]["Enums"]["org_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          invited_by?: string | null
+          joined_at?: string
+          organisation_id?: string
+          role?: Database["public"]["Enums"]["org_role"]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organisation_members_organisation_id_fkey"
+            columns: ["organisation_id"]
+            isOneToOne: false
+            referencedRelation: "organisations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organisations: {
+        Row: {
+          billing_cycle: string | null
+          billing_email: string | null
+          created_at: string
+          domain: string | null
+          domain_verified: boolean | null
+          id: string
+          logo_url: string | null
+          name: string
+          price_per_seat: number | null
+          seat_limit: number | null
+          seats_used: number | null
+          slug: string
+          subscription_status: string | null
+          updated_at: string
+        }
+        Insert: {
+          billing_cycle?: string | null
+          billing_email?: string | null
+          created_at?: string
+          domain?: string | null
+          domain_verified?: boolean | null
+          id?: string
+          logo_url?: string | null
+          name: string
+          price_per_seat?: number | null
+          seat_limit?: number | null
+          seats_used?: number | null
+          slug: string
+          subscription_status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          billing_cycle?: string | null
+          billing_email?: string | null
+          created_at?: string
+          domain?: string | null
+          domain_verified?: boolean | null
+          id?: string
+          logo_url?: string | null
+          name?: string
+          price_per_seat?: number | null
+          seat_limit?: number | null
+          seats_used?: number | null
+          slug?: string
+          subscription_status?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       performance_goals: {
         Row: {
           created_at: string
@@ -957,14 +1172,25 @@ export type Database = {
     }
     Functions: {
       get_user_points_balance: { Args: { p_user_id: string }; Returns: number }
+      is_org_admin: {
+        Args: { org_id: string; user_uuid: string }
+        Returns: boolean
+      }
+      is_org_member: {
+        Args: { org_id: string; user_uuid: string }
+        Returns: boolean
+      }
     }
     Enums: {
+      invite_status: "pending" | "accepted" | "expired" | "revoked"
+      join_request_status: "pending" | "approved" | "rejected"
       order_status:
         | "pending"
         | "processing"
         | "shipped"
         | "delivered"
         | "cancelled"
+      org_role: "owner" | "admin" | "member"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1092,6 +1318,8 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      invite_status: ["pending", "accepted", "expired", "revoked"],
+      join_request_status: ["pending", "approved", "rejected"],
       order_status: [
         "pending",
         "processing",
@@ -1099,6 +1327,7 @@ export const Constants = {
         "delivered",
         "cancelled",
       ],
+      org_role: ["owner", "admin", "member"],
     },
   },
 } as const
