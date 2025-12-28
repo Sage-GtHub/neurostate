@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, lazy, Suspense } from "react";
 import { cn } from "@/lib/utils";
+
+// Lazy load the 3D illustration for better performance
+const IsometricIllustration = lazy(() => import("./hero/IsometricIllustration"));
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -36,9 +39,12 @@ const Hero = () => {
       ref={heroRef}
       className="relative min-h-[90vh] flex flex-col bg-background overflow-hidden"
     >
+      {/* Subtle gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/[0.02]" />
+      
       {/* Floating Gradient Orbs */}
       <div 
-        className="absolute top-20 right-[10%] w-[500px] h-[500px] rounded-full opacity-[0.06] blur-[100px] pointer-events-none animate-float-slow"
+        className="absolute top-20 right-[10%] w-[500px] h-[500px] rounded-full opacity-[0.04] blur-[120px] pointer-events-none"
         style={{
           background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%)',
           transform: `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.5}px)`
@@ -46,7 +52,7 @@ const Hero = () => {
       />
       
       <div 
-        className="absolute bottom-40 left-[5%] w-[400px] h-[400px] rounded-full opacity-[0.04] blur-[80px] pointer-events-none animate-float"
+        className="absolute bottom-40 left-[5%] w-[400px] h-[400px] rounded-full opacity-[0.03] blur-[100px] pointer-events-none"
         style={{
           background: 'radial-gradient(circle, hsl(280, 70%, 55%) 0%, transparent 70%)',
           transform: `translate(${-mousePosition.x * 0.3}px, ${-mousePosition.y * 0.3}px)`
@@ -55,10 +61,10 @@ const Hero = () => {
 
       {/* Main Content */}
       <div className="flex-1 flex items-center relative z-10">
-        <div className="w-full max-w-6xl mx-auto px-6 md:px-8 py-20 lg:py-24">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="w-full max-w-7xl mx-auto px-6 md:px-8 py-20 lg:py-24">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left - Text Content */}
-            <div className="space-y-8">
+            <div className="space-y-8 lg:pr-8">
               {/* Eyebrow */}
               <div 
                 className={cn(
@@ -108,7 +114,7 @@ const Hero = () => {
                 <Link to="/contact">
                   <Button 
                     size="sm"
-                    className="h-10 px-5 text-xs font-medium bg-gray-800 text-white hover:bg-gray-700 rounded-full group"
+                    className="h-10 px-5 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group"
                   >
                     Book a demo
                     <ArrowUpRight className="ml-2 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -127,129 +133,57 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* Right - Interactive Visual */}
+            {/* Right - 3D Isometric Illustration */}
             <div 
               className={cn(
                 "relative",
-                "transition-all duration-700 delay-400",
-                isLoaded ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-6 scale-95"
+                "transition-all duration-1000 delay-400",
+                isLoaded ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95"
               )}
             >
-              <div 
-                className="relative aspect-square max-w-sm mx-auto cursor-follow"
-                style={{
-                  transform: `translate(${mousePosition.x * 0.3}px, ${mousePosition.y * 0.3}px)`
-                }}
-              >
-                {/* Organic blob background */}
-                <div className="absolute inset-0 blob-animated bg-gradient-to-br from-primary/10 via-transparent to-primary/5 opacity-60" />
-                
-                {/* Interactive rings */}
-                <svg 
-                  viewBox="0 0 400 400" 
-                  className="w-full h-full relative z-10"
-                  fill="none"
-                >
-                  {/* Outer organic ring */}
-                  <ellipse 
-                    cx="200" 
-                    cy="200" 
-                    rx="150" 
-                    ry="140" 
-                    stroke="currentColor" 
-                    strokeWidth="0.5"
-                    className="text-foreground/8"
-                    style={{ transform: `rotate(${mousePosition.x * 0.1}deg)`, transformOrigin: 'center' }}
-                  />
-                  
-                  {/* Middle ring */}
-                  <ellipse 
-                    cx="200" 
-                    cy="200" 
-                    rx="110" 
-                    ry="100" 
-                    stroke="currentColor" 
-                    strokeWidth="0.5"
-                    className="text-foreground/8"
-                  />
-                  
-                  {/* Inner ring */}
-                  <circle 
-                    cx="200" 
-                    cy="200" 
-                    r="60" 
-                    stroke="currentColor" 
-                    strokeWidth="0.5"
-                    className="text-foreground/10"
-                  />
-                  
-                  {/* Dotted orbital path */}
-                  <circle 
-                    cx="200" 
-                    cy="200" 
-                    r="85" 
-                    stroke="currentColor" 
-                    strokeWidth="1"
-                    strokeDasharray="2 6"
-                    className="text-primary/30"
-                  />
-                  
-                  {/* Data points - flowing positions */}
-                  {[0, 72, 144, 216, 288].map((angle, i) => {
-                    const rad = ((angle + mousePosition.x * 0.5) * Math.PI) / 180;
-                    const x = 200 + Math.cos(rad) * 85;
-                    const y = 200 + Math.sin(rad) * 85;
-                    return (
-                      <circle 
-                        key={i}
-                        cx={x} 
-                        cy={y} 
-                        r={i === 0 ? 5 : 2.5}
-                        className={cn(
-                          "transition-all duration-300",
-                          i === 0 ? "fill-primary" : "fill-foreground/20"
-                        )}
-                      />
-                    );
-                  })}
-                  
-                  {/* Central core - organic shape */}
-                  <circle 
-                    cx="200" 
-                    cy="200" 
-                    r="32" 
-                    className="fill-primary/8"
-                  />
-                  <circle 
-                    cx="200" 
-                    cy="200" 
-                    r="12" 
-                    className="fill-primary"
-                  />
-                </svg>
+              <div className="relative aspect-square max-w-lg mx-auto">
+                {/* 3D Canvas */}
+                <Suspense fallback={
+                  <div className="w-full h-full flex items-center justify-center">
+                    <div className="w-16 h-16 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
+                  </div>
+                }>
+                  <IsometricIllustration />
+                </Suspense>
                 
                 {/* Floating status pill */}
                 <div 
-                  className="absolute top-6 right-6 glass-subtle px-3 py-1.5 rounded-full"
+                  className="absolute top-8 right-8 bg-background/80 backdrop-blur-sm border border-border/50 px-4 py-2 rounded-full shadow-sm"
                   style={{
-                    transform: `translate(${mousePosition.x * -0.2}px, ${mousePosition.y * -0.2}px)`
+                    transform: `translate(${mousePosition.x * -0.15}px, ${mousePosition.y * -0.15}px)`
                   }}
                 >
                   <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
-                    <span className="text-[10px] font-medium text-foreground">Live</span>
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                    <span className="text-[11px] font-medium text-foreground">System Active</span>
                   </div>
                 </div>
                 
                 {/* Bottom metric pill */}
                 <div 
-                  className="absolute bottom-10 left-10 glass-subtle px-4 py-2 rounded-2xl"
+                  className="absolute bottom-12 left-8 bg-background/80 backdrop-blur-sm border border-border/50 px-5 py-3 rounded-2xl shadow-sm"
                   style={{
-                    transform: `translate(${mousePosition.x * 0.2}px, ${mousePosition.y * 0.2}px)`
+                    transform: `translate(${mousePosition.x * 0.15}px, ${mousePosition.y * 0.15}px)`
                   }}
                 >
-                  <p className="text-lg font-light text-foreground">98%</p>
-                  <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Accuracy</p>
+                  <p className="text-2xl font-light text-foreground">98.7%</p>
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Accuracy Rate</p>
+                </div>
+                
+                {/* Top left metric */}
+                <div 
+                  className="absolute top-16 left-4 bg-background/80 backdrop-blur-sm border border-border/50 px-4 py-2.5 rounded-xl shadow-sm"
+                  style={{
+                    transform: `translate(${mousePosition.x * 0.1}px, ${mousePosition.y * 0.1}px)`
+                  }}
+                >
+                  <p className="text-lg font-light text-foreground">2.4M+</p>
+                  <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Predictions/Day</p>
                 </div>
               </div>
             </div>
@@ -260,19 +194,19 @@ const Hero = () => {
       {/* Client Logos - Flowing marquee */}
       <div 
         className={cn(
-          "py-10 relative overflow-hidden border-t border-border/50",
+          "py-10 relative overflow-hidden border-t border-border/30",
           "transition-all duration-700 delay-500",
           isLoaded ? "opacity-100" : "opacity-0"
         )}
       >
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
         
         <div className="marquee-track">
           {[...clientNames, ...clientNames, ...clientNames].map((name, i) => (
             <span 
               key={i}
-              className="px-10 text-xs text-muted-foreground/40 font-medium tracking-wider uppercase hover:text-muted-foreground transition-colors duration-300 cursor-default whitespace-nowrap"
+              className="px-12 text-xs text-muted-foreground/40 font-medium tracking-wider uppercase hover:text-muted-foreground transition-colors duration-300 cursor-default whitespace-nowrap"
             >
               {name}
             </span>
