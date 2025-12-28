@@ -182,6 +182,16 @@ export const Header = () => {
 
           {/* Right Actions */}
           <div className="flex items-center gap-1.5 lg:gap-2">
+            {/* Search Button */}
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => setSearchOpen(!searchOpen)}
+              className="hidden lg:flex h-8 w-8 text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full"
+            >
+              <Search className="h-4 w-4" />
+            </Button>
+            
             {/* Book a Demo - Primary CTA */}
             <Link to="/contact" className="hidden lg:block">
               <Button 
