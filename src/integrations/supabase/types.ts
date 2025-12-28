@@ -356,6 +356,50 @@ export type Database = {
         }
         Relationships: []
       }
+      nova_usage: {
+        Row: {
+          created_at: string
+          feature_type: string
+          id: string
+          messages_count: number | null
+          organisation_id: string | null
+          session_ended_at: string | null
+          session_started_at: string
+          tokens_used: number | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          feature_type?: string
+          id?: string
+          messages_count?: number | null
+          organisation_id?: string | null
+          session_ended_at?: string | null
+          session_started_at?: string
+          tokens_used?: number | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          feature_type?: string
+          id?: string
+          messages_count?: number | null
+          organisation_id?: string | null
+          session_ended_at?: string | null
+          session_started_at?: string
+          tokens_used?: number | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nova_usage_organisation_id_fkey"
+            columns: ["organisation_id"]
+            isOneToOne: false
+            referencedRelation: "organisations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       order_items: {
         Row: {
           created_at: string
@@ -1173,6 +1217,10 @@ export type Database = {
     Functions: {
       get_user_points_balance: { Args: { p_user_id: string }; Returns: number }
       is_org_admin: {
+        Args: { org_id: string; user_uuid: string }
+        Returns: boolean
+      }
+      is_org_admin_or_owner: {
         Args: { org_id: string; user_uuid: string }
         Returns: boolean
       }

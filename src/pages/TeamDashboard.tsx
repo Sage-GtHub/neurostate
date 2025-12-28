@@ -16,7 +16,10 @@ import {
   X,
   Building2,
   ArrowUpRight,
-  Plus
+  Plus,
+  CreditCard,
+  Sparkles,
+  MessageSquare
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -27,6 +30,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { useOrganisation, OrgRole } from '@/hooks/useOrganisation';
+import { useNovaUsage } from '@/hooks/useNovaUsage';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { Header } from '@/components/Header';
@@ -66,6 +70,8 @@ export default function TeamDashboard() {
     rejectJoinRequest,
     updateOrganisation
   } = useOrganisation();
+
+  const { orgUsage, summary: usageSummary, loading: usageLoading } = useNovaUsage(organisation?.id);
 
   const [inviteEmail, setInviteEmail] = useState('');
   const [inviteRole, setInviteRole] = useState<OrgRole>('member');
@@ -342,6 +348,20 @@ export default function TeamDashboard() {
                       )}
                     </TabsTrigger>
                     <TabsTrigger 
+                      value="nova"
+                      className="bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none rounded-none border-b-2 border-transparent data-[state=active]:border-foreground px-0 pb-3 text-xs font-normal text-foreground/50 data-[state=active]:text-foreground"
+                    >
+                      <Sparkles className="h-3 w-3 mr-1.5" />
+                      Nova AI
+                    </TabsTrigger>
+                    <TabsTrigger 
+                      value="billing"
+                      className="bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none rounded-none border-b-2 border-transparent data-[state=active]:border-foreground px-0 pb-3 text-xs font-normal text-foreground/50 data-[state=active]:text-foreground"
+                    >
+                      <CreditCard className="h-3 w-3 mr-1.5" />
+                      Billing
+                    </TabsTrigger>
+                    <TabsTrigger 
                       value="analytics"
                       className="bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none rounded-none border-b-2 border-transparent data-[state=active]:border-foreground px-0 pb-3 text-xs font-normal text-foreground/50 data-[state=active]:text-foreground"
                     >
@@ -579,6 +599,179 @@ export default function TeamDashboard() {
                       </div>
                     ))
                   )}
+                </div>
+              </TabsContent>
+
+              {/* Nova AI Tab */}
+              <TabsContent value="nova" className="mt-0">
+                <div className="space-y-6">
+                  {/* Nova Usage Overview */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="p-5 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
+                      <div className="w-8 h-8 rounded-full bg-purple-500/10 flex items-center justify-center mb-4">
+                        <Sparkles className="h-3.5 w-3.5 text-purple-600" />
+                      </div>
+                      <p className="text-xl font-medium text-foreground">
+                        {orgUsage.reduce((acc, u) => acc + u.totalSessions, 0)}
+                      </p>
+                      <p className="text-[11px] text-foreground/40 mt-1">Total Sessions</p>
+                    </div>
+                    <div className="p-5 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
+                      <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center mb-4">
+                        <MessageSquare className="h-3.5 w-3.5 text-blue-600" />
+                      </div>
+                      <p className="text-xl font-medium text-foreground">
+                        {orgUsage.reduce((acc, u) => acc + u.totalMessages, 0)}
+                      </p>
+                      <p className="text-[11px] text-foreground/40 mt-1">Total Messages</p>
+                    </div>
+                    <div className="p-5 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
+                      <div className="w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center mb-4">
+                        <Users className="h-3.5 w-3.5 text-green-600" />
+                      </div>
+                      <p className="text-xl font-medium text-foreground">
+                        {orgUsage.length}
+                      </p>
+                      <p className="text-[11px] text-foreground/40 mt-1">Active Users</p>
+                    </div>
+                  </div>
+
+                  {/* Per-Member Usage */}
+                  <div>
+                    <h3 className="text-sm font-medium text-foreground mb-4">Member Usage</h3>
+                    <div className="space-y-3">
+                      {orgUsage.length === 0 ? (
+                        <div className="text-center py-16">
+                          <div className="w-12 h-12 rounded-full bg-foreground/5 flex items-center justify-center mx-auto mb-4">
+                            <Sparkles className="h-5 w-5 text-foreground/30" />
+                          </div>
+                          <p className="text-sm text-foreground/50">No Nova AI usage yet</p>
+                          <p className="text-[11px] text-foreground/40 mt-1">
+                            Team members get automatic access via your organisation
+                          </p>
+                        </div>
+                      ) : (
+                        orgUsage.map((usage) => (
+                          <div
+                            key={usage.userId}
+                            className="flex items-center justify-between p-4 rounded-xl bg-foreground/[0.02] border border-foreground/5"
+                          >
+                            <div className="flex items-center gap-4">
+                              <Avatar className="h-10 w-10 border border-foreground/5">
+                                <AvatarFallback className="bg-foreground/5 text-foreground/50 text-xs">
+                                  {usage.userName?.charAt(0) || usage.userEmail?.charAt(0) || '?'}
+                                </AvatarFallback>
+                              </Avatar>
+                              <div>
+                                <p className="text-sm font-medium text-foreground">
+                                  {usage.userName || usage.userEmail || 'Unknown'}
+                                </p>
+                                <p className="text-[11px] text-foreground/40">
+                                  Last used: {usage.lastUsed 
+                                    ? new Date(usage.lastUsed).toLocaleDateString()
+                                    : 'Never'}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-8">
+                              <div className="text-center">
+                                <p className="text-lg font-medium text-foreground">{usage.totalSessions}</p>
+                                <p className="text-[10px] text-foreground/40">Sessions</p>
+                              </div>
+                              <div className="text-center">
+                                <p className="text-lg font-medium text-foreground">{usage.totalMessages}</p>
+                                <p className="text-[10px] text-foreground/40">Messages</p>
+                              </div>
+                            </div>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+
+              {/* Billing Tab */}
+              <TabsContent value="billing" className="mt-0">
+                <div className="space-y-8">
+                  {/* Current Plan */}
+                  <div className="p-6 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
+                    <div className="flex items-start justify-between mb-6">
+                      <div>
+                        <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 mb-1">Current Plan</p>
+                        <h3 className="text-lg font-medium text-foreground">Team Plan</h3>
+                        <p className="text-sm text-foreground/50 mt-1">
+                          Per-seat pricing for Nova AI access
+                        </p>
+                      </div>
+                      <Badge variant="outline" className="bg-green-500/10 text-green-600 border-green-200">
+                        {organisation.subscription_status || 'Active'}
+                      </Badge>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div>
+                        <p className="text-[11px] text-foreground/40 mb-1">Price per seat</p>
+                        <p className="text-2xl font-medium text-foreground">
+                          £{organisation.price_per_seat || 29}
+                          <span className="text-sm text-foreground/40">/{organisation.billing_cycle || 'month'}</span>
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-[11px] text-foreground/40 mb-1">Seats used</p>
+                        <p className="text-2xl font-medium text-foreground">
+                          {organisation.seats_used}
+                          {organisation.seat_limit && (
+                            <span className="text-sm text-foreground/40"> / {organisation.seat_limit}</span>
+                          )}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-[11px] text-foreground/40 mb-1">Monthly total</p>
+                        <p className="text-2xl font-medium text-foreground">
+                          £{(organisation.seats_used * (organisation.price_per_seat || 29)).toFixed(2)}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Billing Details */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="p-5 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
+                      <h4 className="text-sm font-medium text-foreground mb-4">Billing Email</h4>
+                      <p className="text-foreground/60 text-sm">
+                        {organisation.billing_email || 'Not set'}
+                      </p>
+                    </div>
+                    <div className="p-5 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
+                      <h4 className="text-sm font-medium text-foreground mb-4">Billing Cycle</h4>
+                      <p className="text-foreground/60 text-sm capitalize">
+                        {organisation.billing_cycle || 'Monthly'}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* What's Included */}
+                  <div className="p-6 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
+                    <h4 className="text-sm font-medium text-foreground mb-4">What's included per seat</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {[
+                        'Full Nova AI access',
+                        'Unlimited conversations',
+                        'Biometric device sync',
+                        'Personalised protocols',
+                        'Health forecasting',
+                        'Team analytics'
+                      ].map((feature) => (
+                        <div key={feature} className="flex items-center gap-3">
+                          <div className="w-5 h-5 rounded-full bg-green-500/10 flex items-center justify-center">
+                            <Check className="h-3 w-3 text-green-600" />
+                          </div>
+                          <span className="text-sm text-foreground/70">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </TabsContent>
 
