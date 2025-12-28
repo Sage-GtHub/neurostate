@@ -97,7 +97,6 @@ export const Header = () => {
   const mobileLinks = [
     { label: "Shop", href: "#", comingSoon: true },
     { label: "Nova AI", href: "/nova/overview" },
-    { label: "Team", href: "/team" },
     { label: "For Teams", href: "/enterprise/overview" },
     { label: "About", href: "/about" },
   ];
@@ -181,13 +180,6 @@ export const Header = () => {
               className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
             >
               Nova AI
-            </Link>
-
-            <Link
-              to="/team"
-              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
-            >
-              Team
             </Link>
 
             <Link

@@ -53,6 +53,11 @@ export const Footer = () => {
       { name: "Order Tracking", href: "/track-order" },
       { name: "Rewards", href: "/rewards" },
     ],
+    account: [
+      { name: "Team Dashboard", href: "/team" },
+      { name: "My Dashboard", href: "/dashboard" },
+      { name: "Sign In", href: "/auth" },
+    ],
   };
 
   return (
@@ -105,7 +110,7 @@ export const Footer = () => {
           </div>
 
           {/* Links Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 mb-20">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-12 md:gap-8 mb-20">
             <div className="space-y-5">
               <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30">Platform</p>
               <ul className="space-y-3">
@@ -138,6 +143,20 @@ export const Footer = () => {
               <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30">Support</p>
               <ul className="space-y-3">
                 {footerLinks.support.map((link) => (
+                  <li key={link.name}>
+                    <Link to={link.href} className="group inline-flex items-center gap-1 text-xs text-foreground/50 hover:text-foreground transition-colors">
+                      {link.name}
+                      <ArrowUpRight className="w-2.5 h-2.5 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="space-y-5">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30">Account</p>
+              <ul className="space-y-3">
+                {footerLinks.account.map((link) => (
                   <li key={link.name}>
                     <Link to={link.href} className="group inline-flex items-center gap-1 text-xs text-foreground/50 hover:text-foreground transition-colors">
                       {link.name}
