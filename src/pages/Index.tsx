@@ -294,7 +294,7 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Hardware Section */}
+          {/* Hardware Section - Recovery Technologies */}
           <section className="py-24 md:py-32 px-6 md:px-8">
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -312,18 +312,29 @@ const Index = () => {
                   <div className="space-y-6">
                     <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Neuromodulation</span>
                     <h2 className="text-large-display text-foreground">
-                      Recovery Technology
+                      Recovery Technologies
                     </h2>
                     <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-                      Clinical-grade photobiomodulation for neural pathway stimulation. Engineered for cognitive enhancement and deep recovery.
+                      Clinical-grade photobiomodulation devices engineered for neural pathway stimulation. Our recovery technologies combine red and near-infrared light therapy to enhance mitochondrial function, accelerate tissue repair, and optimise cognitive performance.
+                    </p>
+                    <p className="hidden lg:block text-sm text-muted-foreground leading-relaxed max-w-md">
+                      Each device is calibrated to deliver precise wavelengths proven in peer-reviewed research to stimulate cellular energy production. Whether you're recovering from intense training or seeking enhanced mental clarity, our photobiomodulation systems provide measurable, repeatable results.
                     </p>
                     
-                    <StaggerContainer className="space-y-2 py-2" staggerDelay={0.1}>
-                      {["660nm & 850nm wavelengths", "Direct neural pathway stimulation", "Clinically validated efficacy"].map((item, i) => (
+                    <StaggerContainer className="space-y-3 py-2" staggerDelay={0.1}>
+                      {[
+                        { title: "660nm & 850nm wavelengths", desc: "Optimal penetration for cellular regeneration" },
+                        { title: "Direct neural pathway stimulation", desc: "Enhanced brain plasticity and cognitive function" },
+                        { title: "Clinically validated efficacy", desc: "Backed by 500+ peer-reviewed studies" },
+                        { title: "Professional-grade power output", desc: "Medical-level irradiance for faster results" }
+                      ].map((item, i) => (
                         <StaggerItem key={i}>
-                          <div className="flex items-center gap-2">
-                            <div className="w-1 h-1 bg-primary rounded-full" />
-                            <span className="text-xs text-muted-foreground">{item}</span>
+                          <div className="flex items-start gap-3">
+                            <div className="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 flex-shrink-0" />
+                            <div>
+                              <span className="text-sm text-foreground font-medium">{item.title}</span>
+                              <p className="hidden lg:block text-xs text-muted-foreground mt-0.5">{item.desc}</p>
+                            </div>
                           </div>
                         </StaggerItem>
                       ))}
@@ -345,40 +356,56 @@ const Index = () => {
           <section className="py-24 md:py-32 px-6 md:px-8">
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                <ScrollReveal direction="left" className="order-last lg:order-first">
-                  <Suspense fallback={
-                    <div className="w-full aspect-square max-w-sm mx-auto flex items-center justify-center">
-                      <div className="w-12 h-12 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
-                    </div>
-                  }>
-                    <SupplementStackVisual />
-                  </Suspense>
-                </ScrollReveal>
-
-                <ScrollReveal direction="right" delay={0.2}>
+                <ScrollReveal direction="left">
                   <div className="space-y-6">
                     <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Execution Layer</span>
                     <h2 className="text-large-display text-foreground">
                       Personalised Supplement Stacks
                     </h2>
                     <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-                      Research-backed formulations designed for measurable cognitive enhancement. Every compound is selected for efficacy.
+                      Research-backed formulations designed for measurable cognitive enhancement. Every compound is selected for efficacy, bioavailability, and synergistic interaction with our broader protocol ecosystem.
+                    </p>
+                    <p className="hidden lg:block text-sm text-muted-foreground leading-relaxed max-w-md">
+                      Our formulations are developed in partnership with leading neuroscientists and are manufactured to pharmaceutical-grade standards. Each ingredient is third-party tested for purity, and dosages are calibrated based on clinical research rather than marketing claims.
                     </p>
                     
-                    <div className="flex flex-wrap gap-2 py-2">
-                      {["Cognitive", "Recovery", "Sleep", "Focus"].map((item, i) => (
-                        <motion.span 
-                          key={i} 
-                          className="px-3 py-1.5 text-[10px] font-medium text-muted-foreground bg-background rounded-full border border-border/50"
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.3 + i * 0.1 }}
-                          whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary) / 0.5)" }}
-                        >
-                          {item}
-                        </motion.span>
-                      ))}
+                    <div className="space-y-4 py-2">
+                      <div className="flex flex-wrap gap-2">
+                        {["Cognitive", "Recovery", "Sleep", "Focus", "Energy", "Longevity"].map((item, i) => (
+                          <motion.span 
+                            key={i} 
+                            className="px-3 py-1.5 text-[10px] font-medium text-muted-foreground bg-background rounded-full border border-border/50"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3 + i * 0.1 }}
+                            whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary) / 0.5)" }}
+                          >
+                            {item}
+                          </motion.span>
+                        ))}
+                      </div>
+                      
+                      <div className="hidden lg:grid grid-cols-2 gap-4 pt-2">
+                        {[
+                          { label: "Bioavailability", value: "Enhanced absorption" },
+                          { label: "Purity", value: "Third-party tested" },
+                          { label: "Dosing", value: "Research-calibrated" },
+                          { label: "Synergy", value: "Stack-optimised" }
+                        ].map((item, i) => (
+                          <motion.div 
+                            key={i}
+                            className="p-3 bg-muted/30 rounded-xl"
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.4 + i * 0.1 }}
+                          >
+                            <p className="text-[10px] text-muted-foreground uppercase tracking-wider">{item.label}</p>
+                            <p className="text-sm text-foreground font-medium mt-1">{item.value}</p>
+                          </motion.div>
+                        ))}
+                      </div>
                     </div>
                     
                     <Link to="/category/supplements">
@@ -388,6 +415,16 @@ const Index = () => {
                       </Button>
                     </Link>
                   </div>
+                </ScrollReveal>
+
+                <ScrollReveal direction="right" delay={0.2}>
+                  <Suspense fallback={
+                    <div className="w-full aspect-square max-w-sm mx-auto flex items-center justify-center">
+                      <div className="w-12 h-12 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
+                    </div>
+                  }>
+                    <SupplementStackVisual />
+                  </Suspense>
                 </ScrollReveal>
               </div>
             </div>
