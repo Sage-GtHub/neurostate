@@ -51,6 +51,15 @@ import HealthClubsOverview from "./pages/HealthClubsOverview";
 import HealthcareOverview from "./pages/HealthcareOverview";
 import HospitalityOverview from "./pages/HospitalityOverview";
 import FinancialServicesOverview from "./pages/FinancialServicesOverview";
+import InformationTechnologyOverview from "./pages/InformationTechnologyOverview";
+import InformationTechnologyIntegrations from "./pages/InformationTechnologyIntegrations";
+import InformationTechnologyPricing from "./pages/InformationTechnologyPricing";
+import FinancialServicesIntegrations from "./pages/FinancialServicesIntegrations";
+import FinancialServicesPricing from "./pages/FinancialServicesPricing";
+import HealthcareIntegrations from "./pages/HealthcareIntegrations";
+import HealthcarePricing from "./pages/HealthcarePricing";
+import HospitalityIntegrations from "./pages/HospitalityIntegrations";
+import HospitalityPricing from "./pages/HospitalityPricing";
 import EnterpriseIntegrations from "./pages/EnterpriseIntegrations";
 import EnterprisePricing from "./pages/EnterprisePricing";
 import EnterpriseOverview from "./pages/EnterpriseOverview";
@@ -161,12 +170,23 @@ const AnimatedRoutes = () => {
             
             {/* Healthcare & Clinical Routes */}
             <Route path="/enterprise/healthcare/overview" element={<HealthcareOverview />} />
+            <Route path="/enterprise/healthcare/integrations" element={<HealthcareIntegrations />} />
+            <Route path="/enterprise/healthcare/pricing" element={<HealthcarePricing />} />
             
             {/* Hospitality & Spas Routes */}
             <Route path="/enterprise/hospitality/overview" element={<HospitalityOverview />} />
+            <Route path="/enterprise/hospitality/integrations" element={<HospitalityIntegrations />} />
+            <Route path="/enterprise/hospitality/pricing" element={<HospitalityPricing />} />
             
             {/* Financial Services Routes */}
             <Route path="/enterprise/financial-services/overview" element={<FinancialServicesOverview />} />
+            <Route path="/enterprise/financial-services/integrations" element={<FinancialServicesIntegrations />} />
+            <Route path="/enterprise/financial-services/pricing" element={<FinancialServicesPricing />} />
+            
+            {/* Information Technology Routes */}
+            <Route path="/enterprise/information-technology/overview" element={<InformationTechnologyOverview />} />
+            <Route path="/enterprise/information-technology/integrations" element={<InformationTechnologyIntegrations />} />
+            <Route path="/enterprise/information-technology/pricing" element={<InformationTechnologyPricing />} />
             
             {/* Legacy enterprise routes */}
             <Route path="/enterprise/integrations" element={<EnterpriseIntegrations />} />
