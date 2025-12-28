@@ -30,15 +30,16 @@ const Contact = () => {
   const hero = useScrollAnimation();
   const form = useScrollAnimation();
 
-  // Load Calendly widget script
+  // Load Calendly widget script only once
   useEffect(() => {
+    // Check if script already exists
+    if (document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]')) {
+      return;
+    }
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
     document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
   }, []);
 
   const {
