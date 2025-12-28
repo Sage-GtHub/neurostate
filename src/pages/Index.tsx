@@ -279,13 +279,9 @@ const Index = () => {
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 <div className="order-last lg:order-first">
-                  <Suspense fallback={
-                    <div className="w-full aspect-square max-w-sm mx-auto flex items-center justify-center">
-                      <div className="w-12 h-12 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
-                    </div>
-                  }>
-                    <RecoveryTechVisual />
-                  </Suspense>
+                  <div className="w-full aspect-square max-w-sm mx-auto flex items-center justify-center">
+                    <div className="w-32 h-32 bg-primary/5 rounded-full border border-primary/10" />
+                  </div>
                 </div>
 
                 <div className="space-y-6">
@@ -370,7 +366,7 @@ const Index = () => {
             <div className="max-w-3xl mx-auto text-center space-y-6">
               <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Get Started</span>
               <h2 className="text-large-display text-foreground">
-                Ready to optimise your cognitive infrastructure?
+                Ready to get started?
               </h2>
               <p className="text-sm text-muted-foreground max-w-md mx-auto">
                 Join the enterprises already using Neurostate for predictive cognitive performance management.
