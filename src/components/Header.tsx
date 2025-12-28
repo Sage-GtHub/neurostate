@@ -92,48 +92,47 @@ export const Header = () => {
   return (
     <>
       <AnnouncementBar />
-      <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur-md border-b border-border">
-        <div className="container mx-auto flex h-16 lg:h-20 items-center justify-between">
+      <header className="sticky top-0 z-50 w-full bg-background/90 backdrop-blur-xl border-b border-border/50">
+        <div className="max-w-6xl mx-auto px-6 md:px-8 flex h-14 lg:h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group">
+          <Link to="/" className="flex items-center gap-2 group">
             <img 
               src={logoIcon} 
               alt="Neurostate" 
-              className="h-7 w-7 lg:h-8 lg:w-8 transition-transform duration-300 group-hover:scale-105" 
+              className="h-5 w-5 lg:h-6 lg:w-6 transition-transform duration-300 group-hover:scale-105" 
             />
-            <span className="text-sm lg:text-base font-medium tracking-tight text-foreground">
+            <span className="text-xs lg:text-sm font-medium tracking-tight text-foreground">
               Neurostate
             </span>
           </Link>
           
-          {/* Desktop Navigation - Clean like Invisible */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {/* Industries Dropdown */}
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-0.5">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent text-foreground/70 hover:text-foreground hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground text-sm font-normal h-10 px-4">
+                  <NavigationMenuTrigger className="bg-transparent text-foreground/60 hover:text-foreground hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground text-xs font-normal h-9 px-3 rounded-full">
                     Industries
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="w-[400px] p-4 bg-card border border-border rounded-lg shadow-lg">
-                      <div className="space-y-1">
+                    <div className="w-[320px] p-3 bg-card border border-border rounded-2xl shadow-lg">
+                      <div className="space-y-0.5">
                         {industries.map((item) => (
                           <NavigationMenuLink key={item.label} asChild>
                             <Link
                               to={item.href}
-                              className="block p-3 rounded-md hover:bg-muted transition-colors group"
+                              className="block p-3 rounded-xl hover:bg-muted transition-colors group"
                             >
                               <div className="flex items-center justify-between">
                                 <div>
-                                  <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                                  <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors">
                                     {item.label}
                                   </p>
-                                  <p className="text-sm text-muted-foreground mt-0.5">
+                                  <p className="text-[10px] text-muted-foreground mt-0.5">
                                     {item.desc}
                                   </p>
                                 </div>
-                                <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                               </div>
                             </Link>
                           </NavigationMenuLink>
@@ -147,67 +146,67 @@ export const Header = () => {
 
             <Link
               to="/shop"
-              className="text-sm font-normal text-foreground/70 hover:text-foreground transition-colors px-4 py-2"
+              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-colors px-3 py-2 rounded-full hover:bg-muted/50"
             >
               Shop
             </Link>
 
             <Link
               to="/nova/overview"
-              className="text-sm font-normal text-foreground/70 hover:text-foreground transition-colors px-4 py-2"
+              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-colors px-3 py-2 rounded-full hover:bg-muted/50"
             >
               Nova AI
             </Link>
 
             <Link
               to="/resources"
-              className="text-sm font-normal text-foreground/70 hover:text-foreground transition-colors px-4 py-2"
+              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-colors px-3 py-2 rounded-full hover:bg-muted/50"
             >
               Resources
             </Link>
 
             <Link
               to="/about"
-              className="text-sm font-normal text-foreground/70 hover:text-foreground transition-colors px-4 py-2"
+              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-colors px-3 py-2 rounded-full hover:bg-muted/50"
             >
               Company
             </Link>
           </nav>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-2 lg:gap-3">
+          <div className="flex items-center gap-1.5 lg:gap-2">
             {/* Desktop Search */}
             {searchOpen ? (
-              <form onSubmit={handleSearch} className="hidden lg:flex items-center gap-2">
+              <form onSubmit={handleSearch} className="hidden lg:flex items-center gap-1.5">
                 <Input
                   type="search"
                   placeholder="Search..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-56 h-9 text-sm bg-muted border-transparent focus:border-primary"
+                  className="w-48 h-8 text-xs bg-muted border-transparent focus:border-primary rounded-full"
                   autoFocus
                 />
                 <Button 
                   type="button" 
                   size="icon" 
                   variant="ghost"
-                  className="h-9 w-9 text-muted-foreground hover:text-foreground"
+                  className="h-8 w-8 text-muted-foreground hover:text-foreground rounded-full"
                   onClick={() => {
                     setSearchOpen(false);
                     clearSearch();
                   }}
                 >
-                  <X className="h-4 w-4" />
+                  <X className="h-3.5 w-3.5" />
                 </Button>
               </form>
             ) : (
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="hidden lg:flex h-9 w-9 text-foreground/70 hover:text-foreground hover:bg-muted"
+                className="hidden lg:flex h-8 w-8 text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full"
                 onClick={() => setSearchOpen(true)}
               >
-                <Search className="h-4 w-4" />
+                <Search className="h-3.5 w-3.5" />
               </Button>
             )}
             
@@ -215,43 +214,43 @@ export const Header = () => {
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="hidden lg:flex h-9 w-9 relative text-foreground/70 hover:text-foreground hover:bg-muted">
-                    <User className="h-4 w-4" />
-                    <Badge className="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full p-0 bg-primary" />
+                  <Button variant="ghost" size="icon" className="hidden lg:flex h-8 w-8 relative text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full">
+                    <User className="h-3.5 w-3.5" />
+                    <Badge className="absolute -top-0.5 -right-0.5 h-1.5 w-1.5 rounded-full p-0 bg-primary" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48 bg-card border-border">
-                  <DropdownMenuItem disabled className="text-xs text-muted-foreground">
+                <DropdownMenuContent align="end" className="w-44 bg-card border-border rounded-xl">
+                  <DropdownMenuItem disabled className="text-[10px] text-muted-foreground">
                     {user.email}
                   </DropdownMenuItem>
                   <DropdownMenuSeparator className="bg-border" />
                   <DropdownMenuItem asChild>
-                    <Link to="/dashboard" className="cursor-pointer text-foreground">
+                    <Link to="/dashboard" className="cursor-pointer text-foreground text-xs">
                       Dashboard
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/profile" className="cursor-pointer text-foreground">
+                    <Link to="/profile" className="cursor-pointer text-foreground text-xs">
                       Profile
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/rewards" className="cursor-pointer flex items-center text-foreground">
-                      <Award className="h-4 w-4 mr-2 text-primary" />
+                    <Link to="/rewards" className="cursor-pointer flex items-center text-foreground text-xs">
+                      <Award className="h-3.5 w-3.5 mr-2 text-primary" />
                       Rewards
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator className="bg-border" />
-                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive">
-                    <LogOut className="h-4 w-4 mr-2" />
+                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive text-xs">
+                    <LogOut className="h-3.5 w-3.5 mr-2" />
                     Sign Out
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
               <Link to="/auth">
-                <Button variant="ghost" size="icon" className="hidden lg:flex h-9 w-9 text-foreground/70 hover:text-foreground hover:bg-muted">
-                  <User className="h-4 w-4" />
+                <Button variant="ghost" size="icon" className="hidden lg:flex h-8 w-8 text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full">
+                  <User className="h-3.5 w-3.5" />
                 </Button>
               </Link>
             )}
@@ -259,7 +258,8 @@ export const Header = () => {
             {/* Book a Demo - Primary CTA */}
             <Link to="/contact" className="hidden lg:block">
               <Button 
-                className="h-9 px-4 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-md"
+                size="sm"
+                className="h-8 px-4 text-[11px] font-medium bg-gray-800 text-white hover:bg-gray-700 rounded-full"
               >
                 Book a demo
               </Button>
@@ -270,34 +270,34 @@ export const Header = () => {
             {/* Mobile Menu */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="lg:hidden h-9 w-9 text-foreground/70 hover:text-foreground hover:bg-muted">
-                  <Menu className="h-5 w-5" />
+                <Button variant="ghost" size="icon" className="lg:hidden h-8 w-8 text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full">
+                  <Menu className="h-4 w-4" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-full sm:w-[350px] bg-background border-l border-border p-0">
-                <SheetHeader className="p-6 border-b border-border">
-                  <SheetTitle className="text-left text-foreground text-base font-medium">Menu</SheetTitle>
+              <SheetContent side="right" className="w-full sm:w-[320px] bg-background border-l border-border p-0">
+                <SheetHeader className="p-5 border-b border-border">
+                  <SheetTitle className="text-left text-foreground text-sm font-medium">Menu</SheetTitle>
                 </SheetHeader>
                 
-                <nav className="p-6 space-y-1">
+                <nav className="p-5 space-y-1">
                   {mobileLinks.map((link) => (
                     <Link
                       key={link.label}
                       to={link.href}
-                      className="block py-3 text-lg font-medium text-foreground hover:text-primary transition-colors"
+                      className="block py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {link.label}
                     </Link>
                   ))}
                   
-                  <div className="pt-6 border-t border-border mt-6">
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider mb-4">Industries</p>
+                  <div className="pt-5 border-t border-border mt-5">
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-3">Industries</p>
                     {industries.map((item) => (
                       <Link
                         key={item.label}
                         to={item.href}
-                        className="block py-2.5 text-foreground/80 hover:text-primary transition-colors"
+                        className="block py-2 text-xs text-foreground/70 hover:text-primary transition-colors"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         {item.label}
@@ -306,13 +306,13 @@ export const Header = () => {
                   </div>
                   
                   {/* Account Section */}
-                  <div className="pt-6 border-t border-border mt-6">
+                  <div className="pt-5 border-t border-border mt-5">
                     {user ? (
-                      <div className="space-y-3">
-                        <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+                      <div className="space-y-2">
+                        <p className="text-[10px] text-muted-foreground truncate">{user.email}</p>
                         <Link
                           to="/dashboard"
-                          className="block py-2.5 text-foreground hover:text-primary transition-colors"
+                          className="block py-2 text-xs text-foreground hover:text-primary transition-colors"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           Dashboard
@@ -322,7 +322,7 @@ export const Header = () => {
                             handleSignOut();
                             setMobileMenuOpen(false);
                           }}
-                          className="block py-2.5 text-destructive hover:text-destructive/80 transition-colors"
+                          className="block py-2 text-xs text-destructive hover:text-destructive/80 transition-colors"
                         >
                           Sign Out
                         </button>
@@ -330,7 +330,7 @@ export const Header = () => {
                     ) : (
                       <Link
                         to="/auth"
-                        className="block py-2.5 text-foreground hover:text-primary transition-colors"
+                        className="block py-2 text-xs text-foreground hover:text-primary transition-colors"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         Sign In
@@ -339,9 +339,9 @@ export const Header = () => {
                   </div>
                   
                   {/* CTA */}
-                  <div className="pt-6">
+                  <div className="pt-5">
                     <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
-                      <Button className="w-full h-12 text-base font-medium bg-foreground text-background hover:bg-foreground/90">
+                      <Button className="w-full h-10 text-xs font-medium bg-gray-800 text-white hover:bg-gray-700 rounded-full">
                         Book a demo
                       </Button>
                     </Link>

@@ -56,56 +56,57 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bg-foreground text-background">
-      <div className="px-6 md:px-12 lg:px-20 xl:px-32 py-20 md:py-24">
-        {/* Top Section */}
+    <footer className="bg-gray-800 text-white">
+      <div className="px-6 md:px-8 py-16 md:py-20">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 mb-16 pb-16 border-b border-background/10">
+          {/* Top Section */}
+          <div className="grid lg:grid-cols-2 gap-12 mb-12 pb-12 border-b border-white/10">
             {/* Brand */}
-            <div className="space-y-6">
-              <Link to="/" className="flex items-center gap-3 group">
-                <img src={logoIcon} alt="Neurostate" className="h-8 w-8 invert opacity-90" />
-                <span className="text-xl font-medium tracking-tight">NEUROSTATE</span>
+            <div className="space-y-4">
+              <Link to="/" className="flex items-center gap-2.5 group">
+                <img src={logoIcon} alt="Neurostate" className="h-6 w-6 invert opacity-90" />
+                <span className="text-sm font-medium tracking-tight">Neurostate</span>
               </Link>
-              <p className="text-background/60 text-sm leading-relaxed max-w-sm">
+              <p className="text-white/50 text-xs leading-relaxed max-w-xs">
                 The AI operating system for human performance. Cognitive forecasting, precision supplements, and neuromodulation technology.
               </p>
             </div>
 
             {/* Newsletter */}
-            <div className="space-y-4">
-              <h3 className="text-sm font-medium">Join the newsletter</h3>
-              <p className="text-background/60 text-sm">
-                Get 10% off your first order and exclusive insights.
+            <div className="space-y-3">
+              <h3 className="text-xs font-medium">Join the newsletter</h3>
+              <p className="text-white/50 text-xs">
+                Get 10% off your first order.
               </p>
-              <form onSubmit={handleNewsletterSignup} className="flex gap-3">
+              <form onSubmit={handleNewsletterSignup} className="flex gap-2">
                 <Input
                   type="email"
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 bg-background/10 border-background/20 text-background placeholder:text-background/40 focus:border-primary"
+                  className="flex-1 h-9 bg-white/10 border-white/10 text-white text-xs placeholder:text-white/30 focus:border-primary rounded-full"
                   disabled={isLoading}
                 />
                 <Button 
                   type="submit" 
                   disabled={isLoading}
-                  className="bg-primary hover:bg-primary/90"
+                  size="sm"
+                  className="h-9 px-4 bg-primary hover:bg-primary/90 rounded-full"
                 >
-                  {isLoading ? "..." : <ArrowRight className="w-4 h-4" />}
+                  {isLoading ? "..." : <ArrowRight className="w-3.5 h-3.5" />}
                 </Button>
               </form>
             </div>
           </div>
 
           {/* Links Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
             <div>
-              <h3 className="text-xs uppercase tracking-wider text-background/40 mb-4 font-medium">Platform</h3>
-              <ul className="space-y-3">
+              <h3 className="text-[10px] uppercase tracking-wider text-white/30 mb-4 font-medium">Platform</h3>
+              <ul className="space-y-2.5">
                 {footerLinks.platform.map((link) => (
                   <li key={link.name}>
-                    <Link to={link.href} className="text-sm text-background/60 hover:text-background transition-colors">
+                    <Link to={link.href} className="text-xs text-white/50 hover:text-white transition-colors">
                       {link.name}
                     </Link>
                   </li>
@@ -114,11 +115,11 @@ export const Footer = () => {
             </div>
 
             <div>
-              <h3 className="text-xs uppercase tracking-wider text-background/40 mb-4 font-medium">Company</h3>
-              <ul className="space-y-3">
+              <h3 className="text-[10px] uppercase tracking-wider text-white/30 mb-4 font-medium">Company</h3>
+              <ul className="space-y-2.5">
                 {footerLinks.company.map((link) => (
                   <li key={link.name}>
-                    <Link to={link.href} className="text-sm text-background/60 hover:text-background transition-colors">
+                    <Link to={link.href} className="text-xs text-white/50 hover:text-white transition-colors">
                       {link.name}
                     </Link>
                   </li>
@@ -127,11 +128,11 @@ export const Footer = () => {
             </div>
 
             <div>
-              <h3 className="text-xs uppercase tracking-wider text-background/40 mb-4 font-medium">Support</h3>
-              <ul className="space-y-3">
+              <h3 className="text-[10px] uppercase tracking-wider text-white/30 mb-4 font-medium">Support</h3>
+              <ul className="space-y-2.5">
                 {footerLinks.support.map((link) => (
                   <li key={link.name}>
-                    <Link to={link.href} className="text-sm text-background/60 hover:text-background transition-colors">
+                    <Link to={link.href} className="text-xs text-white/50 hover:text-white transition-colors">
                       {link.name}
                     </Link>
                   </li>
@@ -140,14 +141,14 @@ export const Footer = () => {
             </div>
 
             <div>
-              <h3 className="text-xs uppercase tracking-wider text-background/40 mb-4 font-medium">Contact</h3>
-              <ul className="space-y-3">
+              <h3 className="text-[10px] uppercase tracking-wider text-white/30 mb-4 font-medium">Contact</h3>
+              <ul className="space-y-2.5">
                 <li>
-                  <a href="mailto:contact@neurostate.co.uk" className="text-sm text-background/60 hover:text-background transition-colors">
+                  <a href="mailto:contact@neurostate.co.uk" className="text-xs text-white/50 hover:text-white transition-colors">
                     contact@neurostate.co.uk
                   </a>
                 </li>
-                <li className="text-sm text-background/40">
+                <li className="text-xs text-white/30">
                   London, United Kingdom
                 </li>
               </ul>
@@ -155,15 +156,15 @@ export const Footer = () => {
           </div>
 
           {/* Bottom */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-background/10">
-            <p className="text-xs text-background/40">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-white/10">
+            <p className="text-[10px] text-white/30">
               © {new Date().getFullYear()} Neurostate. All rights reserved.
             </p>
-            <div className="flex gap-6">
-              <Link to="/terms" className="text-xs text-background/40 hover:text-background transition-colors">
+            <div className="flex gap-5">
+              <Link to="/terms" className="text-[10px] text-white/30 hover:text-white transition-colors">
                 Terms
               </Link>
-              <Link to="/privacy" className="text-xs text-background/40 hover:text-background transition-colors">
+              <Link to="/privacy" className="text-[10px] text-white/30 hover:text-white transition-colors">
                 Privacy
               </Link>
             </div>
