@@ -1,225 +1,362 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
+import { Button } from "@/components/ui/button";
+import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
+import { ArrowRight, ArrowUpRight, Check, Cpu, Brain, Shield, Code, Zap, GitBranch } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Monitor, Cpu, Shield, Brain, Zap, LineChart, CheckCircle2 } from "lucide-react";
+import { motion } from "framer-motion";
 
-export default function InformationTechnologyOverview() {
+const InformationTechnologyOverview = () => {
   const stats = [
-    { value: "47%", label: "Reduced Burnout", desc: "Developer wellness improvement" },
-    { value: "31%", label: "Code Quality", desc: "Fewer production incidents" },
-    { value: "2.4x", label: "Sprint Velocity", desc: "Sustainable performance gains" },
-    { value: "89%", label: "Team Retention", desc: "Annual retention rate" },
+    { value: "47%", label: "Reduced burnout", desc: "across engineering teams" },
+    { value: "31%", label: "Fewer incidents", desc: "production error reduction" },
+    { value: "2.4x", label: "ROI", desc: "within first year" },
+    { value: "89%", label: "Team retention", desc: "annual retention rate" }
   ];
 
   const solutions = [
-    {
-      icon: <Cpu className="w-6 h-6" />,
-      title: "Developer Wellness",
-      description: "Combat burnout with personalised recovery protocols designed for high-cognitive workloads and long coding sessions.",
-      features: ["Cognitive load monitoring", "Screen fatigue protocols", "Focus enhancement stacks"]
+    { 
+      title: "Developer Wellness Monitoring", 
+      desc: "Real-time tracking of cognitive load and burnout risk during sprints, on-call rotations, and deadline-intensive periods.",
+      detail: "Seamless integration with Slack, GitHub, and developer workflows.",
+      num: "01",
+      icon: Brain
     },
-    {
-      icon: <Brain className="w-6 h-6" />,
-      title: "Cognitive Performance",
-      description: "Optimise mental clarity and problem-solving capabilities with science-backed nootropic protocols.",
-      features: ["Deep work optimisation", "Memory enhancement", "Decision fatigue reduction"]
+    { 
+      title: "Deep Work Optimisation", 
+      desc: "AI-predicted optimal time windows for complex coding, architecture decisions, and focused problem-solving.",
+      detail: "Personalised to individual work patterns and meeting schedules.",
+      num: "02",
+      icon: Code
     },
-    {
-      icon: <Monitor className="w-6 h-6" />,
-      title: "Remote Team Wellness",
-      description: "Support distributed teams with comprehensive wellness programmes that adapt to individual schedules and time zones.",
-      features: ["Timezone-aware protocols", "Async wellness check-ins", "Virtual team challenges"]
+    { 
+      title: "On-Call Recovery Protocols", 
+      desc: "Automated recovery support for engineers handling incident response and high-stress production issues.",
+      detail: "Evidence-based techniques from elite performance psychology.",
+      num: "03",
+      icon: Shield
     },
-    {
-      icon: <Shield className="w-6 h-6" />,
-      title: "On-Call Recovery",
-      description: "Specialised protocols for engineers handling on-call rotations and incident response stress.",
-      features: ["Post-incident recovery", "Sleep debt management", "Stress response protocols"]
-    },
-    {
-      icon: <Zap className="w-6 h-6" />,
-      title: "Hackathon & Sprint Support",
-      description: "Peak performance protocols for intense development periods and product launches.",
-      features: ["Energy optimisation", "Sustained focus stacks", "Rapid recovery protocols"]
-    },
-    {
-      icon: <LineChart className="w-6 h-6" />,
-      title: "Engineering Analytics",
-      description: "Team-level insights into wellness metrics correlated with productivity and code quality.",
-      features: ["Burnout risk indicators", "Team wellness dashboards", "Performance correlation data"]
-    }
   ];
 
   const benefits = [
-    "Reduced developer burnout and turnover",
-    "Improved code quality and fewer bugs",
-    "Higher sprint velocity sustainably",
-    "Better on-call and incident recovery",
-    "Enhanced remote team cohesion",
-    "Data-driven wellness decisions"
+    { title: "Sustainable velocity", desc: "Maintain sprint performance without burnout" },
+    { title: "Higher code quality", desc: "Fewer bugs when developers are well-rested" },
+    { title: "Reduced turnover", desc: "Retain top engineering talent long-term" },
+    { title: "Better decisions", desc: "Clearer thinking for architecture choices" }
+  ];
+
+  const useCases = [
+    { title: "Tech Companies", desc: "Engineering and product teams" },
+    { title: "Startups", desc: "Fast-moving development teams" },
+    { title: "Enterprise IT", desc: "Platform and infrastructure teams" },
+    { title: "Agencies", desc: "Client delivery and project teams" }
   ];
 
   return (
     <>
       <SEO 
-        title="Information Technology Solutions | NeuroState"
-        description="Optimise developer performance and reduce burnout with NeuroState's cognitive wellness platform. Science-backed protocols for IT teams and engineering organisations."
+        title="Information Technology Solutions | Neurostate"
+        description="AI-powered cognitive performance for engineering teams. Reduce burnout, improve code quality, and retain top developer talent."
       />
-      
-      <div className="min-h-screen bg-ivory">
+      <div className="min-h-screen bg-background">
         <Header />
-        
-        {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-carbon via-slate to-carbon text-ivory pt-32 pb-24">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(139,92,246,0.08),transparent_50%)]" />
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative">
-            <div className="text-center max-w-4xl mx-auto mb-16">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full mb-8">
-                <Cpu className="w-4 h-4 text-accent" />
-                <span className="text-xs font-semibold text-accent uppercase tracking-wider">Information Technology</span>
-              </div>
-              <h1 className="text-hero-display font-bold mb-6">
-                Optimise Developer<br />Performance & Wellness
-              </h1>
-              <p className="text-body-large text-pearl max-w-3xl mx-auto font-light">
-                Combat burnout, enhance cognitive performance, and build sustainable engineering cultures with science-backed wellness protocols.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-                <Button size="lg" asChild className="group">
-                  <Link to="/contact">
-                    Schedule Demo
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </Button>
-                <Button size="lg" variant="outline" asChild className="text-ivory border-ivory/30 hover:bg-ivory/10">
-                  <Link to="/enterprise/information-technology/integrations">View Integrations</Link>
-                </Button>
-              </div>
-            </div>
+        <main>
+          {/* Hero Section */}
+          <section className="relative min-h-[80vh] flex items-center overflow-hidden">
+            {/* Gradient Background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/[0.03]" />
+            <motion.div 
+              className="absolute top-20 right-[10%] w-[500px] h-[500px] rounded-full opacity-[0.06] blur-[120px] pointer-events-none"
+              style={{ background: 'radial-gradient(circle, hsl(270, 100%, 55%) 0%, transparent 70%)' }}
+              animate={{ scale: [1, 1.1, 1], opacity: [0.06, 0.08, 0.06] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div 
+              className="absolute bottom-40 left-[5%] w-[400px] h-[400px] rounded-full opacity-[0.04] blur-[100px] pointer-events-none"
+              style={{ background: 'radial-gradient(circle, hsl(200, 65%, 45%) 0%, transparent 70%)' }}
+            />
 
-            {/* Stats Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
-              {stats.map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <div className="text-5xl sm:text-6xl font-bold mb-3 text-accent">{stat.value}</div>
-                  <div className="text-lg font-semibold mb-1 text-ivory">{stat.label}</div>
-                  <div className="text-sm text-mist">{stat.desc}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Solutions Grid */}
-        <section className="py-24 bg-ivory">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-            <div className="text-center mb-16">
-              <h2 className="text-large-display font-bold text-carbon mb-4">
-                IT Wellness Solutions
-              </h2>
-              <p className="text-body-large text-stone max-w-2xl mx-auto">
-                Comprehensive wellness programmes designed for the unique challenges of technology teams.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {solutions.map((solution) => (
-                <div 
-                  key={solution.title}
-                  className="group bg-pearl rounded-3xl p-8 hover:shadow-soft transition-all duration-300"
+            <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-8 py-20 lg:py-28">
+              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <motion.div 
+                  className="space-y-6"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
                 >
-                  <div className="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center mb-6 text-accent group-hover:scale-110 transition-transform">
-                    {solution.icon}
+                  <div className="inline-flex items-center gap-2">
+                    <motion.div 
+                      className="w-1.5 h-1.5 bg-primary rounded-full"
+                      animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
+                    <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">Information Technology</span>
                   </div>
-                  <h3 className="text-2xl font-bold text-carbon mb-3">{solution.title}</h3>
-                  <p className="text-stone mb-6">{solution.description}</p>
-                  <ul className="space-y-2">
-                    {solution.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-2 text-sm text-stone">
-                        <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
-        {/* Benefits Section */}
-        <section className="py-24 bg-pearl">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <h2 className="text-large-display font-bold text-carbon mb-6">
-                  Build Sustainable<br />Engineering Teams
-                </h2>
-                <p className="text-body-large text-stone mb-8">
-                  Technology companies face unique wellness challenges—from cognitive fatigue to on-call stress. NeuroState provides the tools to build high-performing, resilient teams.
-                </p>
-                <ul className="space-y-4">
-                  {benefits.map((benefit) => (
-                    <li key={benefit} className="flex items-center gap-3">
-                      <div className="w-6 h-6 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
-                        <CheckCircle2 className="w-4 h-4 text-accent" />
+                  <h1 className="text-2xl md:text-3xl lg:text-4xl font-normal text-foreground tracking-tight">
+                    Ship faster.{" "}
+                    <span className="text-primary">Burn out less.</span>
+                  </h1>
+                  
+                  <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
+                    Elite cognitive performance for engineering teams. Predict burnout, optimise deep work windows, and maintain sustainable velocity when deadlines are critical.
+                  </p>
+
+                  <div className="flex flex-wrap items-center gap-3 pt-2">
+                    <Link to="/contact">
+                      <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
+                        <Button className="h-10 px-5 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                          <span className="flex items-center">
+                            Request engineering demo
+                            <ArrowUpRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                          </span>
+                        </Button>
+                      </motion.div>
+                    </Link>
+                    <Link to="/enterprise/overview">
+                      <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
+                        <Button variant="ghost" className="h-10 px-5 text-xs font-medium text-foreground hover:bg-muted rounded-full group">
+                          View all solutions
+                          <ArrowRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                        </Button>
+                      </motion.div>
+                    </Link>
+                  </div>
+                </motion.div>
+
+                {/* Hero Visual */}
+                <motion.div 
+                  className="relative"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1, delay: 0.3 }}
+                >
+                  <div className="flow-card p-8 space-y-6">
+                    <div className="flex items-center justify-between pb-4 border-b border-border/50">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
+                          <Cpu className="w-5 h-5 text-primary" />
+                        </div>
+                        <div>
+                          <p className="text-foreground font-medium text-sm">Engineering Team</p>
+                          <p className="text-muted-foreground text-[10px]">Real-time wellness monitoring</p>
+                        </div>
                       </div>
-                      <span className="text-stone font-medium">{benefit}</span>
-                    </li>
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                        <span className="text-[10px] text-muted-foreground">Sprint Active</span>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-4">
+                      {[
+                        { label: "Focus Score", value: "87%", trend: "Optimal" },
+                        { label: "Burnout Risk", value: "Low", trend: "Healthy" },
+                        { label: "Deep Work", value: "3.2h", trend: "Today" },
+                        { label: "Team Wellness", value: "92%", trend: "Above avg" }
+                      ].map((metric, i) => (
+                        <motion.div 
+                          key={i}
+                          className="p-4 rounded-xl bg-muted/30 border border-border/30"
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.5 + i * 0.1 }}
+                        >
+                          <p className="text-[10px] text-muted-foreground uppercase tracking-wider">{metric.label}</p>
+                          <p className="text-lg font-medium text-foreground mt-1">{metric.value}</p>
+                          <p className="text-[10px] text-green-500">{metric.trend}</p>
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    <div className="pt-4 border-t border-border/50">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Next Deep Work Block</p>
+                          <p className="text-sm font-medium text-foreground mt-1">In 25 minutes</p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Zap className="w-4 h-4 text-primary" />
+                          <span className="text-xs text-primary font-medium">Calendar protected</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </section>
+
+          {/* Stats Section */}
+          <section className="py-20 md:py-28 px-6 md:px-8">
+            <div className="max-w-6xl mx-auto">
+              <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+                {stats.map((stat, i) => (
+                  <StaggerItem key={i}>
+                    <motion.div 
+                      className="text-center lg:text-left group cursor-default relative"
+                      whileHover={{ scale: 1.03, y: -4 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    >
+                      <motion.div className="absolute inset-0 bg-primary/5 rounded-3xl -m-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <p className="stat-display text-foreground group-hover:text-primary transition-colors duration-300 relative">{stat.value}</p>
+                      <p className="text-sm text-foreground font-medium mt-2 relative">{stat.label}</p>
+                      <p className="hidden lg:block text-xs text-muted-foreground mt-1 relative">{stat.desc}</p>
+                    </motion.div>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </div>
+          </section>
+
+          {/* Solutions Section */}
+          <section className="py-24 md:py-32 px-6 md:px-8">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+                <ScrollReveal className="lg:sticky lg:top-28 space-y-5">
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Developer Solutions</span>
+                  <h2 className="text-large-display text-foreground">
+                    Sustainable velocity.
+                    <br />
+                    <span className="text-muted-foreground">Happy engineers.</span>
+                  </h2>
+                  <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
+                    Purpose-built for the demands of modern software development. From startups to enterprise, we help your team ship without burning out.
+                  </p>
+                </ScrollReveal>
+
+                <StaggerContainer className="space-y-4" staggerDelay={0.15}>
+                  {solutions.map((item, i) => (
+                    <StaggerItem key={i}>
+                      <motion.div 
+                        className="group flow-card spotlight-card p-6 md:p-8 cursor-pointer"
+                        whileHover={{ x: 8, scale: 1.01 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      >
+                        <div className="flex items-start justify-between gap-6">
+                          <div className="space-y-3 flex-1">
+                            <div className="flex items-center gap-3">
+                              <span className="text-[10px] text-muted-foreground font-mono">{item.num}</span>
+                              <motion.div className="w-6 h-px bg-border group-hover:bg-primary/50 transition-all duration-300" whileHover={{ width: 40 }} />
+                            </div>
+                            <h3 className="text-base font-medium text-foreground group-hover:text-primary transition-colors duration-300">{item.title}</h3>
+                            <p className="text-xs text-muted-foreground leading-relaxed max-w-sm">{item.desc}</p>
+                            <p className="hidden lg:block text-xs text-muted-foreground/70 leading-relaxed max-w-sm mt-1">{item.detail}</p>
+                          </div>
+                          <motion.div whileHover={{ rotate: 45 }} transition={{ type: "spring", stiffness: 400, damping: 10 }}>
+                            <ArrowUpRight className="w-4 h-4 text-muted-foreground/30 group-hover:text-primary transition-all duration-300 mt-1" />
+                          </motion.div>
+                        </div>
+                      </motion.div>
+                    </StaggerItem>
                   ))}
-                </ul>
+                </StaggerContainer>
               </div>
-              <div className="bg-gradient-to-br from-carbon to-slate rounded-3xl p-10 text-ivory">
-                <h3 className="text-2xl font-bold mb-6">Platform Integration</h3>
-                <p className="text-pearl mb-8">
-                  NeuroState integrates with your existing development tools and workflows—Slack, Jira, GitHub, and more.
+            </div>
+          </section>
+
+          {/* Benefits Section */}
+          <section className="py-24 md:py-32 px-6 md:px-8 bg-muted/30">
+            <div className="max-w-6xl mx-auto">
+              <ScrollReveal className="text-center mb-16 space-y-4 max-w-2xl mx-auto">
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Engineering Benefits</span>
+                <h2 className="text-large-display text-foreground">
+                  Build better software.
+                  <br />
+                  <span className="text-muted-foreground">Keep your best people.</span>
+                </h2>
+              </ScrollReveal>
+
+              <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+                <ScrollReveal delay={0.1} direction="left">
+                  <div className="space-y-4">
+                    {benefits.map((item, i) => (
+                      <motion.div 
+                        key={i} 
+                        className="flex items-start gap-4 p-4 rounded-xl hover:bg-background transition-colors duration-300"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 + i * 0.1 }}
+                        whileHover={{ x: 4 }}
+                      >
+                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <Check className="w-4 h-4 text-primary" />
+                        </div>
+                        <div>
+                          <h3 className="text-sm font-medium text-foreground">{item.title}</h3>
+                          <p className="text-xs text-muted-foreground mt-1">{item.desc}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </ScrollReveal>
+
+                <ScrollReveal delay={0.2} direction="right">
+                  <div className="space-y-4">
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] mb-5 font-medium">Use Cases</p>
+                    {useCases.map((item, i) => (
+                      <motion.div 
+                        key={i} 
+                        className="flex items-start gap-4 p-4 rounded-xl border border-border/50 hover:border-primary/30 transition-all duration-300"
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 + i * 0.1 }}
+                        whileHover={{ x: 4, borderColor: "hsl(var(--primary) / 0.5)" }}
+                      >
+                        <div>
+                          <h3 className="text-sm font-medium text-foreground">{item.title}</h3>
+                          <p className="text-xs text-muted-foreground mt-1">{item.desc}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </ScrollReveal>
+              </div>
+            </div>
+          </section>
+
+          {/* CTA Section */}
+          <section className="py-24 md:py-32 px-6 md:px-8">
+            <div className="max-w-4xl mx-auto text-center">
+              <ScrollReveal>
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Get Started</span>
+                <h2 className="text-large-display text-foreground mt-4 mb-6">
+                  Ready to build sustainable teams?
+                </h2>
+                <p className="text-sm text-muted-foreground max-w-lg mx-auto mb-8">
+                  Schedule a demonstration to see how Neurostate can help your engineering team perform at their best without burning out.
                 </p>
-                <div className="space-y-4 mb-8">
-                  <div className="flex items-center gap-3 text-sm">
-                    <CheckCircle2 className="w-5 h-5 text-accent" />
-                    <span>Slack wellness check-ins</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <CheckCircle2 className="w-5 h-5 text-accent" />
-                    <span>Calendar-aware protocol scheduling</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <CheckCircle2 className="w-5 h-5 text-accent" />
-                    <span>PagerDuty integration for on-call recovery</span>
-                  </div>
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  <Link to="/contact">
+                    <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
+                      <Button className="h-10 px-5 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                        <span className="flex items-center">
+                          Schedule demo
+                          <ArrowUpRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </span>
+                      </Button>
+                    </motion.div>
+                  </Link>
+                  <Link to="/enterprise/information-technology/pricing">
+                    <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
+                      <Button variant="ghost" className="h-10 px-5 text-xs font-medium text-foreground hover:bg-muted rounded-full group">
+                        View pricing
+                        <ArrowRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                      </Button>
+                    </motion.div>
+                  </Link>
                 </div>
-                <Button variant="secondary" size="lg" asChild className="w-full">
-                  <Link to="/enterprise/information-technology/integrations">Explore Integrations</Link>
-                </Button>
-              </div>
+              </ScrollReveal>
             </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="py-24 bg-gradient-to-br from-carbon to-slate text-ivory">
-          <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
-            <h2 className="text-large-display font-bold mb-6">
-              Ready to Optimise Your<br />Engineering Team?
-            </h2>
-            <p className="text-body-large text-pearl mb-10 max-w-2xl mx-auto">
-              Join leading technology companies using NeuroState to build sustainable, high-performing engineering cultures.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" asChild>
-                <Link to="/contact">Schedule Demo</Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild className="text-ivory border-ivory/30 hover:bg-ivory/10">
-                <Link to="/enterprise/information-technology/pricing">View Pricing</Link>
-              </Button>
-            </div>
-          </div>
-        </section>
-
+          </section>
+        </main>
         <Footer />
       </div>
     </>
   );
-}
+};
+
+export default InformationTechnologyOverview;
