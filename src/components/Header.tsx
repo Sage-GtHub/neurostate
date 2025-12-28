@@ -22,11 +22,12 @@ import {
 } from "./ui/dropdown-menu";
 import { AnnouncementBar } from "./AnnouncementBar";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser, Session } from "@supabase/supabase-js";
 import { toast } from "sonner";
 import logoIcon from "@/assets/neurostate-icon.svg";
+import { cn } from "@/lib/utils";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -36,6 +37,17 @@ export const Header = () => {
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [session, setSession] = useState<Session | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Handle scroll for glass effect
+  const handleScroll = useCallback(() => {
+    setIsScrolled(window.scrollY > 10);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -92,16 +104,22 @@ export const Header = () => {
   return (
     <>
       <AnnouncementBar />
-      <header className="sticky top-0 z-50 w-full bg-background border-b border-border/30 transition-all duration-300">
+      <header className={cn(
+        "sticky top-0 z-50 w-full transition-all duration-500",
+        isScrolled 
+          ? "bg-background/95 backdrop-blur-xl border-b border-border/50 shadow-sm" 
+          : "bg-background/80 backdrop-blur-md border-b border-transparent"
+      )}>
         <div className="max-w-6xl mx-auto px-6 md:px-8 flex h-14 lg:h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
+          <Link to="/" className="flex items-center gap-2 group relative">
+            <div className="absolute -inset-2 bg-primary/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <img 
               src={logoIcon} 
               alt="Neurostate" 
-              className="h-5 w-5 lg:h-6 lg:w-6 transition-transform duration-300 group-hover:scale-105" 
+              className="h-5 w-5 lg:h-6 lg:w-6 transition-all duration-300 group-hover:scale-110 relative" 
             />
-            <span className="text-xs lg:text-sm font-medium tracking-tight text-foreground">
+            <span className="text-xs lg:text-sm font-medium tracking-tight text-foreground relative">
               Neurostate
             </span>
           </Link>
@@ -111,28 +129,29 @@ export const Header = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent text-foreground/60 hover:text-foreground hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground text-xs font-normal h-9 px-3 rounded-full">
+                  <NavigationMenuTrigger className="bg-transparent text-foreground/60 hover:text-foreground hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground text-xs font-normal h-9 px-3 rounded-full transition-all duration-300">
                     Businesses
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="w-[320px] p-3 bg-card border border-border rounded-2xl shadow-lg">
-                      <div className="space-y-0.5">
-                        {industries.map((item) => (
+                    <div className="w-[340px] p-4 bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl">
+                      <div className="space-y-1">
+                        {industries.map((item, index) => (
                           <NavigationMenuLink key={item.label} asChild>
                             <Link
                               to={item.href}
-                              className="block p-3 rounded-xl hover:bg-muted transition-colors group"
+                              className="block p-3 rounded-xl hover:bg-muted/80 transition-all duration-300 group"
+                              style={{ animationDelay: `${index * 50}ms` }}
                             >
                               <div className="flex items-center justify-between">
                                 <div>
-                                  <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors">
+                                  <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors duration-300">
                                     {item.label}
                                   </p>
-                                  <p className="text-[10px] text-muted-foreground mt-0.5">
+                                  <p className="text-[10px] text-muted-foreground mt-0.5 group-hover:text-muted-foreground/80 transition-colors">
                                     {item.desc}
                                   </p>
                                 </div>
-                                <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
                               </div>
                             </Link>
                           </NavigationMenuLink>
@@ -151,14 +170,14 @@ export const Header = () => {
                   description: "Our shop is launching soon. Stay tuned!",
                 });
               }}
-              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-colors px-3 py-2 rounded-full hover:bg-muted/50"
+              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
             >
               Shop
             </button>
 
             <Link
               to="/nova/overview"
-              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-colors px-3 py-2 rounded-full hover:bg-muted/50"
+              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
             >
               Nova AI
             </Link>
@@ -166,7 +185,7 @@ export const Header = () => {
 
             <Link
               to="/about"
-              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-colors px-3 py-2 rounded-full hover:bg-muted/50"
+              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
             >
               Company
             </Link>
@@ -258,9 +277,12 @@ export const Header = () => {
             <Link to="/contact" className="hidden lg:block">
               <Button 
                 size="sm"
-                className="h-8 px-4 text-[11px] font-medium bg-gray-800 text-white hover:bg-gray-700 rounded-full"
+                className="h-8 px-4 text-[11px] font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg"
               >
-                Book a demo
+                <span className="relative z-10 flex items-center gap-1.5">
+                  Book a demo
+                  <ArrowUpRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
               </Button>
             </Link>
             
