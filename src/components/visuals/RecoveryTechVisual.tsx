@@ -1,75 +1,151 @@
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float } from '@react-three/drei';
-import { useRef, Suspense } from 'react';
+import { useRef, Suspense, useMemo } from 'react';
 import * as THREE from 'three';
 
-// Glowing recovery orb
-const RecoveryOrb = () => {
-  const orbRef = useRef<THREE.Mesh>(null);
-  const ringRef = useRef<THREE.Mesh>(null);
+// Ethereal crystal formation
+const CrystalCore = () => {
+  const coreRef = useRef<THREE.Mesh>(null);
+  const innerRef = useRef<THREE.Mesh>(null);
+  const ringsRef = useRef<THREE.Group>(null);
   
   useFrame((state) => {
-    if (orbRef.current) {
-      orbRef.current.rotation.y = state.clock.elapsedTime * 0.2;
+    const t = state.clock.elapsedTime;
+    if (coreRef.current) {
+      coreRef.current.rotation.y = t * 0.15;
+      coreRef.current.rotation.x = Math.sin(t * 0.2) * 0.1;
     }
-    if (ringRef.current) {
-      ringRef.current.rotation.x = state.clock.elapsedTime * 0.3;
-      ringRef.current.rotation.z = state.clock.elapsedTime * 0.1;
+    if (innerRef.current) {
+      innerRef.current.rotation.y = -t * 0.25;
+      innerRef.current.rotation.z = t * 0.1;
+    }
+    if (ringsRef.current) {
+      ringsRef.current.rotation.y = t * 0.1;
+      ringsRef.current.rotation.z = Math.sin(t * 0.3) * 0.05;
     }
   });
 
+  // Floating particles
+  const particles = useMemo(() => {
+    return Array.from({ length: 24 }, (_, i) => ({
+      position: [
+        Math.sin(i * 0.5) * (1.8 + Math.random() * 0.5),
+        (Math.random() - 0.5) * 2,
+        Math.cos(i * 0.5) * (1.8 + Math.random() * 0.5)
+      ] as [number, number, number],
+      scale: 0.02 + Math.random() * 0.03,
+      speed: 0.5 + Math.random() * 0.5
+    }));
+  }, []);
+
   return (
-    <Float speed={2} rotationIntensity={0.2} floatIntensity={0.3}>
+    <Float speed={1.5} rotationIntensity={0.15} floatIntensity={0.25}>
       <group>
-        {/* Central orb with warm glow */}
-        <mesh ref={orbRef}>
-          <sphereGeometry args={[1, 32, 32]} />
+        {/* Central icosahedron */}
+        <mesh ref={coreRef}>
+          <icosahedronGeometry args={[0.8, 0]} />
           <meshStandardMaterial 
-            color="#ff6b35"
-            emissive="#ff4500"
-            emissiveIntensity={0.4}
+            color="#4ade80"
+            emissive="#22c55e"
+            emissiveIntensity={0.3}
+            roughness={0.1}
+            metalness={0.9}
+            wireframe={false}
+          />
+        </mesh>
+        
+        {/* Inner glowing sphere */}
+        <mesh ref={innerRef} scale={0.5}>
+          <dodecahedronGeometry args={[1, 0]} />
+          <meshStandardMaterial 
+            color="#a3e635"
+            emissive="#84cc16"
+            emissiveIntensity={0.5}
+            transparent
+            opacity={0.7}
             roughness={0.2}
             metalness={0.8}
           />
         </mesh>
         
-        {/* Outer ring */}
-        <mesh ref={ringRef} rotation={[Math.PI / 3, 0, 0]}>
-          <torusGeometry args={[1.6, 0.04, 16, 100]} />
-          <meshStandardMaterial 
-            color="#ffa07a"
-            emissive="#ff6347"
-            emissiveIntensity={0.3}
-            roughness={0.3}
-            metalness={0.7}
-          />
-        </mesh>
-        
-        {/* Second ring */}
-        <mesh rotation={[Math.PI / 2, Math.PI / 4, 0]}>
-          <torusGeometry args={[1.4, 0.03, 16, 100]} />
-          <meshStandardMaterial 
-            color="#ffd700"
-            transparent
-            opacity={0.6}
-            roughness={0.4}
-          />
-        </mesh>
-        
-        {/* Pulse waves */}
-        {[0, 1, 2].map((i) => (
-          <mesh key={i} scale={1.2 + i * 0.3}>
-            <ringGeometry args={[0.9, 1, 32]} />
-            <meshBasicMaterial 
-              color="#ff6b35"
+        {/* Orbiting rings */}
+        <group ref={ringsRef}>
+          <mesh rotation={[Math.PI / 2, 0, 0]}>
+            <torusGeometry args={[1.4, 0.015, 16, 64]} />
+            <meshStandardMaterial 
+              color="#86efac"
+              emissive="#4ade80"
+              emissiveIntensity={0.4}
               transparent
-              opacity={0.1 - i * 0.03}
-              side={THREE.DoubleSide}
+              opacity={0.8}
             />
           </mesh>
+          
+          <mesh rotation={[Math.PI / 3, Math.PI / 4, 0]}>
+            <torusGeometry args={[1.2, 0.012, 16, 64]} />
+            <meshStandardMaterial 
+              color="#bbf7d0"
+              emissive="#86efac"
+              emissiveIntensity={0.3}
+              transparent
+              opacity={0.6}
+            />
+          </mesh>
+          
+          <mesh rotation={[Math.PI / 2.5, -Math.PI / 3, Math.PI / 6]}>
+            <torusGeometry args={[1.6, 0.01, 16, 64]} />
+            <meshStandardMaterial 
+              color="#dcfce7"
+              emissive="#bbf7d0"
+              emissiveIntensity={0.2}
+              transparent
+              opacity={0.4}
+            />
+          </mesh>
+        </group>
+
+        {/* Floating particles */}
+        {particles.map((particle, i) => (
+          <FloatingParticle key={i} {...particle} index={i} />
         ))}
+        
+        {/* Outer glow sphere */}
+        <mesh scale={2}>
+          <sphereGeometry args={[1, 32, 32]} />
+          <meshBasicMaterial 
+            color="#22c55e"
+            transparent
+            opacity={0.03}
+            side={THREE.BackSide}
+          />
+        </mesh>
       </group>
     </Float>
+  );
+};
+
+// Animated floating particle
+const FloatingParticle = ({ position, scale, speed, index }: { 
+  position: [number, number, number]; 
+  scale: number; 
+  speed: number;
+  index: number;
+}) => {
+  const ref = useRef<THREE.Mesh>(null);
+  
+  useFrame((state) => {
+    if (ref.current) {
+      const t = state.clock.elapsedTime * speed;
+      ref.current.position.y = position[1] + Math.sin(t + index) * 0.3;
+      ref.current.position.x = position[0] + Math.cos(t * 0.7 + index) * 0.1;
+    }
+  });
+
+  return (
+    <mesh ref={ref} position={position} scale={scale}>
+      <sphereGeometry args={[1, 8, 8]} />
+      <meshBasicMaterial color="#4ade80" transparent opacity={0.6} />
+    </mesh>
   );
 };
 
@@ -82,10 +158,11 @@ const RecoveryTechVisual = () => {
         style={{ background: 'transparent' }}
       >
         <Suspense fallback={null}>
-          <ambientLight intensity={0.4} />
-          <directionalLight position={[5, 5, 5]} intensity={1} />
-          <pointLight position={[-3, 3, 3]} intensity={0.6} color="#ff6347" />
-          <RecoveryOrb />
+          <ambientLight intensity={0.3} />
+          <directionalLight position={[5, 5, 5]} intensity={0.8} />
+          <pointLight position={[-3, 2, 3]} intensity={0.5} color="#4ade80" />
+          <pointLight position={[3, -2, -3]} intensity={0.3} color="#22c55e" />
+          <CrystalCore />
         </Suspense>
       </Canvas>
     </div>
