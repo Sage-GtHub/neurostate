@@ -57,11 +57,8 @@ export const Footer = () => {
 
   return (
     <footer className="relative overflow-hidden bg-background">
-      {/* Subtle gradient at top */}
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
-      
-      {/* Floating orb - subtle */}
-      <div className="absolute top-40 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/3 blur-3xl animate-float pointer-events-none" />
+      {/* Clean top border */}
+      <div className="absolute inset-x-0 top-0 h-px bg-border/50" />
       
       <div className="relative px-6 md:px-12 lg:px-20 xl:px-32 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">

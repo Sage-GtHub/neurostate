@@ -92,7 +92,7 @@ export const Header = () => {
   return (
     <>
       <AnnouncementBar />
-      <header className="sticky top-0 z-50 w-full bg-background/90 backdrop-blur-xl border-b border-border/50">
+      <header className="sticky top-0 z-50 w-full bg-background border-b border-border/30 transition-all duration-300">
         <div className="max-w-6xl mx-auto px-6 md:px-8 flex h-14 lg:h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
