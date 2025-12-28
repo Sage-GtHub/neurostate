@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Microscope, Shield, Brain, Zap, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { toast } from "sonner";
 import { SEO } from "@/components/SEO";
 
 const AboutUs = () => {
@@ -180,12 +181,18 @@ const AboutUs = () => {
                 Experience the Neurostate system. AI coaching. Neuromodulation. Precision nutrition.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
-                <Link to="/shop">
-                  <Button size="sm" className="rounded-full h-10 px-6 text-xs bg-foreground text-background hover:bg-foreground/90">
-                    Shop now
-                    <ArrowRight className="ml-2 w-3.5 h-3.5" />
-                  </Button>
-                </Link>
+                <Button 
+                  size="sm" 
+                  className="rounded-full h-10 px-6 text-xs bg-foreground text-background hover:bg-foreground/90"
+                  onClick={() => {
+                    toast.info("Coming Soon", {
+                      description: "Our shop is launching soon. Stay tuned!",
+                    });
+                  }}
+                >
+                  Shop now
+                  <ArrowRight className="ml-2 w-3.5 h-3.5" />
+                </Button>
                 <Link to="/contact">
                   <Button variant="outline" size="sm" className="rounded-full h-10 px-6 text-xs border-foreground/20 text-foreground/70 hover:bg-foreground/5">
                     Contact us
