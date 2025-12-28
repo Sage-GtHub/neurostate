@@ -12,6 +12,7 @@ import redlightDevice from "@/assets/redlight.webp";
 import heroSupplement from "@/assets/hero-supplement.png";
 
 const Index = () => {
+  const stats = useScrollAnimation();
   const system = useScrollAnimation();
   const problems = useScrollAnimation();
   const category = useScrollAnimation();
@@ -36,63 +37,104 @@ const Index = () => {
         <main>
           <Hero />
 
-          {/* The Platform - Clean Minimal Style */}
-          <section ref={system.ref} className={`py-32 md:py-40 lg:py-48 px-6 md:px-12 lg:px-20 xl:px-32 bg-background transition-all duration-1000 ${system.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-20 md:mb-28 space-y-6">
-                <p className="text-primary/60 text-xs tracking-[0.3em] uppercase font-medium">The Platform</p>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium text-foreground leading-[1.1] tracking-tight">
-                  Three integrated systems.
-                  <br className="hidden md:block" />
-                  <span className="text-muted-foreground">One cognitive operating system.</span>
-                </h2>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-px bg-border">
+          {/* Stats Section - Large Display Numbers */}
+          <section ref={stats.ref} className={`py-24 md:py-32 px-6 md:px-12 lg:px-20 border-b border-border transition-all duration-1000 ${stats.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="max-w-[1400px] mx-auto">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
                 {[
-                  { 
-                    title: "Nova AI Engine", 
-                    desc: "Cognitive Forecasting",
-                    detail: "Predictive cognitive modelling with multi-model AI. Real-time performance forecasting and risk prediction.",
-                    num: "01"
-                  },
-                  { 
-                    title: "Execution Layer", 
-                    desc: "Precision Supplements", 
-                    detail: "Biological optimisation components. Research-backed formulas for peak cognitive output.",
-                    num: "02"
-                  },
-                  { 
-                    title: "Neuromodulation", 
-                    desc: "Brain State Control", 
-                    detail: "Red light therapy and photobiomodulation. Alpha and beta state switching for cognitive readiness.",
-                    num: "03"
-                  },
-                ].map((item, i) => (
+                  { value: "40%", label: "Reduction in cognitive volatility" },
+                  { value: "72hr", label: "Performance prediction window" },
+                  { value: "500+", label: "Enterprise deployments" },
+                  { value: "98%", label: "Prediction accuracy" }
+                ].map((stat, i) => (
                   <div 
-                    key={i}
-                    className="group bg-background p-10 md:p-12 hover:bg-muted/30 transition-all duration-500"
+                    key={i} 
+                    className="text-center lg:text-left space-y-3"
+                    style={{ transitionDelay: `${i * 100}ms` }}
                   >
-                    <p className="text-xs text-muted-foreground font-mono mb-8">{item.num}</p>
-                    <h3 className="text-xl font-medium text-foreground mb-2">{item.title}</h3>
-                    <p className="text-primary text-sm font-medium mb-4">{item.desc}</p>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{item.detail}</p>
+                    <p className="stat-display text-foreground">{stat.value}</p>
+                    <p className="text-sm text-muted-foreground max-w-[180px] mx-auto lg:mx-0">{stat.label}</p>
                   </div>
                 ))}
               </div>
             </div>
           </section>
 
-          {/* Problems We Solve - Clean Style */}
-          <section ref={problems.ref} className={`py-32 md:py-40 px-6 md:px-12 lg:px-20 xl:px-32 bg-muted/30 transition-all duration-1000 ${problems.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-                <div className="space-y-6">
-                  <p className="text-primary/60 text-xs tracking-[0.3em] uppercase font-medium">The Problem</p>
+          {/* The Platform - Asymmetric Grid */}
+          <section ref={system.ref} className={`py-32 md:py-40 lg:py-48 px-6 md:px-12 lg:px-20 bg-background transition-all duration-1000 ${system.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="max-w-[1400px] mx-auto">
+              <div className="grid lg:grid-cols-12 gap-16 lg:gap-8 items-start">
+                {/* Left - Heading */}
+                <div className="lg:col-span-5 lg:sticky lg:top-32">
+                  <p className="text-primary text-xs tracking-[0.3em] uppercase font-medium mb-6">The Platform</p>
+                  <h2 className="text-4xl md:text-5xl lg:text-[3.5rem] font-medium text-foreground leading-[1.1] tracking-tight mb-8">
+                    Three integrated systems.
+                    <br />
+                    <span className="text-muted-foreground">One cognitive OS.</span>
+                  </h2>
+                  <p className="text-lg text-muted-foreground leading-relaxed max-w-md">
+                    A complete infrastructure for predicting, measuring, and optimising cognitive performance.
+                  </p>
+                </div>
+
+                {/* Right - Cards */}
+                <div className="lg:col-span-7 space-y-4">
+                  {[
+                    { 
+                      title: "Nova AI Engine", 
+                      desc: "Cognitive Forecasting",
+                      detail: "Predictive cognitive modelling with multi-model AI. Real-time performance forecasting and risk prediction.",
+                      num: "01"
+                    },
+                    { 
+                      title: "Execution Layer", 
+                      desc: "Precision Supplements", 
+                      detail: "Biological optimisation components. Research-backed formulas for peak cognitive output.",
+                      num: "02"
+                    },
+                    { 
+                      title: "Neuromodulation", 
+                      desc: "Brain State Control", 
+                      detail: "Red light therapy and photobiomodulation. Alpha and beta state switching for cognitive readiness.",
+                      num: "03"
+                    },
+                  ].map((item, i) => (
+                    <div 
+                      key={i}
+                      className="group border border-border hover:border-primary/30 p-8 md:p-10 transition-all duration-500 card-hover bg-background"
+                    >
+                      <div className="flex items-start justify-between gap-8">
+                        <div className="space-y-4 flex-1">
+                          <div className="flex items-center gap-4">
+                            <span className="text-xs text-muted-foreground font-mono">{item.num}</span>
+                            <div className="w-8 h-px bg-border" />
+                          </div>
+                          <h3 className="text-xl font-medium text-foreground">{item.title}</h3>
+                          <p className="text-primary text-sm font-medium">{item.desc}</p>
+                          <p className="text-muted-foreground text-sm leading-relaxed max-w-md">{item.detail}</p>
+                        </div>
+                        <ArrowRight className="w-5 h-5 text-muted-foreground/30 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300 mt-2" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Section Divider */}
+          <div className="section-divider mx-6 md:mx-12 lg:mx-20" />
+
+          {/* Problems We Solve */}
+          <section ref={problems.ref} className={`py-32 md:py-40 px-6 md:px-12 lg:px-20 bg-background transition-all duration-1000 ${problems.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="max-w-[1400px] mx-auto">
+              <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+                <div className="space-y-8 lg:sticky lg:top-32">
+                  <p className="text-primary text-xs tracking-[0.3em] uppercase font-medium">The Problem</p>
                   <h2 className="text-4xl md:text-5xl font-medium text-foreground leading-[1.1] tracking-tight">
                     Cognitive risk without prediction.
                   </h2>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
+                  <p className="text-lg text-muted-foreground leading-relaxed max-w-md">
                     Traditional approaches react to problems. Our cognitive infrastructure predicts and prevents performance volatility before it impacts output.
                   </p>
                 </div>
@@ -110,7 +152,8 @@ const Index = () => {
                   ].map((problem, i) => (
                     <div 
                       key={i} 
-                      className="group p-5 bg-background border border-border hover:border-primary/30 transition-all duration-300"
+                      className="group p-6 border border-border hover:border-foreground/20 transition-all duration-300"
+                      style={{ transitionDelay: `${i * 50}ms` }}
                     >
                       <p className="text-sm text-foreground">{problem}</p>
                     </div>
@@ -121,13 +164,13 @@ const Index = () => {
           </section>
 
           {/* Category Creation - Clean Style */}
-          <section ref={category.ref} className={`py-32 md:py-40 lg:py-48 px-6 md:px-12 lg:px-20 xl:px-32 bg-background transition-all duration-1000 ${category.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-20 md:mb-24 space-y-6">
-                <p className="text-primary/60 text-xs tracking-[0.3em] uppercase font-medium">The Difference</p>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium text-foreground leading-[1.1] tracking-tight">
+          <section ref={category.ref} className={`py-32 md:py-40 lg:py-48 px-6 md:px-12 lg:px-20 bg-muted/30 grain-texture transition-all duration-1000 ${category.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="max-w-[1400px] mx-auto relative z-10">
+              <div className="text-center mb-20 md:mb-24 space-y-6 max-w-3xl mx-auto">
+                <p className="text-primary text-xs tracking-[0.3em] uppercase font-medium">The Difference</p>
+                <h2 className="text-4xl md:text-5xl lg:text-[3.5rem] font-medium text-foreground leading-[1.1] tracking-tight">
                   Predictive infrastructure.
-                  <br className="hidden md:block" />
+                  <br />
                   <span className="text-muted-foreground">Not reactive wellness.</span>
                 </h2>
               </div>
@@ -144,9 +187,9 @@ const Index = () => {
                   ].map((entry, i) => (
                     <div 
                       key={i} 
-                      className="group flex items-center gap-4 p-5 bg-muted/30 border-l-2 border-destructive/30"
+                      className="group flex items-center gap-4 p-5 bg-background border-l-2 border-destructive/30"
                     >
-                      <X className="w-4 h-4 text-destructive/60" />
+                      <X className="w-4 h-4 text-destructive/60 flex-shrink-0" />
                       <span className="text-muted-foreground line-through text-sm flex-1">{entry.item}</span>
                       <span className="text-[10px] text-destructive/60 uppercase tracking-wider font-medium">{entry.status}</span>
                     </div>
@@ -165,9 +208,9 @@ const Index = () => {
                   ].map((entry, i) => (
                     <div 
                       key={i} 
-                      className="group flex items-start gap-4 p-5 bg-muted/30 border-l-2 border-primary/50 hover:border-primary transition-colors"
+                      className="group flex items-start gap-4 p-5 bg-background border-l-2 border-primary/50 hover:border-primary transition-colors duration-300"
                     >
-                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
                       <div className="flex-1">
                         <span className="text-foreground font-medium text-sm block">{entry.outcome}</span>
                         <p className="text-muted-foreground text-xs mt-1">{entry.metric}</p>
@@ -179,47 +222,46 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Nova AI Section - Clean Style */}
-          <section ref={nova.ref} className={`py-32 md:py-40 lg:py-48 px-6 md:px-12 lg:px-20 xl:px-32 bg-muted/30 transition-all duration-1000 ${nova.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="max-w-6xl mx-auto">
+          {/* Nova AI Section */}
+          <section ref={nova.ref} className={`py-32 md:py-40 lg:py-48 px-6 md:px-12 lg:px-20 bg-background transition-all duration-1000 ${nova.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="max-w-[1400px] mx-auto">
               <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
                 <div className="space-y-8">
                   <div className="space-y-6">
-                    <p className="text-primary/60 text-xs tracking-[0.3em] uppercase font-medium">AI Engine</p>
+                    <p className="text-primary text-xs tracking-[0.3em] uppercase font-medium">AI Engine</p>
                     <h2 className="text-4xl md:text-5xl font-medium text-foreground leading-[1.1] tracking-tight">
-                      Nova — Cognitive Performance Forecasting Engine
+                      Nova — Cognitive Performance Forecasting
                     </h2>
-                    <p className="text-lg text-muted-foreground leading-relaxed">
+                    <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
                       Nova is our multi-model AI engine for predictive cognitive modelling. It forecasts performance states, detects risk patterns, and delivers real-time analytics.
                     </p>
                   </div>
                   
-                  <div className="space-y-3">
+                  <div className="grid grid-cols-2 gap-4 py-4">
                     {[
-                      "Personalised AI coaching",
+                      "Personalised coaching",
                       "Adaptive recommendations",
-                      "Real-time behavioural insights",
-                      "Wearable integration",
-                      "Protocol optimisation"
+                      "Behavioural insights",
+                      "Wearable integration"
                     ].map((item, i) => (
                       <div key={i} className="flex items-center gap-3 text-sm text-muted-foreground">
-                        <div className="w-1 h-1 bg-primary rounded-full" />
+                        <div className="w-1.5 h-1.5 bg-primary rounded-full" />
                         <span>{item}</span>
                       </div>
                     ))}
                   </div>
                   
                   <Link to="/nova/overview">
-                    <Button size="lg" className="mt-4">
+                    <Button size="lg" className="h-14 px-8 rounded-none bg-foreground text-background hover:bg-foreground/90 group">
                       Explore Nova
-                      <ArrowRight className="ml-2 w-4 h-4" />
+                      <ArrowRight className="ml-3 w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </Button>
                   </Link>
                 </div>
 
                 {/* Nova Preview Card */}
                 <div className="relative">
-                  <div className="bg-background border border-border p-8 space-y-6">
+                  <div className="border border-border p-8 space-y-6 card-hover">
                     <div className="flex items-center justify-between pb-4 border-b border-border">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 bg-primary/10 flex items-center justify-center">
@@ -240,7 +282,7 @@ const Index = () => {
                       {["Today", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, i) => (
                         <div 
                           key={i} 
-                          className={`p-3 text-center ${i === 0 ? 'bg-primary/10 border border-primary/30' : 'bg-muted/50'}`}
+                          className={`p-3 text-center transition-all duration-300 ${i === 0 ? 'bg-primary/10 border border-primary/30' : 'bg-muted/50 hover:bg-muted'}`}
                         >
                           <p className="text-[10px] text-muted-foreground uppercase mb-2">{day}</p>
                           <div className={`w-2 h-2 mx-auto rounded-full mb-2 ${i <= 1 || i >= 5 ? 'bg-primary' : i === 3 ? 'bg-destructive' : 'bg-yellow-500'}`} />
@@ -256,8 +298,8 @@ const Index = () => {
                         { value: "85%", label: "Recovery" }
                       ].map((metric, i) => (
                         <div key={i} className="bg-muted/50 p-4 text-center">
-                          <p className="text-foreground text-lg font-medium">{metric.value}</p>
-                          <p className="text-muted-foreground text-[10px] uppercase tracking-wider">{metric.label}</p>
+                          <p className="text-foreground text-2xl font-light">{metric.value}</p>
+                          <p className="text-muted-foreground text-[10px] uppercase tracking-wider mt-1">{metric.label}</p>
                         </div>
                       ))}
                     </div>
@@ -267,11 +309,14 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Hardware Section - Clean Style */}
-          <section ref={device.ref} className={`py-32 md:py-40 lg:py-48 px-6 md:px-12 lg:px-20 xl:px-32 bg-background transition-all duration-1000 ${device.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="max-w-6xl mx-auto">
+          {/* Section Divider */}
+          <div className="section-divider mx-6 md:mx-12 lg:mx-20" />
+
+          {/* Hardware Section */}
+          <section ref={device.ref} className={`py-32 md:py-40 lg:py-48 px-6 md:px-12 lg:px-20 bg-background transition-all duration-1000 ${device.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="max-w-[1400px] mx-auto">
               <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-                <div className="order-last lg:order-first">
+                <div className="order-last lg:order-first img-scale">
                   <img 
                     src={redlightDevice} 
                     alt="NeuroState Red Light Therapy Device" 
@@ -281,11 +326,11 @@ const Index = () => {
 
                 <div className="space-y-8">
                   <div className="space-y-6">
-                    <p className="text-primary/60 text-xs tracking-[0.3em] uppercase font-medium">Neuromodulation</p>
+                    <p className="text-primary text-xs tracking-[0.3em] uppercase font-medium">Neuromodulation</p>
                     <h2 className="text-4xl md:text-5xl font-medium text-foreground leading-[1.1] tracking-tight">
                       Red Light Therapy for Cognitive Performance
                     </h2>
-                    <p className="text-lg text-muted-foreground leading-relaxed">
+                    <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
                       Engineered to deliver photobiomodulation. Enhance focus, accelerate recovery, and improve mental clarity.
                     </p>
                   </div>
@@ -293,21 +338,21 @@ const Index = () => {
                   <div className="space-y-3">
                     {[
                       "660nm and 850nm wavelengths",
-                      "Alpha state for recovery and creativity",
-                      "Beta state for focus optimisation",
-                      "Clinically validated protocols"
+                      "Alpha state for recovery",
+                      "Beta state for focus",
+                      "Clinical protocols"
                     ].map((item, i) => (
                       <div key={i} className="flex items-center gap-3 text-sm text-muted-foreground">
-                        <div className="w-1 h-1 bg-primary rounded-full" />
+                        <div className="w-1.5 h-1.5 bg-primary rounded-full" />
                         <span>{item}</span>
                       </div>
                     ))}
                   </div>
                   
                   <Link to="/category/devices">
-                    <Button size="lg" className="mt-4">
+                    <Button size="lg" className="h-14 px-8 rounded-none bg-foreground text-background hover:bg-foreground/90 group">
                       View devices
-                      <ArrowRight className="ml-2 w-4 h-4" />
+                      <ArrowRight className="ml-3 w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </Button>
                   </Link>
                 </div>
@@ -315,47 +360,47 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Supplements Section - Clean Style */}
-          <section ref={supplements.ref} className={`py-32 md:py-40 lg:py-48 px-6 md:px-12 lg:px-20 xl:px-32 bg-muted/30 transition-all duration-1000 ${supplements.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="max-w-6xl mx-auto">
+          {/* Supplements Section */}
+          <section ref={supplements.ref} className={`py-32 md:py-40 lg:py-48 px-6 md:px-12 lg:px-20 bg-muted/30 grain-texture transition-all duration-1000 ${supplements.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="max-w-[1400px] mx-auto relative z-10">
               <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
                 <div className="space-y-8">
                   <div className="space-y-6">
-                    <p className="text-primary/60 text-xs tracking-[0.3em] uppercase font-medium">Execution Layer</p>
+                    <p className="text-primary text-xs tracking-[0.3em] uppercase font-medium">Execution Layer</p>
                     <h2 className="text-4xl md:text-5xl font-medium text-foreground leading-[1.1] tracking-tight">
                       Precision Supplements for Focus and Recovery
                     </h2>
-                    <p className="text-lg text-muted-foreground leading-relaxed">
+                    <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
                       Every ingredient at the dose that works. No proprietary blends. Research-backed formulas designed for cognitive optimisation.
                     </p>
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-2 gap-4">
                     {[
                       { title: "Focus optimisation", desc: "Targeted enhancement" },
                       { title: "Clinical dosing", desc: "Evidence-based" },
-                      { title: "High performers", desc: "Built for pressure" },
-                      { title: "Nova integration", desc: "AI-personalised" }
+                      { title: "Clean formulas", desc: "No fillers" },
+                      { title: "Bioavailable", desc: "Maximum absorption" }
                     ].map((item, i) => (
-                      <div key={i} className="p-4 bg-background border border-border">
-                        <p className="text-foreground font-medium text-sm">{item.title}</p>
+                      <div key={i} className="p-4 border border-border/50 bg-background">
+                        <p className="text-foreground text-sm font-medium">{item.title}</p>
                         <p className="text-muted-foreground text-xs mt-1">{item.desc}</p>
                       </div>
                     ))}
                   </div>
                   
                   <Link to="/category/supplements">
-                    <Button size="lg" className="mt-4">
-                      Browse supplements
-                      <ArrowRight className="ml-2 w-4 h-4" />
+                    <Button size="lg" className="h-14 px-8 rounded-none bg-foreground text-background hover:bg-foreground/90 group">
+                      Shop supplements
+                      <ArrowRight className="ml-3 w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </Button>
                   </Link>
                 </div>
 
-                <div>
+                <div className="img-scale">
                   <img 
                     src={heroSupplement} 
-                    alt="NeuroState Performance Supplements" 
+                    alt="NeuroState Precision Supplements" 
                     className="w-full h-auto"
                   />
                 </div>
@@ -363,54 +408,51 @@ const Index = () => {
             </div>
           </section>
 
-          {/* For Teams - Clean Style */}
-          <section ref={business.ref} className={`py-32 md:py-40 lg:py-48 px-6 md:px-12 lg:px-20 xl:px-32 bg-background transition-all duration-1000 ${business.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+          {/* Enterprise Section */}
+          <section ref={business.ref} className={`py-32 md:py-40 lg:py-48 px-6 md:px-12 lg:px-20 bg-foreground text-background transition-all duration-1000 ${business.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="max-w-[1400px] mx-auto">
+              <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
                 <div className="space-y-8">
-                  <div className="space-y-6">
-                    <p className="text-primary/60 text-xs tracking-[0.3em] uppercase font-medium">Enterprise</p>
-                    <h2 className="text-4xl md:text-5xl font-medium text-foreground leading-[1.1] tracking-tight">
-                      Corporate Performance Platform
-                    </h2>
-                    <p className="text-lg text-muted-foreground leading-relaxed">
-                      Deploy our cognitive performance system across your organisation. Measure real outcomes.
-                    </p>
-                  </div>
+                  <p className="text-primary text-xs tracking-[0.3em] uppercase font-medium">Enterprise</p>
+                  <h2 className="text-4xl md:text-5xl font-medium leading-[1.1] tracking-tight">
+                    Deploy cognitive infrastructure at scale
+                  </h2>
+                  <p className="text-lg text-background/70 leading-relaxed max-w-lg">
+                    From elite sports to Fortune 500 teams. Our platform scales cognitive performance across your entire organisation.
+                  </p>
                   
-                  <div className="grid grid-cols-2 gap-4">
-                    {[
-                      { stat: "47%", label: "Focus increase" },
-                      { stat: "63%", label: "Burnout reduction" },
-                      { stat: "31%", label: "Productivity gain" },
-                      { stat: "89%", label: "Satisfaction rate" }
-                    ].map((item, i) => (
-                      <div key={i} className="p-6 bg-muted/30 border border-border">
-                        <p className="text-3xl md:text-4xl font-medium text-primary tracking-tight">{item.stat}</p>
-                        <p className="text-muted-foreground text-xs mt-2 uppercase tracking-wider">{item.label}</p>
-                      </div>
-                    ))}
+                  <div className="flex flex-wrap gap-4 pt-4">
+                    <Link to="/enterprise">
+                      <Button 
+                        size="lg" 
+                        className="h-14 px-8 rounded-none bg-background text-foreground hover:bg-background/90 group"
+                      >
+                        Learn more
+                        <ArrowRight className="ml-3 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      </Button>
+                    </Link>
+                    <Link to="/contact">
+                      <Button 
+                        size="lg" 
+                        variant="ghost"
+                        className="h-14 px-8 rounded-none text-background hover:text-primary hover:bg-transparent"
+                      >
+                        Contact sales
+                      </Button>
+                    </Link>
                   </div>
-                  
-                  <Link to="/enterprise/overview">
-                    <Button size="lg" className="mt-4">
-                      For teams
-                      <ArrowRight className="ml-2 w-4 h-4" />
-                    </Button>
-                  </Link>
                 </div>
 
-                <div className="space-y-3">
-                  <p className="text-xs text-muted-foreground uppercase tracking-[0.2em] mb-6 font-medium">What's included</p>
+                <div className="grid grid-cols-2 gap-6">
                   {[
-                    { title: "Nova AI for teams", desc: "Personalised AI coaching for every employee" },
-                    { title: "Monthly supplement delivery", desc: "Research-backed formulas delivered to your office" },
-                    { title: "Real-time analytics", desc: "Track cognitive performance across departments" },
-                    { title: "Dedicated support", desc: "Enterprise account management and onboarding" }
-                  ].map((item, i) => (
-                    <div key={i} className="p-5 bg-muted/30 border-l-2 border-primary/30 hover:border-primary transition-colors">
-                      <p className="text-foreground font-medium text-sm">{item.title}</p>
-                      <p className="text-muted-foreground text-xs mt-1">{item.desc}</p>
+                    { value: "500+", label: "Enterprise clients" },
+                    { value: "50K+", label: "Active users" },
+                    { value: "12", label: "Countries" },
+                    { value: "99.9%", label: "Uptime SLA" }
+                  ].map((stat, i) => (
+                    <div key={i} className="text-center p-8 border border-background/20">
+                      <p className="text-4xl md:text-5xl font-light mb-2">{stat.value}</p>
+                      <p className="text-sm text-background/60">{stat.label}</p>
                     </div>
                   ))}
                 </div>
@@ -418,50 +460,32 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Explore Links - Clean Style */}
-          <section className="py-24 px-6 md:px-12 lg:px-20 xl:px-32 bg-muted/30 border-y border-border">
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <p className="text-primary/60 text-xs tracking-[0.3em] uppercase font-medium mb-4">Explore</p>
-                <h3 className="text-2xl md:text-3xl font-medium text-foreground tracking-tight">Discover the full platform</h3>
-              </div>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
-                {[
-                  { title: "Nova AI", href: "/nova/overview", desc: "AI performance assistant" },
-                  { title: "For Teams", href: "/enterprise/overview", desc: "Corporate solutions" },
-                  { title: "Supplements", href: "/category/supplements", desc: "Performance nutrition" },
-                  { title: "Red Light", href: "/category/devices", desc: "Neuromodulation" },
-                  { title: "About Us", href: "/about", desc: "Our mission" }
-                ].map((link, i) => (
-                  <Link key={i} to={link.href} className="group p-5 bg-background border border-border hover:border-primary/30 transition-all duration-300">
-                    <p className="text-sm font-medium text-foreground">{link.title}</p>
-                    <p className="text-xs text-muted-foreground mt-1">{link.desc}</p>
-                    <ArrowRight className="w-4 h-4 text-primary mt-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* Final CTA - Clean Style */}
-          <section ref={cta.ref} className={`py-32 md:py-40 lg:py-48 px-6 md:px-12 lg:px-20 xl:px-32 bg-background transition-all duration-1000 ${cta.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="max-w-3xl mx-auto text-center space-y-8">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-foreground leading-[1.1] tracking-tight">
-                Ready to optimise your cognitive performance?
+          {/* Final CTA */}
+          <section ref={cta.ref} className={`py-32 md:py-40 lg:py-48 px-6 md:px-12 lg:px-20 bg-background transition-all duration-1000 ${cta.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="max-w-[800px] mx-auto text-center space-y-10">
+              <h2 className="text-4xl md:text-5xl lg:text-[3.5rem] font-medium text-foreground leading-[1.1] tracking-tight">
+                Ready to optimise cognitive performance?
               </h2>
-              <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-                Start with Nova AI. Experience the future of cognitive performance prediction.
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-lg mx-auto">
+                Join the organisations using Neurostate to predict, measure, and enhance cognitive output.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                <Link to="/nova/chat">
-                  <Button size="lg" className="min-w-[180px]">
-                    Chat with Nova
-                    <ArrowRight className="ml-2 w-4 h-4" />
+              <div className="flex flex-wrap justify-center gap-4 pt-4">
+                <Link to="/contact">
+                  <Button 
+                    size="lg" 
+                    className="h-14 px-10 rounded-none bg-foreground text-background hover:bg-foreground/90 group"
+                  >
+                    Get started
+                    <ArrowRight className="ml-3 w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </Link>
-                <Link to="/shop">
-                  <Button variant="outline" size="lg" className="min-w-[180px]">
-                    Browse products
+                <Link to="/nova/overview">
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    className="h-14 px-10 rounded-none border-border text-foreground hover:bg-muted"
+                  >
+                    Explore Nova
                   </Button>
                 </Link>
               </div>
