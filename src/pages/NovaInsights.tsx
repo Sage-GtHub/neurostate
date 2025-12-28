@@ -2,11 +2,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { supabase } from "@/integrations/supabase/client";
-import { TrendingUp, Activity, Brain, Target, Loader2, AlertCircle, Watch, RefreshCw } from "lucide-react";
+import { TrendingUp, Activity, Brain, Target, Loader2, Watch, ArrowUpRight } from "lucide-react";
 import { SEO } from "@/components/SEO";
 
 export default function NovaInsights() {
@@ -102,7 +101,11 @@ export default function NovaInsights() {
         <div className="min-h-screen bg-background">
           <NovaNav />
           <div className="flex items-center justify-center h-[60vh]">
-            <Loader2 className="w-8 h-8 animate-spin text-accent" />
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-10 h-10 rounded-full bg-foreground/5 flex items-center justify-center">
+                <Loader2 className="w-5 h-5 animate-spin text-foreground/40" />
+              </div>
+            </div>
           </div>
         </div>
       </NovaSwipeWrapper>
@@ -115,18 +118,35 @@ export default function NovaInsights() {
         <SEO title="Insights | Nova AI" description="Performance analytics and insights." />
         <div className="min-h-screen bg-background">
           <NovaNav />
-          <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12">
-            <div className="max-w-lg mx-auto text-center">
-              <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-6">
-                <Watch className="w-8 h-8 text-muted-foreground" />
+          
+          {/* Floating orbs */}
+          <div className="fixed inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-1/4 right-1/3 w-[500px] h-[500px] rounded-full bg-accent/5 blur-3xl animate-float" />
+          </div>
+          
+          <div className="relative px-6 md:px-12 lg:px-20 xl:px-32 py-16">
+            <div className="max-w-md mx-auto text-center">
+              <div className="w-14 h-14 rounded-full bg-foreground/5 flex items-center justify-center mx-auto mb-6">
+                <Watch className="w-6 h-6 text-foreground/40" />
               </div>
-              <h2 className="text-xl font-semibold text-foreground mb-3">No biometric data yet</h2>
-              <p className="text-muted-foreground mb-8">
+              <h2 className="text-xl font-medium text-foreground mb-3">No biometric data yet</h2>
+              <p className="text-foreground/50 text-sm mb-10">
                 Connect a wearable device and sync your data to see performance analytics.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Button onClick={() => navigate('/nova/devices')}>Connect Device</Button>
-                <Button variant="outline" onClick={loadChartData}>Refresh</Button>
+                <Button 
+                  onClick={() => navigate('/nova/devices')}
+                  className="h-11 px-8 rounded-full bg-foreground text-background hover:bg-foreground/90 text-xs"
+                >
+                  Connect Device
+                </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={loadChartData}
+                  className="h-11 px-8 rounded-full border-foreground/10 text-xs"
+                >
+                  Refresh
+                </Button>
               </div>
             </div>
           </div>
@@ -141,106 +161,132 @@ export default function NovaInsights() {
       <div className="min-h-screen bg-background">
         <NovaNav />
         
-        <div className="border-b border-border">
-          <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8">
-            <h1 className="text-2xl sm:text-3xl font-semibold text-foreground mb-2">Performance Analytics</h1>
-            <p className="text-sm text-muted-foreground">Visualise your biometric trends and patterns</p>
+        {/* Floating orbs */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 right-1/4 w-[600px] h-[600px] rounded-full bg-accent/5 blur-3xl animate-float" />
+          <div className="absolute bottom-40 left-1/4 w-[400px] h-[400px] rounded-full bg-primary/5 blur-3xl animate-float" style={{ animationDelay: '3s' }} />
+        </div>
+        
+        {/* Header */}
+        <div className="relative border-b border-foreground/5">
+          <div className="px-6 md:px-12 lg:px-20 xl:px-32 py-12">
+            <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 mb-2">Analytics</p>
+            <h1 className="text-2xl font-medium text-foreground mb-2">Performance Analytics</h1>
+            <p className="text-sm text-foreground/50">Visualise your biometric trends and patterns</p>
           </div>
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8 sm:py-12">
+        <div className="relative px-6 md:px-12 lg:px-20 xl:px-32 py-12">
           {/* Summary Cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
             {[
               { label: "Average HRV", value: summaryMetrics.hrv.value, trend: summaryMetrics.hrv.trend, icon: Activity },
               { label: "Sleep Score", value: summaryMetrics.sleep.value, trend: summaryMetrics.sleep.trend, icon: Brain },
               { label: "Focus Time", value: summaryMetrics.focus.value, trend: summaryMetrics.focus.trend, icon: Target },
               { label: "Recovery", value: summaryMetrics.recovery.value, trend: summaryMetrics.recovery.trend, icon: TrendingUp }
             ].map((metric, index) => (
-              <Card key={index} className="border-border">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <metric.icon className="w-4 h-4 text-accent" />
-                    <span className="text-xs text-muted-foreground uppercase tracking-wider">{metric.label}</span>
-                  </div>
-                  <div className="text-2xl font-semibold text-foreground mb-1">{metric.value}</div>
-                  <div className="text-xs text-accent">{metric.trend}</div>
-                </CardContent>
-              </Card>
+              <div key={index} className="p-6 bg-white rounded-3xl border border-foreground/5 hover:border-foreground/10 transition-all">
+                <div className="flex items-center gap-2 mb-4">
+                  <metric.icon className="w-3.5 h-3.5 text-foreground/40" />
+                  <span className="text-[10px] uppercase tracking-[0.15em] text-foreground/40">{metric.label}</span>
+                </div>
+                <div className="text-2xl font-medium text-foreground mb-1">{metric.value}</div>
+                <div className="text-[10px] text-accent">{metric.trend}</div>
+              </div>
             ))}
           </div>
 
           {/* Charts */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="border-border">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-medium text-foreground mb-6">HRV Trend</h3>
-                <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={hrvData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                      <XAxis dataKey="date" stroke="hsl(var(--muted-foreground))" style={{ fontSize: '12px' }} />
-                      <YAxis stroke="hsl(var(--muted-foreground))" style={{ fontSize: '12px' }} />
-                      <Tooltip />
-                      <Line type="monotone" dataKey="value" stroke="hsl(var(--accent))" strokeWidth={2} dot={{ fill: 'hsl(var(--accent))', r: 4 }} />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="p-6 bg-white rounded-3xl border border-foreground/5">
+              <h3 className="text-sm font-medium text-foreground mb-6">HRV Trend</h3>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={hrvData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--foreground) / 0.05)" />
+                    <XAxis dataKey="date" stroke="hsl(var(--foreground) / 0.3)" style={{ fontSize: '10px' }} />
+                    <YAxis stroke="hsl(var(--foreground) / 0.3)" style={{ fontSize: '10px' }} />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: 'white', 
+                        border: '1px solid hsl(var(--foreground) / 0.1)',
+                        borderRadius: '12px',
+                        fontSize: '11px'
+                      }} 
+                    />
+                    <Line type="monotone" dataKey="value" stroke="hsl(var(--foreground))" strokeWidth={2} dot={{ fill: 'hsl(var(--foreground))', r: 3 }} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
 
-            <Card className="border-border">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-medium text-foreground mb-6">Sleep Stages</h3>
-                <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={sleepData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                      <XAxis dataKey="day" stroke="hsl(var(--muted-foreground))" style={{ fontSize: '12px' }} />
-                      <YAxis stroke="hsl(var(--muted-foreground))" style={{ fontSize: '12px' }} />
-                      <Tooltip />
-                      <Bar dataKey="Deep" stackId="a" fill="hsl(var(--foreground))" />
-                      <Bar dataKey="REM" stackId="a" fill="hsl(var(--accent))" />
-                      <Bar dataKey="Light" stackId="a" fill="hsl(var(--muted-foreground))" />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="p-6 bg-white rounded-3xl border border-foreground/5">
+              <h3 className="text-sm font-medium text-foreground mb-6">Sleep Stages</h3>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={sleepData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--foreground) / 0.05)" />
+                    <XAxis dataKey="day" stroke="hsl(var(--foreground) / 0.3)" style={{ fontSize: '10px' }} />
+                    <YAxis stroke="hsl(var(--foreground) / 0.3)" style={{ fontSize: '10px' }} />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: 'white', 
+                        border: '1px solid hsl(var(--foreground) / 0.1)',
+                        borderRadius: '12px',
+                        fontSize: '11px'
+                      }} 
+                    />
+                    <Bar dataKey="Deep" stackId="a" fill="hsl(var(--foreground))" radius={[0, 0, 0, 0]} />
+                    <Bar dataKey="REM" stackId="a" fill="hsl(var(--foreground) / 0.6)" />
+                    <Bar dataKey="Light" stackId="a" fill="hsl(var(--foreground) / 0.3)" radius={[4, 4, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
 
-            <Card className="border-border">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-medium text-foreground mb-6">Energy Curve</h3>
-                <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={energyData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                      <XAxis dataKey="hour" stroke="hsl(var(--muted-foreground))" style={{ fontSize: '10px' }} interval={3} />
-                      <YAxis stroke="hsl(var(--muted-foreground))" style={{ fontSize: '12px' }} />
-                      <Tooltip />
-                      <Area type="monotone" dataKey="energy" stroke="hsl(var(--accent))" fill="hsl(var(--accent))" fillOpacity={0.2} />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="p-6 bg-white rounded-3xl border border-foreground/5">
+              <h3 className="text-sm font-medium text-foreground mb-6">Energy Curve</h3>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={energyData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--foreground) / 0.05)" />
+                    <XAxis dataKey="hour" stroke="hsl(var(--foreground) / 0.3)" style={{ fontSize: '9px' }} interval={3} />
+                    <YAxis stroke="hsl(var(--foreground) / 0.3)" style={{ fontSize: '10px' }} />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: 'white', 
+                        border: '1px solid hsl(var(--foreground) / 0.1)',
+                        borderRadius: '12px',
+                        fontSize: '11px'
+                      }} 
+                    />
+                    <Area type="monotone" dataKey="energy" stroke="hsl(var(--foreground))" fill="hsl(var(--foreground) / 0.1)" />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
 
-            <Card className="border-border">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-medium text-foreground mb-6">Recovery Score</h3>
-                <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={recoveryData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                      <XAxis dataKey="day" stroke="hsl(var(--muted-foreground))" style={{ fontSize: '12px' }} />
-                      <YAxis stroke="hsl(var(--muted-foreground))" style={{ fontSize: '12px' }} domain={[0, 100]} />
-                      <Tooltip />
-                      <Line type="monotone" dataKey="recovery" stroke="hsl(142, 76%, 36%)" strokeWidth={2} dot={{ fill: 'hsl(142, 76%, 36%)', r: 4 }} />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="p-6 bg-white rounded-3xl border border-foreground/5">
+              <h3 className="text-sm font-medium text-foreground mb-6">Recovery Score</h3>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={recoveryData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--foreground) / 0.05)" />
+                    <XAxis dataKey="day" stroke="hsl(var(--foreground) / 0.3)" style={{ fontSize: '10px' }} />
+                    <YAxis stroke="hsl(var(--foreground) / 0.3)" style={{ fontSize: '10px' }} domain={[0, 100]} />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: 'white', 
+                        border: '1px solid hsl(var(--foreground) / 0.1)',
+                        borderRadius: '12px',
+                        fontSize: '11px'
+                      }} 
+                    />
+                    <Line type="monotone" dataKey="recovery" stroke="hsl(142, 76%, 36%)" strokeWidth={2} dot={{ fill: 'hsl(142, 76%, 36%)', r: 3 }} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -21,7 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { AnnouncementBar } from "./AnnouncementBar";
-import { MobileBottomNav } from "./MobileBottomNav";
+
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser, Session } from "@supabase/supabase-js";
@@ -352,8 +352,6 @@ export const Header = () => {
           </div>
         </div>
       </header>
-      
-      <MobileBottomNav />
     </>
   );
 };
