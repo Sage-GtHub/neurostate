@@ -89,13 +89,14 @@ export const Header = () => {
   };
 
   const industries = [
-    { label: "Corporate Wellness", href: "/enterprise/corporate/overview", desc: "Enterprise cognitive programmes" },
-    { label: "Sports Organisations", href: "/enterprise/sports/overview", desc: "Athletic performance systems" },
-    { label: "Health Clubs", href: "/enterprise/health-clubs/overview", desc: "Facility integration" },
+    { label: "Corporate Wellness", href: "/enterprise/corporate/overview", desc: "Employee wellbeing programmes" },
+    { label: "Sports & Athletics", href: "/enterprise/sports/overview", desc: "Athletic performance systems" },
+    { label: "Health Clubs & Gyms", href: "/enterprise/health-clubs/overview", desc: "Facility member solutions" },
+    { label: "Healthcare & Clinical", href: "/enterprise/overview", desc: "Patient recovery protocols" },
+    { label: "Hospitality & Spas", href: "/enterprise/overview", desc: "Guest wellness experiences" },
   ];
 
   const mobileLinks = [
-    { label: "Shop", href: "#", comingSoon: true },
     { label: "Nova AI", href: "/nova/overview" },
     { label: "For Teams", href: "/enterprise/overview" },
     { label: "About", href: "/about" },
@@ -130,7 +131,7 @@ export const Header = () => {
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="bg-transparent text-foreground/60 hover:text-foreground hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground text-xs font-normal h-9 px-3 rounded-full transition-all duration-300">
-                    Businesses
+                    Industries
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <div className="w-[340px] p-4 bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl">
@@ -162,18 +163,6 @@ export const Header = () => {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                toast.info("Coming Soon", {
-                  description: "Our shop is launching soon. Stay tuned!",
-                });
-              }}
-              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
-            >
-              Shop
-            </button>
 
             <Link
               to="/nova/overview"
@@ -301,33 +290,18 @@ export const Header = () => {
                 
                 <nav className="p-5 space-y-1">
                   {mobileLinks.map((link) => (
-                    link.comingSoon ? (
-                      <button
-                        key={link.label}
-                        className="block py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors w-full text-left"
-                        onClick={() => {
-                          toast.info("Coming Soon", {
-                            description: "Our shop is launching soon. Stay tuned!",
-                          });
-                          setMobileMenuOpen(false);
-                        }}
-                      >
-                        {link.label}
-                      </button>
-                    ) : (
-                      <Link
-                        key={link.label}
-                        to={link.href}
-                        className="block py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {link.label}
-                      </Link>
-                    )
+                    <Link
+                      key={link.label}
+                      to={link.href}
+                      className="block py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
                   ))}
                   
                   <div className="pt-5 border-t border-border mt-5">
-                    <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-3">Businesses</p>
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-3">Industries</p>
                     {industries.map((item) => (
                       <Link
                         key={item.label}
