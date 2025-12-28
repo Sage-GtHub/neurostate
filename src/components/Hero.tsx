@@ -197,7 +197,7 @@ const Hero = () => {
               
               {/* Subheadline */}
               <motion.p 
-                className="text-sm text-muted-foreground max-w-md leading-relaxed"
+                className="text-xs md:text-sm text-muted-foreground max-w-sm leading-relaxed"
                 variants={itemVariants}
               >
                 We've built the AI infrastructure for cognitive performance and deploy it at enterprise scale, from startups to the Fortune 500.
