@@ -3,36 +3,36 @@ import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
-import { ArrowRight, ArrowUpRight, Check, Cpu, Brain, Shield, Code, Zap, GitBranch } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Cpu, Brain, Shield, Users, Zap, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const InformationTechnologyOverview = () => {
   const stats = [
-    { value: "47%", label: "Reduced burnout", desc: "across engineering teams" },
-    { value: "31%", label: "Fewer incidents", desc: "production error reduction" },
+    { value: "47%", label: "Reduced burnout", desc: "across all departments" },
+    { value: "31%", label: "Productivity gain", desc: "company-wide improvement" },
     { value: "2.4x", label: "ROI", desc: "within first year" },
     { value: "89%", label: "Team retention", desc: "annual retention rate" }
   ];
 
   const solutions = [
     { 
-      title: "Developer Wellness Monitoring", 
-      desc: "Real-time tracking of cognitive load and burnout risk during sprints, on-call rotations, and deadline-intensive periods.",
-      detail: "Seamless integration with Slack, GitHub, and developer workflows.",
+      title: "Team Wellness Monitoring", 
+      desc: "Real-time tracking of cognitive load and burnout risk across all departments—from sales sprints to project deadlines.",
+      detail: "Seamless integration with Slack, Microsoft Teams, and workplace tools.",
       num: "01",
       icon: Brain
     },
     { 
       title: "Deep Work Optimisation", 
-      desc: "AI-predicted optimal time windows for complex coding, architecture decisions, and focused problem-solving.",
+      desc: "AI-predicted optimal time windows for complex work, strategic planning, and focused problem-solving.",
       detail: "Personalised to individual work patterns and meeting schedules.",
       num: "02",
-      icon: Code
+      icon: Target
     },
     { 
-      title: "On-Call Recovery Protocols", 
-      desc: "Automated recovery support for engineers handling incident response and high-stress production issues.",
+      title: "High-Pressure Recovery", 
+      desc: "Automated recovery support for teams handling demanding projects, client deadlines, and high-stress periods.",
       detail: "Evidence-based techniques from elite performance psychology.",
       num: "03",
       icon: Shield
@@ -40,24 +40,24 @@ const InformationTechnologyOverview = () => {
   ];
 
   const benefits = [
-    { title: "Sustainable velocity", desc: "Maintain sprint performance without burnout" },
-    { title: "Higher code quality", desc: "Fewer bugs when developers are well-rested" },
-    { title: "Reduced turnover", desc: "Retain top engineering talent long-term" },
-    { title: "Better decisions", desc: "Clearer thinking for architecture choices" }
+    { title: "Sustainable performance", desc: "Maintain high output without burnout" },
+    { title: "Higher quality work", desc: "Fewer errors when teams are well-rested" },
+    { title: "Reduced turnover", desc: "Retain top talent across all departments" },
+    { title: "Better decisions", desc: "Clearer thinking for strategic choices" }
   ];
 
   const useCases = [
-    { title: "Tech Companies", desc: "Engineering and product teams" },
-    { title: "Startups", desc: "Fast-moving development teams" },
-    { title: "Enterprise IT", desc: "Platform and infrastructure teams" },
-    { title: "Agencies", desc: "Client delivery and project teams" }
+    { title: "Tech Companies", desc: "All teams from engineering to sales" },
+    { title: "Startups", desc: "Fast-moving cross-functional teams" },
+    { title: "Enterprise IT", desc: "Platform, support, and operations teams" },
+    { title: "Agencies", desc: "Client delivery and creative teams" }
   ];
 
   return (
     <>
       <SEO 
         title="Information Technology Solutions | Neurostate"
-        description="AI-powered cognitive performance for engineering teams. Reduce burnout, improve code quality, and retain top developer talent."
+        description="AI-powered cognitive performance for technology companies. Reduce burnout, improve productivity, and retain top talent across all teams."
       />
       <div className="min-h-screen bg-background">
         <Header />
@@ -95,12 +95,12 @@ const InformationTechnologyOverview = () => {
                   </div>
 
                   <h1 className="text-2xl md:text-3xl lg:text-4xl font-normal text-foreground tracking-tight">
-                    Ship faster.{" "}
+                    Perform better.{" "}
                     <span className="text-primary">Burn out less.</span>
                   </h1>
                   
                   <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                    Elite cognitive performance for engineering teams. Predict burnout, optimise deep work windows, and maintain sustainable velocity when deadlines are critical.
+                    Elite cognitive performance for technology teams. Predict burnout, optimise focus windows, and maintain sustainable output when deadlines are critical.
                   </p>
 
                   <div className="flex flex-wrap items-center gap-3 pt-2">
@@ -108,7 +108,7 @@ const InformationTechnologyOverview = () => {
                       <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
                         <Button className="h-10 px-5 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
                           <span className="flex items-center">
-                            Request engineering demo
+                            Request team demo
                             <ArrowUpRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                           </span>
                         </Button>
@@ -139,13 +139,13 @@ const InformationTechnologyOverview = () => {
                           <Cpu className="w-5 h-5 text-primary" />
                         </div>
                         <div>
-                          <p className="text-foreground font-medium text-sm">Engineering Team</p>
+                          <p className="text-foreground font-medium text-sm">Team Performance</p>
                           <p className="text-muted-foreground text-[10px]">Real-time wellness monitoring</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-1.5">
                         <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                        <span className="text-[10px] text-muted-foreground">Sprint Active</span>
+                        <span className="text-[10px] text-muted-foreground">Active</span>
                       </div>
                     </div>
                     
@@ -173,7 +173,7 @@ const InformationTechnologyOverview = () => {
                     <div className="pt-4 border-t border-border/50">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Next Deep Work Block</p>
+                          <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Next Focus Block</p>
                           <p className="text-sm font-medium text-foreground mt-1">In 25 minutes</p>
                         </div>
                         <div className="flex items-center gap-2">
@@ -215,14 +215,14 @@ const InformationTechnologyOverview = () => {
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
                 <ScrollReveal className="lg:sticky lg:top-28 space-y-5">
-                  <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Developer Solutions</span>
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Team Solutions</span>
                   <h2 className="text-large-display text-foreground">
                     Sustainable velocity.
                     <br />
-                    <span className="text-muted-foreground">Happy engineers.</span>
+                    <span className="text-muted-foreground">High-performing teams.</span>
                   </h2>
                   <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
-                    Purpose-built for the demands of modern software development. From startups to enterprise, we help your team ship without burning out.
+                    Purpose-built for the demands of modern technology companies. From startups to enterprise, we help your teams perform without burning out.
                   </p>
                 </ScrollReveal>
 
@@ -260,9 +260,9 @@ const InformationTechnologyOverview = () => {
           <section className="py-24 md:py-32 px-6 md:px-8 bg-muted/30">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="text-center mb-16 space-y-4 max-w-2xl mx-auto">
-                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Engineering Benefits</span>
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Team Benefits</span>
                 <h2 className="text-large-display text-foreground">
-                  Build better software.
+                  Better outcomes.
                   <br />
                   <span className="text-muted-foreground">Keep your best people.</span>
                 </h2>
@@ -327,26 +327,19 @@ const InformationTechnologyOverview = () => {
                   Ready to build sustainable teams?
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-lg mx-auto mb-8">
-                  Schedule a demonstration to see how Neurostate can help your engineering team perform at their best without burning out.
+                  Schedule a demonstration to see how Neurostate can help your teams perform at their best without burning out.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3">
                   <Link to="/contact">
-                    <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
-                      <Button className="h-10 px-5 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
-                        <span className="flex items-center">
-                          Schedule demo
-                          <ArrowUpRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                        </span>
-                      </Button>
-                    </motion.div>
+                    <Button className="h-11 px-6 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                      Request team demo
+                      <ArrowUpRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </Button>
                   </Link>
-                  <Link to="/enterprise/information-technology/pricing">
-                    <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
-                      <Button variant="ghost" className="h-10 px-5 text-xs font-medium text-foreground hover:bg-muted rounded-full group">
-                        View pricing
-                        <ArrowRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                      </Button>
-                    </motion.div>
+                  <Link to="/enterprise/overview">
+                    <Button variant="outline" className="h-11 px-6 text-xs font-medium rounded-full">
+                      View all industries
+                    </Button>
                   </Link>
                 </div>
               </ScrollReveal>
