@@ -12,6 +12,7 @@ import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 
 const SupplementStackVisual = lazy(() => import("@/components/visuals/SupplementStackVisual"));
+const RecoveryTechVisual = lazy(() => import("@/components/visuals/RecoveryTechVisual"));
 
 const Index = () => {
 
@@ -297,6 +298,16 @@ const Index = () => {
           <section className="py-24 md:py-32 px-6 md:px-8">
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <ScrollReveal direction="left" className="order-last lg:order-first">
+                  <Suspense fallback={
+                    <div className="w-full aspect-square max-w-sm mx-auto flex items-center justify-center">
+                      <div className="w-12 h-12 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
+                    </div>
+                  }>
+                    <RecoveryTechVisual />
+                  </Suspense>
+                </ScrollReveal>
+
                 <ScrollReveal direction="right">
                   <div className="space-y-6">
                     <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Neuromodulation</span>
