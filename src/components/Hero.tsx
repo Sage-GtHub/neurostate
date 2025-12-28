@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useEffect, useState, useRef, lazy, Suspense } from "react";
+import { useEffect, useState, useRef, lazy, Suspense, useCallback } from "react";
 import { cn } from "@/lib/utils";
+import { motion, useSpring, useTransform } from "framer-motion";
 
 // Lazy load the 3D illustration for better performance
 const IsometricIllustration = lazy(() => import("./hero/IsometricIllustration"));
@@ -12,25 +13,37 @@ const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const heroRef = useRef<HTMLDivElement>(null);
 
+  // Smoother spring physics for parallax
+  const springConfig = { damping: 25, stiffness: 120 };
+  const mouseX = useSpring(0, springConfig);
+  const mouseY = useSpring(0, springConfig);
+  
+  const orbX = useTransform(mouseX, [-1, 1], [-30, 30]);
+  const orbY = useTransform(mouseY, [-1, 1], [-30, 30]);
+  const orbX2 = useTransform(mouseX, [-1, 1], [20, -20]);
+  const orbY2 = useTransform(mouseY, [-1, 1], [20, -20]);
+
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
-  // Smooth parallax effect
+  // Enhanced parallax with spring physics
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (heroRef.current) {
+      const rect = heroRef.current.getBoundingClientRect();
+      const x = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+      const y = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+      mouseX.set(x);
+      mouseY.set(y);
+      setMousePosition({ x: x * 30, y: y * 30 });
+    }
+  }, [mouseX, mouseY]);
+
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (heroRef.current) {
-        const rect = heroRef.current.getBoundingClientRect();
-        const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
-        const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
-        setMousePosition({ x: x * 30, y: y * 30 });
-      }
-    };
-    
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [handleMouseMove]);
 
   const clientNames = ["Microsoft", "Nasdaq", "Cohere", "Headway", "Swiss Gear", "AI21 Labs"];
 
@@ -42,20 +55,39 @@ const Hero = () => {
       {/* Subtle gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/[0.02]" />
       
-      {/* Floating Gradient Orbs */}
-      <div 
-        className="absolute top-20 right-[10%] w-[500px] h-[500px] rounded-full opacity-[0.04] blur-[120px] pointer-events-none"
+      {/* Enhanced Floating Gradient Orbs with Framer Motion */}
+      <motion.div 
+        className="absolute top-20 right-[10%] w-[500px] h-[500px] rounded-full opacity-[0.05] blur-[120px] pointer-events-none"
         style={{
           background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%)',
-          transform: `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.5}px)`
+          x: orbX,
+          y: orbY,
         }}
       />
       
-      <div 
-        className="absolute bottom-40 left-[5%] w-[400px] h-[400px] rounded-full opacity-[0.03] blur-[100px] pointer-events-none"
+      <motion.div 
+        className="absolute bottom-40 left-[5%] w-[400px] h-[400px] rounded-full opacity-[0.04] blur-[100px] pointer-events-none"
         style={{
           background: 'radial-gradient(circle, hsl(280, 70%, 55%) 0%, transparent 70%)',
-          transform: `translate(${-mousePosition.x * 0.3}px, ${-mousePosition.y * 0.3}px)`
+          x: orbX2,
+          y: orbY2,
+        }}
+      />
+      
+      {/* Third floating orb for more depth */}
+      <motion.div 
+        className="absolute top-1/2 left-1/2 w-[600px] h-[600px] rounded-full opacity-[0.02] blur-[150px] pointer-events-none -translate-x-1/2 -translate-y-1/2"
+        animate={{
+          scale: [1, 1.1, 1],
+          opacity: [0.02, 0.04, 0.02],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        style={{
+          background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 60%)',
         }}
       />
 
@@ -65,154 +97,214 @@ const Hero = () => {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left - Text Content */}
             <div className="space-y-8 lg:pr-8">
-              {/* Eyebrow */}
-              <div 
-                className={cn(
-                  "inline-flex items-center gap-2",
-                  "transition-all duration-700",
-                  isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-                )}
+              {/* Eyebrow with animated dot */}
+              <motion.div 
+                className="inline-flex items-center gap-2"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
               >
-                <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
+                <motion.div 
+                  className="w-1.5 h-1.5 bg-primary rounded-full"
+                  animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                />
                 <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
                   Cognitive Infrastructure
                 </span>
-              </div>
+              </motion.div>
 
-              {/* Headline */}
-              <h1 
-                className={cn(
-                  "text-hero-display text-foreground",
-                  "transition-all duration-700 delay-100",
-                  isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-                )}
+              {/* Headline with staggered animation */}
+              <motion.h1 
+                className="text-hero-display text-foreground"
+                initial={{ opacity: 0, y: 30 }}
+                animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
               >
                 Advancing AI models from{" "}
-                <span className="text-primary">prediction</span>{" "}
+                <motion.span 
+                  className="text-primary inline-block"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  prediction
+                </motion.span>{" "}
                 to execution
-              </h1>
+              </motion.h1>
               
               {/* Subheadline */}
-              <p 
-                className={cn(
-                  "text-sm text-muted-foreground max-w-md leading-relaxed",
-                  "transition-all duration-700 delay-200",
-                  isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-                )}
+              <motion.p 
+                className="text-sm text-muted-foreground max-w-md leading-relaxed"
+                initial={{ opacity: 0, y: 30 }}
+                animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
               >
                 We've built the AI infrastructure for cognitive performance and deploy it at enterprise scale, from startups to the Fortune 500.
-              </p>
+              </motion.p>
 
-              {/* CTAs */}
-              <div 
-                className={cn(
-                  "flex flex-wrap items-center gap-3 pt-2",
-                  "transition-all duration-700 delay-300",
-                  isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-                )}
+              {/* CTAs with magnetic hover effect */}
+              <motion.div 
+                className="flex flex-wrap items-center gap-3 pt-2"
+                initial={{ opacity: 0, y: 30 }}
+                animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
               >
                 <Link to="/contact">
-                  <Button 
-                    size="sm"
-                    className="h-10 px-5 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group"
+                  <motion.div
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
-                    Book a demo
-                    <ArrowUpRight className="ml-2 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </Button>
+                    <Button 
+                      size="sm"
+                      className="h-10 px-5 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group magnetic-btn"
+                    >
+                      Book a demo
+                      <ArrowUpRight className="ml-2 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </Button>
+                  </motion.div>
                 </Link>
                 <Link to="/nova/overview">
-                  <Button 
-                    size="sm"
-                    variant="ghost"
-                    className="h-10 px-5 text-xs font-medium text-foreground hover:bg-muted rounded-full group"
+                  <motion.div
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
-                    Explore Nova AI
-                    <ArrowRight className="ml-2 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                  </Button>
+                    <Button 
+                      size="sm"
+                      variant="ghost"
+                      className="h-10 px-5 text-xs font-medium text-foreground hover:bg-muted rounded-full group"
+                    >
+                      Explore Nova AI
+                      <ArrowRight className="ml-2 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                    </Button>
+                  </motion.div>
                 </Link>
-              </div>
+              </motion.div>
             </div>
 
             {/* Right - 3D Isometric Illustration */}
-            <div 
-              className={cn(
-                "relative",
-                "transition-all duration-1000 delay-400",
-                isLoaded ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95"
-              )}
+            <motion.div 
+              className="relative"
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              animate={isLoaded ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{ duration: 1, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
             >
               <div className="relative aspect-square max-w-lg mx-auto">
                 {/* 3D Canvas */}
                 <Suspense fallback={
                   <div className="w-full h-full flex items-center justify-center">
-                    <div className="w-16 h-16 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
+                    <motion.div 
+                      className="w-16 h-16 border-2 border-primary/20 border-t-primary rounded-full"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    />
                   </div>
                 }>
                   <IsometricIllustration />
                 </Suspense>
                 
-                {/* Floating status pill - Clean white */}
-                <div 
-                  className="absolute top-8 right-8 bg-background border border-border/50 px-4 py-2 rounded-full shadow-sm hover:shadow-md transition-shadow duration-300"
+                {/* Floating status pill with enhanced hover */}
+                <motion.div 
+                  className="absolute top-8 right-8 bg-background border border-border/50 px-4 py-2 rounded-full shadow-sm"
                   style={{
-                    transform: `translate(${mousePosition.x * -0.15}px, ${mousePosition.y * -0.15}px)`
+                    x: useTransform(mouseX, [-1, 1], [10, -10]),
+                    y: useTransform(mouseY, [-1, 1], [10, -10]),
                   }}
+                  whileHover={{ 
+                    scale: 1.05, 
+                    boxShadow: "0 8px 24px -4px rgba(0,0,0,0.1)",
+                    borderColor: "hsl(var(--primary) / 0.3)"
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                    <motion.div 
+                      className="w-2 h-2 bg-green-500 rounded-full"
+                      animate={{ scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    />
                     <span className="text-[11px] font-medium text-foreground">System Active</span>
                   </div>
-                </div>
+                </motion.div>
                 
-                {/* Bottom metric pill - Clean white */}
-                <div 
-                  className="absolute bottom-12 left-8 bg-background border border-border/50 px-5 py-3 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300"
+                {/* Bottom metric pill with enhanced interaction */}
+                <motion.div 
+                  className="absolute bottom-12 left-8 bg-background border border-border/50 px-5 py-3 rounded-2xl shadow-sm"
                   style={{
-                    transform: `translate(${mousePosition.x * 0.15}px, ${mousePosition.y * 0.15}px)`
+                    x: useTransform(mouseX, [-1, 1], [-8, 8]),
+                    y: useTransform(mouseY, [-1, 1], [-8, 8]),
                   }}
+                  whileHover={{ 
+                    scale: 1.05, 
+                    boxShadow: "0 12px 32px -4px rgba(0,0,0,0.12)",
+                    borderColor: "hsl(var(--primary) / 0.3)"
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  <p className="text-2xl font-light text-foreground">98.7%</p>
+                  <motion.p 
+                    className="text-2xl font-light text-foreground"
+                    whileHover={{ color: "hsl(var(--primary))" }}
+                  >
+                    98.7%
+                  </motion.p>
                   <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Accuracy Rate</p>
-                </div>
+                </motion.div>
                 
-                {/* Top left metric - Clean white */}
-                <div 
-                  className="absolute top-16 left-4 bg-background border border-border/50 px-4 py-2.5 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300"
+                {/* Top left metric with enhanced animation */}
+                <motion.div 
+                  className="absolute top-16 left-4 bg-background border border-border/50 px-4 py-2.5 rounded-xl shadow-sm"
                   style={{
-                    transform: `translate(${mousePosition.x * 0.1}px, ${mousePosition.y * 0.1}px)`
+                    x: useTransform(mouseX, [-1, 1], [-6, 6]),
+                    y: useTransform(mouseY, [-1, 1], [-6, 6]),
                   }}
+                  whileHover={{ 
+                    scale: 1.05, 
+                    boxShadow: "0 8px 20px -4px rgba(0,0,0,0.1)",
+                    borderColor: "hsl(var(--primary) / 0.3)"
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  <p className="text-lg font-light text-foreground">2.4M+</p>
+                  <motion.p 
+                    className="text-lg font-light text-foreground"
+                    whileHover={{ color: "hsl(var(--primary))" }}
+                  >
+                    2.4M+
+                  </motion.p>
                   <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Predictions/Day</p>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
 
-      {/* Client Logos - Flowing marquee */}
-      <div 
-        className={cn(
-          "py-10 relative overflow-hidden border-t border-border/30",
-          "transition-all duration-700 delay-500",
-          isLoaded ? "opacity-100" : "opacity-0"
-        )}
+      {/* Client Logos - Enhanced marquee with hover pause */}
+      <motion.div 
+        className="py-10 relative overflow-hidden border-t border-border/30"
+        initial={{ opacity: 0 }}
+        animate={isLoaded ? { opacity: 1 } : {}}
+        transition={{ duration: 0.7, delay: 0.5 }}
       >
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
         
         <div className="marquee-track">
           {[...clientNames, ...clientNames, ...clientNames].map((name, i) => (
-            <span 
+            <motion.span 
               key={i}
-              className="px-12 text-xs text-muted-foreground/40 font-medium tracking-wider uppercase hover:text-muted-foreground transition-colors duration-300 cursor-default whitespace-nowrap"
+              className="px-12 text-xs text-muted-foreground/40 font-medium tracking-wider uppercase whitespace-nowrap cursor-default"
+              whileHover={{ 
+                color: "hsl(var(--foreground))",
+                scale: 1.05,
+              }}
+              transition={{ duration: 0.2 }}
             >
               {name}
-            </span>
+            </motion.span>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

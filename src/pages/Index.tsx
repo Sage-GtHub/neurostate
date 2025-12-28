@@ -31,7 +31,7 @@ const Index = () => {
         <main>
           <Hero />
 
-          {/* Stats - Large flowing numbers */}
+          {/* Stats - Large flowing numbers with enhanced interaction */}
           <section className="py-20 md:py-28 px-6 md:px-8">
             <div className="max-w-6xl mx-auto">
               <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
@@ -43,13 +43,16 @@ const Index = () => {
                 ].map((stat, i) => (
                   <StaggerItem key={i}>
                     <motion.div 
-                      className="text-center lg:text-left group cursor-default"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ type: "spring", stiffness: 400 }}
+                      className="text-center lg:text-left group cursor-default relative"
+                      whileHover={{ scale: 1.03, y: -4 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
                     >
-                      <p className="stat-display text-foreground group-hover:text-primary transition-colors duration-300">{stat.value}</p>
-                      <p className="text-sm text-foreground font-medium mt-2">{stat.label}</p>
-                      <p className="hidden lg:block text-xs text-muted-foreground mt-1">{stat.desc}</p>
+                      <motion.div
+                        className="absolute inset-0 bg-primary/5 rounded-3xl -m-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      />
+                      <p className="stat-display text-foreground group-hover:text-primary transition-colors duration-300 relative">{stat.value}</p>
+                      <p className="text-sm text-foreground font-medium mt-2 relative">{stat.label}</p>
+                      <p className="hidden lg:block text-xs text-muted-foreground mt-1 relative">{stat.desc}</p>
                     </motion.div>
                   </StaggerItem>
                 ))}
@@ -101,20 +104,36 @@ const Index = () => {
                   ].map((item, i) => (
                     <StaggerItem key={i}>
                       <motion.div 
-                        className="group flow-card p-6 md:p-8 hover:bg-card cursor-pointer"
-                        whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                        className="group flow-card spotlight-card p-6 md:p-8 cursor-pointer"
+                        whileHover={{ x: 8, scale: 1.01 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                        onMouseMove={(e) => {
+                          const rect = e.currentTarget.getBoundingClientRect();
+                          const x = ((e.clientX - rect.left) / rect.width) * 100;
+                          const y = ((e.clientY - rect.top) / rect.height) * 100;
+                          e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+                          e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+                        }}
                       >
                         <div className="flex items-start justify-between gap-6">
                           <div className="space-y-3 flex-1">
                             <div className="flex items-center gap-3">
                               <span className="text-[10px] text-muted-foreground font-mono">{item.num}</span>
-                              <div className="w-6 h-px bg-border group-hover:bg-primary/30 group-hover:w-10 transition-all duration-300" />
+                              <motion.div 
+                                className="w-6 h-px bg-border group-hover:bg-primary/50 transition-all duration-300"
+                                whileHover={{ width: 40 }}
+                              />
                             </div>
                             <h3 className="text-base font-medium text-foreground group-hover:text-primary transition-colors duration-300">{item.title}</h3>
                             <p className="text-xs text-muted-foreground leading-relaxed max-w-sm">{item.desc}</p>
                             <p className="hidden lg:block text-xs text-muted-foreground/70 leading-relaxed max-w-sm mt-1">{item.detail}</p>
                           </div>
-                          <ArrowUpRight className="w-4 h-4 text-muted-foreground/30 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300 mt-1" />
+                          <motion.div
+                            whileHover={{ rotate: 45 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                          >
+                            <ArrowUpRight className="w-4 h-4 text-muted-foreground/30 group-hover:text-primary transition-all duration-300 mt-1" />
+                          </motion.div>
                         </div>
                       </motion.div>
                     </StaggerItem>
