@@ -34,12 +34,12 @@ const Index = () => {
           {/* Stats - Large flowing numbers */}
           <section className="py-20 md:py-28 px-6 md:px-8">
             <div className="max-w-6xl mx-auto">
-              <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6">
+              <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
                 {[
-                  { value: "80%", label: "AI models trained" },
-                  { value: "7 days", label: "Prediction window" },
-                  { value: "12+", label: "Research partners" },
-                  { value: "98%", label: "Accuracy rate" }
+                  { value: "80%", label: "AI models trained", desc: "on cognitive performance data" },
+                  { value: "7 days", label: "Prediction window", desc: "for performance forecasting" },
+                  { value: "12+", label: "Research partners", desc: "in neuroscience and AI" },
+                  { value: "98%", label: "Accuracy rate", desc: "in cognitive state detection" }
                 ].map((stat, i) => (
                   <StaggerItem key={i}>
                     <motion.div 
@@ -48,7 +48,8 @@ const Index = () => {
                       transition={{ type: "spring", stiffness: 400 }}
                     >
                       <p className="stat-display text-foreground group-hover:text-primary transition-colors duration-300">{stat.value}</p>
-                      <p className="text-xs text-muted-foreground mt-2 max-w-[140px] mx-auto lg:mx-0">{stat.label}</p>
+                      <p className="text-sm text-foreground font-medium mt-2">{stat.label}</p>
+                      <p className="hidden lg:block text-xs text-muted-foreground mt-1">{stat.desc}</p>
                     </motion.div>
                   </StaggerItem>
                 ))}
@@ -69,7 +70,10 @@ const Index = () => {
                     <span className="text-muted-foreground">One cognitive OS.</span>
                   </h2>
                   <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
-                    A complete infrastructure for predicting, measuring, and optimising cognitive performance.
+                    A complete infrastructure for predicting, measuring, and optimising cognitive performance across individuals and teams.
+                  </p>
+                  <p className="hidden lg:block text-sm text-muted-foreground leading-relaxed max-w-sm">
+                    Each layer of the Neurostate platform works in concert to deliver measurable improvements in focus, recovery, and sustained output.
                   </p>
                 </ScrollReveal>
 
@@ -79,16 +83,19 @@ const Index = () => {
                     { 
                       title: "Nova AI Engine", 
                       desc: "Cognitive forecasting with multi-model AI. Real-time performance prediction and risk detection.",
+                      detail: "Integrates with wearables for continuous biometric monitoring.",
                       num: "01"
                     },
                     { 
                       title: "Execution Layer", 
                       desc: "Precision supplements with research-backed formulas. Biological optimisation for peak output.",
+                      detail: "Third-party tested, pharmaceutical-grade compounds.",
                       num: "02"
                     },
                     { 
                       title: "Neuromodulation", 
                       desc: "Red light therapy and photobiomodulation. Alpha and beta state control for cognitive readiness.",
+                      detail: "Clinical-grade devices with proven wavelengths.",
                       num: "03"
                     },
                   ].map((item, i) => (
@@ -105,6 +112,7 @@ const Index = () => {
                             </div>
                             <h3 className="text-base font-medium text-foreground group-hover:text-primary transition-colors duration-300">{item.title}</h3>
                             <p className="text-xs text-muted-foreground leading-relaxed max-w-sm">{item.desc}</p>
+                            <p className="hidden lg:block text-xs text-muted-foreground/70 leading-relaxed max-w-sm mt-1">{item.detail}</p>
                           </div>
                           <ArrowUpRight className="w-4 h-4 text-muted-foreground/30 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300 mt-1" />
                         </div>
@@ -126,6 +134,9 @@ const Index = () => {
                   <br />
                   <span className="text-muted-foreground">Not reactive wellness.</span>
                 </h2>
+                <p className="hidden lg:block text-sm text-muted-foreground leading-relaxed max-w-lg mx-auto">
+                  Most wellness platforms wait for problems to occur before responding. Neurostate predicts cognitive decline before it impacts performance, enabling proactive intervention.
+                </p>
               </ScrollReveal>
 
               <div className="grid md:grid-cols-2 gap-8 lg:gap-16">
@@ -134,23 +145,26 @@ const Index = () => {
                   <div className="space-y-3">
                     <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] mb-5 font-medium">Reactive approaches</p>
                     {[
-                      "Apps that respond after burnout",
-                      "Generic wellness with no data",
-                      "No performance prediction",
-                      "Interventions after breakdown"
+                      { title: "Apps that respond after burnout", desc: "Damage already done" },
+                      { title: "Generic wellness with no data", desc: "One-size-fits-all solutions" },
+                      { title: "No performance prediction", desc: "Flying blind on capacity" },
+                      { title: "Interventions after breakdown", desc: "Costly recovery periods" }
                     ].map((item, i) => (
                       <motion.div 
                         key={i} 
-                        className="flex items-center gap-3 py-3 border-b border-border/50 last:border-0"
+                        className="flex items-start gap-3 py-3 border-b border-border/50 last:border-0"
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 + i * 0.1 }}
                       >
-                        <div className="w-4 h-4 rounded-full border border-destructive/30 flex items-center justify-center flex-shrink-0">
+                        <div className="w-4 h-4 rounded-full border border-destructive/30 flex items-center justify-center flex-shrink-0 mt-0.5">
                           <span className="text-[8px] text-destructive/60">✕</span>
                         </div>
-                        <span className="text-xs text-muted-foreground">{item}</span>
+                        <div>
+                          <span className="text-sm text-muted-foreground">{item.title}</span>
+                          <p className="hidden lg:block text-xs text-muted-foreground/60 mt-0.5">{item.desc}</p>
+                        </div>
                       </motion.div>
                     ))}
                   </div>
@@ -161,10 +175,10 @@ const Index = () => {
                   <div className="space-y-3">
                     <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] mb-5 font-medium">Predictive infrastructure</p>
                     {[
-                      { title: "Cognitive forecasting", desc: "72-hour prediction" },
-                      { title: "Risk detection", desc: "Before impact" },
-                      { title: "Readiness measurement", desc: "Quantified capacity" },
-                      { title: "Autonomous optimisation", desc: "AI-driven" }
+                      { title: "Cognitive forecasting", desc: "72-hour prediction window", detail: "See performance dips before they happen" },
+                      { title: "Risk detection", desc: "Before impact", detail: "Early warning system for burnout" },
+                      { title: "Readiness measurement", desc: "Quantified capacity", detail: "Know your cognitive bandwidth daily" },
+                      { title: "Autonomous optimisation", desc: "AI-driven protocols", detail: "Continuous improvement without manual tracking" }
                     ].map((item, i) => (
                       <motion.div 
                         key={i} 
@@ -179,8 +193,9 @@ const Index = () => {
                           <Check className="w-2.5 h-2.5 text-primary" />
                         </div>
                         <div>
-                          <span className="text-xs text-foreground font-medium">{item.title}</span>
+                          <span className="text-sm text-foreground font-medium">{item.title}</span>
                           <span className="text-xs text-muted-foreground ml-2">{item.desc}</span>
+                          <p className="hidden lg:block text-xs text-muted-foreground/70 mt-0.5">{item.detail}</p>
                         </div>
                       </motion.div>
                     ))}
@@ -201,23 +216,47 @@ const Index = () => {
                       Nova: Cognitive Performance Forecasting
                     </h2>
                     <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-                      Nova is our multi-model AI engine for predictive cognitive modelling. It forecasts performance states, detects risk patterns, and delivers real-time analytics.
+                      Nova is our multi-model AI engine for predictive cognitive modelling. It forecasts performance states, detects risk patterns, and delivers real-time analytics based on your biometric data.
+                    </p>
+                    <p className="hidden lg:block text-sm text-muted-foreground leading-relaxed max-w-md">
+                      By synthesising data from wearables, sleep patterns, and historical performance, Nova builds a dynamic model of your cognitive capacity and provides actionable recommendations to optimise your output.
                     </p>
                     
-                    <div className="flex flex-wrap gap-2 py-2">
-                      {["Personalised coaching", "Adaptive recommendations", "Wearable integration", "Real-time insights"].map((item, i) => (
-                        <motion.span 
-                          key={i} 
-                          className="px-3 py-1.5 text-[10px] font-medium text-muted-foreground bg-background rounded-full border border-border/50"
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.3 + i * 0.1 }}
-                          whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary) / 0.5)" }}
-                        >
-                          {item}
-                        </motion.span>
-                      ))}
+                    <div className="space-y-4 py-2">
+                      <div className="flex flex-wrap gap-2">
+                        {["Personalised coaching", "Adaptive recommendations", "Wearable integration", "Real-time insights", "Voice interface"].map((item, i) => (
+                          <motion.span 
+                            key={i} 
+                            className="px-3 py-1.5 text-[10px] font-medium text-muted-foreground bg-background rounded-full border border-border/50"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3 + i * 0.1 }}
+                            whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary) / 0.5)" }}
+                          >
+                            {item}
+                          </motion.span>
+                        ))}
+                      </div>
+                      
+                      <div className="hidden lg:flex gap-6 pt-2">
+                        {[
+                          { value: "7", label: "Day forecast" },
+                          { value: "24/7", label: "Monitoring" },
+                          { value: "10+", label: "Integrations" }
+                        ].map((item, i) => (
+                          <motion.div 
+                            key={i}
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.5 + i * 0.1 }}
+                          >
+                            <p className="text-lg text-foreground font-medium">{item.value}</p>
+                            <p className="text-[10px] text-muted-foreground uppercase tracking-wider">{item.label}</p>
+                          </motion.div>
+                        ))}
+                      </div>
                     </div>
                     
                     <Link to="/nova/overview">
@@ -430,7 +469,7 @@ const Index = () => {
             </div>
           </section>
 
-          {/* CTA Section - Clean and minimal */}
+          {/* CTA Section */}
           <ScrollReveal className="py-24 md:py-32 px-6 md:px-8">
             <div className="max-w-3xl mx-auto text-center space-y-6">
               <motion.span 
@@ -459,6 +498,15 @@ const Index = () => {
               >
                 Join the enterprises already using Neurostate for predictive cognitive performance management.
               </motion.p>
+              <motion.p 
+                className="hidden lg:block text-sm text-muted-foreground max-w-lg mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.25 }}
+              >
+                Whether you are an individual optimiser or leading an enterprise team, our platform scales to meet your cognitive performance needs.
+              </motion.p>
               <motion.div 
                 className="flex flex-wrap items-center justify-center gap-3 pt-4"
                 initial={{ opacity: 0, y: 20 }}
@@ -477,6 +525,21 @@ const Index = () => {
                     Browse Products
                   </Button>
                 </Link>
+              </motion.div>
+              
+              <motion.div 
+                className="hidden lg:flex items-center justify-center gap-8 pt-8 text-muted-foreground"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+              >
+                {["No credit card required", "14-day free trial", "Cancel anytime"].map((item, i) => (
+                  <div key={i} className="flex items-center gap-2 text-xs">
+                    <Check className="w-3 h-3 text-primary" />
+                    <span>{item}</span>
+                  </div>
+                ))}
               </motion.div>
             </div>
           </ScrollReveal>
