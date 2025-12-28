@@ -70,19 +70,19 @@ export default function Blog() {
     <>
       <SEO 
         title="Blog – Cognitive Performance Insights | NeuroState"
-        description="Expert insights on cognitive performance, AI-driven personalisation, red light therapy, adaptogen supplements, and workplace performance. Evidence-based articles from NeuroState."
+        description="Expert insights on cognitive performance, AI-driven personalisation, red light therapy, adaptogen supplements, and workplace performance."
       />
       <Header />
       
-      <main className="min-h-screen bg-ivory mobile-nav-padding">
+      <main className="min-h-screen bg-background">
         {/* Hero */}
-        <section ref={hero.ref} className={`pt-32 sm:pt-40 pb-16 sm:pb-20 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-ivory transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <section ref={hero.ref} className={`pt-32 sm:pt-40 pb-16 sm:pb-20 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-background transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="max-w-4xl mx-auto text-center space-y-6">
-            <p className="text-carbon/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium">Insights</p>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-carbon leading-[1.02]">
+            <p className="text-muted-foreground text-xs tracking-[0.3em] uppercase font-medium">Insights</p>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold text-foreground leading-[1.02]">
               Cognitive Performance Blog
             </h1>
-            <p className="text-base sm:text-lg text-ash max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
               Evidence-based insights on AI-driven cognitive performance, neuromodulation, and the future of mental optimisation.
             </p>
           </div>
@@ -93,16 +93,16 @@ export default function Blog() {
           <section className="px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 pb-16 sm:pb-20">
             <div className="max-w-6xl mx-auto">
               <Link to={`/blog/${featuredPost.slug}`} className="group block">
-                <div className="bg-carbon p-8 sm:p-12 lg:p-16 transition-all duration-300 hover:bg-slate">
-                  <p className="text-stone text-[10px] sm:text-xs tracking-[0.3em] uppercase font-medium mb-4">Featured</p>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-ivory leading-tight mb-4 group-hover:text-mist transition-colors">
+                <div className="bg-foreground p-8 sm:p-12 lg:p-16 transition-all duration-300 hover:bg-foreground/90">
+                  <p className="text-background/60 text-xs tracking-[0.3em] uppercase font-medium mb-4">Featured</p>
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-background leading-tight mb-4 group-hover:text-muted transition-colors">
                     {featuredPost.title}
                   </h2>
-                  <p className="text-stone text-base sm:text-lg leading-relaxed mb-6 max-w-3xl">
+                  <p className="text-background/70 text-base sm:text-lg leading-relaxed mb-6 max-w-3xl">
                     {featuredPost.excerpt}
                   </p>
-                  <div className="flex items-center gap-6 text-stone text-sm">
-                    <span className="text-ivory/70">{featuredPost.category}</span>
+                  <div className="flex items-center gap-6 text-background/60 text-sm">
+                    <span className="text-background/80">{featuredPost.category}</span>
                     <div className="flex items-center gap-1.5">
                       <Clock className="w-4 h-4" />
                       {featuredPost.readTime}
@@ -121,21 +121,21 @@ export default function Blog() {
         {/* All Posts */}
         <section ref={posts.ref} className={`px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 pb-24 sm:pb-32 transition-all duration-1000 ${posts.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="max-w-6xl mx-auto">
-            <h3 className="text-lg font-bold text-carbon mb-8">Latest Articles</h3>
-            <div className="grid md:grid-cols-2 gap-px bg-mist">
+            <h3 className="text-lg font-semibold text-foreground mb-8">Latest Articles</h3>
+            <div className="grid md:grid-cols-2 gap-px bg-border">
               {regularPosts.map((post, i) => (
                 <Link key={i} to={`/blog/${post.slug}`} className="group">
-                  <article className="bg-ivory p-8 sm:p-10 h-full transition-all duration-300 hover:bg-carbon">
-                    <p className="text-carbon/50 group-hover:text-stone text-[10px] tracking-[0.2em] uppercase font-medium mb-3 transition-colors">
+                  <article className="bg-background p-8 sm:p-10 h-full transition-all duration-300 hover:bg-foreground">
+                    <p className="text-muted-foreground group-hover:text-background/60 text-xs tracking-[0.2em] uppercase font-medium mb-3 transition-colors">
                       {post.category}
                     </p>
-                    <h4 className="text-xl font-semibold text-carbon group-hover:text-ivory mb-3 transition-colors leading-tight">
+                    <h4 className="text-xl font-medium text-foreground group-hover:text-background mb-3 transition-colors leading-tight">
                       {post.title}
                     </h4>
-                    <p className="text-ash group-hover:text-stone text-sm leading-relaxed mb-6 transition-colors">
+                    <p className="text-muted-foreground group-hover:text-background/70 text-sm leading-relaxed mb-6 transition-colors">
                       {post.excerpt.slice(0, 150)}...
                     </p>
-                    <div className="flex items-center justify-between text-xs text-ash group-hover:text-stone transition-colors">
+                    <div className="flex items-center justify-between text-xs text-muted-foreground group-hover:text-background/60 transition-colors">
                       <div className="flex items-center gap-4">
                         <div className="flex items-center gap-1.5">
                           <Clock className="w-3.5 h-3.5" />
@@ -146,7 +146,7 @@ export default function Blog() {
                           {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}
                         </div>
                       </div>
-                      <div className="flex items-center gap-1 text-carbon group-hover:text-ivory transition-colors">
+                      <div className="flex items-center gap-1 text-foreground group-hover:text-background transition-colors">
                         Read more
                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                       </div>
@@ -159,22 +159,22 @@ export default function Blog() {
         </section>
 
         {/* CTA */}
-        <section className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl border-t border-mist">
+        <section className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-muted border-t border-border">
           <div className="max-w-4xl mx-auto text-center space-y-6">
-            <h3 className="text-2xl sm:text-3xl font-bold text-carbon">
+            <h3 className="text-2xl sm:text-3xl font-semibold text-foreground">
               Experience the cognitive performance system
             </h3>
-            <p className="text-ash max-w-xl mx-auto">
+            <p className="text-muted-foreground max-w-xl mx-auto">
               Move beyond reading about performance. Start optimising it.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link to="/shop">
-                <button className="bg-carbon text-ivory hover:bg-slate px-8 py-3 text-sm font-medium transition-all duration-300">
+                <button className="bg-foreground text-background hover:bg-foreground/90 px-8 py-3 text-sm font-medium transition-all duration-300">
                   Shop products
                 </button>
               </Link>
               <Link to="/nova/overview">
-                <button className="border border-carbon/30 text-carbon hover:bg-carbon/5 px-8 py-3 text-sm font-medium transition-all duration-300">
+                <button className="border border-border text-foreground hover:bg-muted px-8 py-3 text-sm font-medium transition-all duration-300">
                   Explore Nova AI
                 </button>
               </Link>

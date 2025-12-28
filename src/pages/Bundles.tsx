@@ -14,26 +14,22 @@ const Bundles = () => {
     <>
       <SEO 
         title="Product Bundles | NeuroState"
-        description="Curated supplement bundles designed for sleep optimisation, recovery enhancement, and cognitive performance. Save on complete performance stacks."
+        description="Curated supplement bundles designed for sleep optimisation, recovery enhancement, and cognitive performance."
       />
-      <div className="min-h-screen bg-background mobile-nav-padding">
+      <div className="min-h-screen bg-background">
         <Header />
         <main>
           {/* Hero Section */}
-          <section className="pt-20 sm:pt-24 md:pt-32 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-white">
-            <div className="max-w-7xl mx-auto text-center">
-              <div className="space-y-6 sm:space-y-8">
-                <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Curated Stacks</p>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-carbon leading-[1.1]">
-                  Performance
-                  <br />
-                  <span className="font-normal">bundles</span>
-                </h1>
-                <p className="text-base sm:text-lg md:text-xl text-ash leading-relaxed max-w-3xl mx-auto">
-                  Complete supplement stacks designed for specific performance goals. 
-                  Save time, save money, and get exactly what you need.
-                </p>
-              </div>
+          <section className="pt-32 sm:pt-40 pb-16 sm:pb-20 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-background">
+            <div className="max-w-4xl mx-auto text-center space-y-6">
+              <p className="text-muted-foreground text-xs tracking-[0.3em] uppercase font-medium">Curated Stacks</p>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold text-foreground leading-[1.02]">
+                Performance bundles
+              </h1>
+              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
+                Complete supplement stacks designed for specific performance goals. 
+                Save time, save money, and get exactly what you need.
+              </p>
             </div>
           </section>
 
@@ -43,17 +39,16 @@ const Bundles = () => {
           </div>
 
           {/* Benefits Section */}
-          <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl">
-            <div className="max-w-7xl mx-auto">
-              <div className="text-center mb-16 sm:mb-20 space-y-6">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-carbon leading-[1.1]">
-                  Why choose
-                  <br />
-                  <span className="font-normal">bundles</span>
+          <section className="py-20 sm:py-24 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-muted">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-16 space-y-4">
+                <p className="text-muted-foreground text-xs tracking-[0.3em] uppercase font-medium">Benefits</p>
+                <h2 className="text-3xl sm:text-4xl font-semibold text-foreground">
+                  Why choose bundles
                 </h2>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
                 {[
                   {
                     title: "Save money",
@@ -70,10 +65,10 @@ const Bundles = () => {
                 ].map((benefit, i) => (
                   <div 
                     key={i}
-                    className="p-12 hover:bg-white/60 transition-all duration-500"
+                    className="p-10 bg-background hover:bg-muted transition-all duration-300"
                   >
-                    <h3 className="text-xl font-light text-carbon mb-4">{benefit.title}</h3>
-                    <p className="text-ash text-sm leading-relaxed">{benefit.description}</p>
+                    <h3 className="text-lg font-medium text-foreground mb-3">{benefit.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{benefit.description}</p>
                   </div>
                 ))}
               </div>
