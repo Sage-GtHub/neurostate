@@ -118,8 +118,8 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Calendly Embed */}
-            {activeTab === 'schedule' && (
+            {/* Calendly Embed - Always in DOM, hidden with CSS */}
+            <div className={activeTab === 'schedule' ? 'block' : 'hidden'}>
               <div className="max-w-5xl mx-auto">
                 <div 
                   className="calendly-inline-widget rounded-2xl overflow-hidden" 
@@ -127,10 +127,10 @@ const Contact = () => {
                   style={{ minWidth: '320px', height: '800px' }}
                 />
               </div>
-            )}
+            </div>
 
-            {/* Contact Form */}
-            {activeTab === 'message' && (
+            {/* Contact Form - Always in DOM, hidden with CSS */}
+            <div className={activeTab === 'message' ? 'block' : 'hidden'}>
               <div className="grid lg:grid-cols-5 gap-16">
                 <div className="lg:col-span-3">
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -193,7 +193,7 @@ const Contact = () => {
                   </div>
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </section>
       </div>
