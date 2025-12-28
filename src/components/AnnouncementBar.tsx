@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { X, ArrowRight, Sparkles } from "lucide-react";
+import { X, ArrowRight } from "lucide-react";
 
 export const AnnouncementBar = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -23,31 +23,25 @@ export const AnnouncementBar = () => {
   if (!isVisible || isDismissed) return null;
 
   return (
-    <div className="bg-foreground text-background py-2.5 px-4 relative overflow-hidden">
-      {/* Subtle shimmer effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-background/5 to-transparent animate-shimmer" />
-      
-      <div className="container mx-auto flex items-center justify-center gap-3 relative">
-        <div className="flex items-center gap-2">
-          <Sparkles className="h-3 w-3 text-background/60" />
-          <p className="text-xs font-medium">
-            Nova 2.0 is here — Meet your cognitive co-pilot
-          </p>
-        </div>
+    <div className="announcement-gradient text-white text-center py-2.5 px-4 relative">
+      <div className="container mx-auto flex items-center justify-center gap-3">
+        <p className="text-sm font-medium">
+          Introducing Nova 2.0 — Predictive cognitive forecasting
+        </p>
         <Link 
           to="/nova/overview" 
-          className="inline-flex items-center gap-1 text-xs font-medium text-background/80 hover:text-background transition-colors group"
+          className="inline-flex items-center gap-1 text-sm font-medium underline underline-offset-4 hover:no-underline transition-all"
         >
-          See what's new
-          <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+          Learn more
+          <ArrowRight className="h-3 w-3" />
         </Link>
       </div>
       <button 
         onClick={handleDismiss}
-        className="absolute right-4 top-1/2 -translate-y-1/2 p-1 hover:bg-background/10 rounded transition-colors"
+        className="absolute right-4 top-1/2 -translate-y-1/2 p-1 hover:bg-white/20 rounded transition-colors"
         aria-label="Dismiss"
       >
-        <X className="h-3.5 w-3.5 text-background/60" />
+        <X className="h-4 w-4" />
       </button>
     </div>
   );
