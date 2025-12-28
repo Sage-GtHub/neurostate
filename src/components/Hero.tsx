@@ -154,7 +154,7 @@ const Hero = () => {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left - Text Content */}
             <motion.div 
-              className="space-y-8 lg:pr-8"
+              className="space-y-5 lg:pr-8"
               variants={containerVariants}
               initial="hidden"
               animate={isLoaded ? "visible" : "hidden"}
