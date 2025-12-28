@@ -122,7 +122,7 @@ const Contact = () => {
             {activeTab === 'schedule' && (
               <div className="max-w-5xl mx-auto">
                 <div 
-                  className="calendly-inline-widget rounded-2xl overflow-hidden" 
+                  className="calendly-inline-widget rounded-2xl overflow-hidden border border-foreground/10 shadow-lg shadow-foreground/5" 
                   data-url="https://calendly.com/sage-neurostate/30min?hide_gdpr_banner=1&background_color=ffffff&text_color=1a1a1a&primary_color=1a1a1a"
                   style={{ minWidth: '320px', height: '800px' }}
                 />
