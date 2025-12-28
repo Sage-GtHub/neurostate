@@ -177,7 +177,7 @@ const Hero = () => {
               {/* Headline */}
               <motion.h1 
                 ref={headlineRef}
-                className="text-lg md:text-xl lg:text-2xl font-normal text-foreground tracking-tight"
+                className="text-xl md:text-2xl lg:text-3xl font-normal text-foreground tracking-tight"
                 variants={itemVariants}
               >
                 Advancing AI models from{" "}
