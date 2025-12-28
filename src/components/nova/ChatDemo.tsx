@@ -21,7 +21,7 @@ const DEMO_CONVERSATIONS = [
     trigger: "Cognitive Stack",
     messages: [
       { role: "user" as const, content: "I need a supplement stack for deep focus" },
-      { role: "assistant" as const, content: "What outcome are we optimising for—sustained attention across long work blocks, or peak intensity for shorter cognitive sprints?\n\nAssuming sustained focus, here's the stack:\n\n**Morning (6-8am):**\n• Lion's Mane 500mg – neurogenesis\n• Alpha-GPC 300mg – acetylcholine precursor\n• Omega-3 2g – membrane fluidity\n\n**On-demand:**\n• L-Theanine 200mg + Caffeine 100mg\n\n**Timeline:** Noticeable at day 5. Full effect at week 4-6.\n\nThe trade-off: Alpha-GPC may cause vivid dreams. If sleep quality degrades, drop it." }
+      { role: "assistant" as const, content: "What outcome are we optimising for: sustained attention across long work blocks, or peak intensity for shorter cognitive sprints?\n\nAssuming sustained focus, here's the stack:\n\n**Morning (6-8am):**\n• Lion's Mane 500mg: neurogenesis\n• Alpha-GPC 300mg: acetylcholine precursor\n• Omega-3 2g: membrane fluidity\n\n**On-demand:**\n• L-Theanine 200mg + Caffeine 100mg\n\n**Timeline:** Noticeable at day 5. Full effect at week 4-6.\n\nThe trade-off: Alpha-GPC may cause vivid dreams. If sleep quality degrades, drop it." }
     ]
   },
   {
@@ -35,7 +35,7 @@ const DEMO_CONVERSATIONS = [
     trigger: "Sleep",
     messages: [
       { role: "user" as const, content: "My sleep quality has been declining. What should I do?" },
-      { role: "assistant" as const, content: "Based on your sleep architecture, two variables matter:\n\n**1. Temperature.** Your deep sleep correlates with ambient temp below 18°C. You're averaging 21°C.\n\n**2. Cortisol timing.** Your natural dip is at 10:30pm. You're going to bed at 11:45pm—past the window.\n\n**The fix:**\n• Room temp: 18°C\n• Bed at 10:30pm\n• 300mg L-theanine + 1mg melatonin, 30 min prior\n\n**Expected result:** +22% deep sleep, +15% REM within 7 days.\n\nThis is a solvable problem. Execute the protocol." }
+      { role: "assistant" as const, content: "Based on your sleep architecture, two variables matter:\n\n**1. Temperature.** Your deep sleep correlates with ambient temp below 18°C. You're averaging 21°C.\n\n**2. Cortisol timing.** Your natural dip is at 10:30pm. You're going to bed at 11:45pm, past the window.\n\n**The fix:**\n• Room temp: 18°C\n• Bed at 10:30pm\n• 300mg L-theanine + 1mg melatonin, 30 min prior\n\n**Expected result:** +22% deep sleep, +15% REM within 7 days.\n\nThis is a solvable problem. Execute the protocol." }
     ]
   },
   {

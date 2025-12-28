@@ -82,7 +82,7 @@ export default function EnterpriseOverview() {
                   Performance volatility costs billions
                 </h2>
                 <p className="text-sm text-foreground/50 leading-relaxed">
-                  Companies cannot predict cognitive risk. Teams operate in the dark until performance breaks down. The problem is not stress—it's unmeasured cognitive capacity.
+                  Companies cannot predict cognitive risk. Teams operate in the dark until performance breaks down. The problem is not stress. It's unmeasured cognitive capacity.
                 </p>
                 <div className="pt-4">
                   <div className="inline-block bg-foreground rounded-2xl p-6">

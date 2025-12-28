@@ -26,7 +26,7 @@ export const AnnouncementBar = () => {
     <div className="announcement-gradient text-white text-center py-2.5 px-4 relative">
       <div className="container mx-auto flex items-center justify-center gap-3">
         <p className="text-sm font-medium">
-          Introducing Nova 2.0 — Predictive cognitive forecasting
+          Introducing Nova 2.0: Predictive cognitive forecasting
         </p>
         <Link 
           to="/nova/overview" 

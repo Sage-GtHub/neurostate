@@ -137,7 +137,7 @@ export const ProductTabs = ({ description }: ProductTabsProps) => {
             <p className="text-[0.75rem] font-medium tracking-[0.05em] uppercase text-stone mb-3">Optimised</p>
             <h5 className="text-[1.125rem] font-medium mb-3 text-carbon">Actually absorbed</h5>
             <p className="text-[0.9375rem] text-ash leading-relaxed">
-              Formulated for proper absorption—what matters is what your body can use
+              Formulated for proper absorption. What matters is what your body can use
             </p>
           </div>
           
@@ -162,7 +162,7 @@ export const ProductTabs = ({ description }: ProductTabsProps) => {
           <AccordionItem value="item-2" className="border-b border-mist">
             <AccordionTrigger className="text-[0.9375rem] font-medium text-carbon">Can I take this with other supplements?</AccordionTrigger>
             <AccordionContent className="text-[0.9375rem] text-ash leading-relaxed">
-              Generally speaking, yes—it's usually fine to combine with other supplements. That said, if you're taking several supplements or any medications, it's worth checking with your GP or healthcare provider first.
+              Generally speaking, yes. It's usually fine to combine with other supplements. That said, if you're taking several supplements or any medications, it's worth checking with your GP or healthcare provider first.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-3" className="border-b border-mist">

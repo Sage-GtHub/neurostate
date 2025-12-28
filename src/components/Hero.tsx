@@ -100,7 +100,7 @@ const Hero = () => {
                   isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                 )}
               >
-                We've built the AI infrastructure for cognitive performance and deploy it at enterprise scale—from startups to the Fortune 500.
+                We've built the AI infrastructure for cognitive performance and deploy it at enterprise scale, from startups to the Fortune 500.
               </p>
 
               {/* CTAs */}
