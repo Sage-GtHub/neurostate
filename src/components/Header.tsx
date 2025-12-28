@@ -1,7 +1,6 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
-import { GuestChatWidget } from "./GuestChatWidget";
-import { Search, User, Menu, X, Award, Sparkles, LogOut, Package, Droplets, Activity, Moon, Brain, Zap, Target, Lightbulb, Building2, ChevronRight } from "lucide-react";
+import { Search, User, Menu, X, Award, LogOut, ArrowUpRight } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { Input } from "./ui/input";
@@ -21,12 +20,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "./ui/accordion";
 import { AnnouncementBar } from "./AnnouncementBar";
 import { MobileBottomNav } from "./MobileBottomNav";
 import { useState, useEffect } from "react";
@@ -43,10 +36,6 @@ export const Header = () => {
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [session, setSession] = useState<Session | null>(null);
-  const [chatOpen, setChatOpen] = useState(false);
-  const [hasUnreadChat, setHasUnreadChat] = useState(() => {
-    return !localStorage.getItem('nova-chat-visited');
-  });
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -87,186 +76,173 @@ export const Header = () => {
     navigate('/');
   };
 
-  const shopCategories = [
-    { label: "All Products", href: "/shop", icon: Package },
-    { label: "Supplements", href: "/category/supplements", icon: Droplets },
-    { label: "Red Light Therapy", href: "/category/redlight", icon: Lightbulb },
-    { label: "Recovery Devices", href: "/category/devices", icon: Activity },
-    { label: "Sleep Support", href: "/category/sleep", icon: Moon },
-    { label: "Cognitive Enhancement", href: "/category/cognitive", icon: Brain },
-    { label: "Performance", href: "/category/performance", icon: Zap },
+  const industries = [
+    { label: "Corporate Wellness", href: "/enterprise/corporate/overview", desc: "Enterprise cognitive programmes" },
+    { label: "Sports Organisations", href: "/enterprise/sports/overview", desc: "Athletic performance systems" },
+    { label: "Health Clubs", href: "/enterprise/health-clubs/overview", desc: "Facility integration" },
   ];
 
-
-  const enterpriseLinks = [
-    { label: "Overview", href: "/enterprise/overview", icon: Building2 },
-    { label: "Corporate Wellness", href: "/enterprise/corporate/overview", icon: Target },
-    { label: "Sports Organisations", href: "/enterprise/sports/overview", icon: Activity },
-    { label: "Health Clubs and Studios", href: "/enterprise/health-clubs/overview", icon: Zap },
+  const mobileLinks = [
+    { label: "Shop", href: "/shop" },
+    { label: "Nova AI", href: "/nova/overview" },
+    { label: "For Teams", href: "/enterprise/overview" },
+    { label: "About", href: "/about" },
   ];
-
-  const handleNovaOpen = () => {
-    setChatOpen(true);
-    setHasUnreadChat(false);
-    localStorage.setItem('nova-chat-visited', 'true');
-  };
 
   return (
     <>
       <AnnouncementBar />
-      <header className="sticky top-0 z-50 w-full bg-void/80 border-b border-white/5 backdrop-blur-xl">
-        <div className="container mx-auto flex h-14 lg:h-20 items-center justify-between px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32">
+      <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur-md border-b border-border">
+        <div className="container mx-auto flex h-16 lg:h-20 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <img src={logoIcon} alt="NeuroState Neural Waveform" className="h-7 w-7 lg:h-10 lg:w-10 transition-transform duration-300 group-hover:scale-105" />
-            <span className="text-ui-label text-white/90 tracking-widest text-[0.6rem] lg:text-xs font-medium">NEUROSTATE<sup className="text-[5px] lg:text-[6px]">®</sup></span>
+          <Link to="/" className="flex items-center gap-2.5 group">
+            <img 
+              src={logoIcon} 
+              alt="Neurostate" 
+              className="h-7 w-7 lg:h-8 lg:w-8 transition-transform duration-300 group-hover:scale-105" 
+            />
+            <span className="text-sm lg:text-base font-medium tracking-tight text-foreground">
+              Neurostate
+            </span>
           </Link>
           
-          {/* Desktop Navigation */}
-          <NavigationMenu className="hidden lg:flex">
-            <NavigationMenuList className="gap-1">
-              {/* Shop Dropdown */}
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white/70 hover:text-white hover:bg-white/5 data-[state=open]:bg-white/5 data-[state=open]:text-white text-ui-label transition-all duration-200">
-                  Shop
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-1 p-4 bg-obsidian/95 backdrop-blur-xl border border-white/10 rounded-lg shadow-2xl">
-                    {shopCategories.map((category) => (
-                      <li key={category.label}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to={category.href}
-                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-white/5 rounded-lg group"
-                          >
-                            <category.icon className="h-5 w-5 text-emerald-400/70 group-hover:text-emerald-400 transition-colors" />
-                            <span className="text-caption font-medium text-white/80 group-hover:text-white transition-colors">
-                              {category.label}
-                            </span>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
+          {/* Desktop Navigation - Clean like Invisible */}
+          <nav className="hidden lg:flex items-center gap-1">
+            {/* Industries Dropdown */}
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="bg-transparent text-foreground/70 hover:text-foreground hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground text-sm font-normal h-10 px-4">
+                    Industries
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="w-[400px] p-4 bg-card border border-border rounded-lg shadow-lg">
+                      <div className="space-y-1">
+                        {industries.map((item) => (
+                          <NavigationMenuLink key={item.label} asChild>
+                            <Link
+                              to={item.href}
+                              className="block p-3 rounded-md hover:bg-muted transition-colors group"
+                            >
+                              <div className="flex items-center justify-between">
+                                <div>
+                                  <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                                    {item.label}
+                                  </p>
+                                  <p className="text-sm text-muted-foreground mt-0.5">
+                                    {item.desc}
+                                  </p>
+                                </div>
+                                <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                              </div>
+                            </Link>
+                          </NavigationMenuLink>
+                        ))}
+                      </div>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
 
+            <Link
+              to="/shop"
+              className="text-sm font-normal text-foreground/70 hover:text-foreground transition-colors px-4 py-2"
+            >
+              Shop
+            </Link>
 
-               {/* For Teams Dropdown */}
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white/70 hover:text-white hover:bg-white/5 data-[state=open]:bg-white/5 data-[state=open]:text-white text-ui-label transition-all duration-200">
-                  For Teams
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-1 p-4 bg-obsidian/95 backdrop-blur-xl border border-white/10 rounded-lg shadow-2xl">
-                    {enterpriseLinks.map((link) => (
-                      <li key={link.label}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to={link.href}
-                            className="flex items-center gap-3 select-none p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-white/5 rounded-lg group"
-                          >
-                            <link.icon className="h-5 w-5 text-emerald-400/70 group-hover:text-emerald-400 transition-colors" />
-                            <span className="text-caption font-medium text-white/80 group-hover:text-white transition-colors">
-                              {link.label}
-                            </span>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
+            <Link
+              to="/nova/overview"
+              className="text-sm font-normal text-foreground/70 hover:text-foreground transition-colors px-4 py-2"
+            >
+              Nova AI
+            </Link>
 
-              {/* Nova AI Link */}
-              <NavigationMenuItem>
-                <Link
-                  to="/nova/overview"
-                  className="inline-flex h-10 items-center justify-center px-4 py-2 text-ui-label text-white/70 transition-all duration-200 hover:text-emerald-400 hover:bg-white/5 rounded-lg"
-                >
-                  Nova AI
-                </Link>
-              </NavigationMenuItem>
+            <Link
+              to="/resources"
+              className="text-sm font-normal text-foreground/70 hover:text-foreground transition-colors px-4 py-2"
+            >
+              Resources
+            </Link>
 
-            </NavigationMenuList>
-          </NavigationMenu>
+            <Link
+              to="/about"
+              className="text-sm font-normal text-foreground/70 hover:text-foreground transition-colors px-4 py-2"
+            >
+              Company
+            </Link>
+          </nav>
 
+          {/* Right Actions */}
           <div className="flex items-center gap-2 lg:gap-3">
             {/* Desktop Search */}
             {searchOpen ? (
               <form onSubmit={handleSearch} className="hidden lg:flex items-center gap-2">
                 <Input
                   type="search"
-                  placeholder="Search products..."
+                  placeholder="Search..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-64 rounded-lg bg-white/5 border-white/10 text-white placeholder:text-white/40 focus:border-emerald-500/50"
+                  className="w-56 h-9 text-sm bg-muted border-transparent focus:border-primary"
                   autoFocus
                 />
-                <Button type="submit" size="icon" variant="ghost" className="text-white/70 hover:text-white hover:bg-white/5">
-                  <Search className="h-5 w-5" />
-                </Button>
                 <Button 
                   type="button" 
                   size="icon" 
                   variant="ghost"
-                  className="text-white/70 hover:text-white hover:bg-white/5"
+                  className="h-9 w-9 text-muted-foreground hover:text-foreground"
                   onClick={() => {
                     setSearchOpen(false);
                     clearSearch();
                   }}
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-4 w-4" />
                 </Button>
               </form>
             ) : (
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="hidden lg:flex text-white/70 hover:text-white hover:bg-white/5"
+                className="hidden lg:flex h-9 w-9 text-foreground/70 hover:text-foreground hover:bg-muted"
                 onClick={() => setSearchOpen(true)}
               >
-                <Search className="h-5 w-5" />
+                <Search className="h-4 w-4" />
               </Button>
             )}
             
-            {/* User Account Dropdown - Desktop */}
+            {/* User Account - Desktop */}
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="hidden lg:flex relative text-white/70 hover:text-white hover:bg-white/5">
-                    <User className="h-5 w-5" />
-                    <Badge className="absolute -top-1 -right-1 h-3 w-3 rounded-full p-0 bg-emerald-500" />
+                  <Button variant="ghost" size="icon" className="hidden lg:flex h-9 w-9 relative text-foreground/70 hover:text-foreground hover:bg-muted">
+                    <User className="h-4 w-4" />
+                    <Badge className="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full p-0 bg-primary" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48 bg-obsidian/95 backdrop-blur-xl border-white/10 rounded-lg">
-                  <DropdownMenuItem disabled className="text-caption text-white/50">
+                <DropdownMenuContent align="end" className="w-48 bg-card border-border">
+                  <DropdownMenuItem disabled className="text-xs text-muted-foreground">
                     {user.email}
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator className="bg-white/10" />
+                  <DropdownMenuSeparator className="bg-border" />
                   <DropdownMenuItem asChild>
-                    <Link to="/dashboard" className="cursor-pointer text-white/80 hover:text-white hover:bg-white/5">
-                      My Dashboard
+                    <Link to="/dashboard" className="cursor-pointer text-foreground">
+                      Dashboard
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/profile" className="cursor-pointer text-white/80 hover:text-white hover:bg-white/5">
-                      My Profile
+                    <Link to="/profile" className="cursor-pointer text-foreground">
+                      Profile
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/subscriptions" className="cursor-pointer text-white/80 hover:text-white hover:bg-white/5">
-                      My Subscriptions
+                    <Link to="/rewards" className="cursor-pointer flex items-center text-foreground">
+                      <Award className="h-4 w-4 mr-2 text-primary" />
+                      Rewards
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/rewards" className="cursor-pointer flex items-center text-white/80 hover:text-white hover:bg-white/5">
-                      <Award className="h-4 w-4 mr-2 text-emerald-400" />
-                      Rewards Programme
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator className="bg-white/10" />
-                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-red-400 hover:text-red-300 hover:bg-white/5">
+                  <DropdownMenuSeparator className="bg-border" />
+                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive">
                     <LogOut className="h-4 w-4 mr-2" />
                     Sign Out
                   </DropdownMenuItem>
@@ -274,143 +250,101 @@ export const Header = () => {
               </DropdownMenu>
             ) : (
               <Link to="/auth">
-                <Button variant="ghost" size="icon" className="hidden lg:flex text-white/70 hover:text-white hover:bg-white/5">
-                  <User className="h-5 w-5" />
+                <Button variant="ghost" size="icon" className="hidden lg:flex h-9 w-9 text-foreground/70 hover:text-foreground hover:bg-muted">
+                  <User className="h-4 w-4" />
                 </Button>
               </Link>
             )}
+
+            {/* Book a Demo - Primary CTA */}
+            <Link to="/contact" className="hidden lg:block">
+              <Button 
+                className="h-9 px-4 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-md"
+              >
+                Book a demo
+              </Button>
+            </Link>
             
             <CartDrawer />
             
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="lg:hidden h-9 w-9 text-white/70 hover:text-white hover:bg-white/5">
+                <Button variant="ghost" size="icon" className="lg:hidden h-9 w-9 text-foreground/70 hover:text-foreground hover:bg-muted">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-full sm:w-[350px] bg-void/95 backdrop-blur-xl border-l border-white/10 p-0 overflow-y-auto">
-                <SheetHeader className="p-4 border-b border-white/10">
-                  <SheetTitle className="text-left text-white text-base">Menu</SheetTitle>
+              <SheetContent side="right" className="w-full sm:w-[350px] bg-background border-l border-border p-0">
+                <SheetHeader className="p-6 border-b border-border">
+                  <SheetTitle className="text-left text-foreground text-base font-medium">Menu</SheetTitle>
                 </SheetHeader>
                 
-                <nav className="flex flex-col">
-                  {/* Quick Links */}
-                  <div className="p-4 space-y-1">
+                <nav className="p-6 space-y-1">
+                  {mobileLinks.map((link) => (
                     <Link
-                      to="/shop"
-                      className="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-colors"
+                      key={link.label}
+                      to={link.href}
+                      className="block py-3 text-lg font-medium text-foreground hover:text-primary transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      <div className="flex items-center gap-3">
-                        <Package className="h-5 w-5 text-emerald-400/70" />
-                        <span className="text-white font-medium">Shop All</span>
-                      </div>
-                      <ChevronRight className="h-4 w-4 text-white/40" />
+                      {link.label}
                     </Link>
-                    
+                  ))}
+                  
+                  <div className="pt-6 border-t border-border mt-6">
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider mb-4">Industries</p>
+                    {industries.map((item) => (
+                      <Link
+                        key={item.label}
+                        to={item.href}
+                        className="block py-2.5 text-foreground/80 hover:text-primary transition-colors"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
                   </div>
-
-                  {/* Accordion Sections */}
-                  <Accordion type="single" collapsible className="px-4">
-                    {/* Shop Categories */}
-                    <AccordionItem value="shop" className="border-b-0 border-white/10">
-                      <AccordionTrigger className="py-3 hover:no-underline text-white/80 hover:text-white">
-                        <span className="font-medium">Categories</span>
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        <div className="space-y-1 pb-3">
-                          {shopCategories.slice(1).map((category) => (
-                            <Link
-                              key={category.label}
-                              to={category.href}
-                              className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-white/5 transition-colors"
-                              onClick={() => setMobileMenuOpen(false)}
-                            >
-                              <category.icon className="h-4 w-4 text-emerald-400/60" />
-                              <span className="text-white/70 text-sm">{category.label}</span>
-                            </Link>
-                          ))}
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-
-                    {/* For Teams */}
-                    <AccordionItem value="teams" className="border-b-0 border-white/10">
-                      <AccordionTrigger className="py-3 hover:no-underline text-white/80 hover:text-white">
-                        <span className="font-medium">For Teams</span>
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        <div className="space-y-1 pb-3">
-                          {enterpriseLinks.map((link) => (
-                            <Link
-                              key={link.label}
-                              to={link.href}
-                              className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-white/5 transition-colors"
-                              onClick={() => setMobileMenuOpen(false)}
-                            >
-                              <link.icon className="h-4 w-4 text-emerald-400/60" />
-                              <span className="text-white/70 text-sm">{link.label}</span>
-                            </Link>
-                          ))}
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-
-                  {/* Nova AI Link */}
-                  <div className="p-4 border-t border-white/10">
-                    <Link
-                      to="/nova/overview"
-                      className="flex items-center justify-between p-3 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/20 transition-colors"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <div className="flex items-center gap-3">
-                        <Sparkles className="h-5 w-5 text-emerald-400" />
-                        <span className="text-white font-medium">Nova AI</span>
-                      </div>
-                      <ChevronRight className="h-4 w-4 text-emerald-400" />
-                    </Link>
-                  </div>
-
+                  
                   {/* Account Section */}
-                  <div className="p-4 border-t border-white/10 mt-auto">
+                  <div className="pt-6 border-t border-border mt-6">
                     {user ? (
-                      <div className="space-y-2">
-                        <p className="text-xs text-white/50 px-3 truncate">{user.email}</p>
-                        <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                          <Button variant="ghost" className="w-full justify-start h-11 text-white/80 hover:text-white hover:bg-white/5">
-                            <User className="h-4 w-4 mr-3" />
-                            Dashboard
-                          </Button>
+                      <div className="space-y-3">
+                        <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+                        <Link
+                          to="/dashboard"
+                          className="block py-2.5 text-foreground hover:text-primary transition-colors"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          Dashboard
                         </Link>
-                        <Link to="/rewards" onClick={() => setMobileMenuOpen(false)}>
-                          <Button variant="ghost" className="w-full justify-start h-11 text-white/80 hover:text-white hover:bg-white/5">
-                            <Award className="h-4 w-4 mr-3 text-emerald-400" />
-                            Rewards
-                          </Button>
-                        </Link>
-                        <Button 
-                          variant="ghost" 
+                        <button
                           onClick={() => {
                             handleSignOut();
                             setMobileMenuOpen(false);
                           }}
-                          className="w-full justify-start h-11 text-red-400 hover:text-red-300 hover:bg-white/5"
+                          className="block py-2.5 text-destructive hover:text-destructive/80 transition-colors"
                         >
-                          <LogOut className="h-4 w-4 mr-3" />
                           Sign Out
-                        </Button>
+                        </button>
                       </div>
                     ) : (
-                      <Link to="/auth" onClick={() => setMobileMenuOpen(false)}>
-                        <Button className="w-full h-11 bg-emerald-500 hover:bg-emerald-600 text-white">
-                          <User className="h-4 w-4 mr-2" />
-                          Sign In
-                        </Button>
+                      <Link
+                        to="/auth"
+                        className="block py-2.5 text-foreground hover:text-primary transition-colors"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Sign In
                       </Link>
                     )}
+                  </div>
+                  
+                  {/* CTA */}
+                  <div className="pt-6">
+                    <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
+                      <Button className="w-full h-12 text-base font-medium bg-foreground text-background hover:bg-foreground/90">
+                        Book a demo
+                      </Button>
+                    </Link>
                   </div>
                 </nav>
               </SheetContent>
@@ -418,11 +352,8 @@ export const Header = () => {
           </div>
         </div>
       </header>
-
-      {/* Mobile Bottom Navigation */}
-      <MobileBottomNav onNovaOpen={handleNovaOpen} />
-
-      <GuestChatWidget open={chatOpen} onOpenChange={setChatOpen} />
+      
+      <MobileBottomNav />
     </>
   );
 };
