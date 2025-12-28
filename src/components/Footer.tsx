@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { toast } from "sonner";
 import logoIcon from "@/assets/neurostate-icon.png";
 
@@ -56,42 +56,51 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-800 text-white">
-      <div className="px-6 md:px-8 py-16 md:py-20">
+    <footer className="relative overflow-hidden">
+      {/* Organic background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-stone-100 to-stone-50" />
+      
+      {/* Floating orbs */}
+      <div className="absolute top-20 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/5 blur-3xl animate-float pointer-events-none" />
+      <div className="absolute bottom-20 left-1/4 w-[300px] h-[300px] rounded-full bg-primary/5 blur-3xl animate-float pointer-events-none" style={{ animationDelay: '2s' }} />
+      
+      <div className="relative px-6 md:px-12 lg:px-20 xl:px-32 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
-          {/* Top Section */}
-          <div className="grid lg:grid-cols-2 gap-12 mb-12 pb-12 border-b border-white/10">
+          {/* Top Section - Flowing layout */}
+          <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 mb-20 pb-16 border-b border-foreground/5">
             {/* Brand */}
-            <div className="space-y-4">
-              <Link to="/" className="flex items-center gap-2.5 group">
-                <img src={logoIcon} alt="Neurostate" className="h-6 w-6 invert opacity-90" />
-                <span className="text-sm font-medium tracking-tight">Neurostate</span>
+            <div className="lg:max-w-xs space-y-5">
+              <Link to="/" className="inline-flex items-center gap-2.5 group">
+                <div className="w-8 h-8 rounded-full bg-foreground/5 flex items-center justify-center group-hover:bg-foreground/10 transition-colors">
+                  <img src={logoIcon} alt="Neurostate" className="h-4 w-4 opacity-70" />
+                </div>
+                <span className="text-xs font-medium tracking-tight text-foreground/80">Neurostate</span>
               </Link>
-              <p className="text-white/50 text-xs leading-relaxed max-w-xs">
-                The AI operating system for human performance. Cognitive forecasting, precision supplements, and neuromodulation technology.
+              <p className="text-foreground/40 text-[11px] leading-relaxed">
+                The AI operating system for human performance. Cognitive forecasting, precision supplements, and neuromodulation.
               </p>
             </div>
 
-            {/* Newsletter */}
-            <div className="space-y-3">
-              <h3 className="text-xs font-medium">Join the newsletter</h3>
-              <p className="text-white/50 text-xs">
+            {/* Newsletter - Organic form */}
+            <div className="flex-1 lg:max-w-sm lg:ml-auto space-y-4">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/40">Newsletter</p>
+              <p className="text-foreground/60 text-xs">
                 Get 10% off your first order.
               </p>
               <form onSubmit={handleNewsletterSignup} className="flex gap-2">
                 <Input
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="your@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 h-9 bg-white/10 border-white/10 text-white text-xs placeholder:text-white/30 focus:border-primary rounded-full"
+                  className="flex-1 h-10 bg-foreground/[0.03] border-foreground/10 text-foreground text-xs placeholder:text-foreground/30 focus:border-accent/50 rounded-full px-5"
                   disabled={isLoading}
                 />
                 <Button 
                   type="submit" 
                   disabled={isLoading}
                   size="sm"
-                  className="h-9 px-4 bg-primary hover:bg-primary/90 rounded-full"
+                  className="h-10 w-10 p-0 bg-foreground text-background hover:bg-foreground/90 rounded-full"
                 >
                   {isLoading ? "..." : <ArrowRight className="w-3.5 h-3.5" />}
                 </Button>
@@ -99,72 +108,75 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Links Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-            <div>
-              <h3 className="text-[10px] uppercase tracking-wider text-white/30 mb-4 font-medium">Platform</h3>
-              <ul className="space-y-2.5">
+          {/* Links Grid - Minimal and airy */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 mb-20">
+            <div className="space-y-5">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30">Platform</p>
+              <ul className="space-y-3">
                 {footerLinks.platform.map((link) => (
                   <li key={link.name}>
-                    <Link to={link.href} className="text-xs text-white/50 hover:text-white transition-colors">
+                    <Link to={link.href} className="group inline-flex items-center gap-1 text-xs text-foreground/50 hover:text-foreground transition-colors">
                       {link.name}
+                      <ArrowUpRight className="w-2.5 h-2.5 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div>
-              <h3 className="text-[10px] uppercase tracking-wider text-white/30 mb-4 font-medium">Company</h3>
-              <ul className="space-y-2.5">
+            <div className="space-y-5">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30">Company</p>
+              <ul className="space-y-3">
                 {footerLinks.company.map((link) => (
                   <li key={link.name}>
-                    <Link to={link.href} className="text-xs text-white/50 hover:text-white transition-colors">
+                    <Link to={link.href} className="group inline-flex items-center gap-1 text-xs text-foreground/50 hover:text-foreground transition-colors">
                       {link.name}
+                      <ArrowUpRight className="w-2.5 h-2.5 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div>
-              <h3 className="text-[10px] uppercase tracking-wider text-white/30 mb-4 font-medium">Support</h3>
-              <ul className="space-y-2.5">
+            <div className="space-y-5">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30">Support</p>
+              <ul className="space-y-3">
                 {footerLinks.support.map((link) => (
                   <li key={link.name}>
-                    <Link to={link.href} className="text-xs text-white/50 hover:text-white transition-colors">
+                    <Link to={link.href} className="group inline-flex items-center gap-1 text-xs text-foreground/50 hover:text-foreground transition-colors">
                       {link.name}
+                      <ArrowUpRight className="w-2.5 h-2.5 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div>
-              <h3 className="text-[10px] uppercase tracking-wider text-white/30 mb-4 font-medium">Contact</h3>
-              <ul className="space-y-2.5">
+            <div className="space-y-5">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30">Contact</p>
+              <ul className="space-y-3">
                 <li>
-                  <a href="mailto:contact@neurostate.co.uk" className="text-xs text-white/50 hover:text-white transition-colors">
+                  <a href="mailto:contact@neurostate.co.uk" className="group inline-flex items-center gap-1 text-xs text-foreground/50 hover:text-foreground transition-colors">
                     contact@neurostate.co.uk
                   </a>
                 </li>
-                <li className="text-xs text-white/30">
+                <li className="text-xs text-foreground/30">
                   London, United Kingdom
                 </li>
               </ul>
             </div>
           </div>
 
-          {/* Bottom */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-white/10">
-            <p className="text-[10px] text-white/30">
-              © {new Date().getFullYear()} Neurostate. All rights reserved.
+          {/* Bottom - Ultra minimal */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-[10px] text-foreground/25">
+              © {new Date().getFullYear()} Neurostate
             </p>
-            <div className="flex gap-5">
-              <Link to="/terms" className="text-[10px] text-white/30 hover:text-white transition-colors">
+            <div className="flex gap-6">
+              <Link to="/terms" className="text-[10px] text-foreground/25 hover:text-foreground/50 transition-colors">
                 Terms
               </Link>
-              <Link to="/privacy" className="text-[10px] text-white/30 hover:text-white transition-colors">
+              <Link to="/privacy" className="text-[10px] text-foreground/25 hover:text-foreground/50 transition-colors">
                 Privacy
               </Link>
             </div>
