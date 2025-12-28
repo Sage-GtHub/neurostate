@@ -180,20 +180,20 @@ export const Header = () => {
             </Link>
           </nav>
 
-          {/* Right Actions */}
-          <div className="flex items-center gap-1.5 lg:gap-2">
+          {/* Right Actions - Search, Book Demo, Mobile Menu */}
+          <div className="hidden lg:flex items-center gap-2">
             {/* Search Button */}
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={() => setSearchOpen(!searchOpen)}
-              className="hidden lg:flex h-8 w-8 text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full"
+              className="h-8 w-8 text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full"
             >
               <Search className="h-4 w-4" />
             </Button>
             
             {/* Book a Demo - Primary CTA */}
-            <Link to="/contact" className="hidden lg:block">
+            <Link to="/contact">
               <Button 
                 size="sm"
                 className="h-8 px-4 text-[11px] font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg"
@@ -204,6 +204,10 @@ export const Header = () => {
                 </span>
               </Button>
             </Link>
+          </div>
+
+          {/* Mobile Menu Only */}
+          <div className="flex items-center lg:hidden">
             
             {/* Mobile Menu */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>

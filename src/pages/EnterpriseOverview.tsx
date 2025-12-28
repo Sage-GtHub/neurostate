@@ -3,10 +3,12 @@ import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
-import { ArrowRight, ArrowUpRight, Check, Cpu, TrendingUp, Heart, Sparkles, Trophy, Dumbbell, Filter, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Cpu, TrendingUp, Heart, Sparkles, Trophy, Dumbbell, Filter, X, Calculator, Users, PoundSterling, TrendingDown, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { Slider } from "@/components/ui/slider";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const industries = [
   {
@@ -79,10 +81,29 @@ const industries = [
 
 const categories = ["All", "Corporate", "Healthcare", "Hospitality", "Performance", "Fitness"];
 
+// ROI Calculator Data
+const industryMultipliers: Record<string, { burnoutReduction: number; productivityGain: number; turnoverReduction: number }> = {
+  "information-technology": { burnoutReduction: 0.47, productivityGain: 0.31, turnoverReduction: 0.35 },
+  "financial-services": { burnoutReduction: 0.42, productivityGain: 0.23, turnoverReduction: 0.28 },
+  "healthcare": { burnoutReduction: 0.40, productivityGain: 0.25, turnoverReduction: 0.30 },
+  "hospitality": { burnoutReduction: 0.35, productivityGain: 0.20, turnoverReduction: 0.25 },
+  "sports": { burnoutReduction: 0.30, productivityGain: 0.35, turnoverReduction: 0.20 },
+  "health-clubs": { burnoutReduction: 0.38, productivityGain: 0.28, turnoverReduction: 0.32 }
+};
+
+const PRICE_PER_EMPLOYEE = 40; // £40 per employee per month
+const AVG_SALARY = 45000; // Average UK salary for calculations
+const TURNOVER_COST_MULTIPLIER = 0.5; // Cost of turnover as % of salary
+const SICK_DAYS_COST = 150; // Daily cost of absence
+
 export default function EnterpriseOverview() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [compareMode, setCompareMode] = useState(false);
   const [selectedForCompare, setSelectedForCompare] = useState<string[]>([]);
+  
+  // ROI Calculator State
+  const [employeeCount, setEmployeeCount] = useState([100]);
+  const [selectedIndustry, setSelectedIndustry] = useState("information-technology");
 
   const filteredIndustries = activeFilter === "All" 
     ? industries 
@@ -97,6 +118,36 @@ export default function EnterpriseOverview() {
   };
 
   const comparedIndustries = industries.filter(ind => selectedForCompare.includes(ind.id));
+
+  // ROI Calculations
+  const roiData = useMemo(() => {
+    const employees = employeeCount[0];
+    const multipliers = industryMultipliers[selectedIndustry];
+    
+    const annualCost = employees * PRICE_PER_EMPLOYEE * 12;
+    
+    // Savings calculations
+    const burnoutSavings = employees * 5 * SICK_DAYS_COST * multipliers.burnoutReduction; // 5 sick days saved per employee
+    const productivityValue = employees * (AVG_SALARY * multipliers.productivityGain * 0.1); // 10% of salary increase value
+    const turnoverSavings = employees * 0.15 * (AVG_SALARY * TURNOVER_COST_MULTIPLIER) * multipliers.turnoverReduction; // 15% turnover rate baseline
+    
+    const totalSavings = burnoutSavings + productivityValue + turnoverSavings;
+    const netSavings = totalSavings - annualCost;
+    const roi = ((totalSavings - annualCost) / annualCost) * 100;
+    
+    return {
+      annualCost,
+      burnoutSavings: Math.round(burnoutSavings),
+      productivityValue: Math.round(productivityValue),
+      turnoverSavings: Math.round(turnoverSavings),
+      totalSavings: Math.round(totalSavings),
+      netSavings: Math.round(netSavings),
+      roi: Math.round(roi),
+      monthlyPerEmployee: PRICE_PER_EMPLOYEE,
+      burnoutReduction: Math.round(multipliers.burnoutReduction * 100),
+      productivityGain: Math.round(multipliers.productivityGain * 100)
+    };
+  }, [employeeCount, selectedIndustry]);
 
   return (
     <>
@@ -346,6 +397,176 @@ export default function EnterpriseOverview() {
               </motion.section>
             )}
           </AnimatePresence>
+
+          {/* ROI Calculator Section */}
+          <section className="py-20 md:py-28 px-6 md:px-8">
+            <div className="max-w-6xl mx-auto">
+              <ScrollReveal className="text-center mb-12 space-y-4">
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">ROI Calculator</span>
+                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                  Calculate your potential savings
+                </h2>
+                <p className="text-sm text-muted-foreground max-w-lg mx-auto">
+                  See how Neurostate can deliver measurable returns for your organisation at £{PRICE_PER_EMPLOYEE}/employee per month.
+                </p>
+              </ScrollReveal>
+
+              <motion.div 
+                className="flow-card p-8 md:p-10 max-w-4xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <div className="grid md:grid-cols-2 gap-8 mb-8">
+                  {/* Inputs */}
+                  <div className="space-y-6">
+                    <div>
+                      <label className="text-xs font-medium text-foreground mb-3 block">
+                        Number of employees
+                      </label>
+                      <div className="space-y-3">
+                        <Slider
+                          value={employeeCount}
+                          onValueChange={setEmployeeCount}
+                          min={10}
+                          max={1000}
+                          step={10}
+                          className="py-2"
+                        />
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] text-muted-foreground">10</span>
+                          <motion.span 
+                            className="text-2xl font-medium text-foreground"
+                            key={employeeCount[0]}
+                            initial={{ scale: 1.1 }}
+                            animate={{ scale: 1 }}
+                          >
+                            {employeeCount[0].toLocaleString()}
+                          </motion.span>
+                          <span className="text-[10px] text-muted-foreground">1,000</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-medium text-foreground mb-3 block">
+                        Industry
+                      </label>
+                      <Select value={selectedIndustry} onValueChange={setSelectedIndustry}>
+                        <SelectTrigger className="w-full h-10 text-xs rounded-xl border-border/50">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {industries.map((ind) => (
+                            <SelectItem key={ind.id} value={ind.id} className="text-xs">
+                              {ind.title}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-muted/30 border border-border/30">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Calculator className="w-4 h-4 text-primary" />
+                        <span className="text-xs font-medium text-foreground">Annual investment</span>
+                      </div>
+                      <p className="text-2xl font-medium text-foreground">
+                        £{roiData.annualCost.toLocaleString()}
+                      </p>
+                      <p className="text-[10px] text-muted-foreground mt-1">
+                        £{PRICE_PER_EMPLOYEE}/employee × {employeeCount[0]} employees × 12 months
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Results */}
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-2 gap-3">
+                      <motion.div 
+                        className="p-4 rounded-xl bg-green-500/10 border border-green-500/20"
+                        key={`burnout-${roiData.burnoutSavings}`}
+                        initial={{ scale: 0.95 }}
+                        animate={{ scale: 1 }}
+                      >
+                        <TrendingDown className="w-4 h-4 text-green-500 mb-2" />
+                        <p className="text-lg font-medium text-foreground">£{roiData.burnoutSavings.toLocaleString()}</p>
+                        <p className="text-[10px] text-muted-foreground">Burnout savings</p>
+                        <p className="text-[9px] text-green-500 mt-1">{roiData.burnoutReduction}% reduction</p>
+                      </motion.div>
+
+                      <motion.div 
+                        className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20"
+                        key={`productivity-${roiData.productivityValue}`}
+                        initial={{ scale: 0.95 }}
+                        animate={{ scale: 1 }}
+                      >
+                        <Zap className="w-4 h-4 text-blue-500 mb-2" />
+                        <p className="text-lg font-medium text-foreground">£{roiData.productivityValue.toLocaleString()}</p>
+                        <p className="text-[10px] text-muted-foreground">Productivity value</p>
+                        <p className="text-[9px] text-blue-500 mt-1">{roiData.productivityGain}% improvement</p>
+                      </motion.div>
+
+                      <motion.div 
+                        className="p-4 rounded-xl bg-purple-500/10 border border-purple-500/20"
+                        key={`turnover-${roiData.turnoverSavings}`}
+                        initial={{ scale: 0.95 }}
+                        animate={{ scale: 1 }}
+                      >
+                        <Users className="w-4 h-4 text-purple-500 mb-2" />
+                        <p className="text-lg font-medium text-foreground">£{roiData.turnoverSavings.toLocaleString()}</p>
+                        <p className="text-[10px] text-muted-foreground">Turnover savings</p>
+                        <p className="text-[9px] text-purple-500 mt-1">Reduced attrition</p>
+                      </motion.div>
+
+                      <motion.div 
+                        className="p-4 rounded-xl bg-primary/10 border border-primary/20"
+                        key={`total-${roiData.totalSavings}`}
+                        initial={{ scale: 0.95 }}
+                        animate={{ scale: 1 }}
+                      >
+                        <PoundSterling className="w-4 h-4 text-primary mb-2" />
+                        <p className="text-lg font-medium text-foreground">£{roiData.totalSavings.toLocaleString()}</p>
+                        <p className="text-[10px] text-muted-foreground">Total annual value</p>
+                      </motion.div>
+                    </div>
+
+                    {/* ROI Summary */}
+                    <motion.div 
+                      className="p-5 rounded-xl bg-foreground text-background"
+                      key={`roi-${roiData.roi}`}
+                      initial={{ scale: 0.98 }}
+                      animate={{ scale: 1 }}
+                    >
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-xs text-background/70">Net annual savings</span>
+                        <span className="text-xl font-medium">
+                          £{roiData.netSavings.toLocaleString()}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between pt-3 border-t border-background/20">
+                        <span className="text-xs text-background/70">Return on investment</span>
+                        <span className="text-2xl font-medium text-primary">
+                          {roiData.roi}%
+                        </span>
+                      </div>
+                    </motion.div>
+
+                    <Link to="/contact" className="block">
+                      <Button className="w-full h-11 text-xs font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full">
+                        Get personalised ROI analysis
+                        <ArrowUpRight className="ml-2 w-4 h-4" />
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+
+                <p className="text-[10px] text-muted-foreground text-center">
+                  *Estimates based on industry benchmarks. Actual results may vary depending on implementation and organisational factors.
+                </p>
+              </motion.div>
+            </div>
+          </section>
 
           {/* Stats Section */}
           <section className="py-20 md:py-28 px-6 md:px-8 bg-muted/30">
