@@ -45,8 +45,8 @@ const CrystalCore = () => {
         <mesh ref={coreRef}>
           <icosahedronGeometry args={[0.8, 0]} />
           <meshStandardMaterial 
-            color="#4ade80"
-            emissive="#22c55e"
+            color="#3b82f6"
+            emissive="#2563eb"
             emissiveIntensity={0.3}
             roughness={0.1}
             metalness={0.9}
@@ -58,8 +58,8 @@ const CrystalCore = () => {
         <mesh ref={innerRef} scale={0.5}>
           <dodecahedronGeometry args={[1, 0]} />
           <meshStandardMaterial 
-            color="#a3e635"
-            emissive="#84cc16"
+            color="#60a5fa"
+            emissive="#3b82f6"
             emissiveIntensity={0.5}
             transparent
             opacity={0.7}
@@ -73,8 +73,8 @@ const CrystalCore = () => {
           <mesh rotation={[Math.PI / 2, 0, 0]}>
             <torusGeometry args={[1.4, 0.015, 16, 64]} />
             <meshStandardMaterial 
-              color="#86efac"
-              emissive="#4ade80"
+              color="#93c5fd"
+              emissive="#60a5fa"
               emissiveIntensity={0.4}
               transparent
               opacity={0.8}
@@ -84,8 +84,8 @@ const CrystalCore = () => {
           <mesh rotation={[Math.PI / 3, Math.PI / 4, 0]}>
             <torusGeometry args={[1.2, 0.012, 16, 64]} />
             <meshStandardMaterial 
-              color="#bbf7d0"
-              emissive="#86efac"
+              color="#bfdbfe"
+              emissive="#93c5fd"
               emissiveIntensity={0.3}
               transparent
               opacity={0.6}
@@ -95,8 +95,8 @@ const CrystalCore = () => {
           <mesh rotation={[Math.PI / 2.5, -Math.PI / 3, Math.PI / 6]}>
             <torusGeometry args={[1.6, 0.01, 16, 64]} />
             <meshStandardMaterial 
-              color="#dcfce7"
-              emissive="#bbf7d0"
+              color="#dbeafe"
+              emissive="#bfdbfe"
               emissiveIntensity={0.2}
               transparent
               opacity={0.4}
@@ -113,7 +113,7 @@ const CrystalCore = () => {
         <mesh scale={2}>
           <sphereGeometry args={[1, 32, 32]} />
           <meshBasicMaterial 
-            color="#22c55e"
+            color="#2563eb"
             transparent
             opacity={0.03}
             side={THREE.BackSide}
@@ -144,7 +144,7 @@ const FloatingParticle = ({ position, scale, speed, index }: {
   return (
     <mesh ref={ref} position={position} scale={scale}>
       <sphereGeometry args={[1, 8, 8]} />
-      <meshBasicMaterial color="#4ade80" transparent opacity={0.6} />
+      <meshBasicMaterial color="#60a5fa" transparent opacity={0.6} />
     </mesh>
   );
 };
@@ -160,8 +160,8 @@ const RecoveryTechVisual = () => {
         <Suspense fallback={null}>
           <ambientLight intensity={0.3} />
           <directionalLight position={[5, 5, 5]} intensity={0.8} />
-          <pointLight position={[-3, 2, 3]} intensity={0.5} color="#4ade80" />
-          <pointLight position={[3, -2, -3]} intensity={0.3} color="#22c55e" />
+          <pointLight position={[-3, 2, 3]} intensity={0.5} color="#3b82f6" />
+          <pointLight position={[3, -2, -3]} intensity={0.3} color="#2563eb" />
           <CrystalCore />
         </Suspense>
       </Canvas>
