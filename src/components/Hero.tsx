@@ -177,7 +177,7 @@ const Hero = () => {
               {/* Headline with character animation */}
               <motion.h1 
                 ref={headlineRef}
-                className="text-hero-display text-foreground"
+                className="text-large-display text-foreground"
                 variants={itemVariants}
               >
                 <span className="block overflow-hidden">
