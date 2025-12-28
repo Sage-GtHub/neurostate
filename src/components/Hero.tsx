@@ -151,9 +151,9 @@ const Hero = () => {
                   <IsometricIllustration />
                 </Suspense>
                 
-                {/* Floating status pill */}
+                {/* Floating status pill - Clean white */}
                 <div 
-                  className="absolute top-8 right-8 bg-background/80 backdrop-blur-sm border border-border/50 px-4 py-2 rounded-full shadow-sm"
+                  className="absolute top-8 right-8 bg-background border border-border/50 px-4 py-2 rounded-full shadow-sm hover:shadow-md transition-shadow duration-300"
                   style={{
                     transform: `translate(${mousePosition.x * -0.15}px, ${mousePosition.y * -0.15}px)`
                   }}
@@ -164,9 +164,9 @@ const Hero = () => {
                   </div>
                 </div>
                 
-                {/* Bottom metric pill */}
+                {/* Bottom metric pill - Clean white */}
                 <div 
-                  className="absolute bottom-12 left-8 bg-background/80 backdrop-blur-sm border border-border/50 px-5 py-3 rounded-2xl shadow-sm"
+                  className="absolute bottom-12 left-8 bg-background border border-border/50 px-5 py-3 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300"
                   style={{
                     transform: `translate(${mousePosition.x * 0.15}px, ${mousePosition.y * 0.15}px)`
                   }}
@@ -175,9 +175,9 @@ const Hero = () => {
                   <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Accuracy Rate</p>
                 </div>
                 
-                {/* Top left metric */}
+                {/* Top left metric - Clean white */}
                 <div 
-                  className="absolute top-16 left-4 bg-background/80 backdrop-blur-sm border border-border/50 px-4 py-2.5 rounded-xl shadow-sm"
+                  className="absolute top-16 left-4 bg-background border border-border/50 px-4 py-2.5 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300"
                   style={{
                     transform: `translate(${mousePosition.x * 0.1}px, ${mousePosition.y * 0.1}px)`
                   }}

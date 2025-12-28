@@ -61,10 +61,10 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Platform Section - Organic cards */}
+          {/* Platform Section - Clean cards */}
           <section 
             ref={platform.ref} 
-            className={`py-24 md:py-32 px-6 md:px-8 bg-muted/30 transition-all duration-700 ${platform.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            className={`py-24 md:py-32 px-6 md:px-8 transition-all duration-700 ${platform.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
@@ -190,7 +190,7 @@ const Index = () => {
           {/* Nova AI Section */}
           <section 
             ref={nova.ref} 
-            className={`py-24 md:py-32 px-6 md:px-8 bg-muted/30 transition-all duration-700 ${nova.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            className={`py-24 md:py-32 px-6 md:px-8 transition-all duration-700 ${nova.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -318,7 +318,7 @@ const Index = () => {
           {/* Supplements Section */}
           <section 
             ref={supplements.ref} 
-            className={`py-24 md:py-32 px-6 md:px-8 bg-muted/30 transition-all duration-700 ${supplements.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            className={`py-24 md:py-32 px-6 md:px-8 transition-all duration-700 ${supplements.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
