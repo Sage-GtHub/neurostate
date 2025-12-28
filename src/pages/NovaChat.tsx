@@ -24,6 +24,7 @@ import { cn } from "@/lib/utils";
 import { NovaVoiceInterfaceEnhanced } from "@/components/nova/NovaVoiceInterfaceEnhanced";
 import { PerplexityInput } from "@/components/nova/PerplexityInput";
 import { SourceCitation } from "@/components/nova/SourceCitation";
+import { useNovaUsage } from "@/hooks/useNovaUsage";
 import ReactMarkdown from "react-markdown";
 
 interface Message {
@@ -52,6 +53,31 @@ export default function NovaChat() {
   const { toast } = useToast();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  
+  // Nova usage tracking
+  const { startSession, incrementMessages, endSession, currentSessionId } = useNovaUsage();
+  const sessionIdRef = useRef<string | null>(null);
+
+  // Start session on mount
+  useEffect(() => {
+    const initSession = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const newSessionId = await startSession('chat');
+        if (newSessionId) {
+          sessionIdRef.current = newSessionId;
+        }
+      }
+    };
+    initSession();
+
+    // End session on unmount
+    return () => {
+      if (sessionIdRef.current) {
+        endSession(sessionIdRef.current);
+      }
+    };
+  }, [startSession, endSession]);
 
   useEffect(() => {
     const loadHistory = async () => {
@@ -198,6 +224,11 @@ export default function NovaChat() {
           role: 'assistant',
           content: assistantContent
         });
+        
+        // Track usage - increment message count for this session
+        if (sessionIdRef.current) {
+          await incrementMessages(sessionIdRef.current, assistantContent.length);
+        }
       }
 
     } catch (error) {
