@@ -160,6 +160,12 @@ const AnimatedRoutes = () => {
             <Route path="/enterprise/integrations" element={<EnterpriseIntegrations />} />
             <Route path="/enterprise/pricing" element={<EnterprisePricing />} />
             <Route path="/enterprise/cases" element={<EnterpriseCaseStudies />} />
+            
+            {/* Team Management Routes */}
+            <Route path="/team" element={<TeamDashboard />} />
+            <Route path="/join" element={<JoinOrganisation />} />
+            <Route path="/team/settings" element={<TeamSettings />} />
+            
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
