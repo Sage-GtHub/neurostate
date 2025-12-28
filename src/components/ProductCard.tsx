@@ -21,33 +21,9 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
-    
-    if (!firstVariant) {
-      toast.error("Product unavailable");
-      return;
-    }
-
-    setIsAdding(true);
-    await new Promise(resolve => setTimeout(resolve, 300));
-
-    const cartItem = {
-      product,
-      variantId: firstVariant.id,
-      variantTitle: firstVariant.title,
-      price: firstVariant.price,
-      quantity: 1,
-      selectedOptions: firstVariant.selectedOptions || []
-    };
-    
-    addItem(cartItem);
-    setIsAdding(false);
-    setJustAdded(true);
-    
-    toast.success("Added to cart", {
-      description: `${node.title} has been added to your cart.`,
+    toast.info("Coming Soon", {
+      description: "Our shop is launching soon. Stay tuned!",
     });
-    
-    setTimeout(() => setJustAdded(false), 2000);
   };
 
   return (

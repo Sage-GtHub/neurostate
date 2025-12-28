@@ -83,7 +83,7 @@ export const Header = () => {
   ];
 
   const mobileLinks = [
-    { label: "Shop", href: "/shop" },
+    { label: "Shop", href: "#", comingSoon: true },
     { label: "Nova AI", href: "/nova/overview" },
     { label: "For Teams", href: "/enterprise/overview" },
     { label: "About", href: "/about" },
@@ -144,12 +144,17 @@ export const Header = () => {
               </NavigationMenuList>
             </NavigationMenu>
 
-            <Link
-              to="/shop"
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                toast.info("Coming Soon", {
+                  description: "Our shop is launching soon. Stay tuned!",
+                });
+              }}
               className="text-xs font-normal text-foreground/60 hover:text-foreground transition-colors px-3 py-2 rounded-full hover:bg-muted/50"
             >
               Shop
-            </Link>
+            </button>
 
             <Link
               to="/nova/overview"
@@ -281,14 +286,29 @@ export const Header = () => {
                 
                 <nav className="p-5 space-y-1">
                   {mobileLinks.map((link) => (
-                    <Link
-                      key={link.label}
-                      to={link.href}
-                      className="block py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
+                    link.comingSoon ? (
+                      <button
+                        key={link.label}
+                        className="block py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors w-full text-left"
+                        onClick={() => {
+                          toast.info("Coming Soon", {
+                            description: "Our shop is launching soon. Stay tuned!",
+                          });
+                          setMobileMenuOpen(false);
+                        }}
+                      >
+                        {link.label}
+                      </button>
+                    ) : (
+                      <Link
+                        key={link.label}
+                        to={link.href}
+                        className="block py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {link.label}
+                      </Link>
+                    )
                   ))}
                   
                   <div className="pt-5 border-t border-border mt-5">
