@@ -6,14 +6,18 @@ import { ProductCard } from "@/components/ProductCard";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ArrowLeft, ChevronDown } from "lucide-react";
 import { ProductGridSkeleton } from "@/components/ProductSkeleton";
 import { SEO } from "@/components/SEO";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Shop = () => {
   const [sortBy, setSortBy] = useState("featured");
   const [filterCategory, setFilterCategory] = useState("all");
+  const [showFilters, setShowFilters] = useState(false);
+  
+  const hero = useScrollAnimation();
+  const grid = useScrollAnimation();
 
   const { data: products, isLoading, error } = useQuery({
     queryKey: ['products'],
@@ -90,89 +94,140 @@ const Shop = () => {
     return 0;
   });
 
+  const categories = [
+    { value: "all", label: "All" },
+    { value: "supplements", label: "Supplements" },
+    { value: "devices", label: "Devices" },
+    { value: "cognitive", label: "Cognitive" },
+    { value: "sleep", label: "Sleep" },
+    { value: "recovery", label: "Recovery" },
+  ];
+
   return (
     <>
       <SEO 
         title="Shop | Cognitive Performance Products | Neurostate"
         description="Browse the biological optimisation components of the Neurostate cognitive system. Research-backed formulas and neuromodulation devices for peak cognitive performance."
       />
-      <div className="min-h-screen bg-background mobile-nav-padding">
+      <div className="min-h-screen bg-background mobile-nav-padding relative">
+        {/* Organic background elements */}
+        <div className="fixed inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-40 right-0 w-[600px] h-[600px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
+          <div className="absolute bottom-40 left-0 w-[500px] h-[500px] rounded-full bg-primary/[0.02] blur-3xl animate-float" style={{ animationDelay: '3s' }} />
+        </div>
+        
         <Header />
         
-        <main>
-          {/* Hero */}
-          <section className="pt-24 md:pt-32 pb-12 md:pb-16 px-6 md:px-12 lg:px-20 xl:px-32 border-b border-border">
+        <main className="relative">
+          {/* Hero - Minimal and airy */}
+          <section 
+            ref={hero.ref} 
+            className={`pt-28 md:pt-36 pb-16 md:pb-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          >
             <div className="max-w-6xl mx-auto">
-              <Link to="/">
-                <Button variant="ghost" size="sm" className="mb-8 -ml-3">
-                  <ArrowLeft className="mr-2 h-4 w-4" /> Back
-                </Button>
+              <Link to="/" className="inline-flex items-center gap-2 text-[11px] text-foreground/40 hover:text-foreground/60 transition-colors mb-10">
+                <ArrowLeft className="w-3 h-3" />
+                Back
               </Link>
-              <p className="text-primary/60 text-xs tracking-[0.3em] uppercase font-medium mb-4">Shop</p>
-              <h1 className="text-4xl md:text-5xl font-medium text-foreground leading-[1.1] tracking-tight mb-4">
-                All Products
-              </h1>
-              <p className="text-lg text-muted-foreground max-w-2xl">
-                Research-backed supplements and clinical-grade neuromodulation devices.
-              </p>
-            </div>
-          </section>
-
-          {/* Filters */}
-          <section className="py-8 px-6 md:px-12 lg:px-20 xl:px-32 border-b border-border">
-            <div className="max-w-6xl mx-auto flex flex-col sm:flex-row gap-4">
-              <div className="flex-1">
-                <label className="text-xs text-muted-foreground uppercase tracking-wider mb-2 block">Category</label>
-                <Select value={filterCategory} onValueChange={setFilterCategory}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="All Products" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Products</SelectItem>
-                    <SelectItem value="supplements">Supplements</SelectItem>
-                    <SelectItem value="devices">Devices</SelectItem>
-                    <SelectItem value="recovery">Recovery</SelectItem>
-                    <SelectItem value="sleep">Sleep</SelectItem>
-                    <SelectItem value="cognitive">Cognitive</SelectItem>
-                    <SelectItem value="performance">Performance</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="flex-1">
-                <label className="text-xs text-muted-foreground uppercase tracking-wider mb-2 block">Sort by</label>
-                <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Featured" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="featured">Featured</SelectItem>
-                    <SelectItem value="price-asc">Price: Low to High</SelectItem>
-                    <SelectItem value="price-desc">Price: High to Low</SelectItem>
-                    <SelectItem value="name">Name: A-Z</SelectItem>
-                  </SelectContent>
-                </Select>
+              
+              <div className="space-y-4">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/40">Shop</p>
+                <h1 className="text-3xl md:text-4xl font-light text-foreground tracking-tight">
+                  All Products
+                </h1>
+                <p className="text-sm text-foreground/50 max-w-md">
+                  Research-backed supplements and clinical-grade neuromodulation devices.
+                </p>
               </div>
             </div>
           </section>
 
-          {/* Products Grid */}
-          <section className="py-16 md:py-24 px-6 md:px-12 lg:px-20 xl:px-32">
+          {/* Filters - Pill style */}
+          <section className="px-6 md:px-12 lg:px-20 xl:px-32 pb-12">
+            <div className="max-w-6xl mx-auto">
+              {/* Category Pills */}
+              <div className="flex flex-wrap gap-2 mb-6">
+                {categories.map((cat) => (
+                  <button
+                    key={cat.value}
+                    onClick={() => setFilterCategory(cat.value)}
+                    className={`px-4 py-2 rounded-full text-[11px] transition-all duration-300 ${
+                      filterCategory === cat.value
+                        ? 'bg-foreground text-background'
+                        : 'bg-foreground/[0.03] text-foreground/60 hover:bg-foreground/[0.06] hover:text-foreground'
+                    }`}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </div>
+              
+              {/* Sort dropdown */}
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => setShowFilters(!showFilters)}
+                  className="flex items-center gap-2 text-[11px] text-foreground/40 hover:text-foreground/60 transition-colors"
+                >
+                  Sort by: {sortBy === "featured" ? "Featured" : sortBy === "price-asc" ? "Price ↑" : sortBy === "price-desc" ? "Price ↓" : "A-Z"}
+                  <ChevronDown className={`w-3 h-3 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {showFilters && (
+                  <div className="flex gap-2">
+                    {[
+                      { value: "featured", label: "Featured" },
+                      { value: "price-asc", label: "Price ↑" },
+                      { value: "price-desc", label: "Price ↓" },
+                      { value: "name", label: "A-Z" },
+                    ].map((sort) => (
+                      <button
+                        key={sort.value}
+                        onClick={() => { setSortBy(sort.value); setShowFilters(false); }}
+                        className={`px-3 py-1.5 rounded-full text-[10px] transition-all ${
+                          sortBy === sort.value
+                            ? 'bg-foreground/10 text-foreground'
+                            : 'text-foreground/40 hover:text-foreground/60'
+                        }`}
+                      >
+                        {sort.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+                
+                <span className="ml-auto text-[10px] text-foreground/30">
+                  {sortedProducts.length} products
+                </span>
+              </div>
+            </div>
+          </section>
+
+          {/* Products Grid - Organic flow */}
+          <section 
+            ref={grid.ref}
+            className={`pb-24 md:pb-32 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${grid.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          >
             <div className="max-w-6xl mx-auto">
               {isLoading ? (
                 <ProductGridSkeleton />
               ) : error ? (
-                <div className="text-center py-16">
-                  <p className="text-destructive">Failed to load products. Please try again later.</p>
+                <div className="text-center py-20">
+                  <p className="text-sm text-foreground/40">Failed to load products. Please try again.</p>
                 </div>
               ) : sortedProducts.length === 0 ? (
-                <div className="text-center py-16">
-                  <p className="text-muted-foreground">No products found in this category.</p>
+                <div className="text-center py-20">
+                  <p className="text-sm text-foreground/40">No products found in this category.</p>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-                  {sortedProducts.map((product) => (
-                    <ProductCard key={product.node.id} product={product} />
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+                  {sortedProducts.map((product, i) => (
+                    <div 
+                      key={product.node.id} 
+                      className="animate-fade-in"
+                      style={{ animationDelay: `${i * 50}ms` }}
+                    >
+                      <ProductCard product={product} />
+                    </div>
                   ))}
                 </div>
               )}
