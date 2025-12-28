@@ -1,19 +1,16 @@
-import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Button } from "@/components/ui/button";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { LiveChat } from "@/components/LiveChat";
 import { SEO } from "@/components/SEO";
 import { FAQStructuredData } from "@/components/StructuredData";
 
 const FAQ = () => {
-  const [chatOpen, setChatOpen] = useState(false);
-  
   const faqCategories = [
     {
       category: "Orders & Delivery",
@@ -30,10 +27,6 @@ const FAQ = () => {
           q: "Can I track my order?",
           a: "Of course. Once your order's dispatched, you'll get a tracking number via email so you can keep an eye on it.",
         },
-        {
-          q: "What if my order arrives damaged?",
-          a: "Really sorry if that happens! Just get in touch with our support team within 48 hours with photos of the damage, and we'll send a replacement straight away.",
-        },
       ],
     },
     {
@@ -41,19 +34,15 @@ const FAQ = () => {
       questions: [
         {
           q: "How do I know which products are right for me?",
-          a: "Take our Product Quiz on the homepage—it'll give you personalised recommendations based on your wellness goals and lifestyle.",
+          a: "Take our Product Quiz on the homepage—it'll give you personalised recommendations based on your wellness goals.",
         },
         {
           q: "Are your products third-party tested?",
-          a: "Yes, everything goes through rigorous third-party testing for purity, potency, and safety. Transparency and quality are non-negotiable for us.",
-        },
-        {
-          q: "Can I take multiple products together?",
-          a: "Most of our products are designed to work well together. Check individual product pages for specific combinations, or drop our support team a message.",
+          a: "Yes, everything goes through rigorous third-party testing for purity, potency, and safety.",
         },
         {
           q: "How long until I see results?",
-          a: "It varies depending on the product and the person. Most customers notice improvements within 2-4 weeks of consistent use. Stick to the recommended dose for best results.",
+          a: "It varies depending on the product and the person. Most customers notice improvements within 2-4 weeks of consistent use.",
         },
       ],
     },
@@ -68,31 +57,6 @@ const FAQ = () => {
           q: "How do I start a return?",
           a: "Get in touch with our support team with your order number and reason for return. We'll send you a return postage label and instructions.",
         },
-        {
-          q: "When will I get my refund?",
-          a: "Refunds are processed within 5-7 working days of us receiving your return. You'll get an email confirmation once it's sorted.",
-        },
-        {
-          q: "Can I exchange a product?",
-          a: "Yes! If you'd like to swap for something else, just let us know during the return process and we'll sort the exchange.",
-        },
-      ],
-    },
-    {
-      category: "Ambassador Program",
-      questions: [
-        {
-          q: "How does the Ambassador Programme work?",
-          a: "Our ambassadors get exclusive discounts, early access to new products, and earn commission on referral sales. Head to our Ambassador page to learn more and apply.",
-        },
-        {
-          q: "What are the benefits of being an ambassador?",
-          a: "Ambassadors enjoy 25% off all products, access to exclusive content, commission on sales, and the chance to be featured on our platform.",
-        },
-        {
-          q: "How do I apply to become an ambassador?",
-          a: "Visit our Ambassador Programme page and fill out the application. We're looking for passionate people who align with our wellness mission.",
-        },
       ],
     },
     {
@@ -100,15 +64,11 @@ const FAQ = () => {
       questions: [
         {
           q: "How do subscriptions work?",
-          a: "Subscribe to your favourite products and save 15%. Pick your delivery frequency (monthly, bi-monthly, quarterly) and change or cancel anytime.",
+          a: "Subscribe to your favourite products and save 15%. Pick your delivery frequency and change or cancel anytime.",
         },
         {
           q: "Can I pause my subscription?",
           a: "Yes, you can pause, change, or cancel your subscription anytime from your account dashboard—no penalties.",
-        },
-        {
-          q: "How do I update my account details?",
-          a: "Log into your account and head to the settings section to update your email, password, delivery address, and payment methods.",
         },
       ],
     },
@@ -121,73 +81,74 @@ const FAQ = () => {
   return (
     <>
       <SEO 
-        title="FAQ – Frequently Asked Questions | NeuroState"
-        description="Common questions about NeuroState cognitive performance supplements, red light therapy devices, delivery, returns, and the Nova AI performance assistant."
+        title="FAQ | Neurostate"
+        description="Common questions about Neurostate cognitive performance supplements, devices, delivery, and returns."
       />
       <FAQStructuredData faqs={allFaqs} />
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-background">
         <Header />
-      <main className="flex-1">
-        <section className="py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32 border-b border-mist">
-          <div className="w-full max-w-7xl mx-auto">
-            <div className="max-w-2xl mx-auto text-center">
-              <h1 className="text-[2.25rem] md:text-[3rem] font-normal text-carbon mb-4" style={{ lineHeight: '1.2' }}>
+        
+        <main className="flex-1">
+          {/* Hero */}
+          <section className="pt-24 md:pt-32 pb-12 md:pb-16 px-6 md:px-12 lg:px-20 xl:px-32 border-b border-border">
+            <div className="max-w-4xl mx-auto text-center">
+              <p className="text-primary/60 text-xs tracking-[0.3em] uppercase font-medium mb-4">Support</p>
+              <h1 className="text-4xl md:text-5xl font-medium text-foreground leading-[1.1] tracking-tight mb-4">
                 Frequently asked questions
               </h1>
-              <p className="text-[0.9375rem] text-ash">
-                Common questions about our products, delivery, and policies
+              <p className="text-lg text-muted-foreground">
+                Common questions about our products, delivery, and policies.
               </p>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="py-16 md:py-24 px-4 sm:px-6 md:px-8 lg:px-20 xl:px-32">
-          <div className="w-full max-w-3xl mx-auto space-y-12">
-            {faqCategories.map((category) => (
-              <div key={category.category} className="py-8 border-t border-mist first:border-t-0">
-                <h2 className="text-[1.125rem] font-normal text-carbon mb-6 flex items-center gap-3">
-                  <span className="w-2 h-2 bg-signal-green"></span>
-                  {category.category}
-                </h2>
-                <Accordion type="single" collapsible className="w-full">
-                  {category.questions.map((item, idx) => (
-                    <AccordionItem key={idx} value={`item-${idx}`} className="border-mist">
-                      <AccordionTrigger className="text-left text-[0.9375rem] font-normal text-carbon hover:no-underline hover:text-signal-green transition-colors">
-                        {item.q}
-                      </AccordionTrigger>
-                      <AccordionContent className="text-[0.875rem] text-ash">
-                        {item.a}
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              </div>
-            ))}
-          </div>
-        </section>
+          {/* FAQ Content */}
+          <section className="py-16 md:py-24 px-6 md:px-12 lg:px-20 xl:px-32">
+            <div className="max-w-3xl mx-auto space-y-12">
+              {faqCategories.map((category) => (
+                <div key={category.category}>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-1 h-1 bg-primary rounded-full" />
+                    <h2 className="text-sm font-medium text-foreground uppercase tracking-wider">
+                      {category.category}
+                    </h2>
+                  </div>
+                  <Accordion type="single" collapsible className="w-full">
+                    {category.questions.map((item, idx) => (
+                      <AccordionItem key={idx} value={`item-${idx}`} className="border-border">
+                        <AccordionTrigger className="text-left text-sm font-medium text-foreground hover:text-primary transition-colors hover:no-underline py-4">
+                          {item.q}
+                        </AccordionTrigger>
+                        <AccordionContent className="text-sm text-muted-foreground pb-4">
+                          {item.a}
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                </div>
+              ))}
+            </div>
+          </section>
 
-        {/* Contact CTA */}
-        <section className="bg-muted/30 py-16">
-          <div className="container mx-auto px-4">
+          {/* CTA */}
+          <section className="py-16 md:py-24 px-6 md:px-12 lg:px-20 xl:px-32 bg-muted/30 border-t border-border">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl font-bold mb-4">Still got questions?</h2>
-              <p className="text-lg text-muted-foreground mb-8">
-                Our support team is here to help. Get in touch and we'll get back to you within 24 hours.
+              <h2 className="text-2xl md:text-3xl font-medium text-foreground mb-4">
+                Still have questions?
+              </h2>
+              <p className="text-muted-foreground mb-8">
+                Our support team typically responds within 24 hours.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                  href="mailto:contact@neurostate.co.uk"
-                  className="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-8 py-3 font-medium hover:bg-primary/90 transition-colors"
-                >
+              <a href="mailto:contact@neurostate.co.uk">
+                <Button size="lg">
                   Email support
-                </a>
-              </div>
+                </Button>
+              </a>
             </div>
-          </div>
-        </section>
-      </main>
-      <Footer />
-        <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
+          </section>
+        </main>
+        
+        <Footer />
       </div>
     </>
   );

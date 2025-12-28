@@ -14,7 +14,6 @@ const navItems = [
   { to: "/nova/settings", label: "Settings", icon: Settings },
 ];
 
-// Mobile bottom nav shows only key items
 const mobileNavItems = [
   { to: "/nova/chat", label: "Chat", icon: MessageCircle },
   { to: "/nova", label: "Home", icon: LayoutDashboard, end: true },
@@ -33,10 +32,10 @@ export const NovaNav = () => {
 
   return (
     <>
-      {/* Desktop Navigation - Top Bar */}
-      <nav className="hidden md:block sticky top-0 z-40 bg-black/90 backdrop-blur-xl border-b border-border/20">
-        <div className="px-6">
-          <div className="flex items-center gap-1 py-2 overflow-x-auto scrollbar-hide">
+      {/* Desktop Navigation */}
+      <nav className="hidden md:block sticky top-0 z-40 bg-background/95 backdrop-blur-xl border-b border-border">
+        <div className="px-6 md:px-12 lg:px-20">
+          <div className="flex items-center gap-1 py-3 overflow-x-auto">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
@@ -46,8 +45,8 @@ export const NovaNav = () => {
                   "text-xs font-medium uppercase tracking-wider",
                   "text-muted-foreground transition-all duration-200",
                   "hover:text-foreground whitespace-nowrap",
-                  "px-4 py-2.5 rounded-full",
-                  "hover:bg-white/5"
+                  "px-4 py-2 rounded-md",
+                  "hover:bg-muted/50"
                 )}
                 activeClassName="text-primary bg-primary/10"
               >
@@ -58,8 +57,8 @@ export const NovaNav = () => {
         </div>
       </nav>
 
-      {/* Mobile Navigation - Bottom Tab Bar (Whoop Style) */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-xl border-t border-border/20 pb-safe">
+      {/* Mobile Navigation */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-xl border-t border-border pb-safe">
         <div className="flex items-center justify-around py-2">
           {mobileNavItems.map((item) => {
             const active = isActive(item.to, item.end);
@@ -90,7 +89,6 @@ export const NovaNav = () => {
           })}
         </div>
       </nav>
-
     </>
   );
 };
