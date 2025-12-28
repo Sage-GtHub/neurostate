@@ -166,21 +166,21 @@ export const Header = () => {
             </NavigationMenu>
 
             <Link
+              to="/enterprise/overview"
+              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
+            >
+              For Teams
+            </Link>
+
+            <Link
               to="/nova/overview"
               className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
             >
               Nova AI
             </Link>
-
-            <Link
-              to="/about"
-              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
-            >
-              Company
-            </Link>
           </nav>
 
-          {/* Right Actions - Search, Book Demo, Mobile Menu */}
+          {/* Right Actions - Search, Book Demo, Company */}
           <div className="hidden lg:flex items-center gap-2">
             {/* Search Button */}
             <Button 
@@ -192,7 +192,7 @@ export const Header = () => {
               <Search className="h-4 w-4" />
             </Button>
             
-            {/* Book a Demo - Primary CTA */}
+            {/* Book a Demo - Between Search and Company */}
             <Link to="/contact">
               <Button 
                 size="sm"
@@ -203,6 +203,14 @@ export const Header = () => {
                   <ArrowUpRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </span>
               </Button>
+            </Link>
+
+            {/* Company Link */}
+            <Link
+              to="/about"
+              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
+            >
+              Company
             </Link>
           </div>
 
