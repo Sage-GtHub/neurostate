@@ -56,35 +56,34 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="relative overflow-hidden">
-      {/* Organic background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-stone-100 to-stone-50" />
+    <footer className="relative overflow-hidden bg-background">
+      {/* Subtle gradient at top */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
       
-      {/* Floating orbs */}
-      <div className="absolute top-20 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/5 blur-3xl animate-float pointer-events-none" />
-      <div className="absolute bottom-20 left-1/4 w-[300px] h-[300px] rounded-full bg-primary/5 blur-3xl animate-float pointer-events-none" style={{ animationDelay: '2s' }} />
+      {/* Floating orb - subtle */}
+      <div className="absolute top-40 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/3 blur-3xl animate-float pointer-events-none" />
       
       <div className="relative px-6 md:px-12 lg:px-20 xl:px-32 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
-          {/* Top Section - Flowing layout */}
+          {/* Top Section */}
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 mb-20 pb-16 border-b border-foreground/5">
             {/* Brand */}
             <div className="lg:max-w-xs space-y-5">
               <Link to="/" className="inline-flex items-center gap-2.5 group">
                 <div className="w-8 h-8 rounded-full bg-foreground/5 flex items-center justify-center group-hover:bg-foreground/10 transition-colors">
-                  <img src={logoIcon} alt="Neurostate" className="h-4 w-4 opacity-70" />
+                  <img src={logoIcon} alt="Neurostate" className="h-4 w-4 opacity-60" />
                 </div>
-                <span className="text-xs font-medium tracking-tight text-foreground/80">Neurostate</span>
+                <span className="text-xs font-medium tracking-tight text-foreground/70">Neurostate</span>
               </Link>
               <p className="text-foreground/40 text-[11px] leading-relaxed">
                 The AI operating system for human performance. Cognitive forecasting, precision supplements, and neuromodulation.
               </p>
             </div>
 
-            {/* Newsletter - Organic form */}
+            {/* Newsletter */}
             <div className="flex-1 lg:max-w-sm lg:ml-auto space-y-4">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/40">Newsletter</p>
-              <p className="text-foreground/60 text-xs">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30">Newsletter</p>
+              <p className="text-foreground/50 text-xs">
                 Get 10% off your first order.
               </p>
               <form onSubmit={handleNewsletterSignup} className="flex gap-2">
@@ -93,7 +92,7 @@ export const Footer = () => {
                   placeholder="your@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 h-10 bg-foreground/[0.03] border-foreground/10 text-foreground text-xs placeholder:text-foreground/30 focus:border-accent/50 rounded-full px-5"
+                  className="flex-1 h-10 bg-foreground/[0.03] border-foreground/10 text-foreground text-xs placeholder:text-foreground/30 focus:border-foreground/20 rounded-full px-5"
                   disabled={isLoading}
                 />
                 <Button 
@@ -108,7 +107,7 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Links Grid - Minimal and airy */}
+          {/* Links Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 mb-20">
             <div className="space-y-5">
               <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30">Platform</p>
@@ -167,7 +166,7 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Bottom - Ultra minimal */}
+          {/* Bottom */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-[10px] text-foreground/25">
               © {new Date().getFullYear()} Neurostate
