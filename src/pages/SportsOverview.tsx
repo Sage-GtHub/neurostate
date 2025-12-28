@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { SEO } from "@/components/SEO";
-import { ArrowRight, CheckCircle2, TrendingUp, Shield, Target, Activity } from "lucide-react";
+import { ArrowRight, CheckCircle2, Target, Activity, Shield } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export default function SportsOverview() {
@@ -15,60 +15,51 @@ export default function SportsOverview() {
   const included = useScrollAnimation();
   const form = useScrollAnimation();
   
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    organisation: "",
-    athletes: "",
-    goals: ""
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Partnership demo request:", formData);
-  };
+  const [formData, setFormData] = useState({ name: "", email: "", organisation: "", athletes: "", goals: "" });
+  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); console.log("Partnership demo request:", formData); };
 
   return (
     <>
       <SEO 
         title="Athletic Cognitive Infrastructure | AI Performance Forecasting for Sports"
-        description="Predictive cognitive analytics for elite athletes. Real-time performance forecasting, risk prediction, and cognitive readiness measurement for sports organisations."
-        keywords="sports cognitive infrastructure, athlete performance forecasting, AI sports analytics, predictive athletic performance, cognitive readiness measurement"
+        description="Predictive cognitive analytics for elite athletes. Real-time performance forecasting and injury prevention."
       />
       
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-1/4 right-0 w-[600px] h-[600px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
+        </div>
+
         <Header />
         
-        {/* Hero - Performance Focused */}
-        <section ref={hero.ref} className={`pt-28 sm:pt-36 pb-20 sm:pb-28 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="max-w-5xl mx-auto text-center space-y-6">
-            <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Football · Rugby · Athletics · Elite Teams</p>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-carbon leading-[1.02]">
-              Predictive Performance
-              <br />
-              <span className="text-accent">Infrastructure for Sport.</span>
+        {/* Hero */}
+        <section ref={hero.ref} className={`relative pt-32 sm:pt-44 pb-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+            <p className="text-[10px] uppercase tracking-[0.25em] text-foreground/40">Football · Rugby · Athletics</p>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-foreground leading-[1.1]">
+              Predictive Performance<br />
+              <span className="text-foreground/50">Infrastructure for Sport</span>
             </h1>
-            <p className="text-xl text-ash max-w-2xl mx-auto">
-              AI-driven cognitive forecasting for sports organisations. 
-              Predict performance volatility. Measure cognitive readiness. Reduce injury risk.
+            <p className="text-sm text-foreground/50 max-w-lg mx-auto">
+              AI-driven cognitive forecasting for sports organisations. Predict performance volatility. Reduce injury risk.
             </p>
           </div>
         </section>
 
         {/* Impact Metrics */}
-        <section className="py-16 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-carbon text-ivory">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-slate">
+        <section className="px-6 md:px-12 lg:px-20 xl:px-32 pb-20">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { stat: "+23%", label: "Performance Gain", desc: "Key metrics" },
-                { stat: "-41%", label: "Injury Reduction", desc: "Soft tissue" },
-                { stat: "-38%", label: "Recovery Time", desc: "Return to peak" },
-                { stat: "89%", label: "Athlete Satisfaction", desc: "Programme NPS" }
+                { stat: "+23%", label: "Performance", desc: "Key metrics" },
+                { stat: "-41%", label: "Injuries", desc: "Soft tissue" },
+                { stat: "-38%", label: "Recovery", desc: "Return time" },
+                { stat: "89%", label: "Satisfaction", desc: "NPS score" }
               ].map((item, i) => (
-                <div key={i} className="bg-carbon p-6 sm:p-8 text-center">
-                  <p className="text-3xl sm:text-4xl font-bold text-signal-green mb-1">{item.stat}</p>
-                  <p className="text-ivory font-medium text-sm mb-1">{item.label}</p>
-                  <p className="text-xs text-mist">{item.desc}</p>
+                <div key={i} className="p-6 rounded-3xl bg-foreground text-center">
+                  <p className="text-2xl font-light text-accent mb-1">{item.stat}</p>
+                  <p className="text-xs text-background mb-0.5">{item.label}</p>
+                  <p className="text-[10px] text-background/50">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -76,37 +67,23 @@ export default function SportsOverview() {
         </section>
 
         {/* What Athletes Get */}
-        <section ref={outcomes.ref} className={`py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-white transition-all duration-1000 ${outcomes.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16 space-y-4">
-              <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Athlete Benefits</p>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.1]">
-                What athletes get.
-              </h2>
+        <section ref={outcomes.ref} className={`py-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${outcomes.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12 space-y-4">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/40">Athlete Benefits</p>
+              <h2 className="text-3xl font-light text-foreground">What athletes get</h2>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-px bg-mist">
+            <div className="grid md:grid-cols-3 gap-4">
               {[
-                {
-                  icon: Target,
-                  title: "Nova AI Coach",
-                  description: "Personalised protocols based on training load, recovery status, and competition schedule."
-                },
-                {
-                  icon: Activity,
-                  title: "Recovery Optimisation",
-                  description: "Red light therapy, supplement stacks, and sleep protocols designed for athletic recovery."
-                },
-                {
-                  icon: Shield,
-                  title: "Injury Prevention",
-                  description: "Early warning detection. Protocol adjustments before problems become injuries."
-                }
+                { icon: Target, title: "Nova AI Coach", description: "Personalised protocols based on training load, recovery status, and competition schedule." },
+                { icon: Activity, title: "Recovery Optimisation", description: "Red light therapy, supplement stacks, and sleep protocols designed for athletic recovery." },
+                { icon: Shield, title: "Injury Prevention", description: "Early warning detection. Protocol adjustments before problems become injuries." }
               ].map((item, index) => (
-                <div key={index} className="bg-white p-10 sm:p-12 border-l-2 border-signal-green/30">
-                  <item.icon className="w-8 h-8 text-signal-green mb-6" />
-                  <h3 className="text-xl font-bold text-carbon mb-3">{item.title}</h3>
-                  <p className="text-ash text-sm leading-relaxed">{item.description}</p>
+                <div key={index} className="p-8 rounded-3xl bg-foreground/[0.02] hover:bg-foreground group transition-all duration-500">
+                  <item.icon className="w-5 h-5 text-accent mb-5" />
+                  <h3 className="text-sm font-medium text-foreground group-hover:text-background mb-2 transition-colors">{item.title}</h3>
+                  <p className="text-xs text-foreground/50 group-hover:text-background/60 transition-colors">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -114,44 +91,34 @@ export default function SportsOverview() {
         </section>
 
         {/* Value Protection */}
-        <section ref={value.ref} className={`py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl transition-all duration-1000 ${value.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <section ref={value.ref} className={`py-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${value.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="max-w-5xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
-                <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">ROI</p>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.1]">
-                  Protect your
-                  <br />
-                  <span className="text-accent">most valuable assets.</span>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/40">ROI</p>
+                <h2 className="text-3xl font-light text-foreground">
+                  Protect your<br /><span className="text-foreground/50">most valuable assets</span>
                 </h2>
-                <p className="text-lg text-ash leading-relaxed">
-                  Every injury costs time, money, and competitive advantage. 
-                  NeuroState helps athletes stay on the pitch.
-                </p>
+                <p className="text-sm text-foreground/50">Every injury costs time, money, and competitive advantage. NeuroState helps athletes stay on the pitch.</p>
               </div>
 
-              <div className="bg-carbon text-ivory p-8 sm:p-10">
-                <h3 className="text-lg font-bold mb-6">Example: 25 Athlete Squad</h3>
-                <div className="space-y-4 text-sm">
-                  <div className="flex justify-between pb-4 border-b border-slate">
-                    <span className="text-mist">Squad Size</span>
-                    <span className="font-bold">25 athletes</span>
-                  </div>
-                  <div className="flex justify-between pb-4 border-b border-slate">
-                    <span className="text-mist">Average Player Value</span>
-                    <span className="font-bold">£5M</span>
-                  </div>
-                  <div className="flex justify-between pb-4 border-b border-slate">
-                    <span className="text-mist">Injury Prevention Value (41%)</span>
-                    <span className="font-bold text-accent">£2.05M protected</span>
-                  </div>
-                  <div className="flex justify-between pb-4 border-b border-slate">
-                    <span className="text-mist">Annual Investment</span>
-                    <span className="font-bold">£45K</span>
-                  </div>
-                  <div className="flex justify-between pt-4 border-t-2 border-accent">
-                    <span className="text-lg font-bold">Value Protected</span>
-                    <span className="text-2xl font-bold text-accent">£2.0M+</span>
+              <div className="p-8 rounded-3xl bg-foreground">
+                <h3 className="text-sm font-medium text-background mb-6">Example: 25 Athlete Squad</h3>
+                <div className="space-y-4 text-xs">
+                  {[
+                    { label: "Squad Size", value: "25 athletes" },
+                    { label: "Average Player Value", value: "£5M" },
+                    { label: "Injury Prevention (41%)", value: "£2.05M protected", accent: true },
+                    { label: "Annual Investment", value: "£45K" },
+                  ].map((item, i) => (
+                    <div key={i} className="flex justify-between pb-3 border-b border-background/10">
+                      <span className="text-background/50">{item.label}</span>
+                      <span className={item.accent ? "text-accent font-medium" : "text-background font-medium"}>{item.value}</span>
+                    </div>
+                  ))}
+                  <div className="flex justify-between pt-3">
+                    <span className="text-background font-medium">Value Protected</span>
+                    <span className="text-accent text-lg font-medium">£2.0M+</span>
                   </div>
                 </div>
               </div>
@@ -160,27 +127,18 @@ export default function SportsOverview() {
         </section>
 
         {/* What's Included */}
-        <section ref={included.ref} className={`py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-white transition-all duration-1000 ${included.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16 space-y-4">
-              <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium">Partnership Includes</p>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-carbon leading-[1.1]">
-                Full performance stack.
-              </h2>
+        <section ref={included.ref} className={`py-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${included.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12 space-y-4">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/40">Partnership Includes</p>
+              <h2 className="text-3xl font-light text-foreground">Full performance stack</h2>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                "Nova AI for all athletes",
-                "Team analytics dashboard",
-                "Staff training",
-                "Recovery devices",
-                "Supplement protocols",
-                "Competition readiness tools"
-              ].map((item, index) => (
-                <div key={index} className="flex items-center gap-4 p-6 bg-pearl border-l-2 border-signal-green/40">
-                  <CheckCircle2 className="w-5 h-5 text-signal-green flex-shrink-0" />
-                  <span className="text-carbon font-medium">{item}</span>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {["Nova AI for all athletes", "Team analytics dashboard", "Staff training", "Recovery devices", "Supplement protocols", "Competition readiness"].map((item, index) => (
+                <div key={index} className="flex items-center gap-3 p-5 rounded-2xl bg-foreground/[0.02]">
+                  <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0" />
+                  <span className="text-xs text-foreground">{item}</span>
                 </div>
               ))}
             </div>
@@ -188,58 +146,29 @@ export default function SportsOverview() {
         </section>
 
         {/* Contact Form */}
-        <section ref={form.ref} className={`py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-pearl transition-all duration-1000 ${form.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-12 space-y-4">
-              <h2 className="text-3xl sm:text-4xl font-bold text-carbon">
-                Talk to our sports team.
-              </h2>
-              <p className="text-ash">
-                See how NeuroState works for elite athletes. We respond within 24 hours.
-              </p>
-            </div>
+        <section ref={form.ref} className={`py-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${form.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="max-w-lg mx-auto">
+            <div className="glass-subtle rounded-3xl p-8 sm:p-10 space-y-6">
+              <div className="text-center space-y-2">
+                <h2 className="text-xl font-light text-foreground">Talk to our sports team</h2>
+                <p className="text-xs text-foreground/50">We respond within 24 hours.</p>
+              </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <Input 
-                  placeholder="Your name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  className="bg-white border-mist min-h-[48px]"
-                />
-                <Input 
-                  type="email"
-                  placeholder="Email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className="bg-white border-mist min-h-[48px]"
-                />
-              </div>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <Input 
-                  placeholder="Organisation"
-                  value={formData.organisation}
-                  onChange={(e) => setFormData({...formData, organisation: e.target.value})}
-                  className="bg-white border-mist min-h-[48px]"
-                />
-                <Input 
-                  placeholder="Number of athletes"
-                  value={formData.athletes}
-                  onChange={(e) => setFormData({...formData, athletes: e.target.value})}
-                  className="bg-white border-mist min-h-[48px]"
-                />
-              </div>
-              <Textarea 
-                placeholder="What are your performance goals?"
-                value={formData.goals}
-                onChange={(e) => setFormData({...formData, goals: e.target.value})}
-                className="bg-white border-mist min-h-[120px]"
-              />
-              <Button type="submit" className="w-full bg-carbon hover:bg-slate rounded-full min-h-[48px]">
-                Request Demo
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-            </form>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <Input placeholder="Name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="rounded-xl bg-foreground/[0.02] border-foreground/10 h-11 text-xs" />
+                  <Input type="email" placeholder="Email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="rounded-xl bg-foreground/[0.02] border-foreground/10 h-11 text-xs" />
+                </div>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <Input placeholder="Organisation" value={formData.organisation} onChange={(e) => setFormData({...formData, organisation: e.target.value})} className="rounded-xl bg-foreground/[0.02] border-foreground/10 h-11 text-xs" />
+                  <Input placeholder="Number of athletes" value={formData.athletes} onChange={(e) => setFormData({...formData, athletes: e.target.value})} className="rounded-xl bg-foreground/[0.02] border-foreground/10 h-11 text-xs" />
+                </div>
+                <Textarea placeholder="What are your performance goals?" value={formData.goals} onChange={(e) => setFormData({...formData, goals: e.target.value})} className="rounded-xl bg-foreground/[0.02] border-foreground/10 text-xs min-h-[100px]" />
+                <Button type="submit" className="w-full rounded-full h-11 text-xs bg-foreground text-background hover:bg-foreground/90">
+                  Request Demo <ArrowRight className="ml-2 w-3.5 h-3.5" />
+                </Button>
+              </form>
+            </div>
           </div>
         </section>
 

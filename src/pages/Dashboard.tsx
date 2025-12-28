@@ -4,14 +4,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { User, Session } from "@supabase/supabase-js";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { Package, CreditCard, Settings, Award, Calendar, AlertCircle, Loader2 } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Package, CreditCard, Settings, Award, Calendar, Loader2, ArrowUpRight } from "lucide-react";
 import { toast } from "sonner";
 import { SEO } from "@/components/SEO";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 interface Order {
   id: string;
@@ -42,6 +41,7 @@ interface Profile {
 
 export default function Dashboard() {
   const navigate = useNavigate();
+  const hero = useScrollAnimation();
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
@@ -51,67 +51,39 @@ export default function Dashboard() {
   const [pointsBalance, setPointsBalance] = useState(0);
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        if (!session) {
-          navigate("/auth");
-        }
-      }
-    );
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      if (!session) navigate("/auth");
+    });
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
-      if (!session) {
-        navigate("/auth");
-      }
+      if (!session) navigate("/auth");
     });
 
     return () => subscription.unsubscribe();
   }, [navigate]);
 
   useEffect(() => {
-    if (user) {
-      fetchDashboardData();
-    }
+    if (user) fetchDashboardData();
   }, [user]);
 
   const fetchDashboardData = async () => {
     if (!user) return;
-    
     try {
-      const { data: ordersData } = await supabase
-        .from("orders")
-        .select("*")
-        .eq("user_id", user.id)
-        .order("created_at", { ascending: false })
-        .limit(5);
-
+      const { data: ordersData } = await supabase.from("orders").select("*").eq("user_id", user.id).order("created_at", { ascending: false }).limit(5);
       if (ordersData) setOrders(ordersData);
 
-      const { data: subsData } = await supabase
-        .from("subscriptions")
-        .select("*")
-        .eq("user_id", user.id)
-        .order("created_at", { ascending: false });
-
+      const { data: subsData } = await supabase.from("subscriptions").select("*").eq("user_id", user.id).order("created_at", { ascending: false });
       if (subsData) setSubscriptions(subsData);
 
-      const { data: profileData } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", user.id)
-        .single();
-
+      const { data: profileData } = await supabase.from("profiles").select("*").eq("id", user.id).single();
       if (profileData) setProfile(profileData);
 
-      const { data: pointsData } = await supabase
-        .rpc("get_user_points_balance", { p_user_id: user.id });
-
+      const { data: pointsData } = await supabase.rpc("get_user_points_balance", { p_user_id: user.id });
       if (pointsData !== null) setPointsBalance(pointsData);
-
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
     } finally {
@@ -120,31 +92,15 @@ export default function Dashboard() {
   };
 
   const handlePauseSubscription = async (subscriptionId: string) => {
-    const { error } = await supabase
-      .from("subscriptions")
-      .update({ status: "paused" })
-      .eq("id", subscriptionId);
-
-    if (error) {
-      toast.error("Failed to pause subscription");
-    } else {
-      toast.success("Subscription paused");
-      fetchDashboardData();
-    }
+    const { error } = await supabase.from("subscriptions").update({ status: "paused" }).eq("id", subscriptionId);
+    if (error) toast.error("Failed to pause subscription");
+    else { toast.success("Subscription paused"); fetchDashboardData(); }
   };
 
   const handleResumeSubscription = async (subscriptionId: string) => {
-    const { error } = await supabase
-      .from("subscriptions")
-      .update({ status: "active" })
-      .eq("id", subscriptionId);
-
-    if (error) {
-      toast.error("Failed to resume subscription");
-    } else {
-      toast.success("Subscription resumed");
-      fetchDashboardData();
-    }
+    const { error } = await supabase.from("subscriptions").update({ status: "active" }).eq("id", subscriptionId);
+    if (error) toast.error("Failed to resume subscription");
+    else { toast.success("Subscription resumed"); fetchDashboardData(); }
   };
 
   if (loading) {
@@ -152,243 +108,134 @@ export default function Dashboard() {
       <>
         <Header />
         <div className="min-h-screen flex items-center justify-center bg-background">
-          <Loader2 className="w-8 h-8 animate-spin text-accent" />
+          <Loader2 className="w-6 h-6 animate-spin text-accent" />
         </div>
         <Footer />
       </>
     );
   }
 
-  if (!user) {
-    return null;
-  }
+  if (!user) return null;
 
   return (
     <>
-      <SEO 
-        title="Dashboard | NeuroState"
-        description="Manage your orders, subscriptions, and account settings."
-      />
+      <SEO title="Dashboard | NeuroState" description="Manage your orders, subscriptions, and account settings." />
       <Header />
-      <main className="min-h-screen bg-background">
-        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-12 sm:py-16">
-          <div className="mb-10">
-            <h1 className="text-2xl sm:text-3xl font-semibold text-foreground mb-2">My Account</h1>
-            <p className="text-muted-foreground">Manage your orders, subscriptions, and account settings</p>
+      <main className="min-h-screen bg-background relative overflow-hidden">
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
+        </div>
+
+        <div 
+          ref={hero.ref}
+          className={`relative container mx-auto px-6 md:px-12 lg:px-20 xl:px-32 py-12 sm:py-16 transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
+          <div className="mb-12">
+            <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/40 mb-2">Dashboard</p>
+            <h1 className="text-2xl sm:text-3xl font-light text-foreground">My Account</h1>
           </div>
 
           {/* Quick Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-            <Card className="border-border">
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">Total Orders</CardTitle>
-                <Package className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-semibold text-foreground">{orders.length}</div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border">
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">Active Subscriptions</CardTitle>
-                <Calendar className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-semibold text-foreground">
-                  {subscriptions.filter(s => s.status === "active").length}
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border">
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">Rewards Points</CardTitle>
-                <Award className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-semibold text-foreground">{pointsBalance}</div>
-                <Button 
-                  variant="link" 
-                  className="px-0 h-auto text-xs text-accent"
-                  onClick={() => navigate("/rewards")}
-                >
-                  Redeem points
-                </Button>
-              </CardContent>
-            </Card>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+            {[
+              { icon: Package, label: "Orders", value: orders.length },
+              { icon: Calendar, label: "Subscriptions", value: subscriptions.filter(s => s.status === "active").length },
+              { icon: Award, label: "Points", value: pointsBalance, action: () => navigate("/rewards") },
+            ].map((stat, i) => (
+              <div 
+                key={i} 
+                className="p-6 rounded-3xl bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-colors cursor-pointer group"
+                onClick={stat.action}
+              >
+                <stat.icon className="w-4 h-4 text-accent mb-4" />
+                <p className="text-3xl font-light text-foreground mb-1">{stat.value}</p>
+                <p className="text-xs text-foreground/50">{stat.label}</p>
+              </div>
+            ))}
           </div>
 
-          {/* Main Content Tabs */}
+          {/* Tabs */}
           <Tabs defaultValue="orders" className="space-y-6">
-            <TabsList className="bg-muted">
-              <TabsTrigger value="orders">Orders</TabsTrigger>
-              <TabsTrigger value="subscriptions">Subscriptions</TabsTrigger>
-              <TabsTrigger value="profile">Profile</TabsTrigger>
+            <TabsList className="bg-foreground/[0.02] rounded-full p-1">
+              <TabsTrigger value="orders" className="rounded-full text-xs data-[state=active]:bg-foreground data-[state=active]:text-background">Orders</TabsTrigger>
+              <TabsTrigger value="subscriptions" className="rounded-full text-xs data-[state=active]:bg-foreground data-[state=active]:text-background">Subscriptions</TabsTrigger>
+              <TabsTrigger value="profile" className="rounded-full text-xs data-[state=active]:bg-foreground data-[state=active]:text-background">Profile</TabsTrigger>
             </TabsList>
 
-            {/* Orders Tab */}
             <TabsContent value="orders">
-              <Card className="border-border">
-                <CardHeader>
-                  <CardTitle>Order History</CardTitle>
-                  <CardDescription>View and track your recent orders</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  {orders.length === 0 ? (
-                    <div className="text-center py-12">
-                      <Package className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                      <p className="text-muted-foreground mb-4">No orders yet</p>
-                      <Button onClick={() => navigate("/#products")}>Start Shopping</Button>
-                    </div>
-                  ) : (
-                    <div className="space-y-4">
-                      {orders.map((order) => (
-                        <div 
-                          key={order.id}
-                          className="flex items-center justify-between p-4 border border-border rounded-lg hover:border-accent/30 transition-colors"
-                        >
-                          <div className="space-y-1">
-                            <p className="font-medium text-foreground">
-                              Order #{order.order_number}
-                            </p>
-                            <p className="text-sm text-muted-foreground">
-                              {new Date(order.created_at).toLocaleDateString()}
-                            </p>
-                            {order.tracking_number && (
-                              <p className="text-sm text-muted-foreground">
-                                Tracking: {order.tracking_number}
-                              </p>
-                            )}
-                          </div>
-                          <div className="text-right space-y-2">
-                            <p className="font-medium text-foreground">
-                              {order.currency} {order.total_amount.toFixed(2)}
-                            </p>
-                            <Badge variant={
-                              order.status === "delivered" ? "default" :
-                              order.status === "shipped" ? "secondary" :
-                              "outline"
-                            }>
-                              {order.status}
-                            </Badge>
-                          </div>
+              <div className="rounded-3xl bg-foreground/[0.02] p-6 sm:p-8">
+                <h2 className="text-sm font-medium text-foreground mb-6">Order History</h2>
+                {orders.length === 0 ? (
+                  <div className="text-center py-12">
+                    <Package className="h-10 w-10 text-foreground/20 mx-auto mb-4" />
+                    <p className="text-xs text-foreground/40 mb-4">No orders yet</p>
+                    <Button size="sm" className="rounded-full h-9 px-5 text-xs bg-foreground text-background" onClick={() => navigate("/shop")}>Start Shopping</Button>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {orders.map((order) => (
+                      <div key={order.id} className="flex items-center justify-between p-4 rounded-2xl bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-colors">
+                        <div className="space-y-1">
+                          <p className="text-xs font-medium text-foreground">#{order.order_number}</p>
+                          <p className="text-[10px] text-foreground/40">{new Date(order.created_at).toLocaleDateString()}</p>
                         </div>
-                      ))}
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
+                        <div className="text-right">
+                          <p className="text-xs font-medium text-foreground">{order.currency} {order.total_amount.toFixed(2)}</p>
+                          <Badge variant="outline" className="text-[10px] mt-1 rounded-full">{order.status}</Badge>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </TabsContent>
 
-            {/* Subscriptions Tab */}
             <TabsContent value="subscriptions">
-              <Card className="border-border">
-                <CardHeader>
-                  <CardTitle>My Subscriptions</CardTitle>
-                  <CardDescription>Manage your active subscriptions</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  {subscriptions.length === 0 ? (
-                    <div className="text-center py-12">
-                      <Calendar className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                      <p className="text-muted-foreground mb-4">No active subscriptions</p>
-                      <Button onClick={() => navigate("/#products")}>Browse Supplements</Button>
-                    </div>
-                  ) : (
-                    <div className="space-y-4">
-                      {subscriptions.map((sub) => (
-                        <div 
-                          key={sub.id}
-                          className="p-4 border border-border rounded-lg space-y-4"
-                        >
-                          <div className="flex items-start justify-between">
-                            <div className="space-y-1">
-                              <p className="font-medium text-foreground">{sub.product_title}</p>
-                              {sub.variant_title && (
-                                <p className="text-sm text-muted-foreground">{sub.variant_title}</p>
-                              )}
-                              <p className="text-sm text-muted-foreground">
-                                Delivers {sub.frequency} • Next: {new Date(sub.next_delivery_date).toLocaleDateString()}
-                              </p>
-                            </div>
-                            <div className="text-right">
-                              <p className="font-medium text-foreground">
-                                {sub.currency} {sub.price.toFixed(2)}
-                              </p>
-                              <Badge variant={sub.status === "active" ? "default" : "secondary"}>
-                                {sub.status}
-                              </Badge>
-                            </div>
+              <div className="rounded-3xl bg-foreground/[0.02] p-6 sm:p-8">
+                <h2 className="text-sm font-medium text-foreground mb-6">Subscriptions</h2>
+                {subscriptions.length === 0 ? (
+                  <div className="text-center py-12">
+                    <Calendar className="h-10 w-10 text-foreground/20 mx-auto mb-4" />
+                    <p className="text-xs text-foreground/40 mb-4">No active subscriptions</p>
+                    <Button size="sm" className="rounded-full h-9 px-5 text-xs bg-foreground text-background" onClick={() => navigate("/shop")}>Browse Supplements</Button>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {subscriptions.map((sub) => (
+                      <div key={sub.id} className="p-5 rounded-2xl bg-foreground/[0.02]">
+                        <div className="flex items-start justify-between mb-4">
+                          <div>
+                            <p className="text-xs font-medium text-foreground">{sub.product_title}</p>
+                            <p className="text-[10px] text-foreground/40 mt-1">Next: {new Date(sub.next_delivery_date).toLocaleDateString()}</p>
                           </div>
-                          
-                          <Separator />
-                          
-                          <div className="flex gap-2">
-                            {sub.status === "active" ? (
-                              <Button 
-                                variant="outline" 
-                                size="sm"
-                                onClick={() => handlePauseSubscription(sub.id)}
-                              >
-                                Pause Subscription
-                              </Button>
-                            ) : (
-                              <Button 
-                                variant="outline" 
-                                size="sm"
-                                onClick={() => handleResumeSubscription(sub.id)}
-                              >
-                                Resume Subscription
-                              </Button>
-                            )}
-                            <Button 
-                              variant="ghost" 
-                              size="sm"
-                              onClick={() => navigate("/subscriptions")}
-                            >
-                              Manage
-                            </Button>
-                          </div>
+                          <Badge variant={sub.status === "active" ? "default" : "secondary"} className="text-[10px] rounded-full">{sub.status}</Badge>
                         </div>
-                      ))}
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
+                        <div className="flex gap-2">
+                          {sub.status === "active" ? (
+                            <Button variant="outline" size="sm" className="rounded-full h-8 px-4 text-[10px]" onClick={() => handlePauseSubscription(sub.id)}>Pause</Button>
+                          ) : (
+                            <Button variant="outline" size="sm" className="rounded-full h-8 px-4 text-[10px]" onClick={() => handleResumeSubscription(sub.id)}>Resume</Button>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </TabsContent>
 
-            {/* Profile Tab */}
             <TabsContent value="profile">
-              <Card className="border-border">
-                <CardHeader>
-                  <CardTitle>Profile Settings</CardTitle>
-                  <CardDescription>Update your account information</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-muted-foreground">Email</label>
-                    <p className="text-foreground">{profile?.email || user.email}</p>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-muted-foreground">Full Name</label>
-                    <p className="text-foreground">{profile?.full_name || "Not set"}</p>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-muted-foreground">Phone</label>
-                    <p className="text-foreground">{profile?.phone || "Not set"}</p>
-                  </div>
-
-                  <Separator />
-
-                  <Button onClick={() => navigate("/profile")} className="w-full">
-                    <Settings className="h-4 w-4 mr-2" />
-                    Edit Profile
-                  </Button>
-                </CardContent>
-              </Card>
+              <div className="rounded-3xl bg-foreground/[0.02] p-6 sm:p-8">
+                <h2 className="text-sm font-medium text-foreground mb-6">Profile</h2>
+                <div className="space-y-4">
+                  <div><p className="text-[10px] text-foreground/40 mb-1">Email</p><p className="text-xs text-foreground">{profile?.email || user.email}</p></div>
+                  <div><p className="text-[10px] text-foreground/40 mb-1">Name</p><p className="text-xs text-foreground">{profile?.full_name || "Not set"}</p></div>
+                  <div><p className="text-[10px] text-foreground/40 mb-1">Phone</p><p className="text-xs text-foreground">{profile?.phone || "Not set"}</p></div>
+                </div>
+                <Button size="sm" className="rounded-full h-9 px-5 text-xs bg-foreground text-background mt-6" onClick={() => navigate("/profile")}>
+                  <Settings className="h-3 w-3 mr-2" />Edit Profile
+                </Button>
+              </div>
             </TabsContent>
           </Tabs>
         </div>
