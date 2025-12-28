@@ -182,86 +182,6 @@ export const Header = () => {
 
           {/* Right Actions */}
           <div className="flex items-center gap-1.5 lg:gap-2">
-            {/* Desktop Search */}
-            {searchOpen ? (
-              <form onSubmit={handleSearch} className="hidden lg:flex items-center gap-1.5">
-                <Input
-                  type="search"
-                  placeholder="Search..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-48 h-8 text-xs bg-muted border-transparent focus:border-primary rounded-full"
-                  autoFocus
-                />
-                <Button 
-                  type="button" 
-                  size="icon" 
-                  variant="ghost"
-                  className="h-8 w-8 text-muted-foreground hover:text-foreground rounded-full"
-                  onClick={() => {
-                    setSearchOpen(false);
-                    clearSearch();
-                  }}
-                >
-                  <X className="h-3.5 w-3.5" />
-                </Button>
-              </form>
-            ) : (
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="hidden lg:flex h-8 w-8 text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full"
-                onClick={() => setSearchOpen(true)}
-              >
-                <Search className="h-3.5 w-3.5" />
-              </Button>
-            )}
-            
-            {/* User Account - Desktop */}
-            {user ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="hidden lg:flex h-8 w-8 relative text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full">
-                    <User className="h-3.5 w-3.5" />
-                    <Badge className="absolute -top-0.5 -right-0.5 h-1.5 w-1.5 rounded-full p-0 bg-primary" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-44 bg-card border-border rounded-xl">
-                  <DropdownMenuItem disabled className="text-[10px] text-muted-foreground">
-                    {user.email}
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator className="bg-border" />
-                  <DropdownMenuItem asChild>
-                    <Link to="/dashboard" className="cursor-pointer text-foreground text-xs">
-                      Dashboard
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/profile" className="cursor-pointer text-foreground text-xs">
-                      Profile
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/rewards" className="cursor-pointer flex items-center text-foreground text-xs">
-                      <Award className="h-3.5 w-3.5 mr-2 text-primary" />
-                      Rewards
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator className="bg-border" />
-                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive text-xs">
-                    <LogOut className="h-3.5 w-3.5 mr-2" />
-                    Sign Out
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <Link to="/auth">
-                <Button variant="ghost" size="icon" className="hidden lg:flex h-8 w-8 text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full">
-                  <User className="h-3.5 w-3.5" />
-                </Button>
-              </Link>
-            )}
-
             {/* Book a Demo - Primary CTA */}
             <Link to="/contact" className="hidden lg:block">
               <Button 
@@ -274,8 +194,6 @@ export const Header = () => {
                 </span>
               </Button>
             </Link>
-            
-            <CartDrawer />
             
             {/* Mobile Menu */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
