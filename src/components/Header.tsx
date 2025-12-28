@@ -112,7 +112,7 @@ export const Header = () => {
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="bg-transparent text-foreground/60 hover:text-foreground hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground text-xs font-normal h-9 px-3 rounded-full">
-                    Industries
+                    Businesses
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <div className="w-[320px] p-3 bg-card border border-border rounded-2xl shadow-lg">
@@ -163,12 +163,6 @@ export const Header = () => {
               Nova AI
             </Link>
 
-            <Link
-              to="/resources"
-              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-colors px-3 py-2 rounded-full hover:bg-muted/50"
-            >
-              Resources
-            </Link>
 
             <Link
               to="/about"
@@ -312,7 +306,7 @@ export const Header = () => {
                   ))}
                   
                   <div className="pt-5 border-t border-border mt-5">
-                    <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-3">Industries</p>
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-3">Businesses</p>
                     {industries.map((item) => (
                       <Link
                         key={item.label}
