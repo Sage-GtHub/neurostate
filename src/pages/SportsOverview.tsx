@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SEO } from "@/components/SEO";
-import { ArrowRight, ArrowUpRight, CheckCircle2, Target, Activity, Shield, Brain, Users } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CheckCircle2, Target, Activity, Shield, Brain, Users, Calculator } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { motion } from "framer-motion";
 
@@ -17,14 +18,62 @@ export default function SportsOverview() {
   const included = useScrollAnimation();
   const form = useScrollAnimation();
   
+  // ROI Calculator State
+  const [employees, setEmployees] = useState<string>("25");
+  const [avgSalary, setAvgSalary] = useState<string>("150000");
+  const [sickDays, setSickDays] = useState<string>("15");
+  const [industry, setIndustry] = useState<string>("football");
+  
+  const roiCalculation = useMemo(() => {
+    const empCount = parseInt(employees) || 0;
+    const salary = parseInt(avgSalary) || 0;
+    const days = parseInt(sickDays) || 0;
+    
+    const dailyCost = salary / 260;
+    const currentSickCost = empCount * days * dailyCost;
+    const productivityLoss = empCount * salary * 0.20; // 20% productivity loss from injuries
+    const totalCurrentCost = currentSickCost + productivityLoss;
+    
+    const sickDayReduction = 0.41; // 41% injury reduction
+    const productivityGain = 0.23; // 23% performance improvement
+    
+    const sickDaySavings = currentSickCost * sickDayReduction;
+    const productivitySavings = productivityLoss * productivityGain;
+    const totalSavings = sickDaySavings + productivitySavings;
+    
+    const investmentCost = empCount * 1800; // Higher investment for elite athletes
+    const netROI = totalSavings - investmentCost;
+    const roiMultiple = investmentCost > 0 ? totalSavings / investmentCost : 0;
+    
+    return {
+      currentSickCost: Math.round(currentSickCost),
+      productivityLoss: Math.round(productivityLoss),
+      totalCurrentCost: Math.round(totalCurrentCost),
+      sickDaySavings: Math.round(sickDaySavings),
+      productivitySavings: Math.round(productivitySavings),
+      totalSavings: Math.round(totalSavings),
+      investmentCost: Math.round(investmentCost),
+      netROI: Math.round(netROI),
+      roiMultiple: roiMultiple.toFixed(1)
+    };
+  }, [employees, avgSalary, sickDays, industry]);
+
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(value);
+  };
+  
   const [formData, setFormData] = useState({ name: "", email: "", organisation: "", athletes: "", goals: "" });
   const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); console.log("Partnership demo request:", formData); };
+
+  const scrollToContact = () => {
+    document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <>
       <SEO 
         title="Cognitive Performance Infrastructure for Elite Sport | Neurostate"
-        description="AI-powered performance forecasting for professional athletes. Predict performance volatility, prevent injuries, and optimise recovery with precision intelligence."
+        description="AI powered performance forecasting for professional athletes. Predict performance volatility, prevent injuries, and optimise recovery with precision intelligence."
       />
       
       <div className="min-h-screen bg-background relative overflow-hidden">
@@ -34,10 +83,10 @@ export default function SportsOverview() {
 
         <Header />
         
-        {/* Hero - Invisible Tech Style */}
-        <section ref={hero.ref} className={`relative pt-32 sm:pt-44 pb-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="max-w-5xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+        {/* Hero with ROI Calculator */}
+        <section ref={hero.ref} className={`relative pt-32 sm:pt-40 pb-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
               <div className="space-y-6">
                 <p className="text-[10px] uppercase tracking-[0.25em] text-primary font-medium">Football · Rugby · Athletics · Cycling</p>
                 <h1 className="text-4xl sm:text-5xl font-light text-foreground leading-[1.1]">
@@ -49,38 +98,105 @@ export default function SportsOverview() {
                   Elite performance is cognitive, not just physical. We forecast readiness, predict injury risk, and optimise recovery — giving athletes and teams an intelligence advantage.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
-                  <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
-                    <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
-                      <Button className="h-11 px-6 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
-                        Talk to our sports team
-                        <ArrowUpRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                      </Button>
-                    </motion.div>
-                  </a>
+                  <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
+                    <Button onClick={scrollToContact} className="h-11 px-6 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                      Talk to our sports team
+                      <ArrowUpRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </Button>
+                  </motion.div>
                 </div>
               </div>
               
-              {/* Impact Stats */}
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { stat: "+23%", label: "Performance", desc: "Key metrics" },
-                  { stat: "-41%", label: "Injuries", desc: "Soft tissue" },
-                  { stat: "-38%", label: "Recovery", desc: "Return time" },
-                  { stat: "89%", label: "Satisfaction", desc: "Athlete NPS" }
-                ].map((item, i) => (
-                  <motion.div 
-                    key={i} 
-                    className="p-5 rounded-2xl bg-foreground/[0.03] border border-border/30 text-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={hero.isVisible ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 0.3 + i * 0.1 }}
-                  >
-                    <p className="text-2xl font-light text-primary mb-1">{item.stat}</p>
-                    <p className="text-xs font-medium text-foreground mb-0.5">{item.label}</p>
-                    <p className="text-[10px] text-muted-foreground">{item.desc}</p>
-                  </motion.div>
-                ))}
-              </div>
+              {/* ROI Calculator */}
+              <motion.div 
+                className="p-6 sm:p-8 rounded-3xl bg-foreground"
+                initial={{ opacity: 0, y: 20 }}
+                animate={hero.isVisible ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.3 }}
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-background/10 flex items-center justify-center">
+                    <Calculator className="w-5 h-5 text-accent" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-medium text-background">ROI Calculator</h3>
+                    <p className="text-[10px] text-background/60">Calculate your potential savings</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4 mb-6">
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-[10px] text-background/60 uppercase tracking-wider mb-1.5 block">Squad Size</label>
+                      <Input 
+                        type="number" 
+                        value={employees} 
+                        onChange={(e) => setEmployees(e.target.value)}
+                        className="bg-background/10 border-background/20 text-background h-10 text-sm rounded-xl"
+                        placeholder="25"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] text-background/60 uppercase tracking-wider mb-1.5 block">Avg. Value (£)</label>
+                      <Input 
+                        type="number" 
+                        value={avgSalary} 
+                        onChange={(e) => setAvgSalary(e.target.value)}
+                        className="bg-background/10 border-background/20 text-background h-10 text-sm rounded-xl"
+                        placeholder="150000"
+                      />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-[10px] text-background/60 uppercase tracking-wider mb-1.5 block">Injury Days/Year</label>
+                      <Input 
+                        type="number" 
+                        value={sickDays} 
+                        onChange={(e) => setSickDays(e.target.value)}
+                        className="bg-background/10 border-background/20 text-background h-10 text-sm rounded-xl"
+                        placeholder="15"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] text-background/60 uppercase tracking-wider mb-1.5 block">Sport</label>
+                      <Select value={industry} onValueChange={setIndustry}>
+                        <SelectTrigger className="bg-background/10 border-background/20 text-background h-10 text-sm rounded-xl">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="football">Football</SelectItem>
+                          <SelectItem value="rugby">Rugby</SelectItem>
+                          <SelectItem value="athletics">Athletics</SelectItem>
+                          <SelectItem value="cycling">Cycling</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-3 pt-4 border-t border-background/10">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-background/60">Current annual cost</span>
+                    <span className="text-background font-medium">{formatCurrency(roiCalculation.totalCurrentCost)}</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-background/60">Projected savings</span>
+                    <span className="text-accent font-medium">{formatCurrency(roiCalculation.totalSavings)}</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-background/60">Investment</span>
+                    <span className="text-background font-medium">{formatCurrency(roiCalculation.investmentCost)}</span>
+                  </div>
+                  <div className="flex justify-between pt-3 border-t border-background/10">
+                    <span className="text-background font-medium text-sm">Net Annual ROI</span>
+                    <span className="text-accent text-xl font-medium">{formatCurrency(roiCalculation.netROI)}</span>
+                  </div>
+                  <div className="text-center pt-2">
+                    <span className="text-[10px] text-accent">{roiCalculation.roiMultiple}x return on investment</span>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -101,7 +217,7 @@ export default function SportsOverview() {
                 {[
                   { title: "Reactive load management", desc: "Training loads are adjusted after fatigue appears. The damage is already done." },
                   { title: "Missing cognitive signals", desc: "Physical metrics alone miss the full picture. Stress, sleep, and mental load drive performance volatility." },
-                  { title: "Inconsistent recovery", desc: "Recovery protocols are generic. Individual athlete needs aren't accounted for in real-time." }
+                  { title: "Inconsistent recovery", desc: "Recovery protocols are generic. Individual athlete needs are not accounted for in real time." }
                 ].map((item, i) => (
                   <motion.div 
                     key={i}
@@ -130,7 +246,7 @@ export default function SportsOverview() {
                 <span className="text-muted-foreground">For every athlete.</span>
               </h2>
               <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                Neurostate operates as a cognitive layer across athlete performance — forecasting readiness, predicting risk, and guiding recovery in real-time.
+                Neurostate operates as a cognitive layer across athlete performance — forecasting readiness, predicting risk, and guiding recovery in real time.
               </p>
             </div>
 
@@ -181,9 +297,9 @@ export default function SportsOverview() {
               <div className="space-y-6">
                 <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">Asset Protection</p>
                 <h2 className="text-3xl font-light text-foreground">
-                  This isn't wellness.
+                  This is not wellness.
                   <br />
-                  <span className="text-muted-foreground">It's athlete asset protection.</span>
+                  <span className="text-muted-foreground">It is athlete asset protection.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   Every injury costs time, money, and competitive advantage. Neurostate helps athletes stay on the pitch, performing at their cognitive and physical peak.
@@ -191,7 +307,7 @@ export default function SportsOverview() {
                 <div className="space-y-3">
                   {[
                     "41% reduction in soft tissue injuries",
-                    "38% faster return-to-play times",
+                    "38% faster return to play times",
                     "Predictive load management",
                     "Competition readiness forecasting"
                   ].map((item, i) => (
@@ -271,11 +387,11 @@ export default function SportsOverview() {
         </section>
 
         {/* Contact Form */}
-        <section ref={form.ref} className={`py-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${form.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <section id="contact-section" ref={form.ref} className={`py-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${form.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="max-w-lg mx-auto">
             <div className="border border-border/30 rounded-3xl p-8 sm:p-10 space-y-6 bg-foreground/[0.01]">
               <div className="text-center space-y-2">
-                <h2 className="text-xl font-light text-foreground">Let's explore whether Neurostate fits your organisation</h2>
+                <h2 className="text-xl font-light text-foreground">Let us explore whether Neurostate fits your organisation</h2>
                 <p className="text-xs text-muted-foreground">We respond within 24 hours. Pilot programmes available.</p>
               </div>
 

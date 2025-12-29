@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SEO } from "@/components/SEO";
-import { ArrowRight, ArrowUpRight, CheckCircle2, Heart, Activity, Brain, Shield, Users } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CheckCircle2, Heart, Activity, Brain, Shield, Users, Calculator } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { motion } from "framer-motion";
 
@@ -17,14 +18,62 @@ export default function HealthcareOverview() {
   const included = useScrollAnimation();
   const form = useScrollAnimation();
   
+  // ROI Calculator State
+  const [employees, setEmployees] = useState<string>("200");
+  const [avgSalary, setAvgSalary] = useState<string>("52000");
+  const [sickDays, setSickDays] = useState<string>("12");
+  const [industry, setIndustry] = useState<string>("hospital");
+  
+  const roiCalculation = useMemo(() => {
+    const empCount = parseInt(employees) || 0;
+    const salary = parseInt(avgSalary) || 0;
+    const days = parseInt(sickDays) || 0;
+    
+    const dailyCost = salary / 260;
+    const currentSickCost = empCount * days * dailyCost;
+    const productivityLoss = empCount * salary * 0.18; // 18% productivity loss from burnout
+    const totalCurrentCost = currentSickCost + productivityLoss;
+    
+    const sickDayReduction = 0.40; // 40% reduction
+    const productivityGain = 0.25; // 25% improvement
+    
+    const sickDaySavings = currentSickCost * sickDayReduction;
+    const productivitySavings = productivityLoss * productivityGain;
+    const totalSavings = sickDaySavings + productivitySavings;
+    
+    const investmentCost = empCount * 380;
+    const netROI = totalSavings - investmentCost;
+    const roiMultiple = investmentCost > 0 ? totalSavings / investmentCost : 0;
+    
+    return {
+      currentSickCost: Math.round(currentSickCost),
+      productivityLoss: Math.round(productivityLoss),
+      totalCurrentCost: Math.round(totalCurrentCost),
+      sickDaySavings: Math.round(sickDaySavings),
+      productivitySavings: Math.round(productivitySavings),
+      totalSavings: Math.round(totalSavings),
+      investmentCost: Math.round(investmentCost),
+      netROI: Math.round(netROI),
+      roiMultiple: roiMultiple.toFixed(1)
+    };
+  }, [employees, avgSalary, sickDays, industry]);
+
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(value);
+  };
+  
   const [formData, setFormData] = useState({ name: "", email: "", organisation: "", patients: "", goals: "" });
   const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); console.log("Partnership demo request:", formData); };
+
+  const scrollToContact = () => {
+    document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <>
       <SEO 
         title="Predictive Healthcare Intelligence | Neurostate"
-        description="AI-powered cognitive infrastructure for healthcare. Forecast patient outcomes, prevent complications, and accelerate recovery with precision medicine."
+        description="AI powered cognitive infrastructure for healthcare. Forecast patient outcomes, prevent complications, and accelerate recovery with precision medicine."
       />
       
       <div className="min-h-screen bg-background relative overflow-hidden">
@@ -34,10 +83,10 @@ export default function HealthcareOverview() {
 
         <Header />
         
-        {/* Hero - Invisible Tech Style */}
-        <section ref={hero.ref} className={`relative pt-32 sm:pt-44 pb-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="max-w-5xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+        {/* Hero with ROI Calculator */}
+        <section ref={hero.ref} className={`relative pt-32 sm:pt-40 pb-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
               <div className="space-y-6">
                 <p className="text-[10px] uppercase tracking-[0.25em] text-primary font-medium">Hospitals · Clinics · Rehabilitation</p>
                 <h1 className="text-4xl sm:text-5xl font-light text-foreground leading-[1.1]">
@@ -49,38 +98,105 @@ export default function HealthcareOverview() {
                   Most clinical systems track what happened. Neurostate forecasts what will happen — predicting complications, optimising recovery, and reducing readmissions before they occur.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
-                  <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
-                    <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
-                      <Button className="h-11 px-6 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
-                        Request clinical demo
-                        <ArrowUpRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                      </Button>
-                    </motion.div>
-                  </a>
+                  <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
+                    <Button onClick={scrollToContact} className="h-11 px-6 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                      Request clinical demo
+                      <ArrowUpRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </Button>
+                  </motion.div>
                 </div>
               </div>
               
-              {/* Impact Stats */}
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { stat: "40%", label: "Faster Recovery", desc: "Post-surgical outcomes" },
-                  { stat: "-67%", label: "Readmissions", desc: "Through prediction" },
-                  { stat: "92%", label: "Satisfaction", desc: "Patient NPS" },
-                  { stat: "24/7", label: "Monitoring", desc: "Continuous care" }
-                ].map((item, i) => (
-                  <motion.div 
-                    key={i} 
-                    className="p-5 rounded-2xl bg-foreground/[0.03] border border-border/30 text-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={hero.isVisible ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 0.3 + i * 0.1 }}
-                  >
-                    <p className="text-2xl font-light text-primary mb-1">{item.stat}</p>
-                    <p className="text-xs font-medium text-foreground mb-0.5">{item.label}</p>
-                    <p className="text-[10px] text-muted-foreground">{item.desc}</p>
-                  </motion.div>
-                ))}
-              </div>
+              {/* ROI Calculator */}
+              <motion.div 
+                className="p-6 sm:p-8 rounded-3xl bg-foreground"
+                initial={{ opacity: 0, y: 20 }}
+                animate={hero.isVisible ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.3 }}
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-background/10 flex items-center justify-center">
+                    <Calculator className="w-5 h-5 text-accent" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-medium text-background">ROI Calculator</h3>
+                    <p className="text-[10px] text-background/60">Calculate your potential savings</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4 mb-6">
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-[10px] text-background/60 uppercase tracking-wider mb-1.5 block">Staff Count</label>
+                      <Input 
+                        type="number" 
+                        value={employees} 
+                        onChange={(e) => setEmployees(e.target.value)}
+                        className="bg-background/10 border-background/20 text-background h-10 text-sm rounded-xl"
+                        placeholder="200"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] text-background/60 uppercase tracking-wider mb-1.5 block">Avg. Salary (£)</label>
+                      <Input 
+                        type="number" 
+                        value={avgSalary} 
+                        onChange={(e) => setAvgSalary(e.target.value)}
+                        className="bg-background/10 border-background/20 text-background h-10 text-sm rounded-xl"
+                        placeholder="52000"
+                      />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-[10px] text-background/60 uppercase tracking-wider mb-1.5 block">Sick Days/Year</label>
+                      <Input 
+                        type="number" 
+                        value={sickDays} 
+                        onChange={(e) => setSickDays(e.target.value)}
+                        className="bg-background/10 border-background/20 text-background h-10 text-sm rounded-xl"
+                        placeholder="12"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] text-background/60 uppercase tracking-wider mb-1.5 block">Setting</label>
+                      <Select value={industry} onValueChange={setIndustry}>
+                        <SelectTrigger className="bg-background/10 border-background/20 text-background h-10 text-sm rounded-xl">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="hospital">Hospital</SelectItem>
+                          <SelectItem value="clinic">Clinic</SelectItem>
+                          <SelectItem value="rehab">Rehabilitation</SelectItem>
+                          <SelectItem value="mental-health">Mental Health</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-3 pt-4 border-t border-background/10">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-background/60">Current annual cost</span>
+                    <span className="text-background font-medium">{formatCurrency(roiCalculation.totalCurrentCost)}</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-background/60">Projected savings</span>
+                    <span className="text-accent font-medium">{formatCurrency(roiCalculation.totalSavings)}</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-background/60">Investment</span>
+                    <span className="text-background font-medium">{formatCurrency(roiCalculation.investmentCost)}</span>
+                  </div>
+                  <div className="flex justify-between pt-3 border-t border-background/10">
+                    <span className="text-background font-medium text-sm">Net Annual ROI</span>
+                    <span className="text-accent text-xl font-medium">{formatCurrency(roiCalculation.netROI)}</span>
+                  </div>
+                  <div className="text-center pt-2">
+                    <span className="text-[10px] text-accent">{roiCalculation.roiMultiple}x return on investment</span>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -145,7 +261,7 @@ export default function HealthcareOverview() {
                 { 
                   icon: Brain, 
                   title: "Cognitive Rehabilitation", 
-                  description: "Evidence-based protocols for cognitive recovery following neurological events, surgery, or trauma. Personalised by Nova AI.",
+                  description: "Evidence based protocols for cognitive recovery following neurological events, surgery, or trauma. Personalised by Nova AI.",
                   highlight: "Adaptive protocols"
                 },
                 { 
@@ -181,9 +297,9 @@ export default function HealthcareOverview() {
               <div className="space-y-6">
                 <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">Clinical Impact</p>
                 <h2 className="text-3xl font-light text-foreground">
-                  This isn't wellness tech.
+                  This is not wellness tech.
                   <br />
-                  <span className="text-muted-foreground">It's clinical intelligence infrastructure.</span>
+                  <span className="text-muted-foreground">It is clinical intelligence infrastructure.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   Neurostate reduces length of stay, prevents readmissions, and accelerates recovery. Measurable outcomes that translate directly to operational efficiency and patient satisfaction.
@@ -192,7 +308,7 @@ export default function HealthcareOverview() {
                   {[
                     "Reduced length of stay through precision protocols",
                     "Lower readmission rates via predictive monitoring",
-                    "Improved patient outcomes with data-driven care",
+                    "Improved patient outcomes with data driven care",
                     "Staff efficiency gains through automated monitoring"
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-3">
@@ -210,7 +326,7 @@ export default function HealthcareOverview() {
               >
                 <h3 className="text-sm font-medium text-background mb-6 flex items-center gap-2">
                   <Users className="w-4 h-4 text-accent" />
-                  Example: 200-Bed Hospital Unit
+                  Example: 200 Bed Hospital Unit
                 </h3>
                 <div className="space-y-4 text-xs">
                   {[
@@ -253,7 +369,7 @@ export default function HealthcareOverview() {
                 "Staff training programme",
                 "Patient app deployment",
                 "Dedicated clinical support",
-                "Compliance & security"
+                "Compliance and security"
               ].map((item, index) => (
                 <motion.div 
                   key={index} 
@@ -271,11 +387,11 @@ export default function HealthcareOverview() {
         </section>
 
         {/* Contact Form */}
-        <section ref={form.ref} className={`py-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${form.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <section id="contact-section" ref={form.ref} className={`py-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${form.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="max-w-lg mx-auto">
             <div className="border border-border/30 rounded-3xl p-8 sm:p-10 space-y-6 bg-foreground/[0.01]">
               <div className="text-center space-y-2">
-                <h2 className="text-xl font-light text-foreground">Let's explore whether Neurostate fits your organisation</h2>
+                <h2 className="text-xl font-light text-foreground">Let us explore whether Neurostate fits your organisation</h2>
                 <p className="text-xs text-muted-foreground">We respond within 24 hours. Clinical pilots available.</p>
               </div>
 
