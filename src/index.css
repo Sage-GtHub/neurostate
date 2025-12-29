@@ -584,7 +584,8 @@
   /* Premium animated underline */
   .animated-underline {
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
   }
   
   .animated-underline::after {
