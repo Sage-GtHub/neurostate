@@ -96,11 +96,12 @@ export default function EnterpriseIntegrations() {
         <section className="relative bg-gradient-to-br from-carbon via-slate to-carbon text-ivory pt-32 pb-20">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center max-w-4xl mx-auto mb-16">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-accent font-medium mb-4">Human Performance OS</p>
               <h1 className="text-hero-display font-bold mb-6">
-                Seamless Integration
+                Invisible Integration
               </h1>
               <p className="text-body-large text-pearl max-w-3xl mx-auto">
-                NeuroState integrates directly into your existing workplace tools, making wellness support accessible where your team already works.
+                Neurostate operates silently within your existing tools — invisible infrastructure that enhances human performance without friction.
               </p>
             </div>
 

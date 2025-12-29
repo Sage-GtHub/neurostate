@@ -228,7 +228,7 @@ export default function InformationTechnologyOverview() {
                 {[
                   { title: "Silent burnout", desc: "High performers don't complain — they just leave. By the time burnout is visible, it's too late to intervene." },
                   { title: "Deep work destruction", desc: "Meetings, notifications, and context-switching fragment focus. Complex problem-solving requires sustained cognitive capacity." },
-                  { title: "Retention crisis", desc: "Replacing a senior engineer costs 6-12 months salary. The institutional knowledge loss is immeasurable." }
+                  { title: "Retention crisis", desc: "Replacing a senior employee costs 6-12 months salary. The institutional knowledge loss is immeasurable." }
                 ].map((item, i) => (
                   <motion.div 
                     key={i}

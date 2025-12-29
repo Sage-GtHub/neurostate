@@ -15,7 +15,7 @@ const industries = [
     id: "information-technology",
     title: "Information Technology",
     category: "Corporate",
-    desc: "Cognitive performance for technology teams across all departments.",
+    desc: "Cognitive performance infrastructure for technology organisations.",
     href: "/enterprise/information-technology/overview",
     icon: Cpu,
     stats: { primary: "47%", label: "Reduced burnout" },
@@ -26,7 +26,7 @@ const industries = [
     id: "financial-services",
     title: "Financial Services",
     category: "Corporate",
-    desc: "Peak cognitive performance for trading floors and investment teams.",
+    desc: "Peak cognitive performance for high-stakes teams.",
     href: "/enterprise/financial-services/overview",
     icon: TrendingUp,
     stats: { primary: "23%", label: "Performance uplift" },
@@ -59,7 +59,7 @@ const industries = [
     id: "sports",
     title: "Sports & Athletics",
     category: "Performance",
-    desc: "Athletic cognitive optimisation for elite performance.",
+    desc: "Cognitive optimisation for elite performers.",
     href: "/enterprise/sports/overview",
     icon: Trophy,
     stats: { primary: "2.1x", label: "Performance gain" },
@@ -181,16 +181,16 @@ export default function EnterpriseOverview() {
                     animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   />
-                  <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">Enterprise Solutions</span>
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">Human Performance OS</span>
                 </div>
 
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-foreground tracking-tight">
-                  Cognitive performance.{" "}
-                  <span className="text-primary">Every industry.</span>
+                  The cognitive performance{" "}
+                  <span className="text-primary">ecosystem.</span>
                 </h1>
                 
                 <p className="text-sm text-muted-foreground max-w-xl mx-auto leading-relaxed">
-                  AI-powered wellness and performance infrastructure tailored for your sector. From trading floors to wellness retreats, we optimise human performance at scale.
+                  Invisible AI infrastructure advancing human performance through predictive intelligence. The operating system for cognitive excellence at enterprise scale.
                 </p>
 
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-4">

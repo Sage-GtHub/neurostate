@@ -96,24 +96,24 @@ export default function EnterpriseCaseStudies() {
       industry: "Technology • SaaS",
       employees: "450 employees",
       icon: <TrendingUp className="w-8 h-8 text-accent" />,
-      challenge: "Engineering team experiencing chronic burnout, declining code quality, and 22% annual turnover. Leadership needed a solution beyond traditional wellness perks.",
-      solution: "Rolled out NeuroState Professional tier with Slack integration. Nova AI provided personalised cognitive enhancement protocols, and 73% of engineers adopted within first month.",
+      challenge: "High-performing teams experiencing chronic burnout, declining output quality, and 22% annual turnover. Leadership needed infrastructure beyond traditional wellness perks.",
+      solution: "Rolled out NeuroState Professional tier with Slack integration. Nova AI provided personalised cognitive enhancement protocols, and 73% of employees adopted within first month.",
       metrics: [
         { value: "63%", label: "reduction in reported burnout" },
-        { value: "31%", label: "increase in sprint velocity" },
-        { value: "18%", label: "improvement in engineer retention" },
+        { value: "31%", label: "increase in team velocity" },
+        { value: "18%", label: "improvement in talent retention" },
         { value: "89%", label: "employee NPS score" }
       ],
-      quote: "NeuroState transformed our engineering culture. The team is sharper, more focused, and we've seen measurable improvements in code quality and delivery speed.",
+      quote: "NeuroState transformed our culture. The team is sharper, more focused, and we've seen measurable improvements in output quality and delivery speed.",
       author: "Sarah Chen",
-      role: "VP Engineering"
+      role: "VP Operations"
     },
     {
       company: "GlobalFinance",
       industry: "Financial Services",
       employees: "1,200 employees",
       icon: <Users className="w-8 h-8 text-accent" />,
-      challenge: "Trading desk and investment teams working 60+ hour weeks with high-stress decision-making. Healthcare costs rising 15% YoY due to stress-related conditions.",
+      challenge: "Front-office and back-office teams working 60+ hour weeks with high-stress decision-making. Healthcare costs rising 15% YoY due to stress-related conditions.",
       solution: "Enterprise deployment with SSO integration, custom protocols for shift workers, and dedicated CSM for compliance review. API integration with internal wellness dashboard.",
       metrics: [
         { value: "47%", label: "improvement in cognitive performance tests" },
@@ -121,7 +121,7 @@ export default function EnterpriseCaseStudies() {
         { value: "41%", label: "decrease in stress-related leave" },
         { value: "12%", label: "increase in decision accuracy" }
       ],
-      quote: "The ROI is undeniable. Better decisions, healthier team, lower costs. NeuroState is now a core part of our competitive advantage.",
+      quote: "The ROI is undeniable. Better decisions, healthier teams, lower costs. NeuroState is now a core part of our competitive advantage.",
       author: "Marcus Thompson",
       role: "Chief People Officer"
     },
@@ -130,7 +130,7 @@ export default function EnterpriseCaseStudies() {
       industry: "Marketing & Design",
       employees: "180 employees",
       icon: <Sparkles className="w-8 h-8 text-accent" />,
-      challenge: "Creative team facing 'idea fatigue' and missing client deadlines. Pitch win rate declining from 45% to 28% over 18 months.",
+      challenge: "Teams facing 'idea fatigue' and missing client deadlines. Pitch win rate declining from 45% to 28% over 18 months.",
       solution: "Professional tier with focus on creative cognitive protocols. Custom supplement stacks for ideation vs execution phases. Team challenges and leaderboards in Slack.",
       metrics: [
         { value: "53%", label: "increase in creative output" },
@@ -158,11 +158,12 @@ export default function EnterpriseCaseStudies() {
         <section className="relative bg-gradient-to-br from-carbon via-slate to-carbon text-ivory pt-32 pb-20">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center max-w-4xl mx-auto mb-16">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-accent font-medium mb-4">Human Performance OS</p>
               <h1 className="text-hero-display font-bold mb-6">
                 Partnership Success Stories
               </h1>
               <p className="text-body-large text-pearl max-w-3xl mx-auto">
-                See how leading organisations are using NeuroState to elevate workforce performance, reduce burnout, and create competitive advantages.
+                See how leading organisations are deploying cognitive performance infrastructure to unlock sustainable human potential at scale.
               </p>
             </div>
 
