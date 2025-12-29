@@ -193,10 +193,10 @@ const Hero = () => {
               
               {/* Subheadline */}
               <motion.p 
-                className="text-xs md:text-sm text-muted-foreground max-w-sm leading-relaxed"
+                className="text-xs md:text-sm text-muted-foreground max-w-md leading-relaxed"
                 variants={itemVariants}
               >
-                Cognitive infrastructure that forecasts, adapts, and optimises mental performance at enterprise scale.
+                We build cognitive infrastructure that connects wearable data, biometric signals, and behavioural patterns to deliver predictive insights that optimise mental clarity, recovery, and sustained performance across your organisation.
               </motion.p>
 
               {/* CTAs with magnetic hover effect */}
