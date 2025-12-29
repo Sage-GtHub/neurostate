@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { useEffect, useState, useRef, lazy, Suspense, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { motion, useSpring, useTransform, useScroll, useInView } from "framer-motion";
+import DataFlowDiagram from "./hero/DataFlowDiagram";
 
 // Lazy load the 3D illustration for better performance
 const IsometricIllustration = lazy(() => import("./hero/IsometricIllustration"));
-
 // Animated number counter hook
 const useCountUp = (end: number, duration: number = 2000, startOnView: boolean = true) => {
   const [count, setCount] = useState(0);
@@ -199,9 +199,17 @@ const Hero = () => {
                 We build cognitive infrastructure that connects wearable data, biometric signals, and behavioural patterns to deliver predictive insights that optimise mental clarity, recovery, and sustained performance across your organisation.
               </motion.p>
 
+              {/* Data Flow Diagram */}
+              <motion.div 
+                className="py-2"
+                variants={itemVariants}
+              >
+                <DataFlowDiagram />
+              </motion.div>
+
               {/* CTAs with magnetic hover effect */}
               <motion.div 
-                className="flex flex-wrap items-center gap-3 pt-2"
+                className="flex flex-wrap items-center gap-3"
                 variants={itemVariants}
               >
                 <Link to="/contact">
