@@ -170,7 +170,7 @@ const Hero = () => {
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 />
                 <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
-                  Cognitive Infrastructure
+                  Human Performance OS
                 </span>
               </motion.div>
 
@@ -180,15 +180,15 @@ const Hero = () => {
                 className="text-xl md:text-2xl lg:text-3xl font-normal text-foreground tracking-tight"
                 variants={itemVariants}
               >
-                Advancing AI models from{" "}
+                The invisible layer between{" "}
                 <motion.span 
                   className="text-primary inline"
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
-                  prediction
+                  AI
                 </motion.span>{" "}
-                to execution
+                and human performance
               </motion.h1>
               
               {/* Subheadline */}
@@ -196,7 +196,7 @@ const Hero = () => {
                 className="text-xs md:text-sm text-muted-foreground max-w-sm leading-relaxed"
                 variants={itemVariants}
               >
-                We've built the AI infrastructure for cognitive performance and deploy it at enterprise scale, from startups to the Fortune 500.
+                Cognitive infrastructure that forecasts, adapts, and optimises mental performance at enterprise scale.
               </motion.p>
 
               {/* CTAs with magnetic hover effect */}
