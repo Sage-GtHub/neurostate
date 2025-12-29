@@ -194,16 +194,16 @@ export default function EnterpriseOverview() {
                 </p>
 
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
-                  <Link to="/contact">
+                  <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
                     <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
                       <Button className="h-10 px-5 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
                         <span className="flex items-center">
-                          Request enterprise demo
+                          Book a demo
                           <ArrowUpRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                         </span>
                       </Button>
                     </motion.div>
-                  </Link>
+                  </a>
                 </div>
               </motion.div>
             </div>
