@@ -3,7 +3,7 @@ import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ArrowUpRight, Check, Brain, Zap, Target, Eye, TrendingUp } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Brain, Zap, Target, Eye, TrendingUp, Activity, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -11,8 +11,8 @@ const AboutUs = () => {
   return (
     <>
       <SEO 
-        title="About Us | Neurostate"
-        description="Neurostate is building cognitive infrastructure that predicts and guides, not just tracks. AI for cognitive performance — from prediction to execution."
+        title="About Neurostate | AI for Cognitive Performance"
+        description="Advancing human cognitive capacity through artificial intelligence. We've built the infrastructure for cognitive performance and deploy it at enterprise scale."
       />
       <div className="min-h-screen bg-background">
         <Header />
@@ -21,46 +21,71 @@ const AboutUs = () => {
           <section className="pt-32 pb-20 md:pt-40 md:pb-28 px-6 md:px-8">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="max-w-4xl">
-                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">About Neurostate</span>
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">AI, from A to B</span>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-foreground mt-4 leading-[1.1]">
-                  Advancing human cognitive capacity
+                  Artificial intelligence.
                   <br />
-                  <span className="text-muted-foreground">through artificial intelligence.</span>
+                  <span className="text-muted-foreground">Real outcomes.</span>
                 </h1>
                 <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl mt-6">
-                  Most organisations measure outcomes, not the cognitive conditions that create them. We're changing that. Neurostate is a cognitive performance platform that predicts and guides — not just tracks.
+                  We're building the cognitive infrastructure that advances human capacity. System by system. Layer by layer. Until the line between AI and human performance disappears. Not as an experiment. Not as a trend. As infrastructure.
                 </p>
+              </ScrollReveal>
+
+              {/* Stats Row */}
+              <ScrollReveal delay={0.2} className="mt-16">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+                  {[
+                    { value: "2024", label: "Founded", desc: "Built for the frontier" },
+                    { value: "98.7%", label: "Accuracy", desc: "Prediction precision" },
+                    { value: "2.4M+", label: "Predictions", desc: "Daily forecasts" },
+                    { value: "24/7", label: "Monitoring", desc: "Continuous intelligence" },
+                  ].map((stat, i) => (
+                    <motion.div 
+                      key={i}
+                      className="text-center md:text-left"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 * i }}
+                    >
+                      <p className="text-2xl md:text-3xl font-light text-foreground">{stat.value}</p>
+                      <p className="text-xs font-medium text-primary mt-1">{stat.label}</p>
+                      <p className="text-[10px] text-muted-foreground mt-0.5">{stat.desc}</p>
+                    </motion.div>
+                  ))}
+                </div>
               </ScrollReveal>
             </div>
           </section>
 
-          {/* The Problem */}
+          {/* Mission Statement */}
           <section className="py-20 md:py-28 px-6 md:px-8 border-t border-border/30">
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
                 <ScrollReveal className="lg:sticky lg:top-28 self-start">
-                  <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">The Problem</span>
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Our Mission</span>
                   <h2 className="text-3xl md:text-4xl font-light text-foreground mt-4">
-                    Modern work pushes cognitive limits.
+                    AI from genesis to
                     <br />
-                    <span className="text-muted-foreground">But teams operate blind.</span>
+                    <span className="text-muted-foreground">the final mile.</span>
                   </h2>
                 </ScrollReveal>
 
                 <div className="space-y-6">
                   <ScrollReveal delay={0.1}>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Stress, fatigue, and cognitive overload build silently. Performance drops before anyone notices. Existing tools are reactive, fragmented, or purely descriptive.
+                      Most companies are playing catch-up to the future. We're building it. Neurostate exists to turn complexity into clarity, and movement into momentum. We don't optimise tasks. We rewire the logic of how cognitive work works.
                     </p>
                   </ScrollReveal>
                   <ScrollReveal delay={0.2}>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      The result? Burnout incidents that could have been prevented. Inconsistent output that damages team momentum. Decision-making that deteriorates under pressure.
+                      Quietly. Precisely. At scale. Because in the end, the organisations that win won't be the ones that use AI. They'll be the ones that stopped needing to talk about it.
                     </p>
                   </ScrollReveal>
                   <ScrollReveal delay={0.3}>
                     <p className="text-sm text-foreground font-medium leading-relaxed">
-                      We built Neurostate because the future of work isn't about working harder — it's about working with precision.
+                      Advancing human cognitive capacity through artificial intelligence. That's not a tagline. It's the infrastructure we're laying.
                     </p>
                   </ScrollReveal>
                 </div>
@@ -68,16 +93,61 @@ const AboutUs = () => {
             </div>
           </section>
 
-          {/* Our Approach */}
+          {/* The Problem */}
           <section className="py-20 md:py-28 px-6 md:px-8">
             <div className="max-w-6xl mx-auto">
+              <ScrollReveal className="text-center mb-16 space-y-4 max-w-3xl mx-auto">
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">The Problem</span>
+                <h2 className="text-3xl md:text-4xl font-light text-foreground">
+                  Modern work pushes cognitive limits.
+                  <br />
+                  <span className="text-muted-foreground">But teams operate blind.</span>
+                </h2>
+              </ScrollReveal>
+
+              <div className="grid md:grid-cols-3 gap-6">
+                {[
+                  { 
+                    title: "Invisible Signals",
+                    desc: "Stress, fatigue, and cognitive overload build silently. Performance drops before anyone notices.",
+                  },
+                  { 
+                    title: "Reactive Tools",
+                    desc: "Existing solutions are fragmented or purely descriptive. They measure what happened, not what's coming.",
+                  },
+                  { 
+                    title: "Misaligned Metrics",
+                    desc: "Most organisations measure outcomes, not the cognitive conditions that create them.",
+                  },
+                ].map((item, i) => (
+                  <ScrollReveal key={i} delay={0.1 * i}>
+                    <motion.div 
+                      className="p-6 rounded-2xl bg-foreground/[0.02] border border-border/30 h-full"
+                      whileHover={{ y: -4, borderColor: "hsl(var(--primary) / 0.3)" }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <h3 className="text-base font-medium text-foreground mb-3">{item.title}</h3>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+                    </motion.div>
+                  </ScrollReveal>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* What Neurostate Does */}
+          <section className="py-20 md:py-28 px-6 md:px-8 border-t border-border/30">
+            <div className="max-w-6xl mx-auto">
               <ScrollReveal className="text-center mb-16 space-y-4 max-w-2xl mx-auto">
-                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Our Approach</span>
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">What We Do</span>
                 <h2 className="text-3xl md:text-4xl font-light text-foreground">
                   A cognitive operating layer.
                   <br />
                   <span className="text-muted-foreground">Not another dashboard.</span>
                 </h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Neurostate is a cognitive performance platform that predicts and guides — not just tracks.
+                </p>
               </ScrollReveal>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -120,15 +190,15 @@ const AboutUs = () => {
               </div>
 
               <ScrollReveal delay={0.4} className="text-center mt-12">
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-foreground font-medium">
                   No dashboards to interpret. No guesswork. Just clear guidance.
                 </p>
               </ScrollReveal>
             </div>
           </section>
 
-          {/* What We Combine */}
-          <section className="py-20 md:py-28 px-6 md:px-8 border-t border-border/30">
+          {/* The Stack */}
+          <section className="py-20 md:py-28 px-6 md:px-8">
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
                 <ScrollReveal className="lg:sticky lg:top-28">
@@ -194,7 +264,7 @@ const AboutUs = () => {
           </section>
 
           {/* Why This Matters */}
-          <section className="py-20 md:py-28 px-6 md:px-8">
+          <section className="py-20 md:py-28 px-6 md:px-8 border-t border-border/30">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="text-center mb-16 space-y-4 max-w-2xl mx-auto">
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Impact</span>
@@ -261,6 +331,48 @@ const AboutUs = () => {
                           <span className="text-sm text-foreground font-medium">{item.title}</span>
                           <p className="text-xs text-muted-foreground/70 mt-0.5">{item.desc}</p>
                         </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </ScrollReveal>
+              </div>
+            </div>
+          </section>
+
+          {/* Who This Is For */}
+          <section className="py-20 md:py-28 px-6 md:px-8">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <ScrollReveal>
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Who This Is For</span>
+                  <h2 className="text-3xl md:text-4xl font-light text-foreground mt-4">
+                    Built for organisations
+                    <br />
+                    <span className="text-muted-foreground">that refuse to stand still.</span>
+                  </h2>
+                  <p className="text-sm text-muted-foreground leading-relaxed max-w-md mt-6">
+                    Neurostate is for teams that care about high performance, sustainable productivity, data-informed decision-making, and long-term human capacity.
+                  </p>
+                </ScrollReveal>
+
+                <ScrollReveal delay={0.2}>
+                  <div className="grid grid-cols-2 gap-4">
+                    {[
+                      { icon: Users, label: "High-performance teams" },
+                      { icon: Activity, label: "Sustainable productivity" },
+                      { icon: Brain, label: "Data-informed decisions" },
+                      { icon: TrendingUp, label: "Long-term capacity" },
+                    ].map((item, i) => (
+                      <motion.div 
+                        key={i}
+                        className="p-5 rounded-2xl bg-foreground/[0.02] border border-border/30 text-center"
+                        whileHover={{ y: -4, borderColor: "hsl(var(--primary) / 0.3)" }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                          <item.icon className="w-5 h-5 text-primary" />
+                        </div>
+                        <p className="text-xs font-medium text-foreground">{item.label}</p>
                       </motion.div>
                     ))}
                   </div>
@@ -356,7 +468,7 @@ const AboutUs = () => {
                   <span className="text-muted-foreground">Early adopters shape how these systems evolve.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Let's explore whether Neurostate can help your team perform better.
+                  The pilot is an opportunity to test the future of performance — early and safely. Let's explore whether Neurostate can help your team perform better.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
                   <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
