@@ -211,7 +211,7 @@ export default function SportsCaseStudies() {
               Schedule a demo with our partnerships team to discuss your team's needs.
             </p>
             <Button size="lg" asChild>
-              <Link to="/enterprise/sports/overview">Schedule Partnership Demo</Link>
+              <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">Schedule Partnership Demo</a>
             </Button>
 
             <div className="mt-12 pt-8 border-t border-mist">
