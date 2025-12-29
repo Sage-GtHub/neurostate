@@ -204,7 +204,7 @@ const Hero = () => {
                 className="flex flex-wrap items-center gap-3 pt-2"
                 variants={itemVariants}
               >
-                <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
+                <Link to="/contact">
                   <motion.div
                     whileHover={{ scale: 1.03, y: -2 }}
                     whileTap={{ scale: 0.98 }}
@@ -220,7 +220,7 @@ const Hero = () => {
                       </span>
                     </Button>
                   </motion.div>
-                </a>
+                </Link>
                 <Link to="/nova/overview">
                   <motion.div
                     whileHover={{ scale: 1.03, y: -2 }}

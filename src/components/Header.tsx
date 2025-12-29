@@ -193,7 +193,7 @@ export const Header = () => {
             </Button>
             
             {/* Book a Demo */}
-            <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
+            <Link to="/contact">
               <Button 
                 size="sm"
                 className="h-8 px-4 text-[11px] font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg"
@@ -203,7 +203,7 @@ export const Header = () => {
                   <ArrowUpRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </span>
               </Button>
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Only */}
@@ -282,11 +282,11 @@ export const Header = () => {
                   
                   {/* CTA */}
                   <div className="pt-5">
-                    <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)}>
+                    <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
                       <Button className="w-full h-10 text-xs font-medium bg-gray-800 text-white hover:bg-gray-700 rounded-full">
                         Book a demo
                       </Button>
-                    </a>
+                    </Link>
                   </div>
                 </nav>
               </SheetContent>

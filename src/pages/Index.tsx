@@ -533,12 +533,12 @@ const Index = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
               >
-                <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
+                <Link to="/contact">
                   <Button size="sm" className="h-10 px-6 text-xs font-medium bg-gray-800 text-white hover:bg-gray-700 rounded-full group">
                     Book a demo
                     <ArrowUpRight className="ml-2 w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Button>
-                </a>
+                </Link>
                 <Link to="/shop">
                   <Button size="sm" variant="outline" className="h-10 px-6 text-xs font-medium rounded-full">
                     Browse Products
