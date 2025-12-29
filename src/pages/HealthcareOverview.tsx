@@ -95,7 +95,7 @@ export default function HealthcareOverview() {
                   <span className="text-muted-foreground">We make it predictive.</span>
                 </h1>
                 <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                  Most clinical systems track what happened. Neurostate forecasts what will happen — predicting complications, optimising recovery, and reducing readmissions before they occur.
+                  Most clinical systems track what happened. Neurostate forecasts what will happen: predicting complications, optimising recovery, and reducing readmissions before they occur.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
                   <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
@@ -246,7 +246,7 @@ export default function HealthcareOverview() {
                 <span className="text-muted-foreground">Integrated into clinical workflow.</span>
               </h2>
               <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                Neurostate operates as a predictive layer across patient care — forecasting outcomes, flagging risk, and guiding intervention timing.
+                Neurostate operates as a predictive layer across patient care: forecasting outcomes, flagging risk, and guiding intervention timing.
               </p>
             </div>
 

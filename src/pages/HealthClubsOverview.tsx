@@ -94,7 +94,7 @@ export default function HealthClubsOverview() {
                   <span className="text-muted-foreground">Now train their minds.</span>
                 </h1>
                 <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                  Most fitness facilities measure reps and sets. You will measure readiness, recovery, and cognitive load — then act on it before members drop off.
+                  Most fitness facilities measure reps and sets. You will measure readiness, recovery, and cognitive load, then act on it before members drop off.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
                   <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
@@ -391,7 +391,7 @@ export default function HealthClubsOverview() {
             <div className="border border-border/30 rounded-3xl p-8 sm:p-10 space-y-6 bg-foreground/[0.01]">
               <div className="text-center space-y-2">
                 <h2 className="text-xl font-light text-foreground">Let us explore whether Neurostate fits your facility</h2>
-                <p className="text-xs text-muted-foreground">We respond within 24 hours. No pressure, no jargon — just answers.</p>
+                <p className="text-xs text-muted-foreground">We respond within 24 hours. No pressure, no jargon, just answers.</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">

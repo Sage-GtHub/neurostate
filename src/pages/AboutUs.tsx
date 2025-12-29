@@ -12,7 +12,7 @@ const AboutUs = () => {
     <>
       <SEO 
         title="About Us | Neurostate"
-        description="Neurostate is building cognitive infrastructure that predicts and guides, not just tracks. AI for cognitive performance — from prediction to execution."
+        description="Neurostate is building cognitive infrastructure that predicts and guides, not just tracks. AI for cognitive performance: from prediction to execution."
       />
       <div className="min-h-screen bg-background">
         <Header />
@@ -28,7 +28,7 @@ const AboutUs = () => {
                   <span className="text-muted-foreground">through artificial intelligence.</span>
                 </h1>
                 <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl mt-6">
-                  Most organisations measure outcomes, not the cognitive conditions that create them. We're changing that. Neurostate is a cognitive performance platform that predicts and guides — not just tracks.
+                  Most organisations measure outcomes, not the cognitive conditions that create them. We're changing that. Neurostate is a cognitive performance platform that predicts and guides, not just tracks.
                 </p>
               </ScrollReveal>
             </div>
@@ -60,7 +60,7 @@ const AboutUs = () => {
                   </ScrollReveal>
                   <ScrollReveal delay={0.3}>
                     <p className="text-sm text-foreground font-medium leading-relaxed">
-                      We built Neurostate because the future of work isn't about working harder — it's about working with precision.
+                      We built Neurostate because the future of work isn't about working harder. It's about working with precision.
                     </p>
                   </ScrollReveal>
                 </div>
@@ -147,7 +147,7 @@ const AboutUs = () => {
                   {[
                     { 
                       title: "Wearable Integration", 
-                      desc: "Sleep, recovery, HRV, stress — continuous biometric monitoring from the devices your team already uses.",
+                      desc: "Sleep, recovery, HRV, stress: continuous biometric monitoring from the devices your team already uses.",
                       num: "01"
                     },
                     { 

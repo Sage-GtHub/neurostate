@@ -95,7 +95,7 @@ export default function SportsOverview() {
                   <span className="text-muted-foreground">We make it predictive.</span>
                 </h1>
                 <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                  Elite performance is cognitive, not just physical. We forecast readiness, predict injury risk, and optimise recovery — giving athletes and teams an intelligence advantage.
+                  Elite performance is cognitive, not just physical. We forecast readiness, predict injury risk, and optimise recovery, giving athletes and teams an intelligence advantage.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
                   <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
@@ -246,7 +246,7 @@ export default function SportsOverview() {
                 <span className="text-muted-foreground">For every athlete.</span>
               </h2>
               <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                Neurostate operates as a cognitive layer across athlete performance — forecasting readiness, predicting risk, and guiding recovery in real time.
+                Neurostate operates as a cognitive layer across athlete performance: forecasting readiness, predicting risk, and guiding recovery in real time.
               </p>
             </div>
 
