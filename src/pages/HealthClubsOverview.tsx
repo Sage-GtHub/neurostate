@@ -5,11 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { SEO } from "@/components/SEO";
-import { ArrowRight, CheckCircle2, TrendingUp, Target, Zap } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CheckCircle2, TrendingUp, Target, Zap, Brain, Activity, Users } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { motion } from "framer-motion";
 
 export default function HealthClubsOverview() {
   const hero = useScrollAnimation();
+  const problem = useScrollAnimation();
   const outcomes = useScrollAnimation();
   const revenue = useScrollAnimation();
   const included = useScrollAnimation();
@@ -21,8 +23,8 @@ export default function HealthClubsOverview() {
   return (
     <>
       <SEO 
-        title="Cognitive Performance Infrastructure for Fitness Facilities | Neurostate"
-        description="Enterprise-grade cognitive analytics for health clubs. Measure member cognitive readiness and deliver data-driven results."
+        title="Cognitive Performance for Health Clubs & Gyms | Neurostate"
+        description="Transform your fitness facility with AI-driven cognitive analytics. Measure what matters. Deliver measurable results. Retain more members."
       />
       
       <div className="min-h-screen bg-background relative overflow-hidden">
@@ -32,36 +34,87 @@ export default function HealthClubsOverview() {
 
         <Header />
         
-        {/* Hero */}
+        {/* Hero - Invisible Tech Style */}
         <section ref={hero.ref} className={`relative pt-32 sm:pt-44 pb-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="max-w-4xl mx-auto text-center space-y-6">
-            <p className="text-[10px] uppercase tracking-[0.25em] text-foreground/40">Gyms · Yoga Studios · Private Clubs</p>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-foreground leading-[1.1]">
-              Cognitive Analytics<br />
-              <span className="text-foreground/50">for Your Facility</span>
-            </h1>
-            <p className="text-sm text-foreground/50 max-w-lg mx-auto">
-              Enterprise-grade cognitive infrastructure for fitness facilities. Measure performance outcomes. Deliver data-driven results.
-            </p>
+          <div className="max-w-5xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6">
+                <p className="text-[10px] uppercase tracking-[0.25em] text-primary font-medium">Health Clubs · Gyms · Studios</p>
+                <h1 className="text-4xl sm:text-5xl font-light text-foreground leading-[1.1]">
+                  Your members train their bodies.
+                  <br />
+                  <span className="text-muted-foreground">Now train their minds.</span>
+                </h1>
+                <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
+                  Most fitness facilities measure reps and sets. You'll measure readiness, recovery, and cognitive load — then act on it before members drop off.
+                </p>
+                <div className="flex flex-wrap gap-3 pt-2">
+                  <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
+                    <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
+                      <Button className="h-11 px-6 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                        Book a demo
+                        <ArrowUpRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </Button>
+                    </motion.div>
+                  </a>
+                </div>
+              </div>
+              
+              {/* Impact Stats */}
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { stat: "+34%", label: "Retention", desc: "Average improvement" },
+                  { stat: "+28%", label: "Revenue", desc: "Per member" },
+                  { stat: "89%", label: "Satisfaction", desc: "Member NPS" },
+                  { stat: "4 weeks", label: "Deployment", desc: "Full rollout" }
+                ].map((item, i) => (
+                  <motion.div 
+                    key={i} 
+                    className="p-5 rounded-2xl bg-foreground/[0.03] border border-border/30 text-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={hero.isVisible ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.3 + i * 0.1 }}
+                  >
+                    <p className="text-2xl font-light text-primary mb-1">{item.stat}</p>
+                    <p className="text-xs font-medium text-foreground mb-0.5">{item.label}</p>
+                    <p className="text-[10px] text-muted-foreground">{item.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Impact Metrics */}
-        <section className="px-6 md:px-12 lg:px-20 xl:px-32 pb-20">
+        {/* The Problem */}
+        <section ref={problem.ref} className={`py-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${problem.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
-                { stat: "+34%", label: "Retention", desc: "Average" },
-                { stat: "+28%", label: "Revenue", desc: "Per member" },
-                { stat: "89%", label: "Satisfaction", desc: "NPS score" },
-                { stat: "4 weeks", label: "Rollout", desc: "Onboarding" }
-              ].map((item, i) => (
-                <div key={i} className="p-6 rounded-3xl bg-foreground text-center">
-                  <p className="text-2xl font-light text-accent mb-1">{item.stat}</p>
-                  <p className="text-xs text-background mb-0.5">{item.label}</p>
-                  <p className="text-[10px] text-background/50">{item.desc}</p>
-                </div>
-              ))}
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+              <div className="space-y-6">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">The Problem</p>
+                <h2 className="text-3xl font-light text-foreground">
+                  Members don't quit because of your equipment.
+                  <br />
+                  <span className="text-muted-foreground">They quit because they stop seeing results.</span>
+                </h2>
+              </div>
+              <div className="space-y-4">
+                {[
+                  { title: "Invisible churn signals", desc: "Fatigue and stress build before members cancel. You only see the end result." },
+                  { title: "Generic programming", desc: "One-size-fits-all doesn't work. Members need personalised guidance based on their actual readiness." },
+                  { title: "No outcome measurement", desc: "You track attendance. But can you prove cognitive and performance improvement?" }
+                ].map((item, i) => (
+                  <motion.div 
+                    key={i}
+                    className="p-5 rounded-2xl bg-foreground/[0.02] border border-border/20"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={problem.isVisible ? { opacity: 1, x: 0 } : {}}
+                    transition={{ delay: 0.2 + i * 0.1 }}
+                  >
+                    <h3 className="text-sm font-medium text-foreground mb-1">{item.title}</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -70,40 +123,95 @@ export default function HealthClubsOverview() {
         <section ref={outcomes.ref} className={`py-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${outcomes.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12 space-y-4">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/40">Member Benefits</p>
-              <h2 className="text-3xl font-light text-foreground">What members get</h2>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">The Solution</p>
+              <h2 className="text-3xl font-light text-foreground">
+                Cognitive infrastructure.
+                <br />
+                <span className="text-muted-foreground">For every member.</span>
+              </h2>
+              <p className="text-sm text-muted-foreground max-w-lg mx-auto">
+                Neurostate integrates seamlessly into your facility, giving members AI-powered guidance and giving you data that actually matters.
+              </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-3 gap-5">
               {[
-                { icon: Target, title: "Nova AI Coach", description: "Personal cognitive optimisation via app. 24/7 guidance tailored to their goals." },
-                { icon: Zap, title: "Premium Products", description: "20-40% member discount on supplements, red light devices, and recovery tools." },
-                { icon: TrendingUp, title: "Progress Tracking", description: "Visual metrics showing cognitive improvement, recovery scores, and focus gains." }
+                { 
+                  icon: Brain, 
+                  title: "Nova AI Coach", 
+                  description: "Personal cognitive optimisation via app. 24/7 guidance tailored to each member's biometrics and goals.",
+                  highlight: "Personalised protocols"
+                },
+                { 
+                  icon: Activity, 
+                  title: "Readiness Scoring", 
+                  description: "Daily cognitive readiness scores based on sleep, HRV, and recovery. Members know when to push and when to rest.",
+                  highlight: "Real-time adaptation"
+                },
+                { 
+                  icon: TrendingUp, 
+                  title: "Outcome Tracking", 
+                  description: "Visual metrics showing cognitive improvement, focus gains, and recovery trends. Proof your facility delivers results.",
+                  highlight: "Measurable results"
+                }
               ].map((item, index) => (
-                <div key={index} className="p-8 rounded-3xl bg-foreground/[0.02] hover:bg-foreground group transition-all duration-500">
-                  <item.icon className="w-5 h-5 text-accent mb-5" />
+                <motion.div 
+                  key={index} 
+                  className="group p-6 rounded-2xl bg-foreground/[0.02] border border-border/20 hover:bg-foreground hover:border-foreground transition-all duration-500"
+                  whileHover={{ y: -4 }}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-background/10 transition-colors">
+                      <item.icon className="w-5 h-5 text-primary group-hover:text-background transition-colors" />
+                    </div>
+                    <span className="text-[9px] uppercase tracking-wider text-primary group-hover:text-accent transition-colors">{item.highlight}</span>
+                  </div>
                   <h3 className="text-sm font-medium text-foreground group-hover:text-background mb-2 transition-colors">{item.title}</h3>
-                  <p className="text-xs text-foreground/50 group-hover:text-background/60 transition-colors">{item.description}</p>
-                </div>
+                  <p className="text-xs text-muted-foreground group-hover:text-background/70 leading-relaxed transition-colors">{item.description}</p>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Revenue */}
+        {/* Revenue Impact */}
         <section ref={revenue.ref} className={`py-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${revenue.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="max-w-5xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/40">Revenue Impact</p>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">Revenue Impact</p>
                 <h2 className="text-3xl font-light text-foreground">
-                  More than retention<br /><span className="text-foreground/50">New revenue</span>
+                  This isn't wellness theatre.
+                  <br />
+                  <span className="text-muted-foreground">It's performance infrastructure.</span>
                 </h2>
-                <p className="text-sm text-foreground/50">NeuroState creates new premium service opportunities. Members pay more. Stay longer. Refer others.</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Neurostate creates new premium service opportunities. Members pay more, stay longer, and refer others. This is the differentiation your facility needs.
+                </p>
+                <div className="space-y-3">
+                  {[
+                    "20-40% product discounts for members",
+                    "Premium tier differentiation",
+                    "Reduced churn from early intervention",
+                    "Data-driven member success stories"
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
+                      <span className="text-xs text-foreground">{item}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              <div className="p-8 rounded-3xl bg-foreground">
-                <h3 className="text-sm font-medium text-background mb-6">Example: 500 Member Facility</h3>
+              <motion.div 
+                className="p-8 rounded-3xl bg-foreground"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                <h3 className="text-sm font-medium text-background mb-6 flex items-center gap-2">
+                  <Users className="w-4 h-4 text-accent" />
+                  Example: 500 Member Facility
+                </h3>
                 <div className="space-y-4 text-xs">
                   {[
                     { label: "Current Members", value: "500" },
@@ -112,16 +220,16 @@ export default function HealthClubsOverview() {
                     { label: "Premium Revenue (28%)", value: "£168K new", accent: true },
                   ].map((item, i) => (
                     <div key={i} className="flex justify-between pb-3 border-b border-background/10">
-                      <span className="text-background/50">{item.label}</span>
+                      <span className="text-background/60">{item.label}</span>
                       <span className={item.accent ? "text-accent font-medium" : "text-background font-medium"}>{item.value}</span>
                     </div>
                   ))}
                   <div className="flex justify-between pt-3">
                     <span className="text-background font-medium">Net Annual Gain</span>
-                    <span className="text-accent text-lg font-medium">£342K+</span>
+                    <span className="text-accent text-xl font-medium">£342K+</span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -130,16 +238,33 @@ export default function HealthClubsOverview() {
         <section ref={included.ref} className={`py-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${included.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12 space-y-4">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/40">Partnership Includes</p>
-              <h2 className="text-3xl font-light text-foreground">Simple onboarding</h2>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">Partnership Includes</p>
+              <h2 className="text-3xl font-light text-foreground">
+                Simple deployment.
+                <br />
+                <span className="text-muted-foreground">We handle the complexity.</span>
+              </h2>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {["Nova AI for all members", "Facility dashboard", "Staff training", "Marketing materials", "Dedicated support", "Product discounts"].map((item, index) => (
-                <div key={index} className="flex items-center gap-3 p-5 rounded-2xl bg-foreground/[0.02]">
-                  <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0" />
+              {[
+                "Nova AI for all members",
+                "Facility analytics dashboard", 
+                "Staff training programme",
+                "Marketing materials & assets",
+                "Dedicated account support",
+                "Member product discounts"
+              ].map((item, index) => (
+                <motion.div 
+                  key={index} 
+                  className="flex items-center gap-3 p-5 rounded-2xl bg-foreground/[0.02] border border-border/20"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={included.isVisible ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.1 + index * 0.05 }}
+                >
+                  <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
                   <span className="text-xs text-foreground">{item}</span>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -148,22 +273,22 @@ export default function HealthClubsOverview() {
         {/* Contact Form */}
         <section ref={form.ref} className={`py-20 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${form.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="max-w-lg mx-auto">
-            <div className="glass-subtle rounded-3xl p-8 sm:p-10 space-y-6">
+            <div className="border border-border/30 rounded-3xl p-8 sm:p-10 space-y-6 bg-foreground/[0.01]">
               <div className="text-center space-y-2">
-                <h2 className="text-xl font-light text-foreground">Schedule a demo</h2>
-                <p className="text-xs text-foreground/50">We respond within 24 hours.</p>
+                <h2 className="text-xl font-light text-foreground">Let's explore whether Neurostate fits your facility</h2>
+                <p className="text-xs text-muted-foreground">We respond within 24 hours. No pressure, no jargon — just answers.</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid sm:grid-cols-2 gap-3">
-                  <Input placeholder="Name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="rounded-xl bg-foreground/[0.02] border-foreground/10 h-11 text-xs" />
-                  <Input type="email" placeholder="Email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="rounded-xl bg-foreground/[0.02] border-foreground/10 h-11 text-xs" />
+                  <Input placeholder="Name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="rounded-xl bg-foreground/[0.02] border-border/30 h-11 text-xs" />
+                  <Input type="email" placeholder="Email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="rounded-xl bg-foreground/[0.02] border-border/30 h-11 text-xs" />
                 </div>
                 <div className="grid sm:grid-cols-2 gap-3">
-                  <Input placeholder="Facility name" value={formData.facility} onChange={(e) => setFormData({...formData, facility: e.target.value})} className="rounded-xl bg-foreground/[0.02] border-foreground/10 h-11 text-xs" />
-                  <Input placeholder="Number of members" value={formData.members} onChange={(e) => setFormData({...formData, members: e.target.value})} className="rounded-xl bg-foreground/[0.02] border-foreground/10 h-11 text-xs" />
+                  <Input placeholder="Facility name" value={formData.facility} onChange={(e) => setFormData({...formData, facility: e.target.value})} className="rounded-xl bg-foreground/[0.02] border-border/30 h-11 text-xs" />
+                  <Input placeholder="Number of members" value={formData.members} onChange={(e) => setFormData({...formData, members: e.target.value})} className="rounded-xl bg-foreground/[0.02] border-border/30 h-11 text-xs" />
                 </div>
-                <Textarea placeholder="What are your goals?" value={formData.goals} onChange={(e) => setFormData({...formData, goals: e.target.value})} className="rounded-xl bg-foreground/[0.02] border-foreground/10 text-xs min-h-[100px]" />
+                <Textarea placeholder="What are your goals for member performance?" value={formData.goals} onChange={(e) => setFormData({...formData, goals: e.target.value})} className="rounded-xl bg-foreground/[0.02] border-border/30 text-xs min-h-[100px]" />
                 <Button type="submit" className="w-full rounded-full h-11 text-xs bg-foreground text-background hover:bg-foreground/90">
                   Request Demo <ArrowRight className="ml-2 w-3.5 h-3.5" />
                 </Button>

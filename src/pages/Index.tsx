@@ -279,9 +279,9 @@ const Index = () => {
                     </div>
                     
                     <Link to="/nova/overview">
-                      <Button size="sm" className="h-10 px-5 text-xs font-medium bg-gray-800 text-white hover:bg-gray-700 rounded-full group">
-                        Explore Nova
-                        <ArrowRight className="ml-2 w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                      <Button size="sm" className="h-10 px-5 text-xs font-medium bg-gray-800 text-white hover:bg-gray-700 rounded-full group flex items-center gap-2">
+                        <span>Explore Nova</span>
+                        <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                       </Button>
                     </Link>
                   </div>

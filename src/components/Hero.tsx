@@ -230,10 +230,10 @@ const Hero = () => {
                     <Button 
                       size="sm"
                       variant="ghost"
-                      className="h-10 px-5 text-xs font-medium text-foreground hover:bg-muted rounded-full group animated-underline"
+                      className="h-10 px-5 text-xs font-medium text-foreground hover:bg-muted rounded-full group animated-underline flex items-center gap-2"
                     >
-                      Explore Nova AI
-                      <ArrowRight className="ml-2 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                      <span>Explore Nova AI</span>
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                     </Button>
                   </motion.div>
                 </Link>
