@@ -92,7 +92,7 @@ export default function FinancialServicesOverview() {
                   <span className="text-muted-foreground">We deliver it.</span>
                 </h1>
                 <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                  Cognitive fatigue costs financial institutions millions in suboptimal decisions, errors, and burnout. Neurostate predicts mental load and optimises performance windows — turning cognitive science into competitive advantage.
+                  Cognitive fatigue costs financial institutions millions in suboptimal decisions, errors, and burnout. Neurostate predicts mental load and optimises performance windows, turning cognitive science into competitive advantage.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
                   <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
@@ -222,7 +222,7 @@ export default function FinancialServicesOverview() {
               </div>
               <div className="space-y-4">
                 {[
-                  { title: "Decision fatigue", desc: "Traders and analysts make hundreds of decisions daily. Quality deteriorates as cognitive load accumulates — often unnoticed." },
+                  { title: "Decision fatigue", desc: "Traders and analysts make hundreds of decisions daily. Quality deteriorates as cognitive load accumulates, often unnoticed." },
                   { title: "Peak window blindness", desc: "Critical decisions happen whenever markets demand, not when your team is cognitively optimal. Timing is everything." },
                   { title: "Burnout attrition", desc: "Top performers leave. Recruitment costs compound. The institutional knowledge walks out the door." }
                 ].map((item, i) => (
@@ -253,7 +253,7 @@ export default function FinancialServicesOverview() {
                 <span className="text-muted-foreground">For high-stakes environments.</span>
               </h2>
               <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                Neurostate operates as a predictive layer across your trading floor — forecasting cognitive load, optimising decision windows, and preventing burnout before it impacts performance.
+                Neurostate operates as a predictive layer across your trading floor: forecasting cognitive load, optimising decision windows, and preventing burnout before it impacts performance.
               </p>
             </div>
 
@@ -309,7 +309,7 @@ export default function FinancialServicesOverview() {
                   <span className="text-muted-foreground">It's alpha generation.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  The edge in financial services isn't just information — it's the cognitive capacity to act on it. Neurostate ensures your team performs when millions are on the line.
+                  The edge in financial services isn't just information. It's the cognitive capacity to act on it. Neurostate ensures your team performs when millions are on the line.
                 </p>
                 <div className="space-y-3">
                   {[

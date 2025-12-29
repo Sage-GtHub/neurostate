@@ -96,7 +96,7 @@ export default function InformationTechnologyOverview() {
                   <span className="text-muted-foreground">People run on cognitive capacity.</span>
                 </h1>
                 <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                  Burnout isn't a badge of honour — it's a business liability. Neurostate predicts cognitive strain, optimises focus windows, and keeps your best people performing sustainably.
+                  Burnout isn't a badge of honour. It's a business liability. Neurostate predicts cognitive strain, optimises focus windows, and keeps your best people performing sustainably.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
                   <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
@@ -226,7 +226,7 @@ export default function InformationTechnologyOverview() {
               </div>
               <div className="space-y-4">
                 {[
-                  { title: "Silent burnout", desc: "High performers don't complain — they just leave. By the time burnout is visible, it's too late to intervene." },
+                  { title: "Silent burnout", desc: "High performers don't complain. They just leave. By the time burnout is visible, it's too late to intervene." },
                   { title: "Deep work destruction", desc: "Meetings, notifications, and context-switching fragment focus. Complex problem-solving requires sustained cognitive capacity." },
                   { title: "Retention crisis", desc: "Replacing a senior employee costs 6-12 months salary. The institutional knowledge loss is immeasurable." }
                 ].map((item, i) => (
@@ -257,7 +257,7 @@ export default function InformationTechnologyOverview() {
                 <span className="text-muted-foreground">For sustainable velocity.</span>
               </h2>
               <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                Neurostate operates as a cognitive layer across your organisation — predicting burnout, protecting deep work, and keeping your best people performing at their peak.
+                Neurostate operates as a cognitive layer across your organisation: predicting burnout, protecting deep work, and keeping your best people performing at their peak.
               </p>
             </div>
 
@@ -313,7 +313,7 @@ export default function InformationTechnologyOverview() {
                   <span className="text-muted-foreground">It's performance infrastructure.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Sustainable high performance isn't about working harder — it's about working smarter. Neurostate gives your team the cognitive edge to ship faster, think clearer, and stay longer.
+                  Sustainable high performance isn't about working harder. It's about working smarter. Neurostate gives your team the cognitive edge to ship faster, think clearer, and stay longer.
                 </p>
                 <div className="space-y-3">
                   {[
