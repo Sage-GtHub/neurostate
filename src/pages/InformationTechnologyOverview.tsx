@@ -219,7 +219,7 @@ export default function InformationTechnologyOverview() {
               <div className="space-y-6">
                 <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">The Problem</p>
                 <h2 className="text-3xl font-light text-foreground">
-                  Your best engineers are burning out.
+                  Your best performers are burning out.
                   <br />
                   <span className="text-muted-foreground">Quietly. Invisibly. Expensively.</span>
                 </h2>
