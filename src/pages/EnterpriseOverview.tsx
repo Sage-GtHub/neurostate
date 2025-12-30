@@ -181,7 +181,7 @@ export default function EnterpriseOverview() {
                     animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   />
-                  <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">Cognitive Performance OS</span>
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">Human Performance OS</span>
                 </div>
 
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-foreground tracking-tight">

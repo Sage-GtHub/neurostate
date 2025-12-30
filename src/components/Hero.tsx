@@ -170,7 +170,7 @@ const Hero = () => {
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 />
                 <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
-                  Cognitive Performance OS
+                  Human Performance OS
                 </span>
               </motion.div>
 
