@@ -96,7 +96,7 @@ export default function EnterpriseIntegrations() {
         <section className="relative bg-gradient-to-br from-carbon via-slate to-carbon text-ivory pt-32 pb-20">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center max-w-4xl mx-auto mb-16">
-              <p className="text-[10px] uppercase tracking-[0.25em] text-accent font-medium mb-4">Human Performance OS</p>
+              <p className="text-[10px] uppercase tracking-[0.25em] text-accent font-medium mb-4">Cognitive Performance OS</p>
               <h1 className="text-hero-display font-bold mb-6">
                 Invisible Integration
               </h1>
