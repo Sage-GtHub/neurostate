@@ -1,6 +1,7 @@
 import { Header } from "@/components/Header";
 import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
+import LiveDemoSection from "@/components/LiveDemoSection";
 import { SEO } from "@/components/SEO";
 import { OrganizationStructuredData, SoftwareApplicationStructuredData, WebsiteStructuredData, LocalBusinessStructuredData } from "@/components/StructuredData";
 import { Footer } from "@/components/Footer";
@@ -32,6 +33,7 @@ const Index = () => {
         <main>
           <Hero />
           <HowItWorks />
+          <LiveDemoSection />
 
           {/* Stats - Large flowing numbers with enhanced interaction */}
           <section className="py-20 md:py-28 px-6 md:px-8">
