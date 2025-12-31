@@ -1,14 +1,14 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SEO } from "@/components/SEO";
-import { ArrowRight, ArrowUpRight, CheckCircle2, Cpu, Brain, Shield, Target, Users, Calculator } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CheckCircle2, Cpu, Brain, Shield, Target, Users } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { motion } from "framer-motion";
+import { EnterpriseROICalculator } from "@/components/EnterpriseROICalculator";
 
 export default function InformationTechnologyOverview() {
   const hero = useScrollAnimation();
@@ -17,55 +17,6 @@ export default function InformationTechnologyOverview() {
   const impact = useScrollAnimation();
   const included = useScrollAnimation();
   const form = useScrollAnimation();
-  
-  // ROI Calculator State
-  const [employees, setEmployees] = useState<string>("50");
-  const [avgSalary, setAvgSalary] = useState<string>("65000");
-  const [sickDays, setSickDays] = useState<string>("7");
-  const [industry, setIndustry] = useState<string>("saas");
-  
-  const roiCalculation = useMemo(() => {
-    const empCount = parseInt(employees) || 0;
-    const salary = parseInt(avgSalary) || 0;
-    const days = parseInt(sickDays) || 0;
-    
-    const dailyCost = salary / 260; // Working days per year
-    const currentSickCost = empCount * days * dailyCost;
-    const burnoutCost = empCount * salary * 0.18; // 18% productivity loss from burnout/fatigue
-    const turnoverCost = empCount * salary * 0.08; // 8% turnover cost
-    const totalCurrentCost = currentSickCost + burnoutCost + turnoverCost;
-    
-    // Neurostate improvements
-    const sickDayReduction = 0.40; // 40% reduction
-    const burnoutReduction = 0.47; // 47% reduction
-    const turnoverReduction = 0.35; // 35% reduction
-    
-    const sickDaySavings = currentSickCost * sickDayReduction;
-    const burnoutSavings = burnoutCost * burnoutReduction;
-    const turnoverSavings = turnoverCost * turnoverReduction;
-    const totalSavings = sickDaySavings + burnoutSavings + turnoverSavings;
-    
-    const investmentCost = empCount * 380; // £380 per employee per year
-    const netROI = totalSavings - investmentCost;
-    const roiMultiple = investmentCost > 0 ? totalSavings / investmentCost : 0;
-    
-    return {
-      currentSickCost: Math.round(currentSickCost),
-      burnoutCost: Math.round(burnoutCost),
-      totalCurrentCost: Math.round(totalCurrentCost),
-      sickDaySavings: Math.round(sickDaySavings),
-      burnoutSavings: Math.round(burnoutSavings),
-      turnoverSavings: Math.round(turnoverSavings),
-      totalSavings: Math.round(totalSavings),
-      investmentCost: Math.round(investmentCost),
-      netROI: Math.round(netROI),
-      roiMultiple: roiMultiple.toFixed(1)
-    };
-  }, [employees, avgSalary, sickDays, industry]);
-
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(value);
-  };
   
   const [formData, setFormData] = useState({ name: "", email: "", organisation: "", team: "", goals: "" });
   const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); console.log("Partnership demo request:", formData); };
@@ -111,103 +62,7 @@ export default function InformationTechnologyOverview() {
               </div>
               
               {/* ROI Calculator */}
-              <motion.div 
-                className="p-6 sm:p-8 rounded-3xl bg-foreground"
-                initial={{ opacity: 0, y: 20 }}
-                animate={hero.isVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.3 }}
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-xl bg-background/10 flex items-center justify-center">
-                    <Calculator className="w-5 h-5 text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium text-background">ROI Calculator</h3>
-                    <p className="text-[10px] text-background/60">Calculate your potential savings</p>
-                  </div>
-                </div>
-
-                <div className="space-y-4 mb-6">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className="text-[10px] text-background/60 uppercase tracking-wider mb-1.5 block">Employees</label>
-                      <Input 
-                        type="number" 
-                        value={employees} 
-                        onChange={(e) => setEmployees(e.target.value)}
-                        className="bg-background/10 border-background/20 text-background h-10 text-sm rounded-xl"
-                        placeholder="50"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-[10px] text-background/60 uppercase tracking-wider mb-1.5 block">Avg. Salary (£)</label>
-                      <Input 
-                        type="number" 
-                        value={avgSalary} 
-                        onChange={(e) => setAvgSalary(e.target.value)}
-                        className="bg-background/10 border-background/20 text-background h-10 text-sm rounded-xl"
-                        placeholder="65000"
-                      />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className="text-[10px] text-background/60 uppercase tracking-wider mb-1.5 block">Sick Days/Year</label>
-                      <Input 
-                        type="number" 
-                        value={sickDays} 
-                        onChange={(e) => setSickDays(e.target.value)}
-                        className="bg-background/10 border-background/20 text-background h-10 text-sm rounded-xl"
-                        placeholder="7"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-[10px] text-background/60 uppercase tracking-wider mb-1.5 block">Industry</label>
-                      <Select value={industry} onValueChange={setIndustry}>
-                        <SelectTrigger className="bg-background/10 border-background/20 text-background h-10 text-sm rounded-xl">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="saas">SaaS</SelectItem>
-                          <SelectItem value="enterprise">Enterprise Software</SelectItem>
-                          <SelectItem value="startup">Startup</SelectItem>
-                          <SelectItem value="agency">Agency</SelectItem>
-                          <SelectItem value="consulting">Consulting</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="border-t border-background/10 pt-5 space-y-3">
-                  <div className="flex justify-between text-xs">
-                    <span className="text-background/60">Current hidden costs</span>
-                    <span className="text-background/80">{formatCurrency(roiCalculation.totalCurrentCost)}</span>
-                  </div>
-                  <div className="flex justify-between text-xs">
-                    <span className="text-background/60">Sick day savings (40%)</span>
-                    <span className="text-accent">{formatCurrency(roiCalculation.sickDaySavings)}</span>
-                  </div>
-                  <div className="flex justify-between text-xs">
-                    <span className="text-background/60">Burnout reduction (47%)</span>
-                    <span className="text-accent">{formatCurrency(roiCalculation.burnoutSavings)}</span>
-                  </div>
-                  <div className="flex justify-between text-xs pb-3 border-b border-background/10">
-                    <span className="text-background/60">Annual investment</span>
-                    <span className="text-background/80">-{formatCurrency(roiCalculation.investmentCost)}</span>
-                  </div>
-                  <div className="flex justify-between items-center pt-2">
-                    <div>
-                      <span className="text-xs text-background/60 block">Net Annual ROI</span>
-                      <span className="text-2xl font-light text-accent">{formatCurrency(roiCalculation.netROI)}</span>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-xs text-background/60 block">ROI Multiple</span>
-                      <span className="text-xl font-medium text-background">{roiCalculation.roiMultiple}x</span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+              <EnterpriseROICalculator variant="dark" defaultIndustry="saas-high-growth" />
             </div>
           </div>
         </section>
