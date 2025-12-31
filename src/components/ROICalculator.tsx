@@ -3,102 +3,109 @@ import { Slider } from "@/components/ui/slider";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { z } from "zod";
-import { TrendingUp, Users, DollarSign, Clock, Briefcase, Building2, Sparkles } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { TrendingUp, Users, DollarSign, Clock, Brain, ArrowLeft, Download, Calendar, FileText, Target } from "lucide-react";
 
-type Industry = "technology" | "finance" | "creative";
+type Industry = 
+  | "saas-high-growth"
+  | "saas-enterprise"
+  | "financial-services"
+  | "professional-services"
+  | "healthcare"
+  | "government-defense"
+  | "tech-hardware";
+
+type ImprovementScenario = "conservative" | "realistic" | "optimistic";
 
 interface IndustryProfile {
   name: string;
-  icon: React.ReactNode;
-  gradient: string;
-  multipliers: {
-    productivity: number;
-    burnout: number;
-    turnover: number;
-  };
-  avgSalary: number;
-  avgSickDays: number;
+  turnoverRate: number;
+  productivityLossRate: number;
 }
 
-const calculatorSchema = z.object({
-  employees: z.number().min(10).max(10000),
-  avgSalary: z.number().min(20000).max(500000),
-  currentWellnessSpend: z.number().min(0).max(1000000),
-  avgSickDays: z.number().min(0).max(30)
-});
-
 const industryProfiles: Record<Industry, IndustryProfile> = {
-  technology: {
-    name: "Technology & SaaS",
-    icon: <Briefcase className="w-6 h-6" />,
-    gradient: "from-blue-500 to-cyan-500",
-    multipliers: { productivity: 1.2, burnout: 1.3, turnover: 1.1 },
-    avgSalary: 75000,
-    avgSickDays: 6
+  "saas-high-growth": {
+    name: "SaaS - High Growth",
+    turnoverRate: 0.18,
+    productivityLossRate: 0.17,
   },
-  finance: {
+  "saas-enterprise": {
+    name: "SaaS - Enterprise",
+    turnoverRate: 0.15,
+    productivityLossRate: 0.15,
+  },
+  "financial-services": {
     name: "Financial Services",
-    icon: <Building2 className="w-6 h-6" />,
-    gradient: "from-green-500 to-emerald-500",
-    multipliers: { productivity: 1.1, burnout: 1.4, turnover: 1.2 },
-    avgSalary: 85000,
-    avgSickDays: 7
+    turnoverRate: 0.13,
+    productivityLossRate: 0.14,
   },
-  creative: {
-    name: "Marketing & Creative",
-    icon: <Sparkles className="w-6 h-6" />,
-    gradient: "from-purple-500 to-pink-500",
-    multipliers: { productivity: 1.3, burnout: 1.2, turnover: 0.9 },
-    avgSalary: 55000,
-    avgSickDays: 8
-  }
+  "professional-services": {
+    name: "Professional Services",
+    turnoverRate: 0.22,
+    productivityLossRate: 0.19,
+  },
+  "healthcare": {
+    name: "Healthcare",
+    turnoverRate: 0.19,
+    productivityLossRate: 0.16,
+  },
+  "government-defense": {
+    name: "Government/Defense",
+    turnoverRate: 0.11,
+    productivityLossRate: 0.13,
+  },
+  "tech-hardware": {
+    name: "Tech - Hardware/Other",
+    turnoverRate: 0.20,
+    productivityLossRate: 0.18,
+  },
+};
+
+const improvementRates: Record<ImprovementScenario, number> = {
+  conservative: 0.15,
+  realistic: 0.25,
+  optimistic: 0.35,
 };
 
 export function ROICalculator() {
-  const [employees, setEmployees] = useState([250]);
-  const [selectedIndustry, setSelectedIndustry] = useState<Industry>("technology");
-  const [avgSalary, setAvgSalary] = useState("75000");
-  const [currentWellnessSpend, setCurrentWellnessSpend] = useState("25000");
-  const [avgSickDays, setAvgSickDays] = useState("6");
+  const [employees, setEmployees] = useState([50]);
+  const [avgSalary, setAvgSalary] = useState("65000");
+  const [avgSickDays, setAvgSickDays] = useState("7");
+  const [selectedIndustry, setSelectedIndustry] = useState<Industry>("saas-high-growth");
+  const [improvementScenario, setImprovementScenario] = useState<ImprovementScenario>("realistic");
+  const [showReport, setShowReport] = useState(false);
 
   const currentIndustry = industryProfiles[selectedIndustry];
+  const improvement = improvementRates[improvementScenario];
 
-  // Validate and parse inputs
+  // Parse inputs
   const parseNumber = (value: string, defaultValue: number) => {
     const parsed = parseFloat(value.replace(/,/g, ''));
     return isNaN(parsed) ? defaultValue : parsed;
   };
 
-  const salaryNum = parseNumber(avgSalary, 50000);
-  const wellnessSpendNum = parseNumber(currentWellnessSpend, 25000);
-  const sickDaysNum = parseNumber(avgSickDays, 8);
+  const salaryNum = parseNumber(avgSalary, 65000);
+  const sickDaysNum = parseNumber(avgSickDays, 7);
   const employeeCount = employees[0];
+  const { turnoverRate, productivityLossRate } = currentIndustry;
 
-  // Calculate metrics based on NeuroState improvements with industry multipliers
-  const dailyRate = salaryNum / 260; // Working days per year
-  
-  // Productivity gains (31% base improvement * industry multiplier)
-  const productivityGainPerEmployee = salaryNum * 0.31 * currentIndustry.multipliers.productivity;
-  const totalProductivityGain = productivityGainPerEmployee * employeeCount;
+  // Calculate current hidden costs
+  const underperformanceCost = employeeCount * salaryNum * productivityLossRate;
+  const turnoverCost = employeeCount * turnoverRate * (salaryNum * 0.5);
+  const dailyCost = salaryNum / 260;
+  const sickDaysCost = employeeCount * dailyCost * sickDaysNum;
+  const totalHiddenCosts = underperformanceCost + turnoverCost + sickDaysCost;
 
-  // Sick day reduction (63% reduction in burnout * industry multiplier = ~40% fewer sick days)
-  const sickDayReduction = sickDaysNum * 0.40 * currentIndustry.multipliers.burnout;
-  const sickDaySavings = sickDayReduction * dailyRate * employeeCount;
-
-  // Turnover reduction (18% improvement * industry multiplier)
-  const avgTurnoverCost = salaryNum * 0.5; // Industry standard
-  const currentTurnoverRate = 0.15; // 15% annual turnover
-  const turnoverReduction = 0.18 * currentIndustry.multipliers.turnover; 
-  const turnoverSavings = (currentTurnoverRate * turnoverReduction * avgTurnoverCost * employeeCount);
-
-  // NeuroState cost (Professional tier at £78/employee/month)
-  const neurostateAnnualCost = employeeCount * 78 * 12;
-  
-  // Total savings
-  const totalSavings = totalProductivityGain + sickDaySavings + turnoverSavings - wellnessSpendNum;
-  const netSavings = totalSavings - neurostateAnnualCost;
-  const roi = ((netSavings / neurostateAnnualCost) * 100);
+  // Calculate NeuroState impact at £50/user/month
+  const investment = employeeCount * 50 * 12;
+  const recoveredUnderperformance = underperformanceCost * improvement;
+  const recoveredTurnover = turnoverCost * improvement;
+  const recoveredSickDays = sickDaysCost * improvement;
+  const year1Recovery = recoveredUnderperformance + recoveredTurnover + recoveredSickDays;
+  const netGain = year1Recovery - investment;
+  const roiMultiple = investment > 0 ? year1Recovery / investment : 0;
+  const paybackMonths = year1Recovery > 0 ? Math.min(60, Math.max(0, 12 * (investment / year1Recovery))) : 60;
+  const fiveYearValue = (year1Recovery * 5) - (investment * 5);
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('en-GB', {
@@ -109,165 +116,351 @@ export function ROICalculator() {
     }).format(value);
   };
 
+  if (showReport) {
+    return (
+      <div className="space-y-8">
+        {/* Back Button */}
+        <Button
+          variant="ghost"
+          onClick={() => setShowReport(false)}
+          className="mb-4 text-stone hover:text-carbon"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back to Calculator
+        </Button>
+
+        {/* Executive Summary */}
+        <div className="bg-gradient-to-br from-carbon to-slate text-ivory rounded-2xl p-8">
+          <h3 className="text-2xl font-bold mb-6">Executive Summary</h3>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="text-center p-4 bg-white/10 rounded-xl">
+              <div className="text-xs uppercase tracking-wide mb-2 opacity-80">Year 1 Recovery</div>
+              <div className="text-3xl font-bold text-accent">{formatCurrency(year1Recovery)}</div>
+            </div>
+            <div className="text-center p-4 bg-white/10 rounded-xl">
+              <div className="text-xs uppercase tracking-wide mb-2 opacity-80">Net Gain</div>
+              <div className="text-3xl font-bold text-accent">{formatCurrency(netGain)}</div>
+            </div>
+            <div className="text-center p-4 bg-white/10 rounded-xl">
+              <div className="text-xs uppercase tracking-wide mb-2 opacity-80">Payback Period</div>
+              <div className="text-3xl font-bold text-accent">{Math.round(paybackMonths)} months</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Detailed Cost Analysis */}
+        <div>
+          <h3 className="text-xl font-bold text-carbon mb-4">Detailed Cost Analysis</h3>
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="bg-pearl/50 rounded-2xl p-6 border border-mist/30">
+              <div className="flex items-center gap-3 mb-4">
+                <Brain className="w-5 h-5 text-accent" />
+                <span className="text-xs uppercase tracking-wide text-stone font-medium">Cognitive Underperformance</span>
+              </div>
+              <div className="space-y-3">
+                <div>
+                  <div className="text-xs text-stone mb-1">Current Cost</div>
+                  <div className="text-xl font-bold text-carbon">{formatCurrency(underperformanceCost)}</div>
+                </div>
+                <div>
+                  <div className="text-xs text-stone mb-1">Estimated Recovery</div>
+                  <div className="text-xl font-bold text-accent">{formatCurrency(recoveredUnderperformance)}</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-pearl/50 rounded-2xl p-6 border border-mist/30">
+              <div className="flex items-center gap-3 mb-4">
+                <Users className="w-5 h-5 text-accent" />
+                <span className="text-xs uppercase tracking-wide text-stone font-medium">Burnout-Related Turnover</span>
+              </div>
+              <div className="space-y-3">
+                <div>
+                  <div className="text-xs text-stone mb-1">Current Cost</div>
+                  <div className="text-xl font-bold text-carbon">{formatCurrency(turnoverCost)}</div>
+                </div>
+                <div>
+                  <div className="text-xs text-stone mb-1">Estimated Recovery</div>
+                  <div className="text-xl font-bold text-accent">{formatCurrency(recoveredTurnover)}</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-pearl/50 rounded-2xl p-6 border border-mist/30">
+              <div className="flex items-center gap-3 mb-4">
+                <Clock className="w-5 h-5 text-accent" />
+                <span className="text-xs uppercase tracking-wide text-stone font-medium">Preventable Sick Days</span>
+              </div>
+              <div className="space-y-3">
+                <div>
+                  <div className="text-xs text-stone mb-1">Current Cost</div>
+                  <div className="text-xl font-bold text-carbon">{formatCurrency(sickDaysCost)}</div>
+                </div>
+                <div>
+                  <div className="text-xs text-stone mb-1">Estimated Recovery</div>
+                  <div className="text-xl font-bold text-accent">{formatCurrency(recoveredSickDays)}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 5-Year Value Projection */}
+        <div>
+          <h3 className="text-xl font-bold text-carbon mb-4">5-Year Value Projection</h3>
+          <div className="bg-pearl/50 rounded-2xl p-6 border border-mist/30">
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="text-center">
+                <div className="text-xs uppercase tracking-wide text-stone mb-2">5-Year Recovery</div>
+                <div className="text-2xl font-bold text-accent">{formatCurrency(year1Recovery * 5)}</div>
+              </div>
+              <div className="text-center">
+                <div className="text-xs uppercase tracking-wide text-stone mb-2">5-Year Investment</div>
+                <div className="text-2xl font-bold text-carbon">{formatCurrency(investment * 5)}</div>
+              </div>
+              <div className="text-center">
+                <div className="text-xs uppercase tracking-wide text-stone mb-2">5-Year Net Value</div>
+                <div className="text-2xl font-bold text-accent">{formatCurrency(fiveYearValue)}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ROI Multiple Card */}
+        <div className="bg-gradient-to-br from-accent via-accent/90 to-accent/80 rounded-2xl p-8 text-center">
+          <div className="text-xs uppercase tracking-wide text-white/80 mb-2">ROI Multiple</div>
+          <div className="text-5xl font-bold text-white">{roiMultiple.toFixed(1)}x</div>
+          <div className="text-sm text-white/80 mt-2">Return on investment</div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+          <Button
+            size="lg"
+            className="bg-carbon text-ivory hover:bg-carbon/90"
+            onClick={() => window.open('https://calendly.com', '_blank')}
+          >
+            <Calendar className="w-4 h-4 mr-2" />
+            Book an Implementation Call
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="border-carbon text-carbon hover:bg-carbon/5"
+          >
+            <Download className="w-4 h-4 mr-2" />
+            Download PDF
+          </Button>
+        </div>
+
+        {/* Disclaimer */}
+        <div className="text-xs text-stone pt-4 border-t border-mist text-center">
+          * Projections based on {currentIndustry.name} industry benchmarks with {improvementScenario} scenario ({(improvement * 100).toFixed(0)}% improvement). Individual results may vary.
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-8">
-      {/* Industry Selection */}
-      <div className="grid md:grid-cols-3 gap-4 mb-8">
-        {(Object.keys(industryProfiles) as Industry[]).map((industry) => {
-          const profile = industryProfiles[industry];
-          return (
-            <button
-              key={industry}
-              onClick={() => {
-                setSelectedIndustry(industry);
-                setAvgSalary(profile.avgSalary.toString());
-                setAvgSickDays(profile.avgSickDays.toString());
-              }}
-              className={`relative overflow-hidden rounded-2xl p-6 text-left transition-all ${
-                selectedIndustry === industry
-                  ? 'ring-2 ring-accent scale-105'
-                  : 'hover:scale-102'
-              }`}
-            >
-              <div className={`absolute inset-0 bg-gradient-to-br ${profile.gradient} opacity-10`} />
-              <div className="relative">
-                <div className="w-12 h-12 bg-ivory/50 backdrop-blur-sm rounded-xl flex items-center justify-center mb-3">
-                  {profile.icon}
-                </div>
-                <div className="font-bold text-carbon">{profile.name}</div>
-                {selectedIndustry === industry && (
-                  <div className="mt-2 text-xs text-accent font-semibold uppercase tracking-wide">
-                    Selected
-                  </div>
-                )}
-              </div>
-            </button>
-          );
-        })}
-      </div>
-
       <div className="grid md:grid-cols-2 gap-8">
         {/* Left Column - Inputs */}
-        <div className="space-y-8">
-        <div>
-          <Label className="text-sm font-semibold text-stone uppercase tracking-wide mb-3 block">
-            Number of Employees
-          </Label>
-          <div className="text-4xl font-bold text-carbon mb-4">{employeeCount}</div>
-          <Slider
-            value={employees}
-            onValueChange={setEmployees}
-            min={10}
-            max={5000}
-            step={10}
-            className="mb-2"
-          />
-          <div className="flex justify-between text-xs text-stone">
-            <span>10</span>
-            <span>5,000</span>
+        <div className="space-y-6">
+          {/* Number of Employees */}
+          <div>
+            <Label className="text-sm font-semibold text-stone uppercase tracking-wide mb-3 block">
+              Number of Employees
+            </Label>
+            <div className="text-4xl font-bold text-carbon mb-4">{employeeCount}</div>
+            <Slider
+              value={employees}
+              onValueChange={setEmployees}
+              min={10}
+              max={1000}
+              step={10}
+              className="mb-2"
+            />
+            <div className="flex justify-between text-xs text-stone">
+              <span>10</span>
+              <span>1,000</span>
+            </div>
+          </div>
+
+          {/* Average Salary */}
+          <div>
+            <Label htmlFor="avgSalary" className="text-sm font-semibold text-stone uppercase tracking-wide mb-3 block">
+              Average Salary (£)
+            </Label>
+            <Input
+              id="avgSalary"
+              type="text"
+              value={avgSalary}
+              onChange={(e) => setAvgSalary(e.target.value.replace(/[^0-9]/g, ''))}
+              placeholder="65000"
+              className="text-lg"
+            />
+          </div>
+
+          {/* Average Sick Days */}
+          <div>
+            <Label htmlFor="sickDays" className="text-sm font-semibold text-stone uppercase tracking-wide mb-3 block">
+              Average Sick Days Per Year
+            </Label>
+            <Input
+              id="sickDays"
+              type="text"
+              value={avgSickDays}
+              onChange={(e) => setAvgSickDays(e.target.value.replace(/[^0-9.]/g, ''))}
+              placeholder="7"
+              className="text-lg"
+            />
+          </div>
+
+          {/* Industry Dropdown */}
+          <div>
+            <Label className="text-sm font-semibold text-stone uppercase tracking-wide mb-3 block">
+              Industry
+            </Label>
+            <Select value={selectedIndustry} onValueChange={(value) => setSelectedIndustry(value as Industry)}>
+              <SelectTrigger className="text-lg">
+                <SelectValue placeholder="Select industry" />
+              </SelectTrigger>
+              <SelectContent>
+                {Object.entries(industryProfiles).map(([key, profile]) => (
+                  <SelectItem key={key} value={key}>
+                    {profile.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Improvement Scenario Toggle */}
+          <div>
+            <Label className="text-sm font-semibold text-stone uppercase tracking-wide mb-3 block">
+              Improvement Scenario
+            </Label>
+            <div className="flex gap-2">
+              {[
+                { key: "conservative" as const, label: "Conservative", rate: "15%" },
+                { key: "realistic" as const, label: "Realistic", rate: "25%" },
+                { key: "optimistic" as const, label: "Optimistic", rate: "35%" },
+              ].map(({ key, label, rate }) => (
+                <button
+                  key={key}
+                  onClick={() => setImprovementScenario(key)}
+                  className={`flex-1 py-3 px-4 rounded-xl text-sm font-medium transition-all ${
+                    improvementScenario === key
+                      ? 'bg-accent text-white'
+                      : 'bg-pearl text-stone hover:bg-mist'
+                  }`}
+                >
+                  <div>{label}</div>
+                  <div className="text-xs opacity-80">({rate})</div>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-
-        <div>
-          <Label htmlFor="avgSalary" className="text-sm font-semibold text-stone uppercase tracking-wide mb-3 block">
-            Average Salary (£)
-          </Label>
-          <Input
-            id="avgSalary"
-            type="text"
-            value={avgSalary}
-            onChange={(e) => setAvgSalary(e.target.value.replace(/[^0-9]/g, ''))}
-            placeholder="50000"
-            className="text-lg"
-          />
-        </div>
-
-        <div>
-          <Label htmlFor="currentWellness" className="text-sm font-semibold text-stone uppercase tracking-wide mb-3 block">
-            Current Annual Wellness Spend (£)
-          </Label>
-          <Input
-            id="currentWellness"
-            type="text"
-            value={currentWellnessSpend}
-            onChange={(e) => setCurrentWellnessSpend(e.target.value.replace(/[^0-9]/g, ''))}
-            placeholder="25000"
-            className="text-lg"
-          />
-        </div>
-
-        <div>
-          <Label htmlFor="sickDays" className="text-sm font-semibold text-stone uppercase tracking-wide mb-3 block">
-            Average Sick Days Per Employee
-          </Label>
-          <Input
-            id="sickDays"
-            type="text"
-            value={avgSickDays}
-            onChange={(e) => setAvgSickDays(e.target.value.replace(/[^0-9.]/g, ''))}
-            placeholder="8"
-            className="text-lg"
-          />
-        </div>
-      </div>
 
         {/* Right Column - Results */}
-        <div className="space-y-8">
-          <div className="bg-gradient-to-br from-carbon to-slate text-ivory rounded-2xl p-8 text-center">
-            <div className="text-xs font-semibold uppercase tracking-wide mb-3 opacity-80">
-              Annual ROI
+        <div className="space-y-6">
+          {/* Current Hidden Costs */}
+          <div className="bg-pearl/50 rounded-2xl p-6 border border-mist/30">
+            <div className="text-xs text-stone uppercase tracking-wide mb-4 font-semibold">
+              Current Hidden Costs
             </div>
-            <div className="text-4xl font-bold mb-2 text-accent">
-              {roi > 0 ? '+' : ''}{roi.toFixed(0)}%
-            </div>
-            <div className="text-sm opacity-80">
-              {formatCurrency(netSavings)} net savings
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            <div className="flex items-start gap-4 pb-4 border-b border-mist">
-              <TrendingUp className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
-              <div className="flex-1">
-                <div className="text-xs text-stone mb-1 uppercase tracking-wide">Productivity Gains</div>
-                <div className="text-xl font-bold text-accent">{formatCurrency(totalProductivityGain)}</div>
-                <div className="text-xs text-stone mt-1"><span className="text-accent font-semibold">31%</span> improvement per employee</div>
+            <div className="space-y-3">
+              <div className="flex justify-between items-center pb-2 border-b border-mist/50">
+                <div className="flex items-center gap-2">
+                  <Brain className="w-4 h-4 text-stone" />
+                  <span className="text-sm text-stone">Cognitive underperformance</span>
+                </div>
+                <span className="font-semibold text-carbon">{formatCurrency(underperformanceCost)}</span>
               </div>
-            </div>
-
-            <div className="flex items-start gap-4 pb-4 border-b border-mist">
-              <Clock className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
-              <div className="flex-1">
-                <div className="text-xs text-stone mb-1 uppercase tracking-wide">Sick Day Reduction</div>
-                <div className="text-xl font-bold text-accent">{formatCurrency(sickDaySavings)}</div>
-                <div className="text-xs text-stone mt-1"><span className="text-accent font-semibold">40%</span> fewer sick days annually</div>
+              <div className="flex justify-between items-center pb-2 border-b border-mist/50">
+                <div className="flex items-center gap-2">
+                  <Users className="w-4 h-4 text-stone" />
+                  <span className="text-sm text-stone">Burnout-related turnover</span>
+                </div>
+                <span className="font-semibold text-carbon">{formatCurrency(turnoverCost)}</span>
               </div>
-            </div>
-
-            <div className="flex items-start gap-4 pb-4 border-b border-mist">
-              <Users className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
-              <div className="flex-1">
-                <div className="text-xs text-stone mb-1 uppercase tracking-wide">Turnover Savings</div>
-                <div className="text-xl font-bold text-accent">{formatCurrency(turnoverSavings)}</div>
-                <div className="text-xs text-stone mt-1"><span className="text-accent font-semibold">18%</span> retention improvement</div>
+              <div className="flex justify-between items-center pb-2 border-b border-mist/50">
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-stone" />
+                  <span className="text-sm text-stone">Preventable sick days</span>
+                </div>
+                <span className="font-semibold text-carbon">{formatCurrency(sickDaysCost)}</span>
               </div>
-            </div>
-
-            <div className="flex items-start gap-4 pt-2">
-              <DollarSign className="w-5 h-5 text-carbon flex-shrink-0 mt-1" />
-              <div className="flex-1">
-                <div className="text-xs text-stone mb-1 uppercase tracking-wide">NeuroState Investment</div>
-                <div className="text-xl font-bold text-carbon">{formatCurrency(neurostateAnnualCost)}</div>
-                <div className="text-xs text-stone mt-1">£78 per employee per month</div>
+              <div className="flex justify-between items-center pt-2">
+                <span className="text-sm font-semibold text-carbon">Total hidden costs</span>
+                <span className="text-xl font-bold text-carbon">{formatCurrency(totalHiddenCosts)}</span>
               </div>
             </div>
           </div>
 
-          <div className="text-xs text-stone pt-4 border-t border-mist">
-            * Calculations based on verified metrics from enterprise deployments. Individual results may vary based on industry.
+          {/* NeuroState Impact */}
+          <div className="bg-gradient-to-br from-accent/10 to-accent/5 rounded-2xl p-6 border border-accent/20">
+            <div className="text-xs text-accent uppercase tracking-wide mb-4 font-semibold">
+              NeuroState Impact
+            </div>
+            <div className="space-y-3">
+              <div className="flex justify-between items-center pb-2 border-b border-accent/20">
+                <div className="flex items-center gap-2">
+                  <TrendingUp className="w-4 h-4 text-accent" />
+                  <span className="text-sm text-stone">Year 1 recovery</span>
+                </div>
+                <span className="font-semibold text-accent">{formatCurrency(year1Recovery)}</span>
+              </div>
+              <div className="flex justify-between items-center pb-2 border-b border-accent/20">
+                <div className="flex items-center gap-2">
+                  <DollarSign className="w-4 h-4 text-stone" />
+                  <span className="text-sm text-stone">Annual investment</span>
+                </div>
+                <span className="font-semibold text-carbon">{formatCurrency(investment)}</span>
+              </div>
+              <div className="flex justify-between items-center pb-2 border-b border-accent/20">
+                <div className="flex items-center gap-2">
+                  <Target className="w-4 h-4 text-accent" />
+                  <span className="text-sm text-stone">Net gain</span>
+                </div>
+                <span className="font-semibold text-accent">{formatCurrency(netGain)}</span>
+              </div>
+              <div className="flex justify-between items-center pb-2 border-b border-accent/20">
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-stone" />
+                  <span className="text-sm text-stone">Payback</span>
+                </div>
+                <span className="font-semibold text-carbon">{Math.round(paybackMonths)} months</span>
+              </div>
+              <div className="flex justify-between items-center pt-2">
+                <span className="text-sm text-stone">5-year value</span>
+                <span className="text-xl font-bold text-accent">{formatCurrency(fiveYearValue)}</span>
+              </div>
+            </div>
           </div>
+
+          {/* ROI Multiple Card */}
+          <div className="bg-gradient-to-br from-accent via-accent/90 to-accent/80 rounded-2xl p-6 text-center">
+            <div className="text-xs uppercase tracking-wide text-white/80 mb-1">ROI Multiple</div>
+            <div className="text-4xl font-bold text-white">{roiMultiple.toFixed(1)}x</div>
+          </div>
+
+          {/* View Report Button */}
+          <Button
+            size="lg"
+            className="w-full bg-carbon text-ivory hover:bg-carbon/90"
+            onClick={() => setShowReport(true)}
+          >
+            <FileText className="w-4 h-4 mr-2" />
+            View Complete Business Case
+          </Button>
+        </div>
       </div>
-    </div>
+
+      <div className="text-xs text-stone pt-4 border-t border-mist">
+        * Calculations based on {currentIndustry.name} industry benchmarks ({(turnoverRate * 100).toFixed(0)}% turnover, {(productivityLossRate * 100).toFixed(0)}% productivity loss). Individual results may vary.
+      </div>
     </div>
   );
 }
