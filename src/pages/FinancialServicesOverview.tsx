@@ -1,14 +1,14 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SEO } from "@/components/SEO";
-import { ArrowRight, ArrowUpRight, CheckCircle2, TrendingUp, Brain, Shield, Target, Users, Calculator } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CheckCircle2, TrendingUp, Brain, Shield, Target, Users } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { motion } from "framer-motion";
+import { EnterpriseROICalculator } from "@/components/EnterpriseROICalculator";
 
 export default function FinancialServicesOverview() {
   const hero = useScrollAnimation();
@@ -17,51 +17,6 @@ export default function FinancialServicesOverview() {
   const impact = useScrollAnimation();
   const included = useScrollAnimation();
   const form = useScrollAnimation();
-  
-  // ROI Calculator State
-  const [employees, setEmployees] = useState<string>("100");
-  const [avgSalary, setAvgSalary] = useState<string>("85000");
-  const [sickDays, setSickDays] = useState<string>("8");
-  const [industry, setIndustry] = useState<string>("investment-banking");
-  
-  const roiCalculation = useMemo(() => {
-    const empCount = parseInt(employees) || 0;
-    const salary = parseInt(avgSalary) || 0;
-    const days = parseInt(sickDays) || 0;
-    
-    const dailyCost = salary / 260; // Working days per year
-    const currentSickCost = empCount * days * dailyCost;
-    const productivityLoss = empCount * salary * 0.15; // 15% productivity loss from cognitive fatigue
-    const totalCurrentCost = currentSickCost + productivityLoss;
-    
-    // Neurostate improvements
-    const sickDayReduction = 0.35; // 35% reduction
-    const productivityGain = 0.23; // 23% improvement
-    
-    const sickDaySavings = currentSickCost * sickDayReduction;
-    const productivitySavings = productivityLoss * productivityGain;
-    const totalSavings = sickDaySavings + productivitySavings;
-    
-    const investmentCost = empCount * 450; // £450 per employee per year
-    const netROI = totalSavings - investmentCost;
-    const roiMultiple = investmentCost > 0 ? totalSavings / investmentCost : 0;
-    
-    return {
-      currentSickCost: Math.round(currentSickCost),
-      productivityLoss: Math.round(productivityLoss),
-      totalCurrentCost: Math.round(totalCurrentCost),
-      sickDaySavings: Math.round(sickDaySavings),
-      productivitySavings: Math.round(productivitySavings),
-      totalSavings: Math.round(totalSavings),
-      investmentCost: Math.round(investmentCost),
-      netROI: Math.round(netROI),
-      roiMultiple: roiMultiple.toFixed(1)
-    };
-  }, [employees, avgSalary, sickDays, industry]);
-
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(value);
-  };
   
   const [formData, setFormData] = useState({ name: "", email: "", organisation: "", team: "", goals: "" });
   const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); console.log("Partnership demo request:", formData); };
@@ -107,103 +62,7 @@ export default function FinancialServicesOverview() {
               </div>
               
               {/* ROI Calculator */}
-              <motion.div 
-                className="p-6 sm:p-8 rounded-3xl bg-foreground"
-                initial={{ opacity: 0, y: 20 }}
-                animate={hero.isVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.3 }}
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-xl bg-background/10 flex items-center justify-center">
-                    <Calculator className="w-5 h-5 text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium text-background">ROI Calculator</h3>
-                    <p className="text-[10px] text-background/60">Calculate your potential savings</p>
-                  </div>
-                </div>
-
-                <div className="space-y-4 mb-6">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className="text-[10px] text-background/60 uppercase tracking-wider mb-1.5 block">Employees</label>
-                      <Input 
-                        type="number" 
-                        value={employees} 
-                        onChange={(e) => setEmployees(e.target.value)}
-                        className="bg-background/10 border-background/20 text-background h-10 text-sm rounded-xl"
-                        placeholder="100"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-[10px] text-background/60 uppercase tracking-wider mb-1.5 block">Avg. Salary (£)</label>
-                      <Input 
-                        type="number" 
-                        value={avgSalary} 
-                        onChange={(e) => setAvgSalary(e.target.value)}
-                        className="bg-background/10 border-background/20 text-background h-10 text-sm rounded-xl"
-                        placeholder="85000"
-                      />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className="text-[10px] text-background/60 uppercase tracking-wider mb-1.5 block">Sick Days/Year</label>
-                      <Input 
-                        type="number" 
-                        value={sickDays} 
-                        onChange={(e) => setSickDays(e.target.value)}
-                        className="bg-background/10 border-background/20 text-background h-10 text-sm rounded-xl"
-                        placeholder="8"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-[10px] text-background/60 uppercase tracking-wider mb-1.5 block">Industry</label>
-                      <Select value={industry} onValueChange={setIndustry}>
-                        <SelectTrigger className="bg-background/10 border-background/20 text-background h-10 text-sm rounded-xl">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="investment-banking">Investment Banking</SelectItem>
-                          <SelectItem value="trading">Trading</SelectItem>
-                          <SelectItem value="asset-management">Asset Management</SelectItem>
-                          <SelectItem value="private-equity">Private Equity</SelectItem>
-                          <SelectItem value="hedge-fund">Hedge Fund</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="border-t border-background/10 pt-5 space-y-3">
-                  <div className="flex justify-between text-xs">
-                    <span className="text-background/60">Current cognitive costs</span>
-                    <span className="text-background/80">{formatCurrency(roiCalculation.totalCurrentCost)}</span>
-                  </div>
-                  <div className="flex justify-between text-xs">
-                    <span className="text-background/60">Sick day savings (35%)</span>
-                    <span className="text-accent">{formatCurrency(roiCalculation.sickDaySavings)}</span>
-                  </div>
-                  <div className="flex justify-between text-xs">
-                    <span className="text-background/60">Productivity gains (23%)</span>
-                    <span className="text-accent">{formatCurrency(roiCalculation.productivitySavings)}</span>
-                  </div>
-                  <div className="flex justify-between text-xs pb-3 border-b border-background/10">
-                    <span className="text-background/60">Annual investment</span>
-                    <span className="text-background/80">-{formatCurrency(roiCalculation.investmentCost)}</span>
-                  </div>
-                  <div className="flex justify-between items-center pt-2">
-                    <div>
-                      <span className="text-xs text-background/60 block">Net Annual ROI</span>
-                      <span className="text-2xl font-light text-accent">{formatCurrency(roiCalculation.netROI)}</span>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-xs text-background/60 block">ROI Multiple</span>
-                      <span className="text-xl font-medium text-background">{roiCalculation.roiMultiple}x</span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+              <EnterpriseROICalculator variant="dark" defaultIndustry="financial-services" />
             </div>
           </div>
         </section>
