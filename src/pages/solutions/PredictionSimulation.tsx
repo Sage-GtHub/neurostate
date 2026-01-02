@@ -6,6 +6,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { ArrowUpRight, ArrowRight, TrendingUp, Calendar, Target, Sparkles, AlertTriangle, BarChart3, Clock, Zap, Cpu, Brain } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { SolutionDataFlowDiagram } from "@/components/SolutionDataFlowDiagram";
 
 const forecastTypes = [
   {
@@ -66,6 +67,15 @@ export default function PredictionSimulation() {
                 <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                   NeuroState does not stop at visibility. It forecasts what is likely to happen next—and lets you model the impact of decisions before you make them. This is where understanding becomes foresight.
                 </p>
+                
+                {/* Animated Data Flow Diagram */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <SolutionDataFlowDiagram variant="prediction" className="mt-12" />
+                </motion.div>
               </motion.div>
             </div>
           </section>

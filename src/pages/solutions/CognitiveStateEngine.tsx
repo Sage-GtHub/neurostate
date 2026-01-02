@@ -6,6 +6,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { ArrowUpRight, ArrowRight, Cpu, Activity, Brain, Zap, AlertTriangle, TrendingUp, Database, Gauge, BarChart3 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { SolutionDataFlowDiagram } from "@/components/SolutionDataFlowDiagram";
 
 const cognitiveStates = [
   { 
@@ -64,6 +65,15 @@ export default function CognitiveStateEngine() {
                 <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                   Raw data is noise. The Cognitive State Engine transforms signals into intelligence—interpretable states that drive decisions. This is where NeuroState moves from tracking to understanding.
                 </p>
+                
+                {/* Animated Data Flow Diagram */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <SolutionDataFlowDiagram variant="state-engine" className="mt-12" />
+                </motion.div>
               </motion.div>
             </div>
           </section>
