@@ -429,6 +429,12 @@ export default function TeamDashboard() {
                   <RefreshCw className="w-3.5 h-3.5 mr-2" />
                   Refresh
                 </Button>
+                <Link to="/team/settings/advanced">
+                  <Button variant="outline" size="sm" className="h-9 px-3 rounded-lg">
+                    <Settings className="w-3.5 h-3.5 mr-2" />
+                    Settings
+                  </Button>
+                </Link>
               </div>
             </div>
 
