@@ -272,10 +272,8 @@ const Index = () => {
                       transition={{ duration: 0.5, delay: i * 0.1 }}
                       whileHover={{ y: -4 }}
                     >
-                      {/* Step number */}
-                      <div className="w-10 h-10 rounded-full bg-background border-2 border-border flex items-center justify-center mx-auto mb-3 group-hover:border-primary/50 group-hover:bg-primary/5 transition-colors relative z-10">
-                        <span className="text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors">{item.step}</span>
-                      </div>
+                      
+
                       
                       <div className="text-center">
                         <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-2 group-hover:bg-primary/20 transition-colors">
