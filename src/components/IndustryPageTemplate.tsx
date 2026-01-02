@@ -7,6 +7,7 @@ import { ArrowUpRight, Check, LucideIcon, Activity, Brain, AlertTriangle, Zap, T
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { EnterpriseROICalculator } from "@/components/EnterpriseROICalculator";
+import { DataFlowVisualization, SignalFlowVisual } from "@/components/DataFlowVisualization";
 
 interface Signal {
   name: string;
@@ -64,6 +65,12 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
           {/* Hero Section */}
           <section className="relative min-h-[80vh] flex items-center overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/[0.03]" />
+            
+            {/* Animated Data Flow Background */}
+            <div className="absolute inset-0 opacity-30 pointer-events-none">
+              <DataFlowVisualization className="w-full h-full" />
+            </div>
+            
             <motion.div
               className="absolute top-20 right-[10%] w-[500px] h-[500px] rounded-full opacity-[0.06] blur-[120px] pointer-events-none"
               style={{ background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%)' }}
@@ -473,12 +480,12 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
                   Speak with our team to understand how NeuroState can transform your organisation.
                 </p>
                 <div className="flex flex-wrap justify-center gap-3 pt-4">
-                  <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
+                  <Link to="/contact">
                     <Button className="h-11 px-6 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full">
                       Book a demo
                       <ArrowUpRight className="ml-2 h-3.5 w-3.5" />
                     </Button>
-                  </a>
+                  </Link>
                   <Link to="/contact">
                     <Button variant="outline" className="h-11 px-6 text-xs font-medium rounded-full">
                       Contact us

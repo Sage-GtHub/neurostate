@@ -278,12 +278,12 @@ export default function ROILayer() {
               <ScrollReveal className="space-y-6">
                 <h2 className="text-xl font-normal text-foreground">Ready to see your ROI?</h2>
                 <div className="flex flex-wrap justify-center gap-3 pt-4">
-                  <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
+                  <Link to="/contact">
                     <Button className="h-11 px-6 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full">
                       Book a demo
                       <ArrowUpRight className="ml-2 h-3.5 w-3.5" />
                     </Button>
-                  </a>
+                  </Link>
                   <Link to="/contact">
                     <Button variant="outline" className="h-11 px-6 text-xs font-medium rounded-full">
                       Contact us

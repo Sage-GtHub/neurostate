@@ -264,12 +264,12 @@ export default function CognitiveDataLayer() {
               <ScrollReveal className="space-y-6">
                 <h2 className="text-xl font-normal text-foreground">Ready to unify your cognitive data?</h2>
                 <div className="flex flex-wrap justify-center gap-3">
-                  <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
+                  <Link to="/contact">
                     <Button className="h-10 px-5 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full">
                       Book a demo
                       <ArrowUpRight className="ml-2 h-3.5 w-3.5" />
                     </Button>
-                  </a>
+                  </Link>
                   <Link to="/solutions">
                     <Button variant="outline" className="h-10 px-5 text-xs font-medium rounded-full">
                       Back to Solutions

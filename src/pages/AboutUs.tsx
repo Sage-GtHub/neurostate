@@ -359,12 +359,12 @@ const AboutUs = () => {
                   Let's explore whether Neurostate can help your team perform better.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
-                  <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
+                  <Link to="/contact">
                     <Button size="sm" className="h-10 px-6 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
                       Book a demo
                       <ArrowUpRight className="ml-2 w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </Button>
-                  </a>
+                  </Link>
                   <Link to="/nova/overview">
                     <Button variant="outline" size="sm" className="h-10 px-6 text-xs font-medium rounded-full border-border/50 hover:border-primary/50 hover:bg-transparent group">
                       Explore Nova
