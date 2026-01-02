@@ -6,7 +6,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { ArrowUpRight, ArrowRight, Zap, User, Users, Bell, Clock, MessageSquare, Calendar, Target, CheckCircle2, AlertTriangle, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { EnterpriseROICalculator } from "@/components/EnterpriseROICalculator";
+
 
 const actionCategories = [
   {
@@ -96,11 +96,6 @@ export default function ActionControlLayer() {
                 </p>
               </motion.div>
             </div>
-          </section>
-
-          {/* ROI Calculator - Directly Under Hero */}
-          <section className="py-12 md:py-16 px-6 md:px-8">
-            <EnterpriseROICalculator />
           </section>
 
           {/* Philosophy */}

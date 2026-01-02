@@ -7,7 +7,7 @@ import { ArrowRight, ArrowUpRight, Layers, Brain, TrendingUp, Zap, Users, Calcul
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { DataFlowVisualization } from "@/components/DataFlowVisualization";
-import { EnterpriseROICalculator } from "@/components/EnterpriseROICalculator";
+
 
 const solutionLayers = [
   {
@@ -136,11 +136,6 @@ export default function SolutionsHub() {
                 </div>
               </motion.div>
             </div>
-          </section>
-
-          {/* ROI Calculator - Directly Under Hero */}
-          <section className="py-12 md:py-16 px-6 md:px-8">
-            <EnterpriseROICalculator />
           </section>
 
           {/* Category Framing - Comprehensive */}

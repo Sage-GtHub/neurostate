@@ -6,7 +6,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { ArrowUpRight, Check, LucideIcon, Activity, Brain, AlertTriangle, Zap, Target, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { EnterpriseROICalculator } from "@/components/EnterpriseROICalculator";
+
 
 interface Signal {
   name: string;
@@ -115,13 +115,6 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
                   </motion.div>
                 ))}
               </div>
-            </div>
-          </section>
-
-          {/* ROI Calculator */}
-          <section className="py-20 px-6 md:px-8">
-            <div className="max-w-6xl mx-auto">
-              <EnterpriseROICalculator variant="light" defaultIndustry={industry.defaultIndustry} />
             </div>
           </section>
 
@@ -358,10 +351,10 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
             <div className="max-w-3xl mx-auto text-center">
               <ScrollReveal className="space-y-8">
                 <h2 className="text-3xl md:text-4xl font-normal text-foreground">
-                  Ready to transform {industry.name}?
+                  See what's possible
                 </h2>
                 <p className="text-base text-muted-foreground">
-                  See how NeuroState can help your organisation achieve measurable results.
+                  We'll walk you through NeuroState and answer your questions. No pressure, no jargon.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
                   <Link to="/contact">
