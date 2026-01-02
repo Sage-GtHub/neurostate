@@ -63,10 +63,10 @@ const HowItWorks = () => {
           </p>
         </motion.div>
 
-        {/* Flow Diagram */}
-        <div className="relative">
+        {/* Desktop Layout - Grid */}
+        <div className="hidden md:block relative">
           {/* Connection Lines - Desktop */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 -translate-y-1/2 z-0">
+          <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 z-0">
             <svg className="w-full h-4" viewBox="0 0 1000 16" preserveAspectRatio="none">
               <motion.path
                 d="M 60 8 L 940 8"
@@ -90,8 +90,8 @@ const HowItWorks = () => {
             </svg>
           </div>
 
-          {/* Steps Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-4 relative z-10">
+          {/* Steps Grid - Desktop */}
+          <div className="grid grid-cols-4 gap-4 relative z-10">
             {steps.map((step, index) => (
               <motion.div
                 key={step.title}
@@ -100,49 +100,39 @@ const HowItWorks = () => {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
               >
-                {/* Card */}
                 <motion.div 
-                  className="flow-card p-4 sm:p-5 md:p-6 h-full relative group"
+                  className="flow-card p-6 h-full relative group"
                   whileHover={{ y: -4, scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
                   {/* Step Number */}
-                  <div className="absolute -top-2.5 sm:-top-3 -left-0.5 sm:-left-1 w-5 h-5 sm:w-6 sm:h-6 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-[9px] sm:text-[10px] font-bold shadow-lg">
+                  <div className="absolute -top-3 -left-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-[10px] font-bold shadow-lg">
                     {index + 1}
                   </div>
 
                   {/* Icon */}
                   <motion.div 
-                    className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-primary/20 transition-colors duration-300"
-                    animate={isInView ? { 
-                      scale: [1, 1.05, 1],
-                    } : {}}
-                    transition={{ 
-                      duration: 2, 
-                      repeat: Infinity, 
-                      delay: index * 0.3,
-                      ease: "easeInOut"
-                    }}
+                    className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors duration-300"
+                    animate={isInView ? { scale: [1, 1.05, 1] } : {}}
+                    transition={{ duration: 2, repeat: Infinity, delay: index * 0.3, ease: "easeInOut" }}
                   >
-                    <step.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+                    <step.icon className="w-5 h-5 text-primary" />
                   </motion.div>
 
                   {/* Content */}
-                  <div className="space-y-1.5 sm:space-y-2">
-                    <h3 className="text-sm sm:text-base font-medium text-foreground">{step.title}</h3>
-                    <p className="text-[10px] sm:text-xs text-primary font-medium">{step.subtitle}</p>
-                    <p className="text-[10px] sm:text-xs text-muted-foreground leading-relaxed">
-                      {step.description}
-                    </p>
+                  <div className="space-y-2">
+                    <h3 className="text-base font-medium text-foreground">{step.title}</h3>
+                    <p className="text-xs text-primary font-medium">{step.subtitle}</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{step.description}</p>
                   </div>
 
                   {/* Metrics */}
-                  <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-border/50">
-                    <div className="flex flex-wrap gap-1 sm:gap-1.5">
+                  <div className="mt-4 pt-4 border-t border-border/50">
+                    <div className="flex flex-wrap gap-1.5">
                       {step.metrics.map((metric, i) => (
                         <motion.span
                           key={metric}
-                          className="px-1.5 sm:px-2 py-0.5 sm:py-1 text-[8px] sm:text-[9px] text-muted-foreground bg-muted/50 rounded-full"
+                          className="px-2 py-1 text-[9px] text-muted-foreground bg-muted/50 rounded-full"
                           initial={{ opacity: 0, scale: 0.8 }}
                           animate={isInView ? { opacity: 1, scale: 1 } : {}}
                           transition={{ delay: 0.5 + index * 0.15 + i * 0.05 }}
@@ -153,32 +143,77 @@ const HowItWorks = () => {
                     </div>
                   </div>
 
-                  {/* Animated pulse on hover */}
                   <motion.div
-                    className="absolute inset-0 rounded-xl sm:rounded-2xl border-2 border-primary/0 group-hover:border-primary/20"
+                    className="absolute inset-0 rounded-2xl border-2 border-primary/0 group-hover:border-primary/20"
                     animate={{ scale: [1, 1.02, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   />
                 </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
 
-                {/* Arrow between cards - Mobile only (single column) */}
-                {index < steps.length - 1 && (
+        {/* Mobile Layout - Clean Timeline */}
+        <div className="md:hidden relative">
+          {/* Timeline line */}
+          <motion.div 
+            className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/20 via-primary to-primary/20"
+            initial={{ scaleY: 0 }}
+            animate={isInView ? { scaleY: 1 } : {}}
+            transition={{ duration: 1, delay: 0.3 }}
+            style={{ originY: 0 }}
+          />
+
+          <div className="space-y-0">
+            {steps.map((step, index) => (
+              <motion.div
+                key={step.title}
+                className="relative flex items-start gap-4 py-6"
+                initial={{ opacity: 0, x: -20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
+              >
+                {/* Timeline node */}
+                <div className="relative z-10 flex-shrink-0">
                   <motion.div 
-                    className="sm:hidden flex justify-center py-2"
-                    initial={{ opacity: 0 }}
-                    animate={isInView ? { opacity: 1 } : {}}
-                    transition={{ delay: 0.3 + index * 0.15 }}
+                    className="w-12 h-12 bg-background border-2 border-primary rounded-xl flex items-center justify-center shadow-lg"
+                    animate={isInView ? { scale: [1, 1.05, 1] } : {}}
+                    transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
                   >
-                    <motion.div
-                      animate={{ y: [0, 3, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-primary/60">
-                        <path d="M12 5L12 19M12 19L18 13M12 19L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </motion.div>
+                    <step.icon className="w-5 h-5 text-primary" />
                   </motion.div>
-                )}
+                  {/* Step number badge */}
+                  <div className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-[10px] font-bold">
+                    {index + 1}
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 pt-1">
+                  <div className="flex items-baseline gap-2 mb-1">
+                    <h3 className="text-base font-semibold text-foreground">{step.title}</h3>
+                    <span className="text-[10px] text-primary font-medium">{step.subtitle}</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                    {step.description}
+                  </p>
+                  
+                  {/* Metrics - inline pills */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {step.metrics.map((metric, i) => (
+                      <motion.span
+                        key={metric}
+                        className="px-2 py-0.5 text-[10px] text-muted-foreground bg-muted/80 rounded-full border border-border/50"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                        transition={{ delay: 0.4 + index * 0.1 + i * 0.05 }}
+                      >
+                        {metric}
+                      </motion.span>
+                    ))}
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
