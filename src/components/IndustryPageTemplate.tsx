@@ -133,203 +133,12 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
             </div>
           </section>
 
-          {/* Industry Problem Deep Dive Section */}
-          {industry.industryProblem && (
-            <section className="py-20 md:py-28 px-6 md:px-8 bg-muted/30">
-              <div className="max-w-4xl mx-auto">
-                <ScrollReveal className="space-y-8">
-                  <div className="text-center space-y-4">
-                    <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">The Problem</span>
-                    <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                      {industry.industryProblem.title}
-                    </h2>
-                  </div>
-                  
-                  <div className="space-y-6">
-                    {industry.industryProblem.paragraphs.map((paragraph, i) => (
-                      <motion.p 
-                        key={i}
-                        className="text-sm text-muted-foreground leading-relaxed"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.1 }}
-                      >
-                        {paragraph}
-                      </motion.p>
-                    ))}
-                  </div>
-                </ScrollReveal>
-              </div>
-            </section>
-          )}
-
-          {/* Challenges Section */}
-          <section className="py-20 md:py-28 px-6 md:px-8">
+          {/* ROI Calculator - Directly Under Hero */}
+          <section className="py-10 md:py-12 px-6 md:px-8 bg-muted/30">
             <div className="max-w-6xl mx-auto">
-              <ScrollReveal className="text-center mb-12 space-y-4">
-                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">The Challenge</span>
-                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  Why {industry.name} needs cognitive infrastructure
-                </h2>
-              </ScrollReveal>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {industry.challenges.map((challenge, i) => (
-                  <motion.div
-                    key={i}
-                    className="p-6 rounded-2xl bg-background border border-border/50 hover:border-primary/20 transition-all duration-300"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                  >
-                    <h3 className="text-sm font-medium text-foreground mb-2">{challenge.title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{challenge.description}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* Why Existing Solutions Fail */}
-          {industry.whyExistingSolutionsFail && (
-            <section className="py-20 md:py-28 px-6 md:px-8 bg-destructive/5">
-              <div className="max-w-5xl mx-auto">
-                <ScrollReveal className="text-center mb-12 space-y-4">
-                  <span className="text-[10px] tracking-[0.2em] uppercase text-destructive font-medium">Why Existing Solutions Fail</span>
-                  <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                    {industry.whyExistingSolutionsFail.title}
-                  </h2>
-                </ScrollReveal>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  {industry.whyExistingSolutionsFail.failures.map((failure, i) => (
-                    <motion.div
-                      key={i}
-                      className="p-6 rounded-2xl bg-background border border-destructive/20"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                    >
-                      <div className="flex items-start gap-4">
-                        <div className="w-8 h-8 rounded-full bg-destructive/10 flex items-center justify-center flex-shrink-0">
-                          <AlertTriangle className="w-4 h-4 text-destructive" />
-                        </div>
-                        <div>
-                          <h3 className="text-sm font-medium text-foreground mb-2">{failure.point}</h3>
-                          <p className="text-xs text-muted-foreground leading-relaxed">{failure.explanation}</p>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* How NeuroState Applies */}
-          {industry.howNeuroStateApplies && (
-            <section className="py-20 md:py-28 px-6 md:px-8">
-              <div className="max-w-5xl mx-auto">
-                <ScrollReveal className="text-center mb-12 space-y-4">
-                  <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">How NeuroState Applies</span>
-                  <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                    {industry.howNeuroStateApplies.title}
-                  </h2>
-                </ScrollReveal>
-
-                <div className="space-y-8 mb-12">
-                  {industry.howNeuroStateApplies.paragraphs.map((paragraph, i) => (
-                    <motion.p 
-                      key={i}
-                      className="text-sm text-muted-foreground leading-relaxed max-w-3xl mx-auto"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                    >
-                      {paragraph}
-                    </motion.p>
-                  ))}
-                </div>
-
-                {/* Workflow Examples */}
-                <div className="grid md:grid-cols-2 gap-6">
-                  {industry.howNeuroStateApplies.workflows.map((workflow, i) => (
-                    <motion.div
-                      key={i}
-                      className="p-6 rounded-2xl bg-primary/5 border border-primary/10"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                    >
-                      <div className="flex items-start gap-4">
-                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                          <Zap className="w-4 h-4 text-primary" />
-                        </div>
-                        <div>
-                          <h3 className="text-sm font-medium text-foreground mb-2">{workflow.title}</h3>
-                          <p className="text-xs text-muted-foreground leading-relaxed">{workflow.description}</p>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* Relevant Signals Section */}
-          {industry.relevantSignals && (
-            <section className="py-20 md:py-28 px-6 md:px-8 bg-muted/30">
-              <div className="max-w-6xl mx-auto">
-                <ScrollReveal className="text-center mb-12 space-y-4">
-                  <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Signal Intelligence</span>
-                  <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                    Critical signals for {industry.name}
-                  </h2>
-                  <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-                    Different industries require different signal priorities. These are the data streams that matter most for cognitive performance in {industry.name.toLowerCase()}.
-                  </p>
-                </ScrollReveal>
-
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {industry.relevantSignals.map((signal, i) => (
-                    <motion.div
-                      key={i}
-                      className="p-6 rounded-2xl bg-background border border-border/50 hover:border-primary/20 transition-all duration-300"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                    >
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                          <Activity className="w-4 h-4 text-primary" />
-                        </div>
-                        <h3 className="text-sm font-medium text-foreground">{signal.name}</h3>
-                      </div>
-                      <p className="text-xs text-muted-foreground leading-relaxed mb-3">{signal.description}</p>
-                      <div className="pt-3 border-t border-border/50">
-                        <p className="text-[10px] text-primary uppercase tracking-wider mb-1">Why it matters</p>
-                        <p className="text-xs text-muted-foreground">{signal.importance}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* ROI Calculator - Landscape on Desktop */}
-          <section className="py-12 md:py-16 px-6 md:px-8 bg-background">
-            <div className="max-w-6xl mx-auto">
-              <ScrollReveal className="text-center mb-8 space-y-3">
+              <ScrollReveal className="text-center mb-6 space-y-2">
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">ROI Calculator</span>
-                <h2 className="text-xl md:text-2xl font-normal text-foreground">
+                <h2 className="text-lg md:text-xl font-normal text-foreground">
                   Calculate your potential savings
                 </h2>
               </ScrollReveal>
@@ -337,68 +146,79 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
             </div>
           </section>
 
-          {/* Capabilities Section */}
-          <section className="py-20 md:py-28 px-6 md:px-8 bg-muted/30">
+          {/* Industry Problem - Condensed */}
+          {industry.industryProblem && (
+            <section className="py-12 md:py-16 px-6 md:px-8">
+              <div className="max-w-4xl mx-auto">
+                <ScrollReveal className="space-y-4">
+                  <div className="text-center space-y-2">
+                    <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">The Problem</span>
+                    <h2 className="text-xl md:text-2xl font-normal text-foreground">
+                      {industry.industryProblem.title}
+                    </h2>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed text-center max-w-2xl mx-auto">
+                    {industry.industryProblem.paragraphs[0]}
+                  </p>
+                </ScrollReveal>
+              </div>
+            </section>
+          )}
+
+          {/* Challenges Section - Compact */}
+          <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/30">
             <div className="max-w-6xl mx-auto">
-              <ScrollReveal className="text-center mb-12 space-y-4">
-                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Capabilities</span>
-                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  Purpose-built for {industry.name}
+              <ScrollReveal className="text-center mb-8 space-y-2">
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Key Challenges</span>
+                <h2 className="text-xl md:text-2xl font-normal text-foreground">
+                  Why {industry.name} needs cognitive infrastructure
                 </h2>
               </ScrollReveal>
 
-              <div className="grid md:grid-cols-2 gap-6">
-                {industry.capabilities.map((cap, i) => (
+              <div className="grid md:grid-cols-3 gap-4">
+                {industry.challenges.slice(0, 3).map((challenge, i) => (
                   <motion.div
                     key={i}
-                    className="p-6 rounded-2xl bg-background border border-border/50"
+                    className="p-4 rounded-xl bg-background border border-border/50 hover:border-primary/20 transition-all duration-300"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
                   >
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                      <cap.icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <h3 className="text-sm font-medium text-foreground mb-2">{cap.title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{cap.description}</p>
+                    <h3 className="text-xs font-medium text-foreground mb-1">{challenge.title}</h3>
+                    <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-2">{challenge.description}</p>
                   </motion.div>
                 ))}
               </div>
             </div>
           </section>
 
-          {/* Executive Outcomes Section */}
-          {industry.executiveOutcomes && (
-            <section className="py-20 md:py-28 px-6 md:px-8">
+          {/* Why Existing Solutions Fail - Condensed */}
+          {industry.whyExistingSolutionsFail && (
+            <section className="py-12 md:py-16 px-6 md:px-8">
               <div className="max-w-5xl mx-auto">
-                <ScrollReveal className="text-center mb-12 space-y-4">
-                  <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Executive Outcomes</span>
-                  <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                    What leadership cares about
+                <ScrollReveal className="text-center mb-8 space-y-2">
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-destructive font-medium">Current Gaps</span>
+                  <h2 className="text-xl md:text-2xl font-normal text-foreground">
+                    {industry.whyExistingSolutionsFail.title}
                   </h2>
-                  <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-                    NeuroState translates cognitive intelligence into the metrics that matter to {industry.name.toLowerCase()} executives.
-                  </p>
                 </ScrollReveal>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  {industry.executiveOutcomes.map((outcome, i) => (
+                <div className="grid md:grid-cols-2 gap-4">
+                  {industry.whyExistingSolutionsFail.failures.slice(0, 4).map((failure, i) => (
                     <motion.div
                       key={i}
-                      className="p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent border border-primary/10"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      className="p-4 rounded-xl bg-background border border-destructive/20"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.1 }}
                     >
-                      <div className="flex items-start gap-4">
-                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                          <Target className="w-4 h-4 text-primary" />
-                        </div>
+                      <div className="flex items-start gap-3">
+                        <AlertTriangle className="w-4 h-4 text-destructive flex-shrink-0 mt-0.5" />
                         <div>
-                          <h3 className="text-sm font-medium text-foreground mb-2">{outcome.title}</h3>
-                          <p className="text-xs text-muted-foreground leading-relaxed">{outcome.description}</p>
+                          <h3 className="text-xs font-medium text-foreground mb-1">{failure.point}</h3>
+                          <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-2">{failure.explanation}</p>
                         </div>
                       </div>
                     </motion.div>
@@ -408,27 +228,159 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
             </section>
           )}
 
-          {/* Outcomes Section */}
-          <section className="py-20 md:py-28 px-6 md:px-8 bg-muted/30">
+          {/* How NeuroState Applies - Compact */}
+          {industry.howNeuroStateApplies && (
+            <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/30">
+              <div className="max-w-5xl mx-auto">
+                <ScrollReveal className="text-center mb-8 space-y-2">
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Our Approach</span>
+                  <h2 className="text-xl md:text-2xl font-normal text-foreground">
+                    {industry.howNeuroStateApplies.title}
+                  </h2>
+                </ScrollReveal>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  {industry.howNeuroStateApplies.workflows.slice(0, 4).map((workflow, i) => (
+                    <motion.div
+                      key={i}
+                      className="p-4 rounded-xl bg-primary/5 border border-primary/10"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                    >
+                      <div className="flex items-start gap-3">
+                        <Zap className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                        <div>
+                          <h3 className="text-xs font-medium text-foreground mb-1">{workflow.title}</h3>
+                          <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-2">{workflow.description}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Relevant Signals - Condensed */}
+          {industry.relevantSignals && (
+            <section className="py-12 md:py-16 px-6 md:px-8">
+              <div className="max-w-6xl mx-auto">
+                <ScrollReveal className="text-center mb-8 space-y-2">
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Signal Intelligence</span>
+                  <h2 className="text-xl md:text-2xl font-normal text-foreground">
+                    Critical signals for {industry.name}
+                  </h2>
+                </ScrollReveal>
+
+                <div className="grid md:grid-cols-3 gap-4">
+                  {industry.relevantSignals.slice(0, 3).map((signal, i) => (
+                    <motion.div
+                      key={i}
+                      className="p-4 rounded-xl bg-background border border-border/50 hover:border-primary/20 transition-all duration-300"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                    >
+                      <div className="flex items-center gap-2 mb-2">
+                        <Activity className="w-4 h-4 text-primary" />
+                        <h3 className="text-xs font-medium text-foreground">{signal.name}</h3>
+                      </div>
+                      <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-2">{signal.description}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Capabilities Section - Compact */}
+          <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/30">
             <div className="max-w-6xl mx-auto">
-              <ScrollReveal className="text-center mb-12 space-y-4">
+              <ScrollReveal className="text-center mb-8 space-y-2">
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Capabilities</span>
+                <h2 className="text-xl md:text-2xl font-normal text-foreground">
+                  Purpose-built for {industry.name}
+                </h2>
+              </ScrollReveal>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {industry.capabilities.slice(0, 4).map((cap, i) => (
+                  <motion.div
+                    key={i}
+                    className="p-4 rounded-xl bg-background border border-border/50"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                  >
+                    <cap.icon className="w-5 h-5 text-primary mb-2" />
+                    <h3 className="text-xs font-medium text-foreground mb-1">{cap.title}</h3>
+                    <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-2">{cap.description}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Executive Outcomes - Condensed */}
+          {industry.executiveOutcomes && (
+            <section className="py-12 md:py-16 px-6 md:px-8">
+              <div className="max-w-5xl mx-auto">
+                <ScrollReveal className="text-center mb-8 space-y-2">
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Executive Outcomes</span>
+                  <h2 className="text-xl md:text-2xl font-normal text-foreground">
+                    What leadership cares about
+                  </h2>
+                </ScrollReveal>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  {industry.executiveOutcomes.slice(0, 4).map((outcome, i) => (
+                    <motion.div
+                      key={i}
+                      className="p-4 rounded-xl bg-gradient-to-br from-primary/5 to-transparent border border-primary/10"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                    >
+                      <div className="flex items-start gap-3">
+                        <Target className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                        <div>
+                          <h3 className="text-xs font-medium text-foreground mb-1">{outcome.title}</h3>
+                          <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-2">{outcome.description}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Outcomes Section - Compact */}
+          <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/30">
+            <div className="max-w-6xl mx-auto">
+              <ScrollReveal className="text-center mb-8 space-y-2">
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Outcomes</span>
-                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                <h2 className="text-xl md:text-2xl font-normal text-foreground">
                   Measurable impact
                 </h2>
               </ScrollReveal>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {industry.outcomes.map((outcome, i) => (
                   <motion.div
                     key={i}
-                    className="text-center p-6 rounded-2xl bg-background border border-primary/10"
+                    className="text-center p-4 rounded-xl bg-background border border-primary/10"
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
                   >
-                    <div className="text-3xl md:text-4xl font-medium text-primary mb-2">{outcome.metric}</div>
+                    <div className="text-2xl md:text-3xl font-medium text-primary mb-1">{outcome.metric}</div>
                     <div className="text-[10px] text-muted-foreground uppercase tracking-wider">{outcome.label}</div>
                   </motion.div>
                 ))}
@@ -436,32 +388,30 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
             </div>
           </section>
 
-          {/* Use Cases Section */}
-          <section className="py-20 md:py-28 px-6 md:px-8">
+          {/* Use Cases - Compact */}
+          <section className="py-12 md:py-16 px-6 md:px-8">
             <div className="max-w-6xl mx-auto">
-              <ScrollReveal className="text-center mb-12 space-y-4">
+              <ScrollReveal className="text-center mb-8 space-y-2">
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Use Cases</span>
-                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                <h2 className="text-xl md:text-2xl font-normal text-foreground">
                   How teams use NeuroState
                 </h2>
               </ScrollReveal>
 
-              <div className="grid md:grid-cols-2 gap-6">
-                {industry.useCases.map((useCase, i) => (
+              <div className="grid md:grid-cols-2 gap-4">
+                {industry.useCases.slice(0, 4).map((useCase, i) => (
                   <motion.div
                     key={i}
-                    className="flex items-start gap-4 p-6 rounded-2xl bg-muted/30 border border-border/50"
+                    className="flex items-start gap-3 p-4 rounded-xl bg-muted/30 border border-border/50"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
                   >
-                    <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-3 h-3 text-primary" />
-                    </div>
+                    <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                     <div>
-                      <h3 className="text-sm font-medium text-foreground mb-1">{useCase.title}</h3>
-                      <p className="text-xs text-muted-foreground leading-relaxed">{useCase.description}</p>
+                      <h3 className="text-xs font-medium text-foreground mb-1">{useCase.title}</h3>
+                      <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-2">{useCase.description}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -469,25 +419,25 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
             </div>
           </section>
 
-          {/* CTA Section */}
-          <section className="py-20 md:py-28 px-6 md:px-8 bg-muted/30">
+          {/* CTA Section - Compact */}
+          <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/30">
             <div className="max-w-4xl mx-auto text-center">
-              <ScrollReveal className="space-y-6">
-                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+              <ScrollReveal className="space-y-4">
+                <h2 className="text-xl md:text-2xl font-normal text-foreground">
                   Ready to optimise cognitive performance?
                 </h2>
-                <p className="text-sm text-muted-foreground max-w-lg mx-auto">
+                <p className="text-xs text-muted-foreground max-w-lg mx-auto">
                   Speak with our team to understand how NeuroState can transform your organisation.
                 </p>
-                <div className="flex flex-wrap justify-center gap-3 pt-4">
+                <div className="flex flex-wrap justify-center gap-3 pt-2">
                   <Link to="/contact">
-                    <Button className="h-11 px-6 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full">
+                    <Button className="h-10 px-5 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full">
                       Book a demo
                       <ArrowUpRight className="ml-2 h-3.5 w-3.5" />
                     </Button>
                   </Link>
                   <Link to="/contact">
-                    <Button variant="outline" className="h-11 px-6 text-xs font-medium rounded-full">
+                    <Button variant="outline" className="h-10 px-5 text-xs font-medium rounded-full">
                       Contact us
                     </Button>
                   </Link>
