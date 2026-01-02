@@ -670,38 +670,38 @@ export default function TeamDashboard() {
 
                 {/* Readiness Forecast */}
                 <motion.div 
-                  className="p-6 rounded-2xl bg-muted/20 border border-border/50"
+                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-muted/20 border border-border/50"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center justify-between mb-3 md:mb-5">
                     <div>
-                      <h3 className="text-sm font-medium text-foreground">Team Readiness Forecast</h3>
-                      <p className="text-[10px] text-muted-foreground mt-0.5">Nova Insights · 7-day projection</p>
+                      <h3 className="text-xs md:text-sm font-medium text-foreground">Readiness Forecast</h3>
+                      <p className="text-[9px] md:text-[10px] text-muted-foreground mt-0.5">7-day projection</p>
                     </div>
-                    <Badge variant="outline" className="text-[9px] px-2 py-0.5 rounded-full">
-                      <Sparkles className="w-3 h-3 mr-1" />
-                      AI Forecast
+                    <Badge variant="outline" className="text-[8px] md:text-[9px] px-1.5 md:px-2 py-0.5 rounded-full">
+                      <Sparkles className="w-2.5 h-2.5 md:w-3 md:h-3 mr-0.5 md:mr-1" />
+                      AI
                     </Badge>
                   </div>
-                  <div className="grid grid-cols-7 gap-2">
+                  <div className="grid grid-cols-7 gap-1 md:gap-2">
                     {teamReadinessData.forecast.map((day, i) => (
                       <div key={i} className="text-center">
-                        <div className={`text-[10px] mb-2 ${i === 0 ? 'text-primary font-medium' : 'text-muted-foreground'}`}>
+                        <div className={`text-[8px] md:text-[10px] mb-1 md:mb-2 ${i === 0 ? 'text-primary font-medium' : 'text-muted-foreground'}`}>
                           {day.day}
                         </div>
-                        <div className={`h-20 rounded-lg flex items-end justify-center pb-2 transition-all ${
+                        <div className={`h-12 md:h-20 rounded-md md:rounded-lg flex items-end justify-center pb-1 md:pb-2 transition-all ${
                           day.risk === 'low' ? 'bg-green-500/20' : day.risk === 'medium' ? 'bg-amber-500/20' : 'bg-red-500/20'
                         }`}>
                           <div 
-                            className={`w-8 rounded-md ${
+                            className={`w-4 md:w-8 rounded-sm md:rounded-md ${
                               day.risk === 'low' ? 'bg-green-500' : day.risk === 'medium' ? 'bg-amber-500' : 'bg-red-500'
                             }`}
                             style={{ height: `${day.score * 0.8}%` }}
                           />
                         </div>
-                        <div className={`text-xs font-medium mt-1.5 ${
+                        <div className={`text-[10px] md:text-xs font-medium mt-1 ${
                           day.risk === 'low' ? 'text-green-600' : day.risk === 'medium' ? 'text-amber-600' : 'text-red-600'
                         }`}>
                           {day.score}
@@ -709,52 +709,52 @@ export default function TeamDashboard() {
                       </div>
                     ))}
                   </div>
-                  <div className="flex items-center gap-4 mt-4 pt-4 border-t border-border/30">
-                    <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
-                      <div className="w-2 h-2 rounded-full bg-green-500" />
-                      Low risk
+                  <div className="flex items-center gap-2 md:gap-4 mt-3 md:mt-4 pt-3 md:pt-4 border-t border-border/30">
+                    <div className="flex items-center gap-1 text-[8px] md:text-[10px] text-muted-foreground">
+                      <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-green-500" />
+                      Low
                     </div>
-                    <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
-                      <div className="w-2 h-2 rounded-full bg-amber-500" />
-                      Medium risk
+                    <div className="flex items-center gap-1 text-[8px] md:text-[10px] text-muted-foreground">
+                      <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-amber-500" />
+                      Med
                     </div>
-                    <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
-                      <div className="w-2 h-2 rounded-full bg-red-500" />
-                      High risk
+                    <div className="flex items-center gap-1 text-[8px] md:text-[10px] text-muted-foreground">
+                      <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-red-500" />
+                      High
                     </div>
                   </div>
                 </motion.div>
 
-                {/* Burnout Risk by Team with Financial Attribution */}
+                {/* Burnout Risk by Team */}
                 <motion.div 
-                  className="p-6 rounded-2xl bg-muted/20 border border-border/50"
+                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-muted/20 border border-border/50"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
                 >
-                  <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center justify-between mb-3 md:mb-5">
                     <div>
-                      <h3 className="text-sm font-medium text-foreground">Burnout Risk by Team</h3>
-                      <p className="text-[10px] text-muted-foreground mt-0.5">Aggregated view with financial exposure · Individual data anonymised</p>
+                      <h3 className="text-xs md:text-sm font-medium text-foreground">Burnout by Team</h3>
+                      <p className="text-[9px] md:text-[10px] text-muted-foreground mt-0.5 hidden sm:block">With financial exposure</p>
                     </div>
-                    <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
-                      <Lock className="w-3 h-3" />
-                      Privacy protected
+                    <div className="flex items-center gap-1 text-[9px] md:text-[10px] text-muted-foreground">
+                      <Lock className="w-2.5 h-2.5 md:w-3 md:h-3" />
+                      <span className="hidden sm:inline">Protected</span>
                     </div>
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-2 md:space-y-3">
                     {burnoutRiskByTeam.map((team, i) => (
                       <div 
                         key={i} 
-                        className="flex items-center gap-4 cursor-pointer hover:bg-muted/30 p-2 -mx-2 rounded-lg transition-colors"
+                        className="flex items-center gap-2 md:gap-4 cursor-pointer hover:bg-muted/30 p-1.5 md:p-2 -mx-1.5 md:-mx-2 rounded-lg transition-colors"
                         onClick={() => {
                           setSelectedTeamForModal({ name: team.team, risk: team.risk, trend: team.trend, members: team.members, exposure: team.exposure });
                           setShowTeamModal(true);
                         }}
                       >
-                        <div className="w-32 text-xs text-foreground">{team.team}</div>
+                        <div className="w-20 md:w-32 text-[10px] md:text-xs text-foreground truncate">{team.team}</div>
                         <div className="flex-1">
-                          <div className="h-2 bg-muted rounded-full overflow-hidden">
+                          <div className="h-1.5 md:h-2 bg-muted rounded-full overflow-hidden">
                             <div 
                               className={`h-full rounded-full transition-all ${
                                 team.risk < 30 ? 'bg-green-500' : team.risk < 50 ? 'bg-amber-500' : 'bg-red-500'
@@ -763,30 +763,31 @@ export default function TeamDashboard() {
                             />
                           </div>
                         </div>
-                        <div className="w-12 text-right">
-                          <span className={`text-xs font-medium ${
+                        <div className="w-8 md:w-12 text-right">
+                          <span className={`text-[10px] md:text-xs font-medium ${
                             team.risk < 30 ? 'text-green-600' : team.risk < 50 ? 'text-amber-600' : 'text-red-600'
                           }`}>{team.risk}%</span>
                         </div>
-                        <div className="w-20 text-right">
-                          <span className="text-xs text-muted-foreground">{formatCurrency(team.exposure, true)}</span>
+                        <div className="w-12 md:w-20 text-right hidden sm:block">
+                          <span className="text-[10px] md:text-xs text-muted-foreground">{formatCurrency(team.exposure, true)}</span>
                         </div>
-                        <div className="w-6">
-                          {team.trend === 'up' && <TrendingUp className="w-3 h-3 text-red-500" />}
-                          {team.trend === 'down' && <TrendingDown className="w-3 h-3 text-green-500" />}
-                          {team.trend === 'stable' && <div className="w-3 h-0.5 bg-muted-foreground rounded" />}
+                        <div className="w-4 md:w-6">
+                          {team.trend === 'up' && <TrendingUp className="w-2.5 h-2.5 md:w-3 md:h-3 text-red-500" />}
+                          {team.trend === 'down' && <TrendingDown className="w-2.5 h-2.5 md:w-3 md:h-3 text-green-500" />}
+                          {team.trend === 'stable' && <div className="w-2.5 md:w-3 h-0.5 bg-muted-foreground rounded" />}
                         </div>
-                        <ChevronRight className="w-3 h-3 text-muted-foreground" />
+                        <ChevronRight className="w-2.5 h-2.5 md:w-3 md:h-3 text-muted-foreground" />
                       </div>
                     ))}
                   </div>
-                  <div className="mt-4 pt-4 border-t border-border/30 flex items-center justify-between">
-                    <p className="text-[10px] text-muted-foreground flex items-center gap-1.5">
-                      <Eye className="w-3 h-3" />
-                      Individual-level views available with consent and admin permission
+                  <div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-border/30 flex items-center justify-between">
+                    <p className="text-[8px] md:text-[10px] text-muted-foreground flex items-center gap-1">
+                      <Eye className="w-2.5 h-2.5 md:w-3 md:h-3" />
+                      <span className="hidden sm:inline">Individual views with consent</span>
+                      <span className="sm:hidden">With consent</span>
                     </p>
-                    <Button variant="ghost" size="sm" className="h-7 text-[10px] text-primary">
-                      Request access
+                    <Button variant="ghost" size="sm" className="h-6 md:h-7 text-[9px] md:text-[10px] text-primary px-2">
+                      Access
                     </Button>
                   </div>
                 </motion.div>
