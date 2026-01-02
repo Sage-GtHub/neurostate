@@ -24,6 +24,7 @@ import NovaOverview from "./pages/NovaOverview";
 import NovaHistoricalTrends from "./pages/NovaHistoricalTrends";
 import NovaSettings from "./pages/NovaSettings";
 import NovaGoals from "./pages/NovaGoals";
+import NovaSettingsAdvanced from "./pages/NovaSettingsAdvanced";
 
 import FAQ from "./pages/FAQ";
 import Shipping from "./pages/Shipping";
@@ -216,6 +217,7 @@ const AnimatedRoutes = () => {
             <Route path="/team" element={<TeamDashboard />} />
             <Route path="/join" element={<JoinOrganisation />} />
             <Route path="/team/settings" element={<TeamSettings />} />
+            <Route path="/team/settings/advanced" element={<NovaSettingsAdvanced />} />
             
             {/* Industry Landing Pages */}
             <Route path="/industries/saas-high-growth" element={<SaaSHighGrowth />} />
