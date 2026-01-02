@@ -168,6 +168,13 @@ export const Header = () => {
             </NavigationMenu>
 
             <Link
+              to="/solutions"
+              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
+            >
+              Solutions
+            </Link>
+
+            <Link
               to="/nova/overview"
               className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
             >

@@ -3,84 +3,119 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   Users, 
-  UserPlus, 
-  Mail, 
-  Settings, 
-  BarChart3, 
-  Crown, 
-  Shield, 
-  User,
-  Copy,
-  Trash2,
-  Check,
-  X,
-  Building2,
-  ArrowUpRight,
-  Plus,
-  CreditCard,
+  TrendingUp,
+  TrendingDown,
+  AlertTriangle,
+  Activity,
+  Brain,
+  Zap,
+  Calendar,
+  ChevronRight,
+  Filter,
+  RefreshCw,
+  Info,
+  Shield,
+  Target,
+  Clock,
+  BarChart3,
   Sparkles,
-  MessageSquare
+  ArrowUpRight,
+  Building2,
+  Settings,
+  Eye,
+  Lock
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Label } from '@/components/ui/label';
-import { useOrganisation, OrgRole } from '@/hooks/useOrganisation';
-import { useNovaUsage } from '@/hooks/useNovaUsage';
-import { useToast } from '@/hooks/use-toast';
-import { supabase } from '@/integrations/supabase/client';
+import { Progress } from '@/components/ui/progress';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { SEO } from '@/components/SEO';
+import { supabase } from '@/integrations/supabase/client';
 
-const roleIcons = {
-  owner: Crown,
-  admin: Shield,
-  member: User
+// Mock data for demonstration
+const teamReadinessData = {
+  current: 78,
+  trend: 'up',
+  change: 4,
+  forecast: [
+    { day: 'Today', score: 78, risk: 'low' },
+    { day: 'Tomorrow', score: 76, risk: 'low' },
+    { day: 'Wed', score: 72, risk: 'medium' },
+    { day: 'Thu', score: 68, risk: 'medium' },
+    { day: 'Fri', score: 65, risk: 'medium' },
+    { day: 'Sat', score: 74, risk: 'low' },
+    { day: 'Sun', score: 80, risk: 'low' },
+  ]
 };
 
-const roleColors = {
-  owner: 'bg-amber-500/10 text-amber-600 border-amber-200',
-  admin: 'bg-blue-500/10 text-blue-600 border-blue-200',
-  member: 'bg-foreground/5 text-foreground/60 border-foreground/10'
+const burnoutRiskByTeam = [
+  { team: 'Engineering', risk: 32, trend: 'down', members: 24 },
+  { team: 'Product', risk: 45, trend: 'up', members: 12 },
+  { team: 'Sales', risk: 28, trend: 'stable', members: 18 },
+  { team: 'Customer Success', risk: 51, trend: 'up', members: 15 },
+  { team: 'Marketing', risk: 22, trend: 'down', members: 8 },
+];
+
+const weeklyPatterns = [
+  { day: 'Mon', focus: 72, fatigue: 28, optimal: 6.2 },
+  { day: 'Tue', focus: 78, fatigue: 22, optimal: 7.1 },
+  { day: 'Wed', focus: 74, fatigue: 26, optimal: 6.8 },
+  { day: 'Thu', focus: 68, fatigue: 32, optimal: 5.9 },
+  { day: 'Fri', focus: 62, fatigue: 38, optimal: 5.2 },
+];
+
+const interventions = [
+  { 
+    id: 1, 
+    title: 'Schedule team recovery day', 
+    team: 'Customer Success',
+    impact: 'high',
+    confidence: 87,
+    trace: 'Detected 3-week upward trend in cognitive load. Recovery intervention historically reduces burnout risk by 34%.'
+  },
+  { 
+    id: 2, 
+    title: 'Reduce meeting load for Product', 
+    team: 'Product',
+    impact: 'medium',
+    confidence: 72,
+    trace: 'Meeting density 2.3x higher than baseline. Correlation with focus score decline: r=0.78.'
+  },
+  { 
+    id: 3, 
+    title: 'Shift deadline by 2 days', 
+    team: 'Engineering',
+    impact: 'high',
+    confidence: 91,
+    trace: 'Current trajectory indicates 23% probability of quality incidents. 2-day buffer reduces to 4%.'
+  },
+];
+
+const trendComparisons = {
+  weekOverWeek: {
+    readiness: { current: 78, previous: 74, change: 5.4 },
+    burnout: { current: 32, previous: 36, change: -11.1 },
+    focus: { current: 71, previous: 68, change: 4.4 },
+  },
+  monthOverMonth: {
+    readiness: { current: 78, previous: 72, change: 8.3 },
+    burnout: { current: 32, previous: 41, change: -22.0 },
+    focus: { current: 71, previous: 65, change: 9.2 },
+  }
 };
 
 export default function TeamDashboard() {
   const navigate = useNavigate();
-  const { toast } = useToast();
-  const {
-    organisation,
-    members,
-    invites,
-    joinRequests,
-    analytics,
-    userRole,
-    isAdmin,
-    isOwner,
-    loading,
-    createOrganisation,
-    sendInvite,
-    revokeInvite,
-    updateMemberRole,
-    removeMember,
-    approveJoinRequest,
-    rejectJoinRequest,
-    updateOrganisation
-  } = useOrganisation();
-
-  const { orgUsage, summary: usageSummary, loading: usageLoading } = useNovaUsage(organisation?.id);
-
-  const [inviteEmail, setInviteEmail] = useState('');
-  const [inviteRole, setInviteRole] = useState<OrgRole>('member');
-  const [inviteLoading, setInviteLoading] = useState(false);
-  const [showCreateOrg, setShowCreateOrg] = useState(false);
-  const [newOrgName, setNewOrgName] = useState('');
-  const [newOrgDomain, setNewOrgDomain] = useState('');
-  const [createLoading, setCreateLoading] = useState(false);
   const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [timeRange, setTimeRange] = useState('7d');
+  const [selectedTeam, setSelectedTeam] = useState('all');
+  const [comparisonPeriod, setComparisonPeriod] = useState<'week' | 'month'>('week');
+  const [expandedIntervention, setExpandedIntervention] = useState<number | null>(null);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -90,56 +125,10 @@ export default function TeamDashboard() {
         return;
       }
       setUser(user);
+      setLoading(false);
     };
     checkAuth();
   }, [navigate]);
-
-  const handleSendInvite = async () => {
-    if (!inviteEmail) return;
-    setInviteLoading(true);
-    try {
-      await sendInvite(inviteEmail, inviteRole);
-      setInviteEmail('');
-      setInviteRole('member');
-    } catch (error: any) {
-      toast({
-        title: 'Error sending invite',
-        description: error.message,
-        variant: 'destructive'
-      });
-    } finally {
-      setInviteLoading(false);
-    }
-  };
-
-  const handleCreateOrg = async () => {
-    if (!newOrgName) return;
-    setCreateLoading(true);
-    try {
-      await createOrganisation(newOrgName, newOrgDomain || undefined);
-      setShowCreateOrg(false);
-      setNewOrgName('');
-      setNewOrgDomain('');
-    } catch (error: any) {
-      toast({
-        title: 'Error creating organisation',
-        description: error.message,
-        variant: 'destructive'
-      });
-    } finally {
-      setCreateLoading(false);
-    }
-  };
-
-  const copyInviteLink = (token: string) => {
-    const link = `${window.location.origin}/join?token=${token}`;
-    navigator.clipboard.writeText(link);
-    toast({ title: 'Invite link copied to clipboard' });
-  };
-
-  const getMemberAnalytics = (userId: string) => {
-    return analytics.find(a => a.user_id === userId);
-  };
 
   if (loading) {
     return (
@@ -149,691 +138,469 @@ export default function TeamDashboard() {
     );
   }
 
-  // No organisation - show create/join options
-  if (!organisation) {
-    return (
+  const comparison = comparisonPeriod === 'week' ? trendComparisons.weekOverWeek : trendComparisons.monthOverMonth;
+
+  return (
+    <>
+      <SEO 
+        title="Team Dashboard | NeuroState Nova"
+        description="Enterprise-grade cognitive performance analytics for your organisation."
+      />
       <div className="min-h-screen bg-background">
         <Header />
-        <main className="px-6 md:px-12 lg:px-20 xl:px-32 py-24 md:py-32">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-xl mx-auto text-center"
-          >
-            <div className="w-12 h-12 rounded-full bg-foreground/5 flex items-center justify-center mx-auto mb-8">
-              <Building2 className="h-5 w-5 text-foreground/40" />
-            </div>
-            <h1 className="text-2xl md:text-3xl font-medium tracking-tight text-foreground mb-4">
-              Team Management
-            </h1>
-            <p className="text-sm text-foreground/50 mb-10 max-w-md mx-auto leading-relaxed">
-              Create an organisation to manage your team's access to the platform and track performance together.
-            </p>
-
-            <Dialog open={showCreateOrg} onOpenChange={setShowCreateOrg}>
-              <DialogTrigger asChild>
-                <Button 
-                  className="h-11 px-6 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full transition-all duration-300"
-                >
-                  <Plus className="h-3.5 w-3.5 mr-2" />
-                  Create Organisation
+        <main className="px-6 md:px-8 lg:px-12 py-8 md:py-12">
+          <div className="max-w-7xl mx-auto">
+            {/* Header */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <Sparkles className="w-4 h-4 text-primary" />
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">Nova Intelligence</span>
+                </div>
+                <h1 className="text-2xl md:text-3xl font-medium tracking-tight text-foreground">Team Dashboard</h1>
+                <p className="text-sm text-muted-foreground mt-1">Cognitive performance analytics · Last updated 2 min ago</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Select value={timeRange} onValueChange={setTimeRange}>
+                  <SelectTrigger className="h-9 w-[120px] text-xs rounded-lg border-border/50">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="7d">Last 7 days</SelectItem>
+                    <SelectItem value="14d">Last 14 days</SelectItem>
+                    <SelectItem value="30d">Last 30 days</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Select value={selectedTeam} onValueChange={setSelectedTeam}>
+                  <SelectTrigger className="h-9 w-[140px] text-xs rounded-lg border-border/50">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Teams</SelectItem>
+                    <SelectItem value="engineering">Engineering</SelectItem>
+                    <SelectItem value="product">Product</SelectItem>
+                    <SelectItem value="sales">Sales</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Button variant="outline" size="sm" className="h-9 px-3 rounded-lg">
+                  <RefreshCw className="w-3.5 h-3.5 mr-2" />
+                  Refresh
                 </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-md bg-background border-border/50">
-                <DialogHeader>
-                  <DialogTitle className="text-lg font-medium">Create Organisation</DialogTitle>
-                  <DialogDescription className="text-sm text-foreground/50">
-                    Set up your company's team workspace
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="space-y-5 py-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="org-name" className="text-xs font-medium text-foreground/70">
-                      Organisation Name
-                    </Label>
-                    <Input
-                      id="org-name"
-                      placeholder="Acme Corporation"
-                      value={newOrgName}
-                      onChange={(e) => setNewOrgName(e.target.value)}
-                      className="h-11 bg-foreground/[0.03] border-foreground/10 text-sm rounded-lg"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="org-domain" className="text-xs font-medium text-foreground/70">
-                      Email Domain
-                      <span className="text-foreground/40 ml-2 font-normal">Optional</span>
-                    </Label>
-                    <div className="flex items-center gap-2">
-                      <span className="text-foreground/40 text-sm">@</span>
-                      <Input
-                        id="org-domain"
-                        placeholder="acme.com"
-                        value={newOrgDomain}
-                        onChange={(e) => setNewOrgDomain(e.target.value)}
-                        className="h-11 bg-foreground/[0.03] border-foreground/10 text-sm rounded-lg"
-                      />
-                    </div>
-                    <p className="text-[11px] text-foreground/40">
-                      Team members with this email domain can request to join automatically.
-                    </p>
+              </div>
+            </div>
+
+            {/* Key Metrics Row */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+              {/* Team Readiness */}
+              <motion.div 
+                className="p-5 rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[10px] uppercase tracking-wider text-primary font-medium">Team Readiness</span>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <Info className="w-3.5 h-3.5 text-muted-foreground" />
+                    </TooltipTrigger>
+                    <TooltipContent className="max-w-xs text-xs">
+                      Aggregate cognitive capacity score based on sleep, recovery, and stress indicators across all team members.
+                    </TooltipContent>
+                  </Tooltip>
+                </div>
+                <div className="flex items-end gap-2">
+                  <span className="text-3xl font-semibold text-foreground">{teamReadinessData.current}</span>
+                  <div className={`flex items-center text-xs mb-1 ${teamReadinessData.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
+                    {teamReadinessData.trend === 'up' ? <TrendingUp className="w-3 h-3 mr-0.5" /> : <TrendingDown className="w-3 h-3 mr-0.5" />}
+                    {teamReadinessData.change}%
                   </div>
                 </div>
-                <DialogFooter className="gap-2">
-                  <Button 
-                    variant="ghost" 
-                    onClick={() => setShowCreateOrg(false)}
-                    className="h-10 px-4 text-xs rounded-full"
-                  >
-                    Cancel
-                  </Button>
-                  <Button 
-                    onClick={handleCreateOrg} 
-                    disabled={!newOrgName || createLoading}
-                    className="h-10 px-5 text-xs bg-foreground text-background hover:bg-foreground/90 rounded-full"
-                  >
-                    {createLoading ? 'Creating...' : 'Create'}
-                  </Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          </motion.div>
+                <Progress value={teamReadinessData.current} className="h-1.5 mt-3" />
+              </motion.div>
+
+              {/* Burnout Risk */}
+              <motion.div 
+                className="p-5 rounded-2xl bg-muted/30 border border-border/50"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Burnout Risk</span>
+                  <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
+                </div>
+                <div className="flex items-end gap-2">
+                  <span className="text-3xl font-semibold text-foreground">32%</span>
+                  <div className="flex items-center text-xs mb-1 text-green-600">
+                    <TrendingDown className="w-3 h-3 mr-0.5" />
+                    11%
+                  </div>
+                </div>
+                <p className="text-[10px] text-muted-foreground mt-2">2 teams require attention</p>
+              </motion.div>
+
+              {/* Focus Score */}
+              <motion.div 
+                className="p-5 rounded-2xl bg-muted/30 border border-border/50"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Avg Focus Score</span>
+                  <Brain className="w-3.5 h-3.5 text-primary" />
+                </div>
+                <div className="flex items-end gap-2">
+                  <span className="text-3xl font-semibold text-foreground">71</span>
+                  <div className="flex items-center text-xs mb-1 text-green-600">
+                    <TrendingUp className="w-3 h-3 mr-0.5" />
+                    4%
+                  </div>
+                </div>
+                <p className="text-[10px] text-muted-foreground mt-2">Peak: Tuesday 10am</p>
+              </motion.div>
+
+              {/* Active Interventions */}
+              <motion.div 
+                className="p-5 rounded-2xl bg-muted/30 border border-border/50"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Nova Interventions</span>
+                  <Zap className="w-3.5 h-3.5 text-accent" />
+                </div>
+                <div className="flex items-end gap-2">
+                  <span className="text-3xl font-semibold text-foreground">3</span>
+                  <span className="text-xs text-muted-foreground mb-1">recommended</span>
+                </div>
+                <p className="text-[10px] text-muted-foreground mt-2">Est. impact: +12% readiness</p>
+              </motion.div>
+            </div>
+
+            {/* Main Content Grid */}
+            <div className="grid lg:grid-cols-3 gap-6">
+              {/* Left Column - 7-Day Forecast */}
+              <div className="lg:col-span-2 space-y-6">
+                {/* Readiness Forecast */}
+                <motion.div 
+                  className="p-6 rounded-2xl bg-muted/20 border border-border/50"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  <div className="flex items-center justify-between mb-5">
+                    <div>
+                      <h3 className="text-sm font-medium text-foreground">Team Readiness Forecast</h3>
+                      <p className="text-[10px] text-muted-foreground mt-0.5">Nova Insights · 7-day projection</p>
+                    </div>
+                    <Badge variant="outline" className="text-[9px] px-2 py-0.5 rounded-full">
+                      <Sparkles className="w-3 h-3 mr-1" />
+                      AI Forecast
+                    </Badge>
+                  </div>
+                  <div className="grid grid-cols-7 gap-2">
+                    {teamReadinessData.forecast.map((day, i) => (
+                      <div key={i} className="text-center">
+                        <div className={`text-[10px] mb-2 ${i === 0 ? 'text-primary font-medium' : 'text-muted-foreground'}`}>
+                          {day.day}
+                        </div>
+                        <div className={`h-20 rounded-lg flex items-end justify-center pb-2 transition-all ${
+                          day.risk === 'low' ? 'bg-green-500/20' : day.risk === 'medium' ? 'bg-amber-500/20' : 'bg-red-500/20'
+                        }`}>
+                          <div 
+                            className={`w-8 rounded-md ${
+                              day.risk === 'low' ? 'bg-green-500' : day.risk === 'medium' ? 'bg-amber-500' : 'bg-red-500'
+                            }`}
+                            style={{ height: `${day.score * 0.8}%` }}
+                          />
+                        </div>
+                        <div className={`text-xs font-medium mt-1.5 ${
+                          day.risk === 'low' ? 'text-green-600' : day.risk === 'medium' ? 'text-amber-600' : 'text-red-600'
+                        }`}>
+                          {day.score}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-4 mt-4 pt-4 border-t border-border/30">
+                    <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
+                      <div className="w-2 h-2 rounded-full bg-green-500" />
+                      Low risk
+                    </div>
+                    <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
+                      <div className="w-2 h-2 rounded-full bg-amber-500" />
+                      Medium risk
+                    </div>
+                    <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
+                      <div className="w-2 h-2 rounded-full bg-red-500" />
+                      High risk
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Burnout Risk by Team */}
+                <motion.div 
+                  className="p-6 rounded-2xl bg-muted/20 border border-border/50"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <div className="flex items-center justify-between mb-5">
+                    <div>
+                      <h3 className="text-sm font-medium text-foreground">Burnout Risk by Team</h3>
+                      <p className="text-[10px] text-muted-foreground mt-0.5">Aggregated view · Individual data anonymised</p>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
+                      <Lock className="w-3 h-3" />
+                      Privacy protected
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    {burnoutRiskByTeam.map((team, i) => (
+                      <div key={i} className="flex items-center gap-4">
+                        <div className="w-32 text-xs text-foreground">{team.team}</div>
+                        <div className="flex-1">
+                          <div className="h-2 bg-muted rounded-full overflow-hidden">
+                            <div 
+                              className={`h-full rounded-full transition-all ${
+                                team.risk < 30 ? 'bg-green-500' : team.risk < 50 ? 'bg-amber-500' : 'bg-red-500'
+                              }`}
+                              style={{ width: `${team.risk}%` }}
+                            />
+                          </div>
+                        </div>
+                        <div className="w-12 text-right">
+                          <span className={`text-xs font-medium ${
+                            team.risk < 30 ? 'text-green-600' : team.risk < 50 ? 'text-amber-600' : 'text-red-600'
+                          }`}>{team.risk}%</span>
+                        </div>
+                        <div className="w-6">
+                          {team.trend === 'up' && <TrendingUp className="w-3 h-3 text-red-500" />}
+                          {team.trend === 'down' && <TrendingDown className="w-3 h-3 text-green-500" />}
+                          {team.trend === 'stable' && <div className="w-3 h-0.5 bg-muted-foreground rounded" />}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-4 pt-4 border-t border-border/30 flex items-center justify-between">
+                    <p className="text-[10px] text-muted-foreground flex items-center gap-1.5">
+                      <Eye className="w-3 h-3" />
+                      Individual view available with consent/admin permission
+                    </p>
+                    <Button variant="ghost" size="sm" className="h-7 text-[10px] text-primary">
+                      Request access
+                    </Button>
+                  </div>
+                </motion.div>
+
+                {/* Weekly Patterns */}
+                <motion.div 
+                  className="p-6 rounded-2xl bg-muted/20 border border-border/50"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                >
+                  <div className="flex items-center justify-between mb-5">
+                    <div>
+                      <h3 className="text-sm font-medium text-foreground">Focus & Fatigue Patterns</h3>
+                      <p className="text-[10px] text-muted-foreground mt-0.5">Weekly rhythm analysis</p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-5 gap-3">
+                    {weeklyPatterns.map((day, i) => (
+                      <div key={i} className="p-3 rounded-xl bg-background border border-border/30">
+                        <div className="text-[10px] text-muted-foreground mb-2">{day.day}</div>
+                        <div className="space-y-2">
+                          <div>
+                            <div className="flex justify-between text-[9px] mb-0.5">
+                              <span className="text-primary">Focus</span>
+                              <span className="text-foreground font-medium">{day.focus}%</span>
+                            </div>
+                            <div className="h-1 bg-muted rounded-full overflow-hidden">
+                              <div className="h-full bg-primary rounded-full" style={{ width: `${day.focus}%` }} />
+                            </div>
+                          </div>
+                          <div>
+                            <div className="flex justify-between text-[9px] mb-0.5">
+                              <span className="text-amber-600">Fatigue</span>
+                              <span className="text-foreground font-medium">{day.fatigue}%</span>
+                            </div>
+                            <div className="h-1 bg-muted rounded-full overflow-hidden">
+                              <div className="h-full bg-amber-500 rounded-full" style={{ width: `${day.fatigue}%` }} />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="mt-2 pt-2 border-t border-border/30">
+                          <div className="text-[9px] text-muted-foreground">Optimal hrs</div>
+                          <div className="text-sm font-medium text-foreground">{day.optimal}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Right Column - Interventions & Comparisons */}
+              <div className="space-y-6">
+                {/* Nova Interventions */}
+                <motion.div 
+                  className="p-6 rounded-2xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h3 className="text-sm font-medium text-foreground">Nova Interventions</h3>
+                      <p className="text-[10px] text-muted-foreground mt-0.5">AI-recommended actions</p>
+                    </div>
+                    <Sparkles className="w-4 h-4 text-accent" />
+                  </div>
+                  <div className="space-y-3">
+                    {interventions.map((intervention) => (
+                      <div 
+                        key={intervention.id}
+                        className="p-3 rounded-xl bg-background border border-border/30 cursor-pointer hover:border-accent/30 transition-all"
+                        onClick={() => setExpandedIntervention(expandedIntervention === intervention.id ? null : intervention.id)}
+                      >
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <div className="text-xs font-medium text-foreground mb-1">{intervention.title}</div>
+                            <div className="flex items-center gap-2">
+                              <Badge variant="outline" className="text-[9px] px-1.5 py-0 rounded">
+                                {intervention.team}
+                              </Badge>
+                              <Badge 
+                                className={`text-[9px] px-1.5 py-0 rounded ${
+                                  intervention.impact === 'high' ? 'bg-green-500/20 text-green-600' : 'bg-amber-500/20 text-amber-600'
+                                }`}
+                              >
+                                {intervention.impact} impact
+                              </Badge>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <div className="text-xs font-medium text-accent">{intervention.confidence}%</div>
+                            <div className="text-[9px] text-muted-foreground">confidence</div>
+                          </div>
+                        </div>
+                        {expandedIntervention === intervention.id && (
+                          <motion.div 
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="mt-3 pt-3 border-t border-border/30"
+                          >
+                            <div className="text-[10px] text-muted-foreground mb-2 flex items-center gap-1">
+                              <Info className="w-3 h-3" />
+                              Insight Trace
+                            </div>
+                            <p className="text-[11px] text-foreground/80 leading-relaxed">{intervention.trace}</p>
+                            <Button size="sm" className="w-full mt-3 h-8 text-[10px] bg-accent text-white hover:bg-accent/90 rounded-lg">
+                              Apply intervention
+                            </Button>
+                          </motion.div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+
+                {/* Trend Comparisons */}
+                <motion.div 
+                  className="p-6 rounded-2xl bg-muted/20 border border-border/50"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-sm font-medium text-foreground">Trend Comparison</h3>
+                    <div className="flex gap-1">
+                      <button 
+                        onClick={() => setComparisonPeriod('week')}
+                        className={`px-2 py-1 text-[9px] rounded ${comparisonPeriod === 'week' ? 'bg-foreground text-background' : 'text-muted-foreground'}`}
+                      >
+                        WoW
+                      </button>
+                      <button 
+                        onClick={() => setComparisonPeriod('month')}
+                        className={`px-2 py-1 text-[9px] rounded ${comparisonPeriod === 'month' ? 'bg-foreground text-background' : 'text-muted-foreground'}`}
+                      >
+                        MoM
+                      </button>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 rounded-xl bg-background border border-border/30">
+                      <div>
+                        <div className="text-[10px] text-muted-foreground">Readiness</div>
+                        <div className="text-lg font-semibold text-foreground">{comparison.readiness.current}</div>
+                      </div>
+                      <div className={`text-xs font-medium ${comparison.readiness.change > 0 ? 'text-green-600' : 'text-red-500'}`}>
+                        {comparison.readiness.change > 0 ? '+' : ''}{comparison.readiness.change.toFixed(1)}%
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between p-3 rounded-xl bg-background border border-border/30">
+                      <div>
+                        <div className="text-[10px] text-muted-foreground">Burnout Risk</div>
+                        <div className="text-lg font-semibold text-foreground">{comparison.burnout.current}%</div>
+                      </div>
+                      <div className={`text-xs font-medium ${comparison.burnout.change < 0 ? 'text-green-600' : 'text-red-500'}`}>
+                        {comparison.burnout.change > 0 ? '+' : ''}{comparison.burnout.change.toFixed(1)}%
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between p-3 rounded-xl bg-background border border-border/30">
+                      <div>
+                        <div className="text-[10px] text-muted-foreground">Focus Score</div>
+                        <div className="text-lg font-semibold text-foreground">{comparison.focus.current}</div>
+                      </div>
+                      <div className={`text-xs font-medium ${comparison.focus.change > 0 ? 'text-green-600' : 'text-red-500'}`}>
+                        {comparison.focus.change > 0 ? '+' : ''}{comparison.focus.change.toFixed(1)}%
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Quick Actions */}
+                <motion.div 
+                  className="p-6 rounded-2xl bg-muted/20 border border-border/50"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                >
+                  <h3 className="text-sm font-medium text-foreground mb-4">Quick Actions</h3>
+                  <div className="space-y-2">
+                    <Button variant="outline" className="w-full justify-between h-10 text-xs rounded-lg">
+                      <span className="flex items-center gap-2">
+                        <BarChart3 className="w-4 h-4" />
+                        Export report
+                      </span>
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
+                    <Button variant="outline" className="w-full justify-between h-10 text-xs rounded-lg">
+                      <span className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4" />
+                        Schedule review
+                      </span>
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
+                    <Button variant="outline" className="w-full justify-between h-10 text-xs rounded-lg">
+                      <span className="flex items-center gap-2">
+                        <Settings className="w-4 h-4" />
+                        Configure alerts
+                      </span>
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </div>
         </main>
         <Footer />
       </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main className="px-6 md:px-12 lg:px-20 xl:px-32 py-16 md:py-24">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-12"
-          >
-            {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-foreground/5">
-              <div>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 mb-2">Organisation</p>
-                <h1 className="text-2xl md:text-3xl font-medium tracking-tight text-foreground">
-                  {organisation.name}
-                </h1>
-                <p className="text-sm text-foreground/50 mt-2">
-                  {organisation.seats_used} {organisation.seats_used === 1 ? 'member' : 'members'}
-                  {organisation.seat_limit && ` of ${organisation.seat_limit} seats`}
-                </p>
-              </div>
-              {isAdmin && (
-                <Button 
-                  variant="ghost" 
-                  onClick={() => navigate('/team/settings')}
-                  className="h-10 px-4 text-xs text-foreground/60 hover:text-foreground rounded-full border border-foreground/10 hover:border-foreground/20"
-                >
-                  <Settings className="h-3.5 w-3.5 mr-2" />
-                  Settings
-                </Button>
-              )}
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-              <div className="p-5 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
-                <div className="w-8 h-8 rounded-full bg-foreground/5 flex items-center justify-center mb-4">
-                  <Users className="h-3.5 w-3.5 text-foreground/40" />
-                </div>
-                <p className="text-xl font-medium text-foreground">{members.length}</p>
-                <p className="text-[11px] text-foreground/40 mt-1">Team Members</p>
-              </div>
-              <div className="p-5 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
-                <div className="w-8 h-8 rounded-full bg-amber-500/10 flex items-center justify-center mb-4">
-                  <Mail className="h-3.5 w-3.5 text-amber-600" />
-                </div>
-                <p className="text-xl font-medium text-foreground">{invites.length}</p>
-                <p className="text-[11px] text-foreground/40 mt-1">Pending Invites</p>
-              </div>
-              <div className="p-5 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
-                <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center mb-4">
-                  <UserPlus className="h-3.5 w-3.5 text-blue-600" />
-                </div>
-                <p className="text-xl font-medium text-foreground">{joinRequests.length}</p>
-                <p className="text-[11px] text-foreground/40 mt-1">Join Requests</p>
-              </div>
-              <div className="p-5 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
-                <div className="w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center mb-4">
-                  <BarChart3 className="h-3.5 w-3.5 text-green-600" />
-                </div>
-                <p className="text-xl font-medium text-foreground">
-                  {analytics.reduce((acc, a) => acc + (a.protocols_completed || 0), 0)}
-                </p>
-                <p className="text-[11px] text-foreground/40 mt-1">Protocols Completed</p>
-              </div>
-            </div>
-
-            {/* Tabs */}
-            <Tabs defaultValue="members" className="space-y-8">
-              <TabsList className="bg-transparent border-b border-foreground/5 rounded-none p-0 h-auto w-full justify-start gap-6">
-                <TabsTrigger 
-                  value="members" 
-                  className="bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none rounded-none border-b-2 border-transparent data-[state=active]:border-foreground px-0 pb-3 text-xs font-normal text-foreground/50 data-[state=active]:text-foreground"
-                >
-                  Members
-                </TabsTrigger>
-                {isAdmin && (
-                  <>
-                    <TabsTrigger 
-                      value="invites"
-                      className="bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none rounded-none border-b-2 border-transparent data-[state=active]:border-foreground px-0 pb-3 text-xs font-normal text-foreground/50 data-[state=active]:text-foreground"
-                    >
-                      Invites
-                      {invites.length > 0 && (
-                        <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600">
-                          {invites.length}
-                        </span>
-                      )}
-                    </TabsTrigger>
-                    <TabsTrigger 
-                      value="requests"
-                      className="bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none rounded-none border-b-2 border-transparent data-[state=active]:border-foreground px-0 pb-3 text-xs font-normal text-foreground/50 data-[state=active]:text-foreground"
-                    >
-                      Requests
-                      {joinRequests.length > 0 && (
-                        <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600">
-                          {joinRequests.length}
-                        </span>
-                      )}
-                    </TabsTrigger>
-                    <TabsTrigger 
-                      value="nova"
-                      className="bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none rounded-none border-b-2 border-transparent data-[state=active]:border-foreground px-0 pb-3 text-xs font-normal text-foreground/50 data-[state=active]:text-foreground"
-                    >
-                      <Sparkles className="h-3 w-3 mr-1.5" />
-                      Nova AI
-                    </TabsTrigger>
-                    <TabsTrigger 
-                      value="billing"
-                      className="bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none rounded-none border-b-2 border-transparent data-[state=active]:border-foreground px-0 pb-3 text-xs font-normal text-foreground/50 data-[state=active]:text-foreground"
-                    >
-                      <CreditCard className="h-3 w-3 mr-1.5" />
-                      Billing
-                    </TabsTrigger>
-                    <TabsTrigger 
-                      value="analytics"
-                      className="bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none rounded-none border-b-2 border-transparent data-[state=active]:border-foreground px-0 pb-3 text-xs font-normal text-foreground/50 data-[state=active]:text-foreground"
-                    >
-                      Analytics
-                    </TabsTrigger>
-                  </>
-                )}
-              </TabsList>
-
-              {/* Members Tab */}
-              <TabsContent value="members" className="mt-0">
-                <div className="space-y-6">
-                  {isAdmin && (
-                    <div className="flex justify-end">
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button className="h-9 px-4 text-xs bg-foreground text-background hover:bg-foreground/90 rounded-full">
-                            <UserPlus className="h-3.5 w-3.5 mr-2" />
-                            Invite Member
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent className="sm:max-w-md bg-background border-border/50">
-                          <DialogHeader>
-                            <DialogTitle className="text-lg font-medium">Invite Team Member</DialogTitle>
-                            <DialogDescription className="text-sm text-foreground/50">
-                              Send an invitation to join your organisation
-                            </DialogDescription>
-                          </DialogHeader>
-                          <div className="space-y-5 py-6">
-                            <div className="space-y-2">
-                              <Label className="text-xs font-medium text-foreground/70">Email Address</Label>
-                              <Input
-                                type="email"
-                                placeholder="colleague@company.com"
-                                value={inviteEmail}
-                                onChange={(e) => setInviteEmail(e.target.value)}
-                                className="h-11 bg-foreground/[0.03] border-foreground/10 text-sm rounded-lg"
-                              />
-                            </div>
-                            <div className="space-y-2">
-                              <Label className="text-xs font-medium text-foreground/70">Role</Label>
-                              <Select value={inviteRole} onValueChange={(v) => setInviteRole(v as OrgRole)}>
-                                <SelectTrigger className="h-11 bg-foreground/[0.03] border-foreground/10 text-sm rounded-lg">
-                                  <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="member">Member</SelectItem>
-                                  <SelectItem value="admin">Admin</SelectItem>
-                                </SelectContent>
-                              </Select>
-                            </div>
-                          </div>
-                          <DialogFooter>
-                            <Button 
-                              onClick={handleSendInvite} 
-                              disabled={!inviteEmail || inviteLoading}
-                              className="h-10 px-5 text-xs bg-foreground text-background hover:bg-foreground/90 rounded-full w-full"
-                            >
-                              {inviteLoading ? 'Sending...' : 'Send Invite'}
-                            </Button>
-                          </DialogFooter>
-                        </DialogContent>
-                      </Dialog>
-                    </div>
-                  )}
-
-                  <div className="space-y-3">
-                    {members.map((member) => {
-                      const RoleIcon = roleIcons[member.role];
-                      const memberAnalytics = getMemberAnalytics(member.user_id);
-                      
-                      return (
-                        <div
-                          key={member.id}
-                          className="flex items-center justify-between p-4 rounded-xl bg-foreground/[0.02] border border-foreground/5 hover:border-foreground/10 transition-colors"
-                        >
-                          <div className="flex items-center gap-4">
-                            <Avatar className="h-10 w-10 border border-foreground/5">
-                              <AvatarImage src={member.profile?.avatar_url || undefined} />
-                              <AvatarFallback className="bg-foreground/5 text-foreground/50 text-xs">
-                                {member.profile?.full_name?.charAt(0) || member.profile?.email?.charAt(0) || '?'}
-                              </AvatarFallback>
-                            </Avatar>
-                            <div>
-                              <p className="text-sm font-medium text-foreground">
-                                {member.profile?.full_name || member.profile?.email || 'Unknown'}
-                              </p>
-                              <p className="text-[11px] text-foreground/40">
-                                {member.profile?.email}
-                              </p>
-                            </div>
-                            <Badge variant="outline" className={`text-[10px] ${roleColors[member.role]} border`}>
-                              <RoleIcon className="h-2.5 w-2.5 mr-1" />
-                              {member.role.charAt(0).toUpperCase() + member.role.slice(1)}
-                            </Badge>
-                          </div>
-                          <div className="flex items-center gap-4">
-                            {memberAnalytics && (
-                              <div className="text-right hidden sm:block">
-                                <p className="text-[11px] text-foreground/50">
-                                  {memberAnalytics.protocols_completed || 0} protocols
-                                </p>
-                                <p className="text-[11px] text-foreground/40">
-                                  {memberAnalytics.check_ins_count || 0} check-ins
-                                </p>
-                              </div>
-                            )}
-                            {isAdmin && member.role !== 'owner' && member.user_id !== user?.id && (
-                              <div className="flex items-center gap-2">
-                                <Select
-                                  value={member.role}
-                                  onValueChange={(v) => updateMemberRole(member.id, v as OrgRole)}
-                                >
-                                  <SelectTrigger className="h-8 w-24 text-[10px] bg-transparent border-foreground/10 rounded-lg">
-                                    <SelectValue />
-                                  </SelectTrigger>
-                                  <SelectContent>
-                                    <SelectItem value="member">Member</SelectItem>
-                                    <SelectItem value="admin">Admin</SelectItem>
-                                  </SelectContent>
-                                </Select>
-                                <Button
-                                  variant="ghost"
-                                  size="icon"
-                                  onClick={() => removeMember(member.id)}
-                                  className="h-8 w-8 text-foreground/40 hover:text-red-500 rounded-lg"
-                                >
-                                  <Trash2 className="h-3.5 w-3.5" />
-                                </Button>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </TabsContent>
-
-              {/* Invites Tab */}
-              <TabsContent value="invites" className="mt-0">
-                <div className="space-y-3">
-                  {invites.length === 0 ? (
-                    <div className="text-center py-16">
-                      <div className="w-12 h-12 rounded-full bg-foreground/5 flex items-center justify-center mx-auto mb-4">
-                        <Mail className="h-5 w-5 text-foreground/30" />
-                      </div>
-                      <p className="text-sm text-foreground/50">No pending invites</p>
-                    </div>
-                  ) : (
-                    invites.map((invite) => (
-                      <div
-                        key={invite.id}
-                        className="flex items-center justify-between p-4 rounded-xl bg-foreground/[0.02] border border-foreground/5"
-                      >
-                        <div>
-                          <p className="text-sm font-medium text-foreground">{invite.email}</p>
-                          <p className="text-[11px] text-foreground/40">
-                            Invited as {invite.role} · Expires {new Date(invite.expires_at).toLocaleDateString()}
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => copyInviteLink(invite.token)}
-                            className="h-8 px-3 text-[10px] text-foreground/60 hover:text-foreground rounded-lg"
-                          >
-                            <Copy className="h-3 w-3 mr-1.5" />
-                            Copy Link
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => revokeInvite(invite.id)}
-                            className="h-8 w-8 text-foreground/40 hover:text-red-500 rounded-lg"
-                          >
-                            <X className="h-3.5 w-3.5" />
-                          </Button>
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </TabsContent>
-
-              {/* Requests Tab */}
-              <TabsContent value="requests" className="mt-0">
-                <div className="space-y-3">
-                  {joinRequests.length === 0 ? (
-                    <div className="text-center py-16">
-                      <div className="w-12 h-12 rounded-full bg-foreground/5 flex items-center justify-center mx-auto mb-4">
-                        <UserPlus className="h-5 w-5 text-foreground/30" />
-                      </div>
-                      <p className="text-sm text-foreground/50">No pending join requests</p>
-                    </div>
-                  ) : (
-                    joinRequests.map((request) => (
-                      <div
-                        key={request.id}
-                        className="flex items-center justify-between p-4 rounded-xl bg-foreground/[0.02] border border-foreground/5"
-                      >
-                        <div className="flex items-center gap-4">
-                          <Avatar className="h-10 w-10 border border-foreground/5">
-                            <AvatarFallback className="bg-foreground/5 text-foreground/50 text-xs">
-                              {request.profile?.full_name?.charAt(0) || request.profile?.email?.charAt(0) || '?'}
-                            </AvatarFallback>
-                          </Avatar>
-                          <div>
-                            <p className="text-sm font-medium text-foreground">
-                              {request.profile?.full_name || request.profile?.email || 'Unknown'}
-                            </p>
-                            {request.message && (
-                              <p className="text-[11px] text-foreground/50 mt-0.5">"{request.message}"</p>
-                            )}
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => rejectJoinRequest(request.id)}
-                            className="h-8 w-8 text-foreground/40 hover:text-red-500 rounded-lg"
-                          >
-                            <X className="h-3.5 w-3.5" />
-                          </Button>
-                          <Button
-                            size="icon"
-                            onClick={() => approveJoinRequest(request.id)}
-                            className="h-8 w-8 bg-foreground text-background hover:bg-foreground/90 rounded-lg"
-                          >
-                            <Check className="h-3.5 w-3.5" />
-                          </Button>
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </TabsContent>
-
-              {/* Nova AI Tab */}
-              <TabsContent value="nova" className="mt-0">
-                <div className="space-y-6">
-                  {/* Nova Usage Overview */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="p-5 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
-                      <div className="w-8 h-8 rounded-full bg-purple-500/10 flex items-center justify-center mb-4">
-                        <Sparkles className="h-3.5 w-3.5 text-purple-600" />
-                      </div>
-                      <p className="text-xl font-medium text-foreground">
-                        {orgUsage.reduce((acc, u) => acc + u.totalSessions, 0)}
-                      </p>
-                      <p className="text-[11px] text-foreground/40 mt-1">Total Sessions</p>
-                    </div>
-                    <div className="p-5 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
-                      <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center mb-4">
-                        <MessageSquare className="h-3.5 w-3.5 text-blue-600" />
-                      </div>
-                      <p className="text-xl font-medium text-foreground">
-                        {orgUsage.reduce((acc, u) => acc + u.totalMessages, 0)}
-                      </p>
-                      <p className="text-[11px] text-foreground/40 mt-1">Total Messages</p>
-                    </div>
-                    <div className="p-5 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
-                      <div className="w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center mb-4">
-                        <Users className="h-3.5 w-3.5 text-green-600" />
-                      </div>
-                      <p className="text-xl font-medium text-foreground">
-                        {orgUsage.length}
-                      </p>
-                      <p className="text-[11px] text-foreground/40 mt-1">Active Users</p>
-                    </div>
-                  </div>
-
-                  {/* Per-Member Usage */}
-                  <div>
-                    <h3 className="text-sm font-medium text-foreground mb-4">Member Usage</h3>
-                    <div className="space-y-3">
-                      {orgUsage.length === 0 ? (
-                        <div className="text-center py-16">
-                          <div className="w-12 h-12 rounded-full bg-foreground/5 flex items-center justify-center mx-auto mb-4">
-                            <Sparkles className="h-5 w-5 text-foreground/30" />
-                          </div>
-                          <p className="text-sm text-foreground/50">No Nova AI usage yet</p>
-                          <p className="text-[11px] text-foreground/40 mt-1">
-                            Team members get automatic access via your organisation
-                          </p>
-                        </div>
-                      ) : (
-                        orgUsage.map((usage) => (
-                          <div
-                            key={usage.userId}
-                            className="flex items-center justify-between p-4 rounded-xl bg-foreground/[0.02] border border-foreground/5"
-                          >
-                            <div className="flex items-center gap-4">
-                              <Avatar className="h-10 w-10 border border-foreground/5">
-                                <AvatarFallback className="bg-foreground/5 text-foreground/50 text-xs">
-                                  {usage.userName?.charAt(0) || usage.userEmail?.charAt(0) || '?'}
-                                </AvatarFallback>
-                              </Avatar>
-                              <div>
-                                <p className="text-sm font-medium text-foreground">
-                                  {usage.userName || usage.userEmail || 'Unknown'}
-                                </p>
-                                <p className="text-[11px] text-foreground/40">
-                                  Last used: {usage.lastUsed 
-                                    ? new Date(usage.lastUsed).toLocaleDateString()
-                                    : 'Never'}
-                                </p>
-                              </div>
-                            </div>
-                            <div className="flex items-center gap-8">
-                              <div className="text-center">
-                                <p className="text-lg font-medium text-foreground">{usage.totalSessions}</p>
-                                <p className="text-[10px] text-foreground/40">Sessions</p>
-                              </div>
-                              <div className="text-center">
-                                <p className="text-lg font-medium text-foreground">{usage.totalMessages}</p>
-                                <p className="text-[10px] text-foreground/40">Messages</p>
-                              </div>
-                            </div>
-                          </div>
-                        ))
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </TabsContent>
-
-              {/* Billing Tab */}
-              <TabsContent value="billing" className="mt-0">
-                <div className="space-y-8">
-                  {/* Current Plan */}
-                  <div className="p-6 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
-                    <div className="flex items-start justify-between mb-6">
-                      <div>
-                        <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 mb-1">Current Plan</p>
-                        <h3 className="text-lg font-medium text-foreground">Team Plan</h3>
-                        <p className="text-sm text-foreground/50 mt-1">
-                          Per-seat pricing for Nova AI access
-                        </p>
-                      </div>
-                      <Badge variant="outline" className="bg-green-500/10 text-green-600 border-green-200">
-                        {organisation.subscription_status || 'Active'}
-                      </Badge>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                      <div>
-                        <p className="text-[11px] text-foreground/40 mb-1">Price per seat</p>
-                        <p className="text-2xl font-medium text-foreground">
-                          £{organisation.price_per_seat || 29}
-                          <span className="text-sm text-foreground/40">/{organisation.billing_cycle || 'month'}</span>
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-[11px] text-foreground/40 mb-1">Seats used</p>
-                        <p className="text-2xl font-medium text-foreground">
-                          {organisation.seats_used}
-                          {organisation.seat_limit && (
-                            <span className="text-sm text-foreground/40"> / {organisation.seat_limit}</span>
-                          )}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-[11px] text-foreground/40 mb-1">Monthly total</p>
-                        <p className="text-2xl font-medium text-foreground">
-                          £{(organisation.seats_used * (organisation.price_per_seat || 29)).toFixed(2)}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Billing Details */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="p-5 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
-                      <h4 className="text-sm font-medium text-foreground mb-4">Billing Email</h4>
-                      <p className="text-foreground/60 text-sm">
-                        {organisation.billing_email || 'Not set'}
-                      </p>
-                    </div>
-                    <div className="p-5 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
-                      <h4 className="text-sm font-medium text-foreground mb-4">Billing Cycle</h4>
-                      <p className="text-foreground/60 text-sm capitalize">
-                        {organisation.billing_cycle || 'Monthly'}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* What's Included */}
-                  <div className="p-6 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
-                    <h4 className="text-sm font-medium text-foreground mb-4">What's included per seat</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {[
-                        'Full Nova AI access',
-                        'Unlimited conversations',
-                        'Biometric device sync',
-                        'Personalised protocols',
-                        'Health forecasting',
-                        'Team analytics'
-                      ].map((feature) => (
-                        <div key={feature} className="flex items-center gap-3">
-                          <div className="w-5 h-5 rounded-full bg-green-500/10 flex items-center justify-center">
-                            <Check className="h-3 w-3 text-green-600" />
-                          </div>
-                          <span className="text-sm text-foreground/70">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </TabsContent>
-
-              {/* Analytics Tab */}
-              <TabsContent value="analytics" className="mt-0">
-                <div className="space-y-3">
-                  {members.map((member) => {
-                    const memberAnalytics = getMemberAnalytics(member.user_id);
-                    
-                    return (
-                      <div
-                        key={member.id}
-                        className="flex items-center justify-between p-4 rounded-xl bg-foreground/[0.02] border border-foreground/5"
-                      >
-                        <div className="flex items-center gap-4">
-                          <Avatar className="h-10 w-10 border border-foreground/5">
-                            <AvatarImage src={member.profile?.avatar_url || undefined} />
-                            <AvatarFallback className="bg-foreground/5 text-foreground/50 text-xs">
-                              {member.profile?.full_name?.charAt(0) || member.profile?.email?.charAt(0) || '?'}
-                            </AvatarFallback>
-                          </Avatar>
-                          <div>
-                            <p className="text-sm font-medium text-foreground">
-                              {member.profile?.full_name || 'Unknown'}
-                            </p>
-                            <p className="text-[11px] text-foreground/40">
-                              Last active: {memberAnalytics?.last_active_at 
-                                ? new Date(memberAnalytics.last_active_at).toLocaleDateString()
-                                : 'Never'}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-8">
-                          <div className="text-center">
-                            <p className="text-lg font-medium text-foreground">
-                              {memberAnalytics?.protocols_completed || 0}
-                            </p>
-                            <p className="text-[10px] text-foreground/40">Protocols</p>
-                          </div>
-                          <div className="text-center">
-                            <p className="text-lg font-medium text-foreground">
-                              {memberAnalytics?.check_ins_count || 0}
-                            </p>
-                            <p className="text-[10px] text-foreground/40">Check-ins</p>
-                          </div>
-                          <div className="text-center hidden sm:block">
-                            <p className="text-lg font-medium text-foreground">
-                              {memberAnalytics?.total_session_minutes || 0}
-                            </p>
-                            <p className="text-[10px] text-foreground/40">Minutes</p>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </TabsContent>
-            </Tabs>
-          </motion.div>
-        </div>
-      </main>
-      <Footer />
-    </div>
+    </>
   );
 }
