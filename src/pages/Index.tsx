@@ -142,7 +142,7 @@ const Index = () => {
                   </h2>
                 </div>
                 <p className="text-sm text-muted-foreground max-w-md">
-                  We walk you through what's possible. No pressure, no jargon—just answers.
+                  NeuroState is the cognitive operating system for high-performing teams.
                 </p>
               </motion.div>
 
