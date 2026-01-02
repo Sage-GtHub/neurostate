@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Users, 
@@ -44,6 +44,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { SEO } from '@/components/SEO';
 import { supabase } from '@/integrations/supabase/client';
+import { TeamBreakdownModal, InsightTraceModal, FinancialBreakdownModal } from '@/components/DashboardModals';
 
 // Executive Intelligence Metrics
 const executiveMetrics = {
@@ -220,6 +221,13 @@ export default function TeamDashboard() {
   const [expandedIntervention, setExpandedIntervention] = useState<number | null>(null);
   const [forecastPeriod, setForecastPeriod] = useState<7 | 14 | 30>(7);
   const [showInsightTrace, setShowInsightTrace] = useState(false);
+  
+  // Modal states
+  const [selectedTeamForModal, setSelectedTeamForModal] = useState<any>(null);
+  const [showTeamModal, setShowTeamModal] = useState(false);
+  const [showFinancialModal, setShowFinancialModal] = useState(false);
+  const [showInsightModal, setShowInsightModal] = useState(false);
+  const [selectedInsight, setSelectedInsight] = useState<any>(null);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -561,9 +569,10 @@ export default function TeamDashboard() {
 
             {/* Financial Attribution Alert */}
             <motion.div 
-              className="mb-8 p-4 rounded-xl bg-gradient-to-r from-amber-500/10 to-transparent border border-amber-500/20"
+              className="mb-8 p-4 rounded-xl bg-gradient-to-r from-amber-500/10 to-transparent border border-amber-500/20 cursor-pointer hover:border-amber-500/40 transition-colors"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              onClick={() => setShowFinancialModal(true)}
             >
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center flex-shrink-0">
@@ -579,7 +588,7 @@ export default function TeamDashboard() {
                     <span className="text-amber-500 font-medium">{formatCurrency(8900)} per day</span> in estimated productivity loss.
                   </p>
                 </div>
-                <Button variant="ghost" size="sm" className="text-xs text-primary">
+                <Button variant="ghost" size="sm" className="text-xs text-primary" onClick={(e) => { e.stopPropagation(); setShowFinancialModal(true); }}>
                   View breakdown
                   <ChevronRight className="w-3 h-3 ml-1" />
                 </Button>
@@ -725,7 +734,14 @@ export default function TeamDashboard() {
                   </div>
                   <div className="space-y-3">
                     {burnoutRiskByTeam.map((team, i) => (
-                      <div key={i} className="flex items-center gap-4">
+                      <div 
+                        key={i} 
+                        className="flex items-center gap-4 cursor-pointer hover:bg-muted/30 p-2 -mx-2 rounded-lg transition-colors"
+                        onClick={() => {
+                          setSelectedTeamForModal({ name: team.team, risk: team.risk, trend: team.trend, members: team.members, exposure: team.exposure });
+                          setShowTeamModal(true);
+                        }}
+                      >
                         <div className="w-32 text-xs text-foreground">{team.team}</div>
                         <div className="flex-1">
                           <div className="h-2 bg-muted rounded-full overflow-hidden">
@@ -750,6 +766,7 @@ export default function TeamDashboard() {
                           {team.trend === 'down' && <TrendingDown className="w-3 h-3 text-green-500" />}
                           {team.trend === 'stable' && <div className="w-3 h-0.5 bg-muted-foreground rounded" />}
                         </div>
+                        <ChevronRight className="w-3 h-3 text-muted-foreground" />
                       </div>
                     ))}
                   </div>
@@ -1044,13 +1061,15 @@ export default function TeamDashboard() {
                       </span>
                       <ChevronRight className="w-4 h-4" />
                     </Button>
-                    <Button variant="outline" className="w-full justify-between h-10 text-xs rounded-lg">
-                      <span className="flex items-center gap-2">
-                        <Settings className="w-4 h-4" />
-                        Configure alerts
-                      </span>
-                      <ChevronRight className="w-4 h-4" />
-                    </Button>
+                    <Link to="/team/settings/advanced">
+                      <Button variant="outline" className="w-full justify-between h-10 text-xs rounded-lg">
+                        <span className="flex items-center gap-2">
+                          <Settings className="w-4 h-4" />
+                          Configure alerts
+                        </span>
+                        <ChevronRight className="w-4 h-4" />
+                      </Button>
+                    </Link>
                   </div>
                 </motion.div>
               </div>
@@ -1058,6 +1077,28 @@ export default function TeamDashboard() {
           </div>
         </main>
         <Footer />
+        
+        {/* Modals */}
+        {selectedTeamForModal && (
+          <TeamBreakdownModal
+            open={showTeamModal}
+            onClose={() => setShowTeamModal(false)}
+            team={selectedTeamForModal}
+          />
+        )}
+        
+        <FinancialBreakdownModal
+          open={showFinancialModal}
+          onClose={() => setShowFinancialModal(false)}
+        />
+        
+        {selectedInsight && (
+          <InsightTraceModal
+            open={showInsightModal}
+            onClose={() => setShowInsightModal(false)}
+            insight={selectedInsight}
+          />
+        )}
       </div>
     </>
   );
