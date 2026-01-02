@@ -3,16 +3,41 @@ import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { ArrowUpRight, Cpu, Activity, Brain, Zap, AlertTriangle, ArrowRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight, Cpu, Activity, Brain, Zap, AlertTriangle, TrendingUp, Database, Gauge, BarChart3 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const cognitiveStates = [
-  { icon: Activity, title: "Readiness", description: "Overall cognitive capacity for the day based on recovery, sleep, and baseline." },
-  { icon: Brain, title: "Cognitive Load", description: "Real-time mental demand relative to available capacity." },
-  { icon: Zap, title: "Recovery Debt", description: "Accumulated fatigue that compounds over time without intervention." },
-  { icon: AlertTriangle, title: "Stress Volatility", description: "Variability in stress response indicating resilience or fragility." },
-  { icon: AlertTriangle, title: "Burnout Risk", description: "Probability of performance breakdown based on trending indicators." },
+  { 
+    icon: Gauge, 
+    title: "Readiness", 
+    description: "Overall cognitive capacity for the day, derived from sleep quality, recovery status, and baseline patterns. Readiness tells you how much someone has to give—not how they feel.",
+    mechanism: "Calculated from sleep architecture, HRV trends, and recovery debt. Adjusted for individual baseline and recent patterns."
+  },
+  { 
+    icon: Brain, 
+    title: "Cognitive Load", 
+    description: "Real-time mental demand relative to available capacity. High load isn't bad—sustained high load without recovery is where risk begins.",
+    mechanism: "Combines meeting density, context switching, deadline pressure, and workload signals. Compared against current readiness."
+  },
+  { 
+    icon: Zap, 
+    title: "Recovery Debt", 
+    description: "Accumulated fatigue that compounds over time without intervention. Like sleep debt, recovery debt doesn't disappear—it must be repaid.",
+    mechanism: "Tracked as a rolling balance of demand vs. recovery. Factors in weekend patterns, holidays, and individual recovery rates."
+  },
+  { 
+    icon: Activity, 
+    title: "Stress Volatility", 
+    description: "Variability in stress response over time. High volatility indicates fragility—the difference between resilience and one bad week away from breakdown.",
+    mechanism: "Measured through HRV variability, response patterns, and physiological stress markers. Trend analysis over 7-30 day windows."
+  },
+  { 
+    icon: AlertTriangle, 
+    title: "Burnout Risk", 
+    description: "Probability of performance breakdown based on trending indicators. Not a feeling—a statistical prediction based on accumulated signals.",
+    mechanism: "Composite score from recovery debt trajectory, stress volatility, engagement patterns, and historical correlations with departure."
+  },
 ];
 
 export default function CognitiveStateEngine() {
@@ -20,7 +45,7 @@ export default function CognitiveStateEngine() {
     <>
       <SEO
         title="Cognitive State Engine | NeuroState Solutions"
-        description="NeuroState translates raw signals into meaningful cognitive states that drive action."
+        description="NeuroState translates raw signals into meaningful cognitive states: readiness, load, recovery debt, stress volatility, and burnout risk."
       />
       <div className="min-h-screen bg-background">
         <Header />
@@ -32,84 +57,198 @@ export default function CognitiveStateEngine() {
                 <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
                   <Cpu className="w-8 h-8 text-primary" />
                 </div>
-                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Layer 2</span>
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Layer 2 of 6</span>
                 <h1 className="text-3xl md:text-4xl font-normal text-foreground tracking-tight mt-2 mb-4">
                   Cognitive State Engine
                 </h1>
-                <p className="text-sm text-muted-foreground max-w-xl mx-auto">
-                  NeuroState translates raw signals into meaningful cognitive states: readiness, load, recovery debt, stress volatility, and burnout risk.
+                <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                  Raw data is noise. The Cognitive State Engine transforms signals into intelligence—interpretable states that drive decisions. This is where NeuroState moves from tracking to understanding.
                 </p>
               </motion.div>
             </div>
           </section>
 
-          {/* States Grid */}
+          {/* The Difference */}
           <section className="py-16 md:py-24 px-6 md:px-8 bg-muted/30">
-            <div className="max-w-5xl mx-auto">
+            <div className="max-w-4xl mx-auto">
+              <ScrollReveal className="space-y-8">
+                <div className="text-center space-y-3">
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">The Difference</span>
+                  <h2 className="text-2xl font-normal text-foreground">Interpretation, not tracking</h2>
+                </div>
+                <div className="prose prose-sm max-w-none text-muted-foreground">
+                  <p className="leading-relaxed">
+                    Most tools stop at data collection. They show you heart rate variability, sleep duration, meeting counts—and leave interpretation to you. But raw metrics are meaningless without context. A 45ms HRV could be excellent for one person and concerning for another. Eight meetings in a day might be normal for a sales lead and unsustainable for an engineer.
+                  </p>
+                  <p className="leading-relaxed">
+                    The Cognitive State Engine solves this by maintaining a living baseline for every individual. It knows what's normal for each person, tracks deviation from that baseline, and translates those deviations into actionable cognitive states. The output isn't data—it's meaning.
+                  </p>
+                </div>
+              </ScrollReveal>
+            </div>
+          </section>
+
+          {/* States Explained */}
+          <section className="py-16 md:py-24 px-6 md:px-8">
+            <div className="max-w-6xl mx-auto">
               <ScrollReveal className="text-center mb-12 space-y-3">
-                <h2 className="text-2xl font-normal text-foreground">Interpretation, not tracking</h2>
-                <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                  We don't just collect data. We interpret it into actionable cognitive states.
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Five Cognitive States</span>
+                <h2 className="text-2xl font-normal text-foreground">The states that matter</h2>
+                <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
+                  Every NeuroState interpretation resolves to these five cognitive states. Each is precisely defined, mechanistically grounded, and directly tied to outcomes.
                 </p>
               </ScrollReveal>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="space-y-6">
                 {cognitiveStates.map((state, i) => (
                   <motion.div 
                     key={state.title}
-                    className="p-6 rounded-2xl bg-background border border-border/50"
+                    className="p-8 rounded-2xl bg-muted/30 border border-border/50"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
                   >
-                    <state.icon className="w-6 h-6 text-primary mb-3" />
-                    <h3 className="text-sm font-medium text-foreground mb-2">{state.title}</h3>
-                    <p className="text-xs text-muted-foreground">{state.description}</p>
+                    <div className="flex flex-col md:flex-row gap-6">
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                          <state.icon className="w-6 h-6 text-primary" />
+                        </div>
+                      </div>
+                      <div className="flex-1 space-y-3">
+                        <h3 className="text-lg font-medium text-foreground">{state.title}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{state.description}</p>
+                        <div className="pt-3 border-t border-border/30">
+                          <span className="text-[10px] uppercase tracking-wider text-primary font-medium">How it's calculated</span>
+                          <p className="text-xs text-muted-foreground mt-1">{state.mechanism}</p>
+                        </div>
+                      </div>
+                    </div>
                   </motion.div>
                 ))}
               </div>
             </div>
           </section>
 
-          {/* Before/After */}
-          <section className="py-16 md:py-24 px-6 md:px-8">
-            <div className="max-w-4xl mx-auto">
+          {/* Before/After Example */}
+          <section className="py-16 md:py-24 px-6 md:px-8 bg-muted/30">
+            <div className="max-w-5xl mx-auto">
               <ScrollReveal className="text-center mb-12 space-y-3">
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">In Practice</span>
                 <h2 className="text-2xl font-normal text-foreground">From data to meaning</h2>
+                <p className="text-sm text-muted-foreground max-w-lg mx-auto">
+                  Here's what interpretation looks like. Same person, same morning—but one view is data, the other is intelligence.
+                </p>
               </ScrollReveal>
 
               <div className="grid md:grid-cols-2 gap-8">
-                <div className="p-6 rounded-2xl bg-muted/50 border border-border/50">
-                  <h4 className="text-xs font-medium text-muted-foreground mb-4 uppercase tracking-wider">Before: Raw Data</h4>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li>• HRV: 45ms</li>
-                    <li>• Sleep: 6.2 hours</li>
-                    <li>• Resting HR: 62 bpm</li>
-                    <li>• 8 meetings scheduled</li>
+                <motion.div 
+                  className="p-8 rounded-2xl bg-background border border-border/50"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="flex items-center gap-2 mb-6">
+                    <Database className="w-5 h-5 text-muted-foreground" />
+                    <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Before: Raw Data</h4>
+                  </div>
+                  <ul className="space-y-4 text-sm text-muted-foreground">
+                    <li className="flex justify-between"><span>HRV</span><span className="font-mono">45ms</span></li>
+                    <li className="flex justify-between"><span>Sleep Duration</span><span className="font-mono">6.2 hours</span></li>
+                    <li className="flex justify-between"><span>Deep Sleep</span><span className="font-mono">48 min</span></li>
+                    <li className="flex justify-between"><span>Resting HR</span><span className="font-mono">62 bpm</span></li>
+                    <li className="flex justify-between"><span>Meetings Today</span><span className="font-mono">8</span></li>
+                    <li className="flex justify-between"><span>Last Week Avg Sleep</span><span className="font-mono">5.8 hours</span></li>
                   </ul>
-                </div>
-                <div className="p-6 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20">
-                  <h4 className="text-xs font-medium text-primary mb-4 uppercase tracking-wider">After: Cognitive State</h4>
-                  <ul className="space-y-2 text-sm text-foreground">
-                    <li>• Readiness: 68/100</li>
-                    <li>• Recovery Debt: Moderate</li>
-                    <li>• Optimal window: 9-11am</li>
-                    <li>• Recommendation: Defer complex decisions</li>
+                  <div className="mt-6 pt-6 border-t border-border/30">
+                    <p className="text-xs text-muted-foreground italic">Is this good? Bad? Without context, you can't know.</p>
+                  </div>
+                </motion.div>
+
+                <motion.div 
+                  className="p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="flex items-center gap-2 mb-6">
+                    <Cpu className="w-5 h-5 text-primary" />
+                    <h4 className="text-sm font-medium text-primary uppercase tracking-wider">After: Cognitive State</h4>
+                  </div>
+                  <ul className="space-y-4 text-sm text-foreground">
+                    <li className="flex justify-between"><span>Readiness</span><span className="font-semibold text-amber-500">68/100</span></li>
+                    <li className="flex justify-between"><span>Cognitive Load</span><span className="font-semibold text-red-500">High</span></li>
+                    <li className="flex justify-between"><span>Recovery Debt</span><span className="font-semibold text-amber-500">Moderate (3 days)</span></li>
+                    <li className="flex justify-between"><span>Stress Volatility</span><span className="font-semibold text-green-600">Low</span></li>
+                    <li className="flex justify-between"><span>Optimal Window</span><span className="font-semibold text-primary">9-11am</span></li>
+                    <li className="flex justify-between"><span>Recommendation</span><span className="font-semibold text-primary">Defer complex decisions</span></li>
                   </ul>
-                </div>
+                  <div className="mt-6 pt-6 border-t border-primary/20">
+                    <p className="text-xs text-foreground font-medium">Actionable. Clear. No interpretation required.</p>
+                  </div>
+                </motion.div>
               </div>
             </div>
           </section>
 
           {/* Living Baseline */}
+          <section className="py-16 md:py-24 px-6 md:px-8">
+            <div className="max-w-4xl mx-auto">
+              <ScrollReveal className="space-y-8">
+                <div className="text-center space-y-3">
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Personalisation</span>
+                  <h2 className="text-2xl font-normal text-foreground">A living cognitive baseline</h2>
+                </div>
+                <div className="prose prose-sm max-w-none text-muted-foreground">
+                  <p className="leading-relaxed">
+                    The engine maintains a continuously updating baseline for every individual. This baseline adapts to seasonal patterns (winter vs. summer sleep), workload cycles (end-of-quarter intensity), and personal rhythms (morning person vs. night owl). It learns what's normal for each person—so it can detect when something is off.
+                  </p>
+                  <p className="leading-relaxed">
+                    At the team and organisation level, the engine aggregates individual states into collective intelligence. You can see team readiness before a product launch, department-level burnout risk, or organisation-wide patterns that require intervention.
+                  </p>
+                </div>
+                <div className="grid md:grid-cols-3 gap-6 pt-4">
+                  <div className="p-6 rounded-xl bg-muted/30 border border-border/50 text-center">
+                    <BarChart3 className="w-6 h-6 text-primary mx-auto mb-3" />
+                    <h4 className="text-sm font-medium text-foreground mb-1">Individual</h4>
+                    <p className="text-xs text-muted-foreground">Personal baseline, daily state, trend tracking</p>
+                  </div>
+                  <div className="p-6 rounded-xl bg-muted/30 border border-border/50 text-center">
+                    <BarChart3 className="w-6 h-6 text-primary mx-auto mb-3" />
+                    <h4 className="text-sm font-medium text-foreground mb-1">Team</h4>
+                    <p className="text-xs text-muted-foreground">Aggregated capacity, risk distribution, intervention needs</p>
+                  </div>
+                  <div className="p-6 rounded-xl bg-muted/30 border border-border/50 text-center">
+                    <BarChart3 className="w-6 h-6 text-primary mx-auto mb-3" />
+                    <h4 className="text-sm font-medium text-foreground mb-1">Organisation</h4>
+                    <p className="text-xs text-muted-foreground">Portfolio view, systemic patterns, strategic risk</p>
+                  </div>
+                </div>
+              </ScrollReveal>
+            </div>
+          </section>
+
+          {/* Next Layer */}
           <section className="py-16 md:py-24 px-6 md:px-8 bg-muted/30">
-            <div className="max-w-3xl mx-auto text-center">
-              <ScrollReveal className="space-y-6">
-                <h2 className="text-2xl font-normal text-foreground">A living cognitive baseline</h2>
-                <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                  The engine maintains a continuously updating baseline for individuals, teams, and the organisation—adapting to seasonal patterns, workload changes, and personal rhythms.
-                </p>
+            <div className="max-w-4xl mx-auto">
+              <ScrollReveal>
+                <Link to="/solutions/prediction">
+                  <div className="group p-8 rounded-2xl bg-background border border-border/50 hover:border-primary/40 transition-all">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                          <TrendingUp className="w-6 h-6 text-primary" />
+                        </div>
+                        <div>
+                          <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Next: Layer 3</span>
+                          <h3 className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">Prediction & Simulation</h3>
+                          <p className="text-xs text-muted-foreground">Where state becomes forecast</p>
+                        </div>
+                      </div>
+                      <ArrowRight className="w-5 h-5 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                  </div>
+                </Link>
               </ScrollReveal>
             </div>
           </section>
