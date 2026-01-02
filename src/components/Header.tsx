@@ -114,6 +114,16 @@ export const Header = () => {
     { label: "About", href: "/about" },
   ];
 
+  const mobileSolutions = [
+    { label: "Solutions Overview", href: "/solutions" },
+    { label: "Cognitive Data Layer", href: "/solutions/data-layer" },
+    { label: "Cognitive State Engine", href: "/solutions/state-engine" },
+    { label: "Prediction & Simulation", href: "/solutions/prediction" },
+    { label: "Action & Control Layer", href: "/solutions/action-layer" },
+    { label: "Command Surfaces", href: "/solutions/command-surfaces" },
+    { label: "Economic & ROI Layer", href: "/solutions/roi-layer" },
+  ];
+
   return (
     <>
       <AnnouncementBar />
@@ -353,6 +363,22 @@ export const Header = () => {
                     </Link>
                   ))}
                   
+                  {/* Solutions Section */}
+                  <div className="pt-5 border-t border-border mt-5">
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-3">Solutions</p>
+                    {mobileSolutions.map((item) => (
+                      <Link
+                        key={item.label}
+                        to={item.href}
+                        className="block py-2 text-xs text-foreground/70 hover:text-primary transition-colors"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                  
+                  {/* Industries Section */}
                   <div className="pt-5 border-t border-border mt-5">
                     <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-3">Industries</p>
                     {industries.map((item) => (

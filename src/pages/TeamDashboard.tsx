@@ -262,20 +262,20 @@ export default function TeamDashboard() {
       <div className="min-h-screen bg-background">
         <Header />
         
-        {/* Executive Intelligence Strip - Sticky on Desktop */}
+        {/* Executive Intelligence Strip - Sticky on Desktop, scrollable on Mobile */}
         <div className="sticky top-0 z-40 bg-background/95 backdrop-blur-sm border-b border-border/50">
-          <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-3 md:py-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
               {/* CCI Score */}
               <motion.div 
-                className="p-4 rounded-xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20"
+                className="p-3 md:p-4 rounded-xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <Gauge className="w-4 h-4 text-primary" />
-                    <span className="text-[10px] uppercase tracking-wider text-primary font-medium">Cognitive Capacity Index (CCI)</span>
+                    <Gauge className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />
+                    <span className="text-[9px] md:text-[10px] uppercase tracking-wider text-primary font-medium">CCI Score</span>
                   </div>
                   <Tooltip>
                     <TooltipTrigger>
@@ -283,32 +283,32 @@ export default function TeamDashboard() {
                     </TooltipTrigger>
                     <TooltipContent className="max-w-sm text-xs p-3">
                       <p className="font-medium mb-1">Live Cognitive Capacity Index</p>
-                      <p className="text-muted-foreground">Usable cognitive capacity derived from energy, focus, recovery, stress volatility, and burnout risk. Updated in real-time.</p>
+                      <p className="text-muted-foreground">Usable cognitive capacity derived from energy, focus, recovery, stress volatility, and burnout risk.</p>
                     </TooltipContent>
                   </Tooltip>
                 </div>
-                <div className="flex items-end gap-3">
-                  <span className="text-3xl font-semibold text-foreground">{executiveMetrics.cci.current}</span>
-                  <span className="text-xs text-muted-foreground mb-1">/ 100</span>
-                  <div className={`flex items-center text-xs mb-1 ml-auto ${executiveMetrics.cci.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
+                <div className="flex items-end gap-2 md:gap-3">
+                  <span className="text-2xl md:text-3xl font-semibold text-foreground">{executiveMetrics.cci.current}</span>
+                  <span className="text-[10px] md:text-xs text-muted-foreground mb-1">/ 100</span>
+                  <div className={`flex items-center text-[10px] md:text-xs mb-1 ml-auto ${executiveMetrics.cci.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
                     {executiveMetrics.cci.trend === 'up' ? <TrendingUp className="w-3 h-3 mr-0.5" /> : <TrendingDown className="w-3 h-3 mr-0.5" />}
                     {executiveMetrics.cci.change > 0 ? '+' : ''}{executiveMetrics.cci.change}%
                   </div>
                 </div>
-                <Progress value={executiveMetrics.cci.current} className="h-1.5 mt-2" />
+                <Progress value={executiveMetrics.cci.current} className="h-1 md:h-1.5 mt-2" />
               </motion.div>
 
               {/* Live Cognitive Revenue Exposure */}
               <motion.div 
-                className="p-4 rounded-xl bg-muted/30 border border-border/50"
+                className="p-3 md:p-4 rounded-xl bg-muted/30 border border-border/50"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <PoundSterling className="w-4 h-4 text-amber-500" />
-                    <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Live Revenue Exposure</span>
+                    <PoundSterling className="w-3.5 h-3.5 md:w-4 md:h-4 text-amber-500" />
+                    <span className="text-[9px] md:text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Revenue Exposure</span>
                   </div>
                   <Tooltip>
                     <TooltipTrigger>
@@ -316,15 +316,15 @@ export default function TeamDashboard() {
                     </TooltipTrigger>
                     <TooltipContent className="max-w-sm text-xs p-3">
                       <p className="font-medium mb-1">Estimated Revenue at Risk</p>
-                      <p className="text-muted-foreground">Real-time financial loss driven by current cognitive underperformance. Updates as signals change.</p>
+                      <p className="text-muted-foreground">Real-time financial loss driven by current cognitive underperformance.</p>
                     </TooltipContent>
                   </Tooltip>
                 </div>
                 <div className="flex items-end gap-2">
-                  <span className="text-2xl font-semibold text-amber-500">{formatCurrency(executiveMetrics.revenueExposure.weekly)}</span>
-                  <span className="text-xs text-muted-foreground mb-1">/ week at risk</span>
+                  <span className="text-xl md:text-2xl font-semibold text-amber-500">{formatCurrency(executiveMetrics.revenueExposure.weekly)}</span>
+                  <span className="text-[10px] md:text-xs text-muted-foreground mb-1">/ week</span>
                 </div>
-                <div className={`flex items-center text-xs mt-1 ${executiveMetrics.revenueExposure.trend === 'down' ? 'text-green-600' : 'text-red-500'}`}>
+                <div className={`flex items-center text-[10px] md:text-xs mt-1 ${executiveMetrics.revenueExposure.trend === 'down' ? 'text-green-600' : 'text-red-500'}`}>
                   {executiveMetrics.revenueExposure.trend === 'down' ? <TrendingDown className="w-3 h-3 mr-0.5" /> : <TrendingUp className="w-3 h-3 mr-0.5" />}
                   {executiveMetrics.revenueExposure.change}% vs last week
                 </div>
@@ -332,15 +332,15 @@ export default function TeamDashboard() {
 
               {/* Burnout Risk Exposure */}
               <motion.div 
-                className="p-4 rounded-xl bg-muted/30 border border-border/50"
+                className="p-3 md:p-4 rounded-xl bg-muted/30 border border-border/50 sm:col-span-2 md:col-span-1"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <AlertTriangle className="w-4 h-4 text-red-500" />
-                    <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Burnout Risk Exposure</span>
+                    <AlertTriangle className="w-3.5 h-3.5 md:w-4 md:h-4 text-red-500" />
+                    <span className="text-[9px] md:text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Burnout Exposure</span>
                   </div>
                   <Tooltip>
                     <TooltipTrigger>
@@ -348,37 +348,39 @@ export default function TeamDashboard() {
                     </TooltipTrigger>
                     <TooltipContent className="max-w-sm text-xs p-3">
                       <p className="font-medium mb-1">Projected 6-Month Exposure</p>
-                      <p className="text-muted-foreground">Aggregated team-level projected cost from turnover and underperformance if current trajectory continues.</p>
+                      <p className="text-muted-foreground">Aggregated projected cost from turnover and underperformance.</p>
                     </TooltipContent>
                   </Tooltip>
                 </div>
                 <div className="flex items-end gap-2">
-                  <span className="text-2xl font-semibold text-red-500">{formatCurrency(executiveMetrics.burnoutExposure.projected, true)}</span>
-                  <span className="text-xs text-muted-foreground mb-1">projected</span>
+                  <span className="text-xl md:text-2xl font-semibold text-red-500">{formatCurrency(executiveMetrics.burnoutExposure.projected, true)}</span>
+                  <span className="text-[10px] md:text-xs text-muted-foreground mb-1">projected</span>
                 </div>
-                <div className="text-xs text-muted-foreground mt-1">
-                  {executiveMetrics.burnoutExposure.teamsAtRisk} teams require immediate attention
+                <div className="text-[10px] md:text-xs text-muted-foreground mt-1">
+                  {executiveMetrics.burnoutExposure.teamsAtRisk} teams require attention
                 </div>
               </motion.div>
             </div>
           </div>
         </div>
 
-        <main className="px-6 md:px-8 lg:px-12 py-8 md:py-12">
+        <main className="px-4 sm:px-6 md:px-8 lg:px-12 py-6 md:py-8 lg:py-12">
           <div className="max-w-7xl mx-auto">
             {/* Header with Filters */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+            <div className="flex flex-col gap-4 mb-6 md:mb-8">
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <Sparkles className="w-4 h-4 text-primary" />
                   <span className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">Nova Intelligence</span>
                 </div>
-                <h1 className="text-2xl md:text-3xl font-medium tracking-tight text-foreground">Team Dashboard</h1>
-                <p className="text-sm text-muted-foreground mt-1">Cognitive performance analytics · Last updated 2 min ago</p>
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-medium tracking-tight text-foreground">Team Dashboard</h1>
+                <p className="text-xs sm:text-sm text-muted-foreground mt-1">Cognitive performance analytics · Last updated 2 min ago</p>
               </div>
-              <div className="flex flex-wrap items-center gap-3">
+              
+              {/* Filters - Scrollable on mobile */}
+              <div className="flex flex-wrap items-center gap-2 md:gap-3 overflow-x-auto pb-2 -mx-1 px-1">
                 <Select value={timeRange} onValueChange={setTimeRange}>
-                  <SelectTrigger className="h-9 w-[120px] text-xs rounded-lg border-border/50">
+                  <SelectTrigger className="h-8 md:h-9 w-[100px] md:w-[120px] text-[10px] md:text-xs rounded-lg border-border/50 flex-shrink-0">
                     <Clock className="w-3 h-3 mr-1" />
                     <SelectValue />
                   </SelectTrigger>
@@ -389,7 +391,7 @@ export default function TeamDashboard() {
                   </SelectContent>
                 </Select>
                 <Select value={selectedTeam} onValueChange={setSelectedTeam}>
-                  <SelectTrigger className="h-9 w-[130px] text-xs rounded-lg border-border/50">
+                  <SelectTrigger className="h-8 md:h-9 w-[110px] md:w-[130px] text-[10px] md:text-xs rounded-lg border-border/50 flex-shrink-0">
                     <Users className="w-3 h-3 mr-1" />
                     <SelectValue />
                   </SelectTrigger>
@@ -402,7 +404,7 @@ export default function TeamDashboard() {
                   </SelectContent>
                 </Select>
                 <Select value={selectedFunction} onValueChange={setSelectedFunction}>
-                  <SelectTrigger className="h-9 w-[130px] text-xs rounded-lg border-border/50">
+                  <SelectTrigger className="h-8 md:h-9 w-[100px] md:w-[130px] text-[10px] md:text-xs rounded-lg border-border/50 flex-shrink-0 hidden sm:flex">
                     <Briefcase className="w-3 h-3 mr-1" />
                     <SelectValue />
                   </SelectTrigger>
@@ -414,7 +416,7 @@ export default function TeamDashboard() {
                   </SelectContent>
                 </Select>
                 <Select value={selectedLocation} onValueChange={setSelectedLocation}>
-                  <SelectTrigger className="h-9 w-[130px] text-xs rounded-lg border-border/50">
+                  <SelectTrigger className="h-8 md:h-9 w-[100px] md:w-[130px] text-[10px] md:text-xs rounded-lg border-border/50 flex-shrink-0 hidden sm:flex">
                     <MapPin className="w-3 h-3 mr-1" />
                     <SelectValue />
                   </SelectTrigger>
@@ -425,203 +427,205 @@ export default function TeamDashboard() {
                     <SelectItem value="remote">Remote</SelectItem>
                   </SelectContent>
                 </Select>
-                <Button variant="outline" size="sm" className="h-9 px-3 rounded-lg">
-                  <RefreshCw className="w-3.5 h-3.5 mr-2" />
-                  Refresh
-                </Button>
-                <Link to="/team/settings/members">
-                  <Button variant="outline" size="sm" className="h-9 px-3 rounded-lg">
-                    <Settings className="w-3.5 h-3.5 mr-2" />
-                    Settings
+                <div className="flex items-center gap-2 ml-auto flex-shrink-0">
+                  <Button variant="outline" size="sm" className="h-8 md:h-9 px-2 md:px-3 rounded-lg text-[10px] md:text-xs">
+                    <RefreshCw className="w-3 h-3 md:mr-2" />
+                    <span className="hidden md:inline">Refresh</span>
                   </Button>
-                </Link>
+                  <Link to="/team/settings/members">
+                    <Button variant="outline" size="sm" className="h-8 md:h-9 px-2 md:px-3 rounded-lg text-[10px] md:text-xs">
+                      <Settings className="w-3 h-3 md:mr-2" />
+                      <span className="hidden md:inline">Settings</span>
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
 
             {/* System Adoption & Coverage Module */}
             <motion.div 
-              className="mb-8 p-6 rounded-2xl bg-muted/20 border border-border/50"
+              className="mb-6 md:mb-8 p-4 md:p-6 rounded-xl md:rounded-2xl bg-muted/20 border border-border/50"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-3 md:mb-4">
                 <div>
-                  <h3 className="text-sm font-medium text-foreground">System Adoption & Coverage</h3>
-                  <p className="text-[10px] text-muted-foreground mt-0.5">Real-time platform engagement metrics</p>
+                  <h3 className="text-xs md:text-sm font-medium text-foreground">System Adoption & Coverage</h3>
+                  <p className="text-[9px] md:text-[10px] text-muted-foreground mt-0.5">Real-time platform engagement</p>
                 </div>
-                <Badge variant="outline" className="text-[9px]">Live</Badge>
+                <Badge variant="outline" className="text-[8px] md:text-[9px]">Live</Badge>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="p-4 rounded-xl bg-background border border-border/30">
-                  <div className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Daily Active Users</div>
-                  <div className="text-2xl font-semibold text-foreground">{adoptionMetrics.dau.value}</div>
-                  <div className={`text-xs mt-1 ${adoptionMetrics.dau.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
-                    +{adoptionMetrics.dau.change}% vs last week
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
+                <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                  <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Daily Active</div>
+                  <div className="text-lg md:text-2xl font-semibold text-foreground">{adoptionMetrics.dau.value}</div>
+                  <div className={`text-[10px] md:text-xs mt-1 ${adoptionMetrics.dau.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
+                    +{adoptionMetrics.dau.change}%
                   </div>
                 </div>
-                <div className="p-4 rounded-xl bg-background border border-border/30">
-                  <div className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Weekly Active Teams</div>
-                  <div className="text-2xl font-semibold text-foreground">{adoptionMetrics.wat.value}</div>
-                  <div className={`text-xs mt-1 ${adoptionMetrics.wat.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
-                    +{adoptionMetrics.wat.change}% vs last week
+                <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                  <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Active Teams</div>
+                  <div className="text-lg md:text-2xl font-semibold text-foreground">{adoptionMetrics.wat.value}</div>
+                  <div className={`text-[10px] md:text-xs mt-1 ${adoptionMetrics.wat.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
+                    +{adoptionMetrics.wat.change}%
                   </div>
                 </div>
-                <div className="p-4 rounded-xl bg-background border border-border/30">
-                  <div className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Signal Coverage Rate</div>
-                  <div className="text-2xl font-semibold text-foreground">{adoptionMetrics.coverageRate.value}%</div>
-                  <div className={`text-xs mt-1 ${adoptionMetrics.coverageRate.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
-                    +{adoptionMetrics.coverageRate.change}% vs last week
+                <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                  <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Coverage</div>
+                  <div className="text-lg md:text-2xl font-semibold text-foreground">{adoptionMetrics.coverageRate.value}%</div>
+                  <div className={`text-[10px] md:text-xs mt-1 ${adoptionMetrics.coverageRate.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
+                    +{adoptionMetrics.coverageRate.change}%
                   </div>
                 </div>
-                <div className="p-4 rounded-xl bg-background border border-border/30">
-                  <div className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Intervention Adoption</div>
-                  <div className="text-2xl font-semibold text-foreground">{adoptionMetrics.interventionAdoption.value}%</div>
-                  <div className={`text-xs mt-1 ${adoptionMetrics.interventionAdoption.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
-                    +{adoptionMetrics.interventionAdoption.change}% vs last week
+                <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                  <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Adoption</div>
+                  <div className="text-lg md:text-2xl font-semibold text-foreground">{adoptionMetrics.interventionAdoption.value}%</div>
+                  <div className={`text-[10px] md:text-xs mt-1 ${adoptionMetrics.interventionAdoption.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
+                    +{adoptionMetrics.interventionAdoption.change}%
                   </div>
                 </div>
               </div>
             </motion.div>
 
             {/* Key Metrics Row */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
               {/* Team Readiness */}
               <motion.div 
-                className="p-5 rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20"
+                className="p-3 md:p-5 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[10px] uppercase tracking-wider text-primary font-medium">Team Readiness</span>
+                <div className="flex items-center justify-between mb-2 md:mb-3">
+                  <span className="text-[9px] md:text-[10px] uppercase tracking-wider text-primary font-medium">Readiness</span>
                   <Tooltip>
                     <TooltipTrigger>
-                      <Info className="w-3.5 h-3.5 text-muted-foreground" />
+                      <Info className="w-3 h-3 md:w-3.5 md:h-3.5 text-muted-foreground" />
                     </TooltipTrigger>
                     <TooltipContent className="max-w-xs text-xs">
-                      Aggregate cognitive capacity score based on sleep, recovery, and stress indicators across all team members.
+                      Aggregate cognitive capacity score across all team members.
                     </TooltipContent>
                   </Tooltip>
                 </div>
                 <div className="flex items-end gap-2">
-                  <span className="text-3xl font-semibold text-foreground">{teamReadinessData.current}</span>
-                  <div className={`flex items-center text-xs mb-1 ${teamReadinessData.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
+                  <span className="text-2xl md:text-3xl font-semibold text-foreground">{teamReadinessData.current}</span>
+                  <div className={`flex items-center text-[10px] md:text-xs mb-1 ${teamReadinessData.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
                     {teamReadinessData.trend === 'up' ? <TrendingUp className="w-3 h-3 mr-0.5" /> : <TrendingDown className="w-3 h-3 mr-0.5" />}
                     {teamReadinessData.change}%
                   </div>
                 </div>
-                <Progress value={teamReadinessData.current} className="h-1.5 mt-3" />
+                <Progress value={teamReadinessData.current} className="h-1 md:h-1.5 mt-2 md:mt-3" />
               </motion.div>
 
               {/* Burnout Risk */}
               <motion.div 
-                className="p-5 rounded-2xl bg-muted/30 border border-border/50"
+                className="p-3 md:p-5 rounded-xl md:rounded-2xl bg-muted/30 border border-border/50"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
               >
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Burnout Risk</span>
-                  <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
+                <div className="flex items-center justify-between mb-2 md:mb-3">
+                  <span className="text-[9px] md:text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Burnout</span>
+                  <AlertTriangle className="w-3 h-3 md:w-3.5 md:h-3.5 text-amber-500" />
                 </div>
                 <div className="flex items-end gap-2">
-                  <span className="text-3xl font-semibold text-foreground">32%</span>
-                  <div className="flex items-center text-xs mb-1 text-green-600">
+                  <span className="text-2xl md:text-3xl font-semibold text-foreground">32%</span>
+                  <div className="flex items-center text-[10px] md:text-xs mb-1 text-green-600">
                     <TrendingDown className="w-3 h-3 mr-0.5" />
                     11%
                   </div>
                 </div>
-                <p className="text-[10px] text-muted-foreground mt-2">2 teams require attention</p>
+                <p className="text-[9px] md:text-[10px] text-muted-foreground mt-1 md:mt-2">2 teams at risk</p>
               </motion.div>
 
               {/* Focus Score */}
               <motion.div 
-                className="p-5 rounded-2xl bg-muted/30 border border-border/50"
+                className="p-3 md:p-5 rounded-xl md:rounded-2xl bg-muted/30 border border-border/50"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Avg Focus Score</span>
-                  <Brain className="w-3.5 h-3.5 text-primary" />
+                <div className="flex items-center justify-between mb-2 md:mb-3">
+                  <span className="text-[9px] md:text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Focus</span>
+                  <Brain className="w-3 h-3 md:w-3.5 md:h-3.5 text-primary" />
                 </div>
                 <div className="flex items-end gap-2">
-                  <span className="text-3xl font-semibold text-foreground">71</span>
-                  <div className="flex items-center text-xs mb-1 text-green-600">
+                  <span className="text-2xl md:text-3xl font-semibold text-foreground">71</span>
+                  <div className="flex items-center text-[10px] md:text-xs mb-1 text-green-600">
                     <TrendingUp className="w-3 h-3 mr-0.5" />
                     4%
                   </div>
                 </div>
-                <p className="text-[10px] text-muted-foreground mt-2">Peak: Tuesday 10am</p>
+                <p className="text-[9px] md:text-[10px] text-muted-foreground mt-1 md:mt-2">Peak: Tue 10am</p>
               </motion.div>
 
               {/* Active Interventions */}
               <motion.div 
-                className="p-5 rounded-2xl bg-muted/30 border border-border/50"
+                className="p-3 md:p-5 rounded-xl md:rounded-2xl bg-muted/30 border border-border/50"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Nova Interventions</span>
-                  <Zap className="w-3.5 h-3.5 text-accent" />
+                <div className="flex items-center justify-between mb-2 md:mb-3">
+                  <span className="text-[9px] md:text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Actions</span>
+                  <Zap className="w-3 h-3 md:w-3.5 md:h-3.5 text-accent" />
                 </div>
                 <div className="flex items-end gap-2">
-                  <span className="text-3xl font-semibold text-foreground">3</span>
-                  <span className="text-xs text-muted-foreground mb-1">recommended</span>
+                  <span className="text-2xl md:text-3xl font-semibold text-foreground">3</span>
+                  <span className="text-[10px] md:text-xs text-muted-foreground mb-1">pending</span>
                 </div>
-                <p className="text-[10px] text-muted-foreground mt-2">Est. value: {formatCurrency(67200)}</p>
+                <p className="text-[9px] md:text-[10px] text-muted-foreground mt-1 md:mt-2">Est: {formatCurrency(67200)}</p>
               </motion.div>
             </div>
 
             {/* Financial Attribution Alert */}
             <motion.div 
-              className="mb-8 p-4 rounded-xl bg-gradient-to-r from-amber-500/10 to-transparent border border-amber-500/20 cursor-pointer hover:border-amber-500/40 transition-colors"
+              className="mb-6 md:mb-8 p-3 md:p-4 rounded-lg md:rounded-xl bg-gradient-to-r from-amber-500/10 to-transparent border border-amber-500/20 cursor-pointer hover:border-amber-500/40 transition-colors"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               onClick={() => setShowFinancialModal(true)}
             >
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center flex-shrink-0">
-                  <DollarSign className="w-5 h-5 text-amber-500" />
+              <div className="flex items-start gap-3 md:gap-4">
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                  <DollarSign className="w-4 h-4 md:w-5 md:h-5 text-amber-500" />
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <h4 className="text-sm font-medium text-foreground">Financial Attribution</h4>
-                    <Badge variant="outline" className="text-[9px] bg-amber-500/10 text-amber-600 border-amber-500/30">Live</Badge>
+                    <h4 className="text-xs md:text-sm font-medium text-foreground">Financial Attribution</h4>
+                    <Badge variant="outline" className="text-[8px] md:text-[9px] bg-amber-500/10 text-amber-600 border-amber-500/30">Live</Badge>
                   </div>
-                  <p className="text-xs text-muted-foreground">
-                    A <span className="text-foreground font-medium">20% decline in focus across Sales</span> is currently costing{' '}
-                    <span className="text-amber-500 font-medium">{formatCurrency(8900)} per day</span> in estimated productivity loss.
+                  <p className="text-[10px] md:text-xs text-muted-foreground line-clamp-2 md:line-clamp-none">
+                    <span className="text-foreground font-medium">20% focus decline</span> costing{' '}
+                    <span className="text-amber-500 font-medium">{formatCurrency(8900)}/day</span>
                   </p>
                 </div>
-                <Button variant="ghost" size="sm" className="text-xs text-primary" onClick={(e) => { e.stopPropagation(); setShowFinancialModal(true); }}>
-                  View breakdown
+                <Button variant="ghost" size="sm" className="text-[10px] md:text-xs text-primary px-2 md:px-3 hidden sm:flex" onClick={(e) => { e.stopPropagation(); setShowFinancialModal(true); }}>
+                  View
                   <ChevronRight className="w-3 h-3 ml-1" />
                 </Button>
               </div>
             </motion.div>
 
             {/* Main Content Grid */}
-            <div className="grid lg:grid-cols-3 gap-6">
+            <div className="grid lg:grid-cols-3 gap-4 md:gap-6">
               {/* Left Column - Forecasts & Burnout */}
-              <div className="lg:col-span-2 space-y-6">
+              <div className="lg:col-span-2 space-y-4 md:space-y-6">
                 {/* Nova AI Forecast Panel */}
                 <motion.div 
-                  className="p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent border border-primary/20"
+                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary/5 to-transparent border border-primary/20"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                 >
-                  <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center justify-between mb-4 md:mb-5">
                     <div>
-                      <h3 className="text-sm font-medium text-foreground">Nova AI Forecast</h3>
-                      <p className="text-[10px] text-muted-foreground mt-0.5">Cognitive capacity & revenue risk projection</p>
+                      <h3 className="text-xs md:text-sm font-medium text-foreground">Nova AI Forecast</h3>
+                      <p className="text-[9px] md:text-[10px] text-muted-foreground mt-0.5">Capacity & revenue projection</p>
                     </div>
                     <div className="flex gap-1">
                       {[7, 14, 30].map((days) => (
                         <button
                           key={days}
                           onClick={() => setForecastPeriod(days as 7 | 14 | 30)}
-                          className={`px-3 py-1.5 text-[10px] rounded-lg transition-all ${
+                          className={`px-2 md:px-3 py-1 md:py-1.5 text-[9px] md:text-[10px] rounded-md md:rounded-lg transition-all ${
                             forecastPeriod === days 
                               ? 'bg-primary text-primary-foreground' 
                               : 'bg-muted/50 text-muted-foreground hover:bg-muted'
@@ -632,31 +636,31 @@ export default function TeamDashboard() {
                       ))}
                     </div>
                   </div>
-                  <div className="grid md:grid-cols-2 gap-4 mb-4">
-                    <div className="p-4 rounded-xl bg-background border border-border/30">
-                      <div className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Forecasted Capacity</div>
-                      <div className="text-3xl font-semibold text-foreground">{currentForecast.capacity}</div>
-                      <div className="text-xs text-muted-foreground mt-1">
+                  <div className="grid grid-cols-2 gap-3 md:gap-4 mb-3 md:mb-4">
+                    <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                      <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Capacity</div>
+                      <div className="text-2xl md:text-3xl font-semibold text-foreground">{currentForecast.capacity}</div>
+                      <div className="text-[10px] md:text-xs text-muted-foreground mt-1">
                         {currentForecast.capacity < 70 ? 'Below target' : 'On track'}
                       </div>
                     </div>
-                    <div className="p-4 rounded-xl bg-background border border-border/30">
-                      <div className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Revenue at Risk</div>
-                      <div className="text-3xl font-semibold text-amber-500">{formatCurrency(currentForecast.revenueAtRisk, true)}</div>
-                      <div className="text-xs text-muted-foreground mt-1">If no intervention</div>
+                    <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                      <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">At Risk</div>
+                      <div className="text-2xl md:text-3xl font-semibold text-amber-500">{formatCurrency(currentForecast.revenueAtRisk, true)}</div>
+                      <div className="text-[10px] md:text-xs text-muted-foreground mt-1">If no action</div>
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Scenario Previews</div>
+                    <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider">Scenarios</div>
                     {novaForecasts.scenarios.map((scenario, i) => (
-                      <div key={i} className="flex items-center justify-between p-3 rounded-lg bg-background border border-border/30">
-                        <span className="text-xs text-foreground">{scenario.name}</span>
-                        <div className="flex items-center gap-3">
-                          <span className={`text-xs font-medium ${scenario.impact > 0 ? 'text-green-600' : 'text-red-500'}`}>
-                            {scenario.impact > 0 ? '+' : ''}{scenario.impact} CCI
+                      <div key={i} className="flex items-center justify-between p-2 md:p-3 rounded-md md:rounded-lg bg-background border border-border/30">
+                        <span className="text-[10px] md:text-xs text-foreground truncate mr-2">{scenario.name}</span>
+                        <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
+                          <span className={`text-[10px] md:text-xs font-medium ${scenario.impact > 0 ? 'text-green-600' : 'text-red-500'}`}>
+                            {scenario.impact > 0 ? '+' : ''}{scenario.impact}
                           </span>
-                          <span className={`text-xs ${scenario.riskIncrease ? 'text-red-500' : 'text-green-600'}`}>
-                            {scenario.riskIncrease ? `+${formatCurrency(scenario.riskIncrease, true)} risk` : `-${formatCurrency(scenario.riskDecrease!, true)} risk`}
+                          <span className={`text-[10px] md:text-xs hidden sm:inline ${scenario.riskIncrease ? 'text-red-500' : 'text-green-600'}`}>
+                            {scenario.riskIncrease ? `+${formatCurrency(scenario.riskIncrease, true)}` : `-${formatCurrency(scenario.riskDecrease!, true)}`}
                           </span>
                         </div>
                       </div>
