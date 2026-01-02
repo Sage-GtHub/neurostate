@@ -105,10 +105,6 @@ const HowItWorks = () => {
                   whileHover={{ y: -4, scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  {/* Step Number */}
-                  <div className="absolute -top-3 -left-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-[10px] font-bold shadow-lg">
-                    {index + 1}
-                  </div>
 
                   {/* Icon */}
                   <motion.div 
@@ -183,10 +179,6 @@ const HowItWorks = () => {
                   >
                     <step.icon className="w-5 h-5 text-primary" />
                   </motion.div>
-                  {/* Step number badge */}
-                  <div className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-[10px] font-bold">
-                    {index + 1}
-                  </div>
                 </div>
 
                 {/* Content */}
