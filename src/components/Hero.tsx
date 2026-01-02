@@ -104,7 +104,7 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-[90vh] flex flex-col bg-background overflow-hidden"
+      className="relative min-h-[80vh] flex flex-col bg-background overflow-hidden"
     >
       {/* Subtle gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/[0.02]" />
@@ -150,11 +150,11 @@ const Hero = () => {
         className="flex-1 flex items-center relative z-10"
         style={{ opacity: heroOpacity, scale: heroScale }}
       >
-        <div className="w-full max-w-7xl mx-auto px-6 md:px-8 py-20 lg:py-24">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="w-full max-w-7xl mx-auto px-6 md:px-8 py-16 lg:py-20">
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
             {/* Left - Text Content */}
             <motion.div 
-              className="space-y-5 lg:pr-8"
+              className="space-y-4 lg:pr-6"
               variants={containerVariants}
               initial="hidden"
               animate={isLoaded ? "visible" : "hidden"}
@@ -346,13 +346,13 @@ const Hero = () => {
 
       {/* Client Logos - Enhanced marquee with hover pause */}
       <motion.div 
-        className="py-10 relative overflow-hidden border-t border-border/30"
+        className="py-8 relative overflow-hidden border-t border-border/30"
         initial={{ opacity: 0, y: 20 }}
         animate={isLoaded ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7, delay: 0.5 }}
       >
-        <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-background via-background/80 to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-background via-background/80 to-transparent z-10" />
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background via-background/80 to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background via-background/80 to-transparent z-10" />
         
         <div className="marquee-track group">
           {[...clientNames, ...clientNames, ...clientNames].map((name, i) => (

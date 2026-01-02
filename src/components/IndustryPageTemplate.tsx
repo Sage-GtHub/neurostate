@@ -61,33 +61,33 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
         <Header />
         <main>
           {/* Hero Section - Clean, minimal */}
-          <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 px-6 md:px-8">
+          <section className="relative pt-28 pb-16 lg:pt-36 lg:pb-20 px-6 md:px-8">
             <div className="max-w-5xl mx-auto">
               <motion.div
-                className="space-y-8"
+                className="space-y-6"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
               >
                 <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">{industry.name}</span>
                 
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal text-foreground tracking-tight leading-[1.1] max-w-4xl">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-foreground tracking-tight leading-[1.1] max-w-4xl">
                   {industry.headline}
                 </h1>
 
-                <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
+                <p className="text-base text-muted-foreground max-w-2xl leading-relaxed">
                   {industry.subheadline}
                 </p>
 
-                <div className="flex flex-wrap items-center gap-4 pt-4">
+                <div className="flex flex-wrap items-center gap-3 pt-2">
                   <Link to="/contact">
-                    <Button className="h-12 px-8 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                    <Button className="h-10 px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
                       Book a demo
                       <ArrowUpRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </Button>
                   </Link>
                   <Link to="/solutions">
-                    <Button variant="ghost" className="h-12 px-6 text-sm font-medium rounded-full hover:bg-foreground/5">
+                    <Button variant="ghost" className="h-10 px-5 text-sm font-medium rounded-full hover:bg-foreground/5">
                       Explore solutions
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
@@ -98,20 +98,21 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
           </section>
 
           {/* Stats Row - Flowing, no boxes */}
-          <section className="py-16 px-6 md:px-8 border-y border-border/30">
+          <section className="py-12 px-6 md:px-8 border-y border-border/30">
             <div className="max-w-5xl mx-auto">
-              <div className="flex flex-wrap justify-between gap-12">
+              <div className="flex flex-wrap justify-between gap-8 md:gap-10">
                 {industry.heroStats.map((stat, i) => (
                   <motion.div 
                     key={i} 
-                    className="text-left"
+                    className="text-left group cursor-default"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
+                    whileHover={{ scale: 1.05 }}
                   >
-                    <div className="text-4xl md:text-5xl font-light text-foreground mb-2">{stat.value}</div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                    <div className="text-3xl md:text-4xl font-light text-foreground mb-1 group-hover:text-primary transition-colors">{stat.value}</div>
+                    <div className="text-xs text-muted-foreground">{stat.label}</div>
                   </motion.div>
                 ))}
               </div>
@@ -347,24 +348,25 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
           </section>
 
           {/* CTA */}
-          <section className="py-24 px-6 md:px-8 bg-muted/20">
+          <section className="py-16 md:py-20 px-6 md:px-8 bg-muted/20">
             <div className="max-w-3xl mx-auto text-center">
-              <ScrollReveal className="space-y-8">
-                <h2 className="text-3xl md:text-4xl font-normal text-foreground">
-                  See what's possible
+              <ScrollReveal className="space-y-6">
+                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Get Started</span>
+                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                  The cognitive operating system for {industry.name}
                 </h2>
-                <p className="text-base text-muted-foreground">
-                  We'll walk you through NeuroState and answer your questions. No pressure, no jargon.
+                <p className="text-sm text-muted-foreground max-w-lg mx-auto">
+                  Connect your data, understand your patterns, and unlock sustainable performance at scale.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
                   <Link to="/contact">
-                    <Button className="h-12 px-8 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full">
+                    <Button className="h-11 px-7 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
                       Book a demo
-                      <ArrowUpRight className="ml-2 h-4 w-4" />
+                      <ArrowUpRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </Button>
                   </Link>
                   <Link to="/team-dashboard">
-                    <Button variant="outline" className="h-12 px-6 text-sm font-medium rounded-full border-foreground/20">
+                    <Button variant="outline" className="h-11 px-6 text-sm font-medium rounded-full border-foreground/20">
                       View Team Dashboard
                     </Button>
                   </Link>
