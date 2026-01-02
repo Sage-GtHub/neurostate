@@ -3,10 +3,32 @@ import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { ArrowUpRight, Check, LucideIcon } from "lucide-react";
+import { ArrowUpRight, Check, LucideIcon, Activity, Brain, AlertTriangle, Zap, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { EnterpriseROICalculator } from "@/components/EnterpriseROICalculator";
+
+interface Signal {
+  name: string;
+  description: string;
+  importance: string;
+}
+
+interface IndustryProblemSection {
+  title: string;
+  paragraphs: string[];
+}
+
+interface WhyExistingSolutionsFail {
+  title: string;
+  failures: { point: string; explanation: string }[];
+}
+
+interface HowNeuroStateApplies {
+  title: string;
+  paragraphs: string[];
+  workflows: { title: string; description: string }[];
+}
 
 interface IndustryPageProps {
   industry: {
@@ -20,6 +42,12 @@ interface IndustryPageProps {
     outcomes: { metric: string; label: string }[];
     useCases: { title: string; description: string }[];
     defaultIndustry: "saas-high-growth" | "saas-enterprise" | "financial-services" | "professional-services" | "healthcare" | "government-defense" | "tech-hardware";
+    // Enhanced content sections
+    industryProblem?: IndustryProblemSection;
+    whyExistingSolutionsFail?: WhyExistingSolutionsFail;
+    howNeuroStateApplies?: HowNeuroStateApplies;
+    relevantSignals?: Signal[];
+    executiveOutcomes?: { title: string; description: string }[];
   };
 }
 
@@ -98,18 +126,36 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
             </div>
           </section>
 
-          {/* ROI Calculator - Landscape on Desktop */}
-          <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/30">
-            <div className="max-w-6xl mx-auto">
-              <ScrollReveal className="text-center mb-8 space-y-3">
-                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">ROI Calculator</span>
-                <h2 className="text-xl md:text-2xl font-normal text-foreground">
-                  Calculate your potential savings
-                </h2>
-              </ScrollReveal>
-              <EnterpriseROICalculator variant="light" defaultIndustry={industry.defaultIndustry} />
-            </div>
-          </section>
+          {/* Industry Problem Deep Dive Section */}
+          {industry.industryProblem && (
+            <section className="py-20 md:py-28 px-6 md:px-8 bg-muted/30">
+              <div className="max-w-4xl mx-auto">
+                <ScrollReveal className="space-y-8">
+                  <div className="text-center space-y-4">
+                    <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">The Problem</span>
+                    <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                      {industry.industryProblem.title}
+                    </h2>
+                  </div>
+                  
+                  <div className="space-y-6">
+                    {industry.industryProblem.paragraphs.map((paragraph, i) => (
+                      <motion.p 
+                        key={i}
+                        className="text-sm text-muted-foreground leading-relaxed"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.1 }}
+                      >
+                        {paragraph}
+                      </motion.p>
+                    ))}
+                  </div>
+                </ScrollReveal>
+              </div>
+            </section>
+          )}
 
           {/* Challenges Section */}
           <section className="py-20 md:py-28 px-6 md:px-8">
@@ -136,6 +182,151 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
                   </motion.div>
                 ))}
               </div>
+            </div>
+          </section>
+
+          {/* Why Existing Solutions Fail */}
+          {industry.whyExistingSolutionsFail && (
+            <section className="py-20 md:py-28 px-6 md:px-8 bg-destructive/5">
+              <div className="max-w-5xl mx-auto">
+                <ScrollReveal className="text-center mb-12 space-y-4">
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-destructive font-medium">Why Existing Solutions Fail</span>
+                  <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                    {industry.whyExistingSolutionsFail.title}
+                  </h2>
+                </ScrollReveal>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  {industry.whyExistingSolutionsFail.failures.map((failure, i) => (
+                    <motion.div
+                      key={i}
+                      className="p-6 rounded-2xl bg-background border border-destructive/20"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className="w-8 h-8 rounded-full bg-destructive/10 flex items-center justify-center flex-shrink-0">
+                          <AlertTriangle className="w-4 h-4 text-destructive" />
+                        </div>
+                        <div>
+                          <h3 className="text-sm font-medium text-foreground mb-2">{failure.point}</h3>
+                          <p className="text-xs text-muted-foreground leading-relaxed">{failure.explanation}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* How NeuroState Applies */}
+          {industry.howNeuroStateApplies && (
+            <section className="py-20 md:py-28 px-6 md:px-8">
+              <div className="max-w-5xl mx-auto">
+                <ScrollReveal className="text-center mb-12 space-y-4">
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">How NeuroState Applies</span>
+                  <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                    {industry.howNeuroStateApplies.title}
+                  </h2>
+                </ScrollReveal>
+
+                <div className="space-y-8 mb-12">
+                  {industry.howNeuroStateApplies.paragraphs.map((paragraph, i) => (
+                    <motion.p 
+                      key={i}
+                      className="text-sm text-muted-foreground leading-relaxed max-w-3xl mx-auto"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                    >
+                      {paragraph}
+                    </motion.p>
+                  ))}
+                </div>
+
+                {/* Workflow Examples */}
+                <div className="grid md:grid-cols-2 gap-6">
+                  {industry.howNeuroStateApplies.workflows.map((workflow, i) => (
+                    <motion.div
+                      key={i}
+                      className="p-6 rounded-2xl bg-primary/5 border border-primary/10"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <Zap className="w-4 h-4 text-primary" />
+                        </div>
+                        <div>
+                          <h3 className="text-sm font-medium text-foreground mb-2">{workflow.title}</h3>
+                          <p className="text-xs text-muted-foreground leading-relaxed">{workflow.description}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Relevant Signals Section */}
+          {industry.relevantSignals && (
+            <section className="py-20 md:py-28 px-6 md:px-8 bg-muted/30">
+              <div className="max-w-6xl mx-auto">
+                <ScrollReveal className="text-center mb-12 space-y-4">
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Signal Intelligence</span>
+                  <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                    Critical signals for {industry.name}
+                  </h2>
+                  <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
+                    Different industries require different signal priorities. These are the data streams that matter most for cognitive performance in {industry.name.toLowerCase()}.
+                  </p>
+                </ScrollReveal>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {industry.relevantSignals.map((signal, i) => (
+                    <motion.div
+                      key={i}
+                      className="p-6 rounded-2xl bg-background border border-border/50 hover:border-primary/20 transition-all duration-300"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                    >
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                          <Activity className="w-4 h-4 text-primary" />
+                        </div>
+                        <h3 className="text-sm font-medium text-foreground">{signal.name}</h3>
+                      </div>
+                      <p className="text-xs text-muted-foreground leading-relaxed mb-3">{signal.description}</p>
+                      <div className="pt-3 border-t border-border/50">
+                        <p className="text-[10px] text-primary uppercase tracking-wider mb-1">Why it matters</p>
+                        <p className="text-xs text-muted-foreground">{signal.importance}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* ROI Calculator - Landscape on Desktop */}
+          <section className="py-12 md:py-16 px-6 md:px-8 bg-background">
+            <div className="max-w-6xl mx-auto">
+              <ScrollReveal className="text-center mb-8 space-y-3">
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">ROI Calculator</span>
+                <h2 className="text-xl md:text-2xl font-normal text-foreground">
+                  Calculate your potential savings
+                </h2>
+              </ScrollReveal>
+              <EnterpriseROICalculator variant="light" defaultIndustry={industry.defaultIndustry} />
             </div>
           </section>
 
@@ -170,8 +361,48 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
             </div>
           </section>
 
+          {/* Executive Outcomes Section */}
+          {industry.executiveOutcomes && (
+            <section className="py-20 md:py-28 px-6 md:px-8">
+              <div className="max-w-5xl mx-auto">
+                <ScrollReveal className="text-center mb-12 space-y-4">
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Executive Outcomes</span>
+                  <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                    What leadership cares about
+                  </h2>
+                  <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
+                    NeuroState translates cognitive intelligence into the metrics that matter to {industry.name.toLowerCase()} executives.
+                  </p>
+                </ScrollReveal>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  {industry.executiveOutcomes.map((outcome, i) => (
+                    <motion.div
+                      key={i}
+                      className="p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent border border-primary/10"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <Target className="w-4 h-4 text-primary" />
+                        </div>
+                        <div>
+                          <h3 className="text-sm font-medium text-foreground mb-2">{outcome.title}</h3>
+                          <p className="text-xs text-muted-foreground leading-relaxed">{outcome.description}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
           {/* Outcomes Section */}
-          <section className="py-20 md:py-28 px-6 md:px-8">
+          <section className="py-20 md:py-28 px-6 md:px-8 bg-muted/30">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="text-center mb-12 space-y-4">
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Outcomes</span>
@@ -184,7 +415,7 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
                 {industry.outcomes.map((outcome, i) => (
                   <motion.div
                     key={i}
-                    className="text-center p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent border border-primary/10"
+                    className="text-center p-6 rounded-2xl bg-background border border-primary/10"
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
@@ -199,7 +430,7 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
           </section>
 
           {/* Use Cases Section */}
-          <section className="py-20 md:py-28 px-6 md:px-8 bg-muted/30">
+          <section className="py-20 md:py-28 px-6 md:px-8">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="text-center mb-12 space-y-4">
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Use Cases</span>
@@ -212,7 +443,7 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
                 {industry.useCases.map((useCase, i) => (
                   <motion.div
                     key={i}
-                    className="flex items-start gap-4 p-6 rounded-2xl bg-background border border-border/50"
+                    className="flex items-start gap-4 p-6 rounded-2xl bg-muted/30 border border-border/50"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
@@ -232,7 +463,7 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
           </section>
 
           {/* CTA Section */}
-          <section className="py-20 md:py-28 px-6 md:px-8">
+          <section className="py-20 md:py-28 px-6 md:px-8 bg-muted/30">
             <div className="max-w-4xl mx-auto text-center">
               <ScrollReveal className="space-y-6">
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
