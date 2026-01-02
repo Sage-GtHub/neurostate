@@ -4,6 +4,7 @@ import { SEO } from "@/components/SEO";
 import { OrganizationStructuredData, SoftwareApplicationStructuredData, WebsiteStructuredData, LocalBusinessStructuredData } from "@/components/StructuredData";
 import { Footer } from "@/components/Footer";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
+import { EnterpriseROICalculator } from "@/components/EnterpriseROICalculator";
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUpRight, Check, Database, Cpu, TrendingUp, Calculator, Layers, Zap } from "lucide-react";
@@ -62,6 +63,11 @@ const Index = () => {
         <Header />
         <main>
           <Hero />
+
+          {/* ROI Calculator - Directly Under Hero */}
+          <section className="py-12 md:py-16 px-6 md:px-8">
+            <EnterpriseROICalculator />
+          </section>
 
           {/* Problem Statement */}
           <section className="py-20 md:py-28 px-6 md:px-8 bg-muted/30">
