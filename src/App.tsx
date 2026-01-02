@@ -74,6 +74,16 @@ import TeamDashboard from "./pages/TeamDashboard";
 import JoinOrganisation from "./pages/JoinOrganisation";
 import TeamSettings from "./pages/TeamSettings";
 
+// Industry Pages
+import SaaSHighGrowth from "./pages/industries/SaaSHighGrowth";
+import SaaSEnterprise from "./pages/industries/SaaSEnterprise";
+import FinancialServicesIndustry from "./pages/industries/FinancialServices";
+import ProfessionalServices from "./pages/industries/ProfessionalServices";
+import HealthcareIndustry from "./pages/industries/Healthcare";
+import ResearchLifeSciences from "./pages/industries/ResearchLifeSciences";
+import GovernmentDefence from "./pages/industries/GovernmentDefence";
+import AdvancedTechnology from "./pages/industries/AdvancedTechnology";
+
 const queryClient = new QueryClient();
 
 // Analytics tracking component
@@ -197,6 +207,16 @@ const AnimatedRoutes = () => {
             <Route path="/team" element={<TeamDashboard />} />
             <Route path="/join" element={<JoinOrganisation />} />
             <Route path="/team/settings" element={<TeamSettings />} />
+            
+            {/* Industry Landing Pages */}
+            <Route path="/industries/saas-high-growth" element={<SaaSHighGrowth />} />
+            <Route path="/industries/saas-enterprise" element={<SaaSEnterprise />} />
+            <Route path="/industries/financial-services" element={<FinancialServicesIndustry />} />
+            <Route path="/industries/professional-services" element={<ProfessionalServices />} />
+            <Route path="/industries/healthcare" element={<HealthcareIndustry />} />
+            <Route path="/industries/research-life-sciences" element={<ResearchLifeSciences />} />
+            <Route path="/industries/government-defence" element={<GovernmentDefence />} />
+            <Route path="/industries/advanced-technology" element={<AdvancedTechnology />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
