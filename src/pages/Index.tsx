@@ -498,7 +498,7 @@ const Index = () => {
                   The cognitive operating system for high-performing teams
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                  Connect your data, understand your patterns, and unlock sustainable performance at scale.
+                  Click below to learn more or speak to our team today.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
                   <Link to="/contact">

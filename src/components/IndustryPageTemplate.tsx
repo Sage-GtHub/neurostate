@@ -373,7 +373,7 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
                   The cognitive operating system for {industry.name}
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                  Connect your data, understand your patterns, and unlock sustainable performance at scale.
+                  Click below to learn more or speak to our team today.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
                   <Link to="/contact">
