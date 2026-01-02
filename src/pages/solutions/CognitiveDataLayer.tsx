@@ -6,6 +6,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { ArrowUpRight, ArrowRight, Database, Watch, Activity, MapPin, Layers, Check, ChevronRight, Cpu, Server, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { SolutionDataFlowDiagram } from "@/components/SolutionDataFlowDiagram";
 
 const signalSources = [
   {
@@ -58,6 +59,15 @@ export default function CognitiveDataLayer() {
                 <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                   NeuroState connects to the tools your teams already use and unifies disparate data streams into a single, coherent cognitive model. No new hardware. No behaviour change. Just signal.
                 </p>
+              </motion.div>
+              
+              {/* Animated Data Flow Diagram */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                <SolutionDataFlowDiagram variant="data-layer" className="mt-12" />
               </motion.div>
             </div>
           </section>

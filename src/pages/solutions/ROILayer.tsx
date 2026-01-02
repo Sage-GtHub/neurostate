@@ -7,6 +7,7 @@ import { ArrowUpRight, Calculator, TrendingUp, Clock, DollarSign, Target, PoundS
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { EnterpriseROICalculator } from "@/components/EnterpriseROICalculator";
+import { SolutionDataFlowDiagram } from "@/components/SolutionDataFlowDiagram";
 
 const economicDimensions = [
   { 
@@ -86,6 +87,15 @@ export default function ROILayer() {
                 <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                   NeuroState translates cognitive risk into economic reality. This is where performance becomes measurable—and where cognitive infrastructure proves its value in pounds, not platitudes.
                 </p>
+                
+                {/* Animated Data Flow Diagram */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <SolutionDataFlowDiagram variant="roi" className="mt-12" />
+                </motion.div>
               </motion.div>
             </div>
           </section>
