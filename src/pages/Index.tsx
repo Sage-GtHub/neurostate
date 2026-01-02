@@ -126,57 +126,57 @@ const Index = () => {
           <Hero />
 
           {/* Approach Section - 3 Pillars like Invisible's */}
-          <section ref={approachRef} className="py-16 md:py-20 px-6 md:px-8 border-t border-border/30">
+          <section ref={approachRef} className="py-12 md:py-16 px-6 md:px-8 border-t border-border/30">
             <div className="max-w-6xl mx-auto">
               {/* Section header */}
               <motion.div 
-                className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12"
+                className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isApproachInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6 }}
               >
-                <div className="space-y-3">
+                <div className="space-y-2">
                   <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Our approach</span>
                   <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                     Ask. Analyse. Act.
                   </h2>
                 </div>
                 <p className="text-sm text-muted-foreground max-w-md">
-                  NeuroState is the cognitive operating system for high-performing teams.
+                  The cognitive operating system for high-performing teams.
                 </p>
               </motion.div>
 
               {/* 3 Pillars */}
-              <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+              <div className="grid md:grid-cols-3 gap-4 md:gap-5">
                 {approachPillars.map((pillar, i) => (
                   <motion.div
                     key={i}
-                    className="group relative p-6 md:p-8 rounded-2xl bg-gradient-to-br from-muted/50 to-muted/20 border border-border/30 hover:border-primary/30 transition-all duration-300"
+                    className="group relative p-5 md:p-6 rounded-xl bg-gradient-to-br from-muted/50 to-muted/20 border border-border/30 hover:border-primary/30 transition-all duration-300 cursor-default"
                     initial={{ opacity: 0, y: 30 }}
                     animate={isApproachInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: i * 0.15 }}
-                    whileHover={{ y: -4 }}
+                    transition={{ duration: 0.6, delay: i * 0.12 }}
+                    whileHover={{ y: -4, scale: 1.02 }}
                   >
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <pillar.icon className="w-5 h-5 text-primary" />
+                    <div className="flex items-start gap-3 mb-3">
+                      <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        <pillar.icon className="w-4 h-4 text-primary" />
                       </div>
                     </div>
-                    <h3 className="text-base font-medium text-foreground mb-3">{pillar.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{pillar.description}</p>
+                    <h3 className="text-sm font-medium text-foreground mb-2">{pillar.title}</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{pillar.description}</p>
                   </motion.div>
                 ))}
               </div>
 
               {/* CTA */}
               <motion.div 
-                className="flex justify-center mt-10"
+                className="flex justify-center mt-8"
                 initial={{ opacity: 0 }}
                 animate={isApproachInView ? { opacity: 1 } : {}}
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
                 <Link to="/contact">
-                  <Button className="h-11 px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                  <Button className="h-10 px-5 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
                     Book a demo
                     <ArrowUpRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Button>
@@ -186,9 +186,9 @@ const Index = () => {
           </section>
 
           {/* Building Blocks Section - Like Invisible's platform modules */}
-          <section className="py-16 md:py-20 px-6 md:px-8 bg-muted/30">
+          <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/30">
             <div className="max-w-6xl mx-auto">
-              <ScrollReveal className="space-y-4 mb-12">
+              <ScrollReveal className="space-y-3 mb-8">
                 <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Our System</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground max-w-2xl">
                   Building blocks, not black boxes
@@ -199,36 +199,36 @@ const Index = () => {
               </ScrollReveal>
 
               {/* Building blocks grid */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
                 {platformBlocks.map((block, i) => (
                   <Link key={block.id} to={block.link}>
                     <motion.div
-                      className={`group relative h-full p-6 rounded-2xl bg-gradient-to-br ${block.color} border border-border/30 hover:border-primary/40 transition-all duration-300 cursor-pointer overflow-hidden`}
+                      className={`group relative h-full p-5 rounded-xl bg-gradient-to-br ${block.color} border border-border/30 hover:border-primary/40 transition-all duration-300 cursor-pointer overflow-hidden`}
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-50px" }}
-                      transition={{ duration: 0.5, delay: i * 0.08 }}
-                      whileHover={{ y: -4, scale: 1.01 }}
+                      transition={{ duration: 0.5, delay: i * 0.06 }}
+                      whileHover={{ y: -4, scale: 1.02 }}
                     >
                       {/* Background decoration */}
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-background/50 to-transparent rounded-bl-full opacity-50" />
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-background/50 to-transparent rounded-bl-full opacity-50" />
                       
                       <div className="relative z-10">
-                        <div className="flex items-center gap-3 mb-4">
-                          <div className="w-10 h-10 rounded-xl bg-background/80 flex items-center justify-center">
-                            <block.icon className="w-5 h-5 text-foreground" />
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="w-8 h-8 rounded-lg bg-background/80 flex items-center justify-center group-hover:bg-background transition-colors">
+                            <block.icon className="w-4 h-4 text-foreground" />
                           </div>
-                          <span className="text-[10px] tracking-[0.1em] uppercase text-muted-foreground">{block.label}</span>
+                          <span className="text-[9px] tracking-[0.1em] uppercase text-muted-foreground">{block.label}</span>
                         </div>
                         
-                        <h3 className="text-base font-medium text-foreground mb-2 group-hover:text-primary transition-colors">
+                        <h3 className="text-sm font-medium text-foreground mb-1.5 group-hover:text-primary transition-colors">
                           {block.name}
                         </h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+                        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
                           {block.description}
                         </p>
                         
-                        <div className="flex items-center gap-2 mt-4 text-xs text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="flex items-center gap-2 mt-3 text-[10px] text-primary opacity-0 group-hover:opacity-100 transition-opacity">
                           <span>Learn more</span>
                           <ArrowRight className="w-3 h-3" />
                         </div>
@@ -240,14 +240,14 @@ const Index = () => {
 
               {/* View all solutions */}
               <motion.div 
-                className="flex justify-center mt-8"
+                className="flex justify-center mt-6"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
                 <Link to="/solutions">
-                  <Button variant="outline" className="h-11 px-6 text-sm font-medium rounded-full group">
+                  <Button variant="outline" className="h-9 px-5 text-sm font-medium rounded-full group">
                     Explore all solutions
                     <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Button>
@@ -257,9 +257,9 @@ const Index = () => {
           </section>
 
           {/* How It Works - Journey Flow */}
-          <section className="py-16 md:py-20 px-6 md:px-8">
+          <section className="py-12 md:py-16 px-6 md:px-8">
             <div className="max-w-6xl mx-auto">
-              <ScrollReveal className="space-y-4 mb-12 text-center">
+              <ScrollReveal className="space-y-3 mb-8 text-center">
                 <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">How It Works</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                   From signals to outcomes
@@ -271,7 +271,7 @@ const Index = () => {
                 {/* Connection line */}
                 <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent -translate-y-1/2" />
                 
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
                   {[
                     { step: "01", title: "Connect", desc: "Link wearables, calendars, and work tools. Setup takes minutes.", icon: Database },
                     { step: "02", title: "Interpret", desc: "AI transforms raw data into cognitive intelligence.", icon: Brain },
@@ -280,23 +280,24 @@ const Index = () => {
                   ].map((item, i) => (
                     <motion.div
                       key={i}
-                      className="relative group"
+                      className="relative group p-4 rounded-xl hover:bg-muted/30 transition-all cursor-default"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: i * 0.1 }}
+                      whileHover={{ y: -4 }}
                     >
                       {/* Step number */}
-                      <div className="w-12 h-12 rounded-full bg-background border-2 border-border flex items-center justify-center mx-auto mb-4 group-hover:border-primary/50 transition-colors relative z-10">
-                        <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">{item.step}</span>
+                      <div className="w-10 h-10 rounded-full bg-background border-2 border-border flex items-center justify-center mx-auto mb-3 group-hover:border-primary/50 group-hover:bg-primary/5 transition-colors relative z-10">
+                        <span className="text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors">{item.step}</span>
                       </div>
                       
                       <div className="text-center">
-                        <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                          <item.icon className="w-4 h-4 text-primary" />
+                        <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-2 group-hover:bg-primary/20 transition-colors">
+                          <item.icon className="w-3.5 h-3.5 text-primary" />
                         </div>
-                        <h3 className="text-base font-medium text-foreground mb-2">{item.title}</h3>
-                        <p className="text-sm text-muted-foreground">{item.desc}</p>
+                        <h3 className="text-sm font-medium text-foreground mb-1">{item.title}</h3>
+                        <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -306,21 +307,22 @@ const Index = () => {
           </section>
 
           {/* Impact Stats - Full width dark section */}
-          <section className="py-14 md:py-16 px-6 md:px-8 bg-foreground">
+          <section className="py-10 md:py-12 px-6 md:px-8 bg-foreground">
             <div className="max-w-6xl mx-auto">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
                 {impactStats.map((stat, i) => (
                   <motion.div
                     key={i}
-                    className="text-center md:text-left"
+                    className="text-center md:text-left group cursor-default"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
+                    whileHover={{ scale: 1.05 }}
                   >
-                    <p className="text-3xl md:text-4xl font-light text-background mb-1">{stat.value}</p>
-                    <p className="text-sm text-background/80 font-medium">{stat.label}</p>
-                    <p className="text-xs text-background/50 mt-0.5">{stat.sublabel}</p>
+                    <p className="text-2xl md:text-3xl font-light text-background mb-1 group-hover:text-primary transition-colors">{stat.value}</p>
+                    <p className="text-xs text-background/80 font-medium">{stat.label}</p>
+                    <p className="text-[10px] text-background/50 mt-0.5">{stat.sublabel}</p>
                   </motion.div>
                 ))}
               </div>
@@ -328,9 +330,9 @@ const Index = () => {
           </section>
 
           {/* Industries Section */}
-          <section className="py-16 md:py-20 px-6 md:px-8">
+          <section className="py-12 md:py-16 px-6 md:px-8">
             <div className="max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-12 items-start">
+              <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
                 {/* Left - Header */}
                 <ScrollReveal className="space-y-4 lg:sticky lg:top-24">
                   <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Industries</span>
@@ -340,9 +342,9 @@ const Index = () => {
                   <p className="text-sm text-muted-foreground max-w-md">
                     Every industry has unique cognitive demands. NeuroState adapts to yours.
                   </p>
-                  <div className="pt-4">
+                  <div className="pt-3">
                     <Link to="/enterprise/overview">
-                      <Button variant="outline" className="h-10 px-5 text-sm font-medium rounded-full group">
+                      <Button variant="outline" className="h-9 px-5 text-sm font-medium rounded-full group">
                         View all industries
                         <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                       </Button>
@@ -351,23 +353,26 @@ const Index = () => {
                 </ScrollReveal>
 
                 {/* Right - Industry list */}
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {industries.map((industry, i) => (
                     <motion.div
                       key={i}
                       initial={{ opacity: 0, x: 20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: i * 0.08 }}
+                      transition={{ duration: 0.4, delay: i * 0.06 }}
                     >
                       <Link to={industry.href} className="block group">
-                        <div className="flex items-center justify-between p-4 rounded-xl border border-border/30 hover:border-primary/30 hover:bg-muted/30 transition-all">
+                        <motion.div 
+                          className="flex items-center justify-between p-3 rounded-xl border border-border/30 hover:border-primary/30 hover:bg-muted/30 transition-all"
+                          whileHover={{ x: 4, scale: 1.01 }}
+                        >
                           <div className="flex-1">
                             <h3 className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">{industry.name}</h3>
                             <p className="text-xs text-muted-foreground mt-0.5">{industry.desc}</p>
                           </div>
                           <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                        </div>
+                        </motion.div>
                       </Link>
                     </motion.div>
                   ))}
@@ -377,11 +382,11 @@ const Index = () => {
           </section>
 
           {/* Command Surfaces Preview */}
-          <section className="py-16 md:py-20 px-6 md:px-8 bg-muted/30">
+          <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/30">
             <div className="max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
                 <ScrollReveal direction="left">
-                  <div className="space-y-5">
+                  <div className="space-y-4">
                     <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Enterprise-Grade</span>
                     <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                       Command surfaces for every role
@@ -390,38 +395,40 @@ const Index = () => {
                       One system, different perspectives. Each role sees what matters most to them.
                     </p>
                     
-                    <div className="space-y-3 py-2">
+                    <div className="grid grid-cols-2 gap-3 py-2">
                       {[
-                        { icon: Eye, text: "Live cognitive capacity visibility" },
-                        { icon: Gauge, text: "Predictive risk indicators" },
-                        { icon: Calculator, text: "Financial attribution" },
-                        { icon: Sparkles, text: "AI-powered recommendations" }
+                        { icon: Eye, text: "Live cognitive capacity visibility", detail: "Real-time team health" },
+                        { icon: Gauge, text: "Predictive risk indicators", detail: "72hr foresight" },
+                        { icon: Calculator, text: "Financial attribution", detail: "ROI tracking" },
+                        { icon: Sparkles, text: "AI-powered recommendations", detail: "Nova intelligence" }
                       ].map((item, i) => (
                         <motion.div 
                           key={i} 
-                          className="flex items-center gap-3"
+                          className="p-3 rounded-xl bg-background/50 border border-border/30 hover:border-primary/30 transition-all group cursor-default"
                           initial={{ opacity: 0, x: -20 }}
                           whileInView={{ opacity: 1, x: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: i * 0.1 }}
+                          whileHover={{ y: -2, scale: 1.02 }}
                         >
-                          <div className="w-6 h-6 rounded-md bg-primary/10 flex items-center justify-center">
+                          <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center mb-2 group-hover:bg-primary/20 transition-colors">
                             <item.icon className="w-3.5 h-3.5 text-primary" />
                           </div>
-                          <span className="text-sm text-foreground">{item.text}</span>
+                          <p className="text-xs font-medium text-foreground">{item.text}</p>
+                          <p className="text-[10px] text-muted-foreground mt-0.5">{item.detail}</p>
                         </motion.div>
                       ))}
                     </div>
                     
-                    <div className="flex flex-wrap gap-3 pt-2">
+                    <div className="flex flex-wrap gap-3 pt-1">
                       <Link to="/team-dashboard">
-                        <Button className="h-10 px-5 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                        <Button className="h-9 px-4 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
                           View Team Dashboard
                           <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                         </Button>
                       </Link>
                       <Link to="/solutions/command-surfaces">
-                        <Button variant="outline" className="h-10 px-5 text-sm font-medium rounded-full">
+                        <Button variant="outline" className="h-9 px-4 text-sm font-medium rounded-full">
                           Learn more
                         </Button>
                       </Link>
@@ -432,13 +439,13 @@ const Index = () => {
                 {/* Dashboard Preview Card */}
                 <ScrollReveal direction="right" delay={0.2}>
                   <motion.div 
-                    className="p-6 md:p-8 rounded-2xl bg-background border border-border/50 shadow-lg"
+                    className="p-5 md:p-6 rounded-2xl bg-background border border-border/50 shadow-lg"
                     whileHover={{ y: -4, transition: { duration: 0.3 } }}
                   >
-                    <div className="flex items-center justify-between pb-5 border-b border-border/30">
+                    <div className="flex items-center justify-between pb-4 border-b border-border/30">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
-                          <Layers className="w-5 h-5 text-primary" />
+                        <div className="w-9 h-9 bg-primary/10 rounded-xl flex items-center justify-center">
+                          <Layers className="w-4 h-4 text-primary" />
                         </div>
                         <div>
                           <p className="text-foreground font-medium text-sm">Team Dashboard</p>
@@ -451,29 +458,45 @@ const Index = () => {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-4 py-6">
+                    <div className="grid grid-cols-3 gap-3 py-5">
                       {[
-                        { value: "74", label: "CCI Score", color: "text-primary" },
-                        { value: "£41.8k", label: "Exposure", color: "text-amber-500" },
-                        { value: "3", label: "Actions", color: "text-foreground" }
+                        { value: "74", label: "CCI Score", color: "text-primary", trend: "+3" },
+                        { value: "£41.8k", label: "Exposure", color: "text-amber-500", trend: "-12%" },
+                        { value: "3", label: "Actions", color: "text-foreground", trend: "pending" }
                       ].map((metric, i) => (
                         <motion.div 
                           key={i} 
-                          className="text-center"
+                          className="text-center p-2 rounded-lg hover:bg-muted/30 transition-colors cursor-default"
                           initial={{ opacity: 0, scale: 0.9 }}
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
                           transition={{ delay: 0.4 + i * 0.1 }}
+                          whileHover={{ scale: 1.05 }}
                         >
-                          <p className={`text-2xl font-light ${metric.color}`}>{metric.value}</p>
-                          <p className="text-muted-foreground text-[10px] uppercase tracking-wider mt-1">{metric.label}</p>
+                          <p className={`text-xl font-light ${metric.color}`}>{metric.value}</p>
+                          <p className="text-muted-foreground text-[10px] uppercase tracking-wider mt-0.5">{metric.label}</p>
+                          <p className="text-[9px] text-muted-foreground/60 mt-0.5">{metric.trend}</p>
                         </motion.div>
                       ))}
                     </div>
 
-                    <div className="flex items-center gap-2 pt-4 border-t border-border/30">
-                      <span className="text-xs text-muted-foreground">Next action:</span>
-                      <span className="text-xs text-foreground font-medium">Capacity review for Engineering</span>
+                    {/* Mini action preview */}
+                    <div className="pt-3 border-t border-border/30 space-y-2">
+                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Recommended Actions</p>
+                      {[
+                        { text: "Capacity review for Engineering", priority: "high" },
+                        { text: "Recovery protocol for Sales leads", priority: "medium" }
+                      ].map((action, i) => (
+                        <motion.div 
+                          key={i}
+                          className="flex items-center gap-2 p-2 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors cursor-pointer"
+                          whileHover={{ x: 4 }}
+                        >
+                          <div className={`w-1.5 h-1.5 rounded-full ${action.priority === 'high' ? 'bg-amber-500' : 'bg-primary'}`} />
+                          <span className="text-xs text-foreground flex-1">{action.text}</span>
+                          <ArrowRight className="w-3 h-3 text-muted-foreground" />
+                        </motion.div>
+                      ))}
                     </div>
                   </motion.div>
                 </ScrollReveal>
@@ -482,30 +505,31 @@ const Index = () => {
           </section>
 
           {/* Final CTA */}
-          <section className="py-16 md:py-20 px-6 md:px-8">
+          <section className="py-12 md:py-16 px-6 md:px-8">
             <div className="max-w-3xl mx-auto text-center">
-              <ScrollReveal className="space-y-6">
+              <ScrollReveal className="space-y-5">
+                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Get Started</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  See what's possible
+                  The cognitive operating system for high-performing teams
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                  We'll walk you through NeuroState and answer your questions. No pressure, no jargon.
+                  Connect your data, understand your patterns, and unlock sustainable performance at scale.
                 </p>
-                <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
+                <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
                   <Link to="/contact">
-                    <Button className="h-11 px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                    <Button className="h-10 px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
                       Book a demo
                       <ArrowUpRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </Button>
                   </Link>
                   <Link to="/auth?mode=signup">
-                    <Button variant="outline" className="h-11 px-6 text-sm font-medium rounded-full">
+                    <Button variant="outline" className="h-10 px-6 text-sm font-medium rounded-full">
                       Start free trial
                     </Button>
                   </Link>
                 </div>
                 
-                <div className="flex items-center justify-center gap-6 pt-6 text-muted-foreground">
+                <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 pt-4 text-muted-foreground">
                   {["No credit card required", "Enterprise-ready", "SOC 2 compliant"].map((item, i) => (
                     <div key={i} className="flex items-center gap-2 text-xs">
                       <Check className="w-3 h-3 text-primary" />
