@@ -7,7 +7,7 @@ import { ArrowUpRight, ArrowRight, Cpu, Activity, Brain, Zap, AlertTriangle, Tre
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { SolutionDataFlowDiagram } from "@/components/SolutionDataFlowDiagram";
-import { EnterpriseROICalculator } from "@/components/EnterpriseROICalculator";
+
 
 const cognitiveStates = [
   { 
@@ -77,11 +77,6 @@ export default function CognitiveStateEngine() {
                 </motion.div>
               </motion.div>
             </div>
-          </section>
-
-          {/* ROI Calculator - Directly Under Hero */}
-          <section className="py-12 md:py-16 px-6 md:px-8">
-            <EnterpriseROICalculator />
           </section>
 
           {/* The Difference */}

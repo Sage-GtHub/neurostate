@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ArrowUpRight, Check, Database, Cpu, TrendingUp, Calculator, Zap, Users, Brain, Activity, Target, Shield, Gauge, Eye, Layers, BarChart3, Clock, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Eye, Layers, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
@@ -17,34 +17,34 @@ const platformBlocks = [
     id: "cognitive-data",
     label: "Data Layer",
     name: "Cognitive Data Layer",
-    description: "Connect any wearable, calendar, or productivity tool. NeuroState normalises signals from Oura, WHOOP, Apple Watch, Google Calendar, and 40+ sources into a unified cognitive model.",
+    description: "Connect any wearable, calendar, or productivity tool. We normalise signals from 40+ sources into a unified cognitive model.",
     icon: Database,
-    link: "/solutions/cognitive-data-layer",
+    link: "/solutions/data-layer",
     color: "from-blue-500/20 to-cyan-500/20"
   },
   {
     id: "state-engine",
     label: "Intelligence",
     name: "Cognitive State Engine",
-    description: "Transform raw biometrics into actionable intelligence. Real-time readiness scores, cognitive load mapping, recovery debt tracking, and stress volatility analysis.",
+    description: "Raw biometrics become actionable intelligence. Readiness scores, cognitive load, recovery tracking—interpreted in real time.",
     icon: Brain,
-    link: "/solutions/cognitive-state-engine",
+    link: "/solutions/state-engine",
     color: "from-purple-500/20 to-pink-500/20"
   },
   {
     id: "prediction",
     label: "Forecasting",
     name: "Prediction & Simulation",
-    description: "See what's coming before it happens. 7, 14, and 30-day forecasts for capacity degradation, burnout probability, and optimal intervention windows.",
+    description: "See what's coming. 7, 14, and 30-day forecasts for capacity, intervention timing, and optimal performance windows.",
     icon: TrendingUp,
-    link: "/solutions/prediction-simulation",
+    link: "/solutions/prediction",
     color: "from-amber-500/20 to-orange-500/20"
   },
   {
     id: "roi-layer",
     label: "Financial",
-    name: "ROI Attribution Layer",
-    description: "Every metric ties to money. Revenue at risk, cost of burnout, intervention ROI—cognitive performance becomes a financial lever CFOs can measure.",
+    name: "ROI Attribution",
+    description: "Every metric ties to money. Revenue exposure, intervention returns, capacity value—precision economics for cognitive performance.",
     icon: Calculator,
     link: "/solutions/roi-layer",
     color: "from-green-500/20 to-emerald-500/20"
@@ -53,7 +53,7 @@ const platformBlocks = [
     id: "nova-ai",
     label: "AI Assistant",
     name: "Nova AI",
-    description: "Your personal cognitive coach. Delivers personalised nudges, workload recommendations, and manager alerts at exactly the right moment to drive action.",
+    description: "Personal cognitive intelligence. Contextual nudges, timing recommendations, and adaptive protocols—delivered when they matter.",
     icon: Sparkles,
     link: "/nova/overview",
     color: "from-indigo-500/20 to-violet-500/20"
@@ -62,7 +62,7 @@ const platformBlocks = [
     id: "command-surfaces",
     label: "Surfaces",
     name: "Command Surfaces",
-    description: "One system, different views. Individuals see personal optimisation. Managers see team health. Executives see organisational risk and financial exposure.",
+    description: "One system, different views. Individuals see optimisation. Managers see team health. Executives see risk and exposure.",
     icon: Layers,
     link: "/solutions/command-surfaces",
     color: "from-rose-500/20 to-red-500/20"
@@ -72,38 +72,38 @@ const platformBlocks = [
 // Approach pillars - like Invisible's 3 columns
 const approachPillars = [
   {
-    title: "Prediction over reaction",
-    description: "We detect burnout 72 hours before performance breaks. No more exit interviews and sick leave surprises—you see it coming and act first.",
+    title: "Foresight, not hindsight",
+    description: "We surface patterns 72 hours before performance shifts. Early signals, clear context, time to act.",
     icon: Gauge
   },
   {
-    title: "Infrastructure not apps",
-    description: "This isn't another wellness dashboard. It's the cognitive layer your organisation was missing—connecting data, intelligence, and action.",
+    title: "Infrastructure, not apps",
+    description: "This is the cognitive layer your organisation was missing—connecting data, intelligence, and outcomes.",
     icon: Layers
   },
   {
-    title: "Money not metrics",
-    description: "Every insight ties to pounds. Revenue at risk. Cost of turnover. ROI on recovery. CFOs can see exactly what cognitive infrastructure returns.",
+    title: "Precision economics",
+    description: "Every insight ties to value. Exposure quantified. Returns measured. Performance becomes a financial lever.",
     icon: Calculator
   }
 ];
 
 // Industries
 const industries = [
-  { name: "SaaS & Technology", href: "/industries/saas-high-growth", desc: "Protect engineering capacity and reduce churn" },
-  { name: "Financial Services", href: "/industries/financial-services", desc: "Manage cognitive risk in high-stakes decisions" },
-  { name: "Professional Services", href: "/industries/professional-services", desc: "Optimise billable capacity and retention" },
-  { name: "Healthcare", href: "/industries/healthcare", desc: "Prevent clinician burnout and improve care" },
-  { name: "Research & Life Sciences", href: "/industries/research-life-sciences", desc: "Sustain deep work and breakthrough thinking" },
-  { name: "Government & Defence", href: "/industries/government-defence", desc: "Mission-critical performance optimisation" }
+  { name: "SaaS & Technology", href: "/industries/saas-high-growth", desc: "Sustain engineering velocity at scale" },
+  { name: "Financial Services", href: "/industries/financial-services", desc: "Precision in high-stakes environments" },
+  { name: "Professional Services", href: "/industries/professional-services", desc: "Protect billable capacity and talent" },
+  { name: "Healthcare", href: "/industries/healthcare", desc: "Operational resilience for clinical teams" },
+  { name: "Research & Life Sciences", href: "/industries/research-life-sciences", desc: "Sustain deep work and discovery" },
+  { name: "Government & Defence", href: "/industries/government-defence", desc: "Mission-critical performance systems" }
 ];
 
 // Stats
 const impactStats = [
-  { value: "72hr", label: "Prediction window", sublabel: "before performance breaks" },
-  { value: "89%", label: "Coverage rate", sublabel: "across connected devices" },
-  { value: "£41.8k", label: "Weekly at risk", sublabel: "average enterprise exposure" },
-  { value: "3.2x", label: "ROI", sublabel: "first-year return" }
+  { value: "72hr", label: "Foresight window", sublabel: "before performance shifts" },
+  { value: "89%", label: "Signal coverage", sublabel: "across connected sources" },
+  { value: "3.2x", label: "First-year return", sublabel: "average enterprise ROI" },
+  { value: "40+", label: "Integrations", sublabel: "wearables and tools" }
 ];
 
 const Index = () => {
@@ -114,7 +114,7 @@ const Index = () => {
     <>
       <SEO 
         title="Cognitive Infrastructure for Organisations | NeuroState"
-        description="NeuroState is the system of record for cognitive capacity in an organisation. Predictive intelligence for performance, burnout risk, and financial attribution."
+        description="NeuroState is the system of record for cognitive capacity. Predictive intelligence for performance, risk visibility, and financial attribution at enterprise scale."
       />
       <OrganizationStructuredData />
       <SoftwareApplicationStructuredData />
@@ -142,7 +142,7 @@ const Index = () => {
                   </h2>
                 </div>
                 <p className="text-sm text-muted-foreground max-w-md">
-                  We'll walk you through what's possible. No pressure, no jargon—just answers.
+                  We walk you through what's possible. No pressure, no jargon—just answers.
                 </p>
               </motion.div>
 
@@ -194,7 +194,7 @@ const Index = () => {
                   Building blocks, not black boxes
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-xl">
-                  We don't sell black boxes. We give you building blocks—modular, flexible, designed to click into the work you already do. You take what you need, shape something real with artificial intelligence.
+                  Modular components designed to integrate with your existing stack. Take what you need, shape it to your context.
                 </p>
               </ScrollReveal>
 
@@ -262,7 +262,7 @@ const Index = () => {
               <ScrollReveal className="space-y-4 mb-12 text-center">
                 <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">How It Works</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  From signals to action in four steps
+                  From signals to outcomes
                 </h2>
               </ScrollReveal>
 
@@ -273,10 +273,10 @@ const Index = () => {
                 
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {[
-                    { step: "01", title: "Connect", desc: "Link wearables, calendars, and work tools. 5-minute setup.", icon: Database },
+                    { step: "01", title: "Connect", desc: "Link wearables, calendars, and work tools. Setup takes minutes.", icon: Database },
                     { step: "02", title: "Interpret", desc: "AI transforms raw data into cognitive intelligence.", icon: Brain },
-                    { step: "03", title: "Predict", desc: "See burnout risk and capacity shifts before they happen.", icon: TrendingUp },
-                    { step: "04", title: "Act", desc: "Get personalised interventions that drive measurable ROI.", icon: Zap }
+                    { step: "03", title: "Forecast", desc: "See capacity shifts and risk patterns before they materialise.", icon: TrendingUp },
+                    { step: "04", title: "Act", desc: "Receive contextual interventions with measurable returns.", icon: Zap }
                   ].map((item, i) => (
                     <motion.div
                       key={i}
@@ -338,7 +338,7 @@ const Index = () => {
                     Built for knowledge-intensive organisations
                   </h2>
                   <p className="text-sm text-muted-foreground max-w-md">
-                    We've got you covered from day one to the final mile. Every industry has unique cognitive challenges—NeuroState adapts to yours.
+                    Every industry has unique cognitive demands. NeuroState adapts to yours.
                   </p>
                   <div className="pt-4">
                     <Link to="/enterprise/overview">
@@ -387,15 +387,15 @@ const Index = () => {
                       Command surfaces for every role
                     </h2>
                     <p className="text-sm text-muted-foreground max-w-md">
-                      One system, different truths. Individuals see personal optimisation. Managers see team health. Executives see organisational risk and financial exposure.
+                      One system, different perspectives. Each role sees what matters most to them.
                     </p>
                     
                     <div className="space-y-3 py-2">
                       {[
-                        { icon: Eye, text: "Live cognitive capacity dashboards" },
-                        { icon: Gauge, text: "Predictive burnout risk forecasting" },
-                        { icon: Calculator, text: "Financial attribution on every metric" },
-                        { icon: Sparkles, text: "Nova AI intervention recommendations" }
+                        { icon: Eye, text: "Live cognitive capacity visibility" },
+                        { icon: Gauge, text: "Predictive risk indicators" },
+                        { icon: Calculator, text: "Financial attribution" },
+                        { icon: Sparkles, text: "AI-powered recommendations" }
                       ].map((item, i) => (
                         <motion.div 
                           key={i} 
@@ -454,7 +454,7 @@ const Index = () => {
                     <div className="grid grid-cols-3 gap-4 py-6">
                       {[
                         { value: "74", label: "CCI Score", color: "text-primary" },
-                        { value: "£41.8k", label: "At Risk", color: "text-amber-500" },
+                        { value: "£41.8k", label: "Exposure", color: "text-amber-500" },
                         { value: "3", label: "Actions", color: "text-foreground" }
                       ].map((metric, i) => (
                         <motion.div 
@@ -472,8 +472,8 @@ const Index = () => {
                     </div>
 
                     <div className="flex items-center gap-2 pt-4 border-t border-border/30">
-                      <span className="text-xs text-muted-foreground">Next intervention:</span>
-                      <span className="text-xs text-foreground font-medium">Workload adjustment for Sales</span>
+                      <span className="text-xs text-muted-foreground">Next action:</span>
+                      <span className="text-xs text-foreground font-medium">Capacity review for Engineering</span>
                     </div>
                   </motion.div>
                 </ScrollReveal>
@@ -486,10 +486,10 @@ const Index = () => {
             <div className="max-w-3xl mx-auto text-center">
               <ScrollReveal className="space-y-6">
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  Ready to make cognitive performance visible?
+                  See what's possible
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                  Join the enterprises already using NeuroState for predictive cognitive infrastructure. We'll walk you through what's possible.
+                  We'll walk you through NeuroState and answer your questions. No pressure, no jargon.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
                   <Link to="/contact">
