@@ -99,6 +99,15 @@ export const Header = () => {
     { label: "Advanced Technology", href: "/industries/advanced-technology", desc: "Hardware & deep tech" },
   ];
 
+  const solutions = [
+    { label: "Cognitive Data Layer", href: "/solutions/data-layer", desc: "Unified signal ingestion" },
+    { label: "Cognitive State Engine", href: "/solutions/state-engine", desc: "Real-time interpretation" },
+    { label: "Prediction & Simulation", href: "/solutions/prediction", desc: "Near-term forecasting" },
+    { label: "Action & Control Layer", href: "/solutions/action-layer", desc: "Low-friction interventions" },
+    { label: "Command Surfaces by Role", href: "/solutions/command-surfaces", desc: "Role-specific interfaces" },
+    { label: "Economic & ROI Layer", href: "/solutions/roi-layer", desc: "Financial attribution" },
+  ];
+
   const mobileLinks = [
     { label: "Nova AI", href: "/nova/overview" },
     { label: "For Teams", href: "/enterprise/overview" },
@@ -132,6 +141,59 @@ export const Header = () => {
           <nav className="hidden lg:flex items-center gap-0.5">
             <NavigationMenu>
               <NavigationMenuList>
+                {/* Solutions Dropdown */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="bg-transparent text-foreground/60 hover:text-foreground hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground text-xs font-normal h-9 px-3 rounded-full transition-all duration-300">
+                    Solutions
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="w-[360px] p-4 bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl">
+                      <div className="mb-3 pb-3 border-b border-border/30">
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to="/solutions"
+                            className="flex items-center justify-between p-3 rounded-xl hover:bg-muted/80 transition-all duration-300 group"
+                          >
+                            <div>
+                              <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors duration-300">
+                                Solutions Overview
+                              </p>
+                              <p className="text-[10px] text-muted-foreground mt-0.5">
+                                Cognitive infrastructure at scale
+                              </p>
+                            </div>
+                            <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+                          </Link>
+                        </NavigationMenuLink>
+                      </div>
+                      <div className="space-y-1">
+                        {solutions.map((item, index) => (
+                          <NavigationMenuLink key={item.label} asChild>
+                            <Link
+                              to={item.href}
+                              className="block p-3 rounded-xl hover:bg-muted/80 transition-all duration-300 group"
+                              style={{ animationDelay: `${index * 50}ms` }}
+                            >
+                              <div className="flex items-center justify-between">
+                                <div>
+                                  <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors duration-300">
+                                    {item.label}
+                                  </p>
+                                  <p className="text-[10px] text-muted-foreground mt-0.5 group-hover:text-muted-foreground/80 transition-colors">
+                                    {item.desc}
+                                  </p>
+                                </div>
+                                <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+                              </div>
+                            </Link>
+                          </NavigationMenuLink>
+                        ))}
+                      </div>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* Industries Dropdown */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="bg-transparent text-foreground/60 hover:text-foreground hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground text-xs font-normal h-9 px-3 rounded-full transition-all duration-300">
                     Industries
@@ -168,13 +230,6 @@ export const Header = () => {
             </NavigationMenu>
 
             <Link
-              to="/solutions"
-              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
-            >
-              Solutions
-            </Link>
-
-            <Link
               to="/nova/overview"
               className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
             >
@@ -189,7 +244,7 @@ export const Header = () => {
             </Link>
           </nav>
 
-          {/* Right Actions - Search, Book Demo */}
+          {/* Right Actions - Search, Auth, Book Demo */}
           <div className="hidden lg:flex items-center gap-2">
             {/* Search Button */}
             <Button 
@@ -200,6 +255,62 @@ export const Header = () => {
             >
               <Search className="h-4 w-4" />
             </Button>
+            
+            {/* Auth Buttons */}
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    className="h-8 px-3 text-[11px] font-medium text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full gap-1.5"
+                  >
+                    <User className="w-3.5 h-3.5" />
+                    <span className="max-w-[80px] truncate">{user.email?.split('@')[0]}</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuItem asChild>
+                    <Link to="/dashboard" className="flex items-center gap-2">
+                      <Award className="w-4 h-4" />
+                      Dashboard
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/team-dashboard" className="flex items-center gap-2">
+                      <User className="w-4 h-4" />
+                      Team Dashboard
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleSignOut} className="text-destructive">
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <>
+                <Link to="/auth">
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    className="h-8 px-3 text-[11px] font-medium text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full"
+                  >
+                    Log in
+                  </Button>
+                </Link>
+                <Link to="/auth?mode=signup">
+                  <Button 
+                    variant="outline"
+                    size="sm"
+                    className="h-8 px-3 text-[11px] font-medium rounded-full border-foreground/20 hover:bg-foreground/5"
+                  >
+                    Create account
+                  </Button>
+                </Link>
+              </>
+            )}
             
             {/* Book a Demo */}
             <Link to="/contact">

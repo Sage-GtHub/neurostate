@@ -1,27 +1,58 @@
 import { Header } from "@/components/Header";
 import Hero from "@/components/Hero";
-import HowItWorks from "@/components/HowItWorks";
 import { SEO } from "@/components/SEO";
 import { OrganizationStructuredData, SoftwareApplicationStructuredData, WebsiteStructuredData, LocalBusinessStructuredData } from "@/components/StructuredData";
 import { Footer } from "@/components/Footer";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Database, Cpu, TrendingUp, Calculator, Layers, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
-import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 
-const SupplementStackVisual = lazy(() => import("@/components/visuals/SupplementStackVisual"));
-const RecoveryTechVisual = lazy(() => import("@/components/visuals/RecoveryTechVisual"));
+// Solution layers for the home page
+const solutionLayers = [
+  {
+    icon: Database,
+    title: "Cognitive Data Layer",
+    subtitle: "From fragmented signals to one coherent model",
+    description: "NeuroState unifies biometric, behavioural, and contextual signals into a single cognitive data layer. Wearables, work patterns, and environmental context — normalised, structured, and ready for interpretation.",
+    href: "/solutions/data-layer",
+    color: "hsl(220, 100%, 55%)"
+  },
+  {
+    icon: Cpu,
+    title: "Cognitive State Engine",
+    subtitle: "From raw data to live cognitive baselines",
+    description: "We translate signals into readiness, cognitive load, recovery debt, stress volatility, and burnout risk — in real time. This is where data becomes intelligence.",
+    href: "/solutions/state-engine",
+    color: "hsl(270, 100%, 55%)"
+  },
+  {
+    icon: TrendingUp,
+    title: "Prediction & Risk Forecasting",
+    subtitle: "See risk before performance breaks",
+    description: "NeuroState forecasts near-term cognitive risk and capacity, supporting proactive decisions rather than reactive responses. Know what's coming before it arrives.",
+    href: "/solutions/prediction",
+    color: "hsl(156, 65%, 45%)"
+  },
+  {
+    icon: Calculator,
+    title: "Economic & ROI Layer",
+    subtitle: "Turn cognitive risk into financial reality",
+    description: "We quantify revenue at risk, cost of burnout, and recovery value — making performance measurable and buyable. ROI is not a hope. It's a metric.",
+    href: "/solutions/roi-layer",
+    color: "hsl(280, 70%, 55%)"
+  }
+];
 
 const Index = () => {
 
   return (
     <>
       <SEO 
-        title="AI Cognitive Performance Platform | Neurostate"
-        description="Neurostate is an AI-driven cognitive performance platform that predicts focus, fatigue, and performance volatility for teams and individuals. Enterprise-grade cognitive infrastructure."
+        title="Cognitive Infrastructure for Organisations | NeuroState"
+        description="NeuroState is the system of record for cognitive capacity in an organisation. Predictive intelligence for performance, burnout risk, and financial attribution."
       />
       <OrganizationStructuredData />
       <SoftwareApplicationStructuredData />
@@ -31,133 +62,155 @@ const Index = () => {
         <Header />
         <main>
           <Hero />
-          <HowItWorks />
 
-          {/* Stats - Large flowing numbers with enhanced interaction */}
-          <section className="py-20 md:py-28 px-6 md:px-8">
-            <div className="max-w-6xl mx-auto">
-              <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
-                {[
-                  { value: "80%", label: "AI models trained", desc: "on cognitive performance data" },
-                  { value: "7 days", label: "Prediction window", desc: "for performance forecasting" },
-                  { value: "12+", label: "Research partners", desc: "in neuroscience and AI" },
-                  { value: "98%", label: "Accuracy rate", desc: "in cognitive state detection" }
-                ].map((stat, i) => (
-                  <StaggerItem key={i}>
-                    <motion.div 
-                      className="text-center lg:text-left group cursor-default relative"
-                      whileHover={{ scale: 1.03, y: -4 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                    >
-                      <motion.div
-                        className="absolute inset-0 bg-primary/5 rounded-3xl -m-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      />
-                      <p className="stat-display text-foreground group-hover:text-primary transition-colors duration-300 relative">{stat.value}</p>
-                      <p className="text-sm text-foreground font-medium mt-2 relative">{stat.label}</p>
-                      <p className="hidden lg:block text-xs text-muted-foreground mt-1 relative">{stat.desc}</p>
-                    </motion.div>
-                  </StaggerItem>
-                ))}
-              </StaggerContainer>
+          {/* Problem Statement */}
+          <section className="py-20 md:py-28 px-6 md:px-8 bg-muted/30">
+            <div className="max-w-4xl mx-auto text-center">
+              <ScrollReveal className="space-y-6">
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">The Problem</span>
+                <h2 className="text-2xl md:text-3xl font-normal text-foreground leading-relaxed">
+                  Cognitive performance is invisible,<br />
+                  <span className="text-muted-foreground">unmanaged, and costly.</span>
+                </h2>
+                <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+                  Most organisations cannot see cognitive capacity until it breaks. They cannot predict burnout before it happens. They cannot quantify the cost of underperformance. They react to problems instead of preventing them.
+                </p>
+              </ScrollReveal>
             </div>
           </section>
 
-          {/* Platform Section - Clean cards */}
-          <section className="py-24 md:py-32 px-6 md:px-8">
-            <div className="max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-                {/* Left - Heading */}
-                <ScrollReveal className="lg:sticky lg:top-28 space-y-5">
-                  <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">The Platform</span>
-                  <h2 className="text-large-display text-foreground">
-                    Three integrated systems.
-                    <br />
-                    <span className="text-muted-foreground">One cognitive OS.</span>
-                  </h2>
-                  <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
-                    A complete infrastructure for predicting, measuring, and optimising cognitive performance across individuals and teams.
-                  </p>
-                  <p className="hidden lg:block text-sm text-muted-foreground leading-relaxed max-w-sm">
-                    Each layer of the Neurostate platform works in concert to deliver measurable improvements in focus, recovery, and sustained output.
-                  </p>
-                </ScrollReveal>
-
-                {/* Right - Flowing Cards */}
-                <StaggerContainer className="space-y-4" staggerDelay={0.15}>
+          {/* Category Statement */}
+          <section className="py-20 md:py-28 px-6 md:px-8">
+            <div className="max-w-5xl mx-auto">
+              <ScrollReveal className="text-center space-y-8">
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Category Definition</span>
+                <h2 className="text-2xl md:text-4xl font-normal text-foreground">
+                  NeuroState is <span className="text-primary">cognitive infrastructure.</span>
+                </h2>
+                <p className="text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                  Not wellness. Not perks. Not another dashboard. NeuroState is the system of record for cognitive capacity in an organisation — ingesting signals, interpreting states, predicting risk, and driving action with measurable ROI.
+                </p>
+                
+                <div className="grid md:grid-cols-3 gap-4 pt-8 max-w-4xl mx-auto">
                   {[
-                    { 
-                      title: "Nova AI Engine", 
-                      desc: "Cognitive forecasting with multi-model AI. Real-time performance prediction and risk detection.",
-                      detail: "Integrates with wearables for continuous biometric monitoring.",
-                      num: "01"
-                    },
-                    { 
-                      title: "Execution Layer", 
-                      desc: "Precision supplements with research-backed formulas. Biological optimisation for peak output.",
-                      detail: "Third-party tested, pharmaceutical-grade compounds.",
-                      num: "02"
-                    },
-                    { 
-                      title: "Neuromodulation", 
-                      desc: "Red light therapy and photobiomodulation. Alpha and beta state control for cognitive readiness.",
-                      detail: "Clinical-grade devices with proven wavelengths.",
-                      num: "03"
-                    },
+                    { label: "Stripe", desc: "Infrastructure for money" },
+                    { label: "Palantir", desc: "Infrastructure for decisions" },
+                    { label: "NeuroState", desc: "Infrastructure for performance", highlight: true }
                   ].map((item, i) => (
-                    <StaggerItem key={i}>
-                      <motion.div 
-                        className="group flow-card spotlight-card p-6 md:p-8 cursor-pointer"
-                        whileHover={{ x: 8, scale: 1.01 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        onMouseMove={(e) => {
-                          const rect = e.currentTarget.getBoundingClientRect();
-                          const x = ((e.clientX - rect.left) / rect.width) * 100;
-                          const y = ((e.clientY - rect.top) / rect.height) * 100;
-                          e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
-                          e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
-                        }}
-                      >
-                        <div className="flex items-start justify-between gap-6">
-                          <div className="space-y-3 flex-1">
-                            <div className="flex items-center gap-3">
-                              <span className="text-[10px] text-muted-foreground font-mono">{item.num}</span>
-                              <motion.div 
-                                className="w-6 h-px bg-border group-hover:bg-primary/50 transition-all duration-300"
-                                whileHover={{ width: 40 }}
-                              />
-                            </div>
-                            <h3 className="text-base font-medium text-foreground group-hover:text-primary transition-colors duration-300">{item.title}</h3>
-                            <p className="text-xs text-muted-foreground leading-relaxed max-w-sm">{item.desc}</p>
-                            <p className="hidden lg:block text-xs text-muted-foreground/70 leading-relaxed max-w-sm mt-1">{item.detail}</p>
-                          </div>
-                          <motion.div
-                            whileHover={{ rotate: 45 }}
-                            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                          >
-                            <ArrowUpRight className="w-4 h-4 text-muted-foreground/30 group-hover:text-primary transition-all duration-300 mt-1" />
-                          </motion.div>
-                        </div>
-                      </motion.div>
-                    </StaggerItem>
+                    <motion.div
+                      key={i}
+                      className={`p-6 rounded-2xl border ${item.highlight ? 'bg-primary/5 border-primary/20' : 'bg-muted/30 border-border/50'}`}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                    >
+                      <p className={`text-base font-medium ${item.highlight ? 'text-primary' : 'text-foreground'}`}>{item.label}</p>
+                      <p className="text-xs text-muted-foreground mt-1">{item.desc}</p>
+                    </motion.div>
                   ))}
-                </StaggerContainer>
+                </div>
+              </ScrollReveal>
+            </div>
+          </section>
+
+          {/* How NeuroState Works - System Architecture */}
+          <section className="py-24 md:py-32 px-6 md:px-8 bg-muted/20">
+            <div className="max-w-6xl mx-auto">
+              <ScrollReveal className="text-center mb-16 space-y-5">
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">How It Works</span>
+                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                  Cognitive infrastructure, end to end.
+                </h2>
+                <p className="text-sm text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                  A complete system that ingests signals, interprets cognitive states, predicts risk, drives action, and measures ROI — continuously and autonomously.
+                </p>
+              </ScrollReveal>
+
+              {/* Data Flow Visualisation */}
+              <ScrollReveal className="mb-16">
+                <div className="flex items-center justify-center gap-2 md:gap-4 flex-wrap">
+                  {["Signals", "States", "Predictions", "Actions", "ROI"].map((step, i) => (
+                    <motion.div
+                      key={step}
+                      className="flex items-center gap-2 md:gap-4"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.15 }}
+                    >
+                      <div className={`px-4 py-2 rounded-full text-xs font-medium ${i === 4 ? 'bg-primary text-primary-foreground' : 'bg-muted border border-border/50 text-foreground'}`}>
+                        {step}
+                      </div>
+                      {i < 4 && (
+                        <motion.div
+                          className="hidden md:block"
+                          animate={{ x: [0, 4, 0] }}
+                          transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.3 }}
+                        >
+                          <ArrowRight className="w-4 h-4 text-muted-foreground" />
+                        </motion.div>
+                      )}
+                    </motion.div>
+                  ))}
+                </div>
+              </ScrollReveal>
+
+              {/* Solution Layer Cards */}
+              <div className="grid md:grid-cols-2 gap-6">
+                {solutionLayers.map((layer, i) => (
+                  <motion.div
+                    key={layer.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                  >
+                    <Link to={layer.href} className="block h-full">
+                      <div className="group p-6 md:p-8 rounded-2xl bg-background border border-border/50 hover:border-primary/30 transition-all duration-300 h-full">
+                        <div className="flex items-start gap-4">
+                          <div 
+                            className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                            style={{ backgroundColor: `${layer.color}15` }}
+                          >
+                            <layer.icon className="w-6 h-6" style={{ color: layer.color }} />
+                          </div>
+                          <div className="flex-1 space-y-2">
+                            <h3 className="text-base font-medium text-foreground group-hover:text-primary transition-colors">
+                              {layer.title}
+                            </h3>
+                            <p className="text-xs font-medium text-primary/80">
+                              {layer.subtitle}
+                            </p>
+                            <p className="text-xs text-muted-foreground leading-relaxed">
+                              {layer.description}
+                            </p>
+                            <div className="pt-2">
+                              <span className="text-[10px] text-primary font-medium group-hover:underline flex items-center gap-1">
+                                Learn more
+                                <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </motion.div>
+                ))}
               </div>
             </div>
           </section>
 
-          {/* The Difference - Clean comparison */}
+          {/* The Difference - Predictive vs Reactive */}
           <section className="py-24 md:py-32 px-6 md:px-8">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="text-center mb-16 space-y-4 max-w-2xl mx-auto">
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">The Difference</span>
-                <h2 className="text-large-display text-foreground">
+                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                   Predictive infrastructure.
                   <br />
                   <span className="text-muted-foreground">Not reactive wellness.</span>
                 </h2>
-                <p className="hidden lg:block text-sm text-muted-foreground leading-relaxed max-w-lg mx-auto">
-                  Most wellness platforms wait for problems to occur before responding. Neurostate predicts cognitive decline before it impacts performance, enabling proactive intervention.
-                </p>
               </ScrollReveal>
 
               <div className="grid md:grid-cols-2 gap-8 lg:gap-16">
@@ -166,10 +219,10 @@ const Index = () => {
                   <div className="space-y-3">
                     <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] mb-5 font-medium">Reactive approaches</p>
                     {[
-                      { title: "Apps that respond after burnout", desc: "Damage already done" },
-                      { title: "Generic wellness with no data", desc: "One-size-fits-all solutions" },
+                      { title: "Respond after burnout occurs", desc: "Damage already done" },
+                      { title: "Generic wellness programmes", desc: "One-size-fits-all solutions" },
                       { title: "No performance prediction", desc: "Flying blind on capacity" },
-                      { title: "Interventions after breakdown", desc: "Costly recovery periods" }
+                      { title: "No financial attribution", desc: "Cost remains invisible" }
                     ].map((item, i) => (
                       <motion.div 
                         key={i} 
@@ -194,12 +247,12 @@ const Index = () => {
                 {/* What we do */}
                 <ScrollReveal delay={0.2} direction="right">
                   <div className="space-y-3">
-                    <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] mb-5 font-medium">Predictive infrastructure</p>
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] mb-5 font-medium">NeuroState infrastructure</p>
                     {[
-                      { title: "Cognitive forecasting", desc: "72-hour prediction window", detail: "See performance dips before they happen" },
-                      { title: "Risk detection", desc: "Before impact", detail: "Early warning system for burnout" },
-                      { title: "Readiness measurement", desc: "Quantified capacity", detail: "Know your cognitive bandwidth daily" },
-                      { title: "Autonomous optimisation", desc: "AI-driven protocols", detail: "Continuous improvement without manual tracking" }
+                      { title: "Predict risk before impact", desc: "72-hour burnout forecasting" },
+                      { title: "Personalised interventions", desc: "AI-calibrated to individual patterns" },
+                      { title: "Real-time cognitive visibility", desc: "Live readiness and capacity scores" },
+                      { title: "Measurable ROI", desc: "Financial attribution on every action" }
                     ].map((item, i) => (
                       <motion.div 
                         key={i} 
@@ -215,8 +268,7 @@ const Index = () => {
                         </div>
                         <div>
                           <span className="text-sm text-foreground font-medium">{item.title}</span>
-                          <span className="text-xs text-muted-foreground ml-2">{item.desc}</span>
-                          <p className="hidden lg:block text-xs text-muted-foreground/70 mt-0.5">{item.detail}</p>
+                          <p className="hidden lg:block text-xs text-muted-foreground mt-0.5">{item.desc}</p>
                         </div>
                       </motion.div>
                     ))}
@@ -226,70 +278,53 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Nova AI Section */}
-          <section className="py-24 md:py-32 px-6 md:px-8">
+          {/* Proof of Seriousness - Dashboard Preview */}
+          <section className="py-24 md:py-32 px-6 md:px-8 bg-muted/20">
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 <ScrollReveal direction="left">
                   <div className="space-y-6">
-                    <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">AI Engine</span>
-                    <h2 className="text-large-display text-foreground">
-                      Nova: Cognitive Performance Forecasting
+                    <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Enterprise-Grade</span>
+                    <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                      Command surfaces for every role.
                     </h2>
                     <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-                      Nova is our multi-model AI engine for predictive cognitive modelling. It forecasts performance states, detects risk patterns, and delivers real-time analytics based on your biometric data.
-                    </p>
-                    <p className="hidden lg:block text-sm text-muted-foreground leading-relaxed max-w-md">
-                      By synthesising data from wearables, sleep patterns, and historical performance, Nova builds a dynamic model of your cognitive capacity and provides actionable recommendations to optimise your output.
+                      One system, different truths. Individuals see personal optimisation. Managers see team health. Executives see organisational risk and financial exposure.
                     </p>
                     
-                    <div className="space-y-4 py-2">
-                      <div className="flex flex-wrap gap-2">
-                        {["Personalised coaching", "Adaptive recommendations", "Wearable integration", "Real-time insights", "Voice interface"].map((item, i) => (
-                          <motion.span 
-                            key={i} 
-                            className="px-3 py-1.5 text-[10px] font-medium text-muted-foreground bg-background rounded-full border border-border/50"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.3 + i * 0.1 }}
-                            whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary) / 0.5)" }}
-                          >
-                            {item}
-                          </motion.span>
-                        ))}
-                      </div>
-                      
-                      <div className="hidden lg:flex gap-6 pt-2">
-                        {[
-                          { value: "7", label: "Day forecast" },
-                          { value: "24/7", label: "Monitoring" },
-                          { value: "10+", label: "Integrations" }
-                        ].map((item, i) => (
-                          <motion.div 
-                            key={i}
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.5 + i * 0.1 }}
-                          >
-                            <p className="text-lg text-foreground font-medium">{item.value}</p>
-                            <p className="text-[10px] text-muted-foreground uppercase tracking-wider">{item.label}</p>
-                          </motion.div>
-                        ))}
-                      </div>
+                    <StaggerContainer className="space-y-3 py-2" staggerDelay={0.1}>
+                      {[
+                        "Live cognitive capacity dashboards",
+                        "Predictive burnout risk forecasting",
+                        "Financial attribution on every metric",
+                        "Nova AI intervention recommendations"
+                      ].map((item, i) => (
+                        <StaggerItem key={i}>
+                          <div className="flex items-center gap-3">
+                            <div className="w-1.5 h-1.5 bg-primary rounded-full flex-shrink-0" />
+                            <span className="text-sm text-foreground">{item}</span>
+                          </div>
+                        </StaggerItem>
+                      ))}
+                    </StaggerContainer>
+                    
+                    <div className="flex flex-wrap gap-3 pt-2">
+                      <Link to="/team-dashboard">
+                        <Button size="sm" className="h-10 px-5 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                          View Team Dashboard
+                          <ArrowRight className="ml-2 w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                        </Button>
+                      </Link>
+                      <Link to="/solutions">
+                        <Button size="sm" variant="outline" className="h-10 px-5 text-xs font-medium rounded-full">
+                          Explore Solutions
+                        </Button>
+                      </Link>
                     </div>
-                    
-                    <Link to="/nova/overview">
-                      <Button size="sm" className="h-10 px-5 text-xs font-medium bg-gray-800 text-white hover:bg-gray-700 rounded-full group flex items-center gap-2">
-                        <span>Explore Nova</span>
-                        <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                      </Button>
-                    </Link>
                   </div>
                 </ScrollReveal>
 
-                {/* Nova Preview */}
+                {/* Dashboard Preview Card */}
                 <ScrollReveal direction="right" delay={0.2}>
                   <motion.div 
                     className="flow-card p-6 space-y-5"
@@ -298,11 +333,11 @@ const Index = () => {
                     <div className="flex items-center justify-between pb-4 border-b border-border/50">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 bg-primary/10 rounded-xl flex items-center justify-center">
-                          <span className="text-primary font-medium text-xs">N</span>
+                          <Layers className="w-4 h-4 text-primary" />
                         </div>
                         <div>
-                          <p className="text-foreground font-medium text-xs">Nova</p>
-                          <p className="text-muted-foreground text-[10px]">7-Day Forecast</p>
+                          <p className="text-foreground font-medium text-xs">Team Dashboard</p>
+                          <p className="text-muted-foreground text-[10px]">Executive View</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-1.5">
@@ -311,29 +346,11 @@ const Index = () => {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-7 gap-1.5">
-                      {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, i) => (
-                        <motion.div 
-                          key={i} 
-                          className={`p-2.5 text-center rounded-xl transition-all duration-300 ${i === 0 ? 'bg-primary/10 ring-1 ring-primary/20' : 'bg-muted/50 hover:bg-muted'}`}
-                          initial={{ opacity: 0, y: 10 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.4 + i * 0.05 }}
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          <p className="text-[9px] text-muted-foreground uppercase mb-1.5">{day}</p>
-                          <div className={`w-1.5 h-1.5 mx-auto rounded-full mb-1.5 ${i <= 1 || i >= 5 ? 'bg-primary' : i === 3 ? 'bg-destructive/60' : 'bg-yellow-500/60'}`} />
-                          <p className="text-foreground text-[11px] font-medium">{[85, 82, 68, 55, 72, 88, 90][i]}%</p>
-                        </motion.div>
-                      ))}
-                    </div>
-
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-cols-3 gap-3">
                       {[
-                        { value: "68", label: "HRV" },
-                        { value: "7.8h", label: "Sleep" },
-                        { value: "85%", label: "Recovery" }
+                        { value: "74", label: "CCI Score" },
+                        { value: "£41.8k", label: "At Risk" },
+                        { value: "3", label: "Actions" }
                       ].map((metric, i) => (
                         <motion.div 
                           key={i} 
@@ -341,10 +358,27 @@ const Index = () => {
                           initial={{ opacity: 0, scale: 0.9 }}
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
-                          transition={{ delay: 0.6 + i * 0.1 }}
+                          transition={{ delay: 0.4 + i * 0.1 }}
                         >
-                          <p className="text-foreground text-lg font-light">{metric.value}</p>
+                          <p className="text-foreground text-lg font-semibold">{metric.value}</p>
                           <p className="text-muted-foreground text-[9px] uppercase tracking-wider">{metric.label}</p>
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    <div className="grid grid-cols-7 gap-1.5">
+                      {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, i) => (
+                        <motion.div 
+                          key={i} 
+                          className={`p-2 text-center rounded-lg transition-all duration-300 ${i === 0 ? 'bg-primary/10 ring-1 ring-primary/20' : 'bg-muted/50 hover:bg-muted'}`}
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.5 + i * 0.05 }}
+                        >
+                          <p className="text-[8px] text-muted-foreground uppercase mb-1">{day}</p>
+                          <div className={`w-1 h-1 mx-auto rounded-full mb-1 ${i <= 1 || i >= 5 ? 'bg-primary' : i === 3 ? 'bg-destructive/60' : 'bg-yellow-500/60'}`} />
+                          <p className="text-foreground text-[10px] font-medium">{[85, 82, 68, 55, 72, 88, 90][i]}%</p>
                         </motion.div>
                       ))}
                     </div>
@@ -354,144 +388,37 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Hardware Section - Recovery Technologies */}
-          <section className="py-24 md:py-32 px-6 md:px-8">
+          {/* Stats Section */}
+          <section className="py-20 md:py-28 px-6 md:px-8">
             <div className="max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                <ScrollReveal direction="left" className="order-last lg:order-first">
-                  <Suspense fallback={
-                    <div className="w-full aspect-square max-w-sm mx-auto flex items-center justify-center">
-                      <div className="w-12 h-12 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
-                    </div>
-                  }>
-                    <RecoveryTechVisual />
-                  </Suspense>
-                </ScrollReveal>
-
-                <ScrollReveal direction="right">
-                  <div className="space-y-6">
-                    <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Neuromodulation</span>
-                    <h2 className="text-large-display text-foreground">
-                      Recovery Technologies
-                    </h2>
-                    <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-                      Clinical-grade photobiomodulation devices engineered for neural pathway stimulation. Our recovery technologies combine red and near-infrared light therapy to enhance mitochondrial function, accelerate tissue repair, and optimise cognitive performance.
-                    </p>
-                    <p className="hidden lg:block text-sm text-muted-foreground leading-relaxed max-w-md">
-                      Each device is calibrated to deliver precise wavelengths proven in peer-reviewed research to stimulate cellular energy production. Whether you're recovering from intense training or seeking enhanced mental clarity, our photobiomodulation systems provide measurable, repeatable results.
-                    </p>
-                    
-                    <StaggerContainer className="space-y-3 py-2" staggerDelay={0.1}>
-                      {[
-                        { title: "660nm & 850nm wavelengths", desc: "Optimal penetration for cellular regeneration" },
-                        { title: "Direct neural pathway stimulation", desc: "Enhanced brain plasticity and cognitive function" },
-                        { title: "Clinically validated efficacy", desc: "Backed by 500+ peer-reviewed studies" },
-                        { title: "Professional-grade power output", desc: "Medical-level irradiance for faster results" }
-                      ].map((item, i) => (
-                        <StaggerItem key={i}>
-                          <div className="flex items-start gap-3">
-                            <div className="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 flex-shrink-0" />
-                            <div>
-                              <span className="text-sm text-foreground font-medium">{item.title}</span>
-                              <p className="hidden lg:block text-xs text-muted-foreground mt-0.5">{item.desc}</p>
-                            </div>
-                          </div>
-                        </StaggerItem>
-                      ))}
-                    </StaggerContainer>
-                    
-                    <Link to="/category/devices">
-                      <Button size="sm" className="h-10 px-5 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
-                        View Devices
-                        <ArrowRight className="ml-2 w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                      </Button>
-                    </Link>
-                  </div>
-                </ScrollReveal>
-              </div>
-            </div>
-          </section>
-
-          {/* Supplements Section */}
-          <section className="py-24 md:py-32 px-6 md:px-8">
-            <div className="max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                <ScrollReveal direction="left">
-                  <div className="space-y-6">
-                    <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Execution Layer</span>
-                    <h2 className="text-large-display text-foreground">
-                      Personalised Supplement Stacks
-                    </h2>
-                    <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-                      Research-backed formulations designed for measurable cognitive enhancement. Every compound is selected for efficacy, bioavailability, and synergistic interaction with our broader protocol ecosystem.
-                    </p>
-                    <p className="hidden lg:block text-sm text-muted-foreground leading-relaxed max-w-md">
-                      Our formulations are developed in partnership with leading neuroscientists and are manufactured to pharmaceutical-grade standards. Each ingredient is third-party tested for purity, and dosages are calibrated based on clinical research rather than marketing claims.
-                    </p>
-                    
-                    <div className="space-y-4 py-2">
-                      <div className="flex flex-wrap gap-2">
-                        {["Cognitive", "Recovery", "Sleep", "Focus", "Energy", "Longevity"].map((item, i) => (
-                          <motion.span 
-                            key={i} 
-                            className="px-3 py-1.5 text-[10px] font-medium text-muted-foreground bg-background rounded-full border border-border/50"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.3 + i * 0.1 }}
-                            whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary) / 0.5)" }}
-                          >
-                            {item}
-                          </motion.span>
-                        ))}
-                      </div>
-                      
-                      <div className="hidden lg:grid grid-cols-2 gap-4 pt-2">
-                        {[
-                          { label: "Bioavailability", value: "Enhanced absorption" },
-                          { label: "Purity", value: "Third-party tested" },
-                          { label: "Dosing", value: "Research-calibrated" },
-                          { label: "Synergy", value: "Stack-optimised" }
-                        ].map((item, i) => (
-                          <motion.div 
-                            key={i}
-                            className="p-3 bg-muted/30 rounded-xl"
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.4 + i * 0.1 }}
-                          >
-                            <p className="text-[10px] text-muted-foreground uppercase tracking-wider">{item.label}</p>
-                            <p className="text-sm text-foreground font-medium mt-1">{item.value}</p>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <Link to="/category/supplements">
-                      <Button size="sm" className="h-10 px-5 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
-                        Shop Supplements
-                        <ArrowRight className="ml-2 w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                      </Button>
-                    </Link>
-                  </div>
-                </ScrollReveal>
-
-                <ScrollReveal direction="right" delay={0.2}>
-                  <Suspense fallback={
-                    <div className="w-full aspect-square max-w-sm mx-auto flex items-center justify-center">
-                      <div className="w-12 h-12 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
-                    </div>
-                  }>
-                    <SupplementStackVisual />
-                  </Suspense>
-                </ScrollReveal>
-              </div>
+              <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+                {[
+                  { value: "72hr", label: "Prediction window", desc: "For burnout risk forecasting" },
+                  { value: "89%", label: "Coverage rate", desc: "Workforce signal visibility" },
+                  { value: "£41.8k", label: "Weekly at risk", desc: "Average cognitive exposure" },
+                  { value: "67%", label: "Adoption rate", desc: "Intervention acceptance" }
+                ].map((stat, i) => (
+                  <StaggerItem key={i}>
+                    <motion.div 
+                      className="text-center lg:text-left group cursor-default relative"
+                      whileHover={{ scale: 1.03, y: -4 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    >
+                      <motion.div
+                        className="absolute inset-0 bg-primary/5 rounded-3xl -m-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      />
+                      <p className="stat-display text-foreground group-hover:text-primary transition-colors duration-300 relative">{stat.value}</p>
+                      <p className="text-sm text-foreground font-medium mt-2 relative">{stat.label}</p>
+                      <p className="hidden lg:block text-xs text-muted-foreground mt-1 relative">{stat.desc}</p>
+                    </motion.div>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
             </div>
           </section>
 
           {/* CTA Section */}
-          <ScrollReveal className="py-24 md:py-32 px-6 md:px-8">
+          <ScrollReveal className="py-24 md:py-32 px-6 md:px-8 bg-muted/20">
             <div className="max-w-3xl mx-auto text-center space-y-6">
               <motion.span 
                 className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium"
@@ -502,13 +429,13 @@ const Index = () => {
                 Get Started
               </motion.span>
               <motion.h2 
-                className="text-large-display text-foreground"
+                className="text-2xl md:text-3xl font-normal text-foreground"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
               >
-                Ready to get started?
+                Ready to make cognitive performance visible?
               </motion.h2>
               <motion.p 
                 className="text-sm text-muted-foreground max-w-md mx-auto"
@@ -517,16 +444,7 @@ const Index = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
               >
-                Join the enterprises already using Neurostate for predictive cognitive performance management.
-              </motion.p>
-              <motion.p 
-                className="hidden lg:block text-sm text-muted-foreground max-w-lg mx-auto"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.25 }}
-              >
-                Whether you are an individual optimiser or leading an enterprise team, our platform scales to meet your cognitive performance needs.
+                Join the enterprises already using NeuroState for predictive cognitive infrastructure.
               </motion.p>
               <motion.div 
                 className="flex flex-wrap items-center justify-center gap-3 pt-4"
@@ -536,14 +454,14 @@ const Index = () => {
                 transition={{ delay: 0.3 }}
               >
                 <Link to="/contact">
-                  <Button size="sm" className="h-10 px-6 text-xs font-medium bg-gray-800 text-white hover:bg-gray-700 rounded-full group">
+                  <Button size="sm" className="h-10 px-6 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
                     Book a demo
                     <ArrowUpRight className="ml-2 w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Button>
                 </Link>
-                <Link to="/shop">
+                <Link to="/solutions">
                   <Button size="sm" variant="outline" className="h-10 px-6 text-xs font-medium rounded-full">
-                    Browse Products
+                    Explore Solutions
                   </Button>
                 </Link>
               </motion.div>
@@ -555,7 +473,7 @@ const Index = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
               >
-                {["No credit card required", "14-day free trial", "Cancel anytime"].map((item, i) => (
+                {["No credit card required", "Enterprise-ready", "SOC 2 compliant"].map((item, i) => (
                   <div key={i} className="flex items-center gap-2 text-xs">
                     <Check className="w-3 h-3 text-primary" />
                     <span>{item}</span>
