@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { EnterpriseROICalculator } from "@/components/EnterpriseROICalculator";
 import { ArrowUpRight, Check, LucideIcon, Activity, Brain, AlertTriangle, Zap, Target, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -94,6 +95,22 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
                   </Link>
                 </div>
               </motion.div>
+            </div>
+          </section>
+
+          {/* ROI Calculator Section */}
+          <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/20">
+            <div className="max-w-5xl mx-auto">
+              <ScrollReveal className="space-y-3 mb-8 text-center">
+                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Calculate Your Impact</span>
+                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                  See the value for {industry.name}
+                </h2>
+                <p className="text-sm text-muted-foreground max-w-lg mx-auto">
+                  Quantify the hidden costs of cognitive underperformance and discover your potential ROI.
+                </p>
+              </ScrollReveal>
+              <EnterpriseROICalculator variant="light" defaultIndustry={industry.defaultIndustry} />
             </div>
           </section>
 
