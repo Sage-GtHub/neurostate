@@ -346,12 +346,12 @@ export const Header = () => {
                   <Menu className="h-4 w-4" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-full sm:w-[320px] bg-background border-l border-border p-0">
-                <SheetHeader className="p-5 border-b border-border">
+              <SheetContent side="right" className="w-full sm:w-[320px] bg-background border-l border-border p-0 flex flex-col h-full">
+                <SheetHeader className="p-5 border-b border-border flex-shrink-0">
                   <SheetTitle className="text-left text-foreground text-sm font-medium">Menu</SheetTitle>
                 </SheetHeader>
                 
-                <nav className="p-5 space-y-1">
+                <nav className="p-5 space-y-1 overflow-y-auto flex-1">
                   {mobileLinks.map((link) => (
                     <Link
                       key={link.label}
@@ -427,7 +427,7 @@ export const Header = () => {
                   </div>
                   
                   {/* CTA */}
-                  <div className="pt-5">
+                  <div className="pt-5 pb-5">
                     <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
                       <Button className="w-full h-10 text-xs font-medium bg-gray-800 text-white hover:bg-gray-700 rounded-full">
                         Book a demo
