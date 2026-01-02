@@ -96,7 +96,7 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
                 </p>
 
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
-                  <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
+                  <Link to="/contact">
                     <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
                       <Button className="h-10 px-5 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
                         <span className="flex items-center">
@@ -105,7 +105,7 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
                         </span>
                       </Button>
                     </motion.div>
-                  </a>
+                  </Link>
                   <Link to="/contact">
                     <Button variant="outline" className="h-10 px-5 text-xs font-medium rounded-full border-foreground/20 hover:bg-foreground/5">
                       Contact us
