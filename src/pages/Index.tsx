@@ -167,21 +167,6 @@ const Index = () => {
                   </motion.div>
                 ))}
               </div>
-
-              {/* CTA */}
-              <motion.div 
-                className="flex justify-center mt-8"
-                initial={{ opacity: 0 }}
-                animate={isApproachInView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.6, delay: 0.5 }}
-              >
-                <Link to="/contact">
-                  <Button className="h-10 px-5 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
-                    Book a demo
-                    <ArrowUpRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </Button>
-                </Link>
-              </motion.div>
             </div>
           </section>
 
