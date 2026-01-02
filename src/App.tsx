@@ -84,6 +84,15 @@ import ResearchLifeSciences from "./pages/industries/ResearchLifeSciences";
 import GovernmentDefence from "./pages/industries/GovernmentDefence";
 import AdvancedTechnology from "./pages/industries/AdvancedTechnology";
 
+// Solutions Pages
+import SolutionsHub from "./pages/solutions/SolutionsHub";
+import CognitiveDataLayer from "./pages/solutions/CognitiveDataLayer";
+import CognitiveStateEngine from "./pages/solutions/CognitiveStateEngine";
+import PredictionSimulation from "./pages/solutions/PredictionSimulation";
+import ActionControlLayer from "./pages/solutions/ActionControlLayer";
+import CommandSurfaces from "./pages/solutions/CommandSurfaces";
+import ROILayer from "./pages/solutions/ROILayer";
+
 const queryClient = new QueryClient();
 
 // Analytics tracking component
@@ -217,6 +226,15 @@ const AnimatedRoutes = () => {
             <Route path="/industries/research-life-sciences" element={<ResearchLifeSciences />} />
             <Route path="/industries/government-defence" element={<GovernmentDefence />} />
             <Route path="/industries/advanced-technology" element={<AdvancedTechnology />} />
+            
+            {/* Solutions Pages */}
+            <Route path="/solutions" element={<SolutionsHub />} />
+            <Route path="/solutions/data-layer" element={<CognitiveDataLayer />} />
+            <Route path="/solutions/state-engine" element={<CognitiveStateEngine />} />
+            <Route path="/solutions/prediction" element={<PredictionSimulation />} />
+            <Route path="/solutions/action-layer" element={<ActionControlLayer />} />
+            <Route path="/solutions/command-surfaces" element={<CommandSurfaces />} />
+            <Route path="/solutions/roi-layer" element={<ROILayer />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

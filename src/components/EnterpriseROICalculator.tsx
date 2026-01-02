@@ -251,199 +251,342 @@ export function EnterpriseROICalculator({ variant = "dark", defaultIndustry = "s
     );
   }
 
-  // Calculator View
+  // Calculator View - Landscape layout on desktop
   return (
     <motion.div 
-      className={`rounded-3xl p-6 sm:p-8 ${isDark ? 'bg-foreground' : 'bg-background border border-border/50 shadow-soft'}`}
+      className={`rounded-3xl p-6 lg:p-8 ${isDark ? 'bg-foreground' : 'bg-background border border-border/50 shadow-soft'}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
     >
-      {/* Header */}
-      <div className="flex items-center gap-3 mb-6">
+      {/* Header - Desktop only */}
+      <div className="hidden lg:flex items-center gap-3 mb-6">
         <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isDark ? 'bg-background/10' : 'bg-primary/10'}`}>
           <Calculator className={`w-5 h-5 ${isDark ? 'text-accent' : 'text-primary'}`} />
         </div>
         <div>
           <h3 className={`text-sm font-medium ${isDark ? 'text-background' : 'text-foreground'}`}>ROI Calculator</h3>
-          <p className={`text-[10px] ${isDark ? 'text-background/60' : 'text-muted-foreground'}`}>Calculate your potential savings</p>
+          <p className={`text-[10px] ${isDark ? 'text-background/60' : 'text-muted-foreground'}`}>Calculate your potential savings at £50/user/month</p>
         </div>
       </div>
 
-      {/* Inputs */}
-      <div className="space-y-5 mb-6">
-        {/* Number of Employees Slider */}
-        <div>
-          <label className={`text-[10px] uppercase tracking-wider mb-2 block font-medium ${isDark ? 'text-background/60' : 'text-primary'}`}>
-            Number of Employees
-          </label>
-          <div className={`text-3xl font-light mb-3 tabular-nums ${isDark ? 'text-background' : 'text-foreground'}`}>
-            {employeeCount.toLocaleString('en-GB')}
+      {/* Desktop Landscape Layout */}
+      <div className="hidden lg:grid lg:grid-cols-3 lg:gap-8">
+        {/* Left Column - Inputs */}
+        <div className="space-y-4">
+          <div className={`text-[10px] uppercase tracking-wider font-medium mb-3 ${isDark ? 'text-background/60' : 'text-muted-foreground'}`}>
+            Your Organisation
           </div>
-          <Slider
-            value={employees}
-            onValueChange={setEmployees}
-            min={10}
-            max={1000}
-            step={10}
-            className="mb-2"
-          />
-          <div className={`flex justify-between text-[10px] ${isDark ? 'text-background/50' : 'text-muted-foreground'}`}>
-            <span>10</span>
-            <span>1,000</span>
+          
+          {/* Number of Employees */}
+          <div>
+            <label className={`text-[10px] uppercase tracking-wider mb-1.5 block font-medium ${isDark ? 'text-background/60' : 'text-primary'}`}>
+              Employees
+            </label>
+            <div className={`text-2xl font-light mb-2 tabular-nums ${isDark ? 'text-background' : 'text-foreground'}`}>
+              {employeeCount.toLocaleString('en-GB')}
+            </div>
+            <Slider
+              value={employees}
+              onValueChange={setEmployees}
+              min={10}
+              max={1000}
+              step={10}
+              className="mb-1"
+            />
+            <div className={`flex justify-between text-[9px] ${isDark ? 'text-background/40' : 'text-muted-foreground'}`}>
+              <span>10</span>
+              <span>1,000</span>
+            </div>
+          </div>
+
+          {/* Salary & Sick Days */}
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <Label className={`text-[10px] uppercase tracking-wider mb-1.5 block font-medium ${isDark ? 'text-background/60' : 'text-primary'}`}>
+                Avg Salary (£)
+              </Label>
+              <Input
+                type="text"
+                value={avgSalary}
+                onChange={(e) => setAvgSalary(e.target.value.replace(/[^0-9]/g, ''))}
+                placeholder="65000"
+                className={`h-9 text-sm rounded-lg ${isDark ? 'bg-background/10 border-background/20 text-background' : ''}`}
+              />
+            </div>
+            <div>
+              <Label className={`text-[10px] uppercase tracking-wider mb-1.5 block font-medium ${isDark ? 'text-background/60' : 'text-primary'}`}>
+                Sick Days/Yr
+              </Label>
+              <Input
+                type="text"
+                value={avgSickDays}
+                onChange={(e) => setAvgSickDays(e.target.value.replace(/[^0-9.]/g, ''))}
+                placeholder="7"
+                className={`h-9 text-sm rounded-lg ${isDark ? 'bg-background/10 border-background/20 text-background' : ''}`}
+              />
+            </div>
+          </div>
+
+          {/* Industry */}
+          <div>
+            <Label className={`text-[10px] uppercase tracking-wider mb-1.5 block font-medium ${isDark ? 'text-background/60' : 'text-primary'}`}>
+              Industry
+            </Label>
+            <Select value={selectedIndustry} onValueChange={(value) => setSelectedIndustry(value as Industry)}>
+              <SelectTrigger className={`h-9 text-xs rounded-lg ${isDark ? 'bg-background/10 border-background/20 text-background' : ''}`}>
+                <SelectValue placeholder="Select industry" />
+              </SelectTrigger>
+              <SelectContent>
+                {Object.entries(industryProfiles).map(([key, profile]) => (
+                  <SelectItem key={key} value={key} className="text-xs">
+                    {profile.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Improvement Scenario */}
+          <div>
+            <Label className={`text-[10px] uppercase tracking-wider mb-1.5 block font-medium ${isDark ? 'text-background/60' : 'text-primary'}`}>
+              Scenario
+            </Label>
+            <div className="flex gap-1.5">
+              {[
+                { key: "conservative" as const, label: "15%" },
+                { key: "realistic" as const, label: "25%" },
+                { key: "optimistic" as const, label: "35%" },
+              ].map(({ key, label }) => (
+                <button
+                  key={key}
+                  onClick={() => setImprovementScenario(key)}
+                  className={`flex-1 py-1.5 px-2 rounded-md text-[9px] font-medium transition-all ${
+                    improvementScenario === key
+                      ? 'bg-accent text-white'
+                      : isDark 
+                        ? 'bg-background/10 text-background/70 hover:bg-background/20'
+                        : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Average Salary & Sick Days Grid */}
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <Label className={`text-[10px] uppercase tracking-wider mb-2 block font-medium ${isDark ? 'text-background/60' : 'text-primary'}`}>
-              Average Salary (£)
-            </Label>
-            <Input
-              type="text"
-              value={avgSalary}
-              onChange={(e) => setAvgSalary(e.target.value.replace(/[^0-9]/g, ''))}
-              placeholder="65000"
-              className={`h-10 text-sm rounded-xl ${isDark ? 'bg-background/10 border-background/20 text-background' : ''}`}
-            />
+        {/* Middle Column - Cost Breakdown */}
+        <div className={`space-y-3 px-6 border-x ${isDark ? 'border-background/10' : 'border-border/30'}`}>
+          <div className={`text-[10px] uppercase tracking-wider font-medium mb-3 ${isDark ? 'text-background/60' : 'text-muted-foreground'}`}>
+            Hidden Costs (Annual)
           </div>
-          <div>
-            <Label className={`text-[10px] uppercase tracking-wider mb-2 block font-medium ${isDark ? 'text-background/60' : 'text-primary'}`}>
-              Sick Days/Year
-            </Label>
-            <Input
-              type="text"
-              value={avgSickDays}
-              onChange={(e) => setAvgSickDays(e.target.value.replace(/[^0-9.]/g, ''))}
-              placeholder="7"
-              className={`h-10 text-sm rounded-xl ${isDark ? 'bg-background/10 border-background/20 text-background' : ''}`}
-            />
+          
+          <div className="space-y-2.5">
+            <div className={`flex justify-between items-center ${isDark ? 'text-background/80' : 'text-foreground/80'}`}>
+              <div className="flex items-center gap-2">
+                <Brain className="w-3.5 h-3.5 text-accent" />
+                <span className="text-[11px]">Underperformance</span>
+              </div>
+              <span className="text-sm font-medium tabular-nums">{formatCurrency(underperformanceCost)}</span>
+            </div>
+            <div className={`flex justify-between items-center ${isDark ? 'text-background/80' : 'text-foreground/80'}`}>
+              <div className="flex items-center gap-2">
+                <Users className="w-3.5 h-3.5 text-accent" />
+                <span className="text-[11px]">Turnover</span>
+              </div>
+              <span className="text-sm font-medium tabular-nums">{formatCurrency(turnoverCost)}</span>
+            </div>
+            <div className={`flex justify-between items-center ${isDark ? 'text-background/80' : 'text-foreground/80'}`}>
+              <div className="flex items-center gap-2">
+                <Clock className="w-3.5 h-3.5 text-accent" />
+                <span className="text-[11px]">Sick days</span>
+              </div>
+              <span className="text-sm font-medium tabular-nums">{formatCurrency(sickDaysCost)}</span>
+            </div>
+          </div>
+
+          <div className={`pt-3 border-t ${isDark ? 'border-background/10' : 'border-border/30'}`}>
+            <div className="flex justify-between items-center">
+              <span className={`text-xs font-medium ${isDark ? 'text-background' : 'text-foreground'}`}>Total exposure</span>
+              <span className={`text-lg font-semibold tabular-nums ${isDark ? 'text-background' : 'text-foreground'}`}>{formatCurrency(totalHiddenCosts)}</span>
+            </div>
+          </div>
+
+          <div className={`rounded-lg p-3 mt-3 ${isDark ? 'bg-accent/20' : 'bg-gradient-to-br from-accent/10 to-accent/5 border border-accent/20'}`}>
+            <div className="text-[9px] uppercase tracking-wider font-medium text-accent mb-2">
+              NeuroState Recovery
+            </div>
+            <div className="space-y-1.5">
+              <div className={`flex justify-between text-[11px] ${isDark ? 'text-background/80' : 'text-foreground/80'}`}>
+                <span>Year 1 savings</span>
+                <span className="font-medium text-accent tabular-nums">{formatCurrency(year1Recovery)}</span>
+              </div>
+              <div className={`flex justify-between text-[11px] ${isDark ? 'text-background/80' : 'text-foreground/80'}`}>
+                <span>Investment</span>
+                <span className="font-medium tabular-nums">{formatCurrency(investment)}</span>
+              </div>
+              <div className={`flex justify-between text-[11px] ${isDark ? 'text-background/80' : 'text-foreground/80'}`}>
+                <span>Net gain</span>
+                <span className="font-medium text-accent tabular-nums">{formatCurrency(netGain)}</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Industry Dropdown */}
-        <div>
-          <Label className={`text-[10px] uppercase tracking-wider mb-2 block font-medium ${isDark ? 'text-background/60' : 'text-primary'}`}>
-            Industry
-          </Label>
+        {/* Right Column - ROI & Actions */}
+        <div className="flex flex-col justify-between">
+          <div>
+            <div className={`text-[10px] uppercase tracking-wider font-medium mb-3 ${isDark ? 'text-background/60' : 'text-muted-foreground'}`}>
+              Return on Investment
+            </div>
+            
+            {/* ROI Multiple - Hero Card */}
+            <div className="bg-gradient-to-br from-accent via-accent/90 to-accent/80 rounded-2xl p-5 text-center mb-4">
+              <div className="text-[10px] uppercase tracking-wider text-white/70 mb-1">ROI Multiple</div>
+              <div className="text-4xl font-bold text-white tabular-nums">{roiMultiple.toFixed(1)}x</div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div className={`rounded-xl p-3 text-center ${isDark ? 'bg-background/10' : 'bg-muted/50'}`}>
+                <div className={`text-[9px] uppercase tracking-wider mb-1 ${isDark ? 'text-background/50' : 'text-muted-foreground'}`}>Payback</div>
+                <div className={`text-lg font-semibold tabular-nums ${isDark ? 'text-background' : 'text-foreground'}`}>{Math.round(paybackMonths)}mo</div>
+              </div>
+              <div className={`rounded-xl p-3 text-center ${isDark ? 'bg-background/10' : 'bg-muted/50'}`}>
+                <div className={`text-[9px] uppercase tracking-wider mb-1 ${isDark ? 'text-background/50' : 'text-muted-foreground'}`}>5-Year</div>
+                <div className="text-lg font-semibold text-accent tabular-nums">{formatCurrency(fiveYearValue)}</div>
+              </div>
+            </div>
+          </div>
+
+          <Button
+            onClick={() => setShowReport(true)}
+            className="w-full h-10 mt-4 bg-foreground text-background hover:bg-foreground/90 rounded-xl text-xs font-medium"
+          >
+            <FileText className="w-4 h-4 mr-2" />
+            View Business Case
+          </Button>
+        </div>
+      </div>
+
+      {/* Mobile Layout - Stacked */}
+      <div className="lg:hidden">
+        {/* Mobile Header */}
+        <div className="flex items-center gap-3 mb-5">
+          <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${isDark ? 'bg-background/10' : 'bg-primary/10'}`}>
+            <Calculator className={`w-4 h-4 ${isDark ? 'text-accent' : 'text-primary'}`} />
+          </div>
+          <div>
+            <h3 className={`text-sm font-medium ${isDark ? 'text-background' : 'text-foreground'}`}>ROI Calculator</h3>
+            <p className={`text-[10px] ${isDark ? 'text-background/60' : 'text-muted-foreground'}`}>£50/user/month</p>
+          </div>
+        </div>
+
+        {/* Mobile Inputs */}
+        <div className="space-y-4 mb-5">
+          {/* Employees */}
+          <div>
+            <label className={`text-[10px] uppercase tracking-wider mb-1.5 block font-medium ${isDark ? 'text-background/60' : 'text-primary'}`}>
+              Employees
+            </label>
+            <div className={`text-2xl font-light mb-2 tabular-nums ${isDark ? 'text-background' : 'text-foreground'}`}>
+              {employeeCount.toLocaleString('en-GB')}
+            </div>
+            <Slider value={employees} onValueChange={setEmployees} min={10} max={1000} step={10} className="mb-1" />
+          </div>
+
+          {/* Salary & Sick Days */}
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <Label className={`text-[10px] uppercase tracking-wider mb-1.5 block font-medium ${isDark ? 'text-background/60' : 'text-primary'}`}>
+                Avg Salary (£)
+              </Label>
+              <Input
+                type="text"
+                value={avgSalary}
+                onChange={(e) => setAvgSalary(e.target.value.replace(/[^0-9]/g, ''))}
+                className={`h-9 text-sm rounded-lg ${isDark ? 'bg-background/10 border-background/20 text-background' : ''}`}
+              />
+            </div>
+            <div>
+              <Label className={`text-[10px] uppercase tracking-wider mb-1.5 block font-medium ${isDark ? 'text-background/60' : 'text-primary'}`}>
+                Sick Days
+              </Label>
+              <Input
+                type="text"
+                value={avgSickDays}
+                onChange={(e) => setAvgSickDays(e.target.value.replace(/[^0-9.]/g, ''))}
+                className={`h-9 text-sm rounded-lg ${isDark ? 'bg-background/10 border-background/20 text-background' : ''}`}
+              />
+            </div>
+          </div>
+
+          {/* Industry */}
           <Select value={selectedIndustry} onValueChange={(value) => setSelectedIndustry(value as Industry)}>
-            <SelectTrigger className={`h-10 text-sm rounded-xl ${isDark ? 'bg-background/10 border-background/20 text-background' : ''}`}>
+            <SelectTrigger className={`h-9 text-xs rounded-lg ${isDark ? 'bg-background/10 border-background/20 text-background' : ''}`}>
               <SelectValue placeholder="Select industry" />
             </SelectTrigger>
             <SelectContent>
               {Object.entries(industryProfiles).map(([key, profile]) => (
-                <SelectItem key={key} value={key}>
-                  {profile.name}
-                </SelectItem>
+                <SelectItem key={key} value={key} className="text-xs">{profile.name}</SelectItem>
               ))}
             </SelectContent>
           </Select>
-        </div>
 
-        {/* Improvement Scenario Toggle */}
-        <div>
-          <Label className={`text-[10px] uppercase tracking-wider mb-2 block font-medium ${isDark ? 'text-background/60' : 'text-primary'}`}>
-            Improvement Scenario
-          </Label>
-          <div className="flex gap-2">
+          {/* Scenario Toggle */}
+          <div className="flex gap-1.5">
             {[
-              { key: "conservative" as const, label: "Conservative", rate: "15%" },
-              { key: "realistic" as const, label: "Realistic", rate: "25%" },
-              { key: "optimistic" as const, label: "Optimistic", rate: "35%" },
-            ].map(({ key, label, rate }) => (
+              { key: "conservative" as const, label: "15%" },
+              { key: "realistic" as const, label: "25%" },
+              { key: "optimistic" as const, label: "35%" },
+            ].map(({ key, label }) => (
               <button
                 key={key}
                 onClick={() => setImprovementScenario(key)}
                 className={`flex-1 py-2 px-2 rounded-lg text-[10px] font-medium transition-all ${
                   improvementScenario === key
                     ? 'bg-accent text-white'
-                    : isDark 
-                      ? 'bg-background/10 text-background/70 hover:bg-background/20'
-                      : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                    : isDark ? 'bg-background/10 text-background/70' : 'bg-muted text-muted-foreground'
                 }`}
               >
-                <div>{label}</div>
-                <div className="opacity-70">({rate})</div>
+                {label}
               </button>
             ))}
           </div>
         </div>
-      </div>
 
-      {/* Results */}
-      <div className={`space-y-3 pt-4 border-t ${isDark ? 'border-background/10' : 'border-border/30'}`}>
-        {/* Current Hidden Costs */}
-        <div className="space-y-2">
-          <div className={`text-[10px] uppercase tracking-wider font-medium ${isDark ? 'text-background/60' : 'text-muted-foreground'}`}>
-            Current Hidden Costs
+        {/* Mobile Results */}
+        <div className={`pt-4 border-t ${isDark ? 'border-background/10' : 'border-border/30'}`}>
+          {/* ROI Hero */}
+          <div className="bg-gradient-to-br from-accent via-accent/90 to-accent/80 rounded-2xl p-5 text-center mb-4">
+            <div className="text-[10px] uppercase tracking-wider text-white/70 mb-1">ROI Multiple</div>
+            <div className="text-4xl font-bold text-white tabular-nums">{roiMultiple.toFixed(1)}x</div>
           </div>
-          <div className={`flex justify-between text-xs ${isDark ? 'text-background/80' : 'text-foreground/80'}`}>
-            <span>Cognitive underperformance</span>
-            <span className="font-medium">{formatCurrency(underperformanceCost)}</span>
+
+          {/* Key Metrics Grid */}
+          <div className="grid grid-cols-3 gap-2 mb-4">
+            <div className={`rounded-xl p-3 text-center ${isDark ? 'bg-background/10' : 'bg-muted/50'}`}>
+              <div className={`text-[9px] uppercase tracking-wider mb-0.5 ${isDark ? 'text-background/50' : 'text-muted-foreground'}`}>Savings</div>
+              <div className="text-sm font-semibold text-accent tabular-nums">{formatCurrency(year1Recovery)}</div>
+            </div>
+            <div className={`rounded-xl p-3 text-center ${isDark ? 'bg-background/10' : 'bg-muted/50'}`}>
+              <div className={`text-[9px] uppercase tracking-wider mb-0.5 ${isDark ? 'text-background/50' : 'text-muted-foreground'}`}>Payback</div>
+              <div className={`text-sm font-semibold tabular-nums ${isDark ? 'text-background' : 'text-foreground'}`}>{Math.round(paybackMonths)}mo</div>
+            </div>
+            <div className={`rounded-xl p-3 text-center ${isDark ? 'bg-background/10' : 'bg-muted/50'}`}>
+              <div className={`text-[9px] uppercase tracking-wider mb-0.5 ${isDark ? 'text-background/50' : 'text-muted-foreground'}`}>5-Year</div>
+              <div className="text-sm font-semibold text-accent tabular-nums">{formatCurrency(fiveYearValue)}</div>
+            </div>
           </div>
-          <div className={`flex justify-between text-xs ${isDark ? 'text-background/80' : 'text-foreground/80'}`}>
-            <span>Burnout-related turnover</span>
-            <span className="font-medium">{formatCurrency(turnoverCost)}</span>
-          </div>
-          <div className={`flex justify-between text-xs ${isDark ? 'text-background/80' : 'text-foreground/80'}`}>
-            <span>Preventable sick days</span>
-            <span className="font-medium">{formatCurrency(sickDaysCost)}</span>
-          </div>
-          <div className={`flex justify-between pt-2 border-t ${isDark ? 'border-background/10' : 'border-border/30'}`}>
-            <span className={`text-xs font-medium ${isDark ? 'text-background' : 'text-foreground'}`}>Total hidden costs</span>
-            <span className={`text-lg font-semibold ${isDark ? 'text-background' : 'text-foreground'}`}>{formatCurrency(totalHiddenCosts)}</span>
-          </div>
+
+          <Button
+            onClick={() => setShowReport(true)}
+            className="w-full h-10 bg-foreground text-background hover:bg-foreground/90 rounded-xl text-xs font-medium"
+          >
+            <FileText className="w-4 h-4 mr-2" />
+            View Business Case
+          </Button>
         </div>
-
-        {/* NeuroState Impact */}
-        <div className={`rounded-xl p-4 mt-4 ${isDark ? 'bg-accent/20' : 'bg-gradient-to-br from-accent/10 to-accent/5 border border-accent/20'}`}>
-          <div className="text-[10px] uppercase tracking-wider font-medium text-accent mb-2">
-            NeuroState Impact
-          </div>
-          <div className="space-y-2">
-            <div className={`flex justify-between text-xs ${isDark ? 'text-background/80' : 'text-foreground/80'}`}>
-              <span>Year 1 recovery</span>
-              <span className="font-medium text-accent">{formatCurrency(year1Recovery)}</span>
-            </div>
-            <div className={`flex justify-between text-xs ${isDark ? 'text-background/80' : 'text-foreground/80'}`}>
-              <span>Annual investment</span>
-              <span className="font-medium">{formatCurrency(investment)}</span>
-            </div>
-            <div className={`flex justify-between text-xs ${isDark ? 'text-background/80' : 'text-foreground/80'}`}>
-              <span>Net gain</span>
-              <span className="font-medium text-accent">{formatCurrency(netGain)}</span>
-            </div>
-            <div className={`flex justify-between text-xs ${isDark ? 'text-background/80' : 'text-foreground/80'}`}>
-              <span>Payback</span>
-              <span className="font-medium">{Math.round(paybackMonths)} months</span>
-            </div>
-            <div className={`flex justify-between pt-2 border-t ${isDark ? 'border-background/10' : 'border-accent/20'}`}>
-              <span className={`text-xs ${isDark ? 'text-background/70' : 'text-muted-foreground'}`}>5-year value</span>
-              <span className="text-xl font-semibold text-accent">{formatCurrency(fiveYearValue)}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* ROI Multiple */}
-        <div className="bg-gradient-to-br from-accent via-accent/90 to-accent/80 rounded-xl p-4 text-center">
-          <div className="text-[10px] uppercase tracking-wider text-white/80 mb-1">ROI Multiple</div>
-          <div className="text-3xl font-bold text-white">{roiMultiple.toFixed(1)}x</div>
-        </div>
-
-        {/* View Report Button */}
-        <Button
-          className={`w-full h-11 ${isDark ? 'bg-background text-foreground hover:bg-background/90' : 'bg-foreground text-background hover:bg-foreground/90'}`}
-          onClick={() => setShowReport(true)}
-        >
-          <FileText className="w-4 h-4 mr-2" />
-          View Complete Business Case
-        </Button>
-      </div>
-
-      {/* Disclaimer */}
-      <div className={`text-[9px] mt-4 ${isDark ? 'text-background/40' : 'text-muted-foreground'}`}>
-        * Based on {currentIndustry.name} benchmarks ({(turnoverRate * 100).toFixed(0)}% turnover, {(productivityLossRate * 100).toFixed(0)}% productivity loss).
       </div>
     </motion.div>
   );
