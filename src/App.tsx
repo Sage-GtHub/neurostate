@@ -74,6 +74,7 @@ import HealthClubsCaseStudies from "./pages/HealthClubsCaseStudies";
 import TeamDashboard from "./pages/TeamDashboard";
 import JoinOrganisation from "./pages/JoinOrganisation";
 import TeamSettings from "./pages/TeamSettings";
+import TeamSettingsMembers from "./pages/TeamSettingsMembers";
 
 // Industry Pages
 import SaaSHighGrowth from "./pages/industries/SaaSHighGrowth";
@@ -215,8 +216,11 @@ const AnimatedRoutes = () => {
             
             {/* Team Management Routes */}
             <Route path="/team" element={<TeamDashboard />} />
+            <Route path="/team-dashboard" element={<TeamDashboard />} />
             <Route path="/join" element={<JoinOrganisation />} />
+            <Route path="/join-organisation" element={<JoinOrganisation />} />
             <Route path="/team/settings" element={<TeamSettings />} />
+            <Route path="/team/settings/members" element={<TeamSettingsMembers />} />
             <Route path="/team/settings/advanced" element={<NovaSettingsAdvanced />} />
             
             {/* Industry Landing Pages */}
