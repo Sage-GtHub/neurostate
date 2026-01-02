@@ -7,6 +7,7 @@ import { ArrowUpRight, ArrowRight, Database, Watch, Activity, MapPin, Layers, Ch
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { SolutionDataFlowDiagram } from "@/components/SolutionDataFlowDiagram";
+import { EnterpriseROICalculator } from "@/components/EnterpriseROICalculator";
 
 const signalSources = [
   {
@@ -70,6 +71,11 @@ export default function CognitiveDataLayer() {
                 <SolutionDataFlowDiagram variant="data-layer" className="mt-12" />
               </motion.div>
             </div>
+          </section>
+
+          {/* ROI Calculator - Directly Under Hero */}
+          <section className="py-12 md:py-16 px-6 md:px-8">
+            <EnterpriseROICalculator />
           </section>
 
           {/* The Problem */}

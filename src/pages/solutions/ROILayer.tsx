@@ -100,6 +100,11 @@ export default function ROILayer() {
             </div>
           </section>
 
+          {/* ROI Calculator - Directly Under Hero */}
+          <section className="py-12 md:py-16 px-6 md:px-8">
+            <EnterpriseROICalculator />
+          </section>
+
           {/* Why Economics Matter */}
           <section className="py-16 md:py-24 px-6 md:px-8 bg-muted/30">
             <div className="max-w-4xl mx-auto">
