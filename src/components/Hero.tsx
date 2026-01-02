@@ -191,12 +191,12 @@ const Hero = () => {
                 and human performance
               </motion.h1>
               
-              {/* Subheadline */}
+              {/* Subheadline - Blunt & Outcome-led */}
               <motion.p 
-                className="text-xs md:text-sm text-muted-foreground max-w-md leading-relaxed"
+                className="text-sm md:text-base text-foreground/80 max-w-md leading-relaxed font-medium"
                 variants={itemVariants}
               >
-                We build cognitive infrastructure that connects wearable data, biometric signals, and behavioural patterns to deliver predictive insights that optimise mental clarity, recovery, and sustained performance across your organisation.
+                Predict burnout and focus risk across your team before it hits output.
               </motion.p>
 
               {/* Data Flow Diagram */}
@@ -207,9 +207,9 @@ const Hero = () => {
                 <DataFlowDiagram />
               </motion.div>
 
-              {/* CTAs with magnetic hover effect */}
+              {/* Single CTA */}
               <motion.div 
-                className="flex flex-wrap items-center gap-3"
+                className="flex items-center"
                 variants={itemVariants}
               >
                 <Link to="/contact">
@@ -220,28 +220,12 @@ const Hero = () => {
                   >
                     <Button 
                       size="sm"
-                      className="h-10 px-5 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group magnetic-btn relative overflow-hidden"
+                      className="h-11 px-6 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group magnetic-btn relative overflow-hidden"
                     >
                       <span className="relative z-10 flex items-center">
-                        Book a demo
+                        Book an enterprise pilot
                         <ArrowUpRight className="ml-2 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </span>
-                    </Button>
-                  </motion.div>
-                </Link>
-                <Link to="/nova/overview">
-                  <motion.div
-                    whileHover={{ scale: 1.03, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  >
-                    <Button 
-                      size="sm"
-                      variant="ghost"
-                      className="h-10 px-5 text-xs font-medium text-foreground hover:bg-muted rounded-full group animated-underline inline-flex flex-row items-center gap-2"
-                    >
-                      Explore Nova AI
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                     </Button>
                   </motion.div>
                 </Link>
