@@ -114,6 +114,22 @@ export function EnterpriseROICalculator({ variant = "dark", defaultIndustry = "s
   const fiveYearValue = (year1Recovery * 5) - (investment * 5);
 
   const formatCurrency = (value: number) => {
+    // Abbreviate large values for mobile
+    if (value >= 1000000) {
+      return `£${(value / 1000000).toFixed(1)}m`;
+    }
+    if (value >= 1000) {
+      return `£${(value / 1000).toFixed(0)}k`;
+    }
+    return new Intl.NumberFormat('en-GB', {
+      style: 'currency',
+      currency: 'GBP',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(value);
+  };
+
+  const formatCurrencyFull = (value: number) => {
     return new Intl.NumberFormat('en-GB', {
       style: 'currency',
       currency: 'GBP',

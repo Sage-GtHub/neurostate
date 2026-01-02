@@ -89,12 +89,14 @@ export const Header = () => {
   };
 
   const industries = [
-    { label: "Information Technology", href: "/enterprise/information-technology/overview", desc: "Developer wellness & performance" },
-    { label: "Financial Services", href: "/enterprise/financial-services/overview", desc: "Trading floors & investment teams" },
-    { label: "Sports & Athletics", href: "/enterprise/sports/overview", desc: "Athletic performance systems" },
-    { label: "Healthcare & Clinical", href: "/enterprise/healthcare/overview", desc: "Patient recovery protocols" },
-    { label: "Hospitality & Spas", href: "/enterprise/hospitality/overview", desc: "Guest wellness experiences" },
-    { label: "Health Clubs & Gyms", href: "/enterprise/health-clubs/overview", desc: "Facility member solutions" },
+    { label: "SaaS – High Growth", href: "/industries/saas-high-growth", desc: "Hypergrowth team performance" },
+    { label: "SaaS – Enterprise", href: "/industries/saas-enterprise", desc: "Scaled software organisations" },
+    { label: "Financial Services", href: "/industries/financial-services", desc: "Trading & investment teams" },
+    { label: "Professional Services", href: "/industries/professional-services", desc: "Consulting & advisory firms" },
+    { label: "Healthcare", href: "/industries/healthcare", desc: "Clinical & care organisations" },
+    { label: "Research & Life Sciences", href: "/industries/research-life-sciences", desc: "R&D & biotech teams" },
+    { label: "Government / Defence", href: "/industries/government-defence", desc: "Public sector & security" },
+    { label: "Advanced Technology", href: "/industries/advanced-technology", desc: "Hardware & deep tech" },
   ];
 
   const mobileLinks = [
