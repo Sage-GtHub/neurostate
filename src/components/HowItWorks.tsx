@@ -38,27 +38,27 @@ const HowItWorks = () => {
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 md:py-32 px-6 md:px-8 relative overflow-hidden">
+    <section className="py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6 md:px-8 relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
       
       <div className="max-w-6xl mx-auto relative z-10" ref={containerRef}>
         {/* Header */}
         <motion.div 
-          className="text-center mb-16 space-y-4 max-w-2xl mx-auto"
+          className="text-center mb-8 sm:mb-12 md:mb-16 space-y-3 sm:space-y-4 max-w-2xl mx-auto px-2"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">
+          <span className="text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-primary font-medium">
             How It Works
           </span>
-          <h2 className="text-large-display text-foreground">
+          <h2 className="text-2xl sm:text-3xl md:text-large-display text-foreground leading-tight">
             From data to performance.
             <br />
             <span className="text-muted-foreground">In four steps.</span>
           </h2>
-          <p className="text-sm text-muted-foreground leading-relaxed max-w-lg mx-auto">
+          <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-lg mx-auto">
             Our cognitive infrastructure transforms raw biometric data into actionable performance intelligence, automatically and continuously.
           </p>
         </motion.div>
@@ -91,7 +91,7 @@ const HowItWorks = () => {
           </div>
 
           {/* Steps Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4 relative z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-4 relative z-10">
             {steps.map((step, index) => (
               <motion.div
                 key={step.title}
@@ -102,18 +102,18 @@ const HowItWorks = () => {
               >
                 {/* Card */}
                 <motion.div 
-                  className="flow-card p-6 h-full relative group"
+                  className="flow-card p-4 sm:p-5 md:p-6 h-full relative group"
                   whileHover={{ y: -4, scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
                   {/* Step Number */}
-                  <div className="absolute -top-3 -left-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-[10px] font-bold shadow-lg">
+                  <div className="absolute -top-2.5 sm:-top-3 -left-0.5 sm:-left-1 w-5 h-5 sm:w-6 sm:h-6 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-[9px] sm:text-[10px] font-bold shadow-lg">
                     {index + 1}
                   </div>
 
                   {/* Icon */}
                   <motion.div 
-                    className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors duration-300"
+                    className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-primary/20 transition-colors duration-300"
                     animate={isInView ? { 
                       scale: [1, 1.05, 1],
                     } : {}}
@@ -124,25 +124,25 @@ const HowItWorks = () => {
                       ease: "easeInOut"
                     }}
                   >
-                    <step.icon className="w-5 h-5 text-primary" />
+                    <step.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                   </motion.div>
 
                   {/* Content */}
-                  <div className="space-y-2">
-                    <h3 className="text-base font-medium text-foreground">{step.title}</h3>
-                    <p className="text-xs text-primary font-medium">{step.subtitle}</p>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
+                  <div className="space-y-1.5 sm:space-y-2">
+                    <h3 className="text-sm sm:text-base font-medium text-foreground">{step.title}</h3>
+                    <p className="text-[10px] sm:text-xs text-primary font-medium">{step.subtitle}</p>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground leading-relaxed">
                       {step.description}
                     </p>
                   </div>
 
                   {/* Metrics */}
-                  <div className="mt-4 pt-4 border-t border-border/50">
-                    <div className="flex flex-wrap gap-1.5">
+                  <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-border/50">
+                    <div className="flex flex-wrap gap-1 sm:gap-1.5">
                       {step.metrics.map((metric, i) => (
                         <motion.span
                           key={metric}
-                          className="px-2 py-1 text-[9px] text-muted-foreground bg-muted/50 rounded-full"
+                          className="px-1.5 sm:px-2 py-0.5 sm:py-1 text-[8px] sm:text-[9px] text-muted-foreground bg-muted/50 rounded-full"
                           initial={{ opacity: 0, scale: 0.8 }}
                           animate={isInView ? { opacity: 1, scale: 1 } : {}}
                           transition={{ delay: 0.5 + index * 0.15 + i * 0.05 }}
@@ -155,25 +155,25 @@ const HowItWorks = () => {
 
                   {/* Animated pulse on hover */}
                   <motion.div
-                    className="absolute inset-0 rounded-2xl border-2 border-primary/0 group-hover:border-primary/20"
+                    className="absolute inset-0 rounded-xl sm:rounded-2xl border-2 border-primary/0 group-hover:border-primary/20"
                     animate={{ scale: [1, 1.02, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   />
                 </motion.div>
 
-                {/* Arrow between cards - Mobile */}
+                {/* Arrow between cards - Mobile only (single column) */}
                 {index < steps.length - 1 && (
                   <motion.div 
-                    className="lg:hidden flex justify-center py-4"
+                    className="sm:hidden flex justify-center py-2"
                     initial={{ opacity: 0 }}
                     animate={isInView ? { opacity: 1 } : {}}
                     transition={{ delay: 0.3 + index * 0.15 }}
                   >
                     <motion.div
-                      animate={{ y: [0, 4, 0] }}
+                      animate={{ y: [0, 3, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity }}
                     >
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-primary">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-primary/60">
                         <path d="M12 5L12 19M12 19L18 13M12 19L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
                     </motion.div>
@@ -186,12 +186,12 @@ const HowItWorks = () => {
 
         {/* Bottom CTA */}
         <motion.div 
-          className="mt-16 text-center"
+          className="mt-8 sm:mt-12 md:mt-16 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 1 }}
         >
-          <p className="text-xs text-muted-foreground">
+          <p className="text-[10px] sm:text-xs text-muted-foreground">
             The entire cycle runs autonomously. Your only job is to perform.
           </p>
         </motion.div>
