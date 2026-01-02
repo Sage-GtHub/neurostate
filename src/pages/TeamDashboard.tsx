@@ -794,45 +794,45 @@ export default function TeamDashboard() {
 
                 {/* Intervention Effectiveness */}
                 <motion.div 
-                  className="p-6 rounded-2xl bg-muted/20 border border-border/50"
+                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-muted/20 border border-border/50"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.55 }}
                 >
-                  <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center justify-between mb-3 md:mb-5">
                     <div>
-                      <h3 className="text-sm font-medium text-foreground">Intervention Effectiveness</h3>
-                      <p className="text-[10px] text-muted-foreground mt-0.5">Closed-loop impact measurement</p>
+                      <h3 className="text-xs md:text-sm font-medium text-foreground">Intervention Effectiveness</h3>
+                      <p className="text-[9px] md:text-[10px] text-muted-foreground mt-0.5 hidden sm:block">Closed-loop impact measurement</p>
                     </div>
-                    <Badge variant="outline" className="text-[9px] px-2 py-0.5 rounded-full bg-green-500/10 text-green-600 border-green-500/30">
-                      <CheckCircle2 className="w-3 h-3 mr-1" />
-                      Verified ROI
+                    <Badge variant="outline" className="text-[8px] md:text-[9px] px-1.5 md:px-2 py-0.5 rounded-full bg-green-500/10 text-green-600 border-green-500/30">
+                      <CheckCircle2 className="w-2.5 h-2.5 md:w-3 md:h-3 mr-0.5 md:mr-1" />
+                      <span className="hidden sm:inline">Verified</span> ROI
                     </Badge>
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-2 md:space-y-3">
                     {interventionEffectiveness.map((item) => (
-                      <div key={item.id} className="p-4 rounded-xl bg-background border border-border/30">
-                        <div className="flex items-start justify-between mb-2">
-                          <div>
-                            <div className="text-xs font-medium text-foreground">{item.action}</div>
-                            <div className="text-[10px] text-muted-foreground">{item.team} · {item.timeframe}</div>
+                      <div key={item.id} className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                        <div className="flex items-start justify-between mb-1.5 md:mb-2">
+                          <div className="flex-1 min-w-0 mr-2">
+                            <div className="text-[10px] md:text-xs font-medium text-foreground truncate">{item.action}</div>
+                            <div className="text-[9px] md:text-[10px] text-muted-foreground">{item.team} · {item.timeframe}</div>
                           </div>
                           <Badge 
-                            className={`text-[9px] ${
+                            className={`text-[8px] md:text-[9px] px-1.5 md:px-2 flex-shrink-0 ${
                               item.status === 'completed' ? 'bg-green-500/20 text-green-600' : 'bg-amber-500/20 text-amber-600'
                             }`}
                           >
-                            {item.status === 'completed' ? 'Completed' : 'In Progress'}
+                            {item.status === 'completed' ? 'Done' : 'Active'}
                           </Badge>
                         </div>
-                        <div className="flex items-center gap-4">
-                          <div className="flex items-center gap-1.5">
-                            <TrendingUp className="w-3 h-3 text-green-600" />
-                            <span className="text-xs text-green-600 font-medium">{item.signalChange}</span>
+                        <div className="flex items-center gap-2 md:gap-4 flex-wrap">
+                          <div className="flex items-center gap-1">
+                            <TrendingUp className="w-2.5 h-2.5 md:w-3 md:h-3 text-green-600" />
+                            <span className="text-[10px] md:text-xs text-green-600 font-medium">{item.signalChange}</span>
                           </div>
-                          <div className="flex items-center gap-1.5">
-                            <PoundSterling className="w-3 h-3 text-primary" />
-                            <span className="text-xs text-primary font-medium">{formatCurrency(item.valueRecovered)} recovered</span>
+                          <div className="flex items-center gap-1">
+                            <PoundSterling className="w-2.5 h-2.5 md:w-3 md:h-3 text-primary" />
+                            <span className="text-[10px] md:text-xs text-primary font-medium">{formatCurrency(item.valueRecovered, true)}</span>
                           </div>
                         </div>
                       </div>
@@ -842,44 +842,46 @@ export default function TeamDashboard() {
 
                 {/* Weekly Patterns */}
                 <motion.div 
-                  className="p-6 rounded-2xl bg-muted/20 border border-border/50"
+                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-muted/20 border border-border/50"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
                 >
-                  <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center justify-between mb-3 md:mb-5">
                     <div>
-                      <h3 className="text-sm font-medium text-foreground">Focus & Fatigue Patterns</h3>
-                      <p className="text-[10px] text-muted-foreground mt-0.5">Weekly rhythm analysis</p>
+                      <h3 className="text-xs md:text-sm font-medium text-foreground">Focus & Fatigue Patterns</h3>
+                      <p className="text-[9px] md:text-[10px] text-muted-foreground mt-0.5 hidden sm:block">Weekly rhythm analysis</p>
                     </div>
                   </div>
-                  <div className="grid grid-cols-5 gap-3">
+                  <div className="grid grid-cols-5 gap-1.5 md:gap-3">
                     {weeklyPatterns.map((day, i) => (
-                      <div key={i} className="p-3 rounded-xl bg-background border border-border/30">
-                        <div className="text-[10px] text-muted-foreground mb-2">{day.day}</div>
-                        <div className="space-y-2">
+                      <div key={i} className="p-2 md:p-3 rounded-lg md:rounded-xl bg-background border border-border/30">
+                        <div className="text-[8px] md:text-[10px] text-muted-foreground mb-1 md:mb-2">{day.day}</div>
+                        <div className="space-y-1.5 md:space-y-2">
                           <div>
-                            <div className="flex justify-between text-[9px] mb-0.5">
-                              <span className="text-primary">Focus</span>
+                            <div className="flex justify-between text-[7px] md:text-[9px] mb-0.5">
+                              <span className="text-primary hidden sm:inline">Focus</span>
+                              <span className="text-primary sm:hidden">F</span>
                               <span className="text-foreground font-medium">{day.focus}%</span>
                             </div>
-                            <div className="h-1 bg-muted rounded-full overflow-hidden">
+                            <div className="h-0.5 md:h-1 bg-muted rounded-full overflow-hidden">
                               <div className="h-full bg-primary rounded-full" style={{ width: `${day.focus}%` }} />
                             </div>
                           </div>
                           <div>
-                            <div className="flex justify-between text-[9px] mb-0.5">
-                              <span className="text-amber-600">Fatigue</span>
+                            <div className="flex justify-between text-[7px] md:text-[9px] mb-0.5">
+                              <span className="text-amber-600 hidden sm:inline">Fatigue</span>
+                              <span className="text-amber-600 sm:hidden">Ft</span>
                               <span className="text-foreground font-medium">{day.fatigue}%</span>
                             </div>
-                            <div className="h-1 bg-muted rounded-full overflow-hidden">
+                            <div className="h-0.5 md:h-1 bg-muted rounded-full overflow-hidden">
                               <div className="h-full bg-amber-500 rounded-full" style={{ width: `${day.fatigue}%` }} />
                             </div>
                           </div>
                         </div>
-                        <div className="mt-2 pt-2 border-t border-border/30">
-                          <div className="text-[9px] text-muted-foreground">Optimal hrs</div>
-                          <div className="text-sm font-medium text-foreground">{day.optimal}</div>
+                        <div className="mt-1.5 md:mt-2 pt-1.5 md:pt-2 border-t border-border/30">
+                          <div className="text-[7px] md:text-[9px] text-muted-foreground hidden sm:block">Optimal hrs</div>
+                          <div className="text-[10px] md:text-sm font-medium text-foreground">{day.optimal}<span className="sm:hidden text-[7px] text-muted-foreground">h</span></div>
                         </div>
                       </div>
                     ))}
@@ -888,38 +890,38 @@ export default function TeamDashboard() {
               </div>
 
               {/* Right Column - Interventions & Comparisons */}
-              <div className="space-y-6">
+              <div className="space-y-4 md:space-y-6">
                 {/* Insight Trace Panel */}
                 <motion.div 
-                  className="p-6 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20"
+                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.35 }}
                 >
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-3 md:mb-4">
                     <div>
-                      <h3 className="text-sm font-medium text-foreground">Insight Trace</h3>
-                      <p className="text-[10px] text-muted-foreground mt-0.5">Why Nova recommended this</p>
+                      <h3 className="text-xs md:text-sm font-medium text-foreground">Insight Trace</h3>
+                      <p className="text-[9px] md:text-[10px] text-muted-foreground mt-0.5 hidden sm:block">Why Nova recommended this</p>
                     </div>
-                    <Lightbulb className="w-4 h-4 text-primary" />
+                    <Lightbulb className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />
                   </div>
-                  <div className="p-4 rounded-xl bg-background border border-border/30">
-                    <div className="text-[10px] text-primary uppercase tracking-wider mb-2">Current Priority</div>
-                    <p className="text-xs text-foreground leading-relaxed mb-3">
+                  <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                    <div className="text-[9px] md:text-[10px] text-primary uppercase tracking-wider mb-1.5 md:mb-2">Current Priority</div>
+                    <p className="text-[10px] md:text-xs text-foreground leading-relaxed mb-2 md:mb-3">
                       Reduced recovery + sustained workload → rising burnout volatility → preventative intervention recommended.
                     </p>
-                    <div className="space-y-2 pt-3 border-t border-border/30">
-                      <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                        3-week upward trend in cognitive load
+                    <div className="space-y-1.5 md:space-y-2 pt-2 md:pt-3 border-t border-border/30">
+                      <div className="flex items-center gap-1.5 md:gap-2 text-[9px] md:text-[10px] text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                        <span className="line-clamp-1">3-week upward trend in cognitive load</span>
                       </div>
-                      <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
-                        <div className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                        Recovery rate 23% below baseline
+                      <div className="flex items-center gap-1.5 md:gap-2 text-[9px] md:text-[10px] text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0" />
+                        <span className="line-clamp-1">Recovery rate 23% below baseline</span>
                       </div>
-                      <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
-                        <div className="w-1.5 h-1.5 rounded-full bg-red-500" />
-                        Similar pattern preceded 2 departures in Q3
+                      <div className="flex items-center gap-1.5 md:gap-2 text-[9px] md:text-[10px] text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0" />
+                        <span className="line-clamp-1">Similar pattern preceded 2 departures in Q3</span>
                       </div>
                     </div>
                   </div>
@@ -927,47 +929,47 @@ export default function TeamDashboard() {
 
                 {/* Nova Interventions */}
                 <motion.div 
-                  className="p-6 rounded-2xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20"
+                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-3 md:mb-4">
                     <div>
-                      <h3 className="text-sm font-medium text-foreground">Nova Interventions</h3>
-                      <p className="text-[10px] text-muted-foreground mt-0.5">AI-recommended actions with ROI</p>
+                      <h3 className="text-xs md:text-sm font-medium text-foreground">Nova Interventions</h3>
+                      <p className="text-[9px] md:text-[10px] text-muted-foreground mt-0.5 hidden sm:block">AI-recommended actions with ROI</p>
                     </div>
-                    <Sparkles className="w-4 h-4 text-accent" />
+                    <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4 text-accent" />
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-2 md:space-y-3">
                     {interventions.map((intervention) => (
                       <div 
                         key={intervention.id}
-                        className="p-3 rounded-xl bg-background border border-border/30 cursor-pointer hover:border-accent/30 transition-all"
+                        className="p-2.5 md:p-3 rounded-lg md:rounded-xl bg-background border border-border/30 cursor-pointer hover:border-accent/30 transition-all"
                         onClick={() => setExpandedIntervention(expandedIntervention === intervention.id ? null : intervention.id)}
                       >
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <div className="text-xs font-medium text-foreground mb-1">{intervention.title}</div>
-                            <div className="flex items-center gap-2 flex-wrap">
-                              <Badge variant="outline" className="text-[9px] px-1.5 py-0 rounded">
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex-1 min-w-0">
+                            <div className="text-[10px] md:text-xs font-medium text-foreground mb-1 line-clamp-2">{intervention.title}</div>
+                            <div className="flex items-center gap-1.5 md:gap-2 flex-wrap">
+                              <Badge variant="outline" className="text-[8px] md:text-[9px] px-1 md:px-1.5 py-0 rounded">
                                 {intervention.team}
                               </Badge>
                               <Badge 
-                                className={`text-[9px] px-1.5 py-0 rounded ${
+                                className={`text-[8px] md:text-[9px] px-1 md:px-1.5 py-0 rounded ${
                                   intervention.impact === 'high' ? 'bg-green-500/20 text-green-600' : 'bg-amber-500/20 text-amber-600'
                                 }`}
                               >
-                                {intervention.impact} impact
+                                {intervention.impact}
                               </Badge>
-                              <span className="text-[9px] text-primary font-medium">
-                                {formatCurrency(intervention.estimatedValue, true)} value
+                              <span className="text-[8px] md:text-[9px] text-primary font-medium">
+                                {formatCurrency(intervention.estimatedValue, true)}
                               </span>
                             </div>
                           </div>
-                          <div className="text-right ml-2">
-                            <div className="text-xs font-medium text-accent">{intervention.confidence}%</div>
-                            <div className="text-[9px] text-muted-foreground">confidence</div>
+                          <div className="text-right flex-shrink-0">
+                            <div className="text-[10px] md:text-xs font-medium text-accent">{intervention.confidence}%</div>
+                            <div className="text-[8px] md:text-[9px] text-muted-foreground hidden sm:block">confidence</div>
                           </div>
                         </div>
                         <AnimatePresence>
@@ -976,14 +978,14 @@ export default function TeamDashboard() {
                               initial={{ opacity: 0, height: 0 }}
                               animate={{ opacity: 1, height: 'auto' }}
                               exit={{ opacity: 0, height: 0 }}
-                              className="mt-3 pt-3 border-t border-border/30"
+                              className="mt-2 md:mt-3 pt-2 md:pt-3 border-t border-border/30"
                             >
-                              <div className="text-[10px] text-muted-foreground mb-2 flex items-center gap-1">
-                                <Info className="w-3 h-3" />
+                              <div className="text-[9px] md:text-[10px] text-muted-foreground mb-1.5 md:mb-2 flex items-center gap-1">
+                                <Info className="w-2.5 h-2.5 md:w-3 md:h-3" />
                                 Insight Trace
                               </div>
-                              <p className="text-[11px] text-foreground/80 leading-relaxed">{intervention.trace}</p>
-                              <Button size="sm" className="w-full mt-3 h-8 text-[10px] bg-accent text-white hover:bg-accent/90 rounded-lg">
+                              <p className="text-[10px] md:text-[11px] text-foreground/80 leading-relaxed">{intervention.trace}</p>
+                              <Button size="sm" className="w-full mt-2 md:mt-3 h-7 md:h-8 text-[9px] md:text-[10px] bg-accent text-white hover:bg-accent/90 rounded-lg">
                                 Apply intervention
                               </Button>
                             </motion.div>
@@ -996,53 +998,53 @@ export default function TeamDashboard() {
 
                 {/* Trend Comparisons */}
                 <motion.div 
-                  className="p-6 rounded-2xl bg-muted/20 border border-border/50"
+                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-muted/20 border border-border/50"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
                 >
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-sm font-medium text-foreground">Trend Comparison</h3>
+                  <div className="flex items-center justify-between mb-3 md:mb-4">
+                    <h3 className="text-xs md:text-sm font-medium text-foreground">Trend Comparison</h3>
                     <div className="flex gap-1">
                       <button 
                         onClick={() => setComparisonPeriod('week')}
-                        className={`px-2 py-1 text-[9px] rounded ${comparisonPeriod === 'week' ? 'bg-foreground text-background' : 'text-muted-foreground'}`}
+                        className={`px-1.5 md:px-2 py-0.5 md:py-1 text-[8px] md:text-[9px] rounded ${comparisonPeriod === 'week' ? 'bg-foreground text-background' : 'text-muted-foreground'}`}
                       >
                         WoW
                       </button>
                       <button 
                         onClick={() => setComparisonPeriod('month')}
-                        className={`px-2 py-1 text-[9px] rounded ${comparisonPeriod === 'month' ? 'bg-foreground text-background' : 'text-muted-foreground'}`}
+                        className={`px-1.5 md:px-2 py-0.5 md:py-1 text-[8px] md:text-[9px] rounded ${comparisonPeriod === 'month' ? 'bg-foreground text-background' : 'text-muted-foreground'}`}
                       >
                         MoM
                       </button>
                     </div>
                   </div>
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-background border border-border/30">
+                  <div className="space-y-2 md:space-y-3">
+                    <div className="flex items-center justify-between p-2.5 md:p-3 rounded-lg md:rounded-xl bg-background border border-border/30">
                       <div>
-                        <div className="text-[10px] text-muted-foreground">Readiness</div>
-                        <div className="text-lg font-semibold text-foreground">{comparison.readiness.current}</div>
+                        <div className="text-[9px] md:text-[10px] text-muted-foreground">Readiness</div>
+                        <div className="text-base md:text-lg font-semibold text-foreground">{comparison.readiness.current}</div>
                       </div>
-                      <div className={`text-xs font-medium ${comparison.readiness.change > 0 ? 'text-green-600' : 'text-red-500'}`}>
+                      <div className={`text-[10px] md:text-xs font-medium ${comparison.readiness.change > 0 ? 'text-green-600' : 'text-red-500'}`}>
                         {comparison.readiness.change > 0 ? '+' : ''}{comparison.readiness.change.toFixed(1)}%
                       </div>
                     </div>
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-background border border-border/30">
+                    <div className="flex items-center justify-between p-2.5 md:p-3 rounded-lg md:rounded-xl bg-background border border-border/30">
                       <div>
-                        <div className="text-[10px] text-muted-foreground">Burnout Risk</div>
-                        <div className="text-lg font-semibold text-foreground">{comparison.burnout.current}%</div>
+                        <div className="text-[9px] md:text-[10px] text-muted-foreground">Burnout Risk</div>
+                        <div className="text-base md:text-lg font-semibold text-foreground">{comparison.burnout.current}%</div>
                       </div>
-                      <div className={`text-xs font-medium ${comparison.burnout.change < 0 ? 'text-green-600' : 'text-red-500'}`}>
+                      <div className={`text-[10px] md:text-xs font-medium ${comparison.burnout.change < 0 ? 'text-green-600' : 'text-red-500'}`}>
                         {comparison.burnout.change > 0 ? '+' : ''}{comparison.burnout.change.toFixed(1)}%
                       </div>
                     </div>
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-background border border-border/30">
+                    <div className="flex items-center justify-between p-2.5 md:p-3 rounded-lg md:rounded-xl bg-background border border-border/30">
                       <div>
-                        <div className="text-[10px] text-muted-foreground">Focus Score</div>
-                        <div className="text-lg font-semibold text-foreground">{comparison.focus.current}</div>
+                        <div className="text-[9px] md:text-[10px] text-muted-foreground">Focus Score</div>
+                        <div className="text-base md:text-lg font-semibold text-foreground">{comparison.focus.current}</div>
                       </div>
-                      <div className={`text-xs font-medium ${comparison.focus.change > 0 ? 'text-green-600' : 'text-red-500'}`}>
+                      <div className={`text-[10px] md:text-xs font-medium ${comparison.focus.change > 0 ? 'text-green-600' : 'text-red-500'}`}>
                         {comparison.focus.change > 0 ? '+' : ''}{comparison.focus.change.toFixed(1)}%
                       </div>
                     </div>
@@ -1051,34 +1053,34 @@ export default function TeamDashboard() {
 
                 {/* Quick Actions */}
                 <motion.div 
-                  className="p-6 rounded-2xl bg-muted/20 border border-border/50"
+                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-muted/20 border border-border/50"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
                 >
-                  <h3 className="text-sm font-medium text-foreground mb-4">Quick Actions</h3>
-                  <div className="space-y-2">
-                    <Button variant="outline" className="w-full justify-between h-10 text-xs rounded-lg">
-                      <span className="flex items-center gap-2">
-                        <BarChart3 className="w-4 h-4" />
+                  <h3 className="text-xs md:text-sm font-medium text-foreground mb-3 md:mb-4">Quick Actions</h3>
+                  <div className="space-y-1.5 md:space-y-2">
+                    <Button variant="outline" className="w-full justify-between h-8 md:h-10 text-[10px] md:text-xs rounded-lg">
+                      <span className="flex items-center gap-1.5 md:gap-2">
+                        <BarChart3 className="w-3.5 h-3.5 md:w-4 md:h-4" />
                         Export report
                       </span>
-                      <ChevronRight className="w-4 h-4" />
+                      <ChevronRight className="w-3.5 h-3.5 md:w-4 md:h-4" />
                     </Button>
-                    <Button variant="outline" className="w-full justify-between h-10 text-xs rounded-lg">
-                      <span className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4" />
+                    <Button variant="outline" className="w-full justify-between h-8 md:h-10 text-[10px] md:text-xs rounded-lg">
+                      <span className="flex items-center gap-1.5 md:gap-2">
+                        <Calendar className="w-3.5 h-3.5 md:w-4 md:h-4" />
                         Schedule review
                       </span>
-                      <ChevronRight className="w-4 h-4" />
+                      <ChevronRight className="w-3.5 h-3.5 md:w-4 md:h-4" />
                     </Button>
                     <Link to="/team/settings/advanced">
-                      <Button variant="outline" className="w-full justify-between h-10 text-xs rounded-lg">
-                        <span className="flex items-center gap-2">
-                          <Settings className="w-4 h-4" />
+                      <Button variant="outline" className="w-full justify-between h-8 md:h-10 text-[10px] md:text-xs rounded-lg">
+                        <span className="flex items-center gap-1.5 md:gap-2">
+                          <Settings className="w-3.5 h-3.5 md:w-4 md:h-4" />
                           Configure alerts
                         </span>
-                        <ChevronRight className="w-4 h-4" />
+                        <ChevronRight className="w-3.5 h-3.5 md:w-4 md:h-4" />
                       </Button>
                     </Link>
                   </div>
