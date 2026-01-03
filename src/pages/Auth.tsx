@@ -42,17 +42,17 @@ export default function Auth() {
   const [fullName, setFullName] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [isLogin, setIsLogin] = useState(searchParams.get('mode') !== 'signup');
-  const [accountType, setAccountType] = useState<AccountType>(null);
-  const [step, setStep] = useState<'type' | 'details'>('type');
+  const [accountType, setAccountType] = useState<AccountType>(searchParams.get('type') === 'company' ? 'company' : null);
+  const [step, setStep] = useState<'type' | 'details'>(searchParams.get('type') === 'company' ? 'details' : 'type');
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) navigate('/nova');
+      if (session) navigate('/team-dashboard');
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN' && session) {
-        supabase.functions.invoke('seed-demo-data').then(() => navigate('/nova'));
+        supabase.functions.invoke('seed-demo-data').then(() => navigate('/team-dashboard'));
       }
     });
 
@@ -139,7 +139,7 @@ export default function Auth() {
         toast.error("Invalid credentials", { description: "Please check your email and password." });
       } else {
         toast.success("Welcome back!");
-        navigate("/nova");
+        navigate("/team-dashboard");
       }
     } catch (error) {
       if (error instanceof z.ZodError) {
