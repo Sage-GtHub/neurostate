@@ -1,6 +1,6 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
-import { Search, User, Menu, X, Award, LogOut, ArrowUpRight, ChevronDown } from "lucide-react";
+import { User, Menu, X, Award, LogOut, ArrowUpRight, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { Input } from "./ui/input";
@@ -254,7 +254,7 @@ export const Header = () => {
             </Link>
 
             <Link
-              to="/team-dashboard"
+              to={user ? "/team-dashboard" : "/auth?mode=signup&type=company"}
               className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
             >
               Team
@@ -268,17 +268,8 @@ export const Header = () => {
             </Link>
           </nav>
 
-          {/* Right Actions - Search, Auth, Book Demo */}
+          {/* Right Actions - Auth, Book Demo */}
           <div className="hidden lg:flex items-center gap-2">
-            {/* Search Button */}
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={() => setSearchOpen(!searchOpen)}
-              className="h-8 w-8 text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full"
-            >
-              <Search className="h-4 w-4" />
-            </Button>
             
             {/* Auth Buttons */}
             {user ? (
@@ -420,6 +411,14 @@ export const Header = () => {
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Nova AI
+                  </Link>
+
+                  <Link
+                    to={user ? "/team-dashboard" : "/auth?mode=signup&type=company"}
+                    className="block py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Team
                   </Link>
                   
                   <Link
