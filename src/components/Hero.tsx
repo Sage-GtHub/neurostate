@@ -180,13 +180,13 @@ const Hero = () => {
                 className="text-xl md:text-2xl lg:text-3xl font-normal text-foreground tracking-tight"
                 variants={itemVariants}
               >
-                The invisible layer between{" "}
+                NeuroState sits between{" "}
                 <motion.span 
                   className="text-primary inline"
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
-                  AI
+                  raw data
                 </motion.span>{" "}
                 and human performance
               </motion.h1>
