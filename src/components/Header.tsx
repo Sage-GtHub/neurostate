@@ -254,6 +254,13 @@ export const Header = () => {
             </Link>
 
             <Link
+              to="/team-dashboard"
+              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
+            >
+              Team
+            </Link>
+
+            <Link
               to="/about"
               className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
             >
