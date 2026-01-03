@@ -271,8 +271,8 @@ export const Header = () => {
           {/* Right Actions - Auth, Book Demo */}
           <div className="hidden lg:flex items-center gap-2">
             
-            {/* Auth Buttons */}
-            {user ? (
+            {/* User Menu (only when logged in) */}
+            {user && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button 
@@ -304,27 +304,6 @@ export const Header = () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            ) : (
-              <>
-                <Link to="/auth">
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                    className="h-8 px-3 text-[11px] font-medium text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full"
-                  >
-                    Log in
-                  </Button>
-                </Link>
-                <Link to="/auth?mode=signup">
-                  <Button 
-                    variant="outline"
-                    size="sm"
-                    className="h-8 px-3 text-[11px] font-medium rounded-full border-foreground/20 hover:bg-foreground/5"
-                  >
-                    Create account
-                  </Button>
-                </Link>
-              </>
             )}
             
             {/* Book a Demo */}
@@ -458,24 +437,7 @@ export const Header = () => {
                           Sign Out
                         </button>
                       </div>
-                    ) : (
-                      <div className="space-y-2">
-                        <Link
-                          to="/auth"
-                          className="block py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          Log in
-                        </Link>
-                        <Link
-                          to="/auth?mode=signup"
-                          className="block py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          Create account
-                        </Link>
-                      </div>
-                    )}
+                    ) : null}
                   </div>
                   
                   {/* CTA */}
