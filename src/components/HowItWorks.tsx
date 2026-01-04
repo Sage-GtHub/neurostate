@@ -150,57 +150,65 @@ const HowItWorks = () => {
           </div>
         </div>
 
-        {/* Mobile Layout - Card Stack */}
-        <div className="md:hidden space-y-3">
-          {steps.map((step, index) => (
-            <motion.div
-              key={step.title}
-              className="p-4 rounded-xl bg-card border border-border/50"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.1 + index * 0.1 }}
-            >
-              <div className="flex items-start gap-3">
-                {/* Step number + icon */}
-                <div className="flex flex-col items-center gap-1">
-                  <span className="text-[10px] text-muted-foreground font-medium">0{index + 1}</span>
-                  <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
-                    <step.icon className="w-4 h-4 text-primary" />
-                  </div>
+        {/* Mobile Layout - Clean Timeline */}
+        <div className="md:hidden relative">
+          {/* Timeline line */}
+          <motion.div 
+            className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/20 via-primary to-primary/20"
+            initial={{ scaleY: 0 }}
+            animate={isInView ? { scaleY: 1 } : {}}
+            transition={{ duration: 1, delay: 0.3 }}
+            style={{ originY: 0 }}
+          />
+
+          <div className="space-y-0">
+            {steps.map((step, index) => (
+              <motion.div
+                key={step.title}
+                className="relative flex items-start gap-4 py-6"
+                initial={{ opacity: 0, x: -20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
+              >
+                {/* Timeline node */}
+                <div className="relative z-10 flex-shrink-0">
+                  <motion.div 
+                    className="w-12 h-12 bg-background border-2 border-primary rounded-xl flex items-center justify-center shadow-lg"
+                    animate={isInView ? { scale: [1, 1.05, 1] } : {}}
+                    transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                  >
+                    <step.icon className="w-5 h-5 text-primary" />
+                  </motion.div>
                 </div>
-                
+
                 {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-sm font-semibold text-foreground">{step.title}</h3>
-                    <span className="text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded-full">{step.subtitle}</span>
+                <div className="flex-1 pt-1">
+                  <div className="flex items-baseline gap-2 mb-1">
+                    <h3 className="text-base font-semibold text-foreground">{step.title}</h3>
+                    <span className="text-[10px] text-primary font-medium">{step.subtitle}</span>
                   </div>
-                  <p className="text-xs text-muted-foreground leading-relaxed mb-2">
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">
                     {step.description}
                   </p>
                   
-                  {/* Metrics as horizontal scroll */}
-                  <div className="flex gap-1.5 overflow-x-auto pb-1 -mx-1 px-1">
-                    {step.metrics.map((metric) => (
-                      <span
+                  {/* Metrics - inline pills */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {step.metrics.map((metric, i) => (
+                      <motion.span
                         key={metric}
-                        className="flex-shrink-0 px-2 py-0.5 text-[9px] text-muted-foreground bg-muted/60 rounded-full border border-border/30"
+                        className="px-2 py-0.5 text-[10px] text-muted-foreground bg-muted/80 rounded-full border border-border/50"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                        transition={{ delay: 0.4 + index * 0.1 + i * 0.05 }}
                       >
                         {metric}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
                 </div>
-              </div>
-              
-              {/* Connection arrow - except last */}
-              {index < steps.length - 1 && (
-                <div className="flex justify-center mt-2 -mb-5 relative z-10">
-                  <div className="w-px h-4 bg-gradient-to-b from-primary/40 to-transparent" />
-                </div>
-              )}
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* Bottom CTA */}

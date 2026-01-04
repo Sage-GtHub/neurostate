@@ -109,23 +109,31 @@ export function HomeROICalculator() {
 
   return (
     <motion.div 
-      className="p-4 rounded-xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20"
+      className="p-5 md:p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
     >
-      {/* Header Row */}
-      <div className="flex items-center justify-between gap-3 mb-4">
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 bg-primary/10 rounded-lg flex items-center justify-center">
-            <Calculator className="w-3.5 h-3.5 text-primary" />
-          </div>
-          <p className="text-foreground font-medium text-xs">ROI Calculator</p>
+      <div className="flex items-center gap-3 mb-5">
+        <div className="w-9 h-9 bg-primary/10 rounded-xl flex items-center justify-center">
+          <Calculator className="w-4 h-4 text-primary" />
+        </div>
+        <div>
+          <p className="text-foreground font-medium text-sm">Quick ROI Calculator</p>
+          <p className="text-muted-foreground text-xs">Select industry & team size</p>
+        </div>
+      </div>
+
+      {/* Industry Selector */}
+      <div className="mb-5">
+        <div className="flex items-center gap-2 mb-2">
+          <Building2 className="w-3 h-3 text-muted-foreground" />
+          <span className="text-xs text-muted-foreground uppercase tracking-wide">Industry</span>
         </div>
         <Select value={selectedIndustry} onValueChange={(val) => setSelectedIndustry(val as IndustryKey)}>
-          <SelectTrigger className="w-[140px] h-7 text-[10px] bg-background/60 border-primary/20 rounded-lg">
-            <SelectValue placeholder="Industry" />
+          <SelectTrigger className="w-full h-9 text-xs bg-background/60 border-primary/20 rounded-lg">
+            <SelectValue placeholder="Select industry" />
           </SelectTrigger>
           <SelectContent>
             {Object.entries(industryBenchmarks).map(([key, value]) => (
@@ -137,11 +145,32 @@ export function HomeROICalculator() {
         </Select>
       </div>
 
-      {/* Compact Controls Row */}
-      <div className="flex items-center gap-3 mb-4 p-2.5 rounded-lg bg-background/40 border border-primary/10">
-        <div className="flex items-center gap-2 text-[10px] text-muted-foreground whitespace-nowrap">
-          <Users className="w-3 h-3" />
-          <span>{employees}</span>
+      {/* Industry Benchmarks Display */}
+      <AnimatePresence mode="wait">
+        <motion.div 
+          key={selectedIndustry}
+          className="grid grid-cols-2 gap-2 mb-5 p-3 rounded-lg bg-background/40 border border-primary/10"
+          initial={{ opacity: 0, y: -5 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 5 }}
+          transition={{ duration: 0.2 }}
+        >
+          <div className="text-center">
+            <p className="text-lg font-medium text-primary">{formatPercentage(industry.turnover)}</p>
+            <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Avg. Turnover</p>
+          </div>
+          <div className="text-center">
+            <p className="text-lg font-medium text-primary">{formatPercentage(industry.productivity)}</p>
+            <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Productivity Loss</p>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Team Size Slider */}
+      <div className="mb-6">
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-xs text-muted-foreground uppercase tracking-wide">Team Size</span>
+          <span className="text-lg font-medium text-foreground">{employees} people</span>
         </div>
         <Slider
           value={teamSize}
@@ -149,61 +178,90 @@ export function HomeROICalculator() {
           min={10}
           max={500}
           step={10}
-          className="flex-1"
+          className="mb-2"
         />
-        <div className="flex gap-2 text-[9px] text-muted-foreground">
-          <span>{formatPercentage(industry.turnover)} turnover</span>
-          <span>•</span>
-          <span>{formatPercentage(industry.productivity)} loss</span>
+        <div className="flex justify-between text-[10px] text-muted-foreground">
+          <span>10</span>
+          <span>250</span>
+          <span>500</span>
         </div>
       </div>
 
-      {/* Results Row */}
-      <div className="grid grid-cols-4 gap-2 mb-3">
+      {/* Results Grid */}
+      <div className="grid grid-cols-3 gap-2 mb-5">
         <motion.div 
-          className="p-2 rounded-lg bg-background/60 text-center"
+          className="p-3 rounded-xl bg-background/60 text-center"
           key={`roi-${calculations.roiMultiple.toFixed(1)}`}
           initial={{ scale: 0.95 }}
           animate={{ scale: 1 }}
+          transition={{ duration: 0.2 }}
         >
-          <p className="text-base font-medium text-primary">{calculations.roiMultiple.toFixed(1)}x</p>
-          <p className="text-[8px] text-muted-foreground uppercase">ROI</p>
+          <p className="text-xl font-light text-primary">{calculations.roiMultiple.toFixed(1)}x</p>
+          <p className="text-[9px] text-muted-foreground uppercase tracking-wider mt-1">ROI</p>
         </motion.div>
         <motion.div 
-          className="p-2 rounded-lg bg-background/60 text-center"
+          className="p-3 rounded-xl bg-background/60 text-center"
           key={`payback-${Math.round(calculations.paybackMonths)}`}
           initial={{ scale: 0.95 }}
           animate={{ scale: 1 }}
+          transition={{ duration: 0.2 }}
         >
-          <p className="text-base font-medium text-foreground">{Math.round(calculations.paybackMonths)}mo</p>
-          <p className="text-[8px] text-muted-foreground uppercase">Payback</p>
+          <p className="text-xl font-light text-foreground">{Math.round(calculations.paybackMonths)}</p>
+          <p className="text-[9px] text-muted-foreground uppercase tracking-wider mt-1">Months Payback</p>
         </motion.div>
         <motion.div 
-          className="p-2 rounded-lg bg-background/60 text-center"
+          className="p-3 rounded-xl bg-background/60 text-center"
           key={`recovery-${Math.round(calculations.year1Recovery / 1000)}`}
           initial={{ scale: 0.95 }}
           animate={{ scale: 1 }}
+          transition={{ duration: 0.2 }}
         >
-          <p className="text-base font-medium text-primary">£{Math.round(calculations.year1Recovery / 1000)}k</p>
-          <p className="text-[8px] text-muted-foreground uppercase">Recovery</p>
-        </motion.div>
-        <motion.div 
-          className="p-2 rounded-lg bg-primary/10 text-center"
-          key={`net-${Math.round(calculations.netGain / 1000)}`}
-          initial={{ scale: 0.95 }}
-          animate={{ scale: 1 }}
-        >
-          <p className="text-base font-medium text-primary">£{Math.round(calculations.netGain / 1000)}k</p>
-          <p className="text-[8px] text-muted-foreground uppercase">Net Gain</p>
+          <p className="text-xl font-light text-primary">£{Math.round(calculations.year1Recovery / 1000)}k</p>
+          <p className="text-[9px] text-muted-foreground uppercase tracking-wider mt-1">Year 1 Recovery</p>
         </motion.div>
       </div>
 
+      {/* Cost Breakdown */}
+      <div className="space-y-2 mb-5 pb-5 border-b border-primary/20">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <TrendingUp className="w-3 h-3 text-muted-foreground" />
+            <span className="text-xs text-muted-foreground">Hidden costs identified</span>
+          </div>
+          <span className="text-sm font-medium text-foreground">{formatCurrency(calculations.totalHiddenCosts)}</span>
+        </div>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Users className="w-3 h-3 text-muted-foreground" />
+            <span className="text-xs text-muted-foreground">Potential recovery (25%)</span>
+          </div>
+          <span className="text-sm font-medium text-primary">{formatCurrency(calculations.year1Recovery)}</span>
+        </div>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Clock className="w-3 h-3 text-muted-foreground" />
+            <span className="text-xs text-muted-foreground">Annual investment</span>
+          </div>
+          <span className="text-sm font-medium text-foreground">{formatCurrency(calculations.investment)}</span>
+        </div>
+      </div>
+
+      {/* Net Gain Highlight */}
+      <div className="p-3 rounded-xl bg-primary/10 mb-5 text-center">
+        <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Net First-Year Gain</p>
+        <p className="text-2xl font-light text-primary">{formatCurrency(calculations.netGain)}</p>
+      </div>
+
       <Link to="/industries#calculator" className="block">
-        <Button className="w-full h-8 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
-          Full analysis
-          <ArrowRight className="ml-1.5 w-3 h-3 transition-transform group-hover:translate-x-1" />
+        <Button className="w-full h-10 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+          Get detailed analysis
+          <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
         </Button>
       </Link>
+
+      <p className="text-[10px] text-muted-foreground text-center mt-3">
+        Using {industry.name} benchmarks • 25% improvement scenario
+      </p>
     </motion.div>
   );
 }
