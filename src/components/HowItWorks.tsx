@@ -150,73 +150,61 @@ const HowItWorks = () => {
           </div>
         </div>
 
-        {/* Mobile Layout - Modern Cards */}
-        <div className="md:hidden space-y-4">
+        {/* Mobile Layout - Compact Horizontal Cards */}
+        <div className="md:hidden space-y-2">
           {steps.map((step, index) => (
             <motion.div
               key={step.title}
-              className="relative"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.15 + index * 0.1 }}
+              className="flex items-start gap-3 p-3 rounded-xl bg-card/60 border border-border/40"
+              initial={{ opacity: 0, x: -10 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.4, delay: 0.1 + index * 0.08 }}
             >
-              {/* Card */}
-              <div className="relative p-5 rounded-2xl bg-card/80 backdrop-blur-sm border border-border/50 overflow-hidden">
-                {/* Step number badge */}
-                <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                  <span className="text-xs font-semibold text-primary">{index + 1}</span>
+              {/* Left: Icon with step indicator */}
+              <div className="relative flex-shrink-0">
+                <motion.div 
+                  className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center"
+                  animate={isInView ? { scale: [1, 1.03, 1] } : {}}
+                  transition={{ duration: 2.5, repeat: Infinity, delay: index * 0.3 }}
+                >
+                  <step.icon className="w-4 h-4 text-primary" />
+                </motion.div>
+                {/* Step number */}
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-primary-foreground text-[9px] font-bold rounded-full flex items-center justify-center">
+                  {index + 1}
+                </span>
+              </div>
+
+              {/* Right: Content */}
+              <div className="flex-1 min-w-0">
+                {/* Title row */}
+                <div className="flex items-baseline gap-2 mb-0.5">
+                  <h3 className="text-sm font-semibold text-foreground">{step.title}</h3>
+                  <span className="text-[10px] text-primary/80 font-medium truncate">{step.subtitle}</span>
                 </div>
-
-                {/* Gradient accent */}
-                <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary via-primary/50 to-transparent rounded-l-2xl" />
-
-                {/* Header with icon */}
-                <div className="flex items-start gap-4 mb-4">
-                  <motion.div 
-                    className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0"
-                    animate={isInView ? { scale: [1, 1.05, 1] } : {}}
-                    transition={{ duration: 2.5, repeat: Infinity, delay: index * 0.4 }}
-                  >
-                    <step.icon className="w-5 h-5 text-primary" />
-                  </motion.div>
-                  <div className="pt-1">
-                    <h3 className="text-lg font-semibold text-foreground leading-tight">{step.title}</h3>
-                    <span className="text-xs text-primary font-medium">{step.subtitle}</span>
-                  </div>
-                </div>
-
-                {/* Description */}
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4 pl-0">
+                
+                {/* Description - single line on mobile */}
+                <p className="text-[11px] text-muted-foreground leading-snug line-clamp-2 mb-2">
                   {step.description}
                 </p>
 
-                {/* Metrics grid */}
-                <div className="flex flex-wrap gap-2">
-                  {step.metrics.map((metric, i) => (
-                    <motion.span
+                {/* Metrics - compact inline */}
+                <div className="flex flex-wrap gap-1">
+                  {step.metrics.slice(0, 3).map((metric) => (
+                    <span
                       key={metric}
-                      className="px-3 py-1.5 text-[11px] font-medium text-foreground/80 bg-muted/60 rounded-lg border border-border/30"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                      transition={{ delay: 0.3 + index * 0.1 + i * 0.05 }}
+                      className="px-1.5 py-0.5 text-[9px] text-muted-foreground/80 bg-muted/50 rounded"
                     >
                       {metric}
-                    </motion.span>
+                    </span>
                   ))}
+                  {step.metrics.length > 3 && (
+                    <span className="px-1.5 py-0.5 text-[9px] text-muted-foreground/60">
+                      +{step.metrics.length - 3}
+                    </span>
+                  )}
                 </div>
               </div>
-
-              {/* Connector arrow (except last) */}
-              {index < steps.length - 1 && (
-                <motion.div 
-                  className="flex justify-center py-2"
-                  initial={{ opacity: 0 }}
-                  animate={isInView ? { opacity: 1 } : {}}
-                  transition={{ delay: 0.5 + index * 0.1 }}
-                >
-                  <div className="w-px h-4 bg-gradient-to-b from-primary/40 to-transparent" />
-                </motion.div>
-              )}
             </motion.div>
           ))}
         </div>
