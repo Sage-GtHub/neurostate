@@ -559,127 +559,127 @@ const Index = () => {
           {/* Nova AI Preview Section */}
           <section className="py-12 md:py-16 px-6 md:px-8 bg-gradient-to-b from-muted/30 to-background">
             <div className="max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                {/* Nova Chat Preview */}
-                <ScrollReveal direction="left" delay={0.1}>
+              {/* Nova Info - Text on top */}
+              <ScrollReveal className="space-y-5 mb-10 text-center max-w-2xl mx-auto">
+                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">AI Assistant</span>
+                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                  Meet Nova, your cognitive co-pilot
+                </h2>
+                <p className="text-sm text-muted-foreground">
+                  Nova interprets your biometric data, schedules, and work patterns to deliver contextual guidance when it matters most.
+                </p>
+              </ScrollReveal>
+              
+              {/* Features grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10 max-w-3xl mx-auto">
+                {[
+                  { icon: Brain, text: "Adaptive protocols", detail: "Personalised recommendations" },
+                  { icon: TrendingUp, text: "Predictive insights", detail: "72-hour foresight" },
+                  { icon: Zap, text: "Real-time nudges", detail: "Context-aware timing" },
+                  { icon: Eye, text: "Pattern recognition", detail: "Learn from your data" }
+                ].map((item, i) => (
                   <motion.div 
-                    className="relative p-5 md:p-6 rounded-2xl bg-background border border-border/50 shadow-lg overflow-hidden"
-                    whileHover={{ y: -4, transition: { duration: 0.3 } }}
+                    key={i} 
+                    className="p-3 rounded-xl bg-muted/30 border border-border/30 hover:border-primary/30 transition-all group cursor-default text-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    whileHover={{ y: -2, scale: 1.02 }}
                   >
-                    {/* Header */}
-                    <div className="flex items-center gap-3 pb-4 border-b border-border/30">
-                      <motion.div 
-                        className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center"
-                        animate={{ scale: [1, 1.05, 1] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                      >
-                        <Sparkles className="w-5 h-5 text-white" />
-                      </motion.div>
-                      <div>
-                        <p className="text-foreground font-medium text-sm">Nova</p>
-                        <p className="text-xs text-muted-foreground">Your cognitive intelligence assistant</p>
-                      </div>
-                      <div className="ml-auto flex items-center gap-2">
-                        <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                        <span className="text-xs text-muted-foreground">Active</span>
-                      </div>
+                    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center mb-2 group-hover:bg-primary/20 transition-colors mx-auto">
+                      <item.icon className="w-3.5 h-3.5 text-primary" />
                     </div>
-
-                    {/* Chat messages */}
-                    <div className="space-y-3 py-4">
-                      <motion.div 
-                        className="p-3 rounded-xl bg-muted/50 max-w-[85%]"
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3 }}
-                      >
-                        <p className="text-xs text-foreground">Good morning. Based on your sleep data, I've adjusted your focus window to 10am–1pm today. Your cognitive capacity is trending 12% above your weekly average.</p>
-                      </motion.div>
-                      
-                      <motion.div 
-                        className="p-3 rounded-xl bg-primary/10 max-w-[75%] ml-auto"
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.5 }}
-                      >
-                        <p className="text-xs text-foreground">What should I prioritise this morning?</p>
-                      </motion.div>
-                      
-                      <motion.div 
-                        className="p-3 rounded-xl bg-muted/50 max-w-[85%]"
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.7 }}
-                      >
-                        <p className="text-xs text-foreground">Your highest-impact task is the Q4 strategy deck—complexity matches your current state. I'd suggest blocking 90 minutes before lunch.</p>
-                      </motion.div>
-                    </div>
-
-                    {/* Input area */}
-                    <div className="flex items-center gap-2 p-2 rounded-lg bg-muted/30 border border-border/30">
-                      <span className="text-xs text-muted-foreground flex-1 pl-2">Ask Nova anything...</span>
-                      <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <ArrowRight className="w-3.5 h-3.5 text-primary" />
-                      </div>
-                    </div>
-
-                    {/* Background glow */}
-                    <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+                    <p className="text-xs font-medium text-foreground">{item.text}</p>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">{item.detail}</p>
                   </motion.div>
-                </ScrollReveal>
+                ))}
+              </div>
 
-                {/* Right - Nova Info */}
-                <ScrollReveal direction="right" className="space-y-5">
-                  <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">AI Assistant</span>
-                  <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                    Meet Nova, your cognitive co-pilot
-                  </h2>
-                  <p className="text-sm text-muted-foreground max-w-md">
-                    Nova interprets your biometric data, schedules, and work patterns to deliver contextual guidance when it matters most.
-                  </p>
-                  
-                  <div className="grid grid-cols-2 gap-3 py-2">
-                    {[
-                      { icon: Brain, text: "Adaptive protocols", detail: "Personalised recommendations" },
-                      { icon: TrendingUp, text: "Predictive insights", detail: "72-hour foresight" },
-                      { icon: Zap, text: "Real-time nudges", detail: "Context-aware timing" },
-                      { icon: Eye, text: "Pattern recognition", detail: "Learn from your data" }
-                    ].map((item, i) => (
-                      <motion.div 
-                        key={i} 
-                        className="p-3 rounded-xl bg-muted/30 border border-border/30 hover:border-primary/30 transition-all group cursor-default"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.1 }}
-                        whileHover={{ y: -2, scale: 1.02 }}
-                      >
-                        <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center mb-2 group-hover:bg-primary/20 transition-colors">
-                          <item.icon className="w-3.5 h-3.5 text-primary" />
-                        </div>
-                        <p className="text-xs font-medium text-foreground">{item.text}</p>
-                        <p className="text-[10px] text-muted-foreground mt-0.5">{item.detail}</p>
-                      </motion.div>
-                    ))}
+              {/* Nova Chat Preview - Visual below text */}
+              <ScrollReveal delay={0.2}>
+                <motion.div 
+                  className="relative p-5 md:p-6 rounded-2xl bg-background border border-border/50 shadow-lg overflow-hidden max-w-2xl mx-auto"
+                  whileHover={{ y: -4, transition: { duration: 0.3 } }}
+                >
+                  {/* Header */}
+                  <div className="flex items-center gap-3 pb-4 border-b border-border/30">
+                    <motion.div 
+                      className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center"
+                      animate={{ scale: [1, 1.05, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      <Sparkles className="w-5 h-5 text-white" />
+                    </motion.div>
+                    <div>
+                      <p className="text-foreground font-medium text-sm">Nova</p>
+                      <p className="text-xs text-muted-foreground">Your cognitive intelligence assistant</p>
+                    </div>
+                    <div className="ml-auto flex items-center gap-2">
+                      <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                      <span className="text-xs text-muted-foreground">Active</span>
+                    </div>
                   </div>
-                  
-                  <div className="flex flex-wrap gap-3 pt-1">
-                    <Link to="/nova/overview">
-                      <Button className="h-9 px-4 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
-                        Explore Nova
-                        <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                      </Button>
-                    </Link>
-                    <Link to="/nova">
-                      <Button variant="outline" className="h-9 px-4 text-sm font-medium rounded-full">
-                        Try the demo
-                      </Button>
-                    </Link>
+
+                  {/* Chat messages */}
+                  <div className="space-y-3 py-4">
+                    <motion.div 
+                      className="p-3 rounded-xl bg-muted/50 max-w-[85%]"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      <p className="text-xs text-foreground">Good morning. Based on your sleep data, I've adjusted your focus window to 10am–1pm today. Your cognitive capacity is trending 12% above your weekly average.</p>
+                    </motion.div>
+                    
+                    <motion.div 
+                      className="p-3 rounded-xl bg-primary/10 max-w-[75%] ml-auto"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5 }}
+                    >
+                      <p className="text-xs text-foreground">What should I prioritise this morning?</p>
+                    </motion.div>
+                    
+                    <motion.div 
+                      className="p-3 rounded-xl bg-muted/50 max-w-[85%]"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.7 }}
+                    >
+                      <p className="text-xs text-foreground">Your highest-impact task is the Q4 strategy deck—complexity matches your current state. I'd suggest blocking 90 minutes before lunch.</p>
+                    </motion.div>
                   </div>
-                </ScrollReveal>
+
+                  {/* Input area */}
+                  <div className="flex items-center gap-2 p-2 rounded-lg bg-muted/30 border border-border/30">
+                    <span className="text-xs text-muted-foreground flex-1 pl-2">Ask Nova anything...</span>
+                    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <ArrowRight className="w-3.5 h-3.5 text-primary" />
+                    </div>
+                  </div>
+
+                  {/* Background glow */}
+                  <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+                </motion.div>
+              </ScrollReveal>
+
+              {/* CTA buttons */}
+              <div className="flex flex-wrap gap-3 pt-8 justify-center">
+                <Link to="/nova/overview">
+                  <Button className="h-9 px-4 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                    Explore Nova
+                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </Link>
+                <Link to="/nova">
+                  <Button variant="outline" className="h-9 px-4 text-sm font-medium rounded-full">
+                    Try the demo
+                  </Button>
+                </Link>
               </div>
             </div>
           </section>
