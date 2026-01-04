@@ -71,8 +71,9 @@ export default function CommandSurfaces() {
   return (
     <>
       <SEO
-        title="Command Surfaces by Role | NeuroState Solutions"
-        description="One system. Different truths. Role-specific interfaces that deliver the right information to the right people—with privacy by design."
+        title="Command Surfaces by Role | Tailored Dashboards | NeuroState"
+        description="One system, different truths. Role-based interfaces for individuals, managers, HR leaders, and executives—each seeing the cognitive intelligence they need."
+        keywords="role-based dashboards, executive analytics, manager insights, HR workforce analytics, team health visibility, organisational intelligence, privacy-first design"
       />
       <div className="min-h-screen bg-background">
         <Header />

@@ -55,8 +55,9 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
   return (
     <>
       <SEO
-        title={`${industry.name} | NeuroState Cognitive Performance`}
+        title={`${industry.name} | Cognitive Performance Solutions | NeuroState`}
         description={industry.subheadline}
+        keywords={`${industry.name.toLowerCase()} cognitive performance, ${industry.slug} burnout prevention, workforce optimisation ${industry.name.toLowerCase()}, enterprise wellness ${industry.slug}, team performance analytics`}
       />
       <div className="min-h-screen bg-background">
         <Header />
