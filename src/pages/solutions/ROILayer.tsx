@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { SolutionPageStructuredData, BreadcrumbStructuredData } from "@/components/StructuredData";
 import { ArrowUpRight, Calculator, TrendingUp, Clock, DollarSign, Target, PoundSterling, AlertTriangle, Users, BarChart3, CheckCircle2, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -70,6 +71,21 @@ export default function ROILayer() {
         title="Economic & ROI Layer | Financial Attribution | NeuroState"
         description="Translate cognitive risk into business value. See the cost of burnout, price of underperformance, and return on intervention—in pounds, not platitudes."
         keywords="wellness ROI, burnout cost calculation, cognitive performance ROI, workforce investment returns, turnover cost prevention, productivity loss attribution, business case wellness"
+      />
+      <SolutionPageStructuredData
+        solution={{
+          name: "Economic & ROI Layer",
+          description: "Cognitive risk translated to business value. See the cost of burnout, the price of underperformance, and the return on intervention—in pounds, not platitudes.",
+          url: "https://neurostate.co.uk/solutions/roi-layer",
+          features: ["Burnout cost quantification", "Turnover exposure calculation", "Intervention ROI tracking", "Board-ready reporting", "Financial attribution"]
+        }}
+      />
+      <BreadcrumbStructuredData
+        items={[
+          { name: "Home", url: "https://neurostate.co.uk" },
+          { name: "Solutions", url: "https://neurostate.co.uk/solutions" },
+          { name: "Economic & ROI Layer", url: "https://neurostate.co.uk/solutions/roi-layer" }
+        ]}
       />
       <div className="min-h-screen bg-background">
         <Header />

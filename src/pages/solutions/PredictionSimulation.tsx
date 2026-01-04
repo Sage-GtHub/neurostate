@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { SolutionPageStructuredData, BreadcrumbStructuredData } from "@/components/StructuredData";
 import { ArrowUpRight, ArrowRight, TrendingUp, Calendar, Target, Sparkles, AlertTriangle, BarChart3, Clock, Zap, Cpu, Brain } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -51,6 +52,21 @@ export default function PredictionSimulation() {
         title="Prediction & Simulation | Cognitive Forecasting | NeuroState"
         description="Forecast cognitive capacity 7-30 days ahead. Model the impact of decisions before you make them with NeuroState's predictive simulation engine."
         keywords="cognitive forecasting, burnout prediction, scenario modelling, capacity planning, workforce simulation, predictive analytics, decision impact modelling"
+      />
+      <SolutionPageStructuredData
+        solution={{
+          name: "Prediction & Simulation",
+          description: "Near-term forecasting and scenario modelling. NeuroState doesn't just show you what is happening—it tells you what is likely to happen next.",
+          url: "https://neurostate.co.uk/solutions/prediction",
+          features: ["7-30 day forecasting", "Scenario modelling", "Deadline impact analysis", "Travel fatigue modelling", "Intervention effectiveness prediction"]
+        }}
+      />
+      <BreadcrumbStructuredData
+        items={[
+          { name: "Home", url: "https://neurostate.co.uk" },
+          { name: "Solutions", url: "https://neurostate.co.uk/solutions" },
+          { name: "Prediction & Simulation", url: "https://neurostate.co.uk/solutions/prediction" }
+        ]}
       />
       <div className="min-h-screen bg-background">
         <Header />

@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { SolutionPageStructuredData, BreadcrumbStructuredData } from "@/components/StructuredData";
 import { ArrowUpRight, ArrowRight, Database, Watch, Activity, MapPin, Layers, Check, ChevronRight, Cpu, Server, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -40,6 +41,21 @@ export default function CognitiveDataLayer() {
         title="Cognitive Data Layer | Unified Signal Ingestion | NeuroState"
         description="Connect wearables, calendars, and work tools into a unified cognitive data model. NeuroState's Data Layer normalises disparate signals into actionable intelligence."
         keywords="wearable data integration, biometric signals, HRV tracking, sleep analytics, work behaviour data, cognitive data unification, enterprise wellness data"
+      />
+      <SolutionPageStructuredData
+        solution={{
+          name: "Cognitive Data Layer",
+          description: "Unified signal ingestion from wearables, calendars, and work tools. NeuroState's Data Layer normalises disparate signals into actionable intelligence.",
+          url: "https://neurostate.co.uk/solutions/data-layer",
+          features: ["Wearable integration", "Behavioural signal capture", "Contextual data ingestion", "Real-time data normalisation", "Privacy-first architecture"]
+        }}
+      />
+      <BreadcrumbStructuredData
+        items={[
+          { name: "Home", url: "https://neurostate.co.uk" },
+          { name: "Solutions", url: "https://neurostate.co.uk/solutions" },
+          { name: "Cognitive Data Layer", url: "https://neurostate.co.uk/solutions/data-layer" }
+        ]}
       />
       <div className="min-h-screen bg-background">
         <Header />

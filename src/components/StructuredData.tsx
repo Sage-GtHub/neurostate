@@ -561,3 +561,198 @@ export const ArticleStructuredData = ({ article }: ArticleStructuredDataProps) =
 
   return null;
 };
+
+// Solution Page Structured Data
+interface SolutionPageStructuredDataProps {
+  solution: {
+    name: string;
+    description: string;
+    url: string;
+    features?: string[];
+  };
+}
+
+export const SolutionPageStructuredData = ({ solution }: SolutionPageStructuredDataProps) => {
+  useEffect(() => {
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": solution.name,
+      "description": solution.description,
+      "url": solution.url,
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "NeuroState",
+        "url": "https://neurostate.co.uk"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "NeuroState",
+        "url": "https://neurostate.co.uk"
+      },
+      ...(solution.features && {
+        "mainEntity": {
+          "@type": "SoftwareApplication",
+          "name": solution.name,
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "description": solution.description,
+          "featureList": solution.features,
+          "provider": {
+            "@type": "Organization",
+            "name": "NeuroState"
+          }
+        }
+      })
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData);
+    script.id = 'solution-page-structured-data';
+    
+    const existing = document.getElementById('solution-page-structured-data');
+    if (existing) {
+      existing.remove();
+    }
+    
+    document.head.appendChild(script);
+
+    return () => {
+      const scriptToRemove = document.getElementById('solution-page-structured-data');
+      if (scriptToRemove) {
+        scriptToRemove.remove();
+      }
+    };
+  }, [solution]);
+
+  return null;
+};
+
+// Industry Page Structured Data
+interface IndustryPageStructuredDataProps {
+  industry: {
+    name: string;
+    description: string;
+    url: string;
+    outcomes?: { metric: string; label: string }[];
+  };
+}
+
+export const IndustryPageStructuredData = ({ industry }: IndustryPageStructuredDataProps) => {
+  useEffect(() => {
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": `${industry.name} | NeuroState`,
+      "description": industry.description,
+      "url": industry.url,
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "NeuroState",
+        "url": "https://neurostate.co.uk"
+      },
+      "about": {
+        "@type": "Service",
+        "name": `NeuroState for ${industry.name}`,
+        "serviceType": "Cognitive Performance Platform",
+        "description": industry.description,
+        "provider": {
+          "@type": "Organization",
+          "name": "NeuroState",
+          "url": "https://neurostate.co.uk"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "United Kingdom"
+        }
+      },
+      ...(industry.outcomes && {
+        "mainEntity": {
+          "@type": "ItemList",
+          "name": "Measurable Outcomes",
+          "itemListElement": industry.outcomes.map((outcome, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "name": `${outcome.metric} ${outcome.label}`
+          }))
+        }
+      })
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData);
+    script.id = 'industry-page-structured-data';
+    
+    const existing = document.getElementById('industry-page-structured-data');
+    if (existing) {
+      existing.remove();
+    }
+    
+    document.head.appendChild(script);
+
+    return () => {
+      const scriptToRemove = document.getElementById('industry-page-structured-data');
+      if (scriptToRemove) {
+        scriptToRemove.remove();
+      }
+    };
+  }, [industry]);
+
+  return null;
+};
+
+// Service Offering Structured Data (for pricing pages)
+interface ServiceOfferingStructuredDataProps {
+  service: {
+    name: string;
+    description: string;
+    url: string;
+    priceRange?: string;
+  };
+}
+
+export const ServiceOfferingStructuredData = ({ service }: ServiceOfferingStructuredDataProps) => {
+  useEffect(() => {
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": service.name,
+      "description": service.description,
+      "url": service.url,
+      "provider": {
+        "@type": "Organization",
+        "name": "NeuroState",
+        "url": "https://neurostate.co.uk",
+        "logo": "https://neurostate.co.uk/favicon.png"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United Kingdom"
+      },
+      ...(service.priceRange && { "priceRange": service.priceRange })
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData);
+    script.id = 'service-offering-structured-data';
+    
+    const existing = document.getElementById('service-offering-structured-data');
+    if (existing) {
+      existing.remove();
+    }
+    
+    document.head.appendChild(script);
+
+    return () => {
+      const scriptToRemove = document.getElementById('service-offering-structured-data');
+      if (scriptToRemove) {
+        scriptToRemove.remove();
+      }
+    };
+  }, [service]);
+
+  return null;
+};
