@@ -48,8 +48,9 @@ export default function PredictionSimulation() {
   return (
     <>
       <SEO
-        title="Prediction & Simulation | NeuroState Solutions"
-        description="NeuroState does not stop at visibility. It forecasts what is likely to happen next—and lets you model the impact of decisions before you make them."
+        title="Prediction & Simulation | Cognitive Forecasting | NeuroState"
+        description="Forecast cognitive capacity 7-30 days ahead. Model the impact of decisions before you make them with NeuroState's predictive simulation engine."
+        keywords="cognitive forecasting, burnout prediction, scenario modelling, capacity planning, workforce simulation, predictive analytics, decision impact modelling"
       />
       <div className="min-h-screen bg-background">
         <Header />

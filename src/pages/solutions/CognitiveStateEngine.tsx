@@ -46,8 +46,9 @@ export default function CognitiveStateEngine() {
   return (
     <>
       <SEO
-        title="Cognitive State Engine | NeuroState Solutions"
-        description="NeuroState translates raw signals into meaningful cognitive states: readiness, load, recovery debt, stress volatility, and burnout risk."
+        title="Cognitive State Engine | Real-Time Intelligence | NeuroState"
+        description="Transform raw biometric data into meaningful cognitive states: readiness, load, recovery debt, stress volatility, and burnout risk scores in real-time."
+        keywords="cognitive state monitoring, readiness score, burnout risk prediction, recovery debt tracking, stress volatility, real-time analytics, workforce intelligence"
       />
       <div className="min-h-screen bg-background">
         <Header />

@@ -74,8 +74,9 @@ export default function ActionControlLayer() {
   return (
     <>
       <SEO
-        title="Action & Control Layer | NeuroState Solutions"
-        description="NeuroState converts intelligence into clear, low-friction actions that drive measurable outcomes. Insight without action is noise."
+        title="Action & Control Layer | Cognitive Interventions | NeuroState"
+        description="Low-friction interventions that drive outcomes. Personal coaching, workload timing, manager nudges, and preventative actions delivered at the right moment."
+        keywords="cognitive interventions, personal coaching, manager nudges, workload optimisation, preventative burnout actions, team performance interventions, wellness automation"
       />
       <div className="min-h-screen bg-background">
         <Header />

@@ -75,8 +75,9 @@ export default function SolutionsHub() {
   return (
     <>
       <SEO
-        title="Solutions | NeuroState Cognitive Infrastructure"
-        description="NeuroState is the system of record for cognitive capacity in an organisation. Infrastructure for human performance at scale."
+        title="Solutions | Cognitive Performance Infrastructure | NeuroState"
+        description="NeuroState is the system of record for cognitive capacity. Six layers of infrastructure transforming biometric signals into predictive intelligence and measurable ROI."
+        keywords="cognitive performance infrastructure, cognitive data layer, state engine, burnout prediction, ROI measurement, workforce analytics, enterprise wellness platform"
       />
       <div className="min-h-screen bg-background">
         <Header />

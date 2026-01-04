@@ -37,8 +37,9 @@ export default function CognitiveDataLayer() {
   return (
     <>
       <SEO
-        title="Cognitive Data Layer | NeuroState Solutions"
-        description="NeuroState connects to the tools teams already use and unifies them into a single cognitive data model. Many signals. One coherent model."
+        title="Cognitive Data Layer | Unified Signal Ingestion | NeuroState"
+        description="Connect wearables, calendars, and work tools into a unified cognitive data model. NeuroState's Data Layer normalises disparate signals into actionable intelligence."
+        keywords="wearable data integration, biometric signals, HRV tracking, sleep analytics, work behaviour data, cognitive data unification, enterprise wellness data"
       />
       <div className="min-h-screen bg-background">
         <Header />

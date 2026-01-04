@@ -67,8 +67,9 @@ export default function ROILayer() {
   return (
     <>
       <SEO
-        title="Economic & ROI Layer | NeuroState Solutions"
-        description="NeuroState translates cognitive risk into economic reality. This is where performance becomes measurable—and where cognitive infrastructure proves its value."
+        title="Economic & ROI Layer | Financial Attribution | NeuroState"
+        description="Translate cognitive risk into business value. See the cost of burnout, price of underperformance, and return on intervention—in pounds, not platitudes."
+        keywords="wellness ROI, burnout cost calculation, cognitive performance ROI, workforce investment returns, turnover cost prevention, productivity loss attribution, business case wellness"
       />
       <div className="min-h-screen bg-background">
         <Header />

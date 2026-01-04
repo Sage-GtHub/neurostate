@@ -15,7 +15,7 @@ export const SEO = ({
   title = 'NeuroState® - Cognitive Performance Infrastructure for Organisations',
   description = 'NeuroState is the system of record for cognitive capacity. Predictive intelligence for performance, risk visibility, and financial attribution at enterprise scale.',
   keywords = 'cognitive performance infrastructure, enterprise wellness platform, AI performance analytics, workforce optimisation, predictive intelligence, burnout prevention, Nova AI',
-  image = 'https://neurostate.co.uk/og-image.jpg',
+  image = 'https://neurostate.co.uk/og-image.png',
   type = 'website',
   canonical,
   noindex = false,
