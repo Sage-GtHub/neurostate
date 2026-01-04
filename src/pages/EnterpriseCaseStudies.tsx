@@ -147,8 +147,9 @@ export default function EnterpriseCaseStudies() {
   return (
     <>
       <SEO 
-        title="Enterprise Case Studies | NeuroState"
-        description="See how leading organisations use NeuroState to elevate workforce performance, reduce burnout, and create competitive advantages."
+        title="Enterprise Case Studies | Success Stories | NeuroState"
+        description="See how leading organisations use NeuroState to elevate workforce performance, reduce burnout by 63%, and create measurable competitive advantages."
+        keywords="enterprise wellness case studies, cognitive performance results, burnout reduction examples, workplace productivity success, ROI case studies, corporate wellness testimonials"
       />
       
       <div className="min-h-screen bg-ivory">

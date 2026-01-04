@@ -113,8 +113,9 @@ const Index = () => {
   return (
     <>
       <SEO 
-        title="Cognitive Infrastructure for Organisations | NeuroState"
-        description="NeuroState is the system of record for cognitive capacity. Predictive intelligence for performance, risk visibility, and financial attribution at enterprise scale."
+        title="NeuroState® | Cognitive Performance Infrastructure for Organisations"
+        description="The system of record for cognitive capacity. Predictive intelligence, risk visibility, and financial attribution for enterprise-scale human performance."
+        keywords="cognitive performance infrastructure, enterprise wellness platform, AI performance analytics, workforce optimisation, burnout prevention, predictive intelligence, Nova AI, cognitive capacity management"
       />
       <OrganizationStructuredData />
       <SoftwareApplicationStructuredData />

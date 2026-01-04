@@ -72,8 +72,9 @@ export default function HospitalityOverview() {
   return (
     <>
       <SEO 
-        title="Wellness Intelligence for Luxury Hospitality | Neurostate"
-        description="AI powered guest wellness for hotels, resorts, and spas. Personalised experiences that drive premium revenue and lasting guest loyalty."
+        title="Wellness Intelligence for Luxury Hospitality | Hotel & Spa AI | NeuroState"
+        description="AI-powered guest wellness for luxury hotels, resorts, and spas. Deliver personalised experiences that drive premium revenue and lasting guest loyalty."
+        keywords="hotel wellness technology, luxury hospitality AI, spa wellness platform, guest experience technology, resort wellness programme, hospitality innovation"
       />
       
       <div className="min-h-screen bg-background relative overflow-hidden">

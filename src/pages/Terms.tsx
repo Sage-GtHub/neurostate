@@ -8,7 +8,8 @@ const Terms = () => {
     <>
       <SEO 
         title="Terms & Conditions | NeuroState"
-        description="Read the terms and conditions for using the NeuroState website and purchasing our cognitive performance supplements and recovery devices."
+        description="Read the terms and conditions for using the NeuroState website and cognitive performance platform. Understand your rights and obligations."
+        keywords="NeuroState terms, conditions of use, legal agreement, service terms, website terms"
       />
       <div className="min-h-screen bg-background mobile-nav-padding">
         <Header />

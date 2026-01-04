@@ -76,8 +76,9 @@ export default function FinancialServicesPricing() {
   return (
     <>
       <SEO 
-        title="Financial Services Pricing Calculator | NeuroState"
-        description="Professional pricing with institutional bundles and volume discounts. Calculate your custom financial services wellness programme pricing."
+        title="Financial Services Pricing | Institutional Wellness Plans | NeuroState"
+        description="Professional pricing with institutional bundles and volume discounts up to 35%. Calculate custom pricing for banks, trading firms, and asset managers."
+        keywords="financial services wellness pricing, trading floor wellness cost, investment bank wellness, institutional wellness programme, compliance wellness platform"
       />
       
       <div className="min-h-screen bg-ivory">

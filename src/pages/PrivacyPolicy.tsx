@@ -15,8 +15,9 @@ const PrivacyPolicy = () => {
   return (
     <>
       <SEO 
-        title="Privacy Policy | NeuroState"
-        description="How NeuroState collects, uses, and protects your personal information. We never sell your data and use bank-level encryption for security."
+        title="Privacy Policy | Data Protection | NeuroState"
+        description="How NeuroState collects, uses, and protects your personal information. We never sell your data and use bank-level encryption for security. GDPR compliant."
+        keywords="NeuroState privacy, data protection policy, GDPR compliance, personal data security, privacy rights, data encryption"
       />
       <div className="min-h-screen bg-background mobile-nav-padding">
         <Header />

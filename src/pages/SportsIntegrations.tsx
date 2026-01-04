@@ -85,8 +85,9 @@ export default function SportsIntegrations() {
   return (
     <>
       <SEO 
-        title="Sports Integrations | NeuroState"
-        description="Seamless integration with Strava, TrainingPeaks, Whoop, Oura, and sports management platforms. NeuroState fits into your existing performance ecosystem."
+        title="Sports Performance Integrations | Wearables & Training Platforms | NeuroState"
+        description="Seamless integration with Strava, TrainingPeaks, Whoop, Oura, Garmin, and sports management platforms. Connect your performance ecosystem."
+        keywords="sports integration, Strava integration, TrainingPeaks sync, Whoop integration, athlete wearable data, sports analytics platform, performance data aggregation"
       />
       
       <div className="min-h-screen bg-ivory">

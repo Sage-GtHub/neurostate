@@ -76,8 +76,9 @@ export default function InformationTechnologyPricing() {
   return (
     <>
       <SEO 
-        title="IT Pricing Calculator | NeuroState"
-        description="Developer-focused pricing with team bundles and volume discounts. Calculate your custom IT wellness programme pricing."
+        title="IT & Developer Pricing | Team Wellness Plans | NeuroState"
+        description="Developer-focused pricing with team bundles and volume discounts up to 30%. Calculate custom pricing for engineering teams, SaaS companies, and tech startups."
+        keywords="developer wellness pricing, engineering team wellness, tech company wellness cost, SaaS employee performance, startup wellness programme"
       />
       
       <div className="min-h-screen bg-ivory">

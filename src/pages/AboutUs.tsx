@@ -11,8 +11,9 @@ const AboutUs = () => {
   return (
     <>
       <SEO 
-        title="About Us | Neurostate"
-        description="Neurostate is building cognitive infrastructure that predicts and guides, not just tracks. AI for cognitive performance: from prediction to execution."
+        title="About NeuroState | Advancing Human Cognitive Capacity Through AI"
+        description="NeuroState is building cognitive infrastructure that predicts and guides, not just tracks. Learn about our mission to advance human cognitive capacity through AI."
+        keywords="about NeuroState, cognitive performance company, AI wellness platform, workforce optimisation technology, human performance innovation, cognitive infrastructure mission"
       />
       <div className="min-h-screen bg-background">
         <Header />

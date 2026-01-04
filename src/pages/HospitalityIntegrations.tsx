@@ -85,8 +85,9 @@ export default function HospitalityIntegrations() {
   return (
     <>
       <SEO 
-        title="Hospitality Integrations | NeuroState"
-        description="Seamless integration with hotel PMS, spa booking systems, and guest experience platforms. NeuroState enhances your hospitality wellness offerings."
+        title="Hospitality Integrations | Hotel PMS & Spa Systems | NeuroState"
+        description="Seamless integration with hotel PMS, spa booking systems, and guest experience platforms. Enhance your hospitality wellness offerings with connected technology."
+        keywords="hotel PMS integration, spa booking wellness, guest experience platform, hospitality API, resort technology integration, white-label wellness app"
       />
       
       <div className="min-h-screen bg-ivory">

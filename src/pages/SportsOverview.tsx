@@ -72,8 +72,9 @@ export default function SportsOverview() {
   return (
     <>
       <SEO 
-        title="Cognitive Performance Infrastructure for Elite Sport | Neurostate"
-        description="AI powered performance forecasting for professional athletes. Predict performance volatility, prevent injuries, and optimise recovery with precision intelligence."
+        title="Elite Sports Performance | AI-Powered Athletic Recovery | NeuroState"
+        description="AI-powered performance forecasting for professional athletes. Predict performance volatility, prevent injuries, and optimise recovery with precision cognitive intelligence."
+        keywords="sports performance analytics, athlete recovery optimisation, injury prevention AI, elite sports technology, athletic performance forecasting, team sports analytics"
       />
       
       <div className="min-h-screen bg-background relative overflow-hidden">

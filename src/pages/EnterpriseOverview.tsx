@@ -102,8 +102,9 @@ export default function EnterpriseOverview() {
   return (
     <>
       <SEO 
-        title="Enterprise Solutions | Neurostate"
+        title="Enterprise Solutions | AI Cognitive Performance Platform | NeuroState"
         description="AI-powered cognitive performance infrastructure for organisations. Explore solutions for IT, Financial Services, Healthcare, Hospitality, Sports, and Health Clubs."
+        keywords="enterprise wellness platform, corporate cognitive performance, AI workforce analytics, burnout prevention enterprise, team performance monitoring, organisational health technology"
       />
       <div className="min-h-screen bg-background">
         <Header />

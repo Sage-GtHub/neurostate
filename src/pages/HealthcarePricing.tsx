@@ -76,8 +76,9 @@ export default function HealthcarePricing() {
   return (
     <>
       <SEO 
-        title="Healthcare Pricing Calculator | NeuroState"
-        description="Patient-focused pricing with clinical bundles and volume discounts. Calculate your custom healthcare wellness programme pricing."
+        title="Healthcare Pricing | Clinical Wellness Plans | NeuroState"
+        description="Patient-focused pricing with clinical bundles and EHR integration. Calculate custom pricing for hospitals, clinics, and rehabilitation centres."
+        keywords="healthcare wellness pricing, hospital wellness platform, clinical decision support cost, patient wellness programme, EHR wellness integration"
       />
       
       <div className="min-h-screen bg-ivory">

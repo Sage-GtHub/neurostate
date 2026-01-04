@@ -77,8 +77,9 @@ export default function HealthClubsPricing() {
   return (
     <>
       <SEO 
-        title="Health Club Pricing Calculator | NeuroState"
-        description="Member-focused pricing with facility bundles and volume discounts. Calculate your custom health club partnership pricing."
+        title="Health Club Pricing | Gym & Fitness Facility Plans | NeuroState"
+        description="Member-focused pricing with facility bundles and volume discounts. Calculate custom pricing for gyms, studios, and private health clubs."
+        keywords="gym pricing platform, fitness facility wellness, health club member retention, gym technology pricing, fitness centre cognitive tools"
       />
       
       <div className="min-h-screen bg-ivory">

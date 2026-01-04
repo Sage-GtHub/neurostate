@@ -147,8 +147,9 @@ export default function HealthClubsCaseStudies() {
   return (
     <>
       <SEO 
-        title="Health Club Case Studies | NeuroState"
-        description="See how premium gyms, studios, and private clubs use NeuroState to boost retention, increase revenue, and enhance member experience."
+        title="Health Club Case Studies | Gym Retention Success Stories | NeuroState"
+        description="See how premium gyms, studios, and private clubs achieve 34% better retention, £42 additional revenue per member, and enhanced member engagement."
+        keywords="gym retention case studies, fitness club success stories, member retention results, gym revenue increase, boutique studio growth, private club technology"
       />
       
       <div className="min-h-screen bg-ivory">

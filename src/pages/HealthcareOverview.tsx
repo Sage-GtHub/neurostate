@@ -72,8 +72,9 @@ export default function HealthcareOverview() {
   return (
     <>
       <SEO 
-        title="Predictive Healthcare Intelligence | Neurostate"
-        description="AI powered cognitive infrastructure for healthcare. Forecast patient outcomes, prevent complications, and accelerate recovery with precision medicine."
+        title="Predictive Healthcare Intelligence | Clinical AI Platform | NeuroState"
+        description="AI-powered cognitive infrastructure for healthcare. Forecast patient outcomes, prevent complications, and accelerate recovery with precision medicine technology."
+        keywords="healthcare AI, predictive medicine, patient outcome forecasting, clinical intelligence, hospital analytics, recovery acceleration, healthcare burnout prevention"
       />
       
       <div className="min-h-screen bg-background relative overflow-hidden">

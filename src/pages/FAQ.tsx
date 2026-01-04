@@ -48,7 +48,7 @@ const FAQ = () => {
 
   return (
     <>
-      <SEO title="FAQ | Neurostate" description="Common questions about Neurostate cognitive performance supplements, devices, delivery, and returns." />
+      <SEO title="Frequently Asked Questions | NeuroState Support" description="Find answers to common questions about NeuroState cognitive performance products, delivery, returns, subscriptions, and account management." keywords="NeuroState FAQ, cognitive supplements questions, delivery information, return policy, subscription help, customer support" />
       <FAQStructuredData faqs={allFaqs} />
       <div className="min-h-screen flex flex-col bg-background relative overflow-hidden">
         <div className="fixed inset-0 pointer-events-none">

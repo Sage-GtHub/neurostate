@@ -24,8 +24,9 @@ export default function InformationTechnologyOverview() {
   return (
     <>
       <SEO 
-        title="Cognitive Performance for Technology Teams | Neurostate"
+        title="Cognitive Performance for Technology Teams | Developer Wellness | NeuroState"
         description="AI-powered cognitive infrastructure for tech companies. Reduce burnout, improve productivity, and retain top talent across engineering, product, and leadership teams."
+        keywords="tech company wellness, developer burnout prevention, engineering team performance, SaaS employee wellness, startup mental health, tech talent retention"
       />
       
       <div className="min-h-screen bg-background relative overflow-hidden">

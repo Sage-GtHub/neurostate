@@ -32,8 +32,9 @@ export default function ProgramOverview() {
   return (
     <>
       <SEO 
-        title="Corporate Cognitive Performance Programme | NeuroState for Teams"
-        description="Deploy AI-driven cognitive performance across your organisation. Employee performance tools that reduce burnout 63%, increase focus 47%, and deliver measurable workplace productivity gains."
+        title="Corporate Cognitive Performance Programme | Enterprise Wellness | NeuroState"
+        description="Deploy AI-driven cognitive performance across your organisation. Reduce burnout 63%, increase focus 47%, and deliver measurable workplace productivity gains."
+        keywords="corporate wellness programme, enterprise cognitive performance, employee burnout prevention, workplace productivity tools, team performance analytics, AI wellness platform"
       />
       
       <div className="min-h-screen bg-ivory">
