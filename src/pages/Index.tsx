@@ -4,6 +4,7 @@ import { SEO } from "@/components/SEO";
 import { OrganizationStructuredData, SoftwareApplicationStructuredData, WebsiteStructuredData, LocalBusinessStructuredData } from "@/components/StructuredData";
 import { Footer } from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { HomeROICalculator } from "@/components/HomeROICalculator";
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Eye, Layers, Sparkles } from "lucide-react";
@@ -538,67 +539,18 @@ const Index = () => {
                   </div>
                   
                   <div className="pt-3">
-                    <Link to="/solutions/roi-layer">
+                    <Link to="/industries">
                       <Button variant="outline" className="h-9 px-5 text-sm font-medium rounded-full group">
-                        Explore ROI Layer
+                        View all industries
                         <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                       </Button>
                     </Link>
                   </div>
                 </ScrollReveal>
 
-                {/* Right - Mini Calculator */}
+                {/* Right - Interactive Calculator */}
                 <ScrollReveal direction="right" delay={0.2}>
-                  <motion.div 
-                    className="p-5 md:p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20"
-                    whileHover={{ y: -4, transition: { duration: 0.3 } }}
-                  >
-                    <div className="flex items-center gap-3 mb-5">
-                      <div className="w-9 h-9 bg-primary/10 rounded-xl flex items-center justify-center">
-                        <Calculator className="w-4 h-4 text-primary" />
-                      </div>
-                      <div>
-                        <p className="text-foreground font-medium text-sm">Quick ROI Estimate</p>
-                        <p className="text-muted-foreground text-xs">Based on industry benchmarks</p>
-                      </div>
-                    </div>
-
-                    {/* Quick stats preview */}
-                    <div className="grid grid-cols-2 gap-3 mb-5">
-                      <div className="p-3 rounded-xl bg-background/60 text-center">
-                        <p className="text-2xl font-light text-primary">3.2x</p>
-                        <p className="text-[10px] text-muted-foreground uppercase tracking-wider mt-1">Avg. First-Year ROI</p>
-                      </div>
-                      <div className="p-3 rounded-xl bg-background/60 text-center">
-                        <p className="text-2xl font-light text-foreground">4.2</p>
-                        <p className="text-[10px] text-muted-foreground uppercase tracking-wider mt-1">Month Payback</p>
-                      </div>
-                    </div>
-
-                    {/* Example breakdown */}
-                    <div className="space-y-2 mb-5 pb-5 border-b border-primary/20">
-                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">For a 100-person team</p>
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-muted-foreground">Hidden costs identified</span>
-                        <span className="text-sm font-medium text-foreground">£487,500</span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-muted-foreground">Potential recovery (25%)</span>
-                        <span className="text-sm font-medium text-primary">£121,875</span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-muted-foreground">Annual investment</span>
-                        <span className="text-sm font-medium text-foreground">£22,800</span>
-                      </div>
-                    </div>
-
-                    <Link to="/enterprise/pricing" className="block">
-                      <Button className="w-full h-10 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
-                        Get your custom estimate
-                        <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                      </Button>
-                    </Link>
-                  </motion.div>
+                  <HomeROICalculator />
                 </ScrollReveal>
               </div>
             </div>
