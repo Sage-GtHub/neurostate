@@ -370,18 +370,6 @@ const Hero = () => {
           ))}
         </div>
       </motion.div>
-
-      {/* Positioning Statement */}
-      <motion.div 
-        className="py-10 px-6 md:px-8 border-t border-border/30"
-        initial={{ opacity: 0, y: 20 }}
-        animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.7, delay: 0.6 }}
-      >
-        <p className="text-center text-sm md:text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-          Like <span className="text-foreground font-medium">Stripe</span> is infrastructure for money, and <span className="text-foreground font-medium">Palantir</span> is infrastructure for decision intelligence, <span className="text-primary font-medium">NeuroState</span> is infrastructure for human performance.
-        </p>
-      </motion.div>
     </section>
   );
 };
