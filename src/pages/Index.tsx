@@ -270,10 +270,11 @@ const Index = () => {
 
               {/* Journey steps */}
               <div className="relative">
-                {/* Connection line */}
+                {/* Connection line - Desktop only */}
                 <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent -translate-y-1/2" />
                 
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+                {/* Desktop/Tablet Grid */}
+                <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
                   {[
                     { step: "01", title: "Connect", desc: "Link wearables, calendars, and work tools. Setup takes minutes.", icon: Database },
                     { step: "02", title: "Interpret", desc: "AI transforms raw data into cognitive intelligence.", icon: Brain },
@@ -289,15 +290,47 @@ const Index = () => {
                       transition={{ duration: 0.5, delay: i * 0.1 }}
                       whileHover={{ y: -4 }}
                     >
-                      
-
-                      
                       <div className="text-center">
                         <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-2 group-hover:bg-primary/20 transition-colors">
                           <item.icon className="w-3.5 h-3.5 text-primary" />
                         </div>
                         <h3 className="text-sm font-medium text-foreground mb-1">{item.title}</h3>
                         <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Mobile - Compact horizontal cards */}
+                <div className="md:hidden space-y-2">
+                  {[
+                    { step: "01", title: "Connect", desc: "Link wearables, calendars, and work tools. Setup takes minutes.", icon: Database },
+                    { step: "02", title: "Interpret", desc: "AI transforms raw data into cognitive intelligence.", icon: Brain },
+                    { step: "03", title: "Forecast", desc: "See capacity shifts and risk patterns before they materialise.", icon: TrendingUp },
+                    { step: "04", title: "Act", desc: "Receive contextual interventions with measurable returns.", icon: Zap }
+                  ].map((item, i) => (
+                    <motion.div
+                      key={i}
+                      className="flex items-center gap-3 p-3 rounded-xl bg-card/60 border border-border/40"
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: i * 0.08 }}
+                    >
+                      {/* Left: Icon with step number */}
+                      <div className="relative flex-shrink-0">
+                        <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                          <item.icon className="w-4 h-4 text-primary" />
+                        </div>
+                        <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-primary-foreground text-[9px] font-bold rounded-full flex items-center justify-center">
+                          {item.step}
+                        </span>
+                      </div>
+
+                      {/* Right: Content */}
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-sm font-semibold text-foreground mb-0.5">{item.title}</h3>
+                        <p className="text-[11px] text-muted-foreground leading-snug line-clamp-2">{item.desc}</p>
                       </div>
                     </motion.div>
                   ))}
