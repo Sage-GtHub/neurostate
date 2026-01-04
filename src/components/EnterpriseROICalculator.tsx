@@ -102,8 +102,8 @@ export function EnterpriseROICalculator({ variant = "dark", defaultIndustry = "s
   const sickDaysCost = employeeCount * dailyCost * sickDaysNum;
   const totalHiddenCosts = underperformanceCost + turnoverCost + sickDaysCost;
 
-  // Calculate NeuroState impact at £50/user/month
-  const investment = employeeCount * 50 * 12;
+  // Calculate NeuroState impact at £19/user/month
+  const investment = employeeCount * 19 * 12;
   const recoveredUnderperformance = underperformanceCost * improvement;
   const recoveredTurnover = turnoverCost * improvement;
   const recoveredSickDays = sickDaysCost * improvement;
@@ -266,7 +266,7 @@ export function EnterpriseROICalculator({ variant = "dark", defaultIndustry = "s
         </div>
         <div>
           <h3 className={`text-sm font-medium ${isDark ? 'text-background' : 'text-foreground'}`}>ROI Calculator</h3>
-          <p className={`text-[10px] ${isDark ? 'text-background/60' : 'text-muted-foreground'}`}>Calculate your potential savings at £50/user/month</p>
+          <p className={`text-[10px] ${isDark ? 'text-background/60' : 'text-muted-foreground'}`}>Calculate your potential savings at £19/user/month</p>
         </div>
       </div>
 
@@ -478,7 +478,7 @@ export function EnterpriseROICalculator({ variant = "dark", defaultIndustry = "s
           </div>
           <div>
             <h3 className={`text-sm font-medium ${isDark ? 'text-background' : 'text-foreground'}`}>ROI Calculator</h3>
-            <p className={`text-[10px] ${isDark ? 'text-background/60' : 'text-muted-foreground'}`}>£50/user/month</p>
+            <p className={`text-[10px] ${isDark ? 'text-background/60' : 'text-muted-foreground'}`}>£19/user/month</p>
           </div>
         </div>
 
