@@ -17,7 +17,7 @@ interface TierFeature {
 const tiers: TierFeature[] = [
   {
     name: "Startup",
-    price: 35,
+    price: 19,
     commitment: "Monthly",
     features: [
       "Nova AI wellness assistant",
@@ -27,7 +27,7 @@ const tiers: TierFeature[] = [
   },
   {
     name: "Scale",
-    price: 65,
+    price: 29,
     commitment: "Monthly",
     features: [
       "Everything in Startup",
@@ -38,7 +38,7 @@ const tiers: TierFeature[] = [
   },
   {
     name: "Enterprise",
-    price: 110,
+    price: 49,
     commitment: "Custom",
     features: [
       "Everything in Scale",

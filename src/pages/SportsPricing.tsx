@@ -17,7 +17,7 @@ interface TierFeature {
 const tiers: TierFeature[] = [
   {
     name: "Foundation",
-    price: 85,
+    price: 19,
     commitment: "Monthly",
     features: [
       "Nova AI performance assistant",
@@ -27,7 +27,7 @@ const tiers: TierFeature[] = [
   },
   {
     name: "Elite",
-    price: 145,
+    price: 29,
     commitment: "Monthly",
     features: [
       "Everything in Foundation",
@@ -38,7 +38,7 @@ const tiers: TierFeature[] = [
   },
   {
     name: "Championship",
-    price: 225,
+    price: 49,
     commitment: "Custom",
     features: [
       "Everything in Elite",
