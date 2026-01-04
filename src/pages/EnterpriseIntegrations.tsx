@@ -85,8 +85,9 @@ export default function EnterpriseIntegrations() {
   return (
     <>
       <SEO 
-        title="Enterprise Integrations | NeuroState"
-        description="Seamless integration with Slack, Teams, Calendar, SSO, and custom APIs. NeuroState fits into your existing workplace tools."
+        title="Enterprise Integrations | Slack, Teams, SSO & API | NeuroState"
+        description="Seamless integration with Slack, Teams, Calendar, SSO, and custom APIs. NeuroState fits into your existing workplace tools with invisible infrastructure."
+        keywords="enterprise integration, Slack wellness integration, Microsoft Teams wellness, SSO authentication, API integration, workplace tool integration, HRIS integration"
       />
       
       <div className="min-h-screen bg-ivory">

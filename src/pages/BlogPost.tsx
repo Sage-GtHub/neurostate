@@ -265,15 +265,16 @@ export default function BlogPost() {
   return (
     <>
       <SEO 
-        title={`${post.title} | NeuroState Blog`}
+        title={`${post.title} | NeuroState Cognitive Performance Blog`}
         description={post.excerpt}
         type="article"
+        keywords={`${post.category.toLowerCase()}, cognitive performance, ${post.title.toLowerCase().split(' ').slice(0, 3).join(' ')}, NeuroState blog`}
       />
       <ArticleStructuredData 
         article={{
           headline: post.title,
           description: post.excerpt,
-          image: "https://neurostate.co.uk/og-image.jpg",
+          image: "https://neurostate.co.uk/og-image.png",
           datePublished: post.date,
           dateModified: post.date,
           author: "NeuroState"

@@ -76,8 +76,9 @@ export default function HospitalityPricing() {
   return (
     <>
       <SEO 
-        title="Hospitality Pricing Calculator | NeuroState"
-        description="Property-focused pricing with resort bundles and volume discounts. Calculate your custom hospitality wellness programme pricing."
+        title="Hospitality Pricing | Hotel & Resort Wellness Plans | NeuroState"
+        description="Property-focused pricing with resort bundles and multi-property discounts. Calculate custom pricing for hotels, resorts, and spa destinations."
+        keywords="hotel wellness pricing, resort wellness platform, spa technology cost, guest wellness programme, hospitality wellness integration"
       />
       
       <div className="min-h-screen bg-ivory">

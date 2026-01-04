@@ -28,8 +28,9 @@ export default function HealthClubsOverview() {
   return (
     <>
       <SEO 
-        title="Cognitive Performance for Health Clubs and Gyms | Neurostate"
-        description="Transform your fitness facility with AI driven cognitive analytics. Measure what matters. Deliver measurable results. Retain more members."
+        title="Cognitive Performance for Health Clubs & Gyms | Member Retention | NeuroState"
+        description="Transform your fitness facility with AI-driven cognitive analytics. Measure readiness, recovery, and cognitive load. Deliver measurable results and retain more members."
+        keywords="gym member retention, fitness club technology, health club analytics, cognitive fitness tracking, member engagement platform, fitness facility AI"
       />
       
       <div className="min-h-screen bg-background relative overflow-hidden">

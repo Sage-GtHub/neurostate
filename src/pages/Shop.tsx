@@ -106,8 +106,9 @@ const Shop = () => {
   return (
     <>
       <SEO 
-        title="Shop | Cognitive Performance Products | Neurostate"
-        description="Browse the biological optimisation components of the Neurostate cognitive system. Research-backed formulas and neuromodulation devices for peak cognitive performance."
+        title="Shop Cognitive Performance Products | Supplements & Devices | NeuroState"
+        description="Research-backed cognitive supplements and clinical-grade neuromodulation devices. Browse the biological optimisation components of the NeuroState cognitive system."
+        keywords="cognitive supplements, nootropics UK, red light therapy devices, focus supplements, recovery supplements, neuromodulation devices, adaptogens, brain performance products"
       />
       <div className="min-h-screen bg-background mobile-nav-padding relative">
         {/* Organic background elements */}

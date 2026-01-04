@@ -85,8 +85,9 @@ export default function FinancialServicesIntegrations() {
   return (
     <>
       <SEO 
-        title="Financial Services Integrations | NeuroState"
-        description="Seamless integration with trading platforms, Bloomberg terminals, HR systems, and compliance tools. NeuroState fits into your financial services ecosystem."
+        title="Financial Services Integrations | Bloomberg & Trading Systems | NeuroState"
+        description="Seamless integration with trading platforms, Bloomberg terminals, HR systems, and compliance tools. Deploy NeuroState across your financial infrastructure."
+        keywords="Bloomberg integration, trading platform wellness, financial services API, compliance integration, HRIS wellness connection, institutional data integration"
       />
       
       <div className="min-h-screen bg-ivory">

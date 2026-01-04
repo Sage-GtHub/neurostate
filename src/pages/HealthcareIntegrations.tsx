@@ -85,8 +85,9 @@ export default function HealthcareIntegrations() {
   return (
     <>
       <SEO 
-        title="Healthcare Integrations | NeuroState"
-        description="Seamless integration with EHR systems, patient portals, and clinical platforms. NeuroState fits into your healthcare ecosystem."
+        title="Healthcare Integrations | EHR & Patient Portal Systems | NeuroState"
+        description="Seamless integration with EHR systems, patient portals, and clinical platforms. HIPAA-compliant wellness integration for healthcare organisations."
+        keywords="EHR integration, patient portal wellness, clinical system API, HIPAA compliant wellness, healthcare data integration, EMR wellness platform"
       />
       
       <div className="min-h-screen bg-ivory">

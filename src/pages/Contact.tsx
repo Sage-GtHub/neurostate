@@ -73,7 +73,7 @@ const Contact = () => {
 
   return (
     <>
-      <SEO title="Contact Us | Neurostate" description="Questions about our cognitive performance system? Get in touch with our team." />
+      <SEO title="Contact Us | Book a Demo | NeuroState" description="Schedule a demo or get in touch with our team. Discover how NeuroState's cognitive performance infrastructure can transform your organisation." keywords="contact NeuroState, book demo, enterprise wellness enquiry, cognitive performance consultation, team performance demo" />
       <Header />
       <div className="min-h-screen bg-background mobile-nav-padding relative overflow-hidden">
         <div className="fixed inset-0 pointer-events-none">

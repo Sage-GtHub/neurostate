@@ -85,8 +85,9 @@ export default function HealthClubsIntegrations() {
   return (
     <>
       <SEO 
-        title="Health Club Integrations | NeuroState"
-        description="Seamless integration with Mindbody, Glofox, member portals, and club management systems. NeuroState enhances your member experience."
+        title="Health Club Integrations | Mindbody, Glofox & Club Systems | NeuroState"
+        description="Seamless integration with Mindbody, Glofox, member portals, POS, and club management systems. Enhance your member experience with cognitive wellness."
+        keywords="gym management integration, Mindbody integration, Glofox sync, fitness club software, member portal wellness, gym POS integration"
       />
       
       <div className="min-h-screen bg-ivory">

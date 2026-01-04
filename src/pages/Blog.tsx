@@ -70,8 +70,9 @@ export default function Blog() {
   return (
     <>
       <SEO 
-        title="Blog – Cognitive Performance Insights | NeuroState"
-        description="Expert insights on cognitive performance, AI-driven personalisation, red light therapy, adaptogen supplements, and workplace performance."
+        title="Cognitive Performance Blog | Insights & Research | NeuroState"
+        description="Expert insights on cognitive performance, AI-driven personalisation, burnout prevention, and workplace performance optimisation. Evidence-based content from NeuroState."
+        keywords="cognitive performance blog, burnout prevention insights, AI wellness research, workplace productivity articles, cognitive health content, enterprise wellness insights"
       />
       <Header />
       

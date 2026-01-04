@@ -1,5 +1,6 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -149,7 +150,13 @@ const Partnerships = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background mobile-nav-padding">
+    <>
+      <SEO 
+        title="Partnership Programme | B2B Wellness Solutions | NeuroState"
+        description="Partner with NeuroState for wholesale pricing, dedicated support, custom solutions, and co-marketing opportunities. Join our network of performance-focused organisations."
+        keywords="NeuroState partnership, B2B wellness, wholesale cognitive products, corporate wellness partnership, reseller programme, co-marketing wellness"
+      />
+      <div className="min-h-screen bg-background mobile-nav-padding">
       <Header />
       
       <main className="container mx-auto px-4 py-12">
@@ -393,6 +400,7 @@ const Partnerships = () => {
       <Footer />
       <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
     </div>
+    </>
   );
 };
 

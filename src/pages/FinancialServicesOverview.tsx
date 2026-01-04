@@ -24,8 +24,9 @@ export default function FinancialServicesOverview() {
   return (
     <>
       <SEO 
-        title="Cognitive Performance for Financial Services | Neurostate"
+        title="Cognitive Performance for Financial Services | Trading & Investment | NeuroState"
         description="AI-powered cognitive infrastructure for trading floors, investment banks, and financial institutions. Predict mental fatigue, optimise decision windows, and maintain peak focus."
+        keywords="financial services wellness, trading floor performance, investment banker burnout, decision fatigue finance, cognitive performance banking, mental clarity trading"
       />
       
       <div className="min-h-screen bg-background relative overflow-hidden">

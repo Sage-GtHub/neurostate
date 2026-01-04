@@ -31,7 +31,7 @@ export default function NovaOverview() {
 
   return (
     <NovaSwipeWrapper>
-      <SEO title="Nova AI | Cognitive Performance Forecasting Engine" description="Nova is a multi-model AI engine that forecasts cognitive performance using wearable data." />
+      <SEO title="Nova AI | Cognitive Performance Forecasting Engine | NeuroState" description="Nova is a multi-model AI engine that forecasts cognitive performance using wearable data. Real-time readiness scores, recovery tracking, and personalised insights." keywords="Nova AI, cognitive forecasting, wearable data analytics, HRV analysis, sleep tracking AI, recovery optimisation, readiness score, performance prediction" />
       <SoftwareApplicationStructuredData />
       <div className="min-h-screen bg-background relative overflow-hidden">
         {/* Organic background */}

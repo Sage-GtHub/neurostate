@@ -85,8 +85,9 @@ export default function InformationTechnologyIntegrations() {
   return (
     <>
       <SEO 
-        title="IT Integrations | NeuroState"
-        description="Seamless integration with Slack, GitHub, Jira, PagerDuty, and developer tools. NeuroState fits into your engineering workflow."
+        title="IT Integrations | Slack, GitHub & Developer Tools | NeuroState"
+        description="Seamless integration with Slack, GitHub, Jira, PagerDuty, and developer tools. Deploy wellness insights where your engineering team already works."
+        keywords="Slack wellness integration, GitHub developer wellness, Jira burnout tracking, PagerDuty wellness, developer tools API, engineering team integration"
       />
       
       <div className="min-h-screen bg-ivory">

@@ -13,8 +13,9 @@ const Shipping = () => {
   return (
     <>
       <SEO 
-        title="Delivery & Returns – Shipping Information | NeuroState"
-        description="Fast UK delivery, international shipping, and 30-day money-back guarantee. Free standard delivery on orders over £50. Learn about our returns policy."
+        title="Delivery & Returns | UK Shipping Information | NeuroState"
+        description="Fast UK delivery within 2-3 days, international shipping, and 30-day money-back guarantee. Free standard delivery on orders over £50."
+        keywords="NeuroState delivery, UK shipping, international delivery, returns policy, money back guarantee, free shipping UK"
       />
       <div className="min-h-screen flex flex-col">
         <Header />
