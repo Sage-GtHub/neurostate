@@ -387,7 +387,7 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
               <ScrollReveal className="space-y-6">
                 <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Get Started</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  The cognitive operating system for {industry.name}
+                  Curious to see it in action?
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-lg mx-auto">
                   Click below to learn more or speak to our team today.
