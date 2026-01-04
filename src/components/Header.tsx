@@ -217,6 +217,24 @@ export const Header = () => {
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <div className="w-[340px] p-4 bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl">
+                      <div className="mb-3 pb-3 border-b border-border/30">
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to="/industries"
+                            className="flex items-center justify-between p-3 rounded-xl hover:bg-muted/80 transition-all duration-300 group"
+                          >
+                            <div>
+                              <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors duration-300">
+                                Industries Overview
+                              </p>
+                              <p className="text-[10px] text-muted-foreground mt-0.5">
+                                ROI calculator & industry benchmarks
+                              </p>
+                            </div>
+                            <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+                          </Link>
+                        </NavigationMenuLink>
+                      </div>
                       <div className="space-y-1">
                         {industries.map((item, index) => (
                           <NavigationMenuLink key={item.label} asChild>
@@ -370,6 +388,13 @@ export const Header = () => {
                       <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", industriesOpen && "rotate-180")} />
                     </CollapsibleTrigger>
                     <CollapsibleContent className="pl-4 space-y-1">
+                      <Link
+                        to="/industries"
+                        className="block py-2 text-xs text-foreground/70 hover:text-primary transition-colors"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Industries Overview
+                      </Link>
                       {industries.map((item) => (
                         <Link
                           key={item.label}
