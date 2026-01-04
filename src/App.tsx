@@ -95,6 +95,9 @@ import ActionControlLayer from "./pages/solutions/ActionControlLayer";
 import CommandSurfaces from "./pages/solutions/CommandSurfaces";
 import ROILayer from "./pages/solutions/ROILayer";
 
+// Industries Hub
+import Industries from "./pages/Industries";
+
 const queryClient = new QueryClient();
 
 // Analytics tracking component
@@ -224,6 +227,7 @@ const AnimatedRoutes = () => {
             <Route path="/team/settings/advanced" element={<NovaSettingsAdvanced />} />
             
             {/* Industry Landing Pages */}
+            <Route path="/industries" element={<Industries />} />
             <Route path="/industries/saas-high-growth" element={<SaaSHighGrowth />} />
             <Route path="/industries/saas-enterprise" element={<SaaSEnterprise />} />
             <Route path="/industries/financial-services" element={<FinancialServicesIndustry />} />
