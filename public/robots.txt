@@ -6,6 +6,33 @@ Sitemap: https://neurostate.co.uk/sitemap.xml
 # Crawl-delay for all bots
 Crawl-delay: 0
 
-# Block specific paths if needed (currently none)
-# Disallow: /admin/
-# Disallow: /api/
+# Block protected/private paths
+Disallow: /nova/chat
+Disallow: /nova/protocols
+Disallow: /nova/insights
+Disallow: /nova/devices
+Disallow: /nova/optimisation
+Disallow: /nova/trends
+Disallow: /nova/goals
+Disallow: /nova/settings
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /rewards
+Disallow: /subscriptions
+Disallow: /team
+Disallow: /team-dashboard
+Disallow: /team/settings
+Disallow: /admin/
+Disallow: /track-order
+Disallow: /join
+Disallow: /join-organisation
+
+# Allow specific public pages
+Allow: /nova/overview
+Allow: /solutions
+Allow: /industries
+Allow: /enterprise
+Allow: /blog
+Allow: /about
+Allow: /contact
+Allow: /faq
