@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { SolutionPageStructuredData, BreadcrumbStructuredData } from "@/components/StructuredData";
 import { ArrowUpRight, ArrowRight, Users, User, Shield, Crown, BarChart3, Calculator, Lock, Eye, Brain, Zap, TrendingUp, Target, AlertTriangle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -74,6 +75,21 @@ export default function CommandSurfaces() {
         title="Command Surfaces by Role | Tailored Dashboards | NeuroState"
         description="One system, different truths. Role-based interfaces for individuals, managers, HR leaders, and executives—each seeing the cognitive intelligence they need."
         keywords="role-based dashboards, executive analytics, manager insights, HR workforce analytics, team health visibility, organisational intelligence, privacy-first design"
+      />
+      <SolutionPageStructuredData
+        solution={{
+          name: "Command Surfaces by Role",
+          description: "One system, different truths. Tailored interfaces for individuals, managers, HR leaders, and executives—each seeing the cognitive intelligence they need.",
+          url: "https://neurostate.co.uk/solutions/command-surfaces",
+          features: ["Individual contributor dashboard", "Manager insights", "HR analytics", "Executive reporting", "Privacy-first design"]
+        }}
+      />
+      <BreadcrumbStructuredData
+        items={[
+          { name: "Home", url: "https://neurostate.co.uk" },
+          { name: "Solutions", url: "https://neurostate.co.uk/solutions" },
+          { name: "Command Surfaces", url: "https://neurostate.co.uk/solutions/command-surfaces" }
+        ]}
       />
       <div className="min-h-screen bg-background">
         <Header />

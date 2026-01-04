@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { SolutionPageStructuredData, BreadcrumbStructuredData } from "@/components/StructuredData";
 import { ArrowUpRight, ArrowRight, Cpu, Activity, Brain, Zap, AlertTriangle, TrendingUp, Database, Gauge, BarChart3 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -49,6 +50,21 @@ export default function CognitiveStateEngine() {
         title="Cognitive State Engine | Real-Time Intelligence | NeuroState"
         description="Transform raw biometric data into meaningful cognitive states: readiness, load, recovery debt, stress volatility, and burnout risk scores in real-time."
         keywords="cognitive state monitoring, readiness score, burnout risk prediction, recovery debt tracking, stress volatility, real-time analytics, workforce intelligence"
+      />
+      <SolutionPageStructuredData
+        solution={{
+          name: "Cognitive State Engine",
+          description: "Real-time interpretation of raw signals into meaningful cognitive states: readiness, load, recovery debt, stress volatility, and burnout risk.",
+          url: "https://neurostate.co.uk/solutions/state-engine",
+          features: ["Readiness scoring", "Cognitive load monitoring", "Recovery debt tracking", "Stress volatility analysis", "Burnout risk prediction"]
+        }}
+      />
+      <BreadcrumbStructuredData
+        items={[
+          { name: "Home", url: "https://neurostate.co.uk" },
+          { name: "Solutions", url: "https://neurostate.co.uk/solutions" },
+          { name: "Cognitive State Engine", url: "https://neurostate.co.uk/solutions/state-engine" }
+        ]}
       />
       <div className="min-h-screen bg-background">
         <Header />

@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { SolutionPageStructuredData, BreadcrumbStructuredData } from "@/components/StructuredData";
 import { ArrowUpRight, ArrowRight, Zap, User, Users, Bell, Clock, MessageSquare, Calendar, Target, CheckCircle2, AlertTriangle, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -77,6 +78,21 @@ export default function ActionControlLayer() {
         title="Action & Control Layer | Cognitive Interventions | NeuroState"
         description="Low-friction interventions that drive outcomes. Personal coaching, workload timing, manager nudges, and preventative actions delivered at the right moment."
         keywords="cognitive interventions, personal coaching, manager nudges, workload optimisation, preventative burnout actions, team performance interventions, wellness automation"
+      />
+      <SolutionPageStructuredData
+        solution={{
+          name: "Action & Control Layer",
+          description: "Low-friction interventions that drive outcomes. Personal coaching prompts, workload timing recommendations, manager nudges, and preventative interventions.",
+          url: "https://neurostate.co.uk/solutions/action-layer",
+          features: ["Personal coaching prompts", "Workload timing recommendations", "Manager nudges", "Preventative interventions", "Calendar integration"]
+        }}
+      />
+      <BreadcrumbStructuredData
+        items={[
+          { name: "Home", url: "https://neurostate.co.uk" },
+          { name: "Solutions", url: "https://neurostate.co.uk/solutions" },
+          { name: "Action & Control Layer", url: "https://neurostate.co.uk/solutions/action-layer" }
+        ]}
       />
       <div className="min-h-screen bg-background">
         <Header />

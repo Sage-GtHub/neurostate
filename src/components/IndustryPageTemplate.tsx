@@ -4,6 +4,7 @@ import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { EnterpriseROICalculator } from "@/components/EnterpriseROICalculator";
+import { IndustryPageStructuredData, BreadcrumbStructuredData } from "@/components/StructuredData";
 import { ArrowUpRight, Check, LucideIcon, Activity, Brain, AlertTriangle, Zap, Target, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -58,6 +59,21 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
         title={`${industry.name} | Cognitive Performance Solutions | NeuroState`}
         description={industry.subheadline}
         keywords={`${industry.name.toLowerCase()} cognitive performance, ${industry.slug} burnout prevention, workforce optimisation ${industry.name.toLowerCase()}, enterprise wellness ${industry.slug}, team performance analytics`}
+      />
+      <IndustryPageStructuredData
+        industry={{
+          name: industry.name,
+          description: industry.subheadline,
+          url: `https://neurostate.co.uk/industries/${industry.slug}`,
+          outcomes: industry.outcomes
+        }}
+      />
+      <BreadcrumbStructuredData
+        items={[
+          { name: "Home", url: "https://neurostate.co.uk" },
+          { name: "Industries", url: "https://neurostate.co.uk/industries" },
+          { name: industry.name, url: `https://neurostate.co.uk/industries/${industry.slug}` }
+        ]}
       />
       <div className="min-h-screen bg-background">
         <Header />

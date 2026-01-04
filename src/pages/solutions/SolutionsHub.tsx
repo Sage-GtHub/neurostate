@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { SolutionPageStructuredData, BreadcrumbStructuredData } from "@/components/StructuredData";
 import { ArrowRight, ArrowUpRight, Layers, Brain, TrendingUp, Zap, Users, Calculator, Database, Cpu, Target, BarChart3, Check, X, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -78,6 +79,27 @@ export default function SolutionsHub() {
         title="Solutions | Cognitive Performance Infrastructure | NeuroState"
         description="NeuroState is the system of record for cognitive capacity. Six layers of infrastructure transforming biometric signals into predictive intelligence and measurable ROI."
         keywords="cognitive performance infrastructure, cognitive data layer, state engine, burnout prediction, ROI measurement, workforce analytics, enterprise wellness platform"
+      />
+      <SolutionPageStructuredData
+        solution={{
+          name: "NeuroState Solutions",
+          description: "Six layers of cognitive infrastructure transforming biometric signals into predictive intelligence and measurable ROI.",
+          url: "https://neurostate.co.uk/solutions",
+          features: [
+            "Cognitive Data Layer",
+            "Cognitive State Engine",
+            "Prediction & Simulation",
+            "Action & Control Layer",
+            "Command Surfaces by Role",
+            "Economic & ROI Layer"
+          ]
+        }}
+      />
+      <BreadcrumbStructuredData
+        items={[
+          { name: "Home", url: "https://neurostate.co.uk" },
+          { name: "Solutions", url: "https://neurostate.co.uk/solutions" }
+        ]}
       />
       <div className="min-h-screen bg-background">
         <Header />
