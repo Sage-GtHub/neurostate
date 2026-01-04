@@ -358,7 +358,7 @@ export default function EnterpriseOverview() {
                   Calculate your potential savings
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                  See how NeuroState can deliver measurable returns for your organisation at founding pricing of £50/employee per month.
+                  See how NeuroState can deliver measurable returns for your organisation at founding pricing of £19/employee per month.
                 </p>
               </ScrollReveal>
 

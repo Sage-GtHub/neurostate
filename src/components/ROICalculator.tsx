@@ -96,8 +96,8 @@ export function ROICalculator() {
   const sickDaysCost = employeeCount * dailyCost * sickDaysNum;
   const totalHiddenCosts = underperformanceCost + turnoverCost + sickDaysCost;
 
-  // Calculate NeuroState impact at £50/user/month
-  const investment = employeeCount * 50 * 12;
+  // Calculate NeuroState impact at £19/user/month
+  const investment = employeeCount * 19 * 12;
   const recoveredUnderperformance = underperformanceCost * improvement;
   const recoveredTurnover = turnoverCost * improvement;
   const recoveredSickDays = sickDaysCost * improvement;
