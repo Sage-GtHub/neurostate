@@ -12,9 +12,9 @@ interface SEOProps {
 }
 
 export const SEO = ({
-  title = 'NeuroState® - The World\'s First Cognitive Performance System',
-  description = 'AI, red light therapy and performance supplements combined into one system to improve focus, sleep, energy and cognitive performance. Free UK delivery.',
-  keywords = 'cognitive performance system, AI-driven cognitive performance, focus optimisation, mental performance tools, burnout prevention',
+  title = 'NeuroState® - Cognitive Performance Infrastructure for Organisations',
+  description = 'NeuroState is the system of record for cognitive capacity. Predictive intelligence for performance, risk visibility, and financial attribution at enterprise scale.',
+  keywords = 'cognitive performance infrastructure, enterprise wellness platform, AI performance analytics, workforce optimisation, predictive intelligence, burnout prevention, Nova AI',
   image = 'https://neurostate.co.uk/og-image.jpg',
   type = 'website',
   canonical,

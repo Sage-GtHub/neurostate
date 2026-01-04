@@ -76,19 +76,19 @@ export const OrganizationStructuredData = () => {
       "alternateName": "NeuroState®",
       "url": "https://neurostate.co.uk",
       "logo": "https://neurostate.co.uk/favicon.png",
-      "description": "NeuroState is a science-backed cognitive performance and recovery brand offering AI coaching, supplements and red light therapy technology to improve focus, sleep, energy and cognitive performance.",
+      "description": "NeuroState is the cognitive performance infrastructure for organisations. Predictive intelligence, risk visibility, and financial attribution for enterprise-scale human performance.",
       "foundingDate": "2025",
-      "slogan": "The World's First Cognitive Performance System",
+      "slogan": "Cognitive Infrastructure for Organisations",
       "knowsAbout": [
-        "Cognitive Performance",
-        "AI-driven cognitive performance",
-        "Personalised cognitive performance",
-        "Red light therapy cognitive benefits",
-        "Neuromodulation",
-        "Photobiomodulation",
-        "Adaptogen supplements for focus",
-        "Corporate wellbeing solution",
-        "Workplace performance platform"
+        "Cognitive Performance Infrastructure",
+        "Enterprise Wellness Platform",
+        "AI Performance Analytics",
+        "Workforce Optimisation",
+        "Predictive Intelligence",
+        "Burnout Prevention",
+        "Team Performance Monitoring",
+        "Nova AI Assistant",
+        "ROI Attribution"
       ],
       "contactPoint": {
         "@type": "ContactPoint",
@@ -137,9 +137,9 @@ export const SoftwareApplicationStructuredData = () => {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "Nova AI",
-      "applicationCategory": "HealthApplication",
+      "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
-      "description": "AI cognitive performance assistant providing personalised protocols, predictive insights and real-time guidance to enhance focus, sleep and mental resilience.",
+      "description": "Multi-model AI engine that forecasts cognitive performance using wearable data, behavioural signals, and predictive analytics for individuals and teams.",
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -151,12 +151,12 @@ export const SoftwareApplicationStructuredData = () => {
         "ratingCount": "1247"
       },
       "featureList": [
-        "Personalised AI coaching",
-        "Adaptive recommendations",
-        "Real-time behavioural insights",
-        "Predictive wellness AI",
+        "72-hour performance forecasting",
+        "Cognitive load monitoring",
         "Wearable device integration",
-        "Protocol optimisation"
+        "ROI attribution analytics",
+        "Team health dashboards",
+        "Adaptive protocols"
       ],
       "provider": {
         "@type": "Organization",
@@ -266,7 +266,7 @@ export const LocalBusinessStructuredData = () => {
       "url": "https://neurostate.co.uk",
       "logo": "https://neurostate.co.uk/favicon.png",
       "image": "https://neurostate.co.uk/favicon.png",
-      "description": "The world's first cognitive performance system combining AI, red light therapy and performance supplements.",
+      "description": "Cognitive performance infrastructure for organisations. Predictive intelligence, risk visibility, and ROI attribution.",
       "email": "contact@neurostate.co.uk",
       "telephone": "",
       "address": {
@@ -329,7 +329,7 @@ export const WebsiteStructuredData = () => {
       "name": "NeuroState",
       "alternateName": "NeuroState®",
       "url": "https://neurostate.co.uk",
-      "description": "The world's first cognitive performance system combining AI, red light therapy and performance supplements.",
+      "description": "Cognitive performance infrastructure for organisations. Predictive intelligence, risk visibility, and ROI attribution.",
       "potentialAction": {
         "@type": "SearchAction",
         "target": {
@@ -346,33 +346,33 @@ export const WebsiteStructuredData = () => {
       "@graph": [
         {
           "@type": "SiteNavigationElement",
-          "name": "Shop",
-          "description": "Shop performance supplements and recovery devices.",
-          "url": "https://neurostate.co.uk/shop"
+          "name": "Solutions",
+          "description": "Explore our cognitive performance building blocks and platform components.",
+          "url": "https://neurostate.co.uk/solutions"
         },
         {
           "@type": "SiteNavigationElement",
           "name": "Nova AI",
-          "description": "AI-powered cognitive performance assistant.",
+          "description": "Multi-model AI engine for cognitive performance forecasting.",
           "url": "https://neurostate.co.uk/nova"
         },
         {
           "@type": "SiteNavigationElement",
-          "name": "About Us",
-          "description": "Peak performance for everyone. Learn about our mission.",
-          "url": "https://neurostate.co.uk/about"
+          "name": "For Teams",
+          "description": "Enterprise cognitive performance infrastructure for organisations.",
+          "url": "https://neurostate.co.uk/enterprise/overview"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Industries",
+          "description": "Sector-specific solutions for IT, Finance, Healthcare, and more.",
+          "url": "https://neurostate.co.uk/enterprise/overview"
         },
         {
           "@type": "SiteNavigationElement",
           "name": "Resources",
-          "description": "Master your health journey with expert guides and articles.",
+          "description": "Guides, articles, and insights on cognitive performance.",
           "url": "https://neurostate.co.uk/resources"
-        },
-        {
-          "@type": "SiteNavigationElement",
-          "name": "For Teams",
-          "description": "Enterprise cognitive performance solutions for organisations.",
-          "url": "https://neurostate.co.uk/enterprise/overview"
         },
         {
           "@type": "SiteNavigationElement",
