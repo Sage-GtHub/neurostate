@@ -147,6 +147,20 @@ const Index = () => {
                 </p>
               </motion.div>
 
+              {/* Positioning Statement */}
+              <motion.div
+                className="mb-10 py-6 border-y border-border/30"
+                initial={{ opacity: 0, y: 15 }}
+                animate={isApproachInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <p className="text-base md:text-lg text-muted-foreground text-center max-w-3xl mx-auto leading-relaxed">
+                  Like <span className="text-foreground font-medium">Stripe</span> is infrastructure for money, and{" "}
+                  <span className="text-foreground font-medium">Palantir</span> is infrastructure for decision intelligence,{" "}
+                  <span className="text-primary font-medium">NeuroState</span> is infrastructure for human performance.
+                </p>
+              </motion.div>
+
               {/* 3 Pillars */}
               <div className="grid md:grid-cols-3 gap-4 md:gap-5">
                 {approachPillars.map((pillar, i) => (
