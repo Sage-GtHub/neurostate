@@ -373,16 +373,14 @@ const Hero = () => {
 
       {/* Positioning Statement */}
       <motion.div 
-        className="py-12 px-6 md:px-8 bg-muted/50"
+        className="py-10 px-6 md:px-8 border-t border-border/30"
         initial={{ opacity: 0, y: 20 }}
         animate={isLoaded ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7, delay: 0.6 }}
       >
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-base md:text-lg lg:text-xl text-foreground/90 leading-relaxed font-light">
-            Like <span className="text-foreground font-semibold">Stripe</span> is infrastructure for money, and <span className="text-foreground font-semibold">Palantir</span> is infrastructure for decision intelligence, <span className="text-primary font-semibold">NeuroState</span> is infrastructure for human performance.
-          </p>
-        </div>
+        <p className="text-center text-sm md:text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          Like <span className="text-foreground font-medium">Stripe</span> is infrastructure for money, and <span className="text-foreground font-medium">Palantir</span> is infrastructure for decision intelligence, <span className="text-primary font-medium">NeuroState</span> is infrastructure for human performance.
+        </p>
       </motion.div>
     </section>
   );
