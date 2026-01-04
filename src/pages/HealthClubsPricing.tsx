@@ -17,7 +17,7 @@ interface TierFeature {
 const tiers: TierFeature[] = [
   {
     name: "Essentials",
-    price: 28,
+    price: 9,
     commitment: "Monthly",
     features: [
       "Member wellness portal",
@@ -27,7 +27,7 @@ const tiers: TierFeature[] = [
   },
   {
     name: "Premium",
-    price: 52,
+    price: 19,
     commitment: "Monthly",
     features: [
       "Everything in Essentials",
@@ -38,7 +38,7 @@ const tiers: TierFeature[] = [
   },
   {
     name: "Signature",
-    price: 85,
+    price: 29,
     commitment: "Custom",
     features: [
       "Everything in Premium",

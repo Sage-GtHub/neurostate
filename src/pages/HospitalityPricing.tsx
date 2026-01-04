@@ -17,7 +17,7 @@ interface TierFeature {
 const tiers: TierFeature[] = [
   {
     name: "Boutique",
-    price: 8,
+    price: 5,
     commitment: "Per room/month",
     features: [
       "Guest wellness portal",
@@ -27,7 +27,7 @@ const tiers: TierFeature[] = [
   },
   {
     name: "Resort",
-    price: 15,
+    price: 9,
     commitment: "Per room/month",
     features: [
       "Everything in Boutique",
@@ -38,7 +38,7 @@ const tiers: TierFeature[] = [
   },
   {
     name: "Collection",
-    price: 25,
+    price: 15,
     commitment: "Per room/month",
     features: [
       "Everything in Resort",
