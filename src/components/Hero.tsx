@@ -378,8 +378,8 @@ const Hero = () => {
         animate={isLoaded ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7, delay: 0.6 }}
       >
-        <p className="text-center text-sm md:text-base text-foreground/80 max-w-3xl mx-auto leading-relaxed">
-          Like <span className="text-foreground font-semibold">Stripe</span> is infrastructure for money, and <span className="text-foreground font-semibold">Palantir</span> is infrastructure for decision intelligence, <span className="text-primary font-semibold">NeuroState</span> is infrastructure for human performance.
+        <p className="text-center text-sm md:text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          Like <span className="text-foreground font-medium">Stripe</span> is infrastructure for money, and <span className="text-foreground font-medium">Palantir</span> is infrastructure for decision intelligence, <span className="text-primary font-medium">NeuroState</span> is infrastructure for human performance.
         </p>
       </motion.div>
     </section>
