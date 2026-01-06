@@ -45,6 +45,8 @@ import { Footer } from '@/components/Footer';
 import { SEO } from '@/components/SEO';
 import { supabase } from '@/integrations/supabase/client';
 import { TeamBreakdownModal, InsightTraceModal, FinancialBreakdownModal } from '@/components/DashboardModals';
+import { OnboardingWizard } from '@/components/onboarding';
+import { useOnboardingWizard } from '@/hooks/useOnboardingWizard';
 
 // Executive Intelligence Metrics
 const executiveMetrics = {
@@ -228,6 +230,9 @@ export default function TeamDashboard() {
   const [showFinancialModal, setShowFinancialModal] = useState(false);
   const [showInsightModal, setShowInsightModal] = useState(false);
   const [selectedInsight, setSelectedInsight] = useState<any>(null);
+  
+  // Onboarding wizard
+  const { showOnboarding, completeOnboarding } = useOnboardingWizard();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -255,6 +260,8 @@ export default function TeamDashboard() {
 
   return (
     <>
+      {/* Onboarding Wizard for new users */}
+      <OnboardingWizard open={showOnboarding} onComplete={completeOnboarding} />
       <SEO 
         title="Team Dashboard | NeuroState Nova"
         description="Enterprise-grade cognitive performance analytics for your organisation."
