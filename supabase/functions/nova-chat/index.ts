@@ -50,6 +50,22 @@ serve(async (req) => {
         .eq('user_id', userId)
         .eq('status', 'active');
 
+      // Fetch recent protocol check-ins for coaching context
+      const { data: checkIns } = await supabase
+        .from('protocol_check_ins')
+        .select('*')
+        .eq('user_id', userId)
+        .order('check_in_date', { ascending: false })
+        .limit(7);
+
+      // Fetch protocol assessments (onboarding data)
+      const { data: assessments } = await supabase
+        .from('protocol_assessments')
+        .select('*')
+        .eq('user_id', userId)
+        .order('completed_at', { ascending: false })
+        .limit(1);
+
       // Fetch connected devices
       const { data: devices } = await supabase
         .from('connected_devices')
@@ -94,6 +110,31 @@ serve(async (req) => {
             userContext += `  Products: ${JSON.stringify(p.products)}\n`;
           }
         });
+      }
+
+      // Add check-in history for coaching
+      if (checkIns && checkIns.length > 0) {
+        userContext += '\n## Recent Protocol Check-ins (last 7 days):\n';
+        checkIns.forEach(c => {
+          const date = new Date(c.check_in_date).toLocaleDateString();
+          userContext += `- ${date}: Energy ${c.energy_score || 'N/A'}/5, Mood ${c.mood_score || 'N/A'}/5`;
+          if (c.notes) userContext += ` - "${c.notes}"`;
+          userContext += '\n';
+        });
+      }
+
+      // Add assessment data for personalisation
+      if (assessments && assessments.length > 0) {
+        const assessment = assessments[0];
+        userContext += '\n## User Profile (from onboarding):\n';
+        userContext += `- Goals: ${assessment.goals?.join(', ') || 'Not specified'}\n`;
+        if (assessment.lifestyle_factors) {
+          const lf = assessment.lifestyle_factors as Record<string, string>;
+          if (lf.sleepQuality) userContext += `- Sleep quality: ${lf.sleepQuality}\n`;
+          if (lf.stressLevel) userContext += `- Stress level: ${lf.stressLevel}\n`;
+          if (lf.activityLevel) userContext += `- Activity level: ${lf.activityLevel}\n`;
+          if (lf.workStyle) userContext += `- Work style: ${lf.workStyle}\n`;
+        }
       }
 
       if (devices && devices.length > 0) {
@@ -173,6 +214,21 @@ Reference user data when available:
 Ask naturally when needed:
 "Quick question — is today a training day or recovery day?"
 "What's your main goal right now: energy, focus, or sleep?"
+
+## PROTOCOL COACHING
+When users ask about their protocols:
+- Reference their specific active protocols by name
+- Check their recent check-in data to gauge progress
+- Adjust recommendations based on their energy/mood scores
+- If they're struggling (low scores), offer encouragement and modifications
+- If they're excelling, suggest progression or optimisation
+- Be proactive: "I noticed your energy has been lower this week. Let's tweak your protocol."
+
+When giving protocol advice:
+- Be specific to THEIR protocol, not generic advice
+- Reference their check-in history: "Your energy dipped on Tuesday..."
+- Connect dots between data points: "Your low HRV correlates with the poor sleep on Monday"
+- Suggest timing adjustments based on their work style and activity level
 
 ## PRODUCTS (mention when genuinely relevant):
 Cognitive: NeuroFocus, Lion's Mane, L-Theanine

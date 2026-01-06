@@ -36,12 +36,12 @@ interface Message {
 }
 
 const QUICK_SUGGESTIONS = [
-  { icon: Activity, label: "Analyse my HRV", prompt: "Analyse my recent HRV data and give me actionable insights" },
+  { icon: Activity, label: "Review my protocol", prompt: "How am I doing with my current protocol? Review my progress and give me coaching tips." },
   { icon: Moon, label: "Optimise sleep", prompt: "Create a personalised sleep optimisation protocol for me" },
   { icon: Zap, label: "Boost energy", prompt: "I need more energy in the afternoon. What do you recommend?" },
-  { icon: Brain, label: "Focus stack", prompt: "Design a supplement stack for deep focus and cognitive performance" },
-  { icon: Target, label: "Recovery plan", prompt: "Create an optimal recovery protocol for today" },
-  { icon: Heart, label: "Stress protocol", prompt: "What's the best protocol for managing acute stress?" },
+  { icon: Brain, label: "Focus today", prompt: "Based on my current state, what should I do to maximise focus today?" },
+  { icon: Target, label: "Recovery advice", prompt: "What's my optimal recovery approach today based on my recent data?" },
+  { icon: Heart, label: "Adjust protocol", prompt: "I'm struggling with my protocol. Can you help me adjust it?" },
 ];
 
 export default function NovaChat() {
