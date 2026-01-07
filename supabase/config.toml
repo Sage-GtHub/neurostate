@@ -38,3 +38,9 @@ verify_jwt = false
 
 [functions.vital-webhook]
 verify_jwt = false
+
+[functions.website-chat]
+verify_jwt = false
+
+[functions.send-contact-email]
+verify_jwt = false
