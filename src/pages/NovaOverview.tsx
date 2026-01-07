@@ -1,5 +1,6 @@
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
+import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { SEO } from "@/components/SEO";
@@ -132,6 +133,8 @@ export default function NovaOverview() {
             <ArrowRight className="w-3.5 h-3.5 ml-2" />
           </Button>
         </div>
+        
+        <FloatingNovaChat />
       </div>
     </NovaSwipeWrapper>
   );

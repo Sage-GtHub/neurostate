@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
+import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -253,6 +254,8 @@ export default function NovaSettings() {
 
           </div>
         </div>
+        
+        <FloatingNovaChat />
       </div>
     </NovaSwipeWrapper>
   );

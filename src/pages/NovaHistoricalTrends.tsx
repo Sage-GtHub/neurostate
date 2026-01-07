@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
+import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -264,6 +265,8 @@ export default function NovaHistoricalTrends() {
             </div>
           )}
         </div>
+        
+        <FloatingNovaChat />
       </div>
     </NovaSwipeWrapper>
   );

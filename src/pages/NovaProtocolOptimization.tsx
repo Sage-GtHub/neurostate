@@ -1,5 +1,6 @@
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
+import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
 import { ResearchFoundation } from "@/components/nova/ResearchFoundation";
 import { PredictiveInsightsComponent } from "@/components/nova/PredictiveInsightsComponent";
 import { AdaptiveProtocol } from "@/components/nova/AdaptiveProtocol";
@@ -117,6 +118,8 @@ export default function NovaProtocolOptimization() {
           <ResearchFoundation />
         </section>
       </div>
+      
+      <FloatingNovaChat />
     </div>
     </NovaSwipeWrapper>
   );

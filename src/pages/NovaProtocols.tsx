@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
+import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
 import { supabase } from "@/integrations/supabase/client";
 import { ProtocolAssessment } from "@/components/ProtocolAssessment";
 import { useToast } from "@/components/ui/use-toast";
@@ -444,6 +445,8 @@ export default function NovaProtocols() {
         </div>
 
         <ProtocolAssessment open={showAssessment} onOpenChange={setShowAssessment} onComplete={() => { loadProtocols(); loadAssessment(); }} />
+        
+        <FloatingNovaChat />
       </div>
     </NovaSwipeWrapper>
   );
