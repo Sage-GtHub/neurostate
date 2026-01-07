@@ -117,7 +117,7 @@ export function FloatingNovaChat() {
         <div className="flex items-center justify-between p-4 border-b border-border/50">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-foreground/5 flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-accent" />
+              <img src={neurostateIcon} alt="Neurostate" className="w-5 h-5" />
             </div>
             <div>
               <h2 className="text-sm font-medium text-foreground">Nova</h2>
@@ -137,7 +137,7 @@ export function FloatingNovaChat() {
           {messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center px-4">
               <div className="w-12 h-12 rounded-full bg-foreground/5 flex items-center justify-center mb-4">
-                <Brain className="w-6 h-6 text-foreground/40" />
+                <img src={neurostateIcon} alt="Neurostate" className="w-7 h-7 opacity-40" />
               </div>
               <p className="text-sm text-foreground mb-1">Ask Nova anything</p>
               <p className="text-[11px] text-muted-foreground mb-6">
