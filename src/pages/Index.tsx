@@ -5,6 +5,7 @@ import { OrganizationStructuredData, SoftwareApplicationStructuredData, WebsiteS
 import { Footer } from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { HomeROICalculator } from "@/components/HomeROICalculator";
+import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Eye, Layers, Sparkles } from "lucide-react";
@@ -802,6 +803,7 @@ const Index = () => {
 
         </main>
         <Footer />
+        <FloatingNovaChat />
       </div>
     </>
   );
