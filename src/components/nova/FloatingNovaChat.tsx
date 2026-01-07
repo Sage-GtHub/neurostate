@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { Brain, X, ArrowUp, Loader2, Sparkles, Send } from "lucide-react";
+import { ArrowUp, Loader2, User, LogIn } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
@@ -15,10 +15,10 @@ interface Message {
 }
 
 const QUICK_PROMPTS = [
-  "How am I doing today?",
-  "Review my protocol",
-  "Optimise my sleep",
-  "Boost my energy",
+  "What is Neurostate?",
+  "Tell me about Nova AI",
+  "What products do you have?",
+  "How does it work?",
 ];
 
 export function FloatingNovaChat() {
@@ -26,13 +26,29 @@ export function FloatingNovaChat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = useToast();
 
-  // Don't show on the full chat page
-  if (location.pathname === "/nova/chat") {
+  // Check auth status
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setIsLoggedIn(!!session);
+    };
+    checkAuth();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setIsLoggedIn(!!session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  // Don't show on the full chat page or Nova app pages
+  if (location.pathname.startsWith("/nova")) {
     return null;
   }
 
@@ -54,32 +70,33 @@ export function FloatingNovaChat() {
     setIsLoading(true);
 
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        toast({ title: "Please sign in", description: "You need to be signed in to use Nova.", variant: "destructive" });
-        setIsLoading(false);
-        return;
-      }
-
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/nova-chat`, {
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/website-chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session.access_token}`,
+          'apikey': import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
         },
         body: JSON.stringify({
           messages: [...messages, userMessage].map(m => ({ role: m.role, content: m.content })),
         }),
       });
 
-      if (!response.ok) throw new Error('Failed to get response');
+      if (!response.ok) {
+        if (response.status === 429) {
+          toast({ title: "Too many requests", description: "Please wait a moment and try again.", variant: "destructive" });
+        } else {
+          throw new Error('Failed to get response');
+        }
+        setIsLoading(false);
+        return;
+      }
       
       const data = await response.json();
       const assistantMessage: Message = { role: "assistant", content: data.message };
       setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
       console.error("Chat error:", error);
-      toast({ title: "Error", description: "Failed to get response from Nova", variant: "destructive" });
+      toast({ title: "Error", description: "Failed to get response. Please try again.", variant: "destructive" });
     } finally {
       setIsLoading(false);
     }
@@ -92,17 +109,12 @@ export function FloatingNovaChat() {
     }
   };
 
-  const openFullChat = () => {
-    setIsOpen(false);
-    navigate('/nova/chat');
-  };
-
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <button
           className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-foreground text-background shadow-lg hover:scale-105 transition-transform flex items-center justify-center group"
-          aria-label="Open Nova chat"
+          aria-label="Open chat"
         >
           <img src={neurostateIcon} alt="Neurostate" className="w-7 h-7 invert group-hover:scale-110 transition-transform" />
           <span className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse" />
@@ -120,17 +132,42 @@ export function FloatingNovaChat() {
               <img src={neurostateIcon} alt="Neurostate" className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-sm font-medium text-foreground">Nova</h2>
-              <p className="text-[10px] text-muted-foreground">AI Coach</p>
+              <h2 className="text-sm font-medium text-foreground">Neurostate</h2>
+              <p className="text-[10px] text-muted-foreground">Ask us anything</p>
             </div>
           </div>
-          <button
-            onClick={openFullChat}
-            className="text-[10px] text-accent hover:underline"
-          >
-            Full chat →
-          </button>
+          {!isLoggedIn && (
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                navigate('/auth');
+              }}
+              className="flex items-center gap-1.5 text-[10px] text-accent hover:underline"
+            >
+              <LogIn className="w-3 h-3" />
+              Sign in
+            </button>
+          )}
         </div>
+
+        {/* Sign up prompt */}
+        {!isLoggedIn && messages.length >= 2 && (
+          <div className="mx-4 mt-3 p-3 rounded-lg bg-accent/10 border border-accent/20">
+            <p className="text-[11px] text-foreground mb-2">
+              Want personalised coaching with your biometric data?
+            </p>
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                navigate('/auth');
+              }}
+              className="w-full py-2 rounded-full bg-foreground text-background text-[11px] font-medium hover:bg-foreground/90 transition-colors flex items-center justify-center gap-1.5"
+            >
+              <User className="w-3 h-3" />
+              Create free account
+            </button>
+          </div>
+        )}
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -139,9 +176,9 @@ export function FloatingNovaChat() {
               <div className="w-12 h-12 rounded-full bg-foreground/5 flex items-center justify-center mb-4">
                 <img src={neurostateIcon} alt="Neurostate" className="w-7 h-7 opacity-40" />
               </div>
-              <p className="text-sm text-foreground mb-1">Ask Nova anything</p>
+              <p className="text-sm text-foreground mb-1">Hi! How can I help?</p>
               <p className="text-[11px] text-muted-foreground mb-6">
-                Get quick coaching, protocol advice, or insights
+                Ask about our products, services, or how Neurostate works
               </p>
               
               <div className="flex flex-wrap gap-2 justify-center">
@@ -208,7 +245,7 @@ export function FloatingNovaChat() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Ask Nova..."
+              placeholder="Ask a question..."
               className="flex-1 h-10 px-4 rounded-full bg-foreground/5 border-0 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-foreground/20"
             />
             <button
