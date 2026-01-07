@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { ArrowUp, Loader2, User, LogIn } from "lucide-react";
+import { ArrowUp, Loader2, User, LogIn, Calendar } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
@@ -15,10 +15,17 @@ interface Message {
 }
 
 const QUICK_PROMPTS = [
-  "What is Neurostate?",
+  "What industries do you serve?",
+  "How does the platform work?",
+  "What ROI can we expect?",
   "Tell me about Nova AI",
-  "What products do you have?",
-  "How does it work?",
+];
+
+// Keywords that trigger CTA
+const CTA_KEYWORDS = [
+  "pricing", "price", "cost", "enterprise", "deployment", "implement", 
+  "demo", "trial", "pilot", "contact", "sales", "quote", "subscription",
+  "licence", "license", "team", "organisation", "organization", "company"
 ];
 
 export function FloatingNovaChat() {
@@ -195,32 +202,56 @@ export function FloatingNovaChat() {
             </div>
           ) : (
             <>
-              {messages.map((msg, i) => (
-                <div
-                  key={i}
-                  className={cn(
-                    "flex",
-                    msg.role === "user" ? "justify-end" : "justify-start"
-                  )}
-                >
-                  <div
-                    className={cn(
-                      "max-w-[85%] rounded-2xl px-4 py-2.5",
-                      msg.role === "user"
-                        ? "bg-foreground text-background"
-                        : "bg-foreground/5 text-foreground"
-                    )}
-                  >
-                    {msg.role === "assistant" ? (
-                      <div className="text-xs prose prose-sm dark:prose-invert max-w-none">
-                        <ReactMarkdown>{msg.content}</ReactMarkdown>
+              {messages.map((msg, i) => {
+                const showCTA = msg.role === "assistant" && 
+                  i > 0 && 
+                  CTA_KEYWORDS.some(keyword => 
+                    messages[i - 1]?.content.toLowerCase().includes(keyword) ||
+                    msg.content.toLowerCase().includes(keyword)
+                  );
+                
+                return (
+                  <div key={i}>
+                    <div
+                      className={cn(
+                        "flex",
+                        msg.role === "user" ? "justify-end" : "justify-start"
+                      )}
+                    >
+                      <div
+                        className={cn(
+                          "max-w-[85%] rounded-2xl px-4 py-2.5",
+                          msg.role === "user"
+                            ? "bg-foreground text-background"
+                            : "bg-foreground/5 text-foreground"
+                        )}
+                      >
+                        {msg.role === "assistant" ? (
+                          <div className="text-xs prose prose-sm dark:prose-invert max-w-none">
+                            <ReactMarkdown>{msg.content}</ReactMarkdown>
+                          </div>
+                        ) : (
+                          <p className="text-xs">{msg.content}</p>
+                        )}
                       </div>
-                    ) : (
-                      <p className="text-xs">{msg.content}</p>
+                    </div>
+                    
+                    {showCTA && (
+                      <div className="flex justify-start mt-2">
+                        <a
+                          href="https://calendly.com/neurostate/30min"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent text-accent-foreground text-[11px] font-medium hover:bg-accent/90 transition-colors"
+                        >
+                          <Calendar className="w-3.5 h-3.5" />
+                          Book a Demo
+                        </a>
+                      </div>
                     )}
                   </div>
-                </div>
-              ))}
+                );
+              })}
               
               {isLoading && (
                 <div className="flex justify-start">
