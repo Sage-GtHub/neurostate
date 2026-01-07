@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
+import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
 import { RefreshCw, Plus, Loader2, Check, WifiOff } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
@@ -265,6 +266,8 @@ export default function NovaDevices() {
             </div>
           </div>
         </div>
+        
+        <FloatingNovaChat />
       </div>
     </NovaSwipeWrapper>
   );

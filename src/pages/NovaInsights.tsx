@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
+import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
 import { Button } from "@/components/ui/button";
 import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { supabase } from "@/integrations/supabase/client";
@@ -289,6 +290,8 @@ export default function NovaInsights() {
             </div>
           </div>
         </div>
+        
+        <FloatingNovaChat />
       </div>
     </NovaSwipeWrapper>
   );
