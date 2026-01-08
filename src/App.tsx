@@ -9,10 +9,6 @@ import { trackPageView } from "@/lib/analytics";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 import Index from "./pages/Index";
-import ProductDetail from "./pages/ProductDetail";
-import CategoryProducts from "./pages/CategoryProducts";
-import Shop from "./pages/Shop";
-import Bundles from "./pages/Bundles";
 import Nova from "./pages/Nova";
 import NovaChat from "./pages/NovaChat";
 import NovaProtocols from "./pages/NovaProtocols";
@@ -27,12 +23,9 @@ import NovaGoals from "./pages/NovaGoals";
 import NovaSettingsAdvanced from "./pages/NovaSettingsAdvanced";
 
 import FAQ from "./pages/FAQ";
-import Shipping from "./pages/Shipping";
 import HowToUse from "./pages/HowToUse";
 import Ambassador from "./pages/Ambassador";
 import Partnerships from "./pages/Partnerships";
-import Subscriptions from "./pages/Subscriptions";
-import ProductDescriptionUpdater from "./pages/ProductDescriptionUpdater";
 import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
 import Rewards from "./pages/Rewards";
@@ -41,7 +34,6 @@ import Terms from "./pages/Terms";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
-import OrderTracking from "./pages/OrderTracking";
 import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
@@ -137,17 +129,12 @@ const AnimatedRoutes = () => {
         >
           <Routes location={location}>
             <Route path="/" element={<Index />} />
-            <Route path="/product/:handle" element={<ProductDetail />} />
-            <Route path="/category/:category" element={<CategoryProducts />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/bundles" element={<Bundles />} />
+            <Route path="/learning-path/:id" element={<LearningPathDetail />} />
             <Route path="/learning-path/:id" element={<LearningPathDetail />} />
             <Route path="/faq" element={<FAQ />} />
-            <Route path="/shipping" element={<Shipping />} />
             <Route path="/guides" element={<HowToUse />} />
             <Route path="/ambassador" element={<Ambassador />} />
             <Route path="/partnerships" element={<Partnerships />} />
-            <Route path="/subscriptions" element={<Subscriptions />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
@@ -158,8 +145,7 @@ const AnimatedRoutes = () => {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/track-order" element={<OrderTracking />} />
-            <Route path="/admin/update-descriptions" element={<ProductDescriptionUpdater />} />
+            <Route path="/resources" element={<HowToUse />} />
             <Route path="/nova/overview" element={<NovaOverview />} />
             <Route path="/nova/chat" element={<ProtectedRoute><NovaChat /></ProtectedRoute>} />
             <Route path="/nova" element={<ProtectedRoute><Nova /></ProtectedRoute>} />
