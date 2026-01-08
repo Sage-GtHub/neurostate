@@ -220,11 +220,11 @@ const Hero = () => {
                   >
                     <Button 
                       size="sm"
-                      className="h-10 px-5 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group magnetic-btn relative overflow-hidden"
+                      className="h-10 px-6 text-xs font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group magnetic-btn relative overflow-hidden"
                     >
                       <span className="relative z-10 flex items-center">
-                        Book a demo
-                        <ArrowUpRight className="ml-2 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        Get Started
+                        <ArrowRight className="ml-2 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                       </span>
                     </Button>
                   </motion.div>
