@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Clock, MapPin, Send, Calendar } from "lucide-react";
+import { Mail, Clock, MapPin, Send, Calendar, Building2, Users, Briefcase } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { z } from "zod";
@@ -17,8 +18,11 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, { message: "Name is required" }).max(100),
-  email: z.string().trim().email({ message: "Please enter a valid email" }).max(255),
-  subject: z.string().trim().min(1, { message: "Subject is required" }).max(200),
+  email: z.string().trim().email({ message: "Please enter a valid work email" }).max(255),
+  company: z.string().trim().min(1, { message: "Company name is required" }).max(200),
+  jobTitle: z.string().trim().min(1, { message: "Job title is required" }).max(100),
+  teamSize: z.string().trim().min(1, { message: "Please select team size" }),
+  inquiryType: z.string().trim().min(1, { message: "Please select inquiry type" }),
   message: z.string().trim().min(10, { message: "Message must be at least 10 characters" }).max(2000),
 });
 
@@ -66,14 +70,30 @@ const Contact = () => {
   };
 
   const contactInfo = [
-    { icon: Mail, title: "Email", content: "contact@neurostate.co.uk", link: "mailto:contact@neurostate.co.uk" },
-    { icon: Clock, title: "Hours", content: "Mon - Fri: 9am - 6pm GMT", link: null },
-    { icon: MapPin, title: "Location", content: "London, UK", link: null },
+    { icon: Mail, title: "Sales", content: "sales@neurostate.co.uk", link: "mailto:sales@neurostate.co.uk" },
+    { icon: Clock, title: "Response Time", content: "Within 24 business hours", link: null },
+    { icon: MapPin, title: "Headquarters", content: "London, United Kingdom", link: null },
+  ];
+
+  const teamSizeOptions = [
+    "1-50 employees",
+    "51-200 employees",
+    "201-1,000 employees",
+    "1,001-5,000 employees",
+    "5,000+ employees",
+  ];
+
+  const inquiryTypeOptions = [
+    "Request a Demo",
+    "Pricing & Plans",
+    "Enterprise Partnership",
+    "Technical Integration",
+    "Pilot Programme",
   ];
 
   return (
     <>
-      <SEO title="Contact Us | Book a Demo | NeuroState" description="Schedule a demo or get in touch with our team. Discover how NeuroState's cognitive performance infrastructure can transform your organisation." keywords="contact NeuroState, book demo, enterprise wellness enquiry, cognitive performance consultation, team performance demo" />
+      <SEO title="Request a Demo | Enterprise Sales | NeuroState" description="Schedule a personalised demo with our enterprise team. Learn how NeuroState's AI-powered cognitive analytics platform drives measurable workforce performance outcomes." keywords="enterprise demo, B2B sales, cognitive analytics demo, workforce performance platform, enterprise software demo" />
       <Header />
       <div className="min-h-screen bg-background mobile-nav-padding relative overflow-hidden">
         <div className="fixed inset-0 pointer-events-none">
@@ -82,9 +102,9 @@ const Contact = () => {
 
         <section ref={hero.ref} className={`relative pt-32 md:pt-44 pb-16 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="max-w-4xl mx-auto text-center space-y-4">
-            <p className="text-[10px] uppercase tracking-[0.25em] text-foreground/40">Contact</p>
-            <h1 className="text-4xl md:text-5xl font-light text-foreground">Get in touch</h1>
-            <p className="text-sm text-foreground/50">Schedule a demo or send us a message.</p>
+            <p className="text-[10px] uppercase tracking-[0.25em] text-foreground/40">Enterprise Sales</p>
+            <h1 className="text-4xl md:text-5xl font-light text-foreground">Let's talk</h1>
+            <p className="text-sm text-foreground/50 max-w-lg mx-auto">Schedule a personalised demo to see how NeuroState can drive measurable performance outcomes for your organisation.</p>
           </div>
         </section>
 
@@ -129,41 +149,105 @@ const Contact = () => {
               </div>
             )}
 
-            {/* Contact Form */}
+            {/* Sales Inquiry Form */}
             {activeTab === 'message' && (
               <div className="grid lg:grid-cols-5 gap-16">
                 <div className="lg:col-span-3">
+                  <div className="mb-6">
+                    <h2 className="text-lg font-medium mb-2">Sales Inquiry</h2>
+                    <p className="text-xs text-foreground/50">Complete the form below and our enterprise team will be in touch within 24 hours.</p>
+                  </div>
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                     <div className="grid md:grid-cols-2 gap-5">
                       <div className="space-y-2">
-                        <Label htmlFor="name" className="text-xs text-foreground/60">Name</Label>
-                        <Input id="name" placeholder="Your name" {...register("name")} className={`rounded-xl bg-foreground/[0.02] border-foreground/10 h-11 text-sm ${errors.name ? "border-destructive" : ""}`} />
+                        <Label htmlFor="name" className="text-xs text-foreground/60">Full Name</Label>
+                        <Input id="name" placeholder="Your full name" {...register("name")} className={`rounded-xl bg-foreground/[0.02] border-foreground/10 h-11 text-sm ${errors.name ? "border-destructive" : ""}`} />
                         {errors.name && <p className="text-[10px] text-destructive">{errors.name.message}</p>}
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="email" className="text-xs text-foreground/60">Email</Label>
-                        <Input id="email" type="email" placeholder="your@email.com" {...register("email")} className={`rounded-xl bg-foreground/[0.02] border-foreground/10 h-11 text-sm ${errors.email ? "border-destructive" : ""}`} />
+                        <Label htmlFor="email" className="text-xs text-foreground/60">Work Email</Label>
+                        <Input id="email" type="email" placeholder="you@company.com" {...register("email")} className={`rounded-xl bg-foreground/[0.02] border-foreground/10 h-11 text-sm ${errors.email ? "border-destructive" : ""}`} />
                         {errors.email && <p className="text-[10px] text-destructive">{errors.email.message}</p>}
                       </div>
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="subject" className="text-xs text-foreground/60">Subject</Label>
-                      <Input id="subject" placeholder="How can we help?" {...register("subject")} className={`rounded-xl bg-foreground/[0.02] border-foreground/10 h-11 text-sm ${errors.subject ? "border-destructive" : ""}`} />
-                      {errors.subject && <p className="text-[10px] text-destructive">{errors.subject.message}</p>}
+                    <div className="grid md:grid-cols-2 gap-5">
+                      <div className="space-y-2">
+                        <Label htmlFor="company" className="text-xs text-foreground/60">Company</Label>
+                        <Input id="company" placeholder="Company name" {...register("company")} className={`rounded-xl bg-foreground/[0.02] border-foreground/10 h-11 text-sm ${errors.company ? "border-destructive" : ""}`} />
+                        {errors.company && <p className="text-[10px] text-destructive">{errors.company.message}</p>}
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="jobTitle" className="text-xs text-foreground/60">Job Title</Label>
+                        <Input id="jobTitle" placeholder="Your role" {...register("jobTitle")} className={`rounded-xl bg-foreground/[0.02] border-foreground/10 h-11 text-sm ${errors.jobTitle ? "border-destructive" : ""}`} />
+                        {errors.jobTitle && <p className="text-[10px] text-destructive">{errors.jobTitle.message}</p>}
+                      </div>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-5">
+                      <div className="space-y-2">
+                        <Label className="text-xs text-foreground/60">Team Size</Label>
+                        <Select onValueChange={(value) => {
+                          const event = { target: { name: 'teamSize', value } };
+                          register("teamSize").onChange(event);
+                        }}>
+                          <SelectTrigger className={`rounded-xl bg-foreground/[0.02] border-foreground/10 h-11 text-sm ${errors.teamSize ? "border-destructive" : ""}`}>
+                            <SelectValue placeholder="Select team size" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {teamSizeOptions.map((size) => (
+                              <SelectItem key={size} value={size}>{size}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        {errors.teamSize && <p className="text-[10px] text-destructive">{errors.teamSize.message}</p>}
+                      </div>
+                      <div className="space-y-2">
+                        <Label className="text-xs text-foreground/60">Inquiry Type</Label>
+                        <Select onValueChange={(value) => {
+                          const event = { target: { name: 'inquiryType', value } };
+                          register("inquiryType").onChange(event);
+                        }}>
+                          <SelectTrigger className={`rounded-xl bg-foreground/[0.02] border-foreground/10 h-11 text-sm ${errors.inquiryType ? "border-destructive" : ""}`}>
+                            <SelectValue placeholder="What brings you here?" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {inquiryTypeOptions.map((type) => (
+                              <SelectItem key={type} value={type}>{type}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        {errors.inquiryType && <p className="text-[10px] text-destructive">{errors.inquiryType.message}</p>}
+                      </div>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="message" className="text-xs text-foreground/60">Message</Label>
-                      <Textarea id="message" placeholder="Tell us more..." rows={5} {...register("message")} className={`rounded-xl bg-foreground/[0.02] border-foreground/10 text-sm ${errors.message ? "border-destructive" : ""}`} />
+                      <Label htmlFor="message" className="text-xs text-foreground/60">How can we help?</Label>
+                      <Textarea id="message" placeholder="Tell us about your organisation's performance goals and challenges..." rows={4} {...register("message")} className={`rounded-xl bg-foreground/[0.02] border-foreground/10 text-sm ${errors.message ? "border-destructive" : ""}`} />
                       {errors.message && <p className="text-[10px] text-destructive">{errors.message.message}</p>}
                     </div>
                     <Button type="submit" size="sm" disabled={isSubmitting} className="rounded-full h-10 px-6 text-xs bg-foreground text-background hover:bg-foreground/90">
                       <Send className="h-3.5 w-3.5 mr-2" />
-                      {isSubmitting ? "Sending..." : "Send message"}
+                      {isSubmitting ? "Submitting..." : "Submit Inquiry"}
                     </Button>
                   </form>
                 </div>
 
                 <div className="lg:col-span-2 space-y-4">
+                  <div className="p-6 rounded-2xl bg-foreground/[0.02] border border-foreground/5">
+                    <h3 className="text-sm font-medium mb-4">Why NeuroState?</h3>
+                    <ul className="space-y-3">
+                      {[
+                        "40+ wearable integrations",
+                        "AI-powered predictive analytics",
+                        "Enterprise-grade security & compliance",
+                        "Dedicated customer success team",
+                        "Flexible deployment options",
+                      ].map((item, i) => (
+                        <li key={i} className="flex items-center gap-2 text-xs text-foreground/60">
+                          <div className="w-1 h-1 rounded-full bg-accent" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                   {contactInfo.map((info, index) => (
                     <div key={index} className="p-5 rounded-2xl bg-foreground/[0.02]">
                       <div className="flex items-start gap-4">
@@ -182,9 +266,9 @@ const Contact = () => {
                     </div>
                   ))}
                   <div className="pt-4">
-                    <p className="text-[10px] text-foreground/30 mb-3">Quick links</p>
-                    <div className="flex gap-3">
-                      {[{ name: "FAQ", href: "/faq" }, { name: "Shipping", href: "/shipping" }].map((link) => (
+                    <p className="text-[10px] text-foreground/30 mb-3">Resources</p>
+                    <div className="flex flex-wrap gap-2">
+                      {[{ name: "Case Studies", href: "/enterprise/case-studies" }, { name: "Industries", href: "/industries" }, { name: "FAQ", href: "/faq" }].map((link) => (
                         <Link key={link.name} to={link.href} className="px-3 py-1.5 rounded-full bg-foreground/[0.03] text-[10px] text-foreground/50 hover:bg-foreground/[0.06] hover:text-foreground transition-colors">
                           {link.name}
                         </Link>
