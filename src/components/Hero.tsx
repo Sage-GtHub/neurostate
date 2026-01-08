@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState, useRef, lazy, Suspense, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { motion, useSpring, useTransform, useScroll, useInView } from "framer-motion";
-import DataFlowDiagram from "./hero/DataFlowDiagram";
+
 
 // Lazy load the 3D Wearable Stack for better performance
 const WearableStack = lazy(() => import("./hero/WearableStack"));
@@ -199,13 +199,6 @@ const Hero = () => {
                 We build cognitive infrastructure that connects wearable data, biometric signals, and behavioural patterns to deliver predictive insights that optimise mental clarity, recovery, and sustained performance across your organisation.
               </motion.p>
 
-              {/* Data Flow Diagram */}
-              <motion.div 
-                className="py-2"
-                variants={itemVariants}
-              >
-                <DataFlowDiagram />
-              </motion.div>
 
               {/* CTAs with magnetic hover effect */}
               <motion.div 
