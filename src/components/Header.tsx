@@ -324,18 +324,14 @@ export const Header = () => {
               </DropdownMenu>
             )}
             
-            {/* Book a Demo - Coral CTA */}
-            <Link to="/contact">
-              <Button 
-                size="sm"
-                className="h-8 px-5 text-[11px] font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg"
-              >
-                <span className="relative z-10 flex items-center gap-1.5">
-                  Start Building
-                  <ArrowUpRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </span>
-              </Button>
-            </Link>
+            {/* Get In Touch - Coral CTA (non-clickable) */}
+            <div 
+              className="h-8 px-5 text-[11px] font-medium bg-primary text-primary-foreground rounded-full flex items-center cursor-default"
+            >
+              <span className="relative z-10 flex items-center gap-1.5">
+                Get In Touch
+              </span>
+            </div>
           </div>
 
           {/* Mobile Menu Only */}
