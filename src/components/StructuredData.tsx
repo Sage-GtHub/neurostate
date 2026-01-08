@@ -76,19 +76,20 @@ export const OrganizationStructuredData = () => {
       "alternateName": "NeuroState®",
       "url": "https://neurostate.co.uk",
       "logo": "https://neurostate.co.uk/favicon.png",
-      "description": "NeuroState is the cognitive performance infrastructure for organisations. Predictive intelligence, risk visibility, and financial attribution for enterprise-scale human performance.",
+      "description": "NeuroState is the cognitive performance infrastructure for organisations. Predictive intelligence, risk visibility, and financial attribution for enterprise-scale workforce performance.",
       "foundingDate": "2025",
       "slogan": "Cognitive Infrastructure for Organisations",
       "knowsAbout": [
         "Cognitive Performance Infrastructure",
-        "Enterprise Wellness Platform",
+        "Enterprise SaaS Platform",
         "AI Performance Analytics",
         "Workforce Optimisation",
         "Predictive Intelligence",
         "Burnout Prevention",
         "Team Performance Monitoring",
         "Nova AI Assistant",
-        "ROI Attribution"
+        "ROI Attribution",
+        "Wearable Data Integration"
       ],
       "contactPoint": {
         "@type": "ContactPoint",
@@ -193,8 +194,8 @@ export const CorporateServiceStructuredData = () => {
       "@context": "https://schema.org",
       "@type": "Service",
       "name": "NeuroState for Teams",
-      "serviceType": "Corporate Wellbeing Solution",
-      "description": "Enterprise cognitive performance platform transforming workforce performance with AI-driven protocols, recovery tools and supplements that improve focus, wellbeing and productivity.",
+      "serviceType": "Enterprise Cognitive Performance Platform",
+      "description": "Enterprise cognitive performance SaaS platform transforming workforce performance with AI-driven analytics, predictive insights, and ROI attribution that improve focus, wellbeing and productivity.",
       "provider": {
         "@type": "Organization",
         "name": "NeuroState"
@@ -211,21 +212,21 @@ export const CorporateServiceStructuredData = () => {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Corporate Wellness Programme"
+              "name": "Enterprise Cognitive Analytics"
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Sports Organisation Programme"
+              "name": "Team Performance Platform"
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Health Clubs Programme"
+              "name": "Nova AI Assistant"
             }
           }
         ]

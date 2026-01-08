@@ -196,7 +196,7 @@ const Hero = () => {
                 className="text-xs md:text-sm text-muted-foreground max-w-md leading-relaxed"
                 variants={itemVariants}
               >
-                We build cognitive infrastructure that connects wearable data, biometric signals, and behavioural patterns to deliver predictive insights that optimise mental clarity, recovery, and sustained performance across your organisation.
+                We build cognitive infrastructure that ingests wearable integrations, biometric signals, and behavioural patterns to deliver predictive analytics that optimise workforce performance, reduce burnout risk, and drive measurable business outcomes.
               </motion.p>
 
 
