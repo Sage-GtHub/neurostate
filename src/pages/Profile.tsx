@@ -182,7 +182,7 @@ export default function Profile() {
 
               <TabsContent value="account" className="space-y-6">
                 {/* Account Info */}
-                <div className="p-6 bg-white rounded-3xl border border-foreground/5">
+                <div className="p-6 bg-card rounded-3xl border border-foreground/5">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="w-10 h-10 rounded-full bg-foreground/5 flex items-center justify-center">
                       <UserIcon className="w-4 h-4 text-foreground/60" />
@@ -205,7 +205,7 @@ export default function Profile() {
                 </div>
 
                 {/* Update Email */}
-                <div className="p-6 bg-white rounded-3xl border border-foreground/5">
+                <div className="p-6 bg-card rounded-3xl border border-foreground/5">
                   <h3 className="text-sm font-medium text-foreground mb-1">Update Email</h3>
                   <p className="text-[11px] text-foreground/40 mb-6">You'll need to verify your new email.</p>
                   <form onSubmit={handleUpdateEmail} className="space-y-4">
@@ -220,7 +220,7 @@ export default function Profile() {
                 </div>
 
                 {/* Update Password */}
-                <div className="p-6 bg-white rounded-3xl border border-foreground/5">
+                <div className="p-6 bg-card rounded-3xl border border-foreground/5">
                   <h3 className="text-sm font-medium text-foreground mb-1">Update Password</h3>
                   <p className="text-[11px] text-foreground/40 mb-6">At least 6 characters required.</p>
                   <form onSubmit={handleUpdatePassword} className="space-y-4">
@@ -241,11 +241,11 @@ export default function Profile() {
 
               <TabsContent value="orders" className="space-y-6">
                 {loadingOrders ? (
-                  <div className="p-16 text-center bg-white rounded-3xl border border-foreground/5">
+                  <div className="p-16 text-center bg-card rounded-3xl border border-foreground/5">
                     <Loader2 className="w-5 h-5 animate-spin text-foreground/40 mx-auto" />
                   </div>
                 ) : orders.length === 0 ? (
-                  <div className="p-16 text-center bg-white rounded-3xl border border-foreground/5">
+                  <div className="p-16 text-center bg-card rounded-3xl border border-foreground/5">
                     <div className="w-12 h-12 rounded-full bg-foreground/5 flex items-center justify-center mx-auto mb-5">
                       <Package className="h-5 w-5 text-foreground/30" />
                     </div>
@@ -257,7 +257,7 @@ export default function Profile() {
                 ) : (
                   <div className="space-y-4">
                     {orders.map((order) => (
-                      <div key={order.id} className="p-6 bg-white rounded-3xl border border-foreground/5">
+                      <div key={order.id} className="p-6 bg-card rounded-3xl border border-foreground/5">
                         <div className="flex items-start justify-between mb-6">
                           <div>
                             <p className="text-sm font-medium text-foreground">Order #{order.order_number}</p>

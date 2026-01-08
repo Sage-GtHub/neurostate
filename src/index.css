@@ -17,8 +17,8 @@
     --background: 40 33% 96%;
     --foreground: 220 25% 18%;
     
-    /* Card & Surface Colors */
-    --card: 38 30% 96%;
+    /* Card & Surface Colors - Slightly warmer white for subtle contrast */
+    --card: 40 40% 98%;
     --card-foreground: 220 25% 18%;
     
     --popover: 38 30% 96%;

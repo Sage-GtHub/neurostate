@@ -23,11 +23,11 @@ const PrivacyPolicy = () => {
         <Header />
         <main className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Privacy Policy</h1>
+          <h1 className="text-4xl md:text-5xl font-light text-foreground mb-4">Privacy Policy</h1>
           <p className="text-muted-foreground mb-8">Last updated: {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
           
           {/* Key Highlights */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 p-6 bg-muted/30 rounded-lg">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 p-6 bg-card rounded-2xl border border-foreground/5">
             {highlights.map((item, index) => (
               <div key={index} className="flex flex-col items-center text-center gap-2">
                 <item.icon className="h-8 w-8 text-primary" />
