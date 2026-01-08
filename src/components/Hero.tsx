@@ -150,7 +150,7 @@ const Hero = () => {
         className="flex-1 flex items-center relative z-10"
         style={{ opacity: heroOpacity, scale: heroScale }}
       >
-        <div className="w-full max-w-7xl mx-auto px-6 md:px-8 py-16 lg:py-20">
+        <div className="w-full px-6 md:px-12 lg:px-16 py-16 lg:py-20">
           <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
             {/* Left - Text Content */}
             <motion.div 
