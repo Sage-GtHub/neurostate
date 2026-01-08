@@ -1,5 +1,4 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { CartDrawer } from "./CartDrawer";
 import { User, Menu, X, Award, LogOut, ArrowUpRight, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";

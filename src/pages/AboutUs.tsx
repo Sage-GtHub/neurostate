@@ -11,9 +11,9 @@ const AboutUs = () => {
   return (
     <>
       <SEO 
-        title="About NeuroState | Advancing Human Cognitive Capacity Through AI"
-        description="NeuroState is building cognitive infrastructure that predicts and guides, not just tracks. Learn about our mission to advance human cognitive capacity through AI."
-        keywords="about NeuroState, cognitive performance company, AI wellness platform, workforce optimisation technology, human performance innovation, cognitive infrastructure mission"
+        title="About NeuroState | Enterprise Cognitive Performance SaaS Platform"
+        description="NeuroState is a B2B SaaS platform building cognitive infrastructure for organisations. Predictive analytics, AI-driven insights, and workforce optimisation at enterprise scale."
+        keywords="about NeuroState, cognitive performance SaaS, B2B analytics platform, workforce optimisation technology, enterprise AI software, cognitive infrastructure company"
       />
       <div className="min-h-screen bg-background relative overflow-hidden">
         <div className="fixed inset-0 pointer-events-none">
@@ -143,25 +143,25 @@ const AboutUs = () => {
                     <span className="text-muted-foreground">One cognitive OS.</span>
                   </h2>
                   <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mt-6">
-                    We combine wearable data, behavioural signals, and AI-driven forecasting to help individuals and teams perform better, earlier, and more consistently.
+                    We integrate wearable data, behavioural signals, and AI-driven forecasting to help organisations optimise workforce performance at scale.
                   </p>
                 </ScrollReveal>
 
                 <StaggerContainer className="space-y-0" staggerDelay={0.1}>
                   {[
                     { 
-                      title: "Wearable Integration", 
-                      desc: "Sleep, recovery, HRV, stress: continuous biometric monitoring from the devices your team already uses.",
+                      title: "Wearable Integrations", 
+                      desc: "Sleep, recovery, HRV, stress: continuous biometric monitoring from the devices your team already uses. 40+ integrations, no hardware to buy.",
                       num: "01"
                     },
                     { 
                       title: "Behavioural Signals", 
-                      desc: "Contextual patterns, work rhythms, and environmental factors that shape cognitive capacity.",
+                      desc: "Contextual patterns, work rhythms, and environmental factors that shape cognitive capacity across your organisation.",
                       num: "02"
                     },
                     { 
                       title: "AI-Driven Forecasting", 
-                      desc: "Multi-model prediction engine that forecasts performance states and recommends interventions.",
+                      desc: "Multi-model prediction engine that forecasts performance states and recommends interventions with measurable ROI.",
                       num: "03"
                     },
                   ].map((item, i) => (
@@ -203,21 +203,21 @@ const AboutUs = () => {
               <ScrollReveal className="text-center mb-16 space-y-4 max-w-2xl mx-auto">
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Impact</span>
                 <h2 className="text-3xl md:text-4xl font-light text-foreground">
-                  This isn't wellness for wellness' sake.
+                  Enterprise-grade cognitive analytics.
                   <br />
-                  <span className="text-muted-foreground">It's performance infrastructure.</span>
+                  <span className="text-muted-foreground">Measurable business outcomes.</span>
                 </h2>
               </ScrollReveal>
 
               <div className="grid md:grid-cols-2 gap-8 lg:gap-16">
                 <ScrollReveal delay={0.1} direction="left">
                   <div className="space-y-3">
-                    <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] mb-5 font-medium">Team Outcomes</p>
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] mb-5 font-medium">Business Outcomes</p>
                     {[
-                      { title: "Fewer burnout incidents", desc: "Predict and prevent before impact" },
-                      { title: "More consistent output", desc: "Sustainable high performance" },
-                      { title: "Improved decision-making", desc: "Cognitive clarity under pressure" },
-                      { title: "Healthier, sustainable teams", desc: "Long-term capacity building" }
+                      { title: "Reduced turnover costs", desc: "Predict and prevent burnout before impact" },
+                      { title: "Consistent team output", desc: "Sustainable high performance at scale" },
+                      { title: "Better decision-making", desc: "Cognitive clarity under pressure" },
+                      { title: "Quantified ROI", desc: "Financial attribution for every intervention" }
                     ].map((item, i) => (
                       <motion.div 
                         key={i} 
