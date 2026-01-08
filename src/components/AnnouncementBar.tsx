@@ -23,14 +23,14 @@ export const AnnouncementBar = () => {
   if (!isVisible || isDismissed) return null;
 
   return (
-    <div className="announcement-gradient text-white text-center py-2.5 px-4 relative">
+    <div className="bg-primary text-primary-foreground text-center py-2.5 px-4 relative">
       <div className="container mx-auto flex items-center justify-center gap-3">
-        <p className="text-sm font-medium">
+        <p className="text-[11px] font-medium tracking-wide uppercase">
           Introducing Nova 2.0: Predictive cognitive forecasting
         </p>
         <Link 
           to="/nova/overview" 
-          className="inline-flex items-center gap-1 text-sm font-medium underline underline-offset-4 hover:no-underline transition-all"
+          className="inline-flex items-center gap-1 text-[11px] font-medium hover:underline underline-offset-4 transition-all"
         >
           Learn more
           <ArrowRight className="h-3 w-3" />

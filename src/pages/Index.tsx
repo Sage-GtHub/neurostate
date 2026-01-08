@@ -456,7 +456,7 @@ const Index = () => {
                     
                     <div className="flex flex-wrap gap-3 pt-1">
                       <Link to="/team-dashboard">
-                        <Button className="h-9 px-4 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                        <Button className="h-9 px-4 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group">
                           View Team Dashboard
                           <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                         </Button>
