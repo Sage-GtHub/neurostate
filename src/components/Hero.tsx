@@ -81,7 +81,7 @@ const Hero = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [handleMouseMove]);
 
-  const clientNames = ["Microsoft", "Nasdaq", "Cohere", "Headway", "Swiss Gear", "AI21 Labs"];
+  const clientNames = ["Lattice", "Gong", "Notion", "Rippling", "Ramp", "Deel", "Airtable", "Figma"];
 
   // Stagger animation variants
   const containerVariants = {
