@@ -106,7 +106,10 @@ export default function EnterpriseOverview() {
         description="AI-powered cognitive performance infrastructure for organisations. Explore solutions for IT, Financial Services, Healthcare, Hospitality, Sports, and Health Clubs."
         keywords="enterprise wellness platform, corporate cognitive performance, AI workforce analytics, burnout prevention enterprise, team performance monitoring, organisational health technology"
       />
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-1/3 right-0 w-[600px] h-[600px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
+        </div>
         <Header />
         <main>
           {/* Hero Section */}

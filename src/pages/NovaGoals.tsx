@@ -261,7 +261,10 @@ export default function NovaGoals() {
   if (isLoading) {
     return (
       <NovaSwipeWrapper>
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background relative overflow-hidden">
+          <div className="fixed inset-0 pointer-events-none">
+            <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
+          </div>
           <NovaNav />
           <div className="flex items-center justify-center h-[60vh]">
             <Loader2 className="w-8 h-8 animate-spin text-accent" />
@@ -277,7 +280,10 @@ export default function NovaGoals() {
         title="Performance Goals – Cognitive Analytics | Nova"
         description="Set and track measurable cognitive performance targets. AI-driven goal tracking with predictive progress modelling."
       />
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
+        </div>
         <NovaNav />
         
         <div className="border-b border-border/50 bg-gradient-to-b from-background to-muted/20">

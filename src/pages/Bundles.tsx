@@ -16,7 +16,10 @@ const Bundles = () => {
         title="Product Bundles | NeuroState"
         description="Curated supplement bundles designed for sleep optimisation, recovery enhancement, and cognitive performance."
       />
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-1/3 right-0 w-[600px] h-[600px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
+        </div>
         <Header />
         <main>
           {/* Hero Section */}
@@ -39,7 +42,7 @@ const Bundles = () => {
           </div>
 
           {/* Benefits Section */}
-          <section className="py-20 sm:py-24 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-muted">
+          <section className="py-20 sm:py-24 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 bg-card/50">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-16 space-y-4">
                 <p className="text-muted-foreground text-xs tracking-[0.3em] uppercase font-medium">Benefits</p>

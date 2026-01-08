@@ -80,7 +80,10 @@ const Industries = () => {
         description="NeuroState adapts to your industry's unique cognitive demands. Calculate your ROI and see how we serve SaaS, financial services, healthcare, and more."
         keywords="enterprise wellness, industry solutions, SaaS burnout prevention, healthcare workforce, financial services performance"
       />
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-1/3 right-0 w-[600px] h-[600px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
+        </div>
         <Header />
         <main>
           {/* Hero Section */}
@@ -202,7 +205,7 @@ const Industries = () => {
           </section>
 
           {/* Enterprise Features */}
-          <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/30">
+          <section className="py-12 md:py-16 px-6 md:px-8 bg-card/50">
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <ScrollReveal className="space-y-5">

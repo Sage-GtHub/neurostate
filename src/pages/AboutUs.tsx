@@ -15,7 +15,10 @@ const AboutUs = () => {
         description="NeuroState is building cognitive infrastructure that predicts and guides, not just tracks. Learn about our mission to advance human cognitive capacity through AI."
         keywords="about NeuroState, cognitive performance company, AI wellness platform, workforce optimisation technology, human performance innovation, cognitive infrastructure mission"
       />
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-1/3 right-0 w-[600px] h-[600px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
+        </div>
         <Header />
         <main>
           {/* Hero Section - Invisible Tech Style */}
