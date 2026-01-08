@@ -176,6 +176,19 @@
     font-feature-settings: 'tnum' 1, 'cv02' 1, 'cv03' 1, 'cv04' 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+  }
+  
+  @media (min-width: 1280px) {
+    body {
+      font-size: 17px;
+    }
+  }
+  
+  @media (min-width: 1536px) {
+    body {
+      font-size: 18px;
+    }
   }
   
   /* =====================================================
