@@ -101,7 +101,10 @@ export default function SolutionsHub() {
           { name: "Solutions", url: "https://neurostate.co.uk/solutions" }
         ]}
       />
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-1/4 right-0 w-[600px] h-[600px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
+        </div>
         <Header />
         <main>
           {/* Hero Section */}
@@ -162,7 +165,7 @@ export default function SolutionsHub() {
           </section>
 
           {/* Category Framing - Comprehensive */}
-          <section className="py-20 md:py-28 px-6 md:px-8 bg-muted/30">
+          <section className="py-20 md:py-28 px-6 md:px-8 bg-card/50">
             <div className="max-w-5xl mx-auto">
               <ScrollReveal className="space-y-12">
                 <div className="text-center space-y-4">

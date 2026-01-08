@@ -571,6 +571,25 @@
     animation: borderGlow 3s ease-in-out infinite;
   }
   
+  /* Card Hover Effects */
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .card-hover:hover {
+    @apply shadow-lg -translate-y-1;
+    box-shadow: 0 12px 24px -8px hsl(var(--foreground) / 0.08), 0 4px 8px -4px hsl(var(--foreground) / 0.04);
+  }
+  
+  .card-hover-subtle {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .card-hover-subtle:hover {
+    @apply shadow-md -translate-y-0.5;
+    box-shadow: 0 8px 16px -6px hsl(var(--foreground) / 0.06);
+  }
+  
   .text-gradient-animated {
     background: linear-gradient(90deg, hsl(var(--foreground)), hsl(var(--primary)), hsl(var(--foreground)));
     background-size: 200% auto;
