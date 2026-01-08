@@ -33,6 +33,7 @@ import { User as SupabaseUser, Session } from "@supabase/supabase-js";
 import { toast } from "sonner";
 import logoIcon from "@/assets/neurostate-icon.svg";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "./ThemeToggle";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -286,8 +287,11 @@ export const Header = () => {
             </Link>
           </nav>
 
-          {/* Right Actions - Auth, Book Demo */}
+          {/* Right Actions - Theme Toggle, Auth, Book Demo */}
           <div className="hidden lg:flex items-center gap-2">
+            
+            {/* Theme Toggle */}
+            <ThemeToggle />
             
             {/* User Menu (only when logged in) */}
             {user && (
@@ -331,7 +335,7 @@ export const Header = () => {
                 className="h-8 px-5 text-[11px] font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg"
               >
                 <span className="relative z-10 flex items-center gap-1.5">
-                  Start Building
+                  Get In Touch
                   <ArrowUpRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </span>
               </Button>
