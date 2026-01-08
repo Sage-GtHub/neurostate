@@ -186,7 +186,7 @@ export default function NovaInsights() {
               { label: "Focus Time", value: summaryMetrics.focus.value, trend: summaryMetrics.focus.trend, icon: Target },
               { label: "Recovery", value: summaryMetrics.recovery.value, trend: summaryMetrics.recovery.trend, icon: TrendingUp }
             ].map((metric, index) => (
-              <div key={index} className="p-6 bg-white rounded-3xl border border-foreground/5 hover:border-foreground/10 transition-all">
+              <div key={index} className="p-6 bg-card rounded-3xl border border-foreground/5 hover:border-foreground/10 transition-all">
                 <div className="flex items-center gap-2 mb-4">
                   <metric.icon className="w-3.5 h-3.5 text-foreground/40" />
                   <span className="text-[10px] uppercase tracking-[0.15em] text-foreground/40">{metric.label}</span>
@@ -199,7 +199,7 @@ export default function NovaInsights() {
 
           {/* Charts */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="p-6 bg-white rounded-3xl border border-foreground/5">
+            <div className="p-6 bg-card rounded-3xl border border-foreground/5">
               <h3 className="text-sm font-medium text-foreground mb-6">HRV Trend</h3>
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
@@ -221,7 +221,7 @@ export default function NovaInsights() {
               </div>
             </div>
 
-            <div className="p-6 bg-white rounded-3xl border border-foreground/5">
+            <div className="p-6 bg-card rounded-3xl border border-foreground/5">
               <h3 className="text-sm font-medium text-foreground mb-6">Sleep Stages</h3>
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
@@ -245,7 +245,7 @@ export default function NovaInsights() {
               </div>
             </div>
 
-            <div className="p-6 bg-white rounded-3xl border border-foreground/5">
+            <div className="p-6 bg-card rounded-3xl border border-foreground/5">
               <h3 className="text-sm font-medium text-foreground mb-6">Energy Curve</h3>
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
@@ -267,7 +267,7 @@ export default function NovaInsights() {
               </div>
             </div>
 
-            <div className="p-6 bg-white rounded-3xl border border-foreground/5">
+            <div className="p-6 bg-card rounded-3xl border border-foreground/5">
               <h3 className="text-sm font-medium text-foreground mb-6">Recovery Score</h3>
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">

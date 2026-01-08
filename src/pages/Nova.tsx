@@ -301,7 +301,7 @@ export default function Nova() {
                 return (
                   <div 
                     key={summary.id || index} 
-                    className="group p-6 bg-white rounded-3xl border border-foreground/5 hover:border-foreground/10 hover:shadow-lg hover:shadow-foreground/5 transition-all duration-300"
+                    className="group p-6 bg-card rounded-3xl border border-foreground/5 hover:border-foreground/10 hover:shadow-lg hover:shadow-foreground/5 transition-all duration-300"
                   >
                     <div className="w-9 h-9 rounded-full bg-foreground/5 flex items-center justify-center mb-5">
                       <Icon className="w-4 h-4 text-foreground/60" />
@@ -374,7 +374,7 @@ export default function Nova() {
                 return (
                   <div 
                     key={index} 
-                    className={`p-6 bg-white rounded-3xl border border-foreground/5 hover:border-foreground/10 transition-all ${hasData ? '' : 'opacity-50'}`}
+                    className={`p-6 bg-card rounded-3xl border border-foreground/5 hover:border-foreground/10 transition-all ${hasData ? '' : 'opacity-50'}`}
                   >
                     <div className="flex items-center justify-between mb-5">
                       <div className="w-9 h-9 rounded-full bg-foreground/5 flex items-center justify-center">
@@ -413,7 +413,7 @@ export default function Nova() {
                   <button
                     key={action.label}
                     onClick={() => navigate(action.route)}
-                    className="group p-5 bg-white rounded-2xl border border-foreground/5 text-left hover:border-foreground/10 hover:shadow-lg hover:shadow-foreground/5 transition-all duration-300"
+                    className="group p-5 bg-card rounded-2xl border border-foreground/5 text-left hover:border-foreground/10 hover:shadow-lg hover:shadow-foreground/5 transition-all duration-300"
                   >
                     <Icon className="w-4 h-4 text-foreground/40 mb-3 group-hover:text-foreground/60 group-hover:scale-110 transition-all" />
                     <p className="text-[11px] font-medium text-foreground/70 group-hover:text-foreground transition-colors">{action.label}</p>

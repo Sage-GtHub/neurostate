@@ -135,7 +135,7 @@ export default function NovaHistoricalTrends() {
     return (
       <NovaSwipeWrapper>
         <SEO title="Historical Trends – Cognitive Performance Analytics | Nova" description="30-day and 90-day biometric trend analysis with predictive performance modelling." />
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-background">
           <NovaNav />
           <div className="flex items-center justify-center py-24">
             <Loader2 className="w-8 h-8 animate-spin text-accent" />
@@ -148,14 +148,14 @@ export default function NovaHistoricalTrends() {
   return (
     <NovaSwipeWrapper>
       <SEO title="Historical Trends – Cognitive Performance Analytics | Nova" description="30-day and 90-day biometric trend analysis with predictive performance modelling." />
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-background">
         <NovaNav />
 
-        <div className="border-b border-mist bg-white">
+        <div className="border-b border-border/50 bg-background">
           <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-8">
-            <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium mb-2">Analytics</p>
-            <h1 className="text-2xl sm:text-3xl font-bold text-carbon">Historical Trends</h1>
-            <p className="text-sm text-ash mt-1">Track your biometric patterns over time</p>
+            <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 mb-2">Analytics</p>
+            <h1 className="text-2xl font-medium text-foreground">Historical Trends</h1>
+            <p className="text-sm text-foreground/50 mt-1">Track your biometric patterns over time</p>
           </div>
         </div>
 
@@ -173,7 +173,7 @@ export default function NovaHistoricalTrends() {
           {error ? (
             <div className="flex flex-col items-center justify-center py-12 text-center">
               <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
-              <p className="text-ash mb-4">{error}</p>
+              <p className="text-foreground/50 mb-4">{error}</p>
               <Button onClick={loadTrendData} variant="outline">Try Again</Button>
             </div>
           ) : (
@@ -184,7 +184,7 @@ export default function NovaHistoricalTrends() {
                 const hasData = metric.data.length > 0;
 
                 return (
-                  <Card key={metric.key} className="border-mist/30">
+                  <Card key={metric.key} className="border-foreground/5 bg-card">
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between mb-6">
                         <div className="flex items-center gap-3">
@@ -192,8 +192,8 @@ export default function NovaHistoricalTrends() {
                             <metric.icon className="w-5 h-5" style={{ color: metric.color }} />
                           </div>
                           <div>
-                            <h3 className="font-semibold text-carbon">{metric.label}</h3>
-                            <p className="text-sm text-ash">
+                            <h3 className="font-medium text-foreground">{metric.label}</h3>
+                            <p className="text-sm text-foreground/50">
                               Current: {latestValue}{metric.unit}
                             </p>
                           </div>
@@ -203,7 +203,7 @@ export default function NovaHistoricalTrends() {
                             <TrendIcon direction={trend.direction} />
                             <span className={`text-sm font-medium ${
                               trend.direction === "up" ? "text-accent" :
-                              trend.direction === "down" ? "text-red-500" : "text-ash"
+                              trend.direction === "down" ? "text-red-500" : "text-foreground/40"
                             }`}>
                               {trend.change}%
                             </span>
@@ -221,7 +221,7 @@ export default function NovaHistoricalTrends() {
                                   <stop offset="95%" stopColor={metric.color} stopOpacity={0} />
                                 </linearGradient>
                               </defs>
-                              <CartesianGrid strokeDasharray="3 3" stroke="#E5E5E5" />
+                              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--foreground) / 0.05)" />
                               <XAxis 
                                 dataKey="date" 
                                 tick={{ fontSize: 10, fill: '#999' }}
@@ -233,10 +233,10 @@ export default function NovaHistoricalTrends() {
                               />
                               <Tooltip 
                                 contentStyle={{ 
-                                  backgroundColor: '#fff', 
-                                  border: '1px solid #E5E5E5',
-                                  borderRadius: '8px',
-                                  fontSize: '12px',
+                                  backgroundColor: 'hsl(var(--card))', 
+                                  border: '1px solid hsl(var(--foreground) / 0.1)',
+                                  borderRadius: '12px',
+                                  fontSize: '11px',
                                 }}
                                 labelFormatter={(value) => format(new Date(value), 'dd MMM yyyy')}
                               />
@@ -253,8 +253,8 @@ export default function NovaHistoricalTrends() {
                       ) : (
                         <div className="h-48 flex items-center justify-center text-center">
                           <div>
-                            <p className="text-ash mb-2">No data available</p>
-                            <p className="text-xs text-stone">Connect a device to start tracking</p>
+                            <p className="text-foreground/50 mb-2">No data available</p>
+                            <p className="text-xs text-foreground/30">Connect a device to start tracking</p>
                           </div>
                         </div>
                       )}
