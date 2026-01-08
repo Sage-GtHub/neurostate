@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 import { motion, useSpring, useTransform, useScroll, useInView } from "framer-motion";
 import DataFlowDiagram from "./hero/DataFlowDiagram";
 
-// Lazy load the 3D Abstract Wave Mesh for better performance
-const AbstractWaveMesh = lazy(() => import("./hero/AbstractWaveMesh"));
+// Lazy load the 3D Particle Human Silhouette for better performance
+const ParticleHumanSilhouette = lazy(() => import("./hero/ParticleHumanSilhouette"));
 // Animated number counter hook
 const useCountUp = (end: number, duration: number = 2000, startOnView: boolean = true) => {
   const [count, setCount] = useState(0);
@@ -248,7 +248,7 @@ const Hero = () => {
               </motion.div>
             </motion.div>
 
-            {/* Right - 3D Abstract Wave Mesh */}
+            {/* Right - 3D Particle Human Silhouette */}
             <motion.div 
               className="relative"
               initial={{ opacity: 0, scale: 0.9 }}
@@ -256,12 +256,12 @@ const Hero = () => {
               transition={{ duration: 1.2, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
             >
               <div className="relative aspect-square max-w-lg mx-auto">
-                {/* Ambient glow behind wave mesh */}
+                {/* Ambient glow behind silhouette */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-80 h-80 bg-gradient-to-br from-primary/10 via-emerald-500/5 to-blue-500/8 rounded-full blur-[100px]" />
+                  <div className="w-72 h-96 bg-gradient-to-b from-primary/8 via-emerald-500/5 to-blue-500/8 rounded-full blur-[80px]" />
                 </div>
                 
-                {/* 3D Abstract Wave Mesh Canvas */}
+                {/* 3D Particle Human Silhouette Canvas */}
                 <Suspense fallback={
                   <div className="w-full h-full flex items-center justify-center">
                     <motion.div 
@@ -271,7 +271,7 @@ const Hero = () => {
                     />
                   </div>
                 }>
-                  <AbstractWaveMesh />
+                  <ParticleHumanSilhouette />
                 </Suspense>
               </div>
             </motion.div>
