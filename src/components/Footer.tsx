@@ -37,9 +37,9 @@ export const Footer = () => {
   const footerLinks = {
     platform: [
       { name: "Nova AI", href: "/nova/overview" },
-      { name: "Supplements", href: "/category/supplements" },
-      { name: "Devices", href: "/category/devices" },
-      { name: "Shop All", href: "/shop" },
+      { name: "Supplements", href: null, disabled: true },
+      { name: "Devices", href: null, disabled: true },
+      { name: "Shop All", href: null, disabled: true },
     ],
     company: [
       { name: "About", href: "/about" },
@@ -116,10 +116,16 @@ export const Footer = () => {
               <ul className="space-y-3">
                 {footerLinks.platform.map((link) => (
                   <li key={link.name}>
-                    <Link to={link.href} className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-colors">
-                      {link.name}
-                      <ArrowUpRight className="w-2.5 h-2.5 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
-                    </Link>
+                    {link.disabled ? (
+                      <span className="text-xs text-background/40 cursor-default">
+                        {link.name}
+                      </span>
+                    ) : (
+                      <Link to={link.href!} className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-colors">
+                        {link.name}
+                        <ArrowUpRight className="w-2.5 h-2.5 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
