@@ -132,8 +132,8 @@ const Index = () => {
           <Hero />
 
           {/* Approach Section - 3 Pillars like Invisible's */}
-          <section ref={approachRef} className="py-12 md:py-16 px-6 md:px-12 lg:px-16 border-t border-border/30">
-            <div className="w-full">
+          <section ref={approachRef} className="py-12 md:py-16 px-6 md:px-8 border-t border-border/30">
+            <div className="max-w-7xl mx-auto">
               {/* Section header */}
               <motion.div 
                 className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8"
@@ -177,7 +177,7 @@ const Index = () => {
           </section>
 
           {/* Positioning Statement - Between Approach and System */}
-          <section className="py-10 md:py-12 px-6 md:px-12 lg:px-16 border-y border-border/30">
+          <section className="py-10 md:py-12 px-6 md:px-8 border-y border-border/30">
             <motion.p
               className="text-base md:text-lg text-muted-foreground text-center max-w-3xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 15 }}
@@ -192,8 +192,8 @@ const Index = () => {
           </section>
 
           {/* Building Blocks Section - Like Invisible's platform modules */}
-          <section className="py-12 md:py-16 px-6 md:px-12 lg:px-16 bg-muted/30">
-            <div className="w-full">
+          <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/30">
+            <div className="max-w-7xl mx-auto">
               <ScrollReveal className="space-y-3 mb-8">
                 <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Our System</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground max-w-2xl">
@@ -263,8 +263,8 @@ const Index = () => {
           </section>
 
           {/* How It Works - Journey Flow */}
-          <section className="py-12 md:py-16 px-6 md:px-12 lg:px-16">
-            <div className="w-full">
+          <section className="py-12 md:py-16 px-6 md:px-8">
+            <div className="max-w-7xl mx-auto">
               <ScrollReveal className="space-y-3 mb-8 text-center">
                 <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">How It Works</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
@@ -344,8 +344,8 @@ const Index = () => {
           </section>
 
           {/* Impact Stats - Full width dark section */}
-          <section className="py-10 md:py-12 px-6 md:px-12 lg:px-16 bg-foreground">
-            <div className="w-full">
+          <section className="py-10 md:py-12 px-6 md:px-8 bg-foreground">
+            <div className="max-w-7xl mx-auto">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
                 {impactStats.map((stat, i) => (
                   <motion.div
@@ -367,8 +367,8 @@ const Index = () => {
           </section>
 
           {/* Industries Section */}
-          <section className="py-12 md:py-16 px-6 md:px-12 lg:px-16">
-            <div className="w-full">
+          <section className="py-12 md:py-16 px-6 md:px-8">
+            <div className="max-w-7xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
                 {/* Left - Header */}
                 <ScrollReveal className="space-y-4 lg:sticky lg:top-24">
@@ -419,8 +419,8 @@ const Index = () => {
           </section>
 
           {/* Command Surfaces Preview */}
-          <section className="py-12 md:py-16 px-6 md:px-12 lg:px-16 bg-muted/30">
-            <div className="w-full">
+          <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/30">
+            <div className="max-w-7xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
                 <ScrollReveal direction="left">
                   <div className="space-y-4">
@@ -542,8 +542,8 @@ const Index = () => {
           </section>
 
           {/* ROI Calculator Section */}
-          <section className="py-12 md:py-16 px-6 md:px-12 lg:px-16">
-            <div className="w-full">
+          <section className="py-12 md:py-16 px-6 md:px-8">
+            <div className="max-w-7xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                 {/* Left - Header & Benefits */}
                 <ScrollReveal className="space-y-5 lg:sticky lg:top-24">
@@ -594,8 +594,8 @@ const Index = () => {
           </section>
 
           {/* Nova AI Preview Section */}
-          <section className="py-12 md:py-16 px-6 md:px-12 lg:px-16 bg-gradient-to-b from-muted/30 to-background">
-            <div className="w-full">
+          <section className="py-12 md:py-16 px-6 md:px-8 bg-gradient-to-b from-muted/30 to-background">
+            <div className="max-w-7xl mx-auto">
               {/* Nova Info - Text on top */}
               <ScrollReveal className="space-y-5 mb-10 text-center max-w-2xl mx-auto">
                 <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">AI Assistant</span>
@@ -722,8 +722,8 @@ const Index = () => {
           </section>
 
           {/* Platform Integration Visual */}
-          <section className="py-12 md:py-16 px-6 md:px-12 lg:px-16">
-            <div className="w-full text-center">
+          <section className="py-12 md:py-16 px-6 md:px-8">
+            <div className="max-w-7xl mx-auto text-center">
               <ScrollReveal className="space-y-3 mb-8">
                 <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Integrations</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
@@ -768,8 +768,8 @@ const Index = () => {
           </section>
 
           {/* Final CTA */}
-          <section className="py-12 md:py-16 px-6 md:px-12 lg:px-16 bg-gradient-to-b from-background to-muted/30">
-            <div className="w-full max-w-3xl mx-auto text-center">
+          <section className="py-12 md:py-16 px-6 md:px-8 bg-gradient-to-b from-background to-muted/30">
+            <div className="max-w-7xl mx-auto text-center">
               <ScrollReveal className="space-y-5">
                 <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Get Started</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
