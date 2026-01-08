@@ -268,21 +268,21 @@ export const Header = () => {
               to="/nova/overview"
               className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
             >
-              Nova AI
+              nova ai
             </Link>
 
             <Link
               to={user ? "/team-dashboard" : "/auth?mode=signup&type=company"}
               className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
             >
-              Team
+              team
             </Link>
 
             <Link
               to="/about"
               className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
             >
-              Company
+              company
             </Link>
           </nav>
 
