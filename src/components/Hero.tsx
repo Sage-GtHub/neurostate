@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 import { motion, useSpring, useTransform, useScroll, useInView } from "framer-motion";
 import DataFlowDiagram from "./hero/DataFlowDiagram";
 
-// Lazy load the 3D illustration for better performance
-const IsometricIllustration = lazy(() => import("./hero/IsometricIllustration"));
+// Lazy load the 3D Neural Orb for better performance
+const NeuralOrb = lazy(() => import("./hero/NeuralOrb"));
 // Animated number counter hook
 const useCountUp = (end: number, duration: number = 2000, startOnView: boolean = true) => {
   const [count, setCount] = useState(0);
@@ -248,96 +248,31 @@ const Hero = () => {
               </motion.div>
             </motion.div>
 
-            {/* Right - 3D Isometric Illustration */}
+            {/* Right - 3D Neural Orb */}
             <motion.div 
               className="relative"
-              initial={{ opacity: 0, y: 40, scale: 0.95 }}
-              animate={isLoaded ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 1.2, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
             >
               <div className="relative aspect-square max-w-lg mx-auto">
-                {/* 3D Canvas */}
+                {/* Ambient glow behind orb */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="w-64 h-64 bg-primary/10 rounded-full blur-[80px]" />
+                </div>
+                
+                {/* 3D Neural Orb Canvas */}
                 <Suspense fallback={
                   <div className="w-full h-full flex items-center justify-center">
                     <motion.div 
-                      className="w-16 h-16 border-2 border-primary/20 border-t-primary rounded-full"
+                      className="w-20 h-20 border-2 border-primary/20 border-t-primary rounded-full"
                       animate={{ rotate: 360 }}
                       transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                     />
                   </div>
                 }>
-                  <IsometricIllustration />
+                  <NeuralOrb />
                 </Suspense>
-                
-                {/* Floating status pill with enhanced hover */}
-                <motion.div 
-                  className="absolute top-8 right-8 bg-background/90 backdrop-blur-sm border border-border/50 px-4 py-2 rounded-full shadow-sm cursor-default"
-                  style={{
-                    x: useTransform(mouseX, [-1, 1], [10, -10]),
-                    y: useTransform(mouseY, [-1, 1], [10, -10]),
-                  }}
-                  whileHover={{ 
-                    scale: 1.08, 
-                    boxShadow: "0 12px 32px -4px rgba(0,0,0,0.12)",
-                    borderColor: "hsl(var(--primary) / 0.4)"
-                  }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                >
-                  <div className="flex items-center gap-2">
-                    <motion.div 
-                      className="w-2 h-2 bg-green-500 rounded-full"
-                      animate={{ scale: [1, 1.3, 1], opacity: [1, 0.6, 1] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    />
-                    <span className="text-[11px] font-medium text-foreground">System Active</span>
-                  </div>
-                </motion.div>
-                
-                {/* Bottom metric pill with enhanced interaction */}
-                <motion.div 
-                  className="absolute bottom-12 left-8 bg-background/90 backdrop-blur-sm border border-border/50 px-5 py-3 rounded-2xl shadow-sm cursor-default"
-                  style={{
-                    x: useTransform(mouseX, [-1, 1], [-8, 8]),
-                    y: useTransform(mouseY, [-1, 1], [-8, 8]),
-                  }}
-                  whileHover={{ 
-                    scale: 1.08, 
-                    boxShadow: "0 16px 40px -4px rgba(0,0,0,0.14)",
-                    borderColor: "hsl(var(--primary) / 0.4)"
-                  }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                >
-                  <motion.p 
-                    className="text-2xl font-light text-foreground counter-animate"
-                    whileHover={{ color: "hsl(var(--primary))" }}
-                  >
-                    98.7%
-                  </motion.p>
-                  <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Accuracy Rate</p>
-                </motion.div>
-                
-                {/* Top left metric with enhanced animation */}
-                <motion.div 
-                  className="absolute top-16 left-4 bg-background/90 backdrop-blur-sm border border-border/50 px-4 py-2.5 rounded-xl shadow-sm cursor-default"
-                  style={{
-                    x: useTransform(mouseX, [-1, 1], [-6, 6]),
-                    y: useTransform(mouseY, [-1, 1], [-6, 6]),
-                  }}
-                  whileHover={{ 
-                    scale: 1.08, 
-                    boxShadow: "0 12px 28px -4px rgba(0,0,0,0.12)",
-                    borderColor: "hsl(var(--primary) / 0.4)"
-                  }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                >
-                  <motion.p 
-                    className="text-lg font-light text-foreground counter-animate"
-                    whileHover={{ color: "hsl(var(--primary))" }}
-                  >
-                    2.4M+
-                  </motion.p>
-                  <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Predictions/Day</p>
-                </motion.div>
               </div>
             </motion.div>
           </div>
