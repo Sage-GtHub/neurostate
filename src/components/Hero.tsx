@@ -274,15 +274,20 @@ const Hero = () => {
 
       {/* Client Logos - Enhanced marquee with hover pause */}
       <motion.div 
-        className="py-8 relative overflow-hidden border-t border-border/30"
+        className="py-6 relative overflow-hidden border-t border-border/30"
         initial={{ opacity: 0, y: 20 }}
         animate={isLoaded ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7, delay: 0.5 }}
       >
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background via-background/80 to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background via-background/80 to-transparent z-10" />
+        <p className="text-center text-[10px] tracking-[0.15em] uppercase text-muted-foreground/50 mb-4">
+          Trusted by growing teams
+        </p>
         
-        <div className="marquee-track group">
+        <div className="relative">
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background via-background/80 to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background via-background/80 to-transparent z-10" />
+          
+          <div className="marquee-track group">
           {[...clientNames, ...clientNames, ...clientNames].map((name, i) => (
             <motion.span 
               key={i}
@@ -296,6 +301,7 @@ const Hero = () => {
               {name}
             </motion.span>
           ))}
+          </div>
         </div>
       </motion.div>
     </section>
