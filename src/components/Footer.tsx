@@ -36,27 +36,27 @@ export const Footer = () => {
 
   const footerLinks = {
     platform: [
-      { name: "Nova AI", href: "/nova/overview", clickable: true },
-      { name: "Supplements", href: "#", clickable: false },
-      { name: "Devices", href: "#", clickable: false },
-      { name: "Shop All", href: "#", clickable: false },
+      { name: "Nova AI", href: "/nova/overview" },
+      { name: "Supplements", href: "/category/supplements" },
+      { name: "Devices", href: "/category/devices" },
+      { name: "Shop All", href: "/shop" },
     ],
     company: [
-      { name: "About", href: "/about", clickable: true },
-      { name: "Blog", href: "/blog", clickable: true },
-      { name: "Contact", href: "/contact", clickable: true },
-      { name: "Partnerships", href: "/partnerships", clickable: true },
+      { name: "About", href: "/about" },
+      { name: "Blog", href: "/blog" },
+      { name: "Contact", href: "/contact" },
+      { name: "Partnerships", href: "/partnerships" },
     ],
     support: [
-      { name: "FAQ", href: "/faq", clickable: true },
-      { name: "Shipping", href: "/shipping", clickable: true },
-      { name: "Order Tracking", href: "/track-order", clickable: true },
-      { name: "Rewards", href: "/rewards", clickable: true },
+      { name: "FAQ", href: "/faq" },
+      { name: "Shipping", href: "/shipping" },
+      { name: "Order Tracking", href: "/track-order" },
+      { name: "Rewards", href: "/rewards" },
     ],
     account: [
-      { name: "Team Dashboard", href: "/team", clickable: true },
-      { name: "My Dashboard", href: "/dashboard", clickable: true },
-      { name: "Sign In", href: "/auth", clickable: true },
+      { name: "Team Dashboard", href: "/team" },
+      { name: "My Dashboard", href: "/dashboard" },
+      { name: "Sign In", href: "/auth" },
     ],
   };
 
@@ -116,16 +116,10 @@ export const Footer = () => {
               <ul className="space-y-3">
                 {footerLinks.platform.map((link) => (
                   <li key={link.name}>
-                    {link.clickable ? (
-                      <Link to={link.href} className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-colors">
-                        {link.name}
-                        <ArrowUpRight className="w-2.5 h-2.5 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
-                      </Link>
-                    ) : (
-                      <span className="text-xs text-background/40 cursor-default">
-                        {link.name}
-                      </span>
-                    )}
+                    <Link to={link.href} className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-colors">
+                      {link.name}
+                      <ArrowUpRight className="w-2.5 h-2.5 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                    </Link>
                   </li>
                 ))}
               </ul>
