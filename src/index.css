@@ -25,8 +25,8 @@
     --popover: 40 25% 97%;
     --popover-foreground: 220 20% 20%;
     
-    /* Coral/Orange Accent - Groq Style */
-    --primary: 14 90% 55%;
+    /* Coral/Orange Accent - Vibrant */
+    --primary: 12 100% 52%;
     --primary-foreground: 0 0% 100%;
     
     --secondary: 40 20% 92%;
@@ -35,8 +35,8 @@
     --muted: 40 15% 90%;
     --muted-foreground: 220 10% 45%;
     
-    --accent: 14 90% 55%;
-    --accent-light: 14 95% 65%;
+    --accent: 12 100% 52%;
+    --accent-light: 12 100% 62%;
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 72% 55%;
@@ -45,7 +45,7 @@
     /* Borders - Subtle Warm */
     --border: 40 15% 88%;
     --input: 40 15% 88%;
-    --ring: 14 90% 55%;
+    --ring: 12 100% 52%;
     
     --radius: 12px;
     
@@ -96,12 +96,12 @@
     /* Sidebar - Light Theme */
     --sidebar-background: 40 25% 96%;
     --sidebar-foreground: 220 20% 25%;
-    --sidebar-primary: 14 90% 55%;
+    --sidebar-primary: 12 100% 52%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 40 20% 92%;
     --sidebar-accent-foreground: 220 20% 25%;
     --sidebar-border: 40 15% 88%;
-    --sidebar-ring: 14 90% 55%;
+    --sidebar-ring: 12 100% 52%;
     
     /* Shadow System - Warm Soft */
     --shadow-xs: 0 1px 2px 0 rgba(30, 20, 10, 0.03);
