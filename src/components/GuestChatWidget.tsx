@@ -1,20 +1,11 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Send, Loader2, Sparkles, X, MessageSquare, Plus } from "lucide-react";
+import { Send, Loader2, X, Plus, ArrowUp, RotateCcw, Copy, Check, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { useLocation } from "react-router-dom";
-import { format, isToday, isYesterday, formatDistanceToNow } from "date-fns";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { NovaResponseCard } from "@/components/nova/NovaResponseCard";
+import { cn } from "@/lib/utils";
+import ReactMarkdown from "react-markdown";
 
 type Message = {
   role: "user" | "assistant";
@@ -31,13 +22,11 @@ type Conversation = {
 };
 
 const QUICK_SUGGESTIONS = [
-  "What helps with better sleep?",
-  "Tell me about your bundles",
-  "How does red light therapy work?",
-  "Which supplements support recovery?",
+  "What is NeuroState?",
+  "How does Nova AI work?",
+  "Tell me about enterprise pricing",
+  "What integrations do you support?",
 ];
-
-const WELCOME_MESSAGE = "I am Nova, your NeuroState performance assistant. How can I help you optimise your performance today?";
 
 interface GuestChatWidgetProps {
   open: boolean;
@@ -50,7 +39,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
   const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
-  const [showHistory, setShowHistory] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { toast: showToast } = useToast();
@@ -100,17 +89,12 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
     const newConv: Conversation = {
       id: Date.now().toString(),
       title: "New conversation",
-      messages: [{
-        role: "assistant" as const,
-        content: "I am Nova, your NeuroState performance assistant. How can I help you optimise your performance today?",
-        timestamp: new Date().toISOString(),
-      }],
+      messages: [],
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
     setConversations(prev => [newConv, ...prev]);
     setCurrentConversationId(newConv.id);
-    setShowHistory(false);
   };
 
   const updateConversation = (updater: (conv: Conversation) => Conversation) => {
@@ -119,9 +103,10 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
 
   const getPageContext = () => {
     const path = location.pathname;
-    if (path.startsWith('/product/')) return `User is viewing a product page: ${path}`;
-    if (path.includes('bundles')) return 'User is viewing product bundles';
-    if (path.includes('shop')) return 'User is browsing the shop';
+    if (path.includes('nova')) return 'User is viewing Nova AI pages';
+    if (path.includes('solutions')) return 'User is viewing solutions';
+    if (path.includes('industries')) return 'User is viewing industry solutions';
+    if (path.includes('contact')) return 'User is on the contact page';
     return 'User is on the NeuroState website';
   };
 
@@ -208,7 +193,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
     updateConversation(conv => ({
       ...conv,
       messages: [...conv.messages, userMsg],
-      title: conv.messages.length === 1 ? text.slice(0, 30) + (text.length > 30 ? "..." : "") : conv.title,
+      title: conv.messages.length === 0 ? text.slice(0, 30) + (text.length > 30 ? "..." : "") : conv.title,
       updatedAt: new Date().toISOString(),
     }));
 
@@ -253,27 +238,6 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
     setTimeout(() => handleSend(lastUserMsg.content), 100);
   };
 
-  const deleteConversation = (id: string) => {
-    setConversations(prev => {
-      const filtered = prev.filter(c => c.id !== id);
-      if (id === currentConversationId) {
-        if (filtered.length > 0) {
-          setCurrentConversationId(filtered[0].id);
-        } else {
-          createNewConversation();
-          return prev;
-        }
-      }
-      return filtered;
-    });
-  };
-
-  const clearAll = () => {
-    setConversations([]);
-    localStorage.removeItem("guest-nova-conversations");
-    createNewConversation();
-  };
-
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -281,212 +245,225 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
     }
   };
 
-  const formatTime = (ts: string) => {
-    const d = new Date(ts);
-    if (isToday(d)) return format(d, "HH:mm");
-    if (isYesterday(d)) return `Yesterday ${format(d, "HH:mm")}`;
-    return format(d, "dd MMM HH:mm");
-  };
-
-  const groupByDate = () => {
-    const groups: Record<string, Conversation[]> = {};
-    conversations.forEach(c => {
-      const d = new Date(c.updatedAt);
-      const key = isToday(d) ? "Today" : isYesterday(d) ? "Yesterday" : format(d, "dd MMM yyyy");
-      if (!groups[key]) groups[key] = [];
-      groups[key].push(c);
-    });
-    return groups;
-  };
+  const hasMessages = messages.length > 0;
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" hideCloseButton className="w-full sm:w-[420px] p-0 flex flex-col h-full bg-background border-l border-border/50">
-        {/* Header */}
-        <SheetHeader className="border-b border-border/50 p-4 flex-shrink-0">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-accent/10 flex items-center justify-center">
-                <Sparkles className="h-4 w-4 text-accent" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <SheetTitle className="text-base font-semibold text-foreground">Nova</SheetTitle>
-                <p className="text-xs text-muted-foreground truncate">
-                  {currentConversation?.title || "Performance assistant"}
-                </p>
-              </div>
+      <SheetContent 
+        side="right" 
+        hideCloseButton 
+        className="w-full sm:w-[500px] md:w-[600px] p-0 flex flex-col h-full bg-background border-l border-border/30"
+      >
+        {/* Minimal Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-border/30">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center">
+              <span className="text-xs font-bold text-white">N</span>
             </div>
-            <div className="flex items-center gap-1">
-              <Button variant="ghost" size="icon" onClick={() => setShowHistory(!showHistory)} className="h-8 w-8">
-                <MessageSquare className="h-4 w-4" />
-              </Button>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="h-8 w-8">
-                    <Plus className="h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={createNewConversation}>
-                    <Plus className="h-4 w-4 mr-2" /> New conversation
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={clearAll} className="text-destructive">
-                    <X className="h-4 w-4 mr-2" /> Clear all
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-              <Button variant="ghost" size="icon" onClick={() => onOpenChange(false)} className="h-8 w-8">
-                <X className="h-4 w-4" />
-              </Button>
-            </div>
+            <span className="font-medium text-sm">Nova</span>
           </div>
-        </SheetHeader>
+          <div className="flex items-center gap-1">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={createNewConversation}
+              className="h-8 w-8 text-muted-foreground hover:text-foreground"
+            >
+              <Plus className="h-4 w-4" />
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => onOpenChange(false)}
+              className="h-8 w-8 text-muted-foreground hover:text-foreground"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
 
-        {showHistory ? (
-          <ScrollArea className="flex-1">
-            <div className="p-4">
-              <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-4">History</h3>
-              {Object.entries(groupByDate()).map(([date, convs]) => (
-                <div key={date} className="mb-4">
-                  <p className="text-xs text-muted-foreground mb-2">{date}</p>
-                  <div className="space-y-1">
-                    {convs.map(c => (
-                      <button
-                        key={c.id}
-                        onClick={() => { setCurrentConversationId(c.id); setShowHistory(false); }}
-                        className={`w-full text-left p-3 rounded-lg transition-colors ${
-                          c.id === currentConversationId ? "bg-muted" : "hover:bg-muted/50"
-                        }`}
-                      >
-                        <div className="flex items-start justify-between gap-2">
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium truncate">{c.title}</p>
-                            <p className="text-xs text-muted-foreground mt-0.5">
-                              {c.messages.length} messages · {formatDistanceToNow(new Date(c.updatedAt), { addSuffix: true })}
-                            </p>
-                          </div>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-6 w-6 flex-shrink-0 opacity-0 group-hover:opacity-100"
-                            onClick={(e) => { e.stopPropagation(); deleteConversation(c.id); }}
-                          >
-                            <X className="h-3 w-3" />
-                          </Button>
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))}
+        {/* Content Area */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          {!hasMessages ? (
+            /* Empty State - Perplexity style centered */
+            <div className="flex-1 flex flex-col items-center justify-center px-6">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center mb-6">
+                <span className="text-xl font-bold text-white">N</span>
+              </div>
+              <h2 className="text-xl font-semibold text-foreground mb-2">
+                How can I help you?
+              </h2>
+              <p className="text-sm text-muted-foreground text-center mb-8 max-w-sm">
+                Ask me anything about NeuroState's enterprise cognitive performance platform.
+              </p>
+              
+              {/* Quick suggestions grid */}
+              <div className="grid grid-cols-2 gap-2 w-full max-w-md">
+                {QUICK_SUGGESTIONS.map((suggestion, i) => (
+                  <button
+                    key={i}
+                    onClick={() => handleSend(suggestion)}
+                    disabled={isLoading}
+                    className={cn(
+                      "text-left px-4 py-3 rounded-xl text-sm",
+                      "bg-muted/50 border border-border/50",
+                      "hover:bg-muted hover:border-border",
+                      "transition-all duration-200",
+                      "disabled:opacity-50 disabled:cursor-not-allowed"
+                    )}
+                  >
+                    {suggestion}
+                  </button>
+                ))}
+              </div>
             </div>
-          </ScrollArea>
-        ) : (
-          <>
-            {/* Messages */}
+          ) : (
+            /* Messages Area */
             <div className="flex-1 overflow-y-auto">
-              <div className="px-4 py-4 space-y-4">
+              <div className="max-w-2xl mx-auto px-4 py-6 space-y-6">
                 {messages.map((msg, i) => (
-                  <div key={i} className={`group flex gap-3 ${msg.role === "user" ? "justify-end" : ""}`}>
-                    {msg.role === "assistant" && (
-                      <div className="flex-shrink-0 mt-1">
-                        <div className="w-7 h-7 rounded-xl nova-gradient flex items-center justify-center">
-                          <Sparkles className="w-3.5 h-3.5 text-white" />
+                  <div key={i} className="space-y-4">
+                    {msg.role === "user" ? (
+                      /* User message - Perplexity style */
+                      <div className="flex items-start gap-3">
+                        <div className="w-7 h-7 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                          <span className="text-xs font-medium">You</span>
+                        </div>
+                        <div className="flex-1 pt-1">
+                          <p className="text-foreground font-medium">{msg.content}</p>
                         </div>
                       </div>
+                    ) : (
+                      /* Assistant message - Perplexity style with sources look */
+                      <div className="space-y-3">
+                        <div className="flex items-start gap-3">
+                          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center flex-shrink-0">
+                            <span className="text-[10px] font-bold text-white">N</span>
+                          </div>
+                          <div className="flex-1 pt-1">
+                            <div className="prose prose-sm dark:prose-invert max-w-none">
+                              {msg.content ? (
+                                <ReactMarkdown
+                                  components={{
+                                    p: ({ children }) => <p className="text-foreground leading-relaxed mb-3 last:mb-0">{children}</p>,
+                                    ul: ({ children }) => <ul className="list-disc pl-4 mb-3 space-y-1">{children}</ul>,
+                                    ol: ({ children }) => <ol className="list-decimal pl-4 mb-3 space-y-1">{children}</ol>,
+                                    li: ({ children }) => <li className="text-foreground">{children}</li>,
+                                    strong: ({ children }) => <strong className="font-semibold text-foreground">{children}</strong>,
+                                    a: ({ href, children }) => (
+                                      <a href={href} className="text-accent hover:underline inline-flex items-center gap-1">
+                                        {children}
+                                        <ExternalLink className="w-3 h-3" />
+                                      </a>
+                                    ),
+                                    code: ({ children }) => (
+                                      <code className="px-1.5 py-0.5 rounded bg-muted text-sm font-mono">{children}</code>
+                                    ),
+                                  }}
+                                >
+                                  {msg.content}
+                                </ReactMarkdown>
+                              ) : (
+                                <div className="flex items-center gap-2 text-muted-foreground">
+                                  <Loader2 className="w-4 h-4 animate-spin" />
+                                  <span className="text-sm">Thinking...</span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Action buttons for assistant messages */}
+                        {msg.content && !isLoading && (
+                          <div className="flex items-center gap-1 pl-10">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => copyMessage(i)}
+                              className="h-7 px-2 text-xs text-muted-foreground hover:text-foreground"
+                            >
+                              {copiedIndex === i ? (
+                                <><Check className="w-3 h-3 mr-1" /> Copied</>
+                              ) : (
+                                <><Copy className="w-3 h-3 mr-1" /> Copy</>
+                              )}
+                            </Button>
+                            {i === messages.length - 1 && (
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={regenerate}
+                                className="h-7 px-2 text-xs text-muted-foreground hover:text-foreground"
+                              >
+                                <RotateCcw className="w-3 h-3 mr-1" /> Rewrite
+                              </Button>
+                            )}
+                          </div>
+                        )}
+                      </div>
                     )}
-                    <div className={`relative max-w-[85%] ${
-                      msg.role === "user"
-                        ? "bg-foreground text-background px-3 py-2 rounded-2xl rounded-br-sm"
-                        : ""
-                    }`}>
-                      {msg.role === "assistant" ? (
-                        <NovaResponseCard
-                          content={msg.content || "..."}
-                          timestamp={new Date(msg.timestamp)}
-                          confidence="high"
-                          baselineDays={14}
-                          isStreaming={isLoading && i === messages.length - 1 && !msg.content}
-                          onCopy={() => copyMessage(i)}
-                          onRegenerate={i === messages.length - 1 && !isLoading ? regenerate : undefined}
-                          isCopied={copiedIndex === i}
-                          showActions={true}
-                        />
-                      ) : (
-                        <p className="text-sm leading-relaxed">{msg.content}</p>
-                      )}
-                    </div>
                   </div>
                 ))}
-
-                {isLoading && messages[messages.length - 1]?.content === "" && (
-                  <div className="flex gap-3">
-                    <div className="w-7 h-7 rounded-full bg-accent/10 flex items-center justify-center">
-                      <Loader2 className="w-3.5 h-3.5 text-accent animate-spin" />
-                    </div>
-                    <div className="flex gap-1 items-center">
-                      <span className="w-1.5 h-1.5 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                      <span className="w-1.5 h-1.5 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                      <span className="w-1.5 h-1.5 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-                    </div>
-                  </div>
-                )}
-
-                {/* Quick suggestions */}
-                {messages.length === 1 && (
-                  <div className="pt-2 space-y-2">
-                    <p className="text-xs text-muted-foreground">Quick questions</p>
-                    <div className="flex flex-wrap gap-2">
-                      {QUICK_SUGGESTIONS.map((s, i) => (
-                        <Button
-                          key={i}
-                          variant="outline"
-                          size="sm"
-                          className="text-xs h-auto py-1.5 px-3"
-                          onClick={() => handleSend(s)}
-                          disabled={isLoading}
-                        >
-                          {s}
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
                 <div ref={messagesEndRef} />
               </div>
             </div>
+          )}
 
-
-            {/* Input */}
-            <div className="border-t border-border/50 p-3">
-              <div className="flex gap-2 items-end">
-                <Textarea
-                  ref={textareaRef}
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  placeholder="Ask about products, protocols..."
-                  disabled={isLoading}
-                  className="flex-1 resize-none min-h-[40px] max-h-[120px] text-sm"
-                  rows={1}
-                />
-                <Button
-                  size="icon"
-                  onClick={() => handleSend()}
-                  disabled={isLoading || !message.trim()}
-                  className="h-10 w-10"
-                >
-                  {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
-                </Button>
+          {/* Input Area - Perplexity style */}
+          <div className="border-t border-border/30 bg-background p-4">
+            <div className="max-w-2xl mx-auto">
+              <div 
+                className={cn(
+                  "relative rounded-2xl transition-all duration-200",
+                  "bg-muted/40 border",
+                  isFocused 
+                    ? "border-accent/50 shadow-lg shadow-accent/5" 
+                    : "border-border/50 hover:border-border"
+                )}
+              >
+                <div className="flex items-end gap-2 p-3">
+                  <textarea
+                    ref={textareaRef}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    onFocus={() => setIsFocused(true)}
+                    onBlur={() => setIsFocused(false)}
+                    placeholder="Ask follow-up..."
+                    disabled={isLoading}
+                    rows={1}
+                    className={cn(
+                      "flex-1 resize-none bg-transparent border-0",
+                      "py-2 px-1 text-sm placeholder:text-muted-foreground/50",
+                      "focus:outline-none focus:ring-0",
+                      "disabled:opacity-50",
+                      "min-h-[40px] max-h-[120px]"
+                    )}
+                  />
+                  <Button
+                    onClick={() => handleSend()}
+                    disabled={!message.trim() || isLoading}
+                    size="icon"
+                    className={cn(
+                      "h-9 w-9 rounded-xl flex-shrink-0",
+                      "bg-accent text-accent-foreground hover:bg-accent/90",
+                      "disabled:opacity-30"
+                    )}
+                  >
+                    {isLoading ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <ArrowUp className="w-4 h-4" />
+                    )}
+                  </Button>
+                </div>
               </div>
-              <p className="text-[10px] text-muted-foreground text-center mt-2">
-                Nova helps with product questions, not medical advice
+              <p className="text-[10px] text-muted-foreground/50 text-center mt-2">
+                Nova may make mistakes. Verify important information.
               </p>
             </div>
-          </>
-        )}
+          </div>
+        </div>
       </SheetContent>
     </Sheet>
   );
