@@ -19,7 +19,7 @@ const platformBlocks = [
     id: "cognitive-data",
     label: "Data Layer",
     name: "Cognitive Data Layer",
-    description: "Connect any wearable, calendar, or productivity tool. We normalise signals from 40+ sources into a unified cognitive model.",
+    description: "Ingest data from 40+ wearable integrations, calendars, and productivity tools. Normalised signals into a unified cognitive model.",
     icon: Database,
     link: "/solutions/data-layer",
     color: "from-blue-500/20 to-cyan-500/20"
@@ -28,7 +28,7 @@ const platformBlocks = [
     id: "state-engine",
     label: "Intelligence",
     name: "Cognitive State Engine",
-    description: "Raw biometrics become actionable intelligence. Readiness scores, cognitive load, recovery tracking—interpreted in real time.",
+    description: "Raw biometrics become actionable intelligence. Readiness scores, cognitive load, and capacity tracking—interpreted in real time.",
     icon: Brain,
     link: "/solutions/state-engine",
     color: "from-purple-500/20 to-pink-500/20"
@@ -116,8 +116,8 @@ const Index = () => {
     <>
       <SEO 
         title="NeuroState® | Cognitive Performance Infrastructure for Organisations"
-        description="The system of record for cognitive capacity. Predictive intelligence, risk visibility, and financial attribution for enterprise-scale human performance."
-        keywords="cognitive performance infrastructure, enterprise wellness platform, AI performance analytics, workforce optimisation, burnout prevention, predictive intelligence, Nova AI, cognitive capacity management"
+        description="Enterprise SaaS platform for cognitive performance analytics. Predictive intelligence, risk visibility, and financial attribution for workforce optimisation."
+        keywords="cognitive performance SaaS, enterprise analytics platform, AI performance insights, workforce optimisation, burnout prevention, predictive intelligence, Nova AI, B2B cognitive analytics"
       />
       <OrganizationStructuredData />
       <SoftwareApplicationStructuredData />
@@ -280,7 +280,7 @@ const Index = () => {
                 {/* Desktop/Tablet Grid */}
                 <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
                   {[
-                    { step: "01", title: "Connect", desc: "Link wearables, calendars, and work tools. Setup takes minutes.", icon: Database },
+                    { step: "01", title: "Connect", desc: "Integrate wearables, calendars, and work tools. Setup takes minutes.", icon: Database },
                     { step: "02", title: "Interpret", desc: "AI transforms raw data into cognitive intelligence.", icon: Brain },
                     { step: "03", title: "Forecast", desc: "See capacity shifts and risk patterns before they materialise.", icon: TrendingUp },
                     { step: "04", title: "Act", desc: "Receive contextual interventions with measurable returns.", icon: Zap }
@@ -308,7 +308,7 @@ const Index = () => {
                 {/* Mobile - Compact horizontal cards */}
                 <div className="md:hidden space-y-2">
                   {[
-                    { step: "01", title: "Connect", desc: "Link wearables, calendars, and work tools. Setup takes minutes.", icon: Database },
+                    { step: "01", title: "Connect", desc: "Integrate wearables, calendars, and work tools. Setup takes minutes.", icon: Database },
                     { step: "02", title: "Interpret", desc: "AI transforms raw data into cognitive intelligence.", icon: Brain },
                     { step: "03", title: "Forecast", desc: "See capacity shifts and risk patterns before they materialise.", icon: TrendingUp },
                     { step: "04", title: "Act", desc: "Receive contextual interventions with measurable returns.", icon: Zap }
@@ -730,14 +730,14 @@ const Index = () => {
                   Connect everything. See everything.
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-xl mx-auto">
-                  40+ integrations across wearables, calendars, and productivity tools—all normalised into a single cognitive model.
+                  40+ integrations across wearables, calendars, and productivity tools—all normalised into a single cognitive model. We don't sell hardware; we connect to what your team already uses.
                 </p>
               </ScrollReveal>
 
               {/* Integration categories */}
               <div className="grid md:grid-cols-4 gap-4 mb-8">
                 {[
-                  { category: "Wearables", items: ["Oura", "Whoop", "Apple Watch", "Garmin"], count: "15+" },
+                  { category: "Wearable Integrations", items: ["Oura", "Whoop", "Apple Watch", "Garmin"], count: "15+" },
                   { category: "Calendars", items: ["Google", "Outlook", "Apple"], count: "3" },
                   { category: "Productivity", items: ["Slack", "Teams", "Notion"], count: "12+" },
                   { category: "HR Systems", items: ["Workday", "BambooHR", "SAP"], count: "10+" }

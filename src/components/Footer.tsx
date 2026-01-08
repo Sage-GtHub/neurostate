@@ -26,8 +26,8 @@ export const Footer = () => {
     setIsLoading(true);
     
     setTimeout(() => {
-      toast.success("Thanks for signing up!", {
-        description: "Your 10% off code is on its way to your inbox.",
+      toast.success("Thanks for subscribing!", {
+        description: "You'll receive our latest insights on workforce performance.",
       });
       setEmail("");
       setIsLoading(false);
@@ -37,9 +37,9 @@ export const Footer = () => {
   const footerLinks = {
     platform: [
       { name: "Nova AI", href: "/nova/overview" },
-      { name: "Supplements", href: null, disabled: true },
-      { name: "Devices", href: null, disabled: true },
-      { name: "Shop All", href: null, disabled: true },
+      { name: "Solutions", href: "/solutions" },
+      { name: "Industries", href: "/industries" },
+      { name: "Integrations", href: "/solutions/data-layer" },
     ],
     company: [
       { name: "About", href: "/about" },
@@ -47,14 +47,14 @@ export const Footer = () => {
       { name: "Contact", href: "/contact" },
       { name: "Partnerships", href: "/partnerships" },
     ],
-    support: [
+    resources: [
       { name: "FAQ", href: "/faq" },
-      { name: "Shipping", href: "/shipping" },
-      { name: "Order Tracking", href: "/track-order" },
-      { name: "Rewards", href: "/rewards" },
+      { name: "Documentation", href: "/resources" },
+      { name: "Case Studies", href: "/enterprise/case-studies" },
+      { name: "ROI Calculator", href: "/industries" },
     ],
     account: [
-      { name: "Team Dashboard", href: "/team" },
+      { name: "Team Dashboard", href: "/team-dashboard" },
       { name: "My Dashboard", href: "/dashboard" },
       { name: "Sign In", href: "/auth" },
     ],
@@ -78,7 +78,7 @@ export const Footer = () => {
                 <span className="text-xs font-medium tracking-tight text-background/90">Neurostate</span>
               </Link>
               <p className="text-background/50 text-[11px] leading-relaxed">
-                The AI operating system for human performance. Cognitive forecasting, precision supplements, and neuromodulation.
+                Enterprise cognitive performance infrastructure. Predictive analytics, AI-driven insights, and workforce optimisation for modern organisations.
               </p>
             </div>
 
@@ -86,7 +86,7 @@ export const Footer = () => {
             <div className="flex-1 lg:max-w-sm lg:ml-auto space-y-4">
               <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Newsletter</p>
               <p className="text-background/60 text-xs">
-                Get 10% off your first order.
+                Insights on cognitive performance and workforce analytics.
               </p>
               <form onSubmit={handleNewsletterSignup} className="flex gap-2">
                 <Input
@@ -116,16 +116,10 @@ export const Footer = () => {
               <ul className="space-y-3">
                 {footerLinks.platform.map((link) => (
                   <li key={link.name}>
-                    {link.disabled ? (
-                      <span className="text-xs text-background/40 cursor-default">
-                        {link.name}
-                      </span>
-                    ) : (
-                      <Link to={link.href!} className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-colors">
-                        {link.name}
-                        <ArrowUpRight className="w-2.5 h-2.5 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
-                      </Link>
-                    )}
+                    <Link to={link.href} className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-colors">
+                      {link.name}
+                      <ArrowUpRight className="w-2.5 h-2.5 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -146,9 +140,9 @@ export const Footer = () => {
             </div>
 
             <div className="space-y-5">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Support</p>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Resources</p>
               <ul className="space-y-3">
-                {footerLinks.support.map((link) => (
+                {footerLinks.resources.map((link) => (
                   <li key={link.name}>
                     <Link to={link.href} className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-colors">
                       {link.name}
