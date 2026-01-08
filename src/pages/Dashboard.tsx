@@ -146,11 +146,11 @@ export default function Dashboard() {
               { icon: Calendar, label: "Subscriptions", value: subscriptions.filter(s => s.status === "active").length },
               { icon: Award, label: "Points", value: pointsBalance, action: () => navigate("/rewards") },
             ].map((stat, i) => (
-              <button 
-                key={i} 
-                onClick={stat.action}
-                className="group p-6 rounded-3xl bg-white border border-foreground/5 hover:border-foreground/10 hover:shadow-lg hover:shadow-foreground/5 transition-all duration-300 text-left"
-              >
+                <button 
+                  key={i} 
+                  onClick={stat.action}
+                  className="group p-6 rounded-3xl bg-card border border-foreground/5 hover:border-foreground/10 hover:shadow-lg hover:shadow-foreground/5 transition-all duration-300 text-left"
+                >
                 <stat.icon className="w-4 h-4 text-foreground/40 mb-5 group-hover:text-foreground/60 transition-colors" />
                 <p className="text-3xl font-medium text-foreground mb-1">{stat.value}</p>
                 <p className="text-[11px] text-foreground/40">{stat.label}</p>
@@ -167,7 +167,7 @@ export default function Dashboard() {
             </TabsList>
 
             <TabsContent value="orders">
-              <div className="rounded-3xl bg-white border border-foreground/5 p-8">
+              <div className="rounded-3xl bg-card border border-foreground/5 p-8">
                 <h2 className="text-sm font-medium text-foreground mb-8">Order History</h2>
                 {orders.length === 0 ? (
                   <div className="text-center py-16">
@@ -199,7 +199,7 @@ export default function Dashboard() {
             </TabsContent>
 
             <TabsContent value="subscriptions">
-              <div className="rounded-3xl bg-white border border-foreground/5 p-8">
+              <div className="rounded-3xl bg-card border border-foreground/5 p-8">
                 <h2 className="text-sm font-medium text-foreground mb-8">Subscriptions</h2>
                 {subscriptions.length === 0 ? (
                   <div className="text-center py-16">
@@ -237,7 +237,7 @@ export default function Dashboard() {
             </TabsContent>
 
             <TabsContent value="profile">
-              <div className="rounded-3xl bg-white border border-foreground/5 p-8">
+              <div className="rounded-3xl bg-card border border-foreground/5 p-8">
                 <h2 className="text-sm font-medium text-foreground mb-8">Profile</h2>
                 <div className="space-y-5">
                   <div>

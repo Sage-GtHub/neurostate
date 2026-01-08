@@ -17,11 +17,11 @@ const Shipping = () => {
         description="Fast UK delivery within 2-3 days, international shipping, and 30-day money-back guarantee. Free standard delivery on orders over £50."
         keywords="NeuroState delivery, UK shipping, international delivery, returns policy, money back guarantee, free shipping UK"
       />
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-background">
         <Header />
         <main className="flex-1">
           {/* Hero Section */}
-          <section className="bg-muted/30 py-16">
+          <section className="bg-card/50 py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">

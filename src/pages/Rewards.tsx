@@ -166,7 +166,7 @@ export default function Rewards() {
           </div>
 
           {/* Points Balance */}
-          <div className="p-8 mb-12 bg-white rounded-3xl border border-foreground/5">
+          <div className="p-8 mb-12 bg-card rounded-3xl border border-foreground/5">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 mb-3">Your Balance</p>
@@ -195,7 +195,7 @@ export default function Rewards() {
                 {rewards.map((reward) => {
                   const canRedeem = pointsBalance >= reward.points_required;
                   return (
-                    <div key={reward.id} className="p-6 bg-white rounded-3xl border border-foreground/5 hover:border-foreground/10 transition-all">
+                    <div key={reward.id} className="p-6 bg-card rounded-3xl border border-foreground/5 hover:border-foreground/10 transition-all">
                       <div className="flex items-start justify-between mb-5">
                         <Badge variant="outline" className="text-[9px] rounded-full border-foreground/10">{reward.points_required} pts</Badge>
                         {reward.reward_type === 'discount' && reward.discount_percentage && (
@@ -231,7 +231,7 @@ export default function Rewards() {
 
             <TabsContent value="redemptions" className="space-y-4">
               {redemptions.length === 0 ? (
-                <div className="p-16 text-center bg-white rounded-3xl border border-foreground/5">
+                <div className="p-16 text-center bg-card rounded-3xl border border-foreground/5">
                   <div className="w-12 h-12 rounded-full bg-foreground/5 flex items-center justify-center mx-auto mb-5">
                     <Gift className="h-5 w-5 text-foreground/30" />
                   </div>
@@ -239,7 +239,7 @@ export default function Rewards() {
                 </div>
               ) : (
                 redemptions.map((redemption) => (
-                  <div key={redemption.id} className="p-6 bg-white rounded-3xl border border-foreground/5">
+                  <div key={redemption.id} className="p-6 bg-card rounded-3xl border border-foreground/5">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
@@ -269,14 +269,14 @@ export default function Rewards() {
 
             <TabsContent value="history" className="space-y-4">
               {pointsHistory.length === 0 ? (
-                <div className="p-16 text-center bg-white rounded-3xl border border-foreground/5">
+                <div className="p-16 text-center bg-card rounded-3xl border border-foreground/5">
                   <div className="w-12 h-12 rounded-full bg-foreground/5 flex items-center justify-center mx-auto mb-5">
                     <TrendingUp className="h-5 w-5 text-foreground/30" />
                   </div>
                   <p className="text-xs text-foreground/40">No history yet</p>
                 </div>
               ) : (
-                <div className="bg-white rounded-3xl border border-foreground/5 divide-y divide-foreground/5">
+                <div className="bg-card rounded-3xl border border-foreground/5 divide-y divide-foreground/5">
                   {pointsHistory.map((transaction) => (
                     <div key={transaction.id} className="p-5 flex items-center justify-between hover:bg-foreground/[0.02] transition-colors">
                       <div className="flex items-center gap-4">
