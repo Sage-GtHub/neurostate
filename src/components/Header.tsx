@@ -324,14 +324,15 @@ export const Header = () => {
               </DropdownMenu>
             )}
             
-            {/* Get In Touch - Coral CTA (non-clickable) */}
-            <div 
-              className="h-8 px-5 text-[11px] font-medium bg-primary text-primary-foreground rounded-full flex items-center cursor-default"
+            {/* Get In Touch - Coral CTA */}
+            <Link
+              to="/contact"
+              className="h-8 px-5 text-[11px] font-medium bg-primary text-primary-foreground rounded-full flex items-center hover:bg-primary/90 transition-colors"
             >
               <span className="relative z-10 flex items-center gap-1.5">
                 Get In Touch
               </span>
-            </div>
+            </Link>
           </div>
 
           {/* Mobile Menu Only */}
