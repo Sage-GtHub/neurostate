@@ -123,7 +123,7 @@ export default function NovaSettings() {
           <div className="max-w-2xl mx-auto space-y-6">
             
             {/* Profile */}
-            <div className="p-6 bg-white rounded-3xl border border-foreground/5">
+            <div className="p-6 bg-card rounded-3xl border border-foreground/5">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-10 h-10 rounded-full bg-foreground/5 flex items-center justify-center">
                   <User className="w-4 h-4 text-foreground/60" />
@@ -172,7 +172,7 @@ export default function NovaSettings() {
             <NotificationSettings />
 
             {/* Preferences */}
-            <div className="p-6 bg-white rounded-3xl border border-foreground/5">
+            <div className="p-6 bg-card rounded-3xl border border-foreground/5">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-10 h-10 rounded-full bg-foreground/5 flex items-center justify-center">
                   <Bell className="w-4 h-4 text-foreground/60" />
@@ -204,7 +204,7 @@ export default function NovaSettings() {
             </div>
 
             {/* Data & Privacy */}
-            <div className="p-6 bg-white rounded-3xl border border-foreground/5">
+            <div className="p-6 bg-card rounded-3xl border border-foreground/5">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-10 h-10 rounded-full bg-foreground/5 flex items-center justify-center">
                   <Shield className="w-4 h-4 text-foreground/60" />
@@ -242,7 +242,7 @@ export default function NovaSettings() {
             </div>
 
             {/* Sign Out */}
-            <div className="p-6 bg-white rounded-3xl border border-foreground/5">
+            <div className="p-6 bg-card rounded-3xl border border-foreground/5">
               <button 
                 onClick={handleSignOut}
                 className="flex items-center gap-2 text-xs text-foreground/60 hover:text-foreground transition-colors"

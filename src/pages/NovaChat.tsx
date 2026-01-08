@@ -313,7 +313,7 @@ export default function NovaChat() {
             disabled={isLoading}
             className={cn(
               "flex items-center gap-2 px-4 py-2.5 rounded-full text-[11px]",
-              "bg-white text-foreground/60 border border-foreground/5",
+              "bg-card text-foreground/60 border border-foreground/5",
               "hover:bg-foreground/5 hover:text-foreground hover:border-foreground/10",
               "transition-all duration-200",
               "disabled:opacity-50"
