@@ -48,23 +48,12 @@ interface ChatThread {
   updatedAt: string;
 }
 
-// Perplexity-style typing indicator
+// Basic spinner typing indicator
 function TypingIndicator() {
   return (
-    <div className="flex items-center gap-1.5 py-2">
-      <div className="flex items-center gap-1">
-        {[0, 1, 2].map((i) => (
-          <span
-            key={i}
-            className="w-2 h-2 rounded-full bg-accent/70"
-            style={{
-              animation: 'typingDot 1.4s ease-in-out infinite',
-              animationDelay: `${i * 0.2}s`
-            }}
-          />
-        ))}
-      </div>
-      <span className="text-xs text-muted-foreground ml-2">Thinking...</span>
+    <div className="flex items-center gap-2 py-2">
+      <Loader2 className="w-4 h-4 animate-spin text-foreground/50" />
+      <span className="text-xs text-foreground/40">Thinking...</span>
     </div>
   );
 }
@@ -178,11 +167,7 @@ export default function NovaChat() {
     setMessages(prev => [...prev, { 
       role: "assistant", 
       content: "", 
-      timestamp: new Date(),
-      sources: [
-        { title: "Huberman Lab", type: "article", confidence: "high" },
-        { title: "PubMed Central", type: "study", confidence: "high" },
-      ]
+      timestamp: new Date()
     }]);
 
     while (true) {
@@ -590,39 +575,6 @@ export default function NovaChat() {
                                 <TypingIndicator />
                               )}
                               
-                              {/* Enhanced source citation display */}
-                              {message.sources && message.sources.length > 0 && message.content && (
-                                <div className="pt-2 border-t border-border/20">
-                                  <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                                    <ExternalLink className="w-3 h-3" />
-                                    Sources ({message.sources.length})
-                                  </p>
-                                  <div className="flex flex-wrap gap-2">
-                                    {message.sources.map((source, i) => (
-                                      <a
-                                        key={i}
-                                        href={source.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={cn(
-                                          "flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[10px]",
-                                          "border transition-all duration-200",
-                                          source.confidence === "high" 
-                                            ? "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20 hover:bg-green-500/20"
-                                            : "bg-accent/10 text-accent border-accent/20 hover:bg-accent/20",
-                                          source.url && "cursor-pointer"
-                                        )}
-                                      >
-                                        <span className="font-medium">{source.title}</span>
-                                        {source.type && (
-                                          <span className="text-[8px] uppercase opacity-60">{source.type}</span>
-                                        )}
-                                        {source.url && <ExternalLink className="w-2.5 h-2.5" />}
-                                      </a>
-                                    ))}
-                                  </div>
-                                </div>
-                              )}
                               
                               {message.content && (
                                 <div className="flex items-center gap-2 pt-1">

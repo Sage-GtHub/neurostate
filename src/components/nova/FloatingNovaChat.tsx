@@ -14,7 +14,7 @@ import {
   PanelLeftClose, 
   Trash2, 
   MessageSquare,
-  ExternalLink
+  Loader2
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
@@ -27,7 +27,6 @@ interface Message {
   role: "user" | "assistant";
   content: string;
   timestamp: string;
-  sources?: Array<{ title: string; type?: "study" | "article"; url?: string }>;
 }
 
 interface Conversation {
@@ -45,49 +44,12 @@ const QUICK_PROMPTS = [
   "Tell me about Nova AI",
 ];
 
-// Perplexity-style typing indicator
+// Basic spinner typing indicator
 function TypingIndicator() {
   return (
-    <div className="flex items-center gap-1.5 py-2">
-      <div className="flex items-center gap-1">
-        {[0, 1, 2].map((i) => (
-          <span
-            key={i}
-            className="w-1.5 h-1.5 rounded-full bg-accent/70"
-            style={{
-              animation: 'typingDot 1.4s ease-in-out infinite',
-              animationDelay: `${i * 0.2}s`
-            }}
-          />
-        ))}
-      </div>
-      <span className="text-[10px] text-muted-foreground ml-1.5">Thinking...</span>
-    </div>
-  );
-}
-
-// Source citation component
-function SourcePills({ sources }: { sources: Message['sources'] }) {
-  if (!sources?.length) return null;
-  
-  return (
-    <div className="flex flex-wrap gap-1.5 mt-2">
-      {sources.map((source, i) => (
-        <a
-          key={i}
-          href={source.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={cn(
-            "flex items-center gap-1 px-2 py-1 rounded-md text-[9px]",
-            "bg-accent/10 text-accent border border-accent/20",
-            source.url && "hover:bg-accent/20 cursor-pointer"
-          )}
-        >
-          <span className="max-w-[100px] truncate">{source.title}</span>
-          {source.url && <ExternalLink className="w-2.5 h-2.5" />}
-        </a>
-      ))}
+    <div className="flex items-center gap-2 py-2">
+      <Loader2 className="w-3.5 h-3.5 animate-spin text-muted-foreground" />
+      <span className="text-[10px] text-muted-foreground">Thinking...</span>
     </div>
   );
 }
@@ -208,17 +170,13 @@ export function FloatingNovaChat() {
       throw new Error('Failed to get response');
     }
 
-    // Add empty assistant message with sources
+    // Add empty assistant message
     updateConversation(conv => ({
       ...conv,
       messages: [...conv.messages, { 
         role: "assistant", 
         content: "", 
-        timestamp: new Date().toISOString(),
-        sources: [
-          { title: "NeuroState Docs", type: "article" },
-          { title: "Platform Guide", type: "article" },
-        ]
+        timestamp: new Date().toISOString()
       }],
     }));
 
@@ -549,9 +507,6 @@ export function FloatingNovaChat() {
                                   <TypingIndicator />
                                 )}
                               </div>
-                              
-                              {/* Source citations */}
-                              {msg.sources && msg.content && <SourcePills sources={msg.sources} />}
                             </div>
                           </div>
                           

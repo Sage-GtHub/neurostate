@@ -29,23 +29,12 @@ const QUICK_SUGGESTIONS = [
   "What integrations do you support?",
 ];
 
-// Perplexity-style typing indicator with animated dots
+// Basic spinner typing indicator
 function TypingIndicator() {
   return (
-    <div className="flex items-center gap-1.5 py-2">
-      <div className="flex items-center gap-1">
-        {[0, 1, 2].map((i) => (
-          <span
-            key={i}
-            className="w-2 h-2 rounded-full bg-accent/70"
-            style={{
-              animation: 'typingDot 1.4s ease-in-out infinite',
-              animationDelay: `${i * 0.2}s`
-            }}
-          />
-        ))}
-      </div>
-      <span className="text-sm text-muted-foreground ml-2">Searching...</span>
+    <div className="flex items-center gap-2 py-2">
+      <Loader2 className="w-4 h-4 animate-spin text-accent/70" />
+      <span className="text-sm text-muted-foreground">Thinking...</span>
     </div>
   );
 }
