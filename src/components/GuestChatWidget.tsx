@@ -292,48 +292,48 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
       <SheetContent 
         side="right" 
         hideCloseButton 
-        className="w-full sm:w-[500px] md:w-[600px] p-0 flex flex-col h-full bg-background border-l border-border/30 overflow-hidden"
+        className="w-full sm:max-w-[500px] md:max-w-[600px] p-0 flex flex-col h-full bg-background border-l border-border/30 overflow-hidden"
       >
         {/* Conversation History Sidebar - Perplexity style */}
         <div 
           className={cn(
-            "absolute inset-y-0 left-0 w-64 bg-muted/30 border-r border-border/30 z-20",
+            "absolute inset-y-0 left-0 w-[85%] max-w-[280px] bg-muted/30 backdrop-blur-sm border-r border-border/30 z-20",
             "transform transition-transform duration-300 ease-out",
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           )}
         >
           <div className="flex flex-col h-full">
-            <div className="flex items-center justify-between p-3 border-b border-border/30">
-              <span className="text-sm font-medium">History</span>
+            <div className="flex items-center justify-between p-4 border-b border-border/30">
+              <span className="text-base font-medium">History</span>
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setSidebarOpen(false)}
-                className="h-7 w-7 text-muted-foreground hover:text-foreground"
+                className="h-10 w-10 text-muted-foreground hover:text-foreground touch-manipulation"
               >
-                <PanelLeftClose className="h-4 w-4" />
+                <PanelLeftClose className="h-5 w-5" />
               </Button>
             </div>
-            <div className="flex-1 overflow-y-auto py-2">
+            <div className="flex-1 overflow-y-auto py-2 overscroll-contain">
               {conversations.length === 0 ? (
-                <p className="text-xs text-muted-foreground text-center py-8">No conversations yet</p>
+                <p className="text-sm text-muted-foreground text-center py-8">No conversations yet</p>
               ) : (
                 <div className="space-y-1 px-2">
                   {conversations.map((conv) => (
                     <div
                       key={conv.id}
                       className={cn(
-                        "group flex items-center gap-2 px-3 py-2.5 rounded-lg cursor-pointer transition-colors",
+                        "group flex items-center gap-3 px-3 py-3.5 rounded-xl cursor-pointer transition-colors touch-manipulation",
                         conv.id === currentConversationId 
                           ? "bg-accent/10 text-foreground" 
-                          : "hover:bg-muted/50 text-muted-foreground hover:text-foreground"
+                          : "active:bg-muted/70 text-muted-foreground"
                       )}
                       onClick={() => switchConversation(conv.id)}
                     >
-                      <MessageSquare className="h-4 w-4 flex-shrink-0" />
+                      <MessageSquare className="h-5 w-5 flex-shrink-0" />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm truncate">{conv.title}</p>
-                        <p className="text-[10px] text-muted-foreground">
+                        <p className="text-xs text-muted-foreground mt-0.5">
                           {format(new Date(conv.updatedAt), "MMM d, h:mm a")}
                         </p>
                       </div>
@@ -344,26 +344,26 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                           e.stopPropagation();
                           deleteConversation(conv.id);
                         }}
-                        className="h-6 w-6 opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-destructive"
+                        className="h-9 w-9 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 text-muted-foreground hover:text-destructive touch-manipulation"
                       >
-                        <Trash2 className="h-3 w-3" />
+                        <Trash2 className="h-4 w-4" />
                       </Button>
                     </div>
                   ))}
                 </div>
               )}
             </div>
-            <div className="p-3 border-t border-border/30">
+            <div className="p-4 border-t border-border/30 pb-safe">
               <Button
                 variant="outline"
-                size="sm"
+                size="default"
                 onClick={() => {
                   createNewConversation();
                   setSidebarOpen(false);
                 }}
-                className="w-full text-xs"
+                className="w-full h-11 text-sm touch-manipulation"
               >
-                <Plus className="h-3 w-3 mr-2" />
+                <Plus className="h-4 w-4 mr-2" />
                 New Thread
               </Button>
             </div>
@@ -373,43 +373,43 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
         {/* Overlay when sidebar is open */}
         {sidebarOpen && (
           <div 
-            className="absolute inset-0 bg-background/60 z-10"
+            className="absolute inset-0 bg-background/60 backdrop-blur-sm z-10"
             onClick={() => setSidebarOpen(false)}
           />
         )}
 
-        {/* Minimal Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-border/30 relative z-0">
+        {/* Mobile-optimised Header */}
+        <div className="flex items-center justify-between px-3 sm:px-4 py-3 border-b border-border/30 relative z-0 min-h-[56px]">
           <div className="flex items-center gap-2">
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={() => setSidebarOpen(true)}
-              className="h-8 w-8 text-muted-foreground hover:text-foreground"
+              className="h-10 w-10 text-muted-foreground hover:text-foreground touch-manipulation"
             >
-              <PanelLeftOpen className="h-4 w-4" />
+              <PanelLeftOpen className="h-5 w-5" />
             </Button>
-            <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center">
-              <span className="text-xs font-bold text-white">N</span>
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center">
+              <span className="text-sm font-bold text-white">N</span>
             </div>
-            <span className="font-medium text-sm">Nova</span>
+            <span className="font-medium text-base">Nova</span>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-0.5">
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={createNewConversation}
-              className="h-8 w-8 text-muted-foreground hover:text-foreground"
+              className="h-10 w-10 text-muted-foreground hover:text-foreground touch-manipulation"
             >
-              <Plus className="h-4 w-4" />
+              <Plus className="h-5 w-5" />
             </Button>
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={() => onOpenChange(false)}
-              className="h-8 w-8 text-muted-foreground hover:text-foreground"
+              className="h-10 w-10 text-muted-foreground hover:text-foreground touch-manipulation"
             >
-              <X className="h-4 w-4" />
+              <X className="h-5 w-5" />
             </Button>
           </div>
         </div>
@@ -418,29 +418,29 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
         <div className="flex-1 flex flex-col overflow-hidden">
           {!hasMessages ? (
             /* Empty State - Perplexity style centered */
-            <div className="flex-1 flex flex-col items-center justify-center px-6">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center mb-6">
-                <span className="text-xl font-bold text-white">N</span>
+            <div className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6">
+              <div className="w-14 h-14 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center mb-5 sm:mb-6">
+                <span className="text-2xl sm:text-xl font-bold text-white">N</span>
               </div>
-              <h2 className="text-xl font-semibold text-foreground mb-2">
+              <h2 className="text-xl sm:text-xl font-semibold text-foreground mb-2 text-center">
                 How can I help you?
               </h2>
-              <p className="text-sm text-muted-foreground text-center mb-8 max-w-sm">
+              <p className="text-sm text-muted-foreground text-center mb-6 sm:mb-8 max-w-sm px-2">
                 Ask me anything about NeuroState's enterprise cognitive performance platform.
               </p>
               
-              {/* Quick suggestions grid */}
-              <div className="grid grid-cols-2 gap-2 w-full max-w-md">
+              {/* Quick suggestions - stack on mobile, grid on larger screens */}
+              <div className="flex flex-col sm:grid sm:grid-cols-2 gap-2 w-full max-w-md px-2">
                 {QUICK_SUGGESTIONS.map((suggestion, i) => (
                   <button
                     key={i}
                     onClick={() => handleSend(suggestion)}
                     disabled={isLoading}
                     className={cn(
-                      "text-left px-4 py-3 rounded-xl text-sm",
+                      "text-left px-4 py-3.5 sm:py-3 rounded-xl text-sm",
                       "bg-muted/50 border border-border/50",
-                      "hover:bg-muted hover:border-border",
-                      "transition-all duration-200",
+                      "active:bg-muted active:border-border sm:hover:bg-muted sm:hover:border-border",
+                      "transition-all duration-200 touch-manipulation",
                       "disabled:opacity-50 disabled:cursor-not-allowed"
                     )}
                   >
@@ -451,29 +451,29 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
             </div>
           ) : (
             /* Messages Area */
-            <div className="flex-1 overflow-y-auto">
-              <div className="max-w-2xl mx-auto px-4 py-6 space-y-6">
+            <div className="flex-1 overflow-y-auto overscroll-contain">
+              <div className="max-w-2xl mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-5 sm:space-y-6">
                 {messages.map((msg, i) => (
-                  <div key={i} className="space-y-4">
+                  <div key={i} className="space-y-3 sm:space-y-4">
                     {msg.role === "user" ? (
                       /* User message - Perplexity style */
-                      <div className="flex items-start gap-3">
-                        <div className="w-7 h-7 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                      <div className="flex items-start gap-2.5 sm:gap-3">
+                        <div className="w-8 h-8 sm:w-7 sm:h-7 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
                           <span className="text-xs font-medium">You</span>
                         </div>
-                        <div className="flex-1 pt-1">
-                          <p className="text-foreground font-medium">{msg.content}</p>
+                        <div className="flex-1 pt-1.5 sm:pt-1">
+                          <p className="text-foreground font-medium text-[15px] sm:text-sm leading-relaxed">{msg.content}</p>
                         </div>
                       </div>
                     ) : (
                       /* Assistant message - Perplexity style with sources look */
-                      <div className="space-y-3">
-                        <div className="flex items-start gap-3">
-                          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center flex-shrink-0">
-                            <span className="text-[10px] font-bold text-white">N</span>
+                      <div className="space-y-2.5 sm:space-y-3">
+                        <div className="flex items-start gap-2.5 sm:gap-3">
+                          <div className="w-8 h-8 sm:w-7 sm:h-7 rounded-lg bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center flex-shrink-0">
+                            <span className="text-xs sm:text-[10px] font-bold text-white">N</span>
                           </div>
-                          <div className="flex-1 pt-1">
-                            <div className="prose prose-sm dark:prose-invert max-w-none">
+                          <div className="flex-1 pt-1 sm:pt-1">
+                            <div className="prose prose-sm dark:prose-invert max-w-none text-[15px] sm:text-sm leading-relaxed">
                               {msg.content ? (
                                 <ReactMarkdown
                                   components={{
@@ -504,17 +504,17 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                         
                         {/* Action buttons for assistant messages */}
                         {msg.content && !isLoading && (
-                          <div className="flex items-center gap-1 pl-10">
+                          <div className="flex items-center gap-0.5 sm:gap-1 pl-10 sm:pl-10">
                             <Button
                               variant="ghost"
                               size="sm"
                               onClick={() => copyMessage(i)}
-                              className="h-7 px-2 text-xs text-muted-foreground hover:text-foreground"
+                              className="h-9 sm:h-7 px-3 sm:px-2 text-xs text-muted-foreground hover:text-foreground touch-manipulation"
                             >
                               {copiedIndex === i ? (
-                                <><Check className="w-3 h-3 mr-1" /> Copied</>
+                                <><Check className="w-4 h-4 sm:w-3 sm:h-3 mr-1.5 sm:mr-1" /> Copied</>
                               ) : (
-                                <><Copy className="w-3 h-3 mr-1" /> Copy</>
+                                <><Copy className="w-4 h-4 sm:w-3 sm:h-3 mr-1.5 sm:mr-1" /> Copy</>
                               )}
                             </Button>
                             {i === messages.length - 1 && (
@@ -522,9 +522,9 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                                 variant="ghost"
                                 size="sm"
                                 onClick={regenerate}
-                                className="h-7 px-2 text-xs text-muted-foreground hover:text-foreground"
+                                className="h-9 sm:h-7 px-3 sm:px-2 text-xs text-muted-foreground hover:text-foreground touch-manipulation"
                               >
-                                <RotateCcw className="w-3 h-3 mr-1" /> Rewrite
+                                <RotateCcw className="w-4 h-4 sm:w-3 sm:h-3 mr-1.5 sm:mr-1" /> Rewrite
                               </Button>
                             )}
                           </div>
@@ -538,8 +538,8 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
             </div>
           )}
 
-          {/* Input Area - Perplexity style */}
-          <div className="border-t border-border/30 bg-background p-4">
+          {/* Input Area - Mobile optimised */}
+          <div className="border-t border-border/30 bg-background p-3 sm:p-4 pb-safe">
             <div className="max-w-2xl mx-auto">
               <div 
                 className={cn(
@@ -547,10 +547,10 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                   "bg-muted/40 border",
                   isFocused 
                     ? "border-accent/50 shadow-lg shadow-accent/5" 
-                    : "border-border/50 hover:border-border"
+                    : "border-border/50"
                 )}
               >
-                <div className="flex items-end gap-2 p-3">
+                <div className="flex items-end gap-2 p-2.5 sm:p-3">
                   <textarea
                     ref={textareaRef}
                     value={message}
@@ -563,10 +563,10 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                     rows={1}
                     className={cn(
                       "flex-1 resize-none bg-transparent border-0",
-                      "py-2 px-1 text-sm placeholder:text-muted-foreground/50",
+                      "py-2.5 sm:py-2 px-1 text-base sm:text-sm placeholder:text-muted-foreground/50",
                       "focus:outline-none focus:ring-0",
                       "disabled:opacity-50",
-                      "min-h-[40px] max-h-[120px]"
+                      "min-h-[44px] sm:min-h-[40px] max-h-[120px]"
                     )}
                   />
                   <Button
@@ -574,20 +574,20 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                     disabled={!message.trim() || isLoading}
                     size="icon"
                     className={cn(
-                      "h-9 w-9 rounded-xl flex-shrink-0",
+                      "h-11 w-11 sm:h-9 sm:w-9 rounded-xl flex-shrink-0 touch-manipulation",
                       "bg-accent text-accent-foreground hover:bg-accent/90",
                       "disabled:opacity-30"
                     )}
                   >
                     {isLoading ? (
-                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <Loader2 className="w-5 h-5 sm:w-4 sm:h-4 animate-spin" />
                     ) : (
-                      <ArrowUp className="w-4 h-4" />
+                      <ArrowUp className="w-5 h-5 sm:w-4 sm:h-4" />
                     )}
                   </Button>
                 </div>
               </div>
-              <p className="text-[10px] text-muted-foreground/50 text-center mt-2">
+              <p className="text-[10px] text-muted-foreground/50 text-center mt-2 hidden sm:block">
                 Nova may make mistakes. Verify important information.
               </p>
             </div>
