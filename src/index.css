@@ -1440,3 +1440,15 @@ input, textarea {
     padding-bottom: calc(80px + env(safe-area-inset-bottom, 0));
   }
 }
+
+/* Perplexity-style typing indicator dots animation */
+@keyframes typingDot {
+  0%, 60%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

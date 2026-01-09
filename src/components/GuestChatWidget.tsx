@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { Send, Loader2, X, Plus, ArrowUp, RotateCcw, Copy, Check, ExternalLink } from "lucide-react";
+import { X, Plus, ArrowUp, RotateCcw, Copy, Check, ExternalLink, PanelLeftOpen, PanelLeftClose, Trash2, MessageSquare, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import ReactMarkdown from "react-markdown";
+import { format } from "date-fns";
 
 type Message = {
   role: "user" | "assistant";
@@ -28,6 +29,27 @@ const QUICK_SUGGESTIONS = [
   "What integrations do you support?",
 ];
 
+// Perplexity-style typing indicator with animated dots
+function TypingIndicator() {
+  return (
+    <div className="flex items-center gap-1.5 py-2">
+      <div className="flex items-center gap-1">
+        {[0, 1, 2].map((i) => (
+          <span
+            key={i}
+            className="w-2 h-2 rounded-full bg-accent/70"
+            style={{
+              animation: 'typingDot 1.4s ease-in-out infinite',
+              animationDelay: `${i * 0.2}s`
+            }}
+          />
+        ))}
+      </div>
+      <span className="text-sm text-muted-foreground ml-2">Searching...</span>
+    </div>
+  );
+}
+
 interface GuestChatWidgetProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -40,6 +62,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [isFocused, setIsFocused] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { toast: showToast } = useToast();
@@ -245,6 +268,23 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
     }
   };
 
+  const deleteConversation = (convId: string) => {
+    setConversations(prev => prev.filter(c => c.id !== convId));
+    if (currentConversationId === convId) {
+      const remaining = conversations.filter(c => c.id !== convId);
+      if (remaining.length > 0) {
+        setCurrentConversationId(remaining[0].id);
+      } else {
+        createNewConversation();
+      }
+    }
+  };
+
+  const switchConversation = (convId: string) => {
+    setCurrentConversationId(convId);
+    setSidebarOpen(false);
+  };
+
   const hasMessages = messages.length > 0;
 
   return (
@@ -252,11 +292,103 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
       <SheetContent 
         side="right" 
         hideCloseButton 
-        className="w-full sm:w-[500px] md:w-[600px] p-0 flex flex-col h-full bg-background border-l border-border/30"
+        className="w-full sm:w-[500px] md:w-[600px] p-0 flex flex-col h-full bg-background border-l border-border/30 overflow-hidden"
       >
+        {/* Conversation History Sidebar - Perplexity style */}
+        <div 
+          className={cn(
+            "absolute inset-y-0 left-0 w-64 bg-muted/30 border-r border-border/30 z-20",
+            "transform transition-transform duration-300 ease-out",
+            sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          )}
+        >
+          <div className="flex flex-col h-full">
+            <div className="flex items-center justify-between p-3 border-b border-border/30">
+              <span className="text-sm font-medium">History</span>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setSidebarOpen(false)}
+                className="h-7 w-7 text-muted-foreground hover:text-foreground"
+              >
+                <PanelLeftClose className="h-4 w-4" />
+              </Button>
+            </div>
+            <div className="flex-1 overflow-y-auto py-2">
+              {conversations.length === 0 ? (
+                <p className="text-xs text-muted-foreground text-center py-8">No conversations yet</p>
+              ) : (
+                <div className="space-y-1 px-2">
+                  {conversations.map((conv) => (
+                    <div
+                      key={conv.id}
+                      className={cn(
+                        "group flex items-center gap-2 px-3 py-2.5 rounded-lg cursor-pointer transition-colors",
+                        conv.id === currentConversationId 
+                          ? "bg-accent/10 text-foreground" 
+                          : "hover:bg-muted/50 text-muted-foreground hover:text-foreground"
+                      )}
+                      onClick={() => switchConversation(conv.id)}
+                    >
+                      <MessageSquare className="h-4 w-4 flex-shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm truncate">{conv.title}</p>
+                        <p className="text-[10px] text-muted-foreground">
+                          {format(new Date(conv.updatedAt), "MMM d, h:mm a")}
+                        </p>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          deleteConversation(conv.id);
+                        }}
+                        className="h-6 w-6 opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-destructive"
+                      >
+                        <Trash2 className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className="p-3 border-t border-border/30">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  createNewConversation();
+                  setSidebarOpen(false);
+                }}
+                className="w-full text-xs"
+              >
+                <Plus className="h-3 w-3 mr-2" />
+                New Thread
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Overlay when sidebar is open */}
+        {sidebarOpen && (
+          <div 
+            className="absolute inset-0 bg-background/60 z-10"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
+
         {/* Minimal Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-border/30">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-border/30 relative z-0">
           <div className="flex items-center gap-2">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => setSidebarOpen(true)}
+              className="h-8 w-8 text-muted-foreground hover:text-foreground"
+            >
+              <PanelLeftOpen className="h-4 w-4" />
+            </Button>
             <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center">
               <span className="text-xs font-bold text-white">N</span>
             </div>
@@ -364,10 +496,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                                   {msg.content}
                                 </ReactMarkdown>
                               ) : (
-                                <div className="flex items-center gap-2 text-muted-foreground">
-                                  <Loader2 className="w-4 h-4 animate-spin" />
-                                  <span className="text-sm">Thinking...</span>
-                                </div>
+                                <TypingIndicator />
                               )}
                             </div>
                           </div>
