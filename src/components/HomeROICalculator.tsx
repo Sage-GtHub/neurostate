@@ -176,14 +176,14 @@ export function HomeROICalculator() {
           value={teamSize}
           onValueChange={setTeamSize}
           min={10}
-          max={500}
+          max={5000}
           step={10}
           className="mb-2"
         />
         <div className="flex justify-between text-[10px] text-muted-foreground">
           <span>10</span>
-          <span>250</span>
-          <span>500</span>
+          <span>2,500</span>
+          <span>5,000</span>
         </div>
       </div>
 
