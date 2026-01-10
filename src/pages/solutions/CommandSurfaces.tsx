@@ -72,13 +72,13 @@ export default function CommandSurfaces() {
   return (
     <>
       <SEO
-        title="Command Surfaces by Role | Tailored Dashboards | NeuroState"
+        title="Dashboards | Role-Based Analytics | NeuroState"
         description="One system, different truths. Role-based interfaces for individuals, managers, HR leaders, and executives—each seeing the cognitive intelligence they need."
         keywords="role-based dashboards, executive analytics, manager insights, HR workforce analytics, team health visibility, organisational intelligence, privacy-first design"
       />
       <SolutionPageStructuredData
         solution={{
-          name: "Command Surfaces by Role",
+          name: "Dashboards",
           description: "One system, different truths. Tailored interfaces for individuals, managers, HR leaders, and executives—each seeing the cognitive intelligence they need.",
           url: "https://neurostate.co.uk/solutions/command-surfaces",
           features: ["Individual contributor dashboard", "Manager insights", "HR analytics", "Executive reporting", "Privacy-first design"]
@@ -87,8 +87,8 @@ export default function CommandSurfaces() {
       <BreadcrumbStructuredData
         items={[
           { name: "Home", url: "https://neurostate.co.uk" },
-          { name: "Solutions", url: "https://neurostate.co.uk/solutions" },
-          { name: "Command Surfaces", url: "https://neurostate.co.uk/solutions/command-surfaces" }
+          { name: "Platform", url: "https://neurostate.co.uk/solutions" },
+          { name: "Dashboards", url: "https://neurostate.co.uk/solutions/command-surfaces" }
         ]}
       />
       <div className="min-h-screen bg-background">
@@ -103,7 +103,7 @@ export default function CommandSurfaces() {
                 </div>
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Layer 5 of 6</span>
                 <h1 className="text-3xl md:text-4xl font-normal text-foreground tracking-tight mt-2 mb-4">
-                  Command Surfaces by Role
+                  Dashboards
                 </h1>
                 <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                   One system. Different truths. Role-specific interfaces that deliver the right information to the right people—with privacy protected at every layer.

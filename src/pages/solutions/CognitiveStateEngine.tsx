@@ -47,13 +47,13 @@ export default function CognitiveStateEngine() {
   return (
     <>
       <SEO
-        title="Cognitive State Engine | Real-Time Intelligence | NeuroState"
+        title="State Intelligence | Real-Time Cognitive Analysis | NeuroState"
         description="Transform raw biometric data into meaningful cognitive states: readiness, load, recovery debt, stress volatility, and burnout risk scores in real-time."
         keywords="cognitive state monitoring, readiness score, burnout risk prediction, recovery debt tracking, stress volatility, real-time analytics, workforce intelligence"
       />
       <SolutionPageStructuredData
         solution={{
-          name: "Cognitive State Engine",
+          name: "State Intelligence",
           description: "Real-time interpretation of raw signals into meaningful cognitive states: readiness, load, recovery debt, stress volatility, and burnout risk.",
           url: "https://neurostate.co.uk/solutions/state-engine",
           features: ["Readiness scoring", "Cognitive load monitoring", "Recovery debt tracking", "Stress volatility analysis", "Burnout risk prediction"]
@@ -62,8 +62,8 @@ export default function CognitiveStateEngine() {
       <BreadcrumbStructuredData
         items={[
           { name: "Home", url: "https://neurostate.co.uk" },
-          { name: "Solutions", url: "https://neurostate.co.uk/solutions" },
-          { name: "Cognitive State Engine", url: "https://neurostate.co.uk/solutions/state-engine" }
+          { name: "Platform", url: "https://neurostate.co.uk/solutions" },
+          { name: "State Intelligence", url: "https://neurostate.co.uk/solutions/state-engine" }
         ]}
       />
       <div className="min-h-screen bg-background">
@@ -78,7 +78,7 @@ export default function CognitiveStateEngine() {
                 </div>
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Layer 2 of 6</span>
                 <h1 className="text-3xl md:text-4xl font-normal text-foreground tracking-tight mt-2 mb-4">
-                  Cognitive State Engine
+                  State Intelligence
                 </h1>
                 <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                   Raw data is noise. The Cognitive State Engine transforms signals into intelligence—interpretable states that drive decisions. This is where NeuroState moves from tracking to understanding.
@@ -269,7 +269,7 @@ export default function CognitiveStateEngine() {
                         </div>
                         <div>
                           <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Next: Layer 3</span>
-                          <h3 className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">Prediction & Simulation</h3>
+                          <h3 className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">Forecasting</h3>
                           <p className="text-xs text-muted-foreground">Where state becomes forecast</p>
                         </div>
                       </div>

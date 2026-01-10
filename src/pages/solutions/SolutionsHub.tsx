@@ -13,7 +13,7 @@ import { DataFlowVisualization } from "@/components/DataFlowVisualization";
 const solutionLayers = [
   {
     icon: Database,
-    title: "Cognitive Data Layer",
+    title: "Data Integration",
     description: "Unified signal ingestion from wearables, behaviour, and context. NeuroState connects to the tools teams already use and normalises disparate data streams into a single coherent model.",
     href: "/solutions/data-layer",
     color: "hsl(220, 100%, 55%)",
@@ -21,7 +21,7 @@ const solutionLayers = [
   },
   {
     icon: Cpu,
-    title: "Cognitive State Engine",
+    title: "State Intelligence",
     description: "Real-time interpretation of raw signals into meaningful cognitive states: readiness, load, recovery debt, stress volatility, and burnout risk. This is where data becomes intelligence.",
     href: "/solutions/state-engine",
     color: "hsl(270, 100%, 55%)",
@@ -29,7 +29,7 @@ const solutionLayers = [
   },
   {
     icon: TrendingUp,
-    title: "Prediction & Simulation",
+    title: "Forecasting",
     description: "Near-term forecasting and scenario modelling. NeuroState doesn't just show you what is happening—it tells you what is likely to happen next, and what you can do about it.",
     href: "/solutions/prediction",
     color: "hsl(156, 65%, 45%)",
@@ -37,7 +37,7 @@ const solutionLayers = [
   },
   {
     icon: Zap,
-    title: "Action & Control Layer",
+    title: "Interventions",
     description: "Low-friction interventions that drive outcomes. Personal coaching prompts, workload timing recommendations, manager nudges, and preventative interventions before breakdown occurs.",
     href: "/solutions/action-layer",
     color: "hsl(45, 100%, 50%)",
@@ -45,7 +45,7 @@ const solutionLayers = [
   },
   {
     icon: Users,
-    title: "Command Surfaces by Role",
+    title: "Dashboards",
     description: "One system, different truths. Tailored interfaces for individuals seeking personal optimisation, managers overseeing team health, and executives monitoring organisational risk.",
     href: "/solutions/command-surfaces",
     color: "hsl(0, 70%, 55%)",
@@ -53,7 +53,7 @@ const solutionLayers = [
   },
   {
     icon: Calculator,
-    title: "Economic & ROI Layer",
+    title: "ROI Analytics",
     description: "Cognitive risk translated to business value. See the cost of burnout, the price of underperformance, and the return on intervention—in pounds, not platitudes.",
     href: "/solutions/roi-layer",
     color: "hsl(280, 70%, 55%)",
@@ -76,29 +76,29 @@ export default function SolutionsHub() {
   return (
     <>
       <SEO
-        title="Solutions | Cognitive Performance Infrastructure | NeuroState"
+        title="Platform | Cognitive Performance Infrastructure | NeuroState"
         description="NeuroState is the system of record for cognitive capacity. Six layers of infrastructure transforming biometric signals into predictive intelligence and measurable ROI."
-        keywords="cognitive performance infrastructure, cognitive data layer, state engine, burnout prediction, ROI measurement, workforce analytics, enterprise wellness platform"
+        keywords="cognitive performance infrastructure, data integration, state intelligence, forecasting, interventions, dashboards, ROI analytics, enterprise wellness platform"
       />
       <SolutionPageStructuredData
         solution={{
-          name: "NeuroState Solutions",
+          name: "NeuroState Platform",
           description: "Six layers of cognitive infrastructure transforming biometric signals into predictive intelligence and measurable ROI.",
           url: "https://neurostate.co.uk/solutions",
           features: [
-            "Cognitive Data Layer",
-            "Cognitive State Engine",
-            "Prediction & Simulation",
-            "Action & Control Layer",
-            "Command Surfaces by Role",
-            "Economic & ROI Layer"
+            "Data Integration",
+            "State Intelligence",
+            "Forecasting",
+            "Interventions",
+            "Dashboards",
+            "ROI Analytics"
           ]
         }}
       />
       <BreadcrumbStructuredData
         items={[
           { name: "Home", url: "https://neurostate.co.uk" },
-          { name: "Solutions", url: "https://neurostate.co.uk/solutions" }
+          { name: "Platform", url: "https://neurostate.co.uk/solutions" }
         ]}
       />
       <div className="min-h-screen bg-background relative overflow-hidden">
