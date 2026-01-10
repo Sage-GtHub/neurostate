@@ -106,12 +106,12 @@ export const Header = () => {
   ];
 
   const solutions = [
-    { label: "Cognitive Data Layer", href: "/solutions/data-layer", desc: "Capture & unify signals" },
-    { label: "Cognitive State Engine", href: "/solutions/state-engine", desc: "Interpret in real-time" },
-    { label: "Prediction & Simulation", href: "/solutions/prediction", desc: "Forecast what's next" },
-    { label: "Action & Control Layer", href: "/solutions/action-layer", desc: "Deliver interventions" },
-    { label: "Command Surfaces", href: "/solutions/command-surfaces", desc: "Dashboards by role" },
-    { label: "ROI & Analytics", href: "/solutions/roi-layer", desc: "Measure business impact" },
+    { label: "Data Integration", href: "/solutions/data-layer", desc: "Capture & unify signals" },
+    { label: "State Intelligence", href: "/solutions/state-engine", desc: "Interpret in real-time" },
+    { label: "Forecasting", href: "/solutions/prediction", desc: "Forecast what's next" },
+    { label: "Interventions", href: "/solutions/action-layer", desc: "Deliver interventions" },
+    { label: "Dashboards", href: "/solutions/command-surfaces", desc: "Dashboards by role" },
+    { label: "ROI Analytics", href: "/solutions/roi-layer", desc: "Measure business impact" },
   ];
 
   const mobileLinks = [
@@ -122,12 +122,12 @@ export const Header = () => {
 
   const mobileSolutions = [
     { label: "Platform Overview", href: "/solutions" },
-    { label: "Cognitive Data Layer", href: "/solutions/data-layer" },
-    { label: "Cognitive State Engine", href: "/solutions/state-engine" },
-    { label: "Prediction & Simulation", href: "/solutions/prediction" },
-    { label: "Action & Control Layer", href: "/solutions/action-layer" },
-    { label: "Command Surfaces", href: "/solutions/command-surfaces" },
-    { label: "ROI & Analytics", href: "/solutions/roi-layer" },
+    { label: "Data Integration", href: "/solutions/data-layer" },
+    { label: "State Intelligence", href: "/solutions/state-engine" },
+    { label: "Forecasting", href: "/solutions/prediction" },
+    { label: "Interventions", href: "/solutions/action-layer" },
+    { label: "Dashboards", href: "/solutions/command-surfaces" },
+    { label: "ROI Analytics", href: "/solutions/roi-layer" },
   ];
 
   return (
