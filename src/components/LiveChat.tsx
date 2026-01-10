@@ -61,7 +61,7 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "I'm NeuroState's AI customer service agent. How can I help you today?",
+      content: "Hi there! How can I help you today?",
       timestamp: new Date(),
     },
   ]);
@@ -309,7 +309,7 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
   const clearHistory = () => {
     const firstMessage: Message = {
       role: "assistant",
-      content: "I'm NeuroState's AI customer service agent. How can I help you today?",
+      content: "Hi there! How can I help you today?",
       timestamp: new Date(),
     };
     setMessages([firstMessage]);
