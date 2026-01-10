@@ -334,9 +334,9 @@ export default function BlogPost() {
               Ready to experience the cognitive performance system?
             </h3>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Link to="/shop">
+              <Link to="/contact">
                 <button className="bg-ivory text-carbon hover:bg-mist px-8 py-3 text-sm font-medium transition-all duration-300">
-                  Shop products
+                  Get in touch
                 </button>
               </Link>
               <Link to="/nova/overview">

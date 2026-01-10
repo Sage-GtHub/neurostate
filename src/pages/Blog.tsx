@@ -178,9 +178,9 @@ export default function Blog() {
                 Move beyond reading about performance. Start optimising it.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
-                <Link to="/shop">
+                <Link to="/contact">
                   <Button size="sm" className="rounded-full h-10 px-6 text-xs bg-foreground text-background hover:bg-foreground/90">
-                    Shop products
+                    Get in touch
                   </Button>
                 </Link>
                 <Link to="/nova/overview">

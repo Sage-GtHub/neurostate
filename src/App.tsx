@@ -23,7 +23,6 @@ import NovaGoals from "./pages/NovaGoals";
 import NovaSettingsAdvanced from "./pages/NovaSettingsAdvanced";
 
 import FAQ from "./pages/FAQ";
-import HowToUse from "./pages/HowToUse";
 import Ambassador from "./pages/Ambassador";
 import Partnerships from "./pages/Partnerships";
 import Auth from "./pages/Auth";
@@ -132,7 +131,6 @@ const AnimatedRoutes = () => {
             <Route path="/learning-path/:id" element={<LearningPathDetail />} />
             <Route path="/learning-path/:id" element={<LearningPathDetail />} />
             <Route path="/faq" element={<FAQ />} />
-            <Route path="/guides" element={<HowToUse />} />
             <Route path="/ambassador" element={<Ambassador />} />
             <Route path="/partnerships" element={<Partnerships />} />
             <Route path="/auth" element={<Auth />} />
@@ -145,7 +143,6 @@ const AnimatedRoutes = () => {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/resources" element={<HowToUse />} />
             <Route path="/nova/overview" element={<NovaOverview />} />
             <Route path="/nova/chat" element={<ProtectedRoute><NovaChat /></ProtectedRoute>} />
             <Route path="/nova" element={<ProtectedRoute><Nova /></ProtectedRoute>} />

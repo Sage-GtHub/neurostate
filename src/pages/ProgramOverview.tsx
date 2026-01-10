@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 import { Download, CheckCircle2, TrendingUp, Users, Shield, Target, FileText, Layers, Calculator, Award } from "lucide-react";
 import { CorporateROICalculator } from "@/components/CorporateROICalculator";
 import { CorporateComparisonTable } from "@/components/CorporateComparisonTable";
-import { CustomerSuccessMetrics } from "@/components/CustomerSuccessMetrics";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export default function ProgramOverview() {
@@ -100,21 +99,6 @@ export default function ProgramOverview() {
           </div>
         </section>
 
-        {/* Customer Success Metrics Dashboard */}
-        <section className="py-20 bg-gradient-to-b from-pearl to-ivory">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-            <div className="text-center mb-12">
-              <h2 className="text-large-display font-bold mb-4 text-carbon">
-                Live Customer Success Metrics
-              </h2>
-              <p className="text-body text-stone max-w-2xl mx-auto">
-                Real-time adoption rates, satisfaction scores, and team performance insights from our enterprise partners.
-              </p>
-            </div>
-
-            <CustomerSuccessMetrics />
-          </div>
-        </section>
 
         {/* Demo Video Section */}
         <section className="py-20 bg-ivory">
@@ -238,11 +222,11 @@ export default function ProgramOverview() {
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-carbon/5 flex items-center justify-center">
                   <Shield className="w-8 h-8 text-carbon" />
                 </div>
-                <h3 className="text-xl font-semibold text-carbon">Premium Product Access</h3>
+                <h3 className="text-xl font-semibold text-carbon">Enterprise Security</h3>
                 <p className="text-sm text-stone leading-relaxed">
-                  Discounted supplements, red light devices, and recovery products for your team.
+                  SOC 2 compliant, GDPR ready, and built with enterprise-grade security for your team's data.
                 </p>
-                <div className="text-xs text-ash">20-40% corporate discount</div>
+                <div className="text-xs text-ash">End-to-end encryption</div>
               </div>
             </div>
           </div>
