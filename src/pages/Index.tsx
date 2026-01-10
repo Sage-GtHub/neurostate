@@ -62,15 +62,6 @@ const platformBlocks = [
     color: "from-green-500/20 to-emerald-500/20"
   },
   {
-    id: "nova-ai",
-    label: "AI Assistant",
-    name: "Nova AI",
-    description: "Personal cognitive intelligence. Contextual nudges, timing recommendations, and adaptive protocols. Delivered when they matter.",
-    icon: Sparkles,
-    link: "/nova/overview",
-    color: "from-indigo-500/20 to-violet-500/20"
-  },
-  {
     id: "dashboards",
     label: "Surfaces",
     name: "Dashboards",
