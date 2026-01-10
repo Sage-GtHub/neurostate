@@ -448,8 +448,8 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
                   <div className="flex items-center gap-2">
                     <Sparkles className="h-5 w-5 text-primary" />
                     <div>
-                      <DrawerTitle>NeuroState AI</DrawerTitle>
-                      <p className="text-xs text-muted-foreground">World-class customer service</p>
+                    <DrawerTitle>Sage</DrawerTitle>
+                      <p className="text-xs text-muted-foreground">NeuroState AI Assistant</p>
                     </div>
                   </div>
                   <Button
@@ -477,8 +477,8 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
                   <div className="flex items-center gap-2">
                     <Sparkles className="h-5 w-5 text-primary" />
                     <div>
-                      <DrawerTitle>NeuroState AI</DrawerTitle>
-                      <p className="text-xs text-muted-foreground">World-class customer service</p>
+                    <DrawerTitle>Sage</DrawerTitle>
+                      <p className="text-xs text-muted-foreground">NeuroState AI Assistant</p>
                     </div>
                   </div>
                   <Button
@@ -511,8 +511,8 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
                 <Sparkles className="h-5 w-5 text-primary" />
               </div>
               <div>
-                <SheetTitle>NeuroState AI</SheetTitle>
-                <p className="text-xs text-muted-foreground mt-0.5">World-class customer service</p>
+                <SheetTitle>Sage</SheetTitle>
+                <p className="text-xs text-muted-foreground mt-0.5">NeuroState AI Assistant</p>
               </div>
             </div>
             <Button
