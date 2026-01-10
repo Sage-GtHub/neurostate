@@ -335,7 +335,7 @@ export const WebsiteStructuredData = () => {
         "@type": "SearchAction",
         "target": {
           "@type": "EntryPoint",
-          "urlTemplate": "https://neurostate.co.uk/shop?search={search_term_string}"
+          "urlTemplate": "https://neurostate.co.uk/industries?search={search_term_string}"
         },
         "query-input": "required name=search_term_string"
       }
