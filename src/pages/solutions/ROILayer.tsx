@@ -20,23 +20,23 @@ const economicDimensions = [
       { label: "Productivity gap during ramp", value: "6-12 months" },
       { label: "Team impact multiplier", value: "1.3x per departure" },
     ],
-    calculation: "NeuroState quantifies your turnover exposure by combining current burnout trajectory with historical departure correlation. You see not just risk—but the pound value of that risk."
+    calculation: "NeuroState quantifies your turnover exposure by combining current burnout trajectory with historical departure correlation. You see not just risk, but the pound value of that risk."
   },
   { 
     icon: TrendingUp, 
     title: "Cognitive Underperformance", 
-    description: "Hidden productivity loss from suboptimal cognitive states never shows up in timesheets. But it's real. A team operating at 70% cognitive capacity isn't producing 70% of outcomes—the relationship is non-linear, especially for knowledge work.",
+    description: "Hidden productivity loss from suboptimal cognitive states never shows up in timesheets. But it's real. A team operating at 70% cognitive capacity isn't producing 70% of outcomes. The relationship is non-linear, especially for knowledge work.",
     metrics: [
       { label: "Focus loss impact", value: "12-18% output reduction" },
       { label: "Decision quality degradation", value: "2.3x error rate at low readiness" },
       { label: "Meeting effectiveness decline", value: "40% when fatigued" },
     ],
-    calculation: "NeuroState correlates cognitive metrics with performance indicators to model the hidden cost of operating below capacity. This becomes visible—and actionable."
+    calculation: "NeuroState correlates cognitive metrics with performance indicators to model the hidden cost of operating below capacity. This becomes visible, and actionable."
   },
   { 
     icon: Clock, 
     title: "Recovery Value Over Time", 
-    description: "Improving cognitive health isn't a one-time fix—it compounds. Teams that recover well perform better, stay longer, and create virtuous cycles of performance. This is the long-term value that justifies upfront investment.",
+    description: "Improving cognitive health isn't a one-time fix. It compounds. Teams that recover well perform better, stay longer, and create virtuous cycles of performance. This is the long-term value that justifies upfront investment.",
     metrics: [
       { label: "Readiness improvement trajectory", value: "+2-5 points/quarter" },
       { label: "Burnout risk reduction", value: "35-50% within 6 months" },
@@ -47,7 +47,7 @@ const economicDimensions = [
   { 
     icon: Target, 
     title: "Payback Period & ROI", 
-    description: "Clear investment returns that make the business case self-evident. NeuroState isn't sold on wellness benefits—it's sold on financial return. If we can't show ROI, we haven't done our job.",
+    description: "Clear investment returns that make the business case self-evident. NeuroState isn't sold on wellness benefits. It's sold on financial return. If we can't show ROI, we haven't done our job.",
     metrics: [
       { label: "Typical payback period", value: "4-8 months" },
       { label: "First-year ROI", value: "2-4x investment" },
@@ -58,7 +58,7 @@ const economicDimensions = [
 ];
 
 const reportingExamples = [
-  { title: "Monthly Executive Summary", description: "CCI trend, exposure reduction, intervention ROI—one page, board-ready" },
+  { title: "Monthly Executive Summary", description: "CCI trend, exposure reduction, intervention ROI. One page, board-ready" },
   { title: "Intervention Impact Report", description: "What we recommended, what was done, what changed, value recovered" },
   { title: "Quarterly Business Review", description: "Comprehensive analysis with department breakdown and forecast" },
   { title: "Budget Justification Package", description: "Everything finance needs to approve continued investment" },
@@ -69,13 +69,13 @@ export default function ROILayer() {
     <>
       <SEO
         title="ROI Analytics | Financial Attribution | NeuroState"
-        description="Translate cognitive risk into business value. See the cost of burnout, price of underperformance, and return on intervention—in pounds, not platitudes."
+        description="Translate cognitive risk into business value. See the cost of burnout, price of underperformance, and return on intervention. In pounds, not platitudes."
         keywords="wellness ROI, burnout cost calculation, cognitive performance ROI, workforce investment returns, turnover cost prevention, productivity loss attribution, business case wellness"
       />
       <SolutionPageStructuredData
         solution={{
           name: "ROI Analytics",
-          description: "Cognitive risk translated to business value. See the cost of burnout, the price of underperformance, and the return on intervention—in pounds, not platitudes.",
+          description: "Cognitive risk translated to business value. See the cost of burnout, the price of underperformance, and the return on intervention. In pounds, not platitudes.",
           url: "https://neurostate.co.uk/solutions/roi-layer",
           features: ["Burnout cost quantification", "Turnover exposure calculation", "Intervention ROI tracking", "Board-ready reporting", "Financial attribution"]
         }}
@@ -102,7 +102,7 @@ export default function ROILayer() {
                   ROI Analytics
                 </h1>
                 <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                  NeuroState translates cognitive risk into economic reality. This is where performance becomes measurable—and where cognitive infrastructure proves its value in pounds, not platitudes.
+                  NeuroState translates cognitive risk into economic reality. This is where performance becomes measurable, and where cognitive infrastructure proves its value in pounds, not platitudes.
                 </p>
                 
                 {/* Animated Data Flow Diagram */}
@@ -219,7 +219,7 @@ export default function ROILayer() {
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Accountability</span>
                 <h2 className="text-2xl font-normal text-foreground">Reports that prove value</h2>
                 <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                  Standard reports that make the business case undeniable—for the board, for finance, for anyone who asks "what did we get for this investment?"
+                  Standard reports that make the business case undeniable. For the board, for finance, for anyone who asks "what did we get for this investment?"
                 </p>
               </ScrollReveal>
 

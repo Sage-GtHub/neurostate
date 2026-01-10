@@ -100,10 +100,10 @@ export default function CognitiveDataLayer() {
                 </div>
                 <div className="prose prose-sm max-w-none text-muted-foreground">
                   <p className="leading-relaxed">
-                    Most organisations sit on a wealth of data that could reveal cognitive state—but it's fragmented across dozens of systems. Wearable data lives in consumer apps. Work patterns are buried in calendars and project tools. Contextual information is scattered across HR systems and communication platforms.
+                    Most organisations sit on a wealth of data that could reveal cognitive state, but it's fragmented across dozens of systems. Wearable data lives in consumer apps. Work patterns are buried in calendars and project tools. Contextual information is scattered across HR systems and communication platforms.
                   </p>
                   <p className="leading-relaxed">
-                    Without integration, this data is useless for understanding cognitive capacity. A low HRV reading means nothing without knowing someone has a deadline tomorrow. A spike in after-hours work is concerning—but only if it's sustained. Recovery debt only matters in the context of upcoming demands.
+                    Without integration, this data is useless for understanding cognitive capacity. A low HRV reading means nothing without knowing someone has a deadline tomorrow. A spike in after-hours work is concerning, but only if it's sustained. Recovery debt only matters in the context of upcoming demands.
                   </p>
                   <p className="leading-relaxed">
                     The Cognitive Data Layer solves this by creating a unified ingestion pipeline that normalises signals from any source into a common format, ready for interpretation by the Cognitive State Engine.
@@ -120,7 +120,7 @@ export default function CognitiveDataLayer() {
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Signal Taxonomy</span>
                 <h2 className="text-2xl font-normal text-foreground">Three categories of cognitive signal</h2>
                 <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-                  We ingest and normalise data across biometric, behavioural, and contextual dimensions. Each category provides a different lens on cognitive state—together, they create a complete picture.
+                  We ingest and normalise data across biometric, behavioural, and contextual dimensions. Each category provides a different lens on cognitive state. Together, they create a complete picture.
                 </p>
               </ScrollReveal>
 
@@ -212,7 +212,7 @@ export default function CognitiveDataLayer() {
                       <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-xs font-medium text-primary">3</div>
                       <h4 className="text-sm font-medium text-foreground">Unified Model</h4>
                     </div>
-                    <p className="text-xs text-muted-foreground">Normalised signals are combined into a unified cognitive data model—a single source of truth ready for the State Engine.</p>
+                    <p className="text-xs text-muted-foreground">Normalised signals are combined into a unified cognitive data model. A single source of truth ready for the State Engine.</p>
                   </div>
                 </motion.div>
               </div>
@@ -231,7 +231,7 @@ export default function CognitiveDataLayer() {
                   <div className="p-6 rounded-xl bg-muted/30 border border-border/50">
                     <Shield className="w-6 h-6 text-primary mb-3" />
                     <h4 className="text-sm font-medium text-foreground mb-2">End-to-end encryption</h4>
-                    <p className="text-xs text-muted-foreground">All data is encrypted in transit and at rest. We never store raw wearable data—only derived metrics.</p>
+                    <p className="text-xs text-muted-foreground">All data is encrypted in transit and at rest. We never store raw wearable data. Only derived metrics.</p>
                   </div>
                   <div className="p-6 rounded-xl bg-muted/30 border border-border/50">
                     <Server className="w-6 h-6 text-primary mb-3" />
@@ -255,7 +255,7 @@ export default function CognitiveDataLayer() {
                 <Layers className="w-12 h-12 text-primary mx-auto" />
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">Many signals. One coherent model.</h2>
                 <p className="text-sm text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                  Raw data from disparate sources is normalised into a unified cognitive data model. This model powers all downstream intelligence—from state interpretation to prediction to intervention. Without this foundation, everything else would be guesswork.
+                  Raw data from disparate sources is normalised into a unified cognitive data model. This model powers all downstream intelligence, from state interpretation to prediction to intervention. Without this foundation, everything else would be guesswork.
                 </p>
               </ScrollReveal>
             </div>

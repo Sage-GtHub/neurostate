@@ -18,7 +18,7 @@ const forecastTypes = [
     description: "Daily projections of team and individual cognitive capacity based on historical patterns, upcoming commitments, and current trajectory.",
     capabilities: [
       { name: "Readiness forecasts", detail: "Predicted cognitive capacity for each day, accounting for scheduled demands and recovery patterns." },
-      { name: "Burnout probability", detail: "Rolling risk score with trend direction—rising, falling, or stable." },
+      { name: "Burnout probability", detail: "Rolling risk score with trend direction: rising, falling, or stable." },
       { name: "Recovery trajectory", detail: "How quickly capacity will return if current patterns change." },
       { name: "Optimal scheduling", detail: "Which days and times are best for high-stakes work." },
     ],
@@ -35,7 +35,7 @@ const forecastTypes = [
       { name: "Team restructure simulation", detail: "How will capacity redistribute if you move people between teams?" },
       { name: "Intervention effectiveness", detail: "Predict the impact of recovery days, workload reductions, or policy changes." },
     ],
-    useCase: "Before committing to a Q4 deadline, leadership models the cognitive impact across Engineering. The simulation shows 40% burnout probability—they add two weeks and a recovery buffer."
+    useCase: "Before committing to a Q4 deadline, leadership models the cognitive impact across Engineering. The simulation shows 40% burnout probability. They add two weeks and a recovery buffer."
   },
 ];
 
@@ -56,7 +56,7 @@ export default function PredictionSimulation() {
       <SolutionPageStructuredData
         solution={{
           name: "Forecasting",
-          description: "Near-term forecasting and scenario modelling. NeuroState doesn't just show you what is happening—it tells you what is likely to happen next.",
+          description: "Near-term forecasting and scenario modelling. NeuroState doesn't just show you what is happening. It tells you what is likely to happen next.",
           url: "https://neurostate.co.uk/solutions/prediction",
           features: ["7-30 day forecasting", "Scenario modelling", "Deadline impact analysis", "Travel fatigue modelling", "Intervention effectiveness prediction"]
         }}
@@ -83,7 +83,7 @@ export default function PredictionSimulation() {
                   Forecasting
                 </h1>
                 <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                  NeuroState does not stop at visibility. It forecasts what is likely to happen next—and lets you model the impact of decisions before you make them. This is where understanding becomes foresight.
+                  NeuroState does not stop at visibility. It forecasts what is likely to happen next, and lets you model the impact of decisions before you make them. This is where understanding becomes foresight.
                 </p>
                 
                 {/* Animated Data Flow Diagram */}
@@ -108,13 +108,13 @@ export default function PredictionSimulation() {
                 </div>
                 <div className="prose prose-sm max-w-none text-muted-foreground">
                   <p className="leading-relaxed">
-                    Most cognitive visibility tools are rearview mirrors. They show you what happened yesterday—useful for understanding, but not for preventing. By the time you see burnout in historical data, someone has already resigned. By the time you notice a team is struggling, the project is already delayed.
+                    Most cognitive visibility tools are rearview mirrors. They show you what happened yesterday. Useful for understanding, but not for preventing. By the time you see burnout in historical data, someone has already resigned. By the time you notice a team is struggling, the project is already delayed.
                   </p>
                   <p className="leading-relaxed">
                     The Prediction & Simulation layer changes the timeline. Instead of reacting to problems, you anticipate them. Instead of hoping a deadline is realistic, you model its cognitive impact. Instead of guessing whether an intervention will work, you simulate its expected effect.
                   </p>
                   <p className="leading-relaxed">
-                    This is decision support grounded in evidence. Every forecast comes with confidence intervals. Every simulation is traceable to the data that informed it. This isn't crystal-ball guessing—it's statistical prediction with accountability.
+                    This is decision support grounded in evidence. Every forecast comes with confidence intervals. Every simulation is traceable to the data that informed it. This isn't crystal-ball guessing. It's statistical prediction with accountability.
                   </p>
                 </div>
               </ScrollReveal>

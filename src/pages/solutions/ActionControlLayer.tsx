@@ -14,7 +14,7 @@ const actionCategories = [
     icon: User,
     title: "Personal Coaching Prompts",
     target: "Individual",
-    description: "Timely, contextual nudges that guide individuals toward better decisions. These aren't generic wellness tips—they're calibrated to your current state, your patterns, and your upcoming demands.",
+    description: "Timely, contextual nudges that guide individuals toward better decisions. These aren't generic wellness tips. They're calibrated to your current state, your patterns, and your upcoming demands.",
     examples: [
       { trigger: "Low readiness + high-stakes meeting", action: "Suggest rescheduling or preparation strategy" },
       { trigger: "Accumulated recovery debt", action: "Recommend specific recovery protocol" },
@@ -27,7 +27,7 @@ const actionCategories = [
     icon: Clock,
     title: "Workload Timing Recommendations",
     target: "Individual & Team",
-    description: "Suggestions for when to schedule high-stakes work based on predicted cognitive capacity. Not just 'take a break'—specific guidance on optimal timing for different types of work.",
+    description: "Suggestions for when to schedule high-stakes work based on predicted cognitive capacity. Not just 'take a break'. Specific guidance on optimal timing for different types of work.",
     examples: [
       { trigger: "Complex decision required", action: "Schedule for predicted peak readiness window" },
       { trigger: "Creative work needed", action: "Block time when cognitive load is lowest" },
@@ -40,7 +40,7 @@ const actionCategories = [
     icon: Users,
     title: "Manager Nudges",
     target: "Team Leads",
-    description: "Alerts when team members may need support—without exposing individual data. Managers see risk signals and suggested actions, not personal details. Privacy is preserved while enabling intervention.",
+    description: "Alerts when team members may need support, without exposing individual data. Managers see risk signals and suggested actions, not personal details. Privacy is preserved while enabling intervention.",
     examples: [
       { trigger: "Team member approaching burnout threshold", action: "Private nudge to check in" },
       { trigger: "Workload imbalance detected", action: "Suggest redistribution strategy" },
@@ -53,7 +53,7 @@ const actionCategories = [
     icon: AlertTriangle,
     title: "Preventative Interventions",
     target: "Organisation",
-    description: "Early warnings that prevent breakdown before it happens—not after. Systemic interventions that address root causes rather than symptoms. This is where NeuroState prevents problems rather than documenting them.",
+    description: "Early warnings that prevent breakdown before it happens, not after. Systemic interventions that address root causes rather than symptoms. This is where NeuroState prevents problems rather than documenting them.",
     examples: [
       { trigger: "Department-wide stress pattern", action: "Recommend policy adjustment" },
       { trigger: "Seasonal burnout risk rising", action: "Suggest proactive recovery measures" },
@@ -109,7 +109,7 @@ export default function ActionControlLayer() {
                   Interventions
                 </h1>
                 <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                  NeuroState converts intelligence into clear, low-friction actions that drive measurable outcomes. This is where insight becomes intervention—and where the loop closes.
+                  NeuroState converts intelligence into clear, low-friction actions that drive measurable outcomes. This is where insight becomes intervention, and where the loop closes.
                 </p>
               </motion.div>
             </div>
@@ -131,7 +131,7 @@ export default function ActionControlLayer() {
                     The Action & Control Layer closes the gap between knowing and doing. Every piece of intelligence in NeuroState connects to a clear, actionable step. Personal coaching prompts arrive at the right moment. Manager nudges surface when intervention matters. Organisational recommendations come with ROI projections that justify the effort.
                   </p>
                   <p className="leading-relaxed">
-                    And critically, every action is tracked. When you follow a recommendation, we measure the outcome. Over time, the system learns what works for your organisation—making future recommendations more effective.
+                    And critically, every action is tracked. When you follow a recommendation, we measure the outcome. Over time, the system learns what works for your organisation, making future recommendations more effective.
                   </p>
                 </div>
               </ScrollReveal>
@@ -145,7 +145,7 @@ export default function ActionControlLayer() {
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Action Types</span>
                 <h2 className="text-2xl font-normal text-foreground">Four layers of intervention</h2>
                 <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-                  From personal nudges to organisational policy—each layer addresses a different scope of impact.
+                  From personal nudges to organisational policy, each layer addresses a different scope of impact.
                 </p>
               </ScrollReveal>
 
@@ -240,7 +240,7 @@ export default function ActionControlLayer() {
                     When you follow a NeuroState recommendation, we track what happens next. Did the coaching prompt lead to behaviour change? Did the manager nudge result in improved team metrics? Did the policy intervention reduce burnout risk?
                   </p>
                   <p className="leading-relaxed">
-                    This closed-loop approach serves two purposes. First, it creates accountability—you can see which interventions delivered value. Second, it improves the system over time. Recommendations that work get reinforced. Those that don't get refined or retired.
+                    This closed-loop approach serves two purposes. First, it creates accountability. You can see which interventions delivered value. Second, it improves the system over time. Recommendations that work get reinforced. Those that don't get refined or retired.
                   </p>
                 </div>
                 <div className="p-6 rounded-xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20">
