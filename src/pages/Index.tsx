@@ -53,15 +53,6 @@ const platformBlocks = [
     color: "from-rose-500/20 to-red-500/20"
   },
   {
-    id: "roi-analytics",
-    label: "Financial",
-    name: "ROI Analytics",
-    description: "Every metric ties to money. Revenue exposure, intervention returns, capacity value. Precision economics for cognitive performance.",
-    icon: Calculator,
-    link: "/solutions/roi-layer",
-    color: "from-green-500/20 to-emerald-500/20"
-  },
-  {
     id: "dashboards",
     label: "Surfaces",
     name: "Dashboards",
@@ -69,6 +60,15 @@ const platformBlocks = [
     icon: Layers,
     link: "/solutions/command-surfaces",
     color: "from-indigo-500/20 to-violet-500/20"
+  },
+  {
+    id: "roi-analytics",
+    label: "Financial",
+    name: "ROI Analytics",
+    description: "Every metric ties to money. Revenue exposure, intervention returns, capacity value. Precision economics for cognitive performance.",
+    icon: Calculator,
+    link: "/solutions/roi-layer",
+    color: "from-green-500/20 to-emerald-500/20"
   }
 ];
 
