@@ -563,6 +563,36 @@
     animation: shimmer 2s ease-in-out infinite;
   }
   
+  /* Skeleton shimmer effect for loading states */
+  .skeleton-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .skeleton-shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--foreground) / 0.04) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+  
+  /* Hide scrollbar utility */
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  
   .animate-glow-pulse {
     animation: glow-pulse 3s ease-in-out infinite;
   }

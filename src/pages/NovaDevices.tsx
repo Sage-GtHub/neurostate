@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
+import { NovaBreadcrumb } from "@/components/nova/NovaBreadcrumb";
+import { NovaSkeleton } from "@/components/nova/NovaSkeleton";
 import { RefreshCw, Plus, Loader2, Check, WifiOff } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
@@ -170,8 +172,9 @@ export default function NovaDevices() {
           </div>
 
           {isLoading && (
-            <div className="flex items-center justify-center py-16">
-              <Loader2 className="w-5 h-5 animate-spin text-accent" />
+            <div className="space-y-4">
+              <div className="w-20 h-3 rounded-full bg-foreground/5 skeleton-shimmer mb-4" />
+              <NovaSkeleton variant="list" />
             </div>
           )}
 
