@@ -17,36 +17,36 @@ import { useRef } from "react";
 // Building blocks - like Invisible's Neuron, Atomic, etc.
 const platformBlocks = [
   {
-    id: "cognitive-data",
+    id: "data-integration",
     label: "Data Layer",
-    name: "Cognitive Data Layer",
+    name: "Data Integration",
     description: "Ingest data from 40+ wearable integrations, calendars, and productivity tools. Normalised signals into a unified cognitive model.",
     icon: Database,
     link: "/solutions/data-layer",
     color: "from-blue-500/20 to-cyan-500/20"
   },
   {
-    id: "state-engine",
+    id: "state-intelligence",
     label: "Intelligence",
-    name: "Cognitive State Engine",
+    name: "State Intelligence",
     description: "Raw biometrics become actionable intelligence. Readiness scores, cognitive load, and capacity tracking, interpreted in real time.",
     icon: Brain,
     link: "/solutions/state-engine",
     color: "from-purple-500/20 to-pink-500/20"
   },
   {
-    id: "prediction",
+    id: "forecasting",
     label: "Forecasting",
-    name: "Prediction & Simulation",
+    name: "Forecasting",
     description: "See what's coming. 7, 14, and 30-day forecasts for capacity, intervention timing, and optimal performance windows.",
     icon: TrendingUp,
     link: "/solutions/prediction",
     color: "from-amber-500/20 to-orange-500/20"
   },
   {
-    id: "roi-layer",
+    id: "roi-analytics",
     label: "Financial",
-    name: "ROI Attribution",
+    name: "ROI Analytics",
     description: "Every metric ties to money. Revenue exposure, intervention returns, capacity value. Precision economics for cognitive performance.",
     icon: Calculator,
     link: "/solutions/roi-layer",
@@ -62,9 +62,9 @@ const platformBlocks = [
     color: "from-indigo-500/20 to-violet-500/20"
   },
   {
-    id: "command-surfaces",
+    id: "dashboards",
     label: "Surfaces",
-    name: "Command Surfaces",
+    name: "Dashboards",
     description: "One system, different views. Individuals see optimisation. Managers see team health. Executives see risk and exposure.",
     icon: Layers,
     link: "/solutions/command-surfaces",
