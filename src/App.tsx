@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { trackPageView } from "@/lib/analytics";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { CursorGlow } from "@/components/CursorGlow";
 
 import Index from "./pages/Index";
 import Nova from "./pages/Nova";
@@ -241,6 +242,7 @@ const AnimatedRoutes = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <CursorGlow />
       <Toaster />
       <Sonner position="top-center" />
       <BrowserRouter>

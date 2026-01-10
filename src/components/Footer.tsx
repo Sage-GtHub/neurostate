@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
 import logoIcon from "@/assets/neurostate-icon.png";
 
 export const Footer = () => {
@@ -111,67 +112,97 @@ export const Footer = () => {
 
           {/* Links Grid */}
           <div className="grid grid-cols-2 md:grid-cols-5 gap-12 md:gap-8 mb-20">
-            <div className="space-y-5">
+            <motion.div 
+              className="space-y-5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+            >
               <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Platform</p>
               <ul className="space-y-3">
                 {footerLinks.platform.map((link) => (
                   <li key={link.name}>
-                    <Link to={link.href} className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-colors">
+                    <Link to={link.href} className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-all duration-300 hover:translate-x-1">
                       {link.name}
                       <ArrowUpRight className="w-2.5 h-2.5 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
                     </Link>
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
 
-            <div className="space-y-5">
+            <motion.div 
+              className="space-y-5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.15 }}
+            >
               <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Company</p>
               <ul className="space-y-3">
                 {footerLinks.company.map((link) => (
                   <li key={link.name}>
-                    <Link to={link.href} className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-colors">
+                    <Link to={link.href} className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-all duration-300 hover:translate-x-1">
                       {link.name}
                       <ArrowUpRight className="w-2.5 h-2.5 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
                     </Link>
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
 
-            <div className="space-y-5">
+            <motion.div 
+              className="space-y-5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
               <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Resources</p>
               <ul className="space-y-3">
                 {footerLinks.resources.map((link) => (
                   <li key={link.name}>
-                    <Link to={link.href} className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-colors">
+                    <Link to={link.href} className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-all duration-300 hover:translate-x-1">
                       {link.name}
                       <ArrowUpRight className="w-2.5 h-2.5 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
                     </Link>
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
 
-            <div className="space-y-5">
+            <motion.div 
+              className="space-y-5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.25 }}
+            >
               <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Account</p>
               <ul className="space-y-3">
                 {footerLinks.account.map((link) => (
                   <li key={link.name}>
-                    <Link to={link.href} className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-colors">
+                    <Link to={link.href} className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-all duration-300 hover:translate-x-1">
                       {link.name}
                       <ArrowUpRight className="w-2.5 h-2.5 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
                     </Link>
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
 
-            <div className="space-y-5">
+            <motion.div 
+              className="space-y-5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
               <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Contact</p>
               <ul className="space-y-3">
                 <li>
-                  <a href="mailto:contact@neurostate.co.uk" className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-colors">
+                  <a href="mailto:contact@neurostate.co.uk" className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-all duration-300 hover:translate-x-1">
                     contact@neurostate.co.uk
                   </a>
                 </li>
@@ -179,7 +210,7 @@ export const Footer = () => {
                   London, United Kingdom
                 </li>
               </ul>
-            </div>
+            </motion.div>
           </div>
 
           {/* Bottom */}
