@@ -61,7 +61,7 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hello! I'm NeuroState's world-class AI customer service agent — here to help you understand how cognitive infrastructure can transform your organisation. Whether you have questions about our platform, want to explore how we serve your industry, or are curious about the results organisations achieve with NeuroState, I'm here to assist. How can I help you today?",
+      content: "I'm NeuroState's world-class AI customer service agent. How can I help you today?",
       timestamp: new Date(),
     },
   ]);
@@ -309,7 +309,7 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
   const clearHistory = () => {
     const firstMessage: Message = {
       role: "assistant",
-      content: "Hello! I'm NeuroState's world-class AI customer service agent — here to help you understand how cognitive infrastructure can transform your organisation. How can I help you today?",
+      content: "I'm NeuroState's world-class AI customer service agent. How can I help you today?",
       timestamp: new Date(),
     };
     setMessages([firstMessage]);
