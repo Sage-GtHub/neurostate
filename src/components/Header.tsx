@@ -106,12 +106,12 @@ export const Header = () => {
   ];
 
   const solutions = [
-    { label: "Cognitive Data Layer", href: "/solutions/data-layer", desc: "Unified signal ingestion" },
-    { label: "Cognitive State Engine", href: "/solutions/state-engine", desc: "Real-time interpretation" },
-    { label: "Prediction & Simulation", href: "/solutions/prediction", desc: "Near-term forecasting" },
-    { label: "Action & Control Layer", href: "/solutions/action-layer", desc: "Low-friction interventions" },
-    { label: "Command Surfaces by Role", href: "/solutions/command-surfaces", desc: "Role-specific interfaces" },
-    { label: "Economic & ROI Layer", href: "/solutions/roi-layer", desc: "Financial attribution" },
+    { label: "Cognitive Data Layer", href: "/solutions/data-layer", desc: "Capture & unify signals" },
+    { label: "Cognitive State Engine", href: "/solutions/state-engine", desc: "Interpret in real-time" },
+    { label: "Prediction & Simulation", href: "/solutions/prediction", desc: "Forecast what's next" },
+    { label: "Action & Control Layer", href: "/solutions/action-layer", desc: "Deliver interventions" },
+    { label: "Command Surfaces", href: "/solutions/command-surfaces", desc: "Dashboards by role" },
+    { label: "ROI & Analytics", href: "/solutions/roi-layer", desc: "Measure business impact" },
   ];
 
   const mobileLinks = [
@@ -121,13 +121,13 @@ export const Header = () => {
   ];
 
   const mobileSolutions = [
-    { label: "Solutions Overview", href: "/solutions" },
+    { label: "Platform Overview", href: "/solutions" },
     { label: "Cognitive Data Layer", href: "/solutions/data-layer" },
     { label: "Cognitive State Engine", href: "/solutions/state-engine" },
     { label: "Prediction & Simulation", href: "/solutions/prediction" },
     { label: "Action & Control Layer", href: "/solutions/action-layer" },
     { label: "Command Surfaces", href: "/solutions/command-surfaces" },
-    { label: "Economic & ROI Layer", href: "/solutions/roi-layer" },
+    { label: "ROI & Analytics", href: "/solutions/roi-layer" },
   ];
 
   return (
@@ -160,7 +160,7 @@ export const Header = () => {
                 {/* Solutions Dropdown */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="bg-transparent text-foreground/60 hover:text-foreground hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground text-xs font-normal h-9 px-3 rounded-full transition-all duration-300 [&>svg]:text-primary normal-case">
-                    Solutions
+                    Platform
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <div className="w-[360px] p-4 bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl">
@@ -172,10 +172,10 @@ export const Header = () => {
                           >
                             <div>
                               <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors duration-300">
-                                Solutions Overview
+                                Platform Overview
                               </p>
                               <p className="text-[10px] text-muted-foreground mt-0.5">
-                                Cognitive infrastructure at scale
+                                How it all works together
                               </p>
                             </div>
                             <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
@@ -353,7 +353,7 @@ export const Header = () => {
                   {/* Solutions Collapsible */}
                   <Collapsible open={solutionsOpen} onOpenChange={setSolutionsOpen}>
                     <CollapsibleTrigger className="flex items-center justify-between w-full py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors">
-                      <span>Solutions</span>
+                      <span>Platform</span>
                       <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", solutionsOpen && "rotate-180")} />
                     </CollapsibleTrigger>
                     <CollapsibleContent className="pl-4 space-y-1">
