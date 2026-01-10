@@ -14,31 +14,31 @@ const cognitiveStates = [
   { 
     icon: Gauge, 
     title: "Readiness", 
-    description: "Overall cognitive capacity for the day, derived from sleep quality, recovery status, and baseline patterns. Readiness tells you how much someone has to give—not how they feel.",
+    description: "Overall cognitive capacity for the day, derived from sleep quality, recovery status, and baseline patterns. Readiness tells you how much someone has to give, not how they feel.",
     mechanism: "Calculated from sleep architecture, HRV trends, and recovery debt. Adjusted for individual baseline and recent patterns."
   },
   { 
     icon: Brain, 
     title: "Cognitive Load", 
-    description: "Real-time mental demand relative to available capacity. High load isn't bad—sustained high load without recovery is where risk begins.",
+    description: "Real-time mental demand relative to available capacity. High load isn't bad. Sustained high load without recovery is where risk begins.",
     mechanism: "Combines meeting density, context switching, deadline pressure, and workload signals. Compared against current readiness."
   },
   { 
     icon: Zap, 
     title: "Recovery Debt", 
-    description: "Accumulated fatigue that compounds over time without intervention. Like sleep debt, recovery debt doesn't disappear—it must be repaid.",
+    description: "Accumulated fatigue that compounds over time without intervention. Like sleep debt, recovery debt doesn't disappear. It must be repaid.",
     mechanism: "Tracked as a rolling balance of demand vs. recovery. Factors in weekend patterns, holidays, and individual recovery rates."
   },
   { 
     icon: Activity, 
     title: "Stress Volatility", 
-    description: "Variability in stress response over time. High volatility indicates fragility—the difference between resilience and one bad week away from breakdown.",
+    description: "Variability in stress response over time. High volatility indicates fragility. The difference between resilience and one bad week away from breakdown.",
     mechanism: "Measured through HRV variability, response patterns, and physiological stress markers. Trend analysis over 7-30 day windows."
   },
   { 
     icon: AlertTriangle, 
     title: "Burnout Risk", 
-    description: "Probability of performance breakdown based on trending indicators. Not a feeling—a statistical prediction based on accumulated signals.",
+    description: "Probability of performance breakdown based on trending indicators. Not a feeling. A statistical prediction based on accumulated signals.",
     mechanism: "Composite score from recovery debt trajectory, stress volatility, engagement patterns, and historical correlations with departure."
   },
 ];
@@ -81,7 +81,7 @@ export default function CognitiveStateEngine() {
                   State Intelligence
                 </h1>
                 <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                  Raw data is noise. The Cognitive State Engine transforms signals into intelligence—interpretable states that drive decisions. This is where NeuroState moves from tracking to understanding.
+                  Raw data is noise. The Cognitive State Engine transforms signals into intelligence. Interpretable states that drive decisions. This is where NeuroState moves from tracking to understanding.
                 </p>
                 
                 {/* Animated Data Flow Diagram */}
@@ -106,10 +106,10 @@ export default function CognitiveStateEngine() {
                 </div>
                 <div className="prose prose-sm max-w-none text-muted-foreground">
                   <p className="leading-relaxed">
-                    Most tools stop at data collection. They show you heart rate variability, sleep duration, meeting counts—and leave interpretation to you. But raw metrics are meaningless without context. A 45ms HRV could be excellent for one person and concerning for another. Eight meetings in a day might be normal for a sales lead and unsustainable for an engineer.
+                    Most tools stop at data collection. They show you heart rate variability, sleep duration, meeting counts, and leave interpretation to you. But raw metrics are meaningless without context. A 45ms HRV could be excellent for one person and concerning for another. Eight meetings in a day might be normal for a sales lead and unsustainable for an engineer.
                   </p>
                   <p className="leading-relaxed">
-                    The Cognitive State Engine solves this by maintaining a living baseline for every individual. It knows what's normal for each person, tracks deviation from that baseline, and translates those deviations into actionable cognitive states. The output isn't data—it's meaning.
+                    The Cognitive State Engine solves this by maintaining a living baseline for every individual. It knows what's normal for each person, tracks deviation from that baseline, and translates those deviations into actionable cognitive states. The output isn't data. It's meaning.
                   </p>
                 </div>
               </ScrollReveal>
@@ -165,7 +165,7 @@ export default function CognitiveStateEngine() {
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">In Practice</span>
                 <h2 className="text-2xl font-normal text-foreground">From data to meaning</h2>
                 <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                  Here's what interpretation looks like. Same person, same morning—but one view is data, the other is intelligence.
+                  Here's what interpretation looks like. Same person, same morning, but one view is data, the other is intelligence.
                 </p>
               </ScrollReveal>
 
@@ -229,7 +229,7 @@ export default function CognitiveStateEngine() {
                 </div>
                 <div className="prose prose-sm max-w-none text-muted-foreground">
                   <p className="leading-relaxed">
-                    The engine maintains a continuously updating baseline for every individual. This baseline adapts to seasonal patterns (winter vs. summer sleep), workload cycles (end-of-quarter intensity), and personal rhythms (morning person vs. night owl). It learns what's normal for each person—so it can detect when something is off.
+                    The engine maintains a continuously updating baseline for every individual. This baseline adapts to seasonal patterns (winter vs. summer sleep), workload cycles (end-of-quarter intensity), and personal rhythms (morning person vs. night owl). It learns what's normal for each person, so it can detect when something is off.
                   </p>
                   <p className="leading-relaxed">
                     At the team and organisation level, the engine aggregates individual states into collective intelligence. You can see team readiness before a product launch, department-level burnout risk, or organisation-wide patterns that require intervention.

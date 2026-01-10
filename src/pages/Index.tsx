@@ -29,7 +29,7 @@ const platformBlocks = [
     id: "state-engine",
     label: "Intelligence",
     name: "Cognitive State Engine",
-    description: "Raw biometrics become actionable intelligence. Readiness scores, cognitive load, and capacity tracking—interpreted in real time.",
+    description: "Raw biometrics become actionable intelligence. Readiness scores, cognitive load, and capacity tracking, interpreted in real time.",
     icon: Brain,
     link: "/solutions/state-engine",
     color: "from-purple-500/20 to-pink-500/20"
@@ -47,7 +47,7 @@ const platformBlocks = [
     id: "roi-layer",
     label: "Financial",
     name: "ROI Attribution",
-    description: "Every metric ties to money. Revenue exposure, intervention returns, capacity value—precision economics for cognitive performance.",
+    description: "Every metric ties to money. Revenue exposure, intervention returns, capacity value. Precision economics for cognitive performance.",
     icon: Calculator,
     link: "/solutions/roi-layer",
     color: "from-green-500/20 to-emerald-500/20"
@@ -56,7 +56,7 @@ const platformBlocks = [
     id: "nova-ai",
     label: "AI Assistant",
     name: "Nova AI",
-    description: "Personal cognitive intelligence. Contextual nudges, timing recommendations, and adaptive protocols—delivered when they matter.",
+    description: "Personal cognitive intelligence. Contextual nudges, timing recommendations, and adaptive protocols. Delivered when they matter.",
     icon: Sparkles,
     link: "/nova/overview",
     color: "from-indigo-500/20 to-violet-500/20"
@@ -81,7 +81,7 @@ const approachPillars = [
   },
   {
     title: "Infrastructure, not apps",
-    description: "This is the cognitive layer your organisation was missing—connecting data, intelligence, and outcomes.",
+    description: "This is the cognitive layer your organisation was missing. Connecting data, intelligence, and outcomes.",
     icon: Layers
   },
   {
@@ -691,7 +691,7 @@ const Index = () => {
                       viewport={{ once: true }}
                       transition={{ delay: 0.7 }}
                     >
-                      <p className="text-xs text-foreground">Your highest-impact task is the Q4 strategy deck—complexity matches your current state. I'd suggest blocking 90 minutes before lunch.</p>
+                      <p className="text-xs text-foreground">Your highest-impact task is the Q4 strategy deck. Complexity matches your current state. I'd suggest blocking 90 minutes before lunch.</p>
                     </motion.div>
                   </div>
 
@@ -734,7 +734,7 @@ const Index = () => {
                   Connect everything. See everything.
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-xl mx-auto">
-                  40+ integrations across wearables, calendars, and productivity tools—all normalised into a single cognitive model. We don't sell hardware; we connect to what your team already uses.
+                  40+ integrations across wearables, calendars, and productivity tools, all normalised into a single cognitive model. We don't sell hardware; we connect to what your team already uses.
                 </p>
               </ScrollReveal>
 

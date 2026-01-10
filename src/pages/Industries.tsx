@@ -95,7 +95,7 @@ const Industries = () => {
                   Built for knowledge-intensive organisations
                 </h1>
                 <p className="text-base md:text-lg text-muted-foreground max-w-2xl">
-                  Every industry has unique cognitive demands. NeuroState adapts to yours—with benchmarks, 
+                  Every industry has unique cognitive demands. NeuroState adapts to yours, with benchmarks, 
                   integrations, and ROI models tailored to your sector.
                 </p>
               </ScrollReveal>
@@ -188,7 +188,7 @@ const Industries = () => {
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
                   See what cognitive underperformance, burnout-related turnover, and preventable sick days 
-                  are really costing your organisation—and what NeuroState can recover.
+                  are really costing your organisation, and what NeuroState can recover.
                 </p>
               </ScrollReveal>
 

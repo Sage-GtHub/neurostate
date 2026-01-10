@@ -14,12 +14,12 @@ const roles = [
     icon: User, 
     title: "Individual Contributor", 
     tagline: "Personal performance and coaching",
-    description: "For team members who want to understand and optimise their own cognitive performance. This view is entirely private—only you see your data.",
+    description: "For team members who want to understand and optimise their own cognitive performance. This view is entirely private. Only you see your data.",
     capabilities: [
       { name: "Daily readiness score", detail: "Your predicted cognitive capacity for today, based on sleep, recovery, and baseline." },
       { name: "Optimal focus windows", detail: "When your brain is best suited for deep work, meetings, or creative tasks." },
       { name: "Recovery protocols", detail: "Personalised recommendations for rest, exercise, and recovery based on your patterns." },
-      { name: "Progress tracking", detail: "How your cognitive metrics are trending over time—and what's driving the changes." },
+      { name: "Progress tracking", detail: "How your cognitive metrics are trending over time, and what's driving the changes." },
       { name: "Personal coaching prompts", detail: "Timely nudges that help you make better decisions about work and recovery." },
     ],
     privacy: "Your data belongs to you. Nothing is shared with managers or the organisation without your explicit consent."
@@ -28,12 +28,12 @@ const roles = [
     icon: Shield, 
     title: "Manager", 
     tagline: "Team risk and intervention guidance",
-    description: "For team leads who need visibility into team health without surveillance. You see aggregate patterns and risk signals—never individual details unless someone consents to share.",
+    description: "For team leads who need visibility into team health without surveillance. You see aggregate patterns and risk signals, never individual details unless someone consents to share.",
     capabilities: [
       { name: "Team readiness overview", detail: "Aggregate capacity across your team. Is the team ready for a sprint or running on empty?" },
-      { name: "Burnout risk signals", detail: "Which parts of your team are approaching risk thresholds—without naming individuals." },
+      { name: "Burnout risk signals", detail: "Which parts of your team are approaching risk thresholds, without naming individuals." },
       { name: "Workload distribution", detail: "Is work balanced across the team, or are some people carrying too much?" },
-      { name: "Intervention suggestions", detail: "Recommended actions with talking points—how to check in without awkwardness." },
+      { name: "Intervention suggestions", detail: "Recommended actions with talking points. How to check in without awkwardness." },
       { name: "1:1 preparation", detail: "Context that helps you have better conversations with your direct reports." },
     ],
     privacy: "You see patterns, not personal data. Individual consent is required for any drill-down."
@@ -56,7 +56,7 @@ const roles = [
     icon: Crown, 
     title: "CEO / Executive", 
     tagline: "Cognitive risk exposure at scale",
-    description: "For executives who need to understand organisational capacity as a strategic asset. This is cognitive health as a board-level metric—not wellness as HR theatre.",
+    description: "For executives who need to understand organisational capacity as a strategic asset. This is cognitive health as a board-level metric, not wellness as HR theatre.",
     capabilities: [
       { name: "Enterprise cognitive capacity", detail: "The Cognitive Capacity Index (CCI) for the entire organisation. Your north star metric." },
       { name: "Strategic capacity planning", detail: "Do we have the cognitive capacity for the Q1 push? What's the cost if we don't?" },
@@ -73,13 +73,13 @@ export default function CommandSurfaces() {
     <>
       <SEO
         title="Dashboards | Role-Based Analytics | NeuroState"
-        description="One system, different truths. Role-based interfaces for individuals, managers, HR leaders, and executives—each seeing the cognitive intelligence they need."
+        description="One system, different truths. Role-based interfaces for individuals, managers, HR leaders, and executives. Each seeing the cognitive intelligence they need."
         keywords="role-based dashboards, executive analytics, manager insights, HR workforce analytics, team health visibility, organisational intelligence, privacy-first design"
       />
       <SolutionPageStructuredData
         solution={{
           name: "Dashboards",
-          description: "One system, different truths. Tailored interfaces for individuals, managers, HR leaders, and executives—each seeing the cognitive intelligence they need.",
+          description: "One system, different truths. Tailored interfaces for individuals, managers, HR leaders, and executives. Each seeing the cognitive intelligence they need.",
           url: "https://neurostate.co.uk/solutions/command-surfaces",
           features: ["Individual contributor dashboard", "Manager insights", "HR analytics", "Executive reporting", "Privacy-first design"]
         }}
@@ -106,7 +106,7 @@ export default function CommandSurfaces() {
                   Dashboards
                 </h1>
                 <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                  One system. Different truths. Role-specific interfaces that deliver the right information to the right people—with privacy protected at every layer.
+                  One system. Different truths. Role-specific interfaces that deliver the right information to the right people, with privacy protected at every layer.
                 </p>
               </motion.div>
             </div>
@@ -122,13 +122,13 @@ export default function CommandSurfaces() {
                 </div>
                 <div className="prose prose-sm max-w-none text-muted-foreground">
                   <p className="leading-relaxed">
-                    A CEO and an individual contributor have fundamentally different relationships with cognitive data. The CEO needs to understand organisational capacity as a strategic asset. The IC needs to understand their own patterns and optimise their own performance. The manager sits in between—responsible for team health without becoming a surveillance operation.
+                    A CEO and an individual contributor have fundamentally different relationships with cognitive data. The CEO needs to understand organisational capacity as a strategic asset. The IC needs to understand their own patterns and optimise their own performance. The manager sits in between, responsible for team health without becoming a surveillance operation.
                   </p>
                   <p className="leading-relaxed">
-                    NeuroState addresses this by providing role-specific command surfaces. Each role sees exactly what they need to see—no more, no less. Privacy boundaries are enforced by design, not policy. And the system maintains trust at every level because people know their data is protected.
+                    NeuroState addresses this by providing role-specific command surfaces. Each role sees exactly what they need to see. No more, no less. Privacy boundaries are enforced by design, not policy. And the system maintains trust at every level because people know their data is protected.
                   </p>
                   <p className="leading-relaxed">
-                    This isn't just about access control. Each interface is designed for the specific decisions that role needs to make. The language, the metrics, the visualisations—all calibrated to the context.
+                    This isn't just about access control. Each interface is designed for the specific decisions that role needs to make. The language, the metrics, the visualisations. All calibrated to the context.
                   </p>
                 </div>
               </ScrollReveal>

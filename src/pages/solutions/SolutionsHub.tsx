@@ -30,7 +30,7 @@ const solutionLayers = [
   {
     icon: TrendingUp,
     title: "Forecasting",
-    description: "Near-term forecasting and scenario modelling. NeuroState doesn't just show you what is happening—it tells you what is likely to happen next, and what you can do about it.",
+    description: "Near-term forecasting and scenario modelling. NeuroState doesn't just show you what is happening. It tells you what is likely to happen next, and what you can do about it.",
     href: "/solutions/prediction",
     color: "hsl(156, 65%, 45%)",
     layer: 3
@@ -54,7 +54,7 @@ const solutionLayers = [
   {
     icon: Calculator,
     title: "ROI Analytics",
-    description: "Cognitive risk translated to business value. See the cost of burnout, the price of underperformance, and the return on intervention—in pounds, not platitudes.",
+    description: "Cognitive risk translated to business value. See the cost of burnout, the price of underperformance, and the return on intervention. In pounds, not platitudes.",
     href: "/solutions/roi-layer",
     color: "hsl(280, 70%, 55%)",
     layer: 6
@@ -145,7 +145,7 @@ export default function SolutionsHub() {
                 </h1>
 
                 <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                  We turn biometric, behavioural, and contextual signals into real-time cognitive intelligence — insight, prediction, and action that protects performance at scale.
+                  We turn biometric, behavioural, and contextual signals into real-time cognitive intelligence. Insight, prediction, and action that protects performance at scale.
                 </p>
 
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
@@ -250,7 +250,7 @@ export default function SolutionsHub() {
                         <span className="text-primary mt-0.5 flex-shrink-0">✓</span>
                         <div>
                           <span className="font-medium">Measurable business outcomes.</span>
-                          <p className="text-xs mt-1 text-muted-foreground">Every intervention is tied to financial impact. ROI is not a hope—it's a metric.</p>
+                          <p className="text-xs mt-1 text-muted-foreground">Every intervention is tied to financial impact. ROI is not a hope. It's a metric.</p>
                         </div>
                       </li>
                     </ul>
