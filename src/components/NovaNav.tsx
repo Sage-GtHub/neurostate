@@ -8,10 +8,8 @@ import { useState, useRef, useEffect } from "react";
 const navItems = [
   { to: "/nova/chat", label: "Chat", icon: MessageCircle },
   { to: "/nova", label: "Home", icon: LayoutDashboard, end: true },
-  { to: "/nova/goals", label: "Goals", icon: Target },
-  { to: "/nova/protocols", label: "Protocols", icon: Activity },
-  { to: "/nova/insights", label: "Insights", icon: Zap },
-  { to: "/nova/trends", label: "Trends", icon: TrendingUp },
+  { to: "/nova/protocols", label: "Protocols", icon: Activity }, // Merged: Protocols + Goals
+  { to: "/nova/insights", label: "Insights", icon: Zap }, // Merged: Insights + Trends
   { to: "/nova/devices", label: "Devices", icon: Smartphone },
   { to: "/nova/settings", label: "Settings", icon: Settings },
 ];
