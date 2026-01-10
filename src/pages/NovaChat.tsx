@@ -48,14 +48,11 @@ interface ChatThread {
   updatedAt: string;
 }
 
-// Basic spinner typing indicator
+import { NovaTypingAnimation } from "@/components/nova/NovaTypingAnimation";
+
+// Use the new typing animation component
 function TypingIndicator() {
-  return (
-    <div className="flex items-center gap-2 py-2">
-      <Loader2 className="w-4 h-4 animate-spin text-foreground/50" />
-      <span className="text-xs text-foreground/40">Thinking...</span>
-    </div>
-  );
+  return <NovaTypingAnimation variant="default" />;
 }
 
 const QUICK_SUGGESTIONS = [
