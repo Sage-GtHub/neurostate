@@ -17,28 +17,28 @@ type Message = {
 
 const quickSuggestions = [
   {
-    text: "What products are best for recovery?",
-    category: "Products"
+    text: "What is NeuroState and how does it work?",
+    category: "Platform"
   },
   {
-    text: "How can I improve my sleep quality?",
-    category: "Wellness"
+    text: "Which industries do you serve?",
+    category: "Industries"
   },
   {
-    text: "Which supplements support cognitive function?",
-    category: "Products"
+    text: "How is NeuroState different from wellness programmes?",
+    category: "Platform"
   },
   {
-    text: "What's the difference between your red light devices?",
-    category: "Products"
+    text: "What ROI can organisations expect?",
+    category: "Results"
   },
   {
-    text: "How do I use cold therapy for muscle recovery?",
-    category: "Usage"
+    text: "How does Nova AI work?",
+    category: "Technology"
   },
   {
-    text: "Tell me about your subscription options",
-    category: "Shopping"
+    text: "I'd like to book a consultation",
+    category: "Contact"
   }
 ];
 
@@ -61,7 +61,7 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hello! I'm your AI wellness assistant. How can I help you today? Whether you're looking for product recommendations, have questions about our services, or need wellness advice, I'm here to help!",
+      content: "Hello! I'm NeuroState's world-class AI customer service agent — here to help you understand how cognitive infrastructure can transform your organisation. Whether you have questions about our platform, want to explore how we serve your industry, or are curious about the results organisations achieve with NeuroState, I'm here to assist. How can I help you today?",
       timestamp: new Date(),
     },
   ]);
@@ -309,7 +309,7 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
   const clearHistory = () => {
     const firstMessage: Message = {
       role: "assistant",
-      content: "Hello! I'm your AI wellness assistant. How can I help you today?",
+      content: "Hello! I'm NeuroState's world-class AI customer service agent — here to help you understand how cognitive infrastructure can transform your organisation. How can I help you today?",
       timestamp: new Date(),
     };
     setMessages([firstMessage]);
@@ -448,8 +448,8 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
                   <div className="flex items-center gap-2">
                     <Sparkles className="h-5 w-5 text-primary" />
                     <div>
-                      <DrawerTitle>Ask AI</DrawerTitle>
-                      <p className="text-xs text-muted-foreground">Your wellness assistant</p>
+                      <DrawerTitle>NeuroState AI</DrawerTitle>
+                      <p className="text-xs text-muted-foreground">World-class customer service</p>
                     </div>
                   </div>
                   <Button
@@ -477,8 +477,8 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
                   <div className="flex items-center gap-2">
                     <Sparkles className="h-5 w-5 text-primary" />
                     <div>
-                      <DrawerTitle>Ask AI</DrawerTitle>
-                      <p className="text-xs text-muted-foreground">Your wellness assistant</p>
+                      <DrawerTitle>NeuroState AI</DrawerTitle>
+                      <p className="text-xs text-muted-foreground">World-class customer service</p>
                     </div>
                   </div>
                   <Button
@@ -511,8 +511,8 @@ export const LiveChat = ({ externalOpen, onOpenChange }: { externalOpen?: boolea
                 <Sparkles className="h-5 w-5 text-primary" />
               </div>
               <div>
-                <SheetTitle>Ask AI</SheetTitle>
-                <p className="text-xs text-muted-foreground mt-0.5">Your wellness assistant</p>
+                <SheetTitle>NeuroState AI</SheetTitle>
+                <p className="text-xs text-muted-foreground mt-0.5">World-class customer service</p>
               </div>
             </div>
             <Button
