@@ -44,6 +44,15 @@ const platformBlocks = [
     color: "from-amber-500/20 to-orange-500/20"
   },
   {
+    id: "interventions",
+    label: "Actions",
+    name: "Interventions",
+    description: "Automated protocol recommendations and timely nudges. The system acts, not just observes, to optimise cognitive performance.",
+    icon: Zap,
+    link: "/solutions/action-layer",
+    color: "from-rose-500/20 to-red-500/20"
+  },
+  {
     id: "roi-analytics",
     label: "Financial",
     name: "ROI Analytics",
