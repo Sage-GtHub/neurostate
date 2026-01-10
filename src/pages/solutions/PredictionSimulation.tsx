@@ -49,13 +49,13 @@ export default function PredictionSimulation() {
   return (
     <>
       <SEO
-        title="Prediction & Simulation | Cognitive Forecasting | NeuroState"
+        title="Forecasting | Cognitive Capacity Prediction | NeuroState"
         description="Forecast cognitive capacity 7-30 days ahead. Model the impact of decisions before you make them with NeuroState's predictive simulation engine."
         keywords="cognitive forecasting, burnout prediction, scenario modelling, capacity planning, workforce simulation, predictive analytics, decision impact modelling"
       />
       <SolutionPageStructuredData
         solution={{
-          name: "Prediction & Simulation",
+          name: "Forecasting",
           description: "Near-term forecasting and scenario modelling. NeuroState doesn't just show you what is happening—it tells you what is likely to happen next.",
           url: "https://neurostate.co.uk/solutions/prediction",
           features: ["7-30 day forecasting", "Scenario modelling", "Deadline impact analysis", "Travel fatigue modelling", "Intervention effectiveness prediction"]
@@ -64,8 +64,8 @@ export default function PredictionSimulation() {
       <BreadcrumbStructuredData
         items={[
           { name: "Home", url: "https://neurostate.co.uk" },
-          { name: "Solutions", url: "https://neurostate.co.uk/solutions" },
-          { name: "Prediction & Simulation", url: "https://neurostate.co.uk/solutions/prediction" }
+          { name: "Platform", url: "https://neurostate.co.uk/solutions" },
+          { name: "Forecasting", url: "https://neurostate.co.uk/solutions/prediction" }
         ]}
       />
       <div className="min-h-screen bg-background">
@@ -80,7 +80,7 @@ export default function PredictionSimulation() {
                 </div>
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Layer 3 of 6</span>
                 <h1 className="text-3xl md:text-4xl font-normal text-foreground tracking-tight mt-2 mb-4">
-                  Prediction & Simulation
+                  Forecasting
                 </h1>
                 <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                   NeuroState does not stop at visibility. It forecasts what is likely to happen next—and lets you model the impact of decisions before you make them. This is where understanding becomes foresight.
@@ -279,7 +279,7 @@ export default function PredictionSimulation() {
                         </div>
                         <div>
                           <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Next: Layer 4</span>
-                          <h3 className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">Action & Control Layer</h3>
+                          <h3 className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">Interventions</h3>
                           <p className="text-xs text-muted-foreground">Where foresight becomes intervention</p>
                         </div>
                       </div>

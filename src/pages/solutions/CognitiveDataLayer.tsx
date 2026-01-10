@@ -38,14 +38,14 @@ export default function CognitiveDataLayer() {
   return (
     <>
       <SEO
-        title="Cognitive Data Layer | Unified Signal Ingestion | NeuroState"
-        description="Connect wearables, calendars, and work tools into a unified cognitive data model. NeuroState's Data Layer normalises disparate signals into actionable intelligence."
+        title="Data Integration | Unified Signal Ingestion | NeuroState"
+        description="Connect wearables, calendars, and work tools into a unified cognitive data model. NeuroState's Data Integration layer normalises disparate signals into actionable intelligence."
         keywords="wearable data integration, biometric signals, HRV tracking, sleep analytics, work behaviour data, cognitive data unification, enterprise wellness data"
       />
       <SolutionPageStructuredData
         solution={{
-          name: "Cognitive Data Layer",
-          description: "Unified signal ingestion from wearables, calendars, and work tools. NeuroState's Data Layer normalises disparate signals into actionable intelligence.",
+          name: "Data Integration",
+          description: "Unified signal ingestion from wearables, calendars, and work tools. NeuroState's Data Integration layer normalises disparate signals into actionable intelligence.",
           url: "https://neurostate.co.uk/solutions/data-layer",
           features: ["Wearable integration", "Behavioural signal capture", "Contextual data ingestion", "Real-time data normalisation", "Privacy-first architecture"]
         }}
@@ -53,8 +53,8 @@ export default function CognitiveDataLayer() {
       <BreadcrumbStructuredData
         items={[
           { name: "Home", url: "https://neurostate.co.uk" },
-          { name: "Solutions", url: "https://neurostate.co.uk/solutions" },
-          { name: "Cognitive Data Layer", url: "https://neurostate.co.uk/solutions/data-layer" }
+          { name: "Platform", url: "https://neurostate.co.uk/solutions" },
+          { name: "Data Integration", url: "https://neurostate.co.uk/solutions/data-layer" }
         ]}
       />
       <div className="min-h-screen bg-background">
@@ -72,7 +72,7 @@ export default function CognitiveDataLayer() {
                 </div>
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Layer 1 of 6</span>
                 <h1 className="text-3xl md:text-4xl font-normal text-foreground tracking-tight mt-2 mb-4">
-                  Cognitive Data Layer
+                  Data Integration
                 </h1>
                 <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                   NeuroState connects to the tools your teams already use and unifies disparate data streams into a single, coherent cognitive model. No new hardware. No behaviour change. Just signal.
@@ -274,7 +274,7 @@ export default function CognitiveDataLayer() {
                         </div>
                         <div>
                           <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Next: Layer 2</span>
-                          <h3 className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">Cognitive State Engine</h3>
+                          <h3 className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">State Intelligence</h3>
                           <p className="text-xs text-muted-foreground">Where raw data becomes meaningful intelligence</p>
                         </div>
                       </div>

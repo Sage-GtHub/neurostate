@@ -75,13 +75,13 @@ export default function ActionControlLayer() {
   return (
     <>
       <SEO
-        title="Action & Control Layer | Cognitive Interventions | NeuroState"
+        title="Interventions | Cognitive Performance Actions | NeuroState"
         description="Low-friction interventions that drive outcomes. Personal coaching, workload timing, manager nudges, and preventative actions delivered at the right moment."
         keywords="cognitive interventions, personal coaching, manager nudges, workload optimisation, preventative burnout actions, team performance interventions, wellness automation"
       />
       <SolutionPageStructuredData
         solution={{
-          name: "Action & Control Layer",
+          name: "Interventions",
           description: "Low-friction interventions that drive outcomes. Personal coaching prompts, workload timing recommendations, manager nudges, and preventative interventions.",
           url: "https://neurostate.co.uk/solutions/action-layer",
           features: ["Personal coaching prompts", "Workload timing recommendations", "Manager nudges", "Preventative interventions", "Calendar integration"]
@@ -90,8 +90,8 @@ export default function ActionControlLayer() {
       <BreadcrumbStructuredData
         items={[
           { name: "Home", url: "https://neurostate.co.uk" },
-          { name: "Solutions", url: "https://neurostate.co.uk/solutions" },
-          { name: "Action & Control Layer", url: "https://neurostate.co.uk/solutions/action-layer" }
+          { name: "Platform", url: "https://neurostate.co.uk/solutions" },
+          { name: "Interventions", url: "https://neurostate.co.uk/solutions/action-layer" }
         ]}
       />
       <div className="min-h-screen bg-background">
@@ -106,7 +106,7 @@ export default function ActionControlLayer() {
                 </div>
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Layer 4 of 6</span>
                 <h1 className="text-3xl md:text-4xl font-normal text-foreground tracking-tight mt-2 mb-4">
-                  Action & Control Layer
+                  Interventions
                 </h1>
                 <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                   NeuroState converts intelligence into clear, low-friction actions that drive measurable outcomes. This is where insight becomes intervention—and where the loop closes.
@@ -269,7 +269,7 @@ export default function ActionControlLayer() {
                         </div>
                         <div>
                           <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Next: Layer 5</span>
-                          <h3 className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">Command Surfaces by Role</h3>
+                          <h3 className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">Dashboards</h3>
                           <p className="text-xs text-muted-foreground">Different views for different responsibilities</p>
                         </div>
                       </div>
