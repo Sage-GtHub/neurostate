@@ -68,7 +68,7 @@ const platformBlocks = [
     description: "One system, different views. Individuals see optimisation. Managers see team health. Executives see risk and exposure.",
     icon: Layers,
     link: "/solutions/command-surfaces",
-    color: "from-rose-500/20 to-red-500/20"
+    color: "from-indigo-500/20 to-violet-500/20"
   }
 ];
 
