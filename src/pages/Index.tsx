@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { HomeROICalculator } from "@/components/HomeROICalculator";
 import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
+import { HomeComparisonSection } from "@/components/HomeComparisonSection";
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Eye, Layers, Sparkles } from "lucide-react";
@@ -417,6 +418,9 @@ const Index = () => {
               </div>
             </div>
           </section>
+
+          {/* Side-by-side Comparison */}
+          <HomeComparisonSection />
 
           {/* Command Surfaces Preview */}
           <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/30">
