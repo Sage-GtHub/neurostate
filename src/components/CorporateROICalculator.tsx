@@ -280,13 +280,13 @@ export function CorporateROICalculator() {
           value={employees}
           onValueChange={setEmployees}
           min={10}
-          max={1000}
+          max={5000}
           step={10}
           className="mb-3"
         />
         <div className="flex justify-between text-xs text-stone font-medium">
           <span>10</span>
-          <span>1,000</span>
+          <span>5,000</span>
         </div>
       </div>
 
