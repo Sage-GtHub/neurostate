@@ -1,8 +1,8 @@
 import { NavLink } from "@/components/NavLink";
 import { useLocation, useNavigate } from "react-router-dom";
-import { MessageCircle, LayoutDashboard, Target, Activity, TrendingUp, Smartphone, Settings, Zap, ChevronLeft, ChevronRight, Users, Search, LogOut } from "lucide-react";
+import { MessageCircle, LayoutDashboard, Target, Activity, TrendingUp, Smartphone, Settings, Zap, ChevronLeft, ChevronRight, Users, Search, LogOut, Menu, X, Bell } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { NotificationCenter } from "@/components/nova/NotificationCenter";
 import { useAuth } from "@/hooks/useAuth";
@@ -15,6 +15,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import logoIcon from "@/assets/neurostate-icon.png";
 
 const navItems = [
@@ -229,46 +236,141 @@ export const NovaNav = () => {
 
       {/* Mobile Navigation */}
       <nav className="md:hidden fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-xl border-b border-border pt-safe">
-        <div className="flex items-center justify-around py-2">
-          {mobileNavItems.map((item) => {
-            const active = isActive(item.to, item.end);
-            return (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end={item.end}
-                className="relative flex flex-col items-center gap-1 px-4 py-2 min-w-[60px]"
-                activeClassName=""
-              >
-                <div className="relative">
+        <div className="flex items-center justify-between px-4 py-2">
+          {/* Logo */}
+          <button 
+            onClick={() => navigate('/')}
+            className="flex items-center gap-2"
+          >
+            <img src={logoIcon} alt="Nova" className="h-6 w-6" />
+            <span className="text-sm font-medium text-foreground">Nova</span>
+          </button>
+
+          {/* Nav Items */}
+          <div className="flex items-center gap-1">
+            {mobileNavItems.slice(0, 4).map((item) => {
+              const active = isActive(item.to, item.end);
+              return (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  end={item.end}
+                  className="relative p-2"
+                  activeClassName=""
+                >
                   <item.icon 
                     className={cn(
                       "w-5 h-5 transition-all duration-200",
-                      active ? "text-accent scale-110" : "text-muted-foreground"
+                      active ? "text-accent" : "text-muted-foreground"
                     )} 
                   />
-                  {/* Active dot indicator */}
-                  {active && (
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      className="absolute -bottom-1 -right-1 w-2 h-2 rounded-full bg-accent"
-                    />
+                </NavLink>
+              );
+            })}
+          </div>
+
+          {/* Hamburger Menu */}
+          <Sheet>
+            <SheetTrigger asChild>
+              <button className="p-2 text-muted-foreground hover:text-foreground transition-colors">
+                <Menu className="w-5 h-5" />
+              </button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-72 pt-safe">
+              <SheetHeader className="text-left pb-4 border-b border-border">
+                <SheetTitle className="flex items-center gap-3">
+                  {isAuthenticated && (
+                    <>
+                      <Avatar className="h-10 w-10 border border-border/50">
+                        <AvatarImage src={profile?.avatar_url || undefined} />
+                        <AvatarFallback className="bg-accent/10 text-accent text-sm">
+                          {getInitials(profile?.full_name)}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className="flex flex-col">
+                        <span className="text-sm font-medium">{profile?.full_name || 'User'}</span>
+                        <span className="text-xs text-muted-foreground">{profile?.email}</span>
+                      </div>
+                    </>
                   )}
-                </div>
-                <span 
-                  className={cn(
-                    "text-[10px] font-medium transition-colors",
-                    active ? "text-foreground" : "text-muted-foreground"
-                  )}
+                </SheetTitle>
+              </SheetHeader>
+
+              <div className="flex flex-col gap-1 py-4">
+                {/* Notifications */}
+                <button
+                  onClick={() => navigate('/nova/settings')}
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
                 >
-                  {item.label}
-                </span>
-              </NavLink>
-            );
-          })}
+                  <Bell className="w-5 h-5" />
+                  Notifications
+                </button>
+
+                {/* Team Dashboard */}
+                <button
+                  onClick={() => navigate('/team-dashboard')}
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+                >
+                  <Users className="w-5 h-5" />
+                  Team Dashboard
+                </button>
+
+                {/* Dashboard */}
+                <button
+                  onClick={() => navigate('/dashboard')}
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+                >
+                  <LayoutDashboard className="w-5 h-5" />
+                  Dashboard
+                </button>
+
+                {/* Insights */}
+                <button
+                  onClick={() => navigate('/nova/insights')}
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+                >
+                  <Zap className="w-5 h-5" />
+                  Insights
+                </button>
+
+                {/* Settings */}
+                <button
+                  onClick={() => navigate('/nova/settings')}
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+                >
+                  <Settings className="w-5 h-5" />
+                  Settings
+                </button>
+
+                {/* Account Settings */}
+                <button
+                  onClick={() => navigate('/profile')}
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+                >
+                  <Settings className="w-5 h-5" />
+                  Account Settings
+                </button>
+              </div>
+
+              {/* Sign Out */}
+              {isAuthenticated && (
+                <div className="absolute bottom-6 left-6 right-6">
+                  <button
+                    onClick={handleSignOut}
+                    className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm text-destructive hover:bg-destructive/10 transition-colors"
+                  >
+                    <LogOut className="w-5 h-5" />
+                    Sign Out
+                  </button>
+                </div>
+              )}
+            </SheetContent>
+          </Sheet>
         </div>
       </nav>
+
+      {/* Mobile content padding spacer */}
+      <div className="md:hidden h-14" />
     </>
   );
 };
