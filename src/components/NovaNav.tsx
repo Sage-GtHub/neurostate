@@ -228,7 +228,7 @@ export const NovaNav = () => {
       </nav>
 
       {/* Mobile Navigation */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-xl border-t border-border pb-safe">
+      <nav className="md:hidden fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-xl border-b border-border pt-safe">
         <div className="flex items-center justify-around py-2">
           {mobileNavItems.map((item) => {
             const active = isActive(item.to, item.end);
@@ -252,7 +252,7 @@ export const NovaNav = () => {
                     <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-accent"
+                      className="absolute -bottom-1 -right-1 w-2 h-2 rounded-full bg-accent"
                     />
                   )}
                 </div>
