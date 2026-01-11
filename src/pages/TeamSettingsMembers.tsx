@@ -20,7 +20,9 @@ import {
   LogOut,
   ChevronRight,
   AlertTriangle,
-  Loader2
+  Loader2,
+  UsersRound,
+  Plus
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -35,10 +37,14 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator
 } from '@/components/ui/dropdown-menu';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Textarea } from '@/components/ui/textarea';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { SEO } from '@/components/SEO';
 import { useOrganisation, OrgRole } from '@/hooks/useOrganisation';
+import { useTeamDashboard } from '@/hooks/useTeamDashboard';
+import { TeamMemberManager } from '@/components/TeamMemberManager';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
@@ -72,10 +78,24 @@ export default function TeamSettingsMembers() {
     loading
   } = useOrganisation();
 
+  const {
+    teams,
+    teamMembers,
+    orgMembers,
+    createTeam,
+    addTeamMember,
+    removeTeamMember,
+    loading: teamsLoading
+  } = useTeamDashboard();
+
   const [inviteEmail, setInviteEmail] = useState('');
   const [inviteRole, setInviteRole] = useState<OrgRole>('member');
   const [sending, setSending] = useState(false);
   const [activeTab, setActiveTab] = useState('members');
+  const [showCreateTeamDialog, setShowCreateTeamDialog] = useState(false);
+  const [newTeamName, setNewTeamName] = useState('');
+  const [newTeamDescription, setNewTeamDescription] = useState('');
+  const [creatingTeam, setCreatingTeam] = useState(false);
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -114,7 +134,23 @@ export default function TeamSettingsMembers() {
     }
   };
 
-  if (loading) {
+  const handleCreateTeam = async () => {
+    if (!newTeamName.trim()) return;
+    setCreatingTeam(true);
+    try {
+      await createTeam(newTeamName, newTeamDescription);
+      setNewTeamName('');
+      setNewTeamDescription('');
+      setShowCreateTeamDialog(false);
+      toast.success('Team created successfully');
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to create team');
+    } finally {
+      setCreatingTeam(false);
+    }
+  };
+
+  if (loading || teamsLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
@@ -195,6 +231,10 @@ export default function TeamSettingsMembers() {
                 <TabsTrigger value="members" className="rounded-full text-xs">
                   <Users className="w-3.5 h-3.5 mr-2" />
                   Members ({members.length})
+                </TabsTrigger>
+                <TabsTrigger value="teams" className="rounded-full text-xs">
+                  <UsersRound className="w-3.5 h-3.5 mr-2" />
+                  Teams ({teams.length})
                 </TabsTrigger>
                 <TabsTrigger value="invites" className="rounded-full text-xs">
                   <Mail className="w-3.5 h-3.5 mr-2" />
@@ -307,6 +347,40 @@ export default function TeamSettingsMembers() {
                 </div>
               </TabsContent>
 
+              {/* Teams Tab */}
+              <TabsContent value="teams" className="mt-8 space-y-6">
+                {isAdmin && (
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <h3 className="text-sm font-medium text-foreground">Manage Teams</h3>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Create teams and assign organisation members to them.
+                      </p>
+                    </div>
+                    <Button
+                      onClick={() => setShowCreateTeamDialog(true)}
+                      className="rounded-full"
+                      size="sm"
+                    >
+                      <Plus className="w-4 h-4 mr-2" />
+                      Create Team
+                    </Button>
+                  </div>
+                )}
+
+                <TeamMemberManager
+                  teams={teams}
+                  teamMembers={teamMembers}
+                  orgMembers={orgMembers.map(m => ({
+                    user_id: m.user_id,
+                    role: m.role,
+                    profile: m.profile
+                  }))}
+                  isAdmin={isAdmin}
+                  onAddMember={addTeamMember}
+                  onRemoveMember={removeTeamMember}
+                />
+              </TabsContent>
               {/* Invites Tab */}
               <TabsContent value="invites" className="mt-8 space-y-4">
                 {invites.length === 0 ? (
@@ -405,6 +479,56 @@ export default function TeamSettingsMembers() {
           </motion.div>
         </main>
         <Footer />
+
+        {/* Create Team Dialog */}
+        <Dialog open={showCreateTeamDialog} onOpenChange={setShowCreateTeamDialog}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Create New Team</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4 mt-4">
+              <div>
+                <Label htmlFor="teamName">Team Name</Label>
+                <Input
+                  id="teamName"
+                  value={newTeamName}
+                  onChange={(e) => setNewTeamName(e.target.value)}
+                  placeholder="e.g. Engineering, Sales, Product"
+                  className="mt-1"
+                />
+              </div>
+              <div>
+                <Label htmlFor="teamDesc">Description (optional)</Label>
+                <Textarea
+                  id="teamDesc"
+                  value={newTeamDescription}
+                  onChange={(e) => setNewTeamDescription(e.target.value)}
+                  placeholder="Brief description of the team's purpose"
+                  className="mt-1"
+                />
+              </div>
+              <div className="flex justify-end gap-2">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowCreateTeamDialog(false)}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  onClick={handleCreateTeam}
+                  disabled={!newTeamName.trim() || creatingTeam}
+                >
+                  {creatingTeam ? (
+                    <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                  ) : (
+                    <Plus className="w-4 h-4 mr-2" />
+                  )}
+                  Create Team
+                </Button>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </>
   );
