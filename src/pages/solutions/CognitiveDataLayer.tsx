@@ -274,7 +274,7 @@ export default function CognitiveDataLayer() {
                         </div>
                         <div>
                           <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Next: Layer 2</span>
-                          <h3 className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">State Intelligence</h3>
+                          <h3 className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">Cognitive Monitoring</h3>
                           <p className="text-xs text-muted-foreground">Where raw data becomes meaningful intelligence</p>
                         </div>
                       </div>

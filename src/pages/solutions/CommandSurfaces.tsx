@@ -72,13 +72,13 @@ export default function CommandSurfaces() {
   return (
     <>
       <SEO
-        title="Dashboards | Role-Based Analytics | NeuroState"
+        title="Team Analytics | Role-Based Analytics | NeuroState"
         description="One system, different truths. Role-based interfaces for individuals, managers, HR leaders, and executives. Each seeing the cognitive intelligence they need."
         keywords="role-based dashboards, executive analytics, manager insights, HR workforce analytics, team health visibility, organisational intelligence, privacy-first design"
       />
       <SolutionPageStructuredData
         solution={{
-          name: "Dashboards",
+          name: "Team Analytics",
           description: "One system, different truths. Tailored interfaces for individuals, managers, HR leaders, and executives. Each seeing the cognitive intelligence they need.",
           url: "https://neurostate.co.uk/solutions/command-surfaces",
           features: ["Individual contributor dashboard", "Manager insights", "HR analytics", "Executive reporting", "Privacy-first design"]
@@ -88,7 +88,7 @@ export default function CommandSurfaces() {
         items={[
           { name: "Home", url: "https://neurostate.co.uk" },
           { name: "Platform", url: "https://neurostate.co.uk/solutions" },
-          { name: "Dashboards", url: "https://neurostate.co.uk/solutions/command-surfaces" }
+          { name: "Team Analytics", url: "https://neurostate.co.uk/solutions/command-surfaces" }
         ]}
       />
       <div className="min-h-screen bg-background">
@@ -103,7 +103,7 @@ export default function CommandSurfaces() {
                 </div>
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Layer 5 of 6</span>
                 <h1 className="text-3xl md:text-4xl font-normal text-foreground tracking-tight mt-2 mb-4">
-                  Dashboards
+                  Team Analytics
                 </h1>
                 <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                   One system. Different truths. Role-specific interfaces that deliver the right information to the right people, with privacy protected at every layer.
@@ -302,7 +302,7 @@ export default function CommandSurfaces() {
                         </div>
                         <div>
                           <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Next: Layer 6</span>
-                          <h3 className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">Economic & ROI Layer</h3>
+                          <h3 className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">Performance ROI</h3>
                           <p className="text-xs text-muted-foreground">Where cognitive health becomes measurable value</p>
                         </div>
                       </div>
