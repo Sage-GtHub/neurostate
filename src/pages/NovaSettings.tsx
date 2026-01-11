@@ -89,9 +89,64 @@ export default function NovaSettings() {
       <NovaSwipeWrapper>
         <div className="min-h-screen bg-background">
           <NovaNav />
-          <div className="flex items-center justify-center h-[60vh]">
-            <div className="w-10 h-10 rounded-full bg-foreground/5 flex items-center justify-center">
-              <Loader2 className="w-5 h-5 animate-spin text-foreground/40" />
+          
+          {/* Header skeleton */}
+          <div className="relative border-b border-foreground/5">
+            <div className="px-6 md:px-12 lg:px-20 xl:px-32 py-12">
+              <div className="w-20 h-3 rounded-full bg-foreground/5 skeleton-shimmer mb-3" />
+              <div className="w-32 h-6 rounded-lg bg-foreground/5 skeleton-shimmer mb-2" />
+              <div className="w-48 h-4 rounded-lg bg-foreground/5 skeleton-shimmer" />
+            </div>
+          </div>
+
+          <div className="relative px-6 md:px-12 lg:px-20 xl:px-32 py-12">
+            <div className="max-w-2xl mx-auto space-y-6">
+              {/* Profile card skeleton */}
+              <div className="p-6 bg-card rounded-3xl border border-foreground/5">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-10 h-10 rounded-full bg-foreground/5 skeleton-shimmer" />
+                  <div className="space-y-2">
+                    <div className="w-16 h-4 rounded-lg bg-foreground/5 skeleton-shimmer" />
+                    <div className="w-32 h-3 rounded-full bg-foreground/5 skeleton-shimmer" />
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <div className="w-12 h-3 rounded-full bg-foreground/5 skeleton-shimmer" />
+                    <div className="w-full h-11 rounded-xl bg-foreground/5 skeleton-shimmer" />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="w-16 h-3 rounded-full bg-foreground/5 skeleton-shimmer" />
+                    <div className="w-full h-11 rounded-xl bg-foreground/5 skeleton-shimmer" />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="w-20 h-3 rounded-full bg-foreground/5 skeleton-shimmer" />
+                    <div className="w-full h-11 rounded-xl bg-foreground/5 skeleton-shimmer" />
+                  </div>
+                  <div className="w-28 h-10 rounded-full bg-foreground/5 skeleton-shimmer" />
+                </div>
+              </div>
+              
+              {/* Preferences card skeleton */}
+              <div className="p-6 bg-card rounded-3xl border border-foreground/5">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-10 h-10 rounded-full bg-foreground/5 skeleton-shimmer" />
+                  <div className="space-y-2">
+                    <div className="w-20 h-4 rounded-lg bg-foreground/5 skeleton-shimmer" />
+                    <div className="w-36 h-3 rounded-full bg-foreground/5 skeleton-shimmer" />
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between py-3">
+                    <div className="w-24 h-4 rounded-lg bg-foreground/5 skeleton-shimmer" />
+                    <div className="w-10 h-6 rounded-full bg-foreground/5 skeleton-shimmer" />
+                  </div>
+                  <div className="flex items-center justify-between py-3">
+                    <div className="w-32 h-4 rounded-lg bg-foreground/5 skeleton-shimmer" />
+                    <div className="w-10 h-6 rounded-full bg-foreground/5 skeleton-shimmer" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

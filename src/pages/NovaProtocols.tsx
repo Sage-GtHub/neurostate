@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
+import { NovaSkeletonGrid } from "@/components/nova/NovaSkeleton";
 import { supabase } from "@/integrations/supabase/client";
 import { ProtocolAssessment } from "@/components/ProtocolAssessment";
 import { useToast } from "@/components/ui/use-toast";
@@ -755,8 +756,18 @@ export default function NovaProtocols() {
               </div>
 
               {goalsLoading ? (
-                <div className="flex items-center justify-center py-24">
-                  <Loader2 className="w-8 h-8 animate-spin text-accent" />
+                <div className="space-y-6">
+                  {/* Overview Cards skeleton */}
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    {Array.from({ length: 4 }).map((_, i) => (
+                      <div key={i} className="p-4 sm:p-6 bg-card rounded-xl border border-foreground/5">
+                        <div className="w-12 h-8 rounded-lg bg-foreground/5 skeleton-shimmer mx-auto mb-2" />
+                        <div className="w-16 h-3 rounded-full bg-foreground/5 skeleton-shimmer mx-auto" />
+                      </div>
+                    ))}
+                  </div>
+                  {/* Goals Grid skeleton */}
+                  <NovaSkeletonGrid count={3} variant="goal" />
                 </div>
               ) : goals.length === 0 ? (
                 <div className="text-center py-16">

@@ -266,8 +266,57 @@ export default function NovaGoals() {
             <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
           </div>
           <NovaNav />
-          <div className="flex items-center justify-center h-[60vh]">
-            <Loader2 className="w-8 h-8 animate-spin text-accent" />
+          
+          {/* Header skeleton */}
+          <div className="border-b border-border/50 bg-gradient-to-b from-background to-muted/20">
+            <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-6 sm:py-8">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="w-20 h-3 rounded-full bg-foreground/5 skeleton-shimmer mb-3" />
+                  <div className="w-24 h-7 rounded-lg bg-foreground/5 skeleton-shimmer mb-2" />
+                  <div className="w-48 h-4 rounded-lg bg-foreground/5 skeleton-shimmer" />
+                </div>
+                <div className="w-24 h-10 rounded-lg bg-foreground/5 skeleton-shimmer" />
+              </div>
+            </div>
+          </div>
+
+          <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8 sm:py-12">
+            {/* Overview Cards skeleton */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} className="p-4 sm:p-6 bg-card rounded-xl border border-foreground/5">
+                  <div className="w-12 h-8 rounded-lg bg-foreground/5 skeleton-shimmer mx-auto mb-2" />
+                  <div className="w-16 h-3 rounded-full bg-foreground/5 skeleton-shimmer mx-auto" />
+                </div>
+              ))}
+            </div>
+
+            {/* Goals Grid skeleton */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Array.from({ length: 3 }).map((_, i) => (
+                <div key={i} className="p-6 bg-card rounded-xl border border-foreground/5">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-foreground/5 skeleton-shimmer" />
+                      <div className="space-y-2">
+                        <div className="w-20 h-4 rounded-lg bg-foreground/5 skeleton-shimmer" />
+                        <div className="w-24 h-3 rounded-full bg-foreground/5 skeleton-shimmer" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center my-6">
+                    <div className="w-[120px] h-[120px] rounded-full bg-foreground/5 skeleton-shimmer" />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between">
+                      <div className="w-16 h-3 rounded-full bg-foreground/5 skeleton-shimmer" />
+                      <div className="w-12 h-3 rounded-full bg-foreground/5 skeleton-shimmer" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </NovaSwipeWrapper>
