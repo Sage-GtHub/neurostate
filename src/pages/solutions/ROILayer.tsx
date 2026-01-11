@@ -68,13 +68,13 @@ export default function ROILayer() {
   return (
     <>
       <SEO
-        title="ROI Analytics | Financial Attribution | NeuroState"
+        title="Performance ROI | Financial Attribution | NeuroState"
         description="Translate cognitive risk into business value. See the cost of burnout, price of underperformance, and return on intervention. In pounds, not platitudes."
         keywords="wellness ROI, burnout cost calculation, cognitive performance ROI, workforce investment returns, turnover cost prevention, productivity loss attribution, business case wellness"
       />
       <SolutionPageStructuredData
         solution={{
-          name: "ROI Analytics",
+          name: "Performance ROI",
           description: "Cognitive risk translated to business value. See the cost of burnout, the price of underperformance, and the return on intervention. In pounds, not platitudes.",
           url: "https://neurostate.co.uk/solutions/roi-layer",
           features: ["Burnout cost quantification", "Turnover exposure calculation", "Intervention ROI tracking", "Board-ready reporting", "Financial attribution"]
@@ -84,7 +84,7 @@ export default function ROILayer() {
         items={[
           { name: "Home", url: "https://neurostate.co.uk" },
           { name: "Platform", url: "https://neurostate.co.uk/solutions" },
-          { name: "ROI Analytics", url: "https://neurostate.co.uk/solutions/roi-layer" }
+          { name: "Performance ROI", url: "https://neurostate.co.uk/solutions/roi-layer" }
         ]}
       />
       <div className="min-h-screen bg-background">
@@ -99,7 +99,7 @@ export default function ROILayer() {
                 </div>
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Layer 6 of 6</span>
                 <h1 className="text-3xl md:text-4xl font-normal text-foreground tracking-tight mt-2 mb-4">
-                  ROI Analytics
+                  Performance ROI
                 </h1>
                 <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                   NeuroState translates cognitive risk into economic reality. This is where performance becomes measurable, and where cognitive infrastructure proves its value in pounds, not platitudes.

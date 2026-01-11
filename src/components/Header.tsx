@@ -106,12 +106,12 @@ export const Header = () => {
   ];
 
   const solutions = [
-    { label: "Data Integration", href: "/solutions/data-layer", desc: "Capture & unify signals" },
-    { label: "Cognitive Monitoring", href: "/solutions/state-engine", desc: "Interpret in real-time" },
-    { label: "Predictive Intelligence", href: "/solutions/prediction", desc: "Forecast what's next" },
-    { label: "AI Coaching", href: "/solutions/action-layer", desc: "Deliver interventions" },
-    { label: "Team Analytics", href: "/solutions/command-surfaces", desc: "Dashboards by role" },
-    { label: "Performance ROI", href: "/solutions/roi-layer", desc: "Measure business impact" },
+    { label: "Data Integration", href: "/solutions/data-layer", desc: "Unified signal ingestion from wearables & tools" },
+    { label: "Cognitive Monitoring", href: "/solutions/state-engine", desc: "Real-time cognitive state interpretation" },
+    { label: "Predictive Intelligence", href: "/solutions/prediction", desc: "Forecast capacity & model scenarios" },
+    { label: "AI Coaching", href: "/solutions/action-layer", desc: "Personalised nudges & interventions" },
+    { label: "Team Analytics", href: "/solutions/command-surfaces", desc: "Role-based dashboards & insights" },
+    { label: "Performance ROI", href: "/solutions/roi-layer", desc: "Quantify cognitive value in pounds" },
   ];
 
   const mobileLinks = [
