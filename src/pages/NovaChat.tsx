@@ -17,10 +17,8 @@ import {
   Check,
   RotateCcw,
   PanelLeftOpen,
-  PanelLeftClose,
   Plus,
   MessageSquare,
-  ExternalLink
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
@@ -28,10 +26,10 @@ import { SEO } from "@/components/SEO";
 import { cn } from "@/lib/utils";
 import { NovaVoiceInterfaceEnhanced } from "@/components/nova/NovaVoiceInterfaceEnhanced";
 import { PerplexityInput } from "@/components/nova/PerplexityInput";
-import { SourceCitation } from "@/components/nova/SourceCitation";
 import { useNovaUsage } from "@/hooks/useNovaUsage";
+import { useChatThreads } from "@/hooks/useChatThreads";
+import { ThreadSidebar } from "@/components/nova/ThreadSidebar";
 import ReactMarkdown from "react-markdown";
-import { format } from "date-fns";
 
 interface Message {
   id?: string;
@@ -41,16 +39,8 @@ interface Message {
   sources?: Array<{ title: string; type?: "study" | "article"; confidence?: "high" | "medium"; url?: string }>;
 }
 
-interface ChatThread {
-  id: string;
-  title: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
 import { NovaTypingAnimation } from "@/components/nova/NovaTypingAnimation";
 
-// Use the new typing animation component
 function TypingIndicator() {
   return <NovaTypingAnimation variant="default" />;
 }
@@ -65,21 +55,47 @@ const QUICK_SUGGESTIONS = [
 ];
 
 export default function NovaChat() {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [threads, setThreads] = useState<ChatThread[]>([]);
-  const [currentThreadId, setCurrentThreadId] = useState<string | null>(null);
+  const [localMessages, setLocalMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [isLoadingHistory, setIsLoadingHistory] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { toast } = useToast();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   
+  // Thread management
+  const {
+    threads,
+    archivedThreads,
+    currentThread,
+    messages: threadMessages,
+    loading: threadsLoading,
+    messagesLoading,
+    createThread,
+    updateThreadTitle,
+    archiveThread,
+    unarchiveThread,
+    deleteThread,
+    addMessage,
+    clearThreadMessages,
+    selectThread,
+    fetchArchivedThreads,
+  } = useChatThreads();
+
   // Nova usage tracking
-  const { startSession, incrementMessages, endSession, currentSessionId } = useNovaUsage();
+  const { startSession, incrementMessages, endSession } = useNovaUsage();
   const sessionIdRef = useRef<string | null>(null);
+
+  // Combine thread messages with local streaming messages
+  const displayMessages: Message[] = currentThread
+    ? threadMessages.map(m => ({
+        id: m.id,
+        role: m.role,
+        content: m.content,
+        timestamp: new Date(m.created_at),
+      }))
+    : localMessages;
 
   // Start session on mount
   useEffect(() => {
@@ -94,7 +110,6 @@ export default function NovaChat() {
     };
     initSession();
 
-    // End session on unmount
     return () => {
       if (sessionIdRef.current) {
         endSession(sessionIdRef.current);
@@ -103,39 +118,10 @@ export default function NovaChat() {
   }, [startSession, endSession]);
 
   useEffect(() => {
-    const loadHistory = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        setIsLoadingHistory(false);
-        return;
-      }
-
-      const { data: history } = await supabase
-        .from('nova_chat_messages')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: true })
-        .limit(50);
-
-      if (history && history.length > 0) {
-        setMessages(history.map(h => ({
-          id: h.id,
-          role: h.role as "user" | "assistant",
-          content: h.content,
-          timestamp: new Date(h.created_at)
-        })));
-      }
-      setIsLoadingHistory(false);
-    };
-
-    loadHistory();
-  }, []);
-
-  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [displayMessages, threadMessages]);
 
-  const streamChat = useCallback(async (userMessage: Message) => {
+  const streamChat = useCallback(async (userMessage: Message, allMessages: Message[]) => {
     const { data: { session } } = await supabase.auth.getSession();
     
     const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/nova-chat`, {
@@ -145,7 +131,7 @@ export default function NovaChat() {
         'Authorization': `Bearer ${session?.access_token || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
       },
       body: JSON.stringify({
-        messages: [...messages, userMessage].map(m => ({ role: m.role, content: m.content }))
+        messages: [...allMessages, userMessage].map(m => ({ role: m.role, content: m.content }))
       }),
     });
 
@@ -161,7 +147,8 @@ export default function NovaChat() {
     let assistantContent = "";
     let textBuffer = "";
 
-    setMessages(prev => [...prev, { 
+    // Add placeholder for streaming
+    setLocalMessages(prev => [...prev, { 
       role: "assistant", 
       content: "", 
       timestamp: new Date()
@@ -190,7 +177,7 @@ export default function NovaChat() {
           const content = parsed.choices?.[0]?.delta?.content;
           if (content) {
             assistantContent += content;
-            setMessages(prev => {
+            setLocalMessages(prev => {
               const newMessages = [...prev];
               newMessages[newMessages.length - 1] = {
                 ...newMessages[newMessages.length - 1],
@@ -207,7 +194,7 @@ export default function NovaChat() {
     }
 
     return assistantContent;
-  }, [messages]);
+  }, []);
 
   const handleSendMessage = async (messageContent?: string) => {
     const content = messageContent || input.trim();
@@ -224,30 +211,43 @@ export default function NovaChat() {
     }
 
     const userMessage: Message = { role: "user", content, timestamp: new Date() };
-    setMessages(prev => [...prev, userMessage]);
+    
+    // If no current thread, create one
+    let threadId = currentThread?.id;
+    if (!threadId) {
+      // Create new thread with first message as title
+      const title = content.length > 50 ? content.substring(0, 47) + "..." : content;
+      const newThread = await createThread(title);
+      threadId = newThread?.id;
+    }
+
+    // Add to local messages for immediate display
+    setLocalMessages(prev => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
 
     try {
-      await supabase.from('nova_chat_messages').insert({
-        user_id: user.id,
-        role: 'user',
-        content
-      });
+      // Save user message to database
+      await addMessage('user', content, threadId);
 
-      const assistantContent = await streamChat(userMessage);
+      // Get all messages for context
+      const contextMessages = currentThread
+        ? threadMessages.map(m => ({ role: m.role, content: m.content } as Message))
+        : localMessages;
+
+      const assistantContent = await streamChat(userMessage, contextMessages);
 
       if (assistantContent) {
-        await supabase.from('nova_chat_messages').insert({
-          user_id: user.id,
-          role: 'assistant',
-          content: assistantContent
-        });
+        // Save assistant message to database
+        await addMessage('assistant', assistantContent, threadId);
         
-        // Track usage - increment message count for this session
+        // Track usage
         if (sessionIdRef.current) {
           await incrementMessages(sessionIdRef.current, assistantContent.length);
         }
+
+        // Clear local messages - real-time subscription will update
+        setLocalMessages([]);
       }
 
     } catch (error) {
@@ -257,7 +257,7 @@ export default function NovaChat() {
         description: error instanceof Error ? error.message : "Failed to send message",
         variant: "destructive",
       });
-      setMessages(prev => prev.filter(m => m.content !== ""));
+      setLocalMessages(prev => prev.filter(m => m.content !== ""));
     } finally {
       setIsLoading(false);
     }
@@ -271,26 +271,30 @@ export default function NovaChat() {
   };
 
   const clearHistory = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return;
-
-    await supabase.from('nova_chat_messages').delete().eq('user_id', user.id);
-    setMessages([]);
+    if (currentThread) {
+      await clearThreadMessages(currentThread.id);
+    }
+    setLocalMessages([]);
     toast({ description: "Conversation cleared" });
   };
 
   const regenerateLastResponse = async () => {
-    if (messages.length < 2) return;
+    const msgs = displayMessages;
+    if (msgs.length < 2) return;
     
-    const lastUserMessageIndex = [...messages].reverse().findIndex(m => m.role === "user");
+    const lastUserMessageIndex = [...msgs].reverse().findIndex(m => m.role === "user");
     if (lastUserMessageIndex === -1) return;
 
-    const actualIndex = messages.length - 1 - lastUserMessageIndex;
-    const lastUserMessage = messages[actualIndex];
+    const actualIndex = msgs.length - 1 - lastUserMessageIndex;
+    const lastUserMessage = msgs[actualIndex];
     
-    setMessages(prev => prev.slice(0, actualIndex));
-    
-    setTimeout(() => handleSendMessage(lastUserMessage.content), 100);
+    // Can't easily regenerate with thread system, so just send same message
+    await handleSendMessage(lastUserMessage.content);
+  };
+
+  const handleNewConversation = async () => {
+    selectThread(null);
+    setLocalMessages([]);
   };
 
   const formatTime = (date?: Date) => {
@@ -346,7 +350,7 @@ export default function NovaChat() {
     </div>
   );
 
-  if (isLoadingHistory) {
+  if (threadsLoading) {
     return (
       <NovaSwipeWrapper>
         <div className="min-h-screen bg-background">
@@ -364,6 +368,8 @@ export default function NovaChat() {
     );
   }
 
+  const messages = displayMessages;
+
   return (
     <NovaSwipeWrapper>
       <SEO 
@@ -373,87 +379,22 @@ export default function NovaChat() {
       <div className="min-h-screen bg-background flex flex-col relative">
         <NovaNav />
         
-        {/* Conversation History Sidebar */}
-        <div 
-          className={cn(
-            "fixed inset-y-0 left-0 w-72 bg-background/95 backdrop-blur-xl border-r border-border/30 z-40",
-            "transform transition-transform duration-300 ease-out",
-            "pt-[57px]",
-            sidebarOpen ? "translate-x-0" : "-translate-x-full"
-          )}
-        >
-          <div className="flex flex-col h-full">
-            <div className="flex items-center justify-between p-4 border-b border-border/30">
-              <span className="text-sm font-medium">Conversation History</span>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setSidebarOpen(false)}
-                className="h-8 w-8 text-muted-foreground hover:text-foreground"
-              >
-                <PanelLeftClose className="h-4 w-4" />
-              </Button>
-            </div>
-            <div className="flex-1 overflow-y-auto py-3">
-              {threads.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-12 text-center px-4">
-                  <MessageSquare className="w-8 h-8 text-muted-foreground/30 mb-3" />
-                  <p className="text-xs text-muted-foreground">No conversations yet</p>
-                  <p className="text-[10px] text-muted-foreground/60 mt-1">Start chatting to save history</p>
-                </div>
-              ) : (
-                <div className="space-y-1 px-3">
-                  {threads.map((thread) => (
-                    <div
-                      key={thread.id}
-                      className={cn(
-                        "group flex items-center gap-3 px-3 py-3 rounded-xl cursor-pointer transition-all duration-200",
-                        thread.id === currentThreadId 
-                          ? "bg-accent/10 text-foreground border border-accent/20" 
-                          : "hover:bg-muted/50 text-muted-foreground hover:text-foreground"
-                      )}
-                      onClick={() => {
-                        setCurrentThreadId(thread.id);
-                        setSidebarOpen(false);
-                      }}
-                    >
-                      <MessageSquare className="h-4 w-4 flex-shrink-0" />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm truncate font-medium">{thread.title}</p>
-                        <p className="text-[10px] text-muted-foreground">
-                          {format(new Date(thread.updatedAt), "MMM d, h:mm a")}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-            <div className="p-4 border-t border-border/30">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => {
-                  setMessages([]);
-                  setCurrentThreadId(null);
-                  setSidebarOpen(false);
-                }}
-                className="w-full"
-              >
-                <Plus className="h-4 w-4 mr-2" />
-                New Conversation
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* Sidebar overlay */}
-        {sidebarOpen && (
-          <div 
-            className="fixed inset-0 bg-background/60 z-30 pt-[57px]"
-            onClick={() => setSidebarOpen(false)}
-          />
-        )}
+        {/* Thread Sidebar */}
+        <ThreadSidebar
+          open={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+          threads={threads}
+          archivedThreads={archivedThreads}
+          currentThread={currentThread}
+          loading={threadsLoading}
+          onSelectThread={selectThread}
+          onCreateThread={handleNewConversation}
+          onRenameThread={updateThreadTitle}
+          onArchiveThread={archiveThread}
+          onUnarchiveThread={unarchiveThread}
+          onDeleteThread={deleteThread}
+          onFetchArchived={fetchArchivedThreads}
+        />
         
         {/* Floating orbs */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -478,7 +419,9 @@ export default function NovaChat() {
                     <Sparkles className="w-3.5 h-3.5 text-foreground/60" />
                   </div>
                   <div>
-                    <h1 className="text-xs font-medium text-foreground">Nova</h1>
+                    <h1 className="text-xs font-medium text-foreground">
+                      {currentThread?.title || "Nova"}
+                    </h1>
                     <div className="flex items-center gap-1.5">
                       <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
                       <p className="text-[10px] text-foreground/40">Online</p>
@@ -486,12 +429,20 @@ export default function NovaChat() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={handleNewConversation}
+                    className="h-8 w-8 text-muted-foreground hover:text-foreground"
+                  >
+                    <Plus className="h-4 w-4" />
+                  </Button>
                   <NovaVoiceInterfaceEnhanced 
                     onTranscript={(text, role) => {
                       if (role === "user") {
                         handleSendMessage(text);
                       } else {
-                        setMessages(prev => [...prev, { role: "assistant", content: text, timestamp: new Date() }]);
+                        setLocalMessages(prev => [...prev, { role: "assistant", content: text, timestamp: new Date() }]);
                       }
                     }}
                   />
@@ -511,8 +462,12 @@ export default function NovaChat() {
           <div className="px-6 md:px-12 lg:px-20 xl:px-32 flex-1 flex flex-col">
             <div className="max-w-3xl mx-auto w-full flex-1 flex flex-col">
               
-              {messages.length === 0 ? (
+              {messages.length === 0 && !messagesLoading ? (
                 <EmptyState />
+              ) : messagesLoading ? (
+                <div className="flex-1 flex items-center justify-center">
+                  <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+                </div>
               ) : (
                 <>
                   <div 
@@ -521,7 +476,7 @@ export default function NovaChat() {
                   >
                     {messages.map((message, index) => (
                       <div 
-                        key={index} 
+                        key={message.id || index} 
                         className="animate-fade-in"
                         style={{ animationDelay: `${Math.min(index * 30, 150)}ms` }}
                       >
@@ -563,7 +518,6 @@ export default function NovaChat() {
                                   >
                                     {message.content}
                                   </ReactMarkdown>
-                                  {/* Streaming cursor */}
                                   {isLoading && index === messages.length - 1 && (
                                     <span className="inline-block w-0.5 h-4 bg-accent ml-0.5 animate-pulse" />
                                   )}
@@ -571,7 +525,6 @@ export default function NovaChat() {
                               ) : (
                                 <TypingIndicator />
                               )}
-                              
                               
                               {message.content && (
                                 <div className="flex items-center gap-2 pt-1">
