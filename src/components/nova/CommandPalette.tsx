@@ -91,13 +91,6 @@ export function CommandPalette() {
 
   return (
     <>
-      {/* Trigger button for mobile */}
-      <button
-        onClick={() => setOpen(true)}
-        className="fixed bottom-20 right-4 md:hidden z-50 w-12 h-12 rounded-full bg-foreground text-background shadow-lg flex items-center justify-center"
-      >
-        <Search className="w-5 h-5" />
-      </button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput placeholder="Type a command or search..." />
