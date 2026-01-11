@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 interface NovaSkeletonProps {
-  variant?: "card" | "metric" | "chart" | "list" | "insight";
+  variant?: "card" | "metric" | "chart" | "list" | "insight" | "protocol" | "goal";
   className?: string;
 }
 
@@ -79,6 +79,57 @@ export function NovaSkeleton({ variant = "card", className }: NovaSkeletonProps)
     );
   }
 
+  if (variant === "protocol") {
+    return (
+      <div className={cn(
+        "p-5 rounded-2xl border border-foreground/5 bg-foreground/[0.02]",
+        className
+      )}>
+        <div className="flex items-start gap-4">
+          <div className="w-12 h-12 rounded-2xl bg-foreground/5 skeleton-shimmer flex-shrink-0" />
+          <div className="flex-1 space-y-3">
+            <div className="w-32 h-4 rounded-lg bg-foreground/5 skeleton-shimmer" />
+            <div className="w-full h-3 rounded-full bg-foreground/5 skeleton-shimmer" />
+            <div className="w-2/3 h-3 rounded-full bg-foreground/5 skeleton-shimmer" />
+          </div>
+          <div className="w-16 h-6 rounded-full bg-foreground/5 skeleton-shimmer" />
+        </div>
+        <div className="mt-4 flex items-center gap-2">
+          <div className="flex-1 h-2 rounded-full bg-foreground/5 skeleton-shimmer" />
+          <div className="w-8 h-3 rounded-full bg-foreground/5 skeleton-shimmer" />
+        </div>
+      </div>
+    );
+  }
+
+  if (variant === "goal") {
+    return (
+      <div className={cn(
+        "p-6 bg-card rounded-xl border border-foreground/5",
+        className
+      )}>
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-foreground/5 skeleton-shimmer" />
+            <div className="space-y-2">
+              <div className="w-20 h-4 rounded-lg bg-foreground/5 skeleton-shimmer" />
+              <div className="w-24 h-3 rounded-full bg-foreground/5 skeleton-shimmer" />
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center justify-center my-6">
+          <div className="w-[100px] h-[100px] rounded-full bg-foreground/5 skeleton-shimmer" />
+        </div>
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <div className="w-16 h-3 rounded-full bg-foreground/5 skeleton-shimmer" />
+            <div className="w-12 h-3 rounded-full bg-foreground/5 skeleton-shimmer" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // Default card skeleton
   return (
     <div className={cn(
@@ -96,12 +147,16 @@ export function NovaSkeleton({ variant = "card", className }: NovaSkeletonProps)
 }
 
 // Grid skeleton for loading states
-export function NovaSkeletonGrid({ count = 4, variant = "metric" as const }: { count?: number; variant?: "card" | "metric" | "insight" }) {
+export function NovaSkeletonGrid({ count = 4, variant = "metric" as const }: { count?: number; variant?: "card" | "metric" | "insight" | "protocol" | "goal" }) {
   const gridCols = variant === "metric" 
     ? "grid-cols-2 lg:grid-cols-4" 
     : variant === "insight" 
       ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" 
-      : "grid-cols-1 md:grid-cols-2";
+      : variant === "protocol"
+        ? "grid-cols-1 md:grid-cols-2"
+        : variant === "goal"
+          ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          : "grid-cols-1 md:grid-cols-2";
   
   return (
     <div className={cn("grid gap-4", gridCols)}>
