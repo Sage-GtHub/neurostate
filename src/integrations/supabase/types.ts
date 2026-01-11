@@ -1144,6 +1144,225 @@ export type Database = {
         }
         Relationships: []
       }
+      team_interventions: {
+        Row: {
+          actual_value: number | null
+          ai_trace: string | null
+          assigned_to: string | null
+          completed_at: string | null
+          confidence_score: number | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          due_date: string | null
+          estimated_value: number | null
+          id: string
+          impact_level: string | null
+          intervention_type: string
+          organisation_id: string
+          priority: string | null
+          signal_change: string | null
+          started_at: string | null
+          status: string
+          team_id: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          actual_value?: number | null
+          ai_trace?: string | null
+          assigned_to?: string | null
+          completed_at?: string | null
+          confidence_score?: number | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          due_date?: string | null
+          estimated_value?: number | null
+          id?: string
+          impact_level?: string | null
+          intervention_type?: string
+          organisation_id: string
+          priority?: string | null
+          signal_change?: string | null
+          started_at?: string | null
+          status?: string
+          team_id?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          actual_value?: number | null
+          ai_trace?: string | null
+          assigned_to?: string | null
+          completed_at?: string | null
+          confidence_score?: number | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          due_date?: string | null
+          estimated_value?: number | null
+          id?: string
+          impact_level?: string | null
+          intervention_type?: string
+          organisation_id?: string
+          priority?: string | null
+          signal_change?: string | null
+          started_at?: string | null
+          status?: string
+          team_id?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "team_interventions_organisation_id_fkey"
+            columns: ["organisation_id"]
+            isOneToOne: false
+            referencedRelation: "organisations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "team_interventions_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      team_members: {
+        Row: {
+          id: string
+          joined_at: string
+          role: string | null
+          team_id: string
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          joined_at?: string
+          role?: string | null
+          team_id: string
+          user_id: string
+        }
+        Update: {
+          id?: string
+          joined_at?: string
+          role?: string | null
+          team_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "team_members_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      team_metrics: {
+        Row: {
+          active_members: number | null
+          avg_energy_score: number | null
+          avg_focus_score: number | null
+          avg_readiness_score: number | null
+          avg_recovery_score: number | null
+          burnout_risk_score: number | null
+          check_ins_count: number | null
+          cognitive_capacity_index: number | null
+          created_at: string
+          id: string
+          metric_date: string
+          protocol_completion_rate: number | null
+          revenue_exposure: number | null
+          team_id: string
+        }
+        Insert: {
+          active_members?: number | null
+          avg_energy_score?: number | null
+          avg_focus_score?: number | null
+          avg_readiness_score?: number | null
+          avg_recovery_score?: number | null
+          burnout_risk_score?: number | null
+          check_ins_count?: number | null
+          cognitive_capacity_index?: number | null
+          created_at?: string
+          id?: string
+          metric_date?: string
+          protocol_completion_rate?: number | null
+          revenue_exposure?: number | null
+          team_id: string
+        }
+        Update: {
+          active_members?: number | null
+          avg_energy_score?: number | null
+          avg_focus_score?: number | null
+          avg_readiness_score?: number | null
+          avg_recovery_score?: number | null
+          burnout_risk_score?: number | null
+          check_ins_count?: number | null
+          cognitive_capacity_index?: number | null
+          created_at?: string
+          id?: string
+          metric_date?: string
+          protocol_completion_rate?: number | null
+          revenue_exposure?: number | null
+          team_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "team_metrics_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      teams: {
+        Row: {
+          color: string | null
+          created_at: string
+          description: string | null
+          icon: string | null
+          id: string
+          name: string
+          organisation_id: string
+          updated_at: string
+        }
+        Insert: {
+          color?: string | null
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          name: string
+          organisation_id: string
+          updated_at?: string
+        }
+        Update: {
+          color?: string | null
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          name?: string
+          organisation_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "teams_organisation_id_fkey"
+            columns: ["organisation_id"]
+            isOneToOne: false
+            referencedRelation: "organisations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_badges: {
         Row: {
           earned_at: string

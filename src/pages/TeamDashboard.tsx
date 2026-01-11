@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -32,7 +32,9 @@ import {
   Lightbulb,
   CheckCircle2,
   MapPin,
-  Briefcase
+  Briefcase,
+  Plus,
+  Loader2
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -47,6 +49,12 @@ import { supabase } from '@/integrations/supabase/client';
 import { TeamBreakdownModal, InsightTraceModal, FinancialBreakdownModal } from '@/components/DashboardModals';
 import { OnboardingWizard } from '@/components/onboarding';
 import { useOnboardingWizard } from '@/hooks/useOnboardingWizard';
+import { useTeamDashboard } from '@/hooks/useTeamDashboard';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/hooks/use-toast';
 
 // Executive Intelligence Metrics
 const executiveMetrics = {
@@ -213,14 +221,15 @@ const formatCurrency = (value: number, abbreviated = false): string => {
 
 export default function TeamDashboard() {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  const [authLoading, setAuthLoading] = useState(true);
   const [timeRange, setTimeRange] = useState('7d');
-  const [selectedTeam, setSelectedTeam] = useState('all');
+  const [selectedTeamFilter, setSelectedTeamFilter] = useState('all');
   const [selectedFunction, setSelectedFunction] = useState('all');
   const [selectedLocation, setSelectedLocation] = useState('all');
   const [comparisonPeriod, setComparisonPeriod] = useState<'week' | 'month'>('week');
-  const [expandedIntervention, setExpandedIntervention] = useState<number | null>(null);
+  const [expandedIntervention, setExpandedIntervention] = useState<string | null>(null);
   const [forecastPeriod, setForecastPeriod] = useState<7 | 14 | 30>(7);
   const [showInsightTrace, setShowInsightTrace] = useState(false);
   
@@ -230,9 +239,77 @@ export default function TeamDashboard() {
   const [showFinancialModal, setShowFinancialModal] = useState(false);
   const [showInsightModal, setShowInsightModal] = useState(false);
   const [selectedInsight, setSelectedInsight] = useState<any>(null);
+  const [showCreateTeamDialog, setShowCreateTeamDialog] = useState(false);
+  const [showCreateInterventionDialog, setShowCreateInterventionDialog] = useState(false);
+  const [newTeamName, setNewTeamName] = useState('');
+  const [newTeamDescription, setNewTeamDescription] = useState('');
+  const [newInterventionTitle, setNewInterventionTitle] = useState('');
+  const [newInterventionTeam, setNewInterventionTeam] = useState('');
+  const [newInterventionPriority, setNewInterventionPriority] = useState<'low' | 'medium' | 'high'>('medium');
   
   // Onboarding wizard
   const { showOnboarding, completeOnboarding } = useOnboardingWizard();
+  
+  // Real team dashboard data
+  const {
+    organisation,
+    orgMembers,
+    memberAnalytics,
+    isAdmin,
+    teams,
+    teamMembers,
+    interventions: realInterventions,
+    teamMetrics,
+    loading: dashboardLoading,
+    createTeam,
+    updateTeam,
+    deleteTeam,
+    addTeamMember,
+    removeTeamMember,
+    createIntervention,
+    updateIntervention,
+    deleteIntervention,
+    getAggregatedMetrics,
+    getTeamBurnoutRankings,
+    refetch
+  } = useTeamDashboard();
+
+  // Compute real metrics
+  const aggregatedMetrics = useMemo(() => getAggregatedMetrics(), [getAggregatedMetrics]);
+  const teamBurnoutRankings = useMemo(() => getTeamBurnoutRankings(), [getTeamBurnoutRankings]);
+  
+  // Map real interventions to UI format
+  const displayInterventions = useMemo(() => {
+    return realInterventions.map(intervention => ({
+      id: intervention.id,
+      title: intervention.title,
+      team: intervention.team?.name || 'Organisation',
+      impact: intervention.impact_level,
+      confidence: intervention.confidence_score,
+      estimatedValue: Number(intervention.estimated_value) || 0,
+      trace: intervention.ai_trace || 'Nova AI analysis pending...',
+      status: intervention.status
+    }));
+  }, [realInterventions]);
+  
+  // Pending interventions count
+  const pendingInterventionsCount = useMemo(() => 
+    realInterventions.filter(i => i.status === 'pending' || i.status === 'in_progress').length
+  , [realInterventions]);
+  
+  // Compute adoption metrics from real data
+  const adoptionMetricsReal = useMemo(() => {
+    const activeInLast7Days = memberAnalytics.filter(
+      a => a.last_active_at && new Date(a.last_active_at) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+    ).length;
+    
+    return {
+      dau: { value: activeInLast7Days, change: 12.3, trend: 'up' as const },
+      wat: { value: teams.length, change: 5.0, trend: 'up' as const },
+      coverageRate: { value: orgMembers.length > 0 ? Math.round((activeInLast7Days / orgMembers.length) * 100) : 0, change: 4.2, trend: 'up' as const },
+      interventionAdoption: { value: realInterventions.filter(i => i.status === 'completed').length, change: 8.1, trend: 'up' as const }
+    };
+  }, [memberAnalytics, teams, orgMembers, realInterventions]);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -242,10 +319,59 @@ export default function TeamDashboard() {
         return;
       }
       setUser(user);
-      setLoading(false);
+      setAuthLoading(false);
     };
     checkAuth();
   }, [navigate]);
+
+  const handleCreateTeam = async () => {
+    if (!newTeamName.trim()) return;
+    try {
+      await createTeam(newTeamName, newTeamDescription);
+      setNewTeamName('');
+      setNewTeamDescription('');
+      setShowCreateTeamDialog(false);
+    } catch (error) {
+      toast({ title: 'Error creating team', variant: 'destructive' });
+    }
+  };
+
+  const handleCreateIntervention = async () => {
+    if (!newInterventionTitle.trim()) return;
+    try {
+      await createIntervention({
+        title: newInterventionTitle,
+        team_id: newInterventionTeam || undefined,
+        priority: newInterventionPriority,
+        impact_level: newInterventionPriority === 'high' ? 'high' : 'medium',
+        confidence_score: 75,
+        ai_trace: 'Manually created intervention'
+      });
+      setNewInterventionTitle('');
+      setNewInterventionTeam('');
+      setShowCreateInterventionDialog(false);
+    } catch (error) {
+      toast({ title: 'Error creating intervention', variant: 'destructive' });
+    }
+  };
+
+  const handleApplyIntervention = async (interventionId: string) => {
+    try {
+      await updateIntervention(interventionId, { status: 'in_progress' });
+    } catch (error) {
+      toast({ title: 'Error applying intervention', variant: 'destructive' });
+    }
+  };
+
+  const handleCompleteIntervention = async (interventionId: string) => {
+    try {
+      await updateIntervention(interventionId, { status: 'completed' });
+    } catch (error) {
+      toast({ title: 'Error completing intervention', variant: 'destructive' });
+    }
+  };
+
+  const loading = authLoading || dashboardLoading;
 
   if (loading) {
     return (
@@ -397,17 +523,16 @@ export default function TeamDashboard() {
                     <SelectItem value="30d">Last 30 days</SelectItem>
                   </SelectContent>
                 </Select>
-                <Select value={selectedTeam} onValueChange={setSelectedTeam}>
+                <Select value={selectedTeamFilter} onValueChange={setSelectedTeamFilter}>
                   <SelectTrigger className="h-8 md:h-9 w-[110px] md:w-[130px] text-[10px] md:text-xs rounded-lg border-border/50 flex-shrink-0">
                     <Users className="w-3 h-3 mr-1" />
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All Teams</SelectItem>
-                    <SelectItem value="engineering">Engineering</SelectItem>
-                    <SelectItem value="product">Product</SelectItem>
-                    <SelectItem value="sales">Sales</SelectItem>
-                    <SelectItem value="customer-success">Customer Success</SelectItem>
+                    {teams.map(team => (
+                      <SelectItem key={team.id} value={team.id}>{team.name}</SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
                 <Select value={selectedFunction} onValueChange={setSelectedFunction}>
@@ -946,60 +1071,110 @@ export default function TeamDashboard() {
                       <h3 className="text-xs md:text-sm font-medium text-foreground">Nova Interventions</h3>
                       <p className="text-[9px] md:text-[10px] text-muted-foreground mt-0.5 hidden sm:block">AI-recommended actions with ROI</p>
                     </div>
-                    <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4 text-accent" />
+                    <div className="flex items-center gap-2">
+                      {isAdmin && (
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-6 w-6 p-0"
+                          onClick={() => setShowCreateInterventionDialog(true)}
+                        >
+                          <Plus className="w-3 h-3" />
+                        </Button>
+                      )}
+                      <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4 text-accent" />
+                    </div>
                   </div>
                   <div className="space-y-2 md:space-y-3">
-                    {interventions.map((intervention) => (
-                      <div 
-                        key={intervention.id}
-                        className="p-2.5 md:p-3 rounded-lg md:rounded-xl bg-background border border-border/30 cursor-pointer hover:border-accent/30 transition-all"
-                        onClick={() => setExpandedIntervention(expandedIntervention === intervention.id ? null : intervention.id)}
-                      >
-                        <div className="flex items-start justify-between gap-2">
-                          <div className="flex-1 min-w-0">
-                            <div className="text-[10px] md:text-xs font-medium text-foreground mb-1 line-clamp-2">{intervention.title}</div>
-                            <div className="flex items-center gap-1.5 md:gap-2 flex-wrap">
-                              <Badge variant="outline" className="text-[8px] md:text-[9px] px-1 md:px-1.5 py-0 rounded">
-                                {intervention.team}
-                              </Badge>
-                              <Badge 
-                                className={`text-[8px] md:text-[9px] px-1 md:px-1.5 py-0 rounded ${
-                                  intervention.impact === 'high' ? 'bg-green-500/20 text-green-600' : 'bg-amber-500/20 text-amber-600'
-                                }`}
-                              >
-                                {intervention.impact}
-                              </Badge>
-                              <span className="text-[8px] md:text-[9px] text-primary font-medium">
-                                {formatCurrency(intervention.estimatedValue, true)}
-                              </span>
+                    {displayInterventions.length === 0 ? (
+                      <div className="text-center py-6 text-muted-foreground text-xs">
+                        No interventions yet. {isAdmin && 'Click + to create one.'}
+                      </div>
+                    ) : (
+                      displayInterventions.map((intervention) => (
+                        <div 
+                          key={intervention.id}
+                          className="p-2.5 md:p-3 rounded-lg md:rounded-xl bg-background border border-border/30 cursor-pointer hover:border-accent/30 transition-all"
+                          onClick={() => setExpandedIntervention(expandedIntervention === intervention.id ? null : intervention.id)}
+                        >
+                          <div className="flex items-start justify-between gap-2">
+                            <div className="flex-1 min-w-0">
+                              <div className="text-[10px] md:text-xs font-medium text-foreground mb-1 line-clamp-2">{intervention.title}</div>
+                              <div className="flex items-center gap-1.5 md:gap-2 flex-wrap">
+                                <Badge variant="outline" className="text-[8px] md:text-[9px] px-1 md:px-1.5 py-0 rounded">
+                                  {intervention.team}
+                                </Badge>
+                                <Badge 
+                                  className={`text-[8px] md:text-[9px] px-1 md:px-1.5 py-0 rounded ${
+                                    intervention.impact === 'high' ? 'bg-green-500/20 text-green-600' : 'bg-amber-500/20 text-amber-600'
+                                  }`}
+                                >
+                                  {intervention.impact}
+                                </Badge>
+                                <Badge 
+                                  className={`text-[8px] md:text-[9px] px-1 md:px-1.5 py-0 rounded ${
+                                    intervention.status === 'completed' ? 'bg-green-500/20 text-green-600' : 
+                                    intervention.status === 'in_progress' ? 'bg-blue-500/20 text-blue-600' : 
+                                    'bg-amber-500/20 text-amber-600'
+                                  }`}
+                                >
+                                  {intervention.status}
+                                </Badge>
+                                <span className="text-[8px] md:text-[9px] text-primary font-medium">
+                                  {formatCurrency(intervention.estimatedValue, true)}
+                                </span>
+                              </div>
+                            </div>
+                            <div className="text-right flex-shrink-0">
+                              <div className="text-[10px] md:text-xs font-medium text-accent">{intervention.confidence}%</div>
+                              <div className="text-[8px] md:text-[9px] text-muted-foreground hidden sm:block">confidence</div>
                             </div>
                           </div>
-                          <div className="text-right flex-shrink-0">
-                            <div className="text-[10px] md:text-xs font-medium text-accent">{intervention.confidence}%</div>
-                            <div className="text-[8px] md:text-[9px] text-muted-foreground hidden sm:block">confidence</div>
-                          </div>
+                          <AnimatePresence>
+                            {expandedIntervention === intervention.id && (
+                              <motion.div 
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                exit={{ opacity: 0, height: 0 }}
+                                className="mt-2 md:mt-3 pt-2 md:pt-3 border-t border-border/30"
+                              >
+                                <div className="text-[9px] md:text-[10px] text-muted-foreground mb-1.5 md:mb-2 flex items-center gap-1">
+                                  <Info className="w-2.5 h-2.5 md:w-3 md:h-3" />
+                                  Insight Trace
+                                </div>
+                                <p className="text-[10px] md:text-[11px] text-foreground/80 leading-relaxed">{intervention.trace}</p>
+                                <div className="flex gap-2 mt-2 md:mt-3">
+                                  {intervention.status === 'pending' && (
+                                    <Button 
+                                      size="sm" 
+                                      className="flex-1 h-7 md:h-8 text-[9px] md:text-[10px] bg-accent text-white hover:bg-accent/90 rounded-lg"
+                                      onClick={(e) => { e.stopPropagation(); handleApplyIntervention(intervention.id); }}
+                                    >
+                                      Start intervention
+                                    </Button>
+                                  )}
+                                  {intervention.status === 'in_progress' && (
+                                    <Button 
+                                      size="sm" 
+                                      className="flex-1 h-7 md:h-8 text-[9px] md:text-[10px] bg-green-600 text-white hover:bg-green-700 rounded-lg"
+                                      onClick={(e) => { e.stopPropagation(); handleCompleteIntervention(intervention.id); }}
+                                    >
+                                      Mark complete
+                                    </Button>
+                                  )}
+                                  {intervention.status === 'completed' && (
+                                    <div className="flex-1 h-7 md:h-8 flex items-center justify-center text-[9px] md:text-[10px] text-green-600">
+                                      <CheckCircle2 className="w-3 h-3 mr-1" />
+                                      Completed
+                                    </div>
+                                  )}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
                         </div>
-                        <AnimatePresence>
-                          {expandedIntervention === intervention.id && (
-                            <motion.div 
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: 'auto' }}
-                              exit={{ opacity: 0, height: 0 }}
-                              className="mt-2 md:mt-3 pt-2 md:pt-3 border-t border-border/30"
-                            >
-                              <div className="text-[9px] md:text-[10px] text-muted-foreground mb-1.5 md:mb-2 flex items-center gap-1">
-                                <Info className="w-2.5 h-2.5 md:w-3 md:h-3" />
-                                Insight Trace
-                              </div>
-                              <p className="text-[10px] md:text-[11px] text-foreground/80 leading-relaxed">{intervention.trace}</p>
-                              <Button size="sm" className="w-full mt-2 md:mt-3 h-7 md:h-8 text-[9px] md:text-[10px] bg-accent text-white hover:bg-accent/90 rounded-lg">
-                                Apply intervention
-                              </Button>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    ))}
+                      ))
+                    )}
                   </div>
                 </motion.div>
 
@@ -1119,6 +1294,64 @@ export default function TeamDashboard() {
             insight={selectedInsight}
           />
         )}
+        
+        {/* Create Team Dialog */}
+        <Dialog open={showCreateTeamDialog} onOpenChange={setShowCreateTeamDialog}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Create Team</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="teamName">Team Name</Label>
+                <Input id="teamName" value={newTeamName} onChange={(e) => setNewTeamName(e.target.value)} placeholder="e.g. Engineering" />
+              </div>
+              <div>
+                <Label htmlFor="teamDesc">Description</Label>
+                <Textarea id="teamDesc" value={newTeamDescription} onChange={(e) => setNewTeamDescription(e.target.value)} placeholder="Optional description" />
+              </div>
+              <Button onClick={handleCreateTeam} className="w-full">Create Team</Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        {/* Create Intervention Dialog */}
+        <Dialog open={showCreateInterventionDialog} onOpenChange={setShowCreateInterventionDialog}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Create Intervention</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="intTitle">Title</Label>
+                <Input id="intTitle" value={newInterventionTitle} onChange={(e) => setNewInterventionTitle(e.target.value)} placeholder="e.g. Schedule recovery day" />
+              </div>
+              <div>
+                <Label htmlFor="intTeam">Team (optional)</Label>
+                <Select value={newInterventionTeam} onValueChange={setNewInterventionTeam}>
+                  <SelectTrigger><SelectValue placeholder="Select team" /></SelectTrigger>
+                  <SelectContent>
+                    {teams.map(team => (
+                      <SelectItem key={team.id} value={team.id}>{team.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label>Priority</Label>
+                <Select value={newInterventionPriority} onValueChange={(v) => setNewInterventionPriority(v as 'low' | 'medium' | 'high')}>
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="low">Low</SelectItem>
+                    <SelectItem value="medium">Medium</SelectItem>
+                    <SelectItem value="high">High</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <Button onClick={handleCreateIntervention} className="w-full">Create Intervention</Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </>
   );
