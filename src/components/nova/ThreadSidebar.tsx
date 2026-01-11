@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, forwardRef, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { format, formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow } from 'date-fns';
 import {
   MessageSquare,
   Plus,
@@ -33,6 +33,138 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import { ChatThread } from '@/hooks/useChatThreads';
+
+interface ThreadItemProps {
+  thread: ChatThread;
+  isArchived?: boolean;
+  isSelected: boolean;
+  isEditing: boolean;
+  editTitle: string;
+  onEditTitleChange: (title: string) => void;
+  onSaveEdit: () => void;
+  onCancelEdit: () => void;
+  onStartEdit: (thread: ChatThread) => void;
+  onSelect: () => void;
+  onArchive: () => void;
+  onUnarchive: () => void;
+  onDelete: () => void;
+}
+
+const ThreadItem = memo(forwardRef<HTMLDivElement, ThreadItemProps>(({
+  thread,
+  isArchived = false,
+  isSelected,
+  isEditing,
+  editTitle,
+  onEditTitleChange,
+  onSaveEdit,
+  onCancelEdit,
+  onStartEdit,
+  onSelect,
+  onArchive,
+  onUnarchive,
+  onDelete,
+}, ref) => {
+  return (
+    <motion.div
+      ref={ref}
+      layout
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, x: -50 }}
+      className={cn(
+        "group relative flex items-center gap-2 px-3 py-2.5 rounded-xl cursor-pointer transition-all duration-200",
+        isSelected
+          ? "bg-accent/10 text-foreground border border-accent/20"
+          : "hover:bg-muted/50 text-muted-foreground hover:text-foreground"
+      )}
+    >
+      <MessageSquare className="h-4 w-4 flex-shrink-0" />
+      
+      <div className="flex-1 min-w-0">
+        {isEditing ? (
+          <div className="flex items-center gap-1">
+            <Input
+              value={editTitle}
+              onChange={(e) => onEditTitleChange(e.target.value)}
+              className="h-6 text-xs py-0 px-2"
+              autoFocus
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') onSaveEdit();
+                if (e.key === 'Escape') onCancelEdit();
+              }}
+            />
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-5 w-5"
+              onClick={onSaveEdit}
+            >
+              <Check className="h-3 w-3" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-5 w-5"
+              onClick={onCancelEdit}
+            >
+              <X className="h-3 w-3" />
+            </Button>
+          </div>
+        ) : (
+          <div onClick={onSelect}>
+            <p className="text-sm truncate font-medium">{thread.title}</p>
+            <p className="text-[10px] text-muted-foreground">
+              {thread.message_count || 0} messages • {formatDistanceToNow(new Date(thread.updated_at), { addSuffix: true })}
+            </p>
+          </div>
+        )}
+      </div>
+
+      {!isEditing && (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <MoreHorizontal className="h-3.5 w-3.5" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-40">
+            <DropdownMenuItem onClick={() => onStartEdit(thread)}>
+              <Pencil className="h-3.5 w-3.5 mr-2" />
+              Rename
+            </DropdownMenuItem>
+            {isArchived ? (
+              <DropdownMenuItem onClick={onUnarchive}>
+                <ArchiveRestore className="h-3.5 w-3.5 mr-2" />
+                Restore
+              </DropdownMenuItem>
+            ) : (
+              <DropdownMenuItem onClick={onArchive}>
+                <Archive className="h-3.5 w-3.5 mr-2" />
+                Archive
+              </DropdownMenuItem>
+            )}
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={onDelete}
+              className="text-destructive focus:text-destructive"
+            >
+              <Trash2 className="h-3.5 w-3.5 mr-2" />
+              Delete
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )}
+    </motion.div>
+  );
+}));
+
+ThreadItem.displayName = 'ThreadItem';
 
 interface ThreadSidebarProps {
   open: boolean;
@@ -94,112 +226,27 @@ export function ThreadSidebar({
     setShowArchived(!showArchived);
   };
 
-  const ThreadItem = ({ thread, isArchived = false }: { thread: ChatThread; isArchived?: boolean }) => {
-    const isEditing = editingThreadId === thread.id;
-    const isSelected = currentThread?.id === thread.id;
-
-    return (
-      <motion.div
-        layout
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, x: -50 }}
-        className={cn(
-          "group relative flex items-center gap-2 px-3 py-2.5 rounded-xl cursor-pointer transition-all duration-200",
-          isSelected
-            ? "bg-accent/10 text-foreground border border-accent/20"
-            : "hover:bg-muted/50 text-muted-foreground hover:text-foreground"
-        )}
-      >
-        <MessageSquare className="h-4 w-4 flex-shrink-0" />
-        
-        <div className="flex-1 min-w-0">
-          {isEditing ? (
-            <div className="flex items-center gap-1">
-              <Input
-                value={editTitle}
-                onChange={(e) => setEditTitle(e.target.value)}
-                className="h-6 text-xs py-0 px-2"
-                autoFocus
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') handleSaveEdit();
-                  if (e.key === 'Escape') handleCancelEdit();
-                }}
-              />
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-5 w-5"
-                onClick={handleSaveEdit}
-              >
-                <Check className="h-3 w-3" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-5 w-5"
-                onClick={handleCancelEdit}
-              >
-                <X className="h-3 w-3" />
-              </Button>
-            </div>
-          ) : (
-            <div
-              onClick={() => {
-                onSelectThread(thread);
-                onClose();
-              }}
-            >
-              <p className="text-sm truncate font-medium">{thread.title}</p>
-              <p className="text-[10px] text-muted-foreground">
-                {thread.message_count || 0} messages • {formatDistanceToNow(new Date(thread.updated_at), { addSuffix: true })}
-              </p>
-            </div>
-          )}
-        </div>
-
-        {!isEditing && (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <MoreHorizontal className="h-3.5 w-3.5" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-40">
-              <DropdownMenuItem onClick={() => handleStartEdit(thread)}>
-                <Pencil className="h-3.5 w-3.5 mr-2" />
-                Rename
-              </DropdownMenuItem>
-              {isArchived ? (
-                <DropdownMenuItem onClick={() => onUnarchiveThread(thread.id)}>
-                  <ArchiveRestore className="h-3.5 w-3.5 mr-2" />
-                  Restore
-                </DropdownMenuItem>
-              ) : (
-                <DropdownMenuItem onClick={() => onArchiveThread(thread.id)}>
-                  <Archive className="h-3.5 w-3.5 mr-2" />
-                  Archive
-                </DropdownMenuItem>
-              )}
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onClick={() => onDeleteThread(thread.id)}
-                className="text-destructive focus:text-destructive"
-              >
-                <Trash2 className="h-3.5 w-3.5 mr-2" />
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        )}
-      </motion.div>
-    );
-  };
+  const renderThreadItem = (thread: ChatThread, isArchived = false) => (
+    <ThreadItem
+      key={thread.id}
+      thread={thread}
+      isArchived={isArchived}
+      isSelected={currentThread?.id === thread.id}
+      isEditing={editingThreadId === thread.id}
+      editTitle={editTitle}
+      onEditTitleChange={setEditTitle}
+      onSaveEdit={handleSaveEdit}
+      onCancelEdit={handleCancelEdit}
+      onStartEdit={handleStartEdit}
+      onSelect={() => {
+        onSelectThread(thread);
+        onClose();
+      }}
+      onArchive={() => onArchiveThread(thread.id)}
+      onUnarchive={() => onUnarchiveThread(thread.id)}
+      onDelete={() => onDeleteThread(thread.id)}
+    />
+  );
 
   return (
     <>
@@ -242,9 +289,7 @@ export function ThreadSidebar({
               </div>
             ) : (
               <AnimatePresence mode="popLayout">
-                {threads.map((thread) => (
-                  <ThreadItem key={thread.id} thread={thread} />
-                ))}
+                {threads.map((thread) => renderThreadItem(thread, false))}
               </AnimatePresence>
             )}
 
@@ -267,9 +312,7 @@ export function ThreadSidebar({
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-1 mt-1">
                   <AnimatePresence mode="popLayout">
-                    {archivedThreads.map((thread) => (
-                      <ThreadItem key={thread.id} thread={thread} isArchived />
-                    ))}
+                    {archivedThreads.map((thread) => renderThreadItem(thread, true))}
                   </AnimatePresence>
                 </CollapsibleContent>
               </Collapsible>
