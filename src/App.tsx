@@ -8,6 +8,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { trackPageView } from "@/lib/analytics";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { CursorGlow } from "@/components/CursorGlow";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { CommandPalette } from "@/components/nova/CommandPalette";
 
 import Index from "./pages/Index";
 import Nova from "./pages/Nova";
@@ -22,6 +24,7 @@ import NovaHistoricalTrends from "./pages/NovaHistoricalTrends";
 import NovaSettings from "./pages/NovaSettings";
 import NovaGoals from "./pages/NovaGoals";
 import NovaSettingsAdvanced from "./pages/NovaSettingsAdvanced";
+import NovaPersonalDashboard from "./pages/NovaPersonalDashboard";
 
 import FAQ from "./pages/FAQ";
 import Ambassador from "./pages/Ambassador";
@@ -155,6 +158,7 @@ const AnimatedRoutes = () => {
             <Route path="/nova/trends" element={<ProtectedRoute><NovaHistoricalTrends /></ProtectedRoute>} />
             <Route path="/nova/goals" element={<ProtectedRoute><NovaGoals /></ProtectedRoute>} />
             <Route path="/nova/settings" element={<ProtectedRoute><NovaSettings /></ProtectedRoute>} />
+            <Route path="/nova/dashboard" element={<ProtectedRoute><NovaPersonalDashboard /></ProtectedRoute>} />
             {/* Enterprise Overview */}
             <Route path="/enterprise/overview" element={<EnterpriseOverview />} />
             
@@ -242,11 +246,14 @@ const AnimatedRoutes = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <CursorGlow />
-      <Toaster />
-      <Sonner position="top-center" />
       <BrowserRouter>
-        <AnimatedRoutes />
+        <AuthProvider>
+          <CursorGlow />
+          <CommandPalette />
+          <Toaster />
+          <Sonner position="top-center" />
+          <AnimatedRoutes />
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

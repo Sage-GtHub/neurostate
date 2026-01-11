@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      activity_feed: {
+        Row: {
+          activity_type: string
+          created_at: string
+          description: string | null
+          id: string
+          is_read: boolean | null
+          metadata: Json | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          activity_type: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_read?: boolean | null
+          metadata?: Json | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          activity_type?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_read?: boolean | null
+          metadata?: Json | null
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       ai_insights: {
         Row: {
           confidence_score: number | null
@@ -93,6 +126,39 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      chat_threads: {
+        Row: {
+          created_at: string
+          id: string
+          is_archived: boolean | null
+          last_message_at: string | null
+          message_count: number | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_archived?: boolean | null
+          last_message_at?: string | null
+          message_count?: number | null
+          title?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_archived?: boolean | null
+          last_message_at?: string | null
+          message_count?: number | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       connected_devices: {
         Row: {
@@ -338,6 +404,7 @@ export type Database = {
           created_at: string
           id: string
           role: string
+          thread_id: string | null
           user_id: string
         }
         Insert: {
@@ -345,6 +412,7 @@ export type Database = {
           created_at?: string
           id?: string
           role: string
+          thread_id?: string | null
           user_id: string
         }
         Update: {
@@ -352,9 +420,18 @@ export type Database = {
           created_at?: string
           id?: string
           role?: string
+          thread_id?: string | null
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "nova_chat_messages_thread_id_fkey"
+            columns: ["thread_id"]
+            isOneToOne: false
+            referencedRelation: "chat_threads"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       nova_usage: {
         Row: {
@@ -1168,6 +1245,63 @@ export type Database = {
           recorded_at?: string
           user_id?: string
           value?: number
+        }
+        Relationships: []
+      }
+      user_preferences: {
+        Row: {
+          created_at: string
+          default_dashboard: string | null
+          email_notifications: boolean | null
+          id: string
+          insight_alerts: boolean | null
+          language: string | null
+          onboarding_completed: boolean | null
+          onboarding_step: number | null
+          protocol_reminders: boolean | null
+          push_notifications: boolean | null
+          sidebar_collapsed: boolean | null
+          theme: string | null
+          timezone: string | null
+          updated_at: string
+          user_id: string
+          weekly_summary_emails: boolean | null
+        }
+        Insert: {
+          created_at?: string
+          default_dashboard?: string | null
+          email_notifications?: boolean | null
+          id?: string
+          insight_alerts?: boolean | null
+          language?: string | null
+          onboarding_completed?: boolean | null
+          onboarding_step?: number | null
+          protocol_reminders?: boolean | null
+          push_notifications?: boolean | null
+          sidebar_collapsed?: boolean | null
+          theme?: string | null
+          timezone?: string | null
+          updated_at?: string
+          user_id: string
+          weekly_summary_emails?: boolean | null
+        }
+        Update: {
+          created_at?: string
+          default_dashboard?: string | null
+          email_notifications?: boolean | null
+          id?: string
+          insight_alerts?: boolean | null
+          language?: string | null
+          onboarding_completed?: boolean | null
+          onboarding_step?: number | null
+          protocol_reminders?: boolean | null
+          push_notifications?: boolean | null
+          sidebar_collapsed?: boolean | null
+          theme?: string | null
+          timezone?: string | null
+          updated_at?: string
+          user_id?: string
+          weekly_summary_emails?: boolean | null
         }
         Relationships: []
       }

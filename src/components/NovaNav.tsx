@@ -1,9 +1,21 @@
 import { NavLink } from "@/components/NavLink";
-import { useLocation } from "react-router-dom";
-import { MessageCircle, LayoutDashboard, Target, Activity, TrendingUp, Smartphone, Settings, Zap, ChevronLeft, ChevronRight } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { MessageCircle, LayoutDashboard, Target, Activity, TrendingUp, Smartphone, Settings, Zap, ChevronLeft, ChevronRight, Users, Search, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
+import { NotificationCenter } from "@/components/nova/NotificationCenter";
+import { useAuth } from "@/hooks/useAuth";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import logoIcon from "@/assets/neurostate-icon.png";
 
 const navItems = [
   { to: "/nova/chat", label: "Chat", icon: MessageCircle },
@@ -24,9 +36,11 @@ const mobileNavItems = [
 
 export const NovaNav = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
+  const { profile, signOut, isAuthenticated } = useAuth();
   
   const isActive = (path: string, end?: boolean) => {
     if (end) return location.pathname === path;
@@ -56,68 +70,159 @@ export const NovaNav = () => {
     }
   };
 
+  const getInitials = (name: string | null) => {
+    if (!name) return 'U';
+    return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
+
   return (
     <>
       {/* Desktop Navigation */}
       <nav className="hidden md:block sticky top-0 z-40 bg-background/95 backdrop-blur-xl border-b border-border">
         <div className="px-6 md:px-12 lg:px-20 relative">
-          {/* Scroll indicators */}
-          {canScrollLeft && (
+          <div className="flex items-center justify-between">
+            {/* Logo */}
             <button 
-              onClick={() => scroll('left')}
-              className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-background/90 shadow-sm border border-border/50 flex items-center justify-center text-foreground/60 hover:text-foreground transition-colors"
+              onClick={() => navigate('/')}
+              className="flex items-center gap-2 py-3 pr-4 border-r border-border/50 mr-4"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <img src={logoIcon} alt="Nova" className="h-6 w-6" />
+              <span className="text-sm font-medium text-foreground">Nova</span>
             </button>
-          )}
-          {canScrollRight && (
-            <button 
-              onClick={() => scroll('right')}
-              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-background/90 shadow-sm border border-border/50 flex items-center justify-center text-foreground/60 hover:text-foreground transition-colors"
+
+            {/* Scroll indicators */}
+            {canScrollLeft && (
+              <button 
+                onClick={() => scroll('left')}
+                className="absolute left-32 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-background/90 shadow-sm border border-border/50 flex items-center justify-center text-foreground/60 hover:text-foreground transition-colors"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+            )}
+            {canScrollRight && (
+              <button 
+                onClick={() => scroll('right')}
+                className="absolute right-40 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-background/90 shadow-sm border border-border/50 flex items-center justify-center text-foreground/60 hover:text-foreground transition-colors"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            )}
+            
+            {/* Navigation Items */}
+            <div 
+              ref={scrollRef}
+              onScroll={checkScroll}
+              className="flex-1 flex items-center gap-1 py-3 overflow-x-auto scrollbar-none"
             >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          )}
-          
-          <div 
-            ref={scrollRef}
-            onScroll={checkScroll}
-            className="flex items-center gap-1 py-3 overflow-x-auto scrollbar-none"
-          >
-            {navItems.map((item) => {
-              const active = isActive(item.to, item.end);
-              return (
-                <NavLink
-                  key={item.to}
-                  to={item.to}
-                  end={item.end}
-                  className="relative"
-                  activeClassName=""
-                >
-                  <div className={cn(
-                    "flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all duration-200",
-                    active 
-                      ? "text-foreground bg-foreground/5" 
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
-                  )}>
-                    <item.icon className={cn(
-                      "w-4 h-4 transition-colors",
-                      active ? "text-accent" : ""
-                    )} />
-                    {item.label}
-                  </div>
-                  
-                  {/* Active indicator bar */}
-                  {active && (
-                    <motion.div
-                      layoutId="nav-indicator"
-                      className="absolute -bottom-3 left-2 right-2 h-0.5 bg-accent rounded-full"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
-                    />
-                  )}
-                </NavLink>
-              );
-            })}
+              {navItems.map((item) => {
+                const active = isActive(item.to, item.end);
+                return (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    end={item.end}
+                    className="relative"
+                    activeClassName=""
+                  >
+                    <div className={cn(
+                      "flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all duration-200",
+                      active 
+                        ? "text-foreground bg-foreground/5" 
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                    )}>
+                      <item.icon className={cn(
+                        "w-4 h-4 transition-colors",
+                        active ? "text-accent" : ""
+                      )} />
+                      {item.label}
+                    </div>
+                    
+                    {/* Active indicator bar */}
+                    {active && (
+                      <motion.div
+                        layoutId="nav-indicator"
+                        className="absolute -bottom-3 left-2 right-2 h-0.5 bg-accent rounded-full"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
+                      />
+                    )}
+                  </NavLink>
+                );
+              })}
+            </div>
+
+            {/* Right side: Notifications + User Menu */}
+            <div className="flex items-center gap-2 pl-4 border-l border-border/50 ml-4">
+              {/* Command palette hint */}
+              <button
+                onClick={() => {
+                  const event = new KeyboardEvent('keydown', { key: 'k', metaKey: true });
+                  document.dispatchEvent(event);
+                }}
+                className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/50 text-[10px] text-muted-foreground hover:bg-muted transition-colors"
+              >
+                <Search className="w-3 h-3" />
+                <span>Search</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-background/80 text-[9px] font-mono">⌘K</kbd>
+              </button>
+
+              {/* Team Dashboard Link */}
+              <button
+                onClick={() => navigate('/team-dashboard')}
+                className="h-9 w-9 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+              >
+                <Users className="w-4 h-4" />
+              </button>
+
+              {/* Notifications */}
+              <NotificationCenter />
+
+              {/* User Menu */}
+              {isAuthenticated && (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button className="flex items-center gap-2 pl-2">
+                      <Avatar className="h-8 w-8 border border-border/50">
+                        <AvatarImage src={profile?.avatar_url || undefined} />
+                        <AvatarFallback className="bg-accent/10 text-accent text-xs">
+                          {getInitials(profile?.full_name)}
+                        </AvatarFallback>
+                      </Avatar>
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56 rounded-xl">
+                    <DropdownMenuLabel className="font-normal">
+                      <div className="flex flex-col space-y-1">
+                        <p className="text-sm font-medium">{profile?.full_name || 'User'}</p>
+                        <p className="text-xs text-muted-foreground truncate">{profile?.email}</p>
+                      </div>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => navigate('/dashboard')} className="gap-2 cursor-pointer">
+                      <LayoutDashboard className="w-4 h-4" />
+                      Dashboard
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate('/profile')} className="gap-2 cursor-pointer">
+                      <Settings className="w-4 h-4" />
+                      Account Settings
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate('/team-dashboard')} className="gap-2 cursor-pointer">
+                      <Users className="w-4 h-4" />
+                      Team Dashboard
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={handleSignOut} className="gap-2 cursor-pointer text-destructive">
+                      <LogOut className="w-4 h-4" />
+                      Sign Out
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
+            </div>
           </div>
         </div>
       </nav>
