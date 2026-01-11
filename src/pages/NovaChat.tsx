@@ -29,6 +29,8 @@ import { PerplexityInput } from "@/components/nova/PerplexityInput";
 import { useNovaUsage } from "@/hooks/useNovaUsage";
 import { useChatThreads } from "@/hooks/useChatThreads";
 import { ThreadSidebar } from "@/components/nova/ThreadSidebar";
+import { OnboardingWizard } from "@/components/onboarding/OnboardingWizard";
+import { useOnboardingWizard } from "@/hooks/useOnboardingWizard";
 import ReactMarkdown from "react-markdown";
 
 interface Message {
@@ -63,6 +65,9 @@ export default function NovaChat() {
   const { toast } = useToast();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  
+  // Onboarding wizard
+  const { showOnboarding, isChecking, completeOnboarding } = useOnboardingWizard();
   
   // Thread management
   const {
@@ -376,6 +381,10 @@ export default function NovaChat() {
         title="Nova AI | Predictive Cognitive Modelling Interface"
         description="Interact with Nova's multi-model AI engine for real-time cognitive forecasting, performance analytics, and predictive insights."
       />
+      
+      {/* Onboarding Wizard for new users */}
+      <OnboardingWizard open={showOnboarding} onComplete={completeOnboarding} />
+      
       <div className="min-h-screen bg-background flex flex-col relative">
         <NovaNav />
         
