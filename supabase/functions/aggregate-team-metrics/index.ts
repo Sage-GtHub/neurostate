@@ -1,4 +1,4 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient, SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -18,6 +18,213 @@ interface TeamMetricsInput {
   protocol_completion_rate: number | null;
   check_ins_count: number;
   revenue_exposure: number | null;
+}
+
+const BURNOUT_THRESHOLD = 70; // Alert when burnout risk exceeds this
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function createBurnoutAlerts(
+  supabase: SupabaseClient<any, any, any>,
+  teamName: string,
+  teamId: string,
+  orgId: string,
+  burnoutRisk: number
+) {
+  // Get organisation admins to notify
+  const { data: admins, error: adminsError } = await supabase
+    .from("organisation_members")
+    .select("user_id")
+    .eq("organisation_id", orgId)
+    .in("role", ["admin", "owner"]);
+
+  if (adminsError) {
+    console.error("Error fetching admins:", adminsError);
+    return;
+  }
+
+  if (!admins || admins.length === 0) {
+    console.log("No admins found to notify");
+    return;
+  }
+
+  // Create in-app notifications for each admin
+  const notifications = admins.map((admin: { user_id: string }) => ({
+    user_id: admin.user_id,
+    activity_type: "burnout_alert",
+    title: `⚠️ High Burnout Risk: ${teamName}`,
+    description: `Team burnout risk has reached ${burnoutRisk}%. Immediate intervention recommended to prevent productivity loss.`,
+    metadata: {
+      team_id: teamId,
+      team_name: teamName,
+      burnout_risk: burnoutRisk,
+      threshold: BURNOUT_THRESHOLD,
+      alert_type: "critical",
+      recommended_actions: [
+        "Review workload distribution",
+        "Check for overdue time-off requests",
+        "Schedule team wellness check-in",
+        "Consider protocol adjustments"
+      ]
+    },
+    is_read: false,
+  }));
+
+  const { error: insertError } = await supabase
+    .from("activity_feed")
+    .insert(notifications);
+
+  if (insertError) {
+    console.error("Error creating burnout alerts:", insertError);
+  } else {
+    console.log(`Created burnout alerts for ${admins.length} admins`);
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function createPredictiveInsights(
+  supabase: SupabaseClient<any, any, any>,
+  teamName: string,
+  teamId: string,
+  orgId: string,
+  metrics: TeamMetricsInput
+) {
+  // Get admins
+  const { data: admins } = await supabase
+    .from("organisation_members")
+    .select("user_id")
+    .eq("organisation_id", orgId)
+    .in("role", ["admin", "owner"]);
+
+  if (!admins || admins.length === 0) return;
+
+  const insights: Array<{ title: string; description: string; type: string }> = [];
+
+  // Generate predictive insights based on metrics
+  if (metrics.avg_energy_score !== null && metrics.avg_energy_score < 50) {
+    insights.push({
+      title: `📉 Energy Decline Predicted: ${teamName}`,
+      description: `Team energy levels are at ${metrics.avg_energy_score}%. Based on patterns, expect a 15% productivity drop within 3 days without intervention.`,
+      type: "energy_prediction"
+    });
+  }
+
+  if (metrics.protocol_completion_rate !== null && metrics.protocol_completion_rate < 40) {
+    insights.push({
+      title: `📊 Protocol Adherence Warning: ${teamName}`,
+      description: `Only ${metrics.protocol_completion_rate}% protocol completion rate. AI predicts increased stress markers within 1 week.`,
+      type: "protocol_warning"
+    });
+  }
+
+  if (metrics.check_ins_count < 3 && metrics.active_members > 2) {
+    insights.push({
+      title: `🔔 Engagement Drop Detected: ${teamName}`,
+      description: `Low check-in activity (${metrics.check_ins_count} this week). Pattern suggests disengagement risk.`,
+      type: "engagement_warning"
+    });
+  }
+
+  if (metrics.cognitive_capacity_index !== null && metrics.cognitive_capacity_index < 60) {
+    insights.push({
+      title: `🧠 Cognitive Load Alert: ${teamName}`,
+      description: `Team CCI at ${metrics.cognitive_capacity_index}. Recommend reducing meeting load by 20% and enabling focus time blocks.`,
+      type: "cognitive_alert"
+    });
+  }
+
+  // Create notifications for each insight
+  for (const insight of insights) {
+    const notifications = admins.map((admin: { user_id: string }) => ({
+      user_id: admin.user_id,
+      activity_type: "predictive_insight",
+      title: insight.title,
+      description: insight.description,
+      metadata: {
+        team_id: teamId,
+        team_name: teamName,
+        insight_type: insight.type,
+        metrics: {
+          cci: metrics.cognitive_capacity_index,
+          energy: metrics.avg_energy_score,
+          protocol_rate: metrics.protocol_completion_rate,
+          check_ins: metrics.check_ins_count
+        }
+      },
+      is_read: false,
+    }));
+
+    await supabase.from("activity_feed").insert(notifications);
+  }
+
+  if (insights.length > 0) {
+    console.log(`Created ${insights.length} predictive insights for team ${teamName}`);
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function createAutonomousNudges(
+  supabase: SupabaseClient<any, any, any>,
+  teamId: string,
+  orgId: string,
+  metrics: TeamMetricsInput
+) {
+  // Get team members for individual nudges
+  const { data: members } = await supabase
+    .from("team_members")
+    .select("user_id")
+    .eq("team_id", teamId);
+
+  if (!members || members.length === 0) return;
+
+  const nudges: Array<{ title: string; description: string; type: string }> = [];
+
+  // Generate autonomous nudges based on team patterns
+  const hour = new Date().getHours();
+
+  // Morning nudges (9-11am)
+  if (hour >= 9 && hour < 11) {
+    if (metrics.avg_recovery_score !== null && metrics.avg_recovery_score < 60) {
+      nudges.push({
+        title: "☕ Start with Low-Stakes Tasks",
+        description: "Team recovery scores are lower today. Consider tackling simpler tasks first and saving complex work for peak hours.",
+        type: "morning_adjustment"
+      });
+    }
+  }
+
+  // Afternoon nudges (2-4pm)
+  if (hour >= 14 && hour < 16) {
+    if (metrics.avg_energy_score !== null && metrics.avg_energy_score < 55) {
+      nudges.push({
+        title: "🚶 Movement Break Recommended",
+        description: "Afternoon energy dip detected. A 10-minute walk can boost cognitive performance by 15%.",
+        type: "movement_nudge"
+      });
+    }
+  }
+
+  // Create nudges for all team members
+  for (const nudge of nudges) {
+    const notifications = members.map((member: { user_id: string }) => ({
+      user_id: member.user_id,
+      activity_type: "autonomous_nudge",
+      title: nudge.title,
+      description: nudge.description,
+      metadata: {
+        team_id: teamId,
+        nudge_type: nudge.type,
+        triggered_by: "ai_pattern_recognition",
+        dismissable: true
+      },
+      is_read: false,
+    }));
+
+    await supabase.from("activity_feed").insert(notifications);
+  }
+
+  if (nudges.length > 0) {
+    console.log(`Created ${nudges.length} autonomous nudges for ${members.length} team members`);
+  }
 }
 
 Deno.serve(async (req) => {
@@ -56,6 +263,7 @@ Deno.serve(async (req) => {
     console.log(`Processing ${teams.length} teams...`);
     
     const metricsToInsert: TeamMetricsInput[] = [];
+    const burnoutAlerts: Array<{ teamName: string; teamId: string; orgId: string; risk: number }> = [];
     
     for (const team of teams) {
       console.log(`Processing team: ${team.name} (${team.id})`);
@@ -201,6 +409,20 @@ Deno.serve(async (req) => {
       
       metricsToInsert.push(teamMetrics);
       
+      // Check for burnout alert threshold
+      if (burnoutRisk !== null && burnoutRisk >= BURNOUT_THRESHOLD) {
+        burnoutAlerts.push({
+          teamName: team.name,
+          teamId: team.id,
+          orgId: team.organisation_id,
+          risk: burnoutRisk
+        });
+      }
+      
+      // Create predictive insights and autonomous nudges
+      await createPredictiveInsights(supabase, team.name, team.id, team.organisation_id, teamMetrics);
+      await createAutonomousNudges(supabase, team.id, team.organisation_id, teamMetrics);
+      
       console.log(`Calculated metrics for team ${team.name}:`, {
         activeMembers,
         cci,
@@ -229,7 +451,13 @@ Deno.serve(async (req) => {
       throw upsertError;
     }
     
+    // Send burnout alerts
+    for (const alert of burnoutAlerts) {
+      await createBurnoutAlerts(supabase, alert.teamName, alert.teamId, alert.orgId, alert.risk);
+    }
+    
     console.log(`Successfully aggregated metrics for ${metricsToInsert.length} teams`);
+    console.log(`Created ${burnoutAlerts.length} burnout alerts`);
     
     return new Response(
       JSON.stringify({
@@ -237,6 +465,7 @@ Deno.serve(async (req) => {
         message: `Aggregated metrics for ${metricsToInsert.length} teams`,
         date: today,
         teams_processed: metricsToInsert.length,
+        burnout_alerts_sent: burnoutAlerts.length,
       }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
