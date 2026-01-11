@@ -47,3 +47,6 @@ verify_jwt = false
 
 [functions.aggregate-team-metrics]
 verify_jwt = false
+
+[functions.weekly-performance-digest]
+verify_jwt = false

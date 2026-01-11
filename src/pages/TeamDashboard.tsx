@@ -55,6 +55,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { IntelligentAlerts } from '@/components/nova/IntelligentAlerts';
+import { AutonomousNudgePanel } from '@/components/nova/AutonomousNudgePanel';
+import { MeetingLoadOptimiser } from '@/components/nova/MeetingLoadOptimiser';
+import { InterventionROITracker } from '@/components/nova/InterventionROITracker';
 
 // Executive Intelligence Metrics
 const executiveMetrics = {
@@ -1267,7 +1271,45 @@ export default function TeamDashboard() {
                     </Link>
                   </div>
                 </motion.div>
+
+                {/* Intelligent Alerts */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7 }}
+                >
+                  <IntelligentAlerts />
+                </motion.div>
+
+                {/* Smart Nudges */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 }}
+                >
+                  <AutonomousNudgePanel />
+                </motion.div>
               </div>
+
+              {/* Meeting Load Optimiser - Full Width */}
+              <motion.div
+                className="mt-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.9 }}
+              >
+                <MeetingLoadOptimiser />
+              </motion.div>
+
+              {/* Intervention ROI Tracker - Full Width */}
+              <motion.div
+                className="mt-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.0 }}
+              >
+                <InterventionROITracker />
+              </motion.div>
             </div>
           </div>
         </main>
