@@ -21,7 +21,7 @@ const solutionLayers = [
   },
   {
     icon: Cpu,
-    title: "State Intelligence",
+    title: "Cognitive Monitoring",
     description: "Real-time interpretation of raw signals into meaningful cognitive states: readiness, load, recovery debt, stress volatility, and burnout risk. This is where data becomes intelligence.",
     href: "/solutions/state-engine",
     color: "hsl(270, 100%, 55%)",
@@ -29,7 +29,7 @@ const solutionLayers = [
   },
   {
     icon: TrendingUp,
-    title: "Forecasting",
+    title: "Predictive Intelligence",
     description: "Near-term forecasting and scenario modelling. NeuroState doesn't just show you what is happening. It tells you what is likely to happen next, and what you can do about it.",
     href: "/solutions/prediction",
     color: "hsl(156, 65%, 45%)",
@@ -37,7 +37,7 @@ const solutionLayers = [
   },
   {
     icon: Zap,
-    title: "Interventions",
+    title: "AI Coaching",
     description: "Low-friction interventions that drive outcomes. Personal coaching prompts, workload timing recommendations, manager nudges, and preventative interventions before breakdown occurs.",
     href: "/solutions/action-layer",
     color: "hsl(45, 100%, 50%)",
@@ -45,7 +45,7 @@ const solutionLayers = [
   },
   {
     icon: Users,
-    title: "Dashboards",
+    title: "Team Analytics",
     description: "One system, different truths. Tailored interfaces for individuals seeking personal optimisation, managers overseeing team health, and executives monitoring organisational risk.",
     href: "/solutions/command-surfaces",
     color: "hsl(0, 70%, 55%)",
@@ -53,7 +53,7 @@ const solutionLayers = [
   },
   {
     icon: Calculator,
-    title: "ROI Analytics",
+    title: "Performance ROI",
     description: "Cognitive risk translated to business value. See the cost of burnout, the price of underperformance, and the return on intervention. In pounds, not platitudes.",
     href: "/solutions/roi-layer",
     color: "hsl(280, 70%, 55%)",
@@ -87,11 +87,11 @@ export default function SolutionsHub() {
           url: "https://neurostate.co.uk/solutions",
           features: [
             "Data Integration",
-            "State Intelligence",
-            "Forecasting",
-            "Interventions",
-            "Dashboards",
-            "ROI Analytics"
+            "Cognitive Monitoring",
+            "Predictive Intelligence",
+            "AI Coaching",
+            "Team Analytics",
+            "Performance ROI"
           ]
         }}
       />
