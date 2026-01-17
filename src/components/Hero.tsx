@@ -293,11 +293,11 @@ const Hero = () => {
                           />
                         </svg>
                         <span className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-foreground">
-                          87
+                          92
                         </span>
                       </div>
                       <div>
-                        <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Readiness</p>
+                        <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Recovery</p>
                         <p className="text-sm font-medium text-foreground">Optimal</p>
                       </div>
                     </div>
