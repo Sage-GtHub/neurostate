@@ -241,7 +241,7 @@ const Hero = () => {
               </motion.div>
             </motion.div>
 
-            {/* Right - 3D Wearable Stack */}
+            {/* Right - 3D Wearable Stack with Floating Metric Cards */}
             <motion.div 
               className="relative"
               initial={{ opacity: 0, scale: 0.9 }}
@@ -253,6 +253,110 @@ const Hero = () => {
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                   <div className="w-80 h-80 bg-gradient-to-br from-primary/10 via-emerald-500/5 to-blue-500/8 rounded-full blur-[100px]" />
                 </div>
+                
+                {/* Floating Glassmorphic Metric Cards */}
+                {/* Readiness Score - Top Right */}
+                <motion.div
+                  className="absolute -top-4 -right-4 md:top-4 md:right-0 z-20"
+                  initial={{ opacity: 0, y: 20, x: 20 }}
+                  animate={isLoaded ? { opacity: 1, y: 0, x: 0 } : {}}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                >
+                  <motion.div 
+                    className="bg-background/60 backdrop-blur-xl border border-border/50 rounded-2xl p-4 shadow-2xl"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="relative w-12 h-12">
+                        <svg className="w-12 h-12 -rotate-90" viewBox="0 0 48 48">
+                          <circle
+                            cx="24"
+                            cy="24"
+                            r="20"
+                            fill="none"
+                            stroke="hsl(var(--border))"
+                            strokeWidth="4"
+                          />
+                          <motion.circle
+                            cx="24"
+                            cy="24"
+                            r="20"
+                            fill="none"
+                            stroke="hsl(var(--primary))"
+                            strokeWidth="4"
+                            strokeLinecap="round"
+                            strokeDasharray={125.6}
+                            initial={{ strokeDashoffset: 125.6 }}
+                            animate={isLoaded ? { strokeDashoffset: 125.6 * (1 - 0.87) } : {}}
+                            transition={{ duration: 1.5, delay: 0.8, ease: "easeOut" }}
+                          />
+                        </svg>
+                        <span className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-foreground">
+                          87
+                        </span>
+                      </div>
+                      <div>
+                        <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Readiness</p>
+                        <p className="text-sm font-medium text-foreground">Optimal</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </motion.div>
+
+                {/* Cognitive Load - Bottom Left */}
+                <motion.div
+                  className="absolute -bottom-4 -left-4 md:bottom-8 md:left-0 z-20"
+                  initial={{ opacity: 0, y: 20, x: -20 }}
+                  animate={isLoaded ? { opacity: 1, y: 0, x: 0 } : {}}
+                  transition={{ duration: 0.8, delay: 0.8 }}
+                >
+                  <motion.div 
+                    className="bg-background/60 backdrop-blur-xl border border-border/50 rounded-2xl p-4 shadow-2xl"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    <div className="space-y-2">
+                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Cognitive Load</p>
+                      <div className="flex items-end gap-1">
+                        {[65, 45, 78, 52, 68].map((height, i) => (
+                          <motion.div
+                            key={i}
+                            className="w-2 bg-primary/80 rounded-full"
+                            initial={{ height: 0 }}
+                            animate={isLoaded ? { height: height * 0.4 } : {}}
+                            transition={{ duration: 0.5, delay: 1 + i * 0.1 }}
+                          />
+                        ))}
+                      </div>
+                      <p className="text-sm font-medium text-foreground">62% <span className="text-emerald-500 text-xs">↓12%</span></p>
+                    </div>
+                  </motion.div>
+                </motion.div>
+
+                {/* Energy Level - Top Left */}
+                <motion.div
+                  className="absolute top-1/4 -left-8 md:left-4 z-20 hidden md:block"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isLoaded ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.8, delay: 1 }}
+                >
+                  <motion.div 
+                    className="bg-background/60 backdrop-blur-xl border border-border/50 rounded-2xl px-4 py-3 shadow-2xl"
+                    whileHover={{ scale: 1.05, x: 2 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <motion.div
+                        className="w-2 h-2 rounded-full bg-emerald-500"
+                        animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      />
+                      <span className="text-xs text-muted-foreground">Energy</span>
+                      <span className="text-sm font-semibold text-foreground">High</span>
+                    </div>
+                  </motion.div>
+                </motion.div>
                 
                 {/* 3D Wearable Stack Canvas */}
                 <Suspense fallback={
