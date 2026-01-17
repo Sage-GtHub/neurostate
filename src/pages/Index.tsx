@@ -1,5 +1,5 @@
 import { Header } from "@/components/Header";
-import Hero from "@/components/Hero";
+import LifestyleHero from "@/components/hero/LifestyleHero";
 import { SEO } from "@/components/SEO";
 import { OrganizationStructuredData, SoftwareApplicationStructuredData, WebsiteStructuredData, LocalBusinessStructuredData } from "@/components/StructuredData";
 import { Footer } from "@/components/Footer";
@@ -130,7 +130,7 @@ const Index = () => {
         </div>
         <Header />
         <main>
-          <Hero />
+          <LifestyleHero />
 
           {/* Approach Section - 3 Pillars like Invisible's */}
           <section ref={approachRef} className="py-12 md:py-16 px-6 md:px-8 border-t border-border/30">
