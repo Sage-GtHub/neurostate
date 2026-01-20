@@ -1,7 +1,10 @@
 import { ReactNode, useState, useEffect } from 'react';
 import { useSwipeNavigation } from '@/hooks/useSwipeNavigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, WifiOff } from 'lucide-react';
+import { MobileBottomNav } from '@/components/nova/MobileBottomNav';
+import { useOfflineDetection } from '@/hooks/usePWA';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface NovaSwipeWrapperProps {
   children: ReactNode;
@@ -11,6 +14,13 @@ export const NovaSwipeWrapper = ({ children }: NovaSwipeWrapperProps) => {
   const { isSwipeEnabled } = useSwipeNavigation();
   const [showHint, setShowHint] = useState(false);
   const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
+  const [showOfflineToast, setShowOfflineToast] = useState(false);
+  const isMobile = useIsMobile();
+
+  const { isOnline } = useOfflineDetection(
+    () => setShowOfflineToast(true),
+    () => setShowOfflineToast(false)
+  );
 
   useEffect(() => {
     // Show hint briefly when user first loads a Nova page on mobile
@@ -68,7 +78,28 @@ export const NovaSwipeWrapper = ({ children }: NovaSwipeWrapperProps) => {
 
   return (
     <div className="relative">
-      {children}
+      {/* Offline indicator */}
+      <AnimatePresence>
+        {!isOnline && (
+          <motion.div
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -50, opacity: 0 }}
+            className="fixed top-0 left-0 right-0 z-[100] bg-amber-500 text-amber-950 py-2 px-4 text-center text-sm font-medium flex items-center justify-center gap-2"
+          >
+            <WifiOff className="w-4 h-4" />
+            You're offline. Some features may be limited.
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Main content with bottom padding for mobile nav */}
+      <div className={isMobile ? 'pb-20' : ''}>
+        {children}
+      </div>
+      
+      {/* Mobile bottom navigation */}
+      <MobileBottomNav />
       
       {/* Swipe direction indicators */}
       {isSwipeEnabled && swipeDirection && (
