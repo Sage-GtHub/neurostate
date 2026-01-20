@@ -142,6 +142,13 @@ export default function NovaChat() {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+      
+      // Handle rate limit specifically
+      if (response.status === 429) {
+        const retryAfter = errorData.retryAfter || 30;
+        throw new Error(`Too many messages. Please wait ${retryAfter} seconds.`);
+      }
+      
       throw new Error(errorData.error || `HTTP ${response.status}`);
     }
 
@@ -257,11 +264,30 @@ export default function NovaChat() {
 
     } catch (error) {
       console.error("Error:", error);
-      toast({
-        title: "Error",
-        description: error instanceof Error ? error.message : "Failed to send message",
-        variant: "destructive",
-      });
+      const errorMessage = error instanceof Error ? error.message : "Failed to send message";
+      
+      // Check for rate limit errors
+      if (errorMessage.includes("Too many") || errorMessage.includes("Rate limit")) {
+        toast({
+          title: "Too many messages",
+          description: "Please wait a moment before sending another message.",
+          variant: "destructive",
+        });
+      } else if (errorMessage.includes("429")) {
+        toast({
+          title: "Rate limited",
+          description: "Nova is receiving too many requests. Please wait a moment.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: errorMessage,
+          variant: "destructive",
+        });
+      }
+      
+      // Remove empty assistant message on error
       setLocalMessages(prev => prev.filter(m => m.content !== ""));
     } finally {
       setIsLoading(false);

@@ -4,7 +4,9 @@ import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
 import { NovaBreadcrumb } from "@/components/nova/NovaBreadcrumb";
 import { NovaSkeleton } from "@/components/nova/NovaSkeleton";
-import { RefreshCw, Plus, Loader2, Check, WifiOff } from "lucide-react";
+import { NovaEmptyState } from "@/components/nova/NovaEmptyState";
+import { NovaErrorState } from "@/components/nova/NovaErrorBoundary";
+import { RefreshCw, Plus, Loader2, Check, WifiOff, AlertCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { SEO } from "@/components/SEO";
@@ -42,6 +44,7 @@ export default function NovaDevices() {
   const [devices, setDevices] = useState<Device[]>([]);
   const [vitalProviders, setVitalProviders] = useState<VitalProvider[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [syncingDevice, setSyncingDevice] = useState<string | null>(null);
   const [connectingDevice, setConnectingDevice] = useState<string | null>(null);
   const [dataStats, setDataStats] = useState({ dataPoints: 0, syncs: 0 });
@@ -60,9 +63,13 @@ export default function NovaDevices() {
 
   const loadVitalProviders = async () => {
     setIsLoading(true);
+    setError(null);
     try {
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) { setIsLoading(false); return; }
+      if (!session) { 
+        setIsLoading(false); 
+        return; 
+      }
       const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/vital-connect`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.access_token}` },
@@ -71,8 +78,19 @@ export default function NovaDevices() {
       if (response.ok) {
         const data = await response.json();
         setVitalProviders(data.providers || []);
+      } else {
+        const errorData = await response.json().catch(() => ({}));
+        if (response.status === 500 && errorData.error?.includes('API key')) {
+          // Don't show error for unconfigured API - just show empty state
+          console.log("Vital API not configured - showing empty state");
+        } else {
+          throw new Error(errorData.error || 'Failed to load connected devices');
+        }
       }
-    } catch (error) { console.error("Error loading Vital providers:", error); }
+    } catch (err) { 
+      console.error("Error loading Vital providers:", err);
+      setError(err instanceof Error ? err.message : 'Failed to load devices');
+    }
     finally { setIsLoading(false); }
   };
 
@@ -93,20 +111,86 @@ export default function NovaDevices() {
     setConnectingDevice(deviceType);
     try {
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) { toast({ title: "Sign in required", variant: "destructive" }); setConnectingDevice(null); return; }
+      if (!session) { 
+        toast({ title: "Sign in required", description: "Please sign in to connect devices", variant: "destructive" }); 
+        setConnectingDevice(null); 
+        return; 
+      }
       const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/vital-connect`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.access_token}` },
         body: JSON.stringify({ action: 'create-link', provider: deviceType }),
       });
-      if (!response.ok) throw new Error('Failed');
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to initiate connection');
+      }
+      
       const data = await response.json();
       if (data.link_url) {
-        window.open(data.link_url, '_blank', 'width=600,height=700');
-        toast({ title: "Connection started", description: `Complete authorisation in the new window.` });
-        setTimeout(() => { loadVitalProviders(); loadDevices(); }, 5000);
+        // Open OAuth window
+        const popup = window.open(data.link_url, 'vital-connect', 'width=600,height=700,scrollbars=yes');
+        
+        toast({ 
+          title: "Connection started", 
+          description: "Complete authorisation in the popup window, then return here." 
+        });
+        
+        // Poll for connection status
+        let pollCount = 0;
+        const maxPolls = 40; // 2 minutes max
+        const pollInterval = setInterval(async () => {
+          pollCount++;
+          
+          if (pollCount >= maxPolls || !popup || popup.closed) {
+            clearInterval(pollInterval);
+            setConnectingDevice(null);
+            
+            // Final check
+            await loadVitalProviders();
+            await loadDevices();
+            return;
+          }
+          
+          try {
+            const providersRes = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/vital-connect`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.access_token}` },
+              body: JSON.stringify({ action: 'get-providers' }),
+            });
+            
+            if (providersRes.ok) {
+              const providersData = await providersRes.json();
+              const connectedProviders = providersData.providers?.filter((p: any) => p.status === 'connected').map((p: any) => p.slug) || [];
+              
+              if (connectedProviders.includes(deviceType)) {
+                clearInterval(pollInterval);
+                setConnectingDevice(null);
+                await loadVitalProviders();
+                await loadDevices();
+                await loadDataStats();
+                
+                const device = DEVICE_CATALOG.find(d => d.type === deviceType);
+                toast({ 
+                  title: "Device connected!", 
+                  description: `${device?.name} has been successfully connected.` 
+                });
+              }
+            }
+          } catch (e) {
+            console.error("Polling error:", e);
+          }
+        }, 3000);
       }
-    } catch (error) { toast({ title: "Connection failed", variant: "destructive" }); }
+    } catch (err) { 
+      console.error("Connection error:", err);
+      toast({ 
+        title: "Connection failed", 
+        description: err instanceof Error ? err.message : "Please try again",
+        variant: "destructive" 
+      }); 
+    }
     finally { setConnectingDevice(null); }
   };
 
@@ -176,6 +260,15 @@ export default function NovaDevices() {
               <div className="w-20 h-3 rounded-full bg-foreground/5 skeleton-shimmer mb-4" />
               <NovaSkeleton variant="list" />
             </div>
+          )}
+
+          {/* Error State */}
+          {!isLoading && error && (
+            <NovaErrorState 
+              error={error} 
+              onRetry={() => { loadVitalProviders(); loadDevices(); }}
+              title="Failed to load devices"
+            />
           )}
 
           {/* Connected Devices */}

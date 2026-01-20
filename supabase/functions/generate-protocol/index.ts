@@ -6,6 +6,27 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+// In-memory rate limiter for protocol generation
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT = { maxRequests: 3, windowMs: 300000 }; // 3 per 5 minutes
+
+function checkRateLimit(userId: string): { allowed: boolean; retryAfter?: number } {
+  const now = Date.now();
+  const record = rateLimitMap.get(userId);
+  
+  if (!record || now > record.resetAt) {
+    rateLimitMap.set(userId, { count: 1, resetAt: now + RATE_LIMIT.windowMs });
+    return { allowed: true };
+  }
+  
+  if (record.count >= RATE_LIMIT.maxRequests) {
+    return { allowed: false, retryAfter: Math.ceil((record.resetAt - now) / 1000) };
+  }
+  
+  record.count++;
+  return { allowed: true };
+}
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -32,6 +53,17 @@ serve(async (req) => {
     const { data: { user } } = await supabase.auth.getUser(token);
     if (!user) {
       throw new Error('Unauthorized');
+    }
+
+    // Check rate limit
+    const rateCheck = checkRateLimit(user.id);
+    if (!rateCheck.allowed) {
+      return new Response(
+        JSON.stringify({ 
+          error: `You can only generate ${RATE_LIMIT.maxRequests} protocols per ${RATE_LIMIT.windowMs / 60000} minutes. Please wait ${rateCheck.retryAfter} seconds.`
+        }),
+        { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
     }
 
     // Get existing metrics for context
