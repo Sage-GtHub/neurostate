@@ -62,6 +62,7 @@ export default function NovaChat() {
   const [isLoading, setIsLoading] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [chatMode, setChatMode] = useState<"default" | "focus">("default");
   const { toast } = useToast();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -92,18 +93,20 @@ export default function NovaChat() {
   const { startSession, incrementMessages, endSession } = useNovaUsage();
   const sessionIdRef = useRef<string | null>(null);
 
-  // Combine thread messages with local streaming messages
-  // localMessages contains the streaming message being generated
+  // Combine thread messages with local streaming messages.
+  // Filter out local duplicates once the same message is persisted via realtime (prevents UI jitter/twitching).
   const displayMessages: Message[] = currentThread
-    ? [
-        ...threadMessages.map(m => ({
+    ? (() => {
+        const persisted = threadMessages.map(m => ({
           id: m.id,
           role: m.role as 'user' | 'assistant',
           content: m.content,
           timestamp: new Date(m.created_at),
-        })),
-        ...localMessages // Append any streaming messages
-      ]
+        }));
+        const recent = persisted.slice(-10);
+        const localFiltered = localMessages.filter(lm => !recent.some(pm => pm.role === lm.role && pm.content === lm.content));
+        return [...persisted, ...localFiltered];
+      })()
     : localMessages;
 
   // Start session on mount
@@ -126,9 +129,11 @@ export default function NovaChat() {
     };
   }, [startSession, endSession]);
 
+  // Avoid smooth-scrolling on every streamed token (causes visible "twitching").
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [displayMessages, threadMessages]);
+    const behavior: ScrollBehavior = isLoading ? "auto" : "smooth";
+    messagesEndRef.current?.scrollIntoView({ behavior });
+  }, [displayMessages.length, isLoading, currentThread?.id]);
 
   const streamChat = useCallback(async (userMessage: Message, contextMessages: Message[]) => {
     const { data: { session } } = await supabase.auth.getSession();
@@ -140,7 +145,8 @@ export default function NovaChat() {
         'Authorization': `Bearer ${session?.access_token || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
       },
       body: JSON.stringify({
-        messages: [...contextMessages, userMessage].map(m => ({ role: m.role, content: m.content }))
+        messages: [...contextMessages, userMessage].map(m => ({ role: m.role, content: m.content })),
+        context: { mode: chatMode },
       }),
     });
 
@@ -234,7 +240,8 @@ export default function NovaChat() {
 
     const userMessage: Message = { role: "user", content, timestamp: new Date() };
     
-    // Add user message to local state immediately for display
+    // Add user message locally for immediate display.
+    // (We keep this even with threads; duplicates are filtered out once persisted.)
     setLocalMessages([userMessage]);
     
     // Build context from existing thread messages BEFORE any state changes
@@ -360,6 +367,8 @@ export default function NovaChat() {
           onChange={setInput}
           onSubmit={() => handleSendMessage()}
           isLoading={isLoading}
+          mode={chatMode}
+          onModeChange={setChatMode}
           placeholder="Ask anything about your health, performance, or protocols..."
         />
       </div>
@@ -661,6 +670,8 @@ export default function NovaChat() {
                       onChange={setInput}
                       onSubmit={() => handleSendMessage()}
                       isLoading={isLoading}
+                      mode={chatMode}
+                      onModeChange={setChatMode}
                       placeholder="Follow up..."
                     />
                   </div>

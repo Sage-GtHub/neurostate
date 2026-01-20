@@ -217,6 +217,12 @@ serve(async (req) => {
       }
     }
 
+    const mode = (context?.mode === 'focus') ? 'focus' : 'default';
+
+    const focusGuardrails = mode === 'focus'
+      ? `\n\n## FOCUS MODE (ANTI-HALLUCINATION)\n- If you are not sure, say you are not sure. Do not guess.\n- Do not fabricate citations, studies, or URLs.\n- Prefer asking 1 clarifying question over making an assumption.\n- When you reference user data, only use what appears in USER CONTEXT.\n`
+      : '';
+
     const systemPrompt = `You are Nova, a cognitive performance coach having a natural conversation.
 
 ## LANGUAGE
@@ -299,6 +305,8 @@ ${userContext}
 
 Be Nova. Be helpful. Be human.`;
 
+    const finalSystemPrompt = systemPrompt + focusGuardrails;
+
     console.log('Sending request to Lovable AI with context length:', userContext.length);
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
@@ -310,11 +318,11 @@ Be Nova. Be helpful. Be human.`;
       body: JSON.stringify({
         model: "google/gemini-2.5-flash",
         messages: [
-          { role: "system", content: systemPrompt },
+          { role: "system", content: finalSystemPrompt },
           ...messages,
         ],
         stream: true,
-        temperature: 0.7,
+        temperature: mode === 'focus' ? 0.3 : 0.7,
         max_tokens: 2048,
       }),
     });
