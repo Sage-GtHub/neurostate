@@ -1,4 +1,4 @@
-import { ReactNode, useState, useEffect } from 'react';
+import { ReactNode, useState, useEffect, useRef } from 'react';
 import { useSwipeNavigation } from '@/hooks/useSwipeNavigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, WifiOff } from 'lucide-react';
@@ -16,6 +16,11 @@ export const NovaSwipeWrapper = ({ children }: NovaSwipeWrapperProps) => {
   const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
   const [showOfflineToast, setShowOfflineToast] = useState(false);
   const isMobile = useIsMobile();
+
+  const trackingRef = useRef(false);
+  const startXRef = useRef(0);
+  const rafRef = useRef<number | null>(null);
+  const pendingDirRef = useRef<'left' | 'right' | null>(null);
 
   const { isOnline } = useOfflineDetection(
     () => setShowOfflineToast(true),
@@ -43,26 +48,54 @@ export const NovaSwipeWrapper = ({ children }: NovaSwipeWrapperProps) => {
   // Track touch for visual feedback
   useEffect(() => {
     if (!isSwipeEnabled) return;
-    
-    let startX = 0;
-    let currentX = 0;
+
+    const shouldIgnoreTarget = (target: EventTarget | null) => {
+      if (!(target instanceof Element)) return false;
+      return Boolean(
+        target.closest(
+          'input, textarea, button, a, [role="button"], [data-swipe-ignore="true"]'
+        )
+      );
+    };
+
+    const flushDir = () => {
+      rafRef.current = null;
+      setSwipeDirection(pendingDirRef.current);
+    };
     
     const handleTouchStart = (e: TouchEvent) => {
-      startX = e.touches[0].clientX;
+      if (shouldIgnoreTarget(e.target)) {
+        trackingRef.current = false;
+        pendingDirRef.current = null;
+        return;
+      }
+      trackingRef.current = true;
+      startXRef.current = e.touches[0].clientX;
     };
     
     const handleTouchMove = (e: TouchEvent) => {
-      currentX = e.touches[0].clientX;
-      const diff = currentX - startX;
-      if (Math.abs(diff) > 50) {
-        setSwipeDirection(diff > 0 ? 'right' : 'left');
-      } else {
-        setSwipeDirection(null);
+      if (!trackingRef.current) return;
+
+      const currentX = e.touches[0].clientX;
+      const diff = currentX - startXRef.current;
+      const nextDir = Math.abs(diff) > 50 ? (diff > 0 ? 'right' : 'left') : null;
+
+      // Throttle state updates to animation frames to avoid re-render jitter while scrolling.
+      if (pendingDirRef.current === nextDir) return;
+      pendingDirRef.current = nextDir;
+      if (rafRef.current == null) {
+        rafRef.current = requestAnimationFrame(flushDir);
       }
     };
     
     const handleTouchEnd = () => {
+      trackingRef.current = false;
+      pendingDirRef.current = null;
       setSwipeDirection(null);
+      if (rafRef.current != null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
     };
     
     document.addEventListener('touchstart', handleTouchStart);
@@ -73,6 +106,10 @@ export const NovaSwipeWrapper = ({ children }: NovaSwipeWrapperProps) => {
       document.removeEventListener('touchstart', handleTouchStart);
       document.removeEventListener('touchmove', handleTouchMove);
       document.removeEventListener('touchend', handleTouchEnd);
+      if (rafRef.current != null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
     };
   }, [isSwipeEnabled]);
 

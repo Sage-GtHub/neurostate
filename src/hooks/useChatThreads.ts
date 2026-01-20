@@ -300,17 +300,77 @@ export function useChatThreads() {
     if (data && !error) {
       const message = data as ChatMessage;
 
+      // Optimistically update local UI state immediately (realtime may be unavailable/slow).
+      if (message.thread_id && currentThread?.id === message.thread_id) {
+        setMessages((prev) => {
+          if (prev.some((m) => m.id === message.id)) return prev;
+          return [...prev, message];
+        });
+      }
+
       // Update thread's last_message_at and message_count
       if (targetThreadId) {
-        const currentCount = threads.find(t => t.id === targetThreadId)?.message_count || 0;
+        const nowIso = new Date().toISOString();
+        const currentCount =
+          threads.find((t) => t.id === targetThreadId)?.message_count ??
+          currentThread?.message_count ??
+          0;
+
+        // Persist
         await supabase
           .from('chat_threads')
-          .update({ 
-            last_message_at: new Date().toISOString(),
+          .update({
+            last_message_at: nowIso,
             message_count: currentCount + 1,
-            updated_at: new Date().toISOString()
+            updated_at: nowIso,
           })
           .eq('id', targetThreadId);
+
+        // Optimistic UI
+        setThreads((prev) =>
+          prev
+            .map((t) =>
+              t.id === targetThreadId
+                ? {
+                    ...t,
+                    last_message_at: nowIso,
+                    message_count: (t.message_count ?? 0) + 1,
+                    updated_at: nowIso,
+                  }
+                : t
+            )
+            .sort(
+              (a, b) =>
+                new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+            )
+        );
+        setArchivedThreads((prev) =>
+          prev
+            .map((t) =>
+              t.id === targetThreadId
+                ? {
+                    ...t,
+                    last_message_at: nowIso,
+                    message_count: (t.message_count ?? 0) + 1,
+                    updated_at: nowIso,
+                  }
+                : t
+            )
+            .sort(
+              (a, b) =>
+                new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+            )
+        );
+        setCurrentThread((prev) =>
+          prev?.id === targetThreadId
+            ? {
+                ...prev,
+                last_message_at: nowIso,
+                message_count: (prev.message_count ?? 0) + 1,
+                updated_at: nowIso,
+              }
+            : prev
+        );
       }
 
       return message;
