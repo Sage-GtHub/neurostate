@@ -93,13 +93,17 @@ export default function NovaChat() {
   const sessionIdRef = useRef<string | null>(null);
 
   // Combine thread messages with local streaming messages
+  // localMessages contains the streaming message being generated
   const displayMessages: Message[] = currentThread
-    ? threadMessages.map(m => ({
-        id: m.id,
-        role: m.role,
-        content: m.content,
-        timestamp: new Date(m.created_at),
-      }))
+    ? [
+        ...threadMessages.map(m => ({
+          id: m.id,
+          role: m.role as 'user' | 'assistant',
+          content: m.content,
+          timestamp: new Date(m.created_at),
+        })),
+        ...localMessages // Append any streaming messages
+      ]
     : localMessages;
 
   // Start session on mount
@@ -126,7 +130,7 @@ export default function NovaChat() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [displayMessages, threadMessages]);
 
-  const streamChat = useCallback(async (userMessage: Message, allMessages: Message[]) => {
+  const streamChat = useCallback(async (userMessage: Message, contextMessages: Message[]) => {
     const { data: { session } } = await supabase.auth.getSession();
     
     const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/nova-chat`, {
@@ -136,14 +140,13 @@ export default function NovaChat() {
         'Authorization': `Bearer ${session?.access_token || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
       },
       body: JSON.stringify({
-        messages: [...allMessages, userMessage].map(m => ({ role: m.role, content: m.content }))
+        messages: [...contextMessages, userMessage].map(m => ({ role: m.role, content: m.content }))
       }),
     });
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
       
-      // Handle rate limit specifically
       if (response.status === 429) {
         const retryAfter = errorData.retryAfter || 30;
         throw new Error(`Too many messages. Please wait ${retryAfter} seconds.`);
@@ -159,12 +162,15 @@ export default function NovaChat() {
     let assistantContent = "";
     let textBuffer = "";
 
-    // Add placeholder for streaming
-    setLocalMessages(prev => [...prev, { 
-      role: "assistant", 
-      content: "", 
-      timestamp: new Date()
-    }]);
+    // Add streaming assistant message placeholder (after user message)
+    setLocalMessages(prev => {
+      // Keep user message, add assistant placeholder
+      const userMsg = prev.find(m => m.role === 'user');
+      return [
+        ...(userMsg ? [userMsg] : []),
+        { role: "assistant" as const, content: "", timestamp: new Date() }
+      ];
+    });
 
     while (true) {
       const { done, value } = await reader.read();
@@ -189,16 +195,17 @@ export default function NovaChat() {
           const content = parsed.choices?.[0]?.delta?.content;
           if (content) {
             assistantContent += content;
+            // Update only the assistant message content
             setLocalMessages(prev => {
-              const newMessages = [...prev];
-              newMessages[newMessages.length - 1] = {
-                ...newMessages[newMessages.length - 1],
-                content: assistantContent,
-              };
-              return newMessages;
+              return prev.map(m => 
+                m.role === 'assistant' 
+                  ? { ...m, content: assistantContent }
+                  : m
+              );
             });
           }
         } catch {
+          // Incomplete JSON, put back in buffer and wait for more data
           textBuffer = line + "\n" + textBuffer;
           break;
         }
@@ -222,30 +229,34 @@ export default function NovaChat() {
       return;
     }
 
-    const userMessage: Message = { role: "user", content, timestamp: new Date() };
-    
-    // If no current thread, create one
-    let threadId = currentThread?.id;
-    if (!threadId) {
-      // Create new thread with first message as title
-      const title = content.length > 50 ? content.substring(0, 47) + "..." : content;
-      const newThread = await createThread(title);
-      threadId = newThread?.id;
-    }
-
-    // Add to local messages for immediate display
-    setLocalMessages(prev => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
 
+    const userMessage: Message = { role: "user", content, timestamp: new Date() };
+    
+    // Add user message to local state immediately for display
+    setLocalMessages([userMessage]);
+    
+    // Build context from existing thread messages BEFORE any state changes
+    const contextMessages = threadMessages.map(m => ({ 
+      role: m.role as 'user' | 'assistant', 
+      content: m.content 
+    }));
+
     try {
+      // Create thread if needed
+      let threadId = currentThread?.id;
+      if (!threadId) {
+        const title = content.length > 50 ? content.substring(0, 47) + "..." : content;
+        const newThread = await createThread(title);
+        threadId = newThread?.id;
+        if (!threadId) {
+          throw new Error("Failed to create conversation");
+        }
+      }
+
       // Save user message to database
       await addMessage('user', content, threadId);
-
-      // Get all messages for context
-      const contextMessages = currentThread
-        ? threadMessages.map(m => ({ role: m.role, content: m.content } as Message))
-        : localMessages;
 
       const assistantContent = await streamChat(userMessage, contextMessages);
 
@@ -257,26 +268,20 @@ export default function NovaChat() {
         if (sessionIdRef.current) {
           await incrementMessages(sessionIdRef.current, assistantContent.length);
         }
-
-        // Clear local messages - real-time subscription will update
-        setLocalMessages([]);
       }
+
+      // Clear local messages - real-time subscription will handle display
+      setLocalMessages([]);
 
     } catch (error) {
       console.error("Error:", error);
       const errorMessage = error instanceof Error ? error.message : "Failed to send message";
       
       // Check for rate limit errors
-      if (errorMessage.includes("Too many") || errorMessage.includes("Rate limit")) {
-        toast({
-          title: "Too many messages",
-          description: "Please wait a moment before sending another message.",
-          variant: "destructive",
-        });
-      } else if (errorMessage.includes("429")) {
+      if (errorMessage.includes("Too many") || errorMessage.includes("Rate limit") || errorMessage.includes("429")) {
         toast({
           title: "Rate limited",
-          description: "Nova is receiving too many requests. Please wait a moment.",
+          description: "Please wait a moment before sending another message.",
           variant: "destructive",
         });
       } else {
@@ -287,8 +292,8 @@ export default function NovaChat() {
         });
       }
       
-      // Remove empty assistant message on error
-      setLocalMessages(prev => prev.filter(m => m.content !== ""));
+      // Remove streaming messages on error, keep user message for retry
+      setLocalMessages([userMessage]);
     } finally {
       setIsLoading(false);
     }
