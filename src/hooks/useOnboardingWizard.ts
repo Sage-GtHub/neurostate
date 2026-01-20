@@ -27,7 +27,20 @@ export function useOnboardingWizard() {
         return;
       }
 
-      // Check if user has completed onboarding (has assessment or connected devices)
+      // Check user preferences first for explicit onboarding completion
+      const { data: preferences } = await supabase
+        .from('user_preferences')
+        .select('onboarding_completed')
+        .eq('user_id', user.id)
+        .single();
+
+      if (preferences?.onboarding_completed) {
+        setShowOnboarding(false);
+        setIsChecking(false);
+        return;
+      }
+
+      // Fallback: check if user has assessment or connected devices
       const [assessmentResult, devicesResult] = await Promise.all([
         supabase
           .from('protocol_assessments')
@@ -38,6 +51,7 @@ export function useOnboardingWizard() {
           .from('connected_devices')
           .select('id')
           .eq('user_id', user.id)
+          .eq('connection_status', 'connected')
           .limit(1)
       ]);
 
@@ -48,6 +62,8 @@ export function useOnboardingWizard() {
       setShowOnboarding(!hasAssessment && !hasDevices);
     } catch (error) {
       console.error('Error checking onboarding status:', error);
+      // On error, don't show onboarding (fail silently)
+      setShowOnboarding(false);
     } finally {
       setIsChecking(false);
     }

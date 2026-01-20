@@ -84,7 +84,7 @@ export function OnboardingWizard({ open, onComplete }: OnboardingWizardProps) {
       if (!user) throw new Error("Not authenticated");
 
       // Save assessment data
-      const { error } = await supabase.from('protocol_assessments').insert({
+      const { error: assessmentError } = await supabase.from('protocol_assessments').insert({
         user_id: user.id,
         goals: data.goals,
         assessment_data: {
@@ -101,11 +101,44 @@ export function OnboardingWizard({ open, onComplete }: OnboardingWizardProps) {
         }
       });
 
-      if (error) throw error;
+      if (assessmentError) throw assessmentError;
+
+      // Update user preferences to mark onboarding as completed
+      await supabase.from('user_preferences').upsert({
+        user_id: user.id,
+        onboarding_completed: true,
+        onboarding_step: 5,
+      }, { onConflict: 'user_id' });
 
       // Generate initial baseline metrics if no devices connected
       if (data.connectedDevices.length === 0) {
         await generateBaselineMetrics(user.id);
+      }
+
+      // Try to generate initial protocol via AI (non-blocking)
+      try {
+        const { data: session } = await supabase.auth.getSession();
+        if (session?.session?.access_token) {
+          await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/generate-protocol`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${session.session.access_token}`,
+            },
+            body: JSON.stringify({
+              assessmentData: {
+                sleepQuality: data.sleepQuality,
+                stressLevel: data.stressLevel,
+                activityLevel: data.activityLevel,
+                workStyle: data.workStyle,
+              },
+              goals: data.goals,
+            }),
+          });
+        }
+      } catch (protocolError) {
+        console.error("Protocol generation failed (non-blocking):", protocolError);
+        // Don't throw - protocol generation failure shouldn't block onboarding
       }
 
       setCurrentStep("complete");

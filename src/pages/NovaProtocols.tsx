@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
-import { NovaSkeletonGrid } from "@/components/nova/NovaSkeleton";
+import { NovaSkeletonGrid, NovaSkeleton } from "@/components/nova/NovaSkeleton";
+import { NovaEmptyState } from "@/components/nova/NovaEmptyState";
+import { NovaErrorState } from "@/components/nova/NovaErrorBoundary";
 import { supabase } from "@/integrations/supabase/client";
 import { ProtocolAssessment } from "@/components/ProtocolAssessment";
 import { useToast } from "@/components/ui/use-toast";
@@ -28,7 +30,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Plus, ArrowUpRight, Target, Activity, TrendingUp, Zap, Sparkles, Check, Moon, Brain, Heart, Dumbbell, Loader2, Trash2, CheckCircle2 } from "lucide-react";
+import { Plus, ArrowUpRight, Target, Activity, TrendingUp, Zap, Sparkles, Check, Moon, Brain, Heart, Dumbbell, Loader2, Trash2, CheckCircle2, RefreshCw, AlertCircle } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -208,6 +210,8 @@ export default function NovaProtocols() {
   
   // Protocols state
   const [protocols, setProtocols] = useState<Protocol[]>([]);
+  const [protocolsLoading, setProtocolsLoading] = useState(true);
+  const [protocolsError, setProtocolsError] = useState<string | null>(null);
   const [assessment, setAssessment] = useState<Assessment | null>(null);
   const [recommendations, setRecommendations] = useState<RecommendedProtocol[]>([]);
   const [showAssessment, setShowAssessment] = useState(false);
@@ -234,6 +238,8 @@ export default function NovaProtocols() {
   }, [activeTab]);
 
   const loadProtocols = async () => {
+    setProtocolsLoading(true);
+    setProtocolsError(null);
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
@@ -242,7 +248,10 @@ export default function NovaProtocols() {
       setProtocols((data || []) as Protocol[]);
     } catch (error) {
       console.error("Error loading protocols:", error);
+      setProtocolsError(error instanceof Error ? error.message : 'Failed to load protocols');
       toast({ title: "Error", description: "Failed to load protocols", variant: "destructive" });
+    } finally {
+      setProtocolsLoading(false);
     }
   };
 
@@ -525,8 +534,39 @@ export default function NovaProtocols() {
 
             {/* PROTOCOLS TAB */}
             <TabsContent value="protocols" className="mt-0">
+              {/* Loading State */}
+              {protocolsLoading && (
+                <div className="space-y-4">
+                  <NovaSkeletonGrid count={2} variant="protocol" />
+                </div>
+              )}
+
+              {/* Error State */}
+              {!protocolsLoading && protocolsError && (
+                <NovaErrorState 
+                  error={protocolsError} 
+                  onRetry={loadProtocols}
+                  title="Failed to load protocols"
+                />
+              )}
+
+              {/* Empty State */}
+              {!protocolsLoading && !protocolsError && protocols.length === 0 && recommendations.length === 0 && (
+                <NovaEmptyState
+                  variant="protocols"
+                  primaryAction={{
+                    label: "Create Protocol",
+                    onClick: () => setShowAssessment(true)
+                  }}
+                  secondaryAction={{
+                    label: "Refresh",
+                    onClick: loadProtocols
+                  }}
+                />
+              )}
+
               {/* Personalised Recommendations */}
-              {recommendations.length > 0 && (
+              {!protocolsLoading && !protocolsError && recommendations.length > 0 && (
                 <motion.div 
                   className="mb-10"
                   initial={{ opacity: 0, y: 20 }}

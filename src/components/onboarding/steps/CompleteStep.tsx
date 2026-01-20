@@ -56,9 +56,13 @@ export function CompleteStep({ data, onComplete }: CompleteStepProps) {
         <h2 className="text-2xl font-light text-foreground mb-3">
           You're all set!
         </h2>
-        <p className="text-sm text-muted-foreground max-w-md mb-8">
-          Nova has created your personalised profile. Your first insights 
-          will be ready within 24 hours.
+        <p className="text-sm text-muted-foreground max-w-md mb-4">
+          Nova has created your personalised profile based on your goals.
+        </p>
+        <p className="text-xs text-primary/80 max-w-md mb-8">
+          {data.goals.length > 0 
+            ? "Your first AI-generated protocol is being created now."
+            : "Start chatting with Nova to get personalised recommendations."}
         </p>
       </motion.div>
 
