@@ -168,14 +168,10 @@ export default function NovaChat() {
     let assistantContent = "";
     let textBuffer = "";
 
-    // Add streaming assistant message placeholder (after user message)
-    setLocalMessages(prev => {
-      // Keep user message, add assistant placeholder
-      const userMsg = prev.find(m => m.role === 'user');
-      return [
-        ...(userMsg ? [userMsg] : []),
-        { role: "assistant" as const, content: "", timestamp: new Date() }
-      ];
+    // Add streaming assistant message placeholder (do not overwrite existing local state)
+    setLocalMessages((prev) => {
+      if (prev.some((m) => m.role === "assistant")) return prev;
+      return [...prev, { role: "assistant" as const, content: "", timestamp: new Date() }];
     });
 
     while (true) {
@@ -202,12 +198,13 @@ export default function NovaChat() {
           if (content) {
             assistantContent += content;
             // Update only the assistant message content
-            setLocalMessages(prev => {
-              return prev.map(m => 
-                m.role === 'assistant' 
-                  ? { ...m, content: assistantContent }
-                  : m
-              );
+            setLocalMessages((prev) => {
+              const lastAssistantIndexFromEnd = [...prev]
+                .reverse()
+                .findIndex((m) => m.role === "assistant");
+              if (lastAssistantIndexFromEnd === -1) return prev;
+              const idx = prev.length - 1 - lastAssistantIndexFromEnd;
+              return prev.map((m, i) => (i === idx ? { ...m, content: assistantContent } : m));
             });
           }
         } catch {
@@ -219,7 +216,7 @@ export default function NovaChat() {
     }
 
     return assistantContent;
-  }, []);
+  }, [chatMode]);
 
   const handleSendMessage = async (messageContent?: string) => {
     const content = messageContent || input.trim();
@@ -263,13 +260,27 @@ export default function NovaChat() {
       }
 
       // Save user message to database
-      await addMessage('user', content, threadId);
+      const savedUser = await addMessage('user', content, threadId);
+      if (!savedUser) {
+        throw new Error("Failed to save your message. Please try again.");
+      }
 
       const assistantContent = await streamChat(userMessage, contextMessages);
 
+      let canClearLocal = true;
+
       if (assistantContent) {
         // Save assistant message to database
-        await addMessage('assistant', assistantContent, threadId);
+        const savedAssistant = await addMessage('assistant', assistantContent, threadId);
+        if (!savedAssistant) {
+          // Keep local streaming message visible if persistence fails
+          canClearLocal = false;
+          toast({
+            title: "Couldn't save Nova's reply",
+            description: "Nova replied, but saving the response failed. Your chat history may not update until you reload.",
+            variant: "destructive",
+          });
+        }
         
         // Track usage
         if (sessionIdRef.current) {
@@ -277,8 +288,8 @@ export default function NovaChat() {
         }
       }
 
-      // Clear local messages - real-time subscription will handle display
-      setLocalMessages([]);
+      // Clear local messages once persistence succeeded
+      if (canClearLocal) setLocalMessages([]);
 
     } catch (error) {
       console.error("Error:", error);
@@ -580,6 +591,7 @@ export default function NovaChat() {
                 <>
                   <div 
                     ref={chatContainerRef}
+                    data-swipe-ignore="true"
                     className="flex-1 overflow-y-auto py-8 space-y-6"
                   >
                     {messages.map((message, index) => (
@@ -665,6 +677,7 @@ export default function NovaChat() {
                   </div>
 
                   <div className="sticky bottom-0 py-6 bg-gradient-to-t from-background via-background to-transparent">
+                    <div data-swipe-ignore="true">
                     <PerplexityInput
                       value={input}
                       onChange={setInput}
@@ -674,6 +687,7 @@ export default function NovaChat() {
                       onModeChange={setChatMode}
                       placeholder="Follow up..."
                     />
+                    </div>
                   </div>
                 </>
               )}
