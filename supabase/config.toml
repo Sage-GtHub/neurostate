@@ -3,6 +3,9 @@ project_id = "ibugjjjhxtclofaegtvc"
 [functions.update-product-descriptions]
 verify_jwt = false
 
+[functions.scheduled-device-sync]
+verify_jwt = false
+
 [functions.ai-chat]
 verify_jwt = false
 
