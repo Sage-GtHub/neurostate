@@ -34,7 +34,22 @@ serve(async (req) => {
   }
 
   try {
-    const { messages, context } = await req.json();
+    const body = await req.json();
+    let messages = body.messages;
+    const context = body.context;
+    
+    // Handle case where single message is passed
+    if (!messages && body.message) {
+      messages = [{ role: 'user', content: body.message }];
+    }
+    
+    // Validate messages array
+    if (!messages || !Array.isArray(messages)) {
+      return new Response(JSON.stringify({ error: 'Messages must be an array of chat messages' }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
     
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
     if (!LOVABLE_API_KEY) {

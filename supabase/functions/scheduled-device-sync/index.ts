@@ -22,10 +22,10 @@ serve(async (req) => {
 
     console.log('[Scheduled Sync] Starting scheduled device sync...');
 
-    // Get all connected devices with valid tokens
+    // Get all connected devices
     const { data: devices, error: devicesError } = await supabase
       .from('connected_devices')
-      .select('*, device_tokens!inner(*)')
+      .select('*')
       .eq('connection_status', 'connected');
 
     if (devicesError) {
@@ -55,10 +55,18 @@ serve(async (req) => {
       try {
         console.log(`[Scheduled Sync] Syncing device: ${device.device_name} (${device.device_type})`);
 
+        // Get device token for this device
+        const { data: deviceToken } = await supabase
+          .from('device_tokens')
+          .select('*')
+          .eq('user_id', device.user_id)
+          .eq('device_type', device.device_type === 'oura_ring' ? 'oura' : device.device_type)
+          .single();
+
         // Try Vital API first if available
-        if (vitalApiKey && device.device_tokens?.vital_user_id) {
+        if (vitalApiKey && deviceToken?.vital_user_id) {
           const vitalBaseUrl = vitalRegion === 'eu' 
-            ? 'https://api.eu.tryvital.io' 
+            ? 'https://api.eu.tryvital.io'
             : 'https://api.tryvital.io';
 
           // Fetch summary data from Vital
@@ -175,13 +183,13 @@ serve(async (req) => {
           }
         }
         // Fallback to direct Oura API if device has token
-        else if (device.device_type === 'oura_ring' && device.device_tokens?.access_token) {
+        else if (device.device_type === 'oura_ring' && deviceToken?.access_token) {
           const today = new Date().toISOString().split('T')[0];
           const ouraResponse = await fetch(
             `https://api.ouraring.com/v2/usercollection/daily_activity?start_date=${today}&end_date=${today}`,
             {
               headers: {
-                'Authorization': `Bearer ${device.device_tokens.access_token}`,
+                'Authorization': `Bearer ${deviceToken.access_token}`,
               },
             }
           );
