@@ -12,6 +12,8 @@ import {
   Zap
 } from "lucide-react";
 
+type ChatMode = "default" | "focus";
+
 interface PerplexityInputProps {
   value: string;
   onChange: (value: string) => void;
@@ -21,12 +23,10 @@ interface PerplexityInputProps {
   isListening?: boolean;
   placeholder?: string;
   className?: string;
-}
 
-const QUICK_MODES = [
-  { icon: Globe, label: "Focus", active: false },
-  { icon: Image, label: "Attach", active: false },
-];
+  mode?: ChatMode;
+  onModeChange?: (mode: ChatMode) => void;
+}
 
 export function PerplexityInput({
   value,
@@ -37,8 +37,11 @@ export function PerplexityInput({
   isListening,
   placeholder = "Ask anything...",
   className,
+  mode = "default",
+  onModeChange,
 }: PerplexityInputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState(false);
 
   // Auto-resize textarea
@@ -54,6 +57,38 @@ export function PerplexityInput({
       e.preventDefault();
       onSubmit();
     }
+  };
+
+  const toggleFocusMode = () => {
+    const next: ChatMode = mode === "focus" ? "default" : "focus";
+    onModeChange?.(next);
+  };
+
+  const handleAttachClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileSelected = async (file: File | null) => {
+    if (!file) return;
+    // Only handle small text attachments (keeps UX snappy, avoids unexpected behaviour)
+    const isText =
+      file.type.startsWith("text/") ||
+      file.name.toLowerCase().endsWith(".md") ||
+      file.name.toLowerCase().endsWith(".txt") ||
+      file.name.toLowerCase().endsWith(".json");
+
+    if (!isText || file.size > 200_000) {
+      // Silently ignore unsupported files for now (button still works: opens picker)
+      return;
+    }
+
+    const text = await file.text();
+    const snippet = text.length > 6000 ? text.slice(0, 6000) + "\n…(truncated)" : text;
+    const nextValue =
+      (value ? value + "\n\n" : "") +
+      `[Attachment: ${file.name}]\n` +
+      snippet;
+    onChange(nextValue);
   };
 
   return (
@@ -133,20 +168,48 @@ export function PerplexityInput({
         {/* Bottom toolbar - Perplexity style mode buttons */}
         <div className="flex items-center justify-between px-3 pb-3 pt-0">
           <div className="flex items-center gap-2">
-            {QUICK_MODES.map((mode, i) => (
-              <button
-                key={i}
-                className={cn(
-                  "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium",
-                  "bg-muted/50 text-muted-foreground",
-                  "hover:bg-muted hover:text-foreground",
-                  "transition-colors"
-                )}
-              >
-                <mode.icon className="w-3.5 h-3.5" />
-                {mode.label}
-              </button>
-            ))}
+            <button
+              type="button"
+              onClick={toggleFocusMode}
+              aria-pressed={mode === "focus"}
+              className={cn(
+                "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium",
+                "transition-colors",
+                mode === "focus"
+                  ? "bg-accent/20 text-foreground"
+                  : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
+              )}
+            >
+              <Globe className="w-3.5 h-3.5" />
+              Focus
+            </button>
+
+            <button
+              type="button"
+              onClick={handleAttachClick}
+              className={cn(
+                "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium",
+                "bg-muted/50 text-muted-foreground",
+                "hover:bg-muted hover:text-foreground",
+                "transition-colors"
+              )}
+            >
+              <Paperclip className="w-3.5 h-3.5" />
+              Attach
+            </button>
+
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="text/*,.md,.txt,.json"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files?.[0] ?? null;
+                void handleFileSelected(file);
+                // Allow selecting the same file twice
+                e.currentTarget.value = "";
+              }}
+            />
           </div>
           
           <div className="flex items-center gap-2 text-xs text-muted-foreground/60">
