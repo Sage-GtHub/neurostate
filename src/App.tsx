@@ -38,6 +38,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Install from "./pages/Install";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Dashboard from "./pages/Dashboard";
@@ -147,6 +148,7 @@ const AnimatedRoutes = () => {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/install" element={<Install />} />
             <Route path="/nova/overview" element={<NovaOverview />} />
             <Route path="/nova/chat" element={<ProtectedRoute><NovaChat /></ProtectedRoute>} />
             <Route path="/nova" element={<ProtectedRoute><Nova /></ProtectedRoute>} />
