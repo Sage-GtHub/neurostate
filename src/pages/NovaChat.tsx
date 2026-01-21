@@ -20,6 +20,7 @@ import {
   Plus,
   MessageSquare,
 } from "lucide-react";
+import { NovaChatDiagnostics, DiagnosticsState } from "@/components/nova/NovaChatDiagnostics";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { SEO } from "@/components/SEO";
@@ -63,6 +64,15 @@ export default function NovaChat() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [chatMode, setChatMode] = useState<"default" | "focus">("default");
+  const [diagnostics, setDiagnostics] = useState<DiagnosticsState>({
+    requestId: null,
+    lastError: null,
+    streamingState: "idle",
+    persistenceState: { userMessage: null, assistantMessage: null },
+    threadId: null,
+    mode: "default",
+    messageCount: 0,
+  });
   const { toast } = useToast();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -136,6 +146,14 @@ export default function NovaChat() {
   }, [displayMessages.length, isLoading, currentThread?.id]);
 
   const streamChat = useCallback(async (userMessage: Message, contextMessages: Message[]) => {
+    const requestId = `req_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+    setDiagnostics(prev => ({ 
+      ...prev, 
+      requestId, 
+      streamingState: "connecting",
+      mode: chatMode 
+    }));
+    
     const { data: { session } } = await supabase.auth.getSession();
     
     const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/nova-chat`, {
@@ -143,6 +161,7 @@ export default function NovaChat() {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${session?.access_token || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+        'X-Request-ID': requestId,
       },
       body: JSON.stringify({
         messages: [...contextMessages, userMessage].map(m => ({ role: m.role, content: m.content })),
@@ -153,15 +172,29 @@ export default function NovaChat() {
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
       
-      if (response.status === 429) {
-        const retryAfter = errorData.retryAfter || 30;
-        throw new Error(`Too many messages. Please wait ${retryAfter} seconds.`);
-      }
+      const errorMsg = response.status === 429 
+        ? `Too many messages. Please wait ${errorData.retryAfter || 30} seconds.`
+        : (errorData.error || `HTTP ${response.status}`);
       
-      throw new Error(errorData.error || `HTTP ${response.status}`);
+      setDiagnostics(prev => ({
+        ...prev,
+        streamingState: "error",
+        lastError: { message: errorMsg, timestamp: new Date() }
+      }));
+      
+      throw new Error(errorMsg);
     }
 
-    if (!response.body) throw new Error('No response body');
+    if (!response.body) {
+      setDiagnostics(prev => ({
+        ...prev,
+        streamingState: "error",
+        lastError: { message: "No response body", timestamp: new Date() }
+      }));
+      throw new Error('No response body');
+    }
+    
+    setDiagnostics(prev => ({ ...prev, streamingState: "streaming" }));
 
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
@@ -214,6 +247,7 @@ export default function NovaChat() {
         }
       }
     }
+    setDiagnostics(prev => ({ ...prev, streamingState: "complete" }));
 
     return assistantContent;
   }, [chatMode]);
@@ -234,6 +268,18 @@ export default function NovaChat() {
 
     setInput("");
     setIsLoading(true);
+    
+    // Reset diagnostics for new request
+    setDiagnostics(prev => ({
+      ...prev,
+      requestId: null,
+      lastError: null,
+      streamingState: "idle",
+      persistenceState: { userMessage: "pending", assistantMessage: null },
+      threadId: currentThread?.id || null,
+      mode: chatMode,
+      messageCount: displayMessages.length,
+    }));
 
     const userMessage: Message = { role: "user", content, timestamp: new Date() };
     
@@ -255,15 +301,31 @@ export default function NovaChat() {
         const newThread = await createThread(title);
         threadId = newThread?.id;
         if (!threadId) {
+          setDiagnostics(prev => ({
+            ...prev,
+            lastError: { message: "Failed to create conversation", timestamp: new Date() }
+          }));
           throw new Error("Failed to create conversation");
         }
       }
+      
+      setDiagnostics(prev => ({ ...prev, threadId }));
 
       // Save user message to database
       const savedUser = await addMessage('user', content, threadId);
       if (!savedUser) {
+        setDiagnostics(prev => ({
+          ...prev,
+          persistenceState: { ...prev.persistenceState, userMessage: "failed" },
+          lastError: { message: "Failed to save user message", timestamp: new Date() }
+        }));
         throw new Error("Failed to save your message. Please try again.");
       }
+      
+      setDiagnostics(prev => ({
+        ...prev,
+        persistenceState: { ...prev.persistenceState, userMessage: "saved", assistantMessage: "pending" }
+      }));
 
       const assistantContent = await streamChat(userMessage, contextMessages);
 
@@ -275,11 +337,22 @@ export default function NovaChat() {
         if (!savedAssistant) {
           // Keep local streaming message visible if persistence fails
           canClearLocal = false;
+          setDiagnostics(prev => ({
+            ...prev,
+            persistenceState: { ...prev.persistenceState, assistantMessage: "failed" },
+            lastError: { message: "Failed to save assistant response", timestamp: new Date() }
+          }));
           toast({
             title: "Couldn't save Nova's reply",
             description: "Nova replied, but saving the response failed. Your chat history may not update until you reload.",
             variant: "destructive",
           });
+        } else {
+          setDiagnostics(prev => ({
+            ...prev,
+            persistenceState: { ...prev.persistenceState, assistantMessage: "saved" },
+            messageCount: prev.messageCount + 2,
+          }));
         }
         
         // Track usage
@@ -294,6 +367,12 @@ export default function NovaChat() {
     } catch (error) {
       console.error("Error:", error);
       const errorMessage = error instanceof Error ? error.message : "Failed to send message";
+      
+      setDiagnostics(prev => ({
+        ...prev,
+        streamingState: "error",
+        lastError: prev.lastError || { message: errorMessage, timestamp: new Date() }
+      }));
       
       // Check for rate limit errors
       if (errorMessage.includes("Too many") || errorMessage.includes("Rate limit") || errorMessage.includes("429")) {
@@ -541,6 +620,7 @@ export default function NovaChat() {
                       }
                     }}
                   />
+                  <NovaChatDiagnostics state={diagnostics} />
                   <button
                     onClick={clearHistory}
                     className="p-2 rounded-full text-foreground/40 hover:text-foreground hover:bg-foreground/5 transition-all"
