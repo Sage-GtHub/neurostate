@@ -3,7 +3,8 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.80.0";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  // Include any custom headers the frontend sends (e.g. X-Request-ID for diagnostics)
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-request-id',
 };
 
 // In-memory rate limiter (per edge function instance)
