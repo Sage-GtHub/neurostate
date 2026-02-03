@@ -12,7 +12,6 @@ import {
   MessageSquare, 
   Loader2, 
   Sparkles,
-  
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
@@ -20,6 +19,7 @@ import ReactMarkdown from "react-markdown";
 import { format } from "date-fns";
 import { NovaNav } from "@/components/NovaNav";
 import { NovaChatDiagnostics } from "@/components/nova/NovaChatDiagnostics";
+import { DeviceStatusIndicator } from "@/components/nova/DeviceStatusIndicator";
 
 type Message = {
   role: "user" | "assistant";
@@ -35,11 +35,11 @@ type Conversation = {
   updatedAt: string;
 };
 
-const QUICK_SUGGESTIONS = [
-  "What's my readiness score telling me?",
-  "How can I improve my sleep quality?",
-  "Suggest a focus protocol for deep work",
-  "Analyse my recovery trends",
+const QUICK_ACTIONS = [
+  { label: "What's my readiness today?", icon: "🎯" },
+  { label: "Show my sleep trends", icon: "😴" },
+  { label: "Optimise my schedule", icon: "📅" },
+  { label: "Analyse my recovery", icon: "💪" },
 ];
 
 function TypingIndicator() {
@@ -418,6 +418,9 @@ export default function NovaChat() {
           </div>
         </div>
 
+        {/* Device Status Indicator */}
+        <DeviceStatusIndicator />
+
         {/* Content Area */}
         <div className="flex-1 flex flex-col overflow-hidden">
           {!hasMessages ? (
@@ -433,22 +436,23 @@ export default function NovaChat() {
                 Ask me anything about your cognitive performance, recovery, and protocols.
               </p>
               
-              {/* Quick suggestions */}
+              {/* Quick action buttons */}
               <div className="flex flex-col sm:grid sm:grid-cols-2 gap-2 w-full max-w-md px-2">
-                {QUICK_SUGGESTIONS.map((suggestion, i) => (
+                {QUICK_ACTIONS.map((action, i) => (
                   <button
                     key={i}
-                    onClick={() => handleSend(suggestion)}
+                    onClick={() => handleSend(action.label)}
                     disabled={isLoading}
                     className={cn(
-                      "text-left px-4 py-3.5 sm:py-3 rounded-xl text-sm",
+                      "flex items-center gap-3 text-left px-4 py-3.5 sm:py-3 rounded-xl text-sm",
                       "bg-muted/50 border border-border/50",
                       "active:bg-muted active:border-border sm:hover:bg-muted sm:hover:border-border",
                       "transition-all duration-200 touch-manipulation",
                       "disabled:opacity-50 disabled:cursor-not-allowed"
                     )}
                   >
-                    {suggestion}
+                    <span className="text-lg">{action.icon}</span>
+                    <span>{action.label}</span>
                   </button>
                 ))}
               </div>
