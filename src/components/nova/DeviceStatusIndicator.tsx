@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Watch, Activity, Zap, ChevronDown, ChevronUp, RefreshCw } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
@@ -11,6 +11,11 @@ type Device = {
   connection_status: string;
   last_sync_at: string | null;
   battery_level: number | null;
+};
+
+type SyncingDevice = {
+  id: string;
+  startedAt: number;
 };
 
 const DEVICE_ICONS: Record<string, typeof Watch> = {
@@ -26,12 +31,9 @@ export function DeviceStatusIndicator() {
   const [devices, setDevices] = useState<Device[]>([]);
   const [expanded, setExpanded] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [syncingDevices, setSyncingDevices] = useState<SyncingDevice[]>([]);
 
-  useEffect(() => {
-    fetchDevices();
-  }, []);
-
-  const fetchDevices = async () => {
+  const fetchDevices = useCallback(async () => {
     setLoading(true);
     try {
       const { data: { user } } = await supabase.auth.getUser();
@@ -54,10 +56,83 @@ export function DeviceStatusIndicator() {
     } finally {
       setLoading(false);
     }
+  }, []);
+
+  useEffect(() => {
+    fetchDevices();
+
+    // Subscribe to real-time updates for connected_devices
+    const setupSubscription = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const channel = supabase
+        .channel('device-sync-status')
+        .on(
+          'postgres_changes',
+          {
+            event: 'UPDATE',
+            schema: 'public',
+            table: 'connected_devices',
+            filter: `user_id=eq.${user.id}`,
+          },
+          (payload) => {
+            const updatedDevice = payload.new as Device;
+            
+            // Check if this is a sync update (last_sync_at changed)
+            const oldDevice = payload.old as Device;
+            if (updatedDevice.last_sync_at !== oldDevice.last_sync_at) {
+              // Add to syncing devices with animation
+              setSyncingDevices(prev => [
+                ...prev.filter(d => d.id !== updatedDevice.id),
+                { id: updatedDevice.id, startedAt: Date.now() }
+              ]);
+              
+              // Remove after animation completes (2 seconds)
+              setTimeout(() => {
+                setSyncingDevices(prev => prev.filter(d => d.id !== updatedDevice.id));
+              }, 2000);
+            }
+            
+            // Update device in state
+            setDevices(prev => prev.map(d => 
+              d.id === updatedDevice.id ? updatedDevice : d
+            ));
+          }
+        )
+        .subscribe();
+
+      return () => {
+        supabase.removeChannel(channel);
+      };
+    };
+
+    const cleanup = setupSubscription();
+    return () => {
+      cleanup.then(fn => fn?.());
+    };
+  }, [fetchDevices]);
+
+  const handleManualSync = async (deviceId: string) => {
+    // Trigger syncing animation
+    setSyncingDevices(prev => [
+      ...prev.filter(d => d.id !== deviceId),
+      { id: deviceId, startedAt: Date.now() }
+    ]);
+
+    // Simulate sync (in real app, this would call an edge function)
+    setTimeout(() => {
+      setSyncingDevices(prev => prev.filter(d => d.id !== deviceId));
+    }, 2000);
+  };
+
+  const isDeviceSyncing = (deviceId: string) => {
+    return syncingDevices.some(d => d.id === deviceId);
   };
 
   const connectedCount = devices.filter(d => d.connection_status === "connected").length;
   const latestSync = devices.find(d => d.last_sync_at)?.last_sync_at;
+  const anySyncing = syncingDevices.length > 0;
 
   if (loading) {
     return (
@@ -91,14 +166,21 @@ export function DeviceStatusIndicator() {
       >
         <div className="flex items-center gap-1.5">
           <div className={cn(
-            "w-2 h-2 rounded-full",
-            connectedCount > 0 ? "bg-green-500" : "bg-muted-foreground"
+            "w-2 h-2 rounded-full transition-all duration-300",
+            connectedCount > 0 ? "bg-green-500" : "bg-muted-foreground",
+            anySyncing && "animate-pulse ring-2 ring-green-500/30"
           )} />
           <span className="text-muted-foreground">
             {connectedCount} device{connectedCount !== 1 ? "s" : ""} connected
           </span>
+          {anySyncing && (
+            <span className="flex items-center gap-1 text-accent">
+              <RefreshCw className="h-3 w-3 animate-spin" />
+              <span className="hidden sm:inline">Syncing...</span>
+            </span>
+          )}
         </div>
-        {latestSync && (
+        {!anySyncing && latestSync && (
           <span className="text-muted-foreground/70 hidden sm:inline">
             · Synced {formatDistanceToNow(new Date(latestSync), { addSuffix: true })}
           </span>
@@ -113,35 +195,51 @@ export function DeviceStatusIndicator() {
           {devices.map((device) => {
             const Icon = DEVICE_ICONS[device.device_type.toLowerCase()] || DEVICE_ICONS.default;
             const isConnected = device.connection_status === "connected";
+            const isSyncing = isDeviceSyncing(device.id);
             
             return (
               <div
                 key={device.id}
-                className="flex items-center gap-3 p-2 rounded-lg bg-muted/30"
+                className={cn(
+                  "flex items-center gap-3 p-2 rounded-lg bg-muted/30 transition-all duration-300",
+                  isSyncing && "ring-1 ring-accent/50 bg-accent/5"
+                )}
               >
                 <div className={cn(
-                  "w-8 h-8 rounded-lg flex items-center justify-center",
+                  "w-8 h-8 rounded-lg flex items-center justify-center relative",
                   isConnected ? "bg-accent/10 text-accent" : "bg-muted text-muted-foreground"
                 )}>
-                  <Icon className="h-4 w-4" />
+                  <Icon className={cn("h-4 w-4", isSyncing && "animate-pulse")} />
+                  {isSyncing && (
+                    <div className="absolute inset-0 rounded-lg ring-2 ring-accent/40 animate-ping" />
+                  )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium truncate">{device.device_name}</p>
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <span className={cn(
-                      "flex items-center gap-1",
-                      isConnected ? "text-green-500" : "text-muted-foreground"
-                    )}>
-                      <div className={cn(
-                        "w-1.5 h-1.5 rounded-full",
-                        isConnected ? "bg-green-500" : "bg-muted-foreground"
-                      )} />
-                      {isConnected ? "Connected" : "Offline"}
-                    </span>
-                    {device.last_sync_at && (
-                      <span>
-                        · {formatDistanceToNow(new Date(device.last_sync_at), { addSuffix: true })}
+                    {isSyncing ? (
+                      <span className="flex items-center gap-1 text-accent">
+                        <RefreshCw className="h-3 w-3 animate-spin" />
+                        Syncing...
                       </span>
+                    ) : (
+                      <>
+                        <span className={cn(
+                          "flex items-center gap-1",
+                          isConnected ? "text-green-500" : "text-muted-foreground"
+                        )}>
+                          <div className={cn(
+                            "w-1.5 h-1.5 rounded-full",
+                            isConnected ? "bg-green-500" : "bg-muted-foreground"
+                          )} />
+                          {isConnected ? "Connected" : "Offline"}
+                        </span>
+                        {device.last_sync_at && (
+                          <span>
+                            · {formatDistanceToNow(new Date(device.last_sync_at), { addSuffix: true })}
+                          </span>
+                        )}
+                      </>
                     )}
                   </div>
                 </div>
@@ -149,6 +247,18 @@ export function DeviceStatusIndicator() {
                   <div className="text-xs text-muted-foreground">
                     {device.battery_level}%
                   </div>
+                )}
+                {isConnected && !isSyncing && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleManualSync(device.id);
+                    }}
+                    className="p-1.5 rounded-md hover:bg-muted transition-colors touch-manipulation"
+                    aria-label="Sync now"
+                  >
+                    <RefreshCw className="h-3.5 w-3.5 text-muted-foreground" />
+                  </button>
                 )}
               </div>
             );
