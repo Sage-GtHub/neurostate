@@ -602,7 +602,7 @@ const Index = () => {
             <div className="max-w-7xl mx-auto">
               {/* Nova Info - Text on top */}
               <ScrollReveal className="space-y-5 mb-10 text-center max-w-2xl mx-auto">
-                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">AI Assistant</span>
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">AI Assistant</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                   Meet Nova — your team's health advisor
                 </h2>
