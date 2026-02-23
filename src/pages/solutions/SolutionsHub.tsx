@@ -76,9 +76,9 @@ export default function SolutionsHub() {
   return (
     <>
       <SEO
-        title="Platform | Cognitive Performance Infrastructure | NeuroState"
-        description="NeuroState is the system of record for cognitive capacity. Six layers of infrastructure transforming biometric signals into predictive intelligence and measurable ROI."
-        keywords="cognitive performance infrastructure, data integration, state intelligence, forecasting, interventions, dashboards, ROI analytics, enterprise wellness platform"
+        title="Platform | How NeuroState Works | NeuroState"
+        description="See how NeuroState turns wearable data and work patterns into clear health intelligence, early warnings, and measurable results for your organisation."
+        keywords="team health platform, data integration, health monitoring, forecasting, wellness ROI, employee wellbeing, burnout prevention"
       />
       <SolutionPageStructuredData
         solution={{
