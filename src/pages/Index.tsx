@@ -648,7 +648,7 @@ const Index = () => {
                 <p className="text-base md:text-lg text-white/60 max-w-lg mx-auto">
                   Book a 15-minute demo or start exploring for free. No credit card needed.
                 </p>
-                <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+                <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 pt-4">
                   <Link to="/contact">
                     <Button className="h-12 px-8 text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group">
                       Book a demo
