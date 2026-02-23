@@ -7,6 +7,9 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { HomeROICalculator } from "@/components/HomeROICalculator";
 import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
 import { HomeComparisonSection } from "@/components/HomeComparisonSection";
+import { SocialProofStrip } from "@/components/SocialProofStrip";
+import { StatsCounterBar } from "@/components/StatsCounterBar";
+import { IntegrationLogoStrip } from "@/components/IntegrationLogoStrip";
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Eye, Layers, Sparkles } from "lucide-react";
@@ -132,7 +135,9 @@ const Index = () => {
         <main>
           <Hero />
 
-          {/* Approach Section - 3 Pillars like Invisible's */}
+          <SocialProofStrip />
+          <StatsCounterBar />
+          <IntegrationLogoStrip />
           <section ref={approachRef} className="py-12 md:py-16 px-6 md:px-8 border-t border-border/30">
             <div className="max-w-7xl mx-auto">
               {/* Section header */}
