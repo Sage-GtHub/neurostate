@@ -85,7 +85,7 @@ export const Footer = () => {
 
             {/* Newsletter */}
             <div className="flex-1 lg:max-w-sm lg:ml-auto space-y-4">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Newsletter</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-background/40">Newsletter</p>
               <p className="text-background/60 text-xs">
                 Tips on team health, performance, and wellbeing.
               </p>
