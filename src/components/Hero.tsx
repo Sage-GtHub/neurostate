@@ -193,7 +193,7 @@ const Hero = () => {
               
               {/* Subheadline */}
               <motion.p 
-                className="text-xs md:text-sm text-muted-foreground max-w-md leading-relaxed"
+                className="text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed"
                 variants={itemVariants}
               >
                 NeuroState connects to wearables your team already uses, spots early signs of burnout and fatigue, and gives managers clear actions to keep people performing at their best.
