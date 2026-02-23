@@ -345,7 +345,7 @@ const Index = () => {
           <HomeComparisonSection />
 
           {/* Command Surfaces Preview - Open layout, fewer boxes */}
-          <section className="py-20 md:py-32 px-6 md:px-8 bg-muted/20">
+          <section className="py-16 md:py-32 px-5 md:px-8 bg-muted/20">
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
                 <ScrollReveal direction="left">
