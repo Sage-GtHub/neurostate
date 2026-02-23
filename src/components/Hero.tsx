@@ -170,7 +170,7 @@ const Hero = () => {
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 />
                 <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
-                  Human Performance OS
+                  Workforce Health Intelligence
                 </span>
               </motion.div>
 
@@ -180,15 +180,15 @@ const Hero = () => {
                 className="text-xl md:text-2xl lg:text-3xl font-normal text-foreground tracking-tight"
                 variants={itemVariants}
               >
-                NeuroState sits between{" "}
+                We turn your team's{" "}
                 <motion.span 
                   className="text-primary inline"
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
-                  raw data
+                  health data
                 </motion.span>{" "}
-                and human performance
+                into better business performance
               </motion.h1>
               
               {/* Subheadline */}
@@ -196,7 +196,7 @@ const Hero = () => {
                 className="text-xs md:text-sm text-muted-foreground max-w-md leading-relaxed"
                 variants={itemVariants}
               >
-                We build cognitive infrastructure that ingests wearable integrations, biometric signals, and behavioural patterns to deliver predictive analytics that optimise workforce performance, reduce burnout risk, and drive measurable business outcomes.
+                NeuroState connects to wearables your team already uses, spots early signs of burnout and fatigue, and gives managers clear actions to keep people performing at their best.
               </motion.p>
 
 

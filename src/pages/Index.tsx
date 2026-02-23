@@ -18,54 +18,54 @@ import { useRef } from "react";
 const platformBlocks = [
   {
     id: "data-integration",
-    label: "Data Layer",
-    name: "Data Integration",
-    description: "Ingest data from 40+ wearable integrations, calendars, and productivity tools. Normalised signals into a unified cognitive model.",
+    label: "Connect",
+    name: "Data Collection",
+    description: "Pull in data from 40+ wearables, calendars, and work tools your team already uses. Everything in one place.",
     icon: Database,
     link: "/solutions/data-layer",
     color: "from-blue-500/20 to-cyan-500/20"
   },
   {
     id: "state-intelligence",
-    label: "Intelligence",
-    name: "State Intelligence",
-    description: "Raw biometrics become actionable intelligence. Readiness scores, cognitive load, and capacity tracking, interpreted in real time.",
+    label: "Understand",
+    name: "Health Intelligence",
+    description: "Raw numbers become useful insights. See how ready your team is, who's at risk of burnout, and where energy levels are dropping.",
     icon: Brain,
     link: "/solutions/state-engine",
     color: "from-purple-500/20 to-pink-500/20"
   },
   {
     id: "forecasting",
-    label: "Forecasting",
+    label: "Predict",
     name: "Forecasting",
-    description: "See what's coming. 7, 14, and 30-day forecasts for capacity, intervention timing, and optimal performance windows.",
+    description: "See what's coming. 7, 14, and 30-day predictions for team energy, recovery needs, and best times to push or rest.",
     icon: TrendingUp,
     link: "/solutions/prediction",
     color: "from-amber-500/20 to-orange-500/20"
   },
   {
     id: "interventions",
-    label: "Actions",
-    name: "Interventions",
-    description: "Automated protocol recommendations and timely nudges. The system acts, not just observes, to optimise cognitive performance.",
+    label: "Act",
+    name: "Smart Recommendations",
+    description: "The system doesn't just watch — it tells you what to do. Timely, specific actions to keep your team sharp.",
     icon: Zap,
     link: "/solutions/action-layer",
     color: "from-rose-500/20 to-red-500/20"
   },
   {
     id: "dashboards",
-    label: "Surfaces",
-    name: "Dashboards",
-    description: "One system, different views. Individuals see optimisation. Managers see team health. Executives see risk and exposure.",
+    label: "View",
+    name: "Role-Based Dashboards",
+    description: "Everyone sees what matters to them. Individuals see their own health. Managers see team wellbeing. Leaders see business impact.",
     icon: Layers,
     link: "/solutions/command-surfaces",
     color: "from-indigo-500/20 to-violet-500/20"
   },
   {
     id: "roi-analytics",
-    label: "Financial",
-    name: "ROI Analytics",
-    description: "Every metric ties to money. Revenue exposure, intervention returns, capacity value. Precision economics for cognitive performance.",
+    label: "Measure",
+    name: "Financial Impact",
+    description: "See the money. How much burnout is costing you, what you're saving, and the return on every action taken.",
     icon: Calculator,
     link: "/solutions/roi-layer",
     color: "from-green-500/20 to-emerald-500/20"
@@ -75,38 +75,38 @@ const platformBlocks = [
 // Approach pillars - like Invisible's 3 columns
 const approachPillars = [
   {
-    title: "Foresight, not hindsight",
-    description: "We surface patterns 72 hours before performance shifts. Early signals, clear context, time to act.",
+    title: "Spot problems early",
+    description: "We flag burnout and fatigue up to 72 hours before they affect your team. Early warning means time to act.",
     icon: Gauge
   },
   {
-    title: "Infrastructure, not apps",
-    description: "This is the cognitive layer your organisation was missing. Connecting data, intelligence, and outcomes.",
+    title: "One system, not ten apps",
+    description: "NeuroState connects all your team's health and work data in one place. No more scattered tools and guesswork.",
     icon: Layers
   },
   {
-    title: "Precision economics",
-    description: "Every insight ties to value. Exposure quantified. Returns measured. Performance becomes a financial lever.",
+    title: "Show the money",
+    description: "Every insight ties back to cost. See what burnout is costing you, and what NeuroState saves.",
     icon: Calculator
   }
 ];
 
 // Industries
 const industries = [
-  { name: "SaaS & Technology", href: "/industries/saas-high-growth", desc: "Sustain engineering velocity at scale" },
-  { name: "Financial Services", href: "/industries/financial-services", desc: "Precision in high-stakes environments" },
-  { name: "Professional Services", href: "/industries/professional-services", desc: "Protect billable capacity and talent" },
-  { name: "Healthcare", href: "/industries/healthcare", desc: "Operational resilience for clinical teams" },
-  { name: "Research & Life Sciences", href: "/industries/research-life-sciences", desc: "Sustain deep work and discovery" },
-  { name: "Government & Defence", href: "/industries/government-defence", desc: "Mission-critical performance systems" }
+  { name: "SaaS & Technology", href: "/industries/saas-high-growth", desc: "Keep engineering teams sharp as you scale" },
+  { name: "Financial Services", href: "/industries/financial-services", desc: "Peak performance in high-pressure environments" },
+  { name: "Professional Services", href: "/industries/professional-services", desc: "Protect your people and their output" },
+  { name: "Healthcare", href: "/industries/healthcare", desc: "Support clinical teams under constant pressure" },
+  { name: "Research & Life Sciences", href: "/industries/research-life-sciences", desc: "Protect deep focus and discovery" },
+  { name: "Government & Defence", href: "/industries/government-defence", desc: "Performance systems for critical roles" }
 ];
 
 // Stats
 const impactStats = [
-  { value: "72hr", label: "Foresight window", sublabel: "before performance shifts" },
-  { value: "89%", label: "Signal coverage", sublabel: "across connected sources" },
-  { value: "3.2x", label: "First-year return", sublabel: "average enterprise ROI" },
-  { value: "40+", label: "Integrations", sublabel: "wearables and tools" }
+  { value: "72hr", label: "Early warning", sublabel: "spot burnout before it hits" },
+  { value: "89%", label: "Data coverage", sublabel: "from connected wearables" },
+  { value: "3.2x", label: "Return on investment", sublabel: "in the first year" },
+  { value: "40+", label: "Integrations", sublabel: "wearables and work tools" }
 ];
 
 const Index = () => {
@@ -116,9 +116,9 @@ const Index = () => {
   return (
     <>
       <SEO 
-        title="NeuroState® | Cognitive Performance Infrastructure for Organisations"
-        description="Enterprise SaaS platform for cognitive performance analytics. Predictive intelligence, risk visibility, and financial attribution for workforce optimisation."
-        keywords="cognitive performance SaaS, enterprise analytics platform, AI performance insights, workforce optimisation, burnout prevention, predictive intelligence, Nova AI, B2B cognitive analytics"
+        title="NeuroState® | Turn Your Team's Health Data Into Better Business Performance"
+        description="Connect wearables your team already uses, spot burnout before it happens, and get clear actions to keep people performing at their best. 40+ integrations, 72-hour early warnings, 3.2x ROI."
+        keywords="workforce health, team performance, burnout prevention, wearable analytics, employee wellbeing platform, workplace health intelligence, Nova AI, HR analytics"
       />
       <OrganizationStructuredData />
       <SoftwareApplicationStructuredData />
@@ -143,13 +143,13 @@ const Index = () => {
                 transition={{ duration: 0.6 }}
               >
                 <div className="space-y-2">
-                  <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Our approach</span>
+                  <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">How we help</span>
                   <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                    Ask. Analyse. Act.
+                    Predict. Prevent. Perform.
                   </h2>
                 </div>
                 <p className="text-sm text-muted-foreground max-w-md">
-                  The cognitive operating system for high-performing teams.
+                  A smarter way to look after your team's health and performance.
                 </p>
               </motion.div>
 
@@ -186,9 +186,9 @@ const Index = () => {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6 }}
             >
-              Like <span className="text-foreground font-medium">Stripe</span> is infrastructure for money, and{" "}
-              <span className="text-foreground font-medium">Palantir</span> is infrastructure for decision intelligence,{" "}
-              <span className="text-primary font-medium">NeuroState</span> is infrastructure for human performance.
+              Your team wears fitness trackers, smartwatches, and health devices every day.{" "}
+              <span className="text-primary font-medium">NeuroState</span> turns that data into real business value —
+              less burnout, fewer sick days, sharper teams.
             </motion.p>
           </section>
 
@@ -196,12 +196,12 @@ const Index = () => {
           <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/30">
             <div className="max-w-7xl mx-auto">
               <ScrollReveal className="space-y-3 mb-8">
-                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Our System</span>
+                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">The platform</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground max-w-2xl">
-                  Building blocks, not black boxes
+                  Six building blocks. One complete system.
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-xl">
-                  Modular components designed to integrate with your existing stack. Take what you need, shape it to your context.
+                  Each piece works on its own, but together they give you complete visibility into your team's health and performance.
                 </p>
               </ScrollReveal>
 
@@ -267,9 +267,9 @@ const Index = () => {
           <section className="py-12 md:py-16 px-6 md:px-8">
             <div className="max-w-7xl mx-auto">
               <ScrollReveal className="space-y-3 mb-8 text-center">
-                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">How It Works</span>
+                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">How it works</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  From signals to outcomes
+                  Four steps. Up and running in minutes.
                 </h2>
               </ScrollReveal>
 
@@ -281,10 +281,10 @@ const Index = () => {
                 {/* Desktop/Tablet Grid */}
                 <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
                   {[
-                    { step: "01", title: "Connect", desc: "Integrate wearables, calendars, and work tools. Setup takes minutes.", icon: Database },
-                    { step: "02", title: "Interpret", desc: "AI transforms raw data into cognitive intelligence.", icon: Brain },
-                    { step: "03", title: "Forecast", desc: "See capacity shifts and risk patterns before they materialise.", icon: TrendingUp },
-                    { step: "04", title: "Act", desc: "Receive contextual interventions with measurable returns.", icon: Zap }
+                    { step: "01", title: "Connect", desc: "Link wearables, calendars, and work tools. Takes minutes, not days.", icon: Database },
+                    { step: "02", title: "Understand", desc: "AI reads the data and tells you what it means — in plain English.", icon: Brain },
+                    { step: "03", title: "Predict", desc: "See who's at risk of burnout or fatigue before it happens.", icon: TrendingUp },
+                    { step: "04", title: "Act", desc: "Get clear recommendations that save money and protect your people.", icon: Zap }
                   ].map((item, i) => (
                     <motion.div
                       key={i}
@@ -309,10 +309,10 @@ const Index = () => {
                 {/* Mobile - Compact horizontal cards */}
                 <div className="md:hidden space-y-2">
                   {[
-                    { step: "01", title: "Connect", desc: "Integrate wearables, calendars, and work tools. Setup takes minutes.", icon: Database },
-                    { step: "02", title: "Interpret", desc: "AI transforms raw data into cognitive intelligence.", icon: Brain },
-                    { step: "03", title: "Forecast", desc: "See capacity shifts and risk patterns before they materialise.", icon: TrendingUp },
-                    { step: "04", title: "Act", desc: "Receive contextual interventions with measurable returns.", icon: Zap }
+                    { step: "01", title: "Connect", desc: "Link wearables, calendars, and work tools. Takes minutes, not days.", icon: Database },
+                    { step: "02", title: "Understand", desc: "AI reads the data and tells you what it means — in plain English.", icon: Brain },
+                    { step: "03", title: "Predict", desc: "See who's at risk of burnout or fatigue before it happens.", icon: TrendingUp },
+                    { step: "04", title: "Act", desc: "Get clear recommendations that save money and protect your people.", icon: Zap }
                   ].map((item, i) => (
                     <motion.div
                       key={i}
@@ -375,10 +375,10 @@ const Index = () => {
                 <ScrollReveal className="space-y-4 lg:sticky lg:top-24">
                   <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Industries</span>
                   <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                    Built for knowledge-intensive organisations
+                    Built for teams where performance matters most
                   </h2>
                   <p className="text-sm text-muted-foreground max-w-md">
-                    Every industry has unique cognitive demands. NeuroState adapts to yours.
+                    Different industries, different pressures. NeuroState adapts to yours.
                   </p>
                   <div className="pt-3">
                     <Link to="/enterprise/overview">
@@ -428,20 +428,20 @@ const Index = () => {
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
                 <ScrollReveal direction="left">
                   <div className="space-y-4">
-                    <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Enterprise-Grade</span>
+                    <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">For Leaders</span>
                     <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                      Command surfaces for every role
+                      Dashboards built for every role
                     </h2>
                     <p className="text-sm text-muted-foreground max-w-md">
-                      One system, different perspectives. Each role sees what matters most to them.
+                      Everyone sees what matters most to them. No noise, just what you need.
                     </p>
                     
                     <div className="grid grid-cols-2 gap-3 py-2">
                       {[
-                        { icon: Eye, text: "Live cognitive capacity visibility", detail: "Real-time team health" },
-                        { icon: Gauge, text: "Predictive risk indicators", detail: "72hr foresight" },
-                        { icon: Calculator, text: "Financial attribution", detail: "ROI tracking" },
-                        { icon: Sparkles, text: "AI-powered recommendations", detail: "Nova intelligence" }
+                        { icon: Eye, text: "See team health in real time", detail: "Live dashboard" },
+                        { icon: Gauge, text: "Spot risks before they hit", detail: "72-hour early warning" },
+                        { icon: Calculator, text: "Track the financial impact", detail: "Cost savings" },
+                        { icon: Sparkles, text: "AI-powered next steps", detail: "Smart recommendations" }
                       ].map((item, i) => (
                         <motion.div 
                           key={i} 
@@ -501,8 +501,8 @@ const Index = () => {
 
                     <div className="grid grid-cols-3 gap-3 py-5">
                       {[
-                        { value: "74", label: "CCI Score", color: "text-primary", trend: "+3" },
-                        { value: "£41.8k", label: "Exposure", color: "text-amber-500", trend: "-12%" },
+                        { value: "74", label: "Team Health", color: "text-primary", trend: "+3" },
+                        { value: "£41.8k", label: "At Risk", color: "text-amber-500", trend: "-12%" },
                         { value: "3", label: "Actions", color: "text-foreground", trend: "pending" }
                       ].map((metric, i) => (
                         <motion.div 
@@ -523,10 +523,10 @@ const Index = () => {
 
                     {/* Mini action preview */}
                     <div className="pt-3 border-t border-border/30 space-y-2">
-                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Recommended Actions</p>
+                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Suggested Actions</p>
                       {[
-                        { text: "Capacity review for Engineering", priority: "high" },
-                        { text: "Recovery protocol for Sales leads", priority: "medium" }
+                        { text: "Schedule check-in with Engineering team", priority: "high" },
+                        { text: "Adjust workload for Sales leads this week", priority: "medium" }
                       ].map((action, i) => (
                         <motion.div 
                           key={i}
@@ -551,19 +551,19 @@ const Index = () => {
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                 {/* Left - Header & Benefits */}
                 <ScrollReveal className="space-y-5 lg:sticky lg:top-24">
-                  <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Financial Impact</span>
+                  <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">The real cost</span>
                   <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                    Calculate your hidden costs
+                    See what burnout is really costing you
                   </h2>
                   <p className="text-sm text-muted-foreground max-w-md">
-                    Cognitive underperformance, burnout-related turnover, and preventable sick days cost more than you think. See what NeuroState can recover.
+                    Poor health, high turnover, and sick days add up fast. Use our calculator to see the real number — and what NeuroState can save.
                   </p>
                   
                   <div className="space-y-3 pt-2">
                     {[
-                      { label: "Productivity losses", value: "15-20% of salary spend" },
-                      { label: "Turnover costs", value: "50-200% of annual salary" },
-                      { label: "Sick day impact", value: "£600+ per day per employee" }
+                      { label: "Lost productivity", value: "15-20% of salary spend" },
+                      { label: "Replacing someone who leaves", value: "50-200% of their salary" },
+                      { label: "Each sick day", value: "£600+ per employee" }
                     ].map((stat, i) => (
                       <motion.div 
                         key={i}
@@ -604,20 +604,20 @@ const Index = () => {
               <ScrollReveal className="space-y-5 mb-10 text-center max-w-2xl mx-auto">
                 <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">AI Assistant</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  Meet Nova, your cognitive co-pilot
+                  Meet Nova — your team's health advisor
                 </h2>
                 <p className="text-sm text-muted-foreground">
-                  Nova interprets your biometric data, schedules, and work patterns to deliver contextual guidance when it matters most.
+                  Nova reads your team's health data and gives you clear, actionable advice. Ask it anything — in plain English.
                 </p>
               </ScrollReveal>
               
               {/* Features grid */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10 max-w-3xl mx-auto">
                 {[
-                  { icon: Brain, text: "Adaptive protocols", detail: "Personalised recommendations" },
-                  { icon: TrendingUp, text: "Predictive insights", detail: "72-hour foresight" },
-                  { icon: Zap, text: "Real-time nudges", detail: "Context-aware timing" },
-                  { icon: Eye, text: "Pattern recognition", detail: "Learn from your data" }
+                  { icon: Brain, text: "Personalised plans", detail: "Tailored to each person" },
+                  { icon: TrendingUp, text: "72-hour predictions", detail: "See what's coming" },
+                  { icon: Zap, text: "Timely nudges", detail: "Right advice, right time" },
+                  { icon: Eye, text: "Learns your patterns", detail: "Gets smarter over time" }
                 ].map((item, i) => (
                   <motion.div 
                     key={i} 
@@ -654,7 +654,7 @@ const Index = () => {
                     </motion.div>
                     <div>
                       <p className="text-foreground font-medium text-sm">Nova</p>
-                      <p className="text-xs text-muted-foreground">Your cognitive intelligence assistant</p>
+                      <p className="text-xs text-muted-foreground">Your AI health advisor</p>
                     </div>
                     <div className="ml-auto flex items-center gap-2">
                       <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
@@ -731,19 +731,19 @@ const Index = () => {
               <ScrollReveal className="space-y-3 mb-8">
                 <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Integrations</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  Connect everything. See everything.
+                  Works with what your team already uses
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-xl mx-auto">
-                  40+ integrations across wearables, calendars, and productivity tools, all normalised into a single cognitive model. We don't sell hardware; we connect to what your team already uses.
+                  40+ integrations across wearables, calendars, and work tools. We don't sell hardware — we connect to what your team already wears and uses.
                 </p>
               </ScrollReveal>
 
               {/* Integration categories */}
               <div className="grid md:grid-cols-4 gap-4 mb-8">
                 {[
-                  { category: "Wearable Integrations", items: ["Oura", "Whoop", "Apple Watch", "Garmin"], count: "15+" },
+                  { category: "Wearables", items: ["Oura", "Whoop", "Apple Watch", "Garmin"], count: "15+" },
                   { category: "Calendars", items: ["Google", "Outlook", "Apple"], count: "3" },
-                  { category: "Productivity", items: ["Slack", "Teams", "Notion"], count: "12+" },
+                  { category: "Work Tools", items: ["Slack", "Teams", "Notion"], count: "12+" },
                   { category: "HR Systems", items: ["Workday", "BambooHR", "SAP"], count: "10+" }
                 ].map((group, i) => (
                   <motion.div
@@ -777,10 +777,10 @@ const Index = () => {
               <ScrollReveal className="space-y-5">
                 <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Get Started</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  Curious to see it in action?
+                  Ready to see it in action?
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                  Click below to learn more or speak to our team today.
+                  Book a 15-minute demo or start exploring for free. No credit card needed.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
                   <Link to="/contact">
