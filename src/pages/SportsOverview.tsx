@@ -216,9 +216,9 @@ export default function SportsOverview() {
               </div>
               <div className="space-y-4">
                 {[
-                  { title: "Reactive load management", desc: "Training loads are adjusted after fatigue appears. The damage is already done." },
-                  { title: "Missing cognitive signals", desc: "Physical metrics alone miss the full picture. Stress, sleep, and mental load drive performance volatility." },
-                  { title: "Inconsistent recovery", desc: "Recovery protocols are generic. Individual athlete needs are not accounted for in real time." }
+                  { title: "Training adjustments come too late", desc: "Loads get changed after fatigue shows up. By then, performance has already dropped." },
+                  { title: "Stress and sleep get ignored", desc: "Physical data alone misses the full picture. Mental load, sleep quality, and stress all affect how athletes perform." },
+                  { title: "Recovery is one-size-fits-all", desc: "Every athlete is different, but most recovery plans treat them the same. That means slower comebacks." }
                 ].map((item, i) => (
                   <motion.div 
                     key={i}
