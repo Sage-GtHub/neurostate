@@ -277,8 +277,12 @@ const WearableStack = () => {
     <div className="w-full h-full min-h-[400px]">
       <Canvas
         camera={{ position: [0, 0, 6], fov: 50 }}
-        dpr={[1, 2]}
-        gl={{ antialias: true, alpha: true }}
+        dpr={[1, 1.5]}
+        gl={{ antialias: true, alpha: true, powerPreference: 'low-power' }}
+        onCreated={({ gl }) => {
+          const canvas = gl.domElement;
+          canvas.addEventListener('webglcontextlost', (e) => { e.preventDefault(); });
+        }}
       >
         <ambientLight intensity={0.4} />
         <pointLight position={[10, 10, 10]} intensity={0.6} />
