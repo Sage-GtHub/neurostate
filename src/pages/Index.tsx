@@ -1,7 +1,7 @@
 import { Header } from "@/components/Header";
 import Hero from "@/components/Hero";
 import { SEO } from "@/components/SEO";
-import { CorporateServiceStructuredData, FAQStructuredData } from "@/components/StructuredData";
+import { CorporateServiceStructuredData, FAQStructuredData, WebsiteStructuredData } from "@/components/StructuredData";
 
 const homepageFaqs = [
   { question: "What is NeuroState?", answer: "NeuroState is the cognitive performance infrastructure for organisations. It connects to 40+ wearable devices your team already uses, surfaces early signs of burnout and fatigue, and gives managers clear actions to keep people performing at their best." },
@@ -133,6 +133,7 @@ const Index = () => {
         keywords="cognitive performance infrastructure, workforce health intelligence, team performance platform, burnout prevention, wearable analytics, employee wellbeing, Nova AI, HR analytics, predictive intelligence"
       />
       <CorporateServiceStructuredData />
+      <WebsiteStructuredData />
       <FAQStructuredData faqs={homepageFaqs} />
       <div className="min-h-screen bg-background mobile-nav-padding relative overflow-hidden">
         <div className="fixed inset-0 pointer-events-none">
