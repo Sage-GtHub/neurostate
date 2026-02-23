@@ -419,10 +419,10 @@ export default function Nova() {
                     <Icon className="w-4 h-4 text-foreground/40 mb-3 group-hover:text-foreground/60 group-hover:scale-110 transition-all" />
                     <p className="text-[11px] font-medium text-foreground/70 group-hover:text-foreground transition-colors">{action.label}</p>
                   </button>
-                );
-              })}
+              );
+            })}
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>
