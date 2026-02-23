@@ -119,14 +119,11 @@ const Index = () => {
   return (
     <>
       <SEO 
-        title="NeuroState® | Turn Your Team's Health Data Into Better Business Performance"
-        description="Connect wearables your team already uses, spot burnout before it happens, and get clear actions to keep people performing at their best. 40+ integrations, 72-hour early warnings, 3.2x ROI."
-        keywords="workforce health, team performance, burnout prevention, wearable analytics, employee wellbeing platform, workplace health intelligence, Nova AI, HR analytics"
+        title="NeuroState® — Cognitive Performance Infrastructure"
+        description="Turn your team's health data into better business performance. 40+ wearable integrations, 72-hour burnout early warnings, and 3.2x ROI. The system of record for cognitive capacity."
+        keywords="cognitive performance infrastructure, workforce health intelligence, team performance platform, burnout prevention, wearable analytics, employee wellbeing, Nova AI, HR analytics, predictive intelligence"
       />
-      <OrganizationStructuredData />
-      <SoftwareApplicationStructuredData />
-      <WebsiteStructuredData />
-      <LocalBusinessStructuredData />
+      <CorporateServiceStructuredData />
       <div className="min-h-screen bg-background mobile-nav-padding relative overflow-hidden">
         <div className="fixed inset-0 pointer-events-none">
           <div className="absolute top-1/3 right-0 w-[600px] h-[600px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
