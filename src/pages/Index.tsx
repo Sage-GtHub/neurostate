@@ -595,7 +595,7 @@ const Index = () => {
           </section>
 
           {/* Integrations - Clean text, no card grid */}
-          <section className="py-20 md:py-32 px-6 md:px-8">
+          <section className="py-16 md:py-32 px-5 md:px-8">
             <div className="max-w-6xl mx-auto text-center">
               <ScrollReveal className="mb-16">
                 <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Integrations</span>
