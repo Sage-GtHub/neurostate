@@ -376,17 +376,17 @@ export default function EnterpriseOverview() {
           <section className="py-20 md:py-28 px-6 md:px-8 bg-muted/30">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="text-center mb-16 space-y-4">
-                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Enterprise Impact</span>
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Real Results</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  Measurable outcomes across industries
+                  What our partners are seeing
                 </h2>
               </ScrollReveal>
 
               <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-8">
                 {[
-                  { value: "47%", label: "Average burnout reduction" },
-                  { value: "2.4x", label: "ROI within first year" },
-                  { value: "89%", label: "Programme satisfaction" },
+                  { value: "47%", label: "Less burnout" },
+                  { value: "2.4x", label: "Return on investment in year one" },
+                  { value: "89%", label: "Staff satisfaction with the programme" },
                   { value: "31%", label: "Productivity improvement" }
                 ].map((stat, i) => (
                   <StaggerItem key={i}>
