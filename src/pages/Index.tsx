@@ -777,10 +777,10 @@ const Index = () => {
               <ScrollReveal className="space-y-5">
                 <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Get Started</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  Curious to see it in action?
+                  Ready to see it in action?
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                  Click below to learn more or speak to our team today.
+                  Book a 15-minute demo or start exploring for free. No credit card needed.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
                   <Link to="/contact">
