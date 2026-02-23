@@ -76,9 +76,9 @@ export default function SolutionsHub() {
   return (
     <>
       <SEO
-        title="Platform | Cognitive Performance Infrastructure | NeuroState"
-        description="NeuroState is the system of record for cognitive capacity. Six layers of infrastructure transforming biometric signals into predictive intelligence and measurable ROI."
-        keywords="cognitive performance infrastructure, data integration, state intelligence, forecasting, interventions, dashboards, ROI analytics, enterprise wellness platform"
+        title="Platform | How NeuroState Works | NeuroState"
+        description="See how NeuroState turns wearable data and work patterns into clear health intelligence, early warnings, and measurable results for your organisation."
+        keywords="team health platform, data integration, health monitoring, forecasting, wellness ROI, employee wellbeing, burnout prevention"
       />
       <SolutionPageStructuredData
         solution={{
@@ -140,12 +140,12 @@ export default function SolutionsHub() {
                 </div>
 
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-foreground tracking-tight leading-tight">
-                  NeuroState is the system of record for{" "}
-                  <span className="text-primary">cognitive capacity</span> in an organisation.
+                  One platform that turns{" "}
+                  <span className="text-primary">health data</span> into better teams.
                 </h1>
 
                 <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                  We turn biometric, behavioural, and contextual signals into real-time cognitive intelligence. Insight, prediction, and action that protects performance at scale.
+                  We connect wearables and work tools, spot problems early, and give you clear actions to keep your people healthy and performing. With measurable results.
                 </p>
 
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
@@ -171,17 +171,17 @@ export default function SolutionsHub() {
                 <div className="text-center space-y-4">
                   <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Category Definition</span>
                   <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                    This is not wellness software.
+                    This is not another wellness app.
                   </h2>
                 </div>
 
                 {/* Detailed Explanation */}
                 <div className="max-w-3xl mx-auto">
                   <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                    Most workplace "wellbeing" tools were designed for a different era. They rely on periodic surveys, offer historical dashboards with no predictive capability, and treat employee health as an HR checkbox rather than a strategic lever. They measure engagement after the fact. They cannot tell you who is at risk of burnout before it happens. They cannot quantify the cost of cognitive underperformance. They cannot recommend interventions with measurable ROI.
+                    Most workplace wellbeing tools rely on annual surveys, show you historical charts with no predictive capability, and treat employee health as an HR checkbox. They measure engagement after the fact. They cannot tell you who is at risk of burnout before it happens. They cannot show you what tiredness is costing. They cannot recommend actions with measurable returns.
                   </p>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    NeuroState was built from first principles to solve a different problem: how do you maintain cognitive performance across a workforce at scale, in real-time, with economic accountability?
+                    NeuroState was built to solve a different problem: how do you keep a workforce healthy and performing at their best, in real-time, with clear accountability?
                   </p>
                 </div>
 
@@ -260,12 +260,12 @@ export default function SolutionsHub() {
                 {/* Infrastructure Positioning */}
                 <div className="text-center pt-8 max-w-3xl mx-auto">
                   <p className="text-base text-foreground leading-relaxed">
-                    Like <span className="font-medium">Stripe</span> is infrastructure for money, and{" "}
-                    <span className="font-medium">Palantir</span> is infrastructure for decision intelligence,{" "}
-                    <span className="text-primary font-medium">NeuroState</span> is infrastructure for human performance.
+                    Like <span className="font-medium">Stripe</span> makes payments simple, and{" "}
+                    <span className="font-medium">Palantir</span> makes sense of complex data,{" "}
+                    <span className="text-primary font-medium">NeuroState</span> makes workforce health visible and actionable.
                   </p>
                   <p className="text-sm text-muted-foreground mt-4">
-                    We are not building another wellness app. We are building the operating system for cognitive capacity at scale.
+                    We are not building another wellness app. We are building the tools that help organisations look after their people properly.
                   </p>
                 </div>
 
@@ -309,10 +309,10 @@ export default function SolutionsHub() {
               <ScrollReveal className="text-center mb-12 space-y-4">
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Architecture</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  Six layers of cognitive infrastructure
+                  Six layers working together
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                  A complete stack that transforms raw signals into measurable business outcomes. Each layer builds on the one below it, creating a system where data flows seamlessly from collection to action to ROI.
+                  A complete system that turns raw health data into measurable business results. Each layer builds on the one below it — from data collection, through analysis and prediction, to clear actions and provable ROI.
                 </p>
               </ScrollReveal>
 
