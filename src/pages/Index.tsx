@@ -654,7 +654,7 @@ const Index = () => {
                     </motion.div>
                     <div>
                       <p className="text-foreground font-medium text-sm">Nova</p>
-                      <p className="text-xs text-muted-foreground">Your cognitive intelligence assistant</p>
+                      <p className="text-xs text-muted-foreground">Your AI health advisor</p>
                     </div>
                     <div className="ml-auto flex items-center gap-2">
                       <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
