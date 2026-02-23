@@ -638,7 +638,7 @@ const Index = () => {
           </section>
 
           {/* Final CTA - Dark Groq-style contrast section */}
-          <section className="py-24 md:py-36 px-6 md:px-8 bg-foreground">
+          <section className="py-20 md:py-36 px-5 md:px-8 bg-foreground">
             <div className="max-w-4xl mx-auto text-center">
               <ScrollReveal className="space-y-6">
                 <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Get Started</span>
