@@ -143,7 +143,7 @@ const Index = () => {
                 transition={{ duration: 0.6 }}
               >
                 <div className="space-y-2">
-                  <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">How we help</span>
+                  <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">How we help</span>
                   <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                     Predict. Prevent. Perform.
                   </h2>

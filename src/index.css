@@ -350,6 +350,7 @@
   }
   
   .text-ui-label {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
     font-size: 0.6875rem;
     font-weight: 600;
     letter-spacing: 0.1em;

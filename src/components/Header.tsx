@@ -139,36 +139,23 @@ export const Header = () => {
           ? "bg-background/95 backdrop-blur-xl border-b border-border/50 shadow-sm" 
           : "bg-background/80 backdrop-blur-md border-b border-transparent"
       )}>
-        <div className="max-w-6xl mx-auto px-6 md:px-8 flex h-14 lg:h-16 items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group relative">
-            <div className="absolute -inset-2 bg-primary/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <img 
-              src={logoIcon} 
-              alt="Neurostate" 
-              className="h-5 w-5 lg:h-6 lg:w-6 transition-all duration-300 group-hover:scale-110 relative" 
-            />
-            <span className="text-xs lg:text-sm font-medium tracking-tight text-foreground relative">
-              Neurostate
-            </span>
-          </Link>
-          
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-0.5">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 flex h-14 lg:h-16 items-center">
+          {/* Left Navigation */}
+          <nav className="hidden lg:flex items-center gap-0.5 flex-1">
             <NavigationMenu>
               <NavigationMenuList>
                 {/* Solutions Dropdown */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent text-foreground/60 hover:text-foreground hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground text-xs font-normal h-9 px-3 rounded-full transition-all duration-300 [&>svg]:text-primary normal-case">
+                  <NavigationMenuTrigger className="bg-transparent text-foreground/70 hover:text-foreground hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground text-[13px] font-medium h-9 px-3 rounded-full transition-all duration-300 [&>svg]:text-primary normal-case">
                     Platform
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="w-[360px] p-4 bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl">
+                    <div className="w-[360px] p-4 bg-background/95 backdrop-blur-xl border border-border/50 rounded-lg shadow-xl">
                       <div className="mb-3 pb-3 border-b border-border/30">
                         <NavigationMenuLink asChild>
                           <Link
                             to="/solutions"
-                            className="flex items-center justify-between p-3 rounded-xl hover:bg-muted/80 transition-all duration-300 group"
+                            className="flex items-center justify-between p-3 rounded-lg hover:bg-muted/80 transition-all duration-300 group"
                           >
                             <div>
                               <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors duration-300">
@@ -187,7 +174,7 @@ export const Header = () => {
                           <NavigationMenuLink key={item.label} asChild>
                             <Link
                               to={item.href}
-                              className="block p-3 rounded-xl hover:bg-muted/80 transition-all duration-300 group"
+                              className="block p-3 rounded-lg hover:bg-muted/80 transition-all duration-300 group"
                               style={{ animationDelay: `${index * 50}ms` }}
                             >
                               <div className="flex items-center justify-between">
@@ -211,16 +198,16 @@ export const Header = () => {
 
                 {/* Industries Dropdown */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent text-foreground/60 hover:text-foreground hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground text-xs font-normal h-9 px-3 rounded-full transition-all duration-300 [&>svg]:text-primary normal-case">
+                  <NavigationMenuTrigger className="bg-transparent text-foreground/70 hover:text-foreground hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground text-[13px] font-medium h-9 px-3 rounded-full transition-all duration-300 [&>svg]:text-primary normal-case">
                     Industries
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="w-[340px] p-4 bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl">
+                    <div className="w-[340px] p-4 bg-background/95 backdrop-blur-xl border border-border/50 rounded-lg shadow-xl">
                       <div className="mb-3 pb-3 border-b border-border/30">
                         <NavigationMenuLink asChild>
                           <Link
                             to="/industries"
-                            className="flex items-center justify-between p-3 rounded-xl hover:bg-muted/80 transition-all duration-300 group"
+                            className="flex items-center justify-between p-3 rounded-lg hover:bg-muted/80 transition-all duration-300 group"
                           >
                             <div>
                               <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors duration-300">
@@ -239,7 +226,7 @@ export const Header = () => {
                           <NavigationMenuLink key={item.label} asChild>
                             <Link
                               to={item.href}
-                              className="block p-3 rounded-xl hover:bg-muted/80 transition-all duration-300 group"
+                              className="block p-3 rounded-lg hover:bg-muted/80 transition-all duration-300 group"
                               style={{ animationDelay: `${index * 50}ms` }}
                             >
                               <div className="flex items-center justify-between">
@@ -265,21 +252,37 @@ export const Header = () => {
 
             <Link
               to="/nova/overview"
-              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
+              className="text-[13px] font-medium text-foreground/70 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50"
             >
               Nova AI
             </Link>
+          </nav>
 
+          {/* Centre Logo */}
+          <Link to="/" className="flex items-center gap-2.5 group relative mx-4 lg:mx-0">
+            <div className="absolute -inset-2 bg-primary/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <img 
+              src={logoIcon} 
+              alt="Neurostate" 
+              className="h-6 w-6 lg:h-7 lg:w-7 transition-all duration-300 group-hover:scale-110 relative" 
+            />
+            <span className="text-sm lg:text-base font-medium tracking-tight text-foreground relative">
+              Neurostate
+            </span>
+          </Link>
+          
+          {/* Right Navigation */}
+          <nav className="hidden lg:flex items-center gap-0.5 flex-1 justify-end">
             <Link
               to={user ? "/team-dashboard" : "/auth?mode=signup&type=company"}
-              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
+              className="text-[13px] font-medium text-foreground/70 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50"
             >
               Team
             </Link>
 
             <Link
               to="/about"
-              className="text-xs font-normal text-foreground/60 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50 animated-underline"
+              className="text-[13px] font-medium text-foreground/70 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50"
             >
               Company
             </Link>
