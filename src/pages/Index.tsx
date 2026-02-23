@@ -18,54 +18,54 @@ import { useRef } from "react";
 const platformBlocks = [
   {
     id: "data-integration",
-    label: "Data Layer",
-    name: "Data Integration",
-    description: "Ingest data from 40+ wearable integrations, calendars, and productivity tools. Normalised signals into a unified cognitive model.",
+    label: "Connect",
+    name: "Data Collection",
+    description: "Pull in data from 40+ wearables, calendars, and work tools your team already uses. Everything in one place.",
     icon: Database,
     link: "/solutions/data-layer",
     color: "from-blue-500/20 to-cyan-500/20"
   },
   {
     id: "state-intelligence",
-    label: "Intelligence",
-    name: "State Intelligence",
-    description: "Raw biometrics become actionable intelligence. Readiness scores, cognitive load, and capacity tracking, interpreted in real time.",
+    label: "Understand",
+    name: "Health Intelligence",
+    description: "Raw numbers become useful insights. See how ready your team is, who's at risk of burnout, and where energy levels are dropping.",
     icon: Brain,
     link: "/solutions/state-engine",
     color: "from-purple-500/20 to-pink-500/20"
   },
   {
     id: "forecasting",
-    label: "Forecasting",
+    label: "Predict",
     name: "Forecasting",
-    description: "See what's coming. 7, 14, and 30-day forecasts for capacity, intervention timing, and optimal performance windows.",
+    description: "See what's coming. 7, 14, and 30-day predictions for team energy, recovery needs, and best times to push or rest.",
     icon: TrendingUp,
     link: "/solutions/prediction",
     color: "from-amber-500/20 to-orange-500/20"
   },
   {
     id: "interventions",
-    label: "Actions",
-    name: "Interventions",
-    description: "Automated protocol recommendations and timely nudges. The system acts, not just observes, to optimise cognitive performance.",
+    label: "Act",
+    name: "Smart Recommendations",
+    description: "The system doesn't just watch — it tells you what to do. Timely, specific actions to keep your team sharp.",
     icon: Zap,
     link: "/solutions/action-layer",
     color: "from-rose-500/20 to-red-500/20"
   },
   {
     id: "dashboards",
-    label: "Surfaces",
-    name: "Dashboards",
-    description: "One system, different views. Individuals see optimisation. Managers see team health. Executives see risk and exposure.",
+    label: "View",
+    name: "Role-Based Dashboards",
+    description: "Everyone sees what matters to them. Individuals see their own health. Managers see team wellbeing. Leaders see business impact.",
     icon: Layers,
     link: "/solutions/command-surfaces",
     color: "from-indigo-500/20 to-violet-500/20"
   },
   {
     id: "roi-analytics",
-    label: "Financial",
-    name: "ROI Analytics",
-    description: "Every metric ties to money. Revenue exposure, intervention returns, capacity value. Precision economics for cognitive performance.",
+    label: "Measure",
+    name: "Financial Impact",
+    description: "See the money. How much burnout is costing you, what you're saving, and the return on every action taken.",
     icon: Calculator,
     link: "/solutions/roi-layer",
     color: "from-green-500/20 to-emerald-500/20"
