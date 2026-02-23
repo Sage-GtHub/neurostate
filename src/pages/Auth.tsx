@@ -162,6 +162,8 @@ export default function Auth() {
   if (user) return null;
 
   return (
+    <>
+    <SEO title="Sign In to NeuroState® | Cognitive Performance Platform" description="Log in or create your NeuroState account. Access Nova AI coaching, team dashboards, wearable integrations, and cognitive performance analytics." noindex={true} />
     <div className="min-h-screen flex flex-col bg-background relative overflow-hidden">
       {/* Organic background */}
       <div className="fixed inset-0 pointer-events-none">
