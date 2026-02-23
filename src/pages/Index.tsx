@@ -729,7 +729,7 @@ const Index = () => {
           <section className="py-12 md:py-16 px-6 md:px-8">
             <div className="max-w-7xl mx-auto text-center">
               <ScrollReveal className="space-y-3 mb-8">
-                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Integrations</span>
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Integrations</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                   Works with what your team already uses
                 </h2>
