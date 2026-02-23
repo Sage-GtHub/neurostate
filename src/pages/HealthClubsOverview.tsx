@@ -77,9 +77,9 @@ export default function HealthClubsOverview() {
               <div className="space-y-6">
                 <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">The Problem</p>
                 <h2 className="text-3xl font-light text-foreground">
-                  Members do not quit because of your equipment.
+                  Members do not leave because of your equipment.
                   <br />
-                  <span className="text-muted-foreground">They quit because they stop seeing results.</span>
+                  <span className="text-muted-foreground">They leave because they stop seeing progress.</span>
                 </h2>
               </div>
               <div className="space-y-4">
