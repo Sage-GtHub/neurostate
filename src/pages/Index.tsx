@@ -523,10 +523,10 @@ const Index = () => {
 
                     {/* Mini action preview */}
                     <div className="pt-3 border-t border-border/30 space-y-2">
-                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Recommended Actions</p>
+                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Suggested Actions</p>
                       {[
-                        { text: "Capacity review for Engineering", priority: "high" },
-                        { text: "Recovery protocol for Sales leads", priority: "medium" }
+                        { text: "Schedule check-in with Engineering team", priority: "high" },
+                        { text: "Adjust workload for Sales leads this week", priority: "medium" }
                       ].map((action, i) => (
                         <motion.div 
                           key={i}
