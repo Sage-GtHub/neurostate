@@ -248,7 +248,7 @@ const Index = () => {
                 </h2>
               </ScrollReveal>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-8">
                 {[
                   { step: "01", title: "Connect", desc: "Link wearables, calendars, and work tools. Takes minutes, not days.", icon: Database },
                   { step: "02", title: "Understand", desc: "AI reads the data and tells you what it means — in plain English.", icon: Brain },
