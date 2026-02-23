@@ -640,7 +640,7 @@ const Index = () => {
               {/* Nova Chat Preview - Visual below text */}
               <ScrollReveal delay={0.2}>
                 <motion.div 
-                  className="relative p-5 md:p-6 rounded-2xl bg-background border border-border/50 shadow-lg overflow-hidden max-w-2xl mx-auto"
+                  className="relative p-5 md:p-6 rounded-lg bg-background border border-border/50 shadow-lg overflow-hidden max-w-2xl mx-auto"
                   whileHover={{ y: -4, transition: { duration: 0.3 } }}
                 >
                   {/* Header */}

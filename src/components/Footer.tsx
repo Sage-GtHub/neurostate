@@ -199,7 +199,7 @@ export const Footer = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
             >
-              <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Contact</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-background/40">Contact</p>
               <ul className="space-y-3">
                 <li>
                   <a href="mailto:contact@neurostate.co.uk" className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-all duration-300 hover:translate-x-1">
