@@ -273,7 +273,7 @@ const Index = () => {
           </section>
 
           {/* Impact Stats - Full width dark section */}
-          <section className="py-16 md:py-20 px-6 md:px-8 bg-foreground">
+          <section className="py-14 md:py-20 px-5 md:px-8 bg-foreground">
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-16">
                 {impactStats.map((stat, i) => (
