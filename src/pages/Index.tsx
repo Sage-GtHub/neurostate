@@ -1,7 +1,7 @@
 import { Header } from "@/components/Header";
 import Hero from "@/components/Hero";
 import { SEO } from "@/components/SEO";
-import { OrganizationStructuredData, SoftwareApplicationStructuredData, WebsiteStructuredData, LocalBusinessStructuredData } from "@/components/StructuredData";
+import { CorporateServiceStructuredData } from "@/components/StructuredData";
 import { Footer } from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { HomeROICalculator } from "@/components/HomeROICalculator";
