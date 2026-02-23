@@ -604,20 +604,20 @@ const Index = () => {
               <ScrollReveal className="space-y-5 mb-10 text-center max-w-2xl mx-auto">
                 <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">AI Assistant</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  Meet Nova, your cognitive co-pilot
+                  Meet Nova — your team's health advisor
                 </h2>
                 <p className="text-sm text-muted-foreground">
-                  Nova interprets your biometric data, schedules, and work patterns to deliver contextual guidance when it matters most.
+                  Nova reads your team's health data and gives you clear, actionable advice. Ask it anything — in plain English.
                 </p>
               </ScrollReveal>
               
               {/* Features grid */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10 max-w-3xl mx-auto">
                 {[
-                  { icon: Brain, text: "Adaptive protocols", detail: "Personalised recommendations" },
-                  { icon: TrendingUp, text: "Predictive insights", detail: "72-hour foresight" },
-                  { icon: Zap, text: "Real-time nudges", detail: "Context-aware timing" },
-                  { icon: Eye, text: "Pattern recognition", detail: "Learn from your data" }
+                  { icon: Brain, text: "Personalised plans", detail: "Tailored to each person" },
+                  { icon: TrendingUp, text: "72-hour predictions", detail: "See what's coming" },
+                  { icon: Zap, text: "Timely nudges", detail: "Right advice, right time" },
+                  { icon: Eye, text: "Learns your patterns", detail: "Gets smarter over time" }
                 ].map((item, i) => (
                   <motion.div 
                     key={i} 
