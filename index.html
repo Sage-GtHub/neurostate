@@ -1,76 +1,172 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB" dir="ltr">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    
+    <!-- Preconnect & DNS Prefetch -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    
+    <!-- Fonts with display=swap for CLS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#000000" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Nova" />
+    <meta name="apple-mobile-web-app-title" content="NeuroState" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="application-name" content="Nova" />
+    <meta name="application-name" content="NeuroState" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-TileColor" content="#000000" />
     <meta name="msapplication-tap-highlight" content="no" />
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <title>NeuroState® - Cognitive Performance Infrastructure for Organisations</title>
-    <meta name="description" content="NeuroState is the system of record for cognitive capacity. Predictive intelligence, risk visibility, and financial attribution for enterprise-scale human performance." />
-    <meta name="keywords" content="cognitive performance, enterprise wellness, AI performance platform, workforce optimisation, predictive analytics, burnout prevention, team performance, Nova AI" />
-    <meta name="author" content="NeuroState®" />
+    <!-- Primary Meta Tags -->
+    <title>NeuroState® — Cognitive Performance Infrastructure for Organisations</title>
+    <meta name="description" content="NeuroState is the system of record for cognitive capacity. Predictive intelligence, burnout prevention, and ROI attribution for enterprise-scale workforce performance. 40+ wearable integrations." />
+    <meta name="keywords" content="cognitive performance infrastructure, enterprise wellness platform, AI performance analytics, workforce optimisation, predictive intelligence, burnout prevention, Nova AI, wearable integration" />
+    <meta name="author" content="NeuroState" />
     <link rel="canonical" href="https://neurostate.co.uk/" />
+    
+    <!-- Hreflang for international SEO -->
+    <link rel="alternate" hreflang="en-GB" href="https://neurostate.co.uk/" />
+    <link rel="alternate" hreflang="en" href="https://neurostate.co.uk/" />
+    <link rel="alternate" hreflang="x-default" href="https://neurostate.co.uk/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://neurostate.co.uk/" />
-    <meta property="og:title" content="NeuroState® - Cognitive Performance Infrastructure" />
+    <meta property="og:title" content="NeuroState® — Cognitive Performance Infrastructure" />
     <meta property="og:description" content="The system of record for cognitive capacity. Predictive intelligence for performance, risk visibility, and financial attribution at enterprise scale." />
     <meta property="og:image" content="https://neurostate.co.uk/og-image.png" />
+    <meta property="og:image:alt" content="NeuroState cognitive performance dashboard showing team readiness scores and AI insights" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="NeuroState®" />
+    <meta property="og:site_name" content="NeuroState" />
     <meta property="og:locale" content="en_GB" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://neurostate.co.uk/" />
-    <meta name="twitter:title" content="NeuroState® - Cognitive Performance Infrastructure" />
+    <meta name="twitter:title" content="NeuroState® — Cognitive Performance Infrastructure" />
     <meta name="twitter:description" content="Predictive intelligence for human performance. Risk visibility and ROI attribution at enterprise scale." />
     <meta name="twitter:image" content="https://neurostate.co.uk/og-image.png" />
+    <meta name="twitter:image:alt" content="NeuroState cognitive performance dashboard" />
     <meta name="twitter:site" content="@neurostate" />
     <meta name="twitter:creator" content="@neurostate" />
 
-    <!-- Additional SEO -->
+    <!-- Advanced SEO Directives -->
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="googlebot" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow" />
     <meta name="language" content="English" />
     <meta name="geo.region" content="GB" />
     <meta name="geo.placename" content="London" />
     <meta name="rating" content="general" />
+    <meta name="referrer" content="origin-when-cross-origin" />
     
-    <!-- Google Search Console Verification -->
-    <!-- Replace YOUR_VERIFICATION_CODE with your actual verification code from Google Search Console -->
-    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
+    <!-- Structured Data: Organization (inline for immediate crawl) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://neurostate.co.uk/#organization",
+      "name": "NeuroState",
+      "alternateName": "NeuroState®",
+      "url": "https://neurostate.co.uk",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://neurostate.co.uk/favicon.png",
+        "width": 512,
+        "height": 512
+      },
+      "description": "Cognitive performance infrastructure for organisations. Predictive intelligence, risk visibility, and ROI attribution for enterprise-scale workforce performance.",
+      "foundingDate": "2025",
+      "slogan": "The System of Record for Cognitive Capacity",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "contact@neurostate.co.uk",
+        "contactType": "Sales",
+        "areaServed": "GB",
+        "availableLanguage": "English"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/neurostate",
+        "https://www.instagram.com/neurostate"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "GB",
+        "addressRegion": "London"
+      },
+      "knowsAbout": [
+        "Cognitive Performance",
+        "Workforce Optimisation",
+        "Predictive Intelligence",
+        "Burnout Prevention",
+        "Wearable Integration",
+        "AI Performance Analytics"
+      ]
+    }
+    </script>
     
-    <!-- Google Analytics 4 -->
-    <!-- Replace G-XXXXXXXXXX with your actual GA4 Measurement ID -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX', {
-        'send_page_view': false  // We'll handle page views manually
-      });
+    <!-- Structured Data: WebSite with SearchAction -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://neurostate.co.uk/#website",
+      "name": "NeuroState",
+      "alternateName": "NeuroState®",
+      "url": "https://neurostate.co.uk",
+      "description": "Cognitive performance infrastructure for organisations.",
+      "publisher": { "@id": "https://neurostate.co.uk/#organization" },
+      "inLanguage": "en-GB",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://neurostate.co.uk/blog?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <!-- Structured Data: SoftwareApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "@id": "https://neurostate.co.uk/#nova",
+      "name": "Nova AI by NeuroState",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "Multi-model AI engine that forecasts cognitive performance using wearable data, behavioural signals, and predictive analytics for individuals and teams.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/InStock"
+      },
+      "featureList": [
+        "72-hour performance forecasting",
+        "Cognitive load monitoring",
+        "40+ wearable device integrations",
+        "ROI attribution analytics",
+        "Team health dashboards",
+        "Adaptive performance protocols",
+        "Burnout early warning system"
+      ],
+      "provider": { "@id": "https://neurostate.co.uk/#organization" }
+    }
     </script>
   </head>
 
