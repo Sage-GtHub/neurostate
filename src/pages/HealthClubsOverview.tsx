@@ -110,12 +110,12 @@ export default function HealthClubsOverview() {
             <div className="text-center mb-12 space-y-4">
               <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">The Solution</p>
               <h2 className="text-3xl font-light text-foreground">
-                Cognitive infrastructure.
+                What your members get.
                 <br />
-                <span className="text-muted-foreground">For every member.</span>
+                <span className="text-muted-foreground">What you get.</span>
               </h2>
               <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                Neurostate integrates seamlessly into your facility, giving members AI powered guidance and giving you data that actually matters.
+                NeuroState fits right into your facility. Members get personalised guidance through the app. You get data that shows your facility is delivering real results.
               </p>
             </div>
 
@@ -123,20 +123,20 @@ export default function HealthClubsOverview() {
               {[
                 { 
                   icon: Brain, 
-                  title: "Nova AI Coach", 
-                  description: "Personal cognitive optimisation via app. 24/7 guidance tailored to each member's biometrics and goals.",
-                  highlight: "Personalised protocols"
+                  title: "Personal AI Coach", 
+                  description: "Every member gets an AI coach in the app. It learns their habits, tracks their wearable data, and gives them daily guidance.",
+                  highlight: "Always personalised"
                 },
                 { 
                   icon: Activity, 
-                  title: "Readiness Scoring", 
-                  description: "Daily cognitive readiness scores based on sleep, HRV, and recovery. Members know when to push and when to rest.",
-                  highlight: "Real time adaptation"
+                  title: "Daily Readiness Score", 
+                  description: "Based on sleep, heart rate, and recovery. Members know whether to push hard or take it easy today.",
+                  highlight: "Know when to rest"
                 },
                 { 
                   icon: TrendingUp, 
-                  title: "Outcome Tracking", 
-                  description: "Visual metrics showing cognitive improvement, focus gains, and recovery trends. Proof your facility delivers results.",
+                  title: "Progress They Can See", 
+                  description: "Clear charts showing recovery trends, energy improvements, and health gains. Proof that your facility is working.",
                   highlight: "Measurable results"
                 }
               ].map((item, index) => (
