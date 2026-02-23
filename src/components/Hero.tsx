@@ -177,7 +177,7 @@ const Hero = () => {
               {/* Headline */}
               <motion.h1 
                 ref={headlineRef}
-                className="text-xl md:text-2xl lg:text-3xl font-normal text-foreground tracking-tight"
+                className="text-3xl md:text-5xl lg:text-6xl font-normal text-foreground tracking-tight leading-[1.1]"
                 variants={itemVariants}
               >
                 We turn your team's{" "}
