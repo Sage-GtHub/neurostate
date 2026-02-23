@@ -169,7 +169,7 @@ const Hero = () => {
                   animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 />
-                <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
+                <span className="text-xs md:text-sm tracking-[0.2em] uppercase text-muted-foreground">
                   Workforce Health Intelligence
                 </span>
               </motion.div>
