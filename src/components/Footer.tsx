@@ -159,7 +159,7 @@ export const Footer = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Resources</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-background/40">Resources</p>
               <ul className="space-y-3">
                 {footerLinks.resources.map((link) => (
                   <li key={link.name}>
