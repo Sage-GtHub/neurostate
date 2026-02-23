@@ -84,9 +84,9 @@ export default function HealthClubsOverview() {
               </div>
               <div className="space-y-4">
                 {[
-                  { title: "Invisible churn signals", desc: "Fatigue and stress build before members cancel. You only see the end result." },
-                  { title: "Generic programming", desc: "One size fits all does not work. Members need personalised guidance based on their actual readiness." },
-                  { title: "No outcome measurement", desc: "You track attendance. But can you prove cognitive and performance improvement?" }
+                  { title: "You cannot see who is about to quit", desc: "Fatigue and frustration build up before someone cancels. By the time you notice, they are already gone." },
+                  { title: "Everyone gets the same advice", desc: "One-size-fits-all programmes do not work. Members need guidance based on how their body is actually recovering." },
+                  { title: "You cannot prove your facility works", desc: "You track who shows up, but can you show members their actual progress in health and performance?" }
                 ].map((item, i) => (
                   <motion.div 
                     key={i}
