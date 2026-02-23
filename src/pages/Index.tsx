@@ -187,7 +187,7 @@ const Index = () => {
           </section>
 
           {/* Building Blocks - Clean list, no card containers */}
-          <section className="py-20 md:py-32 px-6 md:px-8">
+          <section className="py-16 md:py-32 px-5 md:px-8">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="mb-16 md:mb-20">
                 <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">The platform</span>
