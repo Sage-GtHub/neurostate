@@ -255,21 +255,21 @@ export default function SportsOverview() {
               {[
                 { 
                   icon: Brain, 
-                  title: "Nova AI Coach", 
-                  description: "Personalised cognitive protocols based on training load, recovery status, and competition schedule. 24/7 guidance.",
-                  highlight: "Adaptive intelligence"
+                  title: "Personal AI Coach", 
+                  description: "Every athlete gets a personalised plan based on their training, sleep, and recovery. Available 24/7 through the app.",
+                  highlight: "Always on"
                 },
                 { 
                   icon: Activity, 
-                  title: "Recovery Optimisation", 
-                  description: "Red light therapy, supplement stacks, and sleep protocols designed specifically for athletic recovery demands.",
-                  highlight: "Precision recovery"
+                  title: "Faster Recovery", 
+                  description: "Red light therapy, supplements, and sleep plans built specifically for each athlete's recovery needs.",
+                  highlight: "Tailored recovery"
                 },
                 { 
                   icon: Shield, 
                   title: "Injury Prevention", 
-                  description: "Early warning detection from biometric patterns. Protocol adjustments before problems become injuries.",
-                  highlight: "Predictive protection"
+                  description: "Spot warning signs early from wearable data. Adjust training before small issues become big injuries.",
+                  highlight: "Early warning"
                 }
               ].map((item, index) => (
                 <motion.div 
