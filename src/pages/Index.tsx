@@ -210,7 +210,7 @@ const Index = () => {
                 {platformBlocks.map((block, i) => (
                   <Link key={block.id} to={block.link}>
                     <motion.div
-                      className={`group relative h-full p-5 rounded-xl bg-gradient-to-br ${block.color} border border-border/30 hover:border-primary/40 transition-all duration-300 cursor-pointer overflow-hidden`}
+                      className={`group relative h-full p-5 rounded-lg bg-gradient-to-br ${block.color} border border-border/30 hover:border-primary/40 transition-all duration-300 cursor-pointer overflow-hidden`}
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-50px" }}
