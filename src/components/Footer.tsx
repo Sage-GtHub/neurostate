@@ -62,7 +62,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-gray-900 text-background" style={{ backgroundColor: 'hsl(220, 25%, 12%)' }}>
+    <footer className="relative overflow-hidden bg-obsidian text-background">
       {/* Clean top border */}
       <div className="absolute inset-x-0 top-0 h-px bg-background/10" />
       
