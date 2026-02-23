@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { ArrowLeft, Edit2, Save, X, Trash2 } from "lucide-react";
+import { SEO } from "@/components/SEO";
 import {
   AlertDialog,
   AlertDialogAction,
