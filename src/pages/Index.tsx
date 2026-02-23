@@ -481,7 +481,7 @@ const Index = () => {
           </section>
 
           {/* Nova AI Section - Clean editorial */}
-          <section className="py-20 md:py-32 px-6 md:px-8 bg-muted/20">
+          <section className="py-16 md:py-32 px-5 md:px-8 bg-muted/20">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="mb-16 md:mb-20 text-center max-w-3xl mx-auto">
                 <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">AI Assistant</span>
