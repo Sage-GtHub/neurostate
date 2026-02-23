@@ -260,12 +260,12 @@ export default function SolutionsHub() {
                 {/* Infrastructure Positioning */}
                 <div className="text-center pt-8 max-w-3xl mx-auto">
                   <p className="text-base text-foreground leading-relaxed">
-                    Like <span className="font-medium">Stripe</span> is infrastructure for money, and{" "}
-                    <span className="font-medium">Palantir</span> is infrastructure for decision intelligence,{" "}
-                    <span className="text-primary font-medium">NeuroState</span> is infrastructure for human performance.
+                    Like <span className="font-medium">Stripe</span> makes payments simple, and{" "}
+                    <span className="font-medium">Palantir</span> makes sense of complex data,{" "}
+                    <span className="text-primary font-medium">NeuroState</span> makes workforce health visible and actionable.
                   </p>
                   <p className="text-sm text-muted-foreground mt-4">
-                    We are not building another wellness app. We are building the operating system for cognitive capacity at scale.
+                    We are not building another wellness app. We are building the tools that help organisations look after their people properly.
                   </p>
                 </div>
 
