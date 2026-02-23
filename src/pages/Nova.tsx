@@ -397,10 +397,10 @@ export default function Nova() {
                 );
               })}
             </div>
-          </div>
+          </motion.div>
 
           {/* Quick Actions */}
-          <div>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
             <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 mb-6">Quick Actions</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
