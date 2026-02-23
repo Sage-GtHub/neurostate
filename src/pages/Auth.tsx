@@ -9,6 +9,7 @@ import { z } from "zod";
 import { User } from "@supabase/supabase-js";
 import { ArrowLeft, Building2, User as UserIcon, ChevronRight, Check } from "lucide-react";
 import logoIcon from "@/assets/neurostate-icon.png";
+import { SEO } from "@/components/SEO";
 
 const individualSchema = z.object({
   email: z.string().email("Invalid email address"),
