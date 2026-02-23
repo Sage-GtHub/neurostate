@@ -196,12 +196,12 @@ const Index = () => {
           <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/30">
             <div className="max-w-7xl mx-auto">
               <ScrollReveal className="space-y-3 mb-8">
-                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Our System</span>
+                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">The platform</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground max-w-2xl">
-                  Building blocks, not black boxes
+                  Six building blocks. One complete system.
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-xl">
-                  Modular components designed to integrate with your existing stack. Take what you need, shape it to your context.
+                  Each piece works on its own, but together they give you complete visibility into your team's health and performance.
                 </p>
               </ScrollReveal>
 
