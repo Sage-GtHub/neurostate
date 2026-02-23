@@ -338,10 +338,10 @@ export default function Nova() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-16">
             <WeeklySummary />
             <StreaksAchievements />
-          </div>
+          </motion.div>
 
           {/* Live Metrics */}
-          <div className="mb-16">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="mb-16">
             <div className="flex items-center justify-between mb-8">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 mb-2">Real-time</p>
