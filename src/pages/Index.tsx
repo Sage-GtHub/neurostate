@@ -196,7 +196,7 @@ const Index = () => {
           <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/30">
             <div className="max-w-7xl mx-auto">
               <ScrollReveal className="space-y-3 mb-8">
-                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">The platform</span>
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">The platform</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground max-w-2xl">
                   Six building blocks. One complete system.
                 </h2>
