@@ -375,10 +375,10 @@ const Index = () => {
                 <ScrollReveal className="space-y-4 lg:sticky lg:top-24">
                   <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Industries</span>
                   <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                    Built for knowledge-intensive organisations
+                    Built for teams where performance matters most
                   </h2>
                   <p className="text-sm text-muted-foreground max-w-md">
-                    Every industry has unique cognitive demands. NeuroState adapts to yours.
+                    Different industries, different pressures. NeuroState adapts to yours.
                   </p>
                   <div className="pt-3">
                     <Link to="/enterprise/overview">
