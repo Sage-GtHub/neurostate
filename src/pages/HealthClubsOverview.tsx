@@ -28,9 +28,9 @@ export default function HealthClubsOverview() {
   return (
     <>
       <SEO 
-        title="Cognitive Performance for Health Clubs & Gyms | Member Retention | NeuroState"
-        description="Transform your fitness facility with AI-driven cognitive analytics. Measure readiness, recovery, and cognitive load. Deliver measurable results and retain more members."
-        keywords="gym member retention, fitness club technology, health club analytics, cognitive fitness tracking, member engagement platform, fitness facility AI"
+        title="Health Clubs & Gyms | NeuroState for Fitness Facilities"
+        description="Help your members get better results and stay longer. NeuroState tracks recovery, readiness, and progress — giving your facility a genuine edge."
+        keywords="gym member retention, fitness club technology, health club analytics, member engagement, fitness facility, member results tracking"
       />
       
       <div className="min-h-screen bg-background relative overflow-hidden">
@@ -47,12 +47,12 @@ export default function HealthClubsOverview() {
               <div className="space-y-6">
                 <p className="text-[10px] uppercase tracking-[0.25em] text-primary font-medium">Health Clubs · Gyms · Studios</p>
                 <h1 className="text-4xl sm:text-5xl font-light text-foreground leading-[1.1]">
-                  Your members train their bodies.
+                  Help your members get results they can actually see.
                   <br />
-                  <span className="text-muted-foreground">Now train their minds.</span>
+                  <span className="text-muted-foreground">And keep them coming back.</span>
                 </h1>
                 <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                  Most fitness facilities measure reps and sets. You will measure readiness, recovery, and cognitive load, then act on it before members drop off.
+                  Most gyms track attendance. NeuroState tracks recovery, readiness, and real progress, so your members get better results and stay longer.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
                   <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
