@@ -295,7 +295,7 @@ const Index = () => {
           </section>
 
           {/* Industries Section - Clean list, no cards */}
-          <section className="py-20 md:py-32 px-6 md:px-8">
+          <section className="py-16 md:py-32 px-5 md:px-8">
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
                 <ScrollReveal className="lg:sticky lg:top-24">
