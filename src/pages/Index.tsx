@@ -135,7 +135,9 @@ const Index = () => {
         <main>
           <Hero />
 
-          {/* Approach Section - 3 Pillars like Invisible's */}
+          <SocialProofStrip />
+          <StatsCounterBar />
+          <IntegrationLogoStrip />
           <section ref={approachRef} className="py-12 md:py-16 px-6 md:px-8 border-t border-border/30">
             <div className="max-w-7xl mx-auto">
               {/* Section header */}
