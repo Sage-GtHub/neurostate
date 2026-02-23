@@ -111,8 +111,9 @@ export default function Dashboard() {
   return (
     <>
       <SEO 
-        title="Dashboard | NeuroState" 
-        description="Your personal cognitive performance dashboard."
+        title="Performance Dashboard | Cognitive Analytics | NeuroState"
+        description="Monitor your cognitive performance metrics, track protocol progress, manage wearable devices, and access AI-powered health insights in one dashboard."
+        noindex={true}
       />
       <Header />
       <main className="min-h-screen bg-background relative overflow-hidden">

@@ -267,7 +267,7 @@ export default function NovaInsights() {
   if (isLoading) {
     return (
       <NovaSwipeWrapper>
-        <SEO title="Insights | Nova AI" description="Performance analytics and insights." />
+        <SEO title="Health Insights | Biometric Analytics | Nova AI" description="AI-generated insights from your wearable data. Analyse sleep quality, HRV trends, recovery patterns, and cognitive readiness over time." noindex={true} />
         <div className="min-h-screen bg-background">
           <NovaNav />
           
@@ -294,7 +294,7 @@ export default function NovaInsights() {
   if (!hasRealData) {
     return (
       <NovaSwipeWrapper>
-        <SEO title="Insights | Nova AI" description="Performance analytics and insights." />
+        <SEO title="Health Insights | Biometric Analytics | Nova AI" description="AI-generated insights from your wearable data. Analyse sleep quality, HRV trends, recovery patterns, and cognitive readiness over time." noindex={true} />
         <div className="min-h-screen bg-background">
           <NovaNav />
           
@@ -324,7 +324,7 @@ export default function NovaInsights() {
 
   return (
     <NovaSwipeWrapper>
-      <SEO title="Insights | Nova AI" description="Performance analytics and insights." />
+      <SEO title="Health Insights | Biometric Analytics | Nova AI" description="AI-generated insights from your wearable data. Analyse sleep quality, HRV trends, recovery patterns, and cognitive readiness over time." noindex={true} />
       <div className="min-h-screen bg-background">
         <NovaNav />
         

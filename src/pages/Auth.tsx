@@ -9,6 +9,7 @@ import { z } from "zod";
 import { User } from "@supabase/supabase-js";
 import { ArrowLeft, Building2, User as UserIcon, ChevronRight, Check } from "lucide-react";
 import logoIcon from "@/assets/neurostate-icon.png";
+import { SEO } from "@/components/SEO";
 
 const individualSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -161,6 +162,8 @@ export default function Auth() {
   if (user) return null;
 
   return (
+    <>
+    <SEO title="Sign In to NeuroState® | Cognitive Performance Platform" description="Log in or create your NeuroState account. Access Nova AI coaching, team dashboards, wearable integrations, and cognitive performance analytics." noindex={true} />
     <div className="min-h-screen flex flex-col bg-background relative overflow-hidden">
       {/* Organic background */}
       <div className="fixed inset-0 pointer-events-none">
@@ -365,5 +368,6 @@ export default function Auth() {
         </div>
       </div>
     </div>
+    </>
   );
 }

@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { ArrowLeft, Edit2, Save, X, Trash2 } from "lucide-react";
+import { SEO } from "@/components/SEO";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -177,6 +178,11 @@ export default function ProtocolDetail() {
 
   return (
     <div className="min-h-screen bg-ivory">
+      <SEO 
+        title={`${protocol.protocol_name} | Protocol Detail | NeuroState`}
+        description={`Track your ${protocol.protocol_name} protocol progress. Goal: ${protocol.goal}. ${protocol.products.length} products in your daily stack.`}
+        noindex={true}
+      />
       <NovaNav />
       
       <div className="border-b border-mist bg-ivory">

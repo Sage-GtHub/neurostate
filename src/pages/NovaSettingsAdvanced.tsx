@@ -143,7 +143,7 @@ export default function NovaSettingsAdvanced() {
 
   return (
     <>
-      <SEO title="Settings | NeuroState Nova" description="Configure your NeuroState system settings" />
+      <SEO title="Advanced Settings | System Configuration | NeuroState" description="Configure advanced NeuroState system settings including AI model preferences, data retention, API access, and enterprise integrations." noindex={true} />
       <div className="min-h-screen bg-background">
         <Header />
         

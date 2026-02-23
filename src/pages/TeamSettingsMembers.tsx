@@ -177,7 +177,7 @@ export default function TeamSettingsMembers() {
 
   return (
     <>
-      <SEO title="Team Settings | NeuroState" description="Manage your team members, invites, and settings" />
+      <SEO title="Team Members & Invites | Organisation Management | NeuroState" description="Manage team members, send invitations, assign roles, and oversee join requests for your NeuroState organisation." noindex={true} />
       <div className="min-h-screen bg-background">
         <Header />
         <main className="max-w-5xl mx-auto px-6 py-12">

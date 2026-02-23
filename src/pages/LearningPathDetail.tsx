@@ -10,6 +10,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
+import { SEO } from "@/components/SEO";
 
 interface LearningPath {
   id: string;
@@ -191,6 +192,10 @@ const LearningPathDetail = () => {
 
   return (
     <div className="min-h-screen bg-background mobile-nav-padding">
+      <SEO 
+        title={`${path.title} | Learning Paths | NeuroState`}
+        description={`${path.description.substring(0, 140)}. ${path.duration_days}-day ${path.difficulty} course.`}
+      />
       <Header />
       
       <main className="container mx-auto px-4 py-12">

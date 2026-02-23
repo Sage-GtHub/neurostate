@@ -96,7 +96,7 @@ export default function NovaPersonalDashboard() {
 
   return (
     <NovaSwipeWrapper>
-      <SEO title="Personal Dashboard | Nova AI" description="Your personal cognitive performance dashboard." />
+      <SEO title="Personal Dashboard | Readiness & Recovery | Nova AI" description="Track your daily readiness score, recovery metrics, energy levels, and cognitive performance trends with real-time wearable data." noindex={true} />
       <div className="min-h-screen bg-background relative overflow-hidden">
         <NovaNav />
 

@@ -146,7 +146,7 @@ export default function Rewards() {
 
   return (
     <>
-      <SEO title="Rewards | NeuroState" description="Earn points and redeem exclusive rewards." />
+      <SEO title="Loyalty Rewards | Earn Points & Discounts | NeuroState" description="Earn points through purchases, protocol check-ins, and learning paths. Redeem for exclusive discounts, free products, and premium features." noindex={true} />
       <Header />
       <main className="min-h-screen bg-background relative overflow-hidden">
         {/* Floating orbs */}
