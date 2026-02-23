@@ -428,7 +428,7 @@ const Index = () => {
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
                 <ScrollReveal direction="left">
                   <div className="space-y-4">
-                    <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">For Leaders</span>
+                    <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">For Leaders</span>
                     <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                       Dashboards built for every role
                     </h2>
