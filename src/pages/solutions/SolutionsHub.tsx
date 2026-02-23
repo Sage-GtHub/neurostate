@@ -140,12 +140,12 @@ export default function SolutionsHub() {
                 </div>
 
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-foreground tracking-tight leading-tight">
-                  NeuroState is the system of record for{" "}
-                  <span className="text-primary">cognitive capacity</span> in an organisation.
+                  One platform that turns{" "}
+                  <span className="text-primary">health data</span> into better teams.
                 </h1>
 
                 <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                  We turn biometric, behavioural, and contextual signals into real-time cognitive intelligence. Insight, prediction, and action that protects performance at scale.
+                  We connect wearables and work tools, spot problems early, and give you clear actions to keep your people healthy and performing. With measurable results.
                 </p>
 
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
