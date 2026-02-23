@@ -428,20 +428,20 @@ const Index = () => {
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
                 <ScrollReveal direction="left">
                   <div className="space-y-4">
-                    <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Enterprise-Grade</span>
+                    <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">For Leaders</span>
                     <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                      Command surfaces for every role
+                      Dashboards built for every role
                     </h2>
                     <p className="text-sm text-muted-foreground max-w-md">
-                      One system, different perspectives. Each role sees what matters most to them.
+                      Everyone sees what matters most to them. No noise, just what you need.
                     </p>
                     
                     <div className="grid grid-cols-2 gap-3 py-2">
                       {[
-                        { icon: Eye, text: "Live cognitive capacity visibility", detail: "Real-time team health" },
-                        { icon: Gauge, text: "Predictive risk indicators", detail: "72hr foresight" },
-                        { icon: Calculator, text: "Financial attribution", detail: "ROI tracking" },
-                        { icon: Sparkles, text: "AI-powered recommendations", detail: "Nova intelligence" }
+                        { icon: Eye, text: "See team health in real time", detail: "Live dashboard" },
+                        { icon: Gauge, text: "Spot risks before they hit", detail: "72-hour early warning" },
+                        { icon: Calculator, text: "Track the financial impact", detail: "Cost savings" },
+                        { icon: Sparkles, text: "AI-powered next steps", detail: "Smart recommendations" }
                       ].map((item, i) => (
                         <motion.div 
                           key={i} 
