@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 import { Activity, TrendingUp, Brain, Target, Sparkles, ChevronRight, MessageSquare, Lightbulb, AlertTriangle, RefreshCw, Loader2, LogIn, Zap, Moon, Heart, Battery, ArrowUpRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
@@ -255,18 +256,18 @@ export default function Nova() {
         <div className="relative px-6 md:px-12 lg:px-20 xl:px-32 py-12 sm:py-16">
           
           {/* 7-Day Forecast */}
-          <div className="mb-16">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-16">
             <HealthForecast />
-          </div>
+          </motion.div>
 
           {/* Morning Check-In & Readiness */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-16">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-16">
             <InteractiveMorningCheckIn onComplete={refreshMetrics} />
             <ReadinessScore />
-          </div>
+          </motion.div>
 
           {/* AI Insights Section */}
-          <div className="mb-16">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mb-16">
             <div className="flex items-center justify-between mb-8">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 mb-2">Intelligence</p>
@@ -331,16 +332,16 @@ export default function Nova() {
                 );
               })}
             </div>
-          </div>
+          </motion.div>
 
           {/* Weekly Summary & Streaks */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-16">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-16">
             <WeeklySummary />
             <StreaksAchievements />
-          </div>
+          </motion.div>
 
           {/* Live Metrics */}
-          <div className="mb-16">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="mb-16">
             <div className="flex items-center justify-between mb-8">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 mb-2">Real-time</p>
@@ -396,10 +397,10 @@ export default function Nova() {
                 );
               })}
             </div>
-          </div>
+          </motion.div>
 
           {/* Quick Actions */}
-          <div>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
             <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 mb-6">Quick Actions</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
@@ -418,10 +419,10 @@ export default function Nova() {
                     <Icon className="w-4 h-4 text-foreground/40 mb-3 group-hover:text-foreground/60 group-hover:scale-110 transition-all" />
                     <p className="text-[11px] font-medium text-foreground/70 group-hover:text-foreground transition-colors">{action.label}</p>
                   </button>
-                );
-              })}
+              );
+            })}
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>
