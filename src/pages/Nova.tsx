@@ -256,12 +256,12 @@ export default function Nova() {
         <div className="relative px-6 md:px-12 lg:px-20 xl:px-32 py-12 sm:py-16">
           
           {/* 7-Day Forecast */}
-          <div className="mb-16">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-16">
             <HealthForecast />
-          </div>
+          </motion.div>
 
           {/* Morning Check-In & Readiness */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-16">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-16">
             <InteractiveMorningCheckIn onComplete={refreshMetrics} />
             <ReadinessScore />
           </div>
