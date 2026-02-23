@@ -267,9 +267,9 @@ const Index = () => {
           <section className="py-12 md:py-16 px-6 md:px-8">
             <div className="max-w-7xl mx-auto">
               <ScrollReveal className="space-y-3 mb-8 text-center">
-                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">How It Works</span>
+                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">How it works</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  From signals to outcomes
+                  Four steps. Up and running in minutes.
                 </h2>
               </ScrollReveal>
 
@@ -281,10 +281,10 @@ const Index = () => {
                 {/* Desktop/Tablet Grid */}
                 <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
                   {[
-                    { step: "01", title: "Connect", desc: "Integrate wearables, calendars, and work tools. Setup takes minutes.", icon: Database },
-                    { step: "02", title: "Interpret", desc: "AI transforms raw data into cognitive intelligence.", icon: Brain },
-                    { step: "03", title: "Forecast", desc: "See capacity shifts and risk patterns before they materialise.", icon: TrendingUp },
-                    { step: "04", title: "Act", desc: "Receive contextual interventions with measurable returns.", icon: Zap }
+                    { step: "01", title: "Connect", desc: "Link wearables, calendars, and work tools. Takes minutes, not days.", icon: Database },
+                    { step: "02", title: "Understand", desc: "AI reads the data and tells you what it means — in plain English.", icon: Brain },
+                    { step: "03", title: "Predict", desc: "See who's at risk of burnout or fatigue before it happens.", icon: TrendingUp },
+                    { step: "04", title: "Act", desc: "Get clear recommendations that save money and protect your people.", icon: Zap }
                   ].map((item, i) => (
                     <motion.div
                       key={i}
