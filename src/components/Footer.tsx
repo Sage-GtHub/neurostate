@@ -79,7 +79,7 @@ export const Footer = () => {
                 <span className="text-xs font-medium tracking-tight text-background/90">Neurostate</span>
               </Link>
               <p className="text-background/50 text-[11px] leading-relaxed">
-                Enterprise cognitive performance infrastructure. Predictive analytics, AI-driven insights, and workforce optimisation for modern organisations.
+                Workforce health intelligence. We connect wearables, spot burnout early, and help teams perform at their best.
               </p>
             </div>
 
