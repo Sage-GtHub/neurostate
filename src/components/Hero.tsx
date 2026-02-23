@@ -229,9 +229,9 @@ const Hero = () => {
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
                     <Button 
-                      size="sm"
+                      size="lg"
                       variant="ghost"
-                      className="h-10 px-5 text-xs font-medium text-foreground hover:bg-muted rounded-full group animated-underline inline-flex flex-row items-center gap-2"
+                      className="h-12 px-6 text-sm font-medium text-foreground hover:bg-muted rounded-full group animated-underline inline-flex flex-row items-center gap-2"
                     >
                       Explore Nova AI
                       <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
