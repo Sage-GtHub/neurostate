@@ -1,12 +1,30 @@
+# NeuroState® — https://neurostate.co.uk
+# Cognitive Performance Infrastructure
+
 User-agent: *
 Allow: /
 
+# Sitemap location
 Sitemap: https://neurostate.co.uk/sitemap.xml
 
-# Crawl-delay for all bots
-Crawl-delay: 0
+# Allow indexing of key public pages
+Allow: /nova/overview
+Allow: /solutions
+Allow: /solutions/
+Allow: /industries
+Allow: /industries/
+Allow: /enterprise
+Allow: /enterprise/
+Allow: /blog
+Allow: /blog/
+Allow: /about
+Allow: /contact
+Allow: /faq
+Allow: /resources
+Allow: /partnerships
+Allow: /ambassador
 
-# Block protected/private paths
+# Block protected/authenticated paths
 Disallow: /nova/chat
 Disallow: /nova/protocols
 Disallow: /nova/insights
@@ -15,24 +33,45 @@ Disallow: /nova/optimisation
 Disallow: /nova/trends
 Disallow: /nova/goals
 Disallow: /nova/settings
+Disallow: /nova/dashboard
 Disallow: /dashboard
 Disallow: /profile
 Disallow: /rewards
-Disallow: /subscriptions
 Disallow: /team
 Disallow: /team-dashboard
-Disallow: /team/settings
+Disallow: /team/
 Disallow: /admin/
-Disallow: /track-order
 Disallow: /join
 Disallow: /join-organisation
+Disallow: /auth
+Disallow: /install
 
-# Allow specific public pages
-Allow: /nova/overview
-Allow: /solutions
-Allow: /industries
-Allow: /enterprise
-Allow: /blog
-Allow: /about
-Allow: /contact
-Allow: /faq
+# Block query string duplicates
+Disallow: /*?*utm_
+Disallow: /*?*ref=
+Disallow: /*?*fbclid=
+Disallow: /*?*gclid=
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
