@@ -790,7 +790,7 @@ const Index = () => {
                     </Button>
                   </Link>
                   <Link to="/auth?mode=signup">
-                    <Button variant="outline" className="h-10 px-6 text-sm font-medium rounded-full border-background/20 text-background hover:bg-background/10">
+                    <Button variant="outline" className="h-10 px-6 text-sm font-medium rounded-full border-white/30 text-white hover:bg-white/10">
                       Start free trial
                     </Button>
                   </Link>
