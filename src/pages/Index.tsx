@@ -138,7 +138,7 @@ const Index = () => {
           <IntegrationLogoStrip />
 
           {/* Approach Section - Open editorial, no boxes */}
-          <section ref={approachRef} className="py-20 md:py-32 px-6 md:px-8">
+          <section ref={approachRef} className="py-16 md:py-32 px-5 md:px-8">
             <div className="max-w-6xl mx-auto">
               <motion.div 
                 className="mb-16 md:mb-20"
