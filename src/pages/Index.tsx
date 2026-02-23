@@ -373,7 +373,7 @@ const Index = () => {
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
                 {/* Left - Header */}
                 <ScrollReveal className="space-y-4 lg:sticky lg:top-24">
-                  <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Industries</span>
+                  <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Industries</span>
                   <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                     Built for teams where performance matters most
                   </h2>
