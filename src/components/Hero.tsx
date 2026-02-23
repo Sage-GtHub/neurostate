@@ -104,7 +104,7 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-[80vh] flex flex-col bg-background overflow-hidden"
+      className="relative min-h-[90vh] md:min-h-[80vh] flex flex-col bg-background overflow-hidden"
     >
       {/* Subtle gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/[0.02]" />
@@ -150,8 +150,8 @@ const Hero = () => {
         className="flex-1 flex items-center relative z-10"
         style={{ opacity: heroOpacity, scale: heroScale }}
       >
-        <div className="w-full max-w-7xl mx-auto px-6 md:px-8 py-16 lg:py-20">
-          <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
+        <div className="w-full max-w-7xl mx-auto px-5 md:px-8 py-12 md:py-16 lg:py-20">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-10 items-center">
             {/* Left - Text Content */}
             <motion.div 
               className="space-y-6 lg:pr-6"
@@ -248,7 +248,7 @@ const Hero = () => {
               animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 1.2, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
             >
-              <div className="relative aspect-square max-w-lg mx-auto">
+              <div className="relative aspect-square max-w-sm md:max-w-lg mx-auto">
                 {/* Ambient glow behind devices */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                   <div className="w-80 h-80 bg-gradient-to-br from-primary/10 via-emerald-500/5 to-blue-500/8 rounded-full blur-[100px]" />
@@ -257,7 +257,7 @@ const Hero = () => {
                 {/* Floating Glassmorphic Metric Cards */}
                 {/* Readiness Score - Top Right */}
                 <motion.div
-                  className="absolute -top-4 -right-4 md:top-4 md:right-0 z-20"
+                  className="absolute top-0 right-0 md:top-4 md:right-0 z-20 scale-75 md:scale-100 origin-top-right"
                   initial={{ opacity: 0, y: 20, x: 20 }}
                   animate={isLoaded ? { opacity: 1, y: 0, x: 0 } : {}}
                   transition={{ duration: 0.8, delay: 0.6 }}
@@ -306,7 +306,7 @@ const Hero = () => {
 
                 {/* Cognitive Load - Bottom Left */}
                 <motion.div
-                  className="absolute -bottom-4 -left-4 md:bottom-8 md:left-0 z-20"
+                  className="absolute bottom-0 left-0 md:bottom-8 md:left-0 z-20 scale-75 md:scale-100 origin-bottom-left"
                   initial={{ opacity: 0, y: 20, x: -20 }}
                   animate={isLoaded ? { opacity: 1, y: 0, x: 0 } : {}}
                   transition={{ duration: 0.8, delay: 0.8 }}
@@ -336,7 +336,7 @@ const Hero = () => {
 
                 {/* Energy Level - Top Left */}
                 <motion.div
-                  className="absolute top-1/4 -left-8 md:left-4 z-20 hidden md:block"
+                  className="absolute top-1/4 -left-2 md:left-4 z-20 hidden md:block"
                   initial={{ opacity: 0, x: -20 }}
                   animate={isLoaded ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.8, delay: 1 }}
@@ -390,7 +390,7 @@ const Hero = () => {
           {[...clientNames, ...clientNames, ...clientNames].map((name, i) => (
             <motion.span 
               key={i}
-              className="px-12 text-xs text-muted-foreground/40 font-medium tracking-wider uppercase whitespace-nowrap cursor-default select-none"
+              className="px-8 md:px-12 text-xs text-muted-foreground/40 font-medium tracking-wider uppercase whitespace-nowrap cursor-default select-none"
               whileHover={{ 
                 color: "hsl(var(--foreground))",
                 scale: 1.08,

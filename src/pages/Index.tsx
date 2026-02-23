@@ -138,7 +138,7 @@ const Index = () => {
           <IntegrationLogoStrip />
 
           {/* Approach Section - Open editorial, no boxes */}
-          <section ref={approachRef} className="py-20 md:py-32 px-6 md:px-8">
+          <section ref={approachRef} className="py-16 md:py-32 px-5 md:px-8">
             <div className="max-w-6xl mx-auto">
               <motion.div 
                 className="mb-16 md:mb-20"
@@ -152,7 +152,7 @@ const Index = () => {
                 </h2>
               </motion.div>
 
-              <div className="grid md:grid-cols-3 gap-12 md:gap-16">
+              <div className="grid md:grid-cols-3 gap-10 md:gap-16">
                 {approachPillars.map((pillar, i) => (
                   <motion.div
                     key={i}
@@ -173,9 +173,9 @@ const Index = () => {
           </section>
 
           {/* Positioning Statement - Large editorial quote */}
-          <section className="py-16 md:py-24 px-6 md:px-8">
+          <section className="py-12 md:py-24 px-5 md:px-8">
             <motion.p
-              className="text-xl md:text-3xl lg:text-4xl text-foreground text-center max-w-4xl mx-auto leading-snug font-light"
+              className="text-lg md:text-3xl lg:text-4xl text-foreground text-center max-w-4xl mx-auto leading-snug font-light"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -187,7 +187,7 @@ const Index = () => {
           </section>
 
           {/* Building Blocks - Clean list, no card containers */}
-          <section className="py-20 md:py-32 px-6 md:px-8">
+          <section className="py-16 md:py-32 px-5 md:px-8">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="mb-16 md:mb-20">
                 <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">The platform</span>
@@ -239,7 +239,7 @@ const Index = () => {
           </section>
 
           {/* How It Works - Numbered steps, no boxes */}
-          <section className="py-20 md:py-32 px-6 md:px-8 bg-muted/20">
+          <section className="py-16 md:py-32 px-5 md:px-8 bg-muted/20">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="mb-16 md:mb-20 text-center">
                 <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">How it works</span>
@@ -248,7 +248,7 @@ const Index = () => {
                 </h2>
               </ScrollReveal>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-8">
                 {[
                   { step: "01", title: "Connect", desc: "Link wearables, calendars, and work tools. Takes minutes, not days.", icon: Database },
                   { step: "02", title: "Understand", desc: "AI reads the data and tells you what it means — in plain English.", icon: Brain },
@@ -273,9 +273,9 @@ const Index = () => {
           </section>
 
           {/* Impact Stats - Full width dark section */}
-          <section className="py-16 md:py-20 px-6 md:px-8 bg-foreground">
+          <section className="py-14 md:py-20 px-5 md:px-8 bg-foreground">
             <div className="max-w-6xl mx-auto">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-16">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-16">
                 {impactStats.map((stat, i) => (
                   <motion.div
                     key={i}
@@ -285,7 +285,7 @@ const Index = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
                   >
-                    <p className="text-3xl md:text-4xl lg:text-5xl font-light text-white mb-2">{stat.value}</p>
+                    <p className="text-2xl md:text-4xl lg:text-5xl font-light text-white mb-2">{stat.value}</p>
                     <p className="text-sm text-white/70 font-medium">{stat.label}</p>
                     <p className="text-xs text-white/40 mt-1">{stat.sublabel}</p>
                   </motion.div>
@@ -295,7 +295,7 @@ const Index = () => {
           </section>
 
           {/* Industries Section - Clean list, no cards */}
-          <section className="py-20 md:py-32 px-6 md:px-8">
+          <section className="py-16 md:py-32 px-5 md:px-8">
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
                 <ScrollReveal className="lg:sticky lg:top-24">
@@ -345,7 +345,7 @@ const Index = () => {
           <HomeComparisonSection />
 
           {/* Command Surfaces Preview - Open layout, fewer boxes */}
-          <section className="py-20 md:py-32 px-6 md:px-8 bg-muted/20">
+          <section className="py-16 md:py-32 px-5 md:px-8 bg-muted/20">
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
                 <ScrollReveal direction="left">
@@ -440,7 +440,7 @@ const Index = () => {
           </section>
 
           {/* ROI Calculator Section - Open layout */}
-          <section className="py-20 md:py-32 px-6 md:px-8">
+          <section className="py-16 md:py-32 px-5 md:px-8">
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
                 <ScrollReveal className="lg:sticky lg:top-24">
@@ -481,7 +481,7 @@ const Index = () => {
           </section>
 
           {/* Nova AI Section - Clean editorial */}
-          <section className="py-20 md:py-32 px-6 md:px-8 bg-muted/20">
+          <section className="py-16 md:py-32 px-5 md:px-8 bg-muted/20">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="mb-16 md:mb-20 text-center max-w-3xl mx-auto">
                 <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">AI Assistant</span>
@@ -595,7 +595,7 @@ const Index = () => {
           </section>
 
           {/* Integrations - Clean text, no card grid */}
-          <section className="py-20 md:py-32 px-6 md:px-8">
+          <section className="py-16 md:py-32 px-5 md:px-8">
             <div className="max-w-6xl mx-auto text-center">
               <ScrollReveal className="mb-16">
                 <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Integrations</span>
@@ -638,7 +638,7 @@ const Index = () => {
           </section>
 
           {/* Final CTA - Dark Groq-style contrast section */}
-          <section className="py-24 md:py-36 px-6 md:px-8 bg-foreground">
+          <section className="py-20 md:py-36 px-5 md:px-8 bg-foreground">
             <div className="max-w-4xl mx-auto text-center">
               <ScrollReveal className="space-y-6">
                 <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Get Started</span>
@@ -648,7 +648,7 @@ const Index = () => {
                 <p className="text-base md:text-lg text-white/60 max-w-lg mx-auto">
                   Book a 15-minute demo or start exploring for free. No credit card needed.
                 </p>
-                <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+                <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 pt-4">
                   <Link to="/contact">
                     <Button className="h-12 px-8 text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group">
                       Book a demo
@@ -662,7 +662,7 @@ const Index = () => {
                   </Link>
                 </div>
                 
-                <div className="flex flex-wrap items-center justify-center gap-6 pt-6 text-white/50">
+                <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 sm:gap-6 pt-6 text-white/50">
                   {["No credit card required", "Enterprise-ready", "SOC 2 compliant"].map((item, i) => (
                     <div key={i} className="flex items-center gap-2 text-sm">
                       <Check className="w-4 h-4 text-primary" />
