@@ -166,12 +166,12 @@ export default function HealthClubsOverview() {
               <div className="space-y-6">
                 <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">Revenue Impact</p>
                 <h2 className="text-3xl font-light text-foreground">
-                  This is not wellness theatre.
+                  This is not a wellness gimmick.
                   <br />
-                  <span className="text-muted-foreground">It is performance infrastructure.</span>
+                  <span className="text-muted-foreground">It is a genuine competitive advantage.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Neurostate creates new premium service opportunities. Members pay more, stay longer, and refer others. This is the differentiation your facility needs.
+                  NeuroState lets you offer premium services that actually work. Members pay more, stay longer, and tell their friends. That is the kind of edge your facility needs.
                 </p>
                 <div className="space-y-3">
                   {[

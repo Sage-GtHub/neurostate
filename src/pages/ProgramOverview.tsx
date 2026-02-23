@@ -183,10 +183,10 @@ export default function ProgramOverview() {
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center mb-16">
               <h2 className="text-large-display font-bold mb-4 text-carbon">
-                What's Included
+                What Your Team Gets
               </h2>
               <p className="text-body text-stone max-w-2xl mx-auto">
-                Comprehensive wellness platform built for enterprise teams
+                Everything your team needs to feel better, work better, and stay longer
               </p>
             </div>
 
@@ -195,26 +195,26 @@ export default function ProgramOverview() {
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-carbon/5 flex items-center justify-center">
                   <Target className="w-8 h-8 text-carbon" />
                 </div>
-                <h3 className="text-xl font-semibold text-carbon">Nova AI Assistant</h3>
+                <h3 className="text-xl font-semibold text-carbon">Personal AI Coach</h3>
                 <p className="text-sm text-stone leading-relaxed">
-                  Personalised wellness protocols for every team member via chat, mobile app, or web dashboard.
+                  Every team member gets personalised health plans via chat, mobile, or web. It learns their habits and adapts.
                 </p>
-                <div className="text-xs text-ash">24/7 AI health coach</div>
+                <div className="text-xs text-ash">Available 24/7</div>
               </div>
 
               <div className="text-center space-y-4">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-carbon/5 flex items-center justify-center">
                   <TrendingUp className="w-8 h-8 text-carbon" />
                 </div>
-                <h3 className="text-xl font-semibold text-carbon">Team Dashboard</h3>
+                <h3 className="text-xl font-semibold text-carbon">Manager Dashboard</h3>
                 <p className="text-sm text-stone leading-relaxed">
-                  Aggregated wellness insights and engagement metrics for HR and leadership.
+                  See team-wide health trends, engagement, and burnout risk at a glance. Built for HR and leadership.
                 </p>
                 <div className="space-y-1 text-xs text-ash">
-                  <div>Employee productivity trends</div>
-                  <div>Burnout reduction metrics</div>
-                  <div>Focus & cognitive performance</div>
-                  <div>Team wellness engagement</div>
+                  <div>Productivity trends</div>
+                  <div>Burnout early warning</div>
+                  <div>Focus and energy scores</div>
+                  <div>Team engagement</div>
                 </div>
               </div>
 
@@ -224,7 +224,7 @@ export default function ProgramOverview() {
                 </div>
                 <h3 className="text-xl font-semibold text-carbon">Enterprise Security</h3>
                 <p className="text-sm text-stone leading-relaxed">
-                  SOC 2 compliant, GDPR ready, and built with enterprise-grade security for your team's data.
+                  SOC 2 compliant, GDPR ready, and built with enterprise-grade security. Your team's health data stays private.
                 </p>
                 <div className="text-xs text-ash">End-to-end encryption</div>
               </div>

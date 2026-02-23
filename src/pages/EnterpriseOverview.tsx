@@ -411,10 +411,10 @@ export default function EnterpriseOverview() {
               <ScrollReveal>
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Get Started</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground mt-4 mb-6">
-                  Ready to transform your organisation?
+                  Ready to look after your team properly?
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-lg mx-auto mb-8">
-                  Schedule a consultation to discuss how Neurostate can be tailored to your industry's specific needs.
+                  Book a call and we will show you how NeuroState works for your industry. No jargon, just answers.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3">
                   <Link to="/contact">

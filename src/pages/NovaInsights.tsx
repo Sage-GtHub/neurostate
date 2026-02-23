@@ -341,8 +341,8 @@ export default function NovaInsights() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-[11px] uppercase tracking-[0.2em] text-foreground/30 mb-2">Analytics</p>
-                <h1 className="text-2xl font-medium text-foreground mb-2">Performance Analytics</h1>
-                <p className="text-sm text-foreground/50">Visualise your biometric trends and patterns</p>
+                <h1 className="text-2xl font-medium text-foreground mb-2">Your Health Data</h1>
+                <p className="text-sm text-foreground/50">See how your sleep, recovery, and energy are trending</p>
               </div>
               <Button
                 variant="outline"

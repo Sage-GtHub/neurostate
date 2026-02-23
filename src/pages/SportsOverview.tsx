@@ -296,14 +296,14 @@ export default function SportsOverview() {
           <div className="max-w-5xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">Asset Protection</p>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">Protect Your Players</p>
                 <h2 className="text-3xl font-light text-foreground">
-                  This is not wellness.
+                  Every injury costs you time, money, and results.
                   <br />
-                  <span className="text-muted-foreground">It is athlete asset protection.</span>
+                  <span className="text-muted-foreground">We help you prevent them.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Every injury costs time, money, and competitive advantage. Neurostate helps athletes stay on the pitch, performing at their cognitive and physical peak.
+                  Keep athletes on the pitch and performing at their best. NeuroState spots problems early so you can act before injuries happen.
                 </p>
                 <div className="space-y-3">
                   {[
