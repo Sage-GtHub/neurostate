@@ -47,13 +47,13 @@ export default function ProgramOverview() {
           <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center max-w-4xl mx-auto mb-16">
               <div className="inline-block mb-6 px-4 py-2 bg-accent/10 backdrop-blur-sm rounded-full border border-accent/20">
-                <span className="text-accent font-semibold text-sm uppercase tracking-wider">Enterprise Wellness</span>
+                <span className="text-accent font-semibold text-sm uppercase tracking-wider">For Teams</span>
               </div>
               <h1 className="text-hero-display font-bold mb-6 bg-gradient-to-r from-ivory via-pearl to-ivory bg-clip-text text-transparent">
-                Transform Your Team's Performance
+                A healthier team is a better team
               </h1>
               <p className="text-body-large text-pearl/90 max-w-3xl mx-auto leading-relaxed font-light">
-                Give your team premium cognitive tools, recovery protocols, and AI-powered wellness. Cut burnout, boost productivity.
+                Give every employee personalised health tools, recovery plans, and an AI coach. Cut burnout, boost productivity, and show the results.
               </p>
             </div>
 
