@@ -242,12 +242,12 @@ export default function SportsOverview() {
             <div className="text-center mb-12 space-y-4">
               <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">The Solution</p>
               <h2 className="text-3xl font-light text-foreground">
-                Performance intelligence.
+                What athletes and coaches get.
                 <br />
-                <span className="text-muted-foreground">For every athlete.</span>
+                <span className="text-muted-foreground">Clear tools, real results.</span>
               </h2>
               <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                Neurostate operates as a cognitive layer across athlete performance: forecasting readiness, predicting risk, and guiding recovery in real time.
+                NeuroState sits on top of the wearables your athletes already use. It reads the data, spots risks, and tells you what to do about it.
               </p>
             </div>
 
