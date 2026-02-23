@@ -741,9 +741,9 @@ const Index = () => {
               {/* Integration categories */}
               <div className="grid md:grid-cols-4 gap-4 mb-8">
                 {[
-                  { category: "Wearable Integrations", items: ["Oura", "Whoop", "Apple Watch", "Garmin"], count: "15+" },
+                  { category: "Wearables", items: ["Oura", "Whoop", "Apple Watch", "Garmin"], count: "15+" },
                   { category: "Calendars", items: ["Google", "Outlook", "Apple"], count: "3" },
-                  { category: "Productivity", items: ["Slack", "Teams", "Notion"], count: "12+" },
+                  { category: "Work Tools", items: ["Slack", "Teams", "Notion"], count: "12+" },
                   { category: "HR Systems", items: ["Workday", "BambooHR", "SAP"], count: "10+" }
                 ].map((group, i) => (
                   <motion.div
