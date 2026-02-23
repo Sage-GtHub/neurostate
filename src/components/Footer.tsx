@@ -62,7 +62,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-foreground text-background">
+    <footer className="relative overflow-hidden bg-obsidian text-background">
       {/* Clean top border */}
       <div className="absolute inset-x-0 top-0 h-px bg-background/10" />
       
@@ -85,7 +85,7 @@ export const Footer = () => {
 
             {/* Newsletter */}
             <div className="flex-1 lg:max-w-sm lg:ml-auto space-y-4">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Newsletter</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-background/40">Newsletter</p>
               <p className="text-background/60 text-xs">
                 Tips on team health, performance, and wellbeing.
               </p>
@@ -119,7 +119,7 @@ export const Footer = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
             >
-              <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Platform</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-background/40">Platform</p>
               <ul className="space-y-3">
                 {footerLinks.platform.map((link) => (
                   <li key={link.name}>
@@ -139,7 +139,7 @@ export const Footer = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.15 }}
             >
-              <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Company</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-background/40">Company</p>
               <ul className="space-y-3">
                 {footerLinks.company.map((link) => (
                   <li key={link.name}>
@@ -159,7 +159,7 @@ export const Footer = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Resources</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-background/40">Resources</p>
               <ul className="space-y-3">
                 {footerLinks.resources.map((link) => (
                   <li key={link.name}>
@@ -179,7 +179,7 @@ export const Footer = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.25 }}
             >
-              <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Account</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-background/40">Account</p>
               <ul className="space-y-3">
                 {footerLinks.account.map((link) => (
                   <li key={link.name}>
@@ -199,7 +199,7 @@ export const Footer = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
             >
-              <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Contact</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-background/40">Contact</p>
               <ul className="space-y-3">
                 <li>
                   <a href="mailto:contact@neurostate.co.uk" className="group inline-flex items-center gap-1 text-xs text-background/60 hover:text-background transition-all duration-300 hover:translate-x-1">

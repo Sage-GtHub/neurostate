@@ -143,7 +143,7 @@ const Index = () => {
                 transition={{ duration: 0.6 }}
               >
                 <div className="space-y-2">
-                  <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">How we help</span>
+                  <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">How we help</span>
                   <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                     Predict. Prevent. Perform.
                   </h2>
@@ -158,7 +158,7 @@ const Index = () => {
                 {approachPillars.map((pillar, i) => (
                   <motion.div
                     key={i}
-                    className="group relative p-5 md:p-6 rounded-xl bg-gradient-to-br from-muted/50 to-muted/20 border border-border/30 hover:border-primary/30 transition-all duration-300 cursor-default"
+                    className="group relative p-5 md:p-6 rounded-lg bg-gradient-to-br from-muted/50 to-muted/20 border border-border/30 hover:border-primary/30 transition-all duration-300 cursor-default"
                     initial={{ opacity: 0, y: 30 }}
                     animate={isApproachInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6, delay: i * 0.12 }}
@@ -196,7 +196,7 @@ const Index = () => {
           <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/30">
             <div className="max-w-7xl mx-auto">
               <ScrollReveal className="space-y-3 mb-8">
-                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">The platform</span>
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">The platform</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground max-w-2xl">
                   Six building blocks. One complete system.
                 </h2>
@@ -210,7 +210,7 @@ const Index = () => {
                 {platformBlocks.map((block, i) => (
                   <Link key={block.id} to={block.link}>
                     <motion.div
-                      className={`group relative h-full p-5 rounded-xl bg-gradient-to-br ${block.color} border border-border/30 hover:border-primary/40 transition-all duration-300 cursor-pointer overflow-hidden`}
+                      className={`group relative h-full p-5 rounded-lg bg-gradient-to-br ${block.color} border border-border/30 hover:border-primary/40 transition-all duration-300 cursor-pointer overflow-hidden`}
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-50px" }}
@@ -267,7 +267,7 @@ const Index = () => {
           <section className="py-12 md:py-16 px-6 md:px-8">
             <div className="max-w-7xl mx-auto">
               <ScrollReveal className="space-y-3 mb-8 text-center">
-                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">How it works</span>
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">How it works</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                   Four steps. Up and running in minutes.
                 </h2>
@@ -373,7 +373,7 @@ const Index = () => {
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
                 {/* Left - Header */}
                 <ScrollReveal className="space-y-4 lg:sticky lg:top-24">
-                  <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Industries</span>
+                  <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Industries</span>
                   <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                     Built for teams where performance matters most
                   </h2>
@@ -428,7 +428,7 @@ const Index = () => {
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
                 <ScrollReveal direction="left">
                   <div className="space-y-4">
-                    <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">For Leaders</span>
+                    <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">For Leaders</span>
                     <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                       Dashboards built for every role
                     </h2>
@@ -480,7 +480,7 @@ const Index = () => {
                 {/* Dashboard Preview Card */}
                 <ScrollReveal direction="right" delay={0.2}>
                   <motion.div 
-                    className="p-5 md:p-6 rounded-2xl bg-background border border-border/50 shadow-lg"
+                    className="p-5 md:p-6 rounded-lg bg-background border border-border/50 shadow-lg"
                     whileHover={{ y: -4, transition: { duration: 0.3 } }}
                   >
                     <div className="flex items-center justify-between pb-4 border-b border-border/30">
@@ -551,7 +551,7 @@ const Index = () => {
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                 {/* Left - Header & Benefits */}
                 <ScrollReveal className="space-y-5 lg:sticky lg:top-24">
-                  <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">The real cost</span>
+                  <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">The real cost</span>
                   <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                     See what burnout is really costing you
                   </h2>
@@ -602,7 +602,7 @@ const Index = () => {
             <div className="max-w-7xl mx-auto">
               {/* Nova Info - Text on top */}
               <ScrollReveal className="space-y-5 mb-10 text-center max-w-2xl mx-auto">
-                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">AI Assistant</span>
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">AI Assistant</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                   Meet Nova — your team's health advisor
                 </h2>
@@ -640,7 +640,7 @@ const Index = () => {
               {/* Nova Chat Preview - Visual below text */}
               <ScrollReveal delay={0.2}>
                 <motion.div 
-                  className="relative p-5 md:p-6 rounded-2xl bg-background border border-border/50 shadow-lg overflow-hidden max-w-2xl mx-auto"
+                  className="relative p-5 md:p-6 rounded-lg bg-background border border-border/50 shadow-lg overflow-hidden max-w-2xl mx-auto"
                   whileHover={{ y: -4, transition: { duration: 0.3 } }}
                 >
                   {/* Header */}
@@ -729,7 +729,7 @@ const Index = () => {
           <section className="py-12 md:py-16 px-6 md:px-8">
             <div className="max-w-7xl mx-auto text-center">
               <ScrollReveal className="space-y-3 mb-8">
-                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Integrations</span>
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Integrations</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                   Works with what your team already uses
                 </h2>
@@ -771,32 +771,32 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Final CTA */}
-          <section className="py-12 md:py-16 px-6 md:px-8 bg-gradient-to-b from-background to-muted/30">
+          {/* Final CTA - Dark Groq-style contrast section */}
+          <section className="py-20 md:py-28 px-6 md:px-8 bg-foreground text-background">
             <div className="max-w-7xl mx-auto text-center">
               <ScrollReveal className="space-y-5">
-                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Get Started</span>
-                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Get Started</span>
+                <h2 className="text-2xl md:text-3xl font-normal text-background">
                   Ready to see it in action?
                 </h2>
-                <p className="text-sm text-muted-foreground max-w-lg mx-auto">
+                <p className="text-sm text-background/60 max-w-lg mx-auto">
                   Book a 15-minute demo or start exploring for free. No credit card needed.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
                   <Link to="/contact">
-                    <Button className="h-10 px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                    <Button className="h-10 px-6 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group">
                       Book a demo
                       <ArrowUpRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </Button>
                   </Link>
                   <Link to="/auth?mode=signup">
-                    <Button variant="outline" className="h-10 px-6 text-sm font-medium rounded-full">
+                    <Button variant="outline" className="h-10 px-6 text-sm font-medium rounded-full border-background/20 text-background hover:bg-background/10">
                       Start free trial
                     </Button>
                   </Link>
                 </div>
                 
-                <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 pt-4 text-muted-foreground">
+                <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 pt-4 text-background/50">
                   {["No credit card required", "Enterprise-ready", "SOC 2 compliant"].map((item, i) => (
                     <div key={i} className="flex items-center gap-2 text-xs">
                       <Check className="w-3 h-3 text-primary" />
