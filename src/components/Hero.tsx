@@ -336,7 +336,7 @@ const Hero = () => {
 
                 {/* Energy Level - Top Left */}
                 <motion.div
-                  className="absolute top-1/4 -left-8 md:left-4 z-20 hidden md:block"
+                  className="absolute top-1/4 -left-2 md:left-4 z-20 hidden md:block"
                   initial={{ opacity: 0, x: -20 }}
                   animate={isLoaded ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.8, delay: 1 }}
