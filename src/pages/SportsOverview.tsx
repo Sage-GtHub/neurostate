@@ -72,9 +72,9 @@ export default function SportsOverview() {
   return (
     <>
       <SEO 
-        title="Elite Sports Performance | AI-Powered Athletic Recovery | NeuroState"
-        description="AI-powered performance forecasting for professional athletes. Predict performance volatility, prevent injuries, and optimise recovery with precision cognitive intelligence."
-        keywords="sports performance analytics, athlete recovery optimisation, injury prevention AI, elite sports technology, athletic performance forecasting, team sports analytics"
+        title="Sports Performance | NeuroState for Athletes & Teams"
+        description="Help athletes recover faster, avoid injuries, and perform better on game day. NeuroState tracks health data from wearables and gives coaches clear, actionable plans."
+        keywords="sports performance, athlete recovery, injury prevention, sports technology, athletic performance, team sports health"
       />
       
       <div className="min-h-screen bg-background relative overflow-hidden">
@@ -91,12 +91,12 @@ export default function SportsOverview() {
               <div className="space-y-6">
                 <p className="text-[10px] uppercase tracking-[0.25em] text-primary font-medium">Football · Rugby · Athletics · Cycling</p>
                 <h1 className="text-4xl sm:text-5xl font-light text-foreground leading-[1.1]">
-                  Sport operates on instinct.
+                  Keep athletes healthy.
                   <br />
-                  <span className="text-muted-foreground">We make it predictive.</span>
+                  <span className="text-muted-foreground">Keep them performing.</span>
                 </h1>
                 <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                  Elite performance is cognitive, not just physical. We forecast readiness, predict injury risk, and optimise recovery, giving athletes and teams an intelligence advantage.
+                  Performance is not just physical. We track sleep, stress, and recovery data from wearables, then give coaches and athletes clear plans to stay healthy and play better.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
                   <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
