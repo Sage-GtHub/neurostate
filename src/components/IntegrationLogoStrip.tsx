@@ -1,23 +1,7 @@
 import { motion } from "framer-motion";
 
-import ouraLogo from "@/assets/wearables/oura-logo.png";
-import whoopLogo from "@/assets/wearables/whoop-logo.png";
-import garminLogo from "@/assets/wearables/garmin-logo.png";
-import appleHealthLogo from "@/assets/wearables/apple-health-logo.png";
-import fitbitLogo from "@/assets/wearables/fitbit-logo.png";
-import samsungLogo from "@/assets/wearables/samsung-logo.png";
-import polarLogo from "@/assets/wearables/polar-logo.png";
-import withingsLogo from "@/assets/wearables/withings-logo.png";
-
 const integrations = [
-  { name: "Apple Health", logo: appleHealthLogo },
-  { name: "Oura", logo: ouraLogo },
-  { name: "Whoop", logo: whoopLogo },
-  { name: "Garmin", logo: garminLogo },
-  { name: "Fitbit", logo: fitbitLogo },
-  { name: "Samsung", logo: samsungLogo },
-  { name: "Polar", logo: polarLogo },
-  { name: "Withings", logo: withingsLogo },
+  "Apple Health", "Oura", "Whoop", "Garmin", "Fitbit", "Samsung", "Polar", "Withings"
 ];
 
 export function IntegrationLogoStrip() {
@@ -39,21 +23,17 @@ export function IntegrationLogoStrip() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          {integrations.map((item, i) => (
-            <motion.div
-              key={item.name}
-              className="flex items-center justify-center"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+          {integrations.map((name, i) => (
+            <motion.span
+              key={name}
+              className="text-sm md:text-base font-medium text-muted-foreground/40 hover:text-muted-foreground/70 transition-colors duration-300 select-none"
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 + i * 0.06 }}
             >
-              <img
-                src={item.logo}
-                alt={item.name}
-                className="h-6 md:h-7 w-auto object-contain opacity-40 hover:opacity-80 transition-opacity duration-300 grayscale hover:grayscale-0"
-              />
-            </motion.div>
+              {name}
+            </motion.span>
           ))}
         </motion.div>
       </div>
