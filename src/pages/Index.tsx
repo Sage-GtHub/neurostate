@@ -186,9 +186,9 @@ const Index = () => {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6 }}
             >
-              Like <span className="text-foreground font-medium">Stripe</span> is infrastructure for money, and{" "}
-              <span className="text-foreground font-medium">Palantir</span> is infrastructure for decision intelligence,{" "}
-              <span className="text-primary font-medium">NeuroState</span> is infrastructure for human performance.
+              Your team wears fitness trackers, smartwatches, and health devices every day.{" "}
+              <span className="text-primary font-medium">NeuroState</span> turns that data into real business value —
+              less burnout, fewer sick days, sharper teams.
             </motion.p>
           </section>
 
