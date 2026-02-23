@@ -136,128 +136,100 @@ const Index = () => {
           <Hero />
 
           <IntegrationLogoStrip />
-          <section ref={approachRef} className="py-12 md:py-16 px-6 md:px-8 border-t border-border/30">
-            <div className="max-w-7xl mx-auto">
-              {/* Section header */}
+
+          {/* Approach Section - Open editorial, no boxes */}
+          <section ref={approachRef} className="py-20 md:py-32 px-6 md:px-8">
+            <div className="max-w-6xl mx-auto">
               <motion.div 
-                className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8"
+                className="mb-16 md:mb-20"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isApproachInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6 }}
               >
-                <div className="space-y-2">
-                  <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">How we help</span>
-                  <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                    Predict. Prevent. Perform.
-                  </h2>
-                </div>
-                <p className="text-sm text-muted-foreground max-w-md">
-                  A smarter way to look after your team's health and performance.
-                </p>
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">How we help</span>
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-normal text-foreground mt-4 leading-[1.1]">
+                  Predict. Prevent. Perform.
+                </h2>
               </motion.div>
 
-              {/* 3 Pillars */}
-              <div className="grid md:grid-cols-3 gap-4 md:gap-5">
+              <div className="grid md:grid-cols-3 gap-12 md:gap-16">
                 {approachPillars.map((pillar, i) => (
                   <motion.div
                     key={i}
-                    className="group relative p-5 md:p-6 rounded-lg bg-gradient-to-br from-muted/50 to-muted/20 border border-border/30 hover:border-primary/30 transition-all duration-300 cursor-default"
+                    className="group cursor-default"
                     initial={{ opacity: 0, y: 30 }}
                     animate={isApproachInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6, delay: i * 0.12 }}
-                    whileHover={{ y: -4, scale: 1.02 }}
                   >
-                    <div className="flex items-start gap-3 mb-3">
-                      <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <pillar.icon className="w-4 h-4 text-primary" />
-                      </div>
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
+                      <pillar.icon className="w-5 h-5 text-primary" />
                     </div>
-                    <h3 className="text-sm font-medium text-foreground mb-2">{pillar.title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{pillar.description}</p>
+                    <h3 className="text-lg md:text-xl font-medium text-foreground mb-3">{pillar.title}</h3>
+                    <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{pillar.description}</p>
                   </motion.div>
                 ))}
               </div>
             </div>
           </section>
 
-          {/* Positioning Statement - Between Approach and System */}
-          <section className="py-10 md:py-12 px-6 md:px-8 border-y border-border/30">
+          {/* Positioning Statement - Large editorial quote */}
+          <section className="py-16 md:py-24 px-6 md:px-8">
             <motion.p
-              className="text-base md:text-lg text-muted-foreground text-center max-w-3xl mx-auto leading-relaxed"
+              className="text-xl md:text-3xl lg:text-4xl text-foreground text-center max-w-4xl mx-auto leading-snug font-light"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6 }}
             >
               Your team wears fitness trackers, smartwatches, and health devices every day.{" "}
-              <span className="text-primary font-medium">NeuroState</span> turns that data into real business value —
-              less burnout, fewer sick days, sharper teams.
+              <span className="text-primary font-medium">NeuroState</span> turns that data into real business value.
             </motion.p>
           </section>
 
-          {/* Building Blocks Section - Like Invisible's platform modules */}
-          <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/30">
-            <div className="max-w-7xl mx-auto">
-              <ScrollReveal className="space-y-3 mb-8">
+          {/* Building Blocks - Clean list, no card containers */}
+          <section className="py-20 md:py-32 px-6 md:px-8">
+            <div className="max-w-6xl mx-auto">
+              <ScrollReveal className="mb-16 md:mb-20">
                 <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">The platform</span>
-                <h2 className="text-2xl md:text-3xl font-normal text-foreground max-w-2xl">
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-normal text-foreground mt-4 max-w-3xl leading-[1.1]">
                   Six building blocks. One complete system.
                 </h2>
-                <p className="text-sm text-muted-foreground max-w-xl">
-                  Each piece works on its own, but together they give you complete visibility into your team's health and performance.
-                </p>
               </ScrollReveal>
 
-              {/* Building blocks grid */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+              <div className="space-y-0">
                 {platformBlocks.map((block, i) => (
                   <Link key={block.id} to={block.link}>
                     <motion.div
-                      className={`group relative h-full p-5 rounded-lg bg-gradient-to-br ${block.color} border border-border/30 hover:border-primary/40 transition-all duration-300 cursor-pointer overflow-hidden`}
+                      className="group flex items-start md:items-center justify-between py-8 md:py-10 border-t border-border/40 hover:border-primary/40 transition-colors"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-50px" }}
                       transition={{ duration: 0.5, delay: i * 0.06 }}
-                      whileHover={{ y: -4, scale: 1.02 }}
                     >
-                      {/* Background decoration */}
-                      <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-background/50 to-transparent rounded-bl-full opacity-50" />
-                      
-                      <div className="relative z-10">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-8 h-8 rounded-lg bg-background/80 flex items-center justify-center group-hover:bg-background transition-colors">
-                            <block.icon className="w-4 h-4 text-foreground" />
-                          </div>
-                          <span className="text-[9px] tracking-[0.1em] uppercase text-muted-foreground">{block.label}</span>
-                        </div>
-                        
-                        <h3 className="text-sm font-medium text-foreground mb-1.5 group-hover:text-primary transition-colors">
+                      <div className="flex-1 flex flex-col md:flex-row md:items-center gap-3 md:gap-8">
+                        <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold w-20 flex-shrink-0">{block.label}</span>
+                        <h3 className="text-lg md:text-2xl font-medium text-foreground group-hover:text-primary transition-colors">
                           {block.name}
                         </h3>
-                        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                        <p className="text-sm text-muted-foreground max-w-md md:ml-auto">
                           {block.description}
                         </p>
-                        
-                        <div className="flex items-center gap-2 mt-3 text-[10px] text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                          <span>Learn more</span>
-                          <ArrowRight className="w-3 h-3" />
-                        </div>
                       </div>
+                      <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-2 transition-all ml-4 flex-shrink-0" />
                     </motion.div>
                   </Link>
                 ))}
               </div>
 
-              {/* View all solutions */}
               <motion.div 
-                className="flex justify-center mt-6"
+                className="flex justify-center mt-12"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
                 <Link to="/solutions">
-                  <Button variant="outline" className="h-9 px-5 text-sm font-medium rounded-full group">
+                  <Button variant="outline" className="h-11 px-7 text-sm font-medium rounded-full group">
                     Explore all solutions
                     <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Button>
@@ -266,126 +238,77 @@ const Index = () => {
             </div>
           </section>
 
-          {/* How It Works - Journey Flow */}
-          <section className="py-12 md:py-16 px-6 md:px-8">
-            <div className="max-w-7xl mx-auto">
-              <ScrollReveal className="space-y-3 mb-8 text-center">
+          {/* How It Works - Numbered steps, no boxes */}
+          <section className="py-20 md:py-32 px-6 md:px-8 bg-muted/20">
+            <div className="max-w-6xl mx-auto">
+              <ScrollReveal className="mb-16 md:mb-20 text-center">
                 <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">How it works</span>
-                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  Four steps. Up and running in minutes.
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-normal text-foreground mt-4 leading-[1.1]">
+                  Up and running in minutes
                 </h2>
               </ScrollReveal>
 
-              {/* Journey steps */}
-              <div className="relative">
-                {/* Connection line - Desktop only */}
-                <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent -translate-y-1/2" />
-                
-                {/* Desktop/Tablet Grid */}
-                <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-                  {[
-                    { step: "01", title: "Connect", desc: "Link wearables, calendars, and work tools. Takes minutes, not days.", icon: Database },
-                    { step: "02", title: "Understand", desc: "AI reads the data and tells you what it means — in plain English.", icon: Brain },
-                    { step: "03", title: "Predict", desc: "See who's at risk of burnout or fatigue before it happens.", icon: TrendingUp },
-                    { step: "04", title: "Act", desc: "Get clear recommendations that save money and protect your people.", icon: Zap }
-                  ].map((item, i) => (
-                    <motion.div
-                      key={i}
-                      className="relative group p-4 rounded-xl hover:bg-muted/30 transition-all cursor-default"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: i * 0.1 }}
-                      whileHover={{ y: -4 }}
-                    >
-                      <div className="text-center">
-                        <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-2 group-hover:bg-primary/20 transition-colors">
-                          <item.icon className="w-3.5 h-3.5 text-primary" />
-                        </div>
-                        <h3 className="text-sm font-medium text-foreground mb-1">{item.title}</h3>
-                        <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Mobile - Compact horizontal cards */}
-                <div className="md:hidden space-y-2">
-                  {[
-                    { step: "01", title: "Connect", desc: "Link wearables, calendars, and work tools. Takes minutes, not days.", icon: Database },
-                    { step: "02", title: "Understand", desc: "AI reads the data and tells you what it means — in plain English.", icon: Brain },
-                    { step: "03", title: "Predict", desc: "See who's at risk of burnout or fatigue before it happens.", icon: TrendingUp },
-                    { step: "04", title: "Act", desc: "Get clear recommendations that save money and protect your people.", icon: Zap }
-                  ].map((item, i) => (
-                    <motion.div
-                      key={i}
-                      className="flex items-center gap-3 p-3 rounded-xl bg-card/60 border border-border/40"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: i * 0.08 }}
-                    >
-                      {/* Left: Icon with step number */}
-                      <div className="relative flex-shrink-0">
-                        <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                          <item.icon className="w-4 h-4 text-primary" />
-                        </div>
-                        <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-primary-foreground text-[9px] font-bold rounded-full flex items-center justify-center">
-                          {item.step}
-                        </span>
-                      </div>
-
-                      {/* Right: Content */}
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-sm font-semibold text-foreground mb-0.5">{item.title}</h3>
-                        <p className="text-[11px] text-muted-foreground leading-snug line-clamp-2">{item.desc}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Impact Stats - Full width dark section */}
-          <section className="py-10 md:py-12 px-6 md:px-8 bg-foreground">
-            <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
-                {impactStats.map((stat, i) => (
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8">
+                {[
+                  { step: "01", title: "Connect", desc: "Link wearables, calendars, and work tools. Takes minutes, not days.", icon: Database },
+                  { step: "02", title: "Understand", desc: "AI reads the data and tells you what it means — in plain English.", icon: Brain },
+                  { step: "03", title: "Predict", desc: "See who's at risk of burnout or fatigue before it happens.", icon: TrendingUp },
+                  { step: "04", title: "Act", desc: "Get clear recommendations that save money and protect your people.", icon: Zap }
+                ].map((item, i) => (
                   <motion.div
                     key={i}
-                    className="text-center md:text-left group cursor-default"
+                    className="text-center"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
-                    whileHover={{ scale: 1.05 }}
                   >
-                    <p className="text-2xl md:text-3xl font-light text-background mb-1 group-hover:text-primary transition-colors">{stat.value}</p>
-                    <p className="text-xs text-background/80 font-medium">{stat.label}</p>
-                    <p className="text-[10px] text-background/50 mt-0.5">{stat.sublabel}</p>
+                    <span className="font-mono text-4xl md:text-5xl font-light text-primary/30 block mb-4">{item.step}</span>
+                    <h3 className="text-lg md:text-xl font-medium text-foreground mb-3">{item.title}</h3>
+                    <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{item.desc}</p>
                   </motion.div>
                 ))}
               </div>
             </div>
           </section>
 
-          {/* Industries Section */}
-          <section className="py-12 md:py-16 px-6 md:px-8">
-            <div className="max-w-7xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
-                {/* Left - Header */}
-                <ScrollReveal className="space-y-4 lg:sticky lg:top-24">
+          {/* Impact Stats - Full width dark section */}
+          <section className="py-16 md:py-20 px-6 md:px-8 bg-foreground">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-16">
+                {impactStats.map((stat, i) => (
+                  <motion.div
+                    key={i}
+                    className="text-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                  >
+                    <p className="text-3xl md:text-4xl lg:text-5xl font-light text-white mb-2">{stat.value}</p>
+                    <p className="text-sm text-white/70 font-medium">{stat.label}</p>
+                    <p className="text-xs text-white/40 mt-1">{stat.sublabel}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Industries Section - Clean list, no cards */}
+          <section className="py-20 md:py-32 px-6 md:px-8">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+                <ScrollReveal className="lg:sticky lg:top-24">
                   <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Industries</span>
-                  <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                  <h2 className="text-3xl md:text-5xl font-normal text-foreground mt-4 leading-[1.1]">
                     Built for teams where performance matters most
                   </h2>
-                  <p className="text-sm text-muted-foreground max-w-md">
+                  <p className="text-base md:text-lg text-muted-foreground max-w-md mt-5">
                     Different industries, different pressures. NeuroState adapts to yours.
                   </p>
-                  <div className="pt-3">
+                  <div className="pt-6">
                     <Link to="/enterprise/overview">
-                      <Button variant="outline" className="h-9 px-5 text-sm font-medium rounded-full group">
+                      <Button variant="outline" className="h-11 px-6 text-sm font-medium rounded-full group">
                         View all industries
                         <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                       </Button>
@@ -393,8 +316,7 @@ const Index = () => {
                   </div>
                 </ScrollReveal>
 
-                {/* Right - Industry list */}
-                <div className="space-y-2">
+                <div className="space-y-0">
                   {industries.map((industry, i) => (
                     <motion.div
                       key={i}
@@ -403,17 +325,14 @@ const Index = () => {
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: i * 0.06 }}
                     >
-                      <Link to={industry.href} className="block group">
-                        <motion.div 
-                          className="flex items-center justify-between p-3 rounded-xl border border-border/30 hover:border-primary/30 hover:bg-muted/30 transition-all"
-                          whileHover={{ x: 4, scale: 1.01 }}
-                        >
-                          <div className="flex-1">
-                            <h3 className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">{industry.name}</h3>
-                            <p className="text-xs text-muted-foreground mt-0.5">{industry.desc}</p>
+                      <Link to={industry.href} className="group block">
+                        <div className="flex items-center justify-between py-5 border-b border-border/30 group-hover:border-primary/40 transition-colors">
+                          <div>
+                            <h3 className="text-base md:text-lg font-medium text-foreground group-hover:text-primary transition-colors">{industry.name}</h3>
+                            <p className="text-sm text-muted-foreground mt-0.5">{industry.desc}</p>
                           </div>
-                          <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                        </motion.div>
+                          <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-2 transition-all flex-shrink-0" />
+                        </div>
                       </Link>
                     </motion.div>
                   ))}
@@ -425,121 +344,93 @@ const Index = () => {
           {/* Side-by-side Comparison */}
           <HomeComparisonSection />
 
-          {/* Command Surfaces Preview */}
-          <section className="py-12 md:py-16 px-6 md:px-8 bg-muted/30">
-            <div className="max-w-7xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+          {/* Command Surfaces Preview - Open layout, fewer boxes */}
+          <section className="py-20 md:py-32 px-6 md:px-8 bg-muted/20">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
                 <ScrollReveal direction="left">
-                  <div className="space-y-4">
+                  <div className="space-y-5">
                     <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">For Leaders</span>
-                    <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                    <h2 className="text-3xl md:text-5xl font-normal text-foreground leading-[1.1]">
                       Dashboards built for every role
                     </h2>
-                    <p className="text-sm text-muted-foreground max-w-md">
+                    <p className="text-base md:text-lg text-muted-foreground max-w-md">
                       Everyone sees what matters most to them. No noise, just what you need.
                     </p>
                     
-                    <div className="grid grid-cols-2 gap-3 py-2">
+                    <div className="space-y-4 py-4">
                       {[
-                        { icon: Eye, text: "See team health in real time", detail: "Live dashboard" },
-                        { icon: Gauge, text: "Spot risks before they hit", detail: "72-hour early warning" },
-                        { icon: Calculator, text: "Track the financial impact", detail: "Cost savings" },
-                        { icon: Sparkles, text: "AI-powered next steps", detail: "Smart recommendations" }
+                        { icon: Eye, text: "See team health in real time" },
+                        { icon: Gauge, text: "Spot risks before they hit" },
+                        { icon: Calculator, text: "Track the financial impact" },
+                        { icon: Sparkles, text: "AI-powered next steps" }
                       ].map((item, i) => (
                         <motion.div 
                           key={i} 
-                          className="p-3 rounded-xl bg-background/50 border border-border/30 hover:border-primary/30 transition-all group cursor-default"
+                          className="flex items-center gap-4"
                           initial={{ opacity: 0, x: -20 }}
                           whileInView={{ opacity: 1, x: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: i * 0.1 }}
-                          whileHover={{ y: -2, scale: 1.02 }}
                         >
-                          <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center mb-2 group-hover:bg-primary/20 transition-colors">
-                            <item.icon className="w-3.5 h-3.5 text-primary" />
-                          </div>
-                          <p className="text-xs font-medium text-foreground">{item.text}</p>
-                          <p className="text-[10px] text-muted-foreground mt-0.5">{item.detail}</p>
+                          <item.icon className="w-5 h-5 text-primary flex-shrink-0" />
+                          <p className="text-sm md:text-base text-foreground">{item.text}</p>
                         </motion.div>
                       ))}
                     </div>
                     
-                    <div className="flex flex-wrap gap-3 pt-1">
+                    <div className="flex flex-wrap gap-3 pt-2">
                       <Link to="/team-dashboard">
-                        <Button className="h-9 px-4 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group">
+                        <Button className="h-11 px-6 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group">
                           View Team Dashboard
                           <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                        </Button>
-                      </Link>
-                      <Link to="/solutions/command-surfaces">
-                        <Button variant="outline" className="h-9 px-4 text-sm font-medium rounded-full">
-                          Learn more
                         </Button>
                       </Link>
                     </div>
                   </div>
                 </ScrollReveal>
 
-                {/* Dashboard Preview Card */}
+                {/* Dashboard Preview - Single clean card */}
                 <ScrollReveal direction="right" delay={0.2}>
                   <motion.div 
-                    className="p-5 md:p-6 rounded-lg bg-background border border-border/50 shadow-lg"
+                    className="p-6 md:p-8 rounded-lg bg-background border border-border/50 shadow-lg"
                     whileHover={{ y: -4, transition: { duration: 0.3 } }}
                   >
-                    <div className="flex items-center justify-between pb-4 border-b border-border/30">
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 bg-primary/10 rounded-xl flex items-center justify-center">
-                          <Layers className="w-4 h-4 text-primary" />
-                        </div>
-                        <div>
-                          <p className="text-foreground font-medium text-sm">Team Dashboard</p>
-                          <p className="text-muted-foreground text-xs">Executive View</p>
-                        </div>
+                    <div className="flex items-center justify-between pb-5 border-b border-border/30">
+                      <div>
+                        <p className="text-foreground font-medium text-base">Team Dashboard</p>
+                        <p className="text-muted-foreground text-sm">Executive View</p>
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                        <span className="text-xs text-muted-foreground">Live</span>
+                        <span className="text-sm text-muted-foreground">Live</span>
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-3 py-5">
+                    <div className="grid grid-cols-3 gap-6 py-6">
                       {[
                         { value: "74", label: "Team Health", color: "text-primary", trend: "+3" },
                         { value: "£41.8k", label: "At Risk", color: "text-amber-500", trend: "-12%" },
                         { value: "3", label: "Actions", color: "text-foreground", trend: "pending" }
                       ].map((metric, i) => (
-                        <motion.div 
-                          key={i} 
-                          className="text-center p-2 rounded-lg hover:bg-muted/30 transition-colors cursor-default"
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.4 + i * 0.1 }}
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          <p className={`text-xl font-light ${metric.color}`}>{metric.value}</p>
-                          <p className="text-muted-foreground text-[10px] uppercase tracking-wider mt-0.5">{metric.label}</p>
-                          <p className="text-[9px] text-muted-foreground/60 mt-0.5">{metric.trend}</p>
-                        </motion.div>
+                        <div key={i} className="text-center">
+                          <p className={`text-2xl md:text-3xl font-light ${metric.color}`}>{metric.value}</p>
+                          <p className="text-muted-foreground text-xs uppercase tracking-wider mt-1">{metric.label}</p>
+                        </div>
                       ))}
                     </div>
 
-                    {/* Mini action preview */}
-                    <div className="pt-3 border-t border-border/30 space-y-2">
-                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Suggested Actions</p>
+                    <div className="pt-4 border-t border-border/30 space-y-3">
+                      <p className="text-xs text-muted-foreground uppercase tracking-wider">Suggested Actions</p>
                       {[
-                        { text: "Schedule check-in with Engineering team", priority: "high" },
-                        { text: "Adjust workload for Sales leads this week", priority: "medium" }
+                        "Schedule check-in with Engineering team",
+                        "Adjust workload for Sales leads this week"
                       ].map((action, i) => (
-                        <motion.div 
-                          key={i}
-                          className="flex items-center gap-2 p-2 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors cursor-pointer"
-                          whileHover={{ x: 4 }}
-                        >
-                          <div className={`w-1.5 h-1.5 rounded-full ${action.priority === 'high' ? 'bg-amber-500' : 'bg-primary'}`} />
-                          <span className="text-xs text-foreground flex-1">{action.text}</span>
-                          <ArrowRight className="w-3 h-3 text-muted-foreground" />
-                        </motion.div>
+                        <div key={i} className="flex items-center gap-3 py-2">
+                          <div className={`w-1.5 h-1.5 rounded-full ${i === 0 ? 'bg-amber-500' : 'bg-primary'}`} />
+                          <span className="text-sm text-foreground flex-1">{action}</span>
+                          <ArrowRight className="w-4 h-4 text-muted-foreground" />
+                        </div>
                       ))}
                     </div>
                   </motion.div>
@@ -548,21 +439,20 @@ const Index = () => {
             </div>
           </section>
 
-          {/* ROI Calculator Section */}
-          <section className="py-12 md:py-16 px-6 md:px-8">
-            <div className="max-w-7xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-                {/* Left - Header & Benefits */}
-                <ScrollReveal className="space-y-5 lg:sticky lg:top-24">
+          {/* ROI Calculator Section - Open layout */}
+          <section className="py-20 md:py-32 px-6 md:px-8">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+                <ScrollReveal className="lg:sticky lg:top-24">
                   <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">The real cost</span>
-                  <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                  <h2 className="text-3xl md:text-5xl font-normal text-foreground mt-4 leading-[1.1]">
                     See what burnout is really costing you
                   </h2>
-                  <p className="text-sm text-muted-foreground max-w-md">
-                    Poor health, high turnover, and sick days add up fast. Use our calculator to see the real number — and what NeuroState can save.
+                  <p className="text-base md:text-lg text-muted-foreground max-w-md mt-5">
+                    Poor health, high turnover, and sick days add up fast.
                   </p>
                   
-                  <div className="space-y-3 pt-2">
+                  <div className="space-y-5 pt-6">
                     {[
                       { label: "Lost productivity", value: "15-20% of salary spend" },
                       { label: "Replacing someone who leaves", value: "50-200% of their salary" },
@@ -570,29 +460,19 @@ const Index = () => {
                     ].map((stat, i) => (
                       <motion.div 
                         key={i}
-                        className="flex items-center justify-between p-3 rounded-lg bg-muted/30 border border-border/30"
+                        className="flex items-center justify-between py-3 border-b border-border/30"
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.1 }}
                       >
-                        <span className="text-xs text-muted-foreground">{stat.label}</span>
-                        <span className="text-xs font-medium text-foreground">{stat.value}</span>
+                        <span className="text-sm text-muted-foreground">{stat.label}</span>
+                        <span className="text-sm font-medium text-foreground">{stat.value}</span>
                       </motion.div>
                     ))}
                   </div>
-                  
-                  <div className="pt-3">
-                    <Link to="/industries">
-                      <Button variant="outline" className="h-9 px-5 text-sm font-medium rounded-full group">
-                        View all industries
-                        <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                      </Button>
-                    </Link>
-                  </div>
                 </ScrollReveal>
 
-                {/* Right - Interactive Calculator */}
                 <ScrollReveal direction="right" delay={0.2}>
                   <HomeROICalculator />
                 </ScrollReveal>
@@ -600,54 +480,48 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Nova AI Preview Section */}
-          <section className="py-12 md:py-16 px-6 md:px-8 bg-gradient-to-b from-muted/30 to-background">
-            <div className="max-w-7xl mx-auto">
-              {/* Nova Info - Text on top */}
-              <ScrollReveal className="space-y-5 mb-10 text-center max-w-2xl mx-auto">
+          {/* Nova AI Section - Clean editorial */}
+          <section className="py-20 md:py-32 px-6 md:px-8 bg-muted/20">
+            <div className="max-w-6xl mx-auto">
+              <ScrollReveal className="mb-16 md:mb-20 text-center max-w-3xl mx-auto">
                 <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">AI Assistant</span>
-                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  Meet Nova — your team's health advisor
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-normal text-foreground mt-4 leading-[1.1]">
+                  Meet Nova
                 </h2>
-                <p className="text-sm text-muted-foreground">
-                  Nova reads your team's health data and gives you clear, actionable advice. Ask it anything — in plain English.
+                <p className="text-base md:text-lg text-muted-foreground mt-5">
+                  Your team's AI health advisor. Ask it anything — in plain English.
                 </p>
               </ScrollReveal>
               
-              {/* Features grid */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10 max-w-3xl mx-auto">
+              {/* Feature list - no boxes */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-16 max-w-4xl mx-auto">
                 {[
-                  { icon: Brain, text: "Personalised plans", detail: "Tailored to each person" },
-                  { icon: TrendingUp, text: "72-hour predictions", detail: "See what's coming" },
-                  { icon: Zap, text: "Timely nudges", detail: "Right advice, right time" },
-                  { icon: Eye, text: "Learns your patterns", detail: "Gets smarter over time" }
+                  { icon: Brain, text: "Personalised plans" },
+                  { icon: TrendingUp, text: "72-hour predictions" },
+                  { icon: Zap, text: "Timely nudges" },
+                  { icon: Eye, text: "Learns your patterns" }
                 ].map((item, i) => (
                   <motion.div 
                     key={i} 
-                    className="p-3 rounded-xl bg-muted/30 border border-border/30 hover:border-primary/30 transition-all group cursor-default text-center"
+                    className="text-center"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    whileHover={{ y: -2, scale: 1.02 }}
                   >
-                    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center mb-2 group-hover:bg-primary/20 transition-colors mx-auto">
-                      <item.icon className="w-3.5 h-3.5 text-primary" />
-                    </div>
-                    <p className="text-xs font-medium text-foreground">{item.text}</p>
-                    <p className="text-[10px] text-muted-foreground mt-0.5">{item.detail}</p>
+                    <item.icon className="w-6 h-6 text-primary mx-auto mb-3" />
+                    <p className="text-sm md:text-base font-medium text-foreground">{item.text}</p>
                   </motion.div>
                 ))}
               </div>
 
-              {/* Nova Chat Preview - Visual below text */}
+              {/* Nova Chat Preview */}
               <ScrollReveal delay={0.2}>
                 <motion.div 
-                  className="relative p-5 md:p-6 rounded-lg bg-background border border-border/50 shadow-lg overflow-hidden max-w-2xl mx-auto"
+                  className="relative p-6 md:p-8 rounded-lg bg-background border border-border/50 shadow-lg overflow-hidden max-w-2xl mx-auto"
                   whileHover={{ y: -4, transition: { duration: 0.3 } }}
                 >
-                  {/* Header */}
-                  <div className="flex items-center gap-3 pb-4 border-b border-border/30">
+                  <div className="flex items-center gap-3 pb-5 border-b border-border/30">
                     <motion.div 
                       className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center"
                       animate={{ scale: [1, 1.05, 1] }}
@@ -656,71 +530,63 @@ const Index = () => {
                       <Sparkles className="w-5 h-5 text-white" />
                     </motion.div>
                     <div>
-                      <p className="text-foreground font-medium text-sm">Nova</p>
-                      <p className="text-xs text-muted-foreground">Your AI health advisor</p>
-                    </div>
-                    <div className="ml-auto flex items-center gap-2">
-                      <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                      <span className="text-xs text-muted-foreground">Active</span>
+                      <p className="text-foreground font-medium text-base">Nova</p>
+                      <p className="text-sm text-muted-foreground">Your AI health advisor</p>
                     </div>
                   </div>
 
-                  {/* Chat messages */}
-                  <div className="space-y-3 py-4">
+                  <div className="space-y-4 py-5">
                     <motion.div 
-                      className="p-3 rounded-xl bg-muted/50 max-w-[85%]"
+                      className="p-4 rounded-xl bg-muted/50 max-w-[85%]"
                       initial={{ opacity: 0, y: 10 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.3 }}
                     >
-                      <p className="text-xs text-foreground">Good morning. Based on your sleep data, I've adjusted your focus window to 10am–1pm today. Your cognitive capacity is trending 12% above your weekly average.</p>
+                      <p className="text-sm text-foreground leading-relaxed">Good morning. Based on your sleep data, I've adjusted your focus window to 10am–1pm today. Your cognitive capacity is trending 12% above your weekly average.</p>
                     </motion.div>
                     
                     <motion.div 
-                      className="p-3 rounded-xl bg-primary/10 max-w-[75%] ml-auto"
+                      className="p-4 rounded-xl bg-primary/10 max-w-[75%] ml-auto"
                       initial={{ opacity: 0, y: 10 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.5 }}
                     >
-                      <p className="text-xs text-foreground">What should I prioritise this morning?</p>
+                      <p className="text-sm text-foreground">What should I prioritise this morning?</p>
                     </motion.div>
                     
                     <motion.div 
-                      className="p-3 rounded-xl bg-muted/50 max-w-[85%]"
+                      className="p-4 rounded-xl bg-muted/50 max-w-[85%]"
                       initial={{ opacity: 0, y: 10 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.7 }}
                     >
-                      <p className="text-xs text-foreground">Your highest-impact task is the Q4 strategy deck. Complexity matches your current state. I'd suggest blocking 90 minutes before lunch.</p>
+                      <p className="text-sm text-foreground leading-relaxed">Your highest-impact task is the Q4 strategy deck. Complexity matches your current state. I'd suggest blocking 90 minutes before lunch.</p>
                     </motion.div>
                   </div>
 
-                  {/* Input area */}
-                  <div className="flex items-center gap-2 p-2 rounded-lg bg-muted/30 border border-border/30">
-                    <span className="text-xs text-muted-foreground flex-1 pl-2">Ask Nova anything...</span>
-                    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <ArrowRight className="w-3.5 h-3.5 text-primary" />
+                  <div className="flex items-center gap-2 p-3 rounded-lg bg-muted/30 border border-border/30">
+                    <span className="text-sm text-muted-foreground flex-1 pl-2">Ask Nova anything...</span>
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <ArrowRight className="w-4 h-4 text-primary" />
                     </div>
                   </div>
 
-                  {/* Background glow */}
                   <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
                 </motion.div>
               </ScrollReveal>
 
-              {/* CTA buttons */}
-              <div className="flex flex-wrap gap-3 pt-8 justify-center">
+              <div className="flex flex-wrap gap-3 pt-10 justify-center">
                 <Link to="/nova/overview">
-                  <Button className="h-9 px-4 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                  <Button className="h-11 px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
                     Explore Nova
                     <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </Link>
                 <Link to="/nova">
-                  <Button variant="outline" className="h-9 px-4 text-sm font-medium rounded-full">
+                  <Button variant="outline" className="h-11 px-6 text-sm font-medium rounded-full">
                     Try the demo
                   </Button>
                 </Link>
@@ -728,45 +594,42 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Platform Integration Visual */}
-          <section className="py-12 md:py-16 px-6 md:px-8">
-            <div className="max-w-7xl mx-auto text-center">
-              <ScrollReveal className="space-y-3 mb-8">
+          {/* Integrations - Clean text, no card grid */}
+          <section className="py-20 md:py-32 px-6 md:px-8">
+            <div className="max-w-6xl mx-auto text-center">
+              <ScrollReveal className="mb-16">
                 <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Integrations</span>
-                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-normal text-foreground mt-4 leading-[1.1]">
                   Works with what your team already uses
                 </h2>
-                <p className="text-sm text-muted-foreground max-w-xl mx-auto">
-                  40+ integrations across wearables, calendars, and work tools. We don't sell hardware — we connect to what your team already wears and uses.
+                <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mt-5">
+                  40+ integrations across wearables, calendars, and work tools.
                 </p>
               </ScrollReveal>
 
-              {/* Integration categories */}
-              <div className="grid md:grid-cols-4 gap-4 mb-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 max-w-3xl mx-auto mb-12">
                 {[
-                  { category: "Wearables", items: ["Oura", "Whoop", "Apple Watch", "Garmin"], count: "15+" },
-                  { category: "Calendars", items: ["Google", "Outlook", "Apple"], count: "3" },
-                  { category: "Work Tools", items: ["Slack", "Teams", "Notion"], count: "12+" },
-                  { category: "HR Systems", items: ["Workday", "BambooHR", "SAP"], count: "10+" }
+                  { category: "Wearables", count: "15+" },
+                  { category: "Calendars", count: "3" },
+                  { category: "Work Tools", count: "12+" },
+                  { category: "HR Systems", count: "10+" }
                 ].map((group, i) => (
                   <motion.div
                     key={i}
-                    className="p-4 rounded-xl bg-muted/30 border border-border/30 hover:border-primary/30 transition-all text-center"
+                    className="text-center"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    whileHover={{ y: -4, scale: 1.02 }}
                   >
-                    <p className="text-2xl font-light text-primary mb-1">{group.count}</p>
-                    <p className="text-xs font-medium text-foreground mb-2">{group.category}</p>
-                    <p className="text-[10px] text-muted-foreground">{group.items.join(" · ")}</p>
+                    <p className="text-3xl md:text-4xl font-light text-primary mb-2">{group.count}</p>
+                    <p className="text-sm md:text-base font-medium text-foreground">{group.category}</p>
                   </motion.div>
                 ))}
               </div>
 
               <Link to="/enterprise/integrations">
-                <Button variant="outline" className="h-9 px-5 text-sm font-medium rounded-full group">
+                <Button variant="outline" className="h-11 px-7 text-sm font-medium rounded-full group">
                   View all integrations
                   <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Button>
@@ -775,34 +638,34 @@ const Index = () => {
           </section>
 
           {/* Final CTA - Dark Groq-style contrast section */}
-          <section className="py-20 md:py-28 px-6 md:px-8 bg-foreground text-background">
-            <div className="max-w-7xl mx-auto text-center">
-              <ScrollReveal className="space-y-5">
+          <section className="py-24 md:py-36 px-6 md:px-8 bg-foreground">
+            <div className="max-w-4xl mx-auto text-center">
+              <ScrollReveal className="space-y-6">
                 <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Get Started</span>
-                <h2 className="text-2xl md:text-3xl font-normal text-background">
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-normal text-white leading-[1.1]">
                   Ready to see it in action?
                 </h2>
-                <p className="text-sm text-background/60 max-w-lg mx-auto">
+                <p className="text-base md:text-lg text-white/60 max-w-lg mx-auto">
                   Book a 15-minute demo or start exploring for free. No credit card needed.
                 </p>
-                <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
+                <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
                   <Link to="/contact">
-                    <Button className="h-10 px-6 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group">
+                    <Button className="h-12 px-8 text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group">
                       Book a demo
-                      <ArrowUpRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      <ArrowUpRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </Button>
                   </Link>
                   <Link to="/auth?mode=signup">
-                    <Button className="h-10 px-6 text-sm font-medium rounded-full bg-transparent border border-white/40 !text-white hover:bg-white/10">
+                    <Button className="h-12 px-8 text-base font-medium rounded-full bg-transparent border border-white/40 !text-white hover:bg-white/10">
                       Start free trial
                     </Button>
                   </Link>
                 </div>
                 
-                <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 pt-4 text-background/50">
+                <div className="flex flex-wrap items-center justify-center gap-6 pt-6 text-white/50">
                   {["No credit card required", "Enterprise-ready", "SOC 2 compliant"].map((item, i) => (
-                    <div key={i} className="flex items-center gap-2 text-xs">
-                      <Check className="w-3 h-3 text-primary" />
+                    <div key={i} className="flex items-center gap-2 text-sm">
+                      <Check className="w-4 h-4 text-primary" />
                       <span>{item}</span>
                     </div>
                   ))}
