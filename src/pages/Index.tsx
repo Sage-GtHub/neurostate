@@ -152,7 +152,7 @@ const Index = () => {
                 </h2>
               </motion.div>
 
-              <div className="grid md:grid-cols-3 gap-12 md:gap-16">
+              <div className="grid md:grid-cols-3 gap-10 md:gap-16">
                 {approachPillars.map((pillar, i) => (
                   <motion.div
                     key={i}
