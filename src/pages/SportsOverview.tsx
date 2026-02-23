@@ -209,9 +209,9 @@ export default function SportsOverview() {
               <div className="space-y-6">
                 <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">The Problem</p>
                 <h2 className="text-3xl font-light text-foreground">
-                  Performance science tracks the past.
+                  Most teams only react after injuries happen.
                   <br />
-                  <span className="text-muted-foreground">Injuries happen anyway.</span>
+                  <span className="text-muted-foreground">By then, the damage is done.</span>
                 </h2>
               </div>
               <div className="space-y-4">
