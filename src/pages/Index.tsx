@@ -116,9 +116,9 @@ const Index = () => {
   return (
     <>
       <SEO 
-        title="NeuroState® | Cognitive Performance Infrastructure for Organisations"
-        description="Enterprise SaaS platform for cognitive performance analytics. Predictive intelligence, risk visibility, and financial attribution for workforce optimisation."
-        keywords="cognitive performance SaaS, enterprise analytics platform, AI performance insights, workforce optimisation, burnout prevention, predictive intelligence, Nova AI, B2B cognitive analytics"
+        title="NeuroState® | Turn Your Team's Health Data Into Better Business Performance"
+        description="Connect wearables your team already uses, spot burnout before it happens, and get clear actions to keep people performing at their best. 40+ integrations, 72-hour early warnings, 3.2x ROI."
+        keywords="workforce health, team performance, burnout prevention, wearable analytics, employee wellbeing platform, workplace health intelligence, Nova AI, HR analytics"
       />
       <OrganizationStructuredData />
       <SoftwareApplicationStructuredData />
