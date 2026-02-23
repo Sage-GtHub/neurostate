@@ -18,6 +18,7 @@ import {
   Moon,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { SEO } from "@/components/SEO";
 import { cn } from "@/lib/utils";
 import ReactMarkdown from "react-markdown";
 import { format } from "date-fns";
