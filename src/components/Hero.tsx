@@ -104,7 +104,7 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-[80vh] flex flex-col bg-background overflow-hidden"
+      className="relative min-h-[90vh] md:min-h-[80vh] flex flex-col bg-background overflow-hidden"
     >
       {/* Subtle gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/[0.02]" />
