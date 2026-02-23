@@ -122,7 +122,7 @@ export default function EnterpriseOverview() {
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
             />
 
-            <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-8 py-20 lg:py-28">
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-8 py-20 lg:py-28">
               <motion.div 
                 className="max-w-3xl mx-auto text-center space-y-6"
                 initial={{ opacity: 0, y: 30 }}
@@ -135,16 +135,16 @@ export default function EnterpriseOverview() {
                     animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   />
-                  <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">Human Performance OS</span>
+                <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">Workforce Health Intelligence</span>
                 </div>
 
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-foreground tracking-tight">
-                  The cognitive performance{" "}
-                  <span className="text-primary">ecosystem.</span>
+                  Better health data.{" "}
+                  <span className="text-primary">Better teams.</span>
                 </h1>
                 
                 <p className="text-sm text-muted-foreground max-w-xl mx-auto leading-relaxed">
-                  Invisible AI infrastructure advancing human performance through predictive intelligence. The operating system for cognitive excellence at enterprise scale.
+                  NeuroState connects to wearables, spots early signs of burnout and fatigue, and gives managers clear actions to keep their teams performing at their best.
                 </p>
 
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
