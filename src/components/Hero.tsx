@@ -248,7 +248,7 @@ const Hero = () => {
               animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 1.2, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
             >
-              <div className="relative aspect-square max-w-lg mx-auto">
+              <div className="relative aspect-square max-w-sm md:max-w-lg mx-auto">
                 {/* Ambient glow behind devices */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                   <div className="w-80 h-80 bg-gradient-to-br from-primary/10 via-emerald-500/5 to-blue-500/8 rounded-full blur-[100px]" />
