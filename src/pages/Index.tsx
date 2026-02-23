@@ -133,6 +133,7 @@ const Index = () => {
         keywords="cognitive performance infrastructure, workforce health intelligence, team performance platform, burnout prevention, wearable analytics, employee wellbeing, Nova AI, HR analytics, predictive intelligence"
       />
       <CorporateServiceStructuredData />
+      <FAQStructuredData faqs={homepageFaqs} />
       <div className="min-h-screen bg-background mobile-nav-padding relative overflow-hidden">
         <div className="fixed inset-0 pointer-events-none">
           <div className="absolute top-1/3 right-0 w-[600px] h-[600px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
