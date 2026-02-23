@@ -309,10 +309,10 @@ export default function SolutionsHub() {
               <ScrollReveal className="text-center mb-12 space-y-4">
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Architecture</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  Six layers of cognitive infrastructure
+                  Six layers working together
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                  A complete stack that transforms raw signals into measurable business outcomes. Each layer builds on the one below it, creating a system where data flows seamlessly from collection to action to ROI.
+                  A complete system that turns raw health data into measurable business results. Each layer builds on the one below it — from data collection, through analysis and prediction, to clear actions and provable ROI.
                 </p>
               </ScrollReveal>
 

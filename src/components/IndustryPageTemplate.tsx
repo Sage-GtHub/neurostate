@@ -124,7 +124,7 @@ export function IndustryPageTemplate({ industry }: IndustryPageProps) {
                   See the value for {industry.name}
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                  Quantify the hidden costs of cognitive underperformance and discover your potential ROI.
+                  See the real cost of burnout and tiredness — and what NeuroState could save you.
                 </p>
               </ScrollReveal>
               <EnterpriseROICalculator variant="light" defaultIndustry={industry.defaultIndustry} />
