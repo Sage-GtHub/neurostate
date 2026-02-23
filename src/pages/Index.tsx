@@ -309,10 +309,10 @@ const Index = () => {
                 {/* Mobile - Compact horizontal cards */}
                 <div className="md:hidden space-y-2">
                   {[
-                    { step: "01", title: "Connect", desc: "Integrate wearables, calendars, and work tools. Setup takes minutes.", icon: Database },
-                    { step: "02", title: "Interpret", desc: "AI transforms raw data into cognitive intelligence.", icon: Brain },
-                    { step: "03", title: "Forecast", desc: "See capacity shifts and risk patterns before they materialise.", icon: TrendingUp },
-                    { step: "04", title: "Act", desc: "Receive contextual interventions with measurable returns.", icon: Zap }
+                    { step: "01", title: "Connect", desc: "Link wearables, calendars, and work tools. Takes minutes, not days.", icon: Database },
+                    { step: "02", title: "Understand", desc: "AI reads the data and tells you what it means — in plain English.", icon: Brain },
+                    { step: "03", title: "Predict", desc: "See who's at risk of burnout or fatigue before it happens.", icon: TrendingUp },
+                    { step: "04", title: "Act", desc: "Get clear recommendations that save money and protect your people.", icon: Zap }
                   ].map((item, i) => (
                     <motion.div
                       key={i}
