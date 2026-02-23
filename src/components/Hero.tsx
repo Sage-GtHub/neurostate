@@ -390,7 +390,7 @@ const Hero = () => {
           {[...clientNames, ...clientNames, ...clientNames].map((name, i) => (
             <motion.span 
               key={i}
-              className="px-12 text-xs text-muted-foreground/40 font-medium tracking-wider uppercase whitespace-nowrap cursor-default select-none"
+              className="px-8 md:px-12 text-xs text-muted-foreground/40 font-medium tracking-wider uppercase whitespace-nowrap cursor-default select-none"
               whileHover={{ 
                 color: "hsl(var(--foreground))",
                 scale: 1.08,
