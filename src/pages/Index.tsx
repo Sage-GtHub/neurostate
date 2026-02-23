@@ -7,6 +7,9 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { HomeROICalculator } from "@/components/HomeROICalculator";
 import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
 import { HomeComparisonSection } from "@/components/HomeComparisonSection";
+import { SocialProofStrip } from "@/components/SocialProofStrip";
+import { StatsCounterBar } from "@/components/StatsCounterBar";
+import { IntegrationLogoStrip } from "@/components/IntegrationLogoStrip";
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Eye, Layers, Sparkles } from "lucide-react";
