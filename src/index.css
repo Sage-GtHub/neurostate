@@ -357,6 +357,22 @@
     text-transform: uppercase;
   }
 
+  /* Global mono treatment for ALL uppercase tracking labels (Groq style) */
+  [class*="uppercase"][class*="tracking"] {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  }
+
+  /* Global tighter radius — override rounded-2xl to rounded-lg everywhere */
+  .rounded-2xl {
+    border-radius: 0.5rem !important;
+  }
+  .rounded-3xl {
+    border-radius: 0.75rem !important;
+  }
+  .rounded-xl {
+    border-radius: 0.5rem !important;
+  }
+
   .gradient-line {
     height: 1px;
     width: 100%;
