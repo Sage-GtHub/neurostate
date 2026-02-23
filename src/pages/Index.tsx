@@ -93,20 +93,20 @@ const approachPillars = [
 
 // Industries
 const industries = [
-  { name: "SaaS & Technology", href: "/industries/saas-high-growth", desc: "Sustain engineering velocity at scale" },
-  { name: "Financial Services", href: "/industries/financial-services", desc: "Precision in high-stakes environments" },
-  { name: "Professional Services", href: "/industries/professional-services", desc: "Protect billable capacity and talent" },
-  { name: "Healthcare", href: "/industries/healthcare", desc: "Operational resilience for clinical teams" },
-  { name: "Research & Life Sciences", href: "/industries/research-life-sciences", desc: "Sustain deep work and discovery" },
-  { name: "Government & Defence", href: "/industries/government-defence", desc: "Mission-critical performance systems" }
+  { name: "SaaS & Technology", href: "/industries/saas-high-growth", desc: "Keep engineering teams sharp as you scale" },
+  { name: "Financial Services", href: "/industries/financial-services", desc: "Peak performance in high-pressure environments" },
+  { name: "Professional Services", href: "/industries/professional-services", desc: "Protect your people and their output" },
+  { name: "Healthcare", href: "/industries/healthcare", desc: "Support clinical teams under constant pressure" },
+  { name: "Research & Life Sciences", href: "/industries/research-life-sciences", desc: "Protect deep focus and discovery" },
+  { name: "Government & Defence", href: "/industries/government-defence", desc: "Performance systems for critical roles" }
 ];
 
 // Stats
 const impactStats = [
-  { value: "72hr", label: "Foresight window", sublabel: "before performance shifts" },
-  { value: "89%", label: "Signal coverage", sublabel: "across connected sources" },
-  { value: "3.2x", label: "First-year return", sublabel: "average enterprise ROI" },
-  { value: "40+", label: "Integrations", sublabel: "wearables and tools" }
+  { value: "72hr", label: "Early warning", sublabel: "spot burnout before it hits" },
+  { value: "89%", label: "Data coverage", sublabel: "from connected wearables" },
+  { value: "3.2x", label: "Return on investment", sublabel: "in the first year" },
+  { value: "40+", label: "Integrations", sublabel: "wearables and work tools" }
 ];
 
 const Index = () => {
