@@ -25,8 +25,8 @@ export function usePushNotifications() {
         return;
       }
 
-      const registration = await navigator.serviceWorker.ready;
-      const subscription = await registration.pushManager.getSubscription();
+      const registration = await navigator.serviceWorker.ready as ServiceWorkerRegistration & { pushManager: PushManager };
+      const subscription = await (registration as any).pushManager?.getSubscription();
       setIsSubscribed(!!subscription);
     } catch (error) {
       console.error("Error checking subscription:", error);
