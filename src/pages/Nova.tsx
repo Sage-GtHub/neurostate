@@ -203,7 +203,7 @@ export default function Nova() {
               </div>
               <h1 className="text-2xl sm:text-3xl font-medium text-foreground mb-4 tracking-tight">Welcome to Nova</h1>
               <p className="text-foreground/50 text-sm mb-10 leading-relaxed max-w-sm mx-auto">
-                Sign in to access your personalised AI performance dashboard with biometric tracking and adaptive protocols.
+                Sign in to access your personal health dashboard. Track your sleep, recovery, and energy — all in one place.
               </p>
               <Button 
                 onClick={() => navigate('/auth')} 
