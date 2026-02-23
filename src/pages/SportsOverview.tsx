@@ -72,9 +72,9 @@ export default function SportsOverview() {
   return (
     <>
       <SEO 
-        title="Elite Sports Performance | AI-Powered Athletic Recovery | NeuroState"
-        description="AI-powered performance forecasting for professional athletes. Predict performance volatility, prevent injuries, and optimise recovery with precision cognitive intelligence."
-        keywords="sports performance analytics, athlete recovery optimisation, injury prevention AI, elite sports technology, athletic performance forecasting, team sports analytics"
+        title="Sports Performance | NeuroState for Athletes & Teams"
+        description="Help athletes recover faster, avoid injuries, and perform better on game day. NeuroState tracks health data from wearables and gives coaches clear, actionable plans."
+        keywords="sports performance, athlete recovery, injury prevention, sports technology, athletic performance, team sports health"
       />
       
       <div className="min-h-screen bg-background relative overflow-hidden">
@@ -91,12 +91,12 @@ export default function SportsOverview() {
               <div className="space-y-6">
                 <p className="text-[10px] uppercase tracking-[0.25em] text-primary font-medium">Football · Rugby · Athletics · Cycling</p>
                 <h1 className="text-4xl sm:text-5xl font-light text-foreground leading-[1.1]">
-                  Sport operates on instinct.
+                  Keep athletes healthy.
                   <br />
-                  <span className="text-muted-foreground">We make it predictive.</span>
+                  <span className="text-muted-foreground">Keep them performing.</span>
                 </h1>
                 <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                  Elite performance is cognitive, not just physical. We forecast readiness, predict injury risk, and optimise recovery, giving athletes and teams an intelligence advantage.
+                  Performance is not just physical. We track sleep, stress, and recovery data from wearables, then give coaches and athletes clear plans to stay healthy and play better.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
                   <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
@@ -209,16 +209,16 @@ export default function SportsOverview() {
               <div className="space-y-6">
                 <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">The Problem</p>
                 <h2 className="text-3xl font-light text-foreground">
-                  Performance science tracks the past.
+                  Most teams only react after injuries happen.
                   <br />
-                  <span className="text-muted-foreground">Injuries happen anyway.</span>
+                  <span className="text-muted-foreground">By then, the damage is done.</span>
                 </h2>
               </div>
               <div className="space-y-4">
                 {[
-                  { title: "Reactive load management", desc: "Training loads are adjusted after fatigue appears. The damage is already done." },
-                  { title: "Missing cognitive signals", desc: "Physical metrics alone miss the full picture. Stress, sleep, and mental load drive performance volatility." },
-                  { title: "Inconsistent recovery", desc: "Recovery protocols are generic. Individual athlete needs are not accounted for in real time." }
+                  { title: "Training adjustments come too late", desc: "Loads get changed after fatigue shows up. By then, performance has already dropped." },
+                  { title: "Stress and sleep get ignored", desc: "Physical data alone misses the full picture. Mental load, sleep quality, and stress all affect how athletes perform." },
+                  { title: "Recovery is one-size-fits-all", desc: "Every athlete is different, but most recovery plans treat them the same. That means slower comebacks." }
                 ].map((item, i) => (
                   <motion.div 
                     key={i}
@@ -242,12 +242,12 @@ export default function SportsOverview() {
             <div className="text-center mb-12 space-y-4">
               <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">The Solution</p>
               <h2 className="text-3xl font-light text-foreground">
-                Performance intelligence.
+                What athletes and coaches get.
                 <br />
-                <span className="text-muted-foreground">For every athlete.</span>
+                <span className="text-muted-foreground">Clear tools, real results.</span>
               </h2>
               <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                Neurostate operates as a cognitive layer across athlete performance: forecasting readiness, predicting risk, and guiding recovery in real time.
+                NeuroState sits on top of the wearables your athletes already use. It reads the data, spots risks, and tells you what to do about it.
               </p>
             </div>
 
@@ -255,21 +255,21 @@ export default function SportsOverview() {
               {[
                 { 
                   icon: Brain, 
-                  title: "Nova AI Coach", 
-                  description: "Personalised cognitive protocols based on training load, recovery status, and competition schedule. 24/7 guidance.",
-                  highlight: "Adaptive intelligence"
+                  title: "Personal AI Coach", 
+                  description: "Every athlete gets a personalised plan based on their training, sleep, and recovery. Available 24/7 through the app.",
+                  highlight: "Always on"
                 },
                 { 
                   icon: Activity, 
-                  title: "Recovery Optimisation", 
-                  description: "Red light therapy, supplement stacks, and sleep protocols designed specifically for athletic recovery demands.",
-                  highlight: "Precision recovery"
+                  title: "Faster Recovery", 
+                  description: "Red light therapy, supplements, and sleep plans built specifically for each athlete's recovery needs.",
+                  highlight: "Tailored recovery"
                 },
                 { 
                   icon: Shield, 
                   title: "Injury Prevention", 
-                  description: "Early warning detection from biometric patterns. Protocol adjustments before problems become injuries.",
-                  highlight: "Predictive protection"
+                  description: "Spot warning signs early from wearable data. Adjust training before small issues become big injuries.",
+                  highlight: "Early warning"
                 }
               ].map((item, index) => (
                 <motion.div 
@@ -296,14 +296,14 @@ export default function SportsOverview() {
           <div className="max-w-5xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">Asset Protection</p>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">Protect Your Players</p>
                 <h2 className="text-3xl font-light text-foreground">
-                  This is not wellness.
+                  Every injury costs you time, money, and results.
                   <br />
-                  <span className="text-muted-foreground">It is athlete asset protection.</span>
+                  <span className="text-muted-foreground">We help you prevent them.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Every injury costs time, money, and competitive advantage. Neurostate helps athletes stay on the pitch, performing at their cognitive and physical peak.
+                  Keep athletes on the pitch and performing at their best. NeuroState spots problems early so you can act before injuries happen.
                 </p>
                 <div className="space-y-3">
                   {[

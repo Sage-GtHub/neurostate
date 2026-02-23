@@ -14,66 +14,66 @@ const industries = [
     id: "information-technology",
     title: "Information Technology",
     category: "Corporate",
-    desc: "Cognitive performance infrastructure for technology organisations.",
+    desc: "Help tech teams avoid burnout and stay sharp under pressure.",
     href: "/enterprise/information-technology/overview",
     icon: Cpu,
-    stats: { primary: "47%", label: "Reduced burnout" },
-    features: ["Team wellness monitoring", "Deep work optimisation", "High-pressure recovery"],
+    stats: { primary: "47%", label: "Less burnout" },
+    features: ["Team health monitoring", "Deep work support", "Stress recovery"],
     color: "hsl(270, 100%, 55%)"
   },
   {
     id: "financial-services",
     title: "Financial Services",
     category: "Corporate",
-    desc: "Peak cognitive performance for high-stakes teams.",
+    desc: "Keep high-pressure teams focused and performing at their best.",
     href: "/enterprise/financial-services/overview",
     icon: TrendingUp,
-    stats: { primary: "23%", label: "Performance uplift" },
-    features: ["Cognitive load monitoring", "Peak performance windows", "Risk & stress management"],
+    stats: { primary: "23%", label: "Better performance" },
+    features: ["Workload tracking", "Best performance windows", "Stress management"],
     color: "hsl(220, 100%, 55%)"
   },
   {
     id: "healthcare",
     title: "Healthcare & Clinical",
     category: "Healthcare",
-    desc: "AI-powered patient recovery and clinical wellness programmes.",
+    desc: "Support patient recovery and staff wellbeing with health data.",
     href: "/enterprise/healthcare/overview",
     icon: Heart,
     stats: { primary: "40%", label: "Faster recovery" },
-    features: ["Predictive recovery monitoring", "Cognitive rehabilitation", "Patient wellness"],
+    features: ["Recovery tracking", "Staff wellness", "Patient health monitoring"],
     color: "hsl(0, 70%, 55%)"
   },
   {
     id: "hospitality",
     title: "Hospitality & Spas",
     category: "Hospitality",
-    desc: "Premium guest wellness experiences for luxury properties.",
+    desc: "Offer guests premium wellness experiences backed by real data.",
     href: "/enterprise/hospitality/overview",
     icon: Sparkles,
     stats: { primary: "35%", label: "Revenue increase" },
-    features: ["Personalised wellness journeys", "Sleep optimisation suites", "Recovery & rejuvenation"],
+    features: ["Personalised guest wellness", "Sleep improvement suites", "Recovery services"],
     color: "hsl(280, 70%, 55%)"
   },
   {
     id: "sports",
     title: "Sports & Athletics",
     category: "Performance",
-    desc: "Cognitive optimisation for elite performers.",
+    desc: "Help athletes recover faster and perform better on game day.",
     href: "/enterprise/sports/overview",
     icon: Trophy,
     stats: { primary: "2.1x", label: "Performance gain" },
-    features: ["Reaction time training", "Decision speed optimisation", "Recovery protocols"],
+    features: ["Reaction time training", "Faster recovery", "Injury prevention"],
     color: "hsl(45, 100%, 50%)"
   },
   {
     id: "health-clubs",
     title: "Health Clubs & Gyms",
     category: "Fitness",
-    desc: "Member performance programmes for fitness facilities.",
+    desc: "Keep members engaged with personalised performance tracking.",
     href: "/enterprise/health-clubs/overview",
     icon: Dumbbell,
-    stats: { primary: "52%", label: "Member retention" },
-    features: ["Member wellness tracking", "Premium offerings", "Outcome measurement"],
+    stats: { primary: "52%", label: "Better retention" },
+    features: ["Member health tracking", "Premium tier services", "Measurable results"],
     color: "hsl(156, 65%, 45%)"
   }
 ];
@@ -102,9 +102,9 @@ export default function EnterpriseOverview() {
   return (
     <>
       <SEO 
-        title="Enterprise Solutions | AI Cognitive Performance Platform | NeuroState"
-        description="AI-powered cognitive performance infrastructure for organisations. Explore solutions for IT, Financial Services, Healthcare, Hospitality, Sports, and Health Clubs."
-        keywords="enterprise wellness platform, corporate cognitive performance, AI workforce analytics, burnout prevention enterprise, team performance monitoring, organisational health technology"
+        title="Team Health Solutions | NeuroState for Business"
+        description="NeuroState helps organisations look after their people. Connect wearables, spot burnout early, and keep teams healthy and productive."
+        keywords="employee wellness platform, team health monitoring, burnout prevention, workforce wellbeing, team performance, workplace health technology"
       />
       <div className="min-h-screen bg-background relative overflow-hidden">
         <div className="fixed inset-0 pointer-events-none">
@@ -122,7 +122,7 @@ export default function EnterpriseOverview() {
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
             />
 
-            <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-8 py-20 lg:py-28">
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-8 py-20 lg:py-28">
               <motion.div 
                 className="max-w-3xl mx-auto text-center space-y-6"
                 initial={{ opacity: 0, y: 30 }}
@@ -135,16 +135,16 @@ export default function EnterpriseOverview() {
                     animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   />
-                  <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">Human Performance OS</span>
+                <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">Workforce Health Intelligence</span>
                 </div>
 
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-foreground tracking-tight">
-                  The cognitive performance{" "}
-                  <span className="text-primary">ecosystem.</span>
+                  Better health data.{" "}
+                  <span className="text-primary">Better teams.</span>
                 </h1>
                 
                 <p className="text-sm text-muted-foreground max-w-xl mx-auto leading-relaxed">
-                  Invisible AI infrastructure advancing human performance through predictive intelligence. The operating system for cognitive excellence at enterprise scale.
+                  NeuroState connects to wearables, spots early signs of burnout and fatigue, and gives managers clear actions to keep their teams performing at their best.
                 </p>
 
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
@@ -376,17 +376,17 @@ export default function EnterpriseOverview() {
           <section className="py-20 md:py-28 px-6 md:px-8 bg-muted/30">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="text-center mb-16 space-y-4">
-                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Enterprise Impact</span>
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Real Results</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  Measurable outcomes across industries
+                  What our partners are seeing
                 </h2>
               </ScrollReveal>
 
               <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-8">
                 {[
-                  { value: "47%", label: "Average burnout reduction" },
-                  { value: "2.4x", label: "ROI within first year" },
-                  { value: "89%", label: "Programme satisfaction" },
+                  { value: "47%", label: "Less burnout" },
+                  { value: "2.4x", label: "Return on investment in year one" },
+                  { value: "89%", label: "Staff satisfaction with the programme" },
                   { value: "31%", label: "Productivity improvement" }
                 ].map((stat, i) => (
                   <StaggerItem key={i}>
@@ -411,10 +411,10 @@ export default function EnterpriseOverview() {
               <ScrollReveal>
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Get Started</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground mt-4 mb-6">
-                  Ready to transform your organisation?
+                  Ready to look after your team properly?
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-lg mx-auto mb-8">
-                  Schedule a consultation to discuss how Neurostate can be tailored to your industry's specific needs.
+                  Book a call and we will show you how NeuroState works for your industry. No jargon, just answers.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3">
                   <Link to="/contact">

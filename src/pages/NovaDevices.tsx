@@ -225,7 +225,7 @@ export default function NovaDevices() {
 
   return (
     <NovaSwipeWrapper>
-      <SEO title="Devices | Nova AI" description="Connect wearables for continuous biometric data sync." />
+      <SEO title="Devices | Nova AI" description="Connect your wearables to Nova. We will pull in your health data automatically." />
       <div className="min-h-screen bg-background relative overflow-hidden">
         <div className="fixed inset-0 pointer-events-none">
           <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />

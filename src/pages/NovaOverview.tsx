@@ -32,7 +32,7 @@ export default function NovaOverview() {
 
   return (
     <NovaSwipeWrapper>
-      <SEO title="Nova AI | Enterprise Cognitive Performance Engine | NeuroState" description="Nova is an enterprise-grade AI engine that forecasts team cognitive performance. Integrate wearable data, predict capacity, and optimise workforce performance at scale." keywords="Nova AI, enterprise cognitive analytics, team performance forecasting, workforce analytics, HRV analysis, B2B performance platform, enterprise readiness score" />
+      <SEO title="Nova AI | Your Personal Health Coach | NeuroState" description="Nova is your AI health coach. It reads your wearable data, tracks your sleep, recovery, and energy, and tells you what to do to feel and perform better." keywords="Nova AI, health coach, personal wellness, sleep tracking, recovery, HRV, energy optimisation, daily health score" />
       <SoftwareApplicationStructuredData />
       <div className="min-h-screen bg-background relative overflow-hidden">
         {/* Organic background */}

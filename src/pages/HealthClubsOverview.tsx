@@ -28,9 +28,9 @@ export default function HealthClubsOverview() {
   return (
     <>
       <SEO 
-        title="Cognitive Performance for Health Clubs & Gyms | Member Retention | NeuroState"
-        description="Transform your fitness facility with AI-driven cognitive analytics. Measure readiness, recovery, and cognitive load. Deliver measurable results and retain more members."
-        keywords="gym member retention, fitness club technology, health club analytics, cognitive fitness tracking, member engagement platform, fitness facility AI"
+        title="Health Clubs & Gyms | NeuroState for Fitness Facilities"
+        description="Help your members get better results and stay longer. NeuroState tracks recovery, readiness, and progress — giving your facility a genuine edge."
+        keywords="gym member retention, fitness club technology, health club analytics, member engagement, fitness facility, member results tracking"
       />
       
       <div className="min-h-screen bg-background relative overflow-hidden">
@@ -47,12 +47,12 @@ export default function HealthClubsOverview() {
               <div className="space-y-6">
                 <p className="text-[10px] uppercase tracking-[0.25em] text-primary font-medium">Health Clubs · Gyms · Studios</p>
                 <h1 className="text-4xl sm:text-5xl font-light text-foreground leading-[1.1]">
-                  Your members train their bodies.
+                  Help your members get results they can actually see.
                   <br />
-                  <span className="text-muted-foreground">Now train their minds.</span>
+                  <span className="text-muted-foreground">And keep them coming back.</span>
                 </h1>
                 <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                  Most fitness facilities measure reps and sets. You will measure readiness, recovery, and cognitive load, then act on it before members drop off.
+                  Most gyms track attendance. NeuroState tracks recovery, readiness, and real progress, so your members get better results and stay longer.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
                   <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
@@ -77,16 +77,16 @@ export default function HealthClubsOverview() {
               <div className="space-y-6">
                 <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">The Problem</p>
                 <h2 className="text-3xl font-light text-foreground">
-                  Members do not quit because of your equipment.
+                  Members do not leave because of your equipment.
                   <br />
-                  <span className="text-muted-foreground">They quit because they stop seeing results.</span>
+                  <span className="text-muted-foreground">They leave because they stop seeing progress.</span>
                 </h2>
               </div>
               <div className="space-y-4">
                 {[
-                  { title: "Invisible churn signals", desc: "Fatigue and stress build before members cancel. You only see the end result." },
-                  { title: "Generic programming", desc: "One size fits all does not work. Members need personalised guidance based on their actual readiness." },
-                  { title: "No outcome measurement", desc: "You track attendance. But can you prove cognitive and performance improvement?" }
+                  { title: "You cannot see who is about to quit", desc: "Fatigue and frustration build up before someone cancels. By the time you notice, they are already gone." },
+                  { title: "Everyone gets the same advice", desc: "One-size-fits-all programmes do not work. Members need guidance based on how their body is actually recovering." },
+                  { title: "You cannot prove your facility works", desc: "You track who shows up, but can you show members their actual progress in health and performance?" }
                 ].map((item, i) => (
                   <motion.div 
                     key={i}
@@ -110,12 +110,12 @@ export default function HealthClubsOverview() {
             <div className="text-center mb-12 space-y-4">
               <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">The Solution</p>
               <h2 className="text-3xl font-light text-foreground">
-                Cognitive infrastructure.
+                What your members get.
                 <br />
-                <span className="text-muted-foreground">For every member.</span>
+                <span className="text-muted-foreground">What you get.</span>
               </h2>
               <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                Neurostate integrates seamlessly into your facility, giving members AI powered guidance and giving you data that actually matters.
+                NeuroState fits right into your facility. Members get personalised guidance through the app. You get data that shows your facility is delivering real results.
               </p>
             </div>
 
@@ -123,20 +123,20 @@ export default function HealthClubsOverview() {
               {[
                 { 
                   icon: Brain, 
-                  title: "Nova AI Coach", 
-                  description: "Personal cognitive optimisation via app. 24/7 guidance tailored to each member's biometrics and goals.",
-                  highlight: "Personalised protocols"
+                  title: "Personal AI Coach", 
+                  description: "Every member gets an AI coach in the app. It learns their habits, tracks their wearable data, and gives them daily guidance.",
+                  highlight: "Always personalised"
                 },
                 { 
                   icon: Activity, 
-                  title: "Readiness Scoring", 
-                  description: "Daily cognitive readiness scores based on sleep, HRV, and recovery. Members know when to push and when to rest.",
-                  highlight: "Real time adaptation"
+                  title: "Daily Readiness Score", 
+                  description: "Based on sleep, heart rate, and recovery. Members know whether to push hard or take it easy today.",
+                  highlight: "Know when to rest"
                 },
                 { 
                   icon: TrendingUp, 
-                  title: "Outcome Tracking", 
-                  description: "Visual metrics showing cognitive improvement, focus gains, and recovery trends. Proof your facility delivers results.",
+                  title: "Progress They Can See", 
+                  description: "Clear charts showing recovery trends, energy improvements, and health gains. Proof that your facility is working.",
                   highlight: "Measurable results"
                 }
               ].map((item, index) => (
@@ -166,12 +166,12 @@ export default function HealthClubsOverview() {
               <div className="space-y-6">
                 <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">Revenue Impact</p>
                 <h2 className="text-3xl font-light text-foreground">
-                  This is not wellness theatre.
+                  This is not a wellness gimmick.
                   <br />
-                  <span className="text-muted-foreground">It is performance infrastructure.</span>
+                  <span className="text-muted-foreground">It is a genuine competitive advantage.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Neurostate creates new premium service opportunities. Members pay more, stay longer, and refer others. This is the differentiation your facility needs.
+                  NeuroState lets you offer premium services that actually work. Members pay more, stay longer, and tell their friends. That is the kind of edge your facility needs.
                 </p>
                 <div className="space-y-3">
                   {[

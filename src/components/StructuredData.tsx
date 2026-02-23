@@ -360,7 +360,7 @@ export const WebsiteStructuredData = () => {
         {
           "@type": "SiteNavigationElement",
           "name": "For Teams",
-          "description": "Enterprise cognitive performance infrastructure for organisations.",
+          "description": "Workforce health tools for organisations. Spot burnout, track team health, and improve performance.",
           "url": "https://neurostate.co.uk/enterprise/overview"
         },
         {

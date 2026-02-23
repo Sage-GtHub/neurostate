@@ -31,9 +31,9 @@ export default function ProgramOverview() {
   return (
     <>
       <SEO 
-        title="Corporate Cognitive Performance Programme | Enterprise Wellness | NeuroState"
-        description="Deploy AI-driven cognitive performance across your organisation. Reduce burnout 63%, increase focus 47%, and deliver measurable workplace productivity gains."
-        keywords="corporate wellness programme, enterprise cognitive performance, employee burnout prevention, workplace productivity tools, team performance analytics, AI wellness platform"
+        title="Corporate Wellness Programme | NeuroState for Teams"
+        description="Give your team health tools that actually work. Reduce burnout by 63%, improve focus by 47%, and see real productivity gains across your organisation."
+        keywords="corporate wellness programme, employee burnout prevention, workplace productivity, team performance, staff wellbeing, employee health platform"
       />
       
       <div className="min-h-screen bg-ivory">
@@ -47,13 +47,13 @@ export default function ProgramOverview() {
           <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center max-w-4xl mx-auto mb-16">
               <div className="inline-block mb-6 px-4 py-2 bg-accent/10 backdrop-blur-sm rounded-full border border-accent/20">
-                <span className="text-accent font-semibold text-sm uppercase tracking-wider">Enterprise Wellness</span>
+                <span className="text-accent font-semibold text-sm uppercase tracking-wider">For Teams</span>
               </div>
               <h1 className="text-hero-display font-bold mb-6 bg-gradient-to-r from-ivory via-pearl to-ivory bg-clip-text text-transparent">
-                Transform Your Team's Performance
+                A healthier team is a better team
               </h1>
               <p className="text-body-large text-pearl/90 max-w-3xl mx-auto leading-relaxed font-light">
-                Give your team premium cognitive tools, recovery protocols, and AI-powered wellness. Cut burnout, boost productivity.
+                Give every employee personalised health tools, recovery plans, and an AI coach. Cut burnout, boost productivity, and show the results.
               </p>
             </div>
 
@@ -183,10 +183,10 @@ export default function ProgramOverview() {
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center mb-16">
               <h2 className="text-large-display font-bold mb-4 text-carbon">
-                What's Included
+                What Your Team Gets
               </h2>
               <p className="text-body text-stone max-w-2xl mx-auto">
-                Comprehensive wellness platform built for enterprise teams
+                Everything your team needs to feel better, work better, and stay longer
               </p>
             </div>
 
@@ -195,26 +195,26 @@ export default function ProgramOverview() {
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-carbon/5 flex items-center justify-center">
                   <Target className="w-8 h-8 text-carbon" />
                 </div>
-                <h3 className="text-xl font-semibold text-carbon">Nova AI Assistant</h3>
+                <h3 className="text-xl font-semibold text-carbon">Personal AI Coach</h3>
                 <p className="text-sm text-stone leading-relaxed">
-                  Personalised wellness protocols for every team member via chat, mobile app, or web dashboard.
+                  Every team member gets personalised health plans via chat, mobile, or web. It learns their habits and adapts.
                 </p>
-                <div className="text-xs text-ash">24/7 AI health coach</div>
+                <div className="text-xs text-ash">Available 24/7</div>
               </div>
 
               <div className="text-center space-y-4">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-carbon/5 flex items-center justify-center">
                   <TrendingUp className="w-8 h-8 text-carbon" />
                 </div>
-                <h3 className="text-xl font-semibold text-carbon">Team Dashboard</h3>
+                <h3 className="text-xl font-semibold text-carbon">Manager Dashboard</h3>
                 <p className="text-sm text-stone leading-relaxed">
-                  Aggregated wellness insights and engagement metrics for HR and leadership.
+                  See team-wide health trends, engagement, and burnout risk at a glance. Built for HR and leadership.
                 </p>
                 <div className="space-y-1 text-xs text-ash">
-                  <div>Employee productivity trends</div>
-                  <div>Burnout reduction metrics</div>
-                  <div>Focus & cognitive performance</div>
-                  <div>Team wellness engagement</div>
+                  <div>Productivity trends</div>
+                  <div>Burnout early warning</div>
+                  <div>Focus and energy scores</div>
+                  <div>Team engagement</div>
                 </div>
               </div>
 
@@ -224,7 +224,7 @@ export default function ProgramOverview() {
                 </div>
                 <h3 className="text-xl font-semibold text-carbon">Enterprise Security</h3>
                 <p className="text-sm text-stone leading-relaxed">
-                  SOC 2 compliant, GDPR ready, and built with enterprise-grade security for your team's data.
+                  SOC 2 compliant, GDPR ready, and built with enterprise-grade security. Your team's health data stays private.
                 </p>
                 <div className="text-xs text-ash">End-to-end encryption</div>
               </div>

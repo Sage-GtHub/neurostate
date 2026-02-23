@@ -83,63 +83,63 @@ interface Goal {
 const PROTOCOL_TEMPLATES: Record<string, Omit<RecommendedProtocol, 'match'>> = {
   sleep: {
     id: 'sleep',
-    name: 'Deep Sleep Protocol',
-    description: 'Optimise sleep architecture for enhanced recovery and cognitive restoration.',
+    name: 'Better Sleep Plan',
+    description: 'Improve your sleep quality so you wake up feeling rested and ready to go.',
     icon: Moon,
     color: 'from-indigo-500/20 to-purple-500/20',
     duration: '4 weeks',
     items: 5,
-    benefits: ['Improved sleep quality', 'Faster recovery', 'Enhanced cognition']
+    benefits: ['Better sleep quality', 'Faster recovery', 'Clearer thinking']
   },
   focus: {
     id: 'focus',
-    name: 'Cognitive Enhancement Protocol',
-    description: 'Sharpen focus, extend deep work capacity, and reduce mental fatigue.',
+    name: 'Sharper Focus Plan',
+    description: 'Stay focused for longer, get more deep work done, and reduce mental fatigue.',
     icon: Brain,
     color: 'from-amber-500/20 to-orange-500/20',
     duration: '6 weeks',
     items: 4,
-    benefits: ['Extended focus', 'Reduced brain fog', 'Peak mental clarity']
+    benefits: ['Longer focus', 'Less brain fog', 'Clearer thinking']
   },
   recovery: {
     id: 'recovery',
-    name: 'Recovery Optimisation Protocol',
-    description: 'Accelerate physical and mental recovery between high-demand periods.',
+    name: 'Faster Recovery Plan',
+    description: 'Bounce back quicker between tough days so you can keep performing.',
     icon: Heart,
     color: 'from-emerald-500/20 to-teal-500/20',
     duration: '4 weeks',
     items: 6,
-    benefits: ['Faster HRV recovery', 'Reduced inflammation', 'Better adaptation']
+    benefits: ['Faster HRV recovery', 'Less inflammation', 'Better adaptation']
   },
   energy: {
     id: 'energy',
-    name: 'Sustained Energy Protocol',
-    description: 'Eliminate energy crashes and maintain consistent output throughout the day.',
+    name: 'Steady Energy Plan',
+    description: 'Stop the afternoon crashes and keep your energy consistent all day.',
     icon: Zap,
     color: 'from-yellow-500/20 to-amber-500/20',
     duration: '3 weeks',
     items: 4,
-    benefits: ['Stable energy', 'No afternoon slumps', 'Better endurance']
+    benefits: ['Stable energy', 'No afternoon slump', 'Better endurance']
   },
   stress: {
     id: 'stress',
-    name: 'Stress Resilience Protocol',
-    description: 'Build adaptive capacity and reduce the physiological impact of stress.',
+    name: 'Stress Management Plan',
+    description: 'Build your ability to handle pressure without it wearing you down.',
     icon: Activity,
     color: 'from-cyan-500/20 to-blue-500/20',
     duration: '5 weeks',
     items: 5,
-    benefits: ['Lower cortisol', 'Better HRV', 'Improved resilience']
+    benefits: ['Lower stress hormones', 'Better heart health', 'More resilience']
   },
   performance: {
     id: 'performance',
-    name: 'Peak Performance Protocol',
-    description: 'Comprehensive optimisation for maximum cognitive and physical output.',
+    name: 'Peak Performance Plan',
+    description: 'The full programme for getting the most out of your mind and body.',
     icon: Target,
     color: 'from-rose-500/20 to-pink-500/20',
     duration: '8 weeks',
     items: 8,
-    benefits: ['Peak output', 'Optimal recovery', 'Sustained excellence']
+    benefits: ['Best output', 'Full recovery', 'Consistent excellence']
   },
 };
 
