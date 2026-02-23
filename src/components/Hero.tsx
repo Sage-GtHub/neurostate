@@ -212,8 +212,8 @@ const Hero = () => {
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
                     <Button 
-                      size="sm"
-                      className="h-10 px-6 text-xs font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group magnetic-btn relative overflow-hidden"
+                      size="lg"
+                      className="h-12 px-8 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group magnetic-btn relative overflow-hidden"
                     >
                       <span className="relative z-10 flex items-center">
                         Get Started
