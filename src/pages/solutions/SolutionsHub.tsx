@@ -171,7 +171,7 @@ export default function SolutionsHub() {
                 <div className="text-center space-y-4">
                   <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Category Definition</span>
                   <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                    This is not wellness software.
+                    This is not another wellness app.
                   </h2>
                 </div>
 
