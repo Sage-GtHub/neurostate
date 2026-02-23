@@ -551,12 +551,12 @@ const Index = () => {
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                 {/* Left - Header & Benefits */}
                 <ScrollReveal className="space-y-5 lg:sticky lg:top-24">
-                  <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Financial Impact</span>
+                  <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">The real cost</span>
                   <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                    Calculate your hidden costs
+                    See what burnout is really costing you
                   </h2>
                   <p className="text-sm text-muted-foreground max-w-md">
-                    Cognitive underperformance, burnout-related turnover, and preventable sick days cost more than you think. See what NeuroState can recover.
+                    Poor health, high turnover, and sick days add up fast. Use our calculator to see the real number — and what NeuroState can save.
                   </p>
                   
                   <div className="space-y-3 pt-2">
