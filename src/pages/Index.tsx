@@ -480,7 +480,7 @@ const Index = () => {
                 {/* Dashboard Preview Card */}
                 <ScrollReveal direction="right" delay={0.2}>
                   <motion.div 
-                    className="p-5 md:p-6 rounded-2xl bg-background border border-border/50 shadow-lg"
+                    className="p-5 md:p-6 rounded-lg bg-background border border-border/50 shadow-lg"
                     whileHover={{ y: -4, transition: { duration: 0.3 } }}
                   >
                     <div className="flex items-center justify-between pb-4 border-b border-border/30">
