@@ -673,6 +673,8 @@ const Index = () => {
               </ScrollReveal>
             </div>
           </section>
+
+        </main>
         <Footer />
         <FloatingNovaChat />
       </div>
