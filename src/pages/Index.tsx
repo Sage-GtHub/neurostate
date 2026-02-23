@@ -175,7 +175,7 @@ const Index = () => {
           {/* Positioning Statement - Large editorial quote */}
           <section className="py-12 md:py-24 px-5 md:px-8">
             <motion.p
-              className="text-xl md:text-3xl lg:text-4xl text-foreground text-center max-w-4xl mx-auto leading-snug font-light"
+              className="text-lg md:text-3xl lg:text-4xl text-foreground text-center max-w-4xl mx-auto leading-snug font-light"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
