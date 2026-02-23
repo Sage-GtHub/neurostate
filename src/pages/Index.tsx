@@ -561,9 +561,9 @@ const Index = () => {
                   
                   <div className="space-y-3 pt-2">
                     {[
-                      { label: "Productivity losses", value: "15-20% of salary spend" },
-                      { label: "Turnover costs", value: "50-200% of annual salary" },
-                      { label: "Sick day impact", value: "£600+ per day per employee" }
+                      { label: "Lost productivity", value: "15-20% of salary spend" },
+                      { label: "Replacing someone who leaves", value: "50-200% of their salary" },
+                      { label: "Each sick day", value: "£600+ per employee" }
                     ].map((stat, i) => (
                       <motion.div 
                         key={i}
