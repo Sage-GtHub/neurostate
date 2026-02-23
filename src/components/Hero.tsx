@@ -154,7 +154,7 @@ const Hero = () => {
           <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
             {/* Left - Text Content */}
             <motion.div 
-              className="space-y-4 lg:pr-6"
+              className="space-y-6 lg:pr-6"
               variants={containerVariants}
               initial="hidden"
               animate={isLoaded ? "visible" : "hidden"}
@@ -169,7 +169,7 @@ const Hero = () => {
                   animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 />
-                <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
+                <span className="text-xs md:text-sm tracking-[0.2em] uppercase text-muted-foreground">
                   Workforce Health Intelligence
                 </span>
               </motion.div>
@@ -177,7 +177,7 @@ const Hero = () => {
               {/* Headline */}
               <motion.h1 
                 ref={headlineRef}
-                className="text-xl md:text-2xl lg:text-3xl font-normal text-foreground tracking-tight"
+                className="text-3xl md:text-5xl lg:text-6xl font-normal text-foreground tracking-tight leading-[1.1]"
                 variants={itemVariants}
               >
                 We turn your team's{" "}
@@ -193,7 +193,7 @@ const Hero = () => {
               
               {/* Subheadline */}
               <motion.p 
-                className="text-xs md:text-sm text-muted-foreground max-w-md leading-relaxed"
+                className="text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed"
                 variants={itemVariants}
               >
                 NeuroState connects to wearables your team already uses, spots early signs of burnout and fatigue, and gives managers clear actions to keep people performing at their best.
@@ -212,8 +212,8 @@ const Hero = () => {
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
                     <Button 
-                      size="sm"
-                      className="h-10 px-6 text-xs font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group magnetic-btn relative overflow-hidden"
+                      size="lg"
+                      className="h-12 px-8 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group magnetic-btn relative overflow-hidden"
                     >
                       <span className="relative z-10 flex items-center">
                         Get Started
@@ -229,9 +229,9 @@ const Hero = () => {
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
                     <Button 
-                      size="sm"
+                      size="lg"
                       variant="ghost"
-                      className="h-10 px-5 text-xs font-medium text-foreground hover:bg-muted rounded-full group animated-underline inline-flex flex-row items-center gap-2"
+                      className="h-12 px-6 text-sm font-medium text-foreground hover:bg-muted rounded-full group animated-underline inline-flex flex-row items-center gap-2"
                     >
                       Explore Nova AI
                       <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
