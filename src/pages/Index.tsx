@@ -551,7 +551,7 @@ const Index = () => {
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                 {/* Left - Header & Benefits */}
                 <ScrollReveal className="space-y-5 lg:sticky lg:top-24">
-                  <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">The real cost</span>
+                  <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">The real cost</span>
                   <h2 className="text-2xl md:text-3xl font-normal text-foreground">
                     See what burnout is really costing you
                   </h2>
