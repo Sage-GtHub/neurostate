@@ -257,7 +257,7 @@ const Hero = () => {
                 {/* Floating Glassmorphic Metric Cards */}
                 {/* Readiness Score - Top Right */}
                 <motion.div
-                  className="absolute -top-4 -right-4 md:top-4 md:right-0 z-20"
+                  className="absolute top-0 right-0 md:top-4 md:right-0 z-20 scale-75 md:scale-100 origin-top-right"
                   initial={{ opacity: 0, y: 20, x: 20 }}
                   animate={isLoaded ? { opacity: 1, y: 0, x: 0 } : {}}
                   transition={{ duration: 0.8, delay: 0.6 }}
