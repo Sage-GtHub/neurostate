@@ -771,32 +771,32 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Final CTA */}
-          <section className="py-12 md:py-16 px-6 md:px-8 bg-gradient-to-b from-background to-muted/30">
+          {/* Final CTA - Dark Groq-style contrast section */}
+          <section className="py-20 md:py-28 px-6 md:px-8 bg-foreground text-background">
             <div className="max-w-7xl mx-auto text-center">
               <ScrollReveal className="space-y-5">
-                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Get Started</span>
-                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Get Started</span>
+                <h2 className="text-2xl md:text-3xl font-normal text-background">
                   Ready to see it in action?
                 </h2>
-                <p className="text-sm text-muted-foreground max-w-lg mx-auto">
+                <p className="text-sm text-background/60 max-w-lg mx-auto">
                   Book a 15-minute demo or start exploring for free. No credit card needed.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
                   <Link to="/contact">
-                    <Button className="h-10 px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                    <Button className="h-10 px-6 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group">
                       Book a demo
                       <ArrowUpRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </Button>
                   </Link>
                   <Link to="/auth?mode=signup">
-                    <Button variant="outline" className="h-10 px-6 text-sm font-medium rounded-full">
+                    <Button variant="outline" className="h-10 px-6 text-sm font-medium rounded-full border-background/20 text-background hover:bg-background/10">
                       Start free trial
                     </Button>
                   </Link>
                 </div>
                 
-                <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 pt-4 text-muted-foreground">
+                <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 pt-4 text-background/50">
                   {["No credit card required", "Enterprise-ready", "SOC 2 compliant"].map((item, i) => (
                     <div key={i} className="flex items-center gap-2 text-xs">
                       <Check className="w-3 h-3 text-primary" />
