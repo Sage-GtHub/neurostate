@@ -231,8 +231,8 @@ export default function Nova() {
   return (
     <NovaSwipeWrapper>
       <SEO 
-        title="Nova AI | Cognitive Performance Forecasting Engine"
-        description="Nova is a multi-model AI engine that forecasts cognitive performance using wearable data, behavioural signals, and predictive analytics."
+      title="Nova AI | Your Personal Health Coach | NeuroState"
+        description="Nova is your AI health coach. It reads your wearable data, tracks sleep, recovery, and energy, and gives you clear plans to feel and perform better."
       />
       
       <NovaOnboarding 
