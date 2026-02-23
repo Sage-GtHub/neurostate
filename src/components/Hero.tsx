@@ -306,7 +306,7 @@ const Hero = () => {
 
                 {/* Cognitive Load - Bottom Left */}
                 <motion.div
-                  className="absolute -bottom-4 -left-4 md:bottom-8 md:left-0 z-20"
+                  className="absolute bottom-0 left-0 md:bottom-8 md:left-0 z-20 scale-75 md:scale-100 origin-bottom-left"
                   initial={{ opacity: 0, y: 20, x: -20 }}
                   animate={isLoaded ? { opacity: 1, y: 0, x: 0 } : {}}
                   transition={{ duration: 0.8, delay: 0.8 }}
