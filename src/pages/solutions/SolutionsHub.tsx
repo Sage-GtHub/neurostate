@@ -178,10 +178,10 @@ export default function SolutionsHub() {
                 {/* Detailed Explanation */}
                 <div className="max-w-3xl mx-auto">
                   <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                    Most workplace "wellbeing" tools were designed for a different era. They rely on periodic surveys, offer historical dashboards with no predictive capability, and treat employee health as an HR checkbox rather than a strategic lever. They measure engagement after the fact. They cannot tell you who is at risk of burnout before it happens. They cannot quantify the cost of cognitive underperformance. They cannot recommend interventions with measurable ROI.
+                    Most workplace wellbeing tools rely on annual surveys, show you historical charts with no predictive capability, and treat employee health as an HR checkbox. They measure engagement after the fact. They cannot tell you who is at risk of burnout before it happens. They cannot show you what tiredness is costing. They cannot recommend actions with measurable returns.
                   </p>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    NeuroState was built from first principles to solve a different problem: how do you maintain cognitive performance across a workforce at scale, in real-time, with economic accountability?
+                    NeuroState was built to solve a different problem: how do you keep a workforce healthy and performing at their best, in real-time, with clear accountability?
                   </p>
                 </div>
 
