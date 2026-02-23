@@ -75,18 +75,18 @@ const platformBlocks = [
 // Approach pillars - like Invisible's 3 columns
 const approachPillars = [
   {
-    title: "Foresight, not hindsight",
-    description: "We surface patterns 72 hours before performance shifts. Early signals, clear context, time to act.",
+    title: "Spot problems early",
+    description: "We flag burnout and fatigue up to 72 hours before they affect your team. Early warning means time to act.",
     icon: Gauge
   },
   {
-    title: "Infrastructure, not apps",
-    description: "This is the cognitive layer your organisation was missing. Connecting data, intelligence, and outcomes.",
+    title: "One system, not ten apps",
+    description: "NeuroState connects all your team's health and work data in one place. No more scattered tools and guesswork.",
     icon: Layers
   },
   {
-    title: "Precision economics",
-    description: "Every insight ties to value. Exposure quantified. Returns measured. Performance becomes a financial lever.",
+    title: "Show the money",
+    description: "Every insight ties back to cost. See what burnout is costing you, and what NeuroState saves.",
     icon: Calculator
   }
 ];
