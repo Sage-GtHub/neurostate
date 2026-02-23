@@ -143,13 +143,13 @@ const Index = () => {
                 transition={{ duration: 0.6 }}
               >
                 <div className="space-y-2">
-                  <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Our approach</span>
+                  <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">How we help</span>
                   <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                    Ask. Analyse. Act.
+                    Predict. Prevent. Perform.
                   </h2>
                 </div>
                 <p className="text-sm text-muted-foreground max-w-md">
-                  The cognitive operating system for high-performing teams.
+                  A smarter way to look after your team's health and performance.
                 </p>
               </motion.div>
 
