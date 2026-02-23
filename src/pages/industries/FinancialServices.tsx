@@ -4,167 +4,79 @@ import { TrendingUp, Brain, AlertTriangle, Clock, Shield, BarChart3, Target, Zap
 const industryData = {
   name: "Financial Services",
   slug: "financial-services",
-  headline: "Cognitive edge for high-stakes decision environments.",
-  subheadline: "In financial services, cognitive performance directly impacts returns. NeuroState provides the infrastructure to sustain peak decision-making under pressure.",
+  headline: "Keep high-stakes decision-makers sharp under pressure.",
+  subheadline: "In financial services, tired people make expensive mistakes. NeuroState helps teams sustain the sharpness that good decisions require.",
   heroStats: [
     { value: "13%", label: "Average turnover" },
     { value: "14%", label: "Productivity loss" },
     { value: "2.8x", label: "Typical ROI" },
   ],
-
-  // Industry Problem Deep Dive
   industryProblem: {
-    title: "Where cognitive failure becomes financial loss",
+    title: "When tiredness becomes financial loss",
     paragraphs: [
-      "Financial services operates at the intersection of high stakes and high velocity. A trading desk makes thousands of decisions daily, each carrying potential for significant gain or loss. An M&A team works hundred-hour weeks approaching close. A risk committee must synthesise complex information under time pressure. In each case, cognitive performance is not incidental to the work; it is the work.",
-      "The industry has long recognised the value of cognitive performance without having infrastructure to measure or manage it. Firms invest heavily in talent acquisition, assuming that hiring the best minds solves the problem. But even exceptional minds degrade under sustained pressure. Sleep deprivation, decision fatigue, and accumulated stress erode judgment in ways that are invisible until losses materialise.",
-      "The regulatory environment adds another layer of cognitive load. Compliance requirements have grown continuously since the financial crisis, creating persistent background demands that compete with core responsibilities. Every new regulation is another system to learn, another process to follow, another potential failure mode to track. This administrative cognitive burden is rarely quantified but constantly present.",
-      "Traditional financial services culture compounds the problem. Long hours are worn as badges of honour. Visible exhaustion signals commitment. Taking recovery time suggests weakness. These cultural norms systematically deplete the cognitive resources that the business depends upon, creating an environment where the hardest-working people are often the most cognitively impaired."
+      "Financial services operates at the intersection of high stakes and high speed. A trading desk makes thousands of decisions daily. An M&A team works hundred-hour weeks approaching close. In each case, the quality of thinking is not incidental to the work — it is the work.",
+      "The industry has always known sharp minds matter, but has never had tools to measure or manage them. Firms invest heavily in hiring the best people, then subject them to conditions that systematically erode their capabilities. Sleep deprivation, decision fatigue, and accumulated stress degrade judgement in ways that are invisible until losses appear.",
+      "Traditional culture makes it worse. Long hours are worn as badges of honour. Visible tiredness signals commitment. Taking recovery time suggests weakness. These norms drain the very mental resources the business depends on.",
     ]
   },
-
-  // Why Existing Solutions Fail
   whyExistingSolutionsFail: {
-    title: "Financial services wellness has been compliance theatre",
+    title: "Financial services wellness has been compliance box-ticking",
     failures: [
-      {
-        point: "EAP programmes address crisis, not performance",
-        explanation: "Employee assistance programmes are designed for acute mental health intervention, not cognitive performance optimisation. They activate after problems become severe, far too late for preventative value."
-      },
-      {
-        point: "Wellness offerings signal weakness in competitive cultures",
-        explanation: "In environments where exhaustion signals commitment, engaging with wellness programmes can be career-limiting. The people who most need support are least likely to access it."
-      },
-      {
-        point: "No connection between cognitive state and P&L",
-        explanation: "Leadership cares about performance metrics. Wellness programmes exist in a parallel universe with no demonstrated connection to trading returns, deal outcomes, or risk management quality."
-      },
-      {
-        point: "Annual surveys miss the cadence of financial markets",
-        explanation: "Earnings seasons, quarter-end closes, and market volatility create cognitive patterns that unfold over days and weeks. Annual or quarterly surveys cannot capture these dynamics."
-      },
-      {
-        point: "Generic interventions ignore financial services rhythms",
-        explanation: "The cognitive demands of a trading desk during market opens differ fundamentally from those of a risk committee meeting. Generic wellness programmes offer the same content regardless of context."
-      },
-      {
-        point: "Regulatory compliance has consumed wellness budgets",
-        explanation: "Since 2008, compliance costs have grown dramatically. Wellness investments have not kept pace, leaving firms with increasingly underpowered programmes for increasingly demanding environments."
-      }
+      { point: "Employee assistance programmes address crisis, not performance", explanation: "EAPs are designed for acute mental health support, not daily performance. They activate after problems become severe — far too late." },
+      { point: "Engaging with wellness signals weakness", explanation: "In competitive environments where tiredness signals commitment, using wellness programmes can feel career-limiting." },
+      { point: "No link between health and financial results", explanation: "Leadership cares about performance numbers. Wellness exists in a parallel universe with no proven connection to trading returns or deal outcomes." },
+      { point: "Annual surveys miss market rhythms", explanation: "Earnings seasons, quarter-end closes, and market volatility create patterns that unfold over days and weeks. Annual surveys cannot capture this." },
     ]
   },
-
-  // How NeuroState Applies
   howNeuroStateApplies: {
-    title: "Decision-quality infrastructure for financial performance",
+    title: "Decision-quality tools for financial performance",
     paragraphs: [
-      "NeuroState treats cognitive performance as the core asset it is in financial services. Rather than wellness as a benefit, the platform provides infrastructure for managing decision quality as a competitive advantage. The system measures objective cognitive state and correlates it with performance outcomes, creating visibility into a relationship that has always existed but never been quantified.",
-      "The platform is designed for financial services privacy and performance requirements. Data sovereignty options address regulatory concerns. Integration with trading and deal management systems enables contextual recommendations. The competitive sensitivity of cognitive data is recognised and protected with enterprise-grade security.",
-      "Real-time intervention distinguishes NeuroState from traditional wellness. During high-stakes periods like earnings season or deal closing, the system provides in-the-moment recommendations calibrated to individual patterns. Rather than generic advice to get more sleep, specific protocols address the actual cognitive demands of the moment."
+      "NeuroState treats mental sharpness as the core asset it is in financial services. The platform measures real health signals and correlates them with performance outcomes, making visible a relationship that has always existed but never been measured.",
+      "During high-stakes periods like earnings season or deal closing, the system provides specific support calibrated to individual patterns. Not generic advice to 'get more sleep', but practical plans that address the actual demands of the moment."
     ],
     workflows: [
-      {
-        title: "Trading desk rotation optimisation",
-        description: "Design trading schedules that align peak cognitive performance with market conditions. Rotate coverage to prevent cumulative fatigue during volatile periods. Track decision quality metrics alongside P&L."
-      },
-      {
-        title: "Deal sprint cognitive protection",
-        description: "During intensive deal periods, monitor team cognitive state and surface targeted interventions. Identify when fatigue threatens quality and recommend specific recovery protocols. Protect the decision-making that determines outcomes."
-      },
-      {
-        title: "Regulatory deadline preparation",
-        description: "Build cognitive reserves ahead of filing deadlines and audits. Model the cognitive load of compliance activities and distribute work to prevent quality degradation under time pressure."
-      },
-      {
-        title: "Client presentation optimisation",
-        description: "Ensure investment committee members and client-facing professionals are operating at peak cognitive capacity for high-stakes presentations. Schedule preparation and recovery around critical moments."
-      }
+      { title: "Trading desk scheduling", description: "Design trading schedules that align peak sharpness with market conditions. Rotate coverage to prevent building tiredness during volatile periods." },
+      { title: "Deal sprint support", description: "During intensive deal periods, track team health and provide targeted recovery plans. Protect the decision quality that determines outcomes." },
+      { title: "Regulatory deadline preparation", description: "Build energy reserves ahead of filing deadlines and audits." },
+      { title: "Client presentation readiness", description: "Make sure client-facing professionals are at their sharpest for high-stakes presentations." }
     ]
   },
-
-  // Relevant Signals
   relevantSignals: [
-    {
-      name: "Decision fatigue markers",
-      description: "Physiological indicators of cognitive depletion during sustained decision-making, including HRV decline, sleep architecture changes, and attention consistency metrics.",
-      importance: "Trading and investment decisions made under fatigue show measurably different characteristics. Early detection of decision fatigue enables intervention before it affects outcomes."
-    },
-    {
-      name: "Market hours recovery patterns",
-      description: "Tracks cognitive recovery during non-trading hours, including sleep quality, evening HRV, and morning readiness indicators.",
-      importance: "Sustainable trading performance requires effective recovery between sessions. Many traders who appear fine during market hours are accumulating irrecoverable debt."
-    },
-    {
-      name: "Volatility stress response",
-      description: "Measures individual physiological response to market volatility events, capturing stress activation and recovery patterns during and after high-volatility periods.",
-      importance: "Different individuals respond differently to volatility. Understanding individual patterns enables role assignment and support calibrated to actual stress tolerance."
-    },
-    {
-      name: "Regulatory load accumulation",
-      description: "Composite signal tracking the cognitive overhead of compliance activities, including time spent, complexity, and impact on core work capacity.",
-      importance: "Compliance burden is often invisible until it manifests as performance degradation. Quantifying this load supports staffing decisions and process improvement."
-    },
-    {
-      name: "Deal intensity cognitive impact",
-      description: "Tracks cognitive markers during transaction sprints, including sleep, stress, and recovery patterns during intensive deal periods.",
-      importance: "M&A and capital markets transactions create extreme cognitive demands. Visibility into impact enables protective interventions during the periods that matter most."
-    },
-    {
-      name: "Client interaction quality indicators",
-      description: "Measures cognitive state before and during client interactions, correlating with relationship outcomes and client satisfaction metrics.",
-      importance: "Client relationships depend on cognitive presence and quality attention. Ensuring optimal state for critical interactions protects revenue and relationships."
-    }
+    { name: "Decision fatigue markers", description: "Health indicators that show when sustained decision-making is degrading judgement quality.", importance: "Decisions made when tired show measurably different characteristics. Early detection means better outcomes." },
+    { name: "Market hours recovery", description: "How well traders and analysts recover during non-trading hours.", importance: "Sustainable trading performance requires effective recovery between sessions." },
+    { name: "Volatility stress response", description: "How individuals respond physically to market volatility events.", importance: "Different people handle volatility differently. Understanding patterns enables better role assignment and support." },
   ],
-
-  // Executive Outcomes
   executiveOutcomes: [
-    {
-      title: "Improved risk-adjusted returns",
-      description: "Decisions made under optimal cognitive conditions show different characteristics than those made under fatigue. Protecting decision quality directly affects portfolio and trading performance."
-    },
-    {
-      title: "Reduced operational risk",
-      description: "Cognitive fatigue is a contributing factor in operational failures, compliance errors, and reputational incidents. Managing cognitive capacity is risk management."
-    },
-    {
-      title: "Senior talent retention",
-      description: "Experienced professionals carry irreplaceable institutional knowledge and client relationships. Protecting their cognitive sustainability protects firm value."
-    },
-    {
-      title: "Regulatory examination readiness",
-      description: "Demonstrating systematic attention to employee cognitive health increasingly matters in regulatory examinations and stakeholder assessments."
-    }
+    { title: "Better risk-adjusted returns", description: "Decisions made when people are sharp look different from those made when tired. Protecting decision quality directly affects performance." },
+    { title: "Fewer operational errors", description: "Tiredness contributes to compliance errors and operational failures. Managing team health is risk management." },
+    { title: "Keep senior talent", description: "Experienced professionals carry irreplaceable knowledge and client relationships. Protecting their health protects firm value." },
+    { title: "Regulatory readiness", description: "Demonstrating systematic attention to employee health increasingly matters in regulatory examinations." }
   ],
-
   challenges: [
-    { title: "Decision fatigue in volatile markets", description: "Sustained market volatility creates chronic cognitive load that degrades judgment quality over time, often without visible warning signs." },
-    { title: "Regulatory cognitive burden", description: "Increasing compliance requirements add persistent cognitive overhead that compounds with core responsibilities." },
-    { title: "Peak season burnout", description: "Earnings seasons, year-end closes, and deal cycles create predictable but poorly managed cognitive peaks with lasting impact." },
-    { title: "Client entertainment demands", description: "Relationship maintenance activities add cognitive load beyond core work responsibilities, particularly for senior professionals." },
-    { title: "Global market coordination", description: "24-hour markets and global teams create chronic circadian disruption for professionals managing cross-timezone responsibilities." },
-    { title: "Competitive culture dynamics", description: "Signalling exhaustion as commitment systematically depletes the cognitive resources that competitive advantage depends upon." }
+    { title: "Decision fatigue in volatile markets", description: "Sustained market volatility creates chronic mental load that degrades judgement over time, often without visible warning." },
+    { title: "Regulatory burden", description: "Growing compliance requirements add persistent mental overhead on top of core responsibilities." },
+    { title: "Peak season burnout", description: "Earnings seasons, year-end closes, and deal cycles create predictable but poorly managed pressure peaks." },
+    { title: "Competitive culture norms", description: "Signalling tiredness as commitment systematically drains the mental resources that competitive advantage depends on." },
   ],
   capabilities: [
-    { icon: Brain, title: "Decision quality correlation", description: "Connect cognitive state metrics to decision outcomes for continuous performance optimisation across trading, investment, and risk functions." },
-    { icon: AlertTriangle, title: "Risk-adjusted scheduling", description: "Automatically align high-stakes decisions with optimal cognitive windows based on individual and team patterns." },
-    { icon: Clock, title: "Market hours optimisation", description: "Customised protocols for trading hours, deal sprints, and extended coverage periods calibrated to financial services rhythms." },
-    { icon: Shield, title: "Compliance load modelling", description: "Quantify cognitive cost of regulatory requirements and optimise workflow design to minimise impact on core performance." },
-    { icon: BarChart3, title: "Performance attribution", description: "Connect cognitive metrics to business outcomes, demonstrating ROI in language that resonates with financial leadership." },
-    { icon: Target, title: "Client interaction preparation", description: "Ensure optimal cognitive state for high-stakes client meetings and presentations." }
+    { icon: Brain, title: "Decision quality tracking", description: "Connect health data to decision outcomes for continuous performance improvement across trading and investment teams." },
+    { icon: AlertTriangle, title: "Smart scheduling", description: "Align high-stakes decisions with optimal sharpness windows based on individual patterns." },
+    { icon: Clock, title: "Market hours support", description: "Custom recovery plans for trading hours, deal sprints, and extended coverage periods." },
+    { icon: Shield, title: "Compliance load tracking", description: "See the real mental cost of regulatory requirements and design work to minimise the impact." },
+    { icon: BarChart3, title: "Financial attribution", description: "Connect health data to business outcomes in language that resonates with financial leadership." },
+    { icon: Target, title: "Client meeting preparation", description: "Make sure teams are at their best for high-stakes client interactions." }
   ],
   outcomes: [
-    { metric: "29%", label: "Reduced errors" },
+    { metric: "29%", label: "Fewer errors" },
     { metric: "18%", label: "Better decisions" },
     { metric: "23%", label: "Faster recovery" },
     { metric: "2.8x", label: "ROI Year 1" },
   ],
   useCases: [
-    { title: "Trading desk performance", description: "Optimise trader rotation and recovery protocols to sustain decision quality across market hours and volatility events." },
-    { title: "Deal team capacity", description: "Model cognitive load of concurrent transactions and prevent quality degradation on critical deals during intensive periods." },
-    { title: "Audit season preparation", description: "Build cognitive reserves ahead of predictable high-intensity periods to maintain quality when it matters most." },
-    { title: "Leadership resilience", description: "Protect executive cognitive capacity during high-stakes strategic periods including board meetings and regulatory examinations." },
-    { title: "Risk committee effectiveness", description: "Ensure committee members are operating at optimal cognitive capacity for the complex synthesis that risk oversight requires." },
-    { title: "Client relationship protection", description: "Maintain the cognitive quality required for relationship management that drives revenue and retention." }
+    { title: "Trading desk performance", description: "Design rotation and recovery plans to sustain decision quality across market hours." },
+    { title: "Deal team capacity", description: "Manage team health during concurrent transactions to prevent quality drops on critical deals." },
+    { title: "Audit season preparation", description: "Build energy reserves ahead of predictable high-intensity periods." },
+    { title: "Leadership resilience", description: "Protect executive sharpness during high-stakes strategic periods." },
   ],
   defaultIndustry: "financial-services" as const,
 };

@@ -4,167 +4,79 @@ import { Building2, Brain, Shield, Scale, Clock, Users, AlertTriangle, Target } 
 const industryData = {
   name: "SaaS - Enterprise",
   slug: "saas-enterprise",
-  headline: "Performance infrastructure for scaled software organisations.",
-  subheadline: "Enterprise software teams face unique cognitive demands: complex systems, high-stakes deployments, and cross-functional coordination. NeuroState provides the visibility to sustain excellence at scale.",
+  headline: "Keep large software teams healthy and productive at scale.",
+  subheadline: "Enterprise software teams face unique pressures: complex systems, high-stakes deployments, and endless coordination. NeuroState gives you the visibility to sustain performance without burning people out.",
   heroStats: [
     { value: "15%", label: "Average turnover" },
     { value: "15%", label: "Productivity loss" },
     { value: "2.1x", label: "Typical ROI" },
   ],
-
-  // Industry Problem Deep Dive
   industryProblem: {
     title: "The hidden cost of enterprise complexity",
     paragraphs: [
-      "Enterprise SaaS organisations operate in a fundamentally different cognitive environment from their high-growth counterparts. The systems are more complex, the stakes of failure are higher, and the coordination requirements span dozens or hundreds of people. This complexity creates cognitive demands that are invisible to traditional management but profoundly affect performance.",
-      "A senior engineer maintaining a legacy billing system whilst contributing to a platform modernisation carries cognitive load that cannot be measured by lines of code or story points. The mental overhead of holding multiple complex systems in working memory, anticipating failure modes, and coordinating with distributed teams creates persistent strain that erodes over quarters and years.",
-      "On-call rotations exemplify the problem. The visible cost is the hours worked. The invisible cost is the recovery debt accumulated from interrupted sleep, the cognitive vigilance that persists even during off hours, and the gradual depletion that transforms engaged engineers into candidates for departure. Most organisations have no visibility into this accumulation until experienced contributors leave.",
-      "Cross-functional coordination adds another layer. Enterprise deployments require alignment across engineering, product, security, compliance, and customer success. Each interaction carries cognitive overhead. As organisations grow, this overhead scales super-linearly: more people means exponentially more coordination, not just linear increases in capacity."
+      "Enterprise software teams operate differently from startups. The systems are more complex, the stakes of failure are higher, and coordinating across dozens or hundreds of people creates mental demands that are invisible to traditional management.",
+      "A senior engineer maintaining a legacy billing system while contributing to a platform modernisation carries mental weight that cannot be measured by story points. Holding multiple complex systems in working memory, anticipating failure modes, and coordinating with distributed teams creates persistent strain that builds over months and years.",
+      "On-call rotations are a perfect example. The visible cost is the hours worked. The invisible cost is the interrupted sleep, the constant alertness even during off-hours, and the gradual exhaustion that turns engaged engineers into candidates for departure.",
     ]
   },
-
-  // Why Existing Solutions Fail
   whyExistingSolutionsFail: {
-    title: "Enterprise wellness programmes were not built for technical complexity",
+    title: "Enterprise wellness was not built for technical teams",
     failures: [
-      {
-        point: "Generic programmes ignore technical cognitive demands",
-        explanation: "The cognitive load of debugging a distributed system differs categorically from other knowledge work. Enterprise wellness programmes offer meditation and fitness stipends, but these do not address the specific patterns of depletion that technical work creates."
-      },
-      {
-        point: "Annual engagement surveys miss on-call impact",
-        explanation: "On-call rotations create cognitive patterns that unfold over weeks and months. Annual surveys cannot capture the accumulation of interrupted sleep, the anxiety of potential incidents, or the recovery debt that compounds across rotations."
-      },
-      {
-        point: "No visibility into cross-functional cognitive cost",
-        explanation: "Coordination overhead is invisible to traditional management. When an engineer attends five cross-functional meetings in a day, the productivity cost appears on no dashboard. Traditional tools track hours, not cognitive depletion."
-      },
-      {
-        point: "One-size-fits-all interventions fail specialised roles",
-        explanation: "A platform engineer, a security specialist, and a customer success manager face entirely different cognitive demands. Generic wellness offerings treat them as interchangeable, missing the opportunity for targeted, effective intervention."
-      },
-      {
-        point: "No integration with technical workflows",
-        explanation: "Enterprise engineers live in Jira, Slack, and their IDEs. Wellness programmes that exist in separate applications fail to integrate with actual work patterns and therefore fail to influence them."
-      },
-      {
-        point: "Privacy concerns are amplified in enterprise environments",
-        explanation: "In competitive enterprise environments, signalling stress or fatigue can feel career-limiting. Without robust privacy guarantees, the people who most need support are least likely to engage with wellness tracking."
-      }
+      { point: "Generic programmes miss technical demands", explanation: "Debugging a distributed system is nothing like other knowledge work. Meditation apps and fitness stipends do not address how technical work drains people." },
+      { point: "Annual surveys miss on-call impact", explanation: "On-call creates patterns that unfold over weeks. Annual surveys cannot capture interrupted sleep, incident anxiety, or the recovery debt that builds across rotations." },
+      { point: "Coordination overhead is invisible", explanation: "When an engineer sits in five cross-functional meetings in a day, the productivity cost appears nowhere. Traditional tools track hours, not exhaustion." },
+      { point: "Privacy concerns stop adoption", explanation: "In competitive environments, signalling tiredness can feel career-limiting. Without strong privacy guarantees, the people who need help most will not engage." },
     ]
   },
-
-  // How NeuroState Applies
   howNeuroStateApplies: {
-    title: "Cognitive infrastructure designed for enterprise technical operations",
+    title: "Health tools designed for enterprise engineering",
     paragraphs: [
-      "NeuroState addresses the specific cognitive demands of enterprise software organisations with infrastructure that understands technical work. Rather than generic wellness content, the system provides targeted interventions calibrated to the patterns of engineering, product, and customer-facing roles. On-call schedules, release cycles, and incident response all inform the cognitive models.",
-      "The platform creates visibility at three levels. Individual contributors receive personalised protocols that account for their role, their current load, and their recovery patterns. Managers see team-level aggregates that highlight emerging risks without exposing individual data. Leadership gains organisational visibility into cognitive capacity as a strategic resource that can be planned and optimised.",
-      "Integration with enterprise workflows is fundamental. NeuroState connects with the tools teams actually use: calendar systems, on-call rotations, deployment pipelines. This integration enables proactive recommendations. Before assigning an engineer to on-call during a major release, the system can surface potential cognitive conflicts."
+      "NeuroState understands technical work. On-call schedules, release cycles, and incident response all inform the health models. Instead of generic wellness content, teams get targeted support calibrated to their actual working patterns.",
+      "The platform creates visibility at three levels. Individuals get personalised plans for their role. Managers see team-level trends without accessing individual data. Leadership gets an organisational view of team health as a strategic resource.",
     ],
     workflows: [
-      {
-        title: "Release cycle cognitive mapping",
-        description: "Before major releases, map the cognitive load across the entire cycle: development, testing, staging, and post-deployment monitoring. Identify potential bottlenecks and adjust staffing or timing accordingly."
-      },
-      {
-        title: "On-call rotation optimisation",
-        description: "Design rotation schedules that minimise cumulative cognitive impact. Balance coverage requirements with recovery needs. Track the true cost of on-call and build it into capacity planning."
-      },
-      {
-        title: "Incident response recovery",
-        description: "After major incidents, monitor recovery trajectories for responding engineers. Ensure adequate cognitive restoration before the next high-stakes period. Prevent the cascade of incidents that often follows unrecovered teams."
-      },
-      {
-        title: "Platform migration sustainability",
-        description: "Multi-year infrastructure modernisation projects create sustained cognitive demands. Track team capacity across the migration lifecycle and calibrate pace to prevent mid-project burnout."
-      }
+      { title: "Release cycle planning", description: "Before major releases, map the energy demands across the whole cycle. Spot bottlenecks and adjust staffing or timing." },
+      { title: "On-call rotation design", description: "Design rotations that minimise cumulative tiredness. Balance coverage with recovery needs." },
+      { title: "Post-incident recovery", description: "After major incidents, track recovery and make sure teams are properly rested before the next high-stakes period." },
+      { title: "Platform migration pacing", description: "Multi-year modernisation projects drain teams. Track capacity across the migration and adjust pace to prevent mid-project burnout." }
     ]
   },
-
-  // Relevant Signals
   relevantSignals: [
-    {
-      name: "On-call recovery patterns",
-      description: "Tracks sleep quality, HRV, and cognitive markers during and after on-call rotations. Identifies individuals accumulating recovery debt from interrupted sleep and sustained vigilance.",
-      importance: "On-call creates hidden cognitive costs that compound over time. Visibility into recovery patterns enables rotation optimisation and prevents the burnout that drives experienced engineers to leave."
-    },
-    {
-      name: "Deep work availability",
-      description: "Measures the presence and duration of uninterrupted focus blocks essential for complex technical work. Derived from calendar analysis and application context switching.",
-      importance: "Enterprise environments naturally fragment attention. Protecting deep work windows is essential for the complex problem-solving that enterprise systems require."
-    },
-    {
-      name: "Cross-functional coordination load",
-      description: "Quantifies the cognitive overhead of meetings, communications, and alignment activities across teams and functions.",
-      importance: "As organisations scale, coordination overhead grows super-linearly. Visibility into this load enables structural interventions that reduce cognitive tax without sacrificing alignment."
-    },
-    {
-      name: "Deployment stress markers",
-      description: "Physiological indicators of stress during and around major deployments, including HRV changes, sleep disruption, and recovery patterns post-release.",
-      importance: "Release cycles create predictable stress peaks. Understanding individual and team responses enables better scheduling and support during high-stakes periods."
-    },
-    {
-      name: "Technical debt cognitive burden",
-      description: "Composite signal tracking the mental overhead of working with legacy systems, including context switching frequency and sustained attention demands.",
-      importance: "Technical debt creates invisible cognitive load beyond the time spent on maintenance. Quantifying this burden supports investment decisions in modernisation."
-    },
-    {
-      name: "Team cognitive synchrony",
-      description: "Measures alignment of cognitive peaks across team members, indicating optimal windows for collaborative work versus individual focus time.",
-      importance: "Distributed teams often schedule collaboration during cognitive troughs. Optimising synchrony improves meeting quality and preserves focus time."
-    }
+    { name: "On-call recovery", description: "Sleep quality and energy levels during and after on-call rotations.", importance: "On-call creates hidden tiredness that builds up over time. Visibility helps design better rotations." },
+    { name: "Deep work availability", description: "How much uninterrupted focus time engineers actually get for complex technical work.", importance: "Enterprise environments naturally fragment attention. Protecting focus time protects work quality." },
+    { name: "Meeting overhead", description: "The mental cost of coordination across teams and functions.", importance: "As organisations grow, meeting load grows faster than headcount. Seeing the real cost enables structural changes." },
   ],
-
-  // Executive Outcomes
   executiveOutcomes: [
-    {
-      title: "Reduced incident frequency",
-      description: "Cognitive fatigue is a leading cause of incidents in complex systems. Maintaining cognitive capacity across operations teams directly reduces error rates and system failures."
-    },
-    {
-      title: "Improved senior engineer retention",
-      description: "The most experienced engineers carry disproportionate cognitive load. Visibility into their capacity enables targeted protection of your most valuable and hardest-to-replace talent."
-    },
-    {
-      title: "Accurate capacity planning",
-      description: "Move beyond headcount-based planning to true capacity modelling. Understand how much complex work your organisation can actually sustain, not just how many people are employed."
-    },
-    {
-      title: "M&A integration success",
-      description: "Acquisitions create massive cognitive disruption. Visibility into the cognitive impact of integration enables calibrated pacing that protects productivity through transitions."
-    }
+    { title: "Fewer incidents", description: "Tired engineers make mistakes in complex systems. Keeping teams healthy directly reduces errors and outages." },
+    { title: "Keep senior engineers", description: "Your most experienced engineers carry the most weight. Visibility into how they are doing means you can protect your hardest-to-replace talent." },
+    { title: "Better capacity planning", description: "Move beyond headcount to understand how much complex work your team can actually sustain." },
+    { title: "Smoother M&A integration", description: "Acquisitions are mentally exhausting. Visibility into the team impact helps pace integration to maintain productivity." }
   ],
-
   challenges: [
-    { title: "Cross-functional cognitive strain", description: "Enterprise deployments require coordination across product, engineering, security, and customer success, each with different cognitive demands and recovery patterns." },
-    { title: "On-call fatigue", description: "24/7 support rotations create recovery debt that compounds across quarters, degrading decision quality and driving turnover among experienced engineers." },
-    { title: "Technical debt stress", description: "Maintaining legacy systems whilst building new features creates chronic cognitive overload for senior engineers who must hold multiple complex systems in working memory." },
-    { title: "Meeting proliferation", description: "As organisations grow, coordination overhead scales super-linearly. Engineers spend increasing time in meetings, fragmenting focus and depleting cognitive resources." },
-    { title: "Incident response burden", description: "Major incidents create acute cognitive stress that requires significant recovery. Without visibility, teams return to high-stakes work before cognitive restoration is complete." },
-    { title: "Knowledge concentration risk", description: "Critical system knowledge often concentrates in individuals carrying unsustainable cognitive loads. Their departure creates knowledge loss and operational risk." }
+    { title: "Cross-functional strain", description: "Enterprise deployments need coordination across product, engineering, security, and customer success — each with different demands." },
+    { title: "On-call fatigue", description: "24/7 support rotations create recovery debt that builds up over quarters, driving turnover among experienced engineers." },
+    { title: "Legacy system burden", description: "Maintaining old systems while building new ones creates chronic overload for senior engineers." },
+    { title: "Meeting overload", description: "As teams grow, coordination time grows even faster. Engineers spend more time in meetings, less time doing deep work." },
   ],
   capabilities: [
-    { icon: Brain, title: "Function-specific baselines", description: "Tailored cognitive profiles for engineering, product, and customer-facing roles with role-specific interventions calibrated to their unique patterns of work and depletion." },
-    { icon: Shield, title: "On-call impact analysis", description: "Quantify the true cognitive cost of support rotations and optimise scheduling for sustainable coverage without hidden capacity costs." },
-    { icon: Scale, title: "Workload balancing", description: "Algorithmic recommendations for task distribution based on real-time team cognitive capacity, not just availability in calendars." },
-    { icon: Clock, title: "Deep work protection", description: "Identify and protect optimal focus windows for complex technical work across time zones and team configurations." },
-    { icon: Users, title: "Coordination overhead tracking", description: "Measure the cognitive cost of cross-functional alignment and surface opportunities to reduce tax without sacrificing outcomes." },
-    { icon: Target, title: "Release readiness assessment", description: "Evaluate team cognitive state before major deployments to inform timing and risk decisions." }
+    { icon: Brain, title: "Role-specific health profiles", description: "Tailored support for engineering, product, and customer-facing roles based on their actual working patterns." },
+    { icon: Shield, title: "On-call impact tracking", description: "See the real health cost of support rotations and design schedules for sustainable coverage." },
+    { icon: Scale, title: "Workload balancing", description: "Recommendations for distributing work based on real team capacity, not just calendar availability." },
+    { icon: Clock, title: "Deep work protection", description: "Identify and protect the best focus windows for complex technical work." },
+    { icon: Users, title: "Coordination cost tracking", description: "Measure the real cost of cross-functional alignment and find ways to reduce it." },
+    { icon: Target, title: "Release readiness check", description: "Assess team health before major deployments to inform timing decisions." }
   ],
   outcomes: [
-    { metric: "34%", label: "Reduced burnout" },
+    { metric: "34%", label: "Less burnout" },
     { metric: "19%", label: "Lower turnover" },
     { metric: "22%", label: "Better retention" },
     { metric: "2.1x", label: "ROI Year 1" },
   ],
   useCases: [
-    { title: "Major release preparation", description: "Model cognitive load across the release cycle and identify optimal timing for feature freezes and deployment windows." },
-    { title: "Incident response recovery", description: "Track recovery trajectories after major incidents and ensure teams return to baseline before next high-stakes period." },
-    { title: "M&A integration", description: "Monitor cognitive impact of organisational change and calibrate integration pace to maintain productivity through transition." },
-    { title: "Platform migration", description: "Sustain team performance through multi-year infrastructure modernisation efforts with visibility into long-term cognitive sustainability." },
-    { title: "On-call optimisation", description: "Design rotation schedules that balance coverage requirements with cognitive recovery needs based on actual impact data." },
-    { title: "Technical leadership resilience", description: "Protect architects and principal engineers whose cognitive capacity is essential to system stability and team effectiveness." }
+    { title: "Major release preparation", description: "Check team energy before committing to release timelines and deployment windows." },
+    { title: "Incident recovery", description: "Track recovery after major incidents and make sure teams are rested before the next high-stakes period." },
+    { title: "M&A integration", description: "Monitor team health during organisational change and pace integration to maintain productivity." },
+    { title: "On-call optimisation", description: "Design rotation schedules that balance coverage with actual recovery needs." },
   ],
   defaultIndustry: "saas-enterprise" as const,
 };
