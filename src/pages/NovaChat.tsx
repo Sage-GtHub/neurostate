@@ -72,7 +72,13 @@ export default function NovaChat() {
   });
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const conversationsRef = useRef<Conversation[]>([]);
   const { toast: showToast } = useToast();
+
+  // Keep ref in sync
+  useEffect(() => {
+    conversationsRef.current = conversations;
+  }, [conversations]);
 
   const currentConversation = conversations.find(c => c.id === currentConversationId);
   const messages = currentConversation?.messages || [];
@@ -128,122 +134,161 @@ export default function NovaChat() {
     setCurrentConversationId(newConv.id);
   };
 
-  const updateConversation = (updater: (conv: Conversation) => Conversation) => {
-    setConversations(prev => prev.map(c => c.id === currentConversationId ? updater(c) : c));
-  };
-
-  const streamResponse = useCallback(async (userMsg: Message) => {
-    const requestId = `req_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
-    setDiagnostics(prev => ({ ...prev, requestId, streamingState: "connecting", lastError: null }));
-
-    const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-chat`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-      },
-      body: JSON.stringify({
-        messages: [
-          ...messages.map(({ role, content }) => ({ role, content })),
-          { role: userMsg.role, content: userMsg.content }
-        ],
-      }),
-    });
-
-    if (!response.ok) {
-      const status = response.status;
-      let errorMsg = "Failed to get response";
-      if (status === 429) errorMsg = "Rate limit exceeded. Please try again in a moment.";
-      if (status === 402) errorMsg = "Service temporarily unavailable.";
-      setDiagnostics(prev => ({ ...prev, streamingState: "error", lastError: { message: errorMsg, timestamp: new Date() } }));
-      throw new Error(errorMsg);
-    }
-
-    if (!response.body) {
-      const errorMsg = "No response body";
-      setDiagnostics(prev => ({ ...prev, streamingState: "error", lastError: { message: errorMsg, timestamp: new Date() } }));
-      throw new Error(errorMsg);
-    }
-
-    setDiagnostics(prev => ({ ...prev, streamingState: "streaming" }));
-
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let buffer = "";
-    let content = "";
-
-    // Add empty assistant message
-    updateConversation(conv => ({
-      ...conv,
-      messages: [...conv.messages, { role: "assistant", content: "", timestamp: new Date().toISOString() }],
-    }));
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-
-      buffer += decoder.decode(value, { stream: true });
-
-      let idx: number;
-      while ((idx = buffer.indexOf("\n")) !== -1) {
-        let line = buffer.slice(0, idx);
-        buffer = buffer.slice(idx + 1);
-
-        if (line.endsWith("\r")) line = line.slice(0, -1);
-        if (!line.startsWith("data: ")) continue;
-
-        const json = line.slice(6).trim();
-        if (json === "[DONE]") break;
-
-        try {
-          const parsed = JSON.parse(json);
-          const delta = parsed.choices?.[0]?.delta?.content;
-          if (delta) {
-            content += delta;
-            updateConversation(conv => {
-              const msgs = [...conv.messages];
-              msgs[msgs.length - 1] = { role: "assistant", content, timestamp: new Date().toISOString() };
-              return { ...conv, messages: msgs, updatedAt: new Date().toISOString() };
-            });
-          }
-        } catch {
-          buffer = line + "\n" + buffer;
-          break;
-        }
-      }
-    }
-
-    setDiagnostics(prev => ({ ...prev, streamingState: "complete" }));
-    return content;
-  }, [messages, updateConversation]);
-
   const handleSend = async (customMsg?: string) => {
     const text = customMsg || message.trim();
     if (!text || isLoading || !currentConversationId) return;
 
     const userMsg: Message = { role: "user", content: text, timestamp: new Date().toISOString() };
+    const convId = currentConversationId;
+
+    // Build the full message history BEFORE updating state to avoid stale closure
+    const currentMessages = conversationsRef.current.find(c => c.id === convId)?.messages || [];
+    const allMessages = [...currentMessages, userMsg];
     
-    updateConversation(conv => ({
-      ...conv,
-      messages: [...conv.messages, userMsg],
-      title: conv.messages.length === 0 ? text.slice(0, 30) + (text.length > 30 ? "..." : "") : conv.title,
+    // Update state with user message
+    setConversations(prev => prev.map(c => c.id === convId ? {
+      ...c,
+      messages: [...c.messages, userMsg],
+      title: c.messages.length === 0 ? text.slice(0, 30) + (text.length > 30 ? "..." : "") : c.title,
       updatedAt: new Date().toISOString(),
-    }));
+    } : c));
 
     setMessage("");
     setIsLoading(true);
 
+    const requestId = `req_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+    setDiagnostics(prev => ({ ...prev, requestId, streamingState: "connecting", lastError: null }));
+
     try {
-      await streamResponse(userMsg);
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-chat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+        },
+        body: JSON.stringify({
+          messages: allMessages.map(({ role, content }) => ({ role, content })),
+        }),
+      });
+
+      if (!response.ok) {
+        const status = response.status;
+        let errorMsg = "Failed to get response from Nova.";
+        if (status === 429) errorMsg = "Rate limit exceeded. Please wait a moment and try again.";
+        if (status === 402) errorMsg = "Service temporarily unavailable.";
+        
+        // Try to read error body
+        try {
+          const errBody = await response.json();
+          if (errBody?.error) errorMsg = errBody.error;
+        } catch {}
+
+        setDiagnostics(prev => ({ ...prev, streamingState: "error", lastError: { message: errorMsg, timestamp: new Date() } }));
+        throw new Error(errorMsg);
+      }
+
+      if (!response.body) {
+        setDiagnostics(prev => ({ ...prev, streamingState: "error", lastError: { message: "No response body", timestamp: new Date() } }));
+        throw new Error("No response body received.");
+      }
+
+      setDiagnostics(prev => ({ ...prev, streamingState: "streaming" }));
+
+      // Add empty assistant message
+      setConversations(prev => prev.map(c => c.id === convId ? {
+        ...c,
+        messages: [...c.messages, { role: "assistant" as const, content: "", timestamp: new Date().toISOString() }],
+      } : c));
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+      let content = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+
+        let idx: number;
+        while ((idx = buffer.indexOf("\n")) !== -1) {
+          let line = buffer.slice(0, idx);
+          buffer = buffer.slice(idx + 1);
+
+          if (line.endsWith("\r")) line = line.slice(0, -1);
+          if (line.startsWith(":") || line.trim() === "") continue;
+          if (!line.startsWith("data: ")) continue;
+
+          const json = line.slice(6).trim();
+          if (json === "[DONE]") break;
+
+          try {
+            const parsed = JSON.parse(json);
+            const delta = parsed.choices?.[0]?.delta?.content;
+            if (delta) {
+              content += delta;
+              const updatedContent = content;
+              setConversations(prev => prev.map(c => {
+                if (c.id !== convId) return c;
+                const msgs = [...c.messages];
+                const lastMsg = msgs[msgs.length - 1];
+                if (lastMsg && lastMsg.role === "assistant") {
+                  msgs[msgs.length - 1] = { ...lastMsg, content: updatedContent };
+                }
+                return { ...c, messages: msgs, updatedAt: new Date().toISOString() };
+              }));
+            }
+          } catch {
+            // Incomplete JSON — put it back and wait for more data
+            buffer = line + "\n" + buffer;
+            break;
+          }
+        }
+      }
+
+      // Final flush for any remaining buffered data
+      if (buffer.trim()) {
+        for (let raw of buffer.split("\n")) {
+          if (!raw) continue;
+          if (raw.endsWith("\r")) raw = raw.slice(0, -1);
+          if (raw.startsWith(":") || raw.trim() === "") continue;
+          if (!raw.startsWith("data: ")) continue;
+          const jsonStr = raw.slice(6).trim();
+          if (jsonStr === "[DONE]") continue;
+          try {
+            const parsed = JSON.parse(jsonStr);
+            const delta = parsed.choices?.[0]?.delta?.content;
+            if (delta) {
+              content += delta;
+              const updatedContent = content;
+              setConversations(prev => prev.map(c => {
+                if (c.id !== convId) return c;
+                const msgs = [...c.messages];
+                const lastMsg = msgs[msgs.length - 1];
+                if (lastMsg && lastMsg.role === "assistant") {
+                  msgs[msgs.length - 1] = { ...lastMsg, content: updatedContent };
+                }
+                return { ...c, messages: msgs, updatedAt: new Date().toISOString() };
+              }));
+            }
+          } catch { /* ignore partial leftovers */ }
+        }
+      }
+
+      setDiagnostics(prev => ({ ...prev, streamingState: "complete", messageCount: prev.messageCount + 1 }));
+
     } catch (error) {
       showToast({
         title: "Error",
         description: error instanceof Error ? error.message : "Failed to send message",
         variant: "destructive",
       });
-      updateConversation(conv => ({
-        ...conv,
-        messages: conv.messages.filter(m => m.content !== ""),
+      // Remove the empty assistant message if one was added
+      setConversations(prev => prev.map(c => {
+        if (c.id !== convId) return c;
+        const msgs = c.messages.filter(m => !(m.role === "assistant" && m.content === ""));
+        return { ...c, messages: msgs };
       }));
     } finally {
       setIsLoading(false);
@@ -267,8 +312,14 @@ export default function NovaChat() {
     const idx = messages.length - 1 - lastUserIdx;
     const lastUserMsg = messages[idx];
     
-    updateConversation(conv => ({ ...conv, messages: conv.messages.slice(0, idx) }));
-    setTimeout(() => handleSend(lastUserMsg.content), 100);
+    // Remove messages from the last user message onwards
+    setConversations(prev => prev.map(c => c.id === currentConversationId 
+      ? { ...c, messages: c.messages.slice(0, idx) } 
+      : c
+    ));
+    
+    // Small delay to let state settle, then resend
+    setTimeout(() => handleSend(lastUserMsg.content), 150);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
