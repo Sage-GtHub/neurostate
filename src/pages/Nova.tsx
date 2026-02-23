@@ -184,8 +184,8 @@ export default function Nova() {
     return (
       <NovaSwipeWrapper>
         <SEO 
-          title="Nova AI | Cognitive Performance Forecasting Engine"
-          description="Nova is a multi-model AI engine that forecasts cognitive performance using wearable data, behavioural signals, and predictive analytics."
+          title="Nova AI | Your Personal Health Coach | NeuroState"
+          description="Nova is your AI health coach. It reads your wearable data, tracks sleep, recovery, and energy, and gives you clear plans to feel and perform better."
         />
         <div className="min-h-screen bg-background">
           <NovaNav />
@@ -203,7 +203,7 @@ export default function Nova() {
               </div>
               <h1 className="text-2xl sm:text-3xl font-medium text-foreground mb-4 tracking-tight">Welcome to Nova</h1>
               <p className="text-foreground/50 text-sm mb-10 leading-relaxed max-w-sm mx-auto">
-                Sign in to access your personalised AI performance dashboard with biometric tracking and adaptive protocols.
+                Sign in to access your personal health dashboard. Track your sleep, recovery, and energy — all in one place.
               </p>
               <Button 
                 onClick={() => navigate('/auth')} 
@@ -231,8 +231,8 @@ export default function Nova() {
   return (
     <NovaSwipeWrapper>
       <SEO 
-        title="Nova AI | Cognitive Performance Forecasting Engine"
-        description="Nova is a multi-model AI engine that forecasts cognitive performance using wearable data, behavioural signals, and predictive analytics."
+      title="Nova AI | Your Personal Health Coach | NeuroState"
+        description="Nova is your AI health coach. It reads your wearable data, tracks sleep, recovery, and energy, and gives you clear plans to feel and perform better."
       />
       
       <NovaOnboarding 

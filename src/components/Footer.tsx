@@ -87,7 +87,7 @@ export const Footer = () => {
             <div className="flex-1 lg:max-w-sm lg:ml-auto space-y-4">
               <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Newsletter</p>
               <p className="text-background/60 text-xs">
-                Insights on cognitive performance and workforce analytics.
+                Tips on team health, performance, and wellbeing.
               </p>
               <form onSubmit={handleNewsletterSignup} className="flex gap-2">
                 <Input
