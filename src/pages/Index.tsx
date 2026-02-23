@@ -731,10 +731,10 @@ const Index = () => {
               <ScrollReveal className="space-y-3 mb-8">
                 <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Integrations</span>
                 <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                  Connect everything. See everything.
+                  Works with what your team already uses
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-xl mx-auto">
-                  40+ integrations across wearables, calendars, and productivity tools, all normalised into a single cognitive model. We don't sell hardware; we connect to what your team already uses.
+                  40+ integrations across wearables, calendars, and work tools. We don't sell hardware — we connect to what your team already wears and uses.
                 </p>
               </ScrollReveal>
 
