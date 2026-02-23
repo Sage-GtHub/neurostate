@@ -501,8 +501,8 @@ const Index = () => {
 
                     <div className="grid grid-cols-3 gap-3 py-5">
                       {[
-                        { value: "74", label: "CCI Score", color: "text-primary", trend: "+3" },
-                        { value: "£41.8k", label: "Exposure", color: "text-amber-500", trend: "-12%" },
+                        { value: "74", label: "Team Health", color: "text-primary", trend: "+3" },
+                        { value: "£41.8k", label: "At Risk", color: "text-amber-500", trend: "-12%" },
                         { value: "3", label: "Actions", color: "text-foreground", trend: "pending" }
                       ].map((metric, i) => (
                         <motion.div 
