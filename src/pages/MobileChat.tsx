@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
 import { GuestChatWidget } from "@/components/GuestChatWidget";
 import logoIcon from "@/assets/neurostate-icon.svg";
+import { SEO } from "@/components/SEO";
 
 export default function MobileChat() {
   const [chatOpen, setChatOpen] = useState(false);
