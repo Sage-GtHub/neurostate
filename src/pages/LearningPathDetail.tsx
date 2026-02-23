@@ -192,6 +192,10 @@ const LearningPathDetail = () => {
 
   return (
     <div className="min-h-screen bg-background mobile-nav-padding">
+      <SEO 
+        title={`${path.title} | Learning Paths | NeuroState`}
+        description={`${path.description.substring(0, 140)}. ${path.duration_days}-day ${path.difficulty} course.`}
+      />
       <Header />
       
       <main className="container mx-auto px-4 py-12">

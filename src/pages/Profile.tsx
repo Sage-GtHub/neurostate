@@ -89,7 +89,7 @@ export default function Profile() {
 
   return (
     <>
-      <SEO title="Profile | NeuroState" description="Manage your account settings." />
+      <SEO title="Your Profile | Account Settings | NeuroState" description="Manage your NeuroState account, update personal details, and configure your cognitive performance preferences." noindex={true} />
       <Header />
       <main className="min-h-screen bg-background relative overflow-hidden">
         {/* Floating orbs */}

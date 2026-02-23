@@ -156,7 +156,7 @@ export default function NovaSettings() {
 
   return (
     <NovaSwipeWrapper>
-      <SEO title="Settings | Nova AI" description="Configure your Nova AI preferences." />
+      <SEO title="Nova AI Settings | Preferences & Notifications | NeuroState" description="Customise your Nova AI experience. Manage notification preferences, appearance settings, data export, and account configuration." noindex={true} />
       <div className="min-h-screen bg-background">
         <NovaNav />
         

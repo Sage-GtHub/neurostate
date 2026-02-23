@@ -178,6 +178,11 @@ export default function ProtocolDetail() {
 
   return (
     <div className="min-h-screen bg-ivory">
+      <SEO 
+        title={`${protocol.protocol_name} | Protocol Detail | NeuroState`}
+        description={`Track your ${protocol.protocol_name} protocol progress. Goal: ${protocol.goal}. ${protocol.products.length} products in your daily stack.`}
+        noindex={true}
+      />
       <NovaNav />
       
       <div className="border-b border-mist bg-ivory">

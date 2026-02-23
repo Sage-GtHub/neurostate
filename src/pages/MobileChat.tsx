@@ -10,6 +10,7 @@ export default function MobileChat() {
 
   return (
     <div className="min-h-screen bg-ivory flex flex-col">
+      <SEO title="Ask Nova AI | Mobile Health Assistant | NeuroState" description="Chat with Nova, your AI performance assistant. Get instant answers about supplements, protocols, and cognitive optimisation on mobile." noindex={true} />
       {/* Header */}
       <header className="border-b border-mist bg-ivory p-4">
         <div className="flex items-center justify-center gap-2">

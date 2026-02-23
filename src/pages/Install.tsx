@@ -56,6 +56,7 @@ const Install = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO title="Install Nova App | Offline Health Tracking | NeuroState" description="Install Nova as a progressive web app for offline access, instant loading, and native app experience. Available on iOS, Android, and desktop." noindex={true} />
       <Header />
       
       <main className="pt-24 pb-16">

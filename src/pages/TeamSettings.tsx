@@ -86,6 +86,7 @@ export default function TeamSettings() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO title="Organisation Settings | NeuroState" description="Manage your organisation's profile, domain verification, billing, and subscription settings in NeuroState." noindex={true} />
       <Header />
       <main className="container mx-auto px-4 py-8">
         <motion.div
