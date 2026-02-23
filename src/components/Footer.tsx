@@ -119,7 +119,7 @@ export const Footer = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
             >
-              <p className="text-[10px] uppercase tracking-[0.2em] text-background/40">Platform</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-background/40">Platform</p>
               <ul className="space-y-3">
                 {footerLinks.platform.map((link) => (
                   <li key={link.name}>
