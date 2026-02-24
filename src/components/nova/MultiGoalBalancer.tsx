@@ -215,7 +215,7 @@ export function MultiGoalBalancer() {
           )}
           <Button size="sm" variant="outline" onClick={runAnalysis} disabled={isAnalysing} className="gap-2">
             {isAnalysing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
-            Analyse Trade-offs
+            Analyse Goals
           </Button>
         </div>
       </div>
