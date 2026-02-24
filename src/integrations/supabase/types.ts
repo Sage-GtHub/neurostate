@@ -850,6 +850,7 @@ export type Database = {
           current_value: number | null
           goal_type: string
           id: string
+          priority_weight: number
           progress_percentage: number | null
           started_at: string
           status: string | null
@@ -863,6 +864,7 @@ export type Database = {
           current_value?: number | null
           goal_type: string
           id?: string
+          priority_weight?: number
           progress_percentage?: number | null
           started_at?: string
           status?: string | null
@@ -876,6 +878,7 @@ export type Database = {
           current_value?: number | null
           goal_type?: string
           id?: string
+          priority_weight?: number
           progress_percentage?: number | null
           started_at?: string
           status?: string | null
