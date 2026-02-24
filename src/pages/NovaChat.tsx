@@ -833,7 +833,7 @@ export default function NovaChat() {
   // Auth gate
   if (authLoading || threadsLoading) {
     return (
-      <div className="min-h-screen bg-background flex flex-col">
+      <div className="h-[100dvh] bg-background flex flex-col overflow-hidden">
         <NovaNav />
         <div className="flex-1 flex items-center justify-center">
           <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
@@ -844,7 +844,7 @@ export default function NovaChat() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-background flex flex-col">
+      <div className="h-[100dvh] bg-background flex flex-col overflow-hidden">
         <NovaNav />
         <div className="flex-1 flex flex-col items-center justify-center px-4">
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center mb-6 shadow-lg shadow-accent/20">
@@ -863,7 +863,7 @@ export default function NovaChat() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="h-[100dvh] bg-background flex flex-col overflow-hidden">
       <SEO title="Chat with Nova AI | Health Coaching | NeuroState" description="Have intelligent conversations with Nova AI about your cognitive performance, recovery, sleep, and personalised health protocols." noindex={true} />
       <NovaNav />
 
@@ -879,7 +879,7 @@ export default function NovaChat() {
         )}
       </AnimatePresence>
       
-      <div className="flex-1 flex flex-col relative overflow-hidden">
+      <div className="flex-1 min-h-0 flex flex-col relative overflow-hidden">
         {/* Sidebar */}
         <AnimatePresence>
           {sidebarOpen && (
@@ -1020,7 +1020,7 @@ export default function NovaChat() {
         <DeviceStatusIndicator />
 
         {/* Content Area */}
-        <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
           {!hasMessages ? (
             /* Empty State */
             <div className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6">
@@ -1095,7 +1095,7 @@ export default function NovaChat() {
             /* Messages Area */
             <div 
               ref={scrollContainerRef}
-              className="flex-1 overflow-y-auto overscroll-contain"
+              className="flex-1 min-h-0 overflow-y-auto overscroll-contain touch-pan-y"
               onScroll={checkIfNearBottom}
             >
               <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 space-y-6">
