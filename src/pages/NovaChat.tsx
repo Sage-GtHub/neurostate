@@ -357,7 +357,9 @@ export default function NovaChat() {
     const el = scrollContainerRef.current;
     if (!el) return;
     const threshold = 120; // px from bottom
-    isNearBottomRef.current = el.scrollHeight - el.scrollTop - el.clientHeight < threshold;
+    const nearBottom = el.scrollHeight - el.scrollTop - el.clientHeight < threshold;
+    isNearBottomRef.current = nearBottom;
+    setShowScrollBtn(!nearBottom);
   }, []);
 
   const scrollToBottom = useCallback((force = false) => {
