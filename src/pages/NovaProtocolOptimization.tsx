@@ -9,6 +9,7 @@ import { BehaviourChangeNudges } from "@/components/nova/BehaviourChangeNudges";
 import { PatternRecognition } from "@/components/nova/PatternRecognition";
 import { AutonomousFeatures } from "@/components/nova/AutonomousFeatures";
 import { RealTimeSimulation } from "@/components/nova/RealTimeSimulation";
+import { PersonalROITracker } from "@/components/nova/PersonalROITracker";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SEO } from "@/components/SEO";
 
@@ -36,9 +37,14 @@ export default function NovaProtocolOptimization() {
 
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8 sm:py-12 md:py-16 space-y-12 sm:space-y-16 md:space-y-24">
         
-        {/* Real-Time AI Processing */}
+        {/* Preview Changes (Simulation) */}
         <section className="animate-fade-in">
           <RealTimeSimulation />
+        </section>
+
+        {/* Intervention ROI Tracker */}
+        <section className="animate-fade-in">
+          <PersonalROITracker />
         </section>
 
         {/* Predictive Forecasting */}

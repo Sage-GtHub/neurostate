@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -42,6 +43,7 @@ interface SimulationResult {
 }
 
 export function RealTimeSimulation() {
+  const { user } = useAuth();
   const [supplements, setSupplements] = useState<SupplementChange[]>([
     { name: "Magnesium", current_dose: "200mg", proposed_dose: "400mg" }
   ]);
@@ -51,6 +53,7 @@ export function RealTimeSimulation() {
   const [newAddition, setNewAddition] = useState("");
   const [newRemoval, setNewRemoval] = useState("");
   const [loading, setLoading] = useState(false);
+  const [committing, setCommitting] = useState(false);
   const [result, setResult] = useState<SimulationResult | null>(null);
 
   const addSupplement = () => {
@@ -387,6 +390,53 @@ export function RealTimeSimulation() {
                 </ul>
               </div>
             )}
+
+            {/* Commit & Track button */}
+            <Button
+              onClick={async () => {
+                if (!user) { toast.error("Please sign in"); return; }
+                setCommitting(true);
+                try {
+                  const validSupps = supplements.filter(s => s.name && s.proposed_dose);
+                  const title = validSupps.length > 0
+                    ? validSupps.map(s => `${s.name} ${s.current_dose}→${s.proposed_dose}`).join(', ')
+                    : additions.length > 0
+                    ? `Added ${additions.join(', ')}`
+                    : 'Protocol change';
+
+                  const { error } = await supabase
+                    .from('protocol_interventions' as any)
+                    .insert({
+                      user_id: user.id,
+                      title,
+                      intervention_type: validSupps.length > 0 ? 'dose_change' : additions.length > 0 ? 'addition' : 'timing_change',
+                      changes: {
+                        supplement_adjustments: validSupps,
+                        timing_changes: timingChanges.filter(t => t.item && t.proposed_time),
+                        additions,
+                        removals,
+                      },
+                      predicted_outcomes: result,
+                      status: 'active',
+                      review_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+                    } as any);
+
+                  if (error) throw error;
+                  toast.success("Tracking this change — review in 7 days");
+                  setResult(null);
+                } catch (err: any) {
+                  toast.error(err.message || "Failed to save");
+                } finally {
+                  setCommitting(false);
+                }
+              }}
+              disabled={committing}
+              variant="outline"
+              className="w-full gap-2 border-accent/30 text-accent hover:bg-accent/5"
+            >
+              {committing ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
+              {committing ? "Saving…" : "Commit & Track This Change"}
+            </Button>
           </div>
         )}
       </CardContent>
