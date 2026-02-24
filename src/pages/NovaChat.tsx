@@ -367,6 +367,7 @@ export default function NovaChat() {
     if (scrollRafRef.current) cancelAnimationFrame(scrollRafRef.current);
     scrollRafRef.current = requestAnimationFrame(() => {
       messagesEndRef.current?.scrollIntoView({ behavior: force ? "smooth" : "auto" });
+      setShowScrollBtn(false);
     });
   }, []);
 
