@@ -391,7 +391,7 @@ export default function TeamDashboard() {
         {/* Executive Intelligence Strip - Sticky on Desktop, scrollable on Mobile */}
         <div className="sticky top-0 z-40 bg-background/95 backdrop-blur-sm border-b border-border/50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-3 md:py-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+            <div className="flex gap-3 md:gap-4 overflow-x-auto pb-1 snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 md:grid-cols-3 sm:overflow-visible">
               {/* CCI Score */}
               <motion.div 
                 className="p-3 md:p-4 rounded-xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20"
