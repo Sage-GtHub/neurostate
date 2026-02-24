@@ -60,159 +60,6 @@ import { AutonomousNudgePanel } from '@/components/nova/AutonomousNudgePanel';
 import { MeetingLoadOptimiser } from '@/components/nova/MeetingLoadOptimiser';
 import { InterventionROITracker } from '@/components/nova/InterventionROITracker';
 
-// Executive Intelligence Metrics
-const executiveMetrics = {
-  cci: {
-    current: 74,
-    trend: 'up',
-    change: 3.2,
-    breakdown: {
-      energy: 71,
-      focus: 78,
-      recovery: 69,
-      stressVolatility: 22,
-      burnoutRisk: 28
-    }
-  },
-  revenueExposure: {
-    weekly: 41800,
-    daily: 5971,
-    trend: 'down',
-    change: -8.4
-  },
-  burnoutExposure: {
-    projected: 320000,
-    timeframe: '6 months',
-    teamsAtRisk: 2
-  }
-};
-
-// System adoption metrics
-const adoptionMetrics = {
-  dau: { value: 847, change: 12.3, trend: 'up' },
-  wat: { value: 42, change: 5.0, trend: 'up' },
-  coverageRate: { value: 89, change: 4.2, trend: 'up' },
-  interventionAdoption: { value: 67, change: 8.1, trend: 'up' }
-};
-
-// Intervention effectiveness
-const interventionEffectiveness = [
-  {
-    id: 1,
-    action: 'Workload timing adjustment',
-    team: 'Sales',
-    signalChange: '+11% focus',
-    valueRecovered: 17400,
-    timeframe: '14 days',
-    status: 'completed'
-  },
-  {
-    id: 2,
-    action: 'Recovery day scheduled',
-    team: 'Engineering',
-    signalChange: '+18% readiness',
-    valueRecovered: 23600,
-    timeframe: '21 days',
-    status: 'completed'
-  },
-  {
-    id: 3,
-    action: 'Meeting load reduction',
-    team: 'Product',
-    signalChange: '+9% cognitive capacity',
-    valueRecovered: 8900,
-    timeframe: '7 days',
-    status: 'in_progress'
-  }
-];
-
-// Nova forecasts
-const novaForecasts = {
-  days7: { capacity: 72, revenueAtRisk: 38200 },
-  days14: { capacity: 68, revenueAtRisk: 52400 },
-  days30: { capacity: 65, revenueAtRisk: 89600 },
-  scenarios: [
-    { name: 'Q1 deadline push', impact: -12, riskIncrease: 18000 },
-    { name: 'Team offsite (planned)', impact: +8, riskDecrease: 14200 },
-    { name: 'New product launch', impact: -18, riskIncrease: 34000 }
-  ]
-};
-
-// Mock data for demonstration
-const teamReadinessData = {
-  current: 78,
-  trend: 'up',
-  change: 4,
-  forecast: [
-    { day: 'Today', score: 78, risk: 'low' },
-    { day: 'Tomorrow', score: 76, risk: 'low' },
-    { day: 'Wed', score: 72, risk: 'medium' },
-    { day: 'Thu', score: 68, risk: 'medium' },
-    { day: 'Fri', score: 65, risk: 'medium' },
-    { day: 'Sat', score: 74, risk: 'low' },
-    { day: 'Sun', score: 80, risk: 'low' },
-  ]
-};
-
-const burnoutRiskByTeam = [
-  { team: 'Engineering', risk: 32, trend: 'down', members: 24, exposure: 84000 },
-  { team: 'Product', risk: 45, trend: 'up', members: 12, exposure: 126000 },
-  { team: 'Sales', risk: 28, trend: 'stable', members: 18, exposure: 67200 },
-  { team: 'Customer Success', risk: 51, trend: 'up', members: 15, exposure: 108000 },
-  { team: 'Marketing', risk: 22, trend: 'down', members: 8, exposure: 42400 },
-];
-
-const weeklyPatterns = [
-  { day: 'Mon', focus: 72, fatigue: 28, optimal: 6.2 },
-  { day: 'Tue', focus: 78, fatigue: 22, optimal: 7.1 },
-  { day: 'Wed', focus: 74, fatigue: 26, optimal: 6.8 },
-  { day: 'Thu', focus: 68, fatigue: 32, optimal: 5.9 },
-  { day: 'Fri', focus: 62, fatigue: 38, optimal: 5.2 },
-];
-
-const interventions = [
-  { 
-    id: 1, 
-    title: 'Schedule team recovery day', 
-    team: 'Customer Success',
-    impact: 'high',
-    confidence: 87,
-    estimatedValue: 23600,
-    trace: 'Detected 3-week upward trend in cognitive load. Recovery intervention historically reduces burnout risk by 34%. Pattern correlation with previous Q4 period: r=0.82.'
-  },
-  { 
-    id: 2, 
-    title: 'Reduce meeting load for Product', 
-    team: 'Product',
-    impact: 'medium',
-    confidence: 72,
-    estimatedValue: 12400,
-    trace: 'Meeting density 2.3x higher than baseline. Correlation with focus score decline: r=0.78. Similar interventions recovered 14% focus within 10 days.'
-  },
-  { 
-    id: 3, 
-    title: 'Shift deadline by 2 days', 
-    team: 'Engineering',
-    impact: 'high',
-    confidence: 91,
-    estimatedValue: 31200,
-    trace: 'Current trajectory indicates 23% probability of quality incidents. 2-day buffer reduces to 4%. Historical data shows 89% success rate for similar interventions.'
-  },
-];
-
-const trendComparisons = {
-  weekOverWeek: {
-    readiness: { current: 78, previous: 74, change: 5.4 },
-    burnout: { current: 32, previous: 36, change: -11.1 },
-    focus: { current: 71, previous: 68, change: 4.4 },
-  },
-  monthOverMonth: {
-    readiness: { current: 78, previous: 72, change: 8.3 },
-    burnout: { current: 32, previous: 41, change: -22.0 },
-    focus: { current: 71, previous: 65, change: 9.2 },
-  }
-};
-
 // Format currency helper
 const formatCurrency = (value: number, abbreviated = false): string => {
   if (abbreviated) {
@@ -544,10 +391,10 @@ export default function TeamDashboard() {
         {/* Executive Intelligence Strip - Sticky on Desktop, scrollable on Mobile */}
         <div className="sticky top-0 z-40 bg-background/95 backdrop-blur-sm border-b border-border/50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-3 md:py-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+            <div className="flex gap-3 md:gap-4 overflow-x-auto pb-1 snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 md:grid-cols-3 sm:overflow-visible">
               {/* CCI Score */}
               <motion.div 
-                className="p-3 md:p-4 rounded-xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20"
+                className="p-3 md:p-4 rounded-lg bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 min-w-[260px] sm:min-w-0 snap-start"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
               >
@@ -579,7 +426,7 @@ export default function TeamDashboard() {
 
               {/* Live Cognitive Revenue Exposure */}
               <motion.div 
-                className="p-3 md:p-4 rounded-xl bg-muted/30 border border-border/50"
+                className="p-3 md:p-4 rounded-lg bg-muted/30 border border-border/50 min-w-[260px] sm:min-w-0 snap-start"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
@@ -611,7 +458,7 @@ export default function TeamDashboard() {
 
               {/* Burnout Risk Exposure */}
               <motion.div 
-                className="p-3 md:p-4 rounded-xl bg-muted/30 border border-border/50 sm:col-span-2 md:col-span-1"
+                className="p-3 md:p-4 rounded-lg bg-muted/30 border border-border/50 min-w-[260px] sm:min-w-0 snap-start sm:col-span-2 md:col-span-1"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
@@ -722,7 +569,7 @@ export default function TeamDashboard() {
 
             {/* System Adoption & Coverage Module */}
             <motion.div 
-              className="mb-6 md:mb-8 p-4 md:p-6 rounded-xl md:rounded-2xl bg-muted/20 border border-border/50"
+              className="mb-6 md:mb-8 p-4 md:p-6 rounded-lg bg-muted/20 border border-border/50"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
             >
@@ -734,28 +581,28 @@ export default function TeamDashboard() {
                 <Badge variant="outline" className="text-[8px] md:text-[9px]">Live</Badge>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
-                <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                <div className="p-3 md:p-4 rounded-lg bg-background border border-border/30">
                   <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Daily Active</div>
                   <div className="text-lg md:text-2xl font-semibold text-foreground">{adoptionMetrics.dau.value}</div>
                   <div className={`text-[10px] md:text-xs mt-1 ${adoptionMetrics.dau.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
                     +{adoptionMetrics.dau.change}%
                   </div>
                 </div>
-                <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                <div className="p-3 md:p-4 rounded-lg bg-background border border-border/30">
                   <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Active Teams</div>
                   <div className="text-lg md:text-2xl font-semibold text-foreground">{adoptionMetrics.wat.value}</div>
                   <div className={`text-[10px] md:text-xs mt-1 ${adoptionMetrics.wat.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
                     +{adoptionMetrics.wat.change}%
                   </div>
                 </div>
-                <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                <div className="p-3 md:p-4 rounded-lg bg-background border border-border/30">
                   <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Coverage</div>
                   <div className="text-lg md:text-2xl font-semibold text-foreground">{adoptionMetrics.coverageRate.value}%</div>
                   <div className={`text-[10px] md:text-xs mt-1 ${adoptionMetrics.coverageRate.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
                     +{adoptionMetrics.coverageRate.change}%
                   </div>
                 </div>
-                <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                <div className="p-3 md:p-4 rounded-lg bg-background border border-border/30">
                   <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Adoption</div>
                   <div className="text-lg md:text-2xl font-semibold text-foreground">{adoptionMetrics.interventionAdoption.value}%</div>
                   <div className={`text-[10px] md:text-xs mt-1 ${adoptionMetrics.interventionAdoption.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
@@ -769,7 +616,7 @@ export default function TeamDashboard() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
               {/* Team Readiness */}
               <motion.div 
-                className="p-3 md:p-5 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20"
+                className="p-3 md:p-5 rounded-lg bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
               >
@@ -796,7 +643,7 @@ export default function TeamDashboard() {
 
               {/* Burnout Risk */}
               <motion.div 
-                className="p-3 md:p-5 rounded-xl md:rounded-2xl bg-muted/30 border border-border/50"
+                className="p-3 md:p-5 rounded-lg bg-muted/30 border border-border/50"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
@@ -817,7 +664,7 @@ export default function TeamDashboard() {
 
               {/* Focus Score */}
               <motion.div 
-                className="p-3 md:p-5 rounded-xl md:rounded-2xl bg-muted/30 border border-border/50"
+                className="p-3 md:p-5 rounded-lg bg-muted/30 border border-border/50"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
@@ -838,7 +685,7 @@ export default function TeamDashboard() {
 
               {/* Active Interventions */}
               <motion.div 
-                className="p-3 md:p-5 rounded-xl md:rounded-2xl bg-muted/30 border border-border/50"
+                className="p-3 md:p-5 rounded-lg bg-muted/30 border border-border/50"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
@@ -857,13 +704,13 @@ export default function TeamDashboard() {
 
             {/* Financial Attribution Alert */}
             <motion.div 
-              className="mb-6 md:mb-8 p-3 md:p-4 rounded-lg md:rounded-xl bg-gradient-to-r from-amber-500/10 to-transparent border border-amber-500/20 cursor-pointer hover:border-amber-500/40 transition-colors"
+              className="mb-6 md:mb-8 p-3 md:p-4 rounded-lg bg-gradient-to-r from-amber-500/10 to-transparent border border-amber-500/20 cursor-pointer hover:border-amber-500/40 transition-colors"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               onClick={() => setShowFinancialModal(true)}
             >
               <div className="flex items-start gap-3 md:gap-4">
-                <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-amber-500/20 flex items-center justify-center flex-shrink-0">
                   <DollarSign className="w-4 h-4 md:w-5 md:h-5 text-amber-500" />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -889,7 +736,7 @@ export default function TeamDashboard() {
               <div className="lg:col-span-2 space-y-4 md:space-y-6">
                 {/* Nova AI Forecast Panel */}
                 <motion.div 
-                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary/5 to-transparent border border-primary/20"
+                  className="p-4 md:p-6 rounded-lg bg-gradient-to-br from-primary/5 to-transparent border border-primary/20"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                 >
@@ -915,14 +762,14 @@ export default function TeamDashboard() {
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-3 md:gap-4 mb-3 md:mb-4">
-                    <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                    <div className="p-3 md:p-4 rounded-lg bg-background border border-border/30">
                       <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Capacity</div>
                       <div className="text-2xl md:text-3xl font-semibold text-foreground">{currentForecast.capacity}</div>
                       <div className="text-[10px] md:text-xs text-muted-foreground mt-1">
                         {currentForecast.capacity < 70 ? 'Below target' : 'On track'}
                       </div>
                     </div>
-                    <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                    <div className="p-3 md:p-4 rounded-lg bg-background border border-border/30">
                       <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">At Risk</div>
                       <div className="text-2xl md:text-3xl font-semibold text-amber-500">{formatCurrency(currentForecast.revenueAtRisk, true)}</div>
                       <div className="text-[10px] md:text-xs text-muted-foreground mt-1">If no action</div>
@@ -948,7 +795,7 @@ export default function TeamDashboard() {
 
                 {/* Readiness Forecast */}
                 <motion.div 
-                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-muted/20 border border-border/50"
+                  className="p-4 md:p-6 rounded-lg bg-muted/20 border border-border/50"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
@@ -1005,7 +852,7 @@ export default function TeamDashboard() {
 
                 {/* Burnout Risk by Team */}
                 <motion.div 
-                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-muted/20 border border-border/50"
+                  className="p-4 md:p-6 rounded-lg bg-muted/20 border border-border/50"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
@@ -1072,7 +919,7 @@ export default function TeamDashboard() {
 
                 {/* Intervention Effectiveness */}
                 <motion.div 
-                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-muted/20 border border-border/50"
+                  className="p-4 md:p-6 rounded-lg bg-muted/20 border border-border/50"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.55 }}
@@ -1089,7 +936,7 @@ export default function TeamDashboard() {
                   </div>
                   <div className="space-y-2 md:space-y-3">
                     {interventionEffectiveness.map((item) => (
-                      <div key={item.id} className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                      <div key={item.id} className="p-3 md:p-4 rounded-lg bg-background border border-border/30">
                         <div className="flex items-start justify-between mb-1.5 md:mb-2">
                           <div className="flex-1 min-w-0 mr-2">
                             <div className="text-[10px] md:text-xs font-medium text-foreground truncate">{item.action}</div>
@@ -1120,7 +967,7 @@ export default function TeamDashboard() {
 
                 {/* Weekly Patterns */}
                 <motion.div 
-                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-muted/20 border border-border/50"
+                  className="p-4 md:p-6 rounded-lg bg-muted/20 border border-border/50"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
@@ -1133,7 +980,7 @@ export default function TeamDashboard() {
                   </div>
                   <div className="grid grid-cols-5 gap-1.5 md:gap-3">
                     {weeklyPatterns.map((day, i) => (
-                      <div key={i} className="p-2 md:p-3 rounded-lg md:rounded-xl bg-background border border-border/30">
+                      <div key={i} className="p-2 md:p-3 rounded-lg bg-background border border-border/30">
                         <div className="text-[8px] md:text-[10px] text-muted-foreground mb-1 md:mb-2">{day.day}</div>
                         <div className="space-y-1.5 md:space-y-2">
                           <div>
@@ -1171,7 +1018,7 @@ export default function TeamDashboard() {
               <div className="space-y-4 md:space-y-6">
                 {/* Insight Trace Panel */}
                 <motion.div 
-                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20"
+                  className="p-4 md:p-6 rounded-lg bg-gradient-to-br from-primary/10 to-transparent border border-primary/20"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.35 }}
@@ -1183,7 +1030,7 @@ export default function TeamDashboard() {
                     </div>
                     <Lightbulb className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />
                   </div>
-                  <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                  <div className="p-3 md:p-4 rounded-lg bg-background border border-border/30">
                     <div className="text-[9px] md:text-[10px] text-primary uppercase tracking-wider mb-1.5 md:mb-2">Current Priority</div>
                     <p className="text-[10px] md:text-xs text-foreground leading-relaxed mb-2 md:mb-3">
                       Reduced recovery + sustained workload → rising burnout volatility → preventative intervention recommended.
@@ -1207,7 +1054,7 @@ export default function TeamDashboard() {
 
                 {/* Nova Interventions */}
                 <motion.div 
-                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20"
+                  className="p-4 md:p-6 rounded-lg bg-gradient-to-br from-accent/10 to-transparent border border-accent/20"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
@@ -1240,7 +1087,7 @@ export default function TeamDashboard() {
                       displayInterventions.map((intervention) => (
                         <div 
                           key={intervention.id}
-                          className="p-2.5 md:p-3 rounded-lg md:rounded-xl bg-background border border-border/30 cursor-pointer hover:border-accent/30 transition-all"
+                          className="p-2.5 md:p-3 rounded-lg bg-background border border-border/30 cursor-pointer hover:border-accent/30 transition-all"
                           onClick={() => setExpandedIntervention(expandedIntervention === intervention.id ? null : intervention.id)}
                         >
                           <div className="flex items-start justify-between gap-2">
@@ -1326,7 +1173,7 @@ export default function TeamDashboard() {
 
                 {/* Trend Comparisons */}
                 <motion.div 
-                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-muted/20 border border-border/50"
+                  className="p-4 md:p-6 rounded-lg bg-muted/20 border border-border/50"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
@@ -1349,7 +1196,7 @@ export default function TeamDashboard() {
                     </div>
                   </div>
                   <div className="space-y-2 md:space-y-3">
-                    <div className="flex items-center justify-between p-2.5 md:p-3 rounded-lg md:rounded-xl bg-background border border-border/30">
+                    <div className="flex items-center justify-between p-2.5 md:p-3 rounded-lg bg-background border border-border/30">
                       <div>
                         <div className="text-[9px] md:text-[10px] text-muted-foreground">Readiness</div>
                         <div className="text-base md:text-lg font-semibold text-foreground">{comparison.readiness.current}</div>
@@ -1358,7 +1205,7 @@ export default function TeamDashboard() {
                         {comparison.readiness.change > 0 ? '+' : ''}{comparison.readiness.change.toFixed(1)}%
                       </div>
                     </div>
-                    <div className="flex items-center justify-between p-2.5 md:p-3 rounded-lg md:rounded-xl bg-background border border-border/30">
+                    <div className="flex items-center justify-between p-2.5 md:p-3 rounded-lg bg-background border border-border/30">
                       <div>
                         <div className="text-[9px] md:text-[10px] text-muted-foreground">Burnout Risk</div>
                         <div className="text-base md:text-lg font-semibold text-foreground">{comparison.burnout.current}%</div>
@@ -1367,7 +1214,7 @@ export default function TeamDashboard() {
                         {comparison.burnout.change > 0 ? '+' : ''}{comparison.burnout.change.toFixed(1)}%
                       </div>
                     </div>
-                    <div className="flex items-center justify-between p-2.5 md:p-3 rounded-lg md:rounded-xl bg-background border border-border/30">
+                    <div className="flex items-center justify-between p-2.5 md:p-3 rounded-lg bg-background border border-border/30">
                       <div>
                         <div className="text-[9px] md:text-[10px] text-muted-foreground">Focus Score</div>
                         <div className="text-base md:text-lg font-semibold text-foreground">{comparison.focus.current}</div>
@@ -1381,7 +1228,7 @@ export default function TeamDashboard() {
 
                 {/* Quick Actions */}
                 <motion.div 
-                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-muted/20 border border-border/50"
+                  className="p-4 md:p-6 rounded-lg bg-muted/20 border border-border/50"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
