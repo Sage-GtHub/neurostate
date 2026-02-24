@@ -82,6 +82,15 @@ const TYPE_CONFIG: Record<string, { icon: typeof AlertTriangle; color: string; l
 };
 
 function AIInsightsTab({ insights, isLoading, onGenerate }: { insights: NovaInsight[]; isLoading: boolean; onGenerate: () => void }) {
+  const [gradeFilter, setGradeFilter] = useState<string | null>(null);
+  const [typeFilter, setTypeFilter] = useState<string | null>(null);
+
+  const filteredInsights = insights.filter(i => {
+    if (gradeFilter && (i.evidence_grade || "C") !== gradeFilter) return false;
+    if (typeFilter && i.type !== typeFilter) return false;
+    return true;
+  });
+
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -94,6 +103,57 @@ function AIInsightsTab({ insights, isLoading, onGenerate }: { insights: NovaInsi
           {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
           {isLoading ? "Analysing..." : "Generate Insights"}
         </Button>
+      </div>
+
+      {/* Filter Bar */}
+      <div className="flex flex-wrap items-center gap-6">
+        {/* Grade filters */}
+        <div className="flex items-center gap-2">
+          <span className="text-[10px] uppercase tracking-widest text-foreground/30 mr-1">Grade</span>
+          {Object.entries(GRADE_STYLES).map(([grade, style]) => {
+            const active = gradeFilter === grade;
+            return (
+              <button
+                key={grade}
+                onClick={() => setGradeFilter(active ? null : grade)}
+                className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all ${active ? `${style.bg} ${style.text} ring-1 ring-current` : 'bg-muted/50 text-foreground/40 hover:bg-muted'}`}
+              >
+                {grade}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="w-px h-5 bg-foreground/10" />
+
+        {/* Type filters */}
+        <div className="flex items-center gap-2">
+          <span className="text-[10px] uppercase tracking-widest text-foreground/30 mr-1">Type</span>
+          {Object.entries(TYPE_CONFIG).map(([type, config]) => {
+            const active = typeFilter === type;
+            const Icon = config.icon;
+            return (
+              <button
+                key={type}
+                onClick={() => setTypeFilter(active ? null : type)}
+                className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs transition-all ${active ? `bg-card ${config.color} ring-1 ring-current shadow-sm` : 'bg-muted/50 text-foreground/40 hover:bg-muted'}`}
+              >
+                <Icon className="w-3 h-3" />
+                {config.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Clear */}
+        {(gradeFilter || typeFilter) && (
+          <button
+            onClick={() => { setGradeFilter(null); setTypeFilter(null); }}
+            className="text-xs text-foreground/40 hover:text-foreground underline"
+          >
+            Clear filters
+          </button>
+        )}
       </div>
 
       {/* Evidence Grade Legend */}
