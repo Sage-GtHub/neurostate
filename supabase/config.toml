@@ -53,3 +53,6 @@ verify_jwt = false
 
 [functions.weekly-performance-digest]
 verify_jwt = false
+
+[functions.autonomous-coaching]
+verify_jwt = true
