@@ -394,7 +394,7 @@ export default function TeamDashboard() {
             <div className="flex gap-3 md:gap-4 overflow-x-auto pb-1 snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 md:grid-cols-3 sm:overflow-visible">
               {/* CCI Score */}
               <motion.div 
-                className="p-3 md:p-4 rounded-xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20"
+                className="p-3 md:p-4 rounded-lg bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 min-w-[260px] sm:min-w-0 snap-start"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
               >
