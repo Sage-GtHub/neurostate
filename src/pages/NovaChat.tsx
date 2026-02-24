@@ -75,7 +75,7 @@ function StreamingCursor() {
     <motion.span
       className="inline-block w-[2px] h-[1.1em] bg-accent ml-0.5 align-text-bottom rounded-full"
       animate={{ opacity: [1, 0, 1] }}
-      transition={{ duration: 0.8, repeat: Infinity, ease: "steps(2)" }}
+      transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
     />
   );
 }
