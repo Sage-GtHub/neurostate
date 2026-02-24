@@ -356,7 +356,7 @@ export function MultiGoalBalancer() {
                 <CardContent className="p-5">
                   <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-4">
                     <Link2 className="h-4 w-4 text-emerald-500" />
-                    Goal Synergies
+                     Where Goals Help Each Other
                   </h3>
                   <div className="space-y-3">
                     {analysis.synergies.map((s, i) => (
