@@ -299,7 +299,7 @@ export function MultiGoalBalancer() {
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
                       <Target className="h-4 w-4 text-accent" />
-                      Recommended Weights
+                      Suggested Priorities
                     </h3>
                     <Button size="sm" variant="outline" onClick={() => applyRecommended(analysis.recommended_weights)} className="text-xs gap-1">
                       <ArrowRight className="h-3 w-3" /> Apply
