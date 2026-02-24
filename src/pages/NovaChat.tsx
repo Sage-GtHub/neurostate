@@ -833,7 +833,7 @@ export default function NovaChat() {
   // Auth gate
   if (authLoading || threadsLoading) {
     return (
-      <div className="min-h-screen bg-background flex flex-col">
+      <div className="h-[100dvh] bg-background flex flex-col overflow-hidden">
         <NovaNav />
         <div className="flex-1 flex items-center justify-center">
           <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
