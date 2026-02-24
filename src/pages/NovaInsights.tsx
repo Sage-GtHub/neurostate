@@ -96,8 +96,8 @@ function AIInsightsTab({ insights, isLoading, onGenerate }: { insights: NovaInsi
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-medium text-foreground">Evidence-Graded Insights</h2>
-          <p className="text-sm text-foreground/50 mt-1">AI-powered pattern recognition from your biometric data</p>
+          <h2 className="text-lg font-medium text-foreground">What Your Data Shows</h2>
+          <p className="text-sm text-foreground/50 mt-1">Patterns and trends from your health data</p>
         </div>
         <Button onClick={onGenerate} disabled={isLoading} className="rounded-full gap-2">
           {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
