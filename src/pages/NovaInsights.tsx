@@ -4,6 +4,7 @@ import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
 import { NovaBreadcrumb } from "@/components/nova/NovaBreadcrumb";
+import { AutonomousNudgePanel } from "@/components/nova/AutonomousNudgePanel";
 import { NovaSkeleton, NovaSkeletonGrid } from "@/components/nova/NovaSkeleton";
 import { NovaEmptyState } from "@/components/nova/NovaEmptyState";
 import { Button } from "@/components/ui/button";
@@ -11,7 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import { supabase } from "@/integrations/supabase/client";
-import { TrendingUp, Activity, Brain, Target, Loader2, Watch, RefreshCw, Zap, TrendingDown, Minus, Heart, AlertCircle, Shield, Sparkles, AlertTriangle, Eye } from "lucide-react";
+import { TrendingUp, Activity, Brain, Target, Loader2, Watch, RefreshCw, Zap, TrendingDown, Minus, Heart, AlertCircle, Shield, Sparkles, AlertTriangle, Eye, BellRing } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { format, subDays, startOfDay, endOfDay } from "date-fns";
 import { useNovaInsights, type NovaInsight } from "@/hooks/useNovaInsights";
@@ -579,6 +580,10 @@ export default function NovaInsights() {
                 <TrendingUp className="w-4 h-4" />
                 Trends
               </TabsTrigger>
+              <TabsTrigger value="coaching" className="gap-2">
+                <BellRing className="w-4 h-4" />
+                Auto-Pilot
+              </TabsTrigger>
             </TabsList>
 
             {/* AI INSIGHTS TAB */}
@@ -591,6 +596,17 @@ export default function NovaInsights() {
                   if (result) setFreshInsights(result);
                 }}
               />
+            </TabsContent>
+
+            {/* AUTONOMOUS COACHING TAB */}
+            <TabsContent value="coaching" className="mt-0">
+              <div className="space-y-8">
+                <div>
+                  <h2 className="text-lg font-medium text-foreground">Auto-Pilot Coaching</h2>
+                  <p className="text-sm text-foreground/50 mt-1">AI-driven nudges, alerts, and protocol adjustments based on your real-time data</p>
+                </div>
+                <AutonomousNudgePanel />
+              </div>
             </TabsContent>
             <TabsContent value="insights" className="mt-0">
               {/* Summary Cards */}
