@@ -1054,7 +1054,7 @@ export default function TeamDashboard() {
 
                 {/* Nova Interventions */}
                 <motion.div 
-                  className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20"
+                  className="p-4 md:p-6 rounded-lg bg-gradient-to-br from-accent/10 to-transparent border border-accent/20"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
