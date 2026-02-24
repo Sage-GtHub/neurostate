@@ -1,334 +1,357 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, TrendingUp, TrendingDown, AlertCircle, Check, RefreshCw, Loader2, Sparkles } from "lucide-react";
-import { useHealthForecast } from "@/hooks/useHealthForecast";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Calendar, TrendingUp, TrendingDown, AlertCircle, Check,
+  RefreshCw, Loader2, Sparkles, Sun, Moon, CloudSun, Zap,
+} from "lucide-react";
+import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine } from "recharts";
+import { useHealthForecast, type HealthForecast as ForecastType } from "@/hooks/useHealthForecast";
+import { format, addDays, isToday, isTomorrow } from "date-fns";
 
-interface ForecastDay {
-  date: string;
-  dayName: string;
-  trainingReadiness: "optimal" | "moderate" | "low";
-  energyLevel: number;
-  expectedDip: { time: string; reason: string } | null;
-  interventions: string[];
-  confidence: number;
+function getDateLabel(dateStr: string): string {
+  const d = new Date(dateStr + 'T00:00:00');
+  if (isToday(d)) return "Today";
+  if (isTomorrow(d)) return "Tomorrow";
+  return format(d, "EEE");
 }
 
-// Default placeholder data
-const getPlaceholderData = (): ForecastDay[] => {
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  const today = new Date();
-  
-  return Array.from({ length: 7 }, (_, i) => {
-    const date = new Date(today);
-    date.setDate(today.getDate() + i);
-    const dayIndex = date.getDay();
-    const dayName = days[dayIndex === 0 ? 6 : dayIndex - 1];
-    
-    const readinessOptions: ("optimal" | "moderate" | "low")[] = ["optimal", "moderate", "low"];
-    const readiness = readinessOptions[Math.floor(Math.random() * 3)];
-    const energy = Math.floor(55 + Math.random() * 40);
-    
-    const interventionOptions = [
-      "Light cardio only",
-      "Increase hydration",
-      "Rest day recommended",
-      "Focus on recovery protocols",
-      "High-intensity training recommended",
-      "Morning training ideal",
-      "Moderate intensity OK",
-      "Good for endurance work",
-      "Increase magnesium to 600mg",
-      "Schedule key meetings AM"
-    ];
-    
-    const numInterventions = 2 + Math.floor(Math.random() * 2);
-    const shuffled = interventionOptions.sort(() => 0.5 - Math.random());
-    const interventions = shuffled.slice(0, numInterventions);
-    
-    const hasDip = Math.random() > 0.5;
-    const dipReasons = [
-      "Post-lunch circadian dip",
-      "Natural afternoon lull",
-      "Sleep debt accumulation",
-      "Declining recovery trend"
-    ];
-    
-    return {
-      date: i === 0 ? "Today" : i === 1 ? "Tomorrow" : dayName.slice(0, 3),
-      dayName,
-      trainingReadiness: readiness,
-      energyLevel: energy,
-      expectedDip: hasDip ? {
-        time: `${12 + Math.floor(Math.random() * 5)}:00`,
-        reason: dipReasons[Math.floor(Math.random() * dipReasons.length)]
-      } : null,
-      interventions,
-      confidence: 85 + Math.floor(Math.random() * 10)
-    };
-  });
+function getDayName(dateStr: string): string {
+  return format(new Date(dateStr + 'T00:00:00'), "EEEE");
+}
+
+function getReadiness(recovery: number): "optimal" | "moderate" | "low" {
+  if (recovery >= 75) return "optimal";
+  if (recovery >= 50) return "moderate";
+  return "low";
+}
+
+const readinessConfig = {
+  optimal: { bg: "bg-emerald-500/10", text: "text-emerald-400", border: "border-emerald-500/30", label: "Optimal" },
+  moderate: { bg: "bg-amber-500/10", text: "text-amber-400", border: "border-amber-500/30", label: "Moderate" },
+  low: { bg: "bg-rose-500/10", text: "text-rose-400", border: "border-rose-500/30", label: "Low" },
+};
+
+const ReadinessIcon = ({ readiness }: { readiness: string }) => {
+  if (readiness === "optimal") return <TrendingUp className="w-4 h-4" />;
+  if (readiness === "low") return <TrendingDown className="w-4 h-4" />;
+  return <AlertCircle className="w-4 h-4" />;
+};
+
+const TimeIcon = ({ period }: { period: string }) => {
+  if (period === "morning") return <Sun className="w-3.5 h-3.5 text-amber-400" />;
+  if (period === "afternoon") return <CloudSun className="w-3.5 h-3.5 text-orange-400" />;
+  return <Moon className="w-3.5 h-3.5 text-indigo-400" />;
 };
 
 export function HealthForecast() {
-  const [forecastData, setForecastData] = useState<ForecastDay[]>(getPlaceholderData());
-  const [selectedDay, setSelectedDay] = useState<ForecastDay>(forecastData[0]);
-  const { forecasts, isLoading, generateForecast, refreshForecasts } = useHealthForecast();
+  const { forecasts, isLoading, isInitialLoading, generateForecast } = useHealthForecast();
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
-  useEffect(() => {
-    if (forecasts && forecasts.length > 0) {
-      const mappedData: ForecastDay[] = forecasts.map((f, i) => {
-        const date = new Date(f.date);
-        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        const dayName = days[date.getDay()];
-        
-        let readiness: "optimal" | "moderate" | "low" = "moderate";
-        if (f.recovery_prediction >= 80) readiness = "optimal";
-        else if (f.recovery_prediction < 60) readiness = "low";
-        
-        const avgEnergy = f.energy_prediction?.length > 0 
-          ? Math.round(f.energy_prediction.reduce((sum, e) => sum + e.level, 0) / f.energy_prediction.length)
-          : 70;
-        
-        let expectedDip = null;
-        if (f.energy_prediction?.length > 0) {
-          const minEnergy = f.energy_prediction.reduce((min, e) => e.level < min.level ? e : min, f.energy_prediction[0]);
-          if (minEnergy.level < avgEnergy - 10) {
-            expectedDip = {
-              time: `${minEnergy.hour}:00`,
-              reason: "Predicted energy dip based on patterns"
-            };
-          }
-        }
-        
-        const interventions: string[] = [];
-        if (f.intervention_timing?.morning?.length) {
-          interventions.push(...f.intervention_timing.morning.slice(0, 2));
-        }
-        if (f.intervention_timing?.afternoon?.length) {
-          interventions.push(...f.intervention_timing.afternoon.slice(0, 1));
-        }
-        if (f.intervention_timing?.evening?.length) {
-          interventions.push(...f.intervention_timing.evening.slice(0, 1));
-        }
-        if (f.optimal_training_window) {
-          interventions.unshift(`Optimal training: ${f.optimal_training_window}`);
-        }
-        
-        return {
-          date: i === 0 ? "Today" : i === 1 ? "Tomorrow" : dayName.slice(0, 3),
-          dayName,
-          trainingReadiness: readiness,
-          energyLevel: avgEnergy,
-          expectedDip,
-          interventions: interventions.length > 0 ? interventions : ["Monitor and adjust as needed"],
-          confidence: 85 + Math.floor(Math.random() * 10)
-        };
-      });
-      
-      setForecastData(mappedData);
-      setSelectedDay(mappedData[0]);
-    }
-  }, [forecasts]);
+  const selectedForecast = forecasts[selectedIndex] || null;
 
-  const getReadinessStyles = (readiness: string) => {
-    switch (readiness) {
-      case "optimal":
-        return { 
-          bg: "bg-emerald-500/10", 
-          text: "text-emerald-400", 
-          border: "border-emerald-500/30",
-          glow: "shadow-[0_0_20px_rgba(16,185,129,0.15)]"
-        };
-      case "moderate":
-        return { 
-          bg: "bg-amber-500/10", 
-          text: "text-amber-400", 
-          border: "border-amber-500/30",
-          glow: "shadow-[0_0_20px_rgba(245,158,11,0.15)]"
-        };
-      case "low":
-        return { 
-          bg: "bg-rose-500/10", 
-          text: "text-rose-400", 
-          border: "border-rose-500/30",
-          glow: "shadow-[0_0_20px_rgba(244,63,94,0.15)]"
-        };
-      default:
-        return { bg: "bg-muted/30", text: "text-muted-foreground", border: "border-border", glow: "" };
-    }
-  };
+  // Energy curve data for chart
+  const energyCurveData = useMemo(() => {
+    if (!selectedForecast?.energy_prediction?.length) return [];
+    return selectedForecast.energy_prediction
+      .filter(e => e.hour >= 6 && e.hour <= 22)
+      .sort((a, b) => a.hour - b.hour)
+      .map(e => ({
+        time: `${e.hour}:00`,
+        energy: e.level,
+      }));
+  }, [selectedForecast]);
 
-  const getReadinessIcon = (readiness: string) => {
-    switch (readiness) {
-      case "optimal":
-        return <TrendingUp className="w-4 h-4" />;
-      case "moderate":
-        return <AlertCircle className="w-4 h-4" />;
-      case "low":
-        return <TrendingDown className="w-4 h-4" />;
-      default:
-        return null;
-    }
-  };
+  // Find energy dip
+  const energyDip = useMemo(() => {
+    if (!selectedForecast?.energy_prediction?.length) return null;
+    const points = selectedForecast.energy_prediction.filter(e => e.hour >= 10 && e.hour <= 18);
+    if (!points.length) return null;
+    const avg = points.reduce((s, e) => s + e.level, 0) / points.length;
+    const min = points.reduce((m, e) => e.level < m.level ? e : m, points[0]);
+    if (min.level < avg - 10) return { hour: min.hour, level: min.level };
+    return null;
+  }, [selectedForecast]);
 
-  return (
-    <Card className="nova-card overflow-hidden">
-      <CardContent className="p-6 sm:p-8">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+  const avgEnergy = useMemo(() => {
+    if (!selectedForecast?.energy_prediction?.length) return 0;
+    return Math.round(
+      selectedForecast.energy_prediction.reduce((s, e) => s + e.level, 0) /
+      selectedForecast.energy_prediction.length
+    );
+  }, [selectedForecast]);
+
+  if (isInitialLoading) {
+    return (
+      <Card className="border-foreground/5 bg-card">
+        <CardContent className="p-6 sm:p-8 space-y-6">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-nova-accent/20 to-nova-glow/20 flex items-center justify-center nova-glow">
-              <Calendar className="w-7 h-7 text-nova-accent" />
+            <Skeleton className="w-14 h-14 rounded-2xl" />
+            <div className="space-y-2">
+              <Skeleton className="h-5 w-48" />
+              <Skeleton className="h-4 w-32" />
+            </div>
+          </div>
+          <div className="grid grid-cols-7 gap-2">
+            {Array.from({ length: 7 }).map((_, i) => (
+              <Skeleton key={i} className="h-20 rounded-xl" />
+            ))}
+          </div>
+          <Skeleton className="h-48 rounded-2xl" />
+        </CardContent>
+      </Card>
+    );
+  }
+
+  // Empty state — no forecasts yet
+  if (!forecasts.length) {
+    return (
+      <Card className="border-foreground/5 bg-card">
+        <CardContent className="p-6 sm:p-8">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center">
+              <Calendar className="w-7 h-7 text-accent" />
             </div>
             <div>
               <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
-                7-Day Health Forecast
-                <Sparkles className="w-4 h-4 text-nova-accent" />
+                7-Day Health Forecast <Sparkles className="w-4 h-4 text-accent" />
               </h3>
               <p className="text-sm text-muted-foreground">AI-predicted performance windows</p>
             </div>
           </div>
-          <Button 
-            variant="outline" 
-            size="sm" 
+          <div className="text-center py-12">
+            <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-4">
+              <Zap className="w-7 h-7 text-accent" />
+            </div>
+            <h4 className="text-foreground font-medium mb-2">No forecasts yet</h4>
+            <p className="text-sm text-muted-foreground mb-6 max-w-md mx-auto">
+              Generate your first 7-day forecast. Nova will analyse your biometric data to predict energy levels, recovery windows, and optimal training times.
+            </p>
+            <Button onClick={generateForecast} disabled={isLoading} className="gap-2">
+              {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+              {isLoading ? "Generating…" : "Generate Forecast"}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  const readiness = getReadiness(selectedForecast?.recovery_prediction || 0);
+  const styles = readinessConfig[readiness];
+
+  return (
+    <Card className="border-foreground/5 bg-card overflow-hidden">
+      <CardContent className="p-6 sm:p-8">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center">
+              <Calendar className="w-7 h-7 text-accent" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                7-Day Health Forecast <Sparkles className="w-4 h-4 text-accent" />
+              </h3>
+              <p className="text-sm text-muted-foreground">AI-predicted performance windows</p>
+            </div>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
             onClick={generateForecast}
             disabled={isLoading}
-            className="gap-2 nova-glass border-nova-border hover:border-nova-accent/50 hover:bg-nova-accent/10 transition-all"
+            className="gap-2"
           >
-            {isLoading ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
-            ) : (
-              <RefreshCw className="w-4 h-4" />
-            )}
-            {isLoading ? "Generating..." : "Refresh"}
+            {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
+            {isLoading ? "Generating…" : "Refresh"}
           </Button>
         </div>
 
-        <div className="space-y-6">
-          {/* Calendar Timeline */}
-          <div className="grid grid-cols-7 gap-2">
-            {forecastData.map((day, index) => {
-              const styles = getReadinessStyles(day.trainingReadiness);
-              const isSelected = selectedDay.date === day.date;
-              
-              return (
-                <button
-                  key={index}
-                  onClick={() => setSelectedDay(day)}
-                  className={`relative overflow-hidden rounded-xl p-3 transition-all duration-300 ${
-                    isSelected
-                      ? `${styles.bg} border-2 ${styles.border} ${styles.glow} scale-105`
-                      : "nova-glass border border-nova-border/50 hover:border-nova-accent/30 hover:bg-nova-accent/5"
-                  }`}
-                >
-                  <div className="text-center">
-                    <div className={`text-[0.65rem] font-semibold uppercase tracking-wider mb-1 ${
-                      isSelected ? styles.text : "text-muted-foreground"
-                    }`}>
-                      {day.date}
-                    </div>
-                    <div className="text-[0.6rem] text-muted-foreground/70 mb-2 hidden sm:block">
-                      {day.dayName}
-                    </div>
-                    <div className={`w-8 h-8 rounded-lg mx-auto flex items-center justify-center transition-all ${
-                      isSelected ? `${styles.bg} ${styles.border} border` : "bg-muted/20"
-                    }`}>
-                      <div className={isSelected ? styles.text : "text-muted-foreground"}>
-                        {getReadinessIcon(day.trainingReadiness)}
-                      </div>
-                    </div>
+        {/* Day selector */}
+        <div className="grid grid-cols-7 gap-2 mb-6">
+          {forecasts.map((f, i) => {
+            const r = getReadiness(f.recovery_prediction);
+            const s = readinessConfig[r];
+            const isSelected = i === selectedIndex;
+            return (
+              <button
+                key={f.id}
+                onClick={() => setSelectedIndex(i)}
+                className={`rounded-xl p-3 transition-all duration-200 ${
+                  isSelected
+                    ? `${s.bg} border-2 ${s.border} scale-[1.03]`
+                    : "bg-foreground/[0.02] border border-foreground/5 hover:border-foreground/10"
+                }`}
+              >
+                <div className="text-center">
+                  <div className={`text-[0.65rem] font-semibold uppercase tracking-wider mb-1 ${isSelected ? s.text : "text-muted-foreground"}`}>
+                    {getDateLabel(f.date)}
                   </div>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Selected Day Details */}
-          <div className="animate-fade-in">
-            <div className="rounded-2xl p-6 nova-glass border border-nova-border/50">
-              <div className="flex items-start justify-between mb-6">
-                <div>
-                  <h4 className="text-lg font-semibold text-foreground mb-2">
-                    {selectedDay.date} • {selectedDay.dayName}
-                  </h4>
-                  <Badge
-                    variant="outline"
-                    className={`${getReadinessStyles(selectedDay.trainingReadiness).bg} ${
-                      getReadinessStyles(selectedDay.trainingReadiness).text
-                    } ${getReadinessStyles(selectedDay.trainingReadiness).border} border font-medium`}
-                  >
-                    {selectedDay.trainingReadiness.charAt(0).toUpperCase() + selectedDay.trainingReadiness.slice(1)} Readiness
-                  </Badge>
-                </div>
-                <div className="text-right">
-                  <div className="relative">
-                    <div className="text-4xl font-bold text-foreground leading-none mb-1">
-                      {selectedDay.energyLevel}
-                      <span className="text-lg text-muted-foreground">%</span>
-                    </div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Energy Level</div>
+                  <div className="text-[0.6rem] text-muted-foreground/60 mb-2 hidden sm:block">
+                    {getDayName(f.date)}
                   </div>
-                </div>
-              </div>
-
-              {/* Energy Dip Warning */}
-              {selectedDay.expectedDip && (
-                <div className="mb-6 p-4 rounded-xl bg-amber-500/10 border border-amber-500/30">
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center flex-shrink-0">
-                      <AlertCircle className="w-4 h-4 text-amber-400" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-foreground mb-1">
-                        Expected Energy Dip
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        {selectedDay.expectedDip.time}: {selectedDay.expectedDip.reason}
-                      </div>
+                  <div className={`w-8 h-8 rounded-lg mx-auto flex items-center justify-center ${isSelected ? `${s.bg}` : "bg-foreground/[0.03]"}`}>
+                    <div className={isSelected ? s.text : "text-muted-foreground"}>
+                      <ReadinessIcon readiness={r} />
                     </div>
                   </div>
                 </div>
-              )}
+              </button>
+            );
+          })}
+        </div>
 
-              {/* Interventions */}
+        {selectedForecast && (
+          <div className="space-y-6">
+            {/* Overview Row */}
+            <div className="flex items-start justify-between">
               <div>
-                <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">
-                  Recommended Interventions
+                <h4 className="text-lg font-semibold text-foreground mb-2">
+                  {getDateLabel(selectedForecast.date)} · {getDayName(selectedForecast.date)}
+                </h4>
+                <Badge variant="outline" className={`${styles.bg} ${styles.text} ${styles.border} border font-medium`}>
+                  {styles.label} Readiness
+                </Badge>
+              </div>
+              <div className="text-right">
+                <div className="text-4xl font-bold text-foreground leading-none mb-1">
+                  {selectedForecast.recovery_prediction}<span className="text-lg text-muted-foreground">%</span>
                 </div>
-                <div className="space-y-3">
-                  {selectedDay.interventions.map((intervention, index) => (
-                    <div key={index} className="flex items-start gap-3 group">
-                      <div className="w-6 h-6 rounded-lg bg-nova-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-nova-accent/20 transition-colors">
-                        <Check className="w-3.5 h-3.5 text-nova-accent" />
-                      </div>
-                      <span className="text-sm text-foreground/90">{intervention}</span>
-                    </div>
-                  ))}
+                <div className="text-xs text-muted-foreground uppercase tracking-wider">Recovery</div>
+              </div>
+            </div>
+
+            {/* Training Window */}
+            {selectedForecast.optimal_training_window && (
+              <div className="p-4 rounded-xl bg-accent/5 border border-accent/10">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                    <Zap className="w-4 h-4 text-accent" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium text-foreground">Optimal Training Window</div>
+                    <div className="text-sm text-muted-foreground">{selectedForecast.optimal_training_window}</div>
+                  </div>
                 </div>
               </div>
+            )}
 
-              {/* Confidence Score */}
-              <div className="mt-6 pt-4 border-t border-nova-border/30 flex items-center justify-between">
-                <span className="text-xs text-muted-foreground uppercase tracking-wider">Prediction Confidence</span>
-                <div className="flex items-center gap-2">
-                  <div className="w-24 h-1.5 rounded-full bg-muted/30 overflow-hidden">
-                    <div 
-                      className="h-full rounded-full bg-gradient-to-r from-nova-accent to-nova-glow transition-all duration-500"
-                      style={{ width: `${selectedDay.confidence}%` }}
-                    />
-                  </div>
-                  <span className="text-sm font-semibold text-nova-accent">{selectedDay.confidence}%</span>
+            {/* Energy Curve Chart */}
+            {energyCurveData.length > 0 && (
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    Predicted Energy Curve
+                  </p>
+                  <p className="text-xs text-muted-foreground">Avg: {avgEnergy}%</p>
                 </div>
+                <div className="h-40 -mx-2">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={energyCurveData}>
+                      <defs>
+                        <linearGradient id="energyGrad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="hsl(var(--accent))" stopOpacity={0.25} />
+                          <stop offset="95%" stopColor="hsl(var(--accent))" stopOpacity={0} />
+                        </linearGradient>
+                      </defs>
+                      <XAxis
+                        dataKey="time"
+                        tick={{ fontSize: 10, fill: 'hsl(var(--muted-foreground))' }}
+                        axisLine={false}
+                        tickLine={false}
+                      />
+                      <YAxis
+                        domain={[0, 100]}
+                        tick={{ fontSize: 10, fill: 'hsl(var(--muted-foreground))' }}
+                        axisLine={false}
+                        tickLine={false}
+                        width={30}
+                      />
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: 'hsl(var(--card))',
+                          border: '1px solid hsl(var(--foreground) / 0.1)',
+                          borderRadius: '12px',
+                          fontSize: '11px',
+                        }}
+                        formatter={(value: number) => [`${value}%`, 'Energy']}
+                      />
+                      {energyDip && (
+                        <ReferenceLine
+                          x={`${energyDip.hour}:00`}
+                          stroke="hsl(var(--destructive))"
+                          strokeDasharray="3 3"
+                          strokeOpacity={0.5}
+                        />
+                      )}
+                      <Area
+                        type="monotone"
+                        dataKey="energy"
+                        stroke="hsl(var(--accent))"
+                        strokeWidth={2}
+                        fill="url(#energyGrad)"
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+            )}
+
+            {/* Energy Dip Warning */}
+            {energyDip && (
+              <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                    <AlertCircle className="w-4 h-4 text-amber-400" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-foreground mb-1">Expected Energy Dip</div>
+                    <div className="text-sm text-muted-foreground">
+                      {energyDip.hour}:00 — Energy predicted to drop to {energyDip.level}%. Consider scheduling breaks or light activity.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Intervention Timing */}
+            <div>
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">
+                Recommended Interventions
+              </p>
+              <div className="grid sm:grid-cols-3 gap-3">
+                {(["morning", "afternoon", "evening"] as const).map(period => {
+                  const items = selectedForecast.intervention_timing?.[period] || [];
+                  if (!items.length) return null;
+                  return (
+                    <div key={period} className="p-4 rounded-xl bg-foreground/[0.02] border border-foreground/5">
+                      <div className="flex items-center gap-2 mb-3">
+                        <TimeIcon period={period} />
+                        <span className="text-xs font-semibold text-foreground capitalize">{period}</span>
+                      </div>
+                      <div className="space-y-2">
+                        {items.map((item, idx) => (
+                          <div key={idx} className="flex items-start gap-2">
+                            <Check className="w-3.5 h-3.5 text-accent mt-0.5 flex-shrink-0" />
+                            <span className="text-xs text-foreground/80">{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
+        )}
 
-          {/* Footer Note */}
-          <div className="text-xs text-muted-foreground text-center flex items-center justify-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-nova-accent animate-pulse" />
-            Predictions update every 6 hours based on latest biometric data
-          </div>
+        {/* Footer */}
+        <div className="mt-6 text-xs text-muted-foreground text-center flex items-center justify-center gap-2">
+          <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+          Predictions update when you refresh with latest biometric data
         </div>
       </CardContent>
     </Card>

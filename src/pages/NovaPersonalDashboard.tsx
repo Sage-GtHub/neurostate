@@ -17,6 +17,7 @@ import {
 import { NovaNav } from '@/components/NovaNav';
 import { NovaSwipeWrapper } from '@/components/NovaSwipeWrapper';
 import { SEO } from '@/components/SEO';
+import { HealthForecast } from '@/components/nova/HealthForecast';
 import { useAuth } from '@/hooks/useAuth';
 import { useActivityFeed } from '@/hooks/useActivityFeed';
 import { supabase } from '@/integrations/supabase/client';
