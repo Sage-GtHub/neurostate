@@ -328,6 +328,7 @@ export default function NovaChat() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isNearBottomRef = useRef(true);
   const scrollRafRef = useRef<number | null>(null);
+  const [showScrollBtn, setShowScrollBtn] = useState(false);
   const { toast: showToast } = useToast();
 
   // Build display messages with stable streaming entry
@@ -356,7 +357,9 @@ export default function NovaChat() {
     const el = scrollContainerRef.current;
     if (!el) return;
     const threshold = 120; // px from bottom
-    isNearBottomRef.current = el.scrollHeight - el.scrollTop - el.clientHeight < threshold;
+    const nearBottom = el.scrollHeight - el.scrollTop - el.clientHeight < threshold;
+    isNearBottomRef.current = nearBottom;
+    setShowScrollBtn(!nearBottom);
   }, []);
 
   const scrollToBottom = useCallback((force = false) => {
@@ -364,6 +367,7 @@ export default function NovaChat() {
     if (scrollRafRef.current) cancelAnimationFrame(scrollRafRef.current);
     scrollRafRef.current = requestAnimationFrame(() => {
       messagesEndRef.current?.scrollIntoView({ behavior: force ? "smooth" : "auto" });
+      setShowScrollBtn(false);
     });
   }, []);
 
@@ -1020,7 +1024,7 @@ export default function NovaChat() {
         <DeviceStatusIndicator />
 
         {/* Content Area */}
-        <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
+        <div className="flex-1 min-h-0 flex flex-col overflow-hidden relative">
           {!hasMessages ? (
             /* Empty State */
             <div className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6">
@@ -1130,6 +1134,29 @@ export default function NovaChat() {
               </div>
             </div>
           )}
+
+          {/* Scroll to bottom button */}
+          <AnimatePresence>
+            {showScrollBtn && displayMessages.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.2 }}
+                className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10"
+              >
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => scrollToBottom(true)}
+                  className="rounded-full shadow-lg bg-background/90 backdrop-blur-sm border-border/40 hover:bg-background gap-1.5 px-4"
+                >
+                  <ArrowUp className="h-3.5 w-3.5 rotate-180" />
+                  <span className="text-xs">Latest</span>
+                </Button>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Input Area */}
           <div className="border-t border-border/10 bg-background/80 backdrop-blur-sm">
