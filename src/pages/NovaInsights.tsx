@@ -167,15 +167,15 @@ function AIInsightsTab({ insights, isLoading, onGenerate }: { insights: NovaInsi
       </div>
 
       {/* Insights Grid */}
-      {insights.length === 0 && !isLoading ? (
+      {filteredInsights.length === 0 && !isLoading ? (
         <div className="text-center py-16">
           <Sparkles className="w-12 h-12 text-foreground/10 mx-auto mb-4" />
-          <p className="text-foreground/40 mb-2">No insights yet</p>
-          <p className="text-sm text-foreground/30">Click "Generate Insights" to analyse your biometric data</p>
+          <p className="text-foreground/40 mb-2">{insights.length === 0 ? "No insights yet" : "No insights match filters"}</p>
+          <p className="text-sm text-foreground/30">{insights.length === 0 ? 'Click "Generate Insights" to analyse your biometric data' : "Try adjusting your filters"}</p>
         </div>
       ) : (
         <div className="grid gap-4 md:grid-cols-2">
-          {insights.map((insight) => {
+          {filteredInsights.map((insight) => {
             const typeConfig = TYPE_CONFIG[insight.type] || TYPE_CONFIG.pattern;
             const TypeIcon = typeConfig.icon;
             const grade = insight.evidence_grade || "C";
