@@ -827,13 +827,13 @@ export default function TeamDashboard() {
                   <Brain className="w-3 h-3 md:w-3.5 md:h-3.5 text-primary" />
                 </div>
                 <div className="flex items-end gap-2">
-                  <span className="text-2xl md:text-3xl font-semibold text-foreground">71</span>
-                  <div className="flex items-center text-[10px] md:text-xs mb-1 text-green-600">
-                    <TrendingUp className="w-3 h-3 mr-0.5" />
-                    4%
+                  <span className="text-2xl md:text-3xl font-semibold text-foreground">{Math.round(aggregatedMetrics.avgFocus)}</span>
+                  <div className={`flex items-center text-[10px] md:text-xs mb-1 ${trendComparisons.weekOverWeek.focus.change >= 0 ? 'text-green-600' : 'text-red-500'}`}>
+                    {trendComparisons.weekOverWeek.focus.change >= 0 ? <TrendingUp className="w-3 h-3 mr-0.5" /> : <TrendingDown className="w-3 h-3 mr-0.5" />}
+                    {Math.abs(trendComparisons.weekOverWeek.focus.change)}%
                   </div>
                 </div>
-                <p className="text-[9px] md:text-[10px] text-muted-foreground mt-1 md:mt-2">Peak: Tue 10am</p>
+                <p className="text-[9px] md:text-[10px] text-muted-foreground mt-1 md:mt-2">Avg across teams</p>
               </motion.div>
 
               {/* Active Interventions */}
