@@ -1024,7 +1024,7 @@ export default function NovaChat() {
         <DeviceStatusIndicator />
 
         {/* Content Area */}
-        <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
+        <div className="flex-1 min-h-0 flex flex-col overflow-hidden relative">
           {!hasMessages ? (
             /* Empty State */
             <div className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6">
