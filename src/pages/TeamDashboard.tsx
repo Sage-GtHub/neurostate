@@ -595,7 +595,7 @@ export default function TeamDashboard() {
                     +{adoptionMetrics.wat.change}%
                   </div>
                 </div>
-                <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                <div className="p-3 md:p-4 rounded-lg bg-background border border-border/30">
                   <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Coverage</div>
                   <div className="text-lg md:text-2xl font-semibold text-foreground">{adoptionMetrics.coverageRate.value}%</div>
                   <div className={`text-[10px] md:text-xs mt-1 ${adoptionMetrics.coverageRate.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
