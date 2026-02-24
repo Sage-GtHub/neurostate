@@ -769,7 +769,7 @@ export default function TeamDashboard() {
                         {currentForecast.capacity < 70 ? 'Below target' : 'On track'}
                       </div>
                     </div>
-                    <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                    <div className="p-3 md:p-4 rounded-lg bg-background border border-border/30">
                       <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">At Risk</div>
                       <div className="text-2xl md:text-3xl font-semibold text-amber-500">{formatCurrency(currentForecast.revenueAtRisk, true)}</div>
                       <div className="text-[10px] md:text-xs text-muted-foreground mt-1">If no action</div>
