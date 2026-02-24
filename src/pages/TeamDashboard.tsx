@@ -848,10 +848,10 @@ export default function TeamDashboard() {
                   <Zap className="w-3 h-3 md:w-3.5 md:h-3.5 text-accent" />
                 </div>
                 <div className="flex items-end gap-2">
-                  <span className="text-2xl md:text-3xl font-semibold text-foreground">3</span>
+                  <span className="text-2xl md:text-3xl font-semibold text-foreground">{pendingInterventionsCount}</span>
                   <span className="text-[10px] md:text-xs text-muted-foreground mb-1">pending</span>
                 </div>
-                <p className="text-[9px] md:text-[10px] text-muted-foreground mt-1 md:mt-2">Est: {formatCurrency(67200)}</p>
+                <p className="text-[9px] md:text-[10px] text-muted-foreground mt-1 md:mt-2">Est: {formatCurrency(displayInterventions.reduce((s, i) => s + i.estimatedValue, 0))}</p>
               </motion.div>
             </div>
 
