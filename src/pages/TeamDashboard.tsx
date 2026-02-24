@@ -710,7 +710,7 @@ export default function TeamDashboard() {
               onClick={() => setShowFinancialModal(true)}
             >
               <div className="flex items-start gap-3 md:gap-4">
-                <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-amber-500/20 flex items-center justify-center flex-shrink-0">
                   <DollarSign className="w-4 h-4 md:w-5 md:h-5 text-amber-500" />
                 </div>
                 <div className="flex-1 min-w-0">
