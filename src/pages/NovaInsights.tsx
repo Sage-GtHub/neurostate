@@ -89,6 +89,10 @@ export default function NovaInsights() {
   const [trendsLoading, setTrendsLoading] = useState(false);
   const [trendsError, setTrendsError] = useState<string | null>(null);
 
+  // AI Insights state
+  const { insights: aiInsights, isLoading: aiInsightsLoading, generateInsights } = useNovaInsights();
+  const [freshInsights, setFreshInsights] = useState<NovaInsight[]>([]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
