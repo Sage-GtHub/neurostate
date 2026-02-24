@@ -872,8 +872,8 @@ export default function TeamDashboard() {
                     <Badge variant="outline" className="text-[8px] md:text-[9px] bg-amber-500/10 text-amber-600 border-amber-500/30">Live</Badge>
                   </div>
                   <p className="text-[10px] md:text-xs text-muted-foreground line-clamp-2 md:line-clamp-none">
-                    <span className="text-foreground font-medium">20% focus decline</span> costing{' '}
-                    <span className="text-amber-500 font-medium">{formatCurrency(8900)}/day</span>
+                    <span className="text-foreground font-medium">{aggregatedMetrics.avgFocus > 0 ? `${Math.round(100 - aggregatedMetrics.avgFocus)}% focus gap` : 'Cognitive performance'}</span> costing{' '}
+                    <span className="text-amber-500 font-medium">{formatCurrency(executiveMetrics.revenueExposure.daily)}/day</span>
                   </p>
                 </div>
                 <Button variant="ghost" size="sm" className="text-[10px] md:text-xs text-primary px-2 md:px-3 hidden sm:flex" onClick={(e) => { e.stopPropagation(); setShowFinancialModal(true); }}>
