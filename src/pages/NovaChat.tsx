@@ -844,7 +844,7 @@ export default function NovaChat() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-background flex flex-col">
+      <div className="h-[100dvh] bg-background flex flex-col overflow-hidden">
         <NovaNav />
         <div className="flex-1 flex flex-col items-center justify-center px-4">
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center mb-6 shadow-lg shadow-accent/20">
