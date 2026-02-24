@@ -159,7 +159,7 @@ export function MultiGoalBalancer() {
       }
 
       setAnalysis(response.data.analysis);
-      toast({ title: "Analysis complete", description: "Trade-off analysis generated from your biometric data." });
+      toast({ title: "Analysis complete", description: "Here's how your goals interact based on your recent data." });
     } catch (err: any) {
       console.error("Analysis error:", err);
       toast({ title: "Error", description: err?.message || "Failed to analyse goals", variant: "destructive" });
