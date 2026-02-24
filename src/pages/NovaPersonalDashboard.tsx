@@ -160,6 +160,16 @@ export default function NovaPersonalDashboard() {
             </div>
           </motion.div>
 
+          {/* Health Forecast */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="mb-12"
+          >
+            <HealthForecast />
+          </motion.div>
+
           {/* Two Column Layout */}
           <div className="grid lg:grid-cols-2 gap-6">
             {/* Recent Activity */}
