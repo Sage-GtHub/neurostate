@@ -863,7 +863,7 @@ export default function NovaChat() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="h-[100dvh] bg-background flex flex-col overflow-hidden">
       <SEO title="Chat with Nova AI | Health Coaching | NeuroState" description="Have intelligent conversations with Nova AI about your cognitive performance, recovery, sleep, and personalised health protocols." noindex={true} />
       <NovaNav />
 
