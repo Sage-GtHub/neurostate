@@ -1,6 +1,6 @@
 import { NavLink } from "@/components/NavLink";
 import { useLocation, useNavigate } from "react-router-dom";
-import { MessageCircle, LayoutDashboard, Target, Activity, TrendingUp, Smartphone, Settings, Zap, ChevronLeft, ChevronRight, Users, Search, LogOut, Menu, X, Bell } from "lucide-react";
+import { MessageCircle, LayoutDashboard, Target, Activity, TrendingUp, Smartphone, Settings, Zap, ChevronLeft, ChevronRight, Users, Search, LogOut, Menu, X, Bell, FlaskConical, Gauge } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
