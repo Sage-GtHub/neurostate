@@ -8,9 +8,9 @@ interface WelcomeStepProps {
 
 export function WelcomeStep({ onNext }: WelcomeStepProps) {
   const features = [
-    { icon: Brain, label: "Predictive Intelligence", desc: "72-hour cognitive forecasting" },
-    { icon: Activity, label: "Adaptive Protocols", desc: "Real-time biometric adjustments" },
-    { icon: Shield, label: "Privacy First", desc: "Your data stays yours" },
+    { icon: Brain, label: "See What's Coming", desc: "Know how you'll feel before you feel it" },
+    { icon: Activity, label: "Plans That Adapt", desc: "Adjusts to how your body responds" },
+    { icon: Shield, label: "Your Data, Your Rules", desc: "Private by design, always" },
   ];
 
   return (

@@ -189,9 +189,9 @@ export function MultiGoalBalancer() {
         <Card className="border-foreground/5">
           <CardContent className="p-10 text-center">
             <Target className="h-10 w-10 mx-auto mb-4 text-foreground/20" />
-            <p className="text-sm font-medium text-foreground mb-2">Need at least 2 active goals</p>
+            <p className="text-sm font-medium text-foreground mb-2">You need at least 2 goals</p>
             <p className="text-xs text-muted-foreground mb-4">
-              Create performance goals in the Goals page to enable trade-off analysis.
+              Head to the Goals page and add what you're working towards.
             </p>
           </CardContent>
         </Card>

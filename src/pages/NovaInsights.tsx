@@ -170,8 +170,8 @@ function AIInsightsTab({ insights, isLoading, onGenerate }: { insights: NovaInsi
       {filteredInsights.length === 0 && !isLoading ? (
         <div className="text-center py-16">
           <Sparkles className="w-12 h-12 text-foreground/10 mx-auto mb-4" />
-          <p className="text-foreground/40 mb-2">{insights.length === 0 ? "No insights yet" : "No insights match filters"}</p>
-          <p className="text-sm text-foreground/30">{insights.length === 0 ? 'Click "Generate Insights" to analyse your biometric data' : "Try adjusting your filters"}</p>
+          <p className="text-foreground/40 mb-2">{insights.length === 0 ? "Nothing here yet" : "No results match your filters"}</p>
+          <p className="text-sm text-foreground/30">{insights.length === 0 ? 'Click "Generate Insights" to see what your data tells us' : "Try adjusting your filters"}</p>
         </div>
       ) : (
         <div className="grid gap-4 md:grid-cols-2">

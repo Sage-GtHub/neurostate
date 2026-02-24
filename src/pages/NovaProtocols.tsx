@@ -815,8 +815,8 @@ export default function NovaProtocols() {
                     <Target className="w-10 h-10 text-muted-foreground" />
                   </div>
                   <h2 className="text-xl font-semibold text-foreground mb-3">No goals yet</h2>
-                  <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-                    Set performance goals to track your progress and stay motivated on your optimisation journey.
+                   <p className="text-muted-foreground mb-8 max-w-md mx-auto">
+                    Pick what you want to improve and track how you're doing over time.
                   </p>
                   <Button onClick={() => setIsGoalDialogOpen(true)} className="gap-2">
                     <Plus className="w-4 h-4" />
