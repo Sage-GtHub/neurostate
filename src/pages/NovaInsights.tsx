@@ -67,11 +67,11 @@ interface TrendData {
 
 // Evidence grade styling
 const GRADE_STYLES: Record<string, { bg: string; text: string; label: string }> = {
-  A: { bg: "bg-accent/10", text: "text-accent", label: "Strong Evidence" },
-  B: { bg: "bg-signal-green/10", text: "text-signal-green", label: "Good Evidence" },
-  C: { bg: "bg-signal-amber/10", text: "text-signal-amber", label: "Moderate Evidence" },
-  D: { bg: "bg-signal-amber/20", text: "text-signal-amber", label: "Limited Evidence" },
-  F: { bg: "bg-destructive/10", text: "text-destructive", label: "Minimal Evidence" },
+  A: { bg: "bg-accent/10", text: "text-accent", label: "Very confident" },
+  B: { bg: "bg-signal-green/10", text: "text-signal-green", label: "Confident" },
+  C: { bg: "bg-signal-amber/10", text: "text-signal-amber", label: "Moderate" },
+  D: { bg: "bg-signal-amber/20", text: "text-signal-amber", label: "Early signal" },
+  F: { bg: "bg-destructive/10", text: "text-destructive", label: "Weak signal" },
 };
 
 const TYPE_CONFIG: Record<string, { icon: typeof AlertTriangle; color: string; label: string }> = {
