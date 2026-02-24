@@ -286,7 +286,7 @@ export function MultiGoalBalancer() {
               <CardContent className="p-5 flex items-start gap-3">
                 <Sparkles className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-sm font-medium text-foreground mb-1">AI Assessment</p>
+                  <p className="text-sm font-medium text-foreground mb-1">What We Found</p>
                   <p className="text-sm text-muted-foreground leading-relaxed">{analysis.overall_assessment}</p>
                 </div>
               </CardContent>
