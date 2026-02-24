@@ -91,8 +91,8 @@ export function PatternRecognition() {
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-foreground mb-1">Pattern Recognition Engine</h2>
-          <p className="text-sm text-muted-foreground">Detects correlations between biometric signals, supplement intake, and performance outcomes</p>
+          <h2 className="text-lg font-semibold text-foreground mb-1">Spot Patterns</h2>
+          <p className="text-sm text-muted-foreground">See what's actually moving the needle in your health data</p>
         </div>
         <Button size="sm" onClick={runPatternAnalysis} disabled={isAnalysing} className="gap-2">
           {isAnalysing ? <Loader2 className="h-4 w-4 animate-spin" /> : <BarChart3 className="h-4 w-4" />}
