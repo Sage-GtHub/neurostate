@@ -688,8 +688,8 @@ export default function NovaProtocols() {
                       <div className="w-14 h-14 rounded-3xl bg-foreground/[0.02] flex items-center justify-center mb-6">
                         <Target className="w-6 h-6 text-foreground/20" />
                       </div>
-                      <p className="text-xs text-foreground/40 mb-6 max-w-xs">
-                        No active protocols yet. Complete your assessment to get personalised recommendations.
+                  <p className="text-xs text-foreground/40 mb-6 max-w-xs">
+                        No active protocols yet. Answer a few questions and we'll suggest the right plan for you.
                       </p>
                       <button
                         onClick={() => setShowAssessment(true)}
