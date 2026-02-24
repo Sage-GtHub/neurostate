@@ -980,7 +980,7 @@ export default function TeamDashboard() {
                   </div>
                   <div className="grid grid-cols-5 gap-1.5 md:gap-3">
                     {weeklyPatterns.map((day, i) => (
-                      <div key={i} className="p-2 md:p-3 rounded-lg md:rounded-xl bg-background border border-border/30">
+                      <div key={i} className="p-2 md:p-3 rounded-lg bg-background border border-border/30">
                         <div className="text-[8px] md:text-[10px] text-muted-foreground mb-1 md:mb-2">{day.day}</div>
                         <div className="space-y-1.5 md:space-y-2">
                           <div>
