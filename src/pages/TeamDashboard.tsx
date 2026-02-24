@@ -581,7 +581,7 @@ export default function TeamDashboard() {
                 <Badge variant="outline" className="text-[8px] md:text-[9px]">Live</Badge>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
-                <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                <div className="p-3 md:p-4 rounded-lg bg-background border border-border/30">
                   <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Daily Active</div>
                   <div className="text-lg md:text-2xl font-semibold text-foreground">{adoptionMetrics.dau.value}</div>
                   <div className={`text-[10px] md:text-xs mt-1 ${adoptionMetrics.dau.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
