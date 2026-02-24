@@ -24,7 +24,7 @@ export default function NovaProtocolOptimization() {
       
       <div className="border-b border-mist/30 bg-gradient-to-b from-ivory to-pearl/20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8 sm:py-10 md:py-12">
-          <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium mb-2">Advanced Features</p>
+          <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium mb-2">Fine-tune</p>
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[3rem] font-bold text-carbon tracking-tight mb-2 sm:mb-3">
             Protocol Optimisation
           </h1>
