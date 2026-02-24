@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback, memo } from "react";
+import { useState, useRef, useEffect, useCallback, memo, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { 
   Plus, 
@@ -17,6 +17,12 @@ import {
   Activity,
   Moon,
   Archive,
+  Mic,
+  MicOff,
+  Phone,
+  PhoneOff,
+  Volume2,
+  Square,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { SEO } from "@/components/SEO";
@@ -29,6 +35,7 @@ import { DeviceStatusIndicator } from "@/components/nova/DeviceStatusIndicator";
 import { motion, AnimatePresence } from "framer-motion";
 import { useChatThreads, type ChatThread } from "@/hooks/useChatThreads";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 
 type StreamingMessage = {
   role: "user" | "assistant";
@@ -62,7 +69,18 @@ function StreamingDots() {
   );
 }
 
-const MessageBubble = memo(({ msg, index, isLast, copiedIndex, onCopy, onRegenerate, isLoading }: {
+// Streaming cursor blink
+function StreamingCursor() {
+  return (
+    <motion.span
+      className="inline-block w-[2px] h-[1.1em] bg-accent ml-0.5 align-text-bottom rounded-full"
+      animate={{ opacity: [1, 0, 1] }}
+      transition={{ duration: 0.8, repeat: Infinity, ease: "steps(2)" }}
+    />
+  );
+}
+
+const MessageBubble = memo(({ msg, index, isLast, copiedIndex, onCopy, onRegenerate, isLoading, isStreaming }: {
   msg: StreamingMessage;
   index: number;
   isLast: boolean;
@@ -70,6 +88,7 @@ const MessageBubble = memo(({ msg, index, isLast, copiedIndex, onCopy, onRegener
   onCopy: (i: number) => void;
   onRegenerate: () => void;
   isLoading: boolean;
+  isStreaming?: boolean;
 }) => {
   if (msg.role === "user") {
     return (
@@ -81,7 +100,7 @@ const MessageBubble = memo(({ msg, index, isLast, copiedIndex, onCopy, onRegener
       >
         <div className="max-w-[85%] sm:max-w-[75%]">
           <div className="bg-foreground text-background rounded-2xl rounded-br-md px-4 py-3 shadow-sm">
-            <p className="text-[15px] sm:text-sm leading-relaxed">{msg.content}</p>
+            <p className="text-[15px] sm:text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
           </div>
           <p className="text-[10px] text-muted-foreground/40 text-right mt-1.5 mr-1 font-mono">
             {format(new Date(msg.timestamp), "h:mm a")}
@@ -137,6 +156,7 @@ const MessageBubble = memo(({ msg, index, isLast, copiedIndex, onCopy, onRegener
               >
                 {msg.content}
               </ReactMarkdown>
+              {isStreaming && <StreamingCursor />}
             </div>
           ) : (
             <StreamingDots />
@@ -144,7 +164,7 @@ const MessageBubble = memo(({ msg, index, isLast, copiedIndex, onCopy, onRegener
         </div>
       </div>
       
-      {msg.content && (
+      {msg.content && !isStreaming && (
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -182,6 +202,84 @@ const MessageBubble = memo(({ msg, index, isLast, copiedIndex, onCopy, onRegener
 
 MessageBubble.displayName = "MessageBubble";
 
+// ─── Voice Mode Overlay ─────────────────────────────────────────────────
+function VoiceModeOverlay({ 
+  isActive, 
+  isSpeaking, 
+  status,
+  onEnd 
+}: { 
+  isActive: boolean; 
+  isSpeaking: boolean;
+  status: string;
+  onEnd: () => void;
+}) {
+  if (!isActive) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background/95 backdrop-blur-xl"
+    >
+      {/* Animated orb */}
+      <div className="relative mb-12">
+        <motion.div
+          className="w-32 h-32 rounded-full bg-gradient-to-br from-accent to-accent/40 flex items-center justify-center"
+          animate={isSpeaking ? {
+            scale: [1, 1.15, 1.05, 1.2, 1],
+            boxShadow: [
+              "0 0 40px hsl(var(--accent) / 0.2)",
+              "0 0 80px hsl(var(--accent) / 0.4)",
+              "0 0 60px hsl(var(--accent) / 0.3)",
+              "0 0 90px hsl(var(--accent) / 0.5)",
+              "0 0 40px hsl(var(--accent) / 0.2)",
+            ]
+          } : {
+            scale: [1, 1.03, 1],
+            boxShadow: [
+              "0 0 30px hsl(var(--accent) / 0.15)",
+              "0 0 50px hsl(var(--accent) / 0.25)",
+              "0 0 30px hsl(var(--accent) / 0.15)",
+            ]
+          }}
+          transition={{ duration: isSpeaking ? 0.8 : 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <Volume2 className="w-12 h-12 text-white" />
+        </motion.div>
+        {/* Ripple rings */}
+        {isSpeaking && [0, 1, 2].map(i => (
+          <motion.div
+            key={i}
+            className="absolute inset-0 rounded-full border border-accent/20"
+            animate={{ scale: [1, 2.5], opacity: [0.4, 0] }}
+            transition={{ duration: 2, repeat: Infinity, delay: i * 0.6, ease: "easeOut" }}
+          />
+        ))}
+      </div>
+
+      <p className="text-lg font-medium text-foreground mb-2">
+        {isSpeaking ? "Nova is speaking..." : status === "connected" ? "Listening..." : "Connecting..."}
+      </p>
+      <p className="text-sm text-muted-foreground/60 mb-10">
+        {isSpeaking ? "Wait for me to finish or tap to interrupt" : "Speak naturally — I'm listening"}
+      </p>
+
+      <Button
+        onClick={onEnd}
+        variant="outline"
+        size="lg"
+        className="rounded-full px-8 gap-2 border-destructive/30 text-destructive hover:bg-destructive/10 hover:text-destructive"
+      >
+        <PhoneOff className="h-4 w-4" />
+        End Voice Chat
+      </Button>
+    </motion.div>
+  );
+}
+
+// ─── Main Chat Component ─────────────────────────────────────────────────
 export default function NovaChat() {
   const { user, isAuthenticated, loading: authLoading } = useAuth();
   const {
@@ -201,7 +299,6 @@ export default function NovaChat() {
   const [isLoading, setIsLoading] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  // Streaming message held locally until complete, then persisted to DB
   const [streamingContent, setStreamingContent] = useState<string | null>(null);
   const [diagnostics, setDiagnostics] = useState({
     requestId: null as string | null,
@@ -215,30 +312,83 @@ export default function NovaChat() {
     mode: "default" as "default" | "focus",
     messageCount: 0,
   });
+
+  // Voice input state
+  const [isListening, setIsListening] = useState(false);
+  const recognitionRef = useRef<any>(null);
+
+  // Voice mode (ElevenLabs Conversational AI) state
+  const [voiceModeActive, setVoiceModeActive] = useState(false);
+  const [voiceModeStatus, setVoiceModeStatus] = useState<"disconnected" | "connecting" | "connected">("disconnected");
+  const [voiceModeSpeaking, setVoiceModeSpeaking] = useState(false);
+  const conversationRef = useRef<any>(null);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const isNearBottomRef = useRef(true);
+  const scrollRafRef = useRef<number | null>(null);
   const { toast: showToast } = useToast();
 
-  // Build display messages: DB messages + any in-flight streaming message
-  const displayMessages: StreamingMessage[] = [
-    ...dbMessages.map(m => ({
+  // Build display messages with stable streaming entry
+  const streamingTimestamp = useRef(new Date().toISOString());
+  
+  const displayMessages: StreamingMessage[] = useMemo(() => {
+    const msgs: StreamingMessage[] = dbMessages.map(m => ({
       role: m.role as "user" | "assistant",
       content: m.content,
       timestamp: m.created_at,
       persisted: true,
-    })),
-    ...(streamingContent !== null ? [{
-      role: "assistant" as const,
-      content: streamingContent,
-      timestamp: new Date().toISOString(),
-      persisted: false,
-    }] : []),
-  ];
+    }));
+    if (streamingContent !== null) {
+      msgs.push({
+        role: "assistant",
+        content: streamingContent,
+        timestamp: streamingTimestamp.current,
+        persisted: false,
+      });
+    }
+    return msgs;
+  }, [dbMessages, streamingContent]);
 
+  // ─── Smart Auto-Scroll ────────────────────────────────────
+  const checkIfNearBottom = useCallback(() => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    const threshold = 120; // px from bottom
+    isNearBottomRef.current = el.scrollHeight - el.scrollTop - el.clientHeight < threshold;
+  }, []);
+
+  const scrollToBottom = useCallback((force = false) => {
+    if (!force && !isNearBottomRef.current) return;
+    if (scrollRafRef.current) cancelAnimationFrame(scrollRafRef.current);
+    scrollRafRef.current = requestAnimationFrame(() => {
+      messagesEndRef.current?.scrollIntoView({ behavior: force ? "smooth" : "auto" });
+    });
+  }, []);
+
+  // Scroll on new messages (not every streaming token)
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [displayMessages.length, streamingContent]);
+    scrollToBottom(true);
+  }, [dbMessages.length]);
 
+  // Scroll during streaming - throttled
+  useEffect(() => {
+    if (streamingContent !== null) {
+      scrollToBottom();
+    }
+  }, [streamingContent, scrollToBottom]);
+
+  // Track scroll position
+  useEffect(() => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    const handler = () => checkIfNearBottom();
+    el.addEventListener("scroll", handler, { passive: true });
+    return () => el.removeEventListener("scroll", handler);
+  }, [checkIfNearBottom]);
+
+  // Auto-resize textarea
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
@@ -246,16 +396,246 @@ export default function NovaChat() {
     }
   }, [message]);
 
-  // Auto-select first thread or create one
+  // Auto-select first thread
   useEffect(() => {
     if (!threadsLoading && !authLoading && isAuthenticated && !currentThread) {
       if (threads.length > 0) {
         selectThread(threads[0]);
       }
-      // Don't auto-create — let user start fresh
     }
   }, [threadsLoading, authLoading, isAuthenticated, currentThread, threads, selectThread]);
 
+  // ─── Voice Input (Web Speech API) ─────────────────────────
+  const startListening = useCallback(() => {
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      showToast({ title: "Not supported", description: "Speech recognition isn't available in this browser. Try Chrome or Edge.", variant: "destructive" });
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.lang = "en-GB";
+
+    let finalTranscript = "";
+
+    recognition.onresult = (event: any) => {
+      let interim = "";
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalTranscript += transcript;
+        } else {
+          interim += transcript;
+        }
+      }
+      setMessage(prev => finalTranscript + interim);
+    };
+
+    recognition.onerror = (event: any) => {
+      console.error("Speech recognition error:", event.error);
+      if (event.error === "not-allowed") {
+        showToast({ title: "Microphone blocked", description: "Please allow microphone access in your browser settings.", variant: "destructive" });
+      }
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+      // Auto-focus textarea after voice input
+      setTimeout(() => textareaRef.current?.focus(), 100);
+    };
+
+    recognition.start();
+    recognitionRef.current = recognition;
+    setIsListening(true);
+  }, [showToast]);
+
+  const stopListening = useCallback(() => {
+    recognitionRef.current?.stop();
+    setIsListening(false);
+  }, []);
+
+  const toggleListening = useCallback(() => {
+    if (isListening) {
+      stopListening();
+    } else {
+      startListening();
+    }
+  }, [isListening, startListening, stopListening]);
+
+  // ─── Full Voice Mode (ElevenLabs Conversational AI) ───────
+  const startVoiceMode = useCallback(async () => {
+    setVoiceModeActive(true);
+    setVoiceModeStatus("connecting");
+
+    try {
+      // Request microphone permission first
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+
+      // Get signed URL from edge function
+      const { data, error } = await supabase.functions.invoke("elevenlabs-signed-url");
+      
+      if (error || !data?.signed_url) {
+        throw new Error(error?.message || "Failed to get voice connection. Please check your ElevenLabs agent configuration.");
+      }
+
+      // Dynamically import the ElevenLabs React SDK
+      const { useConversation } = await import("@elevenlabs/react");
+      
+      // We can't use hooks dynamically, so we'll use the lower-level WebSocket approach
+      // Connect via WebSocket with the signed URL
+      const ws = new WebSocket(data.signed_url);
+      conversationRef.current = ws;
+
+      // Set up audio context for playback
+      const audioContext = new AudioContext({ sampleRate: 16000 });
+      
+      // Set up microphone capture
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        audio: { 
+          echoCancellation: true, 
+          noiseSuppression: true,
+          sampleRate: 16000
+        } 
+      });
+      
+      const mediaRecorder = new MediaRecorder(stream, { mimeType: "audio/webm;codecs=opus" });
+      const audioChunks: Blob[] = [];
+
+      ws.onopen = () => {
+        setVoiceModeStatus("connected");
+        console.log("Voice mode connected");
+      };
+
+      ws.onmessage = async (event) => {
+        try {
+          const msg = JSON.parse(event.data);
+          
+          if (msg.type === "agent_response") {
+            setVoiceModeSpeaking(true);
+          }
+          if (msg.type === "user_transcript") {
+            setVoiceModeSpeaking(false);
+          }
+          if (msg.type === "audio") {
+            setVoiceModeSpeaking(true);
+            // Decode and play audio
+            try {
+              const audioData = atob(msg.audio_event?.audio_base_64 || msg.audio?.chunk || "");
+              if (audioData.length > 0) {
+                const audioBuffer = new Uint8Array(audioData.length);
+                for (let i = 0; i < audioData.length; i++) {
+                  audioBuffer[i] = audioData.charCodeAt(i);
+                }
+                // Play via Audio element for simplicity
+                const blob = new Blob([audioBuffer], { type: "audio/mpeg" });
+                const url = URL.createObjectURL(blob);
+                const audio = new Audio(url);
+                audio.onended = () => {
+                  URL.revokeObjectURL(url);
+                  setVoiceModeSpeaking(false);
+                };
+                await audio.play().catch(() => {});
+              }
+            } catch {
+              // Ignore audio decode errors
+            }
+          }
+          if (msg.type === "conversation_initiation_metadata") {
+            console.log("Voice conversation started:", msg.conversation_initiation_metadata_event?.conversation_id);
+          }
+        } catch {
+          // Non-JSON message, ignore
+        }
+      };
+
+      ws.onerror = (err) => {
+        console.error("Voice mode WebSocket error:", err);
+        showToast({ title: "Voice connection error", description: "Connection to voice service failed. Please try again.", variant: "destructive" });
+        endVoiceMode();
+      };
+
+      ws.onclose = () => {
+        console.log("Voice mode disconnected");
+        setVoiceModeStatus("disconnected");
+        setVoiceModeActive(false);
+        setVoiceModeSpeaking(false);
+        stream.getTracks().forEach(t => t.stop());
+      };
+
+      // Send audio to ElevenLabs via WebSocket
+      // Use AudioWorklet or ScriptProcessor to capture raw PCM
+      const source = audioContext.createMediaStreamSource(stream);
+      const processor = audioContext.createScriptProcessor(4096, 1, 1);
+      
+      processor.onaudioprocess = (e) => {
+        if (ws.readyState !== WebSocket.OPEN) return;
+        const inputData = e.inputBuffer.getChannelData(0);
+        // Convert float32 to int16
+        const int16 = new Int16Array(inputData.length);
+        for (let i = 0; i < inputData.length; i++) {
+          const s = Math.max(-1, Math.min(1, inputData[i]));
+          int16[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+        }
+        // Convert to base64
+        const bytes = new Uint8Array(int16.buffer);
+        let binary = "";
+        for (let i = 0; i < bytes.length; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        const base64 = btoa(binary);
+        
+        ws.send(JSON.stringify({
+          user_audio_chunk: base64,
+        }));
+      };
+
+      source.connect(processor);
+      processor.connect(audioContext.destination);
+
+      // Store cleanup refs
+      (conversationRef.current as any).__cleanup = () => {
+        processor.disconnect();
+        source.disconnect();
+        audioContext.close();
+        stream.getTracks().forEach(t => t.stop());
+      };
+
+    } catch (err) {
+      console.error("Voice mode start error:", err);
+      const errorMsg = err instanceof Error ? err.message : "Failed to start voice mode";
+      showToast({ title: "Voice mode error", description: errorMsg, variant: "destructive" });
+      setVoiceModeActive(false);
+      setVoiceModeStatus("disconnected");
+    }
+  }, [showToast]);
+
+  const endVoiceMode = useCallback(() => {
+    const ws = conversationRef.current;
+    if (ws) {
+      if ((ws as any).__cleanup) (ws as any).__cleanup();
+      if (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING) {
+        ws.close();
+      }
+    }
+    conversationRef.current = null;
+    setVoiceModeActive(false);
+    setVoiceModeStatus("disconnected");
+    setVoiceModeSpeaking(false);
+  }, []);
+
+  // Cleanup voice mode on unmount
+  useEffect(() => {
+    return () => {
+      if (conversationRef.current) {
+        endVoiceMode();
+      }
+    };
+  }, [endVoiceMode]);
+
+  // ─── Message Handling ─────────────────────────────────────
   const handleNewThread = useCallback(async () => {
     const thread = await createThread();
     if (thread) {
@@ -267,7 +647,6 @@ export default function NovaChat() {
     const text = customMsg || message.trim();
     if (!text || isLoading || !isAuthenticated) return;
 
-    // Ensure we have a thread
     let threadId = currentThread?.id;
     if (!threadId) {
       const newThread = await createThread(text.slice(0, 50));
@@ -280,11 +659,12 @@ export default function NovaChat() {
 
     setMessage("");
     setIsLoading(true);
+    // Reset streaming timestamp for this response
+    streamingTimestamp.current = new Date().toISOString();
 
     const requestId = `req_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
     setDiagnostics(prev => ({ ...prev, requestId, streamingState: "connecting", lastError: null, persistenceState: { userMessage: "pending", assistantMessage: null } }));
 
-    // 1. Persist user message to DB
     const userMsg = await addMessage("user", text, threadId);
     if (!userMsg) {
       setDiagnostics(prev => ({ ...prev, persistenceState: { ...prev.persistenceState, userMessage: "failed" } }));
@@ -294,19 +674,15 @@ export default function NovaChat() {
     }
     setDiagnostics(prev => ({ ...prev, persistenceState: { ...prev.persistenceState, userMessage: "saved" } }));
 
-    // Update thread title on first message
     if (currentThread && dbMessages.length === 0) {
       updateThreadTitle(threadId, text.slice(0, 50) + (text.length > 50 ? "…" : ""));
     }
 
-    // 2. Build messages array from DB messages (now includes the user message via realtime/optimistic)
-    // We need the full conversation history for the AI
     const conversationHistory = [
       ...dbMessages.map(m => ({ role: m.role, content: m.content })),
       { role: "user" as const, content: text },
     ];
 
-    // 3. Stream response from nova-chat
     setDiagnostics(prev => ({ ...prev, persistenceState: { ...prev.persistenceState, assistantMessage: "pending" } }));
     setStreamingContent("");
 
@@ -391,7 +767,6 @@ export default function NovaChat() {
         }
       }
 
-      // 4. Persist assistant message to DB
       if (fullContent) {
         const assistantMsg = await addMessage("assistant", fullContent, threadId);
         if (assistantMsg) {
@@ -401,7 +776,6 @@ export default function NovaChat() {
         }
       }
 
-      // Clear streaming overlay — DB message will show via realtime/optimistic update
       setStreamingContent(null);
       setDiagnostics(prev => ({ ...prev, streamingState: "complete", messageCount: prev.messageCount + 1 }));
 
@@ -443,7 +817,6 @@ export default function NovaChat() {
 
   const handleDeleteThread = useCallback(async (threadId: string) => {
     await deleteThread(threadId);
-    // If we deleted the current one, select the next available
     const remaining = threads.filter(t => t.id !== threadId);
     if (remaining.length > 0) {
       selectThread(remaining[0]);
@@ -493,6 +866,18 @@ export default function NovaChat() {
     <div className="min-h-screen bg-background flex flex-col">
       <SEO title="Chat with Nova AI | Health Coaching | NeuroState" description="Have intelligent conversations with Nova AI about your cognitive performance, recovery, sleep, and personalised health protocols." noindex={true} />
       <NovaNav />
+
+      {/* Voice Mode Overlay */}
+      <AnimatePresence>
+        {voiceModeActive && (
+          <VoiceModeOverlay
+            isActive={voiceModeActive}
+            isSpeaking={voiceModeSpeaking}
+            status={voiceModeStatus}
+            onEnd={endVoiceMode}
+          />
+        )}
+      </AnimatePresence>
       
       <div className="flex-1 flex flex-col relative overflow-hidden">
         {/* Sidebar */}
@@ -605,6 +990,21 @@ export default function NovaChat() {
             </div>
           </div>
           <div className="flex items-center gap-1">
+            {/* Voice Mode Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={voiceModeActive ? endVoiceMode : startVoiceMode}
+              className={cn(
+                "h-8 w-8 transition-all",
+                voiceModeActive 
+                  ? "text-accent bg-accent/10" 
+                  : "text-muted-foreground/50 hover:text-foreground"
+              )}
+              title="Voice conversation"
+            >
+              {voiceModeActive ? <PhoneOff className="h-4 w-4" /> : <Phone className="h-4 w-4" />}
+            </Button>
             <NovaChatDiagnostics state={{ ...diagnostics, threadId: currentThread?.id || null }} />
             <Button 
               variant="ghost" 
@@ -678,14 +1078,30 @@ export default function NovaChat() {
                   );
                 })}
               </motion.div>
+
+              {/* Voice CTA in empty state */}
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                onClick={startVoiceMode}
+                className="mt-6 flex items-center gap-2 text-sm text-muted-foreground/50 hover:text-accent transition-colors"
+              >
+                <Phone className="h-4 w-4" />
+                <span>or start a voice conversation</span>
+              </motion.button>
             </div>
           ) : (
             /* Messages Area */
-            <div className="flex-1 overflow-y-auto overscroll-contain">
+            <div 
+              ref={scrollContainerRef}
+              className="flex-1 overflow-y-auto overscroll-contain"
+              onScroll={checkIfNearBottom}
+            >
               <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 space-y-6">
                 {displayMessages.map((msg, i) => (
                   <MessageBubble
-                    key={`${i}-${msg.timestamp}`}
+                    key={msg.persisted ? `db-${i}` : `stream-${i}`}
                     msg={msg}
                     index={i}
                     isLast={i === displayMessages.length - 1 && msg.role === "assistant" && msg.persisted === true}
@@ -693,10 +1109,11 @@ export default function NovaChat() {
                     onCopy={copyMessage}
                     onRegenerate={regenerate}
                     isLoading={isLoading}
+                    isStreaming={!msg.persisted && msg.role === "assistant"}
                   />
                 ))}
                 
-                {isLoading && displayMessages[displayMessages.length - 1]?.role === "user" && (
+                {isLoading && streamingContent === null && displayMessages[displayMessages.length - 1]?.role === "user" && (
                   <motion.div
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -727,23 +1144,49 @@ export default function NovaChat() {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder="Ask Nova anything..."
+                  placeholder={isListening ? "Listening..." : "Ask Nova anything..."}
                   rows={1}
                   disabled={isLoading}
                   className={cn(
                     "flex-1 resize-none bg-transparent border-0 focus:ring-0 focus:outline-none",
                     "text-[15px] sm:text-sm text-foreground placeholder:text-muted-foreground/40",
-                    "py-3 px-4 min-h-[48px] max-h-[160px]"
+                    "py-3 px-4 min-h-[48px] max-h-[160px]",
+                    isListening && "placeholder:text-accent/60"
                   )}
                   data-swipe-ignore="true"
                 />
-                <div className="pr-2 pb-2">
+                <div className="flex items-center gap-1.5 pr-2 pb-2">
+                  {/* Voice Input (mic) Button */}
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={toggleListening}
+                    disabled={isLoading}
+                    className={cn(
+                      "h-9 w-9 rounded-xl transition-all touch-manipulation",
+                      isListening 
+                        ? "bg-accent/20 text-accent" 
+                        : "text-muted-foreground/50 hover:text-foreground hover:bg-muted/30"
+                    )}
+                    title={isListening ? "Stop listening" : "Voice input"}
+                  >
+                    {isListening ? (
+                      <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1, repeat: Infinity }}>
+                        <MicOff className="h-4 w-4" />
+                      </motion.div>
+                    ) : (
+                      <Mic className="h-4 w-4" />
+                    )}
+                  </Button>
+
+                  {/* Send Button */}
                   <Button
                     onClick={() => handleSend()}
                     disabled={!message.trim() || isLoading}
                     size="icon"
                     className={cn(
-                      "h-9 w-9 rounded-xl flex-shrink-0 transition-all duration-200",
+                      "h-9 w-9 rounded-xl flex-shrink-0 transition-all duration-200 touch-manipulation",
                       message.trim() && !isLoading
                         ? "bg-accent hover:bg-accent/90 text-white shadow-sm shadow-accent/20"
                         : "bg-muted/30 text-muted-foreground/30 cursor-not-allowed"
