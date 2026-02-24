@@ -1205,7 +1205,7 @@ export default function TeamDashboard() {
                         {comparison.readiness.change > 0 ? '+' : ''}{comparison.readiness.change.toFixed(1)}%
                       </div>
                     </div>
-                    <div className="flex items-center justify-between p-2.5 md:p-3 rounded-lg md:rounded-xl bg-background border border-border/30">
+                    <div className="flex items-center justify-between p-2.5 md:p-3 rounded-lg bg-background border border-border/30">
                       <div>
                         <div className="text-[9px] md:text-[10px] text-muted-foreground">Burnout Risk</div>
                         <div className="text-base md:text-lg font-semibold text-foreground">{comparison.burnout.current}%</div>
