@@ -89,6 +89,63 @@ export type Database = {
         }
         Relationships: []
       }
+      autonomous_nudges: {
+        Row: {
+          action_label: string | null
+          category: string
+          completed_at: string | null
+          confidence: number | null
+          created_at: string
+          description: string
+          expires_at: string | null
+          id: string
+          impact: string | null
+          metadata: Json | null
+          nudge_type: string
+          priority: string
+          status: string
+          timing: string | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          action_label?: string | null
+          category?: string
+          completed_at?: string | null
+          confidence?: number | null
+          created_at?: string
+          description: string
+          expires_at?: string | null
+          id?: string
+          impact?: string | null
+          metadata?: Json | null
+          nudge_type?: string
+          priority?: string
+          status?: string
+          timing?: string | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          action_label?: string | null
+          category?: string
+          completed_at?: string | null
+          confidence?: number | null
+          created_at?: string
+          description?: string
+          expires_at?: string | null
+          id?: string
+          impact?: string | null
+          metadata?: Json | null
+          nudge_type?: string
+          priority?: string
+          status?: string
+          timing?: string | null
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       biometric_streams: {
         Row: {
           created_at: string
