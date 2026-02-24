@@ -1095,7 +1095,7 @@ export default function NovaChat() {
             /* Messages Area */
             <div 
               ref={scrollContainerRef}
-              className="flex-1 overflow-y-auto overscroll-contain"
+              className="flex-1 min-h-0 overflow-y-auto overscroll-contain touch-pan-y"
               onScroll={checkIfNearBottom}
             >
               <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 space-y-6">
