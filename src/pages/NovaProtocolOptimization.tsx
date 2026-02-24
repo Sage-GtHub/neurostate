@@ -63,7 +63,7 @@ export default function NovaProtocolOptimization() {
                 value="adaptive" 
                 className="px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm data-[state=active]:bg-accent/10 data-[state=active]:text-carbon data-[state=active]:border data-[state=active]:border-accent/20 rounded-xl sm:rounded-2xl transition-all whitespace-nowrap"
               >
-                Adaptive Protocol
+                Smart Adjustments
               </TabsTrigger>
               <TabsTrigger 
                 value="goals" 
