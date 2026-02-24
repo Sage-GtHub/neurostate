@@ -1,286 +1,392 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Activity, Brain, TrendingUp, AlertCircle, Play, Pause, RefreshCw } from "lucide-react";
-import { useRealtimeMetrics } from "@/hooks/useRealtimeMetrics";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { 
+  FlaskConical, Plus, Minus, ArrowUp, ArrowDown, Minus as Stable, 
+  Loader2, Trash2, AlertTriangle, CheckCircle, TrendingUp, Lightbulb, X
+} from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
-interface Metric {
-  label: string;
-  value: number;
+interface SupplementChange {
+  name: string;
+  current_dose: string;
+  proposed_dose: string;
+}
+
+interface TimingChange {
+  item: string;
+  current_time: string;
+  proposed_time: string;
+}
+
+interface Prediction {
+  metric: string;
+  current_value: number;
+  predicted_7d: number;
+  predicted_30d: number;
   unit: string;
-  status: "optimal" | "moderate" | "low";
-  icon: any;
+  direction: "up" | "down" | "stable";
+  confidence: number;
+}
+
+interface SimulationResult {
+  predictions: Prediction[];
+  overall_impact: "positive" | "negative" | "mixed" | "neutral";
+  impact_score: number;
+  summary: string;
+  risks: string[];
+  recommendations: string[];
 }
 
 export function RealTimeSimulation() {
-  const [isRunning, setIsRunning] = useState(false);
-  const [isLive, setIsLive] = useState(false);
-  const { metrics: realtimeMetrics, syncDevices } = useRealtimeMetrics();
-  const [metrics, setMetrics] = useState<Metric[]>([
-    { label: "Heart Rate", value: 68, unit: "bpm", status: "optimal", icon: Activity },
-    { label: "Sleep Quality", value: 82, unit: "/100", status: "optimal", icon: Brain },
-    { label: "Recovery Score", value: 75, unit: "%", status: "moderate", icon: TrendingUp },
-    { label: "Stress Index", value: 32, unit: "/100", status: "optimal", icon: AlertCircle }
+  const [supplements, setSupplements] = useState<SupplementChange[]>([
+    { name: "Magnesium", current_dose: "200mg", proposed_dose: "400mg" }
   ]);
-  const [aiConfidence, setAiConfidence] = useState(97);
-  const [prediction, setPrediction] = useState("80/100");
-  const [recommendation, setRecommendation] = useState("Magnesium +100mg");
-  const [processing, setProcessing] = useState("Analysing biometric streams");
+  const [timingChanges, setTimingChanges] = useState<TimingChange[]>([]);
+  const [additions, setAdditions] = useState<string[]>([]);
+  const [removals, setRemovals] = useState<string[]>([]);
+  const [newAddition, setNewAddition] = useState("");
+  const [newRemoval, setNewRemoval] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState<SimulationResult | null>(null);
 
-  // Update from real metrics when available
-  useEffect(() => {
-    if (realtimeMetrics.hrv || realtimeMetrics.sleep || realtimeMetrics.recovery) {
-      setIsLive(true);
-      
-      const updatedMetrics: Metric[] = [
-        { 
-          label: "HRV", 
-          value: parseInt(realtimeMetrics.hrv?.value?.toString() || "68"), 
-          unit: "ms", 
-          status: getHrvStatus(parseInt(realtimeMetrics.hrv?.value?.toString() || "68")), 
-          icon: Activity 
-        },
-        { 
-          label: "Sleep Score", 
-          value: parseInt(realtimeMetrics.sleep?.value?.toString().replace('/10', '') || "8") * 10, 
-          unit: "/100", 
-          status: getSleepStatus(parseInt(realtimeMetrics.sleep?.value?.toString().replace('/10', '') || "8") * 10), 
-          icon: Brain 
-        },
-        { 
-          label: "Recovery", 
-          value: parseInt(realtimeMetrics.recovery?.value?.toString().replace('%', '') || "75"), 
-          unit: "%", 
-          status: getRecoveryStatus(parseInt(realtimeMetrics.recovery?.value?.toString().replace('%', '') || "75")), 
-          icon: TrendingUp 
-        },
-        { 
-          label: "Focus", 
-          value: parseInt(realtimeMetrics.focus?.value?.toString() || "70"), 
-          unit: "/100", 
-          status: getFocusStatus(parseInt(realtimeMetrics.focus?.value?.toString() || "70")), 
-          icon: AlertCircle 
+  const addSupplement = () => {
+    setSupplements([...supplements, { name: "", current_dose: "", proposed_dose: "" }]);
+  };
+
+  const removeSupplement = (i: number) => {
+    setSupplements(supplements.filter((_, idx) => idx !== i));
+  };
+
+  const updateSupplement = (i: number, field: keyof SupplementChange, value: string) => {
+    const updated = [...supplements];
+    updated[i][field] = value;
+    setSupplements(updated);
+  };
+
+  const addTimingChange = () => {
+    setTimingChanges([...timingChanges, { item: "", current_time: "", proposed_time: "" }]);
+  };
+
+  const removeTimingChange = (i: number) => {
+    setTimingChanges(timingChanges.filter((_, idx) => idx !== i));
+  };
+
+  const updateTiming = (i: number, field: keyof TimingChange, value: string) => {
+    const updated = [...timingChanges];
+    updated[i][field] = value;
+    setTimingChanges(updated);
+  };
+
+  const handleAddAddition = () => {
+    if (newAddition.trim()) {
+      setAdditions([...additions, newAddition.trim()]);
+      setNewAddition("");
+    }
+  };
+
+  const handleAddRemoval = () => {
+    if (newRemoval.trim()) {
+      setRemovals([...removals, newRemoval.trim()]);
+      setNewRemoval("");
+    }
+  };
+
+  const runSimulation = async () => {
+    const validSupps = supplements.filter(s => s.name && s.proposed_dose);
+    const validTimings = timingChanges.filter(t => t.item && t.proposed_time);
+    
+    if (validSupps.length === 0 && validTimings.length === 0 && additions.length === 0 && removals.length === 0) {
+      toast.error("Add at least one change to simulate");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('simulate-protocol', {
+        body: {
+          changes: {
+            supplement_adjustments: validSupps,
+            timing_changes: validTimings,
+            additions,
+            removals,
+          }
         }
-      ];
-      
-      setMetrics(updatedMetrics);
-    }
-  }, [realtimeMetrics]);
+      });
 
-  const getHrvStatus = (value: number): "optimal" | "moderate" | "low" => {
-    if (value >= 60) return "optimal";
-    if (value >= 40) return "moderate";
-    return "low";
-  };
-
-  const getSleepStatus = (value: number): "optimal" | "moderate" | "low" => {
-    if (value >= 75) return "optimal";
-    if (value >= 50) return "moderate";
-    return "low";
-  };
-
-  const getRecoveryStatus = (value: number): "optimal" | "moderate" | "low" => {
-    if (value >= 75) return "optimal";
-    if (value >= 50) return "moderate";
-    return "low";
-  };
-
-  const getFocusStatus = (value: number): "optimal" | "moderate" | "low" => {
-    if (value >= 70) return "optimal";
-    if (value >= 50) return "moderate";
-    return "low";
-  };
-
-  useEffect(() => {
-    if (!isRunning || isLive) return;
-
-    const interval = setInterval(() => {
-      setMetrics(prev => prev.map(metric => {
-        const variance = Math.random() * 4 - 2;
-        let newValue = metric.value + variance;
-        
-        if (metric.label === "HRV" || metric.label === "Heart Rate") {
-          newValue = Math.max(50, Math.min(85, newValue));
-        } else {
-          newValue = Math.max(40, Math.min(95, newValue));
-        }
-
-        const status = newValue >= 75 ? "optimal" : newValue >= 50 ? "moderate" : "low";
-
-        return { ...metric, value: Math.round(newValue), status };
-      }));
-
-      setAiConfidence(Math.max(90, Math.min(99, aiConfidence + (Math.random() * 2 - 1))));
-      
-      const recommendations = [
-        "Magnesium +100mg",
-        "L-Theanine 200mg",
-        "Reduce caffeine intake",
-        "Earlier bedtime recommended",
-        "Increase hydration",
-        "Light movement session"
-      ];
-      setRecommendation(recommendations[Math.floor(Math.random() * recommendations.length)]);
-
-      const processingStates = [
-        "Analysing 15 biometric streams",
-        "Processing sleep architecture",
-        "Evaluating recovery patterns",
-        "Computing HRV correlations",
-        "Updating protocol recommendations"
-      ];
-      setProcessing(processingStates[Math.floor(Math.random() * processingStates.length)]);
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }, [isRunning, isLive, aiConfidence]);
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "optimal": return "text-accent";
-      case "moderate": return "text-orange-500";
-      case "low": return "text-red-500";
-      default: return "text-ash";
+      if (error) throw error;
+      setResult(data);
+    } catch (err: any) {
+      toast.error(err.message || "Simulation failed");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const getStatusBg = (status: string) => {
-    switch (status) {
-      case "optimal": return "bg-accent/10";
-      case "moderate": return "bg-orange-500/10";
-      case "low": return "bg-red-500/10";
-      default: return "bg-mist/20";
-    }
+  const getDirectionIcon = (dir: string) => {
+    if (dir === "up") return <ArrowUp className="w-4 h-4 text-accent" />;
+    if (dir === "down") return <ArrowDown className="w-4 h-4 text-red-500" />;
+    return <Stable className="w-4 h-4 text-ash" />;
   };
 
-  const handleSync = async () => {
-    await syncDevices();
+  const getDelta = (current: number, predicted: number) => {
+    const diff = predicted - current;
+    if (diff > 0) return `+${diff.toFixed(0)}`;
+    return diff.toFixed(0);
+  };
+
+  const getImpactColor = (impact: string) => {
+    if (impact === "positive") return "text-accent";
+    if (impact === "negative") return "text-red-500";
+    if (impact === "mixed") return "text-orange-500";
+    return "text-ash";
   };
 
   return (
     <Card className="border-mist/30 hover:shadow-lg transition-shadow">
-      <CardContent className="p-8">
-        <div className="flex items-center justify-between mb-8">
+      <CardContent className="p-6 sm:p-8">
+        <div className="flex items-start justify-between mb-6">
           <div>
             <div className="flex items-center gap-2 mb-2">
+              <FlaskConical className="w-5 h-5 text-accent" />
               <h2 className="text-h3 font-semibold text-carbon">
-                Real-Time AI Processing
+                Preview Changes
               </h2>
-              {isLive && (
-                <span className="flex items-center gap-1 px-2 py-1 rounded-full bg-accent/10 text-accent text-xs font-medium">
-                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                  Live Data
-                </span>
-              )}
             </div>
             <p className="text-body-sm text-ash">
-              {isLive ? "Connected to your devices" : "Watch Nova analyse and adapt in real-time"}
+              See how protocol changes could affect your body before you commit
             </p>
           </div>
-          <div className="flex gap-2">
-            {isLive && (
-              <Button onClick={handleSync} variant="outline" size="sm" className="gap-2">
-                <RefreshCw className="w-4 h-4" />
-                Sync
-              </Button>
-            )}
-            {!isLive && (
-              <Button
-                onClick={() => setIsRunning(!isRunning)}
-                variant={isRunning ? "outline" : "default"}
-                size="sm"
-                className="gap-2"
-              >
-                {isRunning ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                <span>{isRunning ? "Pause" : "Start"} Demo</span>
-              </Button>
-            )}
-          </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
-          {metrics.map((metric, index) => {
-            const Icon = metric.icon;
-            return (
-              <div
-                key={index}
-                className={`p-6 rounded-2xl transition-all ${getStatusBg(metric.status)}`}
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-xl ${getStatusBg(metric.status)} flex items-center justify-center`}>
-                      <Icon className={`w-5 h-5 ${getStatusColor(metric.status)}`} />
-                    </div>
-                    <span className="text-sm font-medium text-carbon">{metric.label}</span>
-                  </div>
-                  <div className={`px-3 py-1 rounded-full text-xs font-medium capitalize ${getStatusBg(metric.status)} ${getStatusColor(metric.status)}`}>
-                    {metric.status}
-                  </div>
-                </div>
-                <div className="flex items-baseline gap-2">
-                  <div className="text-[2.5rem] font-bold text-carbon tracking-tight">
-                    {metric.value}
-                  </div>
-                  <div className="text-sm text-ash">{metric.unit}</div>
-                </div>
+        {/* Supplement dose changes */}
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-sm font-medium text-carbon">Dose changes</h3>
+            <Button variant="ghost" size="sm" onClick={addSupplement} className="gap-1 text-xs">
+              <Plus className="w-3 h-3" /> Add
+            </Button>
+          </div>
+          <div className="space-y-2">
+            {supplements.map((s, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <Input 
+                  placeholder="Supplement" 
+                  value={s.name} 
+                  onChange={e => updateSupplement(i, "name", e.target.value)}
+                  className="flex-1 text-sm h-9"
+                />
+                <Input 
+                  placeholder="Now" 
+                  value={s.current_dose} 
+                  onChange={e => updateSupplement(i, "current_dose", e.target.value)}
+                  className="w-20 text-sm h-9"
+                />
+                <span className="text-ash text-xs">→</span>
+                <Input 
+                  placeholder="New" 
+                  value={s.proposed_dose} 
+                  onChange={e => updateSupplement(i, "proposed_dose", e.target.value)}
+                  className="w-20 text-sm h-9"
+                />
+                <Button variant="ghost" size="sm" onClick={() => removeSupplement(i)} className="h-9 w-9 p-0">
+                  <Trash2 className="w-3.5 h-3.5 text-ash" />
+                </Button>
               </div>
-            );
-          })}
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="p-6 rounded-2xl bg-gradient-to-br from-pearl/50 to-ivory border border-mist/30">
-            <div className="text-caption text-ash uppercase tracking-wider mb-2">AI Confidence</div>
-            <div className="text-[2rem] font-bold text-carbon mb-1">{Math.round(aiConfidence)}%</div>
-            <div className="text-sm text-ash">Processing accuracy</div>
-          </div>
-
-          <div className="p-6 rounded-2xl bg-gradient-to-br from-pearl/50 to-ivory border border-mist/30">
-            <div className="text-caption text-ash uppercase tracking-wider mb-2">Tonight's Prediction</div>
-            <div className="text-[2rem] font-bold text-carbon mb-1">{prediction}</div>
-            <div className="text-sm text-ash">Sleep quality forecast</div>
-          </div>
-
-          <div className="p-6 rounded-2xl bg-gradient-to-br from-pearl/50 to-ivory border border-mist/30">
-            <div className="text-caption text-ash uppercase tracking-wider mb-2">Training Readiness</div>
-            <div className="text-[2rem] font-bold text-carbon mb-1">
-              {metrics.find(m => m.label === "Recovery")?.status === "optimal" ? "High" : 
-               metrics.find(m => m.label === "Recovery")?.status === "moderate" ? "Moderate" : "Low"}
-            </div>
-            <div className="text-sm text-ash">Current state</div>
+            ))}
           </div>
         </div>
 
-        <div className="p-6 rounded-2xl bg-gradient-to-br from-accent/5 to-accent/10 border border-accent/20">
-          <h3 className="text-body font-semibold text-carbon mb-4">Nova's Current Analysis</h3>
-          
-          <div className="space-y-4">
-            <div>
-              <div className="text-caption text-ash uppercase tracking-wider mb-2">Real-Time Processing</div>
-              <p className="text-sm text-carbon font-medium">{processing} with &lt;50ms latency</p>
+        {/* Timing changes */}
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-sm font-medium text-carbon">Timing changes</h3>
+            <Button variant="ghost" size="sm" onClick={addTimingChange} className="gap-1 text-xs">
+              <Plus className="w-3 h-3" /> Add
+            </Button>
+          </div>
+          {timingChanges.map((t, i) => (
+            <div key={i} className="flex items-center gap-2 mb-2">
+              <Input 
+                placeholder="Item" 
+                value={t.item} 
+                onChange={e => updateTiming(i, "item", e.target.value)}
+                className="flex-1 text-sm h-9"
+              />
+              <Input 
+                placeholder="Now" 
+                value={t.current_time} 
+                onChange={e => updateTiming(i, "current_time", e.target.value)}
+                className="w-24 text-sm h-9"
+              />
+              <span className="text-ash text-xs">→</span>
+              <Input 
+                placeholder="New" 
+                value={t.proposed_time} 
+                onChange={e => updateTiming(i, "proposed_time", e.target.value)}
+                className="w-24 text-sm h-9"
+              />
+              <Button variant="ghost" size="sm" onClick={() => removeTimingChange(i)} className="h-9 w-9 p-0">
+                <Trash2 className="w-3.5 h-3.5 text-ash" />
+              </Button>
             </div>
+          ))}
+        </div>
 
-            <div>
-              <div className="text-caption text-ash uppercase tracking-wider mb-2">72-Hour Forecast</div>
-              <p className="text-sm text-carbon font-medium">
-                Optimal training window tomorrow afternoon based on recovery trends
-              </p>
+        {/* Add / Remove items */}
+        <div className="grid sm:grid-cols-2 gap-4 mb-6">
+          <div>
+            <h3 className="text-sm font-medium text-carbon mb-2">Add to protocol</h3>
+            <div className="flex gap-2 mb-2">
+              <Input 
+                placeholder="e.g. L-Theanine 200mg" 
+                value={newAddition} 
+                onChange={e => setNewAddition(e.target.value)}
+                onKeyDown={e => e.key === "Enter" && handleAddAddition()}
+                className="text-sm h-9"
+              />
+              <Button variant="outline" size="sm" onClick={handleAddAddition} className="h-9">
+                <Plus className="w-3.5 h-3.5" />
+              </Button>
             </div>
-
-            <div>
-              <div className="text-caption text-ash uppercase tracking-wider mb-2">Auto-Adjustment Made</div>
-              <p className="text-sm text-carbon font-medium">
-                {recommendation} based on current biometric patterns
-              </p>
+            <div className="flex flex-wrap gap-1.5">
+              {additions.map((a, i) => (
+                <Badge key={i} variant="secondary" className="gap-1 text-xs">
+                  {a}
+                  <X className="w-3 h-3 cursor-pointer" onClick={() => setAdditions(additions.filter((_, idx) => idx !== i))} />
+                </Badge>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 className="text-sm font-medium text-carbon mb-2">Remove from protocol</h3>
+            <div className="flex gap-2 mb-2">
+              <Input 
+                placeholder="e.g. Melatonin" 
+                value={newRemoval} 
+                onChange={e => setNewRemoval(e.target.value)}
+                onKeyDown={e => e.key === "Enter" && handleAddRemoval()}
+                className="text-sm h-9"
+              />
+              <Button variant="outline" size="sm" onClick={handleAddRemoval} className="h-9">
+                <Minus className="w-3.5 h-3.5" />
+              </Button>
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {removals.map((r, i) => (
+                <Badge key={i} variant="destructive" className="gap-1 text-xs">
+                  {r}
+                  <X className="w-3 h-3 cursor-pointer" onClick={() => setRemovals(removals.filter((_, idx) => idx !== i))} />
+                </Badge>
+              ))}
             </div>
           </div>
         </div>
 
-        {(isRunning || isLive) && (
-          <div className="mt-6 flex items-center justify-center gap-2 text-sm text-ash">
-            <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            <span>{isLive ? "Live data • Updates from connected devices" : "Demo mode • Updates every 2 seconds"}</span>
+        <Button onClick={runSimulation} disabled={loading} className="w-full gap-2 mb-6">
+          {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <FlaskConical className="w-4 h-4" />}
+          {loading ? "Simulating…" : "Run Simulation"}
+        </Button>
+
+        {/* Results */}
+        {result && (
+          <div className="space-y-6 animate-fade-in">
+            {/* Overall Impact */}
+            <div className="p-5 rounded-2xl bg-gradient-to-br from-pearl/50 to-ivory border border-mist/30">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  {result.overall_impact === "positive" ? (
+                    <CheckCircle className="w-5 h-5 text-accent" />
+                  ) : result.overall_impact === "negative" ? (
+                    <AlertTriangle className="w-5 h-5 text-red-500" />
+                  ) : (
+                    <TrendingUp className="w-5 h-5 text-orange-500" />
+                  )}
+                  <h3 className="font-semibold text-carbon">
+                    Overall: <span className={getImpactColor(result.overall_impact)}>
+                      {result.overall_impact === "positive" ? "Looks good" : 
+                       result.overall_impact === "negative" ? "Be careful" : 
+                       result.overall_impact === "mixed" ? "Mixed results" : "Minimal change"}
+                    </span>
+                  </h3>
+                </div>
+                <Badge variant="outline" className="text-xs">
+                  Impact score: {result.impact_score}/100
+                </Badge>
+              </div>
+              <p className="text-sm text-ash">{result.summary}</p>
+            </div>
+
+            {/* Metric Predictions */}
+            <div>
+              <h3 className="text-sm font-medium text-carbon mb-3">Predicted changes</h3>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {result.predictions.map((p, i) => (
+                  <div key={i} className="p-4 rounded-xl bg-pearl/30 border border-mist/20">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-medium text-carbon">{p.metric}</span>
+                      {getDirectionIcon(p.direction)}
+                    </div>
+                    <div className="flex items-baseline gap-2 mb-1">
+                      <span className="text-2xl font-bold text-carbon">{p.current_value}</span>
+                      <span className="text-xs text-ash">{p.unit} now</span>
+                    </div>
+                    <div className="flex gap-3 text-xs">
+                      <div>
+                        <span className="text-ash">7 days: </span>
+                        <span className={p.predicted_7d > p.current_value ? "text-accent font-medium" : p.predicted_7d < p.current_value ? "text-red-500 font-medium" : "text-ash"}>
+                          {getDelta(p.current_value, p.predicted_7d)}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-ash">30 days: </span>
+                        <span className={p.predicted_30d > p.current_value ? "text-accent font-medium" : p.predicted_30d < p.current_value ? "text-red-500 font-medium" : "text-ash"}>
+                          {getDelta(p.current_value, p.predicted_30d)}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="mt-2 text-xs text-ash">
+                      Confidence: {p.confidence}%
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Risks */}
+            {result.risks.length > 0 && (
+              <div>
+                <h3 className="text-sm font-medium text-carbon mb-2 flex items-center gap-1.5">
+                  <AlertTriangle className="w-4 h-4 text-orange-500" /> Things to watch
+                </h3>
+                <ul className="space-y-1.5">
+                  {result.risks.map((r, i) => (
+                    <li key={i} className="text-sm text-ash flex items-start gap-2">
+                      <span className="text-orange-500 mt-1">•</span> {r}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Recommendations */}
+            {result.recommendations.length > 0 && (
+              <div>
+                <h3 className="text-sm font-medium text-carbon mb-2 flex items-center gap-1.5">
+                  <Lightbulb className="w-4 h-4 text-accent" /> Suggestions
+                </h3>
+                <ul className="space-y-1.5">
+                  {result.recommendations.map((r, i) => (
+                    <li key={i} className="text-sm text-ash flex items-start gap-2">
+                      <span className="text-accent mt-1">•</span> {r}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         )}
       </CardContent>

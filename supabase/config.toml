@@ -62,3 +62,6 @@ verify_jwt = true
 
 [functions.goal-balance]
 verify_jwt = false
+
+[functions.simulate-protocol]
+verify_jwt = true
