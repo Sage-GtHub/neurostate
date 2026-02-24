@@ -9,6 +9,7 @@ import { BehaviourChangeNudges } from "@/components/nova/BehaviourChangeNudges";
 import { PatternRecognition } from "@/components/nova/PatternRecognition";
 import { AutonomousFeatures } from "@/components/nova/AutonomousFeatures";
 import { RealTimeSimulation } from "@/components/nova/RealTimeSimulation";
+import { PersonalROITracker } from "@/components/nova/PersonalROITracker";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SEO } from "@/components/SEO";
 
