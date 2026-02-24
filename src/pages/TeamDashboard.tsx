@@ -762,7 +762,7 @@ export default function TeamDashboard() {
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-3 md:gap-4 mb-3 md:mb-4">
-                    <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                    <div className="p-3 md:p-4 rounded-lg bg-background border border-border/30">
                       <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Capacity</div>
                       <div className="text-2xl md:text-3xl font-semibold text-foreground">{currentForecast.capacity}</div>
                       <div className="text-[10px] md:text-xs text-muted-foreground mt-1">
