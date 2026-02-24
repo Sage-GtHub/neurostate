@@ -56,3 +56,9 @@ verify_jwt = false
 
 [functions.autonomous-coaching]
 verify_jwt = true
+
+[functions.pattern-recognition]
+verify_jwt = true
+
+[functions.goal-balance]
+verify_jwt = false
