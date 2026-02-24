@@ -27,8 +27,10 @@ import logoIcon from "@/assets/neurostate-icon.png";
 const navItems = [
   { to: "/nova/chat", label: "Chat", icon: MessageCircle },
   { to: "/nova", label: "Home", icon: LayoutDashboard, end: true },
-  { to: "/nova/protocols", label: "Protocols", icon: Activity }, // Merged: Protocols + Goals
-  { to: "/nova/insights", label: "Insights", icon: Zap }, // Merged: Insights + Trends
+  { to: "/nova/dashboard", label: "Dashboard", icon: Gauge },
+  { to: "/nova/protocols", label: "Protocols", icon: Activity },
+  { to: "/nova/optimisation", label: "Optimise", icon: FlaskConical },
+  { to: "/nova/insights", label: "Insights", icon: Zap },
   { to: "/nova/devices", label: "Devices", icon: Smartphone },
   { to: "/nova/settings", label: "Settings", icon: Settings },
 ];
@@ -36,8 +38,8 @@ const navItems = [
 const mobileNavItems = [
   { to: "/nova/chat", label: "Chat", icon: MessageCircle },
   { to: "/nova", label: "Home", icon: LayoutDashboard, end: true },
+  { to: "/nova/dashboard", label: "Dashboard", icon: Gauge },
   { to: "/nova/protocols", label: "Protocols", icon: Activity },
-  { to: "/nova/devices", label: "Devices", icon: Smartphone },
   { to: "/nova/settings", label: "More", icon: Settings },
 ];
 
