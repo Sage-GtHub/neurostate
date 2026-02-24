@@ -53,6 +53,7 @@ export function RealTimeSimulation() {
   const [newAddition, setNewAddition] = useState("");
   const [newRemoval, setNewRemoval] = useState("");
   const [loading, setLoading] = useState(false);
+  const [committing, setCommitting] = useState(false);
   const [result, setResult] = useState<SimulationResult | null>(null);
 
   const addSupplement = () => {
