@@ -23,6 +23,7 @@ import { NovaSwipeWrapper } from '@/components/NovaSwipeWrapper';
 import { SEO } from '@/components/SEO';
 import { HealthForecast } from '@/components/nova/HealthForecast';
 import { AutonomousNudgePanel } from '@/components/nova/AutonomousNudgePanel';
+import { WeeklySummary } from '@/components/nova/WeeklySummary';
 import { WhoopScoreRing } from '@/components/nova/WhoopScoreRing';
 import { WhoopMetricCard } from '@/components/nova/WhoopMetricCard';
 import { useAuth } from '@/hooks/useAuth';
@@ -323,11 +324,22 @@ export default function NovaPersonalDashboard() {
             </div>
           </motion.div>
 
-          {/* Health Forecast */}
+          {/* Weekly Summary */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35 }}
+            className="mb-12"
+          >
+            <p className="text-[10px] uppercase tracking-[0.15em] text-foreground/30 mb-4">Your Week</p>
+            <WeeklySummary />
+          </motion.div>
+
+          {/* Health Forecast */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
             className="mb-12"
           >
             <HealthForecast />
