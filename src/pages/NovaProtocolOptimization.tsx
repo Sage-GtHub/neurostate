@@ -16,8 +16,8 @@ export default function NovaProtocolOptimization() {
   return (
     <NovaSwipeWrapper>
       <SEO 
-        title="Protocol Optimisation – Autonomous Performance Tuning | Nova"
-        description="AI-driven protocol management with pattern recognition, predictive modelling, and autonomous cognitive performance adjustments."
+        title="Protocol Optimisation | Nova"
+        description="Fine-tune your health protocols with data-driven adjustments, pattern spotting, and personalised recommendations."
       />
       <div className="min-h-screen bg-ivory">
         <NovaNav />
