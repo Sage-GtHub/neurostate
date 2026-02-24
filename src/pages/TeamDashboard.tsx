@@ -1214,7 +1214,7 @@ export default function TeamDashboard() {
                         {comparison.burnout.change > 0 ? '+' : ''}{comparison.burnout.change.toFixed(1)}%
                       </div>
                     </div>
-                    <div className="flex items-center justify-between p-2.5 md:p-3 rounded-lg md:rounded-xl bg-background border border-border/30">
+                    <div className="flex items-center justify-between p-2.5 md:p-3 rounded-lg bg-background border border-border/30">
                       <div>
                         <div className="text-[9px] md:text-[10px] text-muted-foreground">Focus Score</div>
                         <div className="text-base md:text-lg font-semibold text-foreground">{comparison.focus.current}</div>
