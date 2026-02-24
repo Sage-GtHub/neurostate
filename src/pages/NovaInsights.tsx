@@ -75,10 +75,10 @@ const GRADE_STYLES: Record<string, { bg: string; text: string; label: string }> 
 };
 
 const TYPE_CONFIG: Record<string, { icon: typeof AlertTriangle; color: string; label: string }> = {
-  warning: { icon: AlertTriangle, color: "text-destructive", label: "Risk Alert" },
-  pattern: { icon: Eye, color: "text-signal-blue", label: "Pattern" },
-  prediction: { icon: TrendingUp, color: "text-signal-amber", label: "Prediction" },
-  optimisation: { icon: Zap, color: "text-accent", label: "Optimisation" },
+  warning: { icon: AlertTriangle, color: "text-destructive", label: "Watch out" },
+  pattern: { icon: Eye, color: "text-signal-blue", label: "Trend" },
+  prediction: { icon: TrendingUp, color: "text-signal-amber", label: "Forecast" },
+  optimisation: { icon: Zap, color: "text-accent", label: "Suggestion" },
 };
 
 function AIInsightsTab({ insights, isLoading, onGenerate }: { insights: NovaInsight[]; isLoading: boolean; onGenerate: () => void }) {
