@@ -229,7 +229,7 @@ export default function NovaGoals() {
     <NovaSwipeWrapper>
       <SEO 
         title="Performance Goals | Nova AI"
-        description="Set and track measurable cognitive performance targets with AI-driven progress modelling."
+        description="Set health and performance goals, track your progress, and see what's working."
       />
       <div className="min-h-screen bg-background relative overflow-hidden">
         <div className="fixed inset-0 pointer-events-none">
