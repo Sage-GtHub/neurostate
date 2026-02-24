@@ -75,7 +75,7 @@ export default function NovaProtocolOptimization() {
                 value="patterns" 
                 className="px-4 py-3 text-xs sm:text-sm data-[state=active]:bg-accent/10 data-[state=active]:text-carbon data-[state=active]:border data-[state=active]:border-accent/20 rounded-2xl transition-all"
               >
-                Pattern Recognition
+                Spot Patterns
               </TabsTrigger>
               <TabsTrigger 
                 value="nudges" 
