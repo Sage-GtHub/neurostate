@@ -579,6 +579,10 @@ export default function NovaInsights() {
                 <TrendingUp className="w-4 h-4" />
                 Trends
               </TabsTrigger>
+              <TabsTrigger value="coaching" className="gap-2">
+                <BellRing className="w-4 h-4" />
+                Auto-Pilot
+              </TabsTrigger>
             </TabsList>
 
             {/* AI INSIGHTS TAB */}
@@ -591,6 +595,17 @@ export default function NovaInsights() {
                   if (result) setFreshInsights(result);
                 }}
               />
+            </TabsContent>
+
+            {/* AUTONOMOUS COACHING TAB */}
+            <TabsContent value="coaching" className="mt-0">
+              <div className="space-y-8">
+                <div>
+                  <h2 className="text-lg font-medium text-foreground">Auto-Pilot Coaching</h2>
+                  <p className="text-sm text-foreground/50 mt-1">AI-driven nudges, alerts, and protocol adjustments based on your real-time data</p>
+                </div>
+                <AutonomousNudgePanel />
+              </div>
             </TabsContent>
             <TabsContent value="insights" className="mt-0">
               {/* Summary Cards */}
