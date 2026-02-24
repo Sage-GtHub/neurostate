@@ -91,8 +91,8 @@ export function PatternRecognition() {
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-foreground mb-1">Pattern Recognition Engine</h2>
-          <p className="text-sm text-muted-foreground">Detects correlations between biometric signals, supplement intake, and performance outcomes</p>
+          <h2 className="text-lg font-semibold text-foreground mb-1">Spot Patterns</h2>
+          <p className="text-sm text-muted-foreground">See what's actually moving the needle in your health data</p>
         </div>
         <Button size="sm" onClick={runPatternAnalysis} disabled={isAnalysing} className="gap-2">
           {isAnalysing ? <Loader2 className="h-4 w-4 animate-spin" /> : <BarChart3 className="h-4 w-4" />}
@@ -250,8 +250,8 @@ export function PatternRecognition() {
         /* Empty state */
         <div className="text-center py-12 rounded-2xl bg-foreground/[0.02]">
           <BarChart3 className="w-10 h-10 text-accent mx-auto mb-3" />
-          <p className="text-sm font-medium text-foreground mb-2">No patterns detected yet</p>
-          <p className="text-xs text-muted-foreground mb-4">Run analysis to detect correlations in your biometric and supplement data</p>
+          <p className="text-sm font-medium text-foreground mb-2">No patterns found yet</p>
+          <p className="text-xs text-muted-foreground mb-4">Run an analysis to find what's working and what isn't</p>
           <Button size="sm" onClick={runPatternAnalysis} disabled={isAnalysing} className="gap-2">
             {isAnalysing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
             Run Analysis

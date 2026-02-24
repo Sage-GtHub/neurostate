@@ -229,7 +229,7 @@ export default function NovaGoals() {
     <NovaSwipeWrapper>
       <SEO 
         title="Performance Goals | Nova AI"
-        description="Set and track measurable cognitive performance targets with AI-driven progress modelling."
+        description="Set health and performance goals, track your progress, and see what's working."
       />
       <div className="min-h-screen bg-background relative overflow-hidden">
         <div className="fixed inset-0 pointer-events-none">
@@ -333,7 +333,7 @@ export default function NovaGoals() {
               </div>
               <h2 className="text-lg font-medium text-foreground mb-2">No goals yet</h2>
               <p className="text-sm text-foreground/40 mb-8 max-w-sm text-center leading-relaxed">
-                Set performance goals to track your progress and stay motivated on your optimisation journey.
+                Pick what matters to you — better sleep, more energy, faster recovery — and track how you're doing.
               </p>
               <button
                 onClick={() => setIsOpen(true)}

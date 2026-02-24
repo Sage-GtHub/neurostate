@@ -159,7 +159,7 @@ export function MultiGoalBalancer() {
       }
 
       setAnalysis(response.data.analysis);
-      toast({ title: "Analysis complete", description: "Trade-off analysis generated from your biometric data." });
+      toast({ title: "Analysis complete", description: "Here's how your goals interact based on your recent data." });
     } catch (err: any) {
       console.error("Analysis error:", err);
       toast({ title: "Error", description: err?.message || "Failed to analyse goals", variant: "destructive" });
@@ -183,15 +183,15 @@ export function MultiGoalBalancer() {
     return (
       <div className="space-y-6">
         <div>
-          <h2 className="text-lg font-semibold text-foreground mb-2">Multi-Goal Balancer</h2>
-          <p className="text-sm text-muted-foreground">Orchestrate competing health objectives with AI trade-off analysis</p>
+          <h2 className="text-lg font-semibold text-foreground mb-2">Balance Your Goals</h2>
+          <p className="text-sm text-muted-foreground">When goals compete, this helps you decide what to prioritise</p>
         </div>
         <Card className="border-foreground/5">
           <CardContent className="p-10 text-center">
             <Target className="h-10 w-10 mx-auto mb-4 text-foreground/20" />
-            <p className="text-sm font-medium text-foreground mb-2">Need at least 2 active goals</p>
+            <p className="text-sm font-medium text-foreground mb-2">You need at least 2 goals</p>
             <p className="text-xs text-muted-foreground mb-4">
-              Create performance goals in the Goals page to enable trade-off analysis.
+              Head to the Goals page and add what you're working towards.
             </p>
           </CardContent>
         </Card>
@@ -203,8 +203,8 @@ export function MultiGoalBalancer() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-foreground mb-1">Multi-Goal Balancer</h2>
-          <p className="text-sm text-muted-foreground">Orchestrate competing objectives with AI trade-off analysis</p>
+          <h2 className="text-lg font-semibold text-foreground mb-1">Balance Your Goals</h2>
+          <p className="text-sm text-muted-foreground">Set priorities and see how your goals work together or compete</p>
         </div>
         <div className="flex gap-2">
           {hasUnsavedChanges && (
@@ -215,7 +215,7 @@ export function MultiGoalBalancer() {
           )}
           <Button size="sm" variant="outline" onClick={runAnalysis} disabled={isAnalysing} className="gap-2">
             {isAnalysing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
-            Analyse Trade-offs
+            Analyse Goals
           </Button>
         </div>
       </div>
@@ -286,7 +286,7 @@ export function MultiGoalBalancer() {
               <CardContent className="p-5 flex items-start gap-3">
                 <Sparkles className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-sm font-medium text-foreground mb-1">AI Assessment</p>
+                  <p className="text-sm font-medium text-foreground mb-1">What We Found</p>
                   <p className="text-sm text-muted-foreground leading-relaxed">{analysis.overall_assessment}</p>
                 </div>
               </CardContent>
@@ -299,7 +299,7 @@ export function MultiGoalBalancer() {
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
                       <Target className="h-4 w-4 text-accent" />
-                      Recommended Weights
+                      Suggested Priorities
                     </h3>
                     <Button size="sm" variant="outline" onClick={() => applyRecommended(analysis.recommended_weights)} className="text-xs gap-1">
                       <ArrowRight className="h-3 w-3" /> Apply
@@ -326,7 +326,7 @@ export function MultiGoalBalancer() {
                 <CardContent className="p-5">
                   <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-4">
                     <AlertTriangle className="h-4 w-4 text-amber-500" />
-                    Goal Conflicts
+                     Where Goals Compete
                   </h3>
                   <div className="space-y-3">
                     {analysis.conflicts.map((c, i) => (
@@ -356,7 +356,7 @@ export function MultiGoalBalancer() {
                 <CardContent className="p-5">
                   <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-4">
                     <Link2 className="h-4 w-4 text-emerald-500" />
-                    Goal Synergies
+                     Where Goals Help Each Other
                   </h3>
                   <div className="space-y-3">
                     {analysis.synergies.map((s, i) => (
@@ -381,7 +381,7 @@ export function MultiGoalBalancer() {
                 <CardContent className="p-5">
                   <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-4">
                     <Info className="h-4 w-4 text-blue-500" />
-                    Trade-off Analysis
+                     Things to Consider
                   </h3>
                   <div className="space-y-3">
                     {analysis.trade_offs.map((t, i) => (
@@ -402,7 +402,7 @@ export function MultiGoalBalancer() {
                 <CardContent className="p-5">
                   <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-4">
                     <Clock className="h-4 w-4 text-violet-500" />
-                    Optimised Daily Schedule
+                     Your Day, Mapped Out
                   </h3>
                   <div className="space-y-2">
                     {analysis.schedule_blocks.map((sb, i) => (

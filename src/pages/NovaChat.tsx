@@ -38,10 +38,10 @@ type StreamingMessage = {
 };
 
 const QUICK_ACTIONS = [
-  { label: "What's my readiness today?", icon: Brain, gradient: "from-violet-500/10 to-indigo-500/10", border: "border-violet-500/20" },
-  { label: "Show my sleep trends", icon: Moon, gradient: "from-blue-500/10 to-cyan-500/10", border: "border-blue-500/20" },
-  { label: "Optimise my schedule", icon: Zap, gradient: "from-amber-500/10 to-orange-500/10", border: "border-amber-500/20" },
-  { label: "Analyse my recovery", icon: Activity, gradient: "from-emerald-500/10 to-teal-500/10", border: "border-emerald-500/20" },
+  { label: "How am I doing today?", icon: Brain, gradient: "from-violet-500/10 to-indigo-500/10", border: "border-violet-500/20" },
+  { label: "How's my sleep been?", icon: Moon, gradient: "from-blue-500/10 to-cyan-500/10", border: "border-blue-500/20" },
+  { label: "Help me plan my day", icon: Zap, gradient: "from-amber-500/10 to-orange-500/10", border: "border-amber-500/20" },
+  { label: "Am I recovering well?", icon: Activity, gradient: "from-emerald-500/10 to-teal-500/10", border: "border-emerald-500/20" },
 ];
 
 function StreamingDots() {

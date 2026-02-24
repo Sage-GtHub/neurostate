@@ -67,18 +67,18 @@ interface TrendData {
 
 // Evidence grade styling
 const GRADE_STYLES: Record<string, { bg: string; text: string; label: string }> = {
-  A: { bg: "bg-accent/10", text: "text-accent", label: "Strong Evidence" },
-  B: { bg: "bg-signal-green/10", text: "text-signal-green", label: "Good Evidence" },
-  C: { bg: "bg-signal-amber/10", text: "text-signal-amber", label: "Moderate Evidence" },
-  D: { bg: "bg-signal-amber/20", text: "text-signal-amber", label: "Limited Evidence" },
-  F: { bg: "bg-destructive/10", text: "text-destructive", label: "Minimal Evidence" },
+  A: { bg: "bg-accent/10", text: "text-accent", label: "Very confident" },
+  B: { bg: "bg-signal-green/10", text: "text-signal-green", label: "Confident" },
+  C: { bg: "bg-signal-amber/10", text: "text-signal-amber", label: "Moderate" },
+  D: { bg: "bg-signal-amber/20", text: "text-signal-amber", label: "Early signal" },
+  F: { bg: "bg-destructive/10", text: "text-destructive", label: "Weak signal" },
 };
 
 const TYPE_CONFIG: Record<string, { icon: typeof AlertTriangle; color: string; label: string }> = {
-  warning: { icon: AlertTriangle, color: "text-destructive", label: "Risk Alert" },
-  pattern: { icon: Eye, color: "text-signal-blue", label: "Pattern" },
-  prediction: { icon: TrendingUp, color: "text-signal-amber", label: "Prediction" },
-  optimisation: { icon: Zap, color: "text-accent", label: "Optimisation" },
+  warning: { icon: AlertTriangle, color: "text-destructive", label: "Watch out" },
+  pattern: { icon: Eye, color: "text-signal-blue", label: "Trend" },
+  prediction: { icon: TrendingUp, color: "text-signal-amber", label: "Forecast" },
+  optimisation: { icon: Zap, color: "text-accent", label: "Suggestion" },
 };
 
 function AIInsightsTab({ insights, isLoading, onGenerate }: { insights: NovaInsight[]; isLoading: boolean; onGenerate: () => void }) {
@@ -96,8 +96,8 @@ function AIInsightsTab({ insights, isLoading, onGenerate }: { insights: NovaInsi
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-medium text-foreground">Evidence-Graded Insights</h2>
-          <p className="text-sm text-foreground/50 mt-1">AI-powered pattern recognition from your biometric data</p>
+          <h2 className="text-lg font-medium text-foreground">What Your Data Shows</h2>
+          <p className="text-sm text-foreground/50 mt-1">Patterns and trends from your health data</p>
         </div>
         <Button onClick={onGenerate} disabled={isLoading} className="rounded-full gap-2">
           {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
@@ -170,8 +170,8 @@ function AIInsightsTab({ insights, isLoading, onGenerate }: { insights: NovaInsi
       {filteredInsights.length === 0 && !isLoading ? (
         <div className="text-center py-16">
           <Sparkles className="w-12 h-12 text-foreground/10 mx-auto mb-4" />
-          <p className="text-foreground/40 mb-2">{insights.length === 0 ? "No insights yet" : "No insights match filters"}</p>
-          <p className="text-sm text-foreground/30">{insights.length === 0 ? 'Click "Generate Insights" to analyse your biometric data' : "Try adjusting your filters"}</p>
+          <p className="text-foreground/40 mb-2">{insights.length === 0 ? "Nothing here yet" : "No results match your filters"}</p>
+          <p className="text-sm text-foreground/30">{insights.length === 0 ? 'Click "Generate Insights" to see what your data tells us' : "Try adjusting your filters"}</p>
         </div>
       ) : (
         <div className="grid gap-4 md:grid-cols-2">

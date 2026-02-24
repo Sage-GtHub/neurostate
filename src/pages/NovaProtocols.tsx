@@ -489,7 +489,7 @@ export default function NovaProtocols() {
 
   return (
     <NovaSwipeWrapper>
-      <SEO title="Performance Protocols | Daily Stacks & Goals | Nova AI" description="Build, track, and optimise your personalised supplement protocols. AI-generated stacks for sleep, focus, recovery, and cognitive performance." noindex={true} />
+      <SEO title="Protocols & Goals | Nova" description="Build and track personalised plans for better sleep, sharper focus, faster recovery, and steady energy." noindex={true} />
       <div className="min-h-screen bg-background relative overflow-hidden">
         <div className="fixed inset-0 pointer-events-none">
           <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
@@ -688,8 +688,8 @@ export default function NovaProtocols() {
                       <div className="w-14 h-14 rounded-3xl bg-foreground/[0.02] flex items-center justify-center mb-6">
                         <Target className="w-6 h-6 text-foreground/20" />
                       </div>
-                      <p className="text-xs text-foreground/40 mb-6 max-w-xs">
-                        No active protocols yet. Complete your assessment to get personalised recommendations.
+                  <p className="text-xs text-foreground/40 mb-6 max-w-xs">
+                        No active protocols yet. Answer a few questions and we'll suggest the right plan for you.
                       </p>
                       <button
                         onClick={() => setShowAssessment(true)}
@@ -815,8 +815,8 @@ export default function NovaProtocols() {
                     <Target className="w-10 h-10 text-muted-foreground" />
                   </div>
                   <h2 className="text-xl font-semibold text-foreground mb-3">No goals yet</h2>
-                  <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-                    Set performance goals to track your progress and stay motivated on your optimisation journey.
+                   <p className="text-muted-foreground mb-8 max-w-md mx-auto">
+                    Pick what you want to improve and track how you're doing over time.
                   </p>
                   <Button onClick={() => setIsGoalDialogOpen(true)} className="gap-2">
                     <Plus className="w-4 h-4" />

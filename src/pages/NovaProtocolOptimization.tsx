@@ -16,20 +16,20 @@ export default function NovaProtocolOptimization() {
   return (
     <NovaSwipeWrapper>
       <SEO 
-        title="Protocol Optimisation – Autonomous Performance Tuning | Nova"
-        description="AI-driven protocol management with pattern recognition, predictive modelling, and autonomous cognitive performance adjustments."
+        title="Protocol Optimisation | Nova"
+        description="Fine-tune your health protocols with data-driven adjustments, pattern spotting, and personalised recommendations."
       />
       <div className="min-h-screen bg-ivory">
         <NovaNav />
       
       <div className="border-b border-mist/30 bg-gradient-to-b from-ivory to-pearl/20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-8 sm:py-10 md:py-12">
-          <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium mb-2">Advanced Features</p>
+          <p className="text-accent text-xs tracking-[0.3em] uppercase font-medium mb-2">Fine-tune</p>
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[3rem] font-bold text-carbon tracking-tight mb-2 sm:mb-3">
             Protocol Optimisation
           </h1>
           <p className="text-sm sm:text-base md:text-body text-ash max-w-3xl">
-            AI-driven tools for adaptive protocols, pattern recognition, and autonomous health management
+            Tools to adjust your protocols, spot patterns, and keep improving
           </p>
         </div>
       </div>
@@ -50,10 +50,10 @@ export default function NovaProtocolOptimization() {
         <section className="animate-fade-in">
           <div className="text-center mb-8 sm:mb-10 md:mb-12">
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[2rem] font-bold text-carbon tracking-tight mb-2 sm:mb-3">
-              Advanced Protocol Management
+              Make It Work Better
             </h2>
             <p className="text-sm sm:text-base md:text-body text-ash">
-              AI-driven optimisation and behaviour change
+              Adjust, balance, and improve your protocols over time
             </p>
           </div>
 
@@ -63,31 +63,31 @@ export default function NovaProtocolOptimization() {
                 value="adaptive" 
                 className="px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm data-[state=active]:bg-accent/10 data-[state=active]:text-carbon data-[state=active]:border data-[state=active]:border-accent/20 rounded-xl sm:rounded-2xl transition-all whitespace-nowrap"
               >
-                Adaptive Protocol
+                Smart Adjustments
               </TabsTrigger>
               <TabsTrigger 
                 value="goals" 
                 className="px-4 py-3 text-xs sm:text-sm data-[state=active]:bg-accent/10 data-[state=active]:text-carbon data-[state=active]:border data-[state=active]:border-accent/20 rounded-2xl transition-all"
               >
-                Multi-Goal Balance
+                Goal Balance
               </TabsTrigger>
               <TabsTrigger 
                 value="patterns" 
                 className="px-4 py-3 text-xs sm:text-sm data-[state=active]:bg-accent/10 data-[state=active]:text-carbon data-[state=active]:border data-[state=active]:border-accent/20 rounded-2xl transition-all"
               >
-                Pattern Recognition
+                Spot Patterns
               </TabsTrigger>
               <TabsTrigger 
                 value="nudges" 
                 className="px-4 py-3 text-xs sm:text-sm data-[state=active]:bg-accent/10 data-[state=active]:text-carbon data-[state=active]:border data-[state=active]:border-accent/20 rounded-2xl transition-all"
               >
-                Behaviour Nudges
+                Daily Nudges
               </TabsTrigger>
               <TabsTrigger 
                 value="autonomous" 
                 className="px-4 py-3 text-xs sm:text-sm data-[state=active]:bg-accent/10 data-[state=active]:text-carbon data-[state=active]:border data-[state=active]:border-accent/20 rounded-2xl transition-all"
               >
-                Autonomous (Phase 4)
+                Auto-Pilot
               </TabsTrigger>
             </TabsList>
 
