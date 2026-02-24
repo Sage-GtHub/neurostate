@@ -489,7 +489,7 @@ export default function NovaProtocols() {
 
   return (
     <NovaSwipeWrapper>
-      <SEO title="Performance Protocols | Daily Stacks & Goals | Nova AI" description="Build, track, and optimise your personalised supplement protocols. AI-generated stacks for sleep, focus, recovery, and cognitive performance." noindex={true} />
+      <SEO title="Protocols & Goals | Nova" description="Build and track personalised plans for better sleep, sharper focus, faster recovery, and steady energy." noindex={true} />
       <div className="min-h-screen bg-background relative overflow-hidden">
         <div className="fixed inset-0 pointer-events-none">
           <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
