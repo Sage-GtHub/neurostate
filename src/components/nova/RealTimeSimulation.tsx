@@ -43,6 +43,7 @@ interface SimulationResult {
 }
 
 export function RealTimeSimulation() {
+  const { user } = useAuth();
   const [supplements, setSupplements] = useState<SupplementChange[]>([
     { name: "Magnesium", current_dose: "200mg", proposed_dose: "400mg" }
   ]);
