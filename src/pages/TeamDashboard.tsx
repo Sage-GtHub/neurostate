@@ -278,11 +278,10 @@ export default function TeamDashboard() {
     refetch
   } = useTeamDashboard();
 
-  // Compute real metrics
+  // ─── Real Computed Metrics ──────────────────────────────────────────
   const aggregatedMetrics = useMemo(() => getAggregatedMetrics(), [getAggregatedMetrics]);
   const teamBurnoutRankings = useMemo(() => getTeamBurnoutRankings(), [getTeamBurnoutRankings]);
-  
-  // Map real interventions to UI format
+
   const displayInterventions = useMemo(() => {
     return realInterventions.map(intervention => ({
       id: intervention.id,
@@ -295,25 +294,168 @@ export default function TeamDashboard() {
       status: intervention.status
     }));
   }, [realInterventions]);
-  
-  // Pending interventions count
-  const pendingInterventionsCount = useMemo(() => 
+
+  const pendingInterventionsCount = useMemo(() =>
     realInterventions.filter(i => i.status === 'pending' || i.status === 'in_progress').length
   , [realInterventions]);
-  
-  // Compute adoption metrics from real data
-  const adoptionMetricsReal = useMemo(() => {
+
+  // Executive Intelligence Metrics — derived from real data
+  const executiveMetrics = useMemo(() => {
+    const cciCurrent = Math.round(aggregatedMetrics.avgCCI) || 0;
+    const weeklyExposure = Math.round(aggregatedMetrics.totalRevenueExposure) || 0;
+    const atRiskTeams = teamBurnoutRankings.filter(t => Number(t.burnoutRisk) > 40).length;
+    return {
+      cci: {
+        current: cciCurrent,
+        trend: 'up' as const,
+        change: 0,
+        breakdown: {
+          energy: Math.round(aggregatedMetrics.avgEnergy) || 0,
+          focus: Math.round(aggregatedMetrics.avgFocus) || 0,
+          recovery: Math.round(aggregatedMetrics.avgRecovery) || 0,
+          stressVolatility: 0,
+          burnoutRisk: Math.round(aggregatedMetrics.avgBurnoutRisk) || 0,
+        }
+      },
+      revenueExposure: {
+        weekly: weeklyExposure,
+        daily: Math.round(weeklyExposure / 7),
+        trend: 'down' as const,
+        change: 0,
+      },
+      burnoutExposure: {
+        projected: weeklyExposure * 26,
+        timeframe: '6 months',
+        teamsAtRisk: atRiskTeams,
+      }
+    };
+  }, [aggregatedMetrics, teamBurnoutRankings]);
+
+  // Adoption metrics from real data
+  const adoptionMetrics = useMemo(() => {
     const activeInLast7Days = memberAnalytics.filter(
       a => a.last_active_at && new Date(a.last_active_at) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
     ).length;
-    
     return {
-      dau: { value: activeInLast7Days, change: 12.3, trend: 'up' as const },
-      wat: { value: teams.length, change: 5.0, trend: 'up' as const },
-      coverageRate: { value: orgMembers.length > 0 ? Math.round((activeInLast7Days / orgMembers.length) * 100) : 0, change: 4.2, trend: 'up' as const },
-      interventionAdoption: { value: realInterventions.filter(i => i.status === 'completed').length, change: 8.1, trend: 'up' as const }
+      dau: { value: activeInLast7Days, change: 0, trend: 'up' as const },
+      wat: { value: teams.length, change: 0, trend: 'up' as const },
+      coverageRate: { value: orgMembers.length > 0 ? Math.round((activeInLast7Days / orgMembers.length) * 100) : 0, change: 0, trend: 'up' as const },
+      interventionAdoption: { value: realInterventions.filter(i => i.status === 'completed').length, change: 0, trend: 'up' as const }
     };
   }, [memberAnalytics, teams, orgMembers, realInterventions]);
+
+  // Team readiness from real data
+  const teamReadinessData = useMemo(() => {
+    const readiness = Math.round(aggregatedMetrics.avgReadiness) || 0;
+    const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const today = new Date();
+    const forecast = Array.from({ length: 7 }, (_, i) => {
+      const d = new Date(today);
+      d.setDate(today.getDate() + i);
+      const dayMetrics = teamMetrics.filter(m => new Date(m.metric_date).getDay() === d.getDay());
+      const avg = dayMetrics.length > 0
+        ? Math.round(dayMetrics.reduce((s, m) => s + (Number(m.avg_readiness_score) || 0), 0) / dayMetrics.length)
+        : readiness;
+      return {
+        day: i === 0 ? 'Today' : i === 1 ? 'Tomorrow' : dayLabels[d.getDay()],
+        score: avg,
+        risk: avg > 70 ? 'low' : avg > 50 ? 'medium' : 'high',
+      };
+    });
+    return { current: readiness, trend: 'up' as const, change: 0, forecast };
+  }, [aggregatedMetrics, teamMetrics]);
+
+  // Burnout risk by team from real data
+  const burnoutRiskByTeam = useMemo(() => {
+    return teamBurnoutRankings.map(r => ({
+      team: r.team.name,
+      risk: Math.round(Number(r.burnoutRisk)) || 0,
+      trend: 'stable' as const,
+      members: r.memberCount,
+      exposure: Math.round(Number(r.revenueExposure)) || 0,
+    }));
+  }, [teamBurnoutRankings]);
+
+  // Weekly focus & fatigue patterns from team_metrics
+  const weeklyPatterns = useMemo(() => {
+    const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    return [1, 2, 3, 4, 5].map(dayIdx => {
+      const dayMetrics = teamMetrics.filter(m => new Date(m.metric_date).getDay() === dayIdx);
+      const avgFocus = dayMetrics.length > 0
+        ? Math.round(dayMetrics.reduce((s, m) => s + (Number(m.avg_focus_score) || 0), 0) / dayMetrics.length) : 0;
+      const avgEnergy = dayMetrics.length > 0
+        ? Math.round(dayMetrics.reduce((s, m) => s + (Number(m.avg_energy_score) || 0), 0) / dayMetrics.length) : 0;
+      return {
+        day: dayLabels[dayIdx],
+        focus: avgFocus,
+        fatigue: avgEnergy > 0 ? Math.max(0, 100 - avgEnergy) : 0,
+        optimal: avgFocus > 0 ? Math.round((avgFocus / 100) * 8 * 10) / 10 : 0,
+      };
+    });
+  }, [teamMetrics]);
+
+  // Intervention effectiveness from completed interventions
+  const interventionEffectiveness = useMemo(() => {
+    return realInterventions
+      .filter(i => i.status === 'completed' || i.status === 'in_progress')
+      .slice(0, 5)
+      .map(i => ({
+        id: i.id,
+        action: i.title,
+        team: i.team?.name || 'Organisation',
+        signalChange: i.signal_change || 'Measuring...',
+        valueRecovered: Number(i.actual_value) || Number(i.estimated_value) || 0,
+        timeframe: i.started_at && i.completed_at
+          ? `${Math.round((new Date(i.completed_at).getTime() - new Date(i.started_at).getTime()) / (1000 * 60 * 60 * 24))} days`
+          : 'In progress',
+        status: i.status,
+      }));
+  }, [realInterventions]);
+
+  // Trend comparisons from team_metrics history
+  const trendComparisons = useMemo(() => {
+    const now = Date.now();
+    const ms = (d: number) => d * 86400000;
+    const avgPeriod = (startAgo: number, endAgo: number, getter: (m: typeof teamMetrics[0]) => number | null) => {
+      const filtered = teamMetrics.filter(m => {
+        const t = new Date(m.metric_date).getTime();
+        return t >= now - ms(startAgo) && t < now - ms(endAgo);
+      });
+      if (filtered.length === 0) return 0;
+      return Math.round(filtered.reduce((s, m) => s + (Number(getter(m)) || 0), 0) / filtered.length);
+    };
+    const pctChange = (current: number, previous: number) =>
+      previous > 0 ? Math.round(((current - previous) / previous) * 1000) / 10 : 0;
+    const makeComp = (s1: number, e1: number, s2: number, e2: number) => {
+      const rC = avgPeriod(s1, e1, m => m.avg_readiness_score);
+      const rP = avgPeriod(s2, e2, m => m.avg_readiness_score);
+      const bC = avgPeriod(s1, e1, m => m.burnout_risk_score);
+      const bP = avgPeriod(s2, e2, m => m.burnout_risk_score);
+      const fC = avgPeriod(s1, e1, m => m.avg_focus_score);
+      const fP = avgPeriod(s2, e2, m => m.avg_focus_score);
+      return {
+        readiness: { current: rC, previous: rP, change: pctChange(rC, rP) },
+        burnout: { current: bC, previous: bP, change: pctChange(bC, bP) },
+        focus: { current: fC, previous: fP, change: pctChange(fC, fP) },
+      };
+    };
+    return {
+      weekOverWeek: makeComp(7, 0, 14, 7),
+      monthOverMonth: makeComp(30, 0, 60, 30),
+    };
+  }, [teamMetrics]);
+
+  // Nova forecasts from current trends
+  const novaForecasts = useMemo(() => {
+    const avgCCI = aggregatedMetrics.avgCCI || 0;
+    const exposure = aggregatedMetrics.totalRevenueExposure || 0;
+    return {
+      days7: { capacity: Math.round(avgCCI * 0.97), revenueAtRisk: Math.round(exposure) },
+      days14: { capacity: Math.round(avgCCI * 0.94), revenueAtRisk: Math.round(exposure * 1.4) },
+      days30: { capacity: Math.round(avgCCI * 0.90), revenueAtRisk: Math.round(exposure * 2.3) },
+      scenarios: [] as { name: string; impact: number; riskIncrease?: number; riskDecrease?: number }[],
+    };
+  }, [aggregatedMetrics]);
 
   useEffect(() => {
     const checkAuth = async () => {
