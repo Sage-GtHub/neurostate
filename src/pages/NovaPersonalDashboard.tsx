@@ -17,6 +17,7 @@ import {
 import { NovaNav } from '@/components/NovaNav';
 import { NovaSwipeWrapper } from '@/components/NovaSwipeWrapper';
 import { SEO } from '@/components/SEO';
+import { HealthForecast } from '@/components/nova/HealthForecast';
 import { useAuth } from '@/hooks/useAuth';
 import { useActivityFeed } from '@/hooks/useActivityFeed';
 import { supabase } from '@/integrations/supabase/client';
@@ -157,6 +158,16 @@ export default function NovaPersonalDashboard() {
                 </button>
               ))}
             </div>
+          </motion.div>
+
+          {/* Health Forecast */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="mb-12"
+          >
+            <HealthForecast />
           </motion.div>
 
           {/* Two Column Layout */}
