@@ -22,6 +22,7 @@ import { NovaNav } from '@/components/NovaNav';
 import { NovaSwipeWrapper } from '@/components/NovaSwipeWrapper';
 import { SEO } from '@/components/SEO';
 import { HealthForecast } from '@/components/nova/HealthForecast';
+import { AutonomousNudgePanel } from '@/components/nova/AutonomousNudgePanel';
 import { WhoopScoreRing } from '@/components/nova/WhoopScoreRing';
 import { WhoopMetricCard } from '@/components/nova/WhoopMetricCard';
 import { useAuth } from '@/hooks/useAuth';
@@ -380,62 +381,13 @@ export default function NovaPersonalDashboard() {
               )}
             </motion.div>
 
-            {/* Suggested Actions */}
+            {/* Autonomous Coaching */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <div className="flex items-center gap-2 mb-4">
-                <Sparkles className="w-3.5 h-3.5 text-accent" />
-                <p className="text-[10px] uppercase tracking-[0.15em] text-foreground/30">Suggested</p>
-              </div>
-              
-              <div className="space-y-2">
-                {stats.connectedDevices === 0 && (
-                  <button
-                    onClick={() => navigate('/nova/devices')}
-                    className="w-full flex items-center gap-4 p-5 rounded-3xl bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-colors text-left"
-                  >
-                    <div className="w-9 h-9 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                      <Activity className="w-4 h-4 text-accent" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-xs font-medium text-foreground">Connect a Device</p>
-                      <p className="text-[10px] text-foreground/40">Sync your wearable for personalised insights</p>
-                    </div>
-                    <ChevronRight className="w-4 h-4 text-foreground/20" />
-                  </button>
-                )}
-                {stats.totalProtocols === 0 && (
-                  <button
-                    onClick={() => navigate('/nova/protocols?new=true')}
-                    className="w-full flex items-center gap-4 p-5 rounded-3xl bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-colors text-left"
-                  >
-                    <div className="w-9 h-9 rounded-full bg-foreground/5 flex items-center justify-center flex-shrink-0">
-                      <Target className="w-4 h-4 text-foreground/60" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-xs font-medium text-foreground">Create Your First Protocol</p>
-                      <p className="text-[10px] text-foreground/40">Build a personalised optimisation routine</p>
-                    </div>
-                    <ChevronRight className="w-4 h-4 text-foreground/20" />
-                  </button>
-                )}
-                <button
-                  onClick={() => navigate('/nova/chat')}
-                  className="w-full flex items-center gap-4 p-5 rounded-3xl bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-colors text-left"
-                >
-                  <div className="w-9 h-9 rounded-full bg-foreground/5 flex items-center justify-center flex-shrink-0">
-                    <Brain className="w-4 h-4 text-foreground/60" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-xs font-medium text-foreground">Ask Nova Anything</p>
-                    <p className="text-[10px] text-foreground/40">Get AI-powered advice and recommendations</p>
-                  </div>
-                  <ChevronRight className="w-4 h-4 text-foreground/20" />
-                </button>
-              </div>
+              <AutonomousNudgePanel />
             </motion.div>
           </div>
         </div>
