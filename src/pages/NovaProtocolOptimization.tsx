@@ -50,10 +50,10 @@ export default function NovaProtocolOptimization() {
         <section className="animate-fade-in">
           <div className="text-center mb-8 sm:mb-10 md:mb-12">
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[2rem] font-bold text-carbon tracking-tight mb-2 sm:mb-3">
-              Advanced Protocol Management
+              Make It Work Better
             </h2>
             <p className="text-sm sm:text-base md:text-body text-ash">
-              AI-driven optimisation and behaviour change
+              Adjust, balance, and improve your protocols over time
             </p>
           </div>
 
