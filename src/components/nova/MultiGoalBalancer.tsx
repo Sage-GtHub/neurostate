@@ -326,7 +326,7 @@ export function MultiGoalBalancer() {
                 <CardContent className="p-5">
                   <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-4">
                     <AlertTriangle className="h-4 w-4 text-amber-500" />
-                    Goal Conflicts
+                     Where Goals Compete
                   </h3>
                   <div className="space-y-3">
                     {analysis.conflicts.map((c, i) => (
