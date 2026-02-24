@@ -66,7 +66,7 @@ interface TrendData {
 }
 
 export default function NovaInsights() {
-  const [activeTab, setActiveTab] = useState("insights");
+  const [activeTab, setActiveTab] = useState("ai-insights");
   
   // Insights state
   const [hrvData, setHrvData] = useState<any[]>([]);
