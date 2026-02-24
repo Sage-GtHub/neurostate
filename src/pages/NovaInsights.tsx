@@ -366,9 +366,13 @@ export default function NovaInsights() {
           {/* Tabs */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="mb-8 bg-muted/30">
+              <TabsTrigger value="ai-insights" className="gap-2">
+                <Sparkles className="w-4 h-4" />
+                AI Insights
+              </TabsTrigger>
               <TabsTrigger value="insights" className="gap-2">
                 <Zap className="w-4 h-4" />
-                Insights
+                Charts
               </TabsTrigger>
               <TabsTrigger value="trends" className="gap-2">
                 <TrendingUp className="w-4 h-4" />
@@ -376,7 +380,17 @@ export default function NovaInsights() {
               </TabsTrigger>
             </TabsList>
 
-            {/* INSIGHTS TAB */}
+            {/* AI INSIGHTS TAB */}
+            <TabsContent value="ai-insights" className="mt-0">
+              <AIInsightsTab
+                insights={freshInsights.length > 0 ? freshInsights : aiInsights}
+                isLoading={aiInsightsLoading}
+                onGenerate={async () => {
+                  const result = await generateInsights();
+                  if (result) setFreshInsights(result);
+                }}
+              />
+            </TabsContent>
             <TabsContent value="insights" className="mt-0">
               {/* Summary Cards */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
