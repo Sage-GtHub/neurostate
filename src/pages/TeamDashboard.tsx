@@ -664,7 +664,7 @@ export default function TeamDashboard() {
 
               {/* Focus Score */}
               <motion.div 
-                className="p-3 md:p-5 rounded-xl md:rounded-2xl bg-muted/30 border border-border/50"
+                className="p-3 md:p-5 rounded-lg bg-muted/30 border border-border/50"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
