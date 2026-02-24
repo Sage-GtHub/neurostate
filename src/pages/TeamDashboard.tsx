@@ -1087,7 +1087,7 @@ export default function TeamDashboard() {
                       displayInterventions.map((intervention) => (
                         <div 
                           key={intervention.id}
-                          className="p-2.5 md:p-3 rounded-lg md:rounded-xl bg-background border border-border/30 cursor-pointer hover:border-accent/30 transition-all"
+                          className="p-2.5 md:p-3 rounded-lg bg-background border border-border/30 cursor-pointer hover:border-accent/30 transition-all"
                           onClick={() => setExpandedIntervention(expandedIntervention === intervention.id ? null : intervention.id)}
                         >
                           <div className="flex items-start justify-between gap-2">
