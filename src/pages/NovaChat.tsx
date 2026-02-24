@@ -1135,6 +1135,29 @@ export default function NovaChat() {
             </div>
           )}
 
+          {/* Scroll to bottom button */}
+          <AnimatePresence>
+            {showScrollBtn && displayMessages.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.2 }}
+                className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10"
+              >
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => scrollToBottom(true)}
+                  className="rounded-full shadow-lg bg-background/90 backdrop-blur-sm border-border/40 hover:bg-background gap-1.5 px-4"
+                >
+                  <ArrowUp className="h-3.5 w-3.5 rotate-180" />
+                  <span className="text-xs">Latest</span>
+                </Button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           {/* Input Area */}
           <div className="border-t border-border/10 bg-background/80 backdrop-blur-sm">
             <div className="max-w-2xl mx-auto p-3 sm:p-4 pb-safe">
