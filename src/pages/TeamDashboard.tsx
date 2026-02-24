@@ -1030,7 +1030,7 @@ export default function TeamDashboard() {
                     </div>
                     <Lightbulb className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />
                   </div>
-                  <div className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                  <div className="p-3 md:p-4 rounded-lg bg-background border border-border/30">
                     <div className="text-[9px] md:text-[10px] text-primary uppercase tracking-wider mb-1.5 md:mb-2">Current Priority</div>
                     <p className="text-[10px] md:text-xs text-foreground leading-relaxed mb-2 md:mb-3">
                       Reduced recovery + sustained workload → rising burnout volatility → preventative intervention recommended.
