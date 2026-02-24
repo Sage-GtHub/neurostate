@@ -704,7 +704,7 @@ export default function TeamDashboard() {
 
             {/* Financial Attribution Alert */}
             <motion.div 
-              className="mb-6 md:mb-8 p-3 md:p-4 rounded-lg md:rounded-xl bg-gradient-to-r from-amber-500/10 to-transparent border border-amber-500/20 cursor-pointer hover:border-amber-500/40 transition-colors"
+              className="mb-6 md:mb-8 p-3 md:p-4 rounded-lg bg-gradient-to-r from-amber-500/10 to-transparent border border-amber-500/20 cursor-pointer hover:border-amber-500/40 transition-colors"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               onClick={() => setShowFinancialModal(true)}
