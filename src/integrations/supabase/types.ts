@@ -1037,6 +1037,60 @@ export type Database = {
           },
         ]
       }
+      protocol_interventions: {
+        Row: {
+          actual_outcomes: Json | null
+          changes: Json
+          completed_at: string | null
+          created_at: string
+          description: string | null
+          id: string
+          intervention_type: string
+          predicted_outcomes: Json | null
+          review_at: string | null
+          roi_score: number | null
+          started_at: string
+          status: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          actual_outcomes?: Json | null
+          changes?: Json
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          intervention_type?: string
+          predicted_outcomes?: Json | null
+          review_at?: string | null
+          roi_score?: number | null
+          started_at?: string
+          status?: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          actual_outcomes?: Json | null
+          changes?: Json
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          intervention_type?: string
+          predicted_outcomes?: Json | null
+          review_at?: string | null
+          roi_score?: number | null
+          started_at?: string
+          status?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       push_subscriptions: {
         Row: {
           auth_key: string
