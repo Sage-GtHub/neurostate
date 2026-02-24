@@ -402,7 +402,7 @@ export function MultiGoalBalancer() {
                 <CardContent className="p-5">
                   <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-4">
                     <Clock className="h-4 w-4 text-violet-500" />
-                    Optimised Daily Schedule
+                     Your Day, Mapped Out
                   </h3>
                   <div className="space-y-2">
                     {analysis.schedule_blocks.map((sb, i) => (
