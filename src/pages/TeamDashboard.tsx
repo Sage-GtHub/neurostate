@@ -370,7 +370,7 @@ export default function TeamDashboard() {
     return teamBurnoutRankings.map(r => ({
       team: r.team.name,
       risk: Math.round(Number(r.burnoutRisk)) || 0,
-      trend: 'stable' as const,
+      trend: (Math.round(Number(r.burnoutRisk)) > 40 ? 'up' : Math.round(Number(r.burnoutRisk)) < 25 ? 'down' : 'stable') as 'up' | 'down' | 'stable',
       members: r.memberCount,
       exposure: Math.round(Number(r.revenueExposure)) || 0,
     }));
