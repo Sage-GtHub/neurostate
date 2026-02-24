@@ -936,7 +936,7 @@ export default function TeamDashboard() {
                   </div>
                   <div className="space-y-2 md:space-y-3">
                     {interventionEffectiveness.map((item) => (
-                      <div key={item.id} className="p-3 md:p-4 rounded-lg md:rounded-xl bg-background border border-border/30">
+                      <div key={item.id} className="p-3 md:p-4 rounded-lg bg-background border border-border/30">
                         <div className="flex items-start justify-between mb-1.5 md:mb-2">
                           <div className="flex-1 min-w-0 mr-2">
                             <div className="text-[10px] md:text-xs font-medium text-foreground truncate">{item.action}</div>
