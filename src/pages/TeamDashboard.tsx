@@ -1196,7 +1196,7 @@ export default function TeamDashboard() {
                     </div>
                   </div>
                   <div className="space-y-2 md:space-y-3">
-                    <div className="flex items-center justify-between p-2.5 md:p-3 rounded-lg md:rounded-xl bg-background border border-border/30">
+                    <div className="flex items-center justify-between p-2.5 md:p-3 rounded-lg bg-background border border-border/30">
                       <div>
                         <div className="text-[9px] md:text-[10px] text-muted-foreground">Readiness</div>
                         <div className="text-base md:text-lg font-semibold text-foreground">{comparison.readiness.current}</div>
