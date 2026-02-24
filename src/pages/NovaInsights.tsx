@@ -11,9 +11,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import { supabase } from "@/integrations/supabase/client";
-import { TrendingUp, Activity, Brain, Target, Loader2, Watch, RefreshCw, Zap, TrendingDown, Minus, Heart, AlertCircle } from "lucide-react";
+import { TrendingUp, Activity, Brain, Target, Loader2, Watch, RefreshCw, Zap, TrendingDown, Minus, Heart, AlertCircle, Shield, Sparkles, AlertTriangle, Eye } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { format, subDays, startOfDay, endOfDay } from "date-fns";
+import { useNovaInsights, type NovaInsight } from "@/hooks/useNovaInsights";
 
 // Standardized chart colors using design system tokens
 const CHART_COLORS = {
