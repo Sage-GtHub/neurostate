@@ -426,7 +426,7 @@ export default function TeamDashboard() {
 
               {/* Live Cognitive Revenue Exposure */}
               <motion.div 
-                className="p-3 md:p-4 rounded-xl bg-muted/30 border border-border/50"
+                className="p-3 md:p-4 rounded-lg bg-muted/30 border border-border/50 min-w-[260px] sm:min-w-0 snap-start"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
