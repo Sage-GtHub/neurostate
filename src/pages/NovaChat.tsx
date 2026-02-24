@@ -328,6 +328,7 @@ export default function NovaChat() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isNearBottomRef = useRef(true);
   const scrollRafRef = useRef<number | null>(null);
+  const [showScrollBtn, setShowScrollBtn] = useState(false);
   const { toast: showToast } = useToast();
 
   // Build display messages with stable streaming entry
