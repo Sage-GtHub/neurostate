@@ -183,8 +183,8 @@ export function MultiGoalBalancer() {
     return (
       <div className="space-y-6">
         <div>
-          <h2 className="text-lg font-semibold text-foreground mb-2">Multi-Goal Balancer</h2>
-          <p className="text-sm text-muted-foreground">Orchestrate competing health objectives with AI trade-off analysis</p>
+          <h2 className="text-lg font-semibold text-foreground mb-2">Balance Your Goals</h2>
+          <p className="text-sm text-muted-foreground">When goals compete, this helps you decide what to prioritise</p>
         </div>
         <Card className="border-foreground/5">
           <CardContent className="p-10 text-center">
