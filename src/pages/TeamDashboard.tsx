@@ -706,7 +706,7 @@ export default function TeamDashboard() {
                   </SelectContent>
                 </Select>
                 <div className="flex items-center gap-2 ml-auto flex-shrink-0">
-                  <Button variant="outline" size="sm" className="h-8 md:h-9 px-2 md:px-3 rounded-lg text-[10px] md:text-xs">
+                  <Button variant="outline" size="sm" className="h-8 md:h-9 px-2 md:px-3 rounded-lg text-[10px] md:text-xs" onClick={() => refetch()}>
                     <RefreshCw className="w-3 h-3 md:mr-2" />
                     <span className="hidden md:inline">Refresh</span>
                   </Button>
