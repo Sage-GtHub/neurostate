@@ -9,6 +9,14 @@ export interface NovaInsight {
   description: string;
   confidence: number;
   timeframe: string;
+  evidence_grade?: string;
+  pattern_category?: string;
+  supporting_metrics?: {
+    current_value?: string;
+    baseline_value?: string;
+    change_percentage?: number;
+    trend_direction?: string;
+  };
   recommendations: string[];
   data_sources: string[];
   created_at: string;
@@ -17,6 +25,7 @@ export interface NovaInsight {
 export function useNovaInsights() {
   const [insights, setInsights] = useState<NovaInsight[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingExisting, setIsLoadingExisting] = useState(true);
   const { toast } = useToast();
 
   const loadInsights = async () => {
@@ -46,6 +55,8 @@ export function useNovaInsights() {
       })) || []);
     } catch (error) {
       console.error('Error loading insights:', error);
+    } finally {
+      setIsLoadingExisting(false);
     }
   };
 
@@ -54,12 +65,8 @@ export function useNovaInsights() {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
-        toast({
-          title: 'Authentication required',
-          description: 'Please sign in to generate insights',
-          variant: 'destructive',
-        });
-        return;
+        toast({ title: 'Authentication required', description: 'Please sign in to generate insights', variant: 'destructive' });
+        return null;
       }
 
       const response = await supabase.functions.invoke('generate-insights', {
@@ -70,19 +77,36 @@ export function useNovaInsights() {
 
       if (response.error) throw response.error;
 
+      // Return fresh AI insights (with evidence grades) from the response
+      const freshInsights: NovaInsight[] = (response.data.insights || []).map((i: any, idx: number) => ({
+        id: `fresh-${idx}`,
+        type: i.type,
+        title: i.title,
+        description: i.description,
+        confidence: i.confidence,
+        timeframe: i.timeframe,
+        evidence_grade: i.evidence_grade,
+        pattern_category: i.pattern_category,
+        supporting_metrics: i.supporting_metrics,
+        recommendations: i.recommendations || [],
+        data_sources: i.data_sources || [],
+        created_at: new Date().toISOString(),
+      }));
+
+      // Also reload from DB
       await loadInsights();
 
       toast({
         title: 'Insights generated',
-        description: `Generated ${response.data.insights?.length || 0} new insights`,
+        description: `Generated ${freshInsights.length} evidence-graded insights`,
       });
-    } catch (error) {
+
+      return freshInsights;
+    } catch (error: any) {
       console.error('Error generating insights:', error);
-      toast({
-        title: 'Error',
-        description: 'Failed to generate insights',
-        variant: 'destructive',
-      });
+      const msg = error?.message || 'Failed to generate insights';
+      toast({ title: 'Error', description: msg, variant: 'destructive' });
+      return null;
     } finally {
       setIsLoading(false);
     }
@@ -95,6 +119,7 @@ export function useNovaInsights() {
   return {
     insights,
     isLoading,
+    isLoadingExisting,
     generateInsights,
     refreshInsights: loadInsights
   };

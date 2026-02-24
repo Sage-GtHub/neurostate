@@ -11,9 +11,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import { supabase } from "@/integrations/supabase/client";
-import { TrendingUp, Activity, Brain, Target, Loader2, Watch, RefreshCw, Zap, TrendingDown, Minus, Heart, AlertCircle } from "lucide-react";
+import { TrendingUp, Activity, Brain, Target, Loader2, Watch, RefreshCw, Zap, TrendingDown, Minus, Heart, AlertCircle, Shield, Sparkles, AlertTriangle, Eye } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { format, subDays, startOfDay, endOfDay } from "date-fns";
+import { useNovaInsights, type NovaInsight } from "@/hooks/useNovaInsights";
 
 // Standardized chart colors using design system tokens
 const CHART_COLORS = {
@@ -64,8 +65,149 @@ interface TrendData {
   focus: MetricData[];
 }
 
+// Evidence grade styling
+const GRADE_STYLES: Record<string, { bg: string; text: string; label: string }> = {
+  A: { bg: "bg-accent/10", text: "text-accent", label: "Strong Evidence" },
+  B: { bg: "bg-signal-green/10", text: "text-signal-green", label: "Good Evidence" },
+  C: { bg: "bg-signal-amber/10", text: "text-signal-amber", label: "Moderate Evidence" },
+  D: { bg: "bg-signal-amber/20", text: "text-signal-amber", label: "Limited Evidence" },
+  F: { bg: "bg-destructive/10", text: "text-destructive", label: "Minimal Evidence" },
+};
+
+const TYPE_CONFIG: Record<string, { icon: typeof AlertTriangle; color: string; label: string }> = {
+  warning: { icon: AlertTriangle, color: "text-destructive", label: "Risk Alert" },
+  pattern: { icon: Eye, color: "text-signal-blue", label: "Pattern" },
+  prediction: { icon: TrendingUp, color: "text-signal-amber", label: "Prediction" },
+  optimisation: { icon: Zap, color: "text-accent", label: "Optimisation" },
+};
+
+function AIInsightsTab({ insights, isLoading, onGenerate }: { insights: NovaInsight[]; isLoading: boolean; onGenerate: () => void }) {
+  return (
+    <div className="space-y-8">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-lg font-medium text-foreground">Evidence-Graded Insights</h2>
+          <p className="text-sm text-foreground/50 mt-1">AI-powered pattern recognition from your biometric data</p>
+        </div>
+        <Button onClick={onGenerate} disabled={isLoading} className="rounded-full gap-2">
+          {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+          {isLoading ? "Analysing..." : "Generate Insights"}
+        </Button>
+      </div>
+
+      {/* Evidence Grade Legend */}
+      <div className="flex flex-wrap gap-3">
+        {Object.entries(GRADE_STYLES).map(([grade, style]) => (
+          <div key={grade} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full ${style.bg}`}>
+            <span className={`text-xs font-bold ${style.text}`}>{grade}</span>
+            <span className="text-[10px] text-foreground/50">{style.label}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Insights Grid */}
+      {insights.length === 0 && !isLoading ? (
+        <div className="text-center py-16">
+          <Sparkles className="w-12 h-12 text-foreground/10 mx-auto mb-4" />
+          <p className="text-foreground/40 mb-2">No insights yet</p>
+          <p className="text-sm text-foreground/30">Click "Generate Insights" to analyse your biometric data</p>
+        </div>
+      ) : (
+        <div className="grid gap-4 md:grid-cols-2">
+          {insights.map((insight) => {
+            const typeConfig = TYPE_CONFIG[insight.type] || TYPE_CONFIG.pattern;
+            const TypeIcon = typeConfig.icon;
+            const grade = insight.evidence_grade || "C";
+            const gradeStyle = GRADE_STYLES[grade] || GRADE_STYLES.C;
+
+            return (
+              <Card key={insight.id} className="border-foreground/5 bg-card hover:border-foreground/10 transition-all">
+                <CardContent className="p-6 space-y-4">
+                  {/* Top row: type badge + evidence grade */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <TypeIcon className={`w-4 h-4 ${typeConfig.color}`} />
+                      <span className={`text-[10px] uppercase tracking-widest font-medium ${typeConfig.color}`}>{typeConfig.label}</span>
+                    </div>
+                    <div className={`flex items-center gap-1 px-2 py-0.5 rounded-full ${gradeStyle.bg}`}>
+                      <Shield className={`w-3 h-3 ${gradeStyle.text}`} />
+                      <span className={`text-xs font-bold ${gradeStyle.text}`}>Grade {grade}</span>
+                    </div>
+                  </div>
+
+                  {/* Title + description */}
+                  <div>
+                    <h3 className="font-medium text-foreground mb-1">{insight.title}</h3>
+                    <p className="text-sm text-foreground/60 leading-relaxed">{insight.description}</p>
+                  </div>
+
+                  {/* Supporting metrics */}
+                  {insight.supporting_metrics && (
+                    <div className="flex gap-4 text-xs">
+                      {insight.supporting_metrics.current_value && (
+                        <div>
+                          <span className="text-foreground/40">Current:</span>{" "}
+                          <span className="font-medium text-foreground">{insight.supporting_metrics.current_value}</span>
+                        </div>
+                      )}
+                      {insight.supporting_metrics.change_percentage !== undefined && (
+                        <div>
+                          <span className="text-foreground/40">Change:</span>{" "}
+                          <span className={`font-medium ${insight.supporting_metrics.trend_direction === 'improving' ? 'text-accent' : insight.supporting_metrics.trend_direction === 'declining' ? 'text-destructive' : 'text-foreground'}`}>
+                            {insight.supporting_metrics.change_percentage > 0 ? '+' : ''}{insight.supporting_metrics.change_percentage}%
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Confidence + timeframe */}
+                  <div className="flex items-center gap-4 text-xs text-foreground/40">
+                    <span>{insight.confidence}% confidence</span>
+                    <span>•</span>
+                    <span>{insight.timeframe}</span>
+                    {insight.pattern_category && (
+                      <>
+                        <span>•</span>
+                        <span className="capitalize">{insight.pattern_category.replace(/_/g, ' ')}</span>
+                      </>
+                    )}
+                  </div>
+
+                  {/* Recommendations */}
+                  {insight.recommendations.length > 0 && (
+                    <div className="space-y-1.5 pt-2 border-t border-foreground/5">
+                      <span className="text-[10px] uppercase tracking-widest text-foreground/30">Recommendations</span>
+                      {insight.recommendations.map((rec, i) => (
+                        <div key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+                          <div className="w-1 h-1 rounded-full bg-accent mt-2 shrink-0" />
+                          <span>{rec}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Data sources */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {insight.data_sources.map((source, i) => (
+                      <span key={i} className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground capitalize">
+                        {source.replace(/_/g, ' ')}
+                      </span>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function NovaInsights() {
-  const [activeTab, setActiveTab] = useState("insights");
+  const [activeTab, setActiveTab] = useState("ai-insights");
   
   // Insights state
   const [hrvData, setHrvData] = useState<any[]>([]);
@@ -87,6 +229,10 @@ export default function NovaInsights() {
   const [trendData, setTrendData] = useState<TrendData>({ hrv: [], sleep: [], recovery: [], focus: [] });
   const [trendsLoading, setTrendsLoading] = useState(false);
   const [trendsError, setTrendsError] = useState<string | null>(null);
+
+  // AI Insights state
+  const { insights: aiInsights, isLoading: aiInsightsLoading, generateInsights } = useNovaInsights();
+  const [freshInsights, setFreshInsights] = useState<NovaInsight[]>([]);
 
   const navigate = useNavigate();
 
@@ -361,9 +507,13 @@ export default function NovaInsights() {
           {/* Tabs */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="mb-8 bg-muted/30">
+              <TabsTrigger value="ai-insights" className="gap-2">
+                <Sparkles className="w-4 h-4" />
+                AI Insights
+              </TabsTrigger>
               <TabsTrigger value="insights" className="gap-2">
                 <Zap className="w-4 h-4" />
-                Insights
+                Charts
               </TabsTrigger>
               <TabsTrigger value="trends" className="gap-2">
                 <TrendingUp className="w-4 h-4" />
@@ -371,7 +521,17 @@ export default function NovaInsights() {
               </TabsTrigger>
             </TabsList>
 
-            {/* INSIGHTS TAB */}
+            {/* AI INSIGHTS TAB */}
+            <TabsContent value="ai-insights" className="mt-0">
+              <AIInsightsTab
+                insights={freshInsights.length > 0 ? freshInsights : aiInsights}
+                isLoading={aiInsightsLoading}
+                onGenerate={async () => {
+                  const result = await generateInsights();
+                  if (result) setFreshInsights(result);
+                }}
+              />
+            </TabsContent>
             <TabsContent value="insights" className="mt-0">
               {/* Summary Cards */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
