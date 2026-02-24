@@ -203,8 +203,8 @@ export function MultiGoalBalancer() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-foreground mb-1">Multi-Goal Balancer</h2>
-          <p className="text-sm text-muted-foreground">Orchestrate competing objectives with AI trade-off analysis</p>
+          <h2 className="text-lg font-semibold text-foreground mb-1">Balance Your Goals</h2>
+          <p className="text-sm text-muted-foreground">Set priorities and see how your goals work together or compete</p>
         </div>
         <div className="flex gap-2">
           {hasUnsavedChanges && (
