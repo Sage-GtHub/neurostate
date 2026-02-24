@@ -29,7 +29,7 @@ export default function NovaProtocolOptimization() {
             Protocol Optimisation
           </h1>
           <p className="text-sm sm:text-base md:text-body text-ash max-w-3xl">
-            AI-driven tools for adaptive protocols, pattern recognition, and autonomous health management
+            Tools to adjust your protocols, spot patterns, and keep improving
           </p>
         </div>
       </div>
