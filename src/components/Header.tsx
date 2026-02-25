@@ -140,15 +140,23 @@ export const Header = () => {
           : "bg-background/80 backdrop-blur-md border-b border-transparent"
       )}>
         <div className="max-w-7xl mx-auto px-6 md:px-8 flex h-14 lg:h-16 items-center">
-          {/* Mobile Burger - Top Left */}
-          <div className="lg:hidden mr-auto">
+          {/* Mobile Logo - Left */}
+          <div className="lg:hidden">
+            <Link to="/" className="flex items-center gap-2 group">
+              <img src={logoIcon} alt="Neurostate" className="h-6 w-6 transition-all duration-300 group-hover:scale-110" />
+              <span className="text-sm font-medium tracking-tight text-foreground">Neurostate</span>
+            </Link>
+          </div>
+
+          {/* Mobile Burger - Right */}
+          <div className="lg:hidden ml-auto">
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="h-8 w-8 text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full">
                   <Menu className="h-4 w-4" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-full sm:w-[320px] bg-background border-r border-border p-0 flex flex-col h-full">
+              <SheetContent side="right" className="w-full sm:w-[320px] bg-background border-l border-border p-0 flex flex-col h-full">
                 <SheetHeader className="p-5 border-b border-border flex-shrink-0">
                   <SheetTitle className="text-left text-foreground text-sm font-medium">Menu</SheetTitle>
                 </SheetHeader>
@@ -322,15 +330,15 @@ export const Header = () => {
             </Link>
           </nav>
 
-          {/* Centre Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group relative mx-4 lg:mx-0">
+          {/* Centre Logo - Desktop only */}
+          <Link to="/" className="hidden lg:flex items-center gap-2.5 group relative">
             <div className="absolute -inset-2 bg-primary/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <img 
               src={logoIcon} 
               alt="Neurostate" 
-              className="h-6 w-6 lg:h-7 lg:w-7 transition-all duration-300 group-hover:scale-110 relative" 
+              className="h-7 w-7 transition-all duration-300 group-hover:scale-110 relative" 
             />
-            <span className="text-sm lg:text-base font-medium tracking-tight text-foreground relative">
+            <span className="text-base font-medium tracking-tight text-foreground relative">
               Neurostate
             </span>
           </Link>
