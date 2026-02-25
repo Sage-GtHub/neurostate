@@ -552,7 +552,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                     rows={1}
                     className={cn(
                       "flex-1 resize-none bg-transparent border-0",
-                      "py-2.5 sm:py-2 px-1 text-base sm:text-sm placeholder:text-muted-foreground/50",
+                      "py-2.5 sm:py-2 px-1 text-[16px] placeholder:text-muted-foreground/50",
                       "focus:outline-none focus:ring-0",
                       "disabled:opacity-50",
                       "min-h-[44px] sm:min-h-[40px] max-h-[120px]"
