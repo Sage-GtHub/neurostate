@@ -187,8 +187,8 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
             });
           }
         } catch {
-          buffer = line + "\n" + buffer;
-          break;
+          // Skip malformed lines instead of breaking the parse loop
+          continue;
         }
       }
     }
