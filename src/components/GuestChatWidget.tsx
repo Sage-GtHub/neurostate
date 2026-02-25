@@ -123,7 +123,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
   };
 
   const streamResponse = useCallback(async (userMsg: Message) => {
-    const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-chat`, {
+    const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/website-chat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
