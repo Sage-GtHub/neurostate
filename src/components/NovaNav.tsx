@@ -22,7 +22,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import logoIcon from "@/assets/neurostate-icon.png";
+import logoIcon from "@/assets/neurostate-icon.svg";
 
 const navItems = [
   { to: "/nova/chat", label: "Chat", icon: MessageCircle },

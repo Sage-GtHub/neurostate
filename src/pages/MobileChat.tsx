@@ -16,7 +16,7 @@ export default function MobileChat() {
         <div className="flex items-center justify-center gap-2">
           <img src={logoIcon} alt="NeuroState" className="h-8 w-8" />
           <span className="text-ui-label text-carbon tracking-widest text-xs">
-            NEUROSTATE<sup className="text-[6px]">®</sup>
+            NEUROSTATE<sup className="text-[5px]">®</sup>
           </span>
         </div>
       </header>
@@ -65,7 +65,7 @@ export default function MobileChat() {
       {/* Footer */}
       <footer className="border-t border-mist bg-ivory p-4">
         <p className="text-xs text-ash text-center">
-          © 2025 NeuroState. Peak performance, by design.
+          © {new Date().getFullYear()} NeuroState<sup className="text-[5px]">®</sup>. Peak performance, by design.
         </p>
       </footer>
 
