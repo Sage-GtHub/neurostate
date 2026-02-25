@@ -158,7 +158,9 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
       messages: [...conv.messages, { role: "assistant", content: "", timestamp: new Date().toISOString() }],
     }));
 
-    while (true) {
+    let streamDone = false;
+
+    while (!streamDone) {
       const { done, value } = await reader.read();
       if (done) break;
 
@@ -170,10 +172,14 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
         buffer = buffer.slice(idx + 1);
 
         if (line.endsWith("\r")) line = line.slice(0, -1);
+        if (line.startsWith(":") || line.trim() === "") continue;
         if (!line.startsWith("data: ")) continue;
 
         const json = line.slice(6).trim();
-        if (json === "[DONE]") break;
+        if (json === "[DONE]") {
+          streamDone = true;
+          break;
+        }
 
         try {
           const parsed = JSON.parse(json);
@@ -187,8 +193,9 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
             });
           }
         } catch {
-          // Skip malformed lines instead of breaking the parse loop
-          continue;
+          // Incomplete JSON split across chunks: put it back and wait for more data
+          buffer = line + "\n" + buffer;
+          break;
         }
       }
     }

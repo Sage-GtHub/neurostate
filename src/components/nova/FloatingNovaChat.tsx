@@ -123,10 +123,6 @@ export function FloatingNovaChat() {
     }
   }, [input]);
 
-  // Don't show on /nova pages
-  if (location.pathname.startsWith("/nova")) {
-    return null;
-  }
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -170,28 +166,69 @@ export function FloatingNovaChat() {
       throw new Error('Failed to get response');
     }
 
+    if (!response.body) throw new Error('No response body');
+
     // Add empty assistant message
     updateConversation(conv => ({
       ...conv,
-      messages: [...conv.messages, { 
-        role: "assistant", 
-        content: "", 
+      messages: [...conv.messages, {
+        role: "assistant",
+        content: "",
         timestamp: new Date().toISOString()
       }],
     }));
 
-    const data = await response.json();
-    const content = data.message;
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+    let content = "";
+    let streamDone = false;
 
-    updateConversation(conv => {
-      const msgs = [...conv.messages];
-      msgs[msgs.length - 1] = { 
-        ...msgs[msgs.length - 1],
-        content,
-        timestamp: new Date().toISOString() 
-      };
-      return { ...conv, messages: msgs, updatedAt: new Date().toISOString() };
-    });
+    while (!streamDone) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+
+      let idx: number;
+      while ((idx = buffer.indexOf("\n")) !== -1) {
+        let line = buffer.slice(0, idx);
+        buffer = buffer.slice(idx + 1);
+
+        if (line.endsWith("\r")) line = line.slice(0, -1);
+        if (line.startsWith(":") || line.trim() === "") continue;
+        if (!line.startsWith("data: ")) continue;
+
+        const json = line.slice(6).trim();
+        if (json === "[DONE]") {
+          streamDone = true;
+          break;
+        }
+
+        try {
+          const parsed = JSON.parse(json);
+          const delta = parsed.choices?.[0]?.delta?.content;
+          if (delta) {
+            content += delta;
+            updateConversation(conv => {
+              const msgs = [...conv.messages];
+              if (msgs.length === 0) return conv;
+              msgs[msgs.length - 1] = {
+                ...msgs[msgs.length - 1],
+                role: "assistant",
+                content,
+                timestamp: new Date().toISOString()
+              };
+              return { ...conv, messages: msgs, updatedAt: new Date().toISOString() };
+            });
+          }
+        } catch {
+          // Incomplete JSON split across chunks: put it back and wait for more data
+          buffer = line + "\n" + buffer;
+          break;
+        }
+      }
+    }
 
     return content;
   }, [messages]);
@@ -279,6 +316,8 @@ export function FloatingNovaChat() {
   };
 
   const hasMessages = messages.length > 0;
+
+  if (location.pathname.startsWith("/nova")) return null;
 
   return (
     <>
@@ -570,7 +609,7 @@ export function FloatingNovaChat() {
                     rows={1}
                     className={cn(
                       "flex-1 resize-none bg-transparent border-0",
-                      "py-1.5 px-1 text-[11px] placeholder:text-muted-foreground/50",
+                      "py-1.5 px-1 text-[16px] sm:text-[11px] placeholder:text-muted-foreground/50",
                       "focus:outline-none focus:ring-0",
                       "disabled:opacity-50",
                       "min-h-[32px] max-h-[80px]"
