@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
-import logoIcon from "@/assets/neurostate-icon.png";
+import logoIcon from "@/assets/neurostate-icon.svg";
 
 export const Footer = () => {
   const [email, setEmail] = useState("");
@@ -76,7 +76,7 @@ export const Footer = () => {
                 <div className="w-8 h-8 rounded-full bg-background/10 flex items-center justify-center group-hover:bg-background/20 transition-colors">
                   <img src={logoIcon} alt="Neurostate" className="h-4 w-4 opacity-80 invert" />
                 </div>
-                <span className="text-xs font-medium tracking-tight text-background/90">Neurostate</span>
+                <span className="text-xs font-medium tracking-tight text-background/90">NeuroState<sup className="text-[6px]">®</sup></span>
               </Link>
               <p className="text-background/50 text-[11px] leading-relaxed">
                 Workforce health intelligence. We connect wearables, spot burnout early, and help teams perform at their best.
@@ -216,7 +216,7 @@ export const Footer = () => {
           {/* Bottom */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-[10px] text-background/30">
-              © {new Date().getFullYear()} Neurostate
+              © {new Date().getFullYear()} NeuroState<sup className="text-[6px]">®</sup>
             </p>
             <div className="flex gap-6">
               <Link to="/terms" className="text-[10px] text-background/30 hover:text-background/60 transition-colors">
