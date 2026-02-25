@@ -140,6 +140,70 @@ export const Header = () => {
           : "bg-background/80 backdrop-blur-md border-b border-transparent"
       )}>
         <div className="max-w-7xl mx-auto px-6 md:px-8 flex h-14 lg:h-16 items-center">
+          {/* Mobile Burger - Top Left */}
+          <div className="lg:hidden mr-auto">
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="h-8 w-8 text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full">
+                  <Menu className="h-4 w-4" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-full sm:w-[320px] bg-background border-r border-border p-0 flex flex-col h-full">
+                <SheetHeader className="p-5 border-b border-border flex-shrink-0">
+                  <SheetTitle className="text-left text-foreground text-sm font-medium">Menu</SheetTitle>
+                </SheetHeader>
+                
+                <nav className="p-5 space-y-1 overflow-y-auto flex-1">
+                  <Collapsible open={solutionsOpen} onOpenChange={setSolutionsOpen}>
+                    <CollapsibleTrigger className="flex items-center justify-between w-full py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors">
+                      <span>Platform</span>
+                      <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", solutionsOpen && "rotate-180")} />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="pl-4 space-y-1">
+                      <Link to="/solutions" className="block py-2 text-xs text-foreground/70 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Solutions Overview</Link>
+                      {solutions.map((item) => (
+                        <Link key={item.label} to={item.href} className="block py-2 text-xs text-foreground/70 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>{item.label}</Link>
+                      ))}
+                    </CollapsibleContent>
+                  </Collapsible>
+                  
+                  <Collapsible open={industriesOpen} onOpenChange={setIndustriesOpen}>
+                    <CollapsibleTrigger className="flex items-center justify-between w-full py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors">
+                      <span>Industries</span>
+                      <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", industriesOpen && "rotate-180")} />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="pl-4 space-y-1">
+                      <Link to="/industries" className="block py-2 text-xs text-foreground/70 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Industries Overview</Link>
+                      {industries.map((item) => (
+                        <Link key={item.label} to={item.href} className="block py-2 text-xs text-foreground/70 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>{item.label}</Link>
+                      ))}
+                    </CollapsibleContent>
+                  </Collapsible>
+                  
+                  <Link to="/nova/overview" className="block py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Nova AI</Link>
+                  <Link to={user ? "/team-dashboard" : "/auth?mode=signup&type=company"} className="block py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Team</Link>
+                  <Link to="/about" className="block py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Company</Link>
+                  
+                  <div className="pt-5 border-t border-border mt-5">
+                    {user ? (
+                      <div className="space-y-2">
+                        <p className="text-[10px] text-muted-foreground truncate">{user.email}</p>
+                        <Link to="/dashboard" className="block py-2 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Dashboard</Link>
+                        <Link to="/team-dashboard" className="block py-2 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Team Dashboard</Link>
+                        <button onClick={() => { handleSignOut(); setMobileMenuOpen(false); }} className="block py-2 text-sm font-medium text-destructive hover:text-destructive/80 transition-colors">Sign Out</button>
+                      </div>
+                    ) : null}
+                  </div>
+                  
+                  <div className="pt-5 pb-5">
+                    <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
+                      <Button className="w-full h-10 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full">Book a demo</Button>
+                    </Link>
+                  </div>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
           {/* Left Navigation */}
           <nav className="hidden lg:flex items-center gap-0.5 flex-1">
             <NavigationMenu>
@@ -337,145 +401,8 @@ export const Header = () => {
             </Link>
           </div>
 
-          {/* Mobile Menu Only */}
-          <div className="flex items-center lg:hidden">
-            
-            {/* Mobile Menu */}
-            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="lg:hidden h-8 w-8 text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full">
-                  <Menu className="h-4 w-4" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-full sm:w-[320px] bg-background border-l border-border p-0 flex flex-col h-full">
-                <SheetHeader className="p-5 border-b border-border flex-shrink-0">
-                  <SheetTitle className="text-left text-foreground text-sm font-medium">Menu</SheetTitle>
-                </SheetHeader>
-                
-                <nav className="p-5 space-y-1 overflow-y-auto flex-1">
-                  {/* Solutions Collapsible */}
-                  <Collapsible open={solutionsOpen} onOpenChange={setSolutionsOpen}>
-                    <CollapsibleTrigger className="flex items-center justify-between w-full py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors">
-                      <span>Platform</span>
-                      <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", solutionsOpen && "rotate-180")} />
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="pl-4 space-y-1">
-                      <Link
-                        to="/solutions"
-                        className="block py-2 text-xs text-foreground/70 hover:text-primary transition-colors"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        Solutions Overview
-                      </Link>
-                      {solutions.map((item) => (
-                        <Link
-                          key={item.label}
-                          to={item.href}
-                          className="block py-2 text-xs text-foreground/70 hover:text-primary transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </CollapsibleContent>
-                  </Collapsible>
-                  
-                  {/* Industries Collapsible */}
-                  <Collapsible open={industriesOpen} onOpenChange={setIndustriesOpen}>
-                    <CollapsibleTrigger className="flex items-center justify-between w-full py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors">
-                      <span>Industries</span>
-                      <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", industriesOpen && "rotate-180")} />
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="pl-4 space-y-1">
-                      <Link
-                        to="/industries"
-                        className="block py-2 text-xs text-foreground/70 hover:text-primary transition-colors"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        Industries Overview
-                      </Link>
-                      {industries.map((item) => (
-                        <Link
-                          key={item.label}
-                          to={item.href}
-                          className="block py-2 text-xs text-foreground/70 hover:text-primary transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </CollapsibleContent>
-                  </Collapsible>
-                  
-                  {/* Direct Links */}
-                  <Link
-                    to="/nova/overview"
-                    className="block py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Nova AI
-                  </Link>
 
-                  <Link
-                    to={user ? "/team-dashboard" : "/auth?mode=signup&type=company"}
-                    className="block py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Team
-                  </Link>
-                  
-                  <Link
-                    to="/about"
-                    className="block py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Company
-                  </Link>
-                  
-                  {/* Account Section */}
-                  <div className="pt-5 border-t border-border mt-5">
-                    {user ? (
-                      <div className="space-y-2">
-                        <p className="text-[10px] text-muted-foreground truncate">{user.email}</p>
-                        <Link
-                          to="/dashboard"
-                          className="block py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          Dashboard
-                        </Link>
-                        <Link
-                          to="/team-dashboard"
-                          className="block py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          Team Dashboard
-                        </Link>
-                        <button
-                          onClick={() => {
-                            handleSignOut();
-                            setMobileMenuOpen(false);
-                          }}
-                          className="block py-2 text-sm font-medium text-destructive hover:text-destructive/80 transition-colors"
-                        >
-                          Sign Out
-                        </button>
-                      </div>
-                    ) : null}
-                  </div>
-                  
-                  {/* CTA */}
-                  <div className="pt-5 pb-5">
-                    <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
-                      <Button className="w-full h-10 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full">
-                        Book a demo
-                      </Button>
-                    </Link>
-                  </div>
-                </nav>
-              </SheetContent>
-            </Sheet>
-          </div>
+
         </div>
       </header>
     </>
