@@ -50,7 +50,6 @@ export const Footer = () => {
     ],
     resources: [
       { name: "FAQ", href: "/faq" },
-      { name: "Documentation", href: "/resources" },
       { name: "Case Studies", href: "/enterprise/case-studies" },
       { name: "ROI Calculator", href: "/industries" },
     ],
