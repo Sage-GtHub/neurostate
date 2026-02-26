@@ -158,14 +158,6 @@ export function FloatingVoiceAgent() {
       await conversation.startSession({
         agentId: AGENT_ID,
         connectionType: "webrtc",
-        overrides: {
-          agent: {
-            prompt: {
-              prompt: AGENT_SYSTEM_PROMPT,
-            },
-            firstMessage: AGENT_FIRST_MESSAGE,
-          },
-        },
       });
       setIsExpanded(true);
     } catch (error) {
