@@ -622,10 +622,13 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                                     li: ({ children }) => <li className="text-foreground">{children}</li>,
                                     strong: ({ children }) => <strong className="font-semibold text-foreground">{children}</strong>,
                                     a: ({ href, children }) => (
-                                      <a href={href} className="text-accent hover:underline inline-flex items-center gap-1">
+                                      <button
+                                        onClick={() => handleLinkClick(href || '#')}
+                                        className="text-accent hover:underline inline-flex items-center gap-1 cursor-pointer bg-transparent border-0 p-0 font-inherit"
+                                      >
                                         {children}
-                                        <ExternalLink className="w-3 h-3" />
-                                      </a>
+                                        {href?.startsWith('/') ? null : <ExternalLink className="w-3 h-3" />}
+                                      </button>
                                     ),
                                     code: ({ children }) => (
                                       <code className="px-1.5 py-0.5 rounded bg-muted text-sm font-mono">{children}</code>
