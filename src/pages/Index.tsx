@@ -650,10 +650,10 @@ const Index = () => {
             <div className="max-w-4xl mx-auto text-center">
               <ScrollReveal className="space-y-6">
                 <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Get Started</span>
-                <h2 className="text-3xl md:text-5xl lg:text-6xl font-normal text-white leading-[1.1]">
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-normal text-background leading-[1.1]">
                   Ready to see it in action?
                 </h2>
-                <p className="text-base md:text-lg text-white/60 max-w-lg mx-auto">
+                <p className="text-base md:text-lg text-background/60 max-w-lg mx-auto">
                   Book a 15-minute demo or start exploring for free. No credit card needed.
                 </p>
                 <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 pt-4">
