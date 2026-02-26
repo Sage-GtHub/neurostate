@@ -34,6 +34,16 @@ const Contact = () => {
   const hero = useScrollAnimation();
   const form = useScrollAnimation();
 
+  // Load Calendly widget script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   const {
     register,
@@ -128,52 +138,14 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Schedule a Demo */}
+            {/* Calendly Embed */}
             {activeTab === 'schedule' && (
-              <div className="max-w-2xl mx-auto text-center space-y-8">
-                <div className="p-12 rounded-2xl bg-foreground/[0.02] border border-foreground/5 space-y-6">
-                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
-                    <Calendar className="h-7 w-7 text-accent" />
-                  </div>
-                  <div className="space-y-3">
-                    <h2 className="text-xl font-medium text-foreground">Book a 30-minute discovery call</h2>
-                    <p className="text-sm text-foreground/50 max-w-md mx-auto">
-                      Speak directly with our enterprise team. We'll walk you through the platform, answer your questions, and explore how NeuroState fits your organisation.
-                    </p>
-                  </div>
-                  <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
-                    <a
-                      href="mailto:sales@neurostate.co.uk?subject=Demo%20Request&body=Hi%20NeuroState%20team%2C%0A%0AI'd%20like%20to%20schedule%20a%20demo.%0A%0ACompany%3A%20%0ATeam%20size%3A%20%0AKey%20interest%3A%20"
-                      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-foreground text-background text-xs font-medium hover:bg-foreground/90 transition-colors"
-                    >
-                      <Mail className="h-3.5 w-3.5" />
-                      Request a Demo
-                    </a>
-                    <button
-                      onClick={() => setActiveTab('message')}
-                      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-foreground/10 text-xs font-medium text-foreground/70 hover:bg-foreground/[0.03] transition-colors"
-                    >
-                      Or send us a message
-                    </button>
-                  </div>
-                  <div className="pt-4 flex items-center justify-center gap-6 text-[10px] text-foreground/30">
-                    <span className="flex items-center gap-1.5"><Clock className="h-3 w-3" /> 30 min call</span>
-                    <span className="flex items-center gap-1.5"><Users className="h-3 w-3" /> No commitment</span>
-                    <span className="flex items-center gap-1.5"><Building2 className="h-3 w-3" /> Enterprise focus</span>
-                  </div>
-                </div>
-
-                {contactInfo.map((info, index) => (
-                  <div key={index} className="inline-flex items-center gap-3 text-xs text-foreground/40">
-                    <info.icon className="h-3.5 w-3.5" />
-                    {info.link ? (
-                      <a href={info.link} className="hover:text-foreground transition-colors">{info.content}</a>
-                    ) : (
-                      <span>{info.content}</span>
-                    )}
-                    {index < contactInfo.length - 1 && <span className="text-foreground/10 ml-3">·</span>}
-                  </div>
-                ))}
+              <div className="max-w-5xl mx-auto">
+                <div 
+                  className="calendly-inline-widget rounded-2xl overflow-hidden border border-foreground/10 shadow-lg shadow-foreground/5" 
+                  data-url="https://calendly.com/neurostate/30min?hide_gdpr_banner=1&background_color=ffffff&text_color=1a1a1a&primary_color=1a1a1a"
+                  style={{ minWidth: '320px', height: '800px' }}
+                />
               </div>
             )}
 
