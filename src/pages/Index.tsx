@@ -670,7 +670,7 @@ const Index = () => {
                   </Link>
                 </div>
                 
-                <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 sm:gap-6 pt-6 text-white/50">
+                <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 sm:gap-6 pt-6 text-background/50">
                   {["No credit card required", "Enterprise-ready", "SOC 2 compliant"].map((item, i) => (
                     <div key={i} className="flex items-center gap-2 text-sm">
                       <Check className="w-4 h-4 text-primary" />
