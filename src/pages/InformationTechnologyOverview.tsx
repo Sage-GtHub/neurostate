@@ -48,7 +48,7 @@ export default function InformationTechnologyOverview() {
                   <span className="text-muted-foreground">People run on cognitive capacity.</span>
                 </h1>
                 <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                  Burnout isn't a badge of honour. It's a business liability. Neurostate predicts cognitive strain, optimises focus windows, and keeps your best people performing sustainably.
+                  Burnout isn't a badge of honour. It's a business liability. NeuroState predicts cognitive strain, optimises focus windows, and keeps your best people performing sustainably.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
                   <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
