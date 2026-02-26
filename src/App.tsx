@@ -25,6 +25,7 @@ import NovaSettings from "./pages/NovaSettings";
 import NovaGoals from "./pages/NovaGoals";
 import NovaSettingsAdvanced from "./pages/NovaSettingsAdvanced";
 import NovaPersonalDashboard from "./pages/NovaPersonalDashboard";
+import MobileChat from "./pages/MobileChat";
 
 import FAQ from "./pages/FAQ";
 import Ambassador from "./pages/Ambassador";
@@ -235,6 +236,9 @@ const AnimatedRoutes = () => {
             <Route path="/solutions/action-layer" element={<ActionControlLayer />} />
             <Route path="/solutions/command-surfaces" element={<CommandSurfaces />} />
             <Route path="/solutions/roi-layer" element={<ROILayer />} />
+            
+            {/* Mobile Chat */}
+            <Route path="/mobile-chat" element={<MobileChat />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
