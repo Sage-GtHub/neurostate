@@ -650,6 +650,18 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                             <Button
                               variant="ghost"
                               size="sm"
+                              onClick={() => speakMessage(msg.content, i)}
+                              className="h-9 sm:h-7 px-3 sm:px-2 text-xs text-muted-foreground hover:text-foreground touch-manipulation"
+                            >
+                              {isSpeaking && speakingIndex === i ? (
+                                <><Square className="w-4 h-4 sm:w-3 sm:h-3 mr-1.5 sm:mr-1 fill-current" /> Stop</>
+                              ) : (
+                                <><Volume2 className="w-4 h-4 sm:w-3 sm:h-3 mr-1.5 sm:mr-1" /> Listen</>
+                              )}
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
                               onClick={() => copyMessage(i)}
                               className="h-9 sm:h-7 px-3 sm:px-2 text-xs text-muted-foreground hover:text-foreground touch-manipulation"
                             >
