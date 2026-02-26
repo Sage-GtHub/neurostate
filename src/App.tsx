@@ -10,6 +10,7 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { CursorGlow } from "@/components/CursorGlow";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { CommandPalette } from "@/components/nova/CommandPalette";
+import { FloatingVoiceAgent } from "@/components/FloatingVoiceAgent";
 
 import Index from "./pages/Index";
 import Nova from "./pages/Nova";
@@ -259,6 +260,7 @@ const App = () => (
           <Toaster />
           <Sonner position="top-center" />
           <AnimatedRoutes />
+          <FloatingVoiceAgent />
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
