@@ -20,7 +20,7 @@ const blogPosts: BlogPost[] = [
   {
     slug: "what-is-a-cognitive-performance-system",
     title: "What Is a Cognitive Performance System?",
-    excerpt: "The cognitive performance system represents a new category in human optimisation. Unlike traditional wellness approaches that focus on relaxation, a cognitive performance system integrates AI, supplements, and technology to measurably improve how you think, focus, and recover.",
+    excerpt: "The cognitive performance system represents a new category in workforce intelligence. Unlike traditional wellness programmes that focus on perks, a cognitive performance system integrates wearable data, AI, and predictive analytics to measurably improve how teams think, focus, and recover.",
     category: "Cognitive Performance",
     readTime: "5 min",
     date: "2025-01-15",
@@ -29,32 +29,32 @@ const blogPosts: BlogPost[] = [
   {
     slug: "why-traditional-corporate-wellness-fails",
     title: "Why Traditional Corporate Wellness Fails",
-    excerpt: "Corporate wellness programmes have become a £50 billion industry, yet employee burnout continues to rise. The fundamental problem is that traditional approaches focus on stress management rather than cognitive optimisation.",
-    category: "Corporate Wellbeing",
+    excerpt: "Corporate wellness programmes have become a £50 billion industry, yet employee burnout continues to rise. The fundamental problem is that traditional approaches focus on reactive perks rather than predictive, data-driven performance infrastructure.",
+    category: "Workforce Intelligence",
     readTime: "6 min",
     date: "2025-01-12"
   },
   {
-    slug: "science-behind-red-light-therapy-mental-performance",
-    title: "The Science Behind Red Light Therapy for Mental Performance",
-    excerpt: "Red light therapy cognitive benefits are supported by over 5,000 peer-reviewed studies. Photobiomodulation at 660nm and 850nm wavelengths enhances mitochondrial function in brain cells.",
-    category: "Neuromodulation",
+    slug: "burnout-prediction-wearable-data",
+    title: "How Wearable Data Predicts Burnout 72 Hours Early",
+    excerpt: "Heart rate variability, sleep architecture, and recovery metrics from wearables like Oura and Whoop can surface burnout risk days before it impacts performance. Here's what the research shows.",
+    category: "Predictive Analytics",
     readTime: "7 min",
     date: "2025-01-10"
   },
   {
     slug: "ai-personalisation-future-of-work",
     title: "How AI Personalisation Will Shape the Future of Work",
-    excerpt: "AI-driven cognitive performance is transforming how we approach workplace productivity. Predictive wellness AI can now anticipate burnout, optimise work schedules, and provide personalised interventions.",
+    excerpt: "AI-driven workforce intelligence is transforming how organisations approach team performance. Predictive systems can now anticipate capacity drops, optimise workloads, and deliver personalised interventions at scale.",
     category: "AI Performance",
     readTime: "5 min",
     date: "2025-01-08"
   },
   {
-    slug: "supplements-that-improve-focus-what-actually-works",
-    title: "Supplements That Improve Focus: What Actually Works?",
-    excerpt: "The supplement industry is flooded with focus claims. Most are marketing noise. Here we examine the evidence for adaptogens like Ashwagandha, Lion's Mane, and Rhodiola.",
-    category: "Performance Supplements",
+    slug: "measuring-roi-workforce-health",
+    title: "Measuring the ROI of Workforce Health Intelligence",
+    excerpt: "The biggest challenge in workforce health isn't adoption — it's attribution. How do you tie health data to business outcomes? Here's the framework enterprise teams are using.",
+    category: "Business Impact",
     readTime: "8 min",
     date: "2025-01-05"
   }
