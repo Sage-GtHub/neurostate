@@ -113,7 +113,7 @@ export default function InformationTechnologyOverview() {
                 <span className="text-muted-foreground">For sustainable velocity.</span>
               </h2>
               <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                Neurostate operates as a cognitive layer across your organisation: predicting burnout, protecting deep work, and keeping your best people performing at their peak.
+                NeuroState operates as a cognitive layer across your organisation: predicting burnout, protecting deep work, and keeping your best people performing at their peak.
               </p>
             </div>
 
