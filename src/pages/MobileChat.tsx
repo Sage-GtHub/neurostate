@@ -41,7 +41,7 @@ export default function MobileChat() {
 
           {/* Description */}
           <p className="text-sm text-ash leading-relaxed">
-            Get instant answers about our products, supplement stacks, and performance optimisation. Nova is here to help you make the right choices for your goals.
+            Get instant answers about cognitive performance, workforce intelligence, and performance optimisation. NeuroState AI is here to help you make the right choices for your goals.
           </p>
 
           {/* CTA */}

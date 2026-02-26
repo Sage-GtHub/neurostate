@@ -584,7 +584,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                 </div>
               </div>
               <p className="text-[10px] text-muted-foreground/50 text-center mt-2 hidden sm:block">
-                Nova may make mistakes. Verify important information.
+                NeuroState AI may make mistakes. Verify important information.
               </p>
             </div>
           </div>
