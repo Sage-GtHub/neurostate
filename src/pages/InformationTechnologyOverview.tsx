@@ -169,7 +169,7 @@ export default function InformationTechnologyOverview() {
                   <span className="text-muted-foreground">It's performance infrastructure.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Sustainable high performance isn't about working harder. It's about working smarter. Neurostate gives your team the cognitive edge to ship faster, think clearer, and stay longer.
+                  Sustainable high performance isn't about working harder. It's about working smarter. NeuroState gives your team the cognitive edge to ship faster, think clearer, and stay longer.
                 </p>
                 <div className="space-y-3">
                   {[
