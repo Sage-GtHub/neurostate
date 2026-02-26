@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { X, Plus, ArrowUp, RotateCcw, Copy, Check, ExternalLink, PanelLeftOpen, PanelLeftClose, Trash2, MessageSquare, Loader2 } from "lucide-react";
+import { X, Plus, ArrowUp, RotateCcw, Copy, Check, ExternalLink, PanelLeftOpen, PanelLeftClose, Trash2, MessageSquare, Loader2, Mic, MicOff, Volume2, Square } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import ReactMarkdown from "react-markdown";
 import { format } from "date-fns";
@@ -52,10 +52,16 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [isFocused, setIsFocused] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [speakingIndex, setSpeakingIndex] = useState<number | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const recognitionRef = useRef<any>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const { toast: showToast } = useToast();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const currentConversation = conversations.find(c => c.id === currentConversationId);
   const messages = currentConversation?.messages || [];
@@ -281,6 +287,143 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
     setSidebarOpen(false);
   };
 
+  // Voice input using Web Speech API
+  const toggleListening = useCallback(() => {
+    if (isListening) {
+      recognitionRef.current?.stop();
+      setIsListening(false);
+      return;
+    }
+
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      showToast({ title: "Not supported", description: "Speech recognition is not supported in your browser.", variant: "destructive" });
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.lang = 'en-GB';
+
+    recognition.onstart = () => setIsListening(true);
+    recognition.onend = () => setIsListening(false);
+    recognition.onerror = (e: any) => {
+      console.error('Speech recognition error:', e.error);
+      setIsListening(false);
+      if (e.error === 'not-allowed') {
+        showToast({ title: "Microphone blocked", description: "Please allow microphone access to use voice input.", variant: "destructive" });
+      }
+    };
+
+    recognition.onresult = (e: any) => {
+      let transcript = '';
+      for (let i = 0; i < e.results.length; i++) {
+        transcript += e.results[i][0].transcript;
+      }
+      setMessage(transcript);
+
+      // Auto-send when speech is final
+      if (e.results[e.results.length - 1].isFinal) {
+        setTimeout(() => {
+          if (transcript.trim()) {
+            handleSend(transcript.trim());
+          }
+        }, 500);
+      }
+    };
+
+    recognitionRef.current = recognition;
+    recognition.start();
+  }, [isListening, handleSend]);
+
+  // Text-to-speech using ElevenLabs
+  const speakMessage = useCallback(async (text: string, index: number) => {
+    // If already speaking this message, stop it
+    if (isSpeaking && speakingIndex === index) {
+      audioRef.current?.pause();
+      audioRef.current = null;
+      setIsSpeaking(false);
+      setSpeakingIndex(null);
+      return;
+    }
+
+    // Stop any current playback
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+
+    setIsSpeaking(true);
+    setSpeakingIndex(index);
+
+    try {
+      // Strip markdown for cleaner speech
+      const cleanText = text
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // links
+        .replace(/[*_~`#]/g, '') // formatting
+        .replace(/\n+/g, '. ') // newlines to pauses
+        .slice(0, 3000);
+
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/elevenlabs-tts`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: JSON.stringify({ text: cleanText }),
+        }
+      );
+
+      if (!response.ok) throw new Error('TTS failed');
+
+      const audioBlob = await response.blob();
+      const audioUrl = URL.createObjectURL(audioBlob);
+      const audio = new Audio(audioUrl);
+      audioRef.current = audio;
+
+      audio.onended = () => {
+        setIsSpeaking(false);
+        setSpeakingIndex(null);
+        URL.revokeObjectURL(audioUrl);
+      };
+
+      audio.onerror = () => {
+        setIsSpeaking(false);
+        setSpeakingIndex(null);
+        URL.revokeObjectURL(audioUrl);
+      };
+
+      await audio.play();
+    } catch (error) {
+      console.error('TTS error:', error);
+      setIsSpeaking(false);
+      setSpeakingIndex(null);
+      showToast({ title: "Voice unavailable", description: "Could not play audio. Please try again.", variant: "destructive" });
+    }
+  }, [isSpeaking, speakingIndex]);
+
+  // Clean up audio on unmount
+  useEffect(() => {
+    return () => {
+      audioRef.current?.pause();
+      recognitionRef.current?.stop();
+    };
+  }, []);
+
+  // Handle link clicks in markdown to navigate within the app
+  const handleLinkClick = useCallback((href: string) => {
+    if (href.startsWith('/')) {
+      onOpenChange(false);
+      navigate(href);
+    } else {
+      window.open(href, '_blank');
+    }
+  }, [navigate, onOpenChange]);
+
   const hasMessages = messages.length > 0;
 
   return (
@@ -479,10 +622,13 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                                     li: ({ children }) => <li className="text-foreground">{children}</li>,
                                     strong: ({ children }) => <strong className="font-semibold text-foreground">{children}</strong>,
                                     a: ({ href, children }) => (
-                                      <a href={href} className="text-accent hover:underline inline-flex items-center gap-1">
+                                      <button
+                                        onClick={() => handleLinkClick(href || '#')}
+                                        className="text-accent hover:underline inline-flex items-center gap-1 cursor-pointer bg-transparent border-0 p-0 font-inherit"
+                                      >
                                         {children}
-                                        <ExternalLink className="w-3 h-3" />
-                                      </a>
+                                        {href?.startsWith('/') ? null : <ExternalLink className="w-3 h-3" />}
+                                      </button>
                                     ),
                                     code: ({ children }) => (
                                       <code className="px-1.5 py-0.5 rounded bg-muted text-sm font-mono">{children}</code>
@@ -501,6 +647,18 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                         {/* Action buttons for assistant messages */}
                         {msg.content && !isLoading && (
                           <div className="flex items-center gap-0.5 sm:gap-1 pl-10 sm:pl-10">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => speakMessage(msg.content, i)}
+                              className="h-9 sm:h-7 px-3 sm:px-2 text-xs text-muted-foreground hover:text-foreground touch-manipulation"
+                            >
+                              {isSpeaking && speakingIndex === i ? (
+                                <><Square className="w-4 h-4 sm:w-3 sm:h-3 mr-1.5 sm:mr-1 fill-current" /> Stop</>
+                              ) : (
+                                <><Volume2 className="w-4 h-4 sm:w-3 sm:h-3 mr-1.5 sm:mr-1" /> Listen</>
+                              )}
+                            </Button>
                             <Button
                               variant="ghost"
                               size="sm"
@@ -554,8 +712,8 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                     onKeyDown={handleKeyDown}
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setIsFocused(false)}
-                    placeholder="Ask follow-up..."
-                    disabled={isLoading}
+                    placeholder={isListening ? "Listening..." : "Type or tap mic to talk..."}
+                    disabled={isLoading || isListening}
                     rows={1}
                     className={cn(
                       "flex-1 resize-none bg-transparent border-0",
@@ -565,6 +723,24 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                       "min-h-[44px] sm:min-h-[40px] max-h-[120px]"
                     )}
                   />
+                  <Button
+                    onClick={toggleListening}
+                    disabled={isLoading}
+                    size="icon"
+                    variant="ghost"
+                    className={cn(
+                      "h-11 w-11 sm:h-9 sm:w-9 rounded-xl flex-shrink-0 touch-manipulation",
+                      isListening 
+                        ? "bg-red-500/10 text-red-500 hover:bg-red-500/20 animate-pulse" 
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {isListening ? (
+                      <MicOff className="w-5 h-5 sm:w-4 sm:h-4" />
+                    ) : (
+                      <Mic className="w-5 h-5 sm:w-4 sm:h-4" />
+                    )}
+                  </Button>
                   <Button
                     onClick={() => handleSend()}
                     disabled={!message.trim() || isLoading}
