@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { X, Plus, ArrowUp, RotateCcw, Copy, Check, ExternalLink, PanelLeftOpen, PanelLeftClose, Trash2, MessageSquare, Loader2 } from "lucide-react";
+import { X, Plus, ArrowUp, RotateCcw, Copy, Check, ExternalLink, PanelLeftOpen, PanelLeftClose, Trash2, MessageSquare, Loader2, Mic, MicOff, Volume2, Square } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import ReactMarkdown from "react-markdown";
 import { format } from "date-fns";
