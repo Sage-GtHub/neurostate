@@ -247,7 +247,7 @@ export default function HealthcareOverview() {
                 <span className="text-muted-foreground">Integrated into clinical workflow.</span>
               </h2>
               <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                Neurostate operates as a predictive layer across patient care: forecasting outcomes, flagging risk, and guiding intervention timing.
+                NeuroState operates as a predictive layer across patient care: forecasting outcomes, flagging risk, and guiding intervention timing.
               </p>
             </div>
 
