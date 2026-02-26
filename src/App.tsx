@@ -237,6 +237,9 @@ const AnimatedRoutes = () => {
             <Route path="/solutions/command-surfaces" element={<CommandSurfaces />} />
             <Route path="/solutions/roi-layer" element={<ROILayer />} />
             
+            {/* Mobile Chat */}
+            <Route path="/mobile-chat" element={<MobileChat />} />
+            
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
