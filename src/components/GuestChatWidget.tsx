@@ -712,8 +712,8 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                     onKeyDown={handleKeyDown}
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setIsFocused(false)}
-                    placeholder="Ask follow-up..."
-                    disabled={isLoading}
+                    placeholder={isListening ? "Listening..." : "Type or tap mic to talk..."}
+                    disabled={isLoading || isListening}
                     rows={1}
                     className={cn(
                       "flex-1 resize-none bg-transparent border-0",
@@ -723,6 +723,24 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                       "min-h-[44px] sm:min-h-[40px] max-h-[120px]"
                     )}
                   />
+                  <Button
+                    onClick={toggleListening}
+                    disabled={isLoading}
+                    size="icon"
+                    variant="ghost"
+                    className={cn(
+                      "h-11 w-11 sm:h-9 sm:w-9 rounded-xl flex-shrink-0 touch-manipulation",
+                      isListening 
+                        ? "bg-red-500/10 text-red-500 hover:bg-red-500/20 animate-pulse" 
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {isListening ? (
+                      <MicOff className="w-5 h-5 sm:w-4 sm:h-4" />
+                    ) : (
+                      <Mic className="w-5 h-5 sm:w-4 sm:h-4" />
+                    )}
+                  </Button>
                   <Button
                     onClick={() => handleSend()}
                     disabled={!message.trim() || isLoading}
