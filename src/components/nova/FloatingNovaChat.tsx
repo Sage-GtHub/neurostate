@@ -433,7 +433,7 @@ export function FloatingNovaChat() {
                 <PanelLeftOpen className="h-3.5 w-3.5" />
               </Button>
               <div className="w-6 h-6 rounded-full bg-foreground/5 flex items-center justify-center">
-                <img src={neurostateIcon} alt="Neurostate" className="w-4 h-4" />
+                <img src={neurostateIcon} alt="NeuroState" className="w-4 h-4" />
               </div>
               <div>
                 <h2 className="text-xs font-medium text-foreground">NeuroState AI Agent</h2>
