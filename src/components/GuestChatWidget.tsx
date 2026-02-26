@@ -388,7 +388,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
             <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center">
               <span className="text-sm font-bold text-white">N</span>
             </div>
-            <span className="font-medium text-base">Nova</span>
+            <span className="font-medium text-base">NeuroState AI</span>
           </div>
           <div className="flex items-center gap-0.5">
             <Button 
