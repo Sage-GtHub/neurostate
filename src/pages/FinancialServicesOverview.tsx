@@ -48,7 +48,7 @@ export default function FinancialServicesOverview() {
                   <span className="text-muted-foreground">We deliver it.</span>
                 </h1>
                 <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                  Cognitive fatigue costs financial institutions millions in suboptimal decisions, errors, and burnout. Neurostate predicts mental load and optimises performance windows, turning cognitive science into competitive advantage.
+                  Cognitive fatigue costs financial institutions millions in suboptimal decisions, errors, and burnout. NeuroState predicts mental load and optimises performance windows, turning cognitive science into competitive advantage.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
                   <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
