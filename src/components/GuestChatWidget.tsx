@@ -23,10 +23,10 @@ type Conversation = {
 };
 
 const QUICK_SUGGESTIONS = [
-  "What is NeuroState?",
-  "How does NeuroState AI work?",
-  "Tell me about enterprise pricing",
-  "What integrations do you support?",
+  "What industries do you serve?",
+  "How does the platform work?",
+  "What ROI can we expect?",
+  "Tell me about NeuroState AI",
 ];
 
 // Basic spinner typing indicator
