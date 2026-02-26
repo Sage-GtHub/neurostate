@@ -327,7 +327,7 @@ export function FloatingNovaChat() {
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-foreground text-background shadow-lg hover:scale-105 transition-transform flex items-center justify-center group"
         aria-label="Open chat"
       >
-        <img src={neurostateIcon} alt="Neurostate" className="w-7 h-7 invert group-hover:scale-110 transition-transform" />
+        <img src={neurostateIcon} alt="NeuroState" className="w-7 h-7 invert group-hover:scale-110 transition-transform" />
         <span className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse" />
       </button>
 
