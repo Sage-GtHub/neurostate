@@ -303,7 +303,7 @@ export default function HealthcareOverview() {
                   <span className="text-muted-foreground">It is clinical intelligence infrastructure.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Neurostate reduces length of stay, prevents readmissions, and accelerates recovery. Measurable outcomes that translate directly to operational efficiency and patient satisfaction.
+                  NeuroState reduces length of stay, prevents readmissions, and accelerates recovery. Measurable outcomes that translate directly to operational efficiency and patient satisfaction.
                 </p>
                 <div className="space-y-3">
                   {[
