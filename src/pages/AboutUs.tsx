@@ -64,7 +64,7 @@ const AboutUs = () => {
                   </ScrollReveal>
                   <ScrollReveal delay={0.3}>
                     <p className="text-sm text-foreground font-medium leading-relaxed">
-                      We built Neurostate because the future of work isn't about working harder. It's about working with precision.
+                      We built NeuroState because the future of work isn't about working harder. It's about working with precision.
                     </p>
                   </ScrollReveal>
                 </div>

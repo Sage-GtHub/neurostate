@@ -663,9 +663,9 @@ const Index = () => {
                       <ArrowUpRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </Button>
                   </Link>
-                  <Link to="/auth?mode=signup">
+                  <Link to="/solutions">
                     <Button className="h-12 px-8 text-base font-medium rounded-full bg-transparent border border-white/40 !text-white hover:bg-white/10">
-                      Start free trial
+                      Explore the platform
                     </Button>
                   </Link>
                 </div>
