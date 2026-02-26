@@ -436,8 +436,8 @@ export function FloatingNovaChat() {
                 <img src={neurostateIcon} alt="Neurostate" className="w-4 h-4" />
               </div>
               <div>
-                <h2 className="text-xs font-medium text-foreground">NeuroState AI</h2>
-                <p className="text-[9px] text-muted-foreground">AI Agent</p>
+                <h2 className="text-xs font-medium text-foreground">NeuroState AI Agent</h2>
+                <p className="text-[9px] text-muted-foreground">Your cognitive performance assistant</p>
               </div>
             </div>
             <div className="flex items-center gap-1">
