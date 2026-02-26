@@ -23,10 +23,10 @@ type Conversation = {
 };
 
 const QUICK_SUGGESTIONS = [
-  "What is NeuroState?",
-  "How does NeuroState AI work?",
-  "Tell me about enterprise pricing",
-  "What integrations do you support?",
+  "What industries do you serve?",
+  "How does the platform work?",
+  "What ROI can we expect?",
+  "Tell me about NeuroState AI",
 ];
 
 // Basic spinner typing indicator
@@ -646,10 +646,11 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                         
                         {/* Action buttons for assistant messages */}
                         {msg.content && !isLoading && (
-                          <div className="flex items-center gap-0.5 sm:gap-1 pl-10 sm:pl-10">
+                          <div className="flex items-center gap-1 pl-10 sm:pl-10 flex-wrap">
                             <Button
                               variant="ghost"
                               size="sm"
+                              data-testid="listen-btn"
                               onClick={() => speakMessage(msg.content, i)}
                               className="h-9 sm:h-7 px-3 sm:px-2 text-xs text-muted-foreground hover:text-foreground touch-manipulation"
                             >

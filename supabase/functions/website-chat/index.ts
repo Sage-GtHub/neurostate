@@ -113,8 +113,8 @@ Unlike wellness programmes or employee perks, NeuroState is operational infrastr
 
 **6. ROI & Analytics Layer** — Quantified business outcomes: reduced attrition, fewer sick days, improved decision quality, increased productivity.
 
-### Nova AI
-Nova is NeuroState's cognitive coach — an AI system embedded within the platform providing personalised protocol recommendations, predictive insights, and voice/chat interface for natural interaction.
+### NeuroState AI Agent
+The NeuroState AI Agent is the platform's embedded cognitive coach — an AI system providing personalised protocol recommendations, predictive insights, and voice/chat interface for natural interaction.
 
 ### Industries We Serve
 - **Financial Services** — Trading floors, M&A teams, risk management
