@@ -81,7 +81,7 @@ const Hero = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [handleMouseMove]);
 
-  const clientNames = ["Lattice", "Gong", "Notion", "Rippling", "Ramp", "Deel", "Airtable", "Figma"];
+  // Removed fake SaaS client logos — no implied partnerships without real customers
 
   // Stagger animation variants
   const containerVariants = {
