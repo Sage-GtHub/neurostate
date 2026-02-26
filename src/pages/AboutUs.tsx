@@ -32,7 +32,7 @@ const AboutUs = () => {
                   <span className="text-muted-foreground">through artificial intelligence.</span>
                 </h1>
                 <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl mt-6">
-                  Most organisations measure outcomes, not the cognitive conditions that create them. We're changing that. Neurostate is a cognitive performance platform that predicts and guides, not just tracks.
+                  Most organisations measure outcomes, not the cognitive conditions that create them. We're changing that. NeuroState is a cognitive performance platform that predicts and guides, not just tracks.
                 </p>
               </ScrollReveal>
             </div>
