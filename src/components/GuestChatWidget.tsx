@@ -287,6 +287,143 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
     setSidebarOpen(false);
   };
 
+  // Voice input using Web Speech API
+  const toggleListening = useCallback(() => {
+    if (isListening) {
+      recognitionRef.current?.stop();
+      setIsListening(false);
+      return;
+    }
+
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      showToast({ title: "Not supported", description: "Speech recognition is not supported in your browser.", variant: "destructive" });
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.lang = 'en-GB';
+
+    recognition.onstart = () => setIsListening(true);
+    recognition.onend = () => setIsListening(false);
+    recognition.onerror = (e: any) => {
+      console.error('Speech recognition error:', e.error);
+      setIsListening(false);
+      if (e.error === 'not-allowed') {
+        showToast({ title: "Microphone blocked", description: "Please allow microphone access to use voice input.", variant: "destructive" });
+      }
+    };
+
+    recognition.onresult = (e: any) => {
+      let transcript = '';
+      for (let i = 0; i < e.results.length; i++) {
+        transcript += e.results[i][0].transcript;
+      }
+      setMessage(transcript);
+
+      // Auto-send when speech is final
+      if (e.results[e.results.length - 1].isFinal) {
+        setTimeout(() => {
+          if (transcript.trim()) {
+            handleSend(transcript.trim());
+          }
+        }, 500);
+      }
+    };
+
+    recognitionRef.current = recognition;
+    recognition.start();
+  }, [isListening, handleSend]);
+
+  // Text-to-speech using ElevenLabs
+  const speakMessage = useCallback(async (text: string, index: number) => {
+    // If already speaking this message, stop it
+    if (isSpeaking && speakingIndex === index) {
+      audioRef.current?.pause();
+      audioRef.current = null;
+      setIsSpeaking(false);
+      setSpeakingIndex(null);
+      return;
+    }
+
+    // Stop any current playback
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+
+    setIsSpeaking(true);
+    setSpeakingIndex(index);
+
+    try {
+      // Strip markdown for cleaner speech
+      const cleanText = text
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // links
+        .replace(/[*_~`#]/g, '') // formatting
+        .replace(/\n+/g, '. ') // newlines to pauses
+        .slice(0, 3000);
+
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/elevenlabs-tts`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: JSON.stringify({ text: cleanText }),
+        }
+      );
+
+      if (!response.ok) throw new Error('TTS failed');
+
+      const audioBlob = await response.blob();
+      const audioUrl = URL.createObjectURL(audioBlob);
+      const audio = new Audio(audioUrl);
+      audioRef.current = audio;
+
+      audio.onended = () => {
+        setIsSpeaking(false);
+        setSpeakingIndex(null);
+        URL.revokeObjectURL(audioUrl);
+      };
+
+      audio.onerror = () => {
+        setIsSpeaking(false);
+        setSpeakingIndex(null);
+        URL.revokeObjectURL(audioUrl);
+      };
+
+      await audio.play();
+    } catch (error) {
+      console.error('TTS error:', error);
+      setIsSpeaking(false);
+      setSpeakingIndex(null);
+      showToast({ title: "Voice unavailable", description: "Could not play audio. Please try again.", variant: "destructive" });
+    }
+  }, [isSpeaking, speakingIndex]);
+
+  // Clean up audio on unmount
+  useEffect(() => {
+    return () => {
+      audioRef.current?.pause();
+      recognitionRef.current?.stop();
+    };
+  }, []);
+
+  // Handle link clicks in markdown to navigate within the app
+  const handleLinkClick = useCallback((href: string) => {
+    if (href.startsWith('/')) {
+      onOpenChange(false);
+      navigate(href);
+    } else {
+      window.open(href, '_blank');
+    }
+  }, [navigate, onOpenChange]);
+
   const hasMessages = messages.length > 0;
 
   return (
