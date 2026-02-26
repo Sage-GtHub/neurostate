@@ -25,6 +25,7 @@ import NovaSettings from "./pages/NovaSettings";
 import NovaGoals from "./pages/NovaGoals";
 import NovaSettingsAdvanced from "./pages/NovaSettingsAdvanced";
 import NovaPersonalDashboard from "./pages/NovaPersonalDashboard";
+import MobileChat from "./pages/MobileChat";
 
 import FAQ from "./pages/FAQ";
 import Ambassador from "./pages/Ambassador";
