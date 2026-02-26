@@ -24,7 +24,7 @@ type Conversation = {
 
 const QUICK_SUGGESTIONS = [
   "What is NeuroState?",
-  "How does Nova AI work?",
+  "How does NeuroState AI work?",
   "Tell me about enterprise pricing",
   "What integrations do you support?",
 ];
