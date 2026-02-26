@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useConversation } from "@11labs/react";
 import { Button } from "@/components/ui/button";
-import { Mic, MicOff, Loader2 } from "lucide-react";
+import { Mic, MicOff, Loader2, Volume2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+
+const AGENT_ID = "agent_2601kjdfphrefs5thzmypmv7fn7a";
 
 interface VoiceInterfaceProps {
   onSpeakingChange?: (speaking: boolean) => void;
@@ -11,33 +12,29 @@ interface VoiceInterfaceProps {
 
 export function VoiceInterface({ onSpeakingChange }: VoiceInterfaceProps) {
   const { toast } = useToast();
-  const [isConnected, setIsConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const conversation = useConversation({
     onConnect: () => {
-      setIsConnected(true);
       setIsLoading(false);
       toast({
-        title: "Voice activated",
-        description: "Nova is listening. Speak naturally.",
+        title: "NeuroState Agent connected",
+        description: "Speak naturally — your AI sales agent is listening.",
       });
     },
     onDisconnect: () => {
-      setIsConnected(false);
       onSpeakingChange?.(false);
     },
     onError: (error) => {
       console.error("Voice error:", error);
       toast({
-        title: "Voice error",
-        description: "Failed to connect voice interface",
+        title: "Connection error",
+        description: "Failed to connect to the NeuroState agent. Please try again.",
         variant: "destructive",
       });
       setIsLoading(false);
     },
     onMessage: (message) => {
-      // ElevenLabs messages have source: 'ai' or 'user'
       if (message.source === "ai") {
         onSpeakingChange?.(true);
       }
@@ -46,28 +43,22 @@ export function VoiceInterface({ onSpeakingChange }: VoiceInterfaceProps) {
 
   const startConversation = async () => {
     setIsLoading(true);
-    
+
     try {
-      // Request microphone access
       await navigator.mediaDevices.getUserMedia({ audio: true });
 
-      // Get signed URL from edge function
-      const { data, error } = await supabase.functions.invoke("elevenlabs-signed-url");
-      
-      if (error) throw error;
-      
-      if (!data?.signed_url) {
-        throw new Error("No signed URL received");
-      }
-
-      await conversation.startSession({ 
-        signedUrl: data.signed_url 
+      await conversation.startSession({
+        agentId: AGENT_ID,
+        connectionType: "webrtc",
       });
     } catch (error) {
       console.error("Error starting conversation:", error);
       toast({
         title: "Connection failed",
-        description: error instanceof Error ? error.message : "Failed to start voice conversation",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Failed to start voice conversation",
         variant: "destructive",
       });
       setIsLoading(false);
@@ -76,14 +67,15 @@ export function VoiceInterface({ onSpeakingChange }: VoiceInterfaceProps) {
 
   const endConversation = async () => {
     await conversation.endSession();
-    setIsConnected(false);
     onSpeakingChange?.(false);
   };
 
+  const isConnected = conversation.status === "connected";
+
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center gap-4">
       {!isConnected ? (
-        <Button 
+        <Button
           onClick={startConversation}
           disabled={isLoading}
           size="lg"
@@ -97,20 +89,28 @@ export function VoiceInterface({ onSpeakingChange }: VoiceInterfaceProps) {
           ) : (
             <>
               <Mic className="w-5 h-5" />
-              <span className="ml-2">Start Voice Chat</span>
+              <span className="ml-2">Talk to NeuroState Agent</span>
             </>
           )}
         </Button>
       ) : (
-        <Button 
-          onClick={endConversation}
-          variant="secondary"
-          size="lg"
-          className="group relative overflow-hidden"
-        >
-          <MicOff className="w-5 h-5" />
-          <span className="ml-2">End Voice Chat</span>
-        </Button>
+        <div className="flex items-center gap-3">
+          {conversation.isSpeaking && (
+            <Volume2 className="w-5 h-5 text-primary animate-pulse" />
+          )}
+          <span className="text-sm text-muted-foreground">
+            {conversation.isSpeaking ? "Agent is speaking…" : "Listening…"}
+          </span>
+          <Button
+            onClick={endConversation}
+            variant="secondary"
+            size="lg"
+            className="group relative overflow-hidden"
+          >
+            <MicOff className="w-5 h-5" />
+            <span className="ml-2">End Conversation</span>
+          </Button>
+        </div>
       )}
     </div>
   );
