@@ -664,7 +664,7 @@ const Index = () => {
                     </Button>
                   </Link>
                   <Link to="/solutions">
-                    <Button className="h-12 px-8 text-base font-medium rounded-full bg-transparent border border-white/40 !text-white hover:bg-white/10">
+                    <Button className="h-12 px-8 text-base font-medium rounded-full bg-transparent border border-background/40 text-background hover:bg-background/10">
                       Explore the platform
                     </Button>
                   </Link>
