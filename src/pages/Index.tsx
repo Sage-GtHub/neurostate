@@ -293,9 +293,9 @@ const Index = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
                   >
-                    <p className="text-2xl md:text-4xl lg:text-5xl font-light text-white mb-2">{stat.value}</p>
-                    <p className="text-sm text-white/70 font-medium">{stat.label}</p>
-                    <p className="text-xs text-white/40 mt-1">{stat.sublabel}</p>
+                    <p className="text-2xl md:text-4xl lg:text-5xl font-light text-background mb-2">{stat.value}</p>
+                    <p className="text-sm text-background/70 font-medium">{stat.label}</p>
+                    <p className="text-xs text-background/40 mt-1">{stat.sublabel}</p>
                   </motion.div>
                 ))}
               </div>
