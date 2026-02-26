@@ -531,7 +531,7 @@ const Index = () => {
                 >
                   <div className="flex items-center gap-3 pb-5 border-b border-border/30">
                     <motion.div 
-                      className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center"
+                      className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center"
                       animate={{ scale: [1, 1.05, 1] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     >
