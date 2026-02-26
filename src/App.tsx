@@ -260,6 +260,7 @@ const App = () => (
           <Toaster />
           <Sonner position="top-center" />
           <AnimatedRoutes />
+          <FloatingVoiceAgent />
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
