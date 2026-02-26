@@ -113,7 +113,7 @@ export default function FinancialServicesOverview() {
                 <span className="text-muted-foreground">For high-stakes environments.</span>
               </h2>
               <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                Neurostate operates as a predictive layer across your trading floor: forecasting cognitive load, optimising decision windows, and preventing burnout before it impacts performance.
+                NeuroState operates as a predictive layer across your trading floor: forecasting cognitive load, optimising decision windows, and preventing burnout before it impacts performance.
               </p>
             </div>
 
