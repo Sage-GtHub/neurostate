@@ -41,7 +41,7 @@ const QUICK_PROMPTS = [
   "What industries do you serve?",
   "How does the platform work?",
   "What ROI can we expect?",
-  "Tell me about Nova AI",
+  "Tell me about NeuroState AI",
 ];
 
 // Basic spinner typing indicator
