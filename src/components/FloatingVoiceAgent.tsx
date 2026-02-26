@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useConversation } from "@11labs/react";
+import { useConversation } from "@elevenlabs/react";
 import { Mic, MicOff, Loader2, Volume2, X, Phone } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
@@ -157,7 +157,7 @@ export function FloatingVoiceAgent() {
       await navigator.mediaDevices.getUserMedia({ audio: true });
       await conversation.startSession({
         agentId: AGENT_ID,
-        connectionType: "webrtc",
+        connectionType: "websocket",
       });
       setIsExpanded(true);
     } catch (error) {
