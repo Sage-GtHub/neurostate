@@ -251,7 +251,7 @@ export default function InformationTechnologyOverview() {
           <div className="max-w-lg mx-auto">
             <div className="border border-border/30 rounded-3xl p-8 sm:p-10 space-y-6 bg-foreground/[0.01]">
               <div className="text-center space-y-2">
-                <h2 className="text-xl font-light text-foreground">Let's explore whether Neurostate fits your team</h2>
+                <h2 className="text-xl font-light text-foreground">Let's explore whether NeuroState fits your team</h2>
                 <p className="text-xs text-muted-foreground">We respond within 24 hours. Pilot programmes available.</p>
               </div>
 

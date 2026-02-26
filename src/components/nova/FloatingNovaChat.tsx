@@ -477,7 +477,7 @@ export function FloatingNovaChat() {
             {!hasMessages ? (
               <div className="flex-1 flex flex-col items-center justify-center px-4">
                 <div className="w-10 h-10 rounded-full bg-foreground/5 flex items-center justify-center mb-4">
-                  <img src={neurostateIcon} alt="Neurostate" className="w-6 h-6 opacity-40" />
+                  <img src={neurostateIcon} alt="NeuroState" className="w-6 h-6 opacity-40" />
                 </div>
                 <p className="text-sm text-foreground mb-1">How can I help?</p>
                 <p className="text-[10px] text-muted-foreground mb-6 text-center">

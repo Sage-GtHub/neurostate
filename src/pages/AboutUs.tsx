@@ -360,7 +360,7 @@ const AboutUs = () => {
                   <span className="text-muted-foreground">Early adopters shape how these systems evolve.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Let's explore whether Neurostate can help your team perform better.
+                  Let's explore whether NeuroState can help your team perform better.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
                   <Link to="/contact">
