@@ -50,7 +50,6 @@ export const Footer = () => {
     ],
     resources: [
       { name: "FAQ", href: "/faq" },
-      { name: "Documentation", href: "/resources" },
       { name: "Case Studies", href: "/enterprise/case-studies" },
       { name: "ROI Calculator", href: "/industries" },
     ],
@@ -74,7 +73,7 @@ export const Footer = () => {
             <div className="lg:max-w-xs space-y-5">
               <Link to="/" className="inline-flex items-center gap-2.5 group">
                 <div className="w-8 h-8 rounded-full bg-background/10 flex items-center justify-center group-hover:bg-background/20 transition-colors">
-                  <img src={logoIcon} alt="Neurostate" className="h-4 w-4 opacity-80 invert" />
+                  <img src={logoIcon} alt="NeuroState" className="h-4 w-4 opacity-80 invert" />
                 </div>
                 <span className="text-xs font-medium tracking-tight text-background/90">NeuroState<sup className="text-[6px]">®</sup></span>
               </Link>
@@ -87,7 +86,7 @@ export const Footer = () => {
             <div className="flex-1 lg:max-w-sm lg:ml-auto space-y-4">
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-background/40">Newsletter</p>
               <p className="text-background/60 text-xs">
-                Tips on team health, performance, and wellbeing.
+                Insights on workforce health, performance, and productivity.
               </p>
               <form onSubmit={handleNewsletterSignup} className="flex gap-2">
                 <Input

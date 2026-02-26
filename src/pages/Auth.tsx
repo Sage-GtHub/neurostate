@@ -184,7 +184,7 @@ export default function Auth() {
         <div className="w-full max-w-md">
           <div className="text-center mb-10">
             <div className="w-12 h-12 rounded-2xl bg-foreground/[0.03] flex items-center justify-center mx-auto mb-6">
-              <img src={logoIcon} alt="Neurostate" className="h-6 w-6 opacity-70" />
+              <img src={logoIcon} alt="NeuroState" className="h-6 w-6 opacity-70" />
             </div>
             <h1 className="text-2xl font-light text-foreground mb-2">
               {isLogin ? "Welcome back" : step === 'type' ? "Create your account" : accountType === 'company' ? "Company account" : "Personal account"}

@@ -48,7 +48,7 @@ export default function InformationTechnologyOverview() {
                   <span className="text-muted-foreground">People run on cognitive capacity.</span>
                 </h1>
                 <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                  Burnout isn't a badge of honour. It's a business liability. Neurostate predicts cognitive strain, optimises focus windows, and keeps your best people performing sustainably.
+                  Burnout isn't a badge of honour. It's a business liability. NeuroState predicts cognitive strain, optimises focus windows, and keeps your best people performing sustainably.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
                   <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
@@ -113,7 +113,7 @@ export default function InformationTechnologyOverview() {
                 <span className="text-muted-foreground">For sustainable velocity.</span>
               </h2>
               <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                Neurostate operates as a cognitive layer across your organisation: predicting burnout, protecting deep work, and keeping your best people performing at their peak.
+                NeuroState operates as a cognitive layer across your organisation: predicting burnout, protecting deep work, and keeping your best people performing at their peak.
               </p>
             </div>
 
@@ -169,7 +169,7 @@ export default function InformationTechnologyOverview() {
                   <span className="text-muted-foreground">It's performance infrastructure.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Sustainable high performance isn't about working harder. It's about working smarter. Neurostate gives your team the cognitive edge to ship faster, think clearer, and stay longer.
+                  Sustainable high performance isn't about working harder. It's about working smarter. NeuroState gives your team the cognitive edge to ship faster, think clearer, and stay longer.
                 </p>
                 <div className="space-y-3">
                   {[
@@ -251,7 +251,7 @@ export default function InformationTechnologyOverview() {
           <div className="max-w-lg mx-auto">
             <div className="border border-border/30 rounded-3xl p-8 sm:p-10 space-y-6 bg-foreground/[0.01]">
               <div className="text-center space-y-2">
-                <h2 className="text-xl font-light text-foreground">Let's explore whether Neurostate fits your team</h2>
+                <h2 className="text-xl font-light text-foreground">Let's explore whether NeuroState fits your team</h2>
                 <p className="text-xs text-muted-foreground">We respond within 24 hours. Pilot programmes available.</p>
               </div>
 

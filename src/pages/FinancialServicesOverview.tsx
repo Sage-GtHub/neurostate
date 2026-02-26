@@ -48,7 +48,7 @@ export default function FinancialServicesOverview() {
                   <span className="text-muted-foreground">We deliver it.</span>
                 </h1>
                 <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                  Cognitive fatigue costs financial institutions millions in suboptimal decisions, errors, and burnout. Neurostate predicts mental load and optimises performance windows, turning cognitive science into competitive advantage.
+                  Cognitive fatigue costs financial institutions millions in suboptimal decisions, errors, and burnout. NeuroState predicts mental load and optimises performance windows, turning cognitive science into competitive advantage.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
                   <a href="https://calendly.com/neurostate/30min" target="_blank" rel="noopener noreferrer">
@@ -113,7 +113,7 @@ export default function FinancialServicesOverview() {
                 <span className="text-muted-foreground">For high-stakes environments.</span>
               </h2>
               <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                Neurostate operates as a predictive layer across your trading floor: forecasting cognitive load, optimising decision windows, and preventing burnout before it impacts performance.
+                NeuroState operates as a predictive layer across your trading floor: forecasting cognitive load, optimising decision windows, and preventing burnout before it impacts performance.
               </p>
             </div>
 
@@ -169,7 +169,7 @@ export default function FinancialServicesOverview() {
                   <span className="text-muted-foreground">It's alpha generation.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  The edge in financial services isn't just information. It's the cognitive capacity to act on it. Neurostate ensures your team performs when millions are on the line.
+                  The edge in financial services isn't just information. It's the cognitive capacity to act on it. NeuroState ensures your team performs when millions are on the line.
                 </p>
                 <div className="space-y-3">
                   {[
@@ -251,7 +251,7 @@ export default function FinancialServicesOverview() {
           <div className="max-w-lg mx-auto">
             <div className="border border-border/30 rounded-3xl p-8 sm:p-10 space-y-6 bg-foreground/[0.01]">
               <div className="text-center space-y-2">
-                <h2 className="text-xl font-light text-foreground">Let's explore whether Neurostate fits your institution</h2>
+                <h2 className="text-xl font-light text-foreground">Let's explore whether NeuroState fits your institution</h2>
                 <p className="text-xs text-muted-foreground">Confidential conversations. No pressure.</p>
               </div>
 

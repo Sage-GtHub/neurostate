@@ -247,7 +247,7 @@ export default function HospitalityOverview() {
                 <span className="text-muted-foreground">For every guest.</span>
               </h2>
               <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                Neurostate transforms passive wellness into active transformation. Personalised journeys based on real data. Measurable outcomes guests can see.
+                NeuroState transforms passive wellness into active transformation. Personalised journeys based on real data. Measurable outcomes guests can see.
               </p>
             </div>
 
@@ -303,7 +303,7 @@ export default function HospitalityOverview() {
                   <span className="text-muted-foreground">It is a revenue engine.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Wellness guests spend more, stay longer, and return more often. Neurostate positions your property as a destination, not just accommodation.
+                  Wellness guests spend more, stay longer, and return more often. NeuroState positions your property as a destination, not just accommodation.
                 </p>
                 <div className="space-y-3">
                   {[
@@ -392,7 +392,7 @@ export default function HospitalityOverview() {
           <div className="max-w-lg mx-auto">
             <div className="border border-border/30 rounded-3xl p-8 sm:p-10 space-y-6 bg-foreground/[0.01]">
               <div className="text-center space-y-2">
-                <h2 className="text-xl font-light text-foreground">Let us explore whether Neurostate fits your property</h2>
+                <h2 className="text-xl font-light text-foreground">Let us explore whether NeuroState fits your property</h2>
                 <p className="text-xs text-muted-foreground">We respond within 24 hours. Property tours available.</p>
               </div>
 

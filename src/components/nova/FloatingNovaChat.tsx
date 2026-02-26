@@ -327,7 +327,7 @@ export function FloatingNovaChat() {
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-foreground text-background shadow-lg hover:scale-105 transition-transform flex items-center justify-center group"
         aria-label="Open chat"
       >
-        <img src={neurostateIcon} alt="Neurostate" className="w-7 h-7 invert group-hover:scale-110 transition-transform" />
+        <img src={neurostateIcon} alt="NeuroState" className="w-7 h-7 invert group-hover:scale-110 transition-transform" />
         <span className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse" />
       </button>
 
@@ -433,7 +433,7 @@ export function FloatingNovaChat() {
                 <PanelLeftOpen className="h-3.5 w-3.5" />
               </Button>
               <div className="w-6 h-6 rounded-full bg-foreground/5 flex items-center justify-center">
-                <img src={neurostateIcon} alt="Neurostate" className="w-4 h-4" />
+                <img src={neurostateIcon} alt="NeuroState" className="w-4 h-4" />
               </div>
               <div>
                 <h2 className="text-xs font-medium text-foreground">NeuroState AI Agent</h2>
@@ -477,7 +477,7 @@ export function FloatingNovaChat() {
             {!hasMessages ? (
               <div className="flex-1 flex flex-col items-center justify-center px-4">
                 <div className="w-10 h-10 rounded-full bg-foreground/5 flex items-center justify-center mb-4">
-                  <img src={neurostateIcon} alt="Neurostate" className="w-6 h-6 opacity-40" />
+                  <img src={neurostateIcon} alt="NeuroState" className="w-6 h-6 opacity-40" />
                 </div>
                 <p className="text-sm text-foreground mb-1">How can I help?</p>
                 <p className="text-[10px] text-muted-foreground mb-6 text-center">

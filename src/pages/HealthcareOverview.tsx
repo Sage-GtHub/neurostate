@@ -96,7 +96,7 @@ export default function HealthcareOverview() {
                   <span className="text-muted-foreground">We make it predictive.</span>
                 </h1>
                 <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                  Most clinical systems track what happened. Neurostate forecasts what will happen: predicting complications, optimising recovery, and reducing readmissions before they occur.
+                  Most clinical systems track what happened. NeuroState forecasts what will happen: predicting complications, optimising recovery, and reducing readmissions before they occur.
                 </p>
                 <div className="flex flex-wrap gap-3 pt-2">
                   <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
@@ -247,7 +247,7 @@ export default function HealthcareOverview() {
                 <span className="text-muted-foreground">Integrated into clinical workflow.</span>
               </h2>
               <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                Neurostate operates as a predictive layer across patient care: forecasting outcomes, flagging risk, and guiding intervention timing.
+                NeuroState operates as a predictive layer across patient care: forecasting outcomes, flagging risk, and guiding intervention timing.
               </p>
             </div>
 
@@ -303,7 +303,7 @@ export default function HealthcareOverview() {
                   <span className="text-muted-foreground">It is clinical intelligence infrastructure.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Neurostate reduces length of stay, prevents readmissions, and accelerates recovery. Measurable outcomes that translate directly to operational efficiency and patient satisfaction.
+                  NeuroState reduces length of stay, prevents readmissions, and accelerates recovery. Measurable outcomes that translate directly to operational efficiency and patient satisfaction.
                 </p>
                 <div className="space-y-3">
                   {[
@@ -392,7 +392,7 @@ export default function HealthcareOverview() {
           <div className="max-w-lg mx-auto">
             <div className="border border-border/30 rounded-3xl p-8 sm:p-10 space-y-6 bg-foreground/[0.01]">
               <div className="text-center space-y-2">
-                <h2 className="text-xl font-light text-foreground">Let us explore whether Neurostate fits your organisation</h2>
+                <h2 className="text-xl font-light text-foreground">Let us explore whether NeuroState fits your organisation</h2>
                 <p className="text-xs text-muted-foreground">We respond within 24 hours. Clinical pilots available.</p>
               </div>
 

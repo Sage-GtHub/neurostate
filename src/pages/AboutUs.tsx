@@ -25,14 +25,14 @@ const AboutUs = () => {
           <section className="pt-32 pb-20 md:pt-40 md:pb-28 px-6 md:px-8">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="max-w-4xl">
-                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">About Neurostate</span>
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">About NeuroState</span>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-foreground mt-4 leading-[1.1]">
                   Advancing human cognitive capacity
                   <br />
                   <span className="text-muted-foreground">through artificial intelligence.</span>
                 </h1>
                 <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl mt-6">
-                  Most organisations measure outcomes, not the cognitive conditions that create them. We're changing that. Neurostate is a cognitive performance platform that predicts and guides, not just tracks.
+                  Most organisations measure outcomes, not the cognitive conditions that create them. We're changing that. NeuroState is a cognitive performance platform that predicts and guides, not just tracks.
                 </p>
               </ScrollReveal>
             </div>
@@ -64,7 +64,7 @@ const AboutUs = () => {
                   </ScrollReveal>
                   <ScrollReveal delay={0.3}>
                     <p className="text-sm text-foreground font-medium leading-relaxed">
-                      We built Neurostate because the future of work isn't about working harder. It's about working with precision.
+                      We built NeuroState because the future of work isn't about working harder. It's about working with precision.
                     </p>
                   </ScrollReveal>
                 </div>
@@ -360,7 +360,7 @@ const AboutUs = () => {
                   <span className="text-muted-foreground">Early adopters shape how these systems evolve.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Let's explore whether Neurostate can help your team perform better.
+                  Let's explore whether NeuroState can help your team perform better.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
                   <Link to="/contact">

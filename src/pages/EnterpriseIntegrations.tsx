@@ -102,7 +102,7 @@ export default function EnterpriseIntegrations() {
                 Invisible Integration
               </h1>
               <p className="text-body-large text-pearl max-w-3xl mx-auto">
-                Neurostate operates silently within your existing tools. Invisible infrastructure that enhances human performance without friction.
+                NeuroState operates silently within your existing tools. Invisible infrastructure that enhances human performance without friction.
               </p>
             </div>
 
