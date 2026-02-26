@@ -303,7 +303,7 @@ export default function HospitalityOverview() {
                   <span className="text-muted-foreground">It is a revenue engine.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Wellness guests spend more, stay longer, and return more often. Neurostate positions your property as a destination, not just accommodation.
+                  Wellness guests spend more, stay longer, and return more often. NeuroState positions your property as a destination, not just accommodation.
                 </p>
                 <div className="space-y-3">
                   {[
