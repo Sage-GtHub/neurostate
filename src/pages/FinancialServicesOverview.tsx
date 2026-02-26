@@ -169,7 +169,7 @@ export default function FinancialServicesOverview() {
                   <span className="text-muted-foreground">It's alpha generation.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  The edge in financial services isn't just information. It's the cognitive capacity to act on it. Neurostate ensures your team performs when millions are on the line.
+                  The edge in financial services isn't just information. It's the cognitive capacity to act on it. NeuroState ensures your team performs when millions are on the line.
                 </p>
                 <div className="space-y-3">
                   {[
