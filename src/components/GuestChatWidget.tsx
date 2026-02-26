@@ -24,7 +24,7 @@ type Conversation = {
 
 const QUICK_SUGGESTIONS = [
   "What is NeuroState?",
-  "How does Nova AI work?",
+  "How does NeuroState AI work?",
   "Tell me about enterprise pricing",
   "What integrations do you support?",
 ];
@@ -388,7 +388,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
             <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center">
               <span className="text-sm font-bold text-white">N</span>
             </div>
-            <span className="font-medium text-base">Nova</span>
+            <span className="font-medium text-base">NeuroState AI</span>
           </div>
           <div className="flex items-center gap-0.5">
             <Button 
@@ -584,7 +584,7 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                 </div>
               </div>
               <p className="text-[10px] text-muted-foreground/50 text-center mt-2 hidden sm:block">
-                Nova may make mistakes. Verify important information.
+                NeuroState AI may make mistakes. Verify important information.
               </p>
             </div>
           </div>

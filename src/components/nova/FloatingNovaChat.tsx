@@ -41,7 +41,7 @@ const QUICK_PROMPTS = [
   "What industries do you serve?",
   "How does the platform work?",
   "What ROI can we expect?",
-  "Tell me about Nova AI",
+  "Tell me about NeuroState AI",
 ];
 
 // Basic spinner typing indicator
@@ -436,8 +436,8 @@ export function FloatingNovaChat() {
                 <img src={neurostateIcon} alt="Neurostate" className="w-4 h-4" />
               </div>
               <div>
-                <h2 className="text-xs font-medium text-foreground">Sage</h2>
-                <p className="text-[9px] text-muted-foreground">NeuroState AI Assistant</p>
+                <h2 className="text-xs font-medium text-foreground">NeuroState AI</h2>
+                <p className="text-[9px] text-muted-foreground">AI Agent</p>
               </div>
             </div>
             <div className="flex items-center gap-1">

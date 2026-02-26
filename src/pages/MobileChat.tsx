@@ -10,7 +10,7 @@ export default function MobileChat() {
 
   return (
     <div className="min-h-screen bg-ivory flex flex-col">
-      <SEO title="Ask Nova AI | Mobile Health Assistant | NeuroState" description="Chat with Nova, your AI performance assistant. Get instant answers about supplements, protocols, and cognitive optimisation on mobile." noindex={true} />
+      <SEO title="NeuroState AI Agent | Mobile Health Assistant" description="Chat with NeuroState AI Agent, your AI performance assistant. Get instant answers about cognitive performance, protocols, and optimisation on mobile." noindex={true} />
       {/* Header */}
       <header className="border-b border-mist bg-ivory p-4">
         <div className="flex items-center justify-center gap-2">
@@ -32,16 +32,16 @@ export default function MobileChat() {
           {/* Title */}
           <div className="space-y-2">
             <h1 className="text-h2 font-semibold text-carbon">
-              Ask Nova
+              NeuroState AI Agent
             </h1>
             <p className="text-body text-ash">
-              Your NeuroState performance assistant
+              Your AI performance assistant
             </p>
           </div>
 
           {/* Description */}
           <p className="text-sm text-ash leading-relaxed">
-            Get instant answers about our products, supplement stacks, and performance optimisation. Nova is here to help you make the right choices for your goals.
+            Get instant answers about cognitive performance, workforce intelligence, and performance optimisation. NeuroState AI is here to help you make the right choices for your goals.
           </p>
 
           {/* CTA */}
