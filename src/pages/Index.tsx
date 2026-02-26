@@ -535,7 +535,7 @@ const Index = () => {
                       animate={{ scale: [1, 1.05, 1] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     >
-                      <Sparkles className="w-5 h-5 text-white" />
+                      <Sparkles className="w-5 h-5 text-primary-foreground" />
                     </motion.div>
                     <div>
                       <p className="text-foreground font-medium text-base">Nova</p>
