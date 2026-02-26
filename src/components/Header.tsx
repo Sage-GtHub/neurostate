@@ -143,7 +143,7 @@ export const Header = () => {
           {/* Mobile Logo - Left */}
           <div className="lg:hidden">
             <Link to="/" className="flex items-center gap-2 group">
-              <img src={logoIcon} alt="Neurostate" className="h-6 w-6 transition-all duration-300 group-hover:scale-110" />
+              <img src={logoIcon} alt="NeuroState" className="h-6 w-6 transition-all duration-300 group-hover:scale-110" />
               <span className="text-sm font-medium tracking-tight text-foreground">NeuroState<sup className="text-[6px]">®</sup></span>
             </Link>
           </div>
