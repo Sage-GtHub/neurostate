@@ -32,10 +32,10 @@ export default function MobileChat() {
           {/* Title */}
           <div className="space-y-2">
             <h1 className="text-h2 font-semibold text-carbon">
-              Ask Nova
+              NeuroState AI Agent
             </h1>
             <p className="text-body text-ash">
-              Your NeuroState performance assistant
+              Your AI performance assistant
             </p>
           </div>
 
