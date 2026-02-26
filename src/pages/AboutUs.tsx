@@ -25,7 +25,7 @@ const AboutUs = () => {
           <section className="pt-32 pb-20 md:pt-40 md:pb-28 px-6 md:px-8">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="max-w-4xl">
-                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">About Neurostate</span>
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">About NeuroState</span>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-foreground mt-4 leading-[1.1]">
                   Advancing human cognitive capacity
                   <br />
