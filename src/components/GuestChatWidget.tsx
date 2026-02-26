@@ -52,10 +52,16 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [isFocused, setIsFocused] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [speakingIndex, setSpeakingIndex] = useState<number | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const recognitionRef = useRef<any>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const { toast: showToast } = useToast();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const currentConversation = conversations.find(c => c.id === currentConversationId);
   const messages = currentConversation?.messages || [];
