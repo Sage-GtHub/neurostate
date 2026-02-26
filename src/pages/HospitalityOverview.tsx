@@ -247,7 +247,7 @@ export default function HospitalityOverview() {
                 <span className="text-muted-foreground">For every guest.</span>
               </h2>
               <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                Neurostate transforms passive wellness into active transformation. Personalised journeys based on real data. Measurable outcomes guests can see.
+                NeuroState transforms passive wellness into active transformation. Personalised journeys based on real data. Measurable outcomes guests can see.
               </p>
             </div>
 
