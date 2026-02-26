@@ -157,7 +157,7 @@ export function FloatingVoiceAgent() {
       await navigator.mediaDevices.getUserMedia({ audio: true });
       await conversation.startSession({
         agentId: AGENT_ID,
-        connectionType: "webrtc",
+        connectionType: "websocket",
       });
       setIsExpanded(true);
     } catch (error) {
