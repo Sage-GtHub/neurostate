@@ -23,7 +23,7 @@ import { NovaSwipeWrapper } from '@/components/NovaSwipeWrapper';
 import { SEO } from '@/components/SEO';
 import { HealthForecast } from '@/components/nova/HealthForecast';
 import { NovaEmptyState } from '@/components/nova/NovaEmptyState';
-import { AutonomousNudgePanel } from '@/components/nova/AutonomousNudgePanel';
+
 import { WeeklySummary } from '@/components/nova/WeeklySummary';
 import { WhoopScoreRing } from '@/components/nova/WhoopScoreRing';
 import { WhoopMetricCard } from '@/components/nova/WhoopMetricCard';
@@ -396,14 +396,6 @@ export default function NovaPersonalDashboard() {
               )}
             </motion.div>
 
-            {/* Autonomous Coaching */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              <AutonomousNudgePanel />
-            </motion.div>
           </div>
         </div>
       </div>
