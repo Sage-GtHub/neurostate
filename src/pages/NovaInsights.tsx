@@ -605,7 +605,11 @@ export default function NovaInsights() {
                   <h2 className="text-lg font-medium text-foreground">Auto-Pilot Coaching</h2>
                   <p className="text-sm text-foreground/50 mt-1">AI-driven nudges, alerts, and protocol adjustments based on your real-time data</p>
                 </div>
-                <AutonomousNudgePanel />
+                <div className="flex flex-col items-center justify-center py-12 text-center">
+                  <Sparkles className="h-10 w-10 text-accent mb-3" />
+                  <p className="text-sm font-medium">Smart Nudges have moved</p>
+                  <p className="text-xs text-muted-foreground mt-1">Access your AI coaching nudges from the bell icon in the top navigation bar.</p>
+                </div>
               </div>
             </TabsContent>
             <TabsContent value="insights" className="mt-0">
