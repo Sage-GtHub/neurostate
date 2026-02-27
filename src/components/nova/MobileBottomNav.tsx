@@ -74,7 +74,7 @@ export const MobileBottomNav = () => {
                 {active && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute inset-x-2 -top-px h-0.5 bg-primary rounded-full"
+                    className="absolute inset-x-2 -bottom-px h-0.5 bg-primary rounded-full"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
