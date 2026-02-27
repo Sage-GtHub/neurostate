@@ -584,7 +584,7 @@ export default function TeamDashboard() {
                 <div className="p-3 md:p-4 rounded-lg bg-background border border-border/30">
                   <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Daily Active</div>
                   <div className="text-lg md:text-2xl font-semibold text-foreground">{adoptionMetrics.dau.value}</div>
-                  <div className={`text-[10px] md:text-xs mt-1 ${adoptionMetrics.dau.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
+                  <div className={`text-[10px] md:text-xs mt-1 ${adoptionMetrics.dau.trend === 'up' ? 'text-signal-green' : 'text-destructive'}`}>
                     +{adoptionMetrics.dau.change}%
                   </div>
                 </div>
