@@ -465,7 +465,7 @@ export default function TeamDashboard() {
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <AlertTriangle className="w-3.5 h-3.5 md:w-4 md:h-4 text-red-500" />
+                    <AlertTriangle className="w-3.5 h-3.5 md:w-4 md:h-4 text-destructive" />
                     <span className="text-[9px] md:text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Burnout Exposure</span>
                   </div>
                   <Tooltip>
