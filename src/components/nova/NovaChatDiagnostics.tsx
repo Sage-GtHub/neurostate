@@ -71,7 +71,7 @@ export function NovaChatDiagnostics({ state }: NovaChatDiagnosticsProps) {
           size="icon"
           className={cn(
             "h-8 w-8 text-foreground/30 hover:text-foreground/60",
-            state.lastError && "text-red-500 hover:text-red-400"
+            state.lastError && "text-destructive hover:text-destructive/80"
           )}
           title="Open diagnostics"
         >

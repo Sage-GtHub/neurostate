@@ -264,9 +264,9 @@ export default function NovaPersonalDashboard() {
                     <p className={cn(
                       "text-sm font-medium",
                       f.value === null ? "text-foreground/20" :
-                      f.value >= 80 ? "text-green-500" :
+                      f.value >= 80 ? "text-signal-green" :
                       f.value >= 60 ? "text-accent" :
-                      f.value >= 40 ? "text-orange-500" : "text-red-500"
+                      f.value >= 40 ? "text-warning-amber" : "text-destructive"
                     )}>
                       {f.value !== null ? `${Math.round(f.value)}%` : '--'}
                     </p>

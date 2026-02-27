@@ -53,7 +53,7 @@ export function WhoopMetricCard({
   const colors = colorVariants[color];
   
   const TrendIcon = trend === "up" ? TrendingUp : trend === "down" ? TrendingDown : Minus;
-  const trendColor = trend === "up" ? "text-green-500" : trend === "down" ? "text-red-500" : "text-muted-foreground";
+  const trendColor = trend === "up" ? "text-signal-green" : trend === "down" ? "text-destructive" : "text-muted-foreground";
 
   return (
     <div 

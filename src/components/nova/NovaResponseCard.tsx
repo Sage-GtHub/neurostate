@@ -200,8 +200,8 @@ export function NovaResponseCard({
             <Sparkles className="w-3 h-3 text-white" />
           </div>
           <span className="text-xs font-medium text-foreground">Nova</span>
-          <span className="text-[10px] text-green-500 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+          <span className="text-[10px] text-signal-green flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-signal-green animate-pulse" />
             Active
           </span>
         </div>
