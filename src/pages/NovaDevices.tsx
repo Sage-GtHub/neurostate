@@ -196,6 +196,31 @@ export default function NovaDevices() {
     // Note: do NOT clear connectingDevice in finally — polling handles it
   };
 
+  const handleDisconnect = async (deviceType: string, deviceName: string) => {
+    if (!confirm(`Disconnect ${deviceName}? You can reconnect at any time.`)) return;
+    setDisconnectingDevice(deviceType);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) return;
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/vital-connect`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.access_token}` },
+        body: JSON.stringify({ action: 'disconnect', provider: deviceType }),
+      });
+      if (response.ok) {
+        toast({ title: "Device disconnected", description: `${deviceName} has been removed.` });
+        await loadVitalProviders();
+        await loadDevices();
+        await loadDataStats();
+      } else {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to disconnect');
+      }
+    } catch (err) {
+      toast({ title: "Disconnect failed", description: err instanceof Error ? err.message : "Please try again", variant: "destructive" });
+    } finally { setDisconnectingDevice(null); }
+  };
+
   const handleSync = async (deviceType: string) => {
     setSyncingDevice(deviceType);
     try {
