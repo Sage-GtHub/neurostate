@@ -416,7 +416,7 @@ export default function TeamDashboard() {
                 <div className="flex items-end gap-2 md:gap-3">
                   <span className="text-2xl md:text-3xl font-semibold text-foreground">{executiveMetrics.cci.current}</span>
                   <span className="text-[10px] md:text-xs text-muted-foreground mb-1">/ 100</span>
-                  <div className={`flex items-center text-[10px] md:text-xs mb-1 ml-auto ${executiveMetrics.cci.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
+                  <div className={`flex items-center text-[10px] md:text-xs mb-1 ml-auto ${executiveMetrics.cci.trend === 'up' ? 'text-signal-green' : 'text-destructive'}`}>
                     {executiveMetrics.cci.trend === 'up' ? <TrendingUp className="w-3 h-3 mr-0.5" /> : <TrendingDown className="w-3 h-3 mr-0.5" />}
                     {executiveMetrics.cci.change > 0 ? '+' : ''}{executiveMetrics.cci.change}%
                   </div>
