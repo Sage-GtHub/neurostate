@@ -211,7 +211,7 @@ export const NovaNav = () => {
                       </div>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={() => navigate('/dashboard')} className="gap-2 cursor-pointer">
+                    <DropdownMenuItem onClick={() => navigate('/nova/dashboard')} className="gap-2 cursor-pointer">
                       <LayoutDashboard className="w-4 h-4" />
                       Dashboard
                     </DropdownMenuItem>
