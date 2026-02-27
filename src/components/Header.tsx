@@ -388,7 +388,7 @@ export const Header = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
                   <DropdownMenuItem asChild>
-                    <Link to="/dashboard" className="flex items-center gap-2">
+                    <Link to="/nova/dashboard" className="flex items-center gap-2">
                       <Award className="w-4 h-4" />
                       Dashboard
                     </Link>

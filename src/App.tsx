@@ -140,7 +140,7 @@ const AnimatedRoutes = () => {
             <Route path="/ambassador" element={<Ambassador />} />
             <Route path="/partnerships" element={<Partnerships />} />
             <Route path="/auth" element={<Auth />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Navigate to="/nova/dashboard" replace />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/rewards" element={<Rewards />} />
             <Route path="/terms" element={<Terms />} />
