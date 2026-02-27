@@ -4,7 +4,7 @@ import { NovaNav } from "@/components/NovaNav";
 import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
 import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
 import { NovaBreadcrumb } from "@/components/nova/NovaBreadcrumb";
-import { AutonomousNudgePanel } from "@/components/nova/AutonomousNudgePanel";
+
 import { NovaSkeleton, NovaSkeletonGrid } from "@/components/nova/NovaSkeleton";
 import { NovaEmptyState } from "@/components/nova/NovaEmptyState";
 import { Button } from "@/components/ui/button";
