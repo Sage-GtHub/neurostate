@@ -41,7 +41,7 @@ export interface OnboardingData {
   connectedDevices: string[];
 }
 
-const STEPS: OnboardingStep[] = ["welcome", "goals", "devices", "lifestyle", "complete"];
+const STEPS: OnboardingStep[] = ["welcome", "goals", "devices", "notifications", "lifestyle", "complete"];
 
 export function OnboardingWizard({ open, onComplete }: OnboardingWizardProps) {
   const [currentStep, setCurrentStep] = useState<OnboardingStep>("welcome");
