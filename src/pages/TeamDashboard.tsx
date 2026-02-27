@@ -479,7 +479,7 @@ export default function TeamDashboard() {
                   </Tooltip>
                 </div>
                 <div className="flex items-end gap-2">
-                  <span className="text-xl md:text-2xl font-semibold text-red-500">{formatCurrency(executiveMetrics.burnoutExposure.projected, true)}</span>
+                  <span className="text-xl md:text-2xl font-semibold text-destructive">{formatCurrency(executiveMetrics.burnoutExposure.projected, true)}</span>
                   <span className="text-[10px] md:text-xs text-muted-foreground mb-1">projected</span>
                 </div>
                 <div className="text-[10px] md:text-xs text-muted-foreground mt-1">
