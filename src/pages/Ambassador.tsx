@@ -21,7 +21,7 @@ import { toast } from "sonner";
 
 
 const Ambassador = () => {
-  const [chatOpen, setChatOpen] = useState(false);
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
