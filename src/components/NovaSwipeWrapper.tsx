@@ -129,13 +129,10 @@ export const NovaSwipeWrapper = ({ children }: NovaSwipeWrapperProps) => {
         )}
       </AnimatePresence>
 
-      {/* Main content with bottom padding for mobile nav */}
-      <div className={isMobile ? 'pb-20' : ''}>
+      {/* Main content */}
+      <div>
         {children}
       </div>
-      
-      {/* Mobile bottom navigation */}
-      <MobileBottomNav />
       
       {/* Swipe direction indicators */}
       {isSwipeEnabled && swipeDirection && (
