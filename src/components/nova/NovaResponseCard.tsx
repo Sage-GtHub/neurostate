@@ -172,7 +172,7 @@ export function NovaResponseCard({
               <div className="flex items-center gap-2">
                 {connectedSources.slice(0, 3).map((source, i) => (
                   <span key={i} className="flex items-center gap-1">
-                    <CheckCircle2 className="w-2.5 h-2.5 text-green-500" />
+                    <CheckCircle2 className="w-2.5 h-2.5 text-signal-green" />
                     {source.name}
                   </span>
                 ))}
