@@ -21,6 +21,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { WelcomeStep } from "./steps/WelcomeStep";
 import { GoalsStep } from "./steps/GoalsStep";
 import { DevicesStep } from "./steps/DevicesStep";
+import { NotificationsStep } from "./steps/NotificationsStep";
 import { LifestyleStep } from "./steps/LifestyleStep";
 import { CompleteStep } from "./steps/CompleteStep";
 
