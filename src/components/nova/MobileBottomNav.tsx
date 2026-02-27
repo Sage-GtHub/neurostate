@@ -54,8 +54,10 @@ export const MobileBottomNav = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-xl border-b border-border/50 pt-safe md:hidden"
+      role="navigation"
+      aria-label="Main navigation"
     >
-      <div className="flex items-center justify-around h-14 px-2">
+      <div className="flex items-center justify-around h-14 px-2" role="tablist">
         {navItems.map((item) => {
           const active = isActive(item.path);
           const Icon = item.icon;
