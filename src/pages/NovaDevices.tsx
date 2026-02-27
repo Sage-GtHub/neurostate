@@ -6,7 +6,7 @@ import { NovaBreadcrumb } from "@/components/nova/NovaBreadcrumb";
 import { NovaSkeleton } from "@/components/nova/NovaSkeleton";
 import { NovaEmptyState } from "@/components/nova/NovaEmptyState";
 import { NovaErrorState } from "@/components/nova/NovaErrorBoundary";
-import { RefreshCw, Plus, Loader2, Check, WifiOff, AlertCircle } from "lucide-react";
+import { RefreshCw, Plus, Loader2, Check, WifiOff, AlertCircle, Unplug } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { SEO } from "@/components/SEO";
