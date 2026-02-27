@@ -126,9 +126,9 @@ export function NovaResponseCard({
 
   const getConfidenceColor = (conf: string) => {
     switch (conf) {
-      case "high": return "text-green-500";
-      case "medium": return "text-amber-500";
-      case "low": return "text-red-500";
+      case "high": return "text-signal-green";
+      case "medium": return "text-warning-amber";
+      case "low": return "text-destructive";
       default: return "text-muted-foreground";
     }
   };
