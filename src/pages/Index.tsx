@@ -21,10 +21,10 @@ import { StatsCounterBar } from "@/components/StatsCounterBar";
 import { IntegrationLogoStrip } from "@/components/IntegrationLogoStrip";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Eye, Layers, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Eye, Layers, Sparkles, MessageCircle, BarChart3, Activity } from "lucide-react";
 import { Link } from "react-router-dom";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
 
 // Building blocks - like Invisible's Neuron, Atomic, etc.
 const platformBlocks = [
@@ -121,9 +121,56 @@ const impactStats = [
   { value: "40+", label: "Integrations", sublabel: "wearables and work tools" }
 ];
 
+// Interactive Nova demo data
+const novaDemoTabs = [
+  {
+    id: 'chat',
+    label: 'AI Chat',
+    icon: MessageCircle,
+    messages: [
+      { role: 'nova', text: "Good morning. Based on your sleep data, I've adjusted your focus window to 10am–1pm today. Your cognitive capacity is trending 12% above your weekly average." },
+      { role: 'user', text: "What should I prioritise this morning?" },
+      { role: 'nova', text: "Your highest-impact task is the Q4 strategy deck. Complexity matches your current state. I'd suggest blocking 90 minutes before lunch." },
+    ]
+  },
+  {
+    id: 'insights',
+    label: 'Insights',
+    icon: Brain,
+    insights: [
+      { title: "Sleep consistency improved", desc: "7-day streak detected. Circadian rhythm is optimising.", confidence: 94, type: "positive" },
+      { title: "HRV downtrend detected", desc: "15% decline over 5 days. Consider a recovery protocol.", confidence: 87, type: "warning" },
+      { title: "Peak focus window shifting", desc: "Your optimal cognitive period has moved 30 mins earlier this week.", confidence: 82, type: "neutral" },
+    ]
+  },
+  {
+    id: 'metrics',
+    label: 'Live Metrics',
+    icon: BarChart3,
+    metrics: [
+      { label: "HRV", value: 68, unit: "ms", trend: "+5%", color: "text-primary" },
+      { label: "Sleep", value: 7.2, unit: "hrs", trend: "+0.4", color: "text-blue-500" },
+      { label: "Readiness", value: 82, unit: "%", trend: "+8%", color: "text-emerald-500" },
+      { label: "Recovery", value: 91, unit: "%", trend: "+3%", color: "text-purple-500" },
+    ]
+  },
+  {
+    id: 'actions',
+    label: 'Actions',
+    icon: Zap,
+    actions: [
+      { title: "Schedule a recovery day", impact: "High", timing: "This week", category: "recovery" },
+      { title: "Move deep work to 9-11 AM", impact: "Medium", timing: "Tomorrow", category: "focus" },
+      { title: "Increase magnesium intake", impact: "Medium", timing: "Tonight", category: "nutrition" },
+      { title: "Cap meetings at 4 hours", impact: "High", timing: "This week", category: "energy" },
+    ]
+  },
+];
+
 const Index = () => {
   const approachRef = useRef<HTMLDivElement>(null);
   const isApproachInView = useInView(approachRef, { once: true, margin: "-100px" });
+  const [activeDemoTab, setActiveDemoTab] = useState('chat');
 
   return (
     <>
@@ -168,11 +215,16 @@ const Index = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={isApproachInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6, delay: i * 0.12 }}
+                    whileHover={{ y: -6 }}
                   >
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
+                    <motion.div 
+                      className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-5 transition-colors"
+                      whileHover={{ scale: 1.15, rotate: 5, backgroundColor: 'hsl(var(--primary) / 0.2)' }}
+                      transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                    >
                       <pillar.icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <h3 className="text-lg md:text-xl font-medium text-foreground mb-3">{pillar.title}</h3>
+                    </motion.div>
+                    <h3 className="text-lg md:text-xl font-medium text-foreground mb-3 group-hover:text-primary transition-colors">{pillar.title}</h3>
                     <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{pillar.description}</p>
                   </motion.div>
                 ))}
@@ -208,13 +260,24 @@ const Index = () => {
                 {platformBlocks.map((block, i) => (
                   <Link key={block.id} to={block.link}>
                     <motion.div
-                      className="group flex items-start md:items-center justify-between py-8 md:py-10 border-t border-border/40 hover:border-primary/40 transition-colors"
+                      className="group flex items-start md:items-center justify-between py-8 md:py-10 border-t border-border/40 hover:border-primary/40 transition-colors relative overflow-hidden"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-50px" }}
                       transition={{ duration: 0.5, delay: i * 0.06 }}
+                      whileHover={{ x: 8 }}
                     >
-                      <div className="flex-1 flex flex-col md:flex-row md:items-center gap-3 md:gap-8">
+                      {/* Hover reveal gradient */}
+                      <motion.div 
+                        className="absolute inset-0 pointer-events-none"
+                        initial={{ opacity: 0 }}
+                        whileHover={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className={`absolute inset-0 bg-gradient-to-r ${block.color} opacity-30`} />
+                      </motion.div>
+                      
+                      <div className="flex-1 flex flex-col md:flex-row md:items-center gap-3 md:gap-8 relative z-10">
                         <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold w-20 flex-shrink-0">{block.label}</span>
                         <h3 className="text-lg md:text-2xl font-medium text-foreground group-hover:text-primary transition-colors">
                           {block.name}
@@ -223,7 +286,13 @@ const Index = () => {
                           {block.description}
                         </p>
                       </div>
-                      <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-2 transition-all ml-4 flex-shrink-0" />
+                      <motion.div
+                        className="relative z-10 ml-4 flex-shrink-0"
+                        whileHover={{ x: 4, scale: 1.2 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                      >
+                        <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                      </motion.div>
                     </motion.div>
                   </Link>
                 ))}
@@ -265,14 +334,21 @@ const Index = () => {
                 ].map((item, i) => (
                   <motion.div
                     key={i}
-                    className="text-center"
+                    className="text-center group cursor-default"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
+                    whileHover={{ y: -8 }}
                   >
-                    <span className="font-mono text-4xl md:text-5xl font-light text-primary/30 block mb-4">{item.step}</span>
-                    <h3 className="text-lg md:text-xl font-medium text-foreground mb-3">{item.title}</h3>
+                    <motion.span 
+                      className="font-mono text-4xl md:text-5xl font-light text-primary/30 block mb-4"
+                      whileHover={{ scale: 1.1, color: 'hsl(var(--primary))' }}
+                      transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                    >
+                      {item.step}
+                    </motion.span>
+                    <h3 className="text-lg md:text-xl font-medium text-foreground mb-3 group-hover:text-primary transition-colors">{item.title}</h3>
                     <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{item.desc}</p>
                   </motion.div>
                 ))}
@@ -287,13 +363,14 @@ const Index = () => {
                 {impactStats.map((stat, i) => (
                   <motion.div
                     key={i}
-                    className="text-center"
+                    className="text-center group cursor-default"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
+                    whileHover={{ scale: 1.08, y: -4 }}
                   >
-                    <p className="text-2xl md:text-4xl lg:text-5xl font-light text-background mb-2">{stat.value}</p>
+                    <p className="text-2xl md:text-4xl lg:text-5xl font-light text-background mb-2 group-hover:text-primary transition-colors">{stat.value}</p>
                     <p className="text-sm text-background/70 font-medium">{stat.label}</p>
                     <p className="text-xs text-background/40 mt-1">{stat.sublabel}</p>
                   </motion.div>
@@ -488,7 +565,7 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Nova AI Section - Clean editorial */}
+          {/* Nova AI Section - Interactive Demo */}
           <section className="py-16 md:py-32 px-5 md:px-8 bg-muted/20">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="mb-16 md:mb-20 text-center max-w-3xl mx-auto">
@@ -497,106 +574,232 @@ const Index = () => {
                   Meet Nova
                 </h2>
                 <p className="text-base md:text-lg text-muted-foreground mt-5">
-                  Your team's AI health advisor. Ask it anything — in plain English.
+                  Your team's AI health advisor. Click through to explore what it can do.
                 </p>
               </ScrollReveal>
-              
-              {/* Feature list - no boxes */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-16 max-w-4xl mx-auto">
-                {[
-                  { icon: Brain, text: "Personalised plans" },
-                  { icon: TrendingUp, text: "72-hour predictions" },
-                  { icon: Zap, text: "Timely nudges" },
-                  { icon: Eye, text: "Learns your patterns" }
-                ].map((item, i) => (
-                  <motion.div 
-                    key={i} 
-                    className="text-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                  >
-                    <item.icon className="w-6 h-6 text-primary mx-auto mb-3" />
-                    <p className="text-sm md:text-base font-medium text-foreground">{item.text}</p>
-                  </motion.div>
-                ))}
-              </div>
 
-              {/* Nova Chat Preview */}
+              {/* Interactive Demo */}
               <ScrollReveal delay={0.2}>
-                <motion.div 
-                  className="relative p-6 md:p-8 rounded-lg bg-background border border-border/50 shadow-lg overflow-hidden max-w-2xl mx-auto"
-                  whileHover={{ y: -4, transition: { duration: 0.3 } }}
-                >
-                  <div className="flex items-center gap-3 pb-5 border-b border-border/30">
-                    <motion.div 
-                      className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center"
-                      animate={{ scale: [1, 1.05, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      <Sparkles className="w-5 h-5 text-primary-foreground" />
-                    </motion.div>
-                    <div>
-                      <p className="text-foreground font-medium text-base">Nova</p>
-                      <p className="text-sm text-muted-foreground">Your AI health advisor</p>
+                <div className="relative max-w-3xl mx-auto">
+                  {/* Tab Navigation */}
+                  <div className="flex items-center gap-1 p-1 bg-muted/50 rounded-full max-w-fit mx-auto mb-8 border border-border/30">
+                    {novaDemoTabs.map((tab) => {
+                      const TabIcon = tab.icon;
+                      return (
+                        <motion.button
+                          key={tab.id}
+                          onClick={() => setActiveDemoTab(tab.id)}
+                          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-colors ${
+                            activeDemoTab === tab.id
+                              ? 'bg-background text-foreground shadow-sm'
+                              : 'text-muted-foreground hover:text-foreground'
+                          }`}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <TabIcon className="w-4 h-4" />
+                          <span className="hidden sm:inline">{tab.label}</span>
+                        </motion.button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Demo Content */}
+                  <motion.div 
+                    className="relative p-6 md:p-8 rounded-2xl bg-background border border-border/50 shadow-lg overflow-hidden"
+                    layout
+                  >
+                    {/* Header */}
+                    <div className="flex items-center gap-3 pb-5 border-b border-border/30">
+                      <motion.div 
+                        className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center"
+                        animate={{ scale: [1, 1.05, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      >
+                        <Sparkles className="w-5 h-5 text-primary-foreground" />
+                      </motion.div>
+                      <div>
+                        <p className="text-foreground font-medium text-base">Nova</p>
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                          <p className="text-xs text-muted-foreground">Interactive demo</p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="space-y-4 py-5">
-                    <motion.div 
-                      className="p-4 rounded-xl bg-muted/50 max-w-[85%]"
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 }}
-                    >
-                      <p className="text-sm text-foreground leading-relaxed">Good morning. Based on your sleep data, I've adjusted your focus window to 10am–1pm today. Your cognitive capacity is trending 12% above your weekly average.</p>
-                    </motion.div>
-                    
-                    <motion.div 
-                      className="p-4 rounded-xl bg-primary/10 max-w-[75%] ml-auto"
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.5 }}
-                    >
-                      <p className="text-sm text-foreground">What should I prioritise this morning?</p>
-                    </motion.div>
-                    
-                    <motion.div 
-                      className="p-4 rounded-xl bg-muted/50 max-w-[85%]"
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.7 }}
-                    >
-                      <p className="text-sm text-foreground leading-relaxed">Your highest-impact task is the Q4 strategy deck. Complexity matches your current state. I'd suggest blocking 90 minutes before lunch.</p>
-                    </motion.div>
-                  </div>
+                    {/* Chat Tab */}
+                    <AnimatePresence mode="wait">
+                      {activeDemoTab === 'chat' && (
+                        <motion.div
+                          key="chat"
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.25 }}
+                          className="space-y-4 py-5"
+                        >
+                          {novaDemoTabs[0].messages?.map((msg, i) => (
+                            <motion.div
+                              key={i}
+                              className={`p-4 rounded-xl max-w-[85%] ${msg.role === 'nova' ? 'bg-muted/50' : 'bg-primary/10 ml-auto max-w-[75%]'}`}
+                              initial={{ opacity: 0, y: 10, x: msg.role === 'user' ? 20 : -20 }}
+                              animate={{ opacity: 1, y: 0, x: 0 }}
+                              transition={{ delay: i * 0.15 }}
+                            >
+                              <p className="text-sm text-foreground leading-relaxed">{msg.text}</p>
+                            </motion.div>
+                          ))}
+                          <div className="flex items-center gap-2 p-3 rounded-lg bg-muted/30 border border-border/30 mt-4">
+                            <span className="text-sm text-muted-foreground flex-1 pl-2">Ask Nova anything...</span>
+                            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                              <ArrowRight className="w-4 h-4 text-primary" />
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
 
-                  <div className="flex items-center gap-2 p-3 rounded-lg bg-muted/30 border border-border/30">
-                    <span className="text-sm text-muted-foreground flex-1 pl-2">Ask Nova anything...</span>
-                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <ArrowRight className="w-4 h-4 text-primary" />
-                    </div>
-                  </div>
+                      {/* Insights Tab */}
+                      {activeDemoTab === 'insights' && (
+                        <motion.div
+                          key="insights"
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.25 }}
+                          className="space-y-3 py-5"
+                        >
+                          {novaDemoTabs[1].insights?.map((insight, i) => (
+                            <motion.div
+                              key={i}
+                              className="group p-4 rounded-xl border border-border/30 hover:border-primary/30 transition-colors cursor-default"
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: i * 0.1 }}
+                              whileHover={{ x: 4, backgroundColor: 'hsl(var(--muted) / 0.3)' }}
+                            >
+                              <div className="flex items-start justify-between gap-4">
+                                <div className="flex-1">
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <div className={`w-2 h-2 rounded-full ${
+                                      insight.type === 'positive' ? 'bg-emerald-500' : 
+                                      insight.type === 'warning' ? 'bg-amber-500' : 'bg-primary'
+                                    }`} />
+                                    <p className="text-sm font-medium text-foreground">{insight.title}</p>
+                                  </div>
+                                  <p className="text-xs text-muted-foreground">{insight.desc}</p>
+                                </div>
+                                <div className="text-right">
+                                  <p className="text-lg font-light text-primary">{insight.confidence}%</p>
+                                  <p className="text-[10px] text-muted-foreground">confidence</p>
+                                </div>
+                              </div>
+                            </motion.div>
+                          ))}
+                        </motion.div>
+                      )}
 
-                  <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-                </motion.div>
+                      {/* Metrics Tab */}
+                      {activeDemoTab === 'metrics' && (
+                        <motion.div
+                          key="metrics"
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.25 }}
+                          className="py-5"
+                        >
+                          <div className="grid grid-cols-2 gap-4">
+                            {novaDemoTabs[2].metrics?.map((metric, i) => (
+                              <motion.div
+                                key={i}
+                                className="group p-5 rounded-xl border border-border/30 hover:border-primary/30 transition-all cursor-default"
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: i * 0.08 }}
+                                whileHover={{ y: -4, scale: 1.02 }}
+                              >
+                                <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">{metric.label}</p>
+                                <div className="flex items-baseline gap-1.5">
+                                  <motion.p 
+                                    className={`text-3xl font-light ${metric.color}`}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.3 + i * 0.1 }}
+                                  >
+                                    {metric.value}
+                                  </motion.p>
+                                  <span className="text-sm text-muted-foreground">{metric.unit}</span>
+                                </div>
+                                <p className="text-xs text-emerald-500 mt-1">{metric.trend}</p>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+
+                      {/* Actions Tab */}
+                      {activeDemoTab === 'actions' && (
+                        <motion.div
+                          key="actions"
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.25 }}
+                          className="space-y-2 py-5"
+                        >
+                          {novaDemoTabs[3].actions?.map((action, i) => (
+                            <motion.div
+                              key={i}
+                              className="group flex items-center gap-4 p-4 rounded-xl border border-border/30 hover:border-primary/30 transition-all cursor-pointer"
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: i * 0.08 }}
+                              whileHover={{ x: 6, backgroundColor: 'hsl(var(--primary) / 0.03)' }}
+                            >
+                              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                <Zap className="w-4 h-4 text-primary" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium text-foreground">{action.title}</p>
+                                <p className="text-xs text-muted-foreground">{action.timing}</p>
+                              </div>
+                              <span className={`text-[10px] font-medium px-2 py-1 rounded-full ${
+                                action.impact === 'High' ? 'bg-primary/10 text-primary' : 'bg-muted text-muted-foreground'
+                              }`}>
+                                {action.impact}
+                              </span>
+                              <motion.div
+                                initial={{ opacity: 0 }}
+                                whileHover={{ opacity: 1 }}
+                              >
+                                <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                              </motion.div>
+                            </motion.div>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+                  </motion.div>
+                </div>
               </ScrollReveal>
 
               <div className="flex flex-wrap gap-3 pt-10 justify-center">
                 <Link to="/nova/overview">
-                  <Button className="h-11 px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
-                    Explore Nova
-                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
+                  <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
+                    <Button className="h-11 px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                      Explore Nova
+                      <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </motion.div>
                 </Link>
                 <Link to="/nova">
-                  <Button variant="outline" className="h-11 px-6 text-sm font-medium rounded-full">
-                    Try the demo
-                  </Button>
+                  <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
+                    <Button variant="outline" className="h-11 px-6 text-sm font-medium rounded-full">
+                      Try the demo
+                    </Button>
+                  </motion.div>
                 </Link>
               </div>
             </div>
@@ -624,13 +827,14 @@ const Index = () => {
                 ].map((group, i) => (
                   <motion.div
                     key={i}
-                    className="text-center"
+                    className="text-center group cursor-default"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
+                    whileHover={{ scale: 1.1, y: -4 }}
                   >
-                    <p className="text-3xl md:text-4xl font-light text-primary mb-2">{group.count}</p>
+                    <p className="text-3xl md:text-4xl font-light text-primary mb-2 group-hover:scale-110 transition-transform">{group.count}</p>
                     <p className="text-sm md:text-base font-medium text-foreground">{group.category}</p>
                   </motion.div>
                 ))}
