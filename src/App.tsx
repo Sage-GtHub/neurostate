@@ -43,7 +43,7 @@ import NotFound from "./pages/NotFound";
 import Install from "./pages/Install";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
-import Dashboard from "./pages/Dashboard";
+
 import ProgramOverview from "./pages/ProgramOverview";
 import SportsOverview from "./pages/SportsOverview";
 import HealthClubsOverview from "./pages/HealthClubsOverview";
