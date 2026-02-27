@@ -47,7 +47,7 @@ export default function Auth() {
   const [step, setStep] = useState<'type' | 'details'>(searchParams.get('type') === 'company' ? 'details' : 'type');
   
   // Get redirect URL from query params, default to team-dashboard
-  const redirectTo = searchParams.get('redirect') || '/team-dashboard';
+  const redirectTo = searchParams.get('redirect') || '/nova/dashboard';
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
