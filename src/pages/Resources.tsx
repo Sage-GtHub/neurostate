@@ -7,7 +7,7 @@ import { Calendar, Clock, ArrowRight, BookOpen, TrendingUp, Search } from "lucid
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { LearningPaths } from "@/components/LearningPaths";
-import { LiveChat } from "@/components/LiveChat";
+
 import { ResourceFinder } from "@/components/ResourceFinder";
 import { MultiFormatHub } from "@/components/MultiFormatHub";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
@@ -116,7 +116,7 @@ const Resources = () => {
   
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
-  const [chatOpen, setChatOpen] = useState(false);
+  
 
   const filteredArticles = articles.filter(article => {
     const matchesCategory = selectedCategory === "All" || article.category === selectedCategory;
@@ -214,7 +214,7 @@ const Resources = () => {
       </main>
 
       <Footer />
-      <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
+      
       </div>
     </>
   );

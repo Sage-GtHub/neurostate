@@ -18,10 +18,10 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { LiveChat } from "@/components/LiveChat";
+
 
 const Ambassador = () => {
-  const [chatOpen, setChatOpen] = useState(false);
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -250,7 +250,7 @@ const Ambassador = () => {
           </section>
         </main>
         <Footer />
-        <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
+        
       </div>
     </>
   );

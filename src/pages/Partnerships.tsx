@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { LiveChat } from "@/components/LiveChat";
+
 
 interface Partner {
   name: string;
@@ -103,7 +103,7 @@ const benefits = [
 ];
 
 const Partnerships = () => {
-  const [chatOpen, setChatOpen] = useState(false);
+  
   const [formData, setFormData] = useState({
     organizationName: "",
     contactName: "",
@@ -398,7 +398,7 @@ const Partnerships = () => {
       </main>
 
       <Footer />
-      <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
+      
     </div>
     </>
   );
