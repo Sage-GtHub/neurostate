@@ -103,7 +103,7 @@ const benefits = [
 ];
 
 const Partnerships = () => {
-  const [chatOpen, setChatOpen] = useState(false);
+  
   const [formData, setFormData] = useState({
     organizationName: "",
     contactName: "",
