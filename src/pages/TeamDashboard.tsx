@@ -450,7 +450,7 @@ export default function TeamDashboard() {
                   <span className="text-xl md:text-2xl font-semibold text-amber-500">{formatCurrency(executiveMetrics.revenueExposure.weekly)}</span>
                   <span className="text-[10px] md:text-xs text-muted-foreground mb-1">/ week</span>
                 </div>
-                <div className={`flex items-center text-[10px] md:text-xs mt-1 ${executiveMetrics.revenueExposure.trend === 'down' ? 'text-green-600' : 'text-red-500'}`}>
+                <div className={`flex items-center text-[10px] md:text-xs mt-1 ${executiveMetrics.revenueExposure.trend === 'down' ? 'text-signal-green' : 'text-destructive'}`}>
                   {executiveMetrics.revenueExposure.trend === 'down' ? <TrendingDown className="w-3 h-3 mr-0.5" /> : <TrendingUp className="w-3 h-3 mr-0.5" />}
                   {executiveMetrics.revenueExposure.change}% vs last week
                 </div>
