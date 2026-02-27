@@ -6,7 +6,7 @@ import { NovaBreadcrumb } from "@/components/nova/NovaBreadcrumb";
 import { NovaSkeleton } from "@/components/nova/NovaSkeleton";
 import { NovaEmptyState } from "@/components/nova/NovaEmptyState";
 import { NovaErrorState } from "@/components/nova/NovaErrorBoundary";
-import { RefreshCw, Plus, Loader2, Check, WifiOff, AlertCircle } from "lucide-react";
+import { RefreshCw, Plus, Loader2, Check, WifiOff, AlertCircle, Unplug } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { SEO } from "@/components/SEO";
@@ -47,6 +47,7 @@ export default function NovaDevices() {
   const [error, setError] = useState<string | null>(null);
   const [syncingDevice, setSyncingDevice] = useState<string | null>(null);
   const [connectingDevice, setConnectingDevice] = useState<string | null>(null);
+  const [disconnectingDevice, setDisconnectingDevice] = useState<string | null>(null);
   const [dataStats, setDataStats] = useState({ dataPoints: 0, syncs: 0 });
   const { toast } = useToast();
 
@@ -195,6 +196,31 @@ export default function NovaDevices() {
     // Note: do NOT clear connectingDevice in finally — polling handles it
   };
 
+  const handleDisconnect = async (deviceType: string, deviceName: string) => {
+    if (!confirm(`Disconnect ${deviceName}? You can reconnect at any time.`)) return;
+    setDisconnectingDevice(deviceType);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) return;
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/vital-connect`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.access_token}` },
+        body: JSON.stringify({ action: 'disconnect', provider: deviceType }),
+      });
+      if (response.ok) {
+        toast({ title: "Device disconnected", description: `${deviceName} has been removed.` });
+        await loadVitalProviders();
+        await loadDevices();
+        await loadDataStats();
+      } else {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to disconnect');
+      }
+    } catch (err) {
+      toast({ title: "Disconnect failed", description: err instanceof Error ? err.message : "Please try again", variant: "destructive" });
+    } finally { setDisconnectingDevice(null); }
+  };
+
   const handleSync = async (deviceType: string) => {
     setSyncingDevice(deviceType);
     try {
@@ -297,13 +323,26 @@ export default function NovaDevices() {
                         </p>
                       </div>
 
-                      <button
-                        onClick={() => handleSync(device.type)}
-                        disabled={syncingDevice === device.type}
-                        className="w-9 h-9 rounded-full bg-foreground/[0.02] flex items-center justify-center hover:bg-foreground/[0.05] transition-colors disabled:opacity-50"
-                      >
-                        <RefreshCw className={`w-3.5 h-3.5 text-foreground/50 ${syncingDevice === device.type ? 'animate-spin' : ''}`} />
-                      </button>
+                      <div className="flex items-center gap-1.5">
+                        <button
+                          onClick={() => handleSync(device.type)}
+                          disabled={syncingDevice === device.type}
+                          className="w-9 h-9 rounded-full bg-foreground/[0.02] flex items-center justify-center hover:bg-foreground/[0.05] transition-colors disabled:opacity-50"
+                        >
+                          <RefreshCw className={`w-3.5 h-3.5 text-foreground/50 ${syncingDevice === device.type ? 'animate-spin' : ''}`} />
+                        </button>
+                        <button
+                          onClick={() => handleDisconnect(device.type, device.name)}
+                          disabled={disconnectingDevice === device.type}
+                          className="w-9 h-9 rounded-full bg-foreground/[0.02] flex items-center justify-center hover:bg-destructive/10 transition-colors disabled:opacity-50 group"
+                        >
+                          {disconnectingDevice === device.type ? (
+                            <Loader2 className="w-3.5 h-3.5 animate-spin text-foreground/50" />
+                          ) : (
+                            <Unplug className="w-3.5 h-3.5 text-foreground/30 group-hover:text-destructive transition-colors" />
+                          )}
+                        </button>
+                      </div>
                     </div>
                   );
                 })}
