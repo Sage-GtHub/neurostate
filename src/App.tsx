@@ -11,6 +11,7 @@ import { CursorGlow } from "@/components/CursorGlow";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { CommandPalette } from "@/components/nova/CommandPalette";
 import { FloatingContactHub } from "@/components/FloatingContactHub";
+import { useNudgeNotifications } from "@/hooks/useNudgeNotifications";
 
 import Index from "./pages/Index";
 import Nova from "./pages/Nova";
