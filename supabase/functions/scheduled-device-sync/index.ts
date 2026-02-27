@@ -3,24 +3,39 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.80.0";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version',
 };
 
-// This function runs on a schedule to sync all connected devices
+const getVitalApiBase = () => {
+  const env = Deno.env.get("VITAL_ENVIRONMENT") || "sandbox";
+  const region = Deno.env.get("VITAL_REGION") || "us";
+  if (env === "production") {
+    return region === "eu" ? "https://api.eu.tryvital.io/v2" : "https://api.us.tryvital.io/v2";
+  }
+  return region === "eu" ? "https://api.sandbox.eu.tryvital.io/v2" : "https://api.sandbox.tryvital.io/v2";
+};
+
+// Runs on a cron schedule — syncs all connected devices via Vital API
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
-    const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-    const vitalApiKey = Deno.env.get('VITAL_API_KEY');
-    const vitalRegion = Deno.env.get('VITAL_REGION') || 'us';
-    
-    const supabase = createClient(supabaseUrl, supabaseKey);
+    const VITAL_API_KEY = Deno.env.get("VITAL_API_KEY");
+    const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
+    const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+    const VITAL_API_BASE = getVitalApiBase();
 
     console.log('[Scheduled Sync] Starting scheduled device sync...');
+
+    if (!VITAL_API_KEY) {
+      console.error('[Scheduled Sync] VITAL_API_KEY not configured');
+      return new Response(JSON.stringify({ error: 'Vital API key not configured' }), {
+        status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
 
     // Get all connected devices
     const { data: devices, error: devicesError } = await supabase
@@ -28,247 +43,113 @@ serve(async (req) => {
       .select('*')
       .eq('connection_status', 'connected');
 
-    if (devicesError) {
-      console.error('[Scheduled Sync] Error fetching devices:', devicesError);
-      throw devicesError;
-    }
+    if (devicesError) throw devicesError;
 
     if (!devices || devices.length === 0) {
       console.log('[Scheduled Sync] No connected devices to sync');
-      return new Response(JSON.stringify({ 
-        success: true, 
-        message: 'No connected devices to sync',
-        synced: 0 
-      }), {
-        status: 200,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      return new Response(JSON.stringify({ success: true, message: 'No connected devices', synced: 0 }), {
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
     console.log(`[Scheduled Sync] Found ${devices.length} connected devices`);
 
+    // Group devices by user_id to avoid duplicate Vital API calls
+    const userDevices = new Map<string, typeof devices>();
+    for (const device of devices) {
+      const existing = userDevices.get(device.user_id) || [];
+      existing.push(device);
+      userDevices.set(device.user_id, existing);
+    }
+
     let successCount = 0;
     let errorCount = 0;
-    const results: Array<{ deviceId: string; status: string; error?: string }> = [];
 
-    for (const device of devices) {
+    for (const [userId, userDeviceList] of userDevices) {
       try {
-        console.log(`[Scheduled Sync] Syncing device: ${device.device_name} (${device.device_type})`);
-
-        // Get device token for this device
-        const { data: deviceToken } = await supabase
-          .from('device_tokens')
-          .select('*')
-          .eq('user_id', device.user_id)
-          .eq('device_type', device.device_type === 'oura_ring' ? 'oura' : device.device_type)
-          .single();
-
-        // Try Vital API first if available
-        if (vitalApiKey && deviceToken?.vital_user_id) {
-          const vitalBaseUrl = vitalRegion === 'eu' 
-            ? 'https://api.eu.tryvital.io'
-            : 'https://api.tryvital.io';
-
-          // Fetch summary data from Vital
-          const today = new Date().toISOString().split('T')[0];
-          const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
-          
-          const summaryResponse = await fetch(
-            `${vitalBaseUrl}/v2/summary/activity/${device.device_tokens.vital_user_id}?start_date=${yesterday}&end_date=${today}`,
-            {
-              headers: {
-                'x-vital-api-key': vitalApiKey,
-              },
-            }
-          );
-
-          if (summaryResponse.ok) {
-            const summaryData = await summaryResponse.json();
-            const metrics = [];
-
-            // Parse activity data
-            if (summaryData.activity && summaryData.activity.length > 0) {
-              const latestActivity = summaryData.activity[0];
-              
-              if (latestActivity.steps) {
-                metrics.push({
-                  user_id: device.user_id,
-                  metric_type: 'steps',
-                  value: latestActivity.steps,
-                  device_source: device.device_type,
-                  recorded_at: new Date().toISOString(),
-                });
-              }
-
-              if (latestActivity.calories_active) {
-                metrics.push({
-                  user_id: device.user_id,
-                  metric_type: 'calories_active',
-                  value: latestActivity.calories_active,
-                  device_source: device.device_type,
-                  recorded_at: new Date().toISOString(),
-                });
-              }
-            }
-
-            // Insert metrics if any
-            if (metrics.length > 0) {
-              await supabase.from('user_metrics').insert(metrics);
-              console.log(`[Scheduled Sync] Inserted ${metrics.length} metrics for ${device.device_name}`);
-            }
-          }
-
-          // Fetch sleep data
-          const sleepResponse = await fetch(
-            `${vitalBaseUrl}/v2/summary/sleep/${device.device_tokens.vital_user_id}?start_date=${yesterday}&end_date=${today}`,
-            {
-              headers: {
-                'x-vital-api-key': vitalApiKey,
-              },
-            }
-          );
-
-          if (sleepResponse.ok) {
-            const sleepData = await sleepResponse.json();
-            const sleepMetrics = [];
-
-            if (sleepData.sleep && sleepData.sleep.length > 0) {
-              const latestSleep = sleepData.sleep[0];
-
-              if (latestSleep.duration_total) {
-                sleepMetrics.push({
-                  user_id: device.user_id,
-                  metric_type: 'sleep_duration',
-                  value: latestSleep.duration_total / 3600, // Convert to hours
-                  device_source: device.device_type,
-                  recorded_at: new Date().toISOString(),
-                });
-              }
-
-              if (latestSleep.efficiency) {
-                sleepMetrics.push({
-                  user_id: device.user_id,
-                  metric_type: 'sleep_efficiency',
-                  value: latestSleep.efficiency,
-                  device_source: device.device_type,
-                  recorded_at: new Date().toISOString(),
-                });
-              }
-
-              if (latestSleep.hr_average) {
-                sleepMetrics.push({
-                  user_id: device.user_id,
-                  metric_type: 'resting_heart_rate',
-                  value: latestSleep.hr_average,
-                  device_source: device.device_type,
-                  recorded_at: new Date().toISOString(),
-                });
-              }
-
-              if (latestSleep.hrv_rmssd_average) {
-                sleepMetrics.push({
-                  user_id: device.user_id,
-                  metric_type: 'hrv',
-                  value: latestSleep.hrv_rmssd_average,
-                  device_source: device.device_type,
-                  recorded_at: new Date().toISOString(),
-                });
-              }
-            }
-
-            if (sleepMetrics.length > 0) {
-              await supabase.from('user_metrics').insert(sleepMetrics);
-              console.log(`[Scheduled Sync] Inserted ${sleepMetrics.length} sleep metrics for ${device.device_name}`);
-            }
-          }
-        }
-        // Fallback to direct Oura API if device has token
-        else if (device.device_type === 'oura_ring' && deviceToken?.access_token) {
-          const today = new Date().toISOString().split('T')[0];
-          const ouraResponse = await fetch(
-            `https://api.ouraring.com/v2/usercollection/daily_activity?start_date=${today}&end_date=${today}`,
-            {
-              headers: {
-                'Authorization': `Bearer ${deviceToken.access_token}`,
-              },
-            }
-          );
-
-          if (ouraResponse.ok) {
-            const ouraData = await ouraResponse.json();
-            const metrics = [];
-
-            if (ouraData.data && ouraData.data.length > 0) {
-              const dayData = ouraData.data[0];
-
-              if (dayData.contributors?.hrv_balance) {
-                metrics.push({
-                  user_id: device.user_id,
-                  metric_type: 'hrv',
-                  value: dayData.contributors.hrv_balance,
-                  device_source: 'oura',
-                  recorded_at: new Date().toISOString(),
-                });
-              }
-
-              if (dayData.score) {
-                metrics.push({
-                  user_id: device.user_id,
-                  metric_type: 'readiness',
-                  value: dayData.score,
-                  device_source: 'oura',
-                  recorded_at: new Date().toISOString(),
-                });
-              }
-            }
-
-            if (metrics.length > 0) {
-              await supabase.from('user_metrics').insert(metrics);
-              console.log(`[Scheduled Sync] Inserted ${metrics.length} Oura metrics for ${device.device_name}`);
-            }
-          }
-        }
-
-        // Update last sync time
-        await supabase
-          .from('connected_devices')
-          .update({ last_sync_at: new Date().toISOString() })
-          .eq('id', device.id);
-
-        successCount++;
-        results.push({ deviceId: device.id, status: 'success' });
-
-      } catch (deviceError) {
-        console.error(`[Scheduled Sync] Error syncing device ${device.id}:`, deviceError);
-        errorCount++;
-        results.push({ 
-          deviceId: device.id, 
-          status: 'error', 
-          error: deviceError instanceof Error ? deviceError.message : 'Unknown error' 
+        // Resolve the Vital user by client_user_id (our auth user id)
+        const getUserRes = await fetch(`${VITAL_API_BASE}/user/resolve/${userId}`, {
+          headers: { "x-vital-api-key": VITAL_API_KEY },
         });
+
+        if (!getUserRes.ok) {
+          console.log(`[Scheduled Sync] User ${userId} not found in Vital, skipping`);
+          errorCount += userDeviceList.length;
+          continue;
+        }
+
+        const vitalUser = await getUserRes.json();
+        const today = new Date().toISOString().split('T')[0];
+        const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+
+        // Fetch sleep + activity in parallel
+        const [sleepRes, activityRes] = await Promise.all([
+          fetch(`${VITAL_API_BASE}/summary/sleep/${vitalUser.user_id}?start_date=${yesterday}&end_date=${today}`, {
+            headers: { "x-vital-api-key": VITAL_API_KEY },
+          }),
+          fetch(`${VITAL_API_BASE}/summary/activity/${vitalUser.user_id}?start_date=${yesterday}&end_date=${today}`, {
+            headers: { "x-vital-api-key": VITAL_API_KEY },
+          }),
+        ]);
+
+        const metrics: Array<{ user_id: string; metric_type: string; value: number; recorded_at: string; device_source: string; metadata?: Record<string, unknown> }> = [];
+
+        if (sleepRes.ok) {
+          const { sleep = [] } = await sleepRes.json();
+          for (const s of sleep) {
+            const source = s.source?.name || 'vital';
+            if (s.duration_sleep_seconds) {
+              metrics.push({ user_id: userId, metric_type: 'sleep_duration', value: s.duration_sleep_seconds / 3600, recorded_at: s.calendar_date, device_source: source,
+                metadata: { deep: s.duration_deep_sleep_seconds, rem: s.duration_rem_sleep_seconds, light: s.duration_light_sleep_seconds } });
+            }
+            if (s.hrv?.avg_sdnn) {
+              metrics.push({ user_id: userId, metric_type: 'hrv', value: s.hrv.avg_sdnn, recorded_at: s.calendar_date, device_source: source });
+            }
+            if (s.hr_average) {
+              metrics.push({ user_id: userId, metric_type: 'resting_heart_rate', value: s.hr_average, recorded_at: s.calendar_date, device_source: source });
+            }
+          }
+        }
+
+        if (activityRes.ok) {
+          const { activity = [] } = await activityRes.json();
+          for (const a of activity) {
+            const source = a.source?.name || 'vital';
+            if (a.steps) metrics.push({ user_id: userId, metric_type: 'steps', value: a.steps, recorded_at: a.calendar_date, device_source: source });
+            if (a.calories_total) metrics.push({ user_id: userId, metric_type: 'calories', value: a.calories_total, recorded_at: a.calendar_date, device_source: source });
+          }
+        }
+
+        if (metrics.length > 0) {
+          const { error: insertError } = await supabase.from('user_metrics').insert(metrics);
+          if (insertError) console.error(`[Scheduled Sync] Insert error for user ${userId}:`, insertError);
+        }
+
+        // Update last_sync_at for all this user's devices
+        const deviceIds = userDeviceList.map(d => d.id);
+        await supabase.from('connected_devices')
+          .update({ last_sync_at: new Date().toISOString() })
+          .in('id', deviceIds);
+
+        console.log(`[Scheduled Sync] Synced ${metrics.length} metrics for user ${userId}`);
+        successCount += userDeviceList.length;
+
+      } catch (userError) {
+        console.error(`[Scheduled Sync] Error for user ${userId}:`, userError);
+        errorCount += userDeviceList.length;
       }
     }
 
     console.log(`[Scheduled Sync] Completed. Success: ${successCount}, Errors: ${errorCount}`);
 
-    return new Response(JSON.stringify({
-      success: true,
-      message: `Synced ${successCount} devices, ${errorCount} errors`,
-      synced: successCount,
-      errors: errorCount,
-      results,
-    }), {
-      status: 200,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    return new Response(JSON.stringify({ success: true, synced: successCount, errors: errorCount }), {
+      status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
 
   } catch (error) {
     console.error('[Scheduled Sync] Fatal error:', error);
-    return new Response(JSON.stringify({ 
-      error: error instanceof Error ? error.message : 'Unknown error' 
-    }), {
-      status: 500,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    return new Response(JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }), {
+      status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }
 });
