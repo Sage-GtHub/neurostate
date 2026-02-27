@@ -66,9 +66,13 @@ export const MobileBottomNav = () => {
             <button
               key={item.path}
               onClick={() => handleNavigation(item.path)}
+              role="tab"
+              aria-selected={active}
+              aria-label={`Navigate to ${item.label}`}
+              tabIndex={0}
               className={cn(
                 "relative flex flex-col items-center justify-center flex-1 h-full gap-0.5 transition-all duration-200",
-                "touch-manipulation active:scale-95",
+                "touch-manipulation active:scale-95 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-[-2px] rounded-lg",
                 active ? "text-primary" : "text-muted-foreground"
               )}
             >

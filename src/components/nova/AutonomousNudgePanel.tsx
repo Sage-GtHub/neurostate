@@ -60,7 +60,7 @@ export function AutonomousNudgePanel() {
   }
 
   return (
-    <Card className="border-foreground/5 overflow-hidden">
+    <Card className="border-foreground/5 overflow-hidden" role="region" aria-label="Smart Nudges">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-lg">
