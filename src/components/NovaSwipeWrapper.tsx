@@ -2,7 +2,6 @@ import { ReactNode, useState, useEffect, useRef } from 'react';
 import { useSwipeNavigation } from '@/hooks/useSwipeNavigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, WifiOff } from 'lucide-react';
-import { MobileBottomNav } from '@/components/nova/MobileBottomNav';
 import { useOfflineDetection } from '@/hooks/usePWA';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -130,13 +129,10 @@ export const NovaSwipeWrapper = ({ children }: NovaSwipeWrapperProps) => {
         )}
       </AnimatePresence>
 
-      {/* Main content with bottom padding for mobile nav */}
-      <div className={isMobile ? 'pb-20' : ''}>
+      {/* Main content */}
+      <div>
         {children}
       </div>
-      
-      {/* Mobile bottom navigation */}
-      <MobileBottomNav />
       
       {/* Swipe direction indicators */}
       {isSwipeEnabled && swipeDirection && (
