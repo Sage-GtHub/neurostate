@@ -398,7 +398,7 @@ const Partnerships = () => {
       </main>
 
       <Footer />
-      <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
+      
     </div>
     </>
   );

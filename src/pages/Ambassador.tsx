@@ -250,7 +250,7 @@ const Ambassador = () => {
           </section>
         </main>
         <Footer />
-        <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
+        
       </div>
     </>
   );

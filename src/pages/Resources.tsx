@@ -214,7 +214,7 @@ const Resources = () => {
       </main>
 
       <Footer />
-      <LiveChat externalOpen={chatOpen} onOpenChange={setChatOpen} />
+      
       </div>
     </>
   );
