@@ -3,7 +3,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version',
 };
 
 // Vital API supports sandbox/production and US/EU regions
@@ -150,10 +150,21 @@ serve(async (req) => {
       }
 
       const linkData = await linkRes.json();
-      console.log("Generated link token for provider:", provider);
+      console.log("Generated link token for provider:", provider, "Response keys:", Object.keys(linkData));
+
+      // Vital API returns link_web_url (the hosted widget URL) and link_token
+      const linkUrl = linkData.link_web_url || linkData.link_url;
+      
+      if (!linkUrl) {
+        console.error("No link URL in Vital response:", JSON.stringify(linkData));
+        return new Response(JSON.stringify({ error: "Failed to generate connection link. No URL returned." }), {
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
 
       return new Response(JSON.stringify({ 
-        link_url: linkData.link_url,
+        link_url: linkUrl,
         link_token: linkData.link_token 
       }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },

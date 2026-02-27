@@ -185,13 +185,14 @@ export default function NovaDevices() {
       }
     } catch (err) { 
       console.error("Connection error:", err);
+      setConnectingDevice(null);
       toast({ 
         title: "Connection failed", 
         description: err instanceof Error ? err.message : "Please try again",
         variant: "destructive" 
       }); 
     }
-    finally { setConnectingDevice(null); }
+    // Note: do NOT clear connectingDevice in finally — polling handles it
   };
 
   const handleSync = async (deviceType: string) => {
