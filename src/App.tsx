@@ -257,6 +257,7 @@ const AnimatedRoutes = () => {
           </Routes>
         </motion.div>
       </AnimatePresence>
+      </Suspense>
     </>
   );
 };
