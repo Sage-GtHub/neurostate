@@ -150,10 +150,21 @@ serve(async (req) => {
       }
 
       const linkData = await linkRes.json();
-      console.log("Generated link token for provider:", provider);
+      console.log("Generated link token for provider:", provider, "Response keys:", Object.keys(linkData));
+
+      // Vital API returns link_web_url (the hosted widget URL) and link_token
+      const linkUrl = linkData.link_web_url || linkData.link_url;
+      
+      if (!linkUrl) {
+        console.error("No link URL in Vital response:", JSON.stringify(linkData));
+        return new Response(JSON.stringify({ error: "Failed to generate connection link. No URL returned." }), {
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
 
       return new Response(JSON.stringify({ 
-        link_url: linkData.link_url,
+        link_url: linkUrl,
         link_token: linkData.link_token 
       }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
