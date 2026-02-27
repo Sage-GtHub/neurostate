@@ -213,13 +213,24 @@ const Index = () => {
                 {platformBlocks.map((block, i) => (
                   <Link key={block.id} to={block.link}>
                     <motion.div
-                      className="group flex items-start md:items-center justify-between py-8 md:py-10 border-t border-border/40 hover:border-primary/40 transition-colors"
+                      className="group flex items-start md:items-center justify-between py-8 md:py-10 border-t border-border/40 hover:border-primary/40 transition-colors relative overflow-hidden"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-50px" }}
                       transition={{ duration: 0.5, delay: i * 0.06 }}
+                      whileHover={{ x: 8 }}
                     >
-                      <div className="flex-1 flex flex-col md:flex-row md:items-center gap-3 md:gap-8">
+                      {/* Hover reveal gradient */}
+                      <motion.div 
+                        className="absolute inset-0 pointer-events-none"
+                        initial={{ opacity: 0 }}
+                        whileHover={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className={`absolute inset-0 bg-gradient-to-r ${block.color} opacity-30`} />
+                      </motion.div>
+                      
+                      <div className="flex-1 flex flex-col md:flex-row md:items-center gap-3 md:gap-8 relative z-10">
                         <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold w-20 flex-shrink-0">{block.label}</span>
                         <h3 className="text-lg md:text-2xl font-medium text-foreground group-hover:text-primary transition-colors">
                           {block.name}
@@ -228,7 +239,13 @@ const Index = () => {
                           {block.description}
                         </p>
                       </div>
-                      <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-2 transition-all ml-4 flex-shrink-0" />
+                      <motion.div
+                        className="relative z-10 ml-4 flex-shrink-0"
+                        whileHover={{ x: 4, scale: 1.2 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                      >
+                        <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                      </motion.div>
                     </motion.div>
                   </Link>
                 ))}
