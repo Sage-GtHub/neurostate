@@ -38,10 +38,10 @@ function StatusIndicator({ status }: { status: "pending" | "saved" | "failed" | 
 function StreamingIndicator({ state }: { state: DiagnosticsState["streamingState"] }) {
   const colors: Record<DiagnosticsState["streamingState"], string> = {
     idle: "bg-foreground/20",
-    connecting: "bg-amber-500 animate-pulse",
-    streaming: "bg-blue-500 animate-pulse",
-    complete: "bg-green-500",
-    error: "bg-red-500",
+    connecting: "bg-warning-amber animate-pulse",
+    streaming: "bg-signal-blue animate-pulse",
+    complete: "bg-signal-green",
+    error: "bg-destructive",
   };
   
   const labels: Record<DiagnosticsState["streamingState"], string> = {
