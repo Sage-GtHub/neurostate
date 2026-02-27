@@ -38,6 +38,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useChatThreads, type ChatThread } from "@/hooks/useChatThreads";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
+import { AutonomousNudgePanel } from "@/components/nova/AutonomousNudgePanel";
 
 type StreamingMessage = {
   role: "user" | "assistant";
