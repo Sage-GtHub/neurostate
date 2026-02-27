@@ -1032,6 +1032,16 @@ export default function NovaChat() {
                   <span>Start a voice conversation</span>
                 </motion.button>
               </motion.div>
+
+              {/* Smart Nudges */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="w-full max-w-lg mt-8 px-2"
+              >
+                <AutonomousNudgePanel />
+              </motion.div>
             </div>
           ) : (
             /* ─── Messages Area ─── */
