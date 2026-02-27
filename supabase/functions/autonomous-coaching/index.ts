@@ -31,17 +31,58 @@ serve(async (req) => {
     const supabase = createClient(supabaseUrl, supabaseKey);
 
     const authHeader = req.headers.get('Authorization');
-    if (!authHeader) throw new Error('No authorization header');
+    const anonKey = Deno.env.get('SUPABASE_ANON_KEY');
+    const isCronCall = authHeader && authHeader.replace('Bearer ', '') === anonKey;
 
-    const token = authHeader.replace('Bearer ', '');
-    const { data: { user } } = await supabase.auth.getUser(token);
-    if (!user) throw new Error('Unauthorized');
+    let userIds: string[] = [];
 
-    if (!checkRateLimit(user.id)) {
-      return new Response(JSON.stringify({ error: "Rate limit exceeded. Please try again in a few minutes." }), {
-        status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
+    if (isCronCall) {
+      // Cron mode: process all users who have active protocols or recent metrics
+      const { data: activeUsers } = await supabase
+        .from('user_preferences')
+        .select('user_id')
+        .eq('onboarding_completed', true)
+        .limit(50);
+      userIds = (activeUsers || []).map((u: any) => u.user_id);
+
+      if (userIds.length === 0) {
+        return new Response(JSON.stringify({ success: true, message: 'No active users to process' }), {
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+    } else {
+      // User-initiated mode
+      if (!authHeader) throw new Error('No authorization header');
+      const token = authHeader.replace('Bearer ', '');
+      const { data: { user } } = await supabase.auth.getUser(token);
+      if (!user) throw new Error('Unauthorized');
+
+      if (!checkRateLimit(user.id)) {
+        return new Response(JSON.stringify({ error: "Rate limit exceeded. Please try again in a few minutes." }), {
+          status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+      userIds = [user.id];
     }
+
+    // Process each user
+    let totalGenerated = 0;
+    for (const userId of userIds) {
+      try {
+        const generated = await processUserCoaching(supabase, userId, LOVABLE_API_KEY);
+        totalGenerated += generated;
+      } catch (err) {
+        console.error(`Error processing user ${userId}:`, err);
+      }
+    }
+
+    return new Response(JSON.stringify({
+      success: true,
+      users_processed: userIds.length,
+      actions_generated: totalGenerated,
+    }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
 
     // Gather all relevant context including response history
     const fourteenDaysAgo = new Date();
