@@ -19,24 +19,24 @@ const colorVariants = {
     border: "border-accent/20",
   },
   green: {
-    icon: "text-green-500",
-    bg: "bg-green-500/10",
-    border: "border-green-500/20",
+    icon: "text-signal-green",
+    bg: "bg-signal-green/10",
+    border: "border-signal-green/20",
   },
   yellow: {
-    icon: "text-yellow-500",
-    bg: "bg-yellow-500/10",
-    border: "border-yellow-500/20",
+    icon: "text-warning-amber",
+    bg: "bg-warning-amber/10",
+    border: "border-warning-amber/20",
   },
   red: {
-    icon: "text-red-500",
-    bg: "bg-red-500/10",
-    border: "border-red-500/20",
+    icon: "text-destructive",
+    bg: "bg-destructive/10",
+    border: "border-destructive/20",
   },
   purple: {
-    icon: "text-purple-500",
-    bg: "bg-purple-500/10",
-    border: "border-purple-500/20",
+    icon: "text-plasma-purple",
+    bg: "bg-plasma-purple/10",
+    border: "border-plasma-purple/20",
   },
 };
 
