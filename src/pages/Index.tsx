@@ -287,14 +287,21 @@ const Index = () => {
                 ].map((item, i) => (
                   <motion.div
                     key={i}
-                    className="text-center"
+                    className="text-center group cursor-default"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
+                    whileHover={{ y: -8 }}
                   >
-                    <span className="font-mono text-4xl md:text-5xl font-light text-primary/30 block mb-4">{item.step}</span>
-                    <h3 className="text-lg md:text-xl font-medium text-foreground mb-3">{item.title}</h3>
+                    <motion.span 
+                      className="font-mono text-4xl md:text-5xl font-light text-primary/30 block mb-4"
+                      whileHover={{ scale: 1.1, color: 'hsl(var(--primary))' }}
+                      transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                    >
+                      {item.step}
+                    </motion.span>
+                    <h3 className="text-lg md:text-xl font-medium text-foreground mb-3 group-hover:text-primary transition-colors">{item.title}</h3>
                     <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{item.desc}</p>
                   </motion.div>
                 ))}
