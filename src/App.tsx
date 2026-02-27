@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { trackPageView } from "@/lib/analytics";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
@@ -12,90 +12,99 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { CommandPalette } from "@/components/nova/CommandPalette";
 import { FloatingContactHub } from "@/components/FloatingContactHub";
 import { useNudgeNotifications } from "@/hooks/useNudgeNotifications";
+import { Loader2 } from "lucide-react";
 
-import Index from "./pages/Index";
-import Nova from "./pages/Nova";
-import NovaChat from "./pages/NovaChat";
-import NovaProtocols from "./pages/NovaProtocols";
-import ProtocolDetail from "./pages/ProtocolDetail";
-import NovaInsights from "./pages/NovaInsights";
-import NovaDevices from "./pages/NovaDevices";
-import NovaProtocolOptimization from "./pages/NovaProtocolOptimization";
-import NovaOverview from "./pages/NovaOverview";
-import NovaHistoricalTrends from "./pages/NovaHistoricalTrends";
-import NovaSettings from "./pages/NovaSettings";
-import NovaGoals from "./pages/NovaGoals";
-import NovaSettingsAdvanced from "./pages/NovaSettingsAdvanced";
-import NovaPersonalDashboard from "./pages/NovaPersonalDashboard";
-import MobileChat from "./pages/MobileChat";
+// ─── Loading Fallback ────────────────────────────────────────────────
+const PageLoader = () => (
+  <div className="flex items-center justify-center min-h-[60vh]" role="status" aria-label="Loading page">
+    <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+  </div>
+);
 
-import FAQ from "./pages/FAQ";
-import Ambassador from "./pages/Ambassador";
-import Partnerships from "./pages/Partnerships";
-import Auth from "./pages/Auth";
-import Profile from "./pages/Profile";
-import Rewards from "./pages/Rewards";
-import LearningPathDetail from "./pages/LearningPathDetail";
-import Terms from "./pages/Terms";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import AboutUs from "./pages/AboutUs";
-import Contact from "./pages/Contact";
-import NotFound from "./pages/NotFound";
-import Install from "./pages/Install";
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
+// ─── Lazy-loaded Pages ───────────────────────────────────────────────
+const Index = lazy(() => import("./pages/Index"));
+const Nova = lazy(() => import("./pages/Nova"));
+const NovaChat = lazy(() => import("./pages/NovaChat"));
+const NovaProtocols = lazy(() => import("./pages/NovaProtocols"));
+const ProtocolDetail = lazy(() => import("./pages/ProtocolDetail"));
+const NovaInsights = lazy(() => import("./pages/NovaInsights"));
+const NovaDevices = lazy(() => import("./pages/NovaDevices"));
+const NovaProtocolOptimization = lazy(() => import("./pages/NovaProtocolOptimization"));
+const NovaOverview = lazy(() => import("./pages/NovaOverview"));
+const NovaHistoricalTrends = lazy(() => import("./pages/NovaHistoricalTrends"));
+const NovaSettings = lazy(() => import("./pages/NovaSettings"));
+const NovaGoals = lazy(() => import("./pages/NovaGoals"));
+const NovaSettingsAdvanced = lazy(() => import("./pages/NovaSettingsAdvanced"));
+const NovaPersonalDashboard = lazy(() => import("./pages/NovaPersonalDashboard"));
+const MobileChat = lazy(() => import("./pages/MobileChat"));
 
-import ProgramOverview from "./pages/ProgramOverview";
-import SportsOverview from "./pages/SportsOverview";
-import HealthClubsOverview from "./pages/HealthClubsOverview";
-import HealthcareOverview from "./pages/HealthcareOverview";
-import HospitalityOverview from "./pages/HospitalityOverview";
-import FinancialServicesOverview from "./pages/FinancialServicesOverview";
-import InformationTechnologyOverview from "./pages/InformationTechnologyOverview";
-import InformationTechnologyIntegrations from "./pages/InformationTechnologyIntegrations";
-import InformationTechnologyPricing from "./pages/InformationTechnologyPricing";
-import FinancialServicesIntegrations from "./pages/FinancialServicesIntegrations";
-import FinancialServicesPricing from "./pages/FinancialServicesPricing";
-import HealthcareIntegrations from "./pages/HealthcareIntegrations";
-import HealthcarePricing from "./pages/HealthcarePricing";
-import HospitalityIntegrations from "./pages/HospitalityIntegrations";
-import HospitalityPricing from "./pages/HospitalityPricing";
-import EnterpriseIntegrations from "./pages/EnterpriseIntegrations";
-import EnterprisePricing from "./pages/EnterprisePricing";
-import EnterpriseOverview from "./pages/EnterpriseOverview";
-import EnterpriseCaseStudies from "./pages/EnterpriseCaseStudies";
-import SportsIntegrations from "./pages/SportsIntegrations";
-import SportsPricing from "./pages/SportsPricing";
-import SportsCaseStudies from "./pages/SportsCaseStudies";
-import HealthClubsIntegrations from "./pages/HealthClubsIntegrations";
-import HealthClubsPricing from "./pages/HealthClubsPricing";
-import HealthClubsCaseStudies from "./pages/HealthClubsCaseStudies";
-import TeamDashboard from "./pages/TeamDashboard";
-import JoinOrganisation from "./pages/JoinOrganisation";
-import TeamSettings from "./pages/TeamSettings";
-import TeamSettingsMembers from "./pages/TeamSettingsMembers";
+const FAQ = lazy(() => import("./pages/FAQ"));
+const Ambassador = lazy(() => import("./pages/Ambassador"));
+const Partnerships = lazy(() => import("./pages/Partnerships"));
+const Auth = lazy(() => import("./pages/Auth"));
+const Profile = lazy(() => import("./pages/Profile"));
+const Rewards = lazy(() => import("./pages/Rewards"));
+const LearningPathDetail = lazy(() => import("./pages/LearningPathDetail"));
+const Terms = lazy(() => import("./pages/Terms"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const AboutUs = lazy(() => import("./pages/AboutUs"));
+const Contact = lazy(() => import("./pages/Contact"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Install = lazy(() => import("./pages/Install"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
+
+const ProgramOverview = lazy(() => import("./pages/ProgramOverview"));
+const SportsOverview = lazy(() => import("./pages/SportsOverview"));
+const HealthClubsOverview = lazy(() => import("./pages/HealthClubsOverview"));
+const HealthcareOverview = lazy(() => import("./pages/HealthcareOverview"));
+const HospitalityOverview = lazy(() => import("./pages/HospitalityOverview"));
+const FinancialServicesOverview = lazy(() => import("./pages/FinancialServicesOverview"));
+const InformationTechnologyOverview = lazy(() => import("./pages/InformationTechnologyOverview"));
+const InformationTechnologyIntegrations = lazy(() => import("./pages/InformationTechnologyIntegrations"));
+const InformationTechnologyPricing = lazy(() => import("./pages/InformationTechnologyPricing"));
+const FinancialServicesIntegrations = lazy(() => import("./pages/FinancialServicesIntegrations"));
+const FinancialServicesPricing = lazy(() => import("./pages/FinancialServicesPricing"));
+const HealthcareIntegrations = lazy(() => import("./pages/HealthcareIntegrations"));
+const HealthcarePricing = lazy(() => import("./pages/HealthcarePricing"));
+const HospitalityIntegrations = lazy(() => import("./pages/HospitalityIntegrations"));
+const HospitalityPricing = lazy(() => import("./pages/HospitalityPricing"));
+const EnterpriseIntegrations = lazy(() => import("./pages/EnterpriseIntegrations"));
+const EnterprisePricing = lazy(() => import("./pages/EnterprisePricing"));
+const EnterpriseOverview = lazy(() => import("./pages/EnterpriseOverview"));
+const EnterpriseCaseStudies = lazy(() => import("./pages/EnterpriseCaseStudies"));
+const SportsIntegrations = lazy(() => import("./pages/SportsIntegrations"));
+const SportsPricing = lazy(() => import("./pages/SportsPricing"));
+const SportsCaseStudies = lazy(() => import("./pages/SportsCaseStudies"));
+const HealthClubsIntegrations = lazy(() => import("./pages/HealthClubsIntegrations"));
+const HealthClubsPricing = lazy(() => import("./pages/HealthClubsPricing"));
+const HealthClubsCaseStudies = lazy(() => import("./pages/HealthClubsCaseStudies"));
+const TeamDashboard = lazy(() => import("./pages/TeamDashboard"));
+const JoinOrganisation = lazy(() => import("./pages/JoinOrganisation"));
+const TeamSettings = lazy(() => import("./pages/TeamSettings"));
+const TeamSettingsMembers = lazy(() => import("./pages/TeamSettingsMembers"));
 
 // Industry Pages
-import SaaSHighGrowth from "./pages/industries/SaaSHighGrowth";
-import SaaSEnterprise from "./pages/industries/SaaSEnterprise";
-import FinancialServicesIndustry from "./pages/industries/FinancialServices";
-import ProfessionalServices from "./pages/industries/ProfessionalServices";
-import HealthcareIndustry from "./pages/industries/Healthcare";
-import ResearchLifeSciences from "./pages/industries/ResearchLifeSciences";
-import GovernmentDefence from "./pages/industries/GovernmentDefence";
-import AdvancedTechnology from "./pages/industries/AdvancedTechnology";
+const SaaSHighGrowth = lazy(() => import("./pages/industries/SaaSHighGrowth"));
+const SaaSEnterprise = lazy(() => import("./pages/industries/SaaSEnterprise"));
+const FinancialServicesIndustry = lazy(() => import("./pages/industries/FinancialServices"));
+const ProfessionalServices = lazy(() => import("./pages/industries/ProfessionalServices"));
+const HealthcareIndustry = lazy(() => import("./pages/industries/Healthcare"));
+const ResearchLifeSciences = lazy(() => import("./pages/industries/ResearchLifeSciences"));
+const GovernmentDefence = lazy(() => import("./pages/industries/GovernmentDefence"));
+const AdvancedTechnology = lazy(() => import("./pages/industries/AdvancedTechnology"));
 
 // Solutions Pages
-import SolutionsHub from "./pages/solutions/SolutionsHub";
-import CognitiveDataLayer from "./pages/solutions/CognitiveDataLayer";
-import CognitiveStateEngine from "./pages/solutions/CognitiveStateEngine";
-import PredictionSimulation from "./pages/solutions/PredictionSimulation";
-import ActionControlLayer from "./pages/solutions/ActionControlLayer";
-import CommandSurfaces from "./pages/solutions/CommandSurfaces";
-import ROILayer from "./pages/solutions/ROILayer";
+const SolutionsHub = lazy(() => import("./pages/solutions/SolutionsHub"));
+const CognitiveDataLayer = lazy(() => import("./pages/solutions/CognitiveDataLayer"));
+const CognitiveStateEngine = lazy(() => import("./pages/solutions/CognitiveStateEngine"));
+const PredictionSimulation = lazy(() => import("./pages/solutions/PredictionSimulation"));
+const ActionControlLayer = lazy(() => import("./pages/solutions/ActionControlLayer"));
+const CommandSurfaces = lazy(() => import("./pages/solutions/CommandSurfaces"));
+const ROILayer = lazy(() => import("./pages/solutions/ROILayer"));
 
 // Industries Hub
-import Industries from "./pages/Industries";
+const Industries = lazy(() => import("./pages/Industries"));
 
 const queryClient = new QueryClient();
 
