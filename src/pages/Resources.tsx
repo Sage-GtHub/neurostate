@@ -116,7 +116,7 @@ const Resources = () => {
   
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
-  const [chatOpen, setChatOpen] = useState(false);
+  
 
   const filteredArticles = articles.filter(article => {
     const matchesCategory = selectedCategory === "All" || article.category === selectedCategory;
