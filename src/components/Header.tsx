@@ -196,7 +196,7 @@ export const Header = () => {
                     {user ? (
                       <div className="space-y-2">
                         <p className="text-[10px] text-muted-foreground truncate">{user.email}</p>
-                        <Link to="/dashboard" className="block py-2 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Dashboard</Link>
+                        <Link to="/nova/dashboard" className="block py-2 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Dashboard</Link>
                         <Link to="/team-dashboard" className="block py-2 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Team Dashboard</Link>
                         <button onClick={() => { handleSignOut(); setMobileMenuOpen(false); }} className="block py-2 text-sm font-medium text-destructive hover:text-destructive/80 transition-colors">Sign Out</button>
                       </div>
