@@ -215,23 +215,29 @@ export function FloatingContactHub() {
         </AnimatePresence>
 
         {/* Main FAB */}
-        <button
-          onClick={() => setMenuOpen((o) => !o)}
-          className={cn(
-            "p-4 rounded-full shadow-xl transition-all duration-200",
-            "hover:scale-105 active:scale-95",
-            menuOpen
-              ? "bg-muted text-foreground rotate-0"
-              : "bg-primary text-primary-foreground"
+        <div className="relative">
+          {/* Pulse ring — plays 3 times on mount then stops */}
+          {!menuOpen && (
+            <span className="absolute inset-0 rounded-full bg-primary/30 animate-[ping_1.5s_ease-out_3]" />
           )}
-          aria-label={menuOpen ? "Close contact menu" : "Contact us"}
-        >
-          {menuOpen ? (
-            <X className="w-6 h-6" />
-          ) : (
-            <MessageCircle className="w-6 h-6" />
-          )}
-        </button>
+          <button
+            onClick={() => setMenuOpen((o) => !o)}
+            className={cn(
+              "relative p-4 rounded-full shadow-xl transition-all duration-200",
+              "hover:scale-105 active:scale-95",
+              menuOpen
+                ? "bg-muted text-foreground rotate-0"
+                : "bg-primary text-primary-foreground"
+            )}
+            aria-label={menuOpen ? "Close contact menu" : "Contact us"}
+          >
+            {menuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <MessageCircle className="w-6 h-6" />
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Chat Sheet — controlled externally */}
