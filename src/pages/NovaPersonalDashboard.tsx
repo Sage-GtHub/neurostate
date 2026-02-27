@@ -27,6 +27,7 @@ import { NovaEmptyState } from '@/components/nova/NovaEmptyState';
 import { WeeklySummary } from '@/components/nova/WeeklySummary';
 import { WhoopScoreRing } from '@/components/nova/WhoopScoreRing';
 import { WhoopMetricCard } from '@/components/nova/WhoopMetricCard';
+import { CognitiveStateForm } from '@/components/nova/CognitiveStateForm';
 import { useAuth } from '@/hooks/useAuth';
 import { useActivityFeed } from '@/hooks/useActivityFeed';
 import { useReadinessScore } from '@/hooks/useReadinessScore';
@@ -348,11 +349,24 @@ export default function NovaPersonalDashboard() {
 
           {/* Two Column Layout */}
           <div className="grid lg:grid-cols-2 gap-6">
+            {/* Cognitive State Entry */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              <p className="text-[10px] uppercase tracking-[0.15em] text-foreground/30 mb-4">Manual Check-In</p>
+              <CognitiveStateForm onSubmitted={() => {
+                readiness.refresh();
+                syncDevices();
+              }} />
+            </motion.div>
+
             {/* Recent Activity */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.45 }}
             >
               <div className="flex items-center justify-between mb-4">
                 <p className="text-[10px] uppercase tracking-[0.15em] text-foreground/30">Recent Activity</p>
