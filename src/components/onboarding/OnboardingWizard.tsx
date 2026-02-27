@@ -21,6 +21,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { WelcomeStep } from "./steps/WelcomeStep";
 import { GoalsStep } from "./steps/GoalsStep";
 import { DevicesStep } from "./steps/DevicesStep";
+import { NotificationsStep } from "./steps/NotificationsStep";
 import { LifestyleStep } from "./steps/LifestyleStep";
 import { CompleteStep } from "./steps/CompleteStep";
 
@@ -29,7 +30,7 @@ interface OnboardingWizardProps {
   onComplete: () => void;
 }
 
-export type OnboardingStep = "welcome" | "goals" | "devices" | "lifestyle" | "complete";
+export type OnboardingStep = "welcome" | "goals" | "devices" | "notifications" | "lifestyle" | "complete";
 
 export interface OnboardingData {
   goals: string[];
@@ -40,7 +41,7 @@ export interface OnboardingData {
   connectedDevices: string[];
 }
 
-const STEPS: OnboardingStep[] = ["welcome", "goals", "devices", "lifestyle", "complete"];
+const STEPS: OnboardingStep[] = ["welcome", "goals", "devices", "notifications", "lifestyle", "complete"];
 
 export function OnboardingWizard({ open, onComplete }: OnboardingWizardProps) {
   const [currentStep, setCurrentStep] = useState<OnboardingStep>("welcome");
@@ -228,6 +229,13 @@ export function OnboardingWizard({ open, onComplete }: OnboardingWizardProps) {
                   onDeviceConnected={(device) => updateData({ 
                     connectedDevices: [...data.connectedDevices, device] 
                   })}
+                  onNext={goNext}
+                  onBack={goBack}
+                />
+              )}
+              
+              {currentStep === "notifications" && (
+                <NotificationsStep
                   onNext={goNext}
                   onBack={goBack}
                 />
