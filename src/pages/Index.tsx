@@ -168,11 +168,16 @@ const Index = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={isApproachInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6, delay: i * 0.12 }}
+                    whileHover={{ y: -6 }}
                   >
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
+                    <motion.div 
+                      className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-5 transition-colors"
+                      whileHover={{ scale: 1.15, rotate: 5, backgroundColor: 'hsl(var(--primary) / 0.2)' }}
+                      transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                    >
                       <pillar.icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <h3 className="text-lg md:text-xl font-medium text-foreground mb-3">{pillar.title}</h3>
+                    </motion.div>
+                    <h3 className="text-lg md:text-xl font-medium text-foreground mb-3 group-hover:text-primary transition-colors">{pillar.title}</h3>
                     <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{pillar.description}</p>
                   </motion.div>
                 ))}
