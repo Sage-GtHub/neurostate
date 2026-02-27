@@ -55,7 +55,7 @@ export const Footer = () => {
     ],
     account: [
       { name: "Team Dashboard", href: "/team-dashboard" },
-      { name: "My Dashboard", href: "/dashboard" },
+      { name: "My Dashboard", href: "/nova/dashboard" },
       { name: "Sign In", href: "/auth" },
     ],
   };

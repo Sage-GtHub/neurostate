@@ -108,7 +108,7 @@ Important: If someone requests pricing, demos, or live meetings, respond with:
 // Pages where the agent should NOT appear (authenticated/app pages)
 const HIDDEN_ROUTES = [
   "/nova",
-  "/dashboard",
+  "/nova/dashboard",
   "/profile",
   "/team",
   "/settings",

@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { trackPageView } from "@/lib/analytics";
@@ -43,7 +43,7 @@ import NotFound from "./pages/NotFound";
 import Install from "./pages/Install";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
-import Dashboard from "./pages/Dashboard";
+
 import ProgramOverview from "./pages/ProgramOverview";
 import SportsOverview from "./pages/SportsOverview";
 import HealthClubsOverview from "./pages/HealthClubsOverview";
@@ -140,7 +140,7 @@ const AnimatedRoutes = () => {
             <Route path="/ambassador" element={<Ambassador />} />
             <Route path="/partnerships" element={<Partnerships />} />
             <Route path="/auth" element={<Auth />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Navigate to="/nova/dashboard" replace />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/rewards" element={<Rewards />} />
             <Route path="/terms" element={<Terms />} />
