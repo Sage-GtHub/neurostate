@@ -30,7 +30,7 @@ interface OnboardingWizardProps {
   onComplete: () => void;
 }
 
-export type OnboardingStep = "welcome" | "goals" | "devices" | "lifestyle" | "complete";
+export type OnboardingStep = "welcome" | "goals" | "devices" | "notifications" | "lifestyle" | "complete";
 
 export interface OnboardingData {
   goals: string[];
