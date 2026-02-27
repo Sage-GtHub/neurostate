@@ -235,19 +235,19 @@ export default function NovaPersonalDashboard() {
                 />
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center py-16 rounded-3xl bg-foreground/[0.02]">
-                <div className="w-16 h-16 rounded-full bg-foreground/[0.03] flex items-center justify-center mb-4">
-                  <Activity className="w-7 h-7 text-foreground/20" />
-                </div>
-                <p className="text-sm text-foreground/50 mb-1">No biometric data yet</p>
-                <p className="text-xs text-foreground/30 mb-4">Connect a wearable to see live readiness & recovery</p>
-                <button
-                  onClick={() => navigate('/nova/devices')}
-                  className="px-5 py-2.5 rounded-full bg-accent text-accent-foreground text-xs font-medium hover:bg-accent/90 transition-colors"
-                >
-                  Connect Device
-                </button>
-              </div>
+              <NovaEmptyState
+                variant="devices"
+                title="No biometric data yet"
+                description="Connect a wearable device to unlock real-time readiness scoring, recovery tracking, and personalised energy predictions powered by your biometric data."
+                primaryAction={{
+                  label: "Connect a Device",
+                  to: "/nova/devices",
+                }}
+                secondaryAction={{
+                  label: "Learn More",
+                  onClick: () => navigate('/nova/insights'),
+                }}
+              />
             )}
 
             {/* Readiness Factor Breakdown */}
