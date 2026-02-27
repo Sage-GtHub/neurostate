@@ -155,37 +155,21 @@ export function OnboardingWizard({ open, onComplete }: OnboardingWizardProps) {
   };
 
   const generateBaselineMetrics = async (userId: string) => {
-    const metricTypes = [
-      { metric_type: 'hrv', baseValue: 50, variance: 30 },
-      { metric_type: 'sleep_quality', baseValue: 6, variance: 3 },
-      { metric_type: 'recovery', baseValue: 65, variance: 25 },
-      { metric_type: 'focus_time', baseValue: 4, variance: 5 },
-      { metric_type: 'focus_score', baseValue: 55, variance: 30 },
-      { metric_type: 'energy_level', baseValue: 60, variance: 25 },
-      { metric_type: 'stress_level', baseValue: 35, variance: 20 },
-      { metric_type: 'recovery_score', baseValue: 70, variance: 20 },
+    const baseMetrics = [
+      { metric_type: 'hrv', value: 50 + Math.floor(Math.random() * 30) },
+      { metric_type: 'sleep_quality', value: 6 + Math.floor(Math.random() * 3) },
+      { metric_type: 'recovery', value: 65 + Math.floor(Math.random() * 25) },
+      { metric_type: 'focus_time', value: 4 + Math.floor(Math.random() * 5) },
     ];
 
-    const inserts = [];
-    // Generate 7 days of historical data
-    for (let day = 6; day >= 0; day--) {
-      const recordedAt = new Date();
-      recordedAt.setDate(recordedAt.getDate() - day);
-      recordedAt.setHours(8 + Math.floor(Math.random() * 4), Math.floor(Math.random() * 60));
-
-      for (const { metric_type, baseValue, variance } of metricTypes) {
-        inserts.push({
-          user_id: userId,
-          metric_type,
-          value: Math.max(1, Math.min(100, baseValue + Math.floor(Math.random() * variance))),
-          device_source: 'onboarding_baseline',
-          recorded_at: recordedAt.toISOString(),
-        });
-      }
+    for (const metric of baseMetrics) {
+      await supabase.from('user_metrics').insert({
+        user_id: userId,
+        metric_type: metric.metric_type,
+        value: metric.value,
+        device_source: 'onboarding_baseline'
+      });
     }
-
-    const { error } = await supabase.from('user_metrics').insert(inserts);
-    if (error) console.error('Error seeding baseline metrics:', error);
   };
 
   const canProceed = () => {
