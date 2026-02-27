@@ -323,13 +323,26 @@ export default function NovaDevices() {
                         </p>
                       </div>
 
-                      <button
-                        onClick={() => handleSync(device.type)}
-                        disabled={syncingDevice === device.type}
-                        className="w-9 h-9 rounded-full bg-foreground/[0.02] flex items-center justify-center hover:bg-foreground/[0.05] transition-colors disabled:opacity-50"
-                      >
-                        <RefreshCw className={`w-3.5 h-3.5 text-foreground/50 ${syncingDevice === device.type ? 'animate-spin' : ''}`} />
-                      </button>
+                      <div className="flex items-center gap-1.5">
+                        <button
+                          onClick={() => handleSync(device.type)}
+                          disabled={syncingDevice === device.type}
+                          className="w-9 h-9 rounded-full bg-foreground/[0.02] flex items-center justify-center hover:bg-foreground/[0.05] transition-colors disabled:opacity-50"
+                        >
+                          <RefreshCw className={`w-3.5 h-3.5 text-foreground/50 ${syncingDevice === device.type ? 'animate-spin' : ''}`} />
+                        </button>
+                        <button
+                          onClick={() => handleDisconnect(device.type, device.name)}
+                          disabled={disconnectingDevice === device.type}
+                          className="w-9 h-9 rounded-full bg-foreground/[0.02] flex items-center justify-center hover:bg-destructive/10 transition-colors disabled:opacity-50 group"
+                        >
+                          {disconnectingDevice === device.type ? (
+                            <Loader2 className="w-3.5 h-3.5 animate-spin text-foreground/50" />
+                          ) : (
+                            <Unplug className="w-3.5 h-3.5 text-foreground/30 group-hover:text-destructive transition-colors" />
+                          )}
+                        </button>
+                      </div>
                     </div>
                   );
                 })}
