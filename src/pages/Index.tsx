@@ -21,7 +21,7 @@ import { StatsCounterBar } from "@/components/StatsCounterBar";
 import { IntegrationLogoStrip } from "@/components/IntegrationLogoStrip";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Eye, Layers, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Eye, Layers, Sparkles, MessageCircle, BarChart3, Activity } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
