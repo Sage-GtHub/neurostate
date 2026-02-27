@@ -23,7 +23,7 @@ import { IntegrationLogoStrip } from "@/components/IntegrationLogoStrip";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Eye, Layers, Sparkles, MessageCircle, BarChart3, Activity } from "lucide-react";
 import { Link } from "react-router-dom";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 
 // Building blocks - like Invisible's Neuron, Atomic, etc.
