@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { LiveChat } from "@/components/LiveChat";
+
 
 interface Partner {
   name: string;
