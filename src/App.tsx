@@ -259,7 +259,7 @@ const App = () => (
           <Toaster />
           <Sonner position="top-center" />
           <AnimatedRoutes />
-          <FloatingVoiceAgent />
+          <FloatingContactHub />
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
