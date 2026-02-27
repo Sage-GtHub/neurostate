@@ -56,7 +56,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { IntelligentAlerts } from '@/components/nova/IntelligentAlerts';
-import { AutonomousNudgePanel } from '@/components/nova/AutonomousNudgePanel';
+
 import { MeetingLoadOptimiser } from '@/components/nova/MeetingLoadOptimiser';
 import { InterventionROITracker } from '@/components/nova/InterventionROITracker';
 
