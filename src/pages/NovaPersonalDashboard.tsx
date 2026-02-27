@@ -27,6 +27,7 @@ import { NovaEmptyState } from '@/components/nova/NovaEmptyState';
 import { WeeklySummary } from '@/components/nova/WeeklySummary';
 import { WhoopScoreRing } from '@/components/nova/WhoopScoreRing';
 import { WhoopMetricCard } from '@/components/nova/WhoopMetricCard';
+import { CognitiveStateForm } from '@/components/nova/CognitiveStateForm';
 import { useAuth } from '@/hooks/useAuth';
 import { useActivityFeed } from '@/hooks/useActivityFeed';
 import { useReadinessScore } from '@/hooks/useReadinessScore';
