@@ -121,9 +121,56 @@ const impactStats = [
   { value: "40+", label: "Integrations", sublabel: "wearables and work tools" }
 ];
 
+// Interactive Nova demo data
+const novaDemoTabs = [
+  {
+    id: 'chat',
+    label: 'AI Chat',
+    icon: MessageCircle,
+    messages: [
+      { role: 'nova', text: "Good morning. Based on your sleep data, I've adjusted your focus window to 10am–1pm today. Your cognitive capacity is trending 12% above your weekly average." },
+      { role: 'user', text: "What should I prioritise this morning?" },
+      { role: 'nova', text: "Your highest-impact task is the Q4 strategy deck. Complexity matches your current state. I'd suggest blocking 90 minutes before lunch." },
+    ]
+  },
+  {
+    id: 'insights',
+    label: 'Insights',
+    icon: Brain,
+    insights: [
+      { title: "Sleep consistency improved", desc: "7-day streak detected. Circadian rhythm is optimising.", confidence: 94, type: "positive" },
+      { title: "HRV downtrend detected", desc: "15% decline over 5 days. Consider a recovery protocol.", confidence: 87, type: "warning" },
+      { title: "Peak focus window shifting", desc: "Your optimal cognitive period has moved 30 mins earlier this week.", confidence: 82, type: "neutral" },
+    ]
+  },
+  {
+    id: 'metrics',
+    label: 'Live Metrics',
+    icon: BarChart3,
+    metrics: [
+      { label: "HRV", value: 68, unit: "ms", trend: "+5%", color: "text-primary" },
+      { label: "Sleep", value: 7.2, unit: "hrs", trend: "+0.4", color: "text-blue-500" },
+      { label: "Readiness", value: 82, unit: "%", trend: "+8%", color: "text-emerald-500" },
+      { label: "Recovery", value: 91, unit: "%", trend: "+3%", color: "text-purple-500" },
+    ]
+  },
+  {
+    id: 'actions',
+    label: 'Actions',
+    icon: Zap,
+    actions: [
+      { title: "Schedule a recovery day", impact: "High", timing: "This week", category: "recovery" },
+      { title: "Move deep work to 9-11 AM", impact: "Medium", timing: "Tomorrow", category: "focus" },
+      { title: "Increase magnesium intake", impact: "Medium", timing: "Tonight", category: "nutrition" },
+      { title: "Cap meetings at 4 hours", impact: "High", timing: "This week", category: "energy" },
+    ]
+  },
+];
+
 const Index = () => {
   const approachRef = useRef<HTMLDivElement>(null);
   const isApproachInView = useInView(approachRef, { once: true, margin: "-100px" });
+  const [activeDemoTab, setActiveDemoTab] = useState('chat');
 
   return (
     <>
