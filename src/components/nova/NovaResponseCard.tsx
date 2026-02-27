@@ -126,9 +126,9 @@ export function NovaResponseCard({
 
   const getConfidenceColor = (conf: string) => {
     switch (conf) {
-      case "high": return "text-green-500";
-      case "medium": return "text-amber-500";
-      case "low": return "text-red-500";
+      case "high": return "text-signal-green";
+      case "medium": return "text-warning-amber";
+      case "low": return "text-destructive";
       default: return "text-muted-foreground";
     }
   };
@@ -172,7 +172,7 @@ export function NovaResponseCard({
               <div className="flex items-center gap-2">
                 {connectedSources.slice(0, 3).map((source, i) => (
                   <span key={i} className="flex items-center gap-1">
-                    <CheckCircle2 className="w-2.5 h-2.5 text-green-500" />
+                    <CheckCircle2 className="w-2.5 h-2.5 text-signal-green" />
                     {source.name}
                   </span>
                 ))}
@@ -200,8 +200,8 @@ export function NovaResponseCard({
             <Sparkles className="w-3 h-3 text-white" />
           </div>
           <span className="text-xs font-medium text-foreground">Nova</span>
-          <span className="text-[10px] text-green-500 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+          <span className="text-[10px] text-signal-green flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-signal-green animate-pulse" />
             Active
           </span>
         </div>

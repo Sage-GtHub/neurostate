@@ -22,6 +22,7 @@ import { NovaNav } from '@/components/NovaNav';
 import { NovaSwipeWrapper } from '@/components/NovaSwipeWrapper';
 import { SEO } from '@/components/SEO';
 import { HealthForecast } from '@/components/nova/HealthForecast';
+import { NovaEmptyState } from '@/components/nova/NovaEmptyState';
 import { AutonomousNudgePanel } from '@/components/nova/AutonomousNudgePanel';
 import { WeeklySummary } from '@/components/nova/WeeklySummary';
 import { WhoopScoreRing } from '@/components/nova/WhoopScoreRing';
@@ -235,19 +236,19 @@ export default function NovaPersonalDashboard() {
                 />
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center py-16 rounded-3xl bg-foreground/[0.02]">
-                <div className="w-16 h-16 rounded-full bg-foreground/[0.03] flex items-center justify-center mb-4">
-                  <Activity className="w-7 h-7 text-foreground/20" />
-                </div>
-                <p className="text-sm text-foreground/50 mb-1">No biometric data yet</p>
-                <p className="text-xs text-foreground/30 mb-4">Connect a wearable to see live readiness & recovery</p>
-                <button
-                  onClick={() => navigate('/nova/devices')}
-                  className="px-5 py-2.5 rounded-full bg-accent text-accent-foreground text-xs font-medium hover:bg-accent/90 transition-colors"
-                >
-                  Connect Device
-                </button>
-              </div>
+              <NovaEmptyState
+                variant="devices"
+                title="No biometric data yet"
+                description="Connect a wearable device to unlock real-time readiness scoring, recovery tracking, and personalised energy predictions powered by your biometric data."
+                primaryAction={{
+                  label: "Connect a Device",
+                  to: "/nova/devices",
+                }}
+                secondaryAction={{
+                  label: "Learn More",
+                  onClick: () => navigate('/nova/insights'),
+                }}
+              />
             )}
 
             {/* Readiness Factor Breakdown */}
@@ -264,9 +265,9 @@ export default function NovaPersonalDashboard() {
                     <p className={cn(
                       "text-sm font-medium",
                       f.value === null ? "text-foreground/20" :
-                      f.value >= 80 ? "text-green-500" :
+                      f.value >= 80 ? "text-signal-green" :
                       f.value >= 60 ? "text-accent" :
-                      f.value >= 40 ? "text-orange-500" : "text-red-500"
+                      f.value >= 40 ? "text-warning-amber" : "text-destructive"
                     )}>
                       {f.value !== null ? `${Math.round(f.value)}%` : '--'}
                     </p>
@@ -364,13 +365,15 @@ export default function NovaPersonalDashboard() {
               </div>
               
               {recentActivities.length === 0 ? (
-                <div className="text-center py-12 rounded-3xl bg-foreground/[0.02]">
-                  <div className="w-12 h-12 rounded-full bg-foreground/[0.03] flex items-center justify-center mx-auto mb-3">
-                    <Clock className="w-5 h-5 text-foreground/20" />
-                  </div>
-                  <p className="text-xs text-foreground/40">No recent activity</p>
-                  <p className="text-[10px] text-foreground/30 mt-1">Start chatting with Nova to see activity here</p>
-                </div>
+                <NovaEmptyState
+                  variant="generic"
+                  title="No recent activity"
+                  description="Start chatting with Nova, connect a device, or begin a protocol to see your activity here."
+                  primaryAction={{
+                    label: "Chat with Nova",
+                    to: "/nova/chat",
+                  }}
+                />
               ) : (
                 <div className="space-y-1">
                   {recentActivities.map((activity) => (

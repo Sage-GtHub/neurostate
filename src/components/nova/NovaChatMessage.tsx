@@ -139,7 +139,7 @@ export function NovaChatMessage({
                   className="h-7 w-7 text-muted-foreground hover:text-foreground"
                 >
                   {copied ? (
-                    <Check className="w-3.5 h-3.5 text-green-500" />
+                    <Check className="w-3.5 h-3.5 text-signal-green" />
                   ) : (
                     <Copy className="w-3.5 h-3.5" />
                   )}

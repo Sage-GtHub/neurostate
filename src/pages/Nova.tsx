@@ -389,7 +389,7 @@ export default function Nova() {
                     </div>
                     
                     {metric.trend && (
-                      <div className={`text-[10px] ${metric.trendColor === 'green' ? 'text-green-500' : metric.trendColor === 'red' ? 'text-red-500' : 'text-foreground/40'}`}>
+                      <div className={`text-[10px] ${metric.trendColor === 'green' ? 'text-signal-green' : metric.trendColor === 'red' ? 'text-destructive' : 'text-foreground/40'}`}>
                         {metric.trend}
                       </div>
                     )}

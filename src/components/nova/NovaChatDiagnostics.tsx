@@ -31,17 +31,17 @@ interface NovaChatDiagnosticsProps {
 function StatusIndicator({ status }: { status: "pending" | "saved" | "failed" | null }) {
   if (status === null) return <Circle className="w-3 h-3 text-foreground/20" />;
   if (status === "pending") return <Loader2 className="w-3 h-3 text-amber-500 animate-spin" />;
-  if (status === "saved") return <CheckCircle2 className="w-3 h-3 text-green-500" />;
-  return <XCircle className="w-3 h-3 text-red-500" />;
+  if (status === "saved") return <CheckCircle2 className="w-3 h-3 text-signal-green" />;
+  return <XCircle className="w-3 h-3 text-destructive" />;
 }
 
 function StreamingIndicator({ state }: { state: DiagnosticsState["streamingState"] }) {
   const colors: Record<DiagnosticsState["streamingState"], string> = {
     idle: "bg-foreground/20",
-    connecting: "bg-amber-500 animate-pulse",
-    streaming: "bg-blue-500 animate-pulse",
-    complete: "bg-green-500",
-    error: "bg-red-500",
+    connecting: "bg-warning-amber animate-pulse",
+    streaming: "bg-signal-blue animate-pulse",
+    complete: "bg-signal-green",
+    error: "bg-destructive",
   };
   
   const labels: Record<DiagnosticsState["streamingState"], string> = {
@@ -71,7 +71,7 @@ export function NovaChatDiagnostics({ state }: NovaChatDiagnosticsProps) {
           size="icon"
           className={cn(
             "h-8 w-8 text-foreground/30 hover:text-foreground/60",
-            state.lastError && "text-red-500 hover:text-red-400"
+            state.lastError && "text-destructive hover:text-destructive/80"
           )}
           title="Open diagnostics"
         >

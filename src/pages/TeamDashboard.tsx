@@ -416,7 +416,7 @@ export default function TeamDashboard() {
                 <div className="flex items-end gap-2 md:gap-3">
                   <span className="text-2xl md:text-3xl font-semibold text-foreground">{executiveMetrics.cci.current}</span>
                   <span className="text-[10px] md:text-xs text-muted-foreground mb-1">/ 100</span>
-                  <div className={`flex items-center text-[10px] md:text-xs mb-1 ml-auto ${executiveMetrics.cci.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
+                  <div className={`flex items-center text-[10px] md:text-xs mb-1 ml-auto ${executiveMetrics.cci.trend === 'up' ? 'text-signal-green' : 'text-destructive'}`}>
                     {executiveMetrics.cci.trend === 'up' ? <TrendingUp className="w-3 h-3 mr-0.5" /> : <TrendingDown className="w-3 h-3 mr-0.5" />}
                     {executiveMetrics.cci.change > 0 ? '+' : ''}{executiveMetrics.cci.change}%
                   </div>
@@ -450,7 +450,7 @@ export default function TeamDashboard() {
                   <span className="text-xl md:text-2xl font-semibold text-amber-500">{formatCurrency(executiveMetrics.revenueExposure.weekly)}</span>
                   <span className="text-[10px] md:text-xs text-muted-foreground mb-1">/ week</span>
                 </div>
-                <div className={`flex items-center text-[10px] md:text-xs mt-1 ${executiveMetrics.revenueExposure.trend === 'down' ? 'text-green-600' : 'text-red-500'}`}>
+                <div className={`flex items-center text-[10px] md:text-xs mt-1 ${executiveMetrics.revenueExposure.trend === 'down' ? 'text-signal-green' : 'text-destructive'}`}>
                   {executiveMetrics.revenueExposure.trend === 'down' ? <TrendingDown className="w-3 h-3 mr-0.5" /> : <TrendingUp className="w-3 h-3 mr-0.5" />}
                   {executiveMetrics.revenueExposure.change}% vs last week
                 </div>
@@ -465,7 +465,7 @@ export default function TeamDashboard() {
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <AlertTriangle className="w-3.5 h-3.5 md:w-4 md:h-4 text-red-500" />
+                    <AlertTriangle className="w-3.5 h-3.5 md:w-4 md:h-4 text-destructive" />
                     <span className="text-[9px] md:text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Burnout Exposure</span>
                   </div>
                   <Tooltip>
@@ -479,7 +479,7 @@ export default function TeamDashboard() {
                   </Tooltip>
                 </div>
                 <div className="flex items-end gap-2">
-                  <span className="text-xl md:text-2xl font-semibold text-red-500">{formatCurrency(executiveMetrics.burnoutExposure.projected, true)}</span>
+                  <span className="text-xl md:text-2xl font-semibold text-destructive">{formatCurrency(executiveMetrics.burnoutExposure.projected, true)}</span>
                   <span className="text-[10px] md:text-xs text-muted-foreground mb-1">projected</span>
                 </div>
                 <div className="text-[10px] md:text-xs text-muted-foreground mt-1">
@@ -584,21 +584,21 @@ export default function TeamDashboard() {
                 <div className="p-3 md:p-4 rounded-lg bg-background border border-border/30">
                   <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Daily Active</div>
                   <div className="text-lg md:text-2xl font-semibold text-foreground">{adoptionMetrics.dau.value}</div>
-                  <div className={`text-[10px] md:text-xs mt-1 ${adoptionMetrics.dau.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
+                  <div className={`text-[10px] md:text-xs mt-1 ${adoptionMetrics.dau.trend === 'up' ? 'text-signal-green' : 'text-destructive'}`}>
                     +{adoptionMetrics.dau.change}%
                   </div>
                 </div>
                 <div className="p-3 md:p-4 rounded-lg bg-background border border-border/30">
                   <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Active Teams</div>
                   <div className="text-lg md:text-2xl font-semibold text-foreground">{adoptionMetrics.wat.value}</div>
-                  <div className={`text-[10px] md:text-xs mt-1 ${adoptionMetrics.wat.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
+                  <div className={`text-[10px] md:text-xs mt-1 ${adoptionMetrics.wat.trend === 'up' ? 'text-signal-green' : 'text-destructive'}`}>
                     +{adoptionMetrics.wat.change}%
                   </div>
                 </div>
                 <div className="p-3 md:p-4 rounded-lg bg-background border border-border/30">
                   <div className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Coverage</div>
                   <div className="text-lg md:text-2xl font-semibold text-foreground">{adoptionMetrics.coverageRate.value}%</div>
-                  <div className={`text-[10px] md:text-xs mt-1 ${adoptionMetrics.coverageRate.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
+                  <div className={`text-[10px] md:text-xs mt-1 ${adoptionMetrics.coverageRate.trend === 'up' ? 'text-signal-green' : 'text-destructive'}`}>
                     +{adoptionMetrics.coverageRate.change}%
                   </div>
                 </div>
