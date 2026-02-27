@@ -47,6 +47,7 @@ export default function NovaDevices() {
   const [error, setError] = useState<string | null>(null);
   const [syncingDevice, setSyncingDevice] = useState<string | null>(null);
   const [connectingDevice, setConnectingDevice] = useState<string | null>(null);
+  const [disconnectingDevice, setDisconnectingDevice] = useState<string | null>(null);
   const [dataStats, setDataStats] = useState({ dataPoints: 0, syncs: 0 });
   const { toast } = useToast();
 
