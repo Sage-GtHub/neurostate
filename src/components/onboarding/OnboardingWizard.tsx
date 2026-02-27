@@ -234,6 +234,13 @@ export function OnboardingWizard({ open, onComplete }: OnboardingWizardProps) {
                 />
               )}
               
+              {currentStep === "notifications" && (
+                <NotificationsStep
+                  onNext={goNext}
+                  onBack={goBack}
+                />
+              )}
+              
               {currentStep === "lifestyle" && (
                 <LifestyleStep 
                   data={data}
