@@ -22,6 +22,7 @@ import { NovaNav } from '@/components/NovaNav';
 import { NovaSwipeWrapper } from '@/components/NovaSwipeWrapper';
 import { SEO } from '@/components/SEO';
 import { HealthForecast } from '@/components/nova/HealthForecast';
+import { NovaEmptyState } from '@/components/nova/NovaEmptyState';
 import { AutonomousNudgePanel } from '@/components/nova/AutonomousNudgePanel';
 import { WeeklySummary } from '@/components/nova/WeeklySummary';
 import { WhoopScoreRing } from '@/components/nova/WhoopScoreRing';
