@@ -134,15 +134,17 @@ const AnimatedRoutes = () => {
   return (
     <>
       <AnalyticsTracker />
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={location.pathname}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          variants={pageVariants}
-          transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-        >
+      <Suspense fallback={<PageLoader />}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={location.pathname}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={pageVariants}
+            transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            role="main"
+          >
           <Routes location={location}>
             <Route path="/" element={<Index />} />
             <Route path="/learning-path/:id" element={<LearningPathDetail />} />
