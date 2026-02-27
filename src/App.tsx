@@ -11,6 +11,7 @@ import { CursorGlow } from "@/components/CursorGlow";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { CommandPalette } from "@/components/nova/CommandPalette";
 import { FloatingContactHub } from "@/components/FloatingContactHub";
+import { useNudgeNotifications } from "@/hooks/useNudgeNotifications";
 
 import Index from "./pages/Index";
 import Nova from "./pages/Nova";
@@ -98,13 +99,13 @@ import Industries from "./pages/Industries";
 
 const queryClient = new QueryClient();
 
-// Analytics tracking component
+// Analytics tracking + global notifications
 const AnalyticsTracker = () => {
   const location = useLocation();
+  useNudgeNotifications();
 
   useEffect(() => {
     trackPageView(location.pathname + location.search);
-    // Smooth scroll to top on page change
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [location]);
 
