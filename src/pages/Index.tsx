@@ -316,13 +316,14 @@ const Index = () => {
                 {impactStats.map((stat, i) => (
                   <motion.div
                     key={i}
-                    className="text-center"
+                    className="text-center group cursor-default"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
+                    whileHover={{ scale: 1.08, y: -4 }}
                   >
-                    <p className="text-2xl md:text-4xl lg:text-5xl font-light text-background mb-2">{stat.value}</p>
+                    <p className="text-2xl md:text-4xl lg:text-5xl font-light text-background mb-2 group-hover:text-primary transition-colors">{stat.value}</p>
                     <p className="text-sm text-background/70 font-medium">{stat.label}</p>
                     <p className="text-xs text-background/40 mt-1">{stat.sublabel}</p>
                   </motion.div>
