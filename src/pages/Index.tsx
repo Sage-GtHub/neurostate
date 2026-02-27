@@ -827,13 +827,14 @@ const Index = () => {
                 ].map((group, i) => (
                   <motion.div
                     key={i}
-                    className="text-center"
+                    className="text-center group cursor-default"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
+                    whileHover={{ scale: 1.1, y: -4 }}
                   >
-                    <p className="text-3xl md:text-4xl font-light text-primary mb-2">{group.count}</p>
+                    <p className="text-3xl md:text-4xl font-light text-primary mb-2 group-hover:scale-110 transition-transform">{group.count}</p>
                     <p className="text-sm md:text-base font-medium text-foreground">{group.category}</p>
                   </motion.div>
                 ))}
