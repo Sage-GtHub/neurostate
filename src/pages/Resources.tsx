@@ -7,7 +7,7 @@ import { Calendar, Clock, ArrowRight, BookOpen, TrendingUp, Search } from "lucid
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { LearningPaths } from "@/components/LearningPaths";
-import { LiveChat } from "@/components/LiveChat";
+
 import { ResourceFinder } from "@/components/ResourceFinder";
 import { MultiFormatHub } from "@/components/MultiFormatHub";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
