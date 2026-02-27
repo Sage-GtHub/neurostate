@@ -31,8 +31,8 @@ interface NovaChatDiagnosticsProps {
 function StatusIndicator({ status }: { status: "pending" | "saved" | "failed" | null }) {
   if (status === null) return <Circle className="w-3 h-3 text-foreground/20" />;
   if (status === "pending") return <Loader2 className="w-3 h-3 text-amber-500 animate-spin" />;
-  if (status === "saved") return <CheckCircle2 className="w-3 h-3 text-green-500" />;
-  return <XCircle className="w-3 h-3 text-red-500" />;
+  if (status === "saved") return <CheckCircle2 className="w-3 h-3 text-signal-green" />;
+  return <XCircle className="w-3 h-3 text-destructive" />;
 }
 
 function StreamingIndicator({ state }: { state: DiagnosticsState["streamingState"] }) {
