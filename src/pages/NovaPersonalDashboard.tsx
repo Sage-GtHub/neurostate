@@ -364,13 +364,15 @@ export default function NovaPersonalDashboard() {
               </div>
               
               {recentActivities.length === 0 ? (
-                <div className="text-center py-12 rounded-3xl bg-foreground/[0.02]">
-                  <div className="w-12 h-12 rounded-full bg-foreground/[0.03] flex items-center justify-center mx-auto mb-3">
-                    <Clock className="w-5 h-5 text-foreground/20" />
-                  </div>
-                  <p className="text-xs text-foreground/40">No recent activity</p>
-                  <p className="text-[10px] text-foreground/30 mt-1">Start chatting with Nova to see activity here</p>
-                </div>
+                <NovaEmptyState
+                  variant="generic"
+                  title="No recent activity"
+                  description="Start chatting with Nova, connect a device, or begin a protocol to see your activity here."
+                  primaryAction={{
+                    label: "Chat with Nova",
+                    to: "/nova/chat",
+                  }}
+                />
               ) : (
                 <div className="space-y-1">
                   {recentActivities.map((activity) => (
