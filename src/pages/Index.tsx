@@ -24,7 +24,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Eye, Layers, Sparkles, MessageCircle, BarChart3, Activity } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 // Building blocks - like Invisible's Neuron, Atomic, etc.
 const platformBlocks = [
