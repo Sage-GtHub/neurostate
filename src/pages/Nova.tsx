@@ -401,7 +401,7 @@ export default function Nova() {
 
           {/* Quick Actions */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
-            <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 mb-6">Quick Actions</p>
+            <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground mb-6 font-mono">Quick Actions</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
                 { label: "Chat with Nova", icon: MessageSquare, route: "/nova/chat" },
@@ -414,10 +414,10 @@ export default function Nova() {
                   <button
                     key={action.label}
                     onClick={() => navigate(action.route)}
-                    className="group p-5 bg-card rounded-2xl border border-foreground/5 text-left hover:border-foreground/10 hover:shadow-lg hover:shadow-foreground/5 transition-all duration-300"
+                    className="group p-5 bg-muted/40 rounded-xl text-left hover:bg-foreground transition-all duration-300"
                   >
-                    <Icon className="w-4 h-4 text-foreground/40 mb-3 group-hover:text-foreground/60 group-hover:scale-110 transition-all" />
-                    <p className="text-[11px] font-medium text-foreground/70 group-hover:text-foreground transition-colors">{action.label}</p>
+                    <Icon className="w-4 h-4 text-accent mb-3 group-hover:scale-110 transition-all" />
+                    <p className="text-[11px] font-medium text-foreground group-hover:text-background transition-colors">{action.label}</p>
                   </button>
               );
             })}
