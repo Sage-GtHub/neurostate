@@ -68,7 +68,7 @@ function StreamingDots() {
           />
         ))}
       </div>
-      <span className="text-xs text-muted-foreground/50 ml-1.5 font-medium">Thinking</span>
+      <span className="text-xs text-muted-foreground ml-1.5 font-medium">Thinking</span>
     </div>
   );
 }
@@ -131,12 +131,12 @@ const MessageBubble = memo(({ msg, index, isLast, copiedIndex, onCopy, onRegener
             <div className="prose prose-sm max-w-none text-foreground">
               <ReactMarkdown
                 components={{
-                  p: ({ children }) => <p className="mb-3 last:mb-0 text-[15px] leading-[1.75] text-foreground/90">{children}</p>,
-                  ul: ({ children }) => <ul className="mb-3 ml-4 list-disc space-y-1.5 marker:text-accent/40">{children}</ul>,
+                  p: ({ children }) => <p className="mb-3 last:mb-0 text-[15px] leading-[1.75] text-foreground/95">{children}</p>,
+                  ul: ({ children }) => <ul className="mb-3 ml-4 list-disc space-y-1.5 marker:text-accent/50">{children}</ul>,
                   ol: ({ children }) => <ol className="mb-3 ml-4 list-decimal space-y-1.5">{children}</ol>,
-                  li: ({ children }) => <li className="text-[15px] leading-[1.65] text-foreground/85 pl-1">{children}</li>,
+                  li: ({ children }) => <li className="text-[15px] leading-[1.65] text-foreground/90 pl-1">{children}</li>,
                   strong: ({ children }) => <strong className="font-semibold text-foreground">{children}</strong>,
-                  em: ({ children }) => <em className="text-foreground/70">{children}</em>,
+                  em: ({ children }) => <em className="text-foreground/75">{children}</em>,
                   h1: ({ children }) => <h1 className="text-lg font-semibold text-foreground mt-5 mb-2">{children}</h1>,
                   h2: ({ children }) => <h2 className="text-base font-semibold text-foreground mt-4 mb-2">{children}</h2>,
                   h3: ({ children }) => <h3 className="text-[15px] font-semibold text-foreground mt-3 mb-1.5">{children}</h3>,
@@ -151,7 +151,7 @@ const MessageBubble = memo(({ msg, index, isLast, copiedIndex, onCopy, onRegener
                     );
                   },
                   blockquote: ({ children }) => (
-                    <blockquote className="border-l-2 border-accent/30 pl-4 italic text-foreground/60 my-3">{children}</blockquote>
+                    <blockquote className="border-l-2 border-accent/30 pl-4 italic text-foreground/70 my-3">{children}</blockquote>
                   ),
                   a: ({ href, children }) => (
                     <a href={href} className="text-accent hover:text-accent/80 underline underline-offset-2 decoration-accent/30 hover:decoration-accent/60 transition-colors" target="_blank" rel="noopener noreferrer">
@@ -286,7 +286,7 @@ function VoiceModeOverlay({
       >
         {isSpeaking ? "Nova is speaking" : status === "connected" ? "Listening..." : "Connecting..."}
       </motion.p>
-      <p className="text-sm text-muted-foreground/50 mb-12 max-w-xs text-center">
+      <p className="text-sm text-muted-foreground mb-12 max-w-xs text-center">
         {isSpeaking ? "Tap below to interrupt" : "Speak naturally — Nova is listening to you"}
       </p>
 
@@ -830,7 +830,7 @@ export default function NovaChat() {
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center">
               <Sparkles className="h-5 w-5 text-white animate-pulse" />
             </div>
-            <p className="text-sm text-muted-foreground/50">Loading Nova...</p>
+            <p className="text-sm text-muted-foreground">Loading Nova...</p>
           </div>
         </div>
       </div>
@@ -846,7 +846,7 @@ export default function NovaChat() {
             <Sparkles className="h-9 w-9 text-white" />
           </div>
           <h2 className="text-2xl font-semibold mb-2 tracking-tight">Sign in to use Nova</h2>
-          <p className="text-sm text-muted-foreground/50 text-center max-w-sm mb-8">
+          <p className="text-sm text-muted-foreground text-center max-w-sm mb-8">
             Nova needs access to your biometric data and protocols to provide personalised cognitive performance insights.
           </p>
           <Button onClick={() => window.location.href = '/auth'} size="lg" className="bg-accent hover:bg-accent/90 text-white rounded-full px-8 h-12">
@@ -1018,27 +1018,63 @@ export default function NovaChat() {
                 transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="flex flex-col items-center w-full max-w-lg"
               >
-                {/* Nova identity */}
+                {/* Nova breathing orb — ChatGPT-style */}
                 <div className="relative mb-8">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-accent via-accent/70 to-accent/30 flex items-center justify-center shadow-xl shadow-accent/15">
-                    <Sparkles className="h-9 w-9 text-white" />
-                  </div>
+                  {/* Outer breathing glow ring */}
                   <motion.div
-                    className="absolute -inset-3 rounded-full"
-                    animate={{ 
-                      boxShadow: [
-                        "0 0 0 0 hsl(var(--accent) / 0.1)",
-                        "0 0 0 12px hsl(var(--accent) / 0)",
-                      ] 
+                    className="absolute -inset-6 rounded-full"
+                    animate={{
+                      opacity: [0.3, 0.6, 0.3],
+                      scale: [0.9, 1.15, 0.9],
                     }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+                    transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+                    style={{
+                      background: "radial-gradient(circle, hsl(12 100% 52% / 0.2) 0%, hsl(12 100% 52% / 0.05) 50%, transparent 70%)",
+                    }}
                   />
+                  {/* Secondary pulse ring */}
+                  <motion.div
+                    className="absolute -inset-3 rounded-full border border-accent/10"
+                    animate={{
+                      scale: [1, 1.3, 1],
+                      opacity: [0.4, 0, 0.4],
+                    }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
+                  />
+                  {/* Third ripple */}
+                  <motion.div
+                    className="absolute -inset-3 rounded-full border border-accent/5"
+                    animate={{
+                      scale: [1, 1.8, 1],
+                      opacity: [0.3, 0, 0.3],
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeOut", delay: 0.5 }}
+                  />
+                  {/* Main orb */}
+                  <motion.div 
+                    className="relative w-20 h-20 rounded-full bg-gradient-to-br from-accent via-accent/80 to-accent/40 flex items-center justify-center"
+                    animate={{
+                      scale: [1, 1.06, 1],
+                      boxShadow: [
+                        "0 0 30px hsl(12 100% 52% / 0.2), 0 0 60px hsl(12 100% 52% / 0.08)",
+                        "0 0 50px hsl(12 100% 52% / 0.35), 0 0 100px hsl(12 100% 52% / 0.12)",
+                        "0 0 30px hsl(12 100% 52% / 0.2), 0 0 60px hsl(12 100% 52% / 0.08)",
+                      ],
+                    }}
+                    transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    {/* Inner highlight */}
+                    <div className="absolute inset-1 rounded-full opacity-30"
+                      style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.5) 0%, transparent 50%)" }}
+                    />
+                    <Sparkles className="h-9 w-9 text-white relative z-10" />
+                  </motion.div>
                 </div>
 
                 <h1 className="text-2xl sm:text-3xl font-semibold text-foreground mb-2 tracking-tight text-center">
                   What can I help with?
                 </h1>
-                <p className="text-sm text-muted-foreground/50 text-center mb-10 max-w-sm leading-relaxed">
+                <p className="text-sm text-muted-foreground text-center mb-10 max-w-sm leading-relaxed">
                   Your cognitive performance agent. Ask about readiness, recovery, sleep patterns, or protocol optimisation.
                 </p>
                 
@@ -1066,8 +1102,8 @@ export default function NovaChat() {
                       >
                         <Icon className="h-5 w-5 text-accent/70" />
                         <div>
-                          <p className="text-sm font-medium text-foreground/80 leading-tight">{action.label}</p>
-                          <p className="text-[11px] text-muted-foreground/40 mt-0.5">{action.description}</p>
+                        <p className="text-sm font-medium text-foreground leading-tight">{action.label}</p>
+                          <p className="text-[11px] text-muted-foreground mt-0.5">{action.description}</p>
                         </div>
                       </motion.button>
                     );
@@ -1080,7 +1116,7 @@ export default function NovaChat() {
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
                   onClick={startVoiceMode}
-                  className="flex items-center gap-2.5 text-sm text-muted-foreground/40 hover:text-accent transition-colors group"
+                  className="flex items-center gap-2.5 text-sm text-muted-foreground hover:text-accent transition-colors group"
                 >
                   <div className="w-8 h-8 rounded-full border border-border/20 flex items-center justify-center group-hover:border-accent/30 group-hover:bg-accent/5 transition-all">
                     <Phone className="h-3.5 w-3.5" />
@@ -1244,7 +1280,7 @@ export default function NovaChat() {
                   </motion.div>
                 </div>
               </motion.div>
-              <p className="text-[10px] text-muted-foreground/25 text-center mt-2 tracking-wide">
+              <p className="text-[10px] text-muted-foreground/60 text-center mt-2 tracking-wide">
                 Nova may produce inaccurate information · Not a substitute for medical advice
               </p>
             </div>

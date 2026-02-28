@@ -20,8 +20,8 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { icon: LayoutDashboard, label: 'Dashboard', path: '/nova/dashboard' },
-  { icon: MessageSquare, label: 'Chat', path: '/nova' },
+  { icon: LayoutDashboard, label: 'Home', path: '/nova' },
+  { icon: MessageSquare, label: 'Chat', path: '/nova/chat' },
   { icon: Target, label: 'Protocols', path: '/nova/protocols' },
   { icon: TrendingUp, label: 'Insights', path: '/nova/insights' },
   { icon: Watch, label: 'Devices', path: '/nova/devices' },
@@ -44,10 +44,16 @@ export const MobileBottomNav = () => {
   // Check if current path starts with nav item path
   const isActive = (path: string) => {
     if (path === '/nova') {
-      return location.pathname === '/nova' || location.pathname === '/nova/chat';
+      return location.pathname === '/nova';
+    }
+    if (path === '/nova/chat') {
+      return location.pathname === '/nova/chat';
     }
     return location.pathname.startsWith(path);
   };
+
+  // Hide on chat page — it has its own mobile header
+  if (location.pathname === '/nova/chat') return null;
 
   return (
     <motion.nav

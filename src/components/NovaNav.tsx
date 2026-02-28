@@ -45,6 +45,7 @@ const mobileNavItems = [
 
 export const NovaNav = () => {
   const location = useLocation();
+  const isChatPage = location.pathname === "/nova/chat";
   const navigate = useNavigate();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -53,6 +54,8 @@ export const NovaNav = () => {
   
   const isActive = (path: string, end?: boolean) => {
     if (end) return location.pathname === path;
+    // Exact match for /nova/chat to avoid matching /nova
+    if (path === "/nova/chat") return location.pathname === "/nova/chat";
     return location.pathname.startsWith(path);
   };
 
@@ -236,8 +239,8 @@ export const NovaNav = () => {
         </div>
       </nav>
 
-      {/* Mobile Navigation */}
-      <nav className="md:hidden fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-xl border-b border-border pt-safe">
+      {/* Mobile Navigation — hidden on chat page (chat has its own mobile header) */}
+      <nav className="hidden">{/* Mobile nav handled by MobileBottomNav or page-specific headers */}
         <div className="flex items-center justify-between px-4 py-2">
           {/* Logo */}
           <button 
@@ -371,8 +374,8 @@ export const NovaNav = () => {
         </div>
       </nav>
 
-      {/* Mobile content padding spacer */}
-      <div className="md:hidden h-14" />
+      {/* Mobile content padding spacer — hidden on chat page */}
+      <div className={cn("md:hidden h-14", isChatPage && "hidden")} />
     </>
   );
 };
