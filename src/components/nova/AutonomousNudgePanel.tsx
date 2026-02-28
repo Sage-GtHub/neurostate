@@ -60,7 +60,7 @@ export function AutonomousNudgePanel() {
   }
 
   return (
-    <Card className="border-foreground/5 overflow-hidden" role="region" aria-label="Smart Nudges">
+    <Card className="border-foreground/5 overflow-hidden">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-lg">
@@ -174,13 +174,12 @@ export function AutonomousNudgePanel() {
                               )}
                             </div>
 
-                            <div className="flex items-center gap-1" role="group" aria-label={`Actions for ${nudge.title}`}>
+                            <div className="flex items-center gap-1">
                               <Button
                                 size="sm"
                                 variant="ghost"
                                 className="h-7 w-7 p-0 text-accent hover:bg-accent/10"
                                 onClick={() => completeNudge(nudge.id)}
-                                aria-label={`Complete: ${nudge.title}`}
                               >
                                 <CheckCircle2 className="h-4 w-4" />
                               </Button>
@@ -189,7 +188,6 @@ export function AutonomousNudgePanel() {
                                 variant="ghost"
                                 className="h-7 w-7 p-0 text-muted-foreground hover:text-foreground"
                                 onClick={() => dismissNudge(nudge.id)}
-                                aria-label={`Dismiss: ${nudge.title}`}
                               >
                                 <X className="h-4 w-4" />
                               </Button>

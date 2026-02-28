@@ -54,10 +54,8 @@ export const MobileBottomNav = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-xl border-b border-border/50 pt-safe md:hidden"
-      role="navigation"
-      aria-label="Main navigation"
     >
-      <div className="flex items-center justify-around h-14 px-2" role="tablist">
+      <div className="flex items-center justify-around h-14 px-2">
         {navItems.map((item) => {
           const active = isActive(item.path);
           const Icon = item.icon;
@@ -66,13 +64,9 @@ export const MobileBottomNav = () => {
             <button
               key={item.path}
               onClick={() => handleNavigation(item.path)}
-              role="tab"
-              aria-selected={active}
-              aria-label={`Navigate to ${item.label}`}
-              tabIndex={0}
               className={cn(
                 "relative flex flex-col items-center justify-center flex-1 h-full gap-0.5 transition-all duration-200",
-                "touch-manipulation active:scale-95 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-[-2px] rounded-lg",
+                "touch-manipulation active:scale-95",
                 active ? "text-primary" : "text-muted-foreground"
               )}
             >
