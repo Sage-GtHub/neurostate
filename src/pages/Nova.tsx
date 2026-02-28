@@ -170,10 +170,10 @@ export default function Nova() {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-10 h-10 rounded-full bg-foreground/5 flex items-center justify-center">
-            <Loader2 className="w-5 h-5 animate-spin text-foreground/40" />
+          <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
+            <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" />
           </div>
-          <p className="text-[11px] text-foreground/40">Loading Nova...</p>
+          <p className="text-[11px] text-muted-foreground">Loading Nova...</p>
         </div>
       </div>
     );
@@ -196,13 +196,13 @@ export default function Nova() {
             <div className="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] rounded-full bg-primary/5 blur-3xl animate-float" style={{ animationDelay: '3s' }} />
           </div>
           
-          <div className="relative px-6 md:px-12 lg:px-20 xl:px-32 py-24 sm:py-32">
+           <div className="relative px-6 md:px-12 lg:px-20 xl:px-32 py-24 sm:py-32">
             <div className="max-w-md mx-auto text-center">
-              <div className="w-14 h-14 mx-auto mb-8 rounded-full bg-foreground/5 flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-foreground/60" />
+              <div className="w-14 h-14 mx-auto mb-8 rounded-full bg-muted flex items-center justify-center">
+                <Sparkles className="w-6 h-6 text-foreground" />
               </div>
               <h1 className="text-2xl sm:text-3xl font-medium text-foreground mb-4 tracking-tight">Welcome to Nova</h1>
-              <p className="text-foreground/50 text-sm mb-10 leading-relaxed max-w-sm mx-auto">
+              <p className="text-muted-foreground text-sm mb-10 leading-relaxed max-w-sm mx-auto">
                 Sign in to access your personal health dashboard. Track your sleep, recovery, and energy — all in one place.
               </p>
               <Button 
@@ -212,11 +212,11 @@ export default function Nova() {
                 <LogIn className="w-3.5 h-3.5" />
                 Sign In to Continue
               </Button>
-              <p className="text-[11px] text-foreground/30 mt-10">
+              <p className="text-[11px] text-muted-foreground mt-10">
                 New to NeuroState?{" "}
                 <button 
                   onClick={() => navigate('/auth')} 
-                  className="text-foreground/50 hover:text-foreground transition-colors"
+                  className="text-foreground hover:text-accent transition-colors"
                 >
                   Create an account
                 </button>
@@ -270,14 +270,14 @@ export default function Nova() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mb-16">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 mb-2">Intelligence</p>
+                <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground mb-2 font-mono">Intelligence</p>
                 <h2 className="text-lg font-medium text-foreground">AI Insights</h2>
               </div>
               <div className="flex items-center gap-2">
                 <button 
                   onClick={handleGenerateInsights}
                   disabled={insightsLoading}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full text-[11px] text-foreground/50 hover:text-foreground hover:bg-foreground/5 transition-all"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full text-[11px] text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-all"
                 >
                   {insightsLoading ? (
                     <Loader2 className="w-3 h-3 animate-spin" />
@@ -302,17 +302,17 @@ export default function Nova() {
                 return (
                   <div 
                     key={summary.id || index} 
-                    className="group p-6 bg-card rounded-3xl border border-foreground/5 hover:border-foreground/10 hover:shadow-lg hover:shadow-foreground/5 transition-all duration-300"
+                    className="group p-6 bg-card rounded-xl border border-border hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
                   >
-                    <div className="w-9 h-9 rounded-full bg-foreground/5 flex items-center justify-center mb-5">
-                      <Icon className="w-4 h-4 text-foreground/60" />
+                    <div className="w-9 h-9 rounded-full bg-muted flex items-center justify-center mb-5">
+                      <Icon className="w-4 h-4 text-foreground" />
                     </div>
                     
                     <h3 className="text-sm font-medium text-foreground mb-2">{summary.title}</h3>
-                    <p className="text-[11px] text-foreground/50 leading-relaxed mb-5">{summary.message}</p>
+                    <p className="text-[11px] text-muted-foreground leading-relaxed mb-5">{summary.message}</p>
                     
                     {summary.action && (
-                      <button 
+                      <button
                         onClick={() => {
                           if (summary.action === "Connect Device") {
                             navigate('/nova/devices');
@@ -322,7 +322,7 @@ export default function Nova() {
                             navigate('/nova/insights');
                           }
                         }}
-                        className="inline-flex items-center gap-1.5 text-[11px] text-foreground/60 hover:text-foreground transition-colors group/btn"
+                        className="inline-flex items-center gap-1.5 text-[11px] text-accent hover:text-foreground transition-colors group/btn"
                       >
                         {summary.action}
                         <ArrowUpRight className="w-3 h-3 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
@@ -344,18 +344,18 @@ export default function Nova() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="mb-16">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 mb-2">Real-time</p>
+                <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground mb-2 font-mono">Real-time</p>
                 <h2 className="text-lg font-medium text-foreground">Live Data</h2>
                 {lastSync ? (
-                  <p className="text-[10px] text-foreground/30 mt-1">Last synced: {lastSync.toLocaleTimeString()}</p>
+                  <p className="text-[11px] text-muted-foreground mt-1">Last synced: {lastSync.toLocaleTimeString()}</p>
                 ) : !hasRealData && connectedDevices.length === 0 ? (
-                  <p className="text-[10px] text-foreground/30 mt-1">Connect a device to see real data</p>
+                  <p className="text-[11px] text-muted-foreground mt-1">Connect a device to see real data</p>
                 ) : null}
               </div>
               <button 
                 onClick={handleSync}
                 disabled={isSyncing || metricsLoading || connectedDevices.length === 0}
-                className="flex items-center gap-2 px-4 py-2 rounded-full text-[11px] border border-foreground/10 text-foreground/60 hover:bg-foreground/5 hover:text-foreground transition-all disabled:opacity-40"
+                className="flex items-center gap-2 px-4 py-2 rounded-full text-[11px] border border-border text-muted-foreground hover:bg-muted/60 hover:text-foreground transition-all disabled:opacity-40"
               >
                 {isSyncing ? (
                   <Loader2 className="w-3 h-3 animate-spin" />
@@ -372,36 +372,36 @@ export default function Nova() {
                 const Icon = config.icon;
                 const hasData = metric.value !== "--";
                 
-                return (
-                  <div 
-                    key={index} 
-                    className={`p-6 bg-card rounded-3xl border border-foreground/5 hover:border-foreground/10 transition-all ${hasData ? '' : 'opacity-50'}`}
-                  >
-                    <div className="flex items-center justify-between mb-5">
-                      <div className="w-9 h-9 rounded-full bg-foreground/5 flex items-center justify-center">
-                        <Icon className="w-4 h-4 text-foreground/60" />
+                  return (
+                    <div 
+                      key={index} 
+                      className={`p-6 bg-card rounded-xl border border-border hover:border-accent/30 transition-all ${hasData ? '' : 'opacity-50'}`}
+                    >
+                      <div className="flex items-center justify-between mb-5">
+                        <div className="w-9 h-9 rounded-full bg-muted flex items-center justify-center">
+                          <Icon className="w-4 h-4 text-foreground" />
+                        </div>
+                        <span className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground font-mono">{metric.label}</span>
                       </div>
-                      <span className="text-[9px] uppercase tracking-[0.15em] text-foreground/30">{metric.label}</span>
-                    </div>
-                    
-                    <div className="text-2xl font-medium text-foreground mb-1">
-                      {metric.value}
-                    </div>
-                    
-                    {metric.trend && (
-                      <div className={`text-[10px] ${metric.trendColor === 'green' ? 'text-signal-green' : metric.trendColor === 'red' ? 'text-destructive' : 'text-foreground/40'}`}>
-                        {metric.trend}
+                      
+                      <div className="text-2xl font-medium text-foreground mb-1">
+                        {metric.value}
                       </div>
-                    )}
-                  </div>
-                );
+                      
+                      {metric.trend && (
+                        <div className={`text-[11px] ${metric.trendColor === 'green' ? 'text-signal-green' : metric.trendColor === 'red' ? 'text-destructive' : 'text-muted-foreground'}`}>
+                          {metric.trend}
+                        </div>
+                      )}
+                    </div>
+                  );
               })}
             </div>
           </motion.div>
 
           {/* Quick Actions */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
-            <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 mb-6">Quick Actions</p>
+            <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground mb-6 font-mono">Quick Actions</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
                 { label: "Chat with Nova", icon: MessageSquare, route: "/nova/chat" },
@@ -414,10 +414,10 @@ export default function Nova() {
                   <button
                     key={action.label}
                     onClick={() => navigate(action.route)}
-                    className="group p-5 bg-card rounded-2xl border border-foreground/5 text-left hover:border-foreground/10 hover:shadow-lg hover:shadow-foreground/5 transition-all duration-300"
+                    className="group p-5 bg-muted/40 rounded-xl text-left hover:bg-foreground transition-all duration-300"
                   >
-                    <Icon className="w-4 h-4 text-foreground/40 mb-3 group-hover:text-foreground/60 group-hover:scale-110 transition-all" />
-                    <p className="text-[11px] font-medium text-foreground/70 group-hover:text-foreground transition-colors">{action.label}</p>
+                    <Icon className="w-4 h-4 text-accent mb-3 group-hover:scale-110 transition-all" />
+                    <p className="text-[11px] font-medium text-foreground group-hover:text-background transition-colors">{action.label}</p>
                   </button>
               );
             })}
