@@ -10,7 +10,7 @@ import { RefreshCw, Plus, Loader2, Check, WifiOff, AlertCircle, Unplug } from "l
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { SEO } from "@/components/SEO";
-
+import { motion } from "framer-motion";
 
 interface Device { id: string; device_type: string; device_name: string; connection_status: string; last_sync_at: string | null; battery_level: number | null; }
 interface VitalProvider { name: string; slug: string; status: string; connected_at?: string; }
@@ -72,7 +72,6 @@ export default function NovaDevices() {
       } else {
         const errorData = await response.json().catch(() => ({}));
         if (response.status === 500 && errorData.error?.includes('API key')) {
-          // Don't show error for unconfigured API - just show empty state
           console.log("Vital API not configured - showing empty state");
         } else {
           throw new Error(errorData.error || 'Failed to load connected devices');
@@ -120,70 +119,48 @@ export default function NovaDevices() {
       
       const data = await response.json();
       if (data.link_url) {
-        // Open OAuth window
         const popup = window.open(data.link_url, 'vital-connect', 'width=600,height=700,scrollbars=yes');
         
-        toast({ 
-          title: "Connection started", 
-          description: "Complete authorisation in the popup window, then return here." 
-        });
+        toast({ title: "Connection started", description: "Complete authorisation in the popup window, then return here." });
         
-        // Poll for connection status
         let pollCount = 0;
-        const maxPolls = 40; // 2 minutes max
+        const maxPolls = 40;
         const pollInterval = setInterval(async () => {
           pollCount++;
-          
           if (pollCount >= maxPolls || !popup || popup.closed) {
             clearInterval(pollInterval);
             setConnectingDevice(null);
-            
-            // Final check
             await loadVitalProviders();
             await loadDevices();
             return;
           }
-          
           try {
             const providersRes = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/vital-connect`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.access_token}` },
               body: JSON.stringify({ action: 'get-providers' }),
             });
-            
             if (providersRes.ok) {
               const providersData = await providersRes.json();
               const connectedProviders = providersData.providers?.filter((p: any) => p.status === 'connected').map((p: any) => p.slug) || [];
-              
               if (connectedProviders.includes(deviceType)) {
                 clearInterval(pollInterval);
                 setConnectingDevice(null);
                 await loadVitalProviders();
                 await loadDevices();
                 await loadDataStats();
-                
                 const device = DEVICE_CATALOG.find(d => d.type === deviceType);
-                toast({ 
-                  title: "Device connected!", 
-                  description: `${device?.name} has been successfully connected.` 
-                });
+                toast({ title: "Device connected!", description: `${device?.name} has been successfully connected.` });
               }
             }
-          } catch (e) {
-            console.error("Polling error:", e);
-          }
+          } catch (e) { console.error("Polling error:", e); }
         }, 3000);
       }
     } catch (err) { 
       console.error("Connection error:", err);
       setConnectingDevice(null);
-      toast({ 
-        title: "Connection failed", 
-        description: err instanceof Error ? err.message : "Please try again",
-        variant: "destructive" 
-      }); 
+      toast({ title: "Connection failed", description: err instanceof Error ? err.message : "Please try again", variant: "destructive" }); 
     }
-    // Note: do NOT clear connectingDevice in finally — polling handles it
   };
 
   const handleDisconnect = async (deviceType: string, deviceName: string) => {
@@ -240,6 +217,9 @@ export default function NovaDevices() {
   const connectedDevices = DEVICE_CATALOG.filter(d => connectedDeviceTypes.includes(d.type));
   const availableDevices = DEVICE_CATALOG.filter(d => !connectedDeviceTypes.includes(d.type));
 
+  const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
+  const fadeUp = { hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] } } };
+
   return (
     <NovaSwipeWrapper>
       <SEO title="Connect Wearables | Oura, Whoop, Garmin & More | Nova AI" description="Link your Oura Ring, WHOOP, Garmin, Apple Watch, Fitbit, and 40+ wearables to Nova for automatic health data syncing and cognitive insights." noindex={true} />
@@ -250,12 +230,17 @@ export default function NovaDevices() {
 
         <NovaNav />
         
-        <div className="relative container mx-auto px-6 md:px-12 lg:px-20 xl:px-32 py-12">
+        <motion.div 
+          className="relative container mx-auto px-6 md:px-12 lg:px-20 xl:px-32 py-12"
+          variants={stagger}
+          initial="hidden"
+          animate="show"
+        >
           
           {/* Header */}
-          <div className="text-center mb-12">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/40 mb-2">Connected</p>
-            <h1 className="text-2xl font-light text-foreground mb-6">Devices</h1>
+          <motion.div variants={fadeUp} className="text-center mb-12">
+            <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground mb-2 font-mono">Connected</p>
+            <h1 className="text-2xl font-medium text-foreground mb-6 tracking-tight">Devices</h1>
             
             {/* Stats */}
             <div className="flex items-center justify-center gap-8">
@@ -265,18 +250,18 @@ export default function NovaDevices() {
                 { value: dataStats.syncs, label: "Syncs", accent: true },
               ].map((stat, i) => (
                 <div key={i} className="text-center">
-                  <div className={`text-2xl font-light ${stat.accent ? 'text-accent' : 'text-foreground'}`}>{stat.value}</div>
-                  <div className="text-[10px] text-foreground/40">{stat.label}</div>
+                  <div className={`text-2xl font-medium ${stat.accent ? 'text-accent' : 'text-foreground'}`}>{stat.value}</div>
+                  <div className="text-[11px] text-muted-foreground font-mono">{stat.label}</div>
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {isLoading && (
-            <div className="space-y-4">
-              <div className="w-20 h-3 rounded-full bg-foreground/5 skeleton-shimmer mb-4" />
+            <motion.div variants={fadeUp} className="space-y-4">
+              <div className="w-20 h-3 rounded-full bg-muted skeleton-shimmer mb-4" />
               <NovaSkeleton variant="list" />
-            </div>
+            </motion.div>
           )}
 
           {/* Error State */}
@@ -290,21 +275,21 @@ export default function NovaDevices() {
 
           {/* Connected Devices */}
           {!isLoading && connectedDevices.length > 0 && (
-            <div className="mb-8">
-              <p className="text-[10px] uppercase tracking-[0.15em] text-foreground/40 mb-4">Connected</p>
+            <motion.div variants={fadeUp} className="mb-8">
+              <p className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground mb-4 font-mono">Connected</p>
               <div className="space-y-2">
                 {connectedDevices.map((device) => {
                   const localDevice = devices.find(d => d.device_type === device.type);
                   const vitalProvider = vitalProviders.find(p => p.slug === device.type);
                   
                   return (
-                    <div key={device.type} className="flex items-center gap-4 p-5 rounded-3xl bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-colors">
+                    <div key={device.type} className="flex items-center gap-4 p-5 rounded-xl bg-muted/40 hover:bg-muted/60 transition-colors">
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-0.5">
-                          <h3 className="text-xs font-medium text-foreground">{device.name}</h3>
+                          <h3 className="text-sm font-medium text-foreground">{device.name}</h3>
                           <div className="w-1.5 h-1.5 rounded-full bg-accent" />
                         </div>
-                        <p className="text-[10px] text-foreground/40">
+                        <p className="text-[11px] text-muted-foreground">
                           {getTimeSince(localDevice?.last_sync_at || vitalProvider?.connected_at || null)} · {device.metrics.join(' · ')}
                         </p>
                       </div>
@@ -313,19 +298,19 @@ export default function NovaDevices() {
                         <button
                           onClick={() => handleSync(device.type)}
                           disabled={syncingDevice === device.type}
-                          className="w-9 h-9 rounded-full bg-foreground/[0.02] flex items-center justify-center hover:bg-foreground/[0.05] transition-colors disabled:opacity-50"
+                          className="w-9 h-9 rounded-full bg-muted/60 flex items-center justify-center hover:bg-muted transition-colors disabled:opacity-50"
                         >
-                          <RefreshCw className={`w-3.5 h-3.5 text-foreground/50 ${syncingDevice === device.type ? 'animate-spin' : ''}`} />
+                          <RefreshCw className={`w-3.5 h-3.5 text-muted-foreground ${syncingDevice === device.type ? 'animate-spin' : ''}`} />
                         </button>
                         <button
                           onClick={() => handleDisconnect(device.type, device.name)}
                           disabled={disconnectingDevice === device.type}
-                          className="w-9 h-9 rounded-full bg-foreground/[0.02] flex items-center justify-center hover:bg-destructive/10 transition-colors disabled:opacity-50 group"
+                          className="w-9 h-9 rounded-full bg-muted/60 flex items-center justify-center hover:bg-destructive/10 transition-colors disabled:opacity-50 group"
                         >
                           {disconnectingDevice === device.type ? (
-                            <Loader2 className="w-3.5 h-3.5 animate-spin text-foreground/50" />
+                            <Loader2 className="w-3.5 h-3.5 animate-spin text-muted-foreground" />
                           ) : (
-                            <Unplug className="w-3.5 h-3.5 text-foreground/30 group-hover:text-destructive transition-colors" />
+                            <Unplug className="w-3.5 h-3.5 text-muted-foreground group-hover:text-destructive transition-colors" />
                           )}
                         </button>
                       </div>
@@ -333,13 +318,13 @@ export default function NovaDevices() {
                   );
                 })}
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* Available Devices */}
           {!isLoading && (
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.15em] text-foreground/40 mb-4">Add Device</p>
+            <motion.div variants={fadeUp}>
+              <p className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground mb-4 font-mono">Add Device</p>
               <div className="space-y-2">
                 {availableDevices.map((device) => {
                   const isSupported = VITAL_SUPPORTED.includes(device.type);
@@ -349,13 +334,13 @@ export default function NovaDevices() {
                       key={device.type}
                       onClick={() => handleConnect(device.type, device.name)}
                       disabled={connectingDevice === device.type || !isSupported}
-                      className={`w-full flex items-center gap-4 p-5 rounded-3xl transition-all ${
-                        isSupported ? 'bg-foreground/[0.02] hover:bg-foreground/[0.04]' : 'bg-foreground/[0.01] opacity-50'
+                      className={`w-full flex items-center gap-4 p-5 rounded-xl transition-all ${
+                        isSupported ? 'bg-muted/40 hover:bg-muted/60' : 'bg-muted/20 opacity-50'
                       }`}
                     >
                       <div className="flex-1 text-left">
-                        <h3 className="text-xs font-medium text-foreground mb-0.5">{device.name}</h3>
-                        <p className="text-[10px] text-foreground/40">{isSupported ? device.metrics.join(' · ') : 'Coming soon'}</p>
+                        <h3 className="text-sm font-medium text-foreground mb-0.5">{device.name}</h3>
+                        <p className="text-[11px] text-muted-foreground">{isSupported ? device.metrics.join(' · ') : 'Coming soon'}</p>
                       </div>
 
                       {connectingDevice === device.type ? (
@@ -363,27 +348,26 @@ export default function NovaDevices() {
                       ) : isSupported ? (
                         <Plus className="w-4 h-4 text-accent" />
                       ) : (
-                        <WifiOff className="w-3.5 h-3.5 text-foreground/30" />
+                        <WifiOff className="w-3.5 h-3.5 text-muted-foreground" />
                       )}
                     </button>
                   );
                 })}
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* Privacy Footer */}
-          <div className="mt-12 pt-8 border-t border-foreground/5">
-            <div className="flex items-center justify-center gap-6 text-[10px] text-foreground/30">
-              {["Encrypted", "GDPR Compliant", "Your Data"].map((item, i) => (
-                <div key={i} className="flex items-center gap-1.5">
-                  <Check className="w-3 h-3 text-accent" />
-                  <span>{item}</span>
-                </div>
-              ))}
+          <motion.div variants={fadeUp} className="mt-12 pt-8 border-t border-border">
+            <div className="flex items-center justify-center gap-6 text-[11px] text-muted-foreground">
+              <span>End-to-end encrypted</span>
+              <span>·</span>
+              <span>GDPR compliant</span>
+              <span>·</span>
+              <span>Your data stays yours</span>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
         
         <FloatingNovaChat />
       </div>
