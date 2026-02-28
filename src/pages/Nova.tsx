@@ -302,14 +302,14 @@ export default function Nova() {
                 return (
                   <div 
                     key={summary.id || index} 
-                    className="group p-6 bg-card rounded-3xl border border-foreground/5 hover:border-foreground/10 hover:shadow-lg hover:shadow-foreground/5 transition-all duration-300"
+                    className="group p-6 bg-card rounded-xl border border-border hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
                   >
-                    <div className="w-9 h-9 rounded-full bg-foreground/5 flex items-center justify-center mb-5">
-                      <Icon className="w-4 h-4 text-foreground/60" />
+                    <div className="w-9 h-9 rounded-full bg-muted flex items-center justify-center mb-5">
+                      <Icon className="w-4 h-4 text-foreground" />
                     </div>
                     
                     <h3 className="text-sm font-medium text-foreground mb-2">{summary.title}</h3>
-                    <p className="text-[11px] text-foreground/50 leading-relaxed mb-5">{summary.message}</p>
+                    <p className="text-[11px] text-muted-foreground leading-relaxed mb-5">{summary.message}</p>
                     
                     {summary.action && (
                       <button 
