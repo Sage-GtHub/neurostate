@@ -1162,13 +1162,17 @@ export default function NovaChat() {
           </AnimatePresence>
 
           {/* ─── Input Area ─── */}
-          <div className="border-t border-border/8">
+          <div className="border-t border-border/8 bg-background/95 backdrop-blur-xl">
             <div className="max-w-2xl mx-auto p-3 sm:p-4 pb-safe">
-              <div className={cn(
-                "flex items-end gap-2 rounded-2xl border transition-all duration-300",
-                "bg-muted/15 border-border/15",
-                "focus-within:border-accent/25 focus-within:bg-muted/25 focus-within:shadow-lg focus-within:shadow-accent/[0.03]"
-              )}>
+              <motion.div 
+                className={cn(
+                  "flex items-end gap-2 rounded-2xl border transition-all duration-300",
+                  "bg-muted/15 border-border/15",
+                  "focus-within:border-accent/25 focus-within:bg-muted/25 focus-within:shadow-lg focus-within:shadow-accent/[0.04]"
+                )}
+                layout
+                transition={{ type: "spring", stiffness: 500, damping: 35 }}
+              >
                 <textarea
                   ref={textareaRef}
                   value={message}
@@ -1179,7 +1183,7 @@ export default function NovaChat() {
                   disabled={isLoading && !streamingContent}
                   className={cn(
                     "flex-1 resize-none bg-transparent border-0 focus:ring-0 focus:outline-none",
-                    "text-base sm:text-[15px] text-foreground placeholder:text-muted-foreground/30",
+                    "text-[16px] sm:text-[15px] text-foreground placeholder:text-muted-foreground/30",
                     "py-3.5 px-4 min-h-[52px] max-h-[160px]",
                     isListening && "placeholder:text-accent/50"
                   )}
@@ -1187,56 +1191,60 @@ export default function NovaChat() {
                 />
                 <div className="flex items-center gap-1 pr-2.5 pb-2.5">
                   {/* Mic button */}
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    onClick={toggleListening}
-                    disabled={isLoading}
-                    className={cn(
-                      "h-9 w-9 rounded-xl transition-all touch-manipulation",
-                      isListening 
-                        ? "bg-accent/15 text-accent" 
-                        : "text-muted-foreground/30 hover:text-foreground hover:bg-muted/30"
-                    )}
-                  >
-                    {isListening ? (
-                      <motion.div animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 1, repeat: Infinity }}>
-                        <MicOff className="h-4 w-4" />
-                      </motion.div>
-                    ) : (
-                      <Mic className="h-4 w-4" />
-                    )}
-                  </Button>
-
-                  {/* Send / Stop button */}
-                  {isLoading ? (
+                  <motion.div whileTap={{ scale: 0.85 }} transition={{ type: "spring", stiffness: 400, damping: 15 }}>
                     <Button
-                      onClick={stopGeneration}
+                      type="button"
+                      variant="ghost"
                       size="icon"
-                      className="h-9 w-9 rounded-xl bg-foreground/10 hover:bg-foreground/20 text-foreground transition-all touch-manipulation"
-                      title="Stop generating"
-                    >
-                      <Square className="h-3.5 w-3.5 fill-current" />
-                    </Button>
-                  ) : (
-                    <Button
-                      onClick={() => handleSend()}
-                      disabled={!message.trim()}
-                      size="icon"
+                      onClick={toggleListening}
+                      disabled={isLoading}
                       className={cn(
-                        "h-9 w-9 rounded-xl flex-shrink-0 transition-all duration-200 touch-manipulation",
-                        message.trim()
-                          ? "bg-accent hover:bg-accent/90 text-white shadow-sm shadow-accent/20"
-                          : "bg-muted/20 text-muted-foreground/20 cursor-not-allowed"
+                        "h-10 w-10 rounded-xl transition-all touch-manipulation",
+                        isListening 
+                          ? "bg-accent/15 text-accent" 
+                          : "text-muted-foreground/30 hover:text-foreground hover:bg-muted/30"
                       )}
                     >
-                      <ArrowUp className="h-4 w-4" />
+                      {isListening ? (
+                        <motion.div animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 1, repeat: Infinity }}>
+                          <MicOff className="h-4.5 w-4.5" />
+                        </motion.div>
+                      ) : (
+                        <Mic className="h-4.5 w-4.5" />
+                      )}
                     </Button>
-                  )}
+                  </motion.div>
+
+                  {/* Send / Stop button */}
+                  <motion.div whileTap={{ scale: 0.85 }} transition={{ type: "spring", stiffness: 400, damping: 15 }}>
+                    {isLoading ? (
+                      <Button
+                        onClick={stopGeneration}
+                        size="icon"
+                        className="h-10 w-10 rounded-xl bg-foreground/10 hover:bg-foreground/20 text-foreground transition-all touch-manipulation"
+                        title="Stop generating"
+                      >
+                        <Square className="h-3.5 w-3.5 fill-current" />
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => handleSend()}
+                        disabled={!message.trim()}
+                        size="icon"
+                        className={cn(
+                          "h-10 w-10 rounded-xl flex-shrink-0 transition-all duration-200 touch-manipulation",
+                          message.trim()
+                            ? "bg-accent hover:bg-accent/90 text-white shadow-sm shadow-accent/20"
+                            : "bg-muted/20 text-muted-foreground/20 cursor-not-allowed"
+                        )}
+                      >
+                        <ArrowUp className="h-4.5 w-4.5" />
+                      </Button>
+                    )}
+                  </motion.div>
                 </div>
-              </div>
-              <p className="text-[10px] text-muted-foreground/25 text-center mt-2.5 tracking-wide">
+              </motion.div>
+              <p className="text-[10px] text-muted-foreground/25 text-center mt-2 tracking-wide">
                 Nova may produce inaccurate information · Not a substitute for medical advice
               </p>
             </div>
