@@ -363,10 +363,6 @@ export default function NovaDevices() {
                         isSupported ? 'bg-foreground/[0.02] hover:bg-foreground/[0.04]' : 'bg-foreground/[0.01] opacity-50'
                       }`}
                     >
-                      <div className="w-10 h-10 rounded-2xl bg-foreground/[0.02] flex items-center justify-center p-2 flex-shrink-0">
-                        <img src={device.logo} alt={device.name} className="w-full h-full object-contain opacity-70" />
-                      </div>
-                      
                       <div className="flex-1 text-left">
                         <h3 className="text-xs font-medium text-foreground mb-0.5">{device.name}</h3>
                         <p className="text-[10px] text-foreground/40">{isSupported ? device.metrics.join(' · ') : 'Coming soon'}</p>
