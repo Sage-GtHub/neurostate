@@ -846,7 +846,7 @@ export default function NovaChat() {
             <Sparkles className="h-9 w-9 text-white" />
           </div>
           <h2 className="text-2xl font-semibold mb-2 tracking-tight">Sign in to use Nova</h2>
-          <p className="text-sm text-muted-foreground/50 text-center max-w-sm mb-8">
+          <p className="text-sm text-muted-foreground text-center max-w-sm mb-8">
             Nova needs access to your biometric data and protocols to provide personalised cognitive performance insights.
           </p>
           <Button onClick={() => window.location.href = '/auth'} size="lg" className="bg-accent hover:bg-accent/90 text-white rounded-full px-8 h-12">
