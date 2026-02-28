@@ -270,7 +270,7 @@ export default function Nova() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mb-16">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 mb-2">Intelligence</p>
+                <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground mb-2 font-mono">Intelligence</p>
                 <h2 className="text-lg font-medium text-foreground">AI Insights</h2>
               </div>
               <div className="flex items-center gap-2">
