@@ -830,7 +830,7 @@ export default function NovaChat() {
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center">
               <Sparkles className="h-5 w-5 text-white animate-pulse" />
             </div>
-            <p className="text-sm text-muted-foreground/50">Loading Nova...</p>
+            <p className="text-sm text-muted-foreground">Loading Nova...</p>
           </div>
         </div>
       </div>

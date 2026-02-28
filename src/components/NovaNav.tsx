@@ -53,6 +53,8 @@ export const NovaNav = () => {
   
   const isActive = (path: string, end?: boolean) => {
     if (end) return location.pathname === path;
+    // Exact match for /nova/chat to avoid matching /nova
+    if (path === "/nova/chat") return location.pathname === "/nova/chat";
     return location.pathname.startsWith(path);
   };
 
