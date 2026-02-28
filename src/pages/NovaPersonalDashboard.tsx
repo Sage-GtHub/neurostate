@@ -156,6 +156,9 @@ export default function NovaPersonalDashboard() {
             </div>
           </motion.div>
 
+          {/* Morning Briefing */}
+          <MorningBriefing />
+
           {/* Readiness + Biometric Cards */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
