@@ -131,10 +131,10 @@ const MessageBubble = memo(({ msg, index, isLast, copiedIndex, onCopy, onRegener
             <div className="prose prose-sm max-w-none text-foreground">
               <ReactMarkdown
                 components={{
-                  p: ({ children }) => <p className="mb-3 last:mb-0 text-[15px] leading-[1.75] text-foreground/90">{children}</p>,
-                  ul: ({ children }) => <ul className="mb-3 ml-4 list-disc space-y-1.5 marker:text-accent/40">{children}</ul>,
+                  p: ({ children }) => <p className="mb-3 last:mb-0 text-[15px] leading-[1.75] text-foreground/95">{children}</p>,
+                  ul: ({ children }) => <ul className="mb-3 ml-4 list-disc space-y-1.5 marker:text-accent/50">{children}</ul>,
                   ol: ({ children }) => <ol className="mb-3 ml-4 list-decimal space-y-1.5">{children}</ol>,
-                  li: ({ children }) => <li className="text-[15px] leading-[1.65] text-foreground/85 pl-1">{children}</li>,
+                  li: ({ children }) => <li className="text-[15px] leading-[1.65] text-foreground/90 pl-1">{children}</li>,
                   strong: ({ children }) => <strong className="font-semibold text-foreground">{children}</strong>,
                   em: ({ children }) => <em className="text-foreground/70">{children}</em>,
                   h1: ({ children }) => <h1 className="text-lg font-semibold text-foreground mt-5 mb-2">{children}</h1>,
