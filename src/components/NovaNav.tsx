@@ -240,7 +240,7 @@ export const NovaNav = () => {
       </nav>
 
       {/* Mobile Navigation — hidden on chat page (chat has its own mobile header) */}
-      <nav className={cn("md:hidden fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-xl border-b border-border pt-safe", isChatPage && "hidden")}>
+      <nav className="hidden">{/* Mobile nav handled by MobileBottomNav or page-specific headers */}
         <div className="flex items-center justify-between px-4 py-2">
           {/* Logo */}
           <button 
