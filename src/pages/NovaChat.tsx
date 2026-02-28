@@ -1280,7 +1280,7 @@ export default function NovaChat() {
                   </motion.div>
                 </div>
               </motion.div>
-              <p className="text-[10px] text-muted-foreground/25 text-center mt-2 tracking-wide">
+              <p className="text-[10px] text-muted-foreground/60 text-center mt-2 tracking-wide">
                 Nova may produce inaccurate information · Not a substitute for medical advice
               </p>
             </div>
