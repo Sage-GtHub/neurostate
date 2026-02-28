@@ -286,7 +286,7 @@ function VoiceModeOverlay({
       >
         {isSpeaking ? "Nova is speaking" : status === "connected" ? "Listening..." : "Connecting..."}
       </motion.p>
-      <p className="text-sm text-muted-foreground/50 mb-12 max-w-xs text-center">
+      <p className="text-sm text-muted-foreground mb-12 max-w-xs text-center">
         {isSpeaking ? "Tap below to interrupt" : "Speak naturally — Nova is listening to you"}
       </p>
 
