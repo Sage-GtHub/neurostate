@@ -151,7 +151,7 @@ const MessageBubble = memo(({ msg, index, isLast, copiedIndex, onCopy, onRegener
                     );
                   },
                   blockquote: ({ children }) => (
-                    <blockquote className="border-l-2 border-accent/30 pl-4 italic text-foreground/60 my-3">{children}</blockquote>
+                    <blockquote className="border-l-2 border-accent/30 pl-4 italic text-foreground/70 my-3">{children}</blockquote>
                   ),
                   a: ({ href, children }) => (
                     <a href={href} className="text-accent hover:text-accent/80 underline underline-offset-2 decoration-accent/30 hover:decoration-accent/60 transition-colors" target="_blank" rel="noopener noreferrer">
