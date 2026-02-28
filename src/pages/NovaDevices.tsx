@@ -11,31 +11,21 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { SEO } from "@/components/SEO";
 
-import ouraLogo from "@/assets/wearables/oura-logo.png";
-import whoopLogo from "@/assets/wearables/whoop-logo.png";
-import fitbitLogo from "@/assets/wearables/fitbit-logo.png";
-import garminLogo from "@/assets/wearables/garmin-logo.png";
-import appleHealthLogo from "@/assets/wearables/apple-health-logo.png";
-import withingsLogo from "@/assets/wearables/withings-logo.png";
-import polarLogo from "@/assets/wearables/polar-logo.png";
-import samsungLogo from "@/assets/wearables/samsung-logo.png";
-import corosLogo from "@/assets/wearables/coros-logo.png";
-import amazfitLogo from "@/assets/wearables/amazfit-logo.png";
 
 interface Device { id: string; device_type: string; device_name: string; connection_status: string; last_sync_at: string | null; battery_level: number | null; }
 interface VitalProvider { name: string; slug: string; status: string; connected_at?: string; }
 
 const DEVICE_CATALOG = [
-  { type: 'oura', name: 'Oura Ring', logo: ouraLogo, metrics: ['Sleep', 'HRV', 'Recovery'] },
-  { type: 'whoop', name: 'WHOOP', logo: whoopLogo, metrics: ['Strain', 'Recovery', 'Sleep'] },
-  { type: 'fitbit', name: 'Fitbit', logo: fitbitLogo, metrics: ['Steps', 'Sleep', 'HR'] },
-  { type: 'garmin', name: 'Garmin', logo: garminLogo, metrics: ['Training', 'Sleep', 'Stress'] },
-  { type: 'apple_health', name: 'Apple Health', logo: appleHealthLogo, metrics: ['Steps', 'HR', 'Sleep'] },
-  { type: 'withings', name: 'Withings', logo: withingsLogo, metrics: ['Weight', 'Sleep', 'ECG'] },
-  { type: 'polar', name: 'Polar', logo: polarLogo, metrics: ['HR', 'Training', 'Recovery'] },
-  { type: 'samsung', name: 'Samsung Health', logo: samsungLogo, metrics: ['Steps', 'Sleep', 'Stress'] },
-  { type: 'coros', name: 'COROS', logo: corosLogo, metrics: ['Training', 'Recovery', 'HRV'] },
-  { type: 'amazfit', name: 'Amazfit', logo: amazfitLogo, metrics: ['Steps', 'Sleep', 'SpO2'] },
+  { type: 'oura', name: 'Oura Ring', metrics: ['Sleep', 'HRV', 'Recovery'] },
+  { type: 'whoop', name: 'WHOOP', metrics: ['Strain', 'Recovery', 'Sleep'] },
+  { type: 'fitbit', name: 'Fitbit', metrics: ['Steps', 'Sleep', 'HR'] },
+  { type: 'garmin', name: 'Garmin', metrics: ['Training', 'Sleep', 'Stress'] },
+  { type: 'apple_health', name: 'Apple Health', metrics: ['Steps', 'HR', 'Sleep'] },
+  { type: 'withings', name: 'Withings', metrics: ['Weight', 'Sleep', 'ECG'] },
+  { type: 'polar', name: 'Polar', metrics: ['HR', 'Training', 'Recovery'] },
+  { type: 'samsung', name: 'Samsung Health', metrics: ['Steps', 'Sleep', 'Stress'] },
+  { type: 'coros', name: 'COROS', metrics: ['Training', 'Recovery', 'HRV'] },
+  { type: 'amazfit', name: 'Amazfit', metrics: ['Steps', 'Sleep', 'SpO2'] },
 ];
 
 const VITAL_SUPPORTED = ['oura', 'whoop', 'fitbit', 'garmin'];
@@ -309,10 +299,6 @@ export default function NovaDevices() {
                   
                   return (
                     <div key={device.type} className="flex items-center gap-4 p-5 rounded-3xl bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-colors">
-                      <div className="w-10 h-10 rounded-2xl bg-foreground/[0.02] flex items-center justify-center p-2 flex-shrink-0">
-                        <img src={device.logo} alt={device.name} className="w-full h-full object-contain" />
-                      </div>
-                      
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-0.5">
                           <h3 className="text-xs font-medium text-foreground">{device.name}</h3>
@@ -367,10 +353,6 @@ export default function NovaDevices() {
                         isSupported ? 'bg-foreground/[0.02] hover:bg-foreground/[0.04]' : 'bg-foreground/[0.01] opacity-50'
                       }`}
                     >
-                      <div className="w-10 h-10 rounded-2xl bg-foreground/[0.02] flex items-center justify-center p-2 flex-shrink-0">
-                        <img src={device.logo} alt={device.name} className="w-full h-full object-contain opacity-70" />
-                      </div>
-                      
                       <div className="flex-1 text-left">
                         <h3 className="text-xs font-medium text-foreground mb-0.5">{device.name}</h3>
                         <p className="text-[10px] text-foreground/40">{isSupported ? device.metrics.join(' · ') : 'Coming soon'}</p>
