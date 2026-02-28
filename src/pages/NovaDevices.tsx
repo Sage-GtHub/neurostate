@@ -16,16 +16,16 @@ interface Device { id: string; device_type: string; device_name: string; connect
 interface VitalProvider { name: string; slug: string; status: string; connected_at?: string; }
 
 const DEVICE_CATALOG = [
-  { type: 'oura', name: 'Oura Ring', logo: ouraLogo, metrics: ['Sleep', 'HRV', 'Recovery'] },
-  { type: 'whoop', name: 'WHOOP', logo: whoopLogo, metrics: ['Strain', 'Recovery', 'Sleep'] },
-  { type: 'fitbit', name: 'Fitbit', logo: fitbitLogo, metrics: ['Steps', 'Sleep', 'HR'] },
-  { type: 'garmin', name: 'Garmin', logo: garminLogo, metrics: ['Training', 'Sleep', 'Stress'] },
-  { type: 'apple_health', name: 'Apple Health', logo: appleHealthLogo, metrics: ['Steps', 'HR', 'Sleep'] },
-  { type: 'withings', name: 'Withings', logo: withingsLogo, metrics: ['Weight', 'Sleep', 'ECG'] },
-  { type: 'polar', name: 'Polar', logo: polarLogo, metrics: ['HR', 'Training', 'Recovery'] },
-  { type: 'samsung', name: 'Samsung Health', logo: samsungLogo, metrics: ['Steps', 'Sleep', 'Stress'] },
-  { type: 'coros', name: 'COROS', logo: corosLogo, metrics: ['Training', 'Recovery', 'HRV'] },
-  { type: 'amazfit', name: 'Amazfit', logo: amazfitLogo, metrics: ['Steps', 'Sleep', 'SpO2'] },
+  { type: 'oura', name: 'Oura Ring', metrics: ['Sleep', 'HRV', 'Recovery'] },
+  { type: 'whoop', name: 'WHOOP', metrics: ['Strain', 'Recovery', 'Sleep'] },
+  { type: 'fitbit', name: 'Fitbit', metrics: ['Steps', 'Sleep', 'HR'] },
+  { type: 'garmin', name: 'Garmin', metrics: ['Training', 'Sleep', 'Stress'] },
+  { type: 'apple_health', name: 'Apple Health', metrics: ['Steps', 'HR', 'Sleep'] },
+  { type: 'withings', name: 'Withings', metrics: ['Weight', 'Sleep', 'ECG'] },
+  { type: 'polar', name: 'Polar', metrics: ['HR', 'Training', 'Recovery'] },
+  { type: 'samsung', name: 'Samsung Health', metrics: ['Steps', 'Sleep', 'Stress'] },
+  { type: 'coros', name: 'COROS', metrics: ['Training', 'Recovery', 'HRV'] },
+  { type: 'amazfit', name: 'Amazfit', metrics: ['Steps', 'Sleep', 'SpO2'] },
 ];
 
 const VITAL_SUPPORTED = ['oura', 'whoop', 'fitbit', 'garmin'];
