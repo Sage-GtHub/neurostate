@@ -20,8 +20,8 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { icon: LayoutDashboard, label: 'Dashboard', path: '/nova/dashboard' },
-  { icon: MessageSquare, label: 'Chat', path: '/nova' },
+  { icon: LayoutDashboard, label: 'Home', path: '/nova' },
+  { icon: MessageSquare, label: 'Chat', path: '/nova/chat' },
   { icon: Target, label: 'Protocols', path: '/nova/protocols' },
   { icon: TrendingUp, label: 'Insights', path: '/nova/insights' },
   { icon: Watch, label: 'Devices', path: '/nova/devices' },
