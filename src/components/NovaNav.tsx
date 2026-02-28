@@ -45,6 +45,7 @@ const mobileNavItems = [
 
 export const NovaNav = () => {
   const location = useLocation();
+  const isChatPage = location.pathname === "/nova/chat";
   const navigate = useNavigate();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
