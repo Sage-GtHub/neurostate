@@ -11,16 +11,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { SEO } from "@/components/SEO";
 
-import ouraLogo from "@/assets/wearables/oura-logo.png";
-import whoopLogo from "@/assets/wearables/whoop-logo.png";
-import fitbitLogo from "@/assets/wearables/fitbit-logo.png";
-import garminLogo from "@/assets/wearables/garmin-logo.png";
-import appleHealthLogo from "@/assets/wearables/apple-health-logo.png";
-import withingsLogo from "@/assets/wearables/withings-logo.png";
-import polarLogo from "@/assets/wearables/polar-logo.png";
-import samsungLogo from "@/assets/wearables/samsung-logo.png";
-import corosLogo from "@/assets/wearables/coros-logo.png";
-import amazfitLogo from "@/assets/wearables/amazfit-logo.png";
 
 interface Device { id: string; device_type: string; device_name: string; connection_status: string; last_sync_at: string | null; battery_level: number | null; }
 interface VitalProvider { name: string; slug: string; status: string; connected_at?: string; }
