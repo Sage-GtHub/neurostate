@@ -97,15 +97,19 @@ const MessageBubble = memo(({ msg, index, isLast, copiedIndex, onCopy, onRegener
   if (msg.role === "user") {
     return (
       <motion.div
-        initial={{ opacity: 0, y: 6 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.2 }}
+        initial={{ opacity: 0, y: 6, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
         className="flex justify-end"
       >
         <div className="max-w-[85%] sm:max-w-[70%] lg:max-w-[60%]">
-          <div className="bg-foreground text-background rounded-3xl rounded-br-lg px-5 py-3.5">
+          <motion.div 
+            className="bg-foreground text-background rounded-3xl rounded-br-lg px-5 py-3.5"
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 25 }}
+          >
             <p className="text-[15px] leading-relaxed whitespace-pre-wrap">{msg.content}</p>
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     );
@@ -856,7 +860,11 @@ export default function NovaChat() {
   return (
     <div className="h-[100dvh] bg-background flex flex-col overflow-hidden">
       <SEO title="Nova AI — Cognitive Performance Agent | NeuroState" description="Intelligent conversations about cognitive performance, recovery, sleep, and personalised health protocols." noindex={true} />
-      <NovaNav />
+      
+      {/* Desktop only: full NovaNav */}
+      <div className="hidden md:block">
+        <NovaNav />
+      </div>
 
       {/* Voice Mode Overlay */}
       <AnimatePresence>
@@ -904,8 +912,58 @@ export default function NovaChat() {
           )}
         </AnimatePresence>
 
-        {/* Header */}
-        <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-border/8 relative z-0 min-h-[52px]">
+        {/* Mobile Chat Header — compact, no duplicate branding */}
+        <div className="md:hidden flex items-center justify-between px-3 py-2 pt-safe border-b border-border/8 relative z-40 bg-background/95 backdrop-blur-xl fixed top-0 left-0 right-0">
+          <div className="flex items-center gap-2">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => setSidebarOpen(true)}
+              className="h-9 w-9 text-muted-foreground/50 hover:text-foreground rounded-xl touch-manipulation active:scale-90 transition-transform"
+            >
+              <PanelLeftOpen className="h-4.5 w-4.5" />
+            </Button>
+            <motion.div 
+              className="flex items-center gap-2"
+              initial={{ opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center shadow-sm">
+                <Sparkles className="h-3.5 w-3.5 text-white" />
+              </div>
+              <span className="font-semibold text-sm tracking-tight">Nova</span>
+            </motion.div>
+          </div>
+          <div className="flex items-center gap-0.5">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={voiceModeActive ? endVoiceMode : startVoiceMode}
+              className={cn(
+                "h-9 w-9 rounded-xl transition-all touch-manipulation active:scale-90",
+                voiceModeActive 
+                  ? "text-accent bg-accent/10" 
+                  : "text-muted-foreground/40 hover:text-foreground"
+              )}
+            >
+              {voiceModeActive ? <PhoneOff className="h-4 w-4" /> : <Phone className="h-4 w-4" />}
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={handleNewThread}
+              className="h-9 w-9 text-muted-foreground/40 hover:text-foreground rounded-xl touch-manipulation active:scale-90 transition-transform"
+            >
+              <Plus className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+        {/* Mobile header spacer */}
+        <div className="md:hidden h-12 pt-safe flex-shrink-0" />
+
+        {/* Desktop Chat Header */}
+        <div className="hidden md:flex items-center justify-between px-4 sm:px-6 py-3 border-b border-border/8 relative z-0 min-h-[52px]">
           <div className="flex items-center gap-3">
             <Button 
               variant="ghost" 
@@ -919,9 +977,7 @@ export default function NovaChat() {
               <div className="w-7 h-7 rounded-full bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center shadow-sm">
                 <Sparkles className="h-3.5 w-3.5 text-white" />
               </div>
-              <div>
-                <span className="font-semibold text-sm tracking-tight">Nova</span>
-              </div>
+              <span className="font-semibold text-sm tracking-tight">Nova</span>
             </div>
           </div>
           <div className="flex items-center gap-1.5">
@@ -1106,13 +1162,17 @@ export default function NovaChat() {
           </AnimatePresence>
 
           {/* ─── Input Area ─── */}
-          <div className="border-t border-border/8">
+          <div className="border-t border-border/8 bg-background/95 backdrop-blur-xl">
             <div className="max-w-2xl mx-auto p-3 sm:p-4 pb-safe">
-              <div className={cn(
-                "flex items-end gap-2 rounded-2xl border transition-all duration-300",
-                "bg-muted/15 border-border/15",
-                "focus-within:border-accent/25 focus-within:bg-muted/25 focus-within:shadow-lg focus-within:shadow-accent/[0.03]"
-              )}>
+              <motion.div 
+                className={cn(
+                  "flex items-end gap-2 rounded-2xl border transition-all duration-300",
+                  "bg-muted/15 border-border/15",
+                  "focus-within:border-accent/25 focus-within:bg-muted/25 focus-within:shadow-lg focus-within:shadow-accent/[0.04]"
+                )}
+                layout
+                transition={{ type: "spring", stiffness: 500, damping: 35 }}
+              >
                 <textarea
                   ref={textareaRef}
                   value={message}
@@ -1123,7 +1183,7 @@ export default function NovaChat() {
                   disabled={isLoading && !streamingContent}
                   className={cn(
                     "flex-1 resize-none bg-transparent border-0 focus:ring-0 focus:outline-none",
-                    "text-base sm:text-[15px] text-foreground placeholder:text-muted-foreground/30",
+                    "text-[16px] sm:text-[15px] text-foreground placeholder:text-muted-foreground/30",
                     "py-3.5 px-4 min-h-[52px] max-h-[160px]",
                     isListening && "placeholder:text-accent/50"
                   )}
@@ -1131,56 +1191,60 @@ export default function NovaChat() {
                 />
                 <div className="flex items-center gap-1 pr-2.5 pb-2.5">
                   {/* Mic button */}
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    onClick={toggleListening}
-                    disabled={isLoading}
-                    className={cn(
-                      "h-9 w-9 rounded-xl transition-all touch-manipulation",
-                      isListening 
-                        ? "bg-accent/15 text-accent" 
-                        : "text-muted-foreground/30 hover:text-foreground hover:bg-muted/30"
-                    )}
-                  >
-                    {isListening ? (
-                      <motion.div animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 1, repeat: Infinity }}>
-                        <MicOff className="h-4 w-4" />
-                      </motion.div>
-                    ) : (
-                      <Mic className="h-4 w-4" />
-                    )}
-                  </Button>
-
-                  {/* Send / Stop button */}
-                  {isLoading ? (
+                  <motion.div whileTap={{ scale: 0.85 }} transition={{ type: "spring", stiffness: 400, damping: 15 }}>
                     <Button
-                      onClick={stopGeneration}
+                      type="button"
+                      variant="ghost"
                       size="icon"
-                      className="h-9 w-9 rounded-xl bg-foreground/10 hover:bg-foreground/20 text-foreground transition-all touch-manipulation"
-                      title="Stop generating"
-                    >
-                      <Square className="h-3.5 w-3.5 fill-current" />
-                    </Button>
-                  ) : (
-                    <Button
-                      onClick={() => handleSend()}
-                      disabled={!message.trim()}
-                      size="icon"
+                      onClick={toggleListening}
+                      disabled={isLoading}
                       className={cn(
-                        "h-9 w-9 rounded-xl flex-shrink-0 transition-all duration-200 touch-manipulation",
-                        message.trim()
-                          ? "bg-accent hover:bg-accent/90 text-white shadow-sm shadow-accent/20"
-                          : "bg-muted/20 text-muted-foreground/20 cursor-not-allowed"
+                        "h-10 w-10 rounded-xl transition-all touch-manipulation",
+                        isListening 
+                          ? "bg-accent/15 text-accent" 
+                          : "text-muted-foreground/30 hover:text-foreground hover:bg-muted/30"
                       )}
                     >
-                      <ArrowUp className="h-4 w-4" />
+                      {isListening ? (
+                        <motion.div animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 1, repeat: Infinity }}>
+                          <MicOff className="h-4.5 w-4.5" />
+                        </motion.div>
+                      ) : (
+                        <Mic className="h-4.5 w-4.5" />
+                      )}
                     </Button>
-                  )}
+                  </motion.div>
+
+                  {/* Send / Stop button */}
+                  <motion.div whileTap={{ scale: 0.85 }} transition={{ type: "spring", stiffness: 400, damping: 15 }}>
+                    {isLoading ? (
+                      <Button
+                        onClick={stopGeneration}
+                        size="icon"
+                        className="h-10 w-10 rounded-xl bg-foreground/10 hover:bg-foreground/20 text-foreground transition-all touch-manipulation"
+                        title="Stop generating"
+                      >
+                        <Square className="h-3.5 w-3.5 fill-current" />
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => handleSend()}
+                        disabled={!message.trim()}
+                        size="icon"
+                        className={cn(
+                          "h-10 w-10 rounded-xl flex-shrink-0 transition-all duration-200 touch-manipulation",
+                          message.trim()
+                            ? "bg-accent hover:bg-accent/90 text-white shadow-sm shadow-accent/20"
+                            : "bg-muted/20 text-muted-foreground/20 cursor-not-allowed"
+                        )}
+                      >
+                        <ArrowUp className="h-4.5 w-4.5" />
+                      </Button>
+                    )}
+                  </motion.div>
                 </div>
-              </div>
-              <p className="text-[10px] text-muted-foreground/25 text-center mt-2.5 tracking-wide">
+              </motion.div>
+              <p className="text-[10px] text-muted-foreground/25 text-center mt-2 tracking-wide">
                 Nova may produce inaccurate information · Not a substitute for medical advice
               </p>
             </div>
