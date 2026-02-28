@@ -309,10 +309,6 @@ export default function NovaDevices() {
                   
                   return (
                     <div key={device.type} className="flex items-center gap-4 p-5 rounded-3xl bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-colors">
-                      <div className="w-10 h-10 rounded-2xl bg-foreground/[0.02] flex items-center justify-center p-2 flex-shrink-0">
-                        <img src={device.logo} alt={device.name} className="w-full h-full object-contain" />
-                      </div>
-                      
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-0.5">
                           <h3 className="text-xs font-medium text-foreground">{device.name}</h3>
