@@ -344,12 +344,12 @@ export default function Nova() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="mb-16">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 mb-2">Real-time</p>
+                <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground mb-2 font-mono">Real-time</p>
                 <h2 className="text-lg font-medium text-foreground">Live Data</h2>
                 {lastSync ? (
-                  <p className="text-[10px] text-foreground/30 mt-1">Last synced: {lastSync.toLocaleTimeString()}</p>
+                  <p className="text-[11px] text-muted-foreground mt-1">Last synced: {lastSync.toLocaleTimeString()}</p>
                 ) : !hasRealData && connectedDevices.length === 0 ? (
-                  <p className="text-[10px] text-foreground/30 mt-1">Connect a device to see real data</p>
+                  <p className="text-[11px] text-muted-foreground mt-1">Connect a device to see real data</p>
                 ) : null}
               </div>
               <button 
