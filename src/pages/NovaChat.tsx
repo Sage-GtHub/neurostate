@@ -1074,7 +1074,7 @@ export default function NovaChat() {
                 <h1 className="text-2xl sm:text-3xl font-semibold text-foreground mb-2 tracking-tight text-center">
                   What can I help with?
                 </h1>
-                <p className="text-sm text-muted-foreground/50 text-center mb-10 max-w-sm leading-relaxed">
+                <p className="text-sm text-muted-foreground text-center mb-10 max-w-sm leading-relaxed">
                   Your cognitive performance agent. Ask about readiness, recovery, sleep patterns, or protocol optimisation.
                 </p>
                 
