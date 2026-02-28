@@ -1018,21 +1018,57 @@ export default function NovaChat() {
                 transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="flex flex-col items-center w-full max-w-lg"
               >
-                {/* Nova identity */}
+                {/* Nova breathing orb — ChatGPT-style */}
                 <div className="relative mb-8">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-accent via-accent/70 to-accent/30 flex items-center justify-center shadow-xl shadow-accent/15">
-                    <Sparkles className="h-9 w-9 text-white" />
-                  </div>
+                  {/* Outer breathing glow ring */}
                   <motion.div
-                    className="absolute -inset-3 rounded-full"
-                    animate={{ 
-                      boxShadow: [
-                        "0 0 0 0 hsl(var(--accent) / 0.1)",
-                        "0 0 0 12px hsl(var(--accent) / 0)",
-                      ] 
+                    className="absolute -inset-6 rounded-full"
+                    animate={{
+                      opacity: [0.3, 0.6, 0.3],
+                      scale: [0.9, 1.15, 0.9],
                     }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+                    transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+                    style={{
+                      background: "radial-gradient(circle, hsl(12 100% 52% / 0.2) 0%, hsl(12 100% 52% / 0.05) 50%, transparent 70%)",
+                    }}
                   />
+                  {/* Secondary pulse ring */}
+                  <motion.div
+                    className="absolute -inset-3 rounded-full border border-accent/10"
+                    animate={{
+                      scale: [1, 1.3, 1],
+                      opacity: [0.4, 0, 0.4],
+                    }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
+                  />
+                  {/* Third ripple */}
+                  <motion.div
+                    className="absolute -inset-3 rounded-full border border-accent/5"
+                    animate={{
+                      scale: [1, 1.8, 1],
+                      opacity: [0.3, 0, 0.3],
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeOut", delay: 0.5 }}
+                  />
+                  {/* Main orb */}
+                  <motion.div 
+                    className="relative w-20 h-20 rounded-full bg-gradient-to-br from-accent via-accent/80 to-accent/40 flex items-center justify-center"
+                    animate={{
+                      scale: [1, 1.06, 1],
+                      boxShadow: [
+                        "0 0 30px hsl(12 100% 52% / 0.2), 0 0 60px hsl(12 100% 52% / 0.08)",
+                        "0 0 50px hsl(12 100% 52% / 0.35), 0 0 100px hsl(12 100% 52% / 0.12)",
+                        "0 0 30px hsl(12 100% 52% / 0.2), 0 0 60px hsl(12 100% 52% / 0.08)",
+                      ],
+                    }}
+                    transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    {/* Inner highlight */}
+                    <div className="absolute inset-1 rounded-full opacity-30"
+                      style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.5) 0%, transparent 50%)" }}
+                    />
+                    <Sparkles className="h-9 w-9 text-white relative z-10" />
+                  </motion.div>
                 </div>
 
                 <h1 className="text-2xl sm:text-3xl font-semibold text-foreground mb-2 tracking-tight text-center">
