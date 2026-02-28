@@ -52,6 +52,9 @@ export const MobileBottomNav = () => {
     return location.pathname.startsWith(path);
   };
 
+  // Hide on chat page — it has its own mobile header
+  if (location.pathname === '/nova/chat') return null;
+
   return (
     <motion.nav
       initial={{ y: -100 }}
