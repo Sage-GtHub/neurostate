@@ -94,13 +94,15 @@ serve(async (req) => {
     // Build rich user context
     let userContext = '';
     if (userId) {
-      // Fetch recent metrics
+      // Fetch recent metrics (wider window for 7-day trends)
+      const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
       const { data: metrics } = await supabase
         .from('user_metrics')
         .select('*')
         .eq('user_id', userId)
+        .gte('recorded_at', sevenDaysAgo)
         .order('recorded_at', { ascending: false })
-        .limit(20);
+        .limit(100);
 
       // Fetch active protocols
       const { data: protocols } = await supabase
@@ -147,18 +149,76 @@ serve(async (req) => {
         .order('forecast_date', { ascending: false })
         .limit(3);
 
+      // --- KEY BIOMETRIC SIGNALS ---
       if (metrics && metrics.length > 0) {
-        userContext += '\n\n## User\'s Recent Biometrics:\n';
-        const metricGroups: Record<string, { value: number; date: string }[]> = {};
+        const metricGroups: Record<string, { value: number; date: string; recorded_at: string }[]> = {};
         metrics.forEach(m => {
           if (!metricGroups[m.metric_type]) metricGroups[m.metric_type] = [];
-          metricGroups[m.metric_type].push({ value: m.value, date: new Date(m.recorded_at).toLocaleDateString() });
+          metricGroups[m.metric_type].push({ 
+            value: Number(m.value), 
+            date: new Date(m.recorded_at).toLocaleDateString('en-GB'),
+            recorded_at: m.recorded_at
+          });
         });
-        Object.entries(metricGroups).forEach(([type, values]) => {
+
+        // Extract key signals with 7-day context
+        const keyMetrics = ['sleep_duration', 'sleep_score', 'hrv', 'heart_rate', 'stress', 'steps', 'readiness', 'recovery', 'respiratory_rate', 'spo2', 'body_temperature'];
+        
+        userContext += '\n\n## LIVE BIOMETRIC SNAPSHOT (last reading → 7-day context):\n';
+        
+        for (const key of keyMetrics) {
+          const values = metricGroups[key];
+          if (!values || values.length === 0) continue;
+          
           const latest = values[0];
-          const trend = values.length > 1 ? (values[0].value > values[1].value ? '↑' : values[0].value < values[1].value ? '↓' : '→') : '';
-          userContext += `- ${type}: ${latest.value} ${trend} (${latest.date})\n`;
-        });
+          const avg7d = values.length > 1 
+            ? (values.reduce((sum, v) => sum + v.value, 0) / values.length).toFixed(1) 
+            : null;
+          const min7d = values.length > 1 ? Math.min(...values.map(v => v.value)) : null;
+          const max7d = values.length > 1 ? Math.max(...values.map(v => v.value)) : null;
+          const trend = values.length >= 3 
+            ? (values[0].value > values[Math.floor(values.length / 2)].value ? 'trending up' : values[0].value < values[Math.floor(values.length / 2)].value ? 'trending down' : 'stable')
+            : 'insufficient data for trend';
+          
+          let unit = '';
+          if (key === 'sleep_duration') unit = ' hrs';
+          else if (key === 'hrv') unit = ' ms';
+          else if (key === 'heart_rate' || key === 'respiratory_rate') unit = ' bpm';
+          else if (key === 'steps') unit = ' steps';
+          else if (key === 'stress') unit = '/100';
+          else if (key === 'spo2') unit = '%';
+          else if (key === 'body_temperature') unit = '°C';
+          
+          userContext += `- **${key}**: ${latest.value}${unit} (${latest.date})`;
+          if (avg7d) userContext += ` | 7d avg: ${avg7d}${unit}, range: ${min7d}–${max7d}${unit}, ${trend}`;
+          userContext += '\n';
+        }
+
+        // Flag any concerning patterns
+        const flags: string[] = [];
+        const sleepVals = metricGroups['sleep_duration'];
+        const hrvVals = metricGroups['hrv'];
+        const stressVals = metricGroups['stress'];
+        
+        if (sleepVals && sleepVals[0]?.value < 6) flags.push(`⚠️ Low sleep: ${sleepVals[0].value} hrs last night`);
+        if (hrvVals && hrvVals.length >= 2 && hrvVals[0].value < hrvVals[1].value * 0.85) flags.push(`⚠️ HRV dropped ${Math.round((1 - hrvVals[0].value / hrvVals[1].value) * 100)}% from previous reading`);
+        if (stressVals && stressVals[0]?.value > 70) flags.push(`⚠️ Elevated stress: ${stressVals[0].value}/100`);
+        
+        if (flags.length > 0) {
+          userContext += '\n## ⚠️ BIOMETRIC ALERTS (proactively address these):\n';
+          flags.forEach(f => { userContext += `${f}\n`; });
+        }
+
+        // Other metrics not in key list
+        const otherMetrics = Object.entries(metricGroups).filter(([key]) => !keyMetrics.includes(key));
+        if (otherMetrics.length > 0) {
+          userContext += '\n## Other Metrics:\n';
+          otherMetrics.forEach(([type, values]) => {
+            const latest = values[0];
+            const trend = values.length > 1 ? (values[0].value > values[1].value ? '↑' : values[0].value < values[1].value ? '↓' : '→') : '';
+            userContext += `- ${type}: ${latest.value} ${trend} (${latest.date})\n`;
+          });
+        }
       }
 
       if (protocols && protocols.length > 0) {
