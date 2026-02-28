@@ -372,29 +372,29 @@ export default function Nova() {
                 const Icon = config.icon;
                 const hasData = metric.value !== "--";
                 
-                return (
-                  <div 
-                    key={index} 
-                    className={`p-6 bg-card rounded-3xl border border-foreground/5 hover:border-foreground/10 transition-all ${hasData ? '' : 'opacity-50'}`}
-                  >
-                    <div className="flex items-center justify-between mb-5">
-                      <div className="w-9 h-9 rounded-full bg-foreground/5 flex items-center justify-center">
-                        <Icon className="w-4 h-4 text-foreground/60" />
+                  return (
+                    <div 
+                      key={index} 
+                      className={`p-6 bg-card rounded-xl border border-border hover:border-accent/30 transition-all ${hasData ? '' : 'opacity-50'}`}
+                    >
+                      <div className="flex items-center justify-between mb-5">
+                        <div className="w-9 h-9 rounded-full bg-muted flex items-center justify-center">
+                          <Icon className="w-4 h-4 text-foreground" />
+                        </div>
+                        <span className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground font-mono">{metric.label}</span>
                       </div>
-                      <span className="text-[9px] uppercase tracking-[0.15em] text-foreground/30">{metric.label}</span>
-                    </div>
-                    
-                    <div className="text-2xl font-medium text-foreground mb-1">
-                      {metric.value}
-                    </div>
-                    
-                    {metric.trend && (
-                      <div className={`text-[10px] ${metric.trendColor === 'green' ? 'text-signal-green' : metric.trendColor === 'red' ? 'text-destructive' : 'text-foreground/40'}`}>
-                        {metric.trend}
+                      
+                      <div className="text-2xl font-medium text-foreground mb-1">
+                        {metric.value}
                       </div>
-                    )}
-                  </div>
-                );
+                      
+                      {metric.trend && (
+                        <div className={`text-[11px] ${metric.trendColor === 'green' ? 'text-signal-green' : metric.trendColor === 'red' ? 'text-destructive' : 'text-muted-foreground'}`}>
+                          {metric.trend}
+                        </div>
+                      )}
+                    </div>
+                  );
               })}
             </div>
           </motion.div>
