@@ -97,15 +97,19 @@ const MessageBubble = memo(({ msg, index, isLast, copiedIndex, onCopy, onRegener
   if (msg.role === "user") {
     return (
       <motion.div
-        initial={{ opacity: 0, y: 6 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.2 }}
+        initial={{ opacity: 0, y: 6, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
         className="flex justify-end"
       >
         <div className="max-w-[85%] sm:max-w-[70%] lg:max-w-[60%]">
-          <div className="bg-foreground text-background rounded-3xl rounded-br-lg px-5 py-3.5">
+          <motion.div 
+            className="bg-foreground text-background rounded-3xl rounded-br-lg px-5 py-3.5"
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 25 }}
+          >
             <p className="text-[15px] leading-relaxed whitespace-pre-wrap">{msg.content}</p>
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     );
