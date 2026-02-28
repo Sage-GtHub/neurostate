@@ -277,7 +277,7 @@ export default function Nova() {
                 <button 
                   onClick={handleGenerateInsights}
                   disabled={insightsLoading}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full text-[11px] text-foreground/50 hover:text-foreground hover:bg-foreground/5 transition-all"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full text-[11px] text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-all"
                 >
                   {insightsLoading ? (
                     <Loader2 className="w-3 h-3 animate-spin" />
