@@ -312,7 +312,7 @@ export default function Nova() {
                     <p className="text-[11px] text-muted-foreground leading-relaxed mb-5">{summary.message}</p>
                     
                     {summary.action && (
-                      <button 
+                      <button
                         onClick={() => {
                           if (summary.action === "Connect Device") {
                             navigate('/nova/devices');
