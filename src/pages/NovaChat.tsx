@@ -68,7 +68,7 @@ function StreamingDots() {
           />
         ))}
       </div>
-      <span className="text-xs text-muted-foreground/50 ml-1.5 font-medium">Thinking</span>
+      <span className="text-xs text-muted-foreground ml-1.5 font-medium">Thinking</span>
     </div>
   );
 }
