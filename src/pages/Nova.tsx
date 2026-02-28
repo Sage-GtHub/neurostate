@@ -322,7 +322,7 @@ export default function Nova() {
                             navigate('/nova/insights');
                           }
                         }}
-                        className="inline-flex items-center gap-1.5 text-[11px] text-foreground/60 hover:text-foreground transition-colors group/btn"
+                        className="inline-flex items-center gap-1.5 text-[11px] text-accent hover:text-foreground transition-colors group/btn"
                       >
                         {summary.action}
                         <ArrowUpRight className="w-3 h-3 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
