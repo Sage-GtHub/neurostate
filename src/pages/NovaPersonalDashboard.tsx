@@ -25,6 +25,7 @@ import { HealthForecast } from '@/components/nova/HealthForecast';
 import { NovaEmptyState } from '@/components/nova/NovaEmptyState';
 
 import { WeeklySummary } from '@/components/nova/WeeklySummary';
+import { MorningBriefing } from '@/components/nova/MorningBriefing';
 import { WhoopScoreRing } from '@/components/nova/WhoopScoreRing';
 import { WhoopMetricCard } from '@/components/nova/WhoopMetricCard';
 import { useAuth } from '@/hooks/useAuth';
