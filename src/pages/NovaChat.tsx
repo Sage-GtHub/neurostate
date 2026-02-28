@@ -1102,8 +1102,8 @@ export default function NovaChat() {
                       >
                         <Icon className="h-5 w-5 text-accent/70" />
                         <div>
-                          <p className="text-sm font-medium text-foreground/80 leading-tight">{action.label}</p>
-                          <p className="text-[11px] text-muted-foreground/40 mt-0.5">{action.description}</p>
+                        <p className="text-sm font-medium text-foreground leading-tight">{action.label}</p>
+                          <p className="text-[11px] text-muted-foreground mt-0.5">{action.description}</p>
                         </div>
                       </motion.button>
                     );
