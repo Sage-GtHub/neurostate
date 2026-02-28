@@ -856,7 +856,11 @@ export default function NovaChat() {
   return (
     <div className="h-[100dvh] bg-background flex flex-col overflow-hidden">
       <SEO title="Nova AI — Cognitive Performance Agent | NeuroState" description="Intelligent conversations about cognitive performance, recovery, sleep, and personalised health protocols." noindex={true} />
-      <NovaNav />
+      
+      {/* Desktop only: full NovaNav */}
+      <div className="hidden md:block">
+        <NovaNav />
+      </div>
 
       {/* Voice Mode Overlay */}
       <AnimatePresence>
@@ -904,8 +908,58 @@ export default function NovaChat() {
           )}
         </AnimatePresence>
 
-        {/* Header */}
-        <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-border/8 relative z-0 min-h-[52px]">
+        {/* Mobile Chat Header — compact, no duplicate branding */}
+        <div className="md:hidden flex items-center justify-between px-3 py-2 pt-safe border-b border-border/8 relative z-40 bg-background/95 backdrop-blur-xl fixed top-0 left-0 right-0">
+          <div className="flex items-center gap-2">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => setSidebarOpen(true)}
+              className="h-9 w-9 text-muted-foreground/50 hover:text-foreground rounded-xl touch-manipulation active:scale-90 transition-transform"
+            >
+              <PanelLeftOpen className="h-4.5 w-4.5" />
+            </Button>
+            <motion.div 
+              className="flex items-center gap-2"
+              initial={{ opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center shadow-sm">
+                <Sparkles className="h-3.5 w-3.5 text-white" />
+              </div>
+              <span className="font-semibold text-sm tracking-tight">Nova</span>
+            </motion.div>
+          </div>
+          <div className="flex items-center gap-0.5">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={voiceModeActive ? endVoiceMode : startVoiceMode}
+              className={cn(
+                "h-9 w-9 rounded-xl transition-all touch-manipulation active:scale-90",
+                voiceModeActive 
+                  ? "text-accent bg-accent/10" 
+                  : "text-muted-foreground/40 hover:text-foreground"
+              )}
+            >
+              {voiceModeActive ? <PhoneOff className="h-4 w-4" /> : <Phone className="h-4 w-4" />}
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={handleNewThread}
+              className="h-9 w-9 text-muted-foreground/40 hover:text-foreground rounded-xl touch-manipulation active:scale-90 transition-transform"
+            >
+              <Plus className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+        {/* Mobile header spacer */}
+        <div className="md:hidden h-12 pt-safe flex-shrink-0" />
+
+        {/* Desktop Chat Header */}
+        <div className="hidden md:flex items-center justify-between px-4 sm:px-6 py-3 border-b border-border/8 relative z-0 min-h-[52px]">
           <div className="flex items-center gap-3">
             <Button 
               variant="ghost" 
@@ -919,9 +973,7 @@ export default function NovaChat() {
               <div className="w-7 h-7 rounded-full bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center shadow-sm">
                 <Sparkles className="h-3.5 w-3.5 text-white" />
               </div>
-              <div>
-                <span className="font-semibold text-sm tracking-tight">Nova</span>
-              </div>
+              <span className="font-semibold text-sm tracking-tight">Nova</span>
             </div>
           </div>
           <div className="flex items-center gap-1.5">
