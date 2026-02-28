@@ -196,13 +196,13 @@ export default function Nova() {
             <div className="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] rounded-full bg-primary/5 blur-3xl animate-float" style={{ animationDelay: '3s' }} />
           </div>
           
-          <div className="relative px-6 md:px-12 lg:px-20 xl:px-32 py-24 sm:py-32">
+           <div className="relative px-6 md:px-12 lg:px-20 xl:px-32 py-24 sm:py-32">
             <div className="max-w-md mx-auto text-center">
-              <div className="w-14 h-14 mx-auto mb-8 rounded-full bg-foreground/5 flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-foreground/60" />
+              <div className="w-14 h-14 mx-auto mb-8 rounded-full bg-muted flex items-center justify-center">
+                <Sparkles className="w-6 h-6 text-foreground" />
               </div>
               <h1 className="text-2xl sm:text-3xl font-medium text-foreground mb-4 tracking-tight">Welcome to Nova</h1>
-              <p className="text-foreground/50 text-sm mb-10 leading-relaxed max-w-sm mx-auto">
+              <p className="text-muted-foreground text-sm mb-10 leading-relaxed max-w-sm mx-auto">
                 Sign in to access your personal health dashboard. Track your sleep, recovery, and energy — all in one place.
               </p>
               <Button 
@@ -212,11 +212,11 @@ export default function Nova() {
                 <LogIn className="w-3.5 h-3.5" />
                 Sign In to Continue
               </Button>
-              <p className="text-[11px] text-foreground/30 mt-10">
+              <p className="text-[11px] text-muted-foreground mt-10">
                 New to NeuroState?{" "}
                 <button 
                   onClick={() => navigate('/auth')} 
-                  className="text-foreground/50 hover:text-foreground transition-colors"
+                  className="text-foreground hover:text-accent transition-colors"
                 >
                   Create an account
                 </button>
