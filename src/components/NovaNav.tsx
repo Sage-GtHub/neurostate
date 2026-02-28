@@ -374,8 +374,8 @@ export const NovaNav = () => {
         </div>
       </nav>
 
-      {/* Mobile content padding spacer */}
-      <div className="md:hidden h-14" />
+      {/* Mobile content padding spacer — hidden on chat page */}
+      <div className={cn("md:hidden h-14", isChatPage && "hidden")} />
     </>
   );
 };
