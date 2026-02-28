@@ -44,7 +44,10 @@ export const MobileBottomNav = () => {
   // Check if current path starts with nav item path
   const isActive = (path: string) => {
     if (path === '/nova') {
-      return location.pathname === '/nova' || location.pathname === '/nova/chat';
+      return location.pathname === '/nova';
+    }
+    if (path === '/nova/chat') {
+      return location.pathname === '/nova/chat';
     }
     return location.pathname.startsWith(path);
   };
