@@ -1116,7 +1116,7 @@ export default function NovaChat() {
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
                   onClick={startVoiceMode}
-                  className="flex items-center gap-2.5 text-sm text-muted-foreground/40 hover:text-accent transition-colors group"
+                  className="flex items-center gap-2.5 text-sm text-muted-foreground hover:text-accent transition-colors group"
                 >
                   <div className="w-8 h-8 rounded-full border border-border/20 flex items-center justify-center group-hover:border-accent/30 group-hover:bg-accent/5 transition-all">
                     <Phone className="h-3.5 w-3.5" />
