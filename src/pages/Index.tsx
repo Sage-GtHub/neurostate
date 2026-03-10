@@ -185,6 +185,157 @@ const Index = () => {
             </div>
           </section>
 
+          {/* Team Dashboard Showcase */}
+          <section className="py-16 md:py-32 px-5 md:px-8">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <ScrollReveal>
+                  <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">For leaders</span>
+                  <h2 className="text-3xl md:text-5xl lg:text-[3.5rem] font-normal text-foreground mt-4 leading-[1.1] tracking-[-0.02em]">
+                    Your team's performance. At a glance.
+                  </h2>
+                  <p className="text-base md:text-lg text-muted-foreground max-w-md mt-5 leading-relaxed">
+                    Real-time executive intelligence across every team. Spot burnout risk, track cognitive capacity, and see the financial impact — all in one dashboard.
+                  </p>
+                  <div className="space-y-4 pt-8">
+                    {[
+                      "Cognitive Capacity Index across teams",
+                      "Revenue exposure from burnout risk",
+                      "AI-generated interventions with ROI tracking",
+                    ].map((item, i) => (
+                      <motion.div
+                        key={i}
+                        className="flex items-center gap-3"
+                        initial={{ opacity: 0, x: -15 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 + i * 0.1 }}
+                      >
+                        <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <Check className="w-3 h-3 text-primary" />
+                        </div>
+                        <span className="text-sm text-foreground">{item}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                  <div className="pt-8">
+                    <Link to="/team-dashboard">
+                      <Button variant="outline" className="h-11 px-7 text-sm font-medium rounded-full group">
+                        Explore Team Dashboard
+                        <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      </Button>
+                    </Link>
+                  </div>
+                </ScrollReveal>
+
+                {/* Mock Team Dashboard UI */}
+                <ScrollReveal direction="right" delay={0.15}>
+                  <motion.div
+                    className="relative rounded-xl border border-border/50 bg-card overflow-hidden shadow-lg"
+                    whileHover={{ y: -4 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {/* Browser chrome */}
+                    <div className="flex items-center gap-2 px-4 py-3 border-b border-border/30 bg-muted/30">
+                      <div className="flex gap-1.5">
+                        <div className="w-2.5 h-2.5 rounded-full bg-destructive/40" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/40" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-green-500/40" />
+                      </div>
+                      <div className="flex-1 mx-3">
+                        <div className="bg-background/60 rounded-md px-3 py-1 text-[10px] text-muted-foreground font-mono text-center">
+                          neurostate.app/team-dashboard
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-5 space-y-4">
+                      {/* Executive strip */}
+                      <div className="grid grid-cols-3 gap-3">
+                        {[
+                          { label: "Cognitive Capacity", value: "78", suffix: "/100", color: "text-primary" },
+                          { label: "Revenue Exposure", value: "£142k", suffix: "", color: "text-destructive" },
+                          { label: "Burnout Risk", value: "23%", suffix: " ↓", color: "text-green-500" },
+                        ].map((metric, i) => (
+                          <motion.div
+                            key={i}
+                            className="bg-background rounded-lg p-3 border border-border/30"
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.4 + i * 0.1 }}
+                          >
+                            <p className="text-[9px] font-mono uppercase tracking-wider text-muted-foreground mb-1">{metric.label}</p>
+                            <p className={`text-lg font-semibold ${metric.color}`}>
+                              {metric.value}<span className="text-xs font-normal text-muted-foreground">{metric.suffix}</span>
+                            </p>
+                          </motion.div>
+                        ))}
+                      </div>
+
+                      {/* Chart area */}
+                      <motion.div
+                        className="bg-background rounded-lg border border-border/30 p-4"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.7 }}
+                      >
+                        <div className="flex items-center justify-between mb-3">
+                          <p className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">Team Energy Trend — 7 Days</p>
+                          <div className="flex gap-3">
+                            <span className="text-[9px] text-muted-foreground flex items-center gap-1"><span className="w-2 h-0.5 bg-primary rounded-full inline-block" /> Energy</span>
+                            <span className="text-[9px] text-muted-foreground flex items-center gap-1"><span className="w-2 h-0.5 bg-muted-foreground/40 rounded-full inline-block" /> Recovery</span>
+                          </div>
+                        </div>
+                        {/* SVG sparkline */}
+                        <svg viewBox="0 0 280 60" className="w-full h-16" fill="none">
+                          <path d="M0,40 Q20,35 40,30 T80,25 T120,20 T160,28 T200,18 T240,15 T280,12" stroke="hsl(var(--primary))" strokeWidth="2" fill="none" />
+                          <path d="M0,45 Q20,42 40,38 T80,35 T120,32 T160,36 T200,30 T240,28 T280,25" stroke="hsl(var(--muted-foreground))" strokeWidth="1.5" strokeOpacity="0.3" fill="none" strokeDasharray="4 3" />
+                        </svg>
+                      </motion.div>
+
+                      {/* Team rows */}
+                      <div className="space-y-2">
+                        {[
+                          { team: "Engineering", members: 24, cci: 82, risk: "Low", riskColor: "bg-green-500/15 text-green-600" },
+                          { team: "Sales", members: 18, cci: 64, risk: "Medium", riskColor: "bg-yellow-500/15 text-yellow-600" },
+                          { team: "Product", members: 12, cci: 91, risk: "Low", riskColor: "bg-green-500/15 text-green-600" },
+                        ].map((team, i) => (
+                          <motion.div
+                            key={i}
+                            className="flex items-center justify-between py-2.5 px-3 bg-background rounded-lg border border-border/30 hover:border-primary/20 transition-colors"
+                            initial={{ opacity: 0, x: 10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.8 + i * 0.08 }}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="w-7 h-7 rounded-lg bg-primary/8 flex items-center justify-center">
+                                <Users className="w-3.5 h-3.5 text-primary" />
+                              </div>
+                              <div>
+                                <p className="text-xs font-medium text-foreground">{team.team}</p>
+                                <p className="text-[10px] text-muted-foreground">{team.members} members</p>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-3">
+                              <div className="text-right">
+                                <p className="text-xs font-semibold text-foreground">{team.cci}</p>
+                                <p className="text-[9px] text-muted-foreground">CCI</p>
+                              </div>
+                              <span className={`text-[9px] px-2 py-0.5 rounded-full font-medium ${team.riskColor}`}>{team.risk}</span>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                </ScrollReveal>
+              </div>
+            </div>
+          </section>
+
           {/* Impact Stats */}
           <section className="py-16 md:py-24 px-5 md:px-8 bg-foreground">
             <div className="max-w-6xl mx-auto">
