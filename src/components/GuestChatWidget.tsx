@@ -5,8 +5,18 @@ import { useToast } from "@/hooks/use-toast";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import ReactMarkdown from "react-markdown";
 import { format } from "date-fns";
+
+// Strip any remaining markdown formatting (asterisks, hashes, etc.)
+const sanitiseMarkdown = (text: string): string => {
+  return text
+    .replace(/\*\*([^*]+)\*\*/g, '$1')  // **bold**
+    .replace(/\*([^*]+)\*/g, '$1')       // *italic*
+    .replace(/__([^_]+)__/g, '$1')       // __bold__
+    .replace(/_([^_]+)_/g, '$1')         // _italic_
+    .replace(/^#{1,6}\s+/gm, '')         // # headings
+    .replace(/`([^`]+)`/g, '$1');        // `code`
+};
 
 type Message = {
   role: "user" | "assistant";
