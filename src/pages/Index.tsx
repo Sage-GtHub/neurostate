@@ -2,6 +2,7 @@ import { Header } from "@/components/Header";
 import Hero from "@/components/Hero";
 import { SEO } from "@/components/SEO";
 import { CorporateServiceStructuredData, FAQStructuredData, WebsiteStructuredData } from "@/components/StructuredData";
+import { AnnouncementBar } from "@/components/AnnouncementBar";
 
 const homepageFaqs = [
   { question: "What is NeuroState?", answer: "NeuroState is the cognitive performance infrastructure for organisations. It connects to 40+ wearable devices your team already uses, surfaces early signs of burnout and fatigue, and gives managers clear actions to keep people performing at their best." },
