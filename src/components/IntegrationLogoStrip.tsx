@@ -26,24 +26,24 @@ const logos = [
 
 export function IntegrationLogoStrip() {
   return (
-    <section className="py-6 md:py-8 border-t border-border/40 overflow-hidden">
+    <section className="py-10 md:py-14 border-y border-border/30 overflow-hidden bg-background">
       <div className="relative">
         {/* Fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
 
         {/* Scrolling marquee */}
         <motion.div
-          className="flex items-center gap-12 md:gap-16 whitespace-nowrap"
+          className="flex items-center gap-16 md:gap-20 whitespace-nowrap"
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
         >
           {[...logos, ...logos].map((logo, i) => (
             <img
               key={i}
               src={logo.src}
               alt={logo.name}
-              className="h-6 md:h-7 w-auto object-contain opacity-40 hover:opacity-70 transition-opacity duration-300 grayscale flex-shrink-0 select-none"
+              className="h-7 md:h-8 w-auto object-contain opacity-35 hover:opacity-60 transition-opacity duration-300 grayscale flex-shrink-0 select-none"
               draggable={false}
             />
           ))}
