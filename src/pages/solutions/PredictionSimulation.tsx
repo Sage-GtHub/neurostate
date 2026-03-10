@@ -210,7 +210,7 @@ export default function PredictionSimulation() {
                       </div>
                       <div className="flex items-center gap-6">
                         <div className="text-center">
-                          <span className={`text-sm font-semibold ${example.impact.startsWith('+') ? 'text-green-600' : 'text-amber-500'}`}>
+                          <span className={`text-sm font-semibold ${example.impact.startsWith('+') ? 'text-signal-green' : 'text-warning-amber'}`}>
                             {example.impact}
                           </span>
                           <p className="text-[10px] text-muted-foreground">Capacity Impact</p>
