@@ -463,6 +463,12 @@ const Index = () => {
             </div>
           </section>
 
+          {/* Platform Showcase - Nova AI */}
+          <PlatformShowcase />
+
+          {/* Team Intelligence Showcase */}
+          <TeamIntelligenceShowcase />
+
           {/* Final CTA */}
           <section className="py-24 md:py-40 px-5 md:px-8 bg-foreground">
             <div className="max-w-4xl mx-auto text-center">
