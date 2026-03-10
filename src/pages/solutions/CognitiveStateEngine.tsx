@@ -131,7 +131,7 @@ export default function CognitiveStateEngine() {
                 {cognitiveStates.map((state, i) => (
                   <motion.div 
                     key={state.title}
-                    className="p-8 rounded-2xl bg-muted/30 border border-border/50"
+                    className="p-8 rounded-xl bg-muted/30 border border-border/50"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
