@@ -896,7 +896,7 @@ export default function NovaChat() {
                 animate={{ x: 0 }}
                 exit={{ x: "-100%" }}
                 transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                className="absolute inset-y-0 left-0 w-[85%] max-w-[320px] bg-background border-r border-border/15 z-20 shadow-2xl"
+                className="absolute inset-y-0 left-0 w-[85%] max-w-[320px] bg-background border-r border-border/50 z-20 shadow-2xl"
               >
                 <ThreadSidebar
                   threads={threads}
