@@ -16,6 +16,7 @@ const sanitiseMarkdown = (text: string): string => {
     .replace(/__/g, '')                    // Remove all __ (bold markers)
     .replace(/(?<!\w)_([^_]+)_(?!\w)/g, '$1') // _italic_
     .replace(/^#{1,6}\s+/gm, '')           // # headings
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1 ($2)') // [text](url) → text (url)
     .replace(/`([^`]+)`/g, '$1')           // `code` → plain
     .replace(/^\s*[-]\s+/gm, '• ');        // - list items → bullet
 };
