@@ -19,7 +19,7 @@ import { HomeComparisonSection } from "@/components/HomeComparisonSection";
 import { IntegrationLogoStrip } from "@/components/IntegrationLogoStrip";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Layers, Users } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Layers, Users, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -188,151 +188,233 @@ const Index = () => {
           {/* Team Dashboard Showcase */}
           <section className="py-16 md:py-32 px-5 md:px-8">
             <div className="max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                <ScrollReveal>
-                  <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">For leaders</span>
-                  <h2 className="text-3xl md:text-5xl lg:text-[3.5rem] font-normal text-foreground mt-4 leading-[1.1] tracking-[-0.02em]">
-                    Your team's performance. At a glance.
-                  </h2>
-                  <p className="text-base md:text-lg text-muted-foreground max-w-md mt-5 leading-relaxed">
-                    Real-time executive intelligence across every team. Spot burnout risk, track cognitive capacity, and see the financial impact — all in one dashboard.
-                  </p>
-                  <div className="space-y-4 pt-8">
-                    {[
-                      "Cognitive Capacity Index across teams",
-                      "Revenue exposure from burnout risk",
-                      "AI-generated interventions with ROI tracking",
-                    ].map((item, i) => (
-                      <motion.div
-                        key={i}
-                        className="flex items-center gap-3"
-                        initial={{ opacity: 0, x: -15 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 + i * 0.1 }}
-                      >
-                        <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                          <Check className="w-3 h-3 text-primary" />
-                        </div>
-                        <span className="text-sm text-foreground">{item}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-                  <div className="pt-8">
-                    <Link to="/team-dashboard">
-                      <Button variant="outline" className="h-11 px-7 text-sm font-medium rounded-full group">
-                        Explore Team Dashboard
-                        <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                      </Button>
-                    </Link>
-                  </div>
-                </ScrollReveal>
-
-                {/* Mock Team Dashboard UI */}
-                <ScrollReveal direction="right" delay={0.15}>
-                  <motion.div
-                    className="relative rounded-xl border border-border/50 bg-card overflow-hidden shadow-lg"
-                    whileHover={{ y: -4 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {/* Browser chrome */}
-                    <div className="flex items-center gap-2 px-4 py-3 border-b border-border/30 bg-muted/30">
-                      <div className="flex gap-1.5">
-                        <div className="w-2.5 h-2.5 rounded-full bg-destructive/40" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/40" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-green-500/40" />
+              {/* Centered headline block */}
+              <ScrollReveal className="text-center mb-12 md:mb-16">
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">For leaders</span>
+                <h2 className="text-3xl md:text-5xl lg:text-[3.5rem] font-normal text-foreground mt-4 leading-[1.1] tracking-[-0.02em] max-w-3xl mx-auto">
+                  The team performance command centre
+                </h2>
+                <p className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto mt-5 leading-relaxed">
+                  Replace scattered spreadsheets with real-time executive intelligence. Spot burnout risk, track cognitive capacity, and see the financial impact.
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 pt-8">
+                  {[
+                    "Cognitive Capacity Index across teams",
+                    "Revenue exposure from burnout risk",
+                    "AI-generated interventions",
+                  ].map((item, i) => (
+                    <motion.div
+                      key={i}
+                      className="flex items-center gap-2"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.2 + i * 0.08 }}
+                    >
+                      <div className="w-4 h-4 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Check className="w-2.5 h-2.5 text-primary" />
                       </div>
-                      <div className="flex-1 mx-3">
-                        <div className="bg-background/60 rounded-md px-3 py-1 text-[10px] text-muted-foreground font-mono text-center">
-                          neurostate.app/team-dashboard
+                      <span className="text-sm text-muted-foreground">{item}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </ScrollReveal>
+
+              {/* Full-width product screenshot */}
+              <ScrollReveal delay={0.15}>
+                <motion.div
+                  className="relative rounded-xl border border-border/50 bg-card overflow-hidden shadow-xl"
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* Browser chrome */}
+                  <div className="flex items-center gap-2 px-4 py-3 border-b border-border/30 bg-muted/30">
+                    <div className="flex gap-1.5">
+                      <div className="w-2.5 h-2.5 rounded-full bg-destructive/40" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-accent/60" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-primary/40" />
+                    </div>
+                    <div className="flex-1 mx-3">
+                      <div className="bg-background/60 rounded-md px-3 py-1 text-[10px] text-muted-foreground font-mono text-center max-w-xs mx-auto">
+                        neurostate.app/team-dashboard
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-5 md:p-8 space-y-5">
+                    {/* Dashboard header bar */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                          <Gauge className="w-4 h-4 text-primary" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-foreground">Team Intelligence</p>
+                          <p className="text-[10px] text-muted-foreground">Last updated 2 min ago</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="h-7 px-3 rounded-md bg-muted/50 border border-border/30 text-[10px] text-muted-foreground flex items-center gap-1.5 font-mono">
+                          <span>Last 7 days</span>
+                          <ChevronDown className="w-3 h-3" />
+                        </div>
+                        <div className="h-7 px-3 rounded-md bg-muted/50 border border-border/30 text-[10px] text-muted-foreground flex items-center gap-1.5 font-mono">
+                          <span>All teams</span>
+                          <ChevronDown className="w-3 h-3" />
                         </div>
                       </div>
                     </div>
 
-                    <div className="p-5 space-y-4">
-                      {/* Executive strip */}
-                      <div className="grid grid-cols-3 gap-3">
-                        {[
-                          { label: "Cognitive Capacity", value: "78", suffix: "/100", color: "text-primary" },
-                          { label: "Revenue Exposure", value: "£142k", suffix: "", color: "text-destructive" },
-                          { label: "Burnout Risk", value: "23%", suffix: " ↓", color: "text-green-500" },
-                        ].map((metric, i) => (
-                          <motion.div
-                            key={i}
-                            className="bg-background rounded-lg p-3 border border-border/30"
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.4 + i * 0.1 }}
-                          >
-                            <p className="text-[9px] font-mono uppercase tracking-wider text-muted-foreground mb-1">{metric.label}</p>
-                            <p className={`text-lg font-semibold ${metric.color}`}>
+                    {/* Executive metric strip */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                      {[
+                        { label: "Cognitive Capacity", value: "78", suffix: "/100", color: "text-primary", trend: "↑ 4%" },
+                        { label: "Revenue Exposure", value: "£142k", suffix: "", color: "text-destructive", trend: "↓ 12%" },
+                        { label: "Burnout Risk", value: "23%", suffix: "", color: "text-primary", trend: "↓ 8%" },
+                        { label: "Protocol Completion", value: "87%", suffix: "", color: "text-primary", trend: "↑ 5%" },
+                      ].map((metric, i) => (
+                        <motion.div
+                          key={i}
+                          className="bg-background rounded-lg p-4 border border-border/30"
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.3 + i * 0.08 }}
+                        >
+                          <p className="text-[9px] font-mono uppercase tracking-wider text-muted-foreground mb-2">{metric.label}</p>
+                          <div className="flex items-end justify-between">
+                            <p className={`text-xl font-semibold ${metric.color}`}>
                               {metric.value}<span className="text-xs font-normal text-muted-foreground">{metric.suffix}</span>
                             </p>
-                          </motion.div>
-                        ))}
-                      </div>
+                            <span className={`text-[10px] font-medium ${metric.trend.startsWith('↑') ? 'text-primary' : 'text-destructive'}`}>{metric.trend}</span>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
 
-                      {/* Chart area */}
+                    <div className="grid md:grid-cols-3 gap-4">
+                      {/* Chart area — 2 cols */}
                       <motion.div
-                        className="bg-background rounded-lg border border-border/30 p-4"
+                        className="md:col-span-2 bg-background rounded-lg border border-border/30 p-5"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.6 }}
+                      >
+                        <div className="flex items-center justify-between mb-4">
+                          <p className="text-xs font-medium text-foreground">Team Energy & Recovery</p>
+                          <div className="flex gap-4">
+                            <span className="text-[10px] text-muted-foreground flex items-center gap-1.5"><span className="w-3 h-[3px] bg-primary rounded-full inline-block" /> Energy</span>
+                            <span className="text-[10px] text-muted-foreground flex items-center gap-1.5"><span className="w-3 h-[3px] bg-muted-foreground/30 rounded-full inline-block" /> Recovery</span>
+                          </div>
+                        </div>
+                        <svg viewBox="0 0 400 80" className="w-full h-20" fill="none">
+                          {/* Grid lines */}
+                          <line x1="0" y1="20" x2="400" y2="20" stroke="hsl(var(--border))" strokeWidth="0.5" strokeOpacity="0.3" />
+                          <line x1="0" y1="40" x2="400" y2="40" stroke="hsl(var(--border))" strokeWidth="0.5" strokeOpacity="0.3" />
+                          <line x1="0" y1="60" x2="400" y2="60" stroke="hsl(var(--border))" strokeWidth="0.5" strokeOpacity="0.3" />
+                          {/* Energy line with gradient fill */}
+                          <defs>
+                            <linearGradient id="energyGrad" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.15" />
+                              <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+                            </linearGradient>
+                          </defs>
+                          <path d="M0,55 C30,50 60,42 100,38 S160,30 200,35 S280,22 330,18 S380,15 400,12 L400,80 L0,80 Z" fill="url(#energyGrad)" />
+                          <path d="M0,55 C30,50 60,42 100,38 S160,30 200,35 S280,22 330,18 S380,15 400,12" stroke="hsl(var(--primary))" strokeWidth="2" fill="none" />
+                          <path d="M0,60 C30,58 60,52 100,48 S160,42 200,45 S280,35 330,32 S380,28 400,25" stroke="hsl(var(--muted-foreground))" strokeWidth="1.5" strokeOpacity="0.25" fill="none" strokeDasharray="4 3" />
+                          {/* Data point */}
+                          <circle cx="330" cy="18" r="3" fill="hsl(var(--primary))" />
+                          <circle cx="330" cy="18" r="6" fill="hsl(var(--primary))" fillOpacity="0.15" />
+                        </svg>
+                        <div className="flex justify-between mt-2">
+                          {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(d => (
+                            <span key={d} className="text-[9px] text-muted-foreground/50 font-mono">{d}</span>
+                          ))}
+                        </div>
+                      </motion.div>
+
+                      {/* AI Alerts — 1 col */}
+                      <motion.div
+                        className="bg-background rounded-lg border border-border/30 p-5"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.7 }}
                       >
-                        <div className="flex items-center justify-between mb-3">
-                          <p className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">Team Energy Trend — 7 Days</p>
-                          <div className="flex gap-3">
-                            <span className="text-[9px] text-muted-foreground flex items-center gap-1"><span className="w-2 h-0.5 bg-primary rounded-full inline-block" /> Energy</span>
-                            <span className="text-[9px] text-muted-foreground flex items-center gap-1"><span className="w-2 h-0.5 bg-muted-foreground/40 rounded-full inline-block" /> Recovery</span>
-                          </div>
+                        <p className="text-xs font-medium text-foreground mb-3">Active Alerts</p>
+                        <div className="space-y-3">
+                          {[
+                            { icon: "🔴", title: "Sales team burnout risk elevated", time: "2h ago" },
+                            { icon: "🟡", title: "3 engineers below recovery threshold", time: "4h ago" },
+                            { icon: "🟢", title: "Product team protocol 92% complete", time: "6h ago" },
+                          ].map((alert, i) => (
+                            <div key={i} className="flex items-start gap-2.5">
+                              <span className="text-[10px] mt-0.5">{alert.icon}</span>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-[11px] text-foreground leading-snug">{alert.title}</p>
+                                <p className="text-[9px] text-muted-foreground mt-0.5">{alert.time}</p>
+                              </div>
+                            </div>
+                          ))}
                         </div>
-                        {/* SVG sparkline */}
-                        <svg viewBox="0 0 280 60" className="w-full h-16" fill="none">
-                          <path d="M0,40 Q20,35 40,30 T80,25 T120,20 T160,28 T200,18 T240,15 T280,12" stroke="hsl(var(--primary))" strokeWidth="2" fill="none" />
-                          <path d="M0,45 Q20,42 40,38 T80,35 T120,32 T160,36 T200,30 T240,28 T280,25" stroke="hsl(var(--muted-foreground))" strokeWidth="1.5" strokeOpacity="0.3" fill="none" strokeDasharray="4 3" />
-                        </svg>
                       </motion.div>
-
-                      {/* Team rows */}
-                      <div className="space-y-2">
-                        {[
-                          { team: "Engineering", members: 24, cci: 82, risk: "Low", riskColor: "bg-green-500/15 text-green-600" },
-                          { team: "Sales", members: 18, cci: 64, risk: "Medium", riskColor: "bg-yellow-500/15 text-yellow-600" },
-                          { team: "Product", members: 12, cci: 91, risk: "Low", riskColor: "bg-green-500/15 text-green-600" },
-                        ].map((team, i) => (
-                          <motion.div
-                            key={i}
-                            className="flex items-center justify-between py-2.5 px-3 bg-background rounded-lg border border-border/30 hover:border-primary/20 transition-colors"
-                            initial={{ opacity: 0, x: 10 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.8 + i * 0.08 }}
-                          >
-                            <div className="flex items-center gap-3">
-                              <div className="w-7 h-7 rounded-lg bg-primary/8 flex items-center justify-center">
-                                <Users className="w-3.5 h-3.5 text-primary" />
-                              </div>
-                              <div>
-                                <p className="text-xs font-medium text-foreground">{team.team}</p>
-                                <p className="text-[10px] text-muted-foreground">{team.members} members</p>
-                              </div>
-                            </div>
-                            <div className="flex items-center gap-3">
-                              <div className="text-right">
-                                <p className="text-xs font-semibold text-foreground">{team.cci}</p>
-                                <p className="text-[9px] text-muted-foreground">CCI</p>
-                              </div>
-                              <span className={`text-[9px] px-2 py-0.5 rounded-full font-medium ${team.riskColor}`}>{team.risk}</span>
-                            </div>
-                          </motion.div>
-                        ))}
-                      </div>
                     </div>
-                  </motion.div>
-                </ScrollReveal>
-              </div>
+
+                    {/* Team breakdown rows */}
+                    <div className="grid md:grid-cols-3 gap-3">
+                      {[
+                        { team: "Engineering", members: 24, cci: 82, risk: "Low", riskColor: "bg-primary/10 text-primary" },
+                        { team: "Sales", members: 18, cci: 64, risk: "High", riskColor: "bg-destructive/10 text-destructive" },
+                        { team: "Product", members: 12, cci: 91, risk: "Low", riskColor: "bg-primary/10 text-primary" },
+                      ].map((team, i) => (
+                        <motion.div
+                          key={i}
+                          className="flex items-center justify-between py-3 px-4 bg-background rounded-lg border border-border/30 hover:border-primary/20 transition-colors cursor-pointer"
+                          initial={{ opacity: 0, y: 8 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.8 + i * 0.06 }}
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-lg bg-primary/8 flex items-center justify-center">
+                              <Users className="w-4 h-4 text-primary" />
+                            </div>
+                            <div>
+                              <p className="text-xs font-medium text-foreground">{team.team}</p>
+                              <p className="text-[10px] text-muted-foreground">{team.members} members</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <div className="text-right">
+                              <p className="text-sm font-semibold text-foreground">{team.cci}</p>
+                              <p className="text-[9px] text-muted-foreground">CCI</p>
+                            </div>
+                            <span className={`text-[9px] px-2 py-0.5 rounded-full font-medium ${team.riskColor}`}>{team.risk}</span>
+                            <ArrowRight className="w-3.5 h-3.5 text-muted-foreground/40" />
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </ScrollReveal>
+
+              {/* CTA below showcase */}
+              <motion.div
+                className="flex justify-center mt-10"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+              >
+                <Link to="/team-dashboard">
+                  <Button variant="outline" className="h-11 px-7 text-sm font-medium rounded-full group">
+                    Explore Team Dashboard
+                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </Link>
+              </motion.div>
             </div>
           </section>
 
