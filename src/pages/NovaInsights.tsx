@@ -660,8 +660,8 @@ export default function NovaInsights() {
                   </div>
                 </div>
 
-                <div className="group p-6 bg-card rounded-3xl border border-foreground/5 hover:border-foreground/10 transition-all">
-                  <h3 className="text-sm font-medium text-foreground mb-6">Sleep Stages</h3>
+                <div className="group p-5 bg-card rounded-xl border border-border/50 hover:border-border hover:shadow-sm transition-all">
+                  <h3 className="text-sm font-medium text-foreground mb-5">Sleep Stages</h3>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={sleepData}>
