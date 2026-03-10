@@ -4,7 +4,7 @@ import { SEO } from "@/components/SEO";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import { ROICalculator } from "@/components/ROICalculator";
-import { ArrowRight, Building2, Briefcase, Heart, Shield, FlaskConical, Cpu, TrendingUp, Users, Zap } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Building2, Briefcase, Heart, Shield, FlaskConical, Cpu, TrendingUp, Users, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -16,7 +16,6 @@ const industries = [
     icon: Cpu,
     href: "/industries/saas-high-growth",
     stats: { turnover: "18%", productivity: "17%" },
-    color: "from-blue-500/20 to-cyan-500/20"
   },
   {
     id: "financial-services",
@@ -25,7 +24,6 @@ const industries = [
     icon: TrendingUp,
     href: "/industries/financial-services",
     stats: { turnover: "13%", productivity: "14%" },
-    color: "from-green-500/20 to-emerald-500/20"
   },
   {
     id: "professional-services",
@@ -34,7 +32,6 @@ const industries = [
     icon: Briefcase,
     href: "/industries/professional-services",
     stats: { turnover: "22%", productivity: "19%" },
-    color: "from-purple-500/20 to-pink-500/20"
   },
   {
     id: "healthcare",
@@ -43,7 +40,6 @@ const industries = [
     icon: Heart,
     href: "/industries/healthcare",
     stats: { turnover: "19%", productivity: "16%" },
-    color: "from-red-500/20 to-rose-500/20"
   },
   {
     id: "research-life-sciences",
@@ -52,7 +48,6 @@ const industries = [
     icon: FlaskConical,
     href: "/industries/research-life-sciences",
     stats: { turnover: "15%", productivity: "18%" },
-    color: "from-amber-500/20 to-orange-500/20"
   },
   {
     id: "government-defence",
@@ -61,7 +56,6 @@ const industries = [
     icon: Shield,
     href: "/industries/government-defence",
     stats: { turnover: "11%", productivity: "13%" },
-    color: "from-slate-500/20 to-zinc-500/20"
   }
 ];
 
@@ -80,73 +74,63 @@ const Industries = () => {
         description="NeuroState adapts to your industry's unique cognitive demands. Calculate your ROI and see how we serve SaaS, financial services, healthcare, and more."
         keywords="enterprise wellness, industry solutions, SaaS burnout prevention, healthcare workforce, financial services performance"
       />
-      <div className="min-h-screen bg-background relative overflow-hidden">
-        <div className="fixed inset-0 pointer-events-none">
-          <div className="absolute top-1/3 right-0 w-[600px] h-[600px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
-        </div>
+      <div className="min-h-screen bg-background">
         <Header />
         <main>
-          {/* Hero Section */}
-          <section className="pt-24 pb-12 md:pt-32 md:pb-16 px-6 md:px-8">
+          {/* Hero */}
+          <section className="pt-24 pb-16 md:pt-32 md:pb-24 px-5 md:px-8">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="max-w-3xl">
-                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Industries</span>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-foreground mt-3 mb-4">
-                  Built for knowledge-intensive organisations
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Industries</span>
+                <h1 className="text-[2.5rem] md:text-[3.25rem] lg:text-[3.75rem] font-medium text-foreground mt-4 tracking-tight leading-[1.08]">
+                  Built for knowledge-intensive{" "}
+                  <span className="text-muted-foreground">organisations.</span>
                 </h1>
-                <p className="text-base md:text-lg text-muted-foreground max-w-2xl">
-                  Every industry has unique cognitive demands. NeuroState adapts to yours, with benchmarks, 
-                  integrations, and ROI models tailored to your sector.
+                <p className="text-base md:text-lg text-muted-foreground max-w-xl mt-6 leading-relaxed">
+                  Every industry has unique cognitive demands. NeuroState adapts to yours, with benchmarks, integrations, and ROI models tailored to your sector.
                 </p>
               </ScrollReveal>
             </div>
           </section>
 
           {/* Industry Grid */}
-          <section className="py-12 md:py-16 px-6 md:px-8">
+          <section className="py-16 md:py-28 px-5 md:px-8 border-t border-border/30">
             <div className="max-w-6xl mx-auto">
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {industries.map((industry, i) => (
                   <Link key={industry.id} to={industry.href}>
                     <motion.div
-                      className={`group relative h-full p-5 rounded-xl bg-gradient-to-br ${industry.color} border border-border/30 hover:border-primary/40 transition-all duration-300 cursor-pointer overflow-hidden`}
-                      initial={{ opacity: 0, y: 20 }}
+                      className="group p-6 rounded-xl border border-border/40 hover:border-primary/30 transition-colors h-full"
+                      initial={{ opacity: 0, y: 16 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-50px" }}
-                      transition={{ duration: 0.5, delay: i * 0.06 }}
-                      whileHover={{ y: -4, scale: 1.02 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: i * 0.06 }}
                     >
-                      <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-background/50 to-transparent rounded-bl-full opacity-50" />
+                      <div className="w-10 h-10 rounded-lg bg-primary/8 flex items-center justify-center mb-4 group-hover:bg-primary/15 transition-colors">
+                        <industry.icon className="w-5 h-5 text-primary" />
+                      </div>
                       
-                      <div className="relative z-10">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-9 h-9 rounded-lg bg-background/80 flex items-center justify-center group-hover:bg-background transition-colors">
-                            <industry.icon className="w-4 h-4 text-foreground" />
-                          </div>
+                      <h3 className="text-base font-medium text-foreground mb-2 group-hover:text-primary transition-colors">
+                        {industry.name}
+                      </h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-5">
+                        {industry.description}
+                      </p>
+                      
+                      <div className="flex items-center gap-6 pt-4 border-t border-border/30">
+                        <div>
+                          <p className="text-lg font-light text-foreground">{industry.stats.turnover}</p>
+                          <p className="text-[10px] text-muted-foreground font-mono">Avg. turnover</p>
                         </div>
-                        
-                        <h3 className="text-sm font-medium text-foreground mb-1.5 group-hover:text-primary transition-colors">
-                          {industry.name}
-                        </h3>
-                        <p className="text-xs text-muted-foreground leading-relaxed mb-4">
-                          {industry.description}
-                        </p>
-                        
-                        <div className="flex items-center gap-4 pt-3 border-t border-border/30">
-                          <div>
-                            <p className="text-sm font-medium text-foreground">{industry.stats.turnover}</p>
-                            <p className="text-[10px] text-muted-foreground">Avg. turnover</p>
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium text-foreground">{industry.stats.productivity}</p>
-                            <p className="text-[10px] text-muted-foreground">Productivity loss</p>
-                          </div>
+                        <div>
+                          <p className="text-lg font-light text-foreground">{industry.stats.productivity}</p>
+                          <p className="text-[10px] text-muted-foreground font-mono">Productivity loss</p>
                         </div>
-                        
-                        <div className="flex items-center gap-2 mt-3 text-[10px] text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                          <span>Explore</span>
-                          <ArrowRight className="w-3 h-3" />
-                        </div>
+                      </div>
+                      
+                      <div className="flex items-center gap-2 mt-4 text-xs font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                        Explore
+                        <ArrowRight className="w-3 h-3" />
                       </div>
                     </motion.div>
                   </Link>
@@ -156,152 +140,126 @@ const Industries = () => {
           </section>
 
           {/* Impact Stats */}
-          <section className="py-10 md:py-12 px-6 md:px-8 bg-foreground">
+          <section className="py-16 md:py-20 px-5 md:px-8 bg-foreground">
             <div className="max-w-6xl mx-auto">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
                 {impactStats.map((stat, i) => (
                   <motion.div
                     key={i}
-                    className="text-center md:text-left group cursor-default"
-                    initial={{ opacity: 0, y: 20 }}
+                    className="group cursor-default"
+                    initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                    whileHover={{ scale: 1.05 }}
+                    transition={{ delay: i * 0.08 }}
                   >
-                    <p className="text-2xl md:text-3xl font-light text-background mb-1 group-hover:text-primary transition-colors">{stat.value}</p>
+                    <p className="text-3xl md:text-4xl font-light text-background mb-1">{stat.value}</p>
                     <p className="text-xs text-background/80 font-medium">{stat.label}</p>
-                    <p className="text-[10px] text-background/50 mt-0.5">{stat.sublabel}</p>
+                    <p className="text-[10px] text-background/50 mt-0.5 font-mono">{stat.sublabel}</p>
                   </motion.div>
                 ))}
               </div>
             </div>
           </section>
 
-          {/* ROI Calculator Section */}
-          <section className="py-12 md:py-20 px-6 md:px-8" id="calculator">
+          {/* ROI Calculator */}
+          <section className="py-16 md:py-28 px-5 md:px-8" id="calculator">
             <div className="max-w-5xl mx-auto">
-              <ScrollReveal className="text-center mb-10">
-                <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">ROI Calculator</span>
-                <h2 className="text-2xl md:text-3xl font-normal text-foreground mt-3 mb-4">
+              <ScrollReveal className="mb-14 md:mb-20 text-center">
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">ROI Calculator</span>
+                <h2 className="text-3xl md:text-[2.75rem] font-medium text-foreground mt-4 leading-[1.1]">
                   Calculate your hidden costs
                 </h2>
-                <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-                  See what cognitive underperformance, burnout-related turnover, and preventable sick days 
-                  are really costing your organisation, and what NeuroState can recover.
+                <p className="text-base text-muted-foreground max-w-xl mx-auto mt-6 leading-relaxed">
+                  See what cognitive underperformance, burnout-related turnover, and preventable sick days are really costing your organisation.
                 </p>
               </ScrollReveal>
 
-              <motion.div
-                className="bg-background rounded-2xl border border-border/50 p-6 md:p-8 shadow-lg"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
+              <div className="p-6 md:p-8 rounded-xl border border-border/50 bg-background">
                 <ROICalculator />
-              </motion.div>
+              </div>
             </div>
           </section>
 
           {/* Enterprise Features */}
-          <section className="py-12 md:py-16 px-6 md:px-8 bg-card/50">
+          <section className="py-16 md:py-28 px-5 md:px-8 bg-muted/20">
             <div className="max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <ScrollReveal className="space-y-5">
-                  <span className="text-[11px] tracking-[0.15em] uppercase text-primary font-medium">Enterprise Ready</span>
-                  <h2 className="text-2xl md:text-3xl font-normal text-foreground">
-                    Built for scale
+              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+                <ScrollReveal className="lg:sticky lg:top-28">
+                  <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Enterprise Ready</span>
+                  <h2 className="text-3xl md:text-[2.75rem] font-medium text-foreground mt-4 leading-[1.1]">
+                    Built for scale.{" "}
+                    <span className="text-muted-foreground">Ready for compliance.</span>
                   </h2>
-                  <p className="text-sm text-muted-foreground max-w-md">
+                  <p className="text-base text-muted-foreground max-w-md mt-6 leading-relaxed">
                     NeuroState is designed for enterprise deployment with security, compliance, and integration capabilities that match your requirements.
                   </p>
-                  
-                  <div className="grid grid-cols-2 gap-3 py-2">
-                    {[
-                      { icon: Shield, text: "SOC 2 Type II", detail: "Certified compliant" },
-                      { icon: Building2, text: "SSO & SCIM", detail: "Enterprise auth" },
-                      { icon: Zap, text: "40+ Integrations", detail: "Wearables & tools" },
-                      { icon: Users, text: "Unlimited seats", detail: "Scale freely" }
-                    ].map((item, i) => (
-                      <motion.div 
-                        key={i} 
-                        className="p-3 rounded-xl bg-background/50 border border-border/30 hover:border-primary/30 transition-all group cursor-default"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.1 }}
-                        whileHover={{ y: -2, scale: 1.02 }}
-                      >
-                        <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center mb-2 group-hover:bg-primary/20 transition-colors">
-                          <item.icon className="w-3.5 h-3.5 text-primary" />
-                        </div>
-                        <p className="text-xs font-medium text-foreground">{item.text}</p>
-                        <p className="text-[10px] text-muted-foreground mt-0.5">{item.detail}</p>
-                      </motion.div>
-                    ))}
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-3 pt-2">
+                  <div className="flex flex-wrap gap-3 mt-8">
                     <Link to="/contact">
-                      <Button className="h-9 px-4 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                      <Button size="lg" className="h-12 px-8 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
                         Book a demo
                         <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                       </Button>
                     </Link>
                     <Link to="/enterprise/overview">
-                      <Button variant="outline" className="h-9 px-4 text-sm font-medium rounded-full">
+                      <Button size="lg" variant="outline" className="h-12 px-6 text-sm font-medium rounded-full border-border/60 hover:border-foreground/30">
                         Enterprise overview
                       </Button>
                     </Link>
                   </div>
                 </ScrollReveal>
 
-                <ScrollReveal direction="right" delay={0.2}>
-                  <div className="grid grid-cols-2 gap-4">
-                    {[
-                      { label: "Data residency", options: "EU, US, UK, APAC" },
-                      { label: "Uptime SLA", options: "99.9% guaranteed" },
-                      { label: "Support", options: "24/7 dedicated" },
-                      { label: "Onboarding", options: "White-glove service" }
-                    ].map((item, i) => (
-                      <motion.div
-                        key={i}
-                        className="p-4 rounded-xl bg-background border border-border/30 text-center"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3 + i * 0.1 }}
-                      >
-                        <p className="text-xs text-muted-foreground mb-1">{item.label}</p>
-                        <p className="text-sm font-medium text-foreground">{item.options}</p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </ScrollReveal>
+                <div className="space-y-0">
+                  {[
+                    { icon: Shield, title: "SOC 2 Type II", desc: "Enterprise security controls, certified compliant." },
+                    { icon: Building2, title: "SSO & SCIM", desc: "Enterprise authentication and provisioning." },
+                    { icon: Zap, title: "40+ Integrations", desc: "Connect to wearables and productivity tools." },
+                    { icon: Users, title: "Unlimited seats", desc: "Scale freely across your organisation." },
+                  ].map((item, i) => (
+                    <motion.div
+                      key={i}
+                      className="group py-7 border-b border-border/40 last:border-0"
+                      initial={{ opacity: 0, y: 12 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.08 }}
+                      whileHover={{ x: 6 }}
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className="w-10 h-10 rounded-lg bg-primary/8 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/15 transition-colors">
+                          <item.icon className="w-5 h-5 text-primary" />
+                        </div>
+                        <div>
+                          <h3 className="text-base font-medium text-foreground group-hover:text-primary transition-colors">{item.title}</h3>
+                          <p className="text-sm text-muted-foreground mt-1">{item.desc}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </div>
           </section>
 
-          {/* Final CTA */}
-          <section className="py-12 md:py-16 px-6 md:px-8">
+          {/* CTA */}
+          <section className="py-20 md:py-32 px-5 md:px-8 bg-foreground">
             <div className="max-w-3xl mx-auto text-center">
-              <ScrollReveal className="space-y-5">
-                <h2 className="text-2xl md:text-3xl font-normal text-foreground">
+              <ScrollReveal className="space-y-6">
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Next Steps</span>
+                <h2 className="text-3xl md:text-[2.75rem] font-medium text-background leading-[1.1]">
                   Ready to see your numbers?
                 </h2>
-                <p className="text-sm text-muted-foreground max-w-lg mx-auto">
+                <p className="text-base text-background/60 max-w-lg mx-auto">
                   Get a custom ROI analysis for your organisation. Our team will walk you through the platform and show you exactly what NeuroState can deliver.
                 </p>
-                <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
                   <Link to="/contact">
-                    <Button className="h-10 px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                    <Button size="lg" className="h-12 px-8 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group">
                       Book a demo
-                      <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      <ArrowUpRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </Button>
                   </Link>
                   <a href="#calculator">
-                    <Button variant="outline" className="h-10 px-6 text-sm font-medium rounded-full">
+                    <Button size="lg" className="h-12 px-8 text-sm font-medium rounded-full bg-transparent border border-background/30 text-background hover:bg-background/10">
                       Use calculator
                     </Button>
                   </a>
