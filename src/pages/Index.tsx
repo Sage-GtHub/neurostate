@@ -2,6 +2,7 @@ import { Header } from "@/components/Header";
 import Hero from "@/components/Hero";
 import { SEO } from "@/components/SEO";
 import { CorporateServiceStructuredData, FAQStructuredData, WebsiteStructuredData } from "@/components/StructuredData";
+import { AnnouncementBar } from "@/components/AnnouncementBar";
 
 const homepageFaqs = [
   { question: "What is NeuroState?", answer: "NeuroState is the cognitive performance infrastructure for organisations. It connects to 40+ wearable devices your team already uses, surfaces early signs of burnout and fatigue, and gives managers clear actions to keep people performing at their best." },
@@ -183,9 +184,7 @@ const Index = () => {
       <WebsiteStructuredData />
       <FAQStructuredData faqs={homepageFaqs} />
       <div className="min-h-screen bg-background mobile-nav-padding relative overflow-hidden">
-        <div className="fixed inset-0 pointer-events-none">
-          <div className="absolute top-1/3 right-0 w-[600px] h-[600px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
-        </div>
+        <AnnouncementBar />
         <Header />
         <main>
           <Hero />
