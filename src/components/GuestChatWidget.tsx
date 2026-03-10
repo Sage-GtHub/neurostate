@@ -7,39 +7,46 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 
-// Strip any remaining markdown formatting (asterisks, hashes, etc.)
+// Aggressively strip all markdown formatting
 const sanitiseMarkdown = (text: string): string => {
   return text
-    .replace(/\*\*([^*]+)\*\*/g, '$1')  // **bold**
-    .replace(/\*([^*]+)\*/g, '$1')       // *italic*
-    .replace(/__([^_]+)__/g, '$1')       // __bold__
-    .replace(/_([^_]+)_/g, '$1')         // _italic_
-    .replace(/^#{1,6}\s+/gm, '')         // # headings
-    .replace(/`([^`]+)`/g, '$1');        // `code`
+    .replace(/\*\*/g, '')                  // Remove all ** (bold markers)
+    .replace(/(?:^|\n)\s*\*\s+/g, '\n• ') // * list items → bullet
+    .replace(/(?<![a-zA-Z0-9/])\*(?![a-zA-Z0-9*])/g, '') // stray asterisks
+    .replace(/__/g, '')                    // Remove all __ (bold markers)
+    .replace(/(?<!\w)_([^_]+)_(?!\w)/g, '$1') // _italic_
+    .replace(/^#{1,6}\s+/gm, '')           // # headings
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1 ($2)') // [text](url) → text (url)
+    .replace(/`([^`]+)`/g, '$1')           // `code` → plain
+    .replace(/^\s*[-]\s+/gm, '• ');        // - list items → bullet
 };
 
-// Render text with clickable URLs
+// Render text with clickable URLs (including bare domains)
 const RenderWithLinks = ({ text }: { text: string }) => {
-  const urlRegex = /(https?:\/\/[^\s<>"{}|\\^`[\]]+)/g;
-  const parts = text.split(urlRegex);
+  // Split on full URLs and bare domain patterns
+  const splitRegex = /(https?:\/\/[^\s<>"{}|\\^`[\]()]+|(?:[\w-]+\.)+(?:com|io|co|org|net|uk|ai|dev|app|health)(?:\/[^\s<>"{}|\\^`[\]()]*)?)/gi;
+  const parts = text.split(splitRegex);
+  const isUrl = (s: string) => /^(https?:\/\/|(?:[\w-]+\.)+(?:com|io|co|org|net|uk|ai|dev|app|health))/i.test(s);
   
   return (
     <>
-      {parts.map((part, i) =>
-        urlRegex.test(part) ? (
-          <a
-            key={i}
-            href={part}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-accent underline underline-offset-2 hover:text-accent/80 break-all"
-          >
-            {part}
-          </a>
-        ) : (
-          <span key={i}>{part}</span>
-        )
-      )}
+      {parts.map((part, i) => {
+        if (isUrl(part)) {
+          const href = part.startsWith('http') ? part : `https://${part}`;
+          return (
+            <a
+              key={i}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent underline underline-offset-2 hover:text-accent/80 break-all"
+            >
+              {part}
+            </a>
+          );
+        }
+        return <span key={i}>{part}</span>;
+      })}
     </>
   );
 };
