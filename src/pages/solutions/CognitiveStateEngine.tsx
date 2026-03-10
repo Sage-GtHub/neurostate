@@ -194,7 +194,7 @@ export default function CognitiveStateEngine() {
                 </motion.div>
 
                 <motion.div 
-                  className="p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20"
+                  className="p-8 rounded-xl bg-muted/20 border border-primary/20"
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
