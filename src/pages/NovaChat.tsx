@@ -1093,9 +1093,9 @@ export default function NovaChat() {
                         onClick={() => handleSend(action.label)}
                         disabled={isLoading}
                         className={cn(
-                          "flex flex-col items-start gap-2 text-left p-4 rounded-2xl",
-                          "bg-muted/20 border border-border/15",
-                          "hover:bg-muted/40 hover:border-border/30",
+                "flex flex-col items-start gap-2 text-left p-4 rounded-xl",
+                          "bg-card border border-border/50",
+                          "hover:bg-muted/40 hover:border-border hover:shadow-sm",
                           "transition-all duration-200",
                           "disabled:opacity-50"
                         )}
