@@ -284,7 +284,7 @@ export default function ROILayer() {
             <div className="max-w-4xl mx-auto">
               <ScrollReveal>
                 <Link to="/solutions">
-                  <div className="group p-8 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent border border-primary/20 hover:border-primary/40 transition-all">
+                  <div className="group p-8 rounded-xl bg-muted/20 border border-border/40 hover:border-primary/30 transition-all">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
