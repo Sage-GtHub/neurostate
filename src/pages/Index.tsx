@@ -184,9 +184,7 @@ const Index = () => {
       <WebsiteStructuredData />
       <FAQStructuredData faqs={homepageFaqs} />
       <div className="min-h-screen bg-background mobile-nav-padding relative overflow-hidden">
-        <div className="fixed inset-0 pointer-events-none">
-          <div className="absolute top-1/3 right-0 w-[600px] h-[600px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
-        </div>
+        <AnnouncementBar />
         <Header />
         <main>
           <Hero />
