@@ -1202,9 +1202,9 @@ export default function NovaChat() {
             <div className="max-w-2xl mx-auto p-3 sm:p-4 pb-safe">
               <motion.div 
                 className={cn(
-                  "flex items-end gap-2 rounded-2xl border transition-all duration-300",
-                  "bg-muted/15 border-border/15",
-                  "focus-within:border-accent/25 focus-within:bg-muted/25 focus-within:shadow-lg focus-within:shadow-accent/[0.04]"
+                  "flex items-end gap-2 rounded-xl border transition-all duration-300",
+                  "bg-card border-border/50",
+                  "focus-within:border-accent/30 focus-within:shadow-lg focus-within:shadow-accent/[0.04]"
                 )}
                 layout
                 transition={{ type: "spring", stiffness: 500, damping: 35 }}
