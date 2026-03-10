@@ -5,8 +5,18 @@ import { useToast } from "@/hooks/use-toast";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import ReactMarkdown from "react-markdown";
 import { format } from "date-fns";
+
+// Strip any remaining markdown formatting (asterisks, hashes, etc.)
+const sanitiseMarkdown = (text: string): string => {
+  return text
+    .replace(/\*\*([^*]+)\*\*/g, '$1')  // **bold**
+    .replace(/\*([^*]+)\*/g, '$1')       // *italic*
+    .replace(/__([^_]+)__/g, '$1')       // __bold__
+    .replace(/_([^_]+)_/g, '$1')         // _italic_
+    .replace(/^#{1,6}\s+/gm, '')         // # headings
+    .replace(/`([^`]+)`/g, '$1');        // `code`
+};
 
 type Message = {
   role: "user" | "assistant";
@@ -612,31 +622,11 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                             <span className="text-xs sm:text-[10px] font-bold text-white">N</span>
                           </div>
                           <div className="flex-1 pt-1 sm:pt-1">
-                            <div className="prose prose-sm dark:prose-invert max-w-none text-[15px] sm:text-sm leading-relaxed">
+                             <div className="max-w-none text-[15px] sm:text-sm leading-relaxed">
                               {msg.content ? (
-                                <ReactMarkdown
-                                  components={{
-                                    p: ({ children }) => <p className="text-foreground leading-relaxed mb-3 last:mb-0">{children}</p>,
-                                    ul: ({ children }) => <ul className="list-disc pl-4 mb-3 space-y-1">{children}</ul>,
-                                    ol: ({ children }) => <ol className="list-decimal pl-4 mb-3 space-y-1">{children}</ol>,
-                                    li: ({ children }) => <li className="text-foreground">{children}</li>,
-                                    strong: ({ children }) => <strong className="font-semibold text-foreground">{children}</strong>,
-                                    a: ({ href, children }) => (
-                                      <button
-                                        onClick={() => handleLinkClick(href || '#')}
-                                        className="text-accent hover:underline inline-flex items-center gap-1 cursor-pointer bg-transparent border-0 p-0 font-inherit"
-                                      >
-                                        {children}
-                                        {href?.startsWith('/') ? null : <ExternalLink className="w-3 h-3" />}
-                                      </button>
-                                    ),
-                                    code: ({ children }) => (
-                                      <code className="px-1.5 py-0.5 rounded bg-muted text-sm font-mono">{children}</code>
-                                    ),
-                                  }}
-                                >
-                                  {msg.content}
-                                </ReactMarkdown>
+                                <div className="text-foreground leading-relaxed whitespace-pre-line">
+                                  {sanitiseMarkdown(msg.content)}
+                                </div>
                               ) : (
                                 <TypingIndicator />
                               )}
