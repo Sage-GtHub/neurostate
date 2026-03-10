@@ -18,6 +18,32 @@ const sanitiseMarkdown = (text: string): string => {
     .replace(/`([^`]+)`/g, '$1');        // `code`
 };
 
+// Render text with clickable URLs
+const RenderWithLinks = ({ text }: { text: string }) => {
+  const urlRegex = /(https?:\/\/[^\s<>"{}|\\^`[\]]+)/g;
+  const parts = text.split(urlRegex);
+  
+  return (
+    <>
+      {parts.map((part, i) =>
+        urlRegex.test(part) ? (
+          <a
+            key={i}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent underline underline-offset-2 hover:text-accent/80 break-all"
+          >
+            {part}
+          </a>
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      )}
+    </>
+  );
+};
+
 type Message = {
   role: "user" | "assistant";
   content: string;
@@ -624,9 +650,9 @@ export function GuestChatWidget({ open, onOpenChange }: GuestChatWidgetProps) {
                           <div className="flex-1 pt-1 sm:pt-1">
                              <div className="max-w-none text-[15px] sm:text-sm leading-relaxed">
                               {msg.content ? (
-                                <div className="text-foreground leading-relaxed whitespace-pre-line">
-                                  {sanitiseMarkdown(msg.content)}
-                                </div>
+                                 <div className="text-foreground leading-relaxed whitespace-pre-line">
+                                   <RenderWithLinks text={sanitiseMarkdown(msg.content)} />
+                                 </div>
                               ) : (
                                 <TypingIndicator />
                               )}
