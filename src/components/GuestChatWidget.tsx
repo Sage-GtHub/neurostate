@@ -7,17 +7,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 
-// Strip any remaining markdown formatting (asterisks, hashes, etc.)
+// Aggressively strip all markdown formatting
 const sanitiseMarkdown = (text: string): string => {
   return text
-    .replace(/\*\*(.*?)\*\*/gs, '$1')    // **bold** (non-greedy, multiline)
-    .replace(/\*(.*?)\*/gs, '$1')         // *italic*
-    .replace(/__([^_]+)__/g, '$1')        // __bold__
-    .replace(/(?<!\w)_([^_]+)_(?!\w)/g, '$1') // _italic_ (not in URLs)
-    .replace(/^#{1,6}\s+/gm, '')          // # headings
-    .replace(/`([^`]+)`/g, '$1')          // `code`
-    .replace(/^\s*[-*]\s+/gm, '• ')       // markdown list items → bullet
-    .replace(/^\s*\d+\.\s+/gm, (m) => m); // keep numbered lists
+    .replace(/\*\*/g, '')                  // Remove all ** (bold markers)
+    .replace(/(?:^|\n)\s*\*\s+/g, '\n• ') // * list items → bullet
+    .replace(/(?<![a-zA-Z0-9/])\*(?![a-zA-Z0-9*])/g, '') // stray asterisks
+    .replace(/__/g, '')                    // Remove all __ (bold markers)
+    .replace(/(?<!\w)_([^_]+)_(?!\w)/g, '$1') // _italic_
+    .replace(/^#{1,6}\s+/gm, '')           // # headings
+    .replace(/`([^`]+)`/g, '$1')           // `code` → plain
+    .replace(/^\s*[-]\s+/gm, '• ');        // - list items → bullet
 };
 
 // Render text with clickable URLs (including bare domains)
