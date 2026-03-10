@@ -20,6 +20,8 @@ import { IntegrationLogoStrip } from "@/components/IntegrationLogoStrip";
 import { NovaChatShowcase } from "@/components/home/NovaChatShowcase";
 import { PersonalDashboardShowcase } from "@/components/home/PersonalDashboardShowcase";
 import { InsightsShowcase } from "@/components/home/InsightsShowcase";
+import { PlatformShowcase } from "@/components/home/PlatformShowcase";
+import { TeamIntelligenceShowcase } from "@/components/home/TeamIntelligenceShowcase";
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Layers, Users } from "lucide-react";
@@ -460,6 +462,12 @@ const Index = () => {
               </div>
             </div>
           </section>
+
+          {/* Platform Showcase - Nova AI */}
+          <PlatformShowcase />
+
+          {/* Team Intelligence Showcase */}
+          <TeamIntelligenceShowcase />
 
           {/* Final CTA */}
           <section className="py-24 md:py-40 px-5 md:px-8 bg-foreground">
