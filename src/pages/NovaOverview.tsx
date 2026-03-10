@@ -122,7 +122,7 @@ export default function NovaOverview() {
                         <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 font-mono">{metric.label}</p>
                         <p className="text-2xl md:text-3xl font-light text-foreground">{metric.value}</p>
                         <div className="flex items-center gap-2 mt-1">
-                          <span className="text-xs text-emerald-600 font-medium">{metric.trend}</span>
+                          <span className="text-xs text-signal-green font-medium">{metric.trend}</span>
                           <span className="text-[11px] text-muted-foreground hidden md:inline">{metric.description}</span>
                         </div>
                       </motion.div>
