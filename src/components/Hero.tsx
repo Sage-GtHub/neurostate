@@ -129,7 +129,7 @@ const Hero = () => {
                   <div className="grid grid-cols-3 gap-3">
                     {[
                       { label: "Team Readiness", value: "87%", trend: "+5%", color: "text-primary" },
-                      { label: "Burnout Risk", value: "Low", trend: "↓12%", color: "text-emerald-600" },
+                      { label: "Burnout Risk", value: "Low", trend: "↓12%", color: "text-primary" },
                       { label: "Recovery Score", value: "92", trend: "+3", color: "text-foreground" },
                     ].map((m, i) => (
                       <motion.div 
