@@ -22,16 +22,15 @@ const sanitiseMarkdown = (text: string): string => {
 
 // Render text with clickable URLs (including bare domains)
 const RenderWithLinks = ({ text }: { text: string }) => {
-  // Match full URLs and bare domain-like patterns (e.g. neurostate.io/path)
-  const urlRegex = /(https?:\/\/[^\s<>"{}|\\^`[\]]+|(?:[\w-]+\.)+(?:com|io|co|org|net|uk|ai|dev|app|health)(?:\/[^\s<>"{}|\\^`[\]]*)?)/gi;
-  const parts = text.split(urlRegex);
+  // Split on full URLs and bare domain patterns
+  const splitRegex = /(https?:\/\/[^\s<>"{}|\\^`[\]()]+|(?:[\w-]+\.)+(?:com|io|co|org|net|uk|ai|dev|app|health)(?:\/[^\s<>"{}|\\^`[\]()]*)?)/gi;
+  const parts = text.split(splitRegex);
+  const isUrl = (s: string) => /^(https?:\/\/|(?:[\w-]+\.)+(?:com|io|co|org|net|uk|ai|dev|app|health))/i.test(s);
   
   return (
     <>
       {parts.map((part, i) => {
-        // Reset regex lastIndex for .test()
-        urlRegex.lastIndex = 0;
-        if (urlRegex.test(part)) {
+        if (isUrl(part)) {
           const href = part.startsWith('http') ? part : `https://${part}`;
           return (
             <a
