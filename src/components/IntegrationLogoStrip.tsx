@@ -1,39 +1,32 @@
 import { motion } from "framer-motion";
 
-const integrations = [
-  "Apple Health", "Oura", "Whoop", "Garmin", "Fitbit", "Samsung", "Polar", "Withings"
+const logos = [
+  "Apple Health", "Oura", "WHOOP", "Garmin", "Fitbit", 
+  "Samsung", "Polar", "Withings", "COROS", "Amazfit",
+  "Google Fit", "Slack", "Microsoft Teams", "Notion",
 ];
 
 export function IntegrationLogoStrip() {
   return (
-    <section className="py-8 md:py-10 px-6 md:px-8 border-b border-border/30 bg-muted/20">
-      <div className="max-w-5xl mx-auto text-center">
-        <motion.p
-          className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-6"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          Integrates with the devices your team already wears
-        </motion.p>
+    <section className="py-6 md:py-8 border-t border-border overflow-hidden">
+      <div className="relative">
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
+        
+        {/* Scrolling marquee */}
         <motion.div
-          className="flex flex-wrap items-center justify-center gap-6 md:gap-10"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          className="flex items-center gap-10 md:gap-14 whitespace-nowrap"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
         >
-          {integrations.map((name, i) => (
-            <motion.span
-              key={name}
-              className="text-sm md:text-base font-medium text-muted-foreground/40 hover:text-muted-foreground/70 transition-colors duration-300 select-none"
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 + i * 0.06 }}
+          {[...logos, ...logos].map((name, i) => (
+            <span
+              key={i}
+              className="text-sm md:text-[15px] font-medium text-foreground/25 select-none flex-shrink-0"
             >
               {name}
-            </motion.span>
+            </span>
           ))}
         </motion.div>
       </div>
