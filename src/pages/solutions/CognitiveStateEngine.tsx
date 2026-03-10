@@ -73,7 +73,7 @@ export default function CognitiveStateEngine() {
           <section className="relative py-20 lg:py-28 px-6 md:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
                   <Cpu className="w-8 h-8 text-primary" />
                 </div>
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Layer 2 of 6</span>
@@ -131,7 +131,7 @@ export default function CognitiveStateEngine() {
                 {cognitiveStates.map((state, i) => (
                   <motion.div 
                     key={state.title}
-                    className="p-8 rounded-2xl bg-muted/30 border border-border/50"
+                    className="p-8 rounded-xl bg-muted/30 border border-border/50"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -171,7 +171,7 @@ export default function CognitiveStateEngine() {
 
               <div className="grid md:grid-cols-2 gap-8">
                 <motion.div 
-                  className="p-8 rounded-2xl bg-background border border-border/50"
+                  className="p-8 rounded-xl bg-background border border-border/50"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -194,7 +194,7 @@ export default function CognitiveStateEngine() {
                 </motion.div>
 
                 <motion.div 
-                  className="p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20"
+                  className="p-8 rounded-xl bg-muted/20 border border-primary/20"
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -204,10 +204,10 @@ export default function CognitiveStateEngine() {
                     <h4 className="text-sm font-medium text-primary uppercase tracking-wider">After: Cognitive State</h4>
                   </div>
                   <ul className="space-y-4 text-sm text-foreground">
-                    <li className="flex justify-between"><span>Readiness</span><span className="font-semibold text-amber-500">68/100</span></li>
-                    <li className="flex justify-between"><span>Cognitive Load</span><span className="font-semibold text-red-500">High</span></li>
-                    <li className="flex justify-between"><span>Recovery Debt</span><span className="font-semibold text-amber-500">Moderate (3 days)</span></li>
-                    <li className="flex justify-between"><span>Stress Volatility</span><span className="font-semibold text-green-600">Low</span></li>
+                    <li className="flex justify-between"><span>Readiness</span><span className="font-semibold text-warning-amber">68/100</span></li>
+                    <li className="flex justify-between"><span>Cognitive Load</span><span className="font-semibold text-destructive">High</span></li>
+                    <li className="flex justify-between"><span>Recovery Debt</span><span className="font-semibold text-warning-amber">Moderate (3 days)</span></li>
+                    <li className="flex justify-between"><span>Stress Volatility</span><span className="font-semibold text-signal-green">Low</span></li>
                     <li className="flex justify-between"><span>Optimal Window</span><span className="font-semibold text-primary">9-11am</span></li>
                     <li className="flex justify-between"><span>Recommendation</span><span className="font-semibold text-primary">Defer complex decisions</span></li>
                   </ul>
@@ -261,7 +261,7 @@ export default function CognitiveStateEngine() {
             <div className="max-w-4xl mx-auto">
               <ScrollReveal>
                 <Link to="/solutions/prediction">
-                  <div className="group p-8 rounded-2xl bg-background border border-border/50 hover:border-primary/40 transition-all">
+                  <div className="group p-8 rounded-xl bg-muted/20 border border-border/40 hover:border-primary/30 transition-all">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">

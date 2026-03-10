@@ -94,7 +94,7 @@ export default function ROILayer() {
           <section className="relative py-20 lg:py-28 px-6 md:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
                   <Calculator className="w-8 h-8 text-primary" />
                 </div>
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Layer 6 of 6</span>
@@ -160,7 +160,7 @@ export default function ROILayer() {
                 {economicDimensions.map((dimension, i) => (
                   <motion.div 
                     key={dimension.title}
-                    className="p-8 rounded-2xl bg-muted/30 border border-border/50"
+                    className="p-8 rounded-xl bg-muted/30 border border-border/50"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -284,7 +284,7 @@ export default function ROILayer() {
             <div className="max-w-4xl mx-auto">
               <ScrollReveal>
                 <Link to="/solutions">
-                  <div className="group p-8 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent border border-primary/20 hover:border-primary/40 transition-all">
+                  <div className="group p-8 rounded-xl bg-muted/20 border border-border/40 hover:border-primary/30 transition-all">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
