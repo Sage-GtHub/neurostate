@@ -141,7 +141,7 @@ const Hero = () => {
                       >
                         <p className="text-[10px] text-muted-foreground uppercase tracking-wider">{m.label}</p>
                         <p className={`text-xl font-medium mt-1 ${m.color}`}>{m.value}</p>
-                        <p className="text-[11px] text-emerald-600 mt-0.5">{m.trend}</p>
+                        <p className="text-[11px] text-primary mt-0.5">{m.trend}</p>
                       </motion.div>
                     ))}
                   </div>
