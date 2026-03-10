@@ -19,10 +19,9 @@ import { HomeComparisonSection } from "@/components/HomeComparisonSection";
 import { IntegrationLogoStrip } from "@/components/IntegrationLogoStrip";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Eye, Layers, Sparkles, MessageCircle, BarChart3 } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Layers } from "lucide-react";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 // Approach pillars
 const approachPillars = [
@@ -71,47 +70,7 @@ const impactStats = [
   { value: "40+", label: "Integrations", sublabel: "wearables and work tools" }
 ];
 
-// Nova demo
-const novaDemoTabs = [
-  {
-    id: 'chat', label: 'AI Chat', icon: MessageCircle,
-    messages: [
-      { role: 'nova', text: "Good morning. Based on your sleep data, I've adjusted your focus window to 10am–1pm today. Your cognitive capacity is trending 12% above your weekly average." },
-      { role: 'user', text: "What should I prioritise this morning?" },
-      { role: 'nova', text: "Your highest-impact task is the Q4 strategy deck. Complexity matches your current state. I'd suggest blocking 90 minutes before lunch." },
-    ]
-  },
-  {
-    id: 'insights', label: 'Insights', icon: Brain,
-    insights: [
-      { title: "Sleep consistency improved", desc: "7-day streak detected. Circadian rhythm is optimising.", confidence: 94, type: "positive" },
-      { title: "HRV downtrend detected", desc: "15% decline over 5 days. Consider a recovery protocol.", confidence: 87, type: "warning" },
-      { title: "Peak focus window shifting", desc: "Your optimal cognitive period has moved 30 mins earlier this week.", confidence: 82, type: "neutral" },
-    ]
-  },
-  {
-    id: 'metrics', label: 'Live Metrics', icon: BarChart3,
-    metrics: [
-      { label: "HRV", value: 68, unit: "ms", trend: "+5%" },
-      { label: "Sleep", value: 7.2, unit: "hrs", trend: "+0.4" },
-      { label: "Readiness", value: 82, unit: "%", trend: "+8%" },
-      { label: "Recovery", value: 91, unit: "%", trend: "+3%" },
-    ]
-  },
-  {
-    id: 'actions', label: 'Actions', icon: Zap,
-    actions: [
-      { title: "Schedule a recovery day", impact: "High", timing: "This week" },
-      { title: "Move deep work to 9-11 AM", impact: "Medium", timing: "Tomorrow" },
-      { title: "Increase magnesium intake", impact: "Medium", timing: "Tonight" },
-      { title: "Cap meetings at 4 hours", impact: "High", timing: "This week" },
-    ]
-  },
-];
-
 const Index = () => {
-  const [activeDemoTab, setActiveDemoTab] = useState('chat');
-
   return (
     <>
       <SEO 
@@ -129,7 +88,7 @@ const Index = () => {
 
           <IntegrationLogoStrip />
 
-          {/* Positioning Statement — Full-width editorial */}
+          {/* Positioning Statement */}
           <section className="py-20 md:py-36 px-5 md:px-8">
             <motion.p
               className="text-xl md:text-3xl lg:text-[2.75rem] text-foreground text-center max-w-4xl mx-auto leading-[1.25] font-light tracking-[-0.01em]"
@@ -143,7 +102,7 @@ const Index = () => {
             </motion.p>
           </section>
 
-          {/* Approach Section — Three pillars, open editorial */}
+          {/* Approach Section */}
           <section className="py-16 md:py-32 px-5 md:px-8">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="mb-16 md:mb-24">
@@ -174,7 +133,7 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Building Blocks — Clean list */}
+          {/* Building Blocks */}
           <section className="py-16 md:py-32 px-5 md:px-8 border-t border-border/30">
             <div className="max-w-6xl mx-auto">
               <ScrollReveal className="mb-16 md:mb-20">
@@ -226,7 +185,7 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Impact Stats — Dark full-width band */}
+          {/* Impact Stats */}
           <section className="py-16 md:py-24 px-5 md:px-8 bg-foreground">
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16">
@@ -248,7 +207,7 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Industries — Two-column with sticky sidebar */}
+          {/* Industries */}
           <section className="py-16 md:py-32 px-5 md:px-8">
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
@@ -297,156 +256,6 @@ const Index = () => {
 
           {/* Comparison */}
           <HomeComparisonSection />
-
-          {/* Nova AI Demo — Centered interactive */}
-          <section className="py-16 md:py-32 px-5 md:px-8 border-t border-border/30">
-            <div className="max-w-6xl mx-auto">
-              <ScrollReveal className="mb-16 md:mb-20 text-center max-w-3xl mx-auto">
-                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">AI Assistant</span>
-                <h2 className="text-3xl md:text-5xl lg:text-[3.5rem] font-normal text-foreground mt-4 leading-[1.1] tracking-[-0.02em]">
-                  Meet Nova
-                </h2>
-                <p className="text-base md:text-lg text-muted-foreground mt-5">
-                  Your team's AI health advisor. Click through to explore what it can do.
-                </p>
-              </ScrollReveal>
-
-              <ScrollReveal delay={0.2}>
-                <div className="relative max-w-3xl mx-auto">
-                  {/* Tab Navigation */}
-                  <div className="flex items-center gap-1 p-1 bg-muted/50 rounded-full max-w-fit mx-auto mb-8 border border-border/30">
-                    {novaDemoTabs.map((tab) => {
-                      const TabIcon = tab.icon;
-                      return (
-                        <button
-                          key={tab.id}
-                          onClick={() => setActiveDemoTab(tab.id)}
-                          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-colors ${
-                            activeDemoTab === tab.id
-                              ? 'bg-background text-foreground shadow-sm'
-                              : 'text-muted-foreground hover:text-foreground'
-                          }`}
-                        >
-                          <TabIcon className="w-4 h-4" />
-                          <span className="hidden sm:inline">{tab.label}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  {/* Demo Content */}
-                  <motion.div 
-                    className="relative p-6 md:p-8 rounded-2xl bg-background border border-border/40 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)] overflow-hidden"
-                    layout
-                  >
-                    {/* Header */}
-                    <div className="flex items-center gap-3 pb-5 border-b border-border/30">
-                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                        <Sparkles className="w-5 h-5 text-primary" />
-                      </div>
-                      <div>
-                        <p className="text-foreground font-medium text-base">Nova</p>
-                        <div className="flex items-center gap-1.5">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                          <p className="text-xs text-muted-foreground">Interactive demo</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <AnimatePresence mode="wait">
-                      {activeDemoTab === 'chat' && (
-                        <motion.div key="chat" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} className="space-y-4 py-5">
-                          {novaDemoTabs[0].messages?.map((msg, i) => (
-                            <motion.div key={i} className={`p-4 rounded-xl max-w-[85%] ${msg.role === 'nova' ? 'bg-muted/50' : 'bg-primary/10 ml-auto max-w-[75%]'}`} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.15 }}>
-                              <p className="text-sm text-foreground leading-relaxed">{msg.text}</p>
-                            </motion.div>
-                          ))}
-                          <div className="flex items-center gap-2 p-3 rounded-xl bg-muted/30 border border-border/30 mt-4">
-                            <span className="text-sm text-muted-foreground flex-1 pl-2">Ask Nova anything...</span>
-                            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                              <ArrowRight className="w-4 h-4 text-primary" />
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-
-                      {activeDemoTab === 'insights' && (
-                        <motion.div key="insights" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} className="space-y-3 py-5">
-                          {novaDemoTabs[1].insights?.map((insight, i) => (
-                            <motion.div key={i} className="p-4 rounded-xl border border-border/30 hover:border-primary/20 transition-colors" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }}>
-                              <div className="flex items-start justify-between gap-3">
-                                <div className="flex-1">
-                                  <div className="flex items-center gap-2 mb-1">
-                                    <div className={`w-2 h-2 rounded-full ${insight.type === 'positive' ? 'bg-signal-green' : insight.type === 'warning' ? 'bg-warning-amber' : 'bg-primary'}`} />
-                                    <p className="text-sm font-medium text-foreground">{insight.title}</p>
-                                  </div>
-                                  <p className="text-xs text-muted-foreground">{insight.desc}</p>
-                                </div>
-                                <div className="text-right flex-shrink-0">
-                                  <p className="text-xl font-light text-primary">{insight.confidence}%</p>
-                                  <p className="text-[10px] text-muted-foreground">confidence</p>
-                                </div>
-                              </div>
-                            </motion.div>
-                          ))}
-                        </motion.div>
-                      )}
-
-                      {activeDemoTab === 'metrics' && (
-                        <motion.div key="metrics" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} className="py-5">
-                          <div className="grid grid-cols-2 gap-4">
-                            {novaDemoTabs[2].metrics?.map((metric, i) => (
-                              <motion.div key={i} className="p-5 rounded-xl border border-border/30" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.08 }}>
-                                <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 font-mono">{metric.label}</p>
-                                <div className="flex items-baseline gap-1.5">
-                                  <p className="text-3xl font-light text-foreground">{metric.value}</p>
-                                  <span className="text-sm text-muted-foreground">{metric.unit}</span>
-                                </div>
-                                <p className="text-xs text-signal-green mt-1">{metric.trend}</p>
-                              </motion.div>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-
-                      {activeDemoTab === 'actions' && (
-                        <motion.div key="actions" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} className="space-y-2 py-5">
-                          {novaDemoTabs[3].actions?.map((action, i) => (
-                            <motion.div key={i} className="flex items-center gap-4 p-4 rounded-xl border border-border/30 hover:border-primary/20 transition-colors" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.08 }}>
-                              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                                <Zap className="w-4 h-4 text-primary" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-foreground">{action.title}</p>
-                                <p className="text-xs text-muted-foreground">{action.timing}</p>
-                              </div>
-                              <span className={`text-[10px] font-medium px-2 py-1 rounded-full ${action.impact === 'High' ? 'bg-primary/10 text-primary' : 'bg-muted text-muted-foreground'}`}>
-                                {action.impact}
-                              </span>
-                            </motion.div>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                </div>
-              </ScrollReveal>
-
-              <div className="flex flex-wrap gap-3 pt-12 justify-center">
-                <Link to="/nova/overview">
-                  <Button className="h-11 px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
-                    Explore Nova
-                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </Link>
-                <Link to="/nova">
-                  <Button variant="outline" className="h-11 px-6 text-sm font-medium rounded-full">
-                    Try the demo
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </section>
 
           {/* ROI Calculator */}
           <section className="py-16 md:py-32 px-5 md:px-8 bg-muted/20">
