@@ -1,158 +1,310 @@
-import { NovaNav } from "@/components/NovaNav";
-import { NovaSwipeWrapper } from "@/components/NovaSwipeWrapper";
-import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { SoftwareApplicationStructuredData } from "@/components/StructuredData";
-import { ArrowRight, Brain, Activity, Moon, Heart, Zap, TrendingUp, ArrowUpRight } from "lucide-react";
+import { ScrollReveal } from "@/components/ScrollReveal";
+import { ArrowRight, Brain, Activity, Moon, Heart, Zap, TrendingUp, ArrowUpRight, MessageCircle, Shield, Sparkles, BarChart3 } from "lucide-react";
 import { motion } from "framer-motion";
 
+const capabilities = [
+  {
+    icon: Brain,
+    title: "Multi-model intelligence",
+    description: "Integrates biometric, behavioural, and contextual data streams into a single cognitive picture. No more scattered tools.",
+  },
+  {
+    icon: TrendingUp,
+    title: "72-hour forecasting",
+    description: "Predicts performance, recovery, and energy levels up to three days ahead so you can act before problems hit.",
+  },
+  {
+    icon: Zap,
+    title: "Adaptive protocols",
+    description: "Personalised recommendations that evolve with your data. Every protocol learns from your response patterns.",
+  },
+  {
+    icon: MessageCircle,
+    title: "Natural language interface",
+    description: "Ask Nova anything about your health data in plain English. No dashboards to interpret.",
+  },
+  {
+    icon: Shield,
+    title: "Privacy-first architecture",
+    description: "End-to-end encryption, SOC 2 certified, GDPR compliant. Your biometric data stays yours.",
+  },
+  {
+    icon: BarChart3,
+    title: "Measurable ROI",
+    description: "Every insight ties back to business outcomes. See the financial impact of every intervention.",
+  },
+];
+
+const demoMetrics = [
+  { label: "Recovery", value: "92%", trend: "+8%", description: "Optimal for high-intensity work" },
+  { label: "Sleep Score", value: "85", trend: "+12", description: "7-day consistency streak" },
+  { label: "HRV", value: "68ms", trend: "+5ms", description: "Trending above baseline" },
+  { label: "Cognitive Load", value: "62%", trend: "−12%", description: "Within optimal range" },
+];
+
 export default function NovaOverview() {
-  const navigate = useNavigate();
-
-  const todayScores = {
-    recovery: 78,
-    strain: 12.4,
-    sleep: 85,
-    hrv: 62
-  };
-
-  const insights = [
-    { title: "Recovery trending up", description: "Your HRV has improved 12% this week.", type: "positive" },
-    { title: "Optimal training window", description: "2-6pm is ideal for high intensity today.", type: "info" },
-    { title: "Sleep debt detected", description: "You're 1.5 hours behind. Consider earlier bedtime.", type: "warning" }
-  ];
-
-  const quickActions = [
-    { label: "Chat with Nova", icon: Brain, route: "/nova/chat" },
-    { label: "View Insights", icon: TrendingUp, route: "/nova/insights" },
-    { label: "My Devices", icon: Activity, route: "/nova/devices" },
-    { label: "Protocols", icon: Zap, route: "/nova/protocols" }
-  ];
-
-  const stagger = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.08 } }
-  };
-  const fadeUp = {
-    hidden: { opacity: 0, y: 16 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] } }
-  };
-
   return (
-    <NovaSwipeWrapper>
-      <SEO title="Nova AI | Your Personal Health Coach | NeuroState" description="Nova is your AI health coach. It reads your wearable data, tracks your sleep, recovery, and energy, and tells you what to do to feel and perform better." keywords="Nova AI, health coach, personal wellness, sleep tracking, recovery, HRV, energy optimisation, daily health score" />
+    <>
+      <SEO 
+        title="Nova AI — Your Personal Health Intelligence | NeuroState" 
+        description="Nova is your AI health coach. It reads your wearable data, tracks your sleep, recovery, and energy, and tells you what to do to feel and perform better." 
+        keywords="Nova AI, health coach, personal wellness, sleep tracking, recovery, HRV, energy optimisation, daily health score" 
+      />
       <SoftwareApplicationStructuredData />
-      <div className="min-h-screen bg-background relative overflow-hidden">
-        {/* Organic background */}
-        <div className="fixed inset-0 pointer-events-none">
-          <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full bg-accent/[0.03] blur-3xl animate-float" />
-          <div className="absolute bottom-1/3 left-0 w-[400px] h-[400px] rounded-full bg-primary/[0.02] blur-3xl animate-float" style={{ animationDelay: '4s' }} />
-        </div>
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main>
 
-        <NovaNav />
-        
-        <motion.div 
-          className="relative container mx-auto px-6 md:px-12 lg:px-20 xl:px-32 py-12"
-          variants={stagger}
-          initial="hidden"
-          animate="show"
-        >
-          
-          {/* Greeting */}
-          <motion.div variants={fadeUp} className="mb-12">
-            <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground mb-2 font-mono">Good morning</p>
-            <h1 className="text-2xl font-medium text-foreground tracking-tight">Your daily overview</h1>
-          </motion.div>
-
-          {/* Main Score */}
-          <motion.div variants={fadeUp} className="flex justify-center mb-12">
-            <div className="text-center">
-              <div className="w-36 h-36 rounded-full border-2 border-accent/30 flex items-center justify-center mx-auto mb-4 bg-accent/[0.03]">
-                <div>
-                  <p className="text-4xl font-light text-foreground tracking-tight">{todayScores.recovery}</p>
-                  <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-mono">Recovery</p>
+          {/* Hero */}
+          <section className="pt-24 pb-16 md:pt-32 md:pb-24 px-5 md:px-8">
+            <div className="max-w-6xl mx-auto">
+              <ScrollReveal className="max-w-3xl">
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Nova AI</span>
+                <h1 className="text-[2.5rem] md:text-[3.25rem] lg:text-[3.75rem] font-medium text-foreground mt-4 tracking-tight leading-[1.08]">
+                  Your AI health coach.{" "}
+                  <span className="text-muted-foreground">Always on, always learning.</span>
+                </h1>
+                <p className="text-base md:text-lg text-muted-foreground max-w-xl mt-6 leading-relaxed">
+                  Nova reads your wearable data, understands your patterns, and tells you exactly what to do to feel and perform better. No guesswork.
+                </p>
+                <div className="flex flex-wrap items-center gap-3 mt-8">
+                  <Link to="/auth?mode=signup">
+                    <Button size="lg" className="h-12 px-8 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                      Try Nova free
+                      <ArrowRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
+                  <Link to="/contact">
+                    <Button size="lg" variant="outline" className="h-12 px-6 text-sm font-medium rounded-full border-border/60 hover:border-foreground/30 group">
+                      Book a demo
+                      <ArrowRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
                 </div>
-              </div>
-              <p className="text-sm text-muted-foreground">Ready to perform</p>
+              </ScrollReveal>
             </div>
-          </motion.div>
+          </section>
 
-          {/* Key Metrics */}
-          <motion.div variants={fadeUp} className="grid grid-cols-3 gap-3 mb-12">
-            {[
-              { icon: Activity, value: todayScores.strain, label: "Strain" },
-              { icon: Moon, value: `${todayScores.sleep}%`, label: "Sleep" },
-              { icon: Heart, value: todayScores.hrv, label: "HRV" },
-            ].map((metric, i) => (
-              <div key={i} className="p-5 rounded-xl bg-muted/40 text-center hover:bg-muted/60 transition-colors">
-                <metric.icon className="w-4 h-4 text-accent mx-auto mb-3" />
-                <p className="text-xl font-medium text-foreground">{metric.value}</p>
-                <p className="text-[11px] text-muted-foreground font-mono">{metric.label}</p>
-              </div>
-            ))}
-          </motion.div>
-
-          {/* Quick Actions */}
-          <motion.div variants={fadeUp} className="grid grid-cols-2 gap-3 mb-12">
-            {quickActions.map((action) => {
-              const Icon = action.icon;
-              return (
-                <button
-                  key={action.label}
-                  onClick={() => navigate(action.route)}
-                  className="group p-5 rounded-xl bg-muted/40 text-left hover:bg-foreground transition-all duration-300"
-                >
-                  <Icon className="w-4 h-4 text-accent group-hover:text-accent mb-3" />
-                  <p className="text-xs font-medium text-foreground group-hover:text-background transition-colors">{action.label}</p>
-                </button>
-              );
-            })}
-          </motion.div>
-
-          {/* Insights */}
-          <motion.div variants={fadeUp} className="mb-12">
-            <div className="flex items-center justify-between mb-4">
-              <p className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-mono">Insights</p>
-              <button onClick={() => navigate('/nova/insights')} className="text-[11px] text-accent flex items-center gap-1 hover:underline">
-                View all <ArrowUpRight className="w-3 h-3" />
-              </button>
-            </div>
-            <div className="space-y-2">
-              {insights.map((insight, index) => (
-                <div key={index} className="p-4 rounded-xl bg-muted/40 hover:bg-muted/60 transition-colors">
-                  <div className="flex items-start gap-3">
-                    <div className={`w-1.5 h-1.5 rounded-full mt-1.5 ${
-                      insight.type === 'positive' ? 'bg-accent' :
-                      insight.type === 'warning' ? 'bg-orange-400' :
-                      'bg-blue-400'
-                    }`} />
+          {/* Live metrics preview */}
+          <section className="py-12 md:py-20 px-5 md:px-8">
+            <div className="max-w-6xl mx-auto">
+              <ScrollReveal>
+                <div className="p-6 md:p-8 rounded-xl bg-background border border-border/50 shadow-sm">
+                  <div className="flex items-center gap-3 pb-5 border-b border-border/30 mb-6">
+                    <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Sparkles className="w-4 h-4 text-primary" />
+                    </div>
                     <div>
-                      <p className="text-xs font-medium text-foreground mb-0.5">{insight.title}</p>
-                      <p className="text-[11px] text-muted-foreground">{insight.description}</p>
+                      <p className="text-sm font-medium text-foreground">Nova Dashboard</p>
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                        <p className="text-[11px] text-muted-foreground">Live preview</p>
+                      </div>
                     </div>
                   </div>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                    {demoMetrics.map((metric, i) => (
+                      <motion.div
+                        key={i}
+                        className="p-4 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors"
+                        initial={{ opacity: 0, y: 12 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.08 }}
+                      >
+                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 font-mono">{metric.label}</p>
+                        <p className="text-2xl md:text-3xl font-light text-foreground">{metric.value}</p>
+                        <div className="flex items-center gap-2 mt-1">
+                          <span className="text-xs text-emerald-600 font-medium">{metric.trend}</span>
+                          <span className="text-[11px] text-muted-foreground hidden md:inline">{metric.description}</span>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
-              ))}
+              </ScrollReveal>
             </div>
-          </motion.div>
+          </section>
+
+          {/* Positioning statement */}
+          <section className="py-12 md:py-20 px-5 md:px-8">
+            <motion.p
+              className="text-lg md:text-2xl lg:text-3xl text-foreground text-center max-w-3xl mx-auto leading-snug font-light"
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              Most health apps show you data.{" "}
+              <span className="text-primary font-medium">Nova tells you what it means</span>{" "}
+              and what to do about it.
+            </motion.p>
+          </section>
+
+          {/* Capabilities grid */}
+          <section className="py-16 md:py-28 px-5 md:px-8">
+            <div className="max-w-6xl mx-auto">
+              <ScrollReveal className="mb-14 md:mb-20">
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Capabilities</span>
+                <h2 className="text-3xl md:text-[2.75rem] font-medium text-foreground mt-4 leading-[1.1] max-w-2xl">
+                  Six layers of intelligence. One seamless experience.
+                </h2>
+              </ScrollReveal>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                {capabilities.map((cap, i) => (
+                  <motion.div
+                    key={i}
+                    className="group p-6 rounded-xl border border-border/40 hover:border-primary/30 transition-colors"
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.06, duration: 0.4 }}
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-primary/8 flex items-center justify-center mb-4 group-hover:bg-primary/15 transition-colors">
+                      <cap.icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <h3 className="text-base font-medium text-foreground mb-2 group-hover:text-primary transition-colors">{cap.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{cap.description}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* How it works */}
+          <section className="py-16 md:py-28 px-5 md:px-8 bg-muted/20">
+            <div className="max-w-6xl mx-auto">
+              <ScrollReveal className="mb-14 md:mb-20 text-center">
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">How it works</span>
+                <h2 className="text-3xl md:text-[2.75rem] font-medium text-foreground mt-4 leading-[1.1]">
+                  From raw data to clear action
+                </h2>
+              </ScrollReveal>
+
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                {[
+                  { step: "01", title: "Connect", desc: "Link your wearables. Apple Watch, WHOOP, Oura, Garmin — 40+ supported." },
+                  { step: "02", title: "Analyse", desc: "Nova reads your biometrics, sleep, and activity patterns automatically." },
+                  { step: "03", title: "Predict", desc: "Get 72-hour forecasts for energy, recovery, and cognitive readiness." },
+                  { step: "04", title: "Act", desc: "Receive clear, personalised recommendations. Ask follow-up questions." },
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    className="text-center group"
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 }}
+                  >
+                    <span className="font-mono text-4xl md:text-5xl font-light text-primary/25 block mb-4">{item.step}</span>
+                    <h3 className="text-base md:text-lg font-medium text-foreground mb-2 group-hover:text-primary transition-colors">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Chat preview */}
+          <section className="py-16 md:py-28 px-5 md:px-8">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <ScrollReveal>
+                  <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Natural language</span>
+                  <h2 className="text-3xl md:text-[2.75rem] font-medium text-foreground mt-4 leading-[1.1]">
+                    Just ask. Nova understands.
+                  </h2>
+                  <p className="text-base md:text-lg text-muted-foreground mt-5 max-w-md leading-relaxed">
+                    No menus to navigate, no charts to interpret. Ask Nova anything about your health in plain English and get actionable answers backed by your data.
+                  </p>
+                  <div className="mt-8">
+                    <Link to="/auth?mode=signup">
+                      <Button size="lg" className="h-12 px-8 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group">
+                        Start chatting with Nova
+                        <ArrowRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                      </Button>
+                    </Link>
+                  </div>
+                </ScrollReveal>
+
+                <ScrollReveal delay={0.15}>
+                  <div className="p-6 rounded-xl bg-background border border-border/50 shadow-sm space-y-4">
+                    <div className="flex items-center gap-3 pb-4 border-b border-border/30">
+                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Sparkles className="w-4 h-4 text-primary" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-foreground">Nova</p>
+                        <p className="text-[11px] text-muted-foreground">AI Health Coach</p>
+                      </div>
+                    </div>
+                    {[
+                      { role: "nova", text: "Good morning. Based on your sleep data, I've adjusted your focus window to 10am–1pm today. Your cognitive capacity is trending 12% above your weekly average." },
+                      { role: "user", text: "What should I prioritise this morning?" },
+                      { role: "nova", text: "Your highest-impact task is the Q4 strategy deck. Complexity matches your current state. I'd suggest blocking 90 minutes before lunch." },
+                    ].map((msg, i) => (
+                      <motion.div
+                        key={i}
+                        className={`p-4 rounded-lg max-w-[85%] ${msg.role === 'nova' ? 'bg-muted/40' : 'bg-primary/8 ml-auto max-w-[75%]'}`}
+                        initial={{ opacity: 0, y: 8 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 + i * 0.12 }}
+                      >
+                        <p className="text-sm text-foreground leading-relaxed">{msg.text}</p>
+                      </motion.div>
+                    ))}
+                    <div className="flex items-center gap-2 p-3 rounded-lg bg-muted/20 border border-border/30 mt-2">
+                      <span className="text-sm text-muted-foreground flex-1 pl-2">Ask Nova anything…</span>
+                      <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                        <ArrowRight className="w-4 h-4 text-primary" />
+                      </div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              </div>
+            </div>
+          </section>
 
           {/* CTA */}
-          <motion.div variants={fadeUp}>
-            <Button 
-              className="w-full h-11 rounded-full text-xs bg-foreground text-background hover:bg-foreground/90"
-              onClick={() => navigate('/nova/chat')}
-            >
-              <Brain className="w-3.5 h-3.5 mr-2" />
-              Ask Nova anything
-              <ArrowRight className="w-3.5 h-3.5 ml-2" />
-            </Button>
-          </motion.div>
-        </motion.div>
-        
-        <FloatingNovaChat />
+          <section className="py-20 md:py-32 px-5 md:px-8 bg-foreground">
+            <div className="max-w-3xl mx-auto text-center">
+              <ScrollReveal className="space-y-6">
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Get started</span>
+                <h2 className="text-3xl md:text-[2.75rem] font-medium text-background leading-[1.1]">
+                  Your health data is already there. Let Nova make sense of it.
+                </h2>
+                <p className="text-base text-background/60 max-w-lg mx-auto">
+                  Connect your wearable, ask a question, and see what Nova finds. Free to start.
+                </p>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
+                  <Link to="/auth?mode=signup">
+                    <Button size="lg" className="h-12 px-8 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group">
+                      Try Nova free
+                      <ArrowUpRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </Button>
+                  </Link>
+                  <Link to="/contact">
+                    <Button size="lg" className="h-12 px-8 text-sm font-medium rounded-full bg-transparent border border-background/30 text-background hover:bg-background/10">
+                      Book a demo
+                    </Button>
+                  </Link>
+                </div>
+              </ScrollReveal>
+            </div>
+          </section>
+
+        </main>
+        <Footer />
       </div>
-    </NovaSwipeWrapper>
+    </>
   );
 }
