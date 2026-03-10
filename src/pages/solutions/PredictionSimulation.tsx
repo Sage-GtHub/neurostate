@@ -75,7 +75,7 @@ export default function PredictionSimulation() {
           <section className="relative py-20 lg:py-28 px-6 md:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
                   <TrendingUp className="w-8 h-8 text-primary" />
                 </div>
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-medium">Layer 3 of 6</span>
