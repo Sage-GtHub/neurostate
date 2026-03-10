@@ -216,7 +216,7 @@ export default function PredictionSimulation() {
                           <p className="text-[10px] text-muted-foreground">Capacity Impact</p>
                         </div>
                         <div className="text-center">
-                          <span className={`text-sm font-semibold ${example.risk.startsWith('-') ? 'text-green-600' : 'text-red-500'}`}>
+                          <span className={`text-sm font-semibold ${example.risk.startsWith('-') ? 'text-signal-green' : 'text-destructive'}`}>
                             {example.risk}
                           </span>
                           <p className="text-[10px] text-muted-foreground">Risk Change</p>

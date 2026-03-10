@@ -204,10 +204,10 @@ export default function CognitiveStateEngine() {
                     <h4 className="text-sm font-medium text-primary uppercase tracking-wider">After: Cognitive State</h4>
                   </div>
                   <ul className="space-y-4 text-sm text-foreground">
-                    <li className="flex justify-between"><span>Readiness</span><span className="font-semibold text-amber-500">68/100</span></li>
-                    <li className="flex justify-between"><span>Cognitive Load</span><span className="font-semibold text-red-500">High</span></li>
-                    <li className="flex justify-between"><span>Recovery Debt</span><span className="font-semibold text-amber-500">Moderate (3 days)</span></li>
-                    <li className="flex justify-between"><span>Stress Volatility</span><span className="font-semibold text-green-600">Low</span></li>
+                    <li className="flex justify-between"><span>Readiness</span><span className="font-semibold text-warning-amber">68/100</span></li>
+                    <li className="flex justify-between"><span>Cognitive Load</span><span className="font-semibold text-destructive">High</span></li>
+                    <li className="flex justify-between"><span>Recovery Debt</span><span className="font-semibold text-warning-amber">Moderate (3 days)</span></li>
+                    <li className="flex justify-between"><span>Stress Volatility</span><span className="font-semibold text-signal-green">Low</span></li>
                     <li className="flex justify-between"><span>Optimal Window</span><span className="font-semibold text-primary">9-11am</span></li>
                     <li className="flex justify-between"><span>Recommendation</span><span className="font-semibold text-primary">Defer complex decisions</span></li>
                   </ul>
