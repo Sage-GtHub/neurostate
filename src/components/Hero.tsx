@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, MessageCircle, Brain, BarChart3, Zap, Sparkles } from "lucide-react";
+import { ArrowRight, MessageCircle, Brain, BarChart3, Zap, Sparkles, Check, TrendingUp, TrendingDown } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const demoTabs = [
@@ -11,13 +11,160 @@ const demoTabs = [
   { id: 'actions', label: 'Actions', icon: Zap },
 ];
 
+const chatMessages = [
+  { role: 'nova', text: "Good morning. Your team's recovery is trending 12% above average. I've adjusted the focus window to 10am–1pm." },
+  { role: 'user', text: "What should I prioritise?" },
+  { role: 'nova', text: "Q4 strategy deck — complexity matches your current cognitive state. Block 90 minutes before lunch." },
+];
+
+const quickReplies = [
+  "Show my energy forecast",
+  "Any burnout risks?",
+  "Optimise my afternoon",
+];
+
+// Animated counter hook
+function useAnimatedValue(target: number, duration = 1200, active = true) {
+  const [value, setValue] = useState(0);
+  const frameRef = useRef<number>();
+
+  useEffect(() => {
+    if (!active) { setValue(0); return; }
+    const start = performance.now();
+    const animate = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(Math.round(target * eased * 10) / 10);
+      if (progress < 1) frameRef.current = requestAnimationFrame(animate);
+    };
+    frameRef.current = requestAnimationFrame(animate);
+    return () => { if (frameRef.current) cancelAnimationFrame(frameRef.current); };
+  }, [target, duration, active]);
+
+  return value;
+}
+
+// Typing animation component
+const TypingText = ({ text, onComplete }: { text: string; onComplete?: () => void }) => {
+  const [displayed, setDisplayed] = useState("");
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    setDisplayed("");
+    setDone(false);
+    let i = 0;
+    const interval = setInterval(() => {
+      i++;
+      setDisplayed(text.slice(0, i));
+      if (i >= text.length) {
+        clearInterval(interval);
+        setDone(true);
+        onComplete?.();
+      }
+    }, 18);
+    return () => clearInterval(interval);
+  }, [text]);
+
+  return (
+    <span>
+      {displayed}
+      {!done && <span className="inline-block w-[2px] h-[14px] bg-primary ml-0.5 animate-pulse align-text-bottom" />}
+    </span>
+  );
+};
+
+// Mini sparkline
+const MiniSparkline = ({ data, color = "stroke-primary" }: { data: number[]; color?: string }) => {
+  const max = Math.max(...data);
+  const min = Math.min(...data);
+  const range = max - min || 1;
+  const points = data.map((v, i) => `${(i / (data.length - 1)) * 100},${100 - ((v - min) / range) * 80 - 10}`).join(' ');
+  
+  return (
+    <svg viewBox="0 0 100 100" className="w-full h-10" preserveAspectRatio="none">
+      <polyline fill="none" className={`${color} opacity-60`} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" points={points} />
+    </svg>
+  );
+};
+
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [activeTab, setActiveTab] = useState('chat');
+  
+  // Chat interactivity
+  const [visibleMessages, setVisibleMessages] = useState(0);
+  const [isTyping, setIsTyping] = useState(false);
+  const [extraMessages, setExtraMessages] = useState<{ role: string; text: string }[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
+  
+  // Actions interactivity
+  const [completedActions, setCompletedActions] = useState<Set<number>>(new Set());
+  
+  // Insights interactivity
+  const [expandedInsight, setExpandedInsight] = useState<number | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 50);
     return () => clearTimeout(timer);
+  }, []);
+
+  // Staggered message reveal on chat tab
+  useEffect(() => {
+    if (activeTab === 'chat') {
+      setVisibleMessages(0);
+      setExtraMessages([]);
+      setCompletedActions(new Set());
+      const timers: NodeJS.Timeout[] = [];
+      chatMessages.forEach((_, i) => {
+        timers.push(setTimeout(() => setVisibleMessages(prev => prev + 1), 400 + i * 800));
+      });
+      return () => timers.forEach(clearTimeout);
+    }
+  }, [activeTab]);
+
+  const handleQuickReply = useCallback((reply: string) => {
+    if (isProcessing) return;
+    setIsProcessing(true);
+    setExtraMessages(prev => [...prev, { role: 'user', text: reply }]);
+    setIsTyping(true);
+
+    const responses: Record<string, string> = {
+      "Show my energy forecast": "Your energy peaks at 10:30am today. I'd schedule complex tasks before noon — your afternoon dip is predicted earlier than usual.",
+      "Any burnout risks?": "Two team members show elevated cortisol patterns. I've flagged them for a check-in and suggested lighter schedules this week.",
+      "Optimise my afternoon": "Done. I've moved your 3pm meeting to async, blocked 2–3:30pm for focused work, and added a 15-min walk reminder at 4pm.",
+    };
+
+    setTimeout(() => {
+      setIsTyping(false);
+      setExtraMessages(prev => [...prev, { role: 'nova', text: responses[reply] || "I'll look into that for you." }]);
+      setIsProcessing(false);
+    }, 1800);
+  }, [isProcessing]);
+
+  const handleInputSend = useCallback(() => {
+    if (!inputValue.trim() || isProcessing) return;
+    setIsProcessing(true);
+    const text = inputValue.trim();
+    setInputValue("");
+    setExtraMessages(prev => [...prev, { role: 'user', text }]);
+    setIsTyping(true);
+
+    setTimeout(() => {
+      setIsTyping(false);
+      setExtraMessages(prev => [...prev, { role: 'nova', text: "Based on your biometric data, I'd recommend focusing on recovery today. Your HRV suggests you'll perform best with lighter cognitive tasks this afternoon." }]);
+      setIsProcessing(false);
+    }, 2000);
+  }, [inputValue, isProcessing]);
+
+  const toggleAction = useCallback((i: number) => {
+    setCompletedActions(prev => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i); else next.add(i);
+      return next;
+    });
   }, []);
 
   const containerVariants = {
@@ -36,6 +183,26 @@ const Hero = () => {
       transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }
     }
   };
+
+  const metricsData = [
+    { label: "HRV", value: 68, unit: "ms", trend: "+5%", up: true, sparkline: [52, 55, 58, 54, 60, 63, 65, 68] },
+    { label: "Sleep", value: 7.2, unit: "hrs", trend: "+0.4", up: true, sparkline: [6.5, 6.8, 6.6, 7.0, 6.9, 7.1, 7.0, 7.2] },
+    { label: "Readiness", value: 82, unit: "%", trend: "+8%", up: true, sparkline: [68, 72, 70, 74, 76, 78, 80, 82] },
+    { label: "Recovery", value: 91, unit: "%", trend: "+3%", up: true, sparkline: [82, 85, 83, 88, 86, 89, 90, 91] },
+  ];
+
+  const insightsData = [
+    { title: "Sleep consistency improved", desc: "7-day streak. Circadian rhythm optimising.", confidence: 94, dot: "bg-signal-green", detail: "Your bedtime variance dropped to ±12 minutes. This consistency is driving a 15% improvement in deep sleep duration and morning alertness scores." },
+    { title: "HRV downtrend detected", desc: "15% decline over 5 days. Consider recovery.", confidence: 87, dot: "bg-warning-amber", detail: "Stress load from back-to-back meetings is the likely cause. I recommend capping meetings at 3 hours tomorrow and adding a 20-min breathing session.", sparkline: [72, 68, 65, 63, 61] },
+    { title: "Peak focus window shifting", desc: "Optimal period moved 30 mins earlier this week.", confidence: 82, dot: "bg-primary", detail: "Your cognitive peak now sits at 9:30am–12pm instead of 10am–12:30pm. This aligns with your earlier wake time. I've updated your focus blocks." },
+  ];
+
+  const actionsData = [
+    { title: "Schedule a recovery day", impact: "High", timing: "This week" },
+    { title: "Move deep work to 9–11 AM", impact: "Medium", timing: "Tomorrow" },
+    { title: "Increase magnesium intake", impact: "Medium", timing: "Tonight" },
+    { title: "Cap meetings at 4 hours", impact: "High", timing: "This week" },
+  ];
 
   return (
     <section className="relative flex flex-col bg-background overflow-hidden">
@@ -129,23 +296,30 @@ const Hero = () => {
                       <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
-                        className={`flex items-center gap-1.5 px-4 py-2.5 text-[12px] font-medium border-b-2 transition-colors ${
+                        className={`relative flex items-center gap-1.5 px-4 py-2.5 text-[12px] font-medium transition-colors ${
                           activeTab === tab.id
-                            ? 'border-primary text-foreground'
-                            : 'border-transparent text-muted-foreground hover:text-foreground'
+                            ? 'text-foreground'
+                            : 'text-muted-foreground hover:text-foreground'
                         }`}
                       >
                         <TabIcon className="w-3.5 h-3.5" />
                         {tab.label}
+                        {activeTab === tab.id && (
+                          <motion.div
+                            layoutId="hero-tab-indicator"
+                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                          />
+                        )}
                       </button>
                     );
                   })}
                 </div>
 
                 {/* Tab Content */}
-                <div className="p-5 md:p-6 min-h-[300px]">
+                <div className="p-5 md:p-6 min-h-[320px] max-h-[380px] overflow-y-auto">
                   <AnimatePresence mode="wait">
-                    {/* Chat Tab */}
+                    {/* Chat Tab — Interactive */}
                     {activeTab === 'chat' && (
                       <motion.div
                         key="chat"
@@ -167,31 +341,100 @@ const Hero = () => {
                             </div>
                           </div>
                         </div>
-                        {[
-                          { role: 'nova', text: "Good morning. Your team's recovery is trending 12% above average. I've adjusted the focus window to 10am–1pm." },
-                          { role: 'user', text: "What should I prioritise?" },
-                          { role: 'nova', text: "Q4 strategy deck — complexity matches your current cognitive state. Block 90 minutes before lunch." },
-                        ].map((msg, i) => (
+
+                        {/* Staggered messages */}
+                        {chatMessages.slice(0, visibleMessages).map((msg, i) => (
                           <motion.div
-                            key={i}
-                            className={`p-3 rounded-xl text-[13px] leading-relaxed ${msg.role === 'nova' ? 'bg-muted/50 max-w-[90%]' : 'bg-primary/8 ml-auto max-w-[75%]'}`}
-                            initial={{ opacity: 0, y: 6 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.12 }}
+                            key={`base-${i}`}
+                            className={`p-3 rounded-xl text-[13px] leading-relaxed ${msg.role === 'nova' ? 'bg-muted/50 max-w-[90%]' : 'bg-primary/8 ml-auto max-w-[75%] text-right'}`}
+                            initial={{ opacity: 0, y: 10, scale: 0.97 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            transition={{ duration: 0.3 }}
                           >
                             <p className="text-foreground">{msg.text}</p>
                           </motion.div>
                         ))}
+
+                        {/* Extra interactive messages */}
+                        {extraMessages.map((msg, i) => (
+                          <motion.div
+                            key={`extra-${i}`}
+                            className={`p-3 rounded-xl text-[13px] leading-relaxed ${msg.role === 'nova' ? 'bg-muted/50 max-w-[90%]' : 'bg-primary/8 ml-auto max-w-[75%] text-right'}`}
+                            initial={{ opacity: 0, y: 10, scale: 0.97 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <p className="text-foreground">
+                              {msg.role === 'nova' && i === extraMessages.length - 1
+                                ? <TypingText text={msg.text} />
+                                : msg.text}
+                            </p>
+                          </motion.div>
+                        ))}
+
+                        {/* Typing indicator */}
+                        {isTyping && (
+                          <motion.div
+                            className="bg-muted/50 max-w-[60px] p-3 rounded-xl"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                          >
+                            <div className="flex gap-1">
+                              {[0, 1, 2].map(d => (
+                                <motion.div
+                                  key={d}
+                                  className="w-1.5 h-1.5 rounded-full bg-muted-foreground/50"
+                                  animate={{ y: [0, -4, 0] }}
+                                  transition={{ duration: 0.6, repeat: Infinity, delay: d * 0.15 }}
+                                />
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+
+                        {/* Quick reply chips */}
+                        {visibleMessages >= chatMessages.length && extraMessages.length === 0 && (
+                          <motion.div
+                            className="flex flex-wrap gap-2 pt-2"
+                            initial={{ opacity: 0, y: 6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3 }}
+                          >
+                            {quickReplies.map((reply) => (
+                              <button
+                                key={reply}
+                                onClick={() => handleQuickReply(reply)}
+                                className="px-3 py-1.5 text-[11px] rounded-full border border-primary/20 text-primary hover:bg-primary/5 hover:border-primary/40 transition-all active:scale-95"
+                              >
+                                {reply}
+                              </button>
+                            ))}
+                          </motion.div>
+                        )}
+
+                        {/* Live input */}
                         <div className="flex items-center gap-2 p-2.5 rounded-xl bg-muted/30 border border-border/30 mt-2">
-                          <span className="text-[12px] text-muted-foreground flex-1 pl-1">Ask Nova anything…</span>
-                          <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
-                            <ArrowRight className="w-3.5 h-3.5 text-primary" />
-                          </div>
+                          <input
+                            type="text"
+                            value={inputValue}
+                            onChange={(e) => setInputValue(e.target.value)}
+                            onKeyDown={(e) => e.key === 'Enter' && handleInputSend()}
+                            placeholder="Ask Nova anything…"
+                            className="text-[12px] text-foreground placeholder:text-muted-foreground flex-1 pl-1 bg-transparent outline-none"
+                          />
+                          <button
+                            onClick={handleInputSend}
+                            className={`w-7 h-7 rounded-lg flex items-center justify-center transition-colors ${
+                              inputValue.trim() ? 'bg-primary text-primary-foreground' : 'bg-primary/10 text-primary'
+                            }`}
+                          >
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </button>
                         </div>
                       </motion.div>
                     )}
 
-                    {/* Insights Tab */}
+                    {/* Insights Tab — Expandable */}
                     {activeTab === 'insights' && (
                       <motion.div
                         key="insights"
@@ -201,37 +444,58 @@ const Hero = () => {
                         transition={{ duration: 0.2 }}
                         className="space-y-3"
                       >
-                        {[
-                          { title: "Sleep consistency improved", desc: "7-day streak. Circadian rhythm optimising.", confidence: 94, dot: "bg-signal-green" },
-                          { title: "HRV downtrend detected", desc: "15% decline over 5 days. Consider recovery.", confidence: 87, dot: "bg-warning-amber" },
-                          { title: "Peak focus window shifting", desc: "Optimal period moved 30 mins earlier this week.", confidence: 82, dot: "bg-primary" },
-                        ].map((insight, i) => (
+                        {insightsData.map((insight, i) => (
                           <motion.div
                             key={i}
-                            className="p-3.5 rounded-xl border border-border/30 hover:border-primary/20 transition-colors"
+                            className="rounded-xl border border-border/30 hover:border-primary/20 transition-all cursor-pointer overflow-hidden"
                             initial={{ opacity: 0, x: -12 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: i * 0.08 }}
+                            onClick={() => setExpandedInsight(expandedInsight === i ? null : i)}
+                            whileHover={{ scale: 1.01 }}
+                            whileTap={{ scale: 0.99 }}
                           >
-                            <div className="flex items-start justify-between gap-3">
-                              <div className="flex-1">
-                                <div className="flex items-center gap-2 mb-1">
-                                  <div className={`w-2 h-2 rounded-full ${insight.dot}`} />
-                                  <p className="text-[13px] font-medium text-foreground">{insight.title}</p>
+                            <div className="p-3.5">
+                              <div className="flex items-start justify-between gap-3">
+                                <div className="flex-1">
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <div className={`w-2 h-2 rounded-full ${insight.dot}`} />
+                                    <p className="text-[13px] font-medium text-foreground">{insight.title}</p>
+                                  </div>
+                                  <p className="text-[12px] text-muted-foreground">{insight.desc}</p>
                                 </div>
-                                <p className="text-[12px] text-muted-foreground">{insight.desc}</p>
-                              </div>
-                              <div className="text-right flex-shrink-0">
-                                <p className="text-lg font-light text-primary">{insight.confidence}%</p>
-                                <p className="text-[10px] text-muted-foreground">confidence</p>
+                                <div className="text-right flex-shrink-0">
+                                  <p className="text-lg font-light text-primary">{insight.confidence}%</p>
+                                  <p className="text-[10px] text-muted-foreground">confidence</p>
+                                </div>
                               </div>
                             </div>
+                            <AnimatePresence>
+                              {expandedInsight === i && (
+                                <motion.div
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: 'auto', opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  transition={{ duration: 0.25 }}
+                                  className="overflow-hidden"
+                                >
+                                  <div className="px-3.5 pb-3.5 pt-0 border-t border-border/20">
+                                    <p className="text-[12px] text-muted-foreground leading-relaxed mt-3">{insight.detail}</p>
+                                    {'sparkline' in insight && insight.sparkline && (
+                                      <div className="mt-2">
+                                        <MiniSparkline data={insight.sparkline} color="stroke-warning-amber" />
+                                      </div>
+                                    )}
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
                           </motion.div>
                         ))}
                       </motion.div>
                     )}
 
-                    {/* Metrics Tab */}
+                    {/* Metrics Tab — Animated counters + sparklines */}
                     {activeTab === 'metrics' && (
                       <motion.div
                         key="metrics"
@@ -241,32 +505,14 @@ const Hero = () => {
                         transition={{ duration: 0.2 }}
                       >
                         <div className="grid grid-cols-2 gap-3">
-                          {[
-                            { label: "HRV", value: "68", unit: "ms", trend: "+5%" },
-                            { label: "Sleep", value: "7.2", unit: "hrs", trend: "+0.4" },
-                            { label: "Readiness", value: "82", unit: "%", trend: "+8%" },
-                            { label: "Recovery", value: "91", unit: "%", trend: "+3%" },
-                          ].map((metric, i) => (
-                            <motion.div
-                              key={i}
-                              className="p-4 rounded-xl border border-border/30"
-                              initial={{ opacity: 0, scale: 0.95 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              transition={{ delay: i * 0.06 }}
-                            >
-                              <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 font-mono">{metric.label}</p>
-                              <div className="flex items-baseline gap-1">
-                                <p className="text-2xl font-light text-foreground">{metric.value}</p>
-                                <span className="text-[12px] text-muted-foreground">{metric.unit}</span>
-                              </div>
-                              <p className="text-[11px] text-signal-green mt-1">{metric.trend}</p>
-                            </motion.div>
+                          {metricsData.map((metric, i) => (
+                            <MetricCard key={i} metric={metric} index={i} active={activeTab === 'metrics'} />
                           ))}
                         </div>
                       </motion.div>
                     )}
 
-                    {/* Actions Tab */}
+                    {/* Actions Tab — Checkable */}
                     {activeTab === 'actions' && (
                       <motion.div
                         key="actions"
@@ -276,33 +522,57 @@ const Hero = () => {
                         transition={{ duration: 0.2 }}
                         className="space-y-2"
                       >
-                        {[
-                          { title: "Schedule a recovery day", impact: "High", timing: "This week" },
-                          { title: "Move deep work to 9–11 AM", impact: "Medium", timing: "Tomorrow" },
-                          { title: "Increase magnesium intake", impact: "Medium", timing: "Tonight" },
-                          { title: "Cap meetings at 4 hours", impact: "High", timing: "This week" },
-                        ].map((action, i) => (
-                          <motion.div
-                            key={i}
-                            className="flex items-center gap-3 p-3.5 rounded-xl border border-border/30 hover:border-primary/20 transition-colors"
-                            initial={{ opacity: 0, x: -12 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: i * 0.06 }}
-                          >
-                            <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                              <Zap className="w-3.5 h-3.5 text-primary" />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <p className="text-[13px] font-medium text-foreground">{action.title}</p>
-                              <p className="text-[11px] text-muted-foreground">{action.timing}</p>
-                            </div>
-                            <span className={`text-[10px] font-medium px-2 py-1 rounded-full ${
-                              action.impact === 'High' ? 'bg-primary/10 text-primary' : 'bg-muted text-muted-foreground'
-                            }`}>
-                              {action.impact}
-                            </span>
-                          </motion.div>
-                        ))}
+                        <div className="flex items-center justify-between mb-3">
+                          <p className="text-[11px] text-muted-foreground font-mono uppercase tracking-wider">Today's Actions</p>
+                          <p className="text-[11px] text-primary font-medium">{completedActions.size}/{actionsData.length} done</p>
+                        </div>
+                        {actionsData.map((action, i) => {
+                          const done = completedActions.has(i);
+                          return (
+                            <motion.button
+                              key={i}
+                              onClick={() => toggleAction(i)}
+                              className={`w-full flex items-center gap-3 p-3.5 rounded-xl border transition-all text-left ${
+                                done
+                                  ? 'border-primary/20 bg-primary/5'
+                                  : 'border-border/30 hover:border-primary/20'
+                              }`}
+                              initial={{ opacity: 0, x: -12 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: i * 0.06 }}
+                              whileHover={{ scale: 1.01 }}
+                              whileTap={{ scale: 0.98 }}
+                            >
+                              <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
+                                done ? 'bg-primary text-primary-foreground' : 'bg-primary/10'
+                              }`}>
+                                {done ? <Check className="w-3.5 h-3.5" /> : <Zap className="w-3.5 h-3.5 text-primary" />}
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className={`text-[13px] font-medium transition-all ${done ? 'text-muted-foreground line-through' : 'text-foreground'}`}>{action.title}</p>
+                                <p className="text-[11px] text-muted-foreground">{action.timing}</p>
+                              </div>
+                              <span className={`text-[10px] font-medium px-2 py-1 rounded-full ${
+                                done ? 'bg-primary/10 text-primary' :
+                                action.impact === 'High' ? 'bg-primary/10 text-primary' : 'bg-muted text-muted-foreground'
+                              }`}>
+                                {done ? '✓ Done' : action.impact}
+                              </span>
+                            </motion.button>
+                          );
+                        })}
+
+                        {/* Progress bar */}
+                        <motion.div className="mt-3 pt-3 border-t border-border/20">
+                          <div className="w-full h-1.5 rounded-full bg-muted overflow-hidden">
+                            <motion.div
+                              className="h-full rounded-full bg-primary"
+                              initial={{ width: 0 }}
+                              animate={{ width: `${(completedActions.size / actionsData.length) * 100}%` }}
+                              transition={{ duration: 0.4, ease: "easeOut" }}
+                            />
+                          </div>
+                        </motion.div>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -313,6 +583,35 @@ const Hero = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+// Separate component for metrics to use the animated value hook
+const MetricCard = ({ metric, index, active }: { metric: { label: string; value: number; unit: string; trend: string; up: boolean; sparkline: number[] }; index: number; active: boolean }) => {
+  const animatedValue = useAnimatedValue(metric.value, 1000 + index * 200, active);
+  const displayValue = metric.unit === 'hrs' ? animatedValue.toFixed(1) : Math.round(animatedValue);
+
+  return (
+    <motion.div
+      className="p-4 rounded-xl border border-border/30 hover:border-primary/20 transition-colors cursor-default group"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: index * 0.06 }}
+      whileHover={{ scale: 1.02 }}
+    >
+      <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 font-mono">{metric.label}</p>
+      <div className="flex items-baseline gap-1">
+        <p className="text-2xl font-light text-foreground tabular-nums">{displayValue}</p>
+        <span className="text-[12px] text-muted-foreground">{metric.unit}</span>
+      </div>
+      <div className="flex items-center gap-1 mt-1">
+        {metric.up ? <TrendingUp className="w-3 h-3 text-signal-green" /> : <TrendingDown className="w-3 h-3 text-destructive" />}
+        <p className="text-[11px] text-signal-green">{metric.trend}</p>
+      </div>
+      <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <MiniSparkline data={metric.sparkline} />
+      </div>
+    </motion.div>
   );
 };
 
