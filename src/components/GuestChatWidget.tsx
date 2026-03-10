@@ -10,36 +10,43 @@ import { format } from "date-fns";
 // Strip any remaining markdown formatting (asterisks, hashes, etc.)
 const sanitiseMarkdown = (text: string): string => {
   return text
-    .replace(/\*\*([^*]+)\*\*/g, '$1')  // **bold**
-    .replace(/\*([^*]+)\*/g, '$1')       // *italic*
-    .replace(/__([^_]+)__/g, '$1')       // __bold__
-    .replace(/_([^_]+)_/g, '$1')         // _italic_
-    .replace(/^#{1,6}\s+/gm, '')         // # headings
-    .replace(/`([^`]+)`/g, '$1');        // `code`
+    .replace(/\*\*(.*?)\*\*/gs, '$1')    // **bold** (non-greedy, multiline)
+    .replace(/\*(.*?)\*/gs, '$1')         // *italic*
+    .replace(/__([^_]+)__/g, '$1')        // __bold__
+    .replace(/(?<!\w)_([^_]+)_(?!\w)/g, '$1') // _italic_ (not in URLs)
+    .replace(/^#{1,6}\s+/gm, '')          // # headings
+    .replace(/`([^`]+)`/g, '$1')          // `code`
+    .replace(/^\s*[-*]\s+/gm, '• ')       // markdown list items → bullet
+    .replace(/^\s*\d+\.\s+/gm, (m) => m); // keep numbered lists
 };
 
-// Render text with clickable URLs
+// Render text with clickable URLs (including bare domains)
 const RenderWithLinks = ({ text }: { text: string }) => {
-  const urlRegex = /(https?:\/\/[^\s<>"{}|\\^`[\]]+)/g;
+  // Match full URLs and bare domain-like patterns (e.g. neurostate.io/path)
+  const urlRegex = /(https?:\/\/[^\s<>"{}|\\^`[\]]+|(?:[\w-]+\.)+(?:com|io|co|org|net|uk|ai|dev|app|health)(?:\/[^\s<>"{}|\\^`[\]]*)?)/gi;
   const parts = text.split(urlRegex);
   
   return (
     <>
-      {parts.map((part, i) =>
-        urlRegex.test(part) ? (
-          <a
-            key={i}
-            href={part}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-accent underline underline-offset-2 hover:text-accent/80 break-all"
-          >
-            {part}
-          </a>
-        ) : (
-          <span key={i}>{part}</span>
-        )
-      )}
+      {parts.map((part, i) => {
+        // Reset regex lastIndex for .test()
+        urlRegex.lastIndex = 0;
+        if (urlRegex.test(part)) {
+          const href = part.startsWith('http') ? part : `https://${part}`;
+          return (
+            <a
+              key={i}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent underline underline-offset-2 hover:text-accent/80 break-all"
+            >
+              {part}
+            </a>
+          );
+        }
+        return <span key={i}>{part}</span>;
+      })}
     </>
   );
 };
