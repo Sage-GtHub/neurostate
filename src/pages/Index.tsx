@@ -17,6 +17,9 @@ import { HomeROICalculator } from "@/components/HomeROICalculator";
 import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
 import { HomeComparisonSection } from "@/components/HomeComparisonSection";
 import { IntegrationLogoStrip } from "@/components/IntegrationLogoStrip";
+import { NovaChatShowcase } from "@/components/home/NovaChatShowcase";
+import { PersonalDashboardShowcase } from "@/components/home/PersonalDashboardShowcase";
+import { InsightsShowcase } from "@/components/home/InsightsShowcase";
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Layers, Users } from "lucide-react";
