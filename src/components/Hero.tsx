@@ -238,9 +238,9 @@ const Hero = () => {
           {/* Browser chrome */}
           <div className="flex items-center gap-2 px-5 py-3 border-b border-border/40 bg-muted/20">
             <div className="flex gap-1.5">
-              <div className="w-2.5 h-2.5 rounded-full bg-red-400/60" />
-              <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/60" />
-              <div className="w-2.5 h-2.5 rounded-full bg-green-400/60" />
+              <div className="w-2.5 h-2.5 rounded-full bg-destructive/40" />
+              <div className="w-2.5 h-2.5 rounded-full bg-warning-amber/60" />
+              <div className="w-2.5 h-2.5 rounded-full bg-signal-green/60" />
             </div>
             <div className="flex-1 flex justify-center">
               <div className="flex items-center gap-2 px-4 py-1 rounded-lg bg-muted/60 border border-border/30">
