@@ -153,7 +153,7 @@ export default function ActionControlLayer() {
                 {actionCategories.map((category, i) => (
                   <motion.div 
                     key={category.title}
-                    className="p-8 rounded-2xl bg-muted/30 border border-border/50"
+                    className="p-8 rounded-xl bg-muted/30 border border-border/50"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
