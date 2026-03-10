@@ -11,40 +11,40 @@
 
 @layer base {
   :root {
-    /* GROQ INSPIRED - Warm Cream with Coral Accent */
+    /* LISTENLABS INSPIRED - Pure White, Clean Minimal */
     
-    /* Core Backgrounds - Warm Cream/Beige like Groq */
-    --background: 33 30% 93%;
-    --foreground: 220 25% 18%;
+    /* Core Backgrounds - Pure white like ListenLabs */
+    --background: 0 0% 100%;
+    --foreground: 220 25% 12%;
     
-    /* Card & Surface Colors - Slightly warmer white for subtle contrast */
-    --card: 40 40% 98%;
-    --card-foreground: 220 25% 18%;
+    /* Card & Surface Colors */
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 12%;
     
-    --popover: 38 30% 96%;
-    --popover-foreground: 220 25% 18%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 12%;
     
-    /* Coral/Orange Accent - Vibrant Groq Style */
-    --primary: 12 100% 52%;
+    /* Primary - Clean dark / black accent like ListenLabs */
+    --primary: 220 100% 50%;
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 38 25% 90%;
-    --secondary-foreground: 220 25% 22%;
+    --secondary: 220 10% 96%;
+    --secondary-foreground: 220 25% 15%;
     
-    --muted: 38 20% 88%;
-    --muted-foreground: 220 15% 42%;
+    --muted: 220 10% 96%;
+    --muted-foreground: 220 10% 46%;
     
-    --accent: 12 100% 52%;
-    --accent-light: 12 100% 62%;
+    --accent: 220 100% 50%;
+    --accent-light: 220 100% 60%;
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 100%;
     
-    /* Borders - Subtle Warm */
-    --border: 38 20% 85%;
-    --input: 38 20% 85%;
-    --ring: 12 100% 52%;
+    /* Borders - Very subtle neutral */
+    --border: 220 10% 90%;
+    --input: 220 10% 90%;
+    --ring: 220 100% 50%;
     
     --radius: 8px;
     
