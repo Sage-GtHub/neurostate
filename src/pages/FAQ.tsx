@@ -4,13 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { SEO } from "@/components/SEO";
 import { FAQStructuredData } from "@/components/StructuredData";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { ArrowRight } from "lucide-react";
+import { ScrollReveal } from "@/components/ScrollReveal";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const FAQ = () => {
-  const hero = useScrollAnimation();
-  const content = useScrollAnimation();
-
   const faqCategories = [
     {
       category: "Orders & Delivery",
@@ -50,55 +48,69 @@ const FAQ = () => {
     <>
       <SEO title="Frequently Asked Questions | NeuroState Support" description="Find answers to common questions about NeuroState cognitive performance products, delivery, returns, subscriptions, and account management." keywords="NeuroState FAQ, cognitive supplements questions, delivery information, return policy, subscription help, customer support" />
       <FAQStructuredData faqs={allFaqs} />
-      <div className="min-h-screen flex flex-col bg-background relative overflow-hidden">
-        <div className="fixed inset-0 pointer-events-none">
-          <div className="absolute top-1/4 right-0 w-[500px] h-[500px] rounded-full bg-accent/[0.02] blur-3xl animate-float" />
-        </div>
-        
+      <div className="min-h-screen bg-background">
         <Header />
-        
-        <main className="flex-1 relative">
-          <section ref={hero.ref} className={`pt-32 md:pt-44 pb-16 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${hero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="max-w-4xl mx-auto text-center space-y-4">
-              <p className="text-[10px] uppercase tracking-[0.25em] text-foreground/40">Support</p>
-              <h1 className="text-4xl md:text-5xl font-light text-foreground">Frequently asked questions</h1>
-              <p className="text-sm text-foreground/50">Common questions about our products and policies.</p>
+        <main>
+          {/* Hero */}
+          <section className="pt-24 pb-16 md:pt-32 md:pb-24 px-5 md:px-8">
+            <div className="max-w-6xl mx-auto">
+              <ScrollReveal className="max-w-3xl">
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Support</span>
+                <h1 className="text-[2.5rem] md:text-[3.25rem] lg:text-[3.75rem] font-medium text-foreground mt-4 tracking-tight leading-[1.08]">
+                  Frequently asked{" "}
+                  <span className="text-muted-foreground">questions</span>
+                </h1>
+                <p className="text-base md:text-lg text-muted-foreground max-w-xl mt-6 leading-relaxed">
+                  Common questions about our products and policies.
+                </p>
+              </ScrollReveal>
             </div>
           </section>
 
-          <section ref={content.ref} className={`py-16 md:py-24 px-6 md:px-12 lg:px-20 xl:px-32 transition-all duration-1000 ${content.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          {/* FAQ Content */}
+          <section className="pb-16 md:pb-28 px-5 md:px-8">
             <div className="max-w-3xl mx-auto space-y-12">
               {faqCategories.map((category) => (
-                <div key={category.category}>
-                  <p className="text-[10px] uppercase tracking-[0.15em] text-foreground/40 mb-4">{category.category}</p>
-                  <Accordion type="single" collapsible className="w-full space-y-2">
+                <ScrollReveal key={category.category}>
+                  <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">{category.category}</span>
+                  <Accordion type="single" collapsible className="w-full mt-4">
                     {category.questions.map((item, idx) => (
-                      <AccordionItem key={idx} value={`item-${idx}`} className="border-0 rounded-2xl bg-foreground/[0.02] px-5 data-[state=open]:bg-foreground/[0.04]">
-                        <AccordionTrigger className="text-left text-xs font-medium text-foreground hover:text-foreground hover:no-underline py-4">{item.q}</AccordionTrigger>
-                        <AccordionContent className="text-xs text-foreground/50 pb-4">{item.a}</AccordionContent>
+                      <AccordionItem key={idx} value={`item-${idx}`} className="border-b border-border/30 py-1">
+                        <AccordionTrigger className="text-left text-sm font-medium text-foreground hover:text-foreground hover:no-underline py-4">{item.q}</AccordionTrigger>
+                        <AccordionContent className="text-sm text-muted-foreground pb-4 leading-relaxed">{item.a}</AccordionContent>
                       </AccordionItem>
                     ))}
                   </Accordion>
-                </div>
+                </ScrollReveal>
               ))}
             </div>
           </section>
 
-          <section className="py-16 md:py-24 px-6 md:px-12 lg:px-20 xl:px-32">
-            <div className="max-w-xl mx-auto text-center">
-              <div className="glass-subtle rounded-3xl p-10 space-y-6">
-                <h2 className="text-xl font-light text-foreground">Still have questions?</h2>
-                <p className="text-xs text-foreground/50">Our support team typically responds within 24 hours.</p>
-                <a href="mailto:contact@neurostate.co.uk">
-                  <Button size="sm" className="rounded-full h-10 px-6 text-xs bg-foreground text-background hover:bg-foreground/90">
-                    Email support <ArrowRight className="w-3.5 h-3.5 ml-2" />
-                  </Button>
-                </a>
-              </div>
+          {/* CTA */}
+          <section className="py-20 md:py-32 px-5 md:px-8 bg-foreground">
+            <div className="max-w-3xl mx-auto text-center">
+              <ScrollReveal className="space-y-6">
+                <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary font-semibold">Still have questions?</span>
+                <h2 className="text-3xl md:text-[2.75rem] font-medium text-background leading-[1.1]">
+                  Our team typically responds within 24 hours.
+                </h2>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
+                  <a href="mailto:contact@neurostate.co.uk">
+                    <Button size="lg" className="h-12 px-8 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group">
+                      Email support
+                      <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </a>
+                  <Link to="/contact">
+                    <Button size="lg" className="h-12 px-8 text-sm font-medium rounded-full bg-transparent border border-background/30 text-background hover:bg-background/10">
+                      Book a demo
+                    </Button>
+                  </Link>
+                </div>
+              </ScrollReveal>
             </div>
           </section>
         </main>
-        
         <Footer />
       </div>
     </>

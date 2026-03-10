@@ -1,11 +1,35 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageCircle, Brain, BarChart3, Zap, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+
+const demoTabs = [
+  {
+    id: 'chat',
+    label: 'Chat',
+    icon: MessageCircle,
+  },
+  {
+    id: 'insights',
+    label: 'Insights',
+    icon: Brain,
+  },
+  {
+    id: 'metrics',
+    label: 'Metrics',
+    icon: BarChart3,
+  },
+  {
+    id: 'actions',
+    label: 'Actions',
+    icon: Zap,
+  },
+];
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [activeTab, setActiveTab] = useState('chat');
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 50);
@@ -42,7 +66,6 @@ const Hero = () => {
               initial="hidden"
               animate={isLoaded ? "visible" : "hidden"}
             >
-              {/* Pill announcement */}
               <motion.div variants={itemVariants}>
                 <Link 
                   to="/nova/overview"
@@ -56,7 +79,6 @@ const Hero = () => {
                 </Link>
               </motion.div>
 
-              {/* Headline — large, clean, like ListenLabs */}
               <motion.h1 
                 className="text-[2.25rem] md:text-[3rem] lg:text-[3.5rem] font-medium text-foreground tracking-[-0.02em] leading-[1.1]"
                 variants={itemVariants}
@@ -64,7 +86,6 @@ const Hero = () => {
                 Turn your team's health data into better performance.
               </motion.h1>
               
-              {/* Subheadline */}
               <motion.p 
                 className="text-base md:text-[17px] text-muted-foreground max-w-md leading-relaxed"
                 variants={itemVariants}
@@ -72,7 +93,6 @@ const Hero = () => {
                 NeuroState connects to wearables your team already uses, spots early signs of burnout, and delivers clear actions to keep people at their best.
               </motion.p>
 
-              {/* CTAs — ListenLabs style: filled primary + outlined */}
               <motion.div 
                 className="flex flex-wrap items-center gap-3 pt-1"
                 variants={itemVariants}
@@ -97,7 +117,7 @@ const Hero = () => {
               </motion.div>
             </motion.div>
 
-            {/* Right — Product Preview (clean UI card like ListenLabs) */}
+            {/* Right — Interactive Tabbed Product Demo */}
             <motion.div 
               className="relative"
               initial={{ opacity: 0, y: 20 }}
@@ -106,61 +126,202 @@ const Hero = () => {
             >
               <div className="relative rounded-xl border border-border bg-background shadow-[0_8px_40px_-12px_rgba(0,0,0,0.08)] overflow-hidden">
                 {/* App header bar */}
-                <div className="flex items-center gap-2 px-5 py-3.5 border-b border-border">
+                <div className="flex items-center gap-2 px-5 py-3 border-b border-border">
                   <div className="flex gap-1.5">
                     <div className="w-2.5 h-2.5 rounded-full bg-border" />
                     <div className="w-2.5 h-2.5 rounded-full bg-border" />
                     <div className="w-2.5 h-2.5 rounded-full bg-border" />
                   </div>
                   <div className="flex-1 flex justify-center">
-                    <div className="px-3 py-1 rounded-md bg-muted text-[11px] text-muted-foreground font-mono">neurostate.ai/dashboard</div>
+                    <div className="px-3 py-1 rounded-md bg-muted text-[11px] text-muted-foreground font-mono">neurostate.ai/nova</div>
                   </div>
                 </div>
 
-                {/* Dashboard content preview */}
-                <div className="p-5 md:p-6 space-y-5">
-                  {/* Greeting */}
-                  <div>
-                    <p className="text-sm text-muted-foreground">Good morning, Alex</p>
-                    <p className="text-lg font-medium text-foreground mt-0.5">Your team is performing well today</p>
-                  </div>
-
-                  {/* Metric cards row */}
-                  <div className="grid grid-cols-3 gap-3">
-                    {[
-                      { label: "Team Readiness", value: "87%", trend: "+5%", color: "text-primary" },
-                      { label: "Burnout Risk", value: "Low", trend: "↓12%", color: "text-primary" },
-                      { label: "Recovery Score", value: "92", trend: "+3", color: "text-foreground" },
-                    ].map((m, i) => (
-                      <motion.div 
-                        key={i} 
-                        className="p-3 rounded-lg border border-border"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-                        transition={{ delay: 0.5 + i * 0.1 }}
+                {/* Tab Navigation */}
+                <div className="flex items-center gap-0 px-4 pt-3 border-b border-border">
+                  {demoTabs.map((tab) => {
+                    const TabIcon = tab.icon;
+                    return (
+                      <button
+                        key={tab.id}
+                        onClick={() => setActiveTab(tab.id)}
+                        className={`flex items-center gap-1.5 px-4 py-2.5 text-[12px] font-medium border-b-2 transition-colors ${
+                          activeTab === tab.id
+                            ? 'border-primary text-foreground'
+                            : 'border-transparent text-muted-foreground hover:text-foreground'
+                        }`}
                       >
-                        <p className="text-[10px] text-muted-foreground uppercase tracking-wider">{m.label}</p>
-                        <p className={`text-xl font-medium mt-1 ${m.color}`}>{m.value}</p>
-                        <p className="text-[11px] text-primary mt-0.5">{m.trend}</p>
-                      </motion.div>
-                    ))}
-                  </div>
+                        <TabIcon className="w-3.5 h-3.5" />
+                        {tab.label}
+                      </button>
+                    );
+                  })}
+                </div>
 
-                  {/* Nova AI suggestion */}
-                  <motion.div 
-                    className="flex items-start gap-3 p-3.5 rounded-lg bg-muted/60 border border-border"
-                    initial={{ opacity: 0 }}
-                    animate={isLoaded ? { opacity: 1 } : {}}
-                    transition={{ delay: 0.8 }}
-                  >
-                    <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-xs font-semibold text-primary">N</span>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-[11px] font-medium text-foreground">Nova AI</p>
-                      <p className="text-[12px] text-muted-foreground mt-0.5 leading-relaxed">3 team members showing early fatigue signals. Consider scheduling lighter workloads for Thursday.</p>
-                    </div>
-                  </motion.div>
+                {/* Tab Content */}
+                <div className="p-5 md:p-6 min-h-[280px]">
+                  <AnimatePresence mode="wait">
+                    {/* Chat Tab */}
+                    {activeTab === 'chat' && (
+                      <motion.div
+                        key="chat"
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.2 }}
+                        className="space-y-3"
+                      >
+                        <div className="flex items-center gap-2 mb-4">
+                          <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center">
+                            <Sparkles className="w-3.5 h-3.5 text-primary" />
+                          </div>
+                          <div>
+                            <p className="text-[11px] font-medium text-foreground">Nova AI</p>
+                            <div className="flex items-center gap-1">
+                              <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                              <p className="text-[10px] text-muted-foreground">Online</p>
+                            </div>
+                          </div>
+                        </div>
+                        {[
+                          { role: 'nova', text: "Good morning. Your team's recovery is trending 12% above average. I've adjusted the focus window to 10am–1pm." },
+                          { role: 'user', text: "What should I prioritise?" },
+                          { role: 'nova', text: "Q4 strategy deck — complexity matches your current cognitive state. Block 90 minutes before lunch." },
+                        ].map((msg, i) => (
+                          <motion.div
+                            key={i}
+                            className={`p-3 rounded-lg text-[13px] leading-relaxed ${msg.role === 'nova' ? 'bg-muted/50 max-w-[90%]' : 'bg-primary/8 ml-auto max-w-[75%]'}`}
+                            initial={{ opacity: 0, y: 6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: i * 0.12 }}
+                          >
+                            <p className="text-foreground">{msg.text}</p>
+                          </motion.div>
+                        ))}
+                        <div className="flex items-center gap-2 p-2.5 rounded-lg bg-muted/30 border border-border/30 mt-2">
+                          <span className="text-[12px] text-muted-foreground flex-1 pl-1">Ask Nova anything…</span>
+                          <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center">
+                            <ArrowRight className="w-3.5 h-3.5 text-primary" />
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {/* Insights Tab */}
+                    {activeTab === 'insights' && (
+                      <motion.div
+                        key="insights"
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.2 }}
+                        className="space-y-3"
+                      >
+                        {[
+                          { title: "Sleep consistency improved", desc: "7-day streak. Circadian rhythm optimising.", confidence: 94, dot: "bg-signal-green" },
+                          { title: "HRV downtrend detected", desc: "15% decline over 5 days. Consider recovery.", confidence: 87, dot: "bg-warning-amber" },
+                          { title: "Peak focus window shifting", desc: "Optimal period moved 30 mins earlier this week.", confidence: 82, dot: "bg-primary" },
+                        ].map((insight, i) => (
+                          <motion.div
+                            key={i}
+                            className="p-3.5 rounded-lg border border-border/30 hover:border-primary/20 transition-colors"
+                            initial={{ opacity: 0, x: -12 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: i * 0.08 }}
+                          >
+                            <div className="flex items-start justify-between gap-3">
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                  <div className={`w-2 h-2 rounded-full ${insight.dot}`} />
+                                  <p className="text-[13px] font-medium text-foreground">{insight.title}</p>
+                                </div>
+                                <p className="text-[12px] text-muted-foreground">{insight.desc}</p>
+                              </div>
+                              <div className="text-right flex-shrink-0">
+                                <p className="text-lg font-light text-primary">{insight.confidence}%</p>
+                                <p className="text-[10px] text-muted-foreground">confidence</p>
+                              </div>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </motion.div>
+                    )}
+
+                    {/* Metrics Tab */}
+                    {activeTab === 'metrics' && (
+                      <motion.div
+                        key="metrics"
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div className="grid grid-cols-2 gap-3">
+                          {[
+                            { label: "HRV", value: "68", unit: "ms", trend: "+5%" },
+                            { label: "Sleep", value: "7.2", unit: "hrs", trend: "+0.4" },
+                            { label: "Readiness", value: "82", unit: "%", trend: "+8%" },
+                            { label: "Recovery", value: "91", unit: "%", trend: "+3%" },
+                          ].map((metric, i) => (
+                            <motion.div
+                              key={i}
+                              className="p-4 rounded-lg border border-border/30"
+                              initial={{ opacity: 0, scale: 0.95 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ delay: i * 0.06 }}
+                            >
+                              <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 font-mono">{metric.label}</p>
+                              <div className="flex items-baseline gap-1">
+                                <p className="text-2xl font-light text-foreground">{metric.value}</p>
+                                <span className="text-[12px] text-muted-foreground">{metric.unit}</span>
+                              </div>
+                              <p className="text-[11px] text-signal-green mt-1">{metric.trend}</p>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {/* Actions Tab */}
+                    {activeTab === 'actions' && (
+                      <motion.div
+                        key="actions"
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.2 }}
+                        className="space-y-2"
+                      >
+                        {[
+                          { title: "Schedule a recovery day", impact: "High", timing: "This week" },
+                          { title: "Move deep work to 9–11 AM", impact: "Medium", timing: "Tomorrow" },
+                          { title: "Increase magnesium intake", impact: "Medium", timing: "Tonight" },
+                          { title: "Cap meetings at 4 hours", impact: "High", timing: "This week" },
+                        ].map((action, i) => (
+                          <motion.div
+                            key={i}
+                            className="flex items-center gap-3 p-3.5 rounded-lg border border-border/30 hover:border-primary/20 transition-colors"
+                            initial={{ opacity: 0, x: -12 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: i * 0.06 }}
+                          >
+                            <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
+                              <Zap className="w-3.5 h-3.5 text-primary" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-[13px] font-medium text-foreground">{action.title}</p>
+                              <p className="text-[11px] text-muted-foreground">{action.timing}</p>
+                            </div>
+                            <span className={`text-[10px] font-medium px-2 py-1 rounded-full ${
+                              action.impact === 'High' ? 'bg-primary/10 text-primary' : 'bg-muted text-muted-foreground'
+                            }`}>
+                              {action.impact}
+                            </span>
+                          </motion.div>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </div>
             </motion.div>
