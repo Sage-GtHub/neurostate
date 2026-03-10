@@ -1,7 +1,6 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { User, Menu, X, Award, LogOut, ArrowUpRight, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
 import { Input } from "./ui/input";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import {
@@ -24,7 +23,6 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "./ui/collapsible";
-import { AnnouncementBar } from "./AnnouncementBar";
 
 import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -37,7 +35,6 @@ export const Header = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [session, setSession] = useState<Session | null>(null);
@@ -45,7 +42,6 @@ export const Header = () => {
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [industriesOpen, setIndustriesOpen] = useState(false);
 
-  // Handle scroll for glass effect
   const handleScroll = useCallback(() => {
     setIsScrolled(window.scrollY > 10);
   }, []);
@@ -84,14 +80,8 @@ export const Header = () => {
     e.preventDefault();
     if (searchQuery.trim()) {
       navigate(`/?search=${encodeURIComponent(searchQuery.trim())}`);
-      setSearchOpen(false);
       setMobileMenuOpen(false);
     }
-  };
-
-  const clearSearch = () => {
-    setSearchQuery('');
-    navigate('/');
   };
 
   const industries = [
@@ -114,315 +104,224 @@ export const Header = () => {
     { label: "Performance ROI", href: "/solutions/roi-layer", desc: "Quantify cognitive value in pounds" },
   ];
 
-  const mobileLinks = [
-    { label: "Nova AI", href: "/nova/overview" },
-    { label: "For Teams", href: "/enterprise/overview" },
-    { label: "About", href: "/about" },
-  ];
-
-  const mobileSolutions = [
-    { label: "Platform Overview", href: "/solutions" },
-    { label: "Data Integration", href: "/solutions/data-layer" },
-    { label: "Cognitive Monitoring", href: "/solutions/state-engine" },
-    { label: "Predictive Intelligence", href: "/solutions/prediction" },
-    { label: "AI Coaching", href: "/solutions/action-layer" },
-    { label: "Team Analytics", href: "/solutions/command-surfaces" },
-    { label: "Performance ROI", href: "/solutions/roi-layer" },
-  ];
-
   return (
-    <>
-      <AnnouncementBar />
-      <header className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-500",
-        isScrolled 
-          ? "bg-background/95 backdrop-blur-xl border-b border-border/50 shadow-sm" 
-          : "bg-background/80 backdrop-blur-md border-b border-transparent"
-      )}>
-        <div className="max-w-7xl mx-auto px-6 md:px-8 flex h-14 lg:h-16 items-center">
-          {/* Mobile Logo - Left */}
-          <div className="lg:hidden">
-            <Link to="/" className="flex items-center gap-2 group">
-              <img src={logoIcon} alt="NeuroState" className="h-6 w-6 transition-all duration-300 group-hover:scale-110" />
-              <span className="text-sm font-medium tracking-tight text-foreground">NeuroState<sup className="text-[6px]">®</sup></span>
-            </Link>
-          </div>
+    <header className={cn(
+      "sticky top-0 z-50 w-full transition-all duration-300",
+      isScrolled 
+        ? "bg-background/95 backdrop-blur-xl border-b border-border/50 shadow-sm" 
+        : "bg-background border-b border-transparent"
+    )}>
+      <div className="max-w-7xl mx-auto px-5 md:px-8 flex h-14 lg:h-16 items-center">
+        
+        {/* Logo — always left */}
+        <Link to="/" className="flex items-center gap-2.5 group mr-8 flex-shrink-0">
+          <img src={logoIcon} alt="NeuroState" className="h-6 w-6 lg:h-7 lg:w-7 transition-transform duration-300 group-hover:scale-110" />
+          <span className="text-sm lg:text-[15px] font-medium tracking-tight text-foreground">
+            NeuroState<sup className="text-[6px]">®</sup>
+          </span>
+        </Link>
 
-          {/* Mobile Burger - Right */}
-          <div className="lg:hidden ml-auto">
-            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="h-8 w-8 text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full">
-                  <Menu className="h-4 w-4" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-full sm:w-[320px] bg-background border-l border-border p-0 flex flex-col h-full">
-                <SheetHeader className="p-5 border-b border-border flex-shrink-0">
-                  <SheetTitle className="text-left text-foreground text-sm font-medium">Menu</SheetTitle>
-                </SheetHeader>
-                
-                <nav className="p-5 space-y-1 overflow-y-auto flex-1">
-                  <Collapsible open={solutionsOpen} onOpenChange={setSolutionsOpen}>
-                    <CollapsibleTrigger className="flex items-center justify-between w-full py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors">
-                      <span>Platform</span>
-                      <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", solutionsOpen && "rotate-180")} />
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="pl-4 space-y-1">
-                      <Link to="/solutions" className="block py-2 text-xs text-foreground/70 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Solutions Overview</Link>
+        {/* Desktop Nav — left-aligned after logo */}
+        <nav className="hidden lg:flex items-center gap-1 flex-1">
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent text-foreground/60 hover:text-foreground hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground text-[13px] font-medium h-9 px-3 rounded-lg transition-colors [&>svg]:text-foreground/40 normal-case">
+                  Platform
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <div className="w-[360px] p-3 bg-background border border-border/60 rounded-xl shadow-xl">
+                    <div className="mb-2 pb-2 border-b border-border/30">
+                      <NavigationMenuLink asChild>
+                        <Link to="/solutions" className="flex items-center justify-between p-3 rounded-lg hover:bg-muted/60 transition-colors group">
+                          <div>
+                            <p className="text-[13px] font-medium text-foreground group-hover:text-primary transition-colors">Platform Overview</p>
+                            <p className="text-[11px] text-muted-foreground mt-0.5">How it all works together</p>
+                          </div>
+                          <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </Link>
+                      </NavigationMenuLink>
+                    </div>
+                    <div className="space-y-0.5">
                       {solutions.map((item) => (
-                        <Link key={item.label} to={item.href} className="block py-2 text-xs text-foreground/70 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>{item.label}</Link>
+                        <NavigationMenuLink key={item.label} asChild>
+                          <Link to={item.href} className="block p-3 rounded-lg hover:bg-muted/60 transition-colors group">
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <p className="text-[13px] font-medium text-foreground group-hover:text-primary transition-colors">{item.label}</p>
+                                <p className="text-[11px] text-muted-foreground mt-0.5">{item.desc}</p>
+                              </div>
+                              <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                            </div>
+                          </Link>
+                        </NavigationMenuLink>
                       ))}
-                    </CollapsibleContent>
-                  </Collapsible>
-                  
-                  <Collapsible open={industriesOpen} onOpenChange={setIndustriesOpen}>
-                    <CollapsibleTrigger className="flex items-center justify-between w-full py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors">
-                      <span>Industries</span>
-                      <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", industriesOpen && "rotate-180")} />
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="pl-4 space-y-1">
-                      <Link to="/industries" className="block py-2 text-xs text-foreground/70 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Industries Overview</Link>
+                    </div>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent text-foreground/60 hover:text-foreground hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground text-[13px] font-medium h-9 px-3 rounded-lg transition-colors [&>svg]:text-foreground/40 normal-case">
+                  Industries
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <div className="w-[340px] p-3 bg-background border border-border/60 rounded-xl shadow-xl">
+                    <div className="mb-2 pb-2 border-b border-border/30">
+                      <NavigationMenuLink asChild>
+                        <Link to="/industries" className="flex items-center justify-between p-3 rounded-lg hover:bg-muted/60 transition-colors group">
+                          <div>
+                            <p className="text-[13px] font-medium text-foreground group-hover:text-primary transition-colors">Industries Overview</p>
+                            <p className="text-[11px] text-muted-foreground mt-0.5">ROI calculator & industry benchmarks</p>
+                          </div>
+                          <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </Link>
+                      </NavigationMenuLink>
+                    </div>
+                    <div className="space-y-0.5">
                       {industries.map((item) => (
-                        <Link key={item.label} to={item.href} className="block py-2 text-xs text-foreground/70 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>{item.label}</Link>
+                        <NavigationMenuLink key={item.label} asChild>
+                          <Link to={item.href} className="block p-3 rounded-lg hover:bg-muted/60 transition-colors group">
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <p className="text-[13px] font-medium text-foreground group-hover:text-primary transition-colors">{item.label}</p>
+                                <p className="text-[11px] text-muted-foreground mt-0.5">{item.desc}</p>
+                              </div>
+                              <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                            </div>
+                          </Link>
+                        </NavigationMenuLink>
                       ))}
-                    </CollapsibleContent>
-                  </Collapsible>
-                  
-                  <Link to="/nova/overview" className="block py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Nova AI</Link>
-                  <Link to={user ? "/team-dashboard" : "/auth?mode=signup&type=company"} className="block py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Team</Link>
-                  <Link to="/about" className="block py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Company</Link>
-                  
-                  <div className="pt-5 border-t border-border mt-5">
-                    {user ? (
-                      <div className="space-y-2">
-                        <p className="text-[10px] text-muted-foreground truncate">{user.email}</p>
-                        <Link to="/nova/dashboard" className="block py-2 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Dashboard</Link>
-                        <Link to="/team-dashboard" className="block py-2 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Team Dashboard</Link>
-                        <button onClick={() => { handleSignOut(); setMobileMenuOpen(false); }} className="block py-2 text-sm font-medium text-destructive hover:text-destructive/80 transition-colors">Sign Out</button>
-                      </div>
-                    ) : null}
-                  </div>
-                  
-                  <div className="pt-5 pb-5">
-                    <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
-                      <Button className="w-full h-10 text-xs font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full">Book a demo</Button>
-                    </Link>
-                  </div>
-                </nav>
-              </SheetContent>
-            </Sheet>
-          </div>
-          {/* Left Navigation */}
-          <nav className="hidden lg:flex items-center gap-0.5 flex-1">
-            <NavigationMenu>
-              <NavigationMenuList>
-                {/* Solutions Dropdown */}
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent text-foreground/70 hover:text-foreground hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground text-[13px] font-medium h-9 px-3 rounded-full transition-all duration-300 [&>svg]:text-primary normal-case">
-                    Platform
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="w-[360px] p-4 bg-background/95 backdrop-blur-xl border border-border/50 rounded-lg shadow-xl">
-                      <div className="mb-3 pb-3 border-b border-border/30">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to="/solutions"
-                            className="flex items-center justify-between p-3 rounded-lg hover:bg-muted/80 transition-all duration-300 group"
-                          >
-                            <div>
-                              <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors duration-300">
-                                Platform Overview
-                              </p>
-                              <p className="text-[10px] text-muted-foreground mt-0.5">
-                                How it all works together
-                              </p>
-                            </div>
-                            <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
-                          </Link>
-                        </NavigationMenuLink>
-                      </div>
-                      <div className="space-y-1">
-                        {solutions.map((item, index) => (
-                          <NavigationMenuLink key={item.label} asChild>
-                            <Link
-                              to={item.href}
-                              className="block p-3 rounded-lg hover:bg-muted/80 transition-all duration-300 group"
-                              style={{ animationDelay: `${index * 50}ms` }}
-                            >
-                              <div className="flex items-center justify-between">
-                                <div>
-                                  <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors duration-300">
-                                    {item.label}
-                                  </p>
-                                  <p className="text-[10px] text-muted-foreground mt-0.5 group-hover:text-muted-foreground/80 transition-colors">
-                                    {item.desc}
-                                  </p>
-                                </div>
-                                <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
-                              </div>
-                            </Link>
-                          </NavigationMenuLink>
-                        ))}
-                      </div>
                     </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
 
-                {/* Industries Dropdown */}
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent text-foreground/70 hover:text-foreground hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-foreground text-[13px] font-medium h-9 px-3 rounded-full transition-all duration-300 [&>svg]:text-primary normal-case">
-                    Industries
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="w-[340px] p-4 bg-background/95 backdrop-blur-xl border border-border/50 rounded-lg shadow-xl">
-                      <div className="mb-3 pb-3 border-b border-border/30">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to="/industries"
-                            className="flex items-center justify-between p-3 rounded-lg hover:bg-muted/80 transition-all duration-300 group"
-                          >
-                            <div>
-                              <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors duration-300">
-                                Industries Overview
-                              </p>
-                              <p className="text-[10px] text-muted-foreground mt-0.5">
-                                ROI calculator & industry benchmarks
-                              </p>
-                            </div>
-                            <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
-                          </Link>
-                        </NavigationMenuLink>
-                      </div>
-                      <div className="space-y-1">
-                        {industries.map((item, index) => (
-                          <NavigationMenuLink key={item.label} asChild>
-                            <Link
-                              to={item.href}
-                              className="block p-3 rounded-lg hover:bg-muted/80 transition-all duration-300 group"
-                              style={{ animationDelay: `${index * 50}ms` }}
-                            >
-                              <div className="flex items-center justify-between">
-                                <div>
-                                  <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors duration-300">
-                                    {item.label}
-                                  </p>
-                                  <p className="text-[10px] text-muted-foreground mt-0.5 group-hover:text-muted-foreground/80 transition-colors">
-                                    {item.desc}
-                                  </p>
-                                </div>
-                                <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
-                              </div>
-                            </Link>
-                          </NavigationMenuLink>
-                        ))}
-                      </div>
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
-
-            <Link
-              to="/nova/overview"
-              className="text-[13px] font-medium text-foreground/70 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50"
-            >
-              Nova AI
-            </Link>
-          </nav>
-
-          {/* Centre Logo - Desktop only */}
-          <Link to="/" className="hidden lg:flex items-center gap-2.5 group relative">
-            <div className="absolute -inset-2 bg-primary/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <img 
-              src={logoIcon} 
-              alt="NeuroState" 
-              className="h-7 w-7 transition-all duration-300 group-hover:scale-110 relative" 
-            />
-            <span className="text-base font-medium tracking-tight text-foreground relative">
-              NeuroState<sup className="text-[6px]">®</sup>
-            </span>
+          <Link to="/nova/overview" className="text-[13px] font-medium text-foreground/60 hover:text-foreground transition-colors px-3 py-2">
+            Nova AI
           </Link>
-          
-          {/* Right Navigation */}
-          <nav className="hidden lg:flex items-center gap-0.5 flex-1 justify-end">
-            <Link
-              to={user ? "/team-dashboard" : "/auth?mode=signup&type=company"}
-              className="text-[13px] font-medium text-foreground/70 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50"
-            >
-              Team
+          <Link to={user ? "/team-dashboard" : "/auth?mode=signup&type=company"} className="text-[13px] font-medium text-foreground/60 hover:text-foreground transition-colors px-3 py-2">
+            Team
+          </Link>
+          <Link to="/about" className="text-[13px] font-medium text-foreground/60 hover:text-foreground transition-colors px-3 py-2">
+            Company
+          </Link>
+        </nav>
+
+        {/* Right Actions */}
+        <div className="hidden lg:flex items-center gap-3 ml-auto">
+          {!user && (
+            <Link to="/auth" className="text-[13px] font-medium text-foreground/60 hover:text-foreground transition-colors px-3 py-2">
+              Login
             </Link>
+          )}
 
-            <Link
-              to="/about"
-              className="text-[13px] font-medium text-foreground/70 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50"
-            >
-              Company
-            </Link>
-          </nav>
+          {user && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="h-8 px-3 text-[12px] font-medium text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-lg gap-1.5">
+                  <User className="w-3.5 h-3.5" />
+                  <span className="max-w-[80px] truncate">{user.email?.split('@')[0]}</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuItem asChild>
+                  <Link to="/nova/dashboard" className="flex items-center gap-2">
+                    <Award className="w-4 h-4" />
+                    Dashboard
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/team-dashboard" className="flex items-center gap-2">
+                    <User className="w-4 h-4" />
+                    Team Dashboard
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleSignOut} className="text-destructive">
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sign Out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
 
-          {/* Right Actions - Auth, Book Demo */}
-          <div className="hidden lg:flex items-center gap-2">
-            
-            {/* Sign In link (only when logged out) */}
-            {!user && (
-              <Link
-                to="/auth"
-                className="text-[13px] font-medium text-foreground/70 hover:text-foreground transition-all duration-300 px-3 py-2 rounded-full hover:bg-muted/50"
-              >
-                Sign In
-              </Link>
-            )}
-
-            {/* User Menu (only when logged in) */}
-            {user && (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                    className="h-8 px-3 text-[11px] font-medium text-foreground/60 hover:text-foreground hover:bg-muted/50 rounded-full gap-1.5"
-                  >
-                    <User className="w-3.5 h-3.5" />
-                    <span className="max-w-[80px] truncate">{user.email?.split('@')[0]}</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
-                  <DropdownMenuItem asChild>
-                    <Link to="/nova/dashboard" className="flex items-center gap-2">
-                      <Award className="w-4 h-4" />
-                      Dashboard
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/team-dashboard" className="flex items-center gap-2">
-                      <User className="w-4 h-4" />
-                      Team Dashboard
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleSignOut} className="text-destructive">
-                    <LogOut className="w-4 h-4 mr-2" />
-                    Sign Out
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            )}
-            
-            {/* Get In Touch - Coral CTA */}
-            <Link
-              to="/contact"
-              className="h-8 px-5 text-[11px] font-medium bg-primary text-primary-foreground rounded-full flex items-center hover:bg-primary/90 transition-colors"
-            >
-              <span className="relative z-10 flex items-center gap-1.5">
-                Get In Touch
-              </span>
-            </Link>
-          </div>
-
-
-
+          <Link to="/contact">
+            <Button size="sm" className="h-9 px-5 text-[13px] font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full">
+              Book a Demo
+            </Button>
+          </Link>
         </div>
-      </header>
-    </>
+
+        {/* Mobile Burger */}
+        <div className="lg:hidden ml-auto">
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="h-9 w-9 text-foreground/60 hover:text-foreground rounded-lg">
+                <Menu className="h-4 w-4" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-full sm:w-[320px] bg-background border-l border-border p-0 flex flex-col h-full">
+              <SheetHeader className="p-5 border-b border-border flex-shrink-0">
+                <SheetTitle className="text-left text-foreground text-sm font-medium">Menu</SheetTitle>
+              </SheetHeader>
+              
+              <nav className="p-5 space-y-1 overflow-y-auto flex-1">
+                <Collapsible open={solutionsOpen} onOpenChange={setSolutionsOpen}>
+                  <CollapsibleTrigger className="flex items-center justify-between w-full py-3 text-sm font-medium text-foreground hover:text-primary transition-colors">
+                    <span>Platform</span>
+                    <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", solutionsOpen && "rotate-180")} />
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="pl-4 space-y-1">
+                    <Link to="/solutions" className="block py-2 text-[13px] text-muted-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Solutions Overview</Link>
+                    {solutions.map((item) => (
+                      <Link key={item.label} to={item.href} className="block py-2 text-[13px] text-muted-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>{item.label}</Link>
+                    ))}
+                  </CollapsibleContent>
+                </Collapsible>
+                
+                <Collapsible open={industriesOpen} onOpenChange={setIndustriesOpen}>
+                  <CollapsibleTrigger className="flex items-center justify-between w-full py-3 text-sm font-medium text-foreground hover:text-primary transition-colors">
+                    <span>Industries</span>
+                    <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", industriesOpen && "rotate-180")} />
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="pl-4 space-y-1">
+                    <Link to="/industries" className="block py-2 text-[13px] text-muted-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Industries Overview</Link>
+                    {industries.map((item) => (
+                      <Link key={item.label} to={item.href} className="block py-2 text-[13px] text-muted-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>{item.label}</Link>
+                    ))}
+                  </CollapsibleContent>
+                </Collapsible>
+                
+                <Link to="/nova/overview" className="block py-3 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Nova AI</Link>
+                <Link to={user ? "/team-dashboard" : "/auth?mode=signup&type=company"} className="block py-3 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Team</Link>
+                <Link to="/about" className="block py-3 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Company</Link>
+                
+                <div className="pt-5 border-t border-border mt-5">
+                  {user ? (
+                    <div className="space-y-2">
+                      <p className="text-[11px] text-muted-foreground truncate">{user.email}</p>
+                      <Link to="/nova/dashboard" className="block py-2 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Dashboard</Link>
+                      <Link to="/team-dashboard" className="block py-2 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Team Dashboard</Link>
+                      <button onClick={() => { handleSignOut(); setMobileMenuOpen(false); }} className="block py-2 text-sm font-medium text-destructive hover:text-destructive/80 transition-colors">Sign Out</button>
+                    </div>
+                  ) : (
+                    <Link to="/auth" className="block py-3 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>Login</Link>
+                  )}
+                </div>
+                
+                <div className="pt-5 pb-5">
+                  <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
+                    <Button className="w-full h-11 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full">Book a Demo</Button>
+                  </Link>
+                </div>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
+    </header>
   );
 };
