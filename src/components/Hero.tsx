@@ -5,26 +5,10 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const demoTabs = [
-  {
-    id: 'chat',
-    label: 'Chat',
-    icon: MessageCircle,
-  },
-  {
-    id: 'insights',
-    label: 'Insights',
-    icon: Brain,
-  },
-  {
-    id: 'metrics',
-    label: 'Metrics',
-    icon: BarChart3,
-  },
-  {
-    id: 'actions',
-    label: 'Actions',
-    icon: Zap,
-  },
+  { id: 'chat', label: 'Chat', icon: MessageCircle },
+  { id: 'insights', label: 'Insights', icon: Brain },
+  { id: 'metrics', label: 'Metrics', icon: BarChart3 },
+  { id: 'actions', label: 'Actions', icon: Zap },
 ];
 
 const Hero = () => {
@@ -56,12 +40,12 @@ const Hero = () => {
   return (
     <section className="relative flex flex-col bg-background overflow-hidden">
       <div className="flex-1 flex items-center relative z-10">
-        <div className="w-full max-w-7xl mx-auto px-5 md:px-8 pt-16 pb-12 md:pt-24 md:pb-16 lg:pt-32 lg:pb-20">
+        <div className="w-full max-w-7xl mx-auto px-5 md:px-8 pt-20 pb-16 md:pt-32 md:pb-24 lg:pt-40 lg:pb-28">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             
             {/* Left — Copy */}
             <motion.div 
-              className="space-y-6 lg:pr-4"
+              className="space-y-7 lg:pr-4"
               variants={containerVariants}
               initial="hidden"
               animate={isLoaded ? "visible" : "hidden"}
@@ -80,21 +64,21 @@ const Hero = () => {
               </motion.div>
 
               <motion.h1 
-                className="text-[2.25rem] md:text-[3rem] lg:text-[3.5rem] font-medium text-foreground tracking-[-0.02em] leading-[1.1]"
+                className="text-[2.75rem] md:text-[3.5rem] lg:text-[4rem] xl:text-[4.5rem] font-medium text-foreground tracking-[-0.03em] leading-[1.05]"
                 variants={itemVariants}
               >
                 Turn your team's health data into better performance.
               </motion.h1>
               
               <motion.p 
-                className="text-base md:text-[17px] text-muted-foreground max-w-md leading-relaxed"
+                className="text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed"
                 variants={itemVariants}
               >
                 NeuroState connects to wearables your team already uses, spots early signs of burnout, and delivers clear actions to keep people at their best.
               </motion.p>
 
               <motion.div 
-                className="flex flex-wrap items-center gap-3 pt-1"
+                className="flex flex-wrap items-center gap-3 pt-2"
                 variants={itemVariants}
               >
                 <Link to="/contact">
@@ -120,13 +104,13 @@ const Hero = () => {
             {/* Right — Interactive Tabbed Product Demo */}
             <motion.div 
               className="relative"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              <div className="relative rounded-xl border border-border bg-background shadow-[0_8px_40px_-12px_rgba(0,0,0,0.08)] overflow-hidden">
+              <div className="relative rounded-2xl border border-border/60 bg-background shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden">
                 {/* App header bar */}
-                <div className="flex items-center gap-2 px-5 py-3 border-b border-border">
+                <div className="flex items-center gap-2 px-5 py-3 border-b border-border/40 bg-muted/20">
                   <div className="flex gap-1.5">
                     <div className="w-2.5 h-2.5 rounded-full bg-border" />
                     <div className="w-2.5 h-2.5 rounded-full bg-border" />
@@ -138,7 +122,7 @@ const Hero = () => {
                 </div>
 
                 {/* Tab Navigation */}
-                <div className="flex items-center gap-0 px-4 pt-3 border-b border-border">
+                <div className="flex items-center gap-0 px-4 pt-3 border-b border-border/40">
                   {demoTabs.map((tab) => {
                     const TabIcon = tab.icon;
                     return (
@@ -159,7 +143,7 @@ const Hero = () => {
                 </div>
 
                 {/* Tab Content */}
-                <div className="p-5 md:p-6 min-h-[280px]">
+                <div className="p-5 md:p-6 min-h-[300px]">
                   <AnimatePresence mode="wait">
                     {/* Chat Tab */}
                     {activeTab === 'chat' && (
@@ -190,7 +174,7 @@ const Hero = () => {
                         ].map((msg, i) => (
                           <motion.div
                             key={i}
-                            className={`p-3 rounded-lg text-[13px] leading-relaxed ${msg.role === 'nova' ? 'bg-muted/50 max-w-[90%]' : 'bg-primary/8 ml-auto max-w-[75%]'}`}
+                            className={`p-3 rounded-xl text-[13px] leading-relaxed ${msg.role === 'nova' ? 'bg-muted/50 max-w-[90%]' : 'bg-primary/8 ml-auto max-w-[75%]'}`}
                             initial={{ opacity: 0, y: 6 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.12 }}
@@ -198,9 +182,9 @@ const Hero = () => {
                             <p className="text-foreground">{msg.text}</p>
                           </motion.div>
                         ))}
-                        <div className="flex items-center gap-2 p-2.5 rounded-lg bg-muted/30 border border-border/30 mt-2">
+                        <div className="flex items-center gap-2 p-2.5 rounded-xl bg-muted/30 border border-border/30 mt-2">
                           <span className="text-[12px] text-muted-foreground flex-1 pl-1">Ask Nova anything…</span>
-                          <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center">
+                          <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
                             <ArrowRight className="w-3.5 h-3.5 text-primary" />
                           </div>
                         </div>
@@ -224,7 +208,7 @@ const Hero = () => {
                         ].map((insight, i) => (
                           <motion.div
                             key={i}
-                            className="p-3.5 rounded-lg border border-border/30 hover:border-primary/20 transition-colors"
+                            className="p-3.5 rounded-xl border border-border/30 hover:border-primary/20 transition-colors"
                             initial={{ opacity: 0, x: -12 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: i * 0.08 }}
@@ -265,7 +249,7 @@ const Hero = () => {
                           ].map((metric, i) => (
                             <motion.div
                               key={i}
-                              className="p-4 rounded-lg border border-border/30"
+                              className="p-4 rounded-xl border border-border/30"
                               initial={{ opacity: 0, scale: 0.95 }}
                               animate={{ opacity: 1, scale: 1 }}
                               transition={{ delay: i * 0.06 }}
@@ -300,12 +284,12 @@ const Hero = () => {
                         ].map((action, i) => (
                           <motion.div
                             key={i}
-                            className="flex items-center gap-3 p-3.5 rounded-lg border border-border/30 hover:border-primary/20 transition-colors"
+                            className="flex items-center gap-3 p-3.5 rounded-xl border border-border/30 hover:border-primary/20 transition-colors"
                             initial={{ opacity: 0, x: -12 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: i * 0.06 }}
                           >
-                            <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
+                            <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                               <Zap className="w-3.5 h-3.5 text-primary" />
                             </div>
                             <div className="flex-1 min-w-0">
