@@ -171,7 +171,7 @@ export default function CognitiveStateEngine() {
 
               <div className="grid md:grid-cols-2 gap-8">
                 <motion.div 
-                  className="p-8 rounded-2xl bg-background border border-border/50"
+                  className="p-8 rounded-xl bg-background border border-border/50"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
