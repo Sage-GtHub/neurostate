@@ -623,7 +623,7 @@ export default function NovaInsights() {
                 ].map((metric, index) => (
                   <div 
                     key={index} 
-                    className="group p-6 bg-card rounded-3xl border border-foreground/5 hover:border-foreground/10 hover:shadow-lg transition-all duration-300 cursor-default"
+                    className="group p-5 bg-card rounded-xl border border-border/50 hover:border-border hover:shadow-md transition-all duration-300 cursor-default"
                   >
                     <div className="flex items-center gap-2 mb-4">
                       <metric.icon className={`w-4 h-4 ${metric.color} group-hover:scale-110 transition-transform`} />
