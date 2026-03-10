@@ -117,7 +117,7 @@ const Hero = () => {
       setVisibleMessages(0);
       setExtraMessages([]);
       setCompletedActions(new Set());
-      const timers: NodeJS.Timeout[] = [];
+      const timers: ReturnType<typeof setTimeout>[] = [];
       chatMessages.forEach((_, i) => {
         timers.push(setTimeout(() => setVisibleMessages(prev => prev + 1), 400 + i * 800));
       });
