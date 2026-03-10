@@ -896,7 +896,7 @@ export default function NovaChat() {
                 animate={{ x: 0 }}
                 exit={{ x: "-100%" }}
                 transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                className="absolute inset-y-0 left-0 w-[85%] max-w-[320px] bg-background border-r border-border/15 z-20 shadow-2xl"
+                className="absolute inset-y-0 left-0 w-[85%] max-w-[320px] bg-background border-r border-border/50 z-20 shadow-2xl"
               >
                 <ThreadSidebar
                   threads={threads}
@@ -1093,9 +1093,9 @@ export default function NovaChat() {
                         onClick={() => handleSend(action.label)}
                         disabled={isLoading}
                         className={cn(
-                          "flex flex-col items-start gap-2 text-left p-4 rounded-2xl",
-                          "bg-muted/20 border border-border/15",
-                          "hover:bg-muted/40 hover:border-border/30",
+                "flex flex-col items-start gap-2 text-left p-4 rounded-xl",
+                          "bg-card border border-border/50",
+                          "hover:bg-muted/40 hover:border-border hover:shadow-sm",
                           "transition-all duration-200",
                           "disabled:opacity-50"
                         )}
@@ -1202,9 +1202,9 @@ export default function NovaChat() {
             <div className="max-w-2xl mx-auto p-3 sm:p-4 pb-safe">
               <motion.div 
                 className={cn(
-                  "flex items-end gap-2 rounded-2xl border transition-all duration-300",
-                  "bg-muted/15 border-border/15",
-                  "focus-within:border-accent/25 focus-within:bg-muted/25 focus-within:shadow-lg focus-within:shadow-accent/[0.04]"
+                  "flex items-end gap-2 rounded-xl border transition-all duration-300",
+                  "bg-card border-border/50",
+                  "focus-within:border-accent/30 focus-within:shadow-lg focus-within:shadow-accent/[0.04]"
                 )}
                 layout
                 transition={{ type: "spring", stiffness: 500, damping: 35 }}

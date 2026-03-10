@@ -8,10 +8,8 @@ import {
   Activity,
   Target,
   Calendar,
-  Clock,
   Sparkles,
   ArrowUpRight,
-  ChevronRight,
   MessageCircle,
   Heart,
   Moon,
@@ -35,6 +33,16 @@ import { useRealtimeMetrics } from '@/hooks/useRealtimeMetrics';
 import { supabase } from '@/integrations/supabase/client';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
+
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06 } },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] } },
+};
 
 export default function NovaPersonalDashboard() {
   const navigate = useNavigate();
@@ -107,7 +115,7 @@ export default function NovaPersonalDashboard() {
         <div className="min-h-screen bg-background">
           <NovaNav />
           <div className="flex items-center justify-center h-[60vh]">
-            <div className="w-10 h-10 rounded-full border-2 border-foreground/5 border-t-foreground/30 animate-spin" />
+            <div className="w-10 h-10 rounded-xl border-2 border-foreground/5 border-t-foreground/30 animate-spin" />
           </div>
         </div>
       </NovaSwipeWrapper>
@@ -117,38 +125,33 @@ export default function NovaPersonalDashboard() {
   return (
     <NovaSwipeWrapper>
       <SEO title="Personal Dashboard | Readiness & Recovery | Nova AI" description="Track your daily readiness score, recovery metrics, energy levels, and cognitive performance trends with real-time wearable data." noindex={true} />
-      <div className="min-h-screen bg-background relative overflow-hidden">
+      <div className="min-h-screen bg-background relative">
         <NovaNav />
 
-        <div className="fixed inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-accent/[0.03] blur-3xl animate-float" />
-        </div>
-
-        <div className="relative px-6 md:px-12 lg:px-20 xl:px-32 py-12">
+        <motion.div 
+          className="relative px-6 md:px-12 lg:px-20 xl:px-32 py-10"
+          variants={stagger}
+          initial="hidden"
+          animate="show"
+        >
           {/* Header */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-12"
-          >
+          <motion.div variants={fadeUp} className="mb-10">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 mb-2">Personal</p>
-                <h1 className="text-2xl font-medium text-foreground mb-2">
+                <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground mb-1.5 font-mono">Personal</p>
+                <h1 className="text-2xl font-medium text-foreground tracking-tight">
                   Welcome back{profile?.full_name ? `, ${profile.full_name.split(' ')[0]}` : ''}
                 </h1>
-                <p className="text-sm text-foreground/50">Your cognitive performance summary</p>
               </div>
-              {/* Sync button */}
               <button
                 onClick={handleSync}
                 disabled={syncing}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/[0.04] hover:bg-foreground/[0.08] text-foreground/60 hover:text-foreground transition-all text-xs"
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground transition-all text-[10px] font-mono"
               >
-                <RefreshCw className={cn("w-3.5 h-3.5", syncing && "animate-spin")} />
+                <RefreshCw className={cn("w-3 h-3", syncing && "animate-spin")} />
                 {syncing ? 'Syncing...' : 'Sync'}
                 {lastSync && (
-                  <span className="text-foreground/30 ml-1">
+                  <span className="text-muted-foreground/50 ml-1">
                     {formatDistanceToNow(lastSync, { addSuffix: true })}
                   </span>
                 )}
@@ -157,21 +160,18 @@ export default function NovaPersonalDashboard() {
           </motion.div>
 
           {/* Morning Briefing */}
-          <MorningBriefing />
+          <motion.div variants={fadeUp}>
+            <MorningBriefing />
+          </motion.div>
 
           {/* Readiness + Biometric Cards */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="mb-12"
-          >
-            <p className="text-[10px] uppercase tracking-[0.15em] text-foreground/30 mb-4">Live Biometrics</p>
+          <motion.div variants={fadeUp} className="mb-10">
+            <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground mb-4 font-mono">Live Biometrics</p>
             
             {hasMetrics ? (
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-                {/* Readiness Ring - spans 1 col */}
-                <div className="flex flex-col items-center justify-center p-6 rounded-3xl bg-foreground/[0.02]">
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
+                {/* Readiness Ring */}
+                <div className="flex flex-col items-center justify-center p-5 rounded-xl bg-card border border-border/50">
                   <WhoopScoreRing
                     score={readiness.score ?? 0}
                     label="Readiness"
@@ -183,7 +183,7 @@ export default function NovaPersonalDashboard() {
                     size="md"
                   />
                   {readiness.recommendation && (
-                    <p className="text-[10px] text-foreground/40 text-center mt-3 max-w-[180px] leading-relaxed">
+                    <p className="text-[10px] text-muted-foreground text-center mt-3 max-w-[180px] leading-relaxed">
                       {readiness.recommendation}
                     </p>
                   )}
@@ -243,7 +243,7 @@ export default function NovaPersonalDashboard() {
               <NovaEmptyState
                 variant="devices"
                 title="No biometric data yet"
-                description="Connect a wearable device to unlock real-time readiness scoring, recovery tracking, and personalised energy predictions powered by your biometric data."
+                description="Connect a wearable device to unlock real-time readiness scoring, recovery tracking, and personalised energy predictions."
                 primaryAction={{
                   label: "Connect a Device",
                   to: "/nova/devices",
@@ -264,11 +264,11 @@ export default function NovaPersonalDashboard() {
                   { label: 'Recovery', value: readiness.factors.recovery },
                   { label: 'Check-in', value: readiness.factors.checkin },
                 ].map((f) => (
-                  <div key={f.label} className="p-3 rounded-2xl bg-foreground/[0.02] text-center">
-                    <p className="text-[9px] text-foreground/30 uppercase tracking-wider mb-1">{f.label}</p>
+                  <div key={f.label} className="p-3 rounded-xl bg-card border border-border/30 text-center">
+                    <p className="text-[9px] text-muted-foreground uppercase tracking-wider mb-1 font-mono">{f.label}</p>
                     <p className={cn(
                       "text-sm font-medium",
-                      f.value === null ? "text-foreground/20" :
+                      f.value === null ? "text-muted-foreground/30" :
                       f.value >= 80 ? "text-signal-green" :
                       f.value >= 60 ? "text-accent" :
                       f.value >= 40 ? "text-warning-amber" : "text-destructive"
@@ -282,12 +282,7 @@ export default function NovaPersonalDashboard() {
           </motion.div>
 
           {/* Stats Grid */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-12"
-          >
+          <motion.div variants={fadeUp} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-10">
             {[
               { label: 'Protocols', value: stats.totalProtocols, icon: Target },
               { label: 'Goals', value: stats.activeGoals, icon: TrendingUp },
@@ -296,112 +291,92 @@ export default function NovaPersonalDashboard() {
               { label: 'Devices', value: stats.connectedDevices, icon: Activity },
               { label: 'Check-ins', value: stats.checkInsCompleted, icon: Calendar },
             ].map((metric) => (
-              <div 
+              <motion.div 
                 key={metric.label}
-                className="p-5 rounded-3xl bg-foreground/[0.02] text-center"
+                whileHover={{ y: -2 }}
+                className="p-4 rounded-xl bg-card border border-border/50 text-center hover:border-border hover:shadow-sm transition-all duration-300"
               >
-                <metric.icon className="w-4 h-4 text-foreground/30 mx-auto mb-3" />
-                <p className="text-xl font-light text-foreground">{metric.value}</p>
-                <p className="text-[10px] text-foreground/40 mt-1">{metric.label}</p>
-              </div>
+                <metric.icon className="w-3.5 h-3.5 text-muted-foreground mx-auto mb-2.5" />
+                <p className="text-xl font-semibold text-foreground tracking-tight">{metric.value}</p>
+                <p className="text-[10px] text-muted-foreground mt-0.5 font-mono">{metric.label}</p>
+              </motion.div>
             ))}
           </motion.div>
 
           {/* Quick Actions */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="mb-12"
-          >
-            <p className="text-[10px] uppercase tracking-[0.15em] text-foreground/30 mb-4">Quick Actions</p>
+          <motion.div variants={fadeUp} className="mb-10">
+            <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground mb-4 font-mono">Quick Actions</p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {quickActions.map((action) => (
-                <button
+                <motion.button
                   key={action.label}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.97 }}
                   onClick={() => navigate(action.route)}
-                  className="group p-5 rounded-3xl bg-foreground/[0.02] text-left hover:bg-foreground transition-all duration-500"
+                  className="group p-5 rounded-xl bg-card border border-border/50 text-left hover:bg-foreground hover:border-foreground transition-all duration-300"
                 >
-                  <action.icon className="w-4 h-4 text-foreground/40 group-hover:text-accent mb-3 transition-colors" />
+                  <action.icon className="w-4 h-4 text-muted-foreground group-hover:text-accent mb-3 transition-colors" />
                   <p className="text-xs font-medium text-foreground group-hover:text-background transition-colors">{action.label}</p>
-                </button>
+                </motion.button>
               ))}
             </div>
           </motion.div>
 
           {/* Weekly Summary */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35 }}
-            className="mb-12"
-          >
-            <p className="text-[10px] uppercase tracking-[0.15em] text-foreground/30 mb-4">Your Week</p>
+          <motion.div variants={fadeUp} className="mb-10">
+            <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground mb-4 font-mono">Your Week</p>
             <WeeklySummary />
           </motion.div>
 
           {/* Health Forecast */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="mb-12"
-          >
+          <motion.div variants={fadeUp} className="mb-10">
             <HealthForecast />
           </motion.div>
 
-          {/* Two Column Layout */}
-          <div className="grid lg:grid-cols-2 gap-6">
-            {/* Recent Activity */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <div className="flex items-center justify-between mb-4">
-                <p className="text-[10px] uppercase tracking-[0.15em] text-foreground/30">Recent Activity</p>
-                <button 
-                  onClick={() => navigate('/nova/insights')}
-                  className="text-[10px] text-foreground/40 hover:text-foreground flex items-center gap-1 transition-colors"
-                >
-                  View all <ArrowUpRight className="w-3 h-3" />
-                </button>
-              </div>
-              
-              {recentActivities.length === 0 ? (
-                <NovaEmptyState
-                  variant="generic"
-                  title="No recent activity"
-                  description="Start chatting with Nova, connect a device, or begin a protocol to see your activity here."
-                  primaryAction={{
-                    label: "Chat with Nova",
-                    to: "/nova/chat",
-                  }}
-                />
-              ) : (
-                <div className="space-y-1">
-                  {recentActivities.map((activity) => (
-                    <div 
-                      key={activity.id}
-                      className="flex items-center gap-3 p-4 rounded-2xl hover:bg-foreground/[0.02] transition-colors"
-                    >
-                      <div className="w-8 h-8 rounded-full bg-foreground/[0.03] flex items-center justify-center flex-shrink-0">
-                        <Zap className="w-3.5 h-3.5 text-foreground/30" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-medium text-foreground truncate">{activity.title}</p>
-                        <p className="text-[10px] text-foreground/30">
-                          {formatDistanceToNow(new Date(activity.created_at), { addSuffix: true })}
-                        </p>
-                      </div>
+          {/* Recent Activity */}
+          <motion.div variants={fadeUp}>
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground font-mono">Recent Activity</p>
+              <button 
+                onClick={() => navigate('/nova/insights')}
+                className="text-[10px] text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors font-mono"
+              >
+                View all <ArrowUpRight className="w-3 h-3" />
+              </button>
+            </div>
+            
+            {recentActivities.length === 0 ? (
+              <NovaEmptyState
+                variant="generic"
+                title="No recent activity"
+                description="Start chatting with Nova, connect a device, or begin a protocol to see your activity here."
+                primaryAction={{
+                  label: "Chat with Nova",
+                  to: "/nova/chat",
+                }}
+              />
+            ) : (
+              <div className="space-y-0.5">
+                {recentActivities.map((activity) => (
+                  <div 
+                    key={activity.id}
+                    className="flex items-center gap-3 p-3.5 rounded-xl hover:bg-muted/30 transition-colors"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
+                      <Zap className="w-3.5 h-3.5 text-muted-foreground" />
                     </div>
-                  ))}
-                </div>
-              )}
-            </motion.div>
-
-          </div>
-        </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-medium text-foreground truncate">{activity.title}</p>
+                      <p className="text-[10px] text-muted-foreground font-mono">
+                        {formatDistanceToNow(new Date(activity.created_at), { addSuffix: true })}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </motion.div>
+        </motion.div>
       </div>
     </NovaSwipeWrapper>
   );

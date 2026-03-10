@@ -547,7 +547,7 @@ export default function NovaInsights() {
             <NovaBreadcrumb className="mb-4" />
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-[11px] uppercase tracking-[0.2em] text-foreground/30 mb-2">Analytics</p>
+                <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground mb-1.5 font-mono">Analytics</p>
                 <h1 className="text-2xl font-medium text-foreground mb-2">Your Health Data</h1>
                 <p className="text-sm text-foreground/50">See how your sleep, recovery, and energy are trending</p>
               </div>
@@ -623,7 +623,7 @@ export default function NovaInsights() {
                 ].map((metric, index) => (
                   <div 
                     key={index} 
-                    className="group p-6 bg-card rounded-3xl border border-foreground/5 hover:border-foreground/10 hover:shadow-lg transition-all duration-300 cursor-default"
+                    className="group p-5 bg-card rounded-xl border border-border/50 hover:border-border hover:shadow-md transition-all duration-300 cursor-default"
                   >
                     <div className="flex items-center gap-2 mb-4">
                       <metric.icon className={`w-4 h-4 ${metric.color} group-hover:scale-110 transition-transform`} />
@@ -637,8 +637,8 @@ export default function NovaInsights() {
 
               {/* Charts */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="group p-6 bg-card rounded-3xl border border-foreground/5 hover:border-foreground/10 transition-all">
-                  <h3 className="text-sm font-medium text-foreground mb-6">HRV Trend</h3>
+                <div className="group p-5 bg-card rounded-xl border border-border/50 hover:border-border hover:shadow-sm transition-all">
+                  <h3 className="text-sm font-medium text-foreground mb-5">HRV Trend</h3>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={hrvData}>
@@ -660,8 +660,8 @@ export default function NovaInsights() {
                   </div>
                 </div>
 
-                <div className="group p-6 bg-card rounded-3xl border border-foreground/5 hover:border-foreground/10 transition-all">
-                  <h3 className="text-sm font-medium text-foreground mb-6">Sleep Stages</h3>
+                <div className="group p-5 bg-card rounded-xl border border-border/50 hover:border-border hover:shadow-sm transition-all">
+                  <h3 className="text-sm font-medium text-foreground mb-5">Sleep Stages</h3>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={sleepData}>
@@ -682,8 +682,8 @@ export default function NovaInsights() {
                   </div>
                 </div>
 
-                <div className="group p-6 bg-card rounded-3xl border border-foreground/5 hover:border-foreground/10 transition-all">
-                  <h3 className="text-sm font-medium text-foreground mb-6">Energy Curve</h3>
+                <div className="group p-5 bg-card rounded-xl border border-border/50 hover:border-border hover:shadow-sm transition-all">
+                  <h3 className="text-sm font-medium text-foreground mb-5">Energy Curve</h3>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <AreaChart data={energyData}>
@@ -710,8 +710,8 @@ export default function NovaInsights() {
                   </div>
                 </div>
 
-                <div className="group p-6 bg-card rounded-3xl border border-foreground/5 hover:border-foreground/10 transition-all">
-                  <h3 className="text-sm font-medium text-foreground mb-6">Recovery Score</h3>
+                <div className="group p-5 bg-card rounded-xl border border-border/50 hover:border-border hover:shadow-sm transition-all">
+                  <h3 className="text-sm font-medium text-foreground mb-5">Recovery Score</h3>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={recoveryData}>
