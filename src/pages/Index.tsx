@@ -20,6 +20,8 @@ import { IntegrationLogoStrip } from "@/components/IntegrationLogoStrip";
 import { NovaChatShowcase } from "@/components/home/NovaChatShowcase";
 import { PersonalDashboardShowcase } from "@/components/home/PersonalDashboardShowcase";
 import { InsightsShowcase } from "@/components/home/InsightsShowcase";
+import { PlatformShowcase } from "@/components/home/PlatformShowcase";
+import { TeamIntelligenceShowcase } from "@/components/home/TeamIntelligenceShowcase";
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Layers, Users } from "lucide-react";
