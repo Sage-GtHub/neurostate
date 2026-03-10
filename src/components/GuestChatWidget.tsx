@@ -18,6 +18,32 @@ const sanitiseMarkdown = (text: string): string => {
     .replace(/`([^`]+)`/g, '$1');        // `code`
 };
 
+// Render text with clickable URLs
+const RenderWithLinks = ({ text }: { text: string }) => {
+  const urlRegex = /(https?:\/\/[^\s<>"{}|\\^`[\]]+)/g;
+  const parts = text.split(urlRegex);
+  
+  return (
+    <>
+      {parts.map((part, i) =>
+        urlRegex.test(part) ? (
+          <a
+            key={i}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent underline underline-offset-2 hover:text-accent/80 break-all"
+          >
+            {part}
+          </a>
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      )}
+    </>
+  );
+};
+
 type Message = {
   role: "user" | "assistant";
   content: string;
