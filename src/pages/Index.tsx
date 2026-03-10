@@ -17,6 +17,9 @@ import { HomeROICalculator } from "@/components/HomeROICalculator";
 import { FloatingNovaChat } from "@/components/nova/FloatingNovaChat";
 import { HomeComparisonSection } from "@/components/HomeComparisonSection";
 import { IntegrationLogoStrip } from "@/components/IntegrationLogoStrip";
+import { NovaChatShowcase } from "@/components/home/NovaChatShowcase";
+import { PersonalDashboardShowcase } from "@/components/home/PersonalDashboardShowcase";
+import { InsightsShowcase } from "@/components/home/InsightsShowcase";
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUpRight, Check, Database, TrendingUp, Calculator, Zap, Brain, Gauge, Layers, Users } from "lucide-react";
@@ -185,6 +188,12 @@ const Index = () => {
             </div>
           </section>
 
+          {/* Nova AI Chat Showcase */}
+          <NovaChatShowcase />
+
+          {/* Personal Dashboard Showcase */}
+          <PersonalDashboardShowcase />
+
           {/* Team Dashboard Showcase */}
           <section className="py-16 md:py-32 px-5 md:px-8">
             <div className="max-w-6xl mx-auto">
@@ -335,6 +344,9 @@ const Index = () => {
               </div>
             </div>
           </section>
+
+          {/* Insights & Forecasting Showcase */}
+          <InsightsShowcase />
 
           {/* Impact Stats */}
           <section className="py-16 md:py-24 px-5 md:px-8 bg-foreground">
